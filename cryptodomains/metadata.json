@@ -1,0 +1,7 @@
+{
+  "name": "CryptoDomains",
+  "description": "Premium AI-powered domain intelligence platform inspired by CryptoFi.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

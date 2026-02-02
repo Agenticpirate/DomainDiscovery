@@ -1,0 +1,17 @@
+{
+  "name": "DomainsDiscovery - AI-Powered Domain Tools",
+  "short_name": "DomainsDiscovery",
+  "description": "Discover available domain names instantly with our free domain search, generator, bulk checker, WHOIS lookup, and appraisal tools.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#cbd5e1",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

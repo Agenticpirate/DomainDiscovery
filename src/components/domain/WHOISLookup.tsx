@@ -1,0 +1,127 @@
+'use client';
+
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/Button';
+import { Icons } from '@/components/ui/Icons';
+
+interface WHOISData {
+  domain: string;
+  registrar: string;
+  registrationDate: string;
+  expirationDate: string;
+  status: string;
+  nameServers: string[];
+  registrant?: {
+    organization?: string;
+    country?: string;
+  };
+}
+
+interface WHOISLookupProps {
+  domain?: string;
+}
+
+export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
+  const [domain, setDomain] = useState(initialDomain || '');
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState<WHOISData | null>(null);
+
+  const handleLookup = async () => {
+    if (!domain.trim()) return;
+    
+    setIsLoading(true);
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    
+    setData({
+      domain: domain,
+      registrar: 'GoDaddy.com, LLC',
+      registrationDate: '2015-03-15',
+      expirationDate: '2026-03-15',
+      status: 'clientTransferProhibited',
+      nameServers: ['ns1.foundersPrime.com', 'ns2.foundersPrime.com'],
+      registrant: {
+        organization: 'Privacy Protected',
+        country: 'US',
+      },
+    });
+    
+    setIsLoading(false);
+  };
+
+  return (
+    <div className="glass-card p-6 border-white/10">
+      <div className="mb-6">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="p-2 rounded-lg bg-white/5 border border-white/10">
+            <Icons.Info />
+          </div>
+          <h3 className="text-lg font-bold">WHOIS Lookup</h3>
+        </div>
+        <p className="text-sm text-white/40">
+          Get domain ownership and registration details instantly
+        </p>
+      </div>
+
+      <div className="flex gap-3 mb-6">
+        <input
+          type="text"
+          value={domain}
+          onChange={(e) => setDomain(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleLookup()}
+          placeholder="Enter domain name..."
+          className="flex-1 bg-black/40 border border-white/10 rounded-xl py-3 px-4 text-sm focus:outline-none focus:border-white/30 focus:ring-2 focus:ring-white/10 transition-all placeholder:text-white/30"
+        />
+        <Button onClick={handleLookup} isLoading={isLoading}>
+          Lookup
+        </Button>
+      </div>
+
+      {data && (
+        <div className="space-y-4 animate-fade-in">
+          <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">
+                  Registrar
+                </div>
+                <div className="text-sm font-semibold">{data.registrar}</div>
+              </div>
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">
+                  Status
+                </div>
+                <div className="text-sm font-semibold">{data.status}</div>
+              </div>
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">
+                  Registered
+                </div>
+                <div className="text-sm font-semibold">{data.registrationDate}</div>
+              </div>
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">
+                  Expires
+                </div>
+                <div className="text-sm font-semibold">{data.expirationDate}</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10">
+            <div className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2">
+              Name Servers
+            </div>
+            <div className="space-y-1">
+              {data.nameServers.map((ns, i) => (
+                <div key={i} className="text-sm font-mono text-white/60">
+                  {ns}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

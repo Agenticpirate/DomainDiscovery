@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "instant-domain-search": {
+      "url": "https://api.godaddy.com/v1/domains/mcp",
+      "transport": "streamable-http",
+      "disabled": false,
+      "autoApprove": ["search_domains", "check_availability", "domain_search"]
+    }
+  }
+}

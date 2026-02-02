@@ -1,0 +1,10 @@
+[
+  { "name": "New South Wales", "code": "NSW", "population": 8166369, "country": "AU" },
+  { "name": "Victoria", "code": "VIC", "population": 6680648, "country": "AU" },
+  { "name": "Queensland", "code": "QLD", "population": 5322000, "country": "AU" },
+  { "name": "Western Australia", "code": "WA", "population": 2762200, "country": "AU" },
+  { "name": "South Australia", "code": "SA", "population": 1820513, "country": "AU" },
+  { "name": "Tasmania", "code": "TAS", "population": 571165, "country": "AU" },
+  { "name": "Australian Capital Territory", "code": "ACT", "population": 453558, "country": "AU" },
+  { "name": "Northern Territory", "code": "NT", "population": 250600, "country": "AU" }
+]

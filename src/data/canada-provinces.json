@@ -1,0 +1,15 @@
+[
+  { "name": "Ontario", "code": "ON", "population": 14826276, "country": "CA" },
+  { "name": "Quebec", "code": "QC", "population": 8604495, "country": "CA" },
+  { "name": "British Columbia", "code": "BC", "population": 5214805, "country": "CA" },
+  { "name": "Alberta", "code": "AB", "population": 4442879, "country": "CA" },
+  { "name": "Manitoba", "code": "MB", "population": 1383765, "country": "CA" },
+  { "name": "Saskatchewan", "code": "SK", "population": 1179844, "country": "CA" },
+  { "name": "Nova Scotia", "code": "NS", "population": 992055, "country": "CA" },
+  { "name": "New Brunswick", "code": "NB", "population": 789225, "country": "CA" },
+  { "name": "Newfoundland and Labrador", "code": "NL", "population": 520553, "country": "CA" },
+  { "name": "Prince Edward Island", "code": "PE", "population": 164318, "country": "CA" },
+  { "name": "Northwest Territories", "code": "NT", "population": 45504, "country": "CA" },
+  { "name": "Yukon", "code": "YT", "population": 42986, "country": "CA" },
+  { "name": "Nunavut", "code": "NU", "population": 39403, "country": "CA" }
+]

@@ -1,0 +1,7 @@
+{
+  "/tools/compare/page": "app/tools/compare/page.js",
+  "/domain-extensions/page": "app/domain-extensions/page.js",
+  "/saved-domains/page": "app/saved-domains/page.js",
+  "/premium/page": "app/premium/page.js",
+  "/page": "app/page.js"
+}

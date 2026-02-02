@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CryptoDomains - AI Powered Domain Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-main: #060606;
+        --bg-card: #111111;
+        --accent-primary: #FFFFFF;
+        --accent-dim: #888888;
+        --border-color: rgba(255, 255, 255, 0.08);
+      }
+      body {
+        background-color: var(--bg-main);
+        color: #FFFFFF;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        margin: 0;
+        overflow-x: hidden;
+      }
+      .font-mono { font-family: 'JetBrains Mono', monospace; }
+      
+      .crypto-gradient {
+        background: linear-gradient(135deg, #FFFFFF 0%, #A5A5A5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+      .glass-card {
+        background: rgba(17, 17, 17, 0.6);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        border-radius: 24px;
+      }
+
+      .glow-soft {
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.03);
+      }
+
+      .btn-primary {
+        background: #FFFFFF;
+        color: #000000;
+        transition: all 0.3s ease;
+      }
+      .btn-primary:hover {
+        background: #E5E5E5;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.05);
+        color: #FFFFFF;
+        border: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+      }
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #060606; }
+      ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+
+      .accordion-item {
+        border-bottom: 1px solid var(--border-color);
+      }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+        "react/": "https://esm.sh/react@^19.2.4/",
+        "react": "https://esm.sh/react@^19.2.4",
+        "@google/genai": "https://esm.sh/@google/genai@^1.38.0"
+      }
+    }
+    </script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
