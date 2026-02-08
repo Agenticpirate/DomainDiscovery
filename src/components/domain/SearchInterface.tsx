@@ -34,8 +34,6 @@ export function SearchInterface({
   debounceMs = 150,
   isLoading = false,
 }: SearchInterfaceProps) {
-  console.log('🚀 SearchInterface Enhanced Component Loaded');
-  
   const [query, setQuery] = useState(initialQuery);
   const [recentSearches, setRecentSearches] = useState<RecentSearch[]>([]);
   const [showRecent, setShowRecent] = useState(false);
@@ -197,8 +195,8 @@ export function SearchInterface({
         {/* Keyboard shortcut hint */}
         {!query && !isLoading && (
           <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-1 text-xs text-white/30">
-            <kbd className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-[10px]">
-              {typeof navigator !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
+            <kbd className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-[10px]" suppressHydrationWarning>
+              {typeof window !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
             </kbd>
             <kbd className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-[10px]">
               K

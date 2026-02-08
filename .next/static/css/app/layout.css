@@ -2259,9 +2259,6 @@ video {
 .to-slate-500 {
   --tw-gradient-to: #64748b var(--tw-gradient-to-position);
 }
-.to-slate-500\/10 {
-  --tw-gradient-to: rgb(100 116 139 / 0.1) var(--tw-gradient-to-position);
-}
 .to-slate-500\/20 {
   --tw-gradient-to: rgb(100 116 139 / 0.2) var(--tw-gradient-to-position);
 }
@@ -3343,12 +3340,12 @@ video {
   border-color: rgb(148 163 184 / 0.2);
 }
 
-.group:hover .group-hover\:bg-slate-400\/10 {
-  background-color: rgb(148 163 184 / 0.1);
-}
-
 .group:hover .group-hover\:bg-slate-400\/20 {
   background-color: rgb(148 163 184 / 0.2);
+}
+
+.group:hover .group-hover\:bg-white\/10 {
+  background-color: rgb(255 255 255 / 0.1);
 }
 
 .group:hover .group-hover\:bg-white\/\[0\.02\] {

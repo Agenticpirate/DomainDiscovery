@@ -39,8 +39,6 @@ export async function callInstantDomainSearchMCP(
       },
     };
 
-    console.log(`Calling GoDaddy MCP tool: ${toolName}`, args);
-
     const response = await fetch(mcpServerUrl, {
       method: 'POST',
       headers: {
@@ -57,9 +55,7 @@ export async function callInstantDomainSearchMCP(
     }
 
     const data = await response.json();
-    
-    console.log('MCP response:', JSON.stringify(data, null, 2));
-    
+
     // Parse MCP response
     if (data.result) {
       if (data.result.content) {

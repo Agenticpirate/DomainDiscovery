@@ -79,49 +79,49 @@ export const HomePageContent: React.FC = () => {
 
   const tools = [
     {
-      icon: '🔍',
+      icon: <Icons.Search />,
       title: 'Instant Domain Search',
       description: 'Search millions of domains with real-time availability checking',
       href: '/'
     },
     {
-      icon: '✨',
+      icon: <Icons.Sparkles />,
       title: 'AI Domain Generator',
       description: 'Generate creative domain names using advanced AI algorithms',
       href: '/generator'
     },
     {
-      icon: '📊',
+      icon: <Icons.Layers />,
       title: 'Bulk Domain Search',
       description: 'Check availability for up to 1,000 domains at once',
       href: '/bulk-search'
     },
     {
-      icon: '🌐',
+      icon: <Icons.Globe />,
       title: 'Domain Extensions',
       description: 'Explore 1,600+ TLD extensions across all categories',
       href: '/domain-extensions'
     },
     {
-      icon: '⭐',
+      icon: <Icons.Star />,
       title: 'Premium Domains',
       description: 'Discover high-value domains with existing traffic and authority',
       href: '/premium-domains'
     },
     {
-      icon: '💰',
+      icon: <Icons.Dollar />,
       title: 'Price Comparison',
       description: 'Compare domain prices across multiple registrars',
       href: '/tools/compare'
     },
     {
-      icon: '📍',
+      icon: <Icons.Globe />,
       title: 'Geo Domain Finder',
       description: 'Find location-based domains for local businesses',
       href: '/tools/geo'
     },
     {
-      icon: 'ℹ️',
+      icon: <Icons.Info />,
       title: 'WHOIS Lookup',
       description: 'Check domain ownership and registration details',
       href: '/tools/whois'
@@ -253,7 +253,7 @@ export const HomePageContent: React.FC = () => {
               href={tool.href}
               className="group p-6 bg-white/[0.02] border border-white/10 rounded-xl hover:border-white/20 hover:bg-white/[0.04] transition-all"
             >
-              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">
+              <div className="p-3 rounded-xl bg-white/5 mb-4 group-hover:bg-white/10 group-hover:scale-110 transition-all text-white/70">
                 {tool.icon}
               </div>
               <h3 className="font-bold mb-2 group-hover:text-white transition-colors">
@@ -277,32 +277,32 @@ export const HomePageContent: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
-              icon: '⚡',
+              icon: <Icons.Magic />,
               title: 'Lightning Fast Search',
               description: 'Get instant results as you type with our optimized search infrastructure. No waiting, no delays - just instant domain availability.'
             },
             {
-              icon: '🤖',
+              icon: <Icons.Sparkles />,
               title: 'AI-Powered Suggestions',
               description: 'Our advanced AI analyzes millions of domains to suggest creative, brandable names you\'ll love. Smart semantic understanding for better results.'
             },
             {
-              icon: '💰',
+              icon: <Icons.Dollar />,
               title: 'Best Prices Guaranteed',
               description: 'Compare prices across multiple registrars instantly. We help you find the lowest price for every domain you want to register.'
             },
             {
-              icon: '🔒',
+              icon: <Icons.Check />,
               title: 'Secure & Private',
               description: 'Your searches are completely private. We don\'t track, store, or sell your search data. Search with confidence.'
             },
             {
-              icon: '🌍',
+              icon: <Icons.Globe />,
               title: '1,600+ Extensions',
               description: 'Access the largest selection of domain extensions. From .com to .ai, find the perfect TLD for your website.'
             },
             {
-              icon: '📱',
+              icon: <Icons.Layers />,
               title: 'Works Everywhere',
               description: 'Fully responsive design works perfectly on desktop, tablet, and mobile. Search domains anywhere, anytime.'
             }
@@ -311,7 +311,7 @@ export const HomePageContent: React.FC = () => {
               key={i}
               className="p-6 bg-white/[0.02] border border-white/10 rounded-xl hover:border-white/20 hover:bg-white/[0.04] transition-all"
             >
-              <div className="text-4xl mb-4">{benefit.icon}</div>
+              <div className="p-3 rounded-xl bg-white/5 inline-flex mb-4 text-white/70">{benefit.icon}</div>
               <h3 className="text-lg font-bold mb-2">{benefit.title}</h3>
               <p className="text-sm text-white/60 leading-relaxed">{benefit.description}</p>
             </div>

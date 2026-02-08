@@ -36,7 +36,6 @@ export async function POST(request: NextRequest) {
 
     // Check uncached domains via DNS (no premium detection)
     if (uncachedDomains.length > 0) {
-      console.log(`Checking ${uncachedDomains.length} domains via DNS...`);
       const dnsResults = await checkDomainsViaDNS(uncachedDomains);
       
       for (const result of dnsResults) {
@@ -55,7 +54,6 @@ export async function POST(request: NextRequest) {
         });
       }
       
-      console.log(`✅ DNS check complete: ${dnsResults.length} results`);
     }
 
     // Return results in original order
@@ -67,7 +65,6 @@ export async function POST(request: NextRequest) {
       };
     });
 
-    console.log(`Checked ${limitedDomains.length} domains in ${Date.now() - startTime}ms`);
     return NextResponse.json(domain ? orderedResults[0] : orderedResults);
 
   } catch (error) {

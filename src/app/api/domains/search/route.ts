@@ -29,7 +29,6 @@ export async function POST(request: NextRequest) {
 
     // Option 1: Use Instant Domain Search MCP (FREE - Recommended)
     try {
-      console.log('🔍 Searching via Instant Domain Search MCP...');
       const mcpResult = await searchDomainsViaMCP({
         query: cleanQuery,
         tlds: searchTlds,
@@ -37,7 +36,6 @@ export async function POST(request: NextRequest) {
       
       // Parse MCP response
       const results = parseMCPSearchResults(mcpResult, cleanQuery, searchTlds);
-      console.log('✅ Got real data from Instant Domain Search MCP');
       return NextResponse.json(results);
     } catch (mcpError) {
       console.warn('⚠️ MCP search failed, trying fallback:', mcpError);
@@ -181,8 +179,7 @@ function parseMCPSearchResults(mcpResult: any, query: string, tlds: string[]) {
             }));
           }
         } catch (parseError) {
-          // If not JSON, parse as text
-          console.log('MCP returned text:', textContent.text);
+          // If not JSON, skip text response
         }
       }
     }

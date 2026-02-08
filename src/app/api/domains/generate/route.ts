@@ -23,7 +23,6 @@ export async function POST(request: NextRequest) {
 
     // Option 1: Use Instant Domain Search MCP (FREE - Recommended)
     try {
-      console.log('🎨 Generating via Instant Domain Search MCP...');
       const mcpResult = await generateDomainVariationsViaMCP({
         keyword: cleanKeyword,
         count,
@@ -31,7 +30,6 @@ export async function POST(request: NextRequest) {
       
       // Parse MCP response
       const variations = parseMCPGenerateResults(mcpResult, cleanKeyword, count);
-      console.log('✅ Got real variations from Instant Domain Search MCP');
       return NextResponse.json(variations);
     } catch (mcpError) {
       console.warn('⚠️ MCP generation failed, trying fallback:', mcpError);
@@ -75,7 +73,7 @@ function parseMCPGenerateResults(mcpResult: any, keyword: string, count: number)
             }));
           }
         } catch (parseError) {
-          console.log('MCP returned text:', textContent.text);
+          // If not JSON, skip text response
         }
       }
     }

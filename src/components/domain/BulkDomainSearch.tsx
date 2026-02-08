@@ -260,8 +260,6 @@ const ResultsView: React.FC<{
 };
 
 export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = () => {
-  console.log('🎨 BulkDomainSearch Full Landing Page v3 - ' + new Date().toISOString());
-  
   const [input, setInput] = useState('');
   const [domains, setDomains] = useState<DomainTag[]>([]);
   const [filter, setFilter] = useState<FilterType>('all');
