@@ -34,13 +34,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const hasSuccess = !!success;
 
     const baseStyles =
-      'w-full bg-white/5 border rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-white/30 transition-all duration-150 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed';
+      'w-full rounded-lg px-4 py-2.5 text-sm transition-all duration-150 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed';
+
+    const themeStyles =
+      'bg-[var(--input-bg)] border text-[var(--text-primary)] placeholder:text-[var(--input-placeholder)]';
 
     const stateStyles = hasError
       ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500/20'
       : hasSuccess
       ? 'border-emerald-500/50 focus:border-emerald-500 focus:ring-emerald-500/20'
-      : 'border-white/10 focus:border-white/20 focus:ring-white/10';
+      : 'border-[var(--input-border)] focus:border-[var(--input-border-focus)] focus:ring-[var(--input-ring)]';
 
     const paddingStyles = leftIcon
       ? 'pl-10'
@@ -53,21 +56,22 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium text-white/70"
+            className="block text-sm font-medium"
+            style={{ color: 'var(--text-secondary)' }}
           >
             {label}
           </label>
         )}
         <div className="relative">
           {leftIcon && (
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-muted)' }}>
               {leftIcon}
             </div>
           )}
           <input
             ref={ref}
             id={inputId}
-            className={cn(baseStyles, stateStyles, paddingStyles, className)}
+            className={cn(baseStyles, themeStyles, stateStyles, paddingStyles, className)}
             disabled={disabled}
             aria-invalid={hasError}
             aria-describedby={
@@ -82,7 +86,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           {rightIcon && (
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40">
+            <div className="absolute right-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-muted)' }}>
               {rightIcon}
             </div>
           )}
@@ -107,7 +111,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {helperText && !error && !success && (
           <p
             id={`${inputId}-helper`}
-            className="text-xs text-white/40"
+            className="text-xs"
+            style={{ color: 'var(--text-muted)' }}
           >
             {helperText}
           </p>

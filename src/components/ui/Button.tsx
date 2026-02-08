@@ -18,16 +18,16 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props 
 }) => {
-  const baseStyles = "inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]";
+  const baseStyles = "inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
   
   const variants = {
-    primary: "bg-white text-black hover:bg-gray-100 active:bg-gray-200 shadow-sm",
-    secondary: "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/20",
-    tertiary: "bg-transparent text-white/70 hover:text-white hover:bg-white/5",
-    success: "bg-emerald-500 text-white hover:bg-emerald-600 active:bg-emerald-700 shadow-sm",
-    error: "bg-red-500 text-white hover:bg-red-600 active:bg-red-700 shadow-sm",
-    outline: "border border-white/20 text-white hover:bg-white/5 hover:border-white/30",
-    ghost: "text-white/60 hover:text-white hover:bg-white/5",
+    primary: "bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] hover:opacity-90 active:opacity-80 shadow-sm focus-visible:ring-[var(--input-ring)] focus-visible:ring-offset-[var(--bg-main)]",
+    secondary: "bg-[var(--btn-secondary-bg)] text-[var(--btn-secondary-text)] border border-[var(--btn-secondary-border)] hover:bg-[var(--btn-secondary-hover-bg)] focus-visible:ring-[var(--input-ring)] focus-visible:ring-offset-[var(--bg-main)]",
+    tertiary: "bg-transparent hover:bg-[var(--card-bg-hover)] focus-visible:ring-[var(--input-ring)] focus-visible:ring-offset-[var(--bg-main)]",
+    success: "bg-emerald-500 text-white hover:bg-emerald-600 active:bg-emerald-700 shadow-sm focus-visible:ring-emerald-500/30 focus-visible:ring-offset-[var(--bg-main)]",
+    error: "bg-red-500 text-white hover:bg-red-600 active:bg-red-700 shadow-sm focus-visible:ring-red-500/30 focus-visible:ring-offset-[var(--bg-main)]",
+    outline: "border border-[var(--card-border)] hover:bg-[var(--card-bg)] hover:border-[var(--card-border-hover)] focus-visible:ring-[var(--input-ring)] focus-visible:ring-offset-[var(--bg-main)]",
+    ghost: "hover:bg-[var(--card-bg-hover)] focus-visible:ring-[var(--input-ring)] focus-visible:ring-offset-[var(--bg-main)]",
   };
   
   const sizes = {

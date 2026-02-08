@@ -14,7 +14,7 @@ const config: Config = {
         mono: ["var(--font-mono)", "monospace"],
       },
       colors: {
-        border: "rgba(255, 255, 255, 0.08)",
+        border: "var(--border-color)",
       },
     },
   },

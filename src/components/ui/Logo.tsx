@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
@@ -7,6 +10,8 @@ interface LogoProps {
 }
 
 export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, className = '' }) => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const sizeClasses = {
     sm: 'w-9 h-9',
     md: 'w-11 h-11',
@@ -52,7 +57,11 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, classN
       {showText && (
         <div className="flex flex-col text-left">
           <div className={`${textSizeClasses[size]} font-black tracking-tight leading-none flex items-center gap-[1px]`}>
-            <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+            <span className={`bg-clip-text text-transparent ${
+              isLight
+                ? 'bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600'
+                : 'bg-gradient-to-r from-white via-slate-100 to-slate-300'
+            }`}>
               DomainsDisc
             </span>
             <div className="relative inline-flex items-center justify-center" style={{ width: '0.65em', height: '0.65em', marginTop: '0.05em' }}>
@@ -83,7 +92,11 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, classN
                 </svg>
               </div>
             </div>
-            <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+            <span className={`bg-clip-text text-transparent ${
+              isLight
+                ? 'bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600'
+                : 'bg-gradient-to-r from-white via-slate-100 to-slate-300'
+            }`}>
               very
             </span>
           </div>

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface SearchInterfaceProps {
   initialQuery?: string;
@@ -39,8 +40,9 @@ export function SearchInterface({
   const [showRecent, setShowRecent] = useState(false);
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
-  // Load recent searches from localStorage
   useEffect(() => {
     if (showRecentSearches && typeof window !== 'undefined') {
       try {
@@ -55,7 +57,6 @@ export function SearchInterface({
     }
   }, [showRecentSearches]);
 
-  // Save search to recent searches
   const saveToRecentSearches = useCallback((searchQuery: string) => {
     if (!showRecentSearches || !searchQuery.trim()) return;
 
@@ -65,7 +66,6 @@ export function SearchInterface({
         timestamp: Date.now(),
       };
 
-      // Remove duplicates and add new search at the beginning
       const updated = [
         newSearch,
         ...recentSearches.filter((s) => s.query !== newSearch.query),
@@ -78,7 +78,6 @@ export function SearchInterface({
     }
   }, [recentSearches, showRecentSearches]);
 
-  // Debounced search handler
   const debouncedSearch = useCallback(
     (searchQuery: string) => {
       if (debounceTimerRef.current) {
@@ -95,14 +94,12 @@ export function SearchInterface({
     [onSearch, saveToRecentSearches, debounceMs]
   );
 
-  // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
     debouncedSearch(newQuery);
   };
 
-  // Handle clear
   const handleClear = () => {
     setQuery('');
     onClear();
@@ -112,23 +109,19 @@ export function SearchInterface({
     }
   };
 
-  // Handle recent search click
   const handleRecentSearchClick = (searchQuery: string) => {
     setQuery(searchQuery);
     setShowRecent(false);
     onSearch(searchQuery);
   };
 
-  // Handle keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Cmd/Ctrl + K to focus search
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         inputRef.current?.focus();
       }
 
-      // Escape to clear
       if (e.key === 'Escape' && document.activeElement === inputRef.current) {
         handleClear();
       }
@@ -138,7 +131,6 @@ export function SearchInterface({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Cleanup debounce timer on unmount
   useEffect(() => {
     return () => {
       if (debounceTimerRef.current) {
@@ -162,11 +154,11 @@ export function SearchInterface({
           leftIcon={<Icons.Search />}
         />
 
-        {/* Clear button */}
         {query && (
           <button
             onClick={handleClear}
-            className="absolute right-14 top-1/2 -translate-y-1/2 p-2 text-white/40 hover:text-white/80 transition-colors"
+            className="absolute right-14 top-1/2 -translate-y-1/2 p-2 transition-colors"
+            style={{ color: 'var(--text-muted)' }}
             aria-label="Clear search"
           >
             <svg
@@ -185,45 +177,53 @@ export function SearchInterface({
           </button>
         )}
 
-        {/* Loading indicator */}
         {isLoading && (
           <div className="absolute right-4 top-1/2 -translate-y-1/2">
-            <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 rounded-full animate-spin" style={{
+              borderColor: 'var(--input-border)',
+              borderTopColor: 'var(--text-primary)'
+            }} />
           </div>
         )}
 
-        {/* Keyboard shortcut hint */}
         {!query && !isLoading && (
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-1 text-xs text-white/30">
-            <kbd className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-[10px]" suppressHydrationWarning>
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-1 text-xs" style={{ color: 'var(--kbd-text)' }}>
+            <kbd className="px-1.5 py-0.5 rounded text-[10px]" style={{ background: 'var(--kbd-bg)', border: '1px solid var(--kbd-border)' }} suppressHydrationWarning>
               {typeof window !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
             </kbd>
-            <kbd className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-[10px]">
+            <kbd className="px-1.5 py-0.5 rounded text-[10px]" style={{ background: 'var(--kbd-bg)', border: '1px solid var(--kbd-border)' }}>
               K
             </kbd>
           </div>
         )}
       </div>
 
-      {/* Recent searches dropdown */}
       {showRecent && showRecentSearches && recentSearches.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-neutral-900 border border-white/10 rounded-xl shadow-xl z-50 overflow-hidden animate-fade-in">
+        <div className={`absolute top-full left-0 right-0 mt-2 rounded-xl shadow-xl z-50 overflow-hidden animate-fade-in ${
+          isLight
+            ? 'bg-white border border-gray-200'
+            : 'bg-neutral-900 border border-white/10'
+        }`}>
           <div className="p-2">
-            <div className="text-xs font-semibold uppercase tracking-wider text-white/40 px-3 py-2">
+            <div className="text-xs font-semibold uppercase tracking-wider px-3 py-2" style={{ color: 'var(--text-muted)' }}>
               Recent Searches
             </div>
             {recentSearches.map((search, index) => (
               <button
                 key={index}
                 onClick={() => handleRecentSearchClick(search.query)}
-                className="w-full flex items-center gap-3 px-3 py-2 text-left text-sm text-white/80 hover:bg-white/5 rounded-lg transition-colors"
+                className={`w-full flex items-center gap-3 px-3 py-2 text-left text-sm rounded-lg transition-colors ${
+                  isLight ? 'hover:bg-gray-100' : 'hover:bg-white/5'
+                }`}
+                style={{ color: 'var(--text-secondary)' }}
               >
-                <div className="w-4 h-4 text-white/40">
+                <div className="w-4 h-4" style={{ color: 'var(--text-muted)' }}>
                   <Icons.Search />
                 </div>
                 <span className="flex-1">{search.query}</span>
                 <svg
-                  className="w-4 h-4 text-white/20"
+                  className="w-4 h-4"
+                  style={{ color: 'var(--text-muted)' }}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

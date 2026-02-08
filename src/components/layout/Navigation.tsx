@@ -32,8 +32,8 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
+  const isLight = theme === 'light';
 
-  // Load saved domains count
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
@@ -50,9 +50,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     };
 
     updateSavedCount();
-    // Listen for storage changes
     window.addEventListener('storage', updateSavedCount);
-    // Custom event for same-tab updates
     window.addEventListener('savedDomainsUpdated', updateSavedCount);
 
     return () => {
@@ -61,7 +59,6 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     };
   }, []);
 
-  // Determine active tool from pathname if not provided
   const currentTool = activeTool || (() => {
     if (pathname === '/') return 'search';
     if (pathname === '/bulk-search') return 'bulk';
@@ -76,7 +73,6 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     return 'search';
   })();
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -91,96 +87,24 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   const searchMenu: DropdownMenu = {
     label: 'Search',
     items: [
-      {
-        id: 'search',
-        label: 'Domain name search',
-        description: 'Find available domains instantly with real-time availability checking.',
-        icon: <Icons.Search />,
-        href: '/',
-      },
-      {
-        id: 'extensions',
-        label: 'Domain extensions',
-        description: 'Explore hundreds of TLD options including .com, .net, .ai, and more.',
-        icon: <Icons.Layers />,
-        href: '/domain-extensions',
-      },
-      {
-        id: 'generator',
-        label: 'Domain generator',
-        description: 'Generate creative domain name ideas using smart keywords and topics.',
-        icon: <Icons.Magic />,
-        href: '/generator',
-      },
-      {
-        id: 'premium',
-        label: 'Premium domains',
-        description: 'Discover premium domains available for sale or aftermarket auction.',
-        icon: <Icons.Star />,
-        href: '/premium',
-      },
-      {
-        id: 'bulk',
-        label: 'Bulk domain search',
-        description: 'Check availability for thousands of domains at once.',
-        icon: <Icons.Layers />,
-        href: '/bulk-search',
-      },
-      {
-        id: 'expired',
-        label: 'Expired domains',
-        description: 'Find expired and expiring domain names with AI-powered search tools.',
-        icon: <Icons.Clock />,
-        href: '/expired',
-      },
+      { id: 'search', label: 'Domain name search', description: 'Find available domains instantly with real-time availability checking.', icon: <Icons.Search />, href: '/' },
+      { id: 'extensions', label: 'Domain extensions', description: 'Explore hundreds of TLD options including .com, .net, .ai, and more.', icon: <Icons.Layers />, href: '/domain-extensions' },
+      { id: 'generator', label: 'Domain generator', description: 'Generate creative domain name ideas using smart keywords and topics.', icon: <Icons.Magic />, href: '/generator' },
+      { id: 'premium', label: 'Premium domains', description: 'Discover premium domains available for sale or aftermarket auction.', icon: <Icons.Star />, href: '/premium' },
+      { id: 'bulk', label: 'Bulk domain search', description: 'Check availability for thousands of domains at once.', icon: <Icons.Layers />, href: '/bulk-search' },
+      { id: 'expired', label: 'Expired domains', description: 'Find expired and expiring domain names with AI-powered search tools.', icon: <Icons.Clock />, href: '/expired' },
     ],
   };
 
   const toolsMenu: DropdownMenu = {
     label: 'Tools',
     items: [
-      {
-        id: 'brandable',
-        label: 'Find Brandable Domains',
-        description: 'Discover unique, memorable brandable domain names for your business.',
-        icon: <Icons.Star />,
-        href: '/tools/brandable',
-      },
-      {
-        id: 'keyword',
-        label: 'Keyword-Based Domains',
-        description: 'Find domains based on specific keywords and search terms.',
-        icon: <Icons.Search />,
-        href: '/tools/keyword',
-      },
-      {
-        id: 'whois',
-        label: 'WHOIS Lookup',
-        description: 'Look up domain ownership history and registrant information instantly.',
-        icon: <Icons.Info />,
-        href: '/tools/whois',
-      },
-      {
-        id: 'value',
-        label: 'Domain Value Estimator',
-        description: 'Estimate how much a domain might be worth using real market data.',
-        icon: <Icons.Dollar />,
-        href: '/tools/value',
-      },
-      {
-        id: 'compare',
-        label: 'Price Comparison',
-        description: 'Compare registrar pricing in real time to find the lowest prices.',
-        icon: <Icons.Dollar />,
-        href: '/tools/compare',
-      },
-      {
-        id: 'geo',
-        label: 'Geo Domain Finder',
-        description: 'Find location-based domains for local businesses and regional marketing.',
-        icon: <Icons.Globe />,
-        href: '/tools/geo',
-      },
+      { id: 'brandable', label: 'Find Brandable Domains', description: 'Discover unique, memorable brandable domain names for your business.', icon: <Icons.Star />, href: '/tools/brandable' },
+      { id: 'keyword', label: 'Keyword-Based Domains', description: 'Find domains based on specific keywords and search terms.', icon: <Icons.Search />, href: '/tools/keyword' },
+      { id: 'whois', label: 'WHOIS Lookup', description: 'Look up domain ownership history and registrant information instantly.', icon: <Icons.Info />, href: '/tools/whois' },
+      { id: 'value', label: 'Domain Value Estimator', description: 'Estimate how much a domain might be worth using real market data.', icon: <Icons.Dollar />, href: '/tools/value' },
+      { id: 'compare', label: 'Price Comparison', description: 'Compare registrar pricing in real time to find the lowest prices.', icon: <Icons.Dollar />, href: '/tools/compare' },
+      { id: 'geo', label: 'Geo Domain Finder', description: 'Find location-based domains for local businesses and regional marketing.', icon: <Icons.Globe />, href: '/tools/geo' },
     ],
   };
 
@@ -195,6 +119,14 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     setMobileMenuOpen(false);
   };
 
+  const navBtnBase = `group flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-300`;
+  const navBtnActive = isLight
+    ? 'text-gray-900 bg-gradient-to-b from-black/[0.08] to-black/[0.04] border border-black/15 shadow-lg shadow-black/5 backdrop-blur-xl'
+    : 'text-white bg-gradient-to-b from-white/[0.12] to-white/[0.08] border border-white/20 shadow-lg shadow-black/20 backdrop-blur-xl';
+  const navBtnInactive = isLight
+    ? 'text-gray-600 hover:text-gray-900 hover:bg-gradient-to-b hover:from-black/[0.05] hover:to-black/[0.02] border border-black/[0.06] hover:border-black/[0.12]'
+    : 'text-white/70 hover:text-white hover:bg-gradient-to-b hover:from-white/[0.08] hover:to-white/[0.04] border border-white/[0.08] hover:border-white/[0.15]';
+
   const renderDropdown = (menu: DropdownMenu, menuKey: string) => (
     <div 
       className="relative" 
@@ -203,17 +135,11 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
       onMouseLeave={() => setOpenDropdown(null)}
     >
       <button
-        className={`group flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 ${
-          openDropdown === menuKey
-            ? 'text-white bg-gradient-to-b from-white/[0.12] to-white/[0.08] border border-white/20 shadow-lg shadow-black/20 backdrop-blur-xl'
-            : 'text-white/70 hover:text-white hover:bg-gradient-to-b hover:from-white/[0.08] hover:to-white/[0.04] border border-white/[0.08] hover:border-white/[0.15]'
-        }`}
+        className={`${navBtnBase} ${openDropdown === menuKey ? navBtnActive : navBtnInactive}`}
       >
         <span>{menu.label}</span>
         <svg
-          className={`w-4 h-4 transition-transform duration-300 ${
-            openDropdown === menuKey ? 'rotate-180' : ''
-          }`}
+          className={`w-4 h-4 transition-transform duration-300 ${openDropdown === menuKey ? 'rotate-180' : ''}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -222,11 +148,16 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
         </svg>
       </button>
 
-      {/* Dropdown Panel */}
       {openDropdown === menuKey && (
         <div className="absolute top-full right-0 w-[560px] z-[100] pt-3">
-          <div className="relative bg-black backdrop-blur-3xl border border-white/[0.15] rounded-2xl shadow-2xl shadow-black/60 p-3 animate-fade-in">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent rounded-2xl pointer-events-none" />
+          <div className={`relative backdrop-blur-3xl border rounded-2xl shadow-2xl p-3 animate-fade-in ${
+            isLight
+              ? 'bg-white border-black/[0.1] shadow-black/10'
+              : 'bg-black border-white/[0.15] shadow-black/60'
+          }`}>
+            <div className={`absolute inset-0 bg-gradient-to-br rounded-2xl pointer-events-none ${
+              isLight ? 'from-black/[0.01] via-transparent to-transparent' : 'from-white/[0.02] via-transparent to-transparent'
+            }`} />
             <div className="relative grid grid-cols-2 gap-2">
               {menu.items.map((item) => (
                 <Link
@@ -235,15 +166,23 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                   onClick={handleDropdownClose}
                   className={`flex items-start gap-3.5 p-4 rounded-xl text-left transition-all duration-300 group ${
                     currentTool === item.id
-                      ? 'bg-gradient-to-br from-white/[0.15] to-white/[0.10] border border-white/[0.2] shadow-lg shadow-black/30'
-                      : 'hover:bg-white/[0.08] border border-transparent hover:border-white/[0.12]'
+                      ? isLight
+                        ? 'bg-gradient-to-br from-black/[0.08] to-black/[0.04] border border-black/[0.12] shadow-lg shadow-black/5'
+                        : 'bg-gradient-to-br from-white/[0.15] to-white/[0.10] border border-white/[0.2] shadow-lg shadow-black/30'
+                      : isLight
+                        ? 'hover:bg-black/[0.04] border border-transparent hover:border-black/[0.08]'
+                        : 'hover:bg-white/[0.08] border border-transparent hover:border-white/[0.12]'
                   }`}
                 >
                   <div
                     className={`p-2.5 rounded-lg shrink-0 transition-all duration-300 ${
                       currentTool === item.id
-                        ? 'bg-white/[0.2] text-white shadow-lg shadow-white/20'
-                        : 'bg-white/[0.08] text-white/60 group-hover:bg-white/[0.15] group-hover:text-white group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-white/10'
+                        ? isLight
+                          ? 'bg-black/[0.1] text-gray-900 shadow-lg shadow-black/5'
+                          : 'bg-white/[0.2] text-white shadow-lg shadow-white/20'
+                        : isLight
+                          ? 'bg-black/[0.05] text-gray-500 group-hover:bg-black/[0.1] group-hover:text-gray-900 group-hover:scale-105'
+                          : 'bg-white/[0.08] text-white/60 group-hover:bg-white/[0.15] group-hover:text-white group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-white/10'
                     }`}
                   >
                     {item.icon}
@@ -251,12 +190,16 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                   <div className="flex-1 min-w-0">
                     <div
                       className={`font-semibold text-sm mb-1.5 transition-colors ${
-                        currentTool === item.id ? 'text-white' : 'text-white/90 group-hover:text-white'
+                        currentTool === item.id
+                          ? isLight ? 'text-gray-900' : 'text-white'
+                          : isLight ? 'text-gray-800 group-hover:text-gray-900' : 'text-white/90 group-hover:text-white'
                       }`}
                     >
                       {item.label}
                     </div>
-                    <div className="text-xs text-white/60 leading-relaxed line-clamp-2 group-hover:text-white/75 transition-colors">
+                    <div className={`text-xs leading-relaxed line-clamp-2 transition-colors ${
+                      isLight ? 'text-gray-500 group-hover:text-gray-600' : 'text-white/60 group-hover:text-white/75'
+                    }`}>
                       {item.description}
                     </div>
                   </div>
@@ -272,12 +215,17 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   return (
     <nav className="fixed top-0 left-0 right-0 z-[60] py-3 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="relative bg-black/40 backdrop-blur-2xl border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/20">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-transparent to-blue-500/5 rounded-2xl pointer-events-none" />
+        <div className={`relative backdrop-blur-2xl border rounded-2xl shadow-2xl ${
+          isLight
+            ? 'bg-white/80 border-black/[0.06] shadow-black/5'
+            : 'bg-black/40 border-white/[0.08] shadow-black/20'
+        }`}>
+          <div className={`absolute inset-0 bg-gradient-to-r rounded-2xl pointer-events-none ${
+            isLight ? 'from-blue-500/3 via-transparent to-purple-500/3' : 'from-purple-500/5 via-transparent to-blue-500/5'
+          }`} />
           
           <div className="relative px-4 sm:px-6 py-3.5">
             <div className="flex items-center justify-between">
-              {/* Logo - Clickable to go home */}
               <Link 
                 href="/"
                 className="hover:opacity-80 transition-all duration-300 hover:scale-105"
@@ -285,16 +233,10 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 <Logo size="md" showText={true} />
               </Link>
 
-              {/* Desktop Menu - Pushed to Right */}
               <div className="hidden lg:flex items-center gap-2" ref={dropdownRef}>
-                {/* Home Button */}
                 <Link
                   href="/"
-                  className={`group flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 ${
-                    currentTool === 'search'
-                      ? 'text-white bg-gradient-to-b from-white/[0.12] to-white/[0.08] border border-white/20 shadow-lg shadow-black/20 backdrop-blur-xl'
-                      : 'text-white/70 hover:text-white hover:bg-gradient-to-b hover:from-white/[0.08] hover:to-white/[0.04] border border-white/[0.08] hover:border-white/[0.15]'
-                  }`}
+                  className={`${navBtnBase} ${currentTool === 'search' ? navBtnActive : navBtnInactive}`}
                 >
                   <svg className="w-4 h-4 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -305,15 +247,14 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 {renderDropdown(toolsMenu, 'tools')}
                 <Link
                   href="/learn"
-                  className="group px-4 py-2.5 text-sm font-medium text-white/70 hover:text-white hover:bg-gradient-to-b hover:from-white/[0.08] hover:to-white/[0.04] border border-white/[0.08] hover:border-white/[0.15] rounded-xl transition-all duration-300"
+                  className={`${navBtnBase} ${navBtnInactive}`}
                 >
                   Learn
                 </Link>
 
-                {/* Saved Domains Link */}
                 <Link
                   href="/saved-domains"
-                  className="group relative flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 text-white/70 hover:text-white hover:bg-gradient-to-b hover:from-white/[0.08] hover:to-white/[0.04] border border-white/[0.08] hover:border-white/[0.15]"
+                  className={`group relative ${navBtnBase} ${navBtnInactive}`}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
@@ -326,10 +267,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                   )}
                 </Link>
 
-                {/* Theme Toggle */}
                 <button
                   onClick={toggleTheme}
-                  className="group flex items-center gap-2 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 text-white/70 hover:text-white hover:bg-gradient-to-b hover:from-white/[0.08] hover:to-white/[0.04] border border-white/[0.08] hover:border-white/[0.15]"
+                  className={`${navBtnBase} ${navBtnInactive} px-3`}
                   title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
                 >
                   {theme === 'dark' ? (
@@ -344,10 +284,13 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 </button>
               </div>
 
-              {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2.5 text-white/60 hover:text-white hover:bg-white/[0.06] rounded-xl transition-all duration-300 border border-transparent hover:border-white/[0.08]"
+                className={`lg:hidden p-2.5 rounded-xl transition-all duration-300 border border-transparent ${
+                  isLight
+                    ? 'text-gray-500 hover:text-gray-900 hover:bg-black/[0.04] hover:border-black/[0.06]'
+                    : 'text-white/60 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.08]'
+                }`}
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   {mobileMenuOpen ? (
@@ -360,33 +303,32 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
             </div>
           </div>
 
-          {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="lg:hidden mt-4 pt-4 border-t border-white/10 animate-fade-in">
-              {/* Home Button */}
+            <div className={`lg:hidden mt-4 pt-4 border-t animate-fade-in ${
+              isLight ? 'border-black/10' : 'border-white/10'
+            }`}>
               <Link
                 href="/"
                 onClick={handleDropdownClose}
                 className={`w-full flex items-center gap-3 p-3 rounded-xl text-left transition-all mb-4 ${
                   currentTool === 'search'
-                    ? 'bg-white/10'
-                    : 'hover:bg-white/5'
+                    ? isLight ? 'bg-black/5' : 'bg-white/10'
+                    : isLight ? 'hover:bg-black/5' : 'hover:bg-white/5'
                 }`}
               >
-                <div className="p-2 rounded-lg bg-white/5 text-white/50">
+                <div className={`p-2 rounded-lg ${isLight ? 'bg-black/5 text-gray-500' : 'bg-white/5 text-white/50'}`}>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
                 </div>
                 <div>
-                  <div className="font-semibold text-sm text-white/80">Home</div>
-                  <div className="text-xs text-white/40">Go back to main search</div>
+                  <div className={`font-semibold text-sm ${isLight ? 'text-gray-800' : 'text-white/80'}`}>Home</div>
+                  <div className={`text-xs ${isLight ? 'text-gray-500' : 'text-white/40'}`}>Go back to main search</div>
                 </div>
               </Link>
 
-              {/* Search Section */}
               <div className="mb-4">
-                <div className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3 px-2">
+                <div className={`text-xs font-bold uppercase tracking-widest mb-3 px-2 ${isLight ? 'text-gray-400' : 'text-white/40'}`}>
                   Search
                 </div>
                 <div className="space-y-1">
@@ -397,25 +339,24 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                       onClick={handleDropdownClose}
                       className={`w-full flex items-center gap-3 p-3 rounded-xl text-left transition-all ${
                         currentTool === item.id
-                          ? 'bg-white/10'
-                          : 'hover:bg-white/5'
+                          ? isLight ? 'bg-black/5' : 'bg-white/10'
+                          : isLight ? 'hover:bg-black/5' : 'hover:bg-white/5'
                       }`}
                     >
-                      <div className="p-2 rounded-lg bg-white/5 text-white/50">
+                      <div className={`p-2 rounded-lg ${isLight ? 'bg-black/5 text-gray-500' : 'bg-white/5 text-white/50'}`}>
                         {item.icon}
                       </div>
                       <div>
-                        <div className="font-semibold text-sm text-white/80">{item.label}</div>
-                        <div className="text-xs text-white/40">{item.description}</div>
+                        <div className={`font-semibold text-sm ${isLight ? 'text-gray-800' : 'text-white/80'}`}>{item.label}</div>
+                        <div className={`text-xs ${isLight ? 'text-gray-500' : 'text-white/40'}`}>{item.description}</div>
                       </div>
                     </Link>
                   ))}
                 </div>
               </div>
 
-              {/* Tools Section */}
               <div className="mb-4">
-                <div className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3 px-2">
+                <div className={`text-xs font-bold uppercase tracking-widest mb-3 px-2 ${isLight ? 'text-gray-400' : 'text-white/40'}`}>
                   Tools
                 </div>
                 <div className="space-y-1">
@@ -426,27 +367,28 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                       onClick={handleDropdownClose}
                       className={`w-full flex items-center gap-3 p-3 rounded-xl text-left transition-all ${
                         currentTool === item.id
-                          ? 'bg-white/10'
-                          : 'hover:bg-white/5'
+                          ? isLight ? 'bg-black/5' : 'bg-white/10'
+                          : isLight ? 'hover:bg-black/5' : 'hover:bg-white/5'
                       }`}
                     >
-                      <div className="p-2 rounded-lg bg-white/5 text-white/50">
+                      <div className={`p-2 rounded-lg ${isLight ? 'bg-black/5 text-gray-500' : 'bg-white/5 text-white/50'}`}>
                         {item.icon}
                       </div>
                       <div>
-                        <div className="font-semibold text-sm text-white/80">{item.label}</div>
-                        <div className="text-xs text-white/40">{item.description}</div>
+                        <div className={`font-semibold text-sm ${isLight ? 'text-gray-800' : 'text-white/80'}`}>{item.label}</div>
+                        <div className={`text-xs ${isLight ? 'text-gray-500' : 'text-white/40'}`}>{item.description}</div>
                       </div>
                     </Link>
                   ))}
                 </div>
               </div>
 
-              {/* Learn */}
               <Link
                 href="/learn"
                 onClick={handleDropdownClose}
-                className="w-full p-3 text-left text-sm font-semibold text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all block"
+                className={`w-full p-3 text-left text-sm font-semibold rounded-xl transition-all block ${
+                  isLight ? 'text-gray-600 hover:text-gray-900 hover:bg-black/5' : 'text-white/60 hover:text-white hover:bg-white/5'
+                }`}
               >
                 Learn
               </Link>
