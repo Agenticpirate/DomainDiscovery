@@ -6,6 +6,7 @@ import { Icons } from '@/components/ui/Icons';
 import { Input } from '@/components/ui/Input';
 import { Badge } from '@/components/ui/Badge';
 import { AvailabilityIndicator } from '@/components/ui/AvailabilityIndicator';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface KeywordDomain {
   domain: string;
@@ -26,6 +27,8 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
   const [tlds, setTlds] = useState<string[]>(['.com']);
   const [isSearching, setIsSearching] = useState(false);
   const [results, setResults] = useState<KeywordDomain[]>([]);
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   const availableTlds = ['.com', '.net', '.org', '.io', '.co', '.ai', '.app', '.dev'];
 
@@ -112,15 +115,15 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
   };
 
   return (
-    <div className="glass-card p-6 border-white/10">
+    <div className={`glass-card p-6 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 rounded-lg bg-white/5 border border-white/10">
+          <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>
             <Icons.Search />
           </div>
           <h3 className="text-lg font-bold">Keyword-Based Domain Finder</h3>
         </div>
-        <p className="text-sm text-white/40">
+        <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
           Discover SEO-optimized domains based on your target keywords
         </p>
       </div>
@@ -147,7 +150,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
       {/* TLD Selection */}
       <div className="mb-4">
-        <label className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-3">
+        <label className={`block text-xs font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-3`}>
           Domain Extensions
         </label>
         <div className="flex flex-wrap gap-2">
@@ -172,9 +175,9 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             type="checkbox"
             checked={includeHyphens}
             onChange={(e) => setIncludeHyphens(e.target.checked)}
-            className="w-4 h-4 rounded border-white/20 bg-white/5 text-white focus:ring-white/20"
+            className={`w-4 h-4 rounded ${isLight ? 'border-slate-300 bg-white text-blue-500 focus:ring-blue-400/20' : 'border-white/20 bg-white/5 text-white focus:ring-white/20'}`}
           />
-          <span className="text-sm text-white/60">Include hyphenated domains</span>
+          <span className={`text-sm ${isLight ? 'text-slate-600' : 'text-white/60'}`}>Include hyphenated domains</span>
         </label>
       </div>
 
@@ -186,8 +189,8 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
       {/* Results */}
       {isSearching && (
         <div className="text-center py-8">
-          <div className="inline-flex items-center gap-2 text-white/40">
-            <div className="w-2 h-2 rounded-full bg-white/40 animate-pulse" />
+          <div className={`inline-flex items-center gap-2 ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+            <div className={`w-2 h-2 rounded-full ${isLight ? 'bg-slate-400' : 'bg-white/40'} animate-pulse`} />
             <span className="text-sm">Searching keyword combinations...</span>
           </div>
         </div>
@@ -196,16 +199,16 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
       {results.length > 0 && !isSearching && (
         <div className="space-y-2 animate-fade-in">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-white/40">
+            <span className={`text-xs font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
               {results.length} domains found
             </span>
-            <span className="text-xs text-white/30">Sorted by relevance</span>
+            <span className={`text-xs ${isLight ? 'text-slate-300' : 'text-white/30'}`}>Sorted by relevance</span>
           </div>
 
           {results.map((result, i) => (
             <div
               key={i}
-              className="p-4 rounded-xl bg-white/[0.02] border border-white/10 hover:border-white/20 transition-all group"
+              className={`p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border transition-all group`}
               style={{ animationDelay: `${i * 30}ms` }}
             >
               <div className="flex items-center justify-between">
@@ -223,7 +226,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                       {result.available ? 'Available' : 'Taken'}
                     </Badge>
                   </div>
-                  <div className="flex items-center gap-4 text-xs text-white/40 mb-2">
+                  <div className={`flex items-center gap-4 text-xs ${isLight ? 'text-slate-500' : 'text-white/40'} mb-2`}>
                     <span>Relevance: {result.relevance}%</span>
                     {result.searchVolume && (
                       <>

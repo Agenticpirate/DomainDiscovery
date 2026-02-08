@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { DomainResultCard, DomainResultCardProps } from './DomainResultCard';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export interface DomainResult {
   domain: string;
@@ -45,6 +46,8 @@ export function ResultsList({
   onDomainSave,
   savedDomains = [],
 }: ResultsListProps) {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const [sortBy, setSortBy] = useState<SortOption>(initialSortBy);
   const [filterBy, setFilterBy] = useState<FilterOption>(initialFilterBy);
 
@@ -98,9 +101,9 @@ export function ResultsList({
   if (!isLoading && results.length === 0) {
     return (
       <div className="text-center py-16">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 mb-4">
+        <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${isLight ? 'bg-slate-200' : 'bg-white/5'} mb-4`}>
           <svg
-            className="w-8 h-8 text-white/40"
+            className={`w-8 h-8 ${isLight ? 'text-slate-400' : 'text-white/40'}`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -113,10 +116,10 @@ export function ResultsList({
             />
           </svg>
         </div>
-        <h3 className="text-lg font-semibold text-white/80 mb-2">
+        <h3 className={`text-lg font-semibold ${isLight ? 'text-slate-700' : 'text-white/80'} mb-2`}>
           No Results Found
         </h3>
-        <p className="text-sm text-white/50 max-w-md mx-auto">
+        <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-md mx-auto`}>
           {emptyStateMessage}
         </p>
       </div>
@@ -126,16 +129,16 @@ export function ResultsList({
   return (
     <div className="space-y-4">
       {/* Header with filters and stats */}
-      <div className="sticky top-0 z-10 bg-[#0a0a0a]/95 backdrop-blur-sm border-b border-white/10 pb-4 -mx-6 px-6">
+      <div className={`sticky top-0 z-10 ${isLight ? 'bg-white/95 border-b border-slate-200' : 'bg-[#0a0a0a]/95 border-b border-white/10'} backdrop-blur-sm pb-4 -mx-6 px-6`}>
         <div className="flex items-center justify-between gap-4 flex-wrap">
           {/* Stats */}
           <div className="flex items-center gap-4 text-sm">
-            <span className="text-white/50">
+            <span className={isLight ? 'text-slate-500' : 'text-white/50'}>
               {sortedResults.length} {sortedResults.length === 1 ? 'domain' : 'domains'}
             </span>
             {stats.available > 0 && (
               <>
-                <span className="text-white/30">•</span>
+                <span className={isLight ? 'text-slate-300' : 'text-white/30'}>•</span>
                 <span className="text-emerald-400 font-medium">
                   {stats.available} available
                 </span>
@@ -143,8 +146,8 @@ export function ResultsList({
             )}
             {stats.unavailable > 0 && (
               <>
-                <span className="text-white/30">•</span>
-                <span className="text-white/40">
+                <span className={isLight ? 'text-slate-300' : 'text-white/30'}>•</span>
+                <span className={isLight ? 'text-slate-400' : 'text-white/40'}>
                   {stats.unavailable} taken
                 </span>
               </>
@@ -154,13 +157,13 @@ export function ResultsList({
           {/* Filters and Sort */}
           <div className="flex items-center gap-2">
             {/* Filter Buttons */}
-            <div className="flex items-center gap-1 bg-white/5 rounded-lg p-1">
+            <div className={`flex items-center gap-1 ${isLight ? 'bg-slate-100' : 'bg-white/5'} rounded-lg p-1`}>
               <button
                 onClick={() => setFilterBy('all')}
                 className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
                   filterBy === 'all'
-                    ? 'bg-white text-black'
-                    : 'text-white/60 hover:text-white/80'
+                    ? isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
+                    : isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/60 hover:text-white/80'
                 }`}
               >
                 All
@@ -170,7 +173,7 @@ export function ResultsList({
                 className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
                   filterBy === 'available'
                     ? 'bg-emerald-500 text-white'
-                    : 'text-white/60 hover:text-white/80'
+                    : isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/60 hover:text-white/80'
                 }`}
               >
                 Available
@@ -179,8 +182,8 @@ export function ResultsList({
                 onClick={() => setFilterBy('unavailable')}
                 className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
                   filterBy === 'unavailable'
-                    ? 'bg-white/20 text-white'
-                    : 'text-white/60 hover:text-white/80'
+                    ? isLight ? 'bg-slate-300 text-slate-900' : 'bg-white/20 text-white'
+                    : isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/60 hover:text-white/80'
                 }`}
               >
                 Taken
@@ -191,7 +194,7 @@ export function ResultsList({
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="px-3 py-1.5 text-xs font-medium bg-white/5 border border-white/10 rounded-lg text-white/80 hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/20"
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 ${isLight ? 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 focus:ring-blue-200' : 'bg-white/5 border border-white/10 text-white/80 hover:bg-white/10 focus:ring-white/20'}`}
             >
               <option value="relevance">Sort: Relevance</option>
               <option value="alphabetical">Sort: A-Z</option>

@@ -7,12 +7,15 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { DomainGenerator } from '@/components/generator/DomainGenerator';
 import { GeneratorContent } from '@/components/generator/GeneratorContent';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function GeneratorPage() {
   const [selectedDomain, setSelectedDomain] = useState<string>('');
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen">
       <PageBackground variant="hero" />
       
       <Navigation activeTool="generator" />
@@ -29,11 +32,11 @@ export default function GeneratorPage() {
           </div>
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4">
-              <span className="bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent">
+              <span className={`bg-gradient-to-r ${isLight ? 'from-slate-900 via-slate-800 to-slate-600' : 'from-white via-white to-white/60'} bg-clip-text text-transparent`}>
                 Domain Name Generator
               </span>
             </h1>
-            <p className="text-lg text-white/50 max-w-2xl mx-auto mb-8">
+            <p className={`text-lg ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-8`}>
               Generate hundreds of creative domain name ideas instantly. Find the perfect name for your website, business, or project.
             </p>
           </div>
@@ -47,7 +50,7 @@ export default function GeneratorPage() {
         </section>
 
         {/* Educational Content & FAQs */}
-        <section className="border-t border-white/5">
+        <section className={`border-t ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
           <GeneratorContent />
         </section>
       </main>

@@ -5,6 +5,7 @@ import { Button } from '../ui/Button';
 import { Icons } from '../ui/Icons';
 import { Badge } from '../ui/Badge';
 import { BulkDomainSearchLanding } from './BulkDomainSearchLanding';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const REGISTRARS = [
   { 
@@ -40,6 +41,8 @@ type FilterType = 'all' | 'available' | 'taken' | 'premium';
 const ActionDropdown: React.FC<{ domain: string; available: boolean }> = ({ domain, available }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   useEffect(() => {
     const h = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); };
@@ -53,7 +56,7 @@ const ActionDropdown: React.FC<{ domain: string; available: boolean }> = ({ doma
         {available ? (
           <>
             <Button onClick={() => window.open(REGISTRARS[0].getUrl(domain), '_blank')} variant="primary" size="sm" className="text-[11px] px-2 py-0.5">Register</Button>
-            <button onClick={() => setOpen(!open)} className="p-1 text-neutral-600 hover:text-neutral-400 rounded hover:bg-neutral-800">
+            <button onClick={() => setOpen(!open)} className={`p-1 rounded ${isLight ? 'text-slate-400 hover:text-slate-600 hover:bg-slate-100' : 'text-neutral-600 hover:text-neutral-400 hover:bg-neutral-800'}`}>
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
             </button>
           </>
@@ -62,15 +65,15 @@ const ActionDropdown: React.FC<{ domain: string; available: boolean }> = ({ doma
         )}
       </div>
       {open && (
-        <div className="absolute right-0 top-full mt-1 w-48 bg-neutral-900 border border-neutral-800 rounded-lg shadow-xl z-50 py-2">
-          <div className="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white/40 border-b border-white/5 mb-1">Register at:</div>
+        <div className={`absolute right-0 top-full mt-1 w-48 rounded-lg shadow-xl z-50 py-2 ${isLight ? 'bg-white border-slate-200 shadow-xl' : 'bg-neutral-900 border border-neutral-800'}`}>
+          <div className={`px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider mb-1 ${isLight ? 'text-slate-400 border-b border-slate-100' : 'text-white/40 border-b border-white/5'}`}>Register at:</div>
           {REGISTRARS.map(r => (
             <a 
               key={r.name} 
               href={r.getUrl(domain)} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex items-center gap-3 px-3 py-2.5 text-sm text-neutral-300 hover:text-white hover:bg-neutral-800 transition-colors" 
+              className={`flex items-center gap-3 px-3 py-2.5 text-sm transition-colors ${isLight ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-50' : 'text-neutral-300 hover:text-white hover:bg-neutral-800'}`} 
               onClick={() => setOpen(false)}
             >
               <img 
@@ -124,6 +127,8 @@ const ResultsView: React.FC<{
   exportCSV: () => void;
   exportPDF: () => void;
 }> = ({ domains, filter, setFilter, sortAZ, setSortAZ, tldFilter, setTldFilter, showTlds, setShowTlds, progress, reset, exportCSV, exportPDF }) => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const tlds = Array.from(new Set(domains.map(d => d.domain.split('.').pop() || ''))).sort();
   
   const filtered = useCallback(() => {
@@ -155,7 +160,7 @@ const ResultsView: React.FC<{
         </Button>
 
         <div>
-          <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">Display</div>
+          <div className={`text-xs font-semibold uppercase tracking-wider mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Display</div>
           {[
             { k: 'all', l: 'All domains', c: counts.all, color: 'bg-white/20' },
             { k: 'available', l: 'Available', c: counts.available, color: 'bg-emerald-500' },
@@ -165,41 +170,41 @@ const ResultsView: React.FC<{
             <button
               key={x.k}
               onClick={() => setFilter(x.k as FilterType)}
-              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all ${filter === x.k ? 'bg-white/10 text-white' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all ${filter === x.k ? (isLight ? 'bg-slate-100 text-slate-900' : 'bg-white/10 text-white') : (isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5')}`}
             >
               <span className="flex items-center gap-2">
                 <span className={`w-2 h-2 rounded-full ${x.color}`} />
                 {x.l}
               </span>
-              <span className="text-xs text-white/40">{x.c}</span>
+              <span className={`text-xs ${isLight ? 'text-slate-400' : 'text-white/40'}`}>{x.c}</span>
             </button>
           ))}
         </div>
 
         <div>
-          <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">Filters</div>
-          <button onClick={() => setShowTlds(!showTlds)} className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/5 transition-all">
+          <div className={`text-xs font-semibold uppercase tracking-wider mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Filters</div>
+          <button onClick={() => setShowTlds(!showTlds)} className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}>
             <span>TLDs</span>
             {tldFilter.length > 0 && <Badge variant="success" size="sm">{tldFilter.length}</Badge>}
           </button>
           {showTlds && tlds.length > 0 && (
-            <div className="pl-4 py-2 space-y-1 border-l border-white/10 ml-3 mt-2">
+            <div className={`pl-4 py-2 space-y-1 border-l ml-3 mt-2 ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
               {tlds.map(t => (
-                <label key={t} className="flex items-center gap-2 text-xs text-white/50 cursor-pointer hover:text-white">
+                <label key={t} className={`flex items-center gap-2 text-xs cursor-pointer ${isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/50 hover:text-white'}`}>
                   <input type="checkbox" checked={tldFilter.includes(t)} onChange={e => setTldFilter(e.target.checked ? [...tldFilter, t] : tldFilter.filter(x => x !== t))} className="w-3 h-3 rounded border-white/20 bg-transparent text-emerald-500 focus:ring-0" />
                   .{t}
                 </label>
               ))}
             </div>
           )}
-          <button onClick={() => setSortAZ(!sortAZ)} className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/5 transition-all">
+          <button onClick={() => setSortAZ(!sortAZ)} className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}>
             Sort: {sortAZ ? 'A-Z' : 'Length'}
           </button>
         </div>
 
         <div>
-          <div className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3">Actions</div>
-          <p className="text-xs text-white/40 mb-3 italic">Click domain names to register</p>
+          <div className={`text-xs font-semibold uppercase tracking-wider mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Actions</div>
+          <p className={`text-xs mb-3 italic ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Click domain names to register</p>
           <Button onClick={reset} variant="ghost" size="sm" className="w-full justify-start gap-2 text-red-400 hover:text-red-300 hover:bg-red-500/10">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
             Reset
@@ -210,15 +215,15 @@ const ResultsView: React.FC<{
       {/* Results Grid */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between mb-4">
-          <span className="text-sm text-white/50">{results.length} domains</span>
+          <span className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{results.length} domains</span>
           <div className="flex items-center gap-4 text-sm">
             <span className="text-emerald-400">{counts.available} available</span>
-            <span className="text-white/40">{counts.taken} taken</span>
+            <span className={isLight ? 'text-slate-400' : 'text-white/40'}>{counts.taken} taken</span>
           </div>
         </div>
 
         {counts.checking > 0 && (
-          <div className="h-1 bg-white/10 rounded-full mb-4 overflow-hidden">
+          <div className={`h-1 rounded-full mb-4 overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
             <div className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 transition-all duration-300" style={{ width: `${(progress.done / Math.max(progress.total, 1)) * 100}%` }} />
           </div>
         )}
@@ -229,7 +234,7 @@ const ResultsView: React.FC<{
           onCopy={(e) => e.preventDefault()}
         >
           {results.map(d => (
-            <div key={d.domain} className="flex items-center justify-between p-3 bg-white/[0.02] border border-white/5 rounded-lg hover:border-white/10 hover:bg-white/[0.04] transition-all group">
+            <div key={d.domain} className={`flex items-center justify-between p-3 rounded-lg transition-all group ${isLight ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-sm' : 'bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04]'}`}>
               <div className="flex items-center gap-3 min-w-0 flex-1">
                 <span className={`w-2 h-2 rounded-full shrink-0 ${
                   d.status === 'checking' ? 'bg-white/40 animate-pulse' :
@@ -241,19 +246,19 @@ const ResultsView: React.FC<{
                   href={`https://www.godaddy.com/domainsearch/find?domainToCheck=${d.domain}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-sm truncate text-white/90 hover:text-emerald-400 transition-colors cursor-pointer"
+                  className={`font-mono text-sm truncate hover:text-emerald-400 transition-colors cursor-pointer ${isLight ? 'text-slate-800' : 'text-white/90'}`}
                   title="Register on GoDaddy"
                 >
                   {d.domain}
                 </a>
                 {d.status === 'premium' && <Badge variant="warning" size="sm">Premium</Badge>}
-                {d.price && <span className="text-white/50 text-xs font-medium">{d.price}</span>}
+                {d.price && <span className={`text-xs font-medium ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{d.price}</span>}
               </div>
               <ActionDropdown domain={d.domain} available={d.status === 'available' || d.status === 'premium'} />
             </div>
           ))}
         </div>
-        {results.length === 0 && <div className="text-center py-16 text-white/40">No domains match your filter</div>}
+        {results.length === 0 && <div className={`text-center py-16 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>No domains match your filter</div>}
       </div>
     </div>
   );

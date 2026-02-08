@@ -5,6 +5,7 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { Icons } from '@/components/ui/Icons';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function ExpiredPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -14,6 +15,8 @@ export default function ExpiredPage() {
     godaddy: false,
     premium: false,
   });
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   const lifecycleStages = [
     {
@@ -68,7 +71,7 @@ export default function ExpiredPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen">
       <PageBackground variant="default" />
       
       <Navigation activeTool="expired" />
@@ -81,28 +84,28 @@ export default function ExpiredPage() {
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight mb-6 leading-[1.1]">
               Expired Domains
             </h1>
-            <p className="text-xl text-white/50 max-w-2xl mx-auto mb-16 leading-relaxed">
+            <p className={`text-xl ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-16 leading-relaxed`}>
               Search expired domains with AI-powered tools. Explore our comprehensive index of expiring and recently expired domain names.
             </p>
 
             {/* Search Bar */}
             <div className="max-w-2xl mx-auto">
-              <div className="relative bg-black/40 backdrop-blur-2xl border border-white/[0.12] rounded-2xl p-2 shadow-2xl shadow-black/40">
-                <div className="flex items-center gap-3 px-5 py-4 bg-white/[0.02] rounded-xl">
-                  <Icons.Search className="w-5 h-5 text-white/40 shrink-0" />
+              <div className={`relative ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-black/40 border-white/[0.12]'} backdrop-blur-2xl border rounded-2xl p-2 shadow-2xl ${isLight ? 'shadow-slate-200/50' : 'shadow-black/40'}`}>
+                <div className={`flex items-center gap-3 px-5 py-4 ${isLight ? 'bg-slate-50' : 'bg-white/[0.02]'} rounded-xl`}>
+                  <Icons.Search className={`w-5 h-5 ${isLight ? 'text-slate-400' : 'text-white/40'} shrink-0`} />
                   <input
                     type="text"
                     placeholder="Start typing here..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="flex-1 bg-transparent text-white placeholder:text-white/40 outline-none text-base"
+                    className={`flex-1 bg-transparent ${isLight ? 'text-slate-900 placeholder:text-slate-400' : 'text-white placeholder:text-white/40'} outline-none text-base`}
                   />
                   {searchQuery && (
                     <button 
                       onClick={() => setSearchQuery('')}
-                      className="p-1.5 hover:bg-white/[0.06] rounded-lg transition-colors"
+                      className={`p-1.5 ${isLight ? 'hover:bg-slate-100' : 'hover:bg-white/[0.06]'} rounded-lg transition-colors`}
                     >
-                      <Icons.X className="w-4 h-4 text-white/40" />
+                      <Icons.X className={`w-4 h-4 ${isLight ? 'text-slate-400' : 'text-white/40'}`} />
                     </button>
                   )}
                 </div>
@@ -115,11 +118,11 @@ export default function ExpiredPage() {
                       onClick={() => setActiveFilters(prev => ({ ...prev, [key]: !active }))}
                       className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-300 ${
                         active
-                          ? 'bg-white/[0.1] text-white border border-white/[0.15]'
-                          : 'bg-transparent text-white/50 border border-white/[0.08] hover:bg-white/[0.04] hover:text-white/70'
+                          ? `${isLight ? 'bg-slate-100 text-slate-900 border-slate-300' : 'bg-white/[0.1] text-white border-white/[0.15]'} border`
+                          : `${isLight ? 'bg-transparent text-slate-500 border-slate-200 hover:bg-slate-50 hover:text-slate-700' : 'bg-transparent text-white/50 border-white/[0.08] hover:bg-white/[0.04] hover:text-white/70'} border`
                       }`}
                     >
-                      {active && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
+                      {active && <span className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-slate-900' : 'bg-white'}`}></span>}
                       <span className="capitalize">{key}</span>
                     </button>
                   ))}
@@ -136,7 +139,7 @@ export default function ExpiredPage() {
               <h2 className="text-3xl sm:text-4xl font-black mb-4 tracking-tight">
                 Understanding the Expired Domain Lifecycle
               </h2>
-              <p className="text-white/50 max-w-2xl mx-auto text-lg">
+              <p className={`${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto text-lg`}>
                 When a domain expires, it goes through several stages before becoming available for registration. The entire process typically takes 75-90 days.
               </p>
             </div>
@@ -145,11 +148,11 @@ export default function ExpiredPage() {
             <div className="space-y-4">
               {lifecycleStages.map((stage, index) => (
                 <div key={index} className="group">
-                  <div className="relative bg-black/40 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 hover:border-white/[0.12] transition-all duration-300">
+                  <div className={`relative ${isLight ? 'bg-white border-slate-200 shadow-sm hover:border-slate-300' : 'bg-black/40 border-white/[0.08] hover:border-white/[0.12]'} backdrop-blur-xl border rounded-2xl p-6 transition-all duration-300`}>
                     <div className="flex items-start gap-6">
                       {/* Number */}
                       <div className="shrink-0">
-                        <div className="text-5xl font-black text-white/[0.06] group-hover:text-white/[0.1] transition-colors">
+                        <div className={`text-5xl font-black ${isLight ? 'text-slate-200 group-hover:text-slate-300' : 'text-white/[0.06] group-hover:text-white/[0.1]'} transition-colors`}>
                           {stage.number}
                         </div>
                       </div>
@@ -157,12 +160,12 @@ export default function ExpiredPage() {
                       {/* Content */}
                       <div className="flex-1 pt-1">
                         <div className="flex items-start justify-between gap-4 mb-3">
-                          <h3 className="text-xl font-bold text-white">{stage.title}</h3>
-                          <span className="px-3 py-1 rounded-lg text-xs font-medium bg-white/[0.06] text-white/70 border border-white/[0.08] whitespace-nowrap">
+                          <h3 className={`text-xl font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>{stage.title}</h3>
+                          <span className={`px-3 py-1 rounded-lg text-xs font-medium ${isLight ? 'bg-slate-100 text-slate-600 border-slate-200' : 'bg-white/[0.06] text-white/70 border-white/[0.08]'} border whitespace-nowrap`}>
                             {stage.badge}
                           </span>
                         </div>
-                        <p className="text-white/50 leading-relaxed">
+                        <p className={`${isLight ? 'text-slate-500' : 'text-white/50'} leading-relaxed`}>
                           {stage.description}
                         </p>
                       </div>
@@ -181,12 +184,12 @@ export default function ExpiredPage() {
               {infoCards.map((card, index) => (
                 <div
                   key={index}
-                  className="bg-black/40 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-8 hover:border-white/[0.12] transition-all duration-300 group"
+                  className={`${isLight ? 'bg-white border-slate-200 shadow-sm hover:border-slate-300' : 'bg-black/40 border-white/[0.08] hover:border-white/[0.12]'} backdrop-blur-xl border rounded-2xl p-8 transition-all duration-300 group`}
                 >
-                  <h3 className="text-lg font-bold mb-3 text-white group-hover:text-white transition-colors">
+                  <h3 className={`text-lg font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'} transition-colors`}>
                     {card.title}
                   </h3>
-                  <p className="text-white/50 leading-relaxed text-[15px]">
+                  <p className={`${isLight ? 'text-slate-500' : 'text-white/50'} leading-relaxed text-[15px]`}>
                     {card.description}
                   </p>
                 </div>

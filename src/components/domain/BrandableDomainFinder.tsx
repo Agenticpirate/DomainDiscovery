@@ -6,6 +6,7 @@ import { Icons } from '@/components/ui/Icons';
 import { Input } from '@/components/ui/Input';
 import { Badge } from '@/components/ui/Badge';
 import { AvailabilityIndicator } from '@/components/ui/AvailabilityIndicator';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface BrandableDomain {
   domain: string;
@@ -25,6 +26,8 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
   const [length, setLength] = useState<'short' | 'medium' | 'any'>('short');
   const [isGenerating, setIsGenerating] = useState(false);
   const [results, setResults] = useState<BrandableDomain[]>([]);
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   const styles = [
     { id: 'modern', label: 'Modern', desc: 'Clean, tech-forward names' },
@@ -73,15 +76,15 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
   };
 
   return (
-    <div className="glass-card p-6 border-white/10">
+    <div className={`glass-card p-6 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 rounded-lg bg-white/5 border border-white/10">
+          <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>
             <Icons.Star />
           </div>
           <h3 className="text-lg font-bold">Find Brandable Domains</h3>
         </div>
-        <p className="text-sm text-white/40">
+        <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
           Discover unique, memorable brandable domain names perfect for your business
         </p>
       </div>
@@ -98,7 +101,7 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
 
       {/* Style Selection */}
       <div className="mb-6">
-        <label className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-3">
+        <label className={`block text-xs font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-3`}>
           Brand Style
         </label>
         <div className="grid grid-cols-2 gap-2">
@@ -110,7 +113,7 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
               className="h-auto p-3 text-left flex-col items-start"
             >
               <div className="font-semibold text-sm mb-0.5">{s.label}</div>
-              <div className="text-xs text-white/40">{s.desc}</div>
+              <div className={`text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{s.desc}</div>
             </Button>
           ))}
         </div>
@@ -118,7 +121,7 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
 
       {/* Length Selection */}
       <div className="mb-6">
-        <label className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-3">
+        <label className={`block text-xs font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-3`}>
           Domain Length
         </label>
         <div className="flex gap-2">
@@ -144,8 +147,8 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
       {/* Results */}
       {isGenerating && (
         <div className="text-center py-8">
-          <div className="inline-flex items-center gap-2 text-white/40">
-            <div className="w-2 h-2 rounded-full bg-white/40 animate-pulse" />
+          <div className={`inline-flex items-center gap-2 ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+            <div className={`w-2 h-2 rounded-full ${isLight ? 'bg-slate-400' : 'bg-white/40'} animate-pulse`} />
             <span className="text-sm">Finding brandable names...</span>
           </div>
         </div>
@@ -156,7 +159,7 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
           {results.map((result, i) => (
             <div
               key={i}
-              className="p-4 rounded-xl bg-white/[0.02] border border-white/10 hover:border-white/20 transition-all group"
+              className={`p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border transition-all group`}
               style={{ animationDelay: `${i * 50}ms` }}
             >
               <div className="flex items-center justify-between">
@@ -173,7 +176,7 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
                       </Badge>
                     )}
                   </div>
-                  <div className="flex items-center gap-4 text-xs text-white/40 mb-2">
+                  <div className={`flex items-center gap-4 text-xs ${isLight ? 'text-slate-500' : 'text-white/40'} mb-2`}>
                     <span>Score: {result.score}</span>
                     <span>•</span>
                     <span>Pronunciation: {result.pronunciation}</span>

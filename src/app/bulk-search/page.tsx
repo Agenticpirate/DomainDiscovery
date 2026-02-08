@@ -6,10 +6,14 @@ import { Footer } from '@/components/layout/Footer';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { BulkDomainSearch } from '@/components/domain/BulkDomainSearch';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function BulkSearchPage() {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
+
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen">
       <PageBackground variant="hero" />
       
       <Navigation activeTool="bulk" />

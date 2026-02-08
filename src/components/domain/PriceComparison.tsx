@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/Button';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface Registrar {
   name: string;
@@ -46,13 +47,15 @@ const DEFAULT_REGISTRARS: Registrar[] = [
 
 export function PriceComparison({ domain, registrars = DEFAULT_REGISTRARS }: PriceComparisonProps) {
   const sortedRegistrars = [...registrars].sort((a, b) => a.priceValue - b.priceValue);
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   return (
-    <div className="glass-card p-6 border-white/10">
+    <div className={`glass-card p-6 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
       <div className="mb-6">
         <h3 className="text-lg font-bold mb-1">Price Comparison</h3>
-        <p className="text-sm text-white/40">
-          Compare prices for <span className="font-mono text-white/60">{domain}</span>
+        <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+          Compare prices for <span className={`font-mono ${isLight ? 'text-slate-600' : 'text-white/60'}`}>{domain}</span>
         </p>
       </div>
 
@@ -62,8 +65,8 @@ export function PriceComparison({ domain, registrars = DEFAULT_REGISTRARS }: Pri
             key={i}
             className={`p-4 rounded-xl border transition-all ${
               registrar.recommended
-                ? 'bg-emerald-500/5 border-emerald-500/20'
-                : 'bg-white/[0.02] border-white/10 hover:border-white/20'
+                ? `${isLight ? 'bg-emerald-50 border-emerald-200' : 'bg-emerald-500/5 border-emerald-500/20'}`
+                : `${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border-white/10 hover:border-white/20'}`
             }`}
           >
             <div className="flex items-center justify-between mb-2">
@@ -80,7 +83,7 @@ export function PriceComparison({ domain, registrars = DEFAULT_REGISTRARS }: Pri
             {registrar.features && (
               <div className="flex flex-wrap gap-2 mb-3">
                 {registrar.features.map((feature, j) => (
-                  <span key={j} className="text-xs text-white/40">
+                  <span key={j} className={`text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
                     • {feature}
                   </span>
                 ))}
