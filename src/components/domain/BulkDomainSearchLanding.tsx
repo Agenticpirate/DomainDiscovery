@@ -89,7 +89,7 @@ const StepCard: React.FC<{
         {number}
       </div>
       <div className="relative pt-8 pl-2">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-400 to-slate-500 flex items-center justify-center text-sm font-bold mb-4 shadow-lg shadow-slate-400/20">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-400 to-slate-500 flex items-center justify-center text-sm font-bold text-white mb-4 shadow-lg shadow-slate-400/20">
           {number}
         </div>
         <h3 className={`text-xl font-bold mb-3 transition-colors ${isLight ? 'group-hover:text-blue-600' : 'group-hover:text-slate-300'}`}>{title}</h3>
@@ -117,9 +117,9 @@ const IndustryCard: React.FC<{
       <div className="flex items-start justify-between mb-4">
         <div>
           <span className="text-3xl mb-4 block">{icon}</span>
-          <h3 className="text-xl font-bold group-hover:text-slate-300 transition-colors">{title}</h3>
+          <h3 className={`text-xl font-bold transition-colors ${isLight ? 'text-slate-900 group-hover:text-blue-600' : 'group-hover:text-slate-300'}`}>{title}</h3>
         </div>
-        <svg className="w-5 h-5 text-white/20 group-hover:text-slate-300 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className={`w-5 h-5 group-hover:translate-x-1 transition-all ${isLight ? 'text-slate-300 group-hover:text-blue-500' : 'text-white/20 group-hover:text-slate-300'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
       </div>
@@ -236,13 +236,13 @@ const SearchInputSection: React.FC<{
         {checking && (
           <div className="mt-4 p-3 bg-slate-400/5 rounded-lg border border-slate-400/20">
             <div className="flex justify-between text-sm mb-2">
-              <span className="text-slate-300 flex items-center gap-2">
+              <span className={`flex items-center gap-2 ${isLight ? 'text-slate-600' : 'text-slate-300'}`}>
                 <span className="w-2 h-2 bg-slate-300 rounded-full animate-pulse" />
                 Checking availability...
               </span>
-              <span className="text-white/60 font-mono">{progress.done}/{progress.total}</span>
+              <span className={`font-mono ${isLight ? 'text-slate-500' : 'text-white/60'}`}>{progress.done}/{progress.total}</span>
             </div>
-            <div className="h-1.5 bg-black/30 rounded-full overflow-hidden">
+            <div className={`h-1.5 rounded-full overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-black/30'}`}>
               <div className="h-full bg-gradient-to-r from-slate-400 to-slate-300 transition-all duration-300" style={{ width: `${(progress.done / Math.max(progress.total, 1)) * 100}%` }} />
             </div>
           </div>
@@ -267,7 +267,7 @@ const SearchInputSection: React.FC<{
       </div>
 
       {domains.length > 0 && counts.available > 0 && (
-        <p className="text-sm text-slate-300 mt-4 text-center">{counts.available} available • {counts.taken} taken</p>
+        <p className={`text-sm mt-4 text-center ${isLight ? 'text-slate-500' : 'text-slate-300'}`}>{counts.available} available • {counts.taken} taken</p>
       )}
     </div>
   );
@@ -374,25 +374,25 @@ export const BulkDomainSearchLanding: React.FC<{
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <FeatureCard 
-              icon={<svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>}
+              icon={<svg className={`w-6 h-6 ${isLight ? 'text-blue-500' : 'text-slate-300'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>}
               title="Lightning Fast"
               description="Check up to 1,000 domains in seconds with parallel processing technology"
               delay={0}
             />
             <FeatureCard 
-              icon={<svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" /></svg>}
+              icon={<svg className={`w-6 h-6 ${isLight ? 'text-indigo-500' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" /></svg>}
               title="Smart Filtering"
               description="Filter by availability, TLD, price range, and more with advanced options"
               delay={100}
             />
             <FeatureCard 
-              icon={<svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>}
+              icon={<svg className={`w-6 h-6 ${isLight ? 'text-indigo-500' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>}
               title="CSV Import/Export"
               description="Import domain lists and export results for analysis and sharing"
               delay={200}
             />
             <FeatureCard 
-              icon={<svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+              icon={<svg className={`w-6 h-6 ${isLight ? 'text-blue-500' : 'text-slate-300'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
               title="Price Comparison"
               description="See pricing across multiple registrars instantly in one view"
               delay={300}
@@ -483,12 +483,12 @@ export const BulkDomainSearchLanding: React.FC<{
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: <svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>, title: 'Smart Parsing', desc: 'Automatically parse domains from any format - CSV, text, URLs, or mixed input' },
-              { icon: <svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg>, title: 'TLD Filtering', desc: 'Filter results by specific TLDs like .com, .io, .ai, and hundreds more' },
-              { icon: <svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>, title: 'Availability Stats', desc: 'See real-time statistics on available, taken, and premium domains' },
-              { icon: <svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>, title: 'Export Results', desc: 'Download your results as CSV or PDF for further analysis or sharing' },
-              { icon: <svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>, title: 'Batch Processing', desc: 'Process large lists efficiently with optimized batch checking' },
-              { icon: <svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" /></svg>, title: 'One-Click Register', desc: 'Register available domains instantly with your preferred registrar' },
+              { icon: <svg className={`w-6 h-6 ${isLight ? 'text-blue-500' : 'text-slate-300'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>, title: 'Smart Parsing', desc: 'Automatically parse domains from any format - CSV, text, URLs, or mixed input' },
+              { icon: <svg className={`w-6 h-6 ${isLight ? 'text-indigo-500' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg>, title: 'TLD Filtering', desc: 'Filter results by specific TLDs like .com, .io, .ai, and hundreds more' },
+              { icon: <svg className={`w-6 h-6 ${isLight ? 'text-indigo-500' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>, title: 'Availability Stats', desc: 'See real-time statistics on available, taken, and premium domains' },
+              { icon: <svg className={`w-6 h-6 ${isLight ? 'text-blue-500' : 'text-slate-300'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>, title: 'Export Results', desc: 'Download your results as CSV or PDF for further analysis or sharing' },
+              { icon: <svg className={`w-6 h-6 ${isLight ? 'text-indigo-500' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>, title: 'Batch Processing', desc: 'Process large lists efficiently with optimized batch checking' },
+              { icon: <svg className={`w-6 h-6 ${isLight ? 'text-blue-500' : 'text-slate-300'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" /></svg>, title: 'One-Click Register', desc: 'Register available domains instantly with your preferred registrar' },
             ].map((f, i) => (
               <FeatureCard 
                 key={i}
@@ -605,7 +605,7 @@ https://example.com/page → example.com`}</code>
             <div className="lg:col-span-2">
               <h2 className={`text-3xl sm:text-4xl md:text-5xl font-black mb-6 leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
                 Master bulk<br />domain<br />searching:<br />
-                <span className="text-slate-300">expert tips</span>
+                <span className={isLight ? 'text-blue-500' : 'text-slate-300'}>expert tips</span>
               </h2>
               <p className={`mb-8 text-lg leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
                 Learn how to maximize your bulk domain search efficiency with these professional strategies.

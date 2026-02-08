@@ -1,3 +1,8 @@
 {
-  "/page": "app/page.js"
+  "/bulk-search/page": "app/bulk-search/page.js",
+  "/generator/page": "app/generator/page.js",
+  "/learn/page": "app/learn/page.js",
+  "/tools/whois/page": "app/tools/whois/page.js",
+  "/domain-extensions/page": "app/domain-extensions/page.js",
+  "/saved-domains/page": "app/saved-domains/page.js"
 }

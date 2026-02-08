@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { useTheme } from '@/contexts/ThemeContext';
 
 type AvailabilityStatus = 'available' | 'unavailable' | 'loading' | 'unknown';
 
@@ -18,6 +21,8 @@ export const AvailabilityIndicator: React.FC<AvailabilityIndicatorProps> = ({
   tooltipText,
   className,
 }) => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const sizeClasses = {
     sm: 'w-4 h-4',
     md: 'w-5 h-5',
@@ -81,7 +86,7 @@ export const AvailabilityIndicator: React.FC<AvailabilityIndicatorProps> = ({
       icon: (
         <svg
           data-icon="spinner"
-          className={cn(sizeClasses[size], 'text-white/40 animate-spin')}
+          className={cn(sizeClasses[size], isLight ? 'text-slate-400 animate-spin' : 'text-white/40 animate-spin')}
           fill="none"
           viewBox="0 0 24 24"
           aria-hidden="true"
@@ -102,8 +107,8 @@ export const AvailabilityIndicator: React.FC<AvailabilityIndicatorProps> = ({
         </svg>
       ),
       label: 'Checking...',
-      color: 'text-white/40',
-      bgColor: 'bg-white/5',
+      color: isLight ? 'text-slate-400' : 'text-white/40',
+      bgColor: isLight ? 'bg-slate-100' : 'bg-white/5',
       tooltip: tooltipText || 'Checking domain availability',
     },
     unknown: {

@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { Icons } from './Icons';
+import { useTheme } from '@/contexts/ThemeContext';
 
 type ToastType = 'success' | 'error' | 'info' | 'warning';
 
@@ -28,6 +29,8 @@ export const useToast = () => {
 
 export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   const showToast = useCallback((message: string, type: ToastType = 'info', duration: number = 3000) => {
     const id = Math.random().toString(36).substring(7);
@@ -104,14 +107,14 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             <div className="shrink-0 mt-0.5">
               {getToastIcon(toast.type)}
             </div>
-            <p className="flex-1 text-sm text-white/90 leading-relaxed">
+            <p className={`flex-1 text-sm leading-relaxed ${isLight ? 'text-slate-800' : 'text-white/90'}`}>
               {toast.message}
             </p>
             <button
               onClick={() => removeToast(toast.id)}
               className="shrink-0 p-1 hover:bg-white/[0.06] rounded-lg transition-colors"
             >
-              <svg className="w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className={`w-4 h-4 ${isLight ? 'text-slate-400' : 'text-white/40'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>

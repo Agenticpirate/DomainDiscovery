@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import { Button } from '../ui/Button';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface DomainResult {
   domain: string;
@@ -13,8 +16,11 @@ interface DomainCardProps {
 }
 
 export const DomainCard: React.FC<DomainCardProps> = ({ result }) => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
+
   return (
-    <div className="relative glass-card p-6 border-white/10 hover:border-white/20 transition-all duration-500 group overflow-hidden">
+    <div className={`relative glass-card p-6 ${isLight ? 'border-slate-200' : 'border-white/10'} hover:${isLight ? 'border-slate-300' : 'border-white/20'} transition-all duration-500 group overflow-hidden`}>
       {/* Subtle white glow on hover */}
       <div className="absolute inset-0 bg-white/0 group-hover:bg-white/[0.02] transition-all duration-500" />
       
@@ -22,10 +28,10 @@ export const DomainCard: React.FC<DomainCardProps> = ({ result }) => {
         {/* Header */}
         <div className="flex items-start justify-between mb-6">
           <div className="flex-1">
-            <h3 className="text-xl font-bold font-mono tracking-tight group-hover:text-white transition-colors mb-1">
+            <h3 className={`text-xl font-bold font-mono tracking-tight group-hover:${isLight ? 'text-slate-900' : 'text-white'} transition-colors mb-1`}>
               {result.domain}
             </h3>
-            <p className="text-xs text-white/40 uppercase tracking-widest font-semibold">
+            <p className={`text-xs ${isLight ? 'text-slate-500' : 'text-white/40'} uppercase tracking-widest font-semibold`}>
               Standard Registry
             </p>
           </div>
@@ -33,24 +39,24 @@ export const DomainCard: React.FC<DomainCardProps> = ({ result }) => {
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
               result.available
                 ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                : 'bg-white/5 text-white/40 border border-white/10'
+                : `${isLight ? 'bg-slate-100' : 'bg-white/5'} ${isLight ? 'text-slate-500' : 'text-white/40'} border ${isLight ? 'border-slate-200' : 'border-white/10'}`
             }`}
           >
-            <span className={`w-1.5 h-1.5 rounded-full ${result.available ? 'bg-emerald-400 animate-pulse' : 'bg-white/40'}`} />
+            <span className={`w-1.5 h-1.5 rounded-full ${result.available ? 'bg-emerald-400 animate-pulse' : isLight ? 'bg-slate-400' : 'bg-white/40'}`} />
             {result.available ? 'Available' : 'Taken'}
           </div>
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-6" />
+        <div className={`h-px bg-gradient-to-r from-transparent ${isLight ? 'via-slate-200' : 'via-white/10'} to-transparent mb-6`} />
 
         {/* Footer */}
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-[10px] text-white/40 uppercase font-bold tracking-widest mb-1">
+            <p className={`text-[10px] ${isLight ? 'text-slate-500' : 'text-white/40'} uppercase font-bold tracking-widest mb-1`}>
               Est. Value
             </p>
-            <p className="text-2xl font-black text-white">
+            <p className={`text-2xl font-black ${isLight ? 'text-slate-900' : 'text-white'}`}>
               {result.available ? result.price || '$12.99' : '—'}
             </p>
           </div>

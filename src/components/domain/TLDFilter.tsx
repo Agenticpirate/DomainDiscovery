@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface TLD {
   extension: string;
@@ -30,6 +31,8 @@ const POPULAR_TLDS: TLD[] = [
 export function TLDFilter({ onSelect }: TLDFilterProps) {
   const [selectedTLDs, setSelectedTLDs] = useState<string[]>([]);
   const [showAll, setShowAll] = useState(false);
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   const toggleTLD = (tld: string) => {
     const updated = selectedTLDs.includes(tld)
@@ -42,14 +45,14 @@ export function TLDFilter({ onSelect }: TLDFilterProps) {
   const displayTLDs = showAll ? POPULAR_TLDS : POPULAR_TLDS.filter((t) => t.popular);
 
   return (
-    <div className="glass-card p-6 border-white/10">
+    <div className={`glass-card p-6 ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-bold uppercase tracking-widest text-white/60">
+        <h3 className={`text-sm font-bold uppercase tracking-widest ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
           Filter by Extension
         </h3>
         <button
           onClick={() => setShowAll(!showAll)}
-          className="text-xs text-white/40 hover:text-white transition-colors"
+          className={`text-xs ${isLight ? 'text-slate-500 hover:text-slate-900' : 'text-white/40 hover:text-white'} transition-colors`}
         >
           {showAll ? 'Show Less' : 'Show All 1,600+'}
         </button>
@@ -62,7 +65,7 @@ export function TLDFilter({ onSelect }: TLDFilterProps) {
             className={`px-3 py-2 rounded-full text-xs font-mono font-bold transition-all ${
               selectedTLDs.includes(tld.extension)
                 ? 'bg-white text-black'
-                : 'bg-white/5 border border-white/10 text-white/60 hover:bg-white/10'
+                : `${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} ${isLight ? 'text-slate-600' : 'text-white/60'} ${isLight ? 'hover:bg-slate-200' : 'hover:bg-white/10'}`
             }`}
           >
             <span>{tld.extension}</span>
@@ -76,7 +79,7 @@ export function TLDFilter({ onSelect }: TLDFilterProps) {
             setSelectedTLDs([]);
             onSelect?.([]);
           }}
-          className="mt-4 text-xs text-white/40 hover:text-white transition-colors"
+          className={`mt-4 text-xs ${isLight ? 'text-slate-500 hover:text-slate-900' : 'text-white/40 hover:text-white'} transition-colors`}
         >
           Clear filters
         </button>

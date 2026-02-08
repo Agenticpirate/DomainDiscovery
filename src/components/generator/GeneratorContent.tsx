@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react';
 import { Icons } from '@/components/ui/Icons';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export const GeneratorContent: React.FC = () => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const faqs = [
@@ -104,21 +107,21 @@ export const GeneratorContent: React.FC = () => {
         <h2 className="text-3xl font-black mb-6 text-center">
           What is an AI Domain Name Generator?
         </h2>
-        <div className="prose prose-invert max-w-none">
-          <p className="text-white/70 leading-relaxed text-lg mb-6">
+        <div className={`prose ${isLight ? 'prose-slate' : 'prose-invert'} max-w-none`}>
+          <p className={`${isLight ? 'text-slate-600' : 'text-white/70'} leading-relaxed text-lg mb-6`}>
             An AI domain name generator is a powerful tool that helps entrepreneurs, businesses, and creators 
             discover the perfect domain name for their online presence. Instead of manually brainstorming and 
             checking availability one domain at a time, our generator uses advanced algorithms to create hundreds 
             of creative, brandable domain suggestions based on your keywords.
           </p>
-          <p className="text-white/70 leading-relaxed text-lg mb-6">
-            What makes our generator unique is its <strong className="text-white">semantic understanding</strong>. 
+          <p className={`${isLight ? 'text-slate-600' : 'text-white/70'} leading-relaxed text-lg mb-6`}>
+            What makes our generator unique is its <strong className={isLight ? 'text-slate-900' : 'text-white'}>semantic understanding</strong>. 
             Unlike basic generators that just add random prefixes and suffixes, our AI understands domain-specific 
             context. When you search for "cloud", it knows you likely mean cloud computing, not weather. When you 
             type "mint", it suggests finance-related terms, not herbs. This contextual awareness helps you find 
             domains that truly match your industry and vision.
           </p>
-          <p className="text-white/70 leading-relaxed text-lg">
+          <p className={`${isLight ? 'text-slate-600' : 'text-white/70'} leading-relaxed text-lg`}>
             Every suggestion is checked for real-time availability across major registrars, so you can immediately 
             register domains that catch your eye. Whether you're launching a startup, building a personal brand, 
             or exploring new project ideas, our generator streamlines the entire domain discovery process.
@@ -135,13 +138,13 @@ export const GeneratorContent: React.FC = () => {
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="p-6 bg-white/[0.02] border border-white/10 rounded-xl hover:border-white/20 hover:bg-white/[0.04] transition-all"
+              className={`p-6 ${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl ${isLight ? 'hover:border-blue-300' : 'hover:border-white/20'} ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.04]'} transition-all`}
             >
               <div className="flex items-start gap-4">
                 <div className="text-4xl">{benefit.icon}</div>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold mb-2">{benefit.title}</h3>
-                  <p className="text-sm text-white/60 leading-relaxed">{benefit.description}</p>
+                  <p className={`text-sm ${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>{benefit.description}</p>
                 </div>
               </div>
             </div>
@@ -158,13 +161,13 @@ export const GeneratorContent: React.FC = () => {
           {tips.map((tip, index) => (
             <div
               key={index}
-              className="p-6 bg-white/[0.02] border border-white/10 rounded-xl hover:border-white/20 hover:bg-white/[0.04] transition-all group"
+              className={`p-6 ${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl ${isLight ? 'hover:border-blue-300' : 'hover:border-white/20'} ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.04]'} transition-all group`}
             >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${isLight ? 'from-slate-200 to-slate-100' : 'from-white/10 to-white/5'} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                 {tip.icon}
               </div>
-              <h3 className="font-bold mb-2 text-white">{tip.title}</h3>
-              <p className="text-sm text-white/60 leading-relaxed">{tip.description}</p>
+              <h3 className={`font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{tip.title}</h3>
+              <p className={`text-sm ${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>{tip.description}</p>
             </div>
           ))}
         </div>
@@ -182,7 +185,7 @@ export const GeneratorContent: React.FC = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold mb-2">Enter Your Keyword</h3>
-              <p className="text-white/60 leading-relaxed">
+              <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>
                 Type a single word that represents your brand, niche, or business idea. Our AI starts generating 
                 suggestions instantly as you type, providing real-time feedback.
               </p>
@@ -195,7 +198,7 @@ export const GeneratorContent: React.FC = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold mb-2">AI Generates Variations</h3>
-              <p className="text-white/60 leading-relaxed">
+              <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>
                 Our semantic engine creates hundreds of variations using prefixes, suffixes, and contextually 
                 relevant alternatives. It understands industry-specific meanings to suggest truly relevant names.
               </p>
@@ -208,7 +211,7 @@ export const GeneratorContent: React.FC = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold mb-2">Real-Time Availability Check</h3>
-              <p className="text-white/60 leading-relaxed">
+              <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>
                 Each suggestion is instantly checked against live registrar databases. Available domains are 
                 highlighted with a green indicator, so you know exactly which names you can register.
               </p>
@@ -221,7 +224,7 @@ export const GeneratorContent: React.FC = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold mb-2">Register Your Domain</h3>
-              <p className="text-white/60 leading-relaxed">
+              <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>
                 Click any available domain to register it instantly through your preferred registrar. We support 
                 GoDaddy, Namecheap, Google Domains, and more for your convenience.
               </p>
@@ -239,15 +242,15 @@ export const GeneratorContent: React.FC = () => {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-white/[0.02] border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all"
+              className={`${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl overflow-hidden ${isLight ? 'hover:border-blue-300' : 'hover:border-white/20'} transition-all`}
             >
               <button
                 onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/[0.02] transition-colors"
+                className={`w-full px-6 py-4 flex items-center justify-between text-left ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.02]'} transition-colors`}
               >
-                <h3 className="font-semibold text-white pr-4">{faq.question}</h3>
+                <h3 className={`font-semibold ${isLight ? 'text-slate-900' : 'text-white'} pr-4`}>{faq.question}</h3>
                 <svg
-                  className={`w-5 h-5 text-white/50 flex-shrink-0 transition-transform ${
+                  className={`w-5 h-5 ${isLight ? 'text-slate-500' : 'text-white/50'} flex-shrink-0 transition-transform ${
                     openFaq === index ? 'rotate-180' : ''
                   }`}
                   fill="none"
@@ -259,7 +262,7 @@ export const GeneratorContent: React.FC = () => {
               </button>
               {openFaq === index && (
                 <div className="px-6 pb-4">
-                  <p className="text-white/60 leading-relaxed">{faq.answer}</p>
+                  <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>{faq.answer}</p>
                 </div>
               )}
             </div>
@@ -272,7 +275,7 @@ export const GeneratorContent: React.FC = () => {
         <h2 className="text-3xl font-black mb-6 text-center">
           Popular Domain Keywords to Try
         </h2>
-        <p className="text-center text-white/60 mb-8">
+        <p className={`text-center ${isLight ? 'text-slate-600' : 'text-white/60'} mb-8`}>
           Click any keyword below to see instant domain suggestions with semantic alternatives
         </p>
         <div className="flex flex-wrap justify-center gap-3">
@@ -284,7 +287,7 @@ export const GeneratorContent: React.FC = () => {
             <a
               key={keyword}
               href={`/generator?q=${keyword}`}
-              className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg text-sm font-medium transition-all"
+              className={`px-4 py-2 ${isLight ? 'bg-slate-100' : 'bg-white/5'} ${isLight ? 'hover:bg-slate-200' : 'hover:bg-white/10'} border ${isLight ? 'border-slate-200' : 'border-white/10'} ${isLight ? 'hover:border-blue-300' : 'hover:border-white/20'} rounded-lg text-sm font-medium transition-all`}
             >
               {keyword}
             </a>
@@ -294,17 +297,17 @@ export const GeneratorContent: React.FC = () => {
 
       {/* CTA Section */}
       <section className="max-w-4xl mx-auto px-6 text-center">
-        <div className="p-12 bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 rounded-2xl">
+        <div className={`p-12 bg-gradient-to-br ${isLight ? 'from-slate-100 to-white' : 'from-white/[0.05] to-white/[0.02]'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-2xl`}>
           <h2 className="text-3xl font-black mb-4">
             Ready to Find Your Perfect Domain?
           </h2>
-          <p className="text-white/60 mb-8 max-w-2xl mx-auto">
+          <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} mb-8 max-w-2xl mx-auto`}>
             Start generating creative, available domain names instantly. Our AI-powered tool makes 
             finding the perfect domain fast, easy, and free.
           </p>
           <a
             href="#top"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-bold rounded-xl hover:bg-white/90 transition-all shadow-lg shadow-white/10"
+            className={`inline-flex items-center gap-2 px-8 py-4 ${isLight ? 'bg-slate-900 text-white hover:bg-slate-800' : 'bg-white text-black hover:bg-white/90'} font-bold rounded-xl transition-all shadow-lg ${isLight ? 'shadow-slate-300' : 'shadow-white/10'}`}
           >
             <Icons.Magic />
             Start Generating Domains

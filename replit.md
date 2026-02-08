@@ -48,12 +48,12 @@ DomainsDiscovery is an AI-powered domain name search and discovery tool built wi
 - **Light mode accents**: Blue-to-indigo gradient for active pills, blue hover borders on cards, emerald-50 for success states
 
 ## Recent Changes
-- Extended full light/dark theme support to ALL internal pages (bulk-search, domain-extensions, generator, premium, saved-domains, expired, learn, and all 6 tools/* pages)
-- Updated all internal page components (DomainExtensionsView, BulkDomainSearch, BulkDomainSearchLanding, WHOISLookup, DomainValueEstimate, PriceComparison, KeywordDomainFinder, BrandableDomainFinder, GeoDomainGenerator) with theme-aware styling
+- Fixed light mode text contrast issues across ALL components - text was invisible due to unconditional text-white/XX opacity classes
+- Added isLight theme conditionals to: FAQSection, Accordion, DomainCard, DomainResultCard, DomainSearchBar, DomainResultsList, TLDFilter, GeneratorContent, DomainGenerator, AvailabilityIndicator, Toast, BulkDomainSearchLanding (IndustryCard, icon colors, progress indicator)
+- All text-white/XX mapped to slate equivalents: text-white/50→text-slate-500, text-white/60→text-slate-600, etc.
+- All bg-white/XX and border-white/XX mapped to slate equivalents for light mode
+- Extended full light/dark theme support to ALL internal pages and components
 - Applied apple silicon color aesthetic (blue/indigo/violet gradients) across all pages for light mode
-- Updated Breadcrumb component for theme support
-- Removed hardcoded `bg-[#0a0a0a] text-white` from all page wrappers (body handles via CSS variables)
-- Converted all gray-* references to slate-* for consistency across Navigation and SearchInterface
 - Configured for Replit environment (port 5000, allowed dev origins via REPLIT_DEV_DOMAIN)
 
 ## User Preferences

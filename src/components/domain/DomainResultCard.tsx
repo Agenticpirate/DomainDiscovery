@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { AvailabilityIndicator } from '@/components/ui/AvailabilityIndicator';
 import { Tooltip } from '@/components/ui/Tooltip';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export interface DomainResultCardProps {
   domain: string;
@@ -33,6 +34,8 @@ export function DomainResultCard({
   isHighlighted = false,
   isSaved = false,
 }: DomainResultCardProps) {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const isAvailable = availability === 'available';
   const isLoading = availability === 'loading';
 
@@ -41,8 +44,8 @@ export function DomainResultCard({
       className={`
         group relative p-4 rounded-xl border transition-all duration-200
         ${isHighlighted 
-          ? 'bg-white/[0.08] border-white/30 shadow-lg' 
-          : 'bg-white/[0.02] border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
+          ? `${isLight ? 'bg-slate-100' : 'bg-white/[0.08]'} ${isLight ? 'border-slate-300' : 'border-white/30'} shadow-lg` 
+          : `${isLight ? 'bg-slate-50/50' : 'bg-white/[0.02]'} ${isLight ? 'border-slate-200' : 'border-white/10'} ${isLight ? 'hover:border-slate-300' : 'hover:border-white/20'} ${isLight ? 'hover:bg-slate-100/50' : 'hover:bg-white/[0.04]'}`
         }
         ${isAvailable ? 'hover:shadow-emerald-500/10' : ''}
       `}
@@ -57,7 +60,7 @@ export function DomainResultCard({
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
               <h3 className={`font-mono font-bold text-lg truncate ${
-                isAvailable ? 'text-white' : 'text-white/60'
+                isAvailable ? (isLight ? 'text-slate-900' : 'text-white') : (isLight ? 'text-slate-600' : 'text-white/60')
               }`}>
                 {domain}
               </h3>
@@ -81,8 +84,8 @@ export function DomainResultCard({
               
               {pricing && isAvailable && (
                 <>
-                  <span className="text-white/30">•</span>
-                  <span className="text-sm text-white/60">
+                  <span className={isLight ? 'text-slate-300' : 'text-white/30'}>•</span>
+                  <span className={`text-sm ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
                     {pricing.currency}{pricing.amount.toFixed(2)}/year
                   </span>
                 </>
@@ -99,7 +102,7 @@ export function DomainResultCard({
               className={`p-2 rounded-lg transition-colors ${
                 isSaved 
                   ? 'text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20' 
-                  : 'text-white/40 hover:text-white/80 hover:bg-white/5'
+                  : `${isLight ? 'text-slate-500' : 'text-white/40'} ${isLight ? 'hover:text-slate-700' : 'hover:text-white/80'} ${isLight ? 'hover:bg-slate-100' : 'hover:bg-white/5'}`
               }`}
               aria-label={isSaved ? 'Remove from saved' : 'Save domain'}
             >
@@ -123,10 +126,10 @@ export function DomainResultCard({
 
       {/* Pricing Details */}
       {pricing && isAvailable && (
-        <div className="mb-3 p-3 bg-white/[0.02] rounded-lg border border-white/5">
+        <div className={`mb-3 p-3 ${isLight ? 'bg-slate-50' : 'bg-white/[0.02]'} rounded-lg border ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-white/50">Best price at</span>
-            <span className="text-white/80 font-medium">{pricing.registrar}</span>
+            <span className={isLight ? 'text-slate-500' : 'text-white/50'}>Best price at</span>
+            <span className={`${isLight ? 'text-slate-700' : 'text-white/80'} font-medium`}>{pricing.registrar}</span>
           </div>
         </div>
       )}

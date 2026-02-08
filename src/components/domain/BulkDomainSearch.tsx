@@ -79,12 +79,14 @@ const ActionDropdown: React.FC<{ domain: string; available: boolean }> = ({ doma
               <img 
                 src={r.logo} 
                 alt={r.name} 
-                className="w-5 h-5 rounded object-contain bg-white/5 p-0.5" 
+                className={`w-5 h-5 rounded object-contain p-0.5 ${isLight ? 'bg-slate-100' : 'bg-white/5'}`}
                 onError={(e) => { 
                   const target = e.currentTarget;
                   target.style.display = 'none';
                   const fallback = document.createElement('div');
-                  fallback.className = 'w-5 h-5 rounded bg-white/10 flex items-center justify-center text-[8px] font-bold text-white/40';
+                  fallback.className = isLight 
+                    ? 'w-5 h-5 rounded bg-slate-100 flex items-center justify-center text-[8px] font-bold text-slate-500'
+                    : 'w-5 h-5 rounded bg-white/10 flex items-center justify-center text-[8px] font-bold text-white/40';
                   fallback.textContent = r.name.charAt(0);
                   target.parentNode?.insertBefore(fallback, target);
                 }} 

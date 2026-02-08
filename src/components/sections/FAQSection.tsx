@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Accordion } from '@/components/ui/Accordion';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const faqItems = [
   {
@@ -67,6 +68,9 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
   maxWidth = '2xl',
   allowMultiple = false
 }) => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
+
   const maxWidthClasses = {
     sm: 'max-w-2xl',
     md: 'max-w-3xl',
@@ -82,11 +86,15 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4">
-            <span className="bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent">
+            <span className={`bg-gradient-to-r bg-clip-text text-transparent ${
+              isLight
+                ? 'from-slate-900 via-slate-800 to-slate-600'
+                : 'from-white via-white to-white/60'
+            }`}>
               {title}
             </span>
           </h2>
-          <p className="text-lg text-white/50 max-w-2xl mx-auto">
+          <p className={`text-lg max-w-2xl mx-auto ${isLight ? 'text-slate-600' : 'text-white/50'}`}>
             {subtitle}
           </p>
         </div>
@@ -96,12 +104,16 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
 
         {/* Contact CTA */}
         <div className="mt-12 text-center">
-          <p className="text-white/50 mb-4">
+          <p className={`mb-4 ${isLight ? 'text-slate-600' : 'text-white/50'}`}>
             Still have questions?
           </p>
           <a
             href="mailto:support@domainsdiscovery.com"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg text-white transition-all"
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
+              isLight
+                ? 'bg-slate-100 hover:bg-slate-200 border border-slate-200 hover:border-slate-300 text-slate-900'
+                : 'bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white'
+            }`}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
