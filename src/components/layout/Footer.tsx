@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className={`relative border-t backdrop-blur-xl ${
       isLight
-        ? 'border-gray-200 bg-white/60'
+        ? 'border-slate-200 bg-white/80'
         : 'border-white/[0.08] bg-black/40'
     }`}>
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -75,7 +75,7 @@ export const Footer: React.FC = () => {
           ))}
         </div>
 
-        <div className={`pt-8 border-t ${isLight ? 'border-gray-200' : 'border-white/[0.08]'}`}>
+        <div className={`pt-8 border-t ${isLight ? 'border-slate-200' : 'border-white/[0.08]'}`}>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
               &copy; {currentYear} DomainsDiscovery. All rights reserved.

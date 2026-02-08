@@ -139,12 +139,12 @@ export default function Home() {
               <h1 className={`text-5xl sm:text-6xl md:text-7xl font-black tracking-tight mb-6 ${mounted ? 'animate-slide-up' : 'opacity-0'}`}>
                 <span className="block bg-clip-text text-transparent" style={{
                   backgroundImage: isLight
-                    ? 'linear-gradient(to right, #111827, #111827, rgba(17,24,39,0.6))'
+                    ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
                     : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.6))'
                 }}>
                   Find Your Perfect Domain
                 </span>
-                <span className={`block text-3xl sm:text-4xl md:text-5xl mt-2`} style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
+                <span className={`block text-3xl sm:text-4xl md:text-5xl mt-2 font-bold`} style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
               </h1>
               <p className={`text-lg max-w-2xl mx-auto mb-8 ${mounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ color: 'var(--text-tertiary)' }}>
                 Search millions of domains with instant results. Compare prices across registrars. Register in one click.
@@ -164,7 +164,9 @@ export default function Home() {
               </div>
 
               <div className="max-w-4xl mx-auto mt-12">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 p-6 rounded-2xl ${
+                  isLight ? 'bg-white/70 border border-slate-200/60 shadow-sm backdrop-blur-sm' : ''
+                }`}>
                   {[
                     { value: '2M+', label: 'Domains Searched' },
                     { value: '50K+', label: 'Active Users' },
@@ -173,7 +175,7 @@ export default function Home() {
                   ].map((stat) => (
                     <div key={stat.label} className="text-center p-4">
                       <div className="text-2xl sm:text-3xl font-black mb-1" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
-                      <div className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
+                      <div className="text-xs font-medium" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
                     </div>
                   ))}
                 </div>

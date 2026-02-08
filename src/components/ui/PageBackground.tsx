@@ -27,8 +27,8 @@ export const PageBackground: React.FC<PageBackgroundProps> = ({
 
       {showGrid && isLight && (
         <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(248,249,252,0.8)_70%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(245,247,250,0.9)_70%)]" />
         </div>
       )}
 
@@ -43,9 +43,9 @@ export const PageBackground: React.FC<PageBackgroundProps> = ({
 
         {variant === 'hero' && isLight && (
           <>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-blue-200/[0.15] via-purple-200/[0.08] to-transparent rounded-full blur-[100px]" />
-            <div className="absolute top-20 left-1/4 -translate-x-1/2 w-[600px] h-[300px] bg-blue-200/[0.12] rounded-full blur-[120px]" />
-            <div className="absolute top-32 right-1/4 translate-x-1/2 w-[500px] h-[250px] bg-purple-200/[0.08] rounded-full blur-[100px]" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-gradient-to-b from-blue-100/[0.35] via-indigo-100/[0.15] to-transparent rounded-full blur-[120px]" />
+            <div className="absolute top-10 left-1/4 -translate-x-1/2 w-[700px] h-[350px] bg-sky-100/[0.25] rounded-full blur-[120px]" />
+            <div className="absolute top-24 right-1/4 translate-x-1/2 w-[600px] h-[300px] bg-violet-100/[0.18] rounded-full blur-[100px]" />
           </>
         )}
 
@@ -59,7 +59,8 @@ export const PageBackground: React.FC<PageBackgroundProps> = ({
 
         {variant === 'default' && isLight && (
           <>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-blue-100/[0.2] via-purple-100/[0.1] to-transparent rounded-full blur-[80px]" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-b from-blue-100/[0.3] via-indigo-100/[0.15] to-transparent rounded-full blur-[80px]" />
+            <div className="absolute top-40 left-1/3 -translate-x-1/2 w-[500px] h-[250px] bg-sky-100/[0.2] rounded-full blur-[100px]" />
           </>
         )}
 

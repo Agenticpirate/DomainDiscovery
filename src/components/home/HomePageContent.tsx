@@ -69,25 +69,25 @@ export const HomePageContent: React.FC = () => {
 
   const cardClasses = `group p-8 rounded-2xl transition-all duration-300 ${
     isLight
-      ? 'bg-white border border-gray-200 hover:border-gray-300 hover:shadow-lg shadow-sm'
+      ? 'bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg shadow-sm'
       : 'bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
   }`;
 
   const smallCardClasses = `group p-6 rounded-xl transition-all ${
     isLight
-      ? 'bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md shadow-sm'
+      ? 'bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md shadow-sm'
       : 'bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
   }`;
 
   const iconBoxClasses = `p-3 rounded-xl transition-transform group-hover:scale-110 ${
     isLight
-      ? 'bg-gradient-to-br from-gray-100 to-gray-50 text-gray-600'
+      ? 'bg-gradient-to-br from-slate-100 to-slate-50 text-slate-600 shadow-sm'
       : 'bg-gradient-to-br from-white/10 to-white/5 text-white/70'
   }`;
 
   const smallIconBoxClasses = `p-3 rounded-xl mb-4 transition-all group-hover:scale-110 ${
     isLight
-      ? 'bg-gray-100 group-hover:bg-gray-200 text-gray-600'
+      ? 'bg-slate-100 group-hover:bg-slate-200 text-slate-600'
       : 'bg-white/5 group-hover:bg-white/10 text-white/70'
   }`;
 
@@ -176,7 +176,7 @@ export const HomePageContent: React.FC = () => {
               href="/domain-extensions"
               className={`group px-6 py-4 rounded-xl transition-all ${
                 isLight
-                  ? 'bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md shadow-sm'
+                  ? 'bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md shadow-sm'
                   : 'bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
               }`}
             >
@@ -194,7 +194,7 @@ export const HomePageContent: React.FC = () => {
             href="/domain-extensions"
             className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
               isLight
-                ? 'bg-gray-100 hover:bg-gray-200 border border-gray-200 hover:border-gray-300'
+                ? 'bg-slate-100 hover:bg-slate-200 border border-slate-200 hover:border-slate-300 text-slate-700'
                 : 'bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20'
             }`}
           >
@@ -271,14 +271,14 @@ export const HomePageContent: React.FC = () => {
               key={index}
               className={`rounded-xl overflow-hidden transition-all ${
                 isLight
-                  ? 'bg-white border border-gray-200 hover:border-gray-300 shadow-sm'
+                  ? 'bg-white border border-slate-200 hover:border-slate-300 shadow-sm'
                   : 'bg-white/[0.02] border border-white/10 hover:border-white/20'
               }`}
             >
               <button
                 onClick={() => setOpenFaq(openFaq === index ? null : index)}
                 className={`w-full px-6 py-5 flex items-center justify-between text-left transition-colors ${
-                  isLight ? 'hover:bg-gray-50' : 'hover:bg-white/[0.02]'
+                  isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.02]'
                 }`}
               >
                 <h3 className="font-bold pr-4">{faq.question}</h3>
@@ -346,7 +346,7 @@ export const HomePageContent: React.FC = () => {
       <section className="max-w-4xl mx-auto px-6">
         <div className={`p-12 rounded-2xl text-center ${
           isLight
-            ? 'bg-gradient-to-br from-gray-50 to-white border border-gray-200 shadow-lg'
+            ? 'bg-gradient-to-br from-slate-50 to-white border border-slate-200 shadow-lg'
             : 'bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10'
         }`}>
           <h2 className="text-3xl sm:text-4xl font-black mb-4">
@@ -360,7 +360,7 @@ export const HomePageContent: React.FC = () => {
             href="#top"
             className={`inline-flex items-center gap-2 px-8 py-4 font-bold rounded-xl transition-all ${
               isLight
-                ? 'bg-gray-900 text-white hover:bg-gray-800 shadow-lg shadow-gray-900/20'
+                ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-lg shadow-slate-900/20'
                 : 'bg-white text-black hover:bg-white/90 shadow-lg shadow-white/10'
             }`}
           >

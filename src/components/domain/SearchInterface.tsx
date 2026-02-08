@@ -199,10 +199,10 @@ export function SearchInterface({
       </div>
 
       {showRecent && showRecentSearches && recentSearches.length > 0 && (
-        <div className={`absolute top-full left-0 right-0 mt-2 rounded-xl shadow-xl z-50 overflow-hidden animate-fade-in ${
+        <div className={`absolute top-full left-0 right-0 mt-2 rounded-xl z-50 overflow-hidden animate-fade-in ${
           isLight
-            ? 'bg-white border border-gray-200'
-            : 'bg-neutral-900 border border-white/10'
+            ? 'bg-white border border-slate-200 shadow-lg shadow-slate-900/[0.06]'
+            : 'bg-neutral-900 border border-white/10 shadow-xl'
         }`}>
           <div className="p-2">
             <div className="text-xs font-semibold uppercase tracking-wider px-3 py-2" style={{ color: 'var(--text-muted)' }}>
@@ -213,7 +213,7 @@ export function SearchInterface({
                 key={index}
                 onClick={() => handleRecentSearchClick(search.query)}
                 className={`w-full flex items-center gap-3 px-3 py-2 text-left text-sm rounded-lg transition-colors ${
-                  isLight ? 'hover:bg-gray-100' : 'hover:bg-white/5'
+                  isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'
                 }`}
                 style={{ color: 'var(--text-secondary)' }}
               >
