@@ -1,3 +1,4 @@
 {
+  "/bulk-search/page": "app/bulk-search/page.js",
   "/page": "app/page.js"
 }
