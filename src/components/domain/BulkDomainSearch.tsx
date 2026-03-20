@@ -153,16 +153,17 @@ const ResultsView: React.FC<{
   };
 
   return (
-    <div className="flex gap-6 w-full max-w-7xl mx-auto">
+    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-7xl mx-auto px-2 sm:px-0">
       {/* Sidebar */}
-      <div className="w-48 shrink-0 space-y-6">
+      <div className="sm:w-48 sm:shrink-0 space-y-3 sm:space-y-6">
         <Button onClick={reset} variant="ghost" size="sm" className="justify-start gap-2 -ml-2">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
           New bulk search
         </Button>
 
         <div>
-          <div className={`text-xs font-semibold uppercase tracking-wider mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Display</div>
+          <div className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Display</div>
+          <div className="flex sm:block gap-1.5 overflow-x-auto sm:overflow-visible pb-1 sm:pb-0">
           {[
             { k: 'all', l: 'All domains', c: counts.all, color: 'bg-white/20' },
             { k: 'available', l: 'Available', c: counts.available, color: 'bg-emerald-500' },
@@ -172,7 +173,7 @@ const ResultsView: React.FC<{
             <button
               key={x.k}
               onClick={() => setFilter(x.k as FilterType)}
-              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all ${filter === x.k ? (isLight ? 'bg-slate-100 text-slate-900' : 'bg-white/10 text-white') : (isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5')}`}
+              className={`sm:w-full flex items-center justify-between px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm transition-all whitespace-nowrap ${filter === x.k ? (isLight ? 'bg-slate-100 text-slate-900' : 'bg-white/10 text-white') : (isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5')}`}
             >
               <span className="flex items-center gap-2">
                 <span className={`w-2 h-2 rounded-full ${x.color}`} />
@@ -181,11 +182,12 @@ const ResultsView: React.FC<{
               <span className={`text-xs ${isLight ? 'text-slate-400' : 'text-white/40'}`}>{x.c}</span>
             </button>
           ))}
+          </div>
         </div>
 
         <div>
-          <div className={`text-xs font-semibold uppercase tracking-wider mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Filters</div>
-          <button onClick={() => setShowTlds(!showTlds)} className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}>
+          <div className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Filters</div>
+          <button onClick={() => setShowTlds(!showTlds)} className={`w-full flex items-center justify-between px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm transition-all ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}>
             <span>TLDs</span>
             {tldFilter.length > 0 && <Badge variant="success" size="sm">{tldFilter.length}</Badge>}
           </button>
@@ -199,12 +201,12 @@ const ResultsView: React.FC<{
               ))}
             </div>
           )}
-          <button onClick={() => setSortAZ(!sortAZ)} className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}>
+          <button onClick={() => setSortAZ(!sortAZ)} className={`w-full flex items-center gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm transition-all ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}>
             Sort: {sortAZ ? 'A-Z' : 'Length'}
           </button>
         </div>
 
-        <div>
+        <div className="hidden sm:block">
           <div className={`text-xs font-semibold uppercase tracking-wider mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Actions</div>
           <p className={`text-xs mb-3 italic ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Click domain names to register</p>
           <Button onClick={reset} variant="ghost" size="sm" className="w-full justify-start gap-2 text-red-400 hover:text-red-300 hover:bg-red-500/10">
@@ -216,9 +218,9 @@ const ResultsView: React.FC<{
 
       {/* Results Grid */}
       <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between mb-4">
-          <span className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{results.length} domains</span>
-          <div className="flex items-center gap-4 text-sm">
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <span className={`text-xs sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{results.length} domains</span>
+          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
             <span className="text-emerald-400">{counts.available} available</span>
             <span className={isLight ? 'text-slate-400' : 'text-white/40'}>{counts.taken} taken</span>
           </div>
@@ -231,14 +233,14 @@ const ResultsView: React.FC<{
         )}
 
         <div 
-          className="grid grid-cols-2 gap-2 max-h-[calc(100vh-200px)] overflow-y-auto pr-2 select-none"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 max-h-[calc(100vh-180px)] overflow-y-auto pr-0 sm:pr-2 select-none"
           onContextMenu={(e) => e.preventDefault()}
           onCopy={(e) => e.preventDefault()}
         >
           {results.map(d => (
-            <div key={d.domain} className={`flex items-center justify-between p-3 rounded-lg transition-all group ${isLight ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-sm' : 'bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04]'}`}>
-              <div className="flex items-center gap-3 min-w-0 flex-1">
-                <span className={`w-2 h-2 rounded-full shrink-0 ${
+            <div key={d.domain} className={`flex items-center justify-between p-2 sm:p-3 rounded-lg transition-all group ${isLight ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-sm' : 'bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04]'}`}>
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                <span className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full shrink-0 ${
                   d.status === 'checking' ? 'bg-white/40 animate-pulse' :
                   d.status === 'available' ? 'bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.8)] animate-pulse' : 
                   d.status === 'premium' ? 'bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.8)] animate-pulse' : 
@@ -248,19 +250,19 @@ const ResultsView: React.FC<{
                   href={`https://www.godaddy.com/domainsearch/find?domainToCheck=${d.domain}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`font-mono text-sm truncate hover:text-emerald-400 transition-colors cursor-pointer ${isLight ? 'text-slate-800' : 'text-white/90'}`}
+                  className={`font-mono text-xs sm:text-sm truncate hover:text-emerald-400 transition-colors cursor-pointer ${isLight ? 'text-slate-800' : 'text-white/90'}`}
                   title="Register on GoDaddy"
                 >
                   {d.domain}
                 </a>
                 {d.status === 'premium' && <Badge variant="warning" size="sm">Premium</Badge>}
-                {d.price && <span className={`text-xs font-medium ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{d.price}</span>}
+                {d.price && <span className={`text-[11px] sm:text-xs font-medium ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{d.price}</span>}
               </div>
               <ActionDropdown domain={d.domain} available={d.status === 'available' || d.status === 'premium'} />
             </div>
           ))}
         </div>
-        {results.length === 0 && <div className={`text-center py-16 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>No domains match your filter</div>}
+        {results.length === 0 && <div className={`text-center py-12 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>No domains match your filter</div>}
       </div>
     </div>
   );
@@ -373,7 +375,7 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
           </tbody>
         </table>
         <div class="footer">
-          Report generated by DomainsDiscovery.com
+          Report generated by DomainDiscovery.com
         </div>
       </body>
       </html>

@@ -64,7 +64,7 @@
   
   <!-- Text -->
   <text x="600" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="900" fill="white" text-anchor="middle">
-    DomainsDiscovery
+    DomainDiscovery
   </text>
   <text x="600" y="330" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="600" fill="#94a3b8" text-anchor="middle">
     AI-POWERED DOMAIN SEARCH &amp; GENERATOR TOOLS

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
@@ -20,11 +20,10 @@ import { BrandableDomainFinder } from '@/components/domain/BrandableDomainFinder
 import { KeywordDomainFinder } from '@/components/domain/KeywordDomainFinder';
 import { WHOISLookup } from '@/components/domain/WHOISLookup';
 import { DomainValueEstimate } from '@/components/domain/DomainValueEstimate';
-import { PriceComparison } from '@/components/domain/PriceComparison';
 import { BulkDomainSearch } from '@/components/domain/BulkDomainSearch';
 import { DomainExtensionsView } from '@/components/domain/DomainExtensionsView';
 
-type ToolType = 'search' | 'extensions' | 'generator' | 'premium' | 'bulk' | 'expired' | 'brandable' | 'keyword' | 'whois' | 'value' | 'compare' | 'geo' | 'learn';
+type ToolType = 'search' | 'extensions' | 'generator' | 'premium' | 'bulk' | 'expired' | 'brandable' | 'keyword' | 'whois' | 'value' | 'geo' | 'learn';
 
 export default function Home() {
   const [activeTool, setActiveTool] = useState<ToolType>('search');
@@ -34,6 +33,8 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [selectedDomain, setSelectedDomain] = useState<string>('');
   const [savedDomains, setSavedDomains] = useState<string[]>([]);
+  const searchRequestIdRef = useRef(0);
+  const searchAbortRef = useRef<AbortController | null>(null);
   const { showToast } = useToast();
   const { theme } = useTheme();
   const isLight = theme === 'light';
@@ -65,32 +66,54 @@ export default function Home() {
   }, [showToast]);
 
   const handleSearch = async (query: string) => {
-    if (!query.trim()) return;
+    if (!query.trim()) {
+      handleClear();
+      return;
+    }
+
+    const requestId = ++searchRequestIdRef.current;
+    searchAbortRef.current?.abort();
+    const controller = new AbortController();
+    searchAbortRef.current = controller;
+
     setIsLoading(true);
     setSearchQuery(query);
     const cleanQuery = query.toLowerCase().replace(/\s+/g, '');
     const tlds = ['.com', '.net', '.org', '.ai', '.io', '.co', '.app', '.xyz'];
-    const apiResults = await searchDomains(cleanQuery, tlds);
-    
-    const formattedResults: DomainResult[] = apiResults.map(r => ({
-      domain: r.domain,
-      availability: r.available ? 'available' : 'unavailable',
-      tld: r.tld,
-      pricing: r.price ? {
-        amount: parseFloat(r.price.replace(/[^0-9.]/g, '')),
-        currency: '$',
-        registrar: r.registrar || 'GoDaddy',
-      } : undefined,
-      premium: r.premium,
-    }));
-    
-    setResults(formattedResults);
-    setIsLoading(false);
+
+    try {
+      const apiResults = await searchDomains(cleanQuery, tlds, { signal: controller.signal });
+
+      if (requestId !== searchRequestIdRef.current) {
+        return;
+      }
+
+      const formattedResults: DomainResult[] = apiResults.map((r) => ({
+        domain: r.domain,
+        availability: r.available ? 'available' : 'unavailable',
+        tld: r.tld,
+        pricing: r.price ? {
+          amount: parseFloat(r.price.replace(/[^0-9.]/g, '')),
+          currency: '$',
+          registrar: r.registrar || 'GoDaddy',
+        } : undefined,
+        premium: r.premium,
+      }));
+
+      setResults(formattedResults);
+    } finally {
+      if (requestId === searchRequestIdRef.current) {
+        setIsLoading(false);
+      }
+    }
   };
 
   const handleClear = () => {
+    searchAbortRef.current?.abort();
+    searchRequestIdRef.current += 1;
     setSearchQuery('');
     setResults([]);
+    setIsLoading(false);
   };
 
   const handleDomainBuy = (domain: string) => {
@@ -131,12 +154,12 @@ export default function Home() {
       
       <Navigation activeTool={activeTool} onToolSelect={(tool) => setActiveTool(tool as ToolType)} />
 
-      <main className="relative pt-28">
+      <main className="relative pt-[4.2rem] sm:pt-[4.9rem]">
         
         {showMainSearch && (
-          <section className="px-6 pb-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className={`text-5xl sm:text-6xl md:text-7xl font-black tracking-tight mb-6 ${mounted ? 'animate-slide-up' : 'opacity-0'}`}>
+          <section className="px-3 sm:px-6 pb-2 sm:pb-4">
+            <div className="max-w-[56rem] mx-auto text-center">
+              <h1 className={`text-[1.95rem] leading-[0.9] sm:text-[4.2rem] md:text-[4.8rem] font-black tracking-tight mb-1.5 sm:mb-3 ${mounted ? 'animate-slide-up' : 'opacity-0'}`}>
                 <span className="block bg-clip-text text-transparent" style={{
                   backgroundImage: isLight
                     ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
@@ -144,9 +167,9 @@ export default function Home() {
                 }}>
                   Find Your Perfect Domain
                 </span>
-                <span className={`block text-3xl sm:text-4xl md:text-5xl mt-2 font-bold`} style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
+                <span className={`block text-[0.9rem] sm:text-[2rem] md:text-[2.35rem] mt-0.5 sm:mt-0.5 font-bold`} style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
               </h1>
-              <p className={`text-lg max-w-2xl mx-auto mb-8 ${mounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ color: 'var(--text-tertiary)' }}>
+              <p className={`text-[13px] sm:text-[15px] max-w-xl mx-auto mb-2.5 sm:mb-4 ${mounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ color: 'var(--text-tertiary)' }}>
                 Search millions of domains with instant results. Compare prices across registrars. Register in one click.
               </p>
 
@@ -163,9 +186,35 @@ export default function Home() {
                 />
               </div>
 
-              <div className="max-w-4xl mx-auto mt-12">
-                <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 p-6 rounded-2xl ${
-                  isLight ? 'bg-white/70 border border-slate-200/60 shadow-sm backdrop-blur-sm' : ''
+              <div className="mt-2.5 flex flex-wrap items-center justify-center gap-1.5 sm:mt-3">
+                <Link
+                  href="/tools/compare"
+                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[11px] font-semibold transition-all ${
+                    isLight
+                      ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                      : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
+                  }`}
+                >
+                  <Icons.Dollar />
+                  Top 100 TLD prices
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setActiveTool('bulk')}
+                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[11px] font-semibold transition-all ${
+                    isLight
+                      ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                      : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
+                  }`}
+                >
+                  <Icons.Layers />
+                  Bulk search
+                </button>
+              </div>
+
+              <div className="max-w-[52rem] mx-auto mt-2.5 sm:mt-4">
+                <div className={`grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-2.5 p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl ${
+                  isLight ? 'bg-white/70 border border-slate-200/60 shadow-sm backdrop-blur-sm' : 'bg-white/[0.02] border border-white/10 backdrop-blur-sm'
                 }`}>
                   {[
                     { value: '2M+', label: 'Domains Searched' },
@@ -173,9 +222,9 @@ export default function Home() {
                     { value: '1,600+', label: 'TLD Extensions' },
                     { value: '99.9%', label: 'Uptime' },
                   ].map((stat) => (
-                    <div key={stat.label} className="text-center p-4">
-                      <div className="text-2xl sm:text-3xl font-black mb-1" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
-                      <div className="text-xs font-medium" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
+                    <div key={stat.label} className="text-center p-1.5 sm:p-2 rounded-lg sm:rounded-xl animate-fade-in" style={{ animationDelay: `${150 + (stat.label.length * 20)}ms` }}>
+                      <div className="text-[1.35rem] sm:text-[1.6rem] font-black mb-0.5" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
+                      <div className="text-[10px] sm:text-xs font-medium" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -185,9 +234,9 @@ export default function Home() {
         )}
 
         {activeTool === 'extensions' && (
-          <section className="px-6 pb-8">
+          <section className="px-3 sm:px-6 pb-4 sm:pb-8">
             <div className="max-w-7xl mx-auto">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4">
+              <h1 className="text-2xl sm:text-5xl md:text-6xl font-black tracking-tight mb-2 sm:mb-4">
                 <span className="bg-clip-text text-transparent" style={{
                   backgroundImage: isLight
                     ? 'linear-gradient(to right, #111827, #111827, rgba(17,24,39,0.6))'
@@ -196,7 +245,7 @@ export default function Home() {
                   Domain Extensions
                 </span>
               </h1>
-              <p className="text-lg max-w-2xl mb-8" style={{ color: 'var(--text-tertiary)' }}>
+              <p className="text-sm sm:text-lg max-w-2xl mb-4 sm:mb-8" style={{ color: 'var(--text-tertiary)' }}>
                 Explore 200+ domain extensions across all categories. Find the perfect TLD for your website.
               </p>
             </div>
@@ -204,15 +253,14 @@ export default function Home() {
         )}
 
         {showToolHeader && (
-          <section className="px-6 pb-8">
+          <section className="px-3 sm:px-6 pb-4 sm:pb-8">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-3xl sm:text-4xl font-black tracking-tight mb-2">
+              <h1 className="text-2xl sm:text-4xl font-black tracking-tight mb-1 sm:mb-2">
                 {activeTool === 'generator' && 'AI Domain Generator'}
                 {activeTool === 'brandable' && 'Find Brandable Domains'}
                 {activeTool === 'keyword' && 'Keyword-Based Domains'}
                 {activeTool === 'whois' && 'WHOIS Lookup'}
                 {activeTool === 'value' && 'Domain Value Estimator'}
-                {activeTool === 'compare' && 'Price Comparison'}
                 {activeTool === 'premium' && 'Premium Domains'}
                 {activeTool === 'expired' && 'Expired Domains'}
                 {activeTool === 'geo' && 'Geo Domain Finder'}
@@ -224,7 +272,6 @@ export default function Home() {
                 {activeTool === 'keyword' && 'Find domains based on specific keywords for better SEO'}
                 {activeTool === 'whois' && 'Look up domain ownership and registration details'}
                 {activeTool === 'value' && 'Estimate domain market value based on real data'}
-                {activeTool === 'compare' && 'Compare prices across top registrars'}
                 {activeTool === 'premium' && 'Discover high-value domains for sale'}
                 {activeTool === 'expired' && 'Find expired and expiring domain names'}
                 {activeTool === 'geo' && 'Find location-based domains for local businesses'}
@@ -235,7 +282,7 @@ export default function Home() {
         )}
 
         {showMainSearch && (isLoading || results.length > 0) && (
-          <section className="px-6 pb-16">
+          <section className="px-4 sm:px-6 pb-12 sm:pb-14">
             <div className="max-w-6xl mx-auto">
               {isLoading ? (
                 <div className="space-y-4">
@@ -258,7 +305,7 @@ export default function Home() {
           </section>
         )}
 
-        <section className={`pb-16 ${activeTool === 'bulk' ? 'px-4' : 'px-6'}`}>
+        <section className={`pb-8 sm:pb-16 ${activeTool === 'bulk' ? 'px-2 sm:px-4' : 'px-3 sm:px-6'}`}>
           <div className={activeTool === 'bulk' ? 'w-full' : activeTool === 'extensions' ? 'max-w-7xl mx-auto' : 'max-w-5xl mx-auto'}>
             
             {activeTool === 'generator' && (
@@ -288,12 +335,6 @@ export default function Home() {
             {activeTool === 'value' && (
               <div className="max-w-2xl mx-auto">
                 <DomainValueEstimate domain={selectedDomain} />
-              </div>
-            )}
-
-            {activeTool === 'compare' && (
-              <div className="max-w-2xl mx-auto">
-                <PriceComparison domain={selectedDomain || 'FoundersPrime.com'} />
               </div>
             )}
 

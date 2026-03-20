@@ -117,7 +117,7 @@ export async function checkDomainsViaMCP(
       return result.map((item: any) => ({
         domain: item.domain || item.name,
         available: item.available ?? item.isAvailable ?? false,
-        premium: item.premium ?? item.isPremium ?? item.type === 'premium' ?? false,
+        premium: item.premium ?? item.isPremium ?? (item.type === 'premium'),
       }));
     }
     

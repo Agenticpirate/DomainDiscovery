@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/Input';
 import { Badge } from '@/components/ui/Badge';
 import { AvailabilityIndicator } from '@/components/ui/AvailabilityIndicator';
 import { useTheme } from '@/contexts/ThemeContext';
+import { checkDomainAvailability } from '@/services/instantDomainService';
 
 interface KeywordDomain {
   domain: string;
@@ -42,7 +43,6 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     if (!primaryKeyword.trim()) return;
 
     setIsSearching(true);
-    await new Promise((resolve) => setTimeout(resolve, 1200));
 
     const primary = primaryKeyword.toLowerCase().replace(/\s+/g, '');
     const secondary = secondaryKeywords
@@ -56,10 +56,9 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     tlds.forEach((tld) => {
       combinations.push({
         domain: `${primary}${tld}`,
-        available: Math.random() > 0.6,
+        available: false,
         keywords: [primaryKeyword],
         relevance: 100,
-        searchVolume: '10K-50K',
       });
     });
 
@@ -68,19 +67,17 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
       tlds.slice(0, 2).forEach((tld) => {
         combinations.push({
           domain: `${primary}${sec}${tld}`,
-          available: Math.random() > 0.4,
+          available: false,
           keywords: [primaryKeyword, sec],
           relevance: 90,
-          searchVolume: '5K-20K',
         });
 
         if (includeHyphens) {
           combinations.push({
             domain: `${primary}-${sec}${tld}`,
-            available: Math.random() > 0.3,
+            available: false,
             keywords: [primaryKeyword, sec],
             relevance: 85,
-            searchVolume: '2K-10K',
           });
         }
       });
@@ -91,10 +88,9 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     prefixes.slice(0, 2).forEach((prefix) => {
       combinations.push({
         domain: `${prefix}${primary}.com`,
-        available: Math.random() > 0.3,
+        available: false,
         keywords: [prefix, primaryKeyword],
         relevance: 80,
-        searchVolume: '1K-5K',
       });
     });
 
@@ -103,20 +99,28 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     suffixes.slice(0, 2).forEach((suffix) => {
       combinations.push({
         domain: `${primary}${suffix}.com`,
-        available: Math.random() > 0.3,
+        available: false,
         keywords: [primaryKeyword, suffix],
         relevance: 82,
-        searchVolume: '1K-5K',
       });
     });
 
-    setResults(combinations.slice(0, 15));
+    const trimmed = combinations.slice(0, 15);
+    const availability = await checkDomainAvailability(trimmed.map((item) => item.domain));
+    const availabilityMap = new Map(availability.map((item) => [item.domain.toLowerCase(), item.available]));
+
+    setResults(
+      trimmed.map((item) => ({
+        ...item,
+        available: availabilityMap.get(item.domain.toLowerCase()) ?? false,
+      }))
+    );
     setIsSearching(false);
   };
 
   return (
-    <div className={`glass-card p-6 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
-      <div className="mb-6">
+    <div className={`glass-card p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+      <div className="mb-5">
         <div className="flex items-center gap-3 mb-2">
           <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>
             <Icons.Search />
@@ -153,14 +157,14 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         <label className={`block text-xs font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-3`}>
           Domain Extensions
         </label>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
           {availableTlds.map((tld) => (
             <Button
               key={tld}
               onClick={() => toggleTld(tld)}
               variant={tlds.includes(tld) ? 'primary' : 'secondary'}
               size="sm"
-              className="font-mono"
+              className="font-mono min-h-[34px]"
             >
               {tld}
             </Button>
@@ -169,7 +173,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
       </div>
 
       {/* Options */}
-      <div className="mb-6">
+      <div className="mb-5">
         <label className="flex items-center gap-3 cursor-pointer">
           <input
             type="checkbox"
@@ -182,7 +186,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
       </div>
 
       {/* Search Button */}
-      <Button onClick={handleSearch} isLoading={isSearching} className="w-full mb-6">
+      <Button onClick={handleSearch} isLoading={isSearching} className="w-full mb-5">
         Find Keyword Domains
       </Button>
 
@@ -198,7 +202,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
       {results.length > 0 && !isSearching && (
         <div className="space-y-2 animate-fade-in">
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
             <span className={`text-xs font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
               {results.length} domains found
             </span>
@@ -208,17 +212,17 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           {results.map((result, i) => (
             <div
               key={i}
-              className={`p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border transition-all group`}
+              className={`p-3.5 sm:p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border transition-all group`}
               style={{ animationDelay: `${i * 30}ms` }}
             >
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex flex-wrap items-center gap-2.5 mb-2">
                     <AvailabilityIndicator 
                       status={result.available ? 'available' : 'unavailable'}
                       size="sm"
                     />
-                    <span className="font-mono font-bold">{result.domain}</span>
+                    <span className="font-mono font-bold text-sm sm:text-base break-all">{result.domain}</span>
                     <Badge 
                       variant={result.available ? 'success' : 'neutral'}
                       size="sm"
@@ -226,7 +230,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                       {result.available ? 'Available' : 'Taken'}
                     </Badge>
                   </div>
-                  <div className={`flex items-center gap-4 text-xs ${isLight ? 'text-slate-500' : 'text-white/40'} mb-2`}>
+                  <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-xs ${isLight ? 'text-slate-500' : 'text-white/40'} mb-2`}>
                     <span>Relevance: {result.relevance}%</span>
                     {result.searchVolume && (
                       <>
@@ -250,7 +254,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 <Button
                   variant={result.available ? 'primary' : 'secondary'}
                   size="sm"
-                  className="opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="w-full sm:w-auto opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
                   onClick={() => onSelect?.(result.domain)}
                 >
                   {result.available ? 'Register' : 'Details'}

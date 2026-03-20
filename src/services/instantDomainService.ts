@@ -1,11 +1,11 @@
 /**
- * Instant Domain Search API Service
+ * Instant Domain Search Client Service
  * 
- * This service integrates with domain availability APIs.
- * Options:
- * 1. Use Instant Domain Search MCP (requires MCP client setup)
- * 2. Use alternative domain APIs (Domainr, RapidAPI, etc.)
- * 3. Use WHOIS-based checking
+ * All functions call the backend API routes which handle:
+ * - Rate limiting
+ * - Caching
+ * - Real DNS-based availability checking
+ * - No random/mock data in production
  */
 
 interface DomainSearchResult {
@@ -15,11 +15,6 @@ interface DomainSearchResult {
   price?: string;
   registrar?: string;
   premium?: boolean;
-  seo?: {
-    traffic?: number;
-    backlinks?: number;
-    authority?: number;
-  };
 }
 
 interface DomainVariation {
@@ -29,39 +24,78 @@ interface DomainVariation {
   reason: string;
 }
 
-/**
- * Search domains across multiple TLDs
- * This mimics the Instant Domain Search MCP search_domains function
- */
+interface SearchDomainsOptions {
+  signal?: AbortSignal;
+}
+
+const SEARCH_CACHE_TTL_MS = 30_000;
+const searchCache = new Map<string, { expiresAt: number; results: DomainSearchResult[] }>();
+const inFlightSearches = new Map<string, Promise<DomainSearchResult[]>>();
+
+function getSearchCacheKey(query: string, tlds: string[]) {
+  return JSON.stringify({
+    query: query.trim().toLowerCase(),
+    tlds: tlds.map((tld) => tld.trim().toLowerCase()),
+  });
+}
+
 export async function searchDomains(
   query: string,
-  tlds: string[] = ['.com', '.net', '.org', '.ai', '.io', '.co']
+  tlds: string[] = ['.com', '.net', '.org', '.ai', '.io', '.co'],
+  options: SearchDomainsOptions = {}
 ): Promise<DomainSearchResult[]> {
+  const cacheKey = getSearchCacheKey(query, tlds);
+  const cached = searchCache.get(cacheKey);
+
+  if (cached && cached.expiresAt > Date.now()) {
+    return cached.results;
+  }
+
+  const existingRequest = inFlightSearches.get(cacheKey);
+  if (existingRequest) {
+    return existingRequest;
+  }
+
+  const requestPromise = (async () => {
   try {
-    // Option 1: Use your own backend API
     const response = await fetch('/api/domains/search', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query, tlds }),
+      signal: options.signal,
     });
 
-    if (response.ok) {
-      return await response.json();
+    if (response.status === 429) {
+      console.warn('Rate limited. Please slow down.');
+      return [];
     }
 
-    // Fallback to mock data if API not available
-    console.warn('Domain API not available, using mock data');
-    return generateMockResults(query, tlds);
+    if (!response.ok) {
+      console.error('Search API error:', response.status);
+      return [];
+    }
+
+      const results = (await response.json()) as DomainSearchResult[];
+      searchCache.set(cacheKey, {
+        expiresAt: Date.now() + SEARCH_CACHE_TTL_MS,
+        results,
+      });
+      return results;
   } catch (error) {
+      if ((error as Error).name === 'AbortError') {
+        return [];
+      }
     console.error('Domain search error:', error);
-    return generateMockResults(query, tlds);
-  }
+    return [];
+    } finally {
+      inFlightSearches.delete(cacheKey);
+    }
+  })();
+
+  inFlightSearches.set(cacheKey, requestPromise);
+  return requestPromise;
 }
 
-/**
- * Generate domain name variations
- * This mimics the Instant Domain Search MCP generate_domain_variations function
- */
 export async function generateDomainVariations(
   keyword: string,
   count: number = 10
@@ -73,200 +107,62 @@ export async function generateDomainVariations(
       body: JSON.stringify({ keyword, count }),
     });
 
-    if (response.ok) {
-      return await response.json();
-    }
+    if (response.status === 429) return [];
+    if (!response.ok) return [];
 
-    // Fallback to mock generation
-    return generateMockVariations(keyword, count);
+    return await response.json();
   } catch (error) {
     console.error('Domain generation error:', error);
-    return generateMockVariations(keyword, count);
+    return [];
   }
 }
 
-/**
- * Check specific domain availability
- * This mimics the Instant Domain Search MCP check_domain_availability function
- */
 export async function checkDomainAvailability(
   domains: string[]
 ): Promise<{ domain: string; available: boolean }[]> {
   try {
-    const response = await fetch('/api/domains/check', {
+    const response = await fetch('/api/domains/instant-check', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ domains }),
     });
 
-    if (response.ok) {
-      return await response.json();
-    }
+    if (response.status === 429) return [];
+    if (!response.ok) return [];
 
-    // Fallback to mock checking
-    return domains.map((domain) => ({
-      domain,
-      available: Math.random() > 0.5,
-    }));
+    return await response.json();
   } catch (error) {
     console.error('Domain check error:', error);
-    return domains.map((domain) => ({
-      domain,
-      available: Math.random() > 0.5,
-    }));
+    return [];
   }
 }
 
-/**
- * Get WHOIS information for a domain
- */
 export async function getWhoisInfo(domain: string) {
   try {
     const response = await fetch(`/api/domains/whois?domain=${encodeURIComponent(domain)}`);
-    
-    if (response.ok) {
-      return await response.json();
-    }
-
-    return null;
-  } catch (error) {
-    console.error('WHOIS lookup error:', error);
+    if (!response.ok) return null;
+    return await response.json();
+  } catch {
     return null;
   }
 }
 
-/**
- * Get domain value estimate
- */
 export async function getDomainValue(domain: string) {
   try {
     const response = await fetch(`/api/domains/value?domain=${encodeURIComponent(domain)}`);
-    
-    if (response.ok) {
-      return await response.json();
-    }
-
-    return null;
-  } catch (error) {
-    console.error('Domain value error:', error);
+    if (!response.ok) return null;
+    return await response.json();
+  } catch {
     return null;
   }
 }
 
-/**
- * Get price comparison across registrars
- */
 export async function getPriceComparison(domain: string) {
   try {
     const response = await fetch(`/api/domains/prices?domain=${encodeURIComponent(domain)}`);
-    
-    if (response.ok) {
-      return await response.json();
-    }
-
-    return null;
-  } catch (error) {
-    console.error('Price comparison error:', error);
+    if (!response.ok) return null;
+    return await response.json();
+  } catch {
     return null;
   }
-}
-
-// ============================================================================
-// Mock Data Generators (for development/fallback)
-// ============================================================================
-
-function generateMockResults(query: string, tlds: string[]): DomainSearchResult[] {
-  const cleanQuery = query.toLowerCase().replace(/\s+/g, '');
-  
-  return tlds.map((tld) => ({
-    domain: `${cleanQuery}${tld}`,
-    available: Math.random() > 0.4,
-    tld: tld.replace('.', ''),
-    price: getPriceForTLD(tld),
-    registrar: Math.random() > 0.5 ? 'Namecheap' : 'GoDaddy',
-    premium: Math.random() > 0.85,
-    seo: Math.random() > 0.7 ? {
-      traffic: Math.floor(Math.random() * 5000),
-      backlinks: Math.floor(Math.random() * 100),
-      authority: Math.floor(Math.random() * 50) + 30,
-    } : undefined,
-  }));
-}
-
-function generateMockVariations(keyword: string, count: number): DomainVariation[] {
-  const cleanKeyword = keyword.toLowerCase().replace(/\s+/g, '');
-  const prefixes = ['get', 'my', 'the', 'try', 'use', 'go', 'hey', 'app'];
-  const suffixes = ['app', 'hub', 'pro', 'hq', 'lab', 'io', 'ai', 'tech', 'now', 'live'];
-  const variations: DomainVariation[] = [];
-
-  // Original
-  variations.push({
-    domain: `${cleanKeyword}.com`,
-    available: Math.random() > 0.7,
-    score: 95,
-    reason: 'Short, memorable, and brandable',
-  });
-
-  // Prefixes
-  for (let i = 0; i < Math.min(3, count - 1); i++) {
-    const prefix = prefixes[i % prefixes.length];
-    variations.push({
-      domain: `${prefix}${cleanKeyword}.com`,
-      available: true,
-      score: 88 - i * 2,
-      reason: `Easy to remember with "${prefix}" prefix`,
-    });
-  }
-
-  // Suffixes
-  for (let i = 0; i < Math.min(3, count - variations.length); i++) {
-    const suffix = suffixes[i % suffixes.length];
-    variations.push({
-      domain: `${cleanKeyword}${suffix}.com`,
-      available: true,
-      score: 90 - i * 2,
-      reason: `Modern and tech-focused with "${suffix}"`,
-    });
-  }
-
-  // Alternative TLDs
-  const altTlds = ['.ai', '.io', '.co', '.app'];
-  for (let i = 0; i < Math.min(altTlds.length, count - variations.length); i++) {
-    variations.push({
-      domain: `${cleanKeyword}${altTlds[i]}`,
-      available: true,
-      score: 87 - i,
-      reason: `Perfect for ${getTLDDescription(altTlds[i])}`,
-    });
-  }
-
-  return variations.slice(0, count);
-}
-
-function getPriceForTLD(tld: string): string {
-  const prices: Record<string, string> = {
-    '.com': '$12.99',
-    '.net': '$14.99',
-    '.org': '$13.99',
-    '.ai': '$89.99',
-    '.io': '$49.99',
-    '.co': '$29.99',
-    '.app': '$19.99',
-    '.dev': '$15.99',
-    '.xyz': '$9.99',
-    '.tech': '$39.99',
-  };
-  return prices[tld] || '$19.99';
-}
-
-function getTLDDescription(tld: string): string {
-  const descriptions: Record<string, string> = {
-    '.ai': 'AI/tech products',
-    '.io': 'startups and tech companies',
-    '.co': 'modern businesses',
-    '.app': 'applications and software',
-    '.dev': 'developers and tech projects',
-    '.tech': 'technology companies',
-  };
-  return descriptions[tld] || 'your business';
 }

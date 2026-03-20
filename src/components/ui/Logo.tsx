@@ -13,19 +13,19 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, classN
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const sizeClasses = {
-    sm: 'w-9 h-9',
-    md: 'w-11 h-11',
+    sm: 'w-8 h-8',
+    md: 'w-8 h-8 sm:w-9 sm:h-9',
     lg: 'w-14 h-14',
   };
 
   const textSizeClasses = {
-    sm: 'text-base',
-    md: 'text-lg',
+    sm: 'text-sm',
+    md: 'text-[15px] sm:text-[17px]',
     lg: 'text-xl',
   };
 
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
+    <div className={`flex items-center gap-2 ${className}`}>
       <div className="relative group shrink-0">
         <div className={`absolute inset-0 rounded-2xl blur-lg transition-opacity ${
           isLight
@@ -64,59 +64,16 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, classN
       </div>
       {showText && (
         <div className="flex flex-col text-left">
-          <div className={`${textSizeClasses[size]} font-black tracking-tight leading-none flex items-center gap-[1px]`}>
+          <div className={`${textSizeClasses[size]} font-black tracking-tight leading-none`}>
             <span className={`bg-clip-text text-transparent ${
               isLight
                 ? 'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-600'
                 : 'bg-gradient-to-r from-white via-slate-100 to-slate-300'
             }`}>
-              DomainsDisc
-            </span>
-            <div className="relative inline-flex items-center justify-center" style={{ width: '0.65em', height: '0.65em', marginTop: '0.05em' }}>
-              <div className={`absolute inset-0 rounded-full blur-[3px] ${
-                isLight
-                  ? 'bg-gradient-to-br from-slate-500 via-slate-400 to-slate-600 opacity-40'
-                  : 'bg-gradient-to-br from-slate-300 via-slate-200 to-slate-400 opacity-30'
-              }`} />
-              <div className={`relative w-full h-full rounded-full flex items-center justify-center shadow-md ${
-                isLight
-                  ? 'bg-gradient-to-br from-slate-700 via-slate-600 to-slate-800 border border-slate-500/30'
-                  : 'bg-gradient-to-br from-slate-200 via-slate-100 to-slate-300 border border-white/30'
-              }`}>
-                <svg 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  className={`w-[55%] h-[55%] ${isLight ? 'text-slate-100' : 'text-slate-700'}`}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path 
-                    d="M12 4L5 8V16L12 20L19 16V8L12 4Z" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                    fill="none"
-                  />
-                  <circle 
-                    cx="12" 
-                    cy="12" 
-                    r="3.5" 
-                    fill="currentColor"
-                    opacity="0.85"
-                  />
-                  <circle cx="12" cy="12" r="1.2" fill={isLight ? '#475569' : 'white'} fillOpacity="0.5" />
-                </svg>
-              </div>
-            </div>
-            <span className={`bg-clip-text text-transparent ${
-              isLight
-                ? 'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-600'
-                : 'bg-gradient-to-r from-white via-slate-100 to-slate-300'
-            }`}>
-              very
+              DomainDiscovery
             </span>
           </div>
-          <span className={`text-[10px] font-semibold uppercase tracking-wider ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
+          <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
             AI-Powered
           </span>
         </div>

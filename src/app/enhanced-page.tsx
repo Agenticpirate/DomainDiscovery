@@ -320,7 +320,7 @@ export default function EnhancedHome() {
                 <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center font-bold text-black text-lg">
                   D
                 </div>
-                <span className="text-2xl font-black tracking-tighter">DomainsDiscovery</span>
+                <span className="text-2xl font-black tracking-tighter">DomainDiscovery</span>
               </div>
               <p className="text-white/40 text-sm max-w-xs leading-relaxed">
                 The ultimate domain intelligence platform. Find, evaluate, and register domains instantly.
@@ -353,7 +353,7 @@ export default function EnhancedHome() {
             </div>
           </div>
           <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-bold text-white/20 uppercase tracking-widest">
-            <p>© 2025 DomainsDiscovery. All Rights Reserved.</p>
+            <p>© 2025 DomainDiscovery. All Rights Reserved.</p>
             <div className="flex gap-8">
               <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
               <span className="hover:text-white cursor-pointer transition-colors">Terms</span>

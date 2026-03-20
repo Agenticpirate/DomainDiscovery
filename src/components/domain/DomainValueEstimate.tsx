@@ -61,8 +61,8 @@ export function DomainValueEstimate({ domain: initialDomain }: DomainValueEstima
   };
 
   return (
-    <div className={`glass-card p-6 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
-      <div className="mb-6">
+    <div className={`glass-card p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+      <div className="mb-5">
         <div className="flex items-center gap-3 mb-2">
           <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>
             <Icons.Dollar />
@@ -74,7 +74,7 @@ export function DomainValueEstimate({ domain: initialDomain }: DomainValueEstima
         </p>
       </div>
 
-      <div className="flex gap-3 mb-6">
+      <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 mb-5">
         <input
           type="text"
           value={domain}
@@ -83,19 +83,19 @@ export function DomainValueEstimate({ domain: initialDomain }: DomainValueEstima
           placeholder="Enter domain name..."
           className={`flex-1 ${isLight ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-blue-400 focus:ring-blue-400/20' : 'bg-black/40 border-white/10 text-white placeholder:text-white/30 focus:border-white/30 focus:ring-white/10'} border rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-2 transition-all`}
         />
-        <Button onClick={handleEstimate} isLoading={isCalculating}>
+        <Button onClick={handleEstimate} isLoading={isCalculating} className="w-full sm:w-auto">
           Estimate
         </Button>
       </div>
 
       {estimate && (
         <div className="space-y-4 animate-fade-in">
-          <div className={`p-6 rounded-xl ${isLight ? 'bg-gradient-to-br from-slate-50 to-white border-slate-200' : 'bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10'} border`}>
-            <div className="text-center mb-4">
+          <div className={`p-3.5 sm:p-4 rounded-xl ${isLight ? 'bg-gradient-to-br from-slate-50 to-white border-slate-200' : 'bg-gradient-to-br from-white/5 to-white/[0.02] border-white/10'} border`}>
+            <div className="text-center mb-3 sm:mb-4">
               <div className={`text-[10px] font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-2`}>
                 Estimated Value
               </div>
-              <div className="text-3xl font-black">{estimate.estimatedValue}</div>
+              <div className="text-2xl sm:text-3xl font-black break-words">{estimate.estimatedValue}</div>
               <div className="mt-2">
                 <span
                   className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
@@ -110,7 +110,7 @@ export function DomainValueEstimate({ domain: initialDomain }: DomainValueEstima
             </div>
           </div>
 
-          <div className={`p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border`}>
+          <div className={`p-3.5 sm:p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border`}>
             <div className={`text-[10px] font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-3`}>
               Value Factors
             </div>
@@ -133,14 +133,14 @@ export function DomainValueEstimate({ domain: initialDomain }: DomainValueEstima
           </div>
 
           {estimate.comparables && (
-            <div className={`p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border`}>
+            <div className={`p-3.5 sm:p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border`}>
               <div className={`text-[10px] font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-3`}>
                 Comparable Sales
               </div>
               <div className="space-y-2">
                 {estimate.comparables.map((comp, i) => (
-                  <div key={i} className="flex items-center justify-between text-sm">
-                    <span className={`font-mono ${isLight ? 'text-slate-600' : 'text-white/60'}`}>{comp.domain}</span>
+                  <div key={i} className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between text-sm">
+                    <span className={`font-mono break-all ${isLight ? 'text-slate-600' : 'text-white/60'}`}>{comp.domain}</span>
                     <div className="flex items-center gap-3">
                       <span className="font-bold">{comp.soldFor}</span>
                       <span className={`text-xs ${isLight ? 'text-slate-300' : 'text-white/30'}`}>{comp.date}</span>

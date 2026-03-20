@@ -1,109 +1,78 @@
-import { NextRequest, NextResponse } from 'next/server';
-import dns from 'dns';
-import { promisify } from 'util';
+import { NextRequest } from 'next/server';
+import { getBulkRateLimiter, getSearchRateLimiter, getClientIP, rateLimitResponse } from '@/lib/rateLimiter';
+import { errorResponse, jsonResponse, corsPreflightResponse } from '@/lib/apiHelpers';
 
-const resolveDns = promisify(dns.resolve);
-
-/**
- * Domain Availability Check API Route
- * 
- * Uses DNS lookup to check if domains are registered.
- * If a domain has DNS records, it's taken. If not, it might be available.
- */
+export async function OPTIONS(request: NextRequest) {
+  return corsPreflightResponse(request);
+}
 
 export async function POST(request: NextRequest) {
+  const ip = getClientIP(request);
+  const rl = getBulkRateLimiter().check(ip);
+  if (!rl.allowed) return rateLimitResponse(rl);
+
   try {
     const { domains } = await request.json();
-
     if (!domains || !Array.isArray(domains) || domains.length === 0) {
-      return NextResponse.json(
-        { error: 'Domains array is required' },
-        { status: 400 }
-      );
+      return errorResponse('Domains array is required', 400);
     }
 
-    // Limit to 100 domains per request
-    const domainsToCheck = domains.slice(0, 100);
-    
-    const results = await Promise.all(
-      domainsToCheck.map(async (domain: string) => {
-        const available = await checkDomainAvailability(domain);
-        return { domain, available };
-      })
-    );
+    const domainsToCheck = domains.slice(0, 100).map((d: string) => d.toLowerCase().trim());
+    const results = await checkBatch(domainsToCheck, 20);
 
-    return NextResponse.json(results);
-
-  } catch (error) {
-    console.error('❌ Domain check error:', error);
-    return NextResponse.json(
-      { error: 'Failed to check domain availability' },
-      { status: 500 }
-    );
-  }
-}
-
-/**
- * Check if a domain is available using DNS lookup
- * 
- * Strategy:
- * 1. Try to resolve DNS records (A, AAAA, MX, NS)
- * 2. If any records exist, domain is taken
- * 3. If no records and NXDOMAIN, domain might be available
- */
-async function checkDomainAvailability(domain: string): Promise<boolean> {
-  try {
-    // Try multiple record types
-    const recordTypes = ['A', 'AAAA', 'MX', 'NS'];
-    
-    for (const type of recordTypes) {
-      try {
-        const records = await resolveDns(domain, type);
-        if (records && (Array.isArray(records) ? records.length > 0 : true)) {
-          // Domain has DNS records - it's taken
-          return false;
-        }
-      } catch (err: any) {
-        // ENOTFOUND or ENODATA means no records for this type
-        // Continue checking other record types
-        if (err.code !== 'ENOTFOUND' && err.code !== 'ENODATA' && err.code !== 'SERVFAIL') {
-          // Some other error, continue
-        }
-      }
-    }
-    
-    // No DNS records found - domain might be available
-    // Note: This isn't 100% accurate as some registered domains don't have DNS records
-    // For production, you'd want to use WHOIS or a domain registrar API
-    return true;
-    
-  } catch (error) {
-    console.error(`Error checking ${domain}:`, error);
-    // On error, assume taken to be safe
-    return false;
-  }
-}
-
-// Also support GET for single domain check
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const domain = searchParams.get('domain');
-
-  if (!domain) {
-    return NextResponse.json(
-      { error: 'Domain parameter is required' },
-      { status: 400 }
-    );
-  }
-
-  try {
-    const available = await checkDomainAvailability(domain);
-    return NextResponse.json({ domain, available });
+    const resp = jsonResponse(results, request, 30);
+    resp.headers.set('X-RateLimit-Remaining', String(rl.remaining));
+    return resp;
   } catch (error) {
     console.error('Domain check error:', error);
-    return NextResponse.json(
-      { error: 'Failed to check domain' },
-      { status: 500 }
-    );
+    return errorResponse('Check failed', 500);
   }
+}
+
+export async function GET(request: NextRequest) {
+  const ip = getClientIP(request);
+  const rl = getSearchRateLimiter().check(ip);
+  if (!rl.allowed) return rateLimitResponse(rl);
+
+  const domain = new URL(request.url).searchParams.get('domain');
+  if (!domain) return errorResponse('Domain parameter is required', 400);
+
+  try {
+    const available = await checkViaDNS(domain.toLowerCase().trim());
+    const resp = jsonResponse({ domain: domain.toLowerCase().trim(), available }, request, 30);
+    resp.headers.set('X-RateLimit-Remaining', String(rl.remaining));
+    return resp;
+  } catch (error) {
+    console.error('Domain check error:', error);
+    return errorResponse('Check failed', 500);
+  }
+}
+
+async function checkBatch(domains: string[], concurrency: number) {
+  const results: { domain: string; available: boolean }[] = [];
+  for (let i = 0; i < domains.length; i += concurrency) {
+    const batch = domains.slice(i, i + concurrency);
+    const batchResults = await Promise.all(
+      batch.map(async (domain) => ({ domain, available: await checkViaDNS(domain) }))
+    );
+    results.push(...batchResults);
+  }
+  return results;
+}
+
+async function checkViaDNS(domain: string): Promise<boolean> {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 2000);
+    const response = await fetch(
+      `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=A`,
+      { signal: controller.signal, headers: { Accept: 'application/dns-json' } }
+    );
+    clearTimeout(timeout);
+    if (response.ok) {
+      const data = await response.json();
+      return data.Status === 3;
+    }
+  } catch { /* safe default */ }
+  return false;
 }

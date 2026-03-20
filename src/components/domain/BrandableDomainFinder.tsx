@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/Input';
 import { Badge } from '@/components/ui/Badge';
 import { AvailabilityIndicator } from '@/components/ui/AvailabilityIndicator';
 import { useTheme } from '@/contexts/ThemeContext';
+import { checkDomainAvailability } from '@/services/instantDomainService';
 
 interface BrandableDomain {
   domain: string;
@@ -46,9 +47,8 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
     if (!industry.trim()) return;
 
     setIsGenerating(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    // Generate brandable names based on style
+    const cleanIndustry = industry.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const industryRoot = cleanIndustry.slice(0, length === 'short' ? 4 : length === 'medium' ? 6 : 8) || 'brand';
     const prefixes = {
       modern: ['Zeno', 'Vex', 'Nex', 'Flux', 'Aero', 'Sync', 'Pixel', 'Nova'],
       classic: ['Prime', 'Atlas', 'Crown', 'Elite', 'Royal', 'Grand', 'Noble', 'Sterling'],
@@ -58,26 +58,41 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
 
     const suffixes = ['io', 'ly', 'ify', 'hub', 'lab', 'co', 'app', 'ai'];
     const selectedPrefixes = prefixes[style];
-
-    const generated: BrandableDomain[] = selectedPrefixes.slice(0, 8).map((prefix, i) => {
+    const candidates = selectedPrefixes.slice(0, 4).flatMap((prefix, i) => {
       const suffix = suffixes[i % suffixes.length];
-      const domain = `${prefix.toLowerCase()}${suffix}.com`;
-      return {
-        domain,
-        available: Math.random() > 0.3,
-        score: Math.floor(Math.random() * 20) + 80,
-        style: style,
-        pronunciation: `${prefix}-${suffix}`,
-      };
+      return [
+        {
+          domain: `${prefix.toLowerCase()}${industryRoot}.com`,
+          score: Math.max(72, 92 - i * 3),
+          pronunciation: `${prefix}-${industryRoot}`,
+        },
+        {
+          domain: `${industryRoot}${suffix}.com`,
+          score: Math.max(70, 89 - i * 2),
+          pronunciation: `${industryRoot}-${suffix}`,
+        },
+      ];
     });
+
+    const uniqueCandidates = Array.from(new Map(candidates.map((item) => [item.domain, item])).values()).slice(0, 8);
+    const availability = await checkDomainAvailability(uniqueCandidates.map((item) => item.domain));
+    const availabilityMap = new Map(availability.map((item) => [item.domain.toLowerCase(), item.available]));
+
+    const generated: BrandableDomain[] = uniqueCandidates.map((item) => ({
+        domain: item.domain,
+        available: availabilityMap.get(item.domain.toLowerCase()) ?? false,
+        score: item.score,
+        style: style,
+        pronunciation: item.pronunciation,
+    }));
 
     setResults(generated);
     setIsGenerating(false);
   };
 
   return (
-    <div className={`glass-card p-6 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
-      <div className="mb-6">
+    <div className={`glass-card p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+      <div className="mb-5">
         <div className="flex items-center gap-3 mb-2">
           <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>
             <Icons.Star />
@@ -90,7 +105,7 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
       </div>
 
       {/* Industry Input */}
-      <div className="mb-6">
+      <div className="mb-5">
         <Input
           label="Industry or Niche"
           value={industry}
@@ -100,17 +115,17 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
       </div>
 
       {/* Style Selection */}
-      <div className="mb-6">
+      <div className="mb-5">
         <label className={`block text-xs font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-3`}>
           Brand Style
         </label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {styles.map((s) => (
             <Button
               key={s.id}
               onClick={() => setStyle(s.id as typeof style)}
               variant={style === s.id ? 'secondary' : 'ghost'}
-              className="h-auto p-3 text-left flex-col items-start"
+              className="h-auto p-3 text-left flex-col items-start min-h-[72px]"
             >
               <div className="font-semibold text-sm mb-0.5">{s.label}</div>
               <div className={`text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{s.desc}</div>
@@ -120,18 +135,18 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
       </div>
 
       {/* Length Selection */}
-      <div className="mb-6">
+      <div className="mb-5">
         <label className={`block text-xs font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-3`}>
           Domain Length
         </label>
-        <div className="flex gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           {lengths.map((l) => (
             <Button
               key={l.id}
               onClick={() => setLength(l.id as typeof length)}
               variant={length === l.id ? 'primary' : 'secondary'}
               size="sm"
-              className="flex-1"
+              className="w-full"
             >
               {l.label}
             </Button>
@@ -140,7 +155,7 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
       </div>
 
       {/* Generate Button */}
-      <Button onClick={handleGenerate} isLoading={isGenerating} className="w-full mb-6">
+      <Button onClick={handleGenerate} isLoading={isGenerating} className="w-full mb-5">
         Generate Brandable Names
       </Button>
 
@@ -159,24 +174,24 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
           {results.map((result, i) => (
             <div
               key={i}
-              className={`p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border transition-all group`}
+              className={`p-3.5 sm:p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border transition-all group`}
               style={{ animationDelay: `${i * 50}ms` }}
             >
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex flex-wrap items-center gap-2.5 mb-2">
                     <AvailabilityIndicator 
                       status={result.available ? 'available' : 'unavailable'}
                       size="sm"
                     />
-                    <span className="font-mono font-bold">{result.domain}</span>
+                    <span className="font-mono font-bold text-sm sm:text-base break-all">{result.domain}</span>
                     {result.available && (
                       <Badge variant="success" size="sm">
                         Available
                       </Badge>
                     )}
                   </div>
-                  <div className={`flex items-center gap-4 text-xs ${isLight ? 'text-slate-500' : 'text-white/40'} mb-2`}>
+                  <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-xs ${isLight ? 'text-slate-500' : 'text-white/40'} mb-2`}>
                     <span>Score: {result.score}</span>
                     <span>•</span>
                     <span>Pronunciation: {result.pronunciation}</span>
@@ -188,7 +203,7 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
                 <Button
                   variant={result.available ? 'primary' : 'secondary'}
                   size="sm"
-                  className="opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="w-full sm:w-auto opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
                   onClick={() => onSelect?.(result.domain)}
                 >
                   {result.available ? 'Register' : 'View'}

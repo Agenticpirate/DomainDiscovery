@@ -379,9 +379,9 @@ export const GeoDomainGenerator: React.FC = () => {
   }), [generatedDomains]);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Settings Panel */}
-      <div className={`p-6 ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border border-white/10'} border rounded-2xl space-y-6`}>
+      <div className={`p-3.5 sm:p-4 ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border border-white/10'} border rounded-2xl space-y-4 sm:space-y-5`}>
         {/* Keyword Input */}
         <div>
           <label className={`block text-sm font-medium ${isLight ? 'text-slate-600' : 'text-white/70'} mb-2`}>
@@ -393,7 +393,7 @@ export const GeoDomainGenerator: React.FC = () => {
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               placeholder="e.g., plumber, lawyer, pizza, news, bulletin"
-              className={`w-full px-4 py-3 ${isLight ? 'bg-white border-slate-200 text-slate-900 placeholder-slate-400 focus:border-blue-400 focus:ring-blue-400/20' : 'bg-white/5 border-white/10 text-white placeholder-white/30 focus:border-slate-400/50 focus:ring-slate-400/50'} border rounded-xl focus:outline-none focus:ring-1 transition-all`}
+              className={`w-full px-4 py-3 text-sm sm:text-base ${isLight ? 'bg-white border-slate-200 text-slate-900 placeholder-slate-400 focus:border-blue-400 focus:ring-blue-400/20' : 'bg-white/5 border-white/10 text-white placeholder-white/30 focus:border-slate-400/50 focus:ring-slate-400/50'} border rounded-xl focus:outline-none focus:ring-1 transition-all`}
             />
             <div className={`absolute right-3 top-1/2 -translate-y-1/2 ${isLight ? 'text-slate-300' : 'text-white/30'}`}>
               <Icons.Search />
@@ -409,12 +409,12 @@ export const GeoDomainGenerator: React.FC = () => {
           <label className={`block text-sm font-medium ${isLight ? 'text-slate-600' : 'text-white/70'} mb-3`}>
             Target Locations
           </label>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
+          <div className="grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-2">
             {LOCATION_OPTIONS.map(option => (
               <button
                 key={option.value}
                 onClick={() => setLocationType(option.value as LocationType)}
-                className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
+                className={`px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border text-xs sm:text-sm font-medium transition-all ${
                   locationType === option.value
                     ? `${isLight ? 'bg-blue-50 border-blue-300 text-blue-700' : 'bg-slate-400/20 border-slate-400/50 text-white'}`
                     : `${isLight ? 'bg-white border-slate-200 text-slate-600 hover:border-blue-300 hover:text-slate-900' : 'bg-white/[0.02] border-white/10 text-white/60 hover:border-white/20 hover:text-white'}`
@@ -432,7 +432,7 @@ export const GeoDomainGenerator: React.FC = () => {
           <label className={`block text-sm font-medium ${isLight ? 'text-slate-600' : 'text-white/70'} mb-3`}>
             Keyword Position
           </label>
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {[
               { value: 'start', label: 'Keyword First', example: 'plumberlondon.com' },
               { value: 'end', label: 'Location First', example: 'londonplumber.com' },
@@ -441,7 +441,7 @@ export const GeoDomainGenerator: React.FC = () => {
               <button
                 key={option.value}
                 onClick={() => setPosition(option.value as KeywordPosition)}
-                className={`px-4 py-3 rounded-xl border text-left transition-all flex-1 min-w-[150px] ${
+                className={`px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border text-left transition-all min-w-0 ${
                   position === option.value
                     ? `${isLight ? 'bg-blue-50 border-blue-300' : 'bg-slate-400/20 border-slate-400/50'}`
                     : `${isLight ? 'bg-white border-slate-200 hover:border-blue-300' : 'bg-white/[0.02] border-white/10 hover:border-white/20'}`
@@ -459,12 +459,12 @@ export const GeoDomainGenerator: React.FC = () => {
           <label className={`block text-sm font-medium ${isLight ? 'text-slate-600' : 'text-white/70'} mb-3`}>
             Domain Extensions (TLDs)
           </label>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {TLD_OPTIONS.map(tld => (
               <button
                 key={tld.value}
                 onClick={() => toggleTld(tld.value)}
-                className={`px-3 py-2 rounded-lg border text-sm font-medium transition-all ${
+                className={`px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg border text-xs sm:text-sm font-medium transition-all ${
                   selectedTlds.includes(tld.value)
                     ? `${isLight ? 'bg-blue-50 border-blue-300 text-blue-700' : 'bg-slate-400/20 border-slate-400/50 text-white'}`
                     : `${isLight ? 'bg-white border-slate-200 text-slate-500 hover:border-blue-300 hover:text-slate-900' : 'bg-white/[0.02] border-white/10 text-white/50 hover:border-white/20 hover:text-white'}`
@@ -500,12 +500,12 @@ export const GeoDomainGenerator: React.FC = () => {
         </div>
 
         {/* Generate Button */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <Button
             onClick={generateDomains}
             disabled={!keyword.trim() || selectedTlds.length === 0 || isGenerating}
             size="lg"
-            className="flex-1"
+            className="flex-1 min-h-[44px]"
           >
             {isGenerating ? (
               <>
@@ -526,13 +526,13 @@ export const GeoDomainGenerator: React.FC = () => {
       {generatedDomains.length > 0 && (
         <div className="space-y-4">
           {/* Results Header with Stats */}
-          <div className={`flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 p-4 ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border border-white/10'} border rounded-xl`}>
-            <div className="flex items-center gap-6">
+          <div className={`flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 p-3.5 sm:p-4 ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border border-white/10'} border rounded-xl`}>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
               <div>
                 <h3 className={`text-lg font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>Results</h3>
                 <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{stats.total} domains</p>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
                   <span className={`text-sm ${isLight ? 'text-slate-600' : 'text-white/70'}`}>{stats.available} available</span>
@@ -555,7 +555,7 @@ export const GeoDomainGenerator: React.FC = () => {
           </div>
 
           {/* Sort Controls */}
-          <div className={`flex flex-wrap items-center gap-2 p-4 ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border border-white/10'} border rounded-xl`}>
+          <div className={`flex flex-wrap items-center gap-1.5 sm:gap-2 p-3.5 sm:p-4 ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border border-white/10'} border rounded-xl`}>
             <span className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>Sort by:</span>
             {['domain', 'population', 'length'].map(sort => (
               <button
@@ -568,7 +568,7 @@ export const GeoDomainGenerator: React.FC = () => {
                     setSortOrder('desc');
                   }
                 }}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                className={`px-2.5 py-1.5 sm:px-3 rounded-lg text-xs sm:text-sm font-medium transition-all ${
                   sortBy === sort
                     ? `${isLight ? 'bg-blue-50 text-blue-700' : 'bg-slate-400/20 text-white'}`
                     : `${isLight ? 'text-slate-500 hover:text-slate-900' : 'text-white/50 hover:text-white'}`
@@ -584,18 +584,18 @@ export const GeoDomainGenerator: React.FC = () => {
 
           {/* Results Table */}
           <div 
-            className="overflow-x-auto select-none"
+            className="overflow-x-auto select-none rounded-xl border border-transparent"
             onContextMenu={(e) => e.preventDefault()}
             onCopy={(e) => e.preventDefault()}
           >
-            <table className="w-full">
+            <table className="w-full min-w-[720px]">
               <thead>
                 <tr className={`border-b ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
-                  <th className={`text-left py-3 px-4 text-xs font-semibold ${isLight ? 'text-slate-500' : 'text-white/50'} uppercase tracking-wider`}>Domain</th>
-                  <th className={`text-center py-3 px-4 text-xs font-semibold ${isLight ? 'text-slate-500' : 'text-white/50'} uppercase tracking-wider`}>Status</th>
-                  <th className={`text-left py-3 px-4 text-xs font-semibold ${isLight ? 'text-slate-500' : 'text-white/50'} uppercase tracking-wider`}>Location</th>
-                  <th className={`text-right py-3 px-4 text-xs font-semibold ${isLight ? 'text-slate-500' : 'text-white/50'} uppercase tracking-wider`}>Population</th>
-                  <th className={`text-center py-3 px-4 text-xs font-semibold ${isLight ? 'text-slate-500' : 'text-white/50'} uppercase tracking-wider`}>Actions</th>
+                  <th className={`text-left py-2.5 px-3 sm:py-3 sm:px-4 text-[11px] font-semibold ${isLight ? 'text-slate-500' : 'text-white/50'} uppercase tracking-wider`}>Domain</th>
+                  <th className={`text-center py-2.5 px-3 sm:py-3 sm:px-4 text-[11px] font-semibold ${isLight ? 'text-slate-500' : 'text-white/50'} uppercase tracking-wider`}>Status</th>
+                  <th className={`text-left py-2.5 px-3 sm:py-3 sm:px-4 text-[11px] font-semibold ${isLight ? 'text-slate-500' : 'text-white/50'} uppercase tracking-wider`}>Location</th>
+                  <th className={`text-right py-2.5 px-3 sm:py-3 sm:px-4 text-[11px] font-semibold ${isLight ? 'text-slate-500' : 'text-white/50'} uppercase tracking-wider`}>Population</th>
+                  <th className={`text-center py-2.5 px-3 sm:py-3 sm:px-4 text-[11px] font-semibold ${isLight ? 'text-slate-500' : 'text-white/50'} uppercase tracking-wider`}>Actions</th>
                 </tr>
               </thead>
               <tbody className={`divide-y ${isLight ? 'divide-slate-100' : 'divide-white/5'}`}>
@@ -707,7 +707,7 @@ export const GeoDomainGenerator: React.FC = () => {
 
       {/* SEO Content Section */}
       <div className={`space-y-6 pt-8 border-t ${isLight ? 'border-slate-100' : 'border-white/5'}`}>
-        <h2 className={`text-2xl font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>What is a Geo Domain Generator?</h2>
+        <h2 className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>What is a Geo Domain Generator?</h2>
         <div className="prose prose-invert max-w-none">
           <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>
             A Geo Domain Generator is a powerful SEO tool that combines your business keyword or niche with geographic locations 
@@ -717,14 +717,14 @@ export const GeoDomainGenerator: React.FC = () => {
         </div>
 
         <h3 className={`text-xl font-bold ${isLight ? 'text-slate-900' : 'text-white'} mt-8`}>Why Use Geo-Targeted Domains?</h3>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
           {[
             { title: 'Local SEO Boost', desc: 'Geo domains naturally rank better for location-specific searches like "plumber london" or "lawyer new york".' },
             { title: 'Instant Relevance', desc: 'Users immediately understand your service area, increasing click-through rates from search results.' },
             { title: 'Brand Trust', desc: 'Local domain names build trust with customers who prefer working with businesses in their area.' },
             { title: 'Market Targeting', desc: 'Target specific markets with dedicated domains for each location you serve.' },
           ].map((item, i) => (
-            <div key={i} className={`p-4 ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border border-white/10'} border rounded-xl`}>
+            <div key={i} className={`p-3.5 sm:p-4 ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border border-white/10'} border rounded-xl`}>
               <h4 className={`font-semibold ${isLight ? 'text-slate-900' : 'text-white'} mb-2`}>{item.title}</h4>
               <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{item.desc}</p>
             </div>
@@ -732,12 +732,12 @@ export const GeoDomainGenerator: React.FC = () => {
         </div>
 
         <h3 className={`text-xl font-bold ${isLight ? 'text-slate-900' : 'text-white'} mt-8`}>Popular Geo Domain Niches</h3>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
           {['plumber', 'lawyer', 'dentist', 'realtor', 'pizza', 'taxi', 'hotel', 'news', 'jobs', 'cars', 'homes', 'rentals', 'tours', 'gym', 'spa'].map(niche => (
             <button
               key={niche}
               onClick={() => setKeyword(niche)}
-              className={`px-3 py-1.5 ${isLight ? 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:border-blue-300' : 'bg-white/5 border border-white/10 text-white/60 hover:text-white hover:border-white/20'} border rounded-lg text-sm transition-all`}
+              className={`px-2.5 py-1.5 sm:px-3 ${isLight ? 'bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900 hover:border-blue-300' : 'bg-white/5 border border-white/10 text-white/60 hover:text-white hover:border-white/20'} border rounded-lg text-xs sm:text-sm transition-all`}
             >
               {niche}
             </button>

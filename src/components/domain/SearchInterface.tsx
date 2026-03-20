@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -100,6 +99,10 @@ export function SearchInterface({
     debouncedSearch(newQuery);
   };
 
+  useEffect(() => {
+    setQuery(initialQuery);
+  }, [initialQuery]);
+
   const handleClear = () => {
     setQuery('');
     onClear();
@@ -113,6 +116,7 @@ export function SearchInterface({
     setQuery(searchQuery);
     setShowRecent(false);
     onSearch(searchQuery);
+    saveToRecentSearches(searchQuery);
   };
 
   useEffect(() => {
@@ -146,18 +150,27 @@ export function SearchInterface({
           ref={inputRef}
           value={query}
           onChange={handleChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && query.trim()) {
+              e.preventDefault();
+              if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+              onSearch(query.trim());
+              saveToRecentSearches(query.trim());
+              setShowRecent(false);
+            }
+          }}
           onFocus={() => setShowRecent(true && recentSearches.length > 0)}
           onBlur={() => setTimeout(() => setShowRecent(false), 200)}
           placeholder={placeholder}
           autoFocus={autoFocus}
-          className="pr-24"
+          className="pr-16 sm:pr-22"
           leftIcon={<Icons.Search />}
         />
 
         {query && (
           <button
             onClick={handleClear}
-            className="absolute right-14 top-1/2 -translate-y-1/2 p-2 transition-colors"
+            className="absolute right-9 sm:right-12 top-1/2 -translate-y-1/2 p-1.5 transition-colors"
             style={{ color: 'var(--text-muted)' }}
             aria-label="Clear search"
           >
@@ -178,8 +191,8 @@ export function SearchInterface({
         )}
 
         {isLoading && (
-          <div className="absolute right-4 top-1/2 -translate-y-1/2">
-            <div className="w-4 h-4 border-2 rounded-full animate-spin" style={{
+          <div className="absolute right-2.5 sm:right-3.5 top-1/2 -translate-y-1/2">
+            <div className="w-3.5 h-3.5 border-2 rounded-full animate-spin" style={{
               borderColor: 'var(--input-border)',
               borderTopColor: 'var(--text-primary)'
             }} />
@@ -187,7 +200,7 @@ export function SearchInterface({
         )}
 
         {!query && !isLoading && (
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-1 text-xs" style={{ color: 'var(--kbd-text)' }}>
+          <div className="absolute right-2.5 sm:right-3.5 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 text-xs" style={{ color: 'var(--kbd-text)' }}>
             <kbd className="px-1.5 py-0.5 rounded text-[10px]" style={{ background: 'var(--kbd-bg)', border: '1px solid var(--kbd-border)' }} suppressHydrationWarning>
               {typeof window !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
             </kbd>
@@ -199,43 +212,72 @@ export function SearchInterface({
       </div>
 
       {showRecent && showRecentSearches && recentSearches.length > 0 && (
-        <div className={`absolute top-full left-0 right-0 mt-2 rounded-xl z-50 overflow-hidden animate-fade-in ${
+        <div className={`absolute top-full left-0 right-0 mt-1.5 rounded-xl z-50 overflow-hidden animate-fade-in ${
           isLight
             ? 'bg-white border border-slate-200 shadow-lg shadow-slate-900/[0.06]'
             : 'bg-neutral-900 border border-white/10 shadow-xl'
         }`}>
-          <div className="p-2">
-            <div className="text-xs font-semibold uppercase tracking-wider px-3 py-2" style={{ color: 'var(--text-muted)' }}>
-              Recent Searches
+          <div className="p-1.5">
+            <div className="flex items-center justify-between px-2.5 py-1.5">
+              <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
+                Recent Searches
+              </div>
+              {recentSearches.length > 0 && (
+                <button
+                  onClick={() => {
+                    setRecentSearches([]);
+                    localStorage.removeItem(RECENT_SEARCHES_KEY);
+                    setShowRecent(false);
+                  }}
+                  className={`text-[11px] transition-colors ${isLight ? 'text-slate-400 hover:text-red-500' : 'text-white/40 hover:text-red-400'}`}
+                >
+                  Clear
+                </button>
+              )}
             </div>
             {recentSearches.map((search, index) => (
-              <button
+              <div
                 key={index}
-                onClick={() => handleRecentSearchClick(search.query)}
-                className={`w-full flex items-center gap-3 px-3 py-2 text-left text-sm rounded-lg transition-colors ${
-                  isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'
-                }`}
-                style={{ color: 'var(--text-secondary)' }}
+                className={`flex items-center gap-2 px-1.5 py-0.5 rounded-lg transition-colors ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'}`}
               >
-                <div className="w-4 h-4" style={{ color: 'var(--text-muted)' }}>
-                  <Icons.Search />
-                </div>
-                <span className="flex-1">{search.query}</span>
-                <svg
-                  className="w-4 h-4"
-                  style={{ color: 'var(--text-muted)' }}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <button
+                  onClick={() => handleRecentSearchClick(search.query)}
+                  className="w-full flex items-center gap-2.5 px-1 py-1 text-left text-sm"
+                  style={{ color: 'var(--text-secondary)' }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
+                  <div className="w-4 h-4" style={{ color: 'var(--text-muted)' }}>
+                    <Icons.Search />
+                  </div>
+                  <span className="flex-1 truncate">{search.query}</span>
+                  <svg
+                    className="w-4 h-4"
+                    style={{ color: 'var(--text-muted)' }}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => {
+                    const updated = recentSearches.filter((item) => item.query !== search.query);
+                    setRecentSearches(updated);
+                    localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(updated));
+                  }}
+                  className={`p-1.5 rounded-md transition-colors ${isLight ? 'text-slate-300 hover:text-red-500 hover:bg-red-50' : 'text-white/20 hover:text-red-400 hover:bg-red-500/10'}`}
+                  aria-label={`Remove ${search.query}`}
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
             ))}
           </div>
         </div>

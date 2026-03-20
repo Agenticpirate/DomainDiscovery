@@ -53,8 +53,8 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
   };
 
   return (
-    <div className={`glass-card p-6 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
-      <div className="mb-6">
+    <div className={`glass-card p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+      <div className="mb-5">
         <div className="flex items-center gap-3 mb-2">
           <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>
             <Icons.Info />
@@ -66,7 +66,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
         </p>
       </div>
 
-      <div className="flex gap-3 mb-6">
+      <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 mb-5">
         <input
           type="text"
           value={domain}
@@ -75,26 +75,26 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
           placeholder="Enter domain name..."
           className={`flex-1 ${isLight ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-blue-400 focus:ring-blue-400/20' : 'bg-black/40 border-white/10 text-white placeholder:text-white/30 focus:border-white/30 focus:ring-white/10'} border rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-2 transition-all`}
         />
-        <Button onClick={handleLookup} isLoading={isLoading}>
+        <Button onClick={handleLookup} isLoading={isLoading} className="w-full sm:w-auto">
           Lookup
         </Button>
       </div>
 
       {data && (
         <div className="space-y-4 animate-fade-in">
-          <div className={`p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border`}>
-            <div className="grid grid-cols-2 gap-4">
+          <div className={`p-3.5 sm:p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border`}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <div className={`text-[10px] font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-1`}>
                   Registrar
                 </div>
-                <div className="text-sm font-semibold">{data.registrar}</div>
+                <div className="text-sm font-semibold break-words">{data.registrar}</div>
               </div>
               <div>
                 <div className={`text-[10px] font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-1`}>
                   Status
                 </div>
-                <div className="text-sm font-semibold">{data.status}</div>
+                <div className="text-sm font-semibold break-words">{data.status}</div>
               </div>
               <div>
                 <div className={`text-[10px] font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-1`}>
@@ -111,13 +111,13 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
             </div>
           </div>
 
-          <div className={`p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border`}>
+          <div className={`p-3.5 sm:p-4 rounded-xl ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-white/20'} border`}>
             <div className={`text-[10px] font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-2`}>
               Name Servers
             </div>
             <div className="space-y-1">
               {data.nameServers.map((ns, i) => (
-                <div key={i} className={`text-sm font-mono ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
+                <div key={i} className={`text-sm font-mono break-all ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
                   {ns}
                 </div>
               ))}

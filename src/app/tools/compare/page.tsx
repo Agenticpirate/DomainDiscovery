@@ -1,49 +1,62 @@
-'use client';
-
 import React from 'react';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { PriceComparison } from '@/components/domain/PriceComparison';
-import { useTheme } from '@/contexts/ThemeContext';
+import { getAllTldPriceDetails, getTldPriceDatasetMeta, getTldPriceDetail, getTldPriceSummaryList } from '@/lib/tldPriceData';
 
 export default function ComparePage() {
-  const { theme } = useTheme();
-  const isLight = theme === 'light';
+  const summaries = getTldPriceSummaryList();
+  const details = getAllTldPriceDetails();
+  const meta = getTldPriceDatasetMeta();
+  const initialDetail = getTldPriceDetail('.com');
+
+  if (!initialDetail) {
+    throw new Error('TLD comparison dataset is unavailable.');
+  }
 
   return (
     <div className="min-h-screen">
       <PageBackground variant="default" />
-      
       <Navigation activeTool="compare" />
 
-      {/* Main Content */}
-      <main className="relative pt-28">
-        {/* Hero Section */}
-        <section className="px-6 pb-8">
-          <div className="max-w-4xl mx-auto">
-            <Breadcrumb items={[
-              { label: 'Tools', href: '/' },
-              { label: 'Price Comparison' }
-            ]} />
+      <main className="relative pt-20 sm:pt-24">
+        <section className="px-4 pb-6 sm:px-6 sm:pb-8">
+          <div className="mx-auto max-w-6xl">
+            <Breadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Price Comparison' }]} />
           </div>
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4">
-              <span className={`bg-gradient-to-r ${isLight ? 'from-slate-900 via-slate-800 to-slate-600' : 'from-white via-white to-white/60'} bg-clip-text text-transparent`}>
+
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="text-3xl font-black tracking-tight sm:text-5xl md:text-[3.9rem]">
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: 'linear-gradient(to right, var(--gradient-hero-from), var(--gradient-hero-from), var(--gradient-hero-to))',
+                }}
+              >
                 Price Comparison
               </span>
             </h1>
-            <p className={`text-lg ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-8`}>
-              Compare registrar pricing in real time to find the lowest prices.
+            <p
+              className="mx-auto mt-3 max-w-3xl text-sm sm:text-base leading-6"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              Live top-TLD pricing data verified against TLD-List for 100 widely used extensions across the selected 10 registrars. Promo-code discounts are stripped out so the numbers shown are the regular listed prices.
             </p>
           </div>
         </section>
 
-        {/* Price Comparison */}
-        <section className="px-6 pb-16">
-          <div className="max-w-2xl mx-auto">
-            <PriceComparison domain="example.com" />
+        <section className="px-4 pb-12 sm:px-6 sm:pb-14">
+          <div className="mx-auto max-w-6xl">
+            <PriceComparison
+              summaries={summaries}
+              details={details}
+              initialDetail={initialDetail}
+              generatedAt={meta.generatedAt}
+              sourceName={meta.sourceName}
+              sourceUrl={meta.sourceUrl}
+            />
           </div>
         </section>
       </main>

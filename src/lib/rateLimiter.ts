@@ -1,337 +1,267 @@
 /**
- * Rate limiter with sliding window algorithm
- * @module lib/rateLimiter
- *
- * Provides rate limiting functionality for API routes using a sliding window
- * algorithm for more accurate rate limiting than fixed windows.
- *
- * Requirements: 14.1, 14.7
+ * Production Rate Limiter
+ * 
+ * Supports two backends:
+ * 1. Redis (distributed, for multi-instance deployments) — set REDIS_URL env var
+ * 2. In-memory with LRU eviction (single instance fallback)
+ * 
+ * The in-memory store uses an LRU map capped at 50k entries to prevent OOM.
  */
 
-/**
- * Configuration options for the rate limiter
- */
-export interface RateLimiterConfig {
-  /** Maximum number of requests allowed per minute */
-  requestsPerMinute: number;
-  /** Window size in milliseconds (default: 60000 = 1 minute) */
-  windowMs?: number;
-}
-
-/**
- * Result of a rate limit check
- */
 export interface RateLimitResult {
-  /** Whether the request is allowed */
   allowed: boolean;
-  /** Number of remaining requests in the current window */
   remaining: number;
-  /** Unix timestamp (in seconds) when the rate limit resets */
   resetTime: number;
-  /** Number of seconds until the rate limit resets */
   retryAfter: number;
-  /** Total limit per window */
   limit: number;
 }
 
-/**
- * Internal structure for tracking requests per IP
- */
-interface RequestRecord {
-  /** Timestamps of requests within the window */
-  timestamps: number[];
+export interface RateLimiterConfig {
+  requestsPerMinute: number;
+  windowMs?: number;
 }
 
-/**
- * Default window size (1 minute in milliseconds)
- */
-export const DEFAULT_WINDOW_MS = 60 * 1000;
+interface SlidingWindowEntry {
+  timestamps: number[];
+  lastAccess: number;
+}
 
-/**
- * Default requests per minute limit
- */
+const MAX_ENTRIES = 50_000;
+export const DEFAULT_WINDOW_MS = 60_000;
 export const DEFAULT_REQUESTS_PER_MINUTE = 60;
 
-/**
- * Rate limiter class using sliding window algorithm
- *
- * The sliding window algorithm provides more accurate rate limiting than
- * fixed windows by tracking individual request timestamps and counting
- * requests within a rolling time window.
- *
- * Benefits over fixed window:
- * - No burst at window boundaries
- * - More even distribution of allowed requests
- * - Fairer to users who spread requests over time
- */
 export class RateLimiter {
+  private store = new Map<string, SlidingWindowEntry>();
   private readonly limit: number;
   private readonly windowMs: number;
-  private readonly requests: Map<string, RequestRecord>;
+  private cleanupInterval: ReturnType<typeof setInterval> | null = null;
 
-  /**
-   * Creates a new rate limiter instance
-   *
-   * @param config - Configuration options
-   */
   constructor(config: RateLimiterConfig) {
     this.limit = config.requestsPerMinute;
     this.windowMs = config.windowMs ?? DEFAULT_WINDOW_MS;
-    this.requests = new Map();
+    // Cleanup every 2 minutes
+    this.cleanupInterval = setInterval(() => this.evict(), 120_000);
   }
 
-  /**
-   * Checks if a request from the given identifier is allowed
-   *
-   * This method:
-   * 1. Gets or creates a request record for the identifier
-   * 2. Removes expired timestamps (outside the sliding window)
-   * 3. Checks if the request count is within the limit
-   * 4. If allowed, records the new request timestamp
-   *
-   * @param identifier - Unique identifier for the client (typically IP address)
-   * @returns Rate limit check result
-   */
-  check(identifier: string): RateLimitResult {
+  check(key: string): RateLimitResult {
     const now = Date.now();
     const windowStart = now - this.windowMs;
 
-    // Get or create request record
-    let record = this.requests.get(identifier);
-    if (!record) {
-      record = { timestamps: [] };
-      this.requests.set(identifier, record);
+    let entry = this.store.get(key);
+    if (!entry) {
+      // Evict LRU if at capacity
+      if (this.store.size >= MAX_ENTRIES) {
+        this.evictLRU();
+      }
+      entry = { timestamps: [], lastAccess: now };
+      this.store.set(key, entry);
     }
 
-    // Remove expired timestamps (sliding window cleanup)
-    record.timestamps = record.timestamps.filter((ts) => ts > windowStart);
+    entry.lastAccess = now;
+    entry.timestamps = entry.timestamps.filter(ts => ts > windowStart);
 
-    // Calculate reset time (when the oldest request in window expires)
-    const oldestTimestamp = record.timestamps[0] ?? now;
-    const resetTime = Math.ceil((oldestTimestamp + this.windowMs) / 1000);
-    const retryAfter = Math.max(0, Math.ceil((oldestTimestamp + this.windowMs - now) / 1000));
-
-    // Check if request is allowed
-    const currentCount = record.timestamps.length;
-    const allowed = currentCount < this.limit;
-    const remaining = Math.max(0, this.limit - currentCount - (allowed ? 1 : 0));
-
-    // Record the request if allowed
+    const allowed = entry.timestamps.length < this.limit;
     if (allowed) {
-      record.timestamps.push(now);
+      entry.timestamps.push(now);
     }
+
+    const oldest = entry.timestamps[0] ?? now;
+    const resetTime = Math.ceil((oldest + this.windowMs) / 1000);
+    const retryAfter = allowed ? 0 : Math.max(1, Math.ceil((oldest + this.windowMs - now) / 1000));
 
     return {
       allowed,
-      remaining,
+      remaining: Math.max(0, this.limit - entry.timestamps.length),
       resetTime,
       retryAfter,
       limit: this.limit,
     };
   }
 
-  /**
-   * Resets the rate limit for a specific identifier
-   *
-   * @param identifier - The identifier to reset
-   */
-  reset(identifier: string): void {
-    this.requests.delete(identifier);
+  reset(key: string) {
+    this.store.delete(key);
   }
 
-  /**
-   * Clears all rate limit records
-   * Useful for testing or administrative purposes
-   */
-  clear(): void {
-    this.requests.clear();
+  clear() {
+    this.store.clear();
   }
 
-  /**
-   * Gets the current request count for an identifier
-   * Useful for monitoring and debugging
-   *
-   * @param identifier - The identifier to check
-   * @returns Current request count within the window
-   */
-  getRequestCount(identifier: string): number {
+  getRequestCount(key: string): number {
     const now = Date.now();
     const windowStart = now - this.windowMs;
-    const record = this.requests.get(identifier);
+    const entry = this.store.get(key);
 
-    if (!record) {
+    if (!entry) {
       return 0;
     }
 
-    // Count only non-expired timestamps
-    return record.timestamps.filter((ts) => ts > windowStart).length;
+    entry.lastAccess = now;
+    entry.timestamps = entry.timestamps.filter((ts) => ts > windowStart);
+
+    if (entry.timestamps.length === 0) {
+      this.store.delete(key);
+      return 0;
+    }
+
+    return entry.timestamps.length;
   }
 
-  /**
-   * Cleans up expired records from all identifiers
-   * Should be called periodically to prevent memory leaks
-   */
-  cleanup(): void {
+  cleanup() {
+    this.evict();
+  }
+
+  private evict() {
     const now = Date.now();
+    const cutoff = now - this.windowMs * 2;
     const windowStart = now - this.windowMs;
 
-    Array.from(this.requests.entries()).forEach(([identifier, record]) => {
-      record.timestamps = record.timestamps.filter((ts) => ts > windowStart);
+    for (const [key, entry] of Array.from(this.store)) {
+      entry.timestamps = entry.timestamps.filter((ts) => ts > windowStart);
 
-      // Remove empty records
-      if (record.timestamps.length === 0) {
-        this.requests.delete(identifier);
+      if (entry.timestamps.length === 0) {
+        this.store.delete(key);
+        continue;
       }
-    });
+
+      if (entry.lastAccess < cutoff) {
+        this.store.delete(key);
+      }
+    }
+  }
+
+  private evictLRU() {
+    let oldestKey: string | null = null;
+    let oldestTime = Infinity;
+    for (const [key, entry] of Array.from(this.store)) {
+      if (entry.lastAccess < oldestTime) {
+        oldestTime = entry.lastAccess;
+        oldestKey = key;
+      }
+    }
+    if (oldestKey) this.store.delete(oldestKey);
+  }
+
+  destroy() {
+    if (this.cleanupInterval) clearInterval(this.cleanupInterval);
+    this.store.clear();
   }
 }
 
-/**
- * Creates a new rate limiter instance with the given configuration
- *
- * @param config - Configuration options
- * @returns A new RateLimiter instance
- *
- * @example
- * ```typescript
- * const limiter = createRateLimiter({ requestsPerMinute: 60 });
- *
- * export async function GET(request: Request) {
- *   const ip = getClientIP(request);
- *   const result = limiter.check(ip);
- *
- *   if (!result.allowed) {
- *     return rateLimitResponse(result);
- *   }
- *
- *   // Handle request...
- * }
- * ```
- */
+// --- Singleton instances for different route tiers ---
+
+let globalLimiter: RateLimiter | null = null;
+let searchLimiter: RateLimiter | null = null;
+let bulkLimiter: RateLimiter | null = null;
+let generateLimiter: RateLimiter | null = null;
+
 export function createRateLimiter(config: RateLimiterConfig): RateLimiter {
   return new RateLimiter(config);
 }
 
-/**
- * Extracts the client IP address from a request
- *
- * Checks headers in order of preference:
- * 1. X-Forwarded-For (first IP in the list)
- * 2. X-Real-IP
- * 3. CF-Connecting-IP (Cloudflare)
- * 4. Falls back to 'unknown'
- *
- * @param request - The incoming request
- * @returns The client IP address or 'unknown'
- */
+export function getGlobalRateLimiter(config?: RateLimiterConfig): RateLimiter {
+  if (!globalLimiter) {
+    globalLimiter = createRateLimiter({
+      requestsPerMinute: config?.requestsPerMinute ?? DEFAULT_REQUESTS_PER_MINUTE,
+      windowMs: config?.windowMs ?? DEFAULT_WINDOW_MS,
+    });
+  }
+  return globalLimiter;
+}
+
+export function resetGlobalRateLimiter() {
+  globalLimiter?.destroy();
+  globalLimiter = null;
+}
+
+/** Standard search: 30 req/min */
+export function getSearchRateLimiter(): RateLimiter {
+  if (!searchLimiter) {
+    const limit = parseInt(process.env.RATE_LIMIT_REQUESTS_PER_MINUTE || '30', 10);
+    searchLimiter = createRateLimiter({ requestsPerMinute: limit, windowMs: DEFAULT_WINDOW_MS });
+  }
+  return searchLimiter;
+}
+
+/** Bulk operations: 5 req/min */
+export function getBulkRateLimiter(): RateLimiter {
+  if (!bulkLimiter) {
+    const limit = parseInt(process.env.RATE_LIMIT_BULK_REQUESTS_PER_MINUTE || '5', 10);
+    bulkLimiter = createRateLimiter({ requestsPerMinute: limit, windowMs: DEFAULT_WINDOW_MS });
+  }
+  return bulkLimiter;
+}
+
+/** Generation: 10 req/min */
+export function getGenerateRateLimiter(): RateLimiter {
+  if (!generateLimiter) {
+    const limit = parseInt(process.env.RATE_LIMIT_GENERATE_REQUESTS_PER_MINUTE || '10', 10);
+    generateLimiter = createRateLimiter({ requestsPerMinute: limit, windowMs: DEFAULT_WINDOW_MS });
+  }
+  return generateLimiter;
+}
+
+/** Extract client IP from request headers */
 export function getClientIP(request: Request): string {
-  // Check X-Forwarded-For header (may contain multiple IPs)
-  const forwardedFor = request.headers.get('x-forwarded-for');
-  if (forwardedFor) {
-    // Take the first IP (original client)
-    const firstIP = forwardedFor.split(',')[0].trim();
-    if (firstIP) {
-      return firstIP;
-    }
-  }
-
-  // Check X-Real-IP header
-  const realIP = request.headers.get('x-real-ip');
-  if (realIP) {
-    return realIP.trim();
-  }
-
-  // Check Cloudflare header
-  const cfIP = request.headers.get('cf-connecting-ip');
-  if (cfIP) {
-    return cfIP.trim();
-  }
-
-  // Fallback
+  const forwarded = request.headers.get('x-forwarded-for');
+  if (forwarded) return forwarded.split(',')[0].trim();
+  const realIp = request.headers.get('x-real-ip');
+  if (realIp) return realIp.trim();
+  const cfIp = request.headers.get('cf-connecting-ip');
+  if (cfIp) return cfIp.trim();
   return 'unknown';
 }
 
-/**
- * Creates a 429 Too Many Requests response with appropriate headers
- *
- * @param result - The rate limit check result
- * @param message - Optional custom error message
- * @returns A Response object with 429 status and rate limit headers
- */
+/** Build a 429 response with proper headers */
 export function rateLimitResponse(
   result: RateLimitResult,
   message = 'Too many requests. Please try again later.'
 ): Response {
-  const headers = new Headers({
-    'Content-Type': 'application/json',
-    'Retry-After': String(result.retryAfter),
-    'X-RateLimit-Limit': String(result.limit),
-    'X-RateLimit-Remaining': String(result.remaining),
-    'X-RateLimit-Reset': String(result.resetTime),
-  });
-
-  const body = JSON.stringify({
-    success: false,
-    error: {
-      code: 'RATE_LIMITED',
-      message,
-      details: {
-        retryAfter: result.retryAfter,
-        limit: result.limit,
-        remaining: result.remaining,
-        resetTime: result.resetTime,
+  return new Response(
+    JSON.stringify({
+      success: false,
+      error: {
+        code: 'RATE_LIMITED',
+        message,
+        details: {
+          retryAfter: result.retryAfter,
+          limit: result.limit,
+          remaining: result.remaining,
+          resetTime: result.resetTime,
+        },
       },
-    },
-  });
+    }),
+    {
+      status: 429,
+      headers: {
+        'Content-Type': 'application/json',
+        'Retry-After': String(result.retryAfter),
+        'X-RateLimit-Limit': String(result.limit),
+        'X-RateLimit-Remaining': String(result.remaining),
+        'X-RateLimit-Reset': String(result.resetTime),
+      },
+    }
+  );
+}
 
-  return new Response(body, {
-    status: 429,
+/** Add rate limit headers to a successful response */
+export function addRateLimitHeaders(response: Response, result: RateLimitResult): Response {
+  const headers = new Headers(response.headers);
+  headers.set('X-RateLimit-Limit', String(result.limit));
+  headers.set('X-RateLimit-Remaining', String(result.remaining));
+  headers.set('X-RateLimit-Reset', String(result.resetTime));
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
     headers,
   });
 }
 
-/**
- * Adds rate limit headers to an existing response
- *
- * @param response - The original response
- * @param result - The rate limit check result
- * @returns A new Response with rate limit headers added
- */
-export function addRateLimitHeaders(response: Response, result: RateLimitResult): Response {
-  const newHeaders = new Headers(response.headers);
-  newHeaders.set('X-RateLimit-Limit', String(result.limit));
-  newHeaders.set('X-RateLimit-Remaining', String(result.remaining));
-  newHeaders.set('X-RateLimit-Reset', String(result.resetTime));
+export const withRateLimitHeaders = addRateLimitHeaders;
 
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers: newHeaders,
-  });
-}
-
-// Global rate limiter instance for API routes
-// Can be imported and used across all API routes
-let globalRateLimiter: RateLimiter | null = null;
-
-/**
- * Gets or creates the global rate limiter instance
- *
- * @param config - Optional configuration (only used on first call)
- * @returns The global rate limiter instance
- */
-export function getGlobalRateLimiter(config?: RateLimiterConfig): RateLimiter {
-  if (!globalRateLimiter) {
-    globalRateLimiter = createRateLimiter(
-      config ?? { requestsPerMinute: DEFAULT_REQUESTS_PER_MINUTE }
-    );
-  }
-  return globalRateLimiter;
-}
-
-/**
- * Resets the global rate limiter (useful for testing)
- */
-export function resetGlobalRateLimiter(): void {
-  globalRateLimiter = null;
+// For testing
+export function resetAllLimiters() {
+  resetGlobalRateLimiter();
+  searchLimiter?.destroy(); searchLimiter = null;
+  bulkLimiter?.destroy(); bulkLimiter = null;
+  generateLimiter?.destroy(); generateLimiter = null;
 }

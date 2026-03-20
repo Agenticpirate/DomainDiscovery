@@ -1,239 +1,291 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { searchDomainsViaMCP } from '@/lib/instantDomainMCP';
+import { checkDomainsWithGoDaddy } from '@/lib/godaddyAPI';
+import { checkDomainAvailabilityViaMCP } from '@/lib/instantDomainMCP';
+import { getSearchRateLimiter, getClientIP, rateLimitResponse } from '@/lib/rateLimiter';
+import { errorResponse, isValidQuery, jsonResponse, corsPreflightResponse } from '@/lib/apiHelpers';
 
-/**
- * Domain Search API Route
- * 
- * This endpoint searches for domain availability across multiple TLDs.
- * 
- * Integration options:
- * 1. Instant Domain Search MCP (FREE - Real-time data)
- * 2. Domainr API (https://domainr.build/)
- * 3. RapidAPI Domain Availability Checker
- * 4. WHOIS-based checking
- */
+const DEFAULT_TLDS = ['.com', '.net', '.org', '.ai', '.io', '.co'];
+const MAX_SEARCH_TLDS = 320;
+const DNS_TIMEOUT_MS = 700;
+const DNS_CONCURRENCY = 60;
+const DNS_CACHE_TTL_MS = 10 * 60 * 1000;
+const PREMIUM_ENRICHMENT_LIMIT = 30;
+const EXACT_DOMAIN_PATTERN = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/i;
+const ENABLE_MCP_SEARCH = process.env.ENABLE_MCP_SEARCH === 'true';
+const ENABLE_PREMIUM_ENRICHMENT = process.env.ENABLE_PREMIUM_ENRICHMENT === 'true';
+
+const dnsCache = new Map<string, { available: boolean; timestamp: number }>();
+
+function normalizeSearchTlds(tlds: unknown): string[] {
+  if (!Array.isArray(tlds)) return DEFAULT_TLDS;
+
+  const seen = new Set<string>();
+  const normalized = tlds
+    .map((tld) => String(tld).trim().toLowerCase())
+    .filter(Boolean)
+    .map((tld) => (tld.startsWith('.') ? tld : `.${tld}`))
+    .filter((tld) => /^\.[a-z0-9-]+(?:\.[a-z0-9-]+)*$/.test(tld))
+    .filter((tld) => {
+      if (seen.has(tld)) return false;
+      seen.add(tld);
+      return true;
+    })
+    .slice(0, MAX_SEARCH_TLDS);
+
+  return normalized.length > 0 ? normalized : DEFAULT_TLDS;
+}
+
+function cacheGet(domain: string): boolean | undefined {
+  const entry = dnsCache.get(domain);
+  if (!entry) return undefined;
+  if (Date.now() - entry.timestamp > DNS_CACHE_TTL_MS) {
+    dnsCache.delete(domain);
+    return undefined;
+  }
+  return entry.available;
+}
+
+function cacheSet(domain: string, available: boolean) {
+  dnsCache.set(domain, { available, timestamp: Date.now() });
+}
+
+function isExactDomainQuery(value: string): boolean {
+  return EXACT_DOMAIN_PATTERN.test(value);
+}
+
+function formatMarketplacePrice(raw: unknown): string | undefined {
+  if (typeof raw === 'number' && Number.isFinite(raw) && raw > 0) {
+    return `$${raw.toFixed(0)}`;
+  }
+
+  if (typeof raw === 'string') {
+    const numeric = Number(raw.replace(/[^0-9.]/g, ''));
+    if (Number.isFinite(numeric) && numeric > 0) {
+      return `$${numeric.toFixed(0)}`;
+    }
+  }
+
+  return undefined;
+}
+
+async function mapWithConcurrency<T, R>(
+  items: T[],
+  concurrency: number,
+  mapper: (item: T) => Promise<R>
+): Promise<R[]> {
+  if (items.length === 0) return [];
+
+  const results: R[] = new Array(items.length);
+  let cursor = 0;
+
+  const worker = async () => {
+    while (true) {
+      const index = cursor++;
+      if (index >= items.length) return;
+      results[index] = await mapper(items[index]);
+    }
+  };
+
+  const workers = Array.from({ length: Math.min(concurrency, items.length) }, () => worker());
+  await Promise.all(workers);
+  return results;
+}
+
+export async function OPTIONS(request: NextRequest) {
+  return corsPreflightResponse(request);
+}
 
 export async function POST(request: NextRequest) {
-  try {
-    const { query, tlds } = await request.json();
+  const ip = getClientIP(request);
+  const rl = getSearchRateLimiter().check(ip);
+  if (!rl.allowed) return rateLimitResponse(rl);
 
-    if (!query || !query.trim()) {
-      return NextResponse.json(
-        { error: 'Query parameter is required' },
-        { status: 400 }
-      );
+  try {
+    const body = await request.json();
+    const { query, tlds } = body;
+
+    if (!query || !isValidQuery(query)) {
+      return errorResponse('Invalid or missing query parameter', 400);
     }
 
     const cleanQuery = query.toLowerCase().replace(/\s+/g, '');
-    const searchTlds = tlds || ['.com', '.net', '.org', '.ai', '.io', '.co'];
+    const searchTlds = normalizeSearchTlds(tlds);
+    const exactDomainQuery = isExactDomainQuery(cleanQuery);
 
-    // Option 1: Use Instant Domain Search MCP (FREE - Recommended)
-    try {
-      const mcpResult = await searchDomainsViaMCP({
-        query: cleanQuery,
-        tlds: searchTlds,
-      });
-      
-      // Parse MCP response
-      const results = parseMCPSearchResults(mcpResult, cleanQuery, searchTlds);
-      return NextResponse.json(results);
-    } catch (mcpError) {
-      console.warn('⚠️ MCP search failed, trying fallback:', mcpError);
-    }
+    // Try MCP first (only on small TLD requests), then fill missing via DNS fallback.
+    const mcpByDomain = new Map<string, { domain: string; available: boolean; price?: string; premium: boolean }>();
+    const shouldUseMCP = ENABLE_MCP_SEARCH && !exactDomainQuery && searchTlds.length <= 60;
 
-    // Option 2: Use Domainr API (requires API key)
-    if (process.env.DOMAINR_API_KEY) {
-      return await searchWithDomainr(cleanQuery, searchTlds);
-    }
-
-    // Option 3: Use RapidAPI (requires API key)
-    if (process.env.RAPIDAPI_KEY) {
-      return await searchWithRapidAPI(cleanQuery, searchTlds);
-    }
-
-    // Option 4: Use WHOIS checking (slower but free)
-    if (process.env.USE_WHOIS_CHECK === 'true') {
-      return await searchWithWhois(cleanQuery, searchTlds);
-    }
-
-    // Fallback: Return mock data for development
-    console.warn('⚠️ No domain API configured, returning mock data');
-    return NextResponse.json(generateMockResults(cleanQuery, searchTlds));
-
-  } catch (error) {
-    console.error('❌ Domain search error:', error);
-    return NextResponse.json(
-      { error: 'Failed to search domains' },
-      { status: 500 }
-    );
-  }
-}
-
-// ============================================================================
-// API Integration Functions
-// ============================================================================
-
-async function searchWithDomainr(query: string, tlds: string[]) {
-  try {
-    const domains = tlds.map(tld => `${query}${tld}`).join(',');
-    const response = await fetch(
-      `https://domainr.p.rapidapi.com/v2/status?domain=${domains}`,
-      {
-        headers: {
-          'X-RapidAPI-Key': process.env.DOMAINR_API_KEY!,
-          'X-RapidAPI-Host': 'domainr.p.rapidapi.com',
-        },
+    if (shouldUseMCP) {
+      try {
+      const mcpResults = await searchDomainsViaMCP({ query: cleanQuery, tlds: searchTlds });
+      if (mcpResults && mcpResults.length > 0) {
+        mcpResults.forEach((r) => {
+          const domain = (r.domain || '').toLowerCase().trim();
+          if (!domain) return;
+          mcpByDomain.set(domain, {
+            domain,
+            available: !!r.available,
+            price: r.price,
+            premium: !!r.premium,
+          });
+        });
       }
-    );
-
-    if (!response.ok) {
-      throw new Error('Domainr API request failed');
+      } catch (mcpError) {
+        console.warn('MCP search unavailable:', (mcpError as Error).message);
+      }
     }
 
-    const data = await response.json();
-    return NextResponse.json(formatDomainrResults(data));
-  } catch (error) {
-    console.error('Domainr API error:', error);
-    return NextResponse.json(generateMockResults(query, tlds));
-  }
-}
+    const allDomains = exactDomainQuery ? [cleanQuery] : searchTlds.map((tld: string) => `${cleanQuery}${tld}`);
+    const missingDomains = allDomains.filter((domain) => !mcpByDomain.has(domain));
+    const dnsByDomain = new Map<string, { domain: string; available: boolean; tld: string; price: string; premium: boolean }>();
 
-async function searchWithRapidAPI(query: string, tlds: string[]) {
-  try {
-    const results = await Promise.all(
-      tlds.map(async (tld) => {
-        const domain = `${query}${tld}`;
-        const response = await fetch(
-          `https://domain-availability-checker.p.rapidapi.com/check/${domain}`,
-          {
-            headers: {
-              'X-RapidAPI-Key': process.env.RAPIDAPI_KEY!,
-              'X-RapidAPI-Host': 'domain-availability-checker.p.rapidapi.com',
-            },
-          }
-        );
+    // DNS fallback for all missing domains so result count matches requested TLD count.
+    const resolvedMissing = await mapWithConcurrency(missingDomains, DNS_CONCURRENCY, async (domain: string) => {
+      const tldPart = '.' + domain.split('.').slice(1).join('.');
+      const cached = cacheGet(domain);
+      const available = cached !== undefined ? cached : await checkViaDNS(domain);
+      if (cached === undefined) cacheSet(domain, available);
+      return { domain, available, tld: tldPart.replace('.', ''), price: getPriceForTLD(tldPart), premium: false };
+    });
 
-        if (!response.ok) {
-          return null;
-        }
+    resolvedMissing.forEach((result) => {
+      dnsByDomain.set(result.domain, result);
+    });
 
-        const data = await response.json();
+    let orderedResults = allDomains.map((domain) => {
+      const fromMcp = mcpByDomain.get(domain);
+      if (fromMcp) {
+        const tldPart = '.' + domain.split('.').slice(1).join('.');
         return {
           domain,
-          available: data.available || false,
-          tld: tld.replace('.', ''),
-          price: getPriceForTLD(tld),
+          available: fromMcp.available,
+          tld: tldPart.replace('.', ''),
+          price: fromMcp.price || getPriceForTLD(tldPart),
+          premium: fromMcp.premium,
         };
-      })
-    );
+      }
+      return (
+        dnsByDomain.get(domain) || {
+          domain,
+          available: false,
+          tld: domain.split('.').slice(1).join('.'),
+          price: getPriceForTLD('.' + domain.split('.').slice(1).join('.')),
+          premium: false,
+        }
+      );
+    });
 
-    return NextResponse.json(results.filter(Boolean));
-  } catch (error) {
-    console.error('RapidAPI error:', error);
-    return NextResponse.json(generateMockResults(query, tlds));
-  }
-}
+    const premiumCandidates = orderedResults
+      .filter((item) => !item.available)
+      .map((item) => item.domain)
+      .slice(0, PREMIUM_ENRICHMENT_LIMIT);
 
-async function searchWithWhois(query: string, tlds: string[]) {
-  // WHOIS checking is slower and should be done server-side
-  // This is a placeholder - you'd need to implement actual WHOIS checking
-  // using a library like 'whois' npm package
-  
-  try {
-    const results = tlds.map((tld) => ({
-      domain: `${query}${tld}`,
-      available: Math.random() > 0.5, // Replace with actual WHOIS check
-      tld: tld.replace('.', ''),
-      price: getPriceForTLD(tld),
-    }));
+    if (ENABLE_PREMIUM_ENRICHMENT && premiumCandidates.length > 0) {
+      const premiumByDomain = new Map<string, { premium: boolean; price?: string }>();
 
-    return NextResponse.json(results);
-  } catch (error) {
-    console.error('WHOIS check error:', error);
-    return NextResponse.json(generateMockResults(query, tlds));
-  }
-}
-
-// ============================================================================
-// Helper Functions
-// ============================================================================
-
-function parseMCPSearchResults(mcpResult: any, query: string, tlds: string[]) {
-  try {
-    // MCP returns content as array of text/resource objects
-    if (Array.isArray(mcpResult)) {
-      const textContent = mcpResult.find((item: any) => item.type === 'text');
-      if (textContent && textContent.text) {
-        // Try to parse JSON response
+      if (process.env.GODADDY_API_KEY && process.env.GODADDY_API_SECRET) {
         try {
-          const parsed = JSON.parse(textContent.text);
-          if (Array.isArray(parsed)) {
-            return parsed.map((item: any) => ({
-              domain: item.domain || `${query}${item.tld || '.com'}`,
-              available: item.available !== false,
-              tld: (item.tld || item.domain?.split('.').pop() || 'com').replace('.', ''),
-              price: item.price || getPriceForTLD(item.tld || '.com'),
-              registrar: item.registrar || 'Namecheap',
-              premium: item.premium || false,
-              seo: item.seo,
-            }));
-          }
-        } catch (parseError) {
-          // If not JSON, skip text response
+          const gdResults = await checkDomainsWithGoDaddy(premiumCandidates);
+          gdResults.forEach((item) => {
+            const domain = item.domain?.toLowerCase().trim();
+            if (!domain) return;
+            const price = formatMarketplacePrice(item.price);
+            premiumByDomain.set(domain, {
+              premium: !!item.premium || (!!price && !item.available),
+              price,
+            });
+          });
+        } catch (error) {
+          console.warn('GoDaddy premium enrichment unavailable:', (error as Error).message);
         }
       }
+
+      const unresolvedPremiumCandidates = premiumCandidates.filter((domain) => {
+        const existing = premiumByDomain.get(domain);
+        return !existing || (!existing.premium && !existing.price);
+      });
+
+      if (unresolvedPremiumCandidates.length > 0) {
+        try {
+          const mcpPremiumResults = await checkDomainAvailabilityViaMCP({ domains: unresolvedPremiumCandidates });
+          mcpPremiumResults.forEach((item) => {
+            const domain = item.domain?.toLowerCase().trim();
+            if (!domain) return;
+            const price = formatMarketplacePrice(item.price);
+            const current = premiumByDomain.get(domain);
+            premiumByDomain.set(domain, {
+              premium: current?.premium || !!item.premium || (!!price && !item.available),
+              price: current?.price || price,
+            });
+          });
+        } catch (error) {
+          console.warn('MCP premium enrichment unavailable:', (error as Error).message);
+        }
+      }
+
+      orderedResults = orderedResults.map((item) => {
+        const enriched = premiumByDomain.get(item.domain);
+        if (!enriched) return item;
+        return {
+          ...item,
+          premium: enriched.premium || item.premium,
+          price: enriched.price || item.price,
+        };
+      });
     }
-    
-    // Fallback: generate results based on query
-    return generateMockResults(query, tlds);
+
+    const resp = jsonResponse(orderedResults, request, 30);
+    resp.headers.set('X-RateLimit-Remaining', String(rl.remaining));
+    return resp;
   } catch (error) {
-    console.error('Error parsing MCP results:', error);
-    return generateMockResults(query, tlds);
+    console.error('Domain search error:', error);
+    return errorResponse('Search failed. Please try again.', 500);
   }
 }
 
-function formatDomainrResults(data: any) {
-  // Format Domainr API response to match our interface
-  if (!data.status) return [];
-
-  return data.status.map((item: any) => ({
-    domain: item.domain,
-    available: item.summary === 'inactive' || item.summary === 'available',
-    tld: item.domain.split('.').pop(),
-    price: getPriceForTLD(`.${item.domain.split('.').pop()}`),
-  }));
-}
-
-function generateMockResults(query: string, tlds: string[]) {
-  return tlds.map((tld) => ({
-    domain: `${query}${tld}`,
-    available: Math.random() > 0.4,
-    tld: tld.replace('.', ''),
-    price: getPriceForTLD(tld),
-    registrar: Math.random() > 0.5 ? 'Namecheap' : 'GoDaddy',
-    premium: Math.random() > 0.85,
-    seo: Math.random() > 0.7 ? {
-      traffic: Math.floor(Math.random() * 5000),
-      backlinks: Math.floor(Math.random() * 100),
-      authority: Math.floor(Math.random() * 50) + 30,
-    } : undefined,
-  }));
+async function checkViaDNS(domain: string): Promise<boolean> {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), DNS_TIMEOUT_MS);
+    const response = await fetch(
+      `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=A`,
+      { signal: controller.signal, headers: { Accept: 'application/dns-json' } }
+    );
+    clearTimeout(timeout);
+    if (response.ok) {
+      const data = await response.json();
+      return data.Status === 3;
+    }
+  } catch { /* safe default */ }
+  return false;
 }
 
 function getPriceForTLD(tld: string): string {
   const prices: Record<string, string> = {
-    '.com': '$12.99',
-    '.net': '$14.99',
-    '.org': '$13.99',
-    '.ai': '$89.99',
-    '.io': '$49.99',
-    '.co': '$29.99',
-    '.app': '$19.99',
-    '.dev': '$15.99',
-    '.xyz': '$9.99',
-    '.tech': '$39.99',
-    '.shop': '$24.99',
-    '.online': '$29.99',
+    '.com': '$12.99', '.net': '$14.99', '.org': '$13.99',
+    '.ai': '$89.99', '.io': '$49.99', '.co': '$29.99',
+    '.app': '$19.99', '.dev': '$15.99', '.xyz': '$9.99',
+    '.in': '$19.99', '.co.in': '$9.99', '.net.in': '$9.99', '.org.in': '$9.99',
+    '.info': '$12.99', '.store': '$14.99', '.online': '$9.99',
+    '.shop': '$14.99', '.site': '$9.99', '.tech': '$12.99',
+    '.me': '$19.99', '.biz': '$14.99', '.us': '$12.99',
+    '.club': '$9.99', '.pro': '$14.99', '.live': '$12.99',
+    '.world': '$9.99', '.today': '$12.99', '.link': '$11.99',
+    '.blog': '$14.99', '.design': '$29.99', '.art': '$14.99',
+    '.one': '$9.99', '.digital': '$14.99', '.space': '$9.99',
+    '.media': '$19.99', '.host': '$29.99', '.ltd': '$14.99',
+    '.agency': '$19.99', '.stream': '$9.99', '.web': '$19.99',
+    '.work': '$9.99', '.love': '$14.99', '.cool': '$14.99',
+    '.guru': '$19.99', '.fit': '$14.99', '.luxury': '$29.99',
+    '.vip': '$14.99', '.top': '$4.99', '.tv': '$29.99',
+    '.cloud': '$12.99', '.studio': '$19.99', '.fun': '$9.99',
+    '.global': '$29.99', '.plus': '$14.99', '.email': '$12.99',
+    '.page': '$12.99', '.social': '$14.99', '.zone': '$14.99',
+    '.team': '$14.99', '.life': '$14.99', '.best': '$9.99',
+    '.care': '$19.99', '.marketing': '$19.99', '.solutions': '$14.99',
+    '.lol': '$9.99',
   };
-  return prices[tld] || '$19.99';
+  return prices[tld] || '$14.99';
 }

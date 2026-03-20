@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { DomainResultCard, DomainResultCardProps } from './DomainResultCard';
+import { DomainResultCard } from './DomainResultCard';
 import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export interface DomainResult {
@@ -23,7 +22,7 @@ interface ResultsListProps {
   isLoading?: boolean;
   onLoadMore?: () => void;
   sortBy?: 'relevance' | 'price' | 'alphabetical';
-  filterBy?: 'available' | 'all';
+  filterBy?: 'available' | 'all' | 'premium';
   emptyStateMessage?: string;
   onDomainBuy?: (domain: string) => void;
   onDomainWhois?: (domain: string) => void;
@@ -32,7 +31,7 @@ interface ResultsListProps {
 }
 
 type SortOption = 'relevance' | 'price' | 'alphabetical';
-type FilterOption = 'all' | 'available' | 'unavailable';
+type FilterOption = 'all' | 'available' | 'unavailable' | 'premium';
 
 export function ResultsList({
   results,
@@ -57,6 +56,8 @@ export function ResultsList({
 
     if (filterBy === 'available') {
       filtered = filtered.filter((r) => r.availability === 'available');
+    } else if (filterBy === 'premium') {
+      filtered = filtered.filter((r) => !!r.premium);
     } else if (filterBy === 'unavailable') {
       filtered = filtered.filter((r) => r.availability === 'unavailable');
     }
@@ -92,9 +93,10 @@ export function ResultsList({
   const stats = useMemo(() => {
     const available = results.filter((r) => r.availability === 'available').length;
     const unavailable = results.filter((r) => r.availability === 'unavailable').length;
+    const premium = results.filter((r) => !!r.premium).length;
     const loading = results.filter((r) => r.availability === 'loading').length;
     
-    return { available, unavailable, loading, total: results.length };
+    return { available, unavailable, premium, loading, total: results.length };
   }, [results]);
 
   // Empty state
@@ -127,12 +129,12 @@ export function ResultsList({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 sm:space-y-4">
       {/* Header with filters and stats */}
-      <div className={`sticky top-0 z-10 ${isLight ? 'bg-white/95 border-b border-slate-200' : 'bg-[#0a0a0a]/95 border-b border-white/10'} backdrop-blur-sm pb-4 -mx-6 px-6`}>
-        <div className="flex items-center justify-between gap-4 flex-wrap">
+      <div className={`sticky top-14 sm:top-16 z-[5] ${isLight ? 'bg-white/95 border-b border-slate-200' : 'bg-[#0a0a0a]/95 border-b border-white/10'} backdrop-blur-sm py-2 sm:py-3 -mx-3 sm:-mx-6 px-3 sm:px-6`}>
+        <div className="flex items-center justify-between gap-2 sm:gap-4 flex-wrap">
           {/* Stats */}
-          <div className="flex items-center gap-4 text-sm">
+          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
             <span className={isLight ? 'text-slate-500' : 'text-white/50'}>
               {sortedResults.length} {sortedResults.length === 1 ? 'domain' : 'domains'}
             </span>
@@ -144,23 +146,23 @@ export function ResultsList({
                 </span>
               </>
             )}
-            {stats.unavailable > 0 && (
+            {stats.premium > 0 && (
               <>
                 <span className={isLight ? 'text-slate-300' : 'text-white/30'}>•</span>
-                <span className={isLight ? 'text-slate-400' : 'text-white/40'}>
-                  {stats.unavailable} taken
+                <span className="text-amber-500 font-medium">
+                  {stats.premium} premium
                 </span>
               </>
             )}
           </div>
 
           {/* Filters and Sort */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {/* Filter Buttons */}
-            <div className={`flex items-center gap-1 ${isLight ? 'bg-slate-100' : 'bg-white/5'} rounded-lg p-1`}>
+            <div className={`flex items-center gap-0.5 sm:gap-1 ${isLight ? 'bg-slate-100' : 'bg-white/5'} rounded-lg p-0.5 sm:p-1`}>
               <button
                 onClick={() => setFilterBy('all')}
-                className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
+                className={`px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium rounded transition-colors ${
                   filterBy === 'all'
                     ? isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
                     : isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/60 hover:text-white/80'
@@ -170,7 +172,7 @@ export function ResultsList({
               </button>
               <button
                 onClick={() => setFilterBy('available')}
-                className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
+                className={`px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium rounded transition-colors ${
                   filterBy === 'available'
                     ? 'bg-emerald-500 text-white'
                     : isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/60 hover:text-white/80'
@@ -180,7 +182,7 @@ export function ResultsList({
               </button>
               <button
                 onClick={() => setFilterBy('unavailable')}
-                className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
+                className={`px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium rounded transition-colors ${
                   filterBy === 'unavailable'
                     ? isLight ? 'bg-slate-300 text-slate-900' : 'bg-white/20 text-white'
                     : isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/60 hover:text-white/80'
@@ -188,13 +190,23 @@ export function ResultsList({
               >
                 Taken
               </button>
+              <button
+                onClick={() => setFilterBy('premium')}
+                className={`px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium rounded transition-colors ${
+                  filterBy === 'premium'
+                    ? 'bg-amber-500 text-white'
+                    : isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/60 hover:text-white/80'
+                }`}
+              >
+                Premium
+              </button>
             </div>
 
             {/* Sort Dropdown */}
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 ${isLight ? 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 focus:ring-blue-200' : 'bg-white/5 border border-white/10 text-white/80 hover:bg-white/10 focus:ring-white/20'}`}
+              className={`px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-xs font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 ${isLight ? 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 focus:ring-blue-200' : 'bg-white/5 border border-white/10 text-white/80 hover:bg-white/10 focus:ring-white/20'}`}
             >
               <option value="relevance">Sort: Relevance</option>
               <option value="alphabetical">Sort: A-Z</option>
@@ -219,7 +231,7 @@ export function ResultsList({
 
       {/* Results Grid */}
       {sortedResults.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-1.5 sm:gap-3">
           {sortedResults.map((result, index) => (
             <div
               key={result.domain}

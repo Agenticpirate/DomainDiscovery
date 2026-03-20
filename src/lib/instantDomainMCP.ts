@@ -28,91 +28,81 @@ interface DomainCheckResult {
 
 let messageId = 0;
 
-/**
- * Call the Instant Domain Search MCP via SSE
- */
+interface MCPToolResponse {
+  result?: {
+    content?: Array<{
+      type?: string;
+      text?: string;
+    }>;
+    isError?: boolean;
+  };
+  error?: { message?: string };
+}
+
+function extractJsonFromText(text: string): unknown {
+  const start = text.indexOf('{');
+  const end = text.lastIndexOf('}');
+  if (start === -1 || end === -1 || end <= start) {
+    throw new Error('MCP response did not include JSON content');
+  }
+  return JSON.parse(text.slice(start, end + 1));
+}
+
+function parseToolPayload(result: unknown): unknown {
+  if (!result) return null;
+  if (typeof result === 'string') return extractJsonFromText(result);
+  return result;
+}
+
 async function callMCPTool(
   toolName: string, 
-  args: Record<string, unknown>
+  args: Record<string, unknown>,
+  timeoutMs: number = 1_200
 ): Promise<unknown> {
-  const url = 'https://instantdomainsearch.com/mcp/sse';
-  
-  return new Promise((resolve, reject) => {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => {
-      controller.abort();
-      reject(new Error('MCP request timeout'));
-    }, 10000);
+  const url = 'https://instantdomainsearch.com/mcp/streamable-http';
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
+  try {
     const id = ++messageId;
-    
-    // Create the JSON-RPC request
     const request: MCPMessage = {
       jsonrpc: '2.0',
       id,
       method: 'tools/call',
       params: {
         name: toolName,
-        arguments: args
-      }
+        arguments: args,
+      },
     };
 
-    fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'text/event-stream'
+        'Accept': 'application/json',
       },
       body: JSON.stringify(request),
-      signal: controller.signal
-    })
-    .then(async response => {
-      clearTimeout(timeout);
-      
-      if (!response.ok) {
-        throw new Error(`MCP request failed: ${response.status}`);
-      }
-
-      const text = await response.text();
-      
-      // Parse SSE response
-      const lines = text.split('\n');
-      for (const line of lines) {
-        if (line.startsWith('data: ')) {
-          try {
-            const data = JSON.parse(line.slice(6));
-            if (data.result) {
-              resolve(data.result);
-              return;
-            }
-            if (data.error) {
-              reject(new Error(data.error.message));
-              return;
-            }
-          } catch (e) {
-            // Continue parsing
-          }
-        }
-      }
-      
-      // Try parsing as plain JSON
-      try {
-        const json = JSON.parse(text);
-        if (json.result) {
-          resolve(json.result);
-          return;
-        }
-      } catch (e) {
-        // Not JSON
-      }
-      
-      resolve(text);
-    })
-    .catch(error => {
-      clearTimeout(timeout);
-      reject(error);
+      signal: controller.signal,
     });
-  });
+
+    if (!response.ok) {
+      throw new Error(`MCP request failed: ${response.status}`);
+    }
+
+    const data = (await response.json()) as MCPToolResponse;
+    if (data.error?.message) {
+      throw new Error(data.error.message);
+    }
+
+    const textPayload = data.result?.content?.find((item) => item.type === 'text' && item.text)?.text;
+    if (!textPayload) {
+      return null;
+    }
+
+    return parseToolPayload(textPayload);
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 /**
@@ -122,43 +112,35 @@ export async function checkDomainAvailabilityViaMCP(params: { domains: string[] 
   try {
     const result = await callMCPTool('check_domain_availability', {
       domains: params.domains
-    });
-    
-    // Parse the result
-    if (Array.isArray(result)) {
-      return result.map((item: any) => ({
-        domain: item.domain || item.name,
-        available: item.available ?? item.isAvailable ?? false,
-        premium: item.premium ?? item.isPremium ?? false,
-        price: item.price
+    }, 900);
+
+    const items = (result as { results?: Array<Record<string, unknown>> } | null)?.results;
+    if (!Array.isArray(items)) {
+      return params.domains.map(domain => ({
+        domain,
+        available: false
       }));
     }
-    
-    // Handle text response
-    if (typeof result === 'string') {
-      try {
-        const parsed = JSON.parse(result);
-        if (Array.isArray(parsed)) {
-          return parsed.map((item: any) => ({
-            domain: item.domain || item.name,
-            available: item.available ?? item.isAvailable ?? false,
-            premium: item.premium ?? item.isPremium ?? false,
-            price: item.price
-          }));
-        }
-      } catch (e) {
-        // Not JSON
-      }
-    }
-    
-    // Fallback
+
+    return items.map((item) => {
+      const domain = `${item.label || item.domain}.${item.tld || ''}`.replace(/\.+$/, '');
+      const markets = Array.isArray(item.markets) ? item.markets as Array<Record<string, unknown>> : [];
+      const firstPrice = markets.find((market) => typeof market.price === 'number' || typeof market.min_price === 'number');
+      const rawPrice = firstPrice?.price ?? firstPrice?.min_price;
+      const price = typeof rawPrice === 'number' && rawPrice > 0 ? `$${(rawPrice / 100).toFixed(2)}` : undefined;
+      return {
+        domain,
+        available: !(item.isRegistered ?? false),
+        premium: markets.length > 0,
+        price,
+      };
+    });
+  } catch (error) {
+    console.error('MCP check_domain_availability error:', error);
     return params.domains.map(domain => ({
       domain,
       available: false
     }));
-  } catch (error) {
-    console.error('MCP check_domain_availability error:', error);
-    throw error;
   }
 }
 
@@ -168,23 +150,25 @@ export async function checkDomainAvailabilityViaMCP(params: { domains: string[] 
 export async function searchDomainsViaMCP(params: { query: string; tlds?: string[] }): Promise<DomainCheckResult[]> {
   try {
     const result = await callMCPTool('search_domains', {
-      query: params.query,
-      tlds: params.tlds || ['.com', '.net', '.org', '.ai', '.io', '.co']
-    });
-    
-    if (Array.isArray(result)) {
-      return result.map((item: any) => ({
-        domain: item.domain || item.name,
-        available: item.available ?? item.isAvailable ?? false,
-        premium: item.premium ?? item.isPremium ?? false,
-        price: item.price
+      name: params.query,
+      tlds: (params.tlds || ['.com', '.net', '.org', '.ai', '.io', '.co']).map((tld) => tld.replace(/^\./, '')),
+      limit: Math.min((params.tlds || []).length || 6, 100),
+    }, 700);
+
+    const items = (result as { domains?: Array<Record<string, unknown>> } | null)?.domains;
+    if (Array.isArray(items)) {
+      return items.map((item) => ({
+        domain: `${item.label || params.query}.${item.tld || ''}`.replace(/\.+$/, ''),
+        available: !(item.isRegistered ?? false),
+        premium: Array.isArray(item.markets) && item.markets.length > 0,
+        price: undefined,
       }));
     }
-    
+
     return [];
   } catch (error) {
     console.error('MCP search_domains error:', error);
-    throw error;
+    return [];
   }
 }
 
@@ -194,22 +178,23 @@ export async function searchDomainsViaMCP(params: { query: string; tlds?: string
 export async function generateDomainVariationsViaMCP(params: { keyword: string; count?: number }): Promise<DomainCheckResult[]> {
   try {
     const result = await callMCPTool('generate_domain_variations', {
-      keyword: params.keyword,
-      count: params.count || 10
-    });
-    
-    if (Array.isArray(result)) {
-      return result.map((item: any) => ({
-        domain: item.domain || item.name,
-        available: item.available ?? item.isAvailable ?? false,
-        premium: item.premium ?? item.isPremium ?? false,
-        price: item.price
+      name: params.keyword,
+      limit: params.count || 10,
+    }, 1_000);
+
+    const items = (result as { variations?: Array<Record<string, unknown>> } | null)?.variations;
+    if (Array.isArray(items)) {
+      return items.map((item) => ({
+        domain: `${item.label || params.keyword}.${item.tld || 'com'}`.replace(/\.+$/, ''),
+        available: !(item.isRegistered ?? false),
+        premium: Array.isArray(item.markets) && item.markets.length > 0,
+        price: undefined,
       }));
     }
-    
+
     return [];
   } catch (error) {
     console.error('MCP generate_domain_variations error:', error);
-    throw error;
+    return [];
   }
 }

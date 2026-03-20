@@ -20,8 +20,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Domain Name Search: Find Available Domains Instantly | DomainsDiscovery",
-    template: "%s | DomainsDiscovery",
+    default: "Domain Name Search: Find Available Domains Instantly | DomainDiscovery",
+    template: "%s | DomainDiscovery",
   },
   description:
     "Domain name search with instant results. Check domain availability as you type across 1,600+ extensions. Find and buy domains with our AI-powered search tool. Free domain generator, bulk checker, WHOIS lookup, and price comparison.",
@@ -43,8 +43,8 @@ export const metadata: Metadata = {
     "register domain",
     "domain tools",
   ],
-  authors: [{ name: "DomainsDiscovery" }],
-  creator: "DomainsDiscovery",
+  authors: [{ name: "DomainDiscovery" }],
+  creator: "DomainDiscovery",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || "https://domainsdiscovery.com"
   ),
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    siteName: "DomainsDiscovery",
+    siteName: "DomainDiscovery",
     title: "Domain Name Search: Find Available Domains Instantly",
     description:
       "Domain name search with instant results. Check domain availability as you type with results in milliseconds. Find and buy domains with our AI-powered search tool across 1,600+ extensions.",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "DomainsDiscovery - The Fastest Domain Search Tool on the Internet",
+        alt: "DomainDiscovery - The Fastest Domain Search Tool on the Internet",
         type: "image/svg+xml",
       },
     ],

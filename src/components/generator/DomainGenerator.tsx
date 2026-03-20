@@ -364,10 +364,10 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
   return (
     <div className="space-y-0">
       {/* Search Input */}
-      <div className={`glass-card p-8 ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-b-none`}>
+      <div className={`glass-card rounded-b-none px-4 py-5 sm:px-6 sm:py-7 ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
         <div className="max-w-3xl mx-auto">
-          <div className="mb-6 text-center">
-            <h2 className="text-2xl font-bold mb-2">AI-Powered Domain Generator</h2>
+          <div className="mb-4 text-center sm:mb-5">
+            <h2 className="text-xl font-bold sm:text-2xl mb-2">AI-Powered Domain Generator</h2>
             <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
               Generate creative domain name ideas as you type. Instant results with real-time availability.
             </p>
@@ -378,8 +378,9 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               type="text"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch(keyword)}
               placeholder="Enter your keyword or business idea (e.g., cloud, mint, spark, shop)..."
-              className={`w-full ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl px-6 py-4 text-lg ${isLight ? 'text-slate-900' : 'text-white'} ${isLight ? 'placeholder:text-slate-400' : 'placeholder:text-white/30'} focus:outline-none focus:ring-2 ${isLight ? 'focus:ring-blue-300' : 'focus:ring-white/20'} ${isLight ? 'focus:border-blue-300' : 'focus:border-white/20'} transition-all`}
+              className={`w-full ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl px-4 py-3 text-base sm:px-6 sm:py-4 sm:text-lg ${isLight ? 'text-slate-900' : 'text-white'} ${isLight ? 'placeholder:text-slate-400' : 'placeholder:text-white/30'} focus:outline-none focus:ring-2 ${isLight ? 'focus:ring-blue-300' : 'focus:ring-white/20'} ${isLight ? 'focus:border-blue-300' : 'focus:border-white/20'} transition-all`}
               autoFocus
             />
             {isSearching && (
@@ -390,7 +391,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
           </div>
 
           {keyword && totalCount > 0 && (
-            <div className="mt-4 flex items-center justify-center gap-4 text-sm">
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm">
               <div className="flex items-center gap-2">
                 <div className={`w-2 h-2 rounded-full ${isLight ? 'bg-slate-400' : 'bg-white/40'}`}></div>
                 <span className={isLight ? 'text-slate-500' : 'text-white/50'}>
@@ -413,15 +414,15 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       {/* Controls Bar */}
       {keyword && totalCount > 0 && (
         <div className={`glass-card ${isLight ? 'border-slate-200' : 'border-white/10'} border-t-0 rounded-t-none`}>
-          <div className="px-6 py-4 flex items-center justify-between flex-wrap gap-4">
-            <div className="flex items-center gap-4 flex-wrap">
+          <div className="px-4 py-3 sm:px-6 sm:py-4 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               {/* Registrar Selector */}
               <div className="flex items-center gap-2">
-                <span className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>Registrar:</span>
+                <span className={`text-xs sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>Registrar:</span>
                 <select
                   value={selectedRegistrar}
                   onChange={(e) => setSelectedRegistrar(e.target.value)}
-                  className={`${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-lg px-3 py-1.5 text-sm ${isLight ? 'text-slate-900' : 'text-white'} focus:outline-none focus:ring-2 ${isLight ? 'focus:ring-blue-300' : 'focus:ring-white/20'}`}
+                  className={`${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-lg px-2.5 py-1.5 text-xs sm:px-3 sm:text-sm ${isLight ? 'text-slate-900' : 'text-white'} focus:outline-none focus:ring-2 ${isLight ? 'focus:ring-blue-300' : 'focus:ring-white/20'}`}
                 >
                   {REGISTRARS.map((reg) => (
                     <option key={reg.name} value={reg.name}>
@@ -432,11 +433,11 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               </div>
               {/* Sort */}
               <div className="flex items-center gap-2">
-                <span className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>Sort:</span>
+                <span className={`text-xs sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>Sort:</span>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as SortType)}
-                  className={`${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-lg px-3 py-1.5 text-sm ${isLight ? 'text-slate-900' : 'text-white'} focus:outline-none focus:ring-2 ${isLight ? 'focus:ring-blue-300' : 'focus:ring-white/20'}`}
+                  className={`${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-lg px-2.5 py-1.5 text-xs sm:px-3 sm:text-sm ${isLight ? 'text-slate-900' : 'text-white'} focus:outline-none focus:ring-2 ${isLight ? 'focus:ring-blue-300' : 'focus:ring-white/20'}`}
                 >
                   <option value="popularity">Popularity</option>
                   <option value="alphabetical">Alphabetical</option>
@@ -448,14 +449,14 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               <div className="relative">
                 <button
                   onClick={() => setShowFilterDropdown(!showFilterDropdown)}
-                  className={`flex items-center gap-2 px-3 py-1.5 ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-lg text-sm ${isLight ? 'text-slate-900' : 'text-white'} ${isLight ? 'hover:bg-slate-200' : 'hover:bg-white/10'} transition-colors`}
+                  className={`flex items-center gap-2 px-2.5 py-1.5 sm:px-3 ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-lg text-xs sm:text-sm ${isLight ? 'text-slate-900' : 'text-white'} ${isLight ? 'hover:bg-slate-200' : 'hover:bg-white/10'} transition-colors`}
                 >
                   <span className={isLight ? 'text-slate-500' : 'text-white/50'}>Filter:</span>
                   <span className={`capitalize ${isLight ? 'text-slate-900' : 'text-white'}`}>{filter === 'all' ? 'All' : filter === 'starts' ? 'Starts with term' : 'Ends with term'}</span>
                   <Icons.ChevronDown />
                 </button>
                 {showFilterDropdown && (
-                  <div className={`absolute left-0 top-full mt-1 w-48 ${isLight ? 'bg-white' : 'bg-[#1a1a1a]'} border ${isLight ? 'border-slate-200' : 'border-white/20'} rounded-lg shadow-xl z-50 py-1`}>
+                  <div className={`absolute left-0 top-full mt-1 w-44 sm:w-48 ${isLight ? 'bg-white' : 'bg-[#1a1a1a]'} border ${isLight ? 'border-slate-200' : 'border-white/20'} rounded-lg shadow-xl z-50 py-1`}>
                     {[
                       { value: 'all', label: 'All' },
                       { value: 'starts', label: 'Starts with term' },
@@ -482,10 +483,10 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
             </div>
 
             {/* View Toggle */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <button
                 onClick={() => setViewType('grid')}
-                className={`p-2 rounded-lg transition-colors ${
+                className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
                   viewType === 'grid' ? `${isLight ? 'bg-slate-200 text-slate-900' : 'bg-white/10 text-white'}` : `${isLight ? 'text-slate-500 hover:text-slate-700' : 'text-white/40 hover:text-white/70'}`
                 }`}
                 title="Grid view"
@@ -496,7 +497,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               </button>
               <button
                 onClick={() => setViewType('list')}
-                className={`p-2 rounded-lg transition-colors ${
+                className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
                   viewType === 'list' ? `${isLight ? 'bg-slate-200 text-slate-900' : 'bg-white/10 text-white'}` : `${isLight ? 'text-slate-500 hover:text-slate-700' : 'text-white/40 hover:text-white/70'}`
                 }`}
                 title="List view"
@@ -515,11 +516,11 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
         <div className={`glass-card ${isLight ? 'border-slate-200' : 'border-white/10'} border-t-0 rounded-t-none`}>
           {viewType === 'grid' ? (
             /* Grid View */
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 p-3 sm:gap-2.5 sm:p-4">
               {filteredSuggestions.map((suggestion, i) => (
                 <div
                   key={i}
-                  className={`group p-4 border rounded-lg transition-all ${
+                  className={`group p-3.5 sm:p-4 border rounded-lg transition-all ${
                     suggestion.available
                       ? `${isLight ? 'bg-white' : 'bg-white/[0.02]'} ${isLight ? 'border-slate-200' : 'border-white/10'} hover:border-emerald-500/30 hover:bg-emerald-500/5`
                       : `${isLight ? 'bg-slate-50' : 'bg-white/[0.01]'} ${isLight ? 'border-slate-100' : 'border-white/5'} opacity-60`
@@ -530,7 +531,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                       onClick={() => handleDomainClick(suggestion.name)}
                       className="flex-1 min-w-0 text-left"
                     >
-                      <div className={`font-bold text-base truncate ${isLight ? 'hover:text-slate-700' : 'hover:text-white/80'} transition-colors`}>
+                      <div className={`font-bold text-sm sm:text-base truncate ${isLight ? 'hover:text-slate-700' : 'hover:text-white/80'} transition-colors`}>
                         {suggestion.name}
                       </div>
                     </button>
@@ -562,7 +563,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               {filteredSuggestions.map((suggestion, i) => (
                 <div
                   key={i}
-                  className={`px-6 py-3 ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.02]'} transition-all group`}
+                  className={`px-4 py-2.5 sm:px-6 sm:py-3 ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.02]'} transition-all group`}
                 >
                   <div className="flex items-center justify-between gap-4">
                     <button
@@ -594,8 +595,8 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
 
       {/* Empty State */}
       {!keyword && (
-        <div className={`glass-card p-12 ${isLight ? 'border-slate-200' : 'border-white/10'} border-t-0 rounded-t-none text-center`}>
-          <div className={`inline-flex p-6 rounded-full ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} mb-6`}>
+        <div className={`glass-card px-4 py-10 sm:p-12 ${isLight ? 'border-slate-200' : 'border-white/10'} border-t-0 rounded-t-none text-center`}>
+          <div className={`inline-flex p-3.5 sm:p-4 rounded-full ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} mb-4 sm:mb-6`}>
             <Icons.Magic />
           </div>
           <h3 className="text-lg font-semibold mb-2">Start Generating Domain Names</h3>
@@ -619,13 +620,13 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
 
       {/* No Results */}
       {keyword && filteredSuggestions.length === 0 && !isSearching && suggestions.length > 0 && (
-        <div className={`glass-card p-12 ${isLight ? 'border-slate-200' : 'border-white/10'} border-t-0 rounded-t-none text-center`}>
-          <div className={`inline-flex p-6 rounded-full ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} mb-6`}>
+        <div className={`glass-card px-4 py-10 sm:p-12 ${isLight ? 'border-slate-200' : 'border-white/10'} border-t-0 rounded-t-none text-center`}>
+          <div className={`inline-flex p-3.5 sm:p-4 rounded-full ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} mb-4 sm:mb-6`}>
             <Icons.Search className="w-8 h-8" />
           </div>
           <h3 className="text-lg font-semibold mb-2">No Results Found</h3>
           <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-md mx-auto`}>
-            Try changing your filter. Your keyword "{keyword}" has {suggestions.length} total results.
+            Try changing your filter. Your keyword &quot;{keyword}&quot; has {suggestions.length} total results.
           </p>
         </div>
       )}
@@ -633,9 +634,9 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       {/* Domain Popup */}
       {showDomainPopup && selectedDomain && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowDomainPopup(false)}>
-          <div className={`${isLight ? 'bg-white' : 'bg-[#1a1a1a]'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl p-6 max-w-md w-full`} onClick={(e) => e.stopPropagation()}>
+          <div className={`${isLight ? 'bg-white' : 'bg-[#1a1a1a]'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl p-3.5 sm:p-4 max-w-md w-full`} onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold">{selectedDomain}.com</h3>
+              <h3 className="text-lg sm:text-xl font-bold">{selectedDomain}.com</h3>
               <button
                 onClick={() => setShowDomainPopup(false)}
                 className={`${isLight ? 'text-slate-500 hover:text-slate-900' : 'text-white/50 hover:text-white'} transition-colors`}

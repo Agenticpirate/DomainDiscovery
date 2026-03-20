@@ -1,6 +1,6 @@
 {
-  "name": "DomainsDiscovery - AI-Powered Domain Tools",
-  "short_name": "DomainsDiscovery",
+  "name": "DomainDiscovery - AI-Powered Domain Tools",
+  "short_name": "DomainDiscovery",
   "description": "Discover available domain names instantly with our free domain search, generator, bulk checker, WHOIS lookup, and appraisal tools.",
   "start_url": "/",
   "display": "standalone",
