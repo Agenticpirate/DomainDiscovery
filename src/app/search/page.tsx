@@ -465,8 +465,8 @@ function SearchPageContent() {
 
             {/* Primary domain highlight */}
             {primary && (
-              <div className="mb-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="mb-3">
+                <div className="flex items-center justify-between gap-2">
                   <button
                     type="button"
                     onClick={() => {
@@ -476,36 +476,36 @@ function SearchPageContent() {
                       }
                       window.open(`https://who.is/whois/${encodeURIComponent(primary.domain)}`, '_blank', 'noopener,noreferrer');
                     }}
-                    className={`text-left text-2xl sm:text-4xl font-black font-mono transition-opacity hover:opacity-90 ${primary.available ? (isLight ? 'text-emerald-600' : 'text-emerald-400') : (isLight ? 'text-red-600' : 'text-red-400')}`}
+                    className={`text-left text-xl sm:text-4xl font-black font-mono transition-opacity hover:opacity-90 truncate min-w-0 ${primary.available ? (isLight ? 'text-emerald-600' : 'text-emerald-400') : (isLight ? 'text-red-600' : 'text-red-400')}`}
                   >
                     {primary.domain}
                   </button>
-                  <button onClick={() => primary.available ? handleBuy(primary.domain) : window.open(`https://who.is/whois/${encodeURIComponent(primary.domain)}`, '_blank', 'noopener,noreferrer')} className={`px-6 py-2.5 text-sm font-bold rounded-lg transition-colors ${
+                  <button onClick={() => primary.available ? handleBuy(primary.domain) : window.open(`https://who.is/whois/${encodeURIComponent(primary.domain)}`, '_blank', 'noopener,noreferrer')} className={`shrink-0 px-3 sm:px-6 py-1.5 sm:py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-colors ${
                     primary.available
                       ? 'bg-emerald-500 text-white hover:bg-emerald-600'
                       : isLight ? 'bg-red-50 text-red-600 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
                   }`}>
-                    {primary.available ? `Continue with ${selectedRegistrar}` : 'Lookup'} &rarr;
+                    {primary.available ? `Buy` : 'Lookup'} &rarr;
                   </button>
                 </div>
 
                 {/* Action bar */}
-                <div className="flex items-center gap-2 mt-3 flex-wrap relative">
+                <div className="flex items-center gap-1.5 mt-2 flex-wrap relative">
                   <button onClick={() => handleSave(primary.domain)} className={btnClass}>
                     <svg className="w-3.5 h-3.5" fill={savedDomains.includes(primary.domain) ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
-                    Bookmark
+                    <span className="hidden sm:inline">Bookmark</span>
                   </button>
                   <button onClick={() => handleCopyURL(primary.domain)} className={btnClass}>
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-                    Copy URL
+                    <span className="hidden sm:inline">Copy URL</span>
                   </button>
                   <button onClick={() => handlePronounce(primary.domain)} className={btnClass}>
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707A1 1 0 0112 5.586v12.828a1 1 0 01-1.707.707L5.586 15z" /></svg>
-                    Pronounce
+                    <span className="hidden sm:inline">Pronounce</span>
                   </button>
                   <button onClick={() => window.open(`https://www.godaddy.com/domain-value-appraisal/appraisal/?domain=${primary.domain}`, '_blank')} className={btnClass}>
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    Appraise
+                    <span className="hidden sm:inline">Appraise</span>
                   </button>
                   <div className="relative">
                     <button onClick={() => setShowMoreActions(!showMoreActions)} className={btnClass}>

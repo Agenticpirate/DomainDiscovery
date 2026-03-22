@@ -14,7 +14,7 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, classN
   const isLight = theme === 'light';
   const sizeClasses = {
     sm: 'w-8 h-8',
-    md: 'w-7.5 h-7.5 sm:w-8 sm:h-8',
+    md: 'w-7 h-7 sm:w-8 sm:h-8',
     lg: 'w-14 h-14',
   };
 
@@ -25,51 +25,65 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, classN
   };
 
   return (
-    <div className={`flex items-center gap-1.5 sm:gap-2 ${className}`}>
-      <div className="relative group shrink-0">
-        <div className={`absolute inset-0 rounded-2xl blur-lg transition-opacity ${
-          isLight
-            ? 'bg-gradient-to-br from-slate-400 via-slate-300 to-slate-500 opacity-50 group-hover:opacity-70'
-            : 'bg-gradient-to-br from-slate-300 via-slate-200 to-slate-400 opacity-40 group-hover:opacity-60'
-        }`} />
-        <div className={`relative ${sizeClasses[size]} rounded-2xl flex items-center justify-center transition-all ${
-          isLight
-            ? 'bg-gradient-to-br from-slate-700 via-slate-600 to-slate-800 shadow-xl shadow-slate-900/30 group-hover:shadow-slate-900/40 border border-slate-500/30'
-            : 'bg-gradient-to-br from-slate-200 via-slate-100 to-slate-300 shadow-xl shadow-slate-900/20 group-hover:shadow-slate-900/30 border border-white/40'
-        }`}>
-          <svg 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            className={`w-[65%] h-[65%] ${isLight ? 'text-slate-100' : 'text-slate-700'}`}
+    <div className={`flex items-center gap-1.5 ${className}`} style={{ maxWidth: '100%' }}>
+      <div
+        className="logo-icon-wrapper relative group shrink-0"
+        style={{
+          width: size === 'lg' ? 56 : size === 'md' ? 32 : 28,
+          height: size === 'lg' ? 56 : size === 'md' ? 32 : 28,
+          minWidth: size === 'lg' ? 56 : size === 'md' ? 32 : 28,
+          maxWidth: size === 'lg' ? 56 : size === 'md' ? 32 : 28,
+          flexShrink: 0,
+          borderRadius: '0.75rem',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          className={`absolute inset-0 transition-opacity ${
+            isLight
+              ? 'bg-gradient-to-br from-slate-400 via-slate-300 to-slate-500 opacity-50 group-hover:opacity-70'
+              : 'bg-gradient-to-br from-slate-300 via-slate-200 to-slate-400 opacity-40 group-hover:opacity-60'
+          }`}
+          style={{ filter: 'blur(0px)' }}
+        />
+        <div
+          className={`relative flex items-center justify-center transition-all ${
+            isLight
+              ? 'bg-gradient-to-br from-slate-700 via-slate-600 to-slate-800 shadow-sm border border-slate-500/30'
+              : 'bg-gradient-to-br from-slate-200 via-slate-100 to-slate-300 shadow-sm border border-white/40'
+          }`}
+          style={{ width: '100%', height: '100%', borderRadius: '0.75rem' }}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            style={{ width: '65%', height: '65%', color: isLight ? '#f1f5f9' : '#334155' }}
           >
-            <path 
-              d="M12 3L4 7.5V16.5L12 21L20 16.5V7.5L12 3Z" 
-              stroke="currentColor" 
-              strokeWidth="1.8" 
-              strokeLinecap="round" 
+            <path
+              d="M12 3L4 7.5V16.5L12 21L20 16.5V7.5L12 3Z"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
               strokeLinejoin="round"
               fill="none"
             />
-            <circle 
-              cx="12" 
-              cy="12" 
-              r="4" 
-              fill="currentColor"
-              opacity="0.9"
-            />
+            <circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.9" />
             <circle cx="12" cy="12" r="1.5" fill={isLight ? '#475569' : 'white'} fillOpacity="0.6" />
           </svg>
         </div>
       </div>
       {showText && (
-        <div className="flex flex-col text-left">
+        <div className="flex flex-col text-left min-w-0">
           <div className={`${textSizeClasses[size]} font-black tracking-tight leading-none`}>
-            <span className={`bg-clip-text text-transparent ${
-              isLight
-                ? 'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-600'
-                : 'bg-gradient-to-r from-white via-slate-100 to-slate-300'
-            }`}>
+            <span
+              className="bg-clip-text text-transparent"
+              style={{
+                backgroundImage: isLight
+                  ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
+                  : 'linear-gradient(to right, #ffffff, #f1f5f9, #cbd5e1)',
+              }}
+            >
               DomainDiscovery
             </span>
           </div>

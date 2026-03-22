@@ -69,12 +69,12 @@ export default function Home() {
       
       <Navigation activeTool={activeTool} onToolSelect={(tool) => setActiveTool(tool as ToolType)} />
 
-      <main className="relative pt-[3.8rem] sm:pt-[4.45rem]">
+      <main className="relative pt-[3.5rem] sm:pt-[4.45rem]">
         
         {showMainSearch && (
-          <section className="px-3 sm:px-6 pb-2 sm:pb-2.5">
+          <section className="px-3 sm:px-6 pt-2 sm:pt-5 pb-1.5 sm:pb-2.5">
             <div className="max-w-[56rem] mx-auto text-center">
-              <h1 className={`text-[1.92rem] leading-[0.92] sm:text-[3.7rem] md:text-[4.35rem] font-black tracking-tight mb-1 sm:mb-1.5 ${mounted ? 'animate-slide-up' : 'opacity-0'}`}>
+              <h1 className="text-[1.45rem] leading-[1.05] sm:text-[3.7rem] md:text-[4.35rem] font-black tracking-tight mb-0.5 sm:mb-1.5 animate-slide-up">
                 <span className="block bg-clip-text text-transparent" style={{
                   backgroundImage: isLight
                     ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
@@ -82,16 +82,19 @@ export default function Home() {
                 }}>
                   Find Your Perfect Domain
                 </span>
-                <span className={`block text-[0.92rem] sm:text-[1.5rem] md:text-[1.95rem] mt-0.5 font-bold`} style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
+                <span className="block text-[0.7rem] sm:text-[1.5rem] md:text-[1.95rem] mt-0 font-bold" style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
               </h1>
-              <p className="text-[12px] sm:text-[14px] max-w-[40rem] mx-auto mb-2.5 sm:mb-3.5" style={{ color: 'var(--text-tertiary)' }}>
+              <p className="hidden sm:block text-[12px] sm:text-[14px] max-w-[40rem] mx-auto mb-2.5 sm:mb-3.5" style={{ color: 'var(--text-tertiary)' }}>
                 Search millions of domains with instant results. Compare prices across registrars. Register in one click.
               </p>
+              <p className="sm:hidden text-[10px] max-w-[26rem] mx-auto mb-1.5 leading-tight" style={{ color: 'var(--text-tertiary)' }}>
+                1,600+ TLDs · Real-time results · Compare prices
+              </p>
 
-              <div className={`max-w-[54rem] mx-auto ${mounted ? 'animate-fade-in' : 'opacity-0'}`}>
+              <div className="max-w-[54rem] mx-auto animate-fade-in">
                 <SearchInterface
                   initialQuery={searchQuery}
-                  placeholder="Try: coffee shop, tech startup, or FoundersPrime.com"
+                  placeholder="Search domain names..."
                   onSearch={handleHeroSearch}
                   onClear={handleHeroClear}
                   autoFocus
@@ -100,10 +103,10 @@ export default function Home() {
                 />
               </div>
 
-              <div className="mt-2 flex flex-wrap items-center justify-center gap-1.5 sm:mt-2.5">
+              <div className="mt-1.5 flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 sm:mt-2.5">
                 <Link
                   href="/tools/compare"
-                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
+                  className={`inline-flex items-center gap-1 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
                     isLight
                       ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
                       : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
@@ -112,10 +115,9 @@ export default function Home() {
                   <Icons.Dollar />
                   Compare prices
                 </Link>
-                <button
-                  type="button"
-                  onClick={() => setActiveTool('bulk')}
-                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
+                <Link
+                  href="/bulk-search"
+                  className={`inline-flex items-center gap-1 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
                     isLight
                       ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
                       : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
@@ -123,22 +125,44 @@ export default function Home() {
                 >
                   <Icons.Layers />
                   Bulk check
-                </button>
+                </Link>
+                <Link
+                  href="/domain-extensions"
+                  className={`inline-flex items-center gap-1 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
+                    isLight
+                      ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                      : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
+                  }`}
+                >
+                  <Icons.Globe />
+                  Extensions
+                </Link>
+                <Link
+                  href="/generator"
+                  className={`inline-flex items-center gap-1 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all sm:hidden ${
+                    isLight
+                      ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                      : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
+                  }`}
+                >
+                  <Icons.Magic />
+                  AI Generator
+                </Link>
               </div>
 
-              <div className="max-w-[52rem] mx-auto mt-2.5 sm:mt-3.5">
-                <div className={`grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-2.5 p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl ${
+              <div className="max-w-[52rem] mx-auto mt-1.5 sm:mt-3.5">
+                <div className={`grid grid-cols-4 gap-0 sm:gap-2.5 px-1 py-1 sm:p-3.5 rounded-lg sm:rounded-2xl ${
                   isLight ? 'bg-white/70 border border-slate-200/60 shadow-sm backdrop-blur-sm' : 'bg-white/[0.02] border border-white/10 backdrop-blur-sm'
                 }`}>
                   {[
-                    { value: '2M+', label: 'Domains Searched' },
-                    { value: '50K+', label: 'Active Users' },
-                    { value: '1,600+', label: 'TLD Extensions' },
+                    { value: '2M+', label: 'Domains' },
+                    { value: '50K+', label: 'Users' },
+                    { value: '1,600+', label: 'TLDs' },
                     { value: '99.9%', label: 'Uptime' },
                   ].map((stat) => (
-                    <div key={stat.label} className="text-center px-1 py-1.5 sm:p-2 rounded-lg sm:rounded-xl">
-                      <div className="text-[1.2rem] sm:text-[1.5rem] font-black mb-0.5" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
-                      <div className="text-[10px] sm:text-xs font-medium leading-tight" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
+                    <div key={stat.label} className="text-center px-0.5 py-0.5 sm:p-2 rounded-md sm:rounded-xl">
+                      <div className="text-[0.85rem] sm:text-[1.5rem] font-black mb-0 leading-tight" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
+                      <div className="text-[8px] sm:text-xs font-medium leading-tight" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
                     </div>
                   ))}
                 </div>

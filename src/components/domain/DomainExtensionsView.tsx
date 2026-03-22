@@ -168,7 +168,7 @@ export function DomainExtensionsView({ searchQuery = '' }: DomainExtensionsViewP
             type="text"
             value={localSearch}
             onChange={(e) => setLocalSearch(e.target.value)}
-            placeholder="Type a keyword to check availability across all extensions..."
+            placeholder="Type keyword to check across all extensions..."
             className={`w-full rounded-lg px-11 py-2.5 text-sm focus:outline-none focus:ring-1 ${isLight ? 'bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-blue-400 focus:ring-blue-400/20' : 'bg-[#1a1a1a] border border-white/10 text-white placeholder:text-white/30 focus:border-emerald-500/50 focus:ring-emerald-500/20'}`}
           />
           {localSearch && (
@@ -217,7 +217,7 @@ export function DomainExtensionsView({ searchQuery = '' }: DomainExtensionsViewP
                 <span>{category}</span>
                 <span className={`text-xs ${isLight ? 'text-slate-400' : 'text-white/40'} font-normal`}>({exts.length})</span>
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1.5 sm:gap-2">
+              <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-2">
                 {exts.map(ext => (
                   <ExtensionCard key={ext.tld} extension={ext} searchQuery={localSearch || searchQuery} />
                 ))}
@@ -264,21 +264,21 @@ function ExtensionCard({ extension, searchQuery }: ExtensionCardProps) {
     <button
       onClick={handleClick}
       disabled={!searchQuery.trim() || extension.checking}
-      className={`group relative p-2.5 border rounded-lg transition-all text-left disabled:cursor-default ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-[#1a1a1a] border-white/10 hover:border-white/20'}`}
+      className={`group relative p-2 sm:p-2.5 border rounded-lg transition-all text-left disabled:cursor-default ${isLight ? 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/[0.06]' : 'bg-[#1a1a1a] border-white/10 hover:border-white/20'}`}
     >
       {showStatus && (
-        <div className="absolute top-2 right-2">
-          <span className={`w-2 h-2 rounded-full block ${getStatusColor()}`} />
+        <div className="absolute top-1.5 right-1.5">
+          <span className={`w-1.5 h-1.5 rounded-full block ${getStatusColor()}`} />
         </div>
       )}
 
-      <div className={`font-mono text-[15px] sm:text-base font-bold mb-0.5 select-none ${isLight ? 'text-slate-900' : 'text-white'}`} style={{ userSelect: 'none' }}>
+      <div className={`font-mono text-[13px] sm:text-base font-bold mb-0 select-none ${isLight ? 'text-slate-900' : 'text-white'}`} style={{ userSelect: 'none' }}>
         {extension.tld}
       </div>
-      <div className={`text-[10px] mb-1 select-none ${isLight ? 'text-slate-400' : 'text-white/40'}`} style={{ userSelect: 'none' }}>
+      <div className={`text-[9px] sm:text-[10px] mb-0.5 select-none ${isLight ? 'text-slate-400' : 'text-white/40'}`} style={{ userSelect: 'none' }}>
         {extension.name}
       </div>
-      <div className={`text-[11px] font-medium select-none ${isLight ? 'text-slate-500' : 'text-white/50'}`} style={{ userSelect: 'none' }}>
+      <div className={`text-[10px] sm:text-[11px] font-medium select-none ${isLight ? 'text-slate-500' : 'text-white/50'}`} style={{ userSelect: 'none' }}>
         {extension.price}
       </div>
     </button>

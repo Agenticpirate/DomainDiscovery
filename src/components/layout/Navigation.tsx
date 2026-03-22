@@ -1,5 +1,5 @@
 'use client';
-
+// v2
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -228,9 +228,25 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
             <div className="flex items-center justify-between">
               <Link 
                 href="/"
-                className="hover:opacity-80 transition-all duration-300 hover:scale-105"
+                className="hover:opacity-80 transition-all duration-300 shrink-0 flex items-center gap-1.5"
+                style={{ maxWidth: '160px' }}
               >
-                <Logo size="md" showText={true} />
+                {/* Nav logo icon - explicit pixel sizes to prevent hydration issues */}
+                <div style={{ width: 28, height: 28, minWidth: 28, maxWidth: 28, flexShrink: 0, borderRadius: '0.625rem', overflow: 'hidden', background: isLight ? 'linear-gradient(135deg, #334155, #475569, #1e293b)' : 'linear-gradient(135deg, #e2e8f0, #f1f5f9, #cbd5e1)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ color: isLight ? '#f1f5f9' : '#334155' }}>
+                    <path d="M12 3L4 7.5V16.5L12 21L20 16.5V7.5L12 3Z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                    <circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.9"/>
+                    <circle cx="12" cy="12" r="1.5" fill={isLight ? '#475569' : 'white'} fillOpacity="0.6"/>
+                  </svg>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                  <span style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1, backgroundImage: isLight ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)' : 'linear-gradient(to right, #ffffff, #f1f5f9, #cbd5e1)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                    DomainDiscovery
+                  </span>
+                  <span style={{ fontSize: '7px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.15em', color: isLight ? '#64748b' : '#94a3b8' }}>
+                    AI-Powered
+                  </span>
+                </div>
               </Link>
 
               <div className="hidden lg:flex items-center gap-1" ref={dropdownRef}>
@@ -286,114 +302,172 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 </button>
               </div>
 
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`lg:hidden p-1.5 rounded-xl transition-all duration-300 border border-transparent ${
-                  isLight
-                    ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50 hover:border-slate-200'
-                    : 'text-white/60 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.08]'
-                }`}
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  {mobileMenuOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <div className="flex items-center gap-1 lg:hidden">
+                <button
+                  onClick={toggleTheme}
+                  className={`p-1.5 rounded-xl transition-all duration-200 border border-transparent ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/[0.06]'}`}
+                  title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                >
+                  {theme === 'dark' ? (
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
                   ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
                   )}
-                </svg>
-              </button>
+                </button>
+                <Link
+                  href="/saved-domains"
+                  className={`relative p-1.5 rounded-xl transition-all duration-200 border border-transparent ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/[0.06]'}`}
+                  aria-label="Saved domains"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                  </svg>
+                  {savedDomainsCount > 0 && (
+                    <span className={`absolute -top-0.5 -right-0.5 min-w-[16px] h-4 rounded-full px-1 text-[10px] font-bold flex items-center justify-center ${
+                      isLight ? 'bg-slate-900 text-white' : 'bg-white text-slate-900'
+                    }`}>
+                      {savedDomainsCount}
+                    </span>
+                  )}
+                </Link>
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className={`p-1.5 rounded-xl transition-all duration-300 border border-transparent ${
+                    isLight
+                      ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50 hover:border-slate-200'
+                      : 'text-white/60 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.08]'
+                  }`}
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    {mobileMenuOpen ? (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    ) : (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    )}
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
 
           {mobileMenuOpen && (
-            <div className={`lg:hidden mt-1 pt-2 border-t animate-fade-in ${
-              isLight ? 'border-slate-200' : 'border-white/10'
-            }`}>
-              <Link
-                href="/"
-                onClick={handleDropdownClose}
-                className={`w-full flex items-center gap-2.5 p-2 rounded-xl text-left transition-all mb-1.5 ${
-                  currentTool === 'search'
-                    ? isLight ? 'bg-slate-100' : 'bg-white/10'
-                    : isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'
-                }`}
-              >
-                <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/5 text-white/50'}`}>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                  </svg>
-                </div>
-                <div>
-                  <div className={`font-semibold text-sm ${isLight ? 'text-slate-800' : 'text-white/80'}`}>Home</div>
-                  <div className={`text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>Go back to main search</div>
-                </div>
-              </Link>
+            <div className={`lg:hidden border-t animate-fade-in ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
+              {/* Main nav items */}
+              <div className="px-3 pt-2 pb-1">
+                {/* Home row */}
+                <Link
+                  href="/"
+                  onClick={handleDropdownClose}
+                  className={`flex items-center gap-2.5 px-2.5 py-2 rounded-xl mb-1 transition-all ${
+                    currentTool === 'search'
+                      ? isLight ? 'bg-indigo-50 text-indigo-700' : 'bg-indigo-500/10 text-indigo-300'
+                      : isLight ? 'hover:bg-slate-100 text-slate-700' : 'hover:bg-white/5 text-white/70'
+                  }`}
+                >
+                  <div className={`w-6 h-6 flex items-center justify-center rounded-lg shrink-0 ${
+                    currentTool === 'search'
+                      ? isLight ? 'bg-indigo-100 text-indigo-600' : 'bg-indigo-500/20 text-indigo-300'
+                      : isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/[0.06] text-white/50'
+                  }`}>
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                  </div>
+                  <span className="text-[13px] font-semibold">Home</span>
+                </Link>
 
-              <div className="mb-2">
-                <div className={`text-[10px] font-bold uppercase tracking-widest mb-1.5 px-2 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
-                  Search
-                </div>
-                <div className="space-y-1">
+                {/* Search section */}
+                <div className={`text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 mb-1 mt-2 ${isLight ? 'text-slate-400' : 'text-white/30'}`}>Search</div>
+                <div className="grid grid-cols-3 gap-1 mb-2">
                   {searchMenu.items.map((item) => (
                     <Link
                       key={item.id}
                       href={item.href}
                       onClick={handleDropdownClose}
-                  className={`w-full flex items-center gap-2.5 p-2 rounded-xl text-left transition-all ${
+                      className={`flex flex-col items-center gap-1 px-1 py-2 rounded-xl text-center transition-all ${
                         currentTool === item.id
-                          ? isLight ? 'bg-slate-100' : 'bg-white/10'
-                          : isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'
+                          ? isLight ? 'bg-indigo-50 text-indigo-700' : 'bg-indigo-500/10 text-indigo-300'
+                          : isLight ? 'hover:bg-slate-100 text-slate-600' : 'hover:bg-white/5 text-white/60'
                       }`}
                     >
-                      <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/5 text-white/50'}`}>
-                        {item.icon}
+                      <div className={`w-7 h-7 flex items-center justify-center rounded-xl shrink-0 ${
+                        currentTool === item.id
+                          ? isLight ? 'bg-indigo-100 text-indigo-600' : 'bg-indigo-500/20 text-indigo-300'
+                          : isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/[0.06] text-white/40'
+                      }`}>
+                        <div className="w-3.5 h-3.5">{item.icon}</div>
                       </div>
-                      <div className="min-w-0">
-                        <div className={`font-semibold text-[13px] ${isLight ? 'text-slate-800' : 'text-white/80'}`}>{item.label}</div>
-                        <div className={`hidden sm:block text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{item.description}</div>
-                      </div>
+                      <span className="text-[10px] font-medium leading-tight">{item.label}</span>
                     </Link>
                   ))}
                 </div>
-              </div>
 
-              <div className="mb-2">
-                <div className={`text-[10px] font-bold uppercase tracking-widest mb-1.5 px-2 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
-                  Tools
-                </div>
-                <div className="space-y-1">
+                {/* Tools section */}
+                <div className={`text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 mb-1 ${isLight ? 'text-slate-400' : 'text-white/30'}`}>Tools</div>
+                <div className="grid grid-cols-3 gap-1">
                   {toolsMenu.items.map((item) => (
                     <Link
                       key={item.id}
                       href={item.href}
                       onClick={handleDropdownClose}
-                  className={`w-full flex items-center gap-2.5 p-2 rounded-xl text-left transition-all ${
+                      className={`flex flex-col items-center gap-1 px-1 py-2 rounded-xl text-center transition-all ${
                         currentTool === item.id
-                          ? isLight ? 'bg-slate-100' : 'bg-white/10'
-                          : isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'
+                          ? isLight ? 'bg-indigo-50 text-indigo-700' : 'bg-indigo-500/10 text-indigo-300'
+                          : isLight ? 'hover:bg-slate-100 text-slate-600' : 'hover:bg-white/5 text-white/60'
                       }`}
                     >
-                      <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/5 text-white/50'}`}>
-                        {item.icon}
+                      <div className={`w-7 h-7 flex items-center justify-center rounded-xl shrink-0 ${
+                        currentTool === item.id
+                          ? isLight ? 'bg-indigo-100 text-indigo-600' : 'bg-indigo-500/20 text-indigo-300'
+                          : isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/[0.06] text-white/40'
+                      }`}>
+                        <div className="w-3.5 h-3.5">{item.icon}</div>
                       </div>
-                      <div className="min-w-0">
-                        <div className={`font-semibold text-sm ${isLight ? 'text-slate-800' : 'text-white/80'}`}>{item.label}</div>
-                        <div className={`hidden sm:block text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{item.description}</div>
-                      </div>
+                      <span className="text-[10px] font-medium leading-tight">{item.label}</span>
                     </Link>
                   ))}
                 </div>
               </div>
 
-              <Link
-                href="/learn"
-                onClick={handleDropdownClose}
-                className={`w-full p-2 text-left text-sm font-semibold rounded-xl transition-all block ${
-                  isLight ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                Learn
-              </Link>
+              {/* Bottom utility bar */}
+              <div className={`flex items-center justify-between px-4 py-2 mt-1 border-t ${isLight ? 'border-slate-100' : 'border-white/[0.05]'}`}>
+                <Link
+                  href="/learn"
+                  onClick={handleDropdownClose}
+                  className={`text-[11px] font-semibold transition-colors ${isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/40 hover:text-white/70'}`}
+                >
+                  Learn
+                </Link>
+                <Link
+                  href="/saved-domains"
+                  onClick={handleDropdownClose}
+                  className={`flex items-center gap-1.5 text-[11px] font-semibold transition-colors ${isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/40 hover:text-white/70'}`}
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                  </svg>
+                  Saved{savedDomainsCount > 0 && ` (${savedDomainsCount})`}
+                </Link>
+                <button
+                  onClick={toggleTheme}
+                  className={`flex items-center gap-1.5 text-[11px] font-semibold transition-colors ${isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/40 hover:text-white/70'}`}
+                >
+                  {theme === 'dark' ? (
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                  )}
+                  {theme === 'dark' ? 'Light' : 'Dark'}
+                </button>
+              </div>
             </div>
           )}
         </div>

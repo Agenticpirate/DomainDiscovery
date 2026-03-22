@@ -212,16 +212,42 @@ const ResultsView: React.FC<{
 
   return (
     <div className="flex flex-col gap-3 sm:gap-4 lg:flex-row lg:gap-6 w-full max-w-7xl mx-auto px-2 sm:px-0">
-      {/* Sidebar */}
+      {/* Sidebar - desktop */}
       <div className={`lg:w-56 lg:shrink-0 space-y-3 sm:space-y-4 ${isLight ? 'lg:text-slate-800' : 'lg:text-white'}`}>
         <Button onClick={reset} variant="ghost" size="sm" className="justify-start gap-2 -ml-2">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
           New bulk search
         </Button>
 
-        <div className={`rounded-2xl border p-3 sm:p-4 ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-black/35 backdrop-blur-xl'}`}>
+        {/* Mobile: horizontal filter chips */}
+        <div className="lg:hidden flex gap-1.5 overflow-x-auto pb-1 -mx-1 px-1">
+          {[
+            { k: 'all', l: 'All', c: counts.all },
+            { k: 'available', l: '✓ Available', c: counts.available },
+            { k: 'taken', l: 'Taken', c: counts.taken },
+            { k: 'premium', l: '★ Premium', c: counts.premium },
+          ].map(x => (
+            <button
+              key={x.k}
+              onClick={() => setFilter(x.k as FilterType)}
+              className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${filter === x.k ? (isLight ? 'bg-slate-900 text-white' : 'bg-white text-slate-900') : (isLight ? 'bg-white border border-slate-200 text-slate-600' : 'bg-white/10 text-white/70 border border-white/10')}`}
+            >
+              {x.l} <span className="opacity-60">{x.c}</span>
+            </button>
+          ))}
+          {/* Mobile export buttons */}
+          <button onClick={exportCSV} className={`shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${isLight ? 'bg-white border border-slate-200 text-slate-600' : 'bg-white/10 text-white/70 border border-white/10'}`}>
+            <Icons.Download />&nbsp;CSV
+          </button>
+          <button onClick={exportPDF} className={`shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${isLight ? 'bg-white border border-slate-200 text-slate-600' : 'bg-white/10 text-white/70 border border-white/10'}`}>
+            <Icons.Download />&nbsp;PDF
+          </button>
+        </div>
+
+        {/* Desktop: sidebar */}
+        <div className={`hidden lg:block rounded-2xl border p-3 sm:p-4 ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-black/35 backdrop-blur-xl'}`}>
           <div className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Display</div>
-          <div className="flex sm:block gap-1.5 overflow-x-auto sm:overflow-visible pb-1 sm:pb-0">
+          <div className="space-y-0.5">
           {[
             { k: 'all', l: 'All domains', c: counts.all, color: 'bg-white/20' },
             { k: 'available', l: 'Available', c: counts.available, color: 'bg-emerald-500' },
@@ -231,7 +257,7 @@ const ResultsView: React.FC<{
             <button
               key={x.k}
               onClick={() => setFilter(x.k as FilterType)}
-              className={`sm:w-full flex items-center justify-between px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm transition-all whitespace-nowrap ${filter === x.k ? (isLight ? 'bg-slate-100 text-slate-900' : 'bg-white/10 text-white') : (isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5')}`}
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all ${filter === x.k ? (isLight ? 'bg-slate-100 text-slate-900' : 'bg-white/10 text-white') : (isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5')}`}
             >
               <span className="flex items-center gap-2">
                 <span className={`w-2 h-2 rounded-full ${x.color}`} />

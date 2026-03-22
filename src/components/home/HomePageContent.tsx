@@ -76,7 +76,7 @@ export const HomePageContent: React.FC = () => {
     { icon: <Icons.Layers />, title: 'Works Everywhere', description: 'The same workflow stays usable on desktop, tablet, and mobile.', stat: 'Responsive' }
   ];
 
-  const cardClasses = `group h-full p-3 sm:p-3.5 rounded-2xl transition-all duration-300 ${
+  const cardClasses = `group h-full rounded-2xl transition-all duration-300 ${
     isLight
       ? 'bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg shadow-sm'
       : 'bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
@@ -88,13 +88,13 @@ export const HomePageContent: React.FC = () => {
       : 'bg-[#0f1012] border border-white/8 hover:border-white/12'
   }`;
 
-  const iconBoxClasses = `inline-flex h-11 w-11 items-center justify-center rounded-2xl border transition-colors ${
+  const iconBoxClasses = `inline-flex items-center justify-center rounded-2xl border transition-colors ${
     isLight
       ? 'border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(241,245,249,0.94))] text-slate-700 shadow-sm'
       : 'border-white/10 bg-[#17191d] text-white/85'
   }`;
 
-  const smallIconBoxClasses = `inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border transition-colors ${
+  const smallIconBoxClasses = `inline-flex shrink-0 items-center justify-center rounded-2xl border transition-colors ${
     isLight
       ? 'border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(241,245,249,0.94))] text-slate-700 shadow-sm'
       : 'border-white/10 bg-[#17191d] text-white/85'
@@ -104,34 +104,33 @@ export const HomePageContent: React.FC = () => {
   const standardTools = tools.filter((tool) => !tool.featured);
 
   return (
-    <div className="space-y-5 sm:space-y-7 py-3 sm:py-5">
+    <div className="space-y-3 sm:space-y-7 py-1 sm:py-5">
       <section className="max-w-5xl mx-auto px-3 sm:px-6">
-        <div className="text-center mb-4 sm:mb-5">
-          <h2 className="text-2xl sm:text-4xl md:text-[2.8rem] font-black mb-2 sm:mb-3">
+        <div className="text-center mb-2 sm:mb-5">
+          <h2 className="text-lg sm:text-4xl md:text-[2.8rem] font-black mb-1 sm:mb-3">
             The fastest domain search tool on the internet
           </h2>
-          <p className="text-sm sm:text-[15px] leading-relaxed max-w-[44rem] mx-auto" style={{ color: 'var(--text-secondary)' }}>
+          <p className="hidden sm:block text-sm sm:text-[15px] leading-relaxed max-w-[44rem] mx-auto" style={{ color: 'var(--text-secondary)' }}>
             DomainDiscovery is the ultimate domain search engine to find, buy, and register available 
-            domain names and extensions (TLDs). Our tool shows hundreds of results as you type, surfacing 
-            the best domain names at the lowest prices. Search and register domains with confidence using 
-            our advanced AI-powered search infrastructure.
+            domain names and extensions (TLDs).
+          </p>
+          <p className="sm:hidden text-[11px] leading-relaxed max-w-[34rem] mx-auto" style={{ color: 'var(--text-secondary)' }}>
+            Instant availability across 1,600+ extensions. AI-powered results as you type.
           </p>
         </div>
       </section>
 
       <section className="max-w-5xl mx-auto px-3 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-2 sm:gap-3">
           {features.map((feature, index) => (
-            <div key={index} className={`${cardClasses} flex flex-col`}>
-              <div className="mb-2 flex items-start justify-between gap-3">
-                <div className="flex items-start gap-3 sm:gap-3.5">
-                  <div className={iconBoxClasses}>
-                    {feature.icon}
-                  </div>
+            <div key={index} className={`${cardClasses} flex flex-col p-2.5 sm:p-4`}>
+              <div className="mb-1 flex items-start justify-between gap-2">
+                <div className={`${iconBoxClasses} h-7 w-7 sm:h-11 sm:w-11`}>
+                  {feature.icon}
                 </div>
                 {feature.badge && (
                   <span
-                    className={`shrink-0 px-2.5 py-1 text-[11px] font-semibold rounded-full border ${
+                    className={`shrink-0 px-1.5 py-0.5 text-[9px] sm:text-[11px] font-semibold rounded-full border ${
                       isLight
                         ? 'border-slate-200 bg-slate-100 text-slate-700'
                         : 'border-white/10 bg-white/[0.04] text-white/75'
@@ -141,24 +140,19 @@ export const HomePageContent: React.FC = () => {
                   </span>
                 )}
               </div>
-              <h3 className="text-base sm:text-[17px] font-bold mb-1.5 transition-colors">
+              <h3 className="text-[11px] sm:text-[17px] font-bold mb-0.5 sm:mb-1 leading-tight">
                 {feature.title}
               </h3>
-              <p className="text-sm sm:text-[13px] leading-relaxed mb-2.5" style={{ color: 'var(--text-tertiary)' }}>
+              <p className="hidden sm:block text-sm sm:text-[13px] leading-relaxed mb-2" style={{ color: 'var(--text-tertiary)' }}>
                 {feature.description}
               </p>
               <Link
                 href={feature.href}
-                className="mt-auto inline-flex items-center gap-2 text-sm font-semibold transition-colors"
+                className="mt-auto inline-flex items-center gap-1 text-[10px] sm:text-sm font-semibold transition-colors"
                 style={{ color: 'var(--text-secondary)' }}
               >
                 {feature.cta}
-                <svg 
-                  className="w-4 h-4" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
@@ -168,57 +162,57 @@ export const HomePageContent: React.FC = () => {
       </section>
 
       <section className="max-w-5xl mx-auto px-3 sm:px-6">
-        <div className="text-center mb-3.5 sm:mb-4.5">
-          <h2 className="text-2xl sm:text-4xl font-black mb-2">
+        <div className="text-center mb-2.5 sm:mb-4.5">
+          <h2 className="text-lg sm:text-4xl font-black mb-1 sm:mb-2">
             Popular Domain Extensions
           </h2>
-          <p style={{ color: 'var(--text-tertiary)' }} className="text-sm sm:text-base max-w-xl mx-auto">
-            Choose from 1,600+ domain extensions. Find the perfect TLD for your website.
+          <p style={{ color: 'var(--text-tertiary)' }} className="text-[11px] sm:text-base max-w-xl mx-auto">
+            Choose from 1,600+ extensions. Find the perfect TLD.
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-2">
+        <div className="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-8 gap-1.5 sm:gap-2">
           {[
-            { ext: '.com', desc: 'Most popular' },
+            { ext: '.com', desc: 'Popular' },
             { ext: '.ai', desc: 'AI & Tech' },
-            { ext: '.io', desc: 'Tech startups' },
+            { ext: '.io', desc: 'Startups' },
             { ext: '.co', desc: 'Companies' },
             { ext: '.net', desc: 'Networks' },
-            { ext: '.org', desc: 'Organizations' },
-            { ext: '.app', desc: 'Applications' },
+            { ext: '.org', desc: 'Orgs' },
+            { ext: '.app', desc: 'Apps' },
             { ext: '.xyz', desc: 'Creative' },
           ].map((item, i) => (
             <Link
               key={i}
               href="/domain-extensions"
-              className={`group px-3 sm:px-5 py-2 sm:py-3 rounded-lg sm:rounded-xl transition-all ${
+              className={`group px-1.5 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl transition-all text-center ${
                 isLight
                   ? 'bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md shadow-sm'
                 : 'bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
               }`}
             >
               <div
-                className="text-lg sm:text-2xl font-black mb-0.5 sm:mb-1"
+                className="text-sm sm:text-2xl font-black mb-0.5"
                 style={{ color: 'var(--text-primary)' }}
               >
                 {item.ext}
               </div>
-              <div className="text-[10px] sm:text-xs transition-colors" style={{ color: 'var(--text-tertiary)' }}>
+              <div className="text-[9px] sm:text-xs transition-colors" style={{ color: 'var(--text-tertiary)' }}>
                 {item.desc}
               </div>
             </Link>
           ))}
         </div>
-        <div className="text-center mt-3 sm:mt-4">
+        <div className="text-center mt-2 sm:mt-4">
           <Link
             href="/domain-extensions"
-            className={`inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl text-sm font-semibold transition-all ${
+            className={`inline-flex items-center gap-1.5 px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold transition-all ${
               isLight
                 ? 'bg-slate-100 hover:bg-slate-200 border border-slate-200 hover:border-slate-300 text-slate-700'
                 : 'bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20'
             }`}
           >
             View all 1,600+ extensions
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </Link>
@@ -226,87 +220,51 @@ export const HomePageContent: React.FC = () => {
       </section>
 
       <section className="max-w-5xl mx-auto px-3 sm:px-6">
-        <div className="text-center mb-3 sm:mb-4">
-          <h2 className="text-2xl sm:text-4xl font-black mb-2">
+        <div className="text-center mb-2 sm:mb-4">
+          <h2 className="text-lg sm:text-4xl font-black mb-1 sm:mb-2">
             Powerful Domain Tools
           </h2>
-          <p style={{ color: 'var(--text-tertiary)' }} className="text-sm sm:text-base max-w-xl mx-auto">
-            Everything you need to find, analyze, and register the perfect domain name
+          <p style={{ color: 'var(--text-tertiary)' }} className="text-[11px] sm:text-base max-w-xl mx-auto">
+            Everything you need to find and register the perfect domain
           </p>
         </div>
-        <div className="space-y-2.5 sm:space-y-3">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <div className="space-y-1.5 sm:space-y-3">
+          {/* Featured tools - horizontal layout, 1 col on mobile */}
+          <div className="space-y-1.5 sm:grid sm:grid-cols-2 sm:gap-2.5 sm:space-y-0">
             {featuredTools.map((tool) => (
               <Link
                 key={tool.title}
                 href={tool.href}
-                className={`${smallCardClasses} overflow-hidden p-3 sm:p-3.5 transition-transform duration-200 hover:-translate-y-0.5`}
+                className={`${smallCardClasses} overflow-hidden p-2.5 sm:p-3.5 transition-transform duration-200 hover:-translate-y-0.5 block`}
               >
-                <div className="flex h-full min-h-[10.5rem] flex-col justify-between gap-3">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className={`${iconBoxClasses} h-10 w-10 rounded-xl`}>{tool.icon}</div>
-                    {tool.badge && (
-                      <span
-                        className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] ${
-                          isLight
-                            ? 'bg-slate-100 text-slate-600'
-                            : 'bg-[#17191d] text-white/55'
-                        }`}
-                      >
-                        {tool.badge}
-                      </span>
-                    )}
-                  </div>
-                  <div className="space-y-1.5">
-                    <div className={`text-[11px] font-semibold uppercase tracking-[0.18em] ${isLight ? 'text-slate-500' : 'text-white/35'}`}>
-                      {tool.eyebrow}
+                <div className="flex items-center gap-2.5">
+                  <div className={`${iconBoxClasses} h-9 w-9 sm:h-11 sm:w-11 rounded-xl shrink-0`}>{tool.icon}</div>
+                  <div className="min-w-0 flex-1">
+                    <div className={`text-[9px] font-semibold uppercase tracking-[0.16em] mb-0.5 ${isLight ? 'text-slate-500' : 'text-white/35'}`}>
+                      {tool.eyebrow} {tool.badge && <span className={`ml-1 px-1 py-0.5 rounded text-[8px] font-bold ${isLight ? 'bg-slate-100 text-slate-600' : 'bg-white/[0.08] text-white/50'}`}>{tool.badge}</span>}
                     </div>
-                    <h3 className="text-base sm:text-[1.15rem] font-black leading-tight">
-                      {tool.title}
-                    </h3>
-                    <p className="max-w-[24rem] text-[12px] sm:text-[13px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
-                      {tool.description}
-                    </p>
+                    <h3 className="text-[13px] sm:text-[15px] font-black leading-tight">{tool.title}</h3>
+                    <p className="mt-0.5 text-[11px] sm:text-[12px] leading-relaxed line-clamp-2" style={{ color: 'var(--text-tertiary)' }}>{tool.description}</p>
                   </div>
+                  <svg className={`w-4 h-4 shrink-0 ${isLight ? 'text-slate-300' : 'text-white/20'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </div>
               </Link>
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          {/* Standard tools - 2 columns on mobile, 3 on desktop */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 sm:gap-2">
             {standardTools.map((tool) => (
               <Link
                 key={tool.title}
                 href={tool.href}
-                className={`${smallCardClasses} p-2.5 sm:p-3`}
+                className={`${smallCardClasses} p-2 sm:p-3`}
               >
-                <div className="flex items-start gap-3">
-                  <div className={smallIconBoxClasses}>{tool.icon}</div>
-                  <div className="min-w-0 flex-1">
-                    {tool.eyebrow && (
-                      <div className={`mb-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${isLight ? 'text-slate-500' : 'text-white/35'}`}>
-                        {tool.eyebrow}
-                      </div>
-                    )}
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h3 className="text-sm sm:text-base font-bold leading-tight">
-                          {tool.title}
-                        </h3>
-                        <p className="mt-1 text-[12px] sm:text-[13px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
-                          {tool.description}
-                        </p>
-                      </div>
-                      <svg
-                        className={`mt-0.5 h-4 w-4 shrink-0 ${isLight ? 'text-slate-400' : 'text-white/30'}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <div className={`${smallIconBoxClasses} h-7 w-7 sm:h-8 sm:w-8 shrink-0`}>{tool.icon}</div>
+                  <h3 className="text-[11px] sm:text-sm font-bold leading-tight min-w-0 flex-1">{tool.title}</h3>
                 </div>
               </Link>
             ))}
@@ -315,27 +273,22 @@ export const HomePageContent: React.FC = () => {
       </section>
 
       <section className="max-w-5xl mx-auto px-3 sm:px-6">
-        <div className="text-center mb-3.5 sm:mb-4.5">
-          <h2 className="text-2xl sm:text-4xl font-black mb-2">
+        <div className="text-center mb-2 sm:mb-4.5">
+          <h2 className="text-lg sm:text-4xl font-black mb-1 sm:mb-2">
             Why Choose DomainDiscovery?
           </h2>
-          <p style={{ color: 'var(--text-tertiary)' }} className="text-sm sm:text-base max-w-xl mx-auto">
-            A faster, quieter workflow for finding, comparing, and shortlisting domains.
+          <p style={{ color: 'var(--text-tertiary)' }} className="text-[11px] sm:text-base max-w-xl mx-auto">
+            Faster, smarter domain search built for founders.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-2.5">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-1.5 sm:gap-2.5">
           {benefits.map((benefit) => (
-            <div key={benefit.title} className={`${smallCardClasses} p-3 sm:p-3.5`}>
-              <div className="flex items-start gap-3">
-                <div className={smallIconBoxClasses}>{benefit.icon}</div>
+            <div key={benefit.title} className={`${smallCardClasses} p-2 sm:p-3.5`}>
+              <div className="flex flex-col items-start gap-1.5 sm:gap-3">
+                <div className={`${smallIconBoxClasses} h-7 w-7 sm:h-10 sm:w-10`}>{benefit.icon}</div>
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-sm sm:text-base font-bold leading-tight">{benefit.title}</h3>
-                    <span className={`shrink-0 text-[10px] font-semibold uppercase tracking-[0.16em] ${isLight ? 'text-slate-500' : 'text-white/35'}`}>
-                      {benefit.stat}
-                    </span>
-                  </div>
-                  <p className="mt-1.5 text-[12px] sm:text-[13px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
+                  <h3 className="text-[11px] sm:text-base font-bold leading-tight">{benefit.title}</h3>
+                  <p className="hidden sm:block mt-1.5 text-[12px] sm:text-[13px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
                     {benefit.description}
                   </p>
                 </div>
