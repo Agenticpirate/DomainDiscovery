@@ -21,9 +21,9 @@ export default function GeneratorPage() {
       <Navigation activeTool="generator" />
 
       {/* Main Content */}
-      <main className="relative pt-20 sm:pt-24">
+      <main className="relative pt-14 sm:pt-24">
         {/* Hero Section */}
-        <section className="px-4 sm:px-6 pb-5 sm:pb-7">
+        <section className="px-4 sm:px-6 pb-3 sm:pb-7">
           <div className="max-w-4xl mx-auto">
             <Breadcrumb items={[
               { label: 'Home', href: '/' },
@@ -31,19 +31,19 @@ export default function GeneratorPage() {
             ]} />
           </div>
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl sm:text-5xl md:text-[3.9rem] font-black tracking-tight mb-3">
+            <h1 className="text-xl sm:text-5xl md:text-[3.9rem] font-black tracking-tight mb-1 sm:mb-3">
               <span className={`bg-gradient-to-r ${isLight ? 'from-slate-900 via-slate-800 to-slate-600' : 'from-white via-white to-white/60'} bg-clip-text text-transparent`}>
                 Domain Name Generator
               </span>
             </h1>
-            <p className={`text-sm sm:text-base ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-5 sm:mb-6`}>
+            <p className={`hidden sm:block text-sm sm:text-base ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-5 sm:mb-6`}>
               Generate hundreds of creative domain name ideas instantly. Find the perfect name for your website, business, or project.
             </p>
           </div>
         </section>
 
         {/* Generator */}
-        <section className="px-4 sm:px-6 pb-12 sm:pb-14" id="top">
+        <section className="px-4 sm:px-6 pb-8 sm:pb-14" id="top">
           <div className="max-w-5xl mx-auto">
             <DomainGenerator onSelect={setSelectedDomain} />
           </div>

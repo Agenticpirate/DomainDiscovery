@@ -21,14 +21,14 @@ export default function ComparePage() {
       <PageBackground variant="default" />
       <Navigation activeTool="compare" />
 
-      <main className="relative pt-20 sm:pt-24">
-        <section className="px-4 pb-6 sm:px-6 sm:pb-8">
+      <main className="relative pt-14 sm:pt-24">
+        <section className="px-4 pb-4 sm:px-6 sm:pb-8">
           <div className="mx-auto max-w-6xl">
             <Breadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Price Comparison' }]} />
           </div>
 
           <div className="mx-auto max-w-4xl text-center">
-            <h1 className="text-3xl font-black tracking-tight sm:text-5xl md:text-[3.9rem]">
+            <h1 className="text-xl sm:text-5xl md:text-[3.9rem] font-black tracking-tight">
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -39,10 +39,11 @@ export default function ComparePage() {
               </span>
             </h1>
             <p
-              className="mx-auto mt-3 max-w-3xl text-sm sm:text-base leading-6"
+              className="mx-auto mt-1.5 sm:mt-3 max-w-3xl text-[11px] sm:text-base leading-snug sm:leading-6"
               style={{ color: 'var(--text-secondary)' }}
             >
-              Live top-TLD pricing data verified against TLD-List for a curated set of the most frequently registered extensions across the selected 10 registrars. Promo-code discounts are stripped out so the numbers shown are the regular listed prices.
+              <span className="sm:hidden">Live regular prices across 10 registrars. No promo codes.</span>
+              <span className="hidden sm:inline">Live top-TLD pricing data verified against TLD-List for a curated set of the most frequently registered extensions across the selected 10 registrars. Promo-code discounts are stripped out so the numbers shown are the regular listed prices.</span>
             </p>
           </div>
         </section>
