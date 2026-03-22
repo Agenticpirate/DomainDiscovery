@@ -119,7 +119,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     setMobileMenuOpen(false);
   };
 
-  const navBtnBase = `group flex items-center gap-1.5 px-2.5 py-1.5 text-[13px] font-medium rounded-xl transition-all duration-200 min-h-[40px]`;
+  const navBtnBase = `group flex items-center gap-1.5 px-2.5 py-1.5 text-[12px] sm:text-[13px] font-medium rounded-xl transition-all duration-200 min-h-[36px]`;
   const navBtnActive = isLight
     ? 'text-slate-900 bg-gradient-to-b from-slate-100 to-slate-50 border border-slate-200 shadow-sm backdrop-blur-xl'
     : 'text-white bg-gradient-to-b from-white/[0.12] to-white/[0.08] border border-white/20 shadow-lg shadow-black/20 backdrop-blur-xl';
@@ -149,8 +149,8 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
       </button>
 
       {openDropdown === menuKey && (
-        <div className="absolute top-full right-0 w-[520px] z-[100] pt-2">
-          <div className={`relative backdrop-blur-3xl border rounded-2xl p-3 animate-fade-in ${
+        <div className="absolute top-full right-0 w-[480px] z-[100] pt-2">
+          <div className={`relative backdrop-blur-3xl border rounded-2xl p-2.5 animate-fade-in ${
             isLight
               ? 'bg-white border-slate-200 shadow-xl shadow-slate-900/[0.08]'
               : 'bg-black border-white/[0.15] shadow-2xl shadow-black/60'
@@ -164,7 +164,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                   key={item.id}
                   href={item.href}
                   onClick={handleDropdownClose}
-                  className={`flex items-start gap-3 p-3 rounded-xl text-left transition-all duration-200 group ${
+                  className={`flex items-start gap-2.5 p-2.5 rounded-xl text-left transition-all duration-200 group ${
                     currentTool === item.id
                       ? isLight
                         ? 'bg-gradient-to-br from-slate-50 to-white border border-slate-200 shadow-sm'
@@ -176,10 +176,10 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 >
                   <div
                     className={`p-2 rounded-lg shrink-0 transition-all duration-200 ${
-                      currentTool === item.id
-                        ? isLight
-                          ? 'bg-slate-100 text-slate-800 shadow-sm'
-                          : 'bg-white/[0.2] text-white shadow-lg shadow-white/20'
+                        currentTool === item.id
+                          ? isLight
+                            ? 'bg-slate-100 text-slate-800 shadow-sm'
+                            : 'bg-white/[0.2] text-white shadow-lg shadow-white/20'
                         : isLight
                           ? 'bg-slate-100 text-slate-500 group-hover:bg-slate-200 group-hover:text-slate-800 group-hover:scale-105'
                           : 'bg-white/[0.08] text-white/60 group-hover:bg-white/[0.15] group-hover:text-white group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-white/10'
@@ -189,7 +189,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                   </div>
                   <div className="flex-1 min-w-0">
                     <div
-                      className={`font-semibold text-[13px] mb-1 transition-colors ${
+                      className={`font-semibold text-[12px] mb-0.5 transition-colors ${
                         currentTool === item.id
                           ? isLight ? 'text-slate-900' : 'text-white'
                           : isLight ? 'text-slate-700 group-hover:text-slate-900' : 'text-white/90 group-hover:text-white'
@@ -197,7 +197,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                     >
                       {item.label}
                     </div>
-                    <div className={`text-[11px] leading-relaxed line-clamp-2 transition-colors ${
+                    <div className={`text-[10px] leading-relaxed line-clamp-2 transition-colors ${
                       isLight ? 'text-slate-500 group-hover:text-slate-600' : 'text-white/60 group-hover:text-white/75'
                     }`}>
                       {item.description}
@@ -213,7 +213,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   );
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[60] py-1 sm:py-2.5 px-2 sm:px-6">
+    <nav className="fixed top-0 left-0 right-0 z-[60] py-1 sm:py-1.5 px-2 sm:px-4">
       <div className="max-w-7xl mx-auto">
         <div className={`relative backdrop-blur-2xl border rounded-2xl ${
           isLight
@@ -221,10 +221,10 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
             : 'bg-black/40 border-white/[0.08] shadow-2xl shadow-black/20'
         }`}>
           <div className={`absolute inset-0 bg-gradient-to-r rounded-2xl pointer-events-none ${
-            isLight ? 'from-blue-500/[0.02] via-transparent to-purple-500/[0.02]' : 'from-purple-500/5 via-transparent to-blue-500/5'
+            isLight ? 'from-slate-500/[0.02] via-transparent to-slate-400/[0.02]' : 'from-white/[0.03] via-transparent to-slate-400/[0.03]'
           }`} />
           
-          <div className="relative px-2 sm:px-3.5 py-1.5 sm:py-1.5">
+          <div className="relative px-2 sm:px-3 py-1.5 sm:py-1.5">
             <div className="flex items-center justify-between">
               <Link 
                 href="/"
@@ -261,7 +261,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                   </svg>
                   <span>Saved</span>
                   {savedDomainsCount > 0 && (
-                    <span className="absolute -top-1 -right-1 px-1.5 py-0.5 text-xs font-bold bg-emerald-500 text-white rounded-full min-w-[20px] text-center">
+                    <span className={`absolute -top-1 -right-1 min-w-[20px] rounded-full px-1.5 py-0.5 text-xs font-bold text-center ${
+                      isLight ? 'bg-slate-900 text-white' : 'bg-white text-slate-900'
+                    }`}>
                       {savedDomainsCount}
                     </span>
                   )}
@@ -269,7 +271,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
 
                 <button
                   onClick={toggleTheme}
-                  className={`${navBtnBase} ${navBtnInactive} px-2.5`}
+                  className={`${navBtnBase} ${navBtnInactive} px-2`}
                   title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
                 >
                   {theme === 'dark' ? (
@@ -304,13 +306,13 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
           </div>
 
           {mobileMenuOpen && (
-            <div className={`lg:hidden mt-1.5 pt-2.5 border-t animate-fade-in ${
+            <div className={`lg:hidden mt-1 pt-2 border-t animate-fade-in ${
               isLight ? 'border-slate-200' : 'border-white/10'
             }`}>
               <Link
                 href="/"
                 onClick={handleDropdownClose}
-                className={`w-full flex items-center gap-3 p-2 rounded-xl text-left transition-all mb-2.5 ${
+                className={`w-full flex items-center gap-2.5 p-2 rounded-xl text-left transition-all mb-1.5 ${
                   currentTool === 'search'
                     ? isLight ? 'bg-slate-100' : 'bg-white/10'
                     : isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'
@@ -327,8 +329,8 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 </div>
               </Link>
 
-              <div className="mb-3">
-                <div className={`text-[11px] font-bold uppercase tracking-widest mb-2.5 px-2 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
+              <div className="mb-2">
+                <div className={`text-[10px] font-bold uppercase tracking-widest mb-1.5 px-2 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
                   Search
                 </div>
                 <div className="space-y-1">
@@ -337,7 +339,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                       key={item.id}
                       href={item.href}
                       onClick={handleDropdownClose}
-                  className={`w-full flex items-center gap-3 p-2 rounded-xl text-left transition-all ${
+                  className={`w-full flex items-center gap-2.5 p-2 rounded-xl text-left transition-all ${
                         currentTool === item.id
                           ? isLight ? 'bg-slate-100' : 'bg-white/10'
                           : isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'
@@ -346,17 +348,17 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                       <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/5 text-white/50'}`}>
                         {item.icon}
                       </div>
-                      <div>
-                        <div className={`font-semibold text-sm ${isLight ? 'text-slate-800' : 'text-white/80'}`}>{item.label}</div>
-                        <div className={`text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{item.description}</div>
+                      <div className="min-w-0">
+                        <div className={`font-semibold text-[13px] ${isLight ? 'text-slate-800' : 'text-white/80'}`}>{item.label}</div>
+                        <div className={`hidden sm:block text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{item.description}</div>
                       </div>
                     </Link>
                   ))}
                 </div>
               </div>
 
-              <div className="mb-3">
-                <div className={`text-[11px] font-bold uppercase tracking-widest mb-2.5 px-2 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
+              <div className="mb-2">
+                <div className={`text-[10px] font-bold uppercase tracking-widest mb-1.5 px-2 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
                   Tools
                 </div>
                 <div className="space-y-1">
@@ -365,7 +367,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                       key={item.id}
                       href={item.href}
                       onClick={handleDropdownClose}
-                  className={`w-full flex items-center gap-3 p-2 rounded-xl text-left transition-all ${
+                  className={`w-full flex items-center gap-2.5 p-2 rounded-xl text-left transition-all ${
                         currentTool === item.id
                           ? isLight ? 'bg-slate-100' : 'bg-white/10'
                           : isLight ? 'hover:bg-slate-50' : 'hover:bg-white/5'
@@ -374,9 +376,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                       <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/5 text-white/50'}`}>
                         {item.icon}
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <div className={`font-semibold text-sm ${isLight ? 'text-slate-800' : 'text-white/80'}`}>{item.label}</div>
-                        <div className={`text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{item.description}</div>
+                        <div className={`hidden sm:block text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{item.description}</div>
                       </div>
                     </Link>
                   ))}

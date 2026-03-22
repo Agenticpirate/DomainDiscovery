@@ -1,18 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
 import { PageBackground } from '@/components/ui/PageBackground';
-import { SearchInterface } from '@/components/domain/SearchInterface';
-import { ResultsList, DomainResult } from '@/components/domain/ResultsList';
-import { searchDomains } from '@/services/instantDomainService';
-import { SkeletonLoader } from '@/components/ui/SkeletonLoader';
-import { useToast } from '@/components/ui/Toast';
 import { HomePageContent } from '@/components/home/HomePageContent';
+import { SearchInterface } from '@/components/domain/SearchInterface';
 import { useTheme } from '@/contexts/ThemeContext';
 
 import { DomainGenerator } from '@/components/generator/DomainGenerator';
@@ -27,122 +24,40 @@ type ToolType = 'search' | 'extensions' | 'generator' | 'premium' | 'bulk' | 'ex
 
 export default function Home() {
   const [activeTool, setActiveTool] = useState<ToolType>('search');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [results, setResults] = useState<DomainResult[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [selectedDomain, setSelectedDomain] = useState<string>('');
-  const [savedDomains, setSavedDomains] = useState<string[]>([]);
-  const searchRequestIdRef = useRef(0);
-  const searchAbortRef = useRef<AbortController | null>(null);
-  const { showToast } = useToast();
+  const [searchQuery, setSearchQuery] = useState('');
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
-    try {
-      const saved = localStorage.getItem('saved_domains');
-      if (saved) {
-        setSavedDomains(JSON.parse(saved));
-      }
-    } catch (error) {
-      console.error('Failed to load saved domains:', error);
-    }
 
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
         e.preventDefault();
-        const searchInput = document.querySelector('input[type="text"]') as HTMLInputElement;
-        if (searchInput) {
-          searchInput.focus();
-          showToast('Press "/" to focus search anytime', 'info', 2000);
-        }
+        router.push('/search');
       }
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [showToast]);
+  }, [router]);
 
-  const handleSearch = async (query: string) => {
-    if (!query.trim()) {
-      handleClear();
-      return;
-    }
-
-    const requestId = ++searchRequestIdRef.current;
-    searchAbortRef.current?.abort();
-    const controller = new AbortController();
-    searchAbortRef.current = controller;
-
-    setIsLoading(true);
-    setSearchQuery(query);
-    const cleanQuery = query.toLowerCase().replace(/\s+/g, '');
-    const tlds = ['.com', '.net', '.org', '.ai', '.io', '.co', '.app', '.xyz'];
-
-    try {
-      const apiResults = await searchDomains(cleanQuery, tlds, { signal: controller.signal });
-
-      if (requestId !== searchRequestIdRef.current) {
-        return;
-      }
-
-      const formattedResults: DomainResult[] = apiResults.map((r) => ({
-        domain: r.domain,
-        availability: r.available ? 'available' : 'unavailable',
-        tld: r.tld,
-        pricing: r.price ? {
-          amount: parseFloat(r.price.replace(/[^0-9.]/g, '')),
-          currency: '$',
-          registrar: r.registrar || 'GoDaddy',
-        } : undefined,
-        premium: r.premium,
-      }));
-
-      setResults(formattedResults);
-    } finally {
-      if (requestId === searchRequestIdRef.current) {
-        setIsLoading(false);
-      }
-    }
+  const launchSearchPage = () => {
+    router.push('/search');
   };
 
-  const handleClear = () => {
-    searchAbortRef.current?.abort();
-    searchRequestIdRef.current += 1;
+  const handleHeroSearch = (query: string) => {
+    const normalized = query.trim();
+    if (!normalized) return;
+    setSearchQuery(normalized);
+    router.push(`/search?q=${encodeURIComponent(normalized)}`);
+  };
+
+  const handleHeroClear = () => {
     setSearchQuery('');
-    setResults([]);
-    setIsLoading(false);
-  };
-
-  const handleDomainBuy = (domain: string) => {
-    window.open(`https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(domain)}`, '_blank');
-  };
-
-  const handleDomainWhois = (domain: string) => {
-    window.open(`https://who.is/whois/${domain}`, '_blank');
-  };
-
-  const handleDomainSave = (domain: string) => {
-    const isSaved = savedDomains.includes(domain);
-    const newSaved = isSaved
-      ? savedDomains.filter(d => d !== domain)
-      : [...savedDomains, domain];
-    
-    setSavedDomains(newSaved);
-    try {
-      localStorage.setItem('saved_domains', JSON.stringify(newSaved));
-      window.dispatchEvent(new Event('savedDomainsUpdated'));
-      showToast(
-        isSaved ? `Removed ${domain} from saved domains` : `Saved ${domain} to your list`,
-        'success',
-        2500
-      );
-    } catch (error) {
-      console.error('Failed to save domain:', error);
-      showToast('Failed to save domain. Please try again.', 'error');
-    }
   };
 
   const showMainSearch = activeTool === 'search';
@@ -154,12 +69,12 @@ export default function Home() {
       
       <Navigation activeTool={activeTool} onToolSelect={(tool) => setActiveTool(tool as ToolType)} />
 
-      <main className="relative pt-[4.2rem] sm:pt-[4.9rem]">
+      <main className="relative pt-[3.8rem] sm:pt-[4.45rem]">
         
         {showMainSearch && (
-          <section className="px-3 sm:px-6 pb-2 sm:pb-4">
+          <section className="px-3 sm:px-6 pb-2 sm:pb-2.5">
             <div className="max-w-[56rem] mx-auto text-center">
-              <h1 className={`text-[1.95rem] leading-[0.9] sm:text-[4.2rem] md:text-[4.8rem] font-black tracking-tight mb-1.5 sm:mb-3 ${mounted ? 'animate-slide-up' : 'opacity-0'}`}>
+              <h1 className={`text-[1.92rem] leading-[0.92] sm:text-[3.7rem] md:text-[4.35rem] font-black tracking-tight mb-1 sm:mb-1.5 ${mounted ? 'animate-slide-up' : 'opacity-0'}`}>
                 <span className="block bg-clip-text text-transparent" style={{
                   backgroundImage: isLight
                     ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
@@ -167,52 +82,51 @@ export default function Home() {
                 }}>
                   Find Your Perfect Domain
                 </span>
-                <span className={`block text-[0.9rem] sm:text-[2rem] md:text-[2.35rem] mt-0.5 sm:mt-0.5 font-bold`} style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
+                <span className={`block text-[0.92rem] sm:text-[1.5rem] md:text-[1.95rem] mt-0.5 font-bold`} style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
               </h1>
-              <p className={`text-[13px] sm:text-[15px] max-w-xl mx-auto mb-2.5 sm:mb-4 ${mounted ? 'animate-fade-in' : 'opacity-0'}`} style={{ color: 'var(--text-tertiary)' }}>
+              <p className="text-[12px] sm:text-[14px] max-w-[40rem] mx-auto mb-2.5 sm:mb-3.5" style={{ color: 'var(--text-tertiary)' }}>
                 Search millions of domains with instant results. Compare prices across registrars. Register in one click.
               </p>
 
-              <div className={`max-w-2xl mx-auto ${mounted ? 'animate-fade-in' : 'opacity-0'}`}>
+              <div className={`max-w-[54rem] mx-auto ${mounted ? 'animate-fade-in' : 'opacity-0'}`}>
                 <SearchInterface
                   initialQuery={searchQuery}
                   placeholder="Try: coffee shop, tech startup, or FoundersPrime.com"
-                  onSearch={handleSearch}
-                  onClear={handleClear}
-                  autoFocus={true}
-                  showRecentSearches={true}
-                  debounceMs={150}
-                  isLoading={isLoading}
+                  onSearch={handleHeroSearch}
+                  onClear={handleHeroClear}
+                  autoFocus
+                  showRecentSearches={false}
+                  debounceMs={180}
                 />
               </div>
 
-              <div className="mt-2.5 flex flex-wrap items-center justify-center gap-1.5 sm:mt-3">
+              <div className="mt-2 flex flex-wrap items-center justify-center gap-1.5 sm:mt-2.5">
                 <Link
                   href="/tools/compare"
-                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[11px] font-semibold transition-all ${
+                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
                     isLight
                       ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
                       : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
                   }`}
                 >
                   <Icons.Dollar />
-                  Top 100 TLD prices
+                  Compare prices
                 </Link>
                 <button
                   type="button"
                   onClick={() => setActiveTool('bulk')}
-                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[11px] font-semibold transition-all ${
+                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
                     isLight
                       ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
                       : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
                   }`}
                 >
                   <Icons.Layers />
-                  Bulk search
+                  Bulk check
                 </button>
               </div>
 
-              <div className="max-w-[52rem] mx-auto mt-2.5 sm:mt-4">
+              <div className="max-w-[52rem] mx-auto mt-2.5 sm:mt-3.5">
                 <div className={`grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-2.5 p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl ${
                   isLight ? 'bg-white/70 border border-slate-200/60 shadow-sm backdrop-blur-sm' : 'bg-white/[0.02] border border-white/10 backdrop-blur-sm'
                 }`}>
@@ -222,9 +136,9 @@ export default function Home() {
                     { value: '1,600+', label: 'TLD Extensions' },
                     { value: '99.9%', label: 'Uptime' },
                   ].map((stat) => (
-                    <div key={stat.label} className="text-center p-1.5 sm:p-2 rounded-lg sm:rounded-xl animate-fade-in" style={{ animationDelay: `${150 + (stat.label.length * 20)}ms` }}>
-                      <div className="text-[1.35rem] sm:text-[1.6rem] font-black mb-0.5" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
-                      <div className="text-[10px] sm:text-xs font-medium" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
+                    <div key={stat.label} className="text-center px-1 py-1.5 sm:p-2 rounded-lg sm:rounded-xl">
+                      <div className="text-[1.2rem] sm:text-[1.5rem] font-black mb-0.5" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
+                      <div className="text-[10px] sm:text-xs font-medium leading-tight" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -234,7 +148,7 @@ export default function Home() {
         )}
 
         {activeTool === 'extensions' && (
-          <section className="px-3 sm:px-6 pb-4 sm:pb-8">
+          <section className="px-3 sm:px-6 pb-3 sm:pb-6">
             <div className="max-w-7xl mx-auto">
               <h1 className="text-2xl sm:text-5xl md:text-6xl font-black tracking-tight mb-2 sm:mb-4">
                 <span className="bg-clip-text text-transparent" style={{
@@ -253,7 +167,7 @@ export default function Home() {
         )}
 
         {showToolHeader && (
-          <section className="px-3 sm:px-6 pb-4 sm:pb-8">
+          <section className="px-3 sm:px-6 pb-3 sm:pb-6">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-2xl sm:text-4xl font-black tracking-tight mb-1 sm:mb-2">
                 {activeTool === 'generator' && 'AI Domain Generator'}
@@ -281,31 +195,7 @@ export default function Home() {
           </section>
         )}
 
-        {showMainSearch && (isLoading || results.length > 0) && (
-          <section className="px-4 sm:px-6 pb-12 sm:pb-14">
-            <div className="max-w-6xl mx-auto">
-              {isLoading ? (
-                <div className="space-y-4">
-                  <SkeletonLoader variant="domain" count={6} />
-                </div>
-              ) : (
-                <ResultsList
-                  results={results}
-                  isLoading={isLoading}
-                  sortBy="relevance"
-                  filterBy="all"
-                  onDomainBuy={handleDomainBuy}
-                  onDomainWhois={handleDomainWhois}
-                  onDomainSave={handleDomainSave}
-                  savedDomains={savedDomains}
-                  emptyStateMessage="No domains found. Try a different search term."
-                />
-              )}
-            </div>
-          </section>
-        )}
-
-        <section className={`pb-8 sm:pb-16 ${activeTool === 'bulk' ? 'px-2 sm:px-4' : 'px-3 sm:px-6'}`}>
+        <section className={`pb-6 sm:pb-12 ${activeTool === 'bulk' ? 'px-2 sm:px-4' : 'px-3 sm:px-6'}`}>
           <div className={activeTool === 'bulk' ? 'w-full' : activeTool === 'extensions' ? 'max-w-7xl mx-auto' : 'max-w-5xl mx-auto'}>
             
             {activeTool === 'generator' && (
@@ -343,7 +233,7 @@ export default function Home() {
             )}
 
             {activeTool === 'extensions' && (
-              <DomainExtensionsView searchQuery={searchQuery} />
+              <DomainExtensionsView searchQuery="" />
             )}
 
             {activeTool === 'premium' && (

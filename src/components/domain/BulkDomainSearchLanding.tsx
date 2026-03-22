@@ -84,19 +84,19 @@ const StepCard: React.FC<{
   const isLight = theme === 'light';
 
   return (
-    <div className="relative group">
-      <div className={`absolute -top-6 -left-2 text-7xl font-black transition-colors duration-500 ${isLight ? 'text-slate-100 group-hover:text-blue-100' : 'text-white/[0.03] group-hover:text-slate-400/10'}`}>
+    <div className={`relative group rounded-2xl border p-4 sm:p-5 ${isLight ? 'border-slate-200 bg-white/80 shadow-sm' : 'border-white/10 bg-white/[0.02]'}`}>
+      <div className={`absolute right-3 top-2 text-5xl sm:text-6xl font-black transition-colors duration-500 ${isLight ? 'text-slate-100 group-hover:text-blue-100' : 'text-white/[0.03] group-hover:text-slate-400/10'}`}>
         {number}
       </div>
-      <div className="relative pt-8 pl-2">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-400 to-slate-500 flex items-center justify-center text-sm font-bold text-white mb-4 shadow-lg shadow-slate-400/20">
+      <div className="relative">
+        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-slate-400 to-slate-500 flex items-center justify-center text-sm font-bold text-white mb-3 shadow-lg shadow-slate-400/20">
           {number}
         </div>
-        <h3 className={`text-xl font-bold mb-3 transition-colors ${isLight ? 'group-hover:text-blue-600' : 'group-hover:text-slate-300'}`}>{title}</h3>
-        <p className={`leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{description}</p>
+        <h3 className={`text-lg sm:text-[1.15rem] font-bold mb-2 transition-colors ${isLight ? 'group-hover:text-blue-600' : 'group-hover:text-slate-300'}`}>{title}</h3>
+        <p className={`text-sm sm:text-[15px] leading-relaxed max-w-[26rem] ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{description}</p>
       </div>
       {!isLast && (
-        <div className="hidden md:block absolute top-16 left-full w-full h-px bg-gradient-to-r from-slate-400/30 via-white/10 to-transparent -translate-x-8" />
+        <div className="hidden md:block absolute top-1/2 left-full w-8 h-px bg-gradient-to-r from-slate-400/30 via-white/10 to-transparent -translate-x-2" />
       )}
     </div>
   );
@@ -113,20 +113,20 @@ const IndustryCard: React.FC<{
   const isLight = theme === 'light';
 
   return (
-    <div className={`group p-5 sm:p-8 rounded-xl sm:rounded-2xl transition-all duration-300 ${isLight ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md' : 'bg-white/[0.02] border border-white/10 hover:border-slate-400/20 hover:bg-white/[0.04]'}`}>
-      <div className="flex items-start justify-between mb-3 sm:mb-4">
+    <div className={`group p-4 sm:p-5 rounded-xl sm:rounded-2xl transition-all duration-300 ${isLight ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md' : 'bg-white/[0.02] border border-white/10 hover:border-slate-400/20 hover:bg-white/[0.04]'}`}>
+      <div className="flex items-start justify-between mb-2.5 sm:mb-3">
         <div>
-          <span className="text-2xl sm:text-3xl mb-3 sm:mb-4 block">{icon}</span>
-          <h3 className={`text-base sm:text-xl font-bold transition-colors ${isLight ? 'text-slate-900 group-hover:text-blue-600' : 'group-hover:text-slate-300'}`}>{title}</h3>
+          <span className="text-[22px] sm:text-[28px] mb-2 sm:mb-2.5 block">{icon}</span>
+          <h3 className={`text-base sm:text-lg font-bold transition-colors ${isLight ? 'text-slate-900 group-hover:text-blue-600' : 'group-hover:text-slate-300'}`}>{title}</h3>
         </div>
         <svg className={`w-5 h-5 group-hover:translate-x-1 transition-all ${isLight ? 'text-slate-300 group-hover:text-blue-500' : 'text-white/20 group-hover:text-slate-300'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
       </div>
-      <p className={`mb-4 sm:mb-6 leading-relaxed text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{description}</p>
-      <div className="flex flex-wrap gap-1.5 sm:gap-2">
+      <p className={`mb-3 sm:mb-4 leading-relaxed text-[13px] sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{description}</p>
+      <div className="flex flex-wrap gap-1.5">
         {features.map((f, i) => (
-          <span key={i} className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs transition-colors ${isLight ? 'bg-slate-50 border border-slate-200 text-slate-500 group-hover:border-blue-300' : 'bg-white/5 border border-white/10 text-white/60 group-hover:border-slate-400/20'}`}>
+          <span key={i} className={`px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] transition-colors ${isLight ? 'bg-slate-50 border border-slate-200 text-slate-500 group-hover:border-blue-300' : 'bg-white/5 border border-white/10 text-white/60 group-hover:border-slate-400/20'}`}>
             {f}
           </span>
         ))}
@@ -183,6 +183,12 @@ interface DomainTag {
   price?: string; 
 }
 
+interface BulkSearchSnapshot {
+  id: string;
+  createdAt: number;
+  domains: DomainTag[];
+}
+
 // Search input section component
 const SearchInputSection: React.FC<{
   input: string;
@@ -215,6 +221,9 @@ const SearchInputSection: React.FC<{
               className={`w-full rounded-lg sm:rounded-xl px-3 sm:px-4 py-3 sm:py-4 focus:outline-none focus:ring-2 min-h-[100px] sm:min-h-[140px] resize-none transition-all text-sm sm:text-base ${isLight ? 'bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-blue-400 focus:ring-blue-400/20' : 'bg-black/30 border border-white/10 text-white placeholder:text-white/30 focus:border-slate-400/50 focus:ring-slate-400/20'}`}
               autoFocus
             />
+            <p className={`mt-2 text-[11px] sm:text-xs ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
+              Separate domain names with commas.
+            </p>
           </div>
         ) : (
           <div className={`flex flex-wrap gap-2 max-h-64 overflow-y-auto p-3 rounded-xl ${isLight ? 'bg-slate-50 border border-slate-200' : 'bg-black/20 border border-white/5'}`}>
@@ -288,6 +297,9 @@ export const BulkDomainSearchLanding: React.FC<{
   progress?: { done: number; total: number };
   counts?: { available: number; taken: number; checking: number };
   showSearchInput?: boolean;
+  recentSearches?: BulkSearchSnapshot[];
+  onLoadPreviousSearch?: (snapshot: BulkSearchSnapshot) => void;
+  onDeletePreviousSearch?: (snapshotId: string) => void;
 }> = ({ 
   onStartSearch, 
   input = '', 
@@ -301,7 +313,10 @@ export const BulkDomainSearchLanding: React.FC<{
   checking = false,
   progress = { done: 0, total: 0 },
   counts = { available: 0, taken: 0, checking: 0 },
-  showSearchInput = false
+  showSearchInput = false,
+  recentSearches = [],
+  onLoadPreviousSearch = () => {},
+  onDeletePreviousSearch = () => {},
 }) => {
   const [mounted, setMounted] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -317,6 +332,25 @@ export const BulkDomainSearchLanding: React.FC<{
       searchRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
+
+  const formatRecentTime = (timestamp: number) => {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMinutes = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+
+    if (diffMinutes < 1) return 'just now';
+    if (diffMinutes < 60) return `${diffMinutes}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    return date.toLocaleDateString();
+  };
+
+  const getSnapshotCounts = (domainsToCount: DomainTag[]) => ({
+    available: domainsToCount.filter((domain) => domain.status === 'available').length,
+    premium: domainsToCount.filter((domain) => domain.status === 'premium').length,
+    taken: domainsToCount.filter((domain) => domain.status === 'taken').length,
+  });
 
   return (
     <div className="w-full">
@@ -356,6 +390,64 @@ export const BulkDomainSearchLanding: React.FC<{
               counts={counts}
             />
           </div>
+
+          {recentSearches.length > 0 && (
+            <div className="mx-auto max-w-5xl px-2 sm:px-0">
+              <div className={`rounded-2xl border p-3 sm:p-4 text-left ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-white/[0.03]'}`}>
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <h3 className={`text-sm sm:text-base font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>Recent bulk searches</h3>
+                    <p className={`text-xs sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
+                      Resume a previous domain set without pasting the same list again.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={scrollToSearch}
+                    className={`text-xs sm:text-sm font-medium ${isLight ? 'text-blue-600 hover:text-blue-700' : 'text-slate-300 hover:text-white'}`}
+                  >
+                    Add a new list
+                  </button>
+                </div>
+
+                <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {recentSearches.slice(0, 6).map((snapshot) => {
+                    const snapshotCounts = getSnapshotCounts(snapshot.domains);
+                    return (
+                      <div
+                        key={snapshot.id}
+                        className={`rounded-xl border p-3 ${isLight ? 'border-slate-200 bg-slate-50/70' : 'border-white/10 bg-black/20'}`}
+                      >
+                        <button type="button" onClick={() => onLoadPreviousSearch(snapshot)} className="w-full text-left">
+                          <div className={`text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white/90'}`}>
+                            {snapshot.domains.length} domains
+                          </div>
+                          <div className={`mt-1 text-xs ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
+                            {snapshotCounts.available} available • {snapshotCounts.premium} premium • {snapshotCounts.taken} taken
+                          </div>
+                          <div className={`mt-2 text-xs ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
+                            Saved {formatRecentTime(snapshot.createdAt)}
+                          </div>
+                        </button>
+                        <div className="mt-3 flex items-center justify-between gap-2">
+                          <Button onClick={() => onLoadPreviousSearch(snapshot)} variant="secondary" size="sm" className="flex-1 text-xs">
+                            Load search
+                          </Button>
+                          <button
+                            type="button"
+                            onClick={() => onDeletePreviousSearch(snapshot.id)}
+                            className={`text-xs ${isLight ? 'text-slate-400 hover:text-red-500' : 'text-white/35 hover:text-red-400'}`}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -503,18 +595,18 @@ export const BulkDomainSearchLanding: React.FC<{
       </section>
 
       {/* Section: Bulk domain search made simple */}
-      <section className={`py-8 sm:py-16 border-t ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
+      <section className={`py-6 sm:py-10 border-t ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
         <div className="max-w-6xl mx-auto px-3 sm:px-6">
-          <div className="text-center mb-6 sm:mb-14">
-            <h2 className={`text-xl sm:text-3xl md:text-5xl font-black mb-2 sm:mb-6 leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-              Bulk domain search<br />made simple
+          <div className="text-center mb-4 sm:mb-7">
+            <h2 className={`text-xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-3 leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
+              Bulk domain search made simple
             </h2>
-            <p className={`max-w-2xl mx-auto text-sm sm:text-lg ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
+            <p className={`max-w-2xl mx-auto text-sm sm:text-base ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
               Three easy steps to check hundreds of domains
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-12 mb-8 sm:mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-5 sm:mb-8">
             <StepCard 
               number="01" 
               title="Enter domains" 
@@ -534,14 +626,14 @@ export const BulkDomainSearchLanding: React.FC<{
           </div>
 
           {/* Code Example */}
-          <div className="bg-[#0d1117] border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
-            <div className="flex items-center gap-2 px-4 sm:px-5 py-3 sm:py-4 border-b border-white/10 bg-white/[0.02]">
-              <span className="w-3 h-3 rounded-full bg-red-500/80" />
-              <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-              <span className="w-3 h-3 rounded-full bg-green-500/80" />
-              <span className="text-sm text-white/40 ml-3 font-mono">domains.txt</span>
+          <div className="bg-[#0d1117] border border-white/10 rounded-2xl overflow-hidden shadow-xl">
+            <div className="flex items-center gap-2 px-3.5 sm:px-4 py-2.5 sm:py-3 border-b border-white/10 bg-white/[0.02]">
+              <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+              <span className="text-xs sm:text-sm text-white/40 ml-2 font-mono">domains.txt</span>
             </div>
-            <pre className="p-4 sm:p-8 text-xs sm:text-sm font-mono text-white/70 overflow-x-auto leading-relaxed">
+            <pre className="p-3.5 sm:p-5 text-[11px] sm:text-sm font-mono text-white/70 overflow-x-auto leading-relaxed">
               <code>{`# Paste your domains in any format
 FoundersPrime.com
 YStartups.com, FoundersBlog.com
@@ -558,18 +650,18 @@ https://example.com/page → example.com`}</code>
       </section>
 
       {/* Section: Bulk domain search solutions by industry */}
-      <section className={`py-8 sm:py-16 border-t ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
+      <section className={`py-6 sm:py-10 border-t ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
         <div className="max-w-6xl mx-auto px-3 sm:px-6">
-          <div className="text-center mb-6 sm:mb-14">
-            <h2 className={`text-xl sm:text-3xl md:text-5xl font-black mb-2 sm:mb-6 leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-              Bulk domain search solutions<br />by industry
+          <div className="text-center mb-4 sm:mb-7">
+            <h2 className={`text-xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-3 leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
+              Bulk domain search solutions by industry
             </h2>
-            <p className={`max-w-2xl mx-auto text-sm sm:text-lg ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
+            <p className={`max-w-2xl mx-auto text-sm sm:text-base ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
               Tailored solutions for different business needs
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <IndustryCard 
               icon="💼"
               title="Domain Investors"

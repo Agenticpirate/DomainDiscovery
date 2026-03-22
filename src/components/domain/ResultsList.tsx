@@ -129,9 +129,9 @@ export function ResultsList({
   }
 
   return (
-    <div className="space-y-3 sm:space-y-4">
+    <div className="space-y-2.5 sm:space-y-3">
       {/* Header with filters and stats */}
-      <div className={`sticky top-14 sm:top-16 z-[5] ${isLight ? 'bg-white/95 border-b border-slate-200' : 'bg-[#0a0a0a]/95 border-b border-white/10'} backdrop-blur-sm py-2 sm:py-3 -mx-3 sm:-mx-6 px-3 sm:px-6`}>
+      <div className={`sticky top-12 sm:top-14 z-[5] ${isLight ? 'bg-white/95 border-b border-slate-200' : 'bg-[#0a0a0a]/95 border-b border-white/10'} backdrop-blur-sm py-2 sm:py-2.5 -mx-3 sm:-mx-6 px-3 sm:px-6`}>
         <div className="flex items-center justify-between gap-2 sm:gap-4 flex-wrap">
           {/* Stats */}
           <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
@@ -218,7 +218,7 @@ export function ResultsList({
 
       {/* Loading State */}
       {isLoading && results.length === 0 && (
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           {[...Array(5)].map((_, i) => (
             <div
               key={i}
@@ -231,7 +231,7 @@ export function ResultsList({
 
       {/* Results Grid */}
       {sortedResults.length > 0 && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-1.5 sm:gap-3">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-1.5 sm:gap-2.5">
           {sortedResults.map((result, index) => (
             <div
               key={result.domain}

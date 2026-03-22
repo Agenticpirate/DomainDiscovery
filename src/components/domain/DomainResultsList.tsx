@@ -54,12 +54,12 @@ export function DomainResultsList({
       {results.map((result, i) => (
         <div
           key={i}
-          className={`glass-card p-4 ${isLight ? 'border-slate-200 hover:border-slate-300' : 'border-white/10 hover:border-white/20'} transition-all duration-300 group animate-fade-in`}
+          className={`glass-card p-3 ${isLight ? 'border-slate-200 hover:border-slate-300' : 'border-white/10 hover:border-white/20'} transition-all duration-300 group animate-fade-in`}
           style={{ animationDelay: `${i * 30}ms` }}
         >
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-4 flex-1 min-w-0">
-              <div className="font-mono font-bold text-lg truncate">{result.domain}</div>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="font-mono font-bold text-base sm:text-lg truncate">{result.domain}</div>
               <div
                 className={`flex items-center gap-1.5 px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider shrink-0 ${
                   result.available
@@ -77,7 +77,7 @@ export function DomainResultsList({
                 </div>
               )}
             </div>
-            <div className="flex items-center gap-4 shrink-0">
+            <div className="flex items-center gap-3 shrink-0">
               {result.available && result.price && (
                 <div className="text-right">
                   <span className={`${isLight ? 'text-slate-600' : 'text-white/60'} font-semibold`}>{result.price}</span>

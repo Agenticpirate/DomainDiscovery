@@ -119,7 +119,7 @@ export async function generateDomainVariations(
 
 export async function checkDomainAvailability(
   domains: string[]
-): Promise<{ domain: string; available: boolean }[]> {
+): Promise<{ domain: string; available: boolean; premium?: boolean; price?: string }[]> {
   try {
     const response = await fetch('/api/domains/instant-check', {
       method: 'POST',

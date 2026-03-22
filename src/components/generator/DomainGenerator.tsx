@@ -8,6 +8,8 @@ import { useTheme } from '@/contexts/ThemeContext';
 interface GeneratedDomain {
   name: string;
   available: boolean;
+  premium?: boolean;
+  price?: string;
   popularity: number;
   category: 'exact' | 'prefix' | 'suffix' | 'compound' | 'alternative';
 }
@@ -125,29 +127,50 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
 
   const checkDomainsAvailability = async (domainNames: string[], variations: GeneratedDomain[]) => {
     try {
-      const response = await fetch('/api/domains/instant-check', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ domains: domainNames })
-      });
-      
-      if (response.ok) {
-        const results = await response.json();
-        
-        // Update variations with real availability data
-        results.forEach((result: { domain: string; available: boolean; premium?: boolean }) => {
-          const domainName = result.domain.replace('.com', '');
-          const variation = variations.find(v => v.name === domainName);
-          if (variation) {
-            variation.available = result.available;
-          }
+      const results: Array<{ domain: string; available: boolean; premium?: boolean; price?: string }> = [];
+
+      for (let i = 0; i < domainNames.length; i += 100) {
+        const batch = domainNames.slice(i, i + 100);
+        const response = await fetch('/api/domains/instant-check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ domains: batch })
         });
+
+        if (!response.ok) {
+          continue;
+        }
+
+        const batchResults = await response.json();
+        if (Array.isArray(batchResults)) {
+          results.push(...batchResults);
+        }
       }
+
+      const resultByDomain = new Map(
+        results.map((result) => [result.domain.toLowerCase(), result])
+      );
+
+      variations.forEach((variation) => {
+        const fullDomain = `${variation.name}.com`.toLowerCase();
+        const result = resultByDomain.get(fullDomain);
+        variation.available = !!result?.available && !result?.premium;
+        variation.premium = !!result?.premium;
+        variation.price = result?.price;
+      });
     } catch (error) {
       console.error('Availability check error:', error);
-      // Keep mock availability if API fails
+      variations.forEach((variation) => {
+        variation.available = false;
+        variation.premium = false;
+        variation.price = undefined;
+      });
     }
   };
+
+  const isAvailableSuggestion = (suggestion: GeneratedDomain) => suggestion.available && !suggestion.premium;
+  const isPremiumSuggestion = (suggestion: GeneratedDomain) => !suggestion.available && !!suggestion.premium;
+  const isTakenSuggestion = (suggestion: GeneratedDomain) => !suggestion.available && !suggestion.premium;
 
   const generateEnhancedVariations = async (keyword: string): Promise<GeneratedDomain[]> => {
     const variations: GeneratedDomain[] = [];
@@ -251,7 +274,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     // Exact match with .com (highest popularity)
     variations.push({
       name: keyword,
-      available: true, // Will be updated by API
+      available: false,
       popularity: 100,
       category: 'exact',
     });
@@ -260,20 +283,20 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     semanticAlternatives.forEach((alt, index) => {
       variations.push({
         name: alt,
-        available: true,
+        available: false,
         popularity: 98 - index,
         category: 'alternative',
       });
       // Also add compound with original keyword
       variations.push({
         name: `${keyword}${alt}`,
-        available: true,
+        available: false,
         popularity: 96 - index,
         category: 'compound',
       });
       variations.push({
         name: `${alt}${keyword}`,
-        available: true,
+        available: false,
         popularity: 95 - index,
         category: 'compound',
       });
@@ -284,7 +307,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       const pop = 95 - Math.floor(index / 5);
       variations.push({
         name: `${prefix}${keyword}`,
-        available: true, // Will be updated by API
+        available: false,
         popularity: pop,
         category: 'prefix',
       });
@@ -295,7 +318,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       const pop = 93 - Math.floor(index / 5);
       variations.push({
         name: `${keyword}${suffix}`,
-        available: true, // Will be updated by API
+        available: false,
         popularity: pop,
         category: 'suffix',
       });
@@ -309,7 +332,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       topSuffixes.slice(0, 5).forEach((suffix, j) => {
         variations.push({
           name: `${prefix}${keyword}${suffix}`,
-          available: true, // Will be updated by API
+          available: false,
           popularity: 85 - Math.floor((i + j) / 2),
           category: 'compound',
         });
@@ -328,7 +351,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       creative.forEach((variant, index) => {
         variations.push({
           name: variant,
-          available: true, // Will be updated by API
+          available: false,
           popularity: 80 - index,
           category: 'alternative',
         });
@@ -358,8 +381,13 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     }
   };
 
-  const availableCount = suggestions.filter(s => s.available).length;
+  const availableCount = suggestions.filter(isAvailableSuggestion).length;
+  const premiumCount = suggestions.filter(isPremiumSuggestion).length;
+  const takenCount = suggestions.filter(isTakenSuggestion).length;
   const totalCount = suggestions.length;
+  const selectedSuggestion = selectedDomain
+    ? suggestions.find((suggestion) => suggestion.name === selectedDomain) ?? null
+    : null;
 
   return (
     <div className="space-y-0">
@@ -403,6 +431,22 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                   <span className="text-emerald-400 font-semibold">
                     {availableCount} available now
+                  </span>
+                </div>
+              )}
+              {premiumCount > 0 && (
+                <div className="flex items-center gap-2">
+                  <div className={`w-2 h-2 rounded-full ${isLight ? 'bg-amber-500' : 'bg-amber-400'}`}></div>
+                  <span className={`${isLight ? 'text-amber-700' : 'text-amber-300'} font-semibold`}>
+                    {premiumCount} premium
+                  </span>
+                </div>
+              )}
+              {takenCount > 0 && (
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-red-500/70"></div>
+                  <span className={isLight ? 'text-slate-500' : 'text-white/50'}>
+                    {takenCount} taken
                   </span>
                 </div>
               )}
@@ -521,9 +565,11 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                 <div
                   key={i}
                   className={`group p-3.5 sm:p-4 border rounded-lg transition-all ${
-                    suggestion.available
+                    isAvailableSuggestion(suggestion)
                       ? `${isLight ? 'bg-white' : 'bg-white/[0.02]'} ${isLight ? 'border-slate-200' : 'border-white/10'} hover:border-emerald-500/30 hover:bg-emerald-500/5`
-                      : `${isLight ? 'bg-slate-50' : 'bg-white/[0.01]'} ${isLight ? 'border-slate-100' : 'border-white/5'} opacity-60`
+                      : isPremiumSuggestion(suggestion)
+                        ? `${isLight ? 'bg-amber-50/60 border-amber-200' : 'bg-amber-500/[0.06] border-amber-400/20'}`
+                        : `${isLight ? 'bg-slate-50' : 'bg-white/[0.01]'} ${isLight ? 'border-slate-100' : 'border-white/5'} opacity-70`
                   }`}
                 >
                   <div className="flex items-center justify-between gap-3">
@@ -536,7 +582,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                       </div>
                     </button>
                     <div className="flex items-center gap-2">
-                      {suggestion.available ? (
+                      {isAvailableSuggestion(suggestion) ? (
                         <>
                           <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                           <button
@@ -546,14 +592,26 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                             .com
                           </button>
                         </>
+                      ) : isPremiumSuggestion(suggestion) ? (
+                        <>
+                          <div className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-amber-500' : 'bg-amber-400'}`}></div>
+                          <span className={`text-xs px-2 py-1 rounded font-medium ${isLight ? 'bg-amber-100 text-amber-700' : 'bg-amber-500/10 text-amber-300'}`}>
+                            Premium
+                          </span>
+                        </>
                       ) : (
                         <>
                           <div className="w-1.5 h-1.5 rounded-full bg-red-500/50"></div>
-                          <span className={`text-xs px-2 py-1 ${isLight ? 'text-slate-400' : 'text-white/30'}`}>.com</span>
+                          <span className={`text-xs px-2 py-1 ${isLight ? 'text-slate-400' : 'text-white/30'}`}>Taken</span>
                         </>
                       )}
                     </div>
                   </div>
+                  {isPremiumSuggestion(suggestion) && suggestion.price && (
+                    <div className={`mt-2 text-xs ${isLight ? 'text-amber-700' : 'text-amber-300'}`}>
+                      Listed from {suggestion.price}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -574,17 +632,22 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         {suggestion.name}
                       </span>
                     </button>
-                    <button
-                      onClick={() => handleComClick(suggestion.name)}
-                      className={`text-xs px-3 py-1 rounded transition-colors ${
-                        suggestion.available
-                          ? 'text-blue-400 hover:text-blue-300 hover:bg-blue-400/10'
-                          : `${isLight ? 'text-slate-400' : 'text-white/30'} cursor-not-allowed`
-                      }`}
-                      disabled={!suggestion.available}
-                    >
-                      .com
-                    </button>
+                    {isAvailableSuggestion(suggestion) ? (
+                      <button
+                        onClick={() => handleComClick(suggestion.name)}
+                        className="text-xs px-3 py-1 rounded transition-colors text-blue-400 hover:text-blue-300 hover:bg-blue-400/10"
+                      >
+                        .com
+                      </button>
+                    ) : isPremiumSuggestion(suggestion) ? (
+                      <span className={`text-xs px-3 py-1 rounded font-medium ${isLight ? 'bg-amber-100 text-amber-700' : 'bg-amber-500/10 text-amber-300'}`}>
+                        Premium
+                      </span>
+                    ) : (
+                      <span className={`text-xs px-3 py-1 rounded ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
+                        Taken
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}
@@ -645,16 +708,33 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               </button>
             </div>
             
-            <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} mb-6`}>
-              Choose your preferred registrar to purchase this domain:
-            </p>
+            {selectedSuggestion && isAvailableSuggestion(selectedSuggestion) && (
+              <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} mb-6`}>
+                Choose your preferred registrar to purchase this domain:
+              </p>
+            )}
+            {selectedSuggestion && isPremiumSuggestion(selectedSuggestion) && (
+              <p className={`text-sm ${isLight ? 'text-amber-700' : 'text-amber-300'} mb-6`}>
+                This domain is listed as premium{selectedSuggestion.price ? ` from ${selectedSuggestion.price}` : ''}. It is not a standard available registration.
+              </p>
+            )}
+            {selectedSuggestion && isTakenSuggestion(selectedSuggestion) && (
+              <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} mb-6`}>
+                This domain appears to be taken and is not currently available for standard registration.
+              </p>
+            )}
             
             <div className="space-y-2">
               {REGISTRARS.map((registrar) => (
                 <button
                   key={registrar.name}
                   onClick={() => handleBuyDomain(selectedDomain, registrar.name)}
-                  className={`w-full text-left px-4 py-3 ${isLight ? 'bg-slate-100' : 'bg-white/5'} ${isLight ? 'hover:bg-slate-200' : 'hover:bg-white/10'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-lg transition-colors group`}
+                  disabled={!selectedSuggestion || !isAvailableSuggestion(selectedSuggestion)}
+                  className={`w-full text-left px-4 py-3 border rounded-lg transition-colors group ${
+                    !selectedSuggestion || !isAvailableSuggestion(selectedSuggestion)
+                      ? `${isLight ? 'bg-slate-50 text-slate-400 border-slate-200' : 'bg-white/[0.03] text-white/30 border-white/10 cursor-not-allowed'}`
+                      : `${isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-white/5 hover:bg-white/10 border-white/10'}`
+                  }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-semibold">{registrar.name}</span>

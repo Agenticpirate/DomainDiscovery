@@ -42,7 +42,7 @@ export default function ComparePage() {
               className="mx-auto mt-3 max-w-3xl text-sm sm:text-base leading-6"
               style={{ color: 'var(--text-secondary)' }}
             >
-              Live top-TLD pricing data verified against TLD-List for 100 widely used extensions across the selected 10 registrars. Promo-code discounts are stripped out so the numbers shown are the regular listed prices.
+              Live top-TLD pricing data verified against TLD-List for a curated set of the most frequently registered extensions across the selected 10 registrars. Promo-code discounts are stripped out so the numbers shown are the regular listed prices.
             </p>
           </div>
         </section>

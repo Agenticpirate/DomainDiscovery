@@ -24,6 +24,148 @@ interface DomainCheckResult {
   available: boolean;
   premium?: boolean;
   price?: string;
+  buyUrl?: string;
+  purchaseInfo?: string;
+}
+
+function getGoDaddyListingUrl(domain: string): string {
+  return `https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(domain)}`;
+}
+
+function normalizeDomainFromItem(item: Record<string, unknown>, fallbackLabel?: string): string | null {
+  const explicitDomain = typeof item.domain === 'string' ? item.domain.trim().toLowerCase() : '';
+  if (explicitDomain) {
+    return explicitDomain;
+  }
+
+  const label = typeof item.label === 'string' ? item.label.trim().toLowerCase() : fallbackLabel?.trim().toLowerCase() || '';
+  const tld = typeof item.tld === 'string' ? item.tld.trim().toLowerCase().replace(/^\./, '') : '';
+
+  if (!label) {
+    return null;
+  }
+
+  return tld ? `${label}.${tld}` : label;
+}
+
+function getBooleanValue(item: Record<string, unknown>, keys: string[]): boolean | undefined {
+  for (const key of keys) {
+    const value = item[key];
+    if (typeof value === 'boolean') {
+      return value;
+    }
+  }
+  return undefined;
+}
+
+function hasSaleKeyword(value: unknown): boolean {
+  return (
+    typeof value === 'string' &&
+    /premium|aftermarket|marketplace|for sale|forsale|buy now|brokered|resale|secondary/i.test(value)
+  );
+}
+
+function inferPremiumFromMarkets(markets: Array<Record<string, unknown>>): boolean {
+  return markets.some((market) => {
+    const rawPrice = market.price ?? market.min_price;
+    if (typeof rawPrice === 'number' && rawPrice > 0) {
+      return true;
+    }
+
+    const explicitBoolean = getBooleanValue(market, [
+      'premium',
+      'isPremium',
+      'forSale',
+      'isForSale',
+      'aftermarket',
+      'isAftermarket',
+      'brokered',
+      'isBrokered',
+      'secondary',
+      'isSecondary',
+    ]);
+
+    if (explicitBoolean) {
+      return true;
+    }
+
+    return ['type', 'listingType', 'kind', 'status', 'source', 'marketType', 'channel'].some((key) =>
+      hasSaleKeyword(market[key])
+    );
+  });
+}
+
+function formatMarketPrice(markets: Array<Record<string, unknown>>): string | undefined {
+  const firstPrice = markets.find((market) => typeof market.price === 'number' || typeof market.min_price === 'number');
+  const rawPrice = firstPrice?.price ?? firstPrice?.min_price;
+  return typeof rawPrice === 'number' && rawPrice > 0 ? `$${(rawPrice / 100).toFixed(2)}` : undefined;
+}
+
+function getPremiumListingUrl(domain: string, markets: Array<Record<string, unknown>>, fallbackBuyUrl?: string): string | undefined {
+  if (markets.length > 0) {
+    return getGoDaddyListingUrl(domain);
+  }
+
+  if (typeof fallbackBuyUrl === 'string' && fallbackBuyUrl.trim()) {
+    return /instantdomainsearch\.com\/get\//i.test(fallbackBuyUrl)
+      ? getGoDaddyListingUrl(domain)
+      : fallbackBuyUrl;
+  }
+
+  return undefined;
+}
+
+function getPurchaseInfo(markets: Array<Record<string, unknown>>, fallbackPurchaseInfo?: string): string | undefined {
+  if (markets.length > 0) {
+    return 'View listing on GoDaddy';
+  }
+
+  if (typeof fallbackPurchaseInfo === 'string' && fallbackPurchaseInfo.trim()) {
+    return /instantdomainsearch\.com\/get\//i.test(fallbackPurchaseInfo)
+      ? 'View listing on GoDaddy'
+      : fallbackPurchaseInfo;
+  }
+
+  return undefined;
+}
+
+function parseDomainItem(
+  item: Record<string, unknown>,
+  options?: { fallbackLabel?: string }
+): DomainCheckResult | null {
+  const domain = normalizeDomainFromItem(item, options?.fallbackLabel);
+  if (!domain) {
+    return null;
+  }
+
+  const markets = Array.isArray(item.markets) ? (item.markets as Array<Record<string, unknown>>) : [];
+  const explicitPremium = getBooleanValue(item, ['premium', 'isPremium', 'forSale', 'isForSale']);
+  const premium = explicitPremium === true || inferPremiumFromMarkets(markets);
+
+  const explicitAvailable = getBooleanValue(item, ['available', 'isAvailable']);
+  const explicitRegistered = getBooleanValue(item, ['isRegistered', 'registered']);
+
+  let available: boolean | undefined;
+  if (typeof explicitAvailable === 'boolean') {
+    available = explicitAvailable;
+  } else if (typeof explicitRegistered === 'boolean') {
+    available = !explicitRegistered;
+  } else if (premium) {
+    available = false;
+  }
+
+  if (typeof available !== 'boolean') {
+    return null;
+  }
+
+  return {
+    domain,
+    available: available && !premium,
+    premium,
+    price: formatMarketPrice(markets),
+    buyUrl: getPremiumListingUrl(domain, markets, typeof item.buy_url === 'string' ? item.buy_url : undefined),
+    purchaseInfo: getPurchaseInfo(markets, typeof item.purchase_info === 'string' ? item.purchase_info : undefined),
+  };
 }
 
 let messageId = 0;
@@ -116,31 +258,15 @@ export async function checkDomainAvailabilityViaMCP(params: { domains: string[] 
 
     const items = (result as { results?: Array<Record<string, unknown>> } | null)?.results;
     if (!Array.isArray(items)) {
-      return params.domains.map(domain => ({
-        domain,
-        available: false
-      }));
+      return [];
     }
 
-    return items.map((item) => {
-      const domain = `${item.label || item.domain}.${item.tld || ''}`.replace(/\.+$/, '');
-      const markets = Array.isArray(item.markets) ? item.markets as Array<Record<string, unknown>> : [];
-      const firstPrice = markets.find((market) => typeof market.price === 'number' || typeof market.min_price === 'number');
-      const rawPrice = firstPrice?.price ?? firstPrice?.min_price;
-      const price = typeof rawPrice === 'number' && rawPrice > 0 ? `$${(rawPrice / 100).toFixed(2)}` : undefined;
-      return {
-        domain,
-        available: !(item.isRegistered ?? false),
-        premium: markets.length > 0,
-        price,
-      };
-    });
+    return items
+      .map((item) => parseDomainItem(item))
+      .filter((item): item is DomainCheckResult => item !== null);
   } catch (error) {
     console.error('MCP check_domain_availability error:', error);
-    return params.domains.map(domain => ({
-      domain,
-      available: false
-    }));
+    return [];
   }
 }
 
@@ -157,12 +283,13 @@ export async function searchDomainsViaMCP(params: { query: string; tlds?: string
 
     const items = (result as { domains?: Array<Record<string, unknown>> } | null)?.domains;
     if (Array.isArray(items)) {
-      return items.map((item) => ({
-        domain: `${item.label || params.query}.${item.tld || ''}`.replace(/\.+$/, ''),
-        available: !(item.isRegistered ?? false),
-        premium: Array.isArray(item.markets) && item.markets.length > 0,
-        price: undefined,
-      }));
+      return items
+        .map((item) => parseDomainItem(item, { fallbackLabel: params.query }))
+        .filter((entry): entry is DomainCheckResult => entry !== null)
+        .map((entry) => ({
+          ...entry,
+          price: undefined,
+        }));
     }
 
     return [];
@@ -184,12 +311,13 @@ export async function generateDomainVariationsViaMCP(params: { keyword: string; 
 
     const items = (result as { variations?: Array<Record<string, unknown>> } | null)?.variations;
     if (Array.isArray(items)) {
-      return items.map((item) => ({
-        domain: `${item.label || params.keyword}.${item.tld || 'com'}`.replace(/\.+$/, ''),
-        available: !(item.isRegistered ?? false),
-        premium: Array.isArray(item.markets) && item.markets.length > 0,
-        price: undefined,
-      }));
+      return items
+        .map((item) => parseDomainItem(item, { fallbackLabel: params.keyword }))
+        .filter((entry): entry is DomainCheckResult => entry !== null)
+        .map((entry) => ({
+          ...entry,
+          price: undefined,
+        }));
     }
 
     return [];

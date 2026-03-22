@@ -34,7 +34,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const hasSuccess = !!success;
 
     const baseStyles =
-      'w-full rounded-xl px-3.5 py-2.5 text-sm sm:px-4 sm:py-3 transition-all duration-150 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed';
+      'w-full rounded-xl px-3 py-2.5 text-sm sm:px-3.5 sm:py-2.5 transition-all duration-150 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
     const themeStyles =
       'bg-[var(--input-bg)] border text-[var(--text-primary)] placeholder:text-[var(--input-placeholder)]';
@@ -46,9 +46,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       : 'border-[var(--input-border)] focus:border-[var(--input-border-focus)] focus:ring-[var(--input-ring)]';
 
     const paddingStyles = leftIcon
-      ? 'pl-10'
+      ? 'pl-10 sm:pl-11'
       : rightIcon
-      ? 'pr-10'
+      ? 'pr-9 sm:pr-10'
       : '';
 
     return (

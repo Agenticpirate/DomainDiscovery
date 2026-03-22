@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    --font-sans: "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: "SFMono-Regular", "JetBrains Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bg-main: #0a0a0a;
     --bg-card: #111111;
     --bg-elevated: #1a1a1a;

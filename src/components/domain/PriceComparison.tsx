@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Input } from '@/components/ui/Input';
 import { useTheme } from '@/contexts/ThemeContext';
 import {
@@ -21,7 +21,7 @@ interface PriceComparisonProps {
   domain?: string;
 }
 
-type SortKey = 'coverage' | 'registration' | 'renewal' | 'transfer' | 'value' | 'alphabetical';
+type SortKey = 'recommended' | 'coverage' | 'registration' | 'renewal' | 'transfer' | 'value' | 'alphabetical';
 
 function formatDate(value: string) {
   const parsed = new Date(`${value}T00:00:00Z`);
@@ -50,6 +50,13 @@ function makeEmptyOffer(registrar: string): RegistrarOffer {
   };
 }
 
+function summarizeTaxAndFees(taxAndFees?: string) {
+  if (!taxAndFees || taxAndFees === 'None') {
+    return null;
+  }
+  return 'Taxes or regional fees may apply';
+}
+
 export function PriceComparison({
   summaries,
   details,
@@ -71,11 +78,18 @@ export function PriceComparison({
   }, [domain]);
 
   const [query, setQuery] = useState('');
-  const [sortKey, setSortKey] = useState<SortKey>('coverage');
+  const [sortKey, setSortKey] = useState<SortKey>('recommended');
   const [selectedTld, setSelectedTld] = useState(initialDetail?.tld ?? fallbackTld);
   const [detail, setDetail] = useState<TldPricingDetail | null>(initialDetail ?? null);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [tableScrollWidth, setTableScrollWidth] = useState(0);
+  const [canScrollTable, setCanScrollTable] = useState(false);
+  const [isScrolledToStart, setIsScrolledToStart] = useState(true);
+  const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
+  const topScrollbarRef = useRef<HTMLDivElement>(null);
+  const tableScrollRef = useRef<HTMLDivElement>(null);
+  const syncScrollRef = useRef(false);
   const [meta, setMeta] = useState({
     generatedAt: generatedAt ?? '',
     sourceName: sourceName ?? 'TLD-List',
@@ -114,6 +128,8 @@ export function PriceComparison({
         : 0;
 
       switch (sortKey) {
+        case 'recommended':
+          return 0;
         case 'coverage':
           if (coverageA !== coverageB) {
             return coverageB - coverageA;
@@ -168,6 +184,49 @@ export function PriceComparison({
     [selectedRegistrarOffers]
   );
 
+  const updateScrollState = useCallback(() => {
+    const tableScroller = tableScrollRef.current;
+    if (!tableScroller) {
+      return;
+    }
+
+    const nextCanScroll = tableScroller.scrollWidth > tableScroller.clientWidth + 4;
+    setTableScrollWidth(tableScroller.scrollWidth);
+    setCanScrollTable(nextCanScroll);
+    setIsScrolledToStart(tableScroller.scrollLeft <= 4);
+    setIsScrolledToEnd(tableScroller.scrollLeft + tableScroller.clientWidth >= tableScroller.scrollWidth - 4);
+  }, []);
+
+  const syncScrollPosition = useCallback((source: 'top' | 'table') => {
+    const topScroller = topScrollbarRef.current;
+    const tableScroller = tableScrollRef.current;
+
+    if (!topScroller || !tableScroller || syncScrollRef.current) {
+      return;
+    }
+
+    syncScrollRef.current = true;
+    if (source === 'top') {
+      tableScroller.scrollLeft = topScroller.scrollLeft;
+    } else {
+      topScroller.scrollLeft = tableScroller.scrollLeft;
+    }
+    syncScrollRef.current = false;
+    updateScrollState();
+  }, [updateScrollState]);
+
+  const nudgeScroll = useCallback((direction: 'left' | 'right') => {
+    const tableScroller = tableScrollRef.current;
+    if (!tableScroller) {
+      return;
+    }
+
+    tableScroller.scrollBy({
+      left: direction === 'left' ? -320 : 320,
+      behavior: 'smooth',
+    });
+  }, []);
+
   useEffect(() => {
     let active = true;
 
@@ -215,9 +274,33 @@ export function PriceComparison({
     };
   }, [detailsByTld, fullMode, initialDetail, selectedTld]);
 
+  useEffect(() => {
+    updateScrollState();
+
+    const handleResize = () => updateScrollState();
+    window.addEventListener('resize', handleResize);
+
+    const tableScroller = tableScrollRef.current;
+    const resizeObserver = typeof ResizeObserver !== 'undefined' && tableScroller
+      ? new ResizeObserver(() => updateScrollState())
+      : null;
+
+    if (resizeObserver && tableScroller) {
+      resizeObserver.observe(tableScroller);
+      if (tableScroller.firstElementChild instanceof HTMLElement) {
+        resizeObserver.observe(tableScroller.firstElementChild);
+      }
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      resizeObserver?.disconnect();
+    };
+  }, [tableRows, updateScrollState]);
+
   if (!detail) {
     return (
-      <div className={`glass-card border p-4 sm:p-5 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+      <div className={`glass-card border p-3 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
         <div className={`rounded-2xl border px-4 py-3 text-sm ${isLight ? 'border-amber-200 bg-amber-50 text-amber-700' : 'border-amber-500/20 bg-amber-500/10 text-amber-200'}`}>
           Loading registrar pricing…
         </div>
@@ -228,7 +311,7 @@ export function PriceComparison({
   if (!fullMode) {
     return (
       <div className="space-y-4">
-        <div className={`glass-card border p-4 sm:p-5 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+        <div className={`glass-card border p-3 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
           <div>
             <div className={`text-[11px] uppercase tracking-[0.22em] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>Registrar Comparison</div>
             <h3 className="mt-1 text-2xl font-black tracking-tight">{detail.tld}</h3>
@@ -237,7 +320,7 @@ export function PriceComparison({
             </p>
           </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
             <MetricCard isLight={isLight} label="Cheapest Reg" value={detail.cheapestRegistration.price ?? '—'} meta={detail.cheapestRegistration.registrar ?? '—'} />
             <MetricCard isLight={isLight} label="Cheapest Renew" value={detail.cheapestRenewal.price ?? '—'} meta={detail.cheapestRenewal.registrar ?? '—'} />
             <MetricCard isLight={isLight} label="Cheapest Transfer" value={detail.cheapestTransfer.price ?? '—'} meta={detail.cheapestTransfer.registrar ?? '—'} />
@@ -245,8 +328,8 @@ export function PriceComparison({
           </div>
         </div>
 
-        <div className={`glass-card border p-4 sm:p-5 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
-          <div className="mb-4">
+        <div className={`glass-card border p-3 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+          <div className="mb-3">
             <h4 className="text-lg font-bold">Top 10 Registrars</h4>
             <p className={`text-sm ${isLight ? 'text-slate-600' : 'text-white/55'}`}>
               Showing only the selected top registrar set for {detail.tld}.
@@ -265,11 +348,11 @@ export function PriceComparison({
 
   return (
     <div className="space-y-3 sm:space-y-4">
-      <div className={`glass-card border p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+      <div className={`glass-card border p-3 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+        <div className="flex flex-col gap-2.5 lg:flex-row lg:items-end lg:justify-between">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.22em]">
-              <span className={isLight ? 'text-slate-500' : 'text-white/45'}>Top 100 TLD Pricing</span>
+              <span className={isLight ? 'text-slate-500' : 'text-white/45'}>Top 50 TLD Pricing</span>
               <span className={`rounded-full px-2 py-1 ${isLight ? 'bg-slate-100 text-slate-600' : 'bg-white/5 text-white/50'}`}>
                 10 registrars only
               </span>
@@ -277,9 +360,9 @@ export function PriceComparison({
                 Regular prices only
               </span>
             </div>
-            <h3 className="text-lg font-black tracking-tight sm:text-xl">Top 100 TLDs Across 10 Registrars</h3>
+            <h3 className="text-lg font-black tracking-tight sm:text-xl">Top 50 Most Registered TLDs Across 10 Registrars</h3>
             <p className={`max-w-3xl text-[13px] leading-5 sm:text-sm sm:leading-6 ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
-              Compare registration prices for the top 100 TLDs across Spaceship, GoDaddy, Namecheap, and the rest of the selected registrar set. Promo codes and outbound source links are removed.
+              Compare regular registration prices for the highest-signal extensions people actually register most often, led by .com, .net, .org, .ai, .io, and .co. Promo codes and outbound source links are removed.
             </p>
           </div>
 
@@ -305,7 +388,7 @@ export function PriceComparison({
       </div>
 
       <div className="grid gap-3 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
-        <div className={`glass-card border p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+        <div className={`glass-card border p-3 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
           <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <Input
               value={query}
@@ -325,6 +408,7 @@ export function PriceComparison({
                   isLight ? 'border-slate-200 bg-white text-slate-900' : 'border-white/10 bg-white/[0.04] text-white'
                 }`}
               >
+                <option value="recommended">Most popular</option>
                 <option value="coverage">Most coverage</option>
                 <option value="registration">Cheapest registration</option>
                 <option value="renewal">Cheapest renewal</option>
@@ -340,14 +424,58 @@ export function PriceComparison({
             <span>Registration price matrix for the selected 10 registrars</span>
           </div>
 
-          <div className="overflow-auto rounded-xl border border-white/10">
-            <table className="min-w-[1080px] w-full text-sm">
+          {canScrollTable && (
+            <div className={`mb-3 rounded-xl border px-3 py-2 ${isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-white/[0.03]'}`}>
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <div className={`text-xs font-semibold uppercase tracking-[0.16em] ${isLight ? 'text-slate-600' : 'text-white/65'}`}>
+                  Scroll sideways to compare all 10 registrars
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => nudgeScroll('left')}
+                    disabled={isScrolledToStart}
+                    className={`rounded-full border px-2.5 py-1 text-xs font-semibold transition ${isLight ? 'border-slate-200 bg-white text-slate-700 disabled:text-slate-300' : 'border-white/10 bg-white/[0.04] text-white/80 disabled:text-white/25'}`}
+                  >
+                    ← Left
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => nudgeScroll('right')}
+                    disabled={isScrolledToEnd}
+                    className={`rounded-full border px-2.5 py-1 text-xs font-semibold transition ${isLight ? 'border-slate-200 bg-white text-slate-700 disabled:text-slate-300' : 'border-white/10 bg-white/[0.04] text-white/80 disabled:text-white/25'}`}
+                  >
+                    Right →
+                  </button>
+                </div>
+              </div>
+
+              <div
+                ref={topScrollbarRef}
+                onScroll={() => syncScrollPosition('top')}
+                className="overflow-x-auto overflow-y-hidden rounded-full"
+              >
+                <div className="h-2 rounded-full bg-transparent" style={{ width: `${tableScrollWidth}px` }} />
+              </div>
+            </div>
+          )}
+
+          <div className="relative">
+            {!isScrolledToStart && <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-8 bg-gradient-to-r from-[var(--bg-main)] to-transparent" />}
+            {!isScrolledToEnd && <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-8 bg-gradient-to-l from-[var(--bg-main)] to-transparent" />}
+
+            <div
+              ref={tableScrollRef}
+              onScroll={() => syncScrollPosition('table')}
+              className="overflow-auto rounded-xl border border-white/10"
+            >
+            <table className="min-w-[1120px] w-full text-sm">
               <thead className={isLight ? 'bg-slate-50' : 'bg-white/[0.03]'}>
                 <tr>
-                  <th className={`sticky left-0 z-10 px-3 py-2 text-left text-xs uppercase tracking-[0.18em] ${isLight ? 'bg-slate-50 text-slate-500' : 'bg-[#111] text-white/45'}`}>TLD</th>
-                  <th className={`px-3 py-2 text-left text-xs uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>Listed</th>
+                  <th className={`sticky left-0 z-10 min-w-[132px] px-4 py-2 text-left text-xs uppercase tracking-[0.18em] ${isLight ? 'bg-slate-50 text-slate-500' : 'bg-[#111] text-white/45'}`}>TLD</th>
+                  <th className={`min-w-[92px] px-3 py-2 text-left text-xs uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>Listed</th>
                   {tableRegistrars.map((registrar) => (
-                    <th key={registrar} className={`px-3 py-2 text-left text-xs uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
+                    <th key={registrar} className={`min-w-[106px] px-3 py-2 text-left text-xs uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
                       {registrar}
                     </th>
                   ))}
@@ -357,15 +485,28 @@ export function PriceComparison({
                 {tableRows.map(({ summary, coverage, prices }) => {
                   const active = summary.tld === selectedTld;
                   return (
-                    <tr key={summary.tld} className={`border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
-                      <td className={`sticky left-0 z-10 px-3 py-2.5 ${active ? (isLight ? 'bg-slate-900 text-white' : 'bg-emerald-500/10 text-white') : isLight ? 'bg-white text-slate-900' : 'bg-[#0f0f0f] text-white'}`}>
-                        <button type="button" onClick={() => setSelectedTld(summary.tld)} className="font-bold tracking-tight">
+                    <tr
+                      key={summary.tld}
+                      role="button"
+                      tabIndex={0}
+                      aria-pressed={active}
+                      onClick={() => setSelectedTld(summary.tld)}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                          event.preventDefault();
+                          setSelectedTld(summary.tld);
+                        }
+                      }}
+                      className={`cursor-pointer border-t transition-colors ${isLight ? 'border-slate-200 hover:bg-slate-50/60 focus-within:bg-slate-50/70' : 'border-white/10 hover:bg-white/[0.035] focus-within:bg-white/[0.05]'} ${active ? (isLight ? 'bg-slate-50/70' : 'bg-white/[0.05]') : ''}`}
+                    >
+                      <td className={`sticky left-0 z-10 min-w-[132px] px-4 py-3 ${active ? (isLight ? 'bg-slate-900 text-white shadow-[inset_-1px_0_0_rgba(255,255,255,0.08)]' : 'bg-white/[0.08] text-white shadow-[inset_-1px_0_0_rgba(255,255,255,0.08)]') : isLight ? 'bg-white text-slate-900' : 'bg-[#0f0f0f] text-white'}`}>
+                        <span className="font-bold tracking-tight">
                           {summary.tld}
-                        </button>
+                        </span>
                       </td>
-                      <td className={`px-3 py-2.5 ${isLight ? 'text-slate-600' : 'text-white/55'}`}>{coverage}/{tableRegistrars.length}</td>
+                      <td className={`whitespace-nowrap px-3 py-3 font-medium ${active ? (isLight ? 'text-slate-900' : 'text-white') : isLight ? 'text-slate-600' : 'text-white/55'}`}>{coverage}/{tableRegistrars.length}</td>
                       {prices.map((price) => (
-                        <td key={`${summary.tld}-${price.registrar}`} className={`px-3 py-2.5 ${isLight ? 'text-slate-700' : 'text-white/75'}`}>
+                        <td key={`${summary.tld}-${price.registrar}`} className={`whitespace-nowrap px-3 py-3 ${isLight ? 'text-slate-700' : 'text-white/75'}`}>
                           <span className={price.value == null ? (isLight ? 'text-slate-400' : 'text-white/30') : ''}>{price.display}</span>
                         </td>
                       ))}
@@ -374,6 +515,7 @@ export function PriceComparison({
                 })}
               </tbody>
             </table>
+            </div>
           </div>
 
           <p className={`mt-2 text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
@@ -382,7 +524,7 @@ export function PriceComparison({
         </div>
 
         <div className="space-y-3">
-          <div className={`glass-card border p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+          <div className={`glass-card border p-3 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
             <div className="flex items-start justify-between gap-3">
               <div>
                 <div className={`text-[11px] uppercase tracking-[0.22em] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>Selected Extension</div>
@@ -404,7 +546,7 @@ export function PriceComparison({
             </div>
           </div>
 
-          <div className={`glass-card border p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+          <div className={`glass-card border p-3 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
                 <h4 className="text-lg font-bold">Top 10 Registrar Breakdown</h4>
@@ -445,10 +587,14 @@ function MetricCard({
   meta: string;
 }) {
   return (
-    <div className={`rounded-xl border p-3 ${metricTone(isLight)}`}>
-      <div className={`text-[11px] uppercase tracking-[0.18em] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>{label}</div>
-      <div className="mt-2 text-base font-bold sm:text-lg">{value}</div>
-      <div className={`mt-1 text-xs leading-5 ${isLight ? 'text-slate-500' : 'text-white/45'}`}>{meta}</div>
+    <div className={`rounded-xl border p-2.5 sm:p-3 ${metricTone(isLight)}`}>
+      <div
+        className={`min-h-[1.65rem] text-[10px] font-semibold uppercase leading-4 tracking-[0.08em] break-words ${isLight ? 'text-slate-500' : 'text-white/45'}`}
+      >
+        {label}
+      </div>
+      <div className="mt-1.5 text-base font-bold sm:text-lg">{value}</div>
+      <div className={`mt-0.5 text-xs leading-5 ${isLight ? 'text-slate-500' : 'text-white/45'}`}>{meta}</div>
     </div>
   );
 }
@@ -460,10 +606,11 @@ function RegistrarCard({ offer, isLight }: { offer: RegistrarOffer; isLight: boo
     offer.transfer.value == null &&
     offer.whoisPrivacy.value == null &&
     offer.whoisPrivacy.display !== 'Unsupported';
+  const taxHint = summarizeTaxAndFees(offer.taxAndFees);
 
   return (
-    <div className={`rounded-xl border p-3 sm:p-4 ${priceCellTone(isLight)}`}>
-      <div className="flex flex-col gap-3">
+    <div className={`rounded-xl border p-3 ${priceCellTone(isLight)}`}>
+      <div className="flex flex-col gap-2.5">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             <h5 className="text-base font-bold">{offer.registrar}</h5>
@@ -473,25 +620,23 @@ function RegistrarCard({ offer, isLight }: { offer: RegistrarOffer; isLight: boo
               </span>
             )}
             {offer.score != null && (
-              <span className={`rounded-full px-2 py-1 text-[11px] ${isLight ? 'bg-emerald-50 text-emerald-700' : 'bg-emerald-500/10 text-emerald-300'}`}>
+              <span className={`rounded-full border px-2 py-1 text-[11px] ${isLight ? 'border-slate-200 bg-slate-100 text-slate-700' : 'border-white/10 bg-white/[0.05] text-white/72'}`}>
                 Score {offer.score.toFixed(2)}
               </span>
             )}
           </div>
           <div className={`mt-1 flex flex-wrap gap-3 text-xs ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-            {offer.rating != null && <span>Rating {offer.rating.toFixed(1)}/5</span>}
-            {offer.reviewCount != null && <span>{offer.reviewCount} reviews</span>}
-            {offer.taxAndFees && <span>{offer.taxAndFees}</span>}
+            {taxHint && <span>{taxHint}</span>}
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-2 2xl:grid-cols-4">
           <MetricCard isLight={isLight} label="Registration" value={offer.registration.display ?? '—'} meta={isUnsupported ? 'Not listed' : 'Standard registration'} />
           <MetricCard isLight={isLight} label="Renewal" value={offer.renewal.display ?? '—'} meta={isUnsupported ? 'Not listed' : 'Standard renewal'} />
           <MetricCard isLight={isLight} label="Transfer" value={offer.transfer.display ?? '—'} meta={isUnsupported ? 'Not listed' : 'Standard transfer'} />
           <MetricCard
             isLight={isLight}
-            label="WHOIS Privacy"
+            label="Privacy"
             value={offer.whoisPrivacy.display ?? '—'}
             meta={
               offer.whoisPrivacy.display === 'Unsupported'
@@ -505,8 +650,8 @@ function RegistrarCard({ offer, isLight }: { offer: RegistrarOffer; isLight: boo
           />
         </div>
 
-        {(offer.features?.length || offer.payments?.length) && (
-          <div className="mt-1 space-y-2 text-xs">
+        {offer.features?.length ? (
+          <div className="mt-0.5 text-xs">
             {offer.features?.length ? (
               <div className={`flex flex-wrap gap-2 ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
                 {offer.features.slice(0, 5).map((feature) => (
@@ -516,13 +661,8 @@ function RegistrarCard({ offer, isLight }: { offer: RegistrarOffer; isLight: boo
                 ))}
               </div>
             ) : null}
-            {offer.payments?.length ? (
-              <div className={isLight ? 'text-slate-500' : 'text-white/45'}>
-                Payment: {offer.payments.slice(0, 4).join(', ')}
-              </div>
-            ) : null}
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

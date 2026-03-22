@@ -14,18 +14,18 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, classN
   const isLight = theme === 'light';
   const sizeClasses = {
     sm: 'w-8 h-8',
-    md: 'w-8 h-8 sm:w-9 sm:h-9',
+    md: 'w-7.5 h-7.5 sm:w-8 sm:h-8',
     lg: 'w-14 h-14',
   };
 
   const textSizeClasses = {
     sm: 'text-sm',
-    md: 'text-[15px] sm:text-[17px]',
+    md: 'text-[14px] sm:text-[16px]',
     lg: 'text-xl',
   };
 
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex items-center gap-1.5 sm:gap-2 ${className}`}>
       <div className="relative group shrink-0">
         <div className={`absolute inset-0 rounded-2xl blur-lg transition-opacity ${
           isLight
@@ -73,7 +73,7 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, classN
               DomainDiscovery
             </span>
           </div>
-          <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
+          <span className={`text-[8px] sm:text-[9px] font-semibold uppercase tracking-[0.16em] ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
             AI-Powered
           </span>
         </div>

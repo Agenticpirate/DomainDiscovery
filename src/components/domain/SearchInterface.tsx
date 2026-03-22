@@ -41,6 +41,7 @@ export function SearchInterface({
   const inputRef = useRef<HTMLInputElement>(null);
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const showRecentPanel = showRecent && showRecentSearches && recentSearches.length > 0;
 
   useEffect(() => {
     if (showRecentSearches && typeof window !== 'undefined') {
@@ -144,7 +145,7 @@ export function SearchInterface({
   }, []);
 
   return (
-    <div className="relative w-full">
+    <div className={`relative w-full ${showRecentPanel ? 'pb-[12.5rem] sm:pb-[13rem]' : ''}`}>
       <div className="relative">
         <Input
           ref={inputRef}
@@ -163,14 +164,14 @@ export function SearchInterface({
           onBlur={() => setTimeout(() => setShowRecent(false), 200)}
           placeholder={placeholder}
           autoFocus={autoFocus}
-          className="pr-16 sm:pr-22"
+          className="pr-14 sm:pr-20"
           leftIcon={<Icons.Search />}
         />
 
         {query && (
           <button
             onClick={handleClear}
-            className="absolute right-9 sm:right-12 top-1/2 -translate-y-1/2 p-1.5 transition-colors"
+            className="absolute right-8 sm:right-11 top-1/2 -translate-y-1/2 p-1 transition-colors"
             style={{ color: 'var(--text-muted)' }}
             aria-label="Clear search"
           >
@@ -191,7 +192,7 @@ export function SearchInterface({
         )}
 
         {isLoading && (
-          <div className="absolute right-2.5 sm:right-3.5 top-1/2 -translate-y-1/2">
+          <div className="absolute right-2.5 sm:right-3 top-1/2 -translate-y-1/2">
             <div className="w-3.5 h-3.5 border-2 rounded-full animate-spin" style={{
               borderColor: 'var(--input-border)',
               borderTopColor: 'var(--text-primary)'
@@ -200,7 +201,7 @@ export function SearchInterface({
         )}
 
         {!query && !isLoading && (
-          <div className="absolute right-2.5 sm:right-3.5 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 text-xs" style={{ color: 'var(--kbd-text)' }}>
+          <div className="absolute right-2.5 sm:right-3 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 text-xs" style={{ color: 'var(--kbd-text)' }}>
             <kbd className="px-1.5 py-0.5 rounded text-[10px]" style={{ background: 'var(--kbd-bg)', border: '1px solid var(--kbd-border)' }} suppressHydrationWarning>
               {typeof window !== 'undefined' && navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
             </kbd>
@@ -211,13 +212,13 @@ export function SearchInterface({
         )}
       </div>
 
-      {showRecent && showRecentSearches && recentSearches.length > 0 && (
+      {showRecentPanel && (
         <div className={`absolute top-full left-0 right-0 mt-1.5 rounded-xl z-50 overflow-hidden animate-fade-in ${
           isLight
             ? 'bg-white border border-slate-200 shadow-lg shadow-slate-900/[0.06]'
             : 'bg-neutral-900 border border-white/10 shadow-xl'
         }`}>
-          <div className="p-1.5">
+          <div className="max-h-[11rem] overflow-y-auto p-1.5 sm:max-h-[11.5rem]">
             <div className="flex items-center justify-between px-2.5 py-1.5">
               <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                 Recent Searches

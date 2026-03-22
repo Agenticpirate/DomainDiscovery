@@ -6,7 +6,10 @@ import { Icons } from '@/components/ui/Icons';
 import { Input } from '@/components/ui/Input';
 import { Badge } from '@/components/ui/Badge';
 import { AvailabilityIndicator } from '@/components/ui/AvailabilityIndicator';
+import { PreferredRegistrarSelect } from '@/components/domain/RegistrarControls';
 import { useTheme } from '@/contexts/ThemeContext';
+import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
+import { getRegistrarUrl } from '@/lib/registrars';
 import { checkDomainAvailability } from '@/services/instantDomainService';
 
 interface BrandableDomain {
@@ -28,6 +31,7 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
   const [isGenerating, setIsGenerating] = useState(false);
   const [results, setResults] = useState<BrandableDomain[]>([]);
   const { theme } = useTheme();
+  const { selectedRegistrar, setSelectedRegistrar } = usePreferredRegistrar();
   const isLight = theme === 'light';
 
   const styles = [
@@ -90,14 +94,31 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
     setIsGenerating(false);
   };
 
+  const handleResultClick = (result: BrandableDomain) => {
+    onSelect?.(result.domain);
+
+    const targetUrl = result.available
+      ? getRegistrarUrl(result.domain, selectedRegistrar)
+      : `https://who.is/whois/${encodeURIComponent(result.domain)}`;
+
+    window.open(targetUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className={`glass-card p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
       <div className="mb-5">
-        <div className="flex items-center gap-3 mb-2">
+        <div className="mb-2 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div className="flex items-center gap-3">
           <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>
             <Icons.Star />
           </div>
-          <h3 className="text-lg font-bold">Find Brandable Domains</h3>
+            <h3 className="text-lg font-bold">Find Brandable Domains</h3>
+          </div>
+          <PreferredRegistrarSelect
+            selectedRegistrar={selectedRegistrar}
+            onSelectRegistrar={setSelectedRegistrar}
+            label="Registrar"
+          />
         </div>
         <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
           Discover unique, memorable brandable domain names perfect for your business
@@ -196,6 +217,14 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
                     <span>•</span>
                     <span>Pronunciation: {result.pronunciation}</span>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => handleResultClick(result)}
+                    className={`font-mono text-left text-sm transition-colors ${result.available ? (isLight ? 'text-slate-700 hover:text-slate-950' : 'text-white/80 hover:text-white') : (isLight ? 'text-slate-400 hover:text-slate-600' : 'text-white/35 hover:text-white/55')}`}
+                    title={result.available ? `Register on ${selectedRegistrar}` : 'View WHOIS'}
+                  >
+                    Open with {result.available ? selectedRegistrar : 'WHOIS'}
+                  </button>
                   <Badge variant="neutral" size="sm">
                     {result.style}
                   </Badge>
@@ -204,7 +233,7 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
                   variant={result.available ? 'primary' : 'secondary'}
                   size="sm"
                   className="w-full sm:w-auto opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
-                  onClick={() => onSelect?.(result.domain)}
+                  onClick={() => handleResultClick(result)}
                 >
                   {result.available ? 'Register' : 'View'}
                 </Button>

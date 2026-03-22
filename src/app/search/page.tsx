@@ -6,8 +6,12 @@ import Link from 'next/link';
 import { Navigation } from '@/components/layout/Navigation';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { Icons } from '@/components/ui/Icons';
+import { PreferredRegistrarSelect, RegistrarActionMenu } from '@/components/domain/RegistrarControls';
+import { SearchInterface } from '@/components/domain/SearchInterface';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
+import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
+import { getRegistrarUrl, type RegistrarName } from '@/lib/registrars';
 import { searchDomains, checkDomainAvailability } from '@/services/instantDomainService';
 import extensionsData from '@/data/extensions.json';
 
@@ -18,6 +22,8 @@ interface DomainResult {
   price?: string;
   premium?: boolean;
   registrar?: string;
+  buyUrl?: string;
+  purchaseInfo?: string;
 }
 
 interface PremiumEnrichment {
@@ -26,6 +32,8 @@ interface PremiumEnrichment {
   premium: boolean;
   price?: string;
   source?: 'godaddy' | 'mcp' | 'cache' | 'fallback';
+  buyUrl?: string;
+  purchaseInfo?: string;
 }
 
 const MAX_SEARCH_TLDS = 260;
@@ -107,6 +115,7 @@ function SearchPageContent() {
   const premiumFetchInFlightRef = useRef(false);
   const { theme } = useTheme();
   const { showToast } = useToast();
+  const { selectedRegistrar, setSelectedRegistrar } = usePreferredRegistrar();
   const isLight = theme === 'light';
 
   useEffect(() => {
@@ -176,8 +185,8 @@ function SearchPageContent() {
         domain: d.domain,
         available: d.available,
         tld: 'com',
-        price: d.available ? '$12.99' : undefined,
-        premium: !d.available,
+        price: d.price || (d.available ? '$12.99' : undefined),
+        premium: !!d.premium,
       }));
       setBrandableResults(brandable);
       setIsBrandableLoading(false);
@@ -197,15 +206,12 @@ function SearchPageContent() {
     router.replace('/search', { scroll: false });
   };
 
-  const handleSearchNewDomain = () => {
-    const nextQuery = window.prompt('Enter a domain keyword');
-    if (!nextQuery?.trim()) return;
-
+  const handleLiveSearch = useCallback((nextQuery: string) => {
     const clean = nextQuery.trim();
     setQuery(clean);
-    router.replace(`/search?q=${encodeURIComponent(clean)}`, { scroll: false });
-    doSearch(clean);
-  };
+    router.replace(clean ? `/search?q=${encodeURIComponent(clean)}` : '/search', { scroll: false });
+    void doSearch(clean);
+  }, [doSearch, router]);
 
   useEffect(() => {
     setQuery(initialQuery);
@@ -216,9 +222,9 @@ function SearchPageContent() {
     }
   }, [initialQuery, doSearch]);
 
-  const handleBuy = (domain: string) => {
-    window.open(`https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(domain)}`, '_blank');
-  };
+  const handleBuy = useCallback((domain: string) => {
+    window.open(getRegistrarUrl(domain, selectedRegistrar), '_blank', 'noopener,noreferrer');
+  }, [selectedRegistrar]);
 
   const handleSave = (domain: string) => {
     const isSaved = savedDomains.includes(domain);
@@ -245,8 +251,6 @@ function SearchPageContent() {
   };
 
   const primary = results.find(r => r.domain.endsWith('.com')) || results[0];
-  const extensions = results.filter(r => r !== primary);
-  const taken = results.filter(r => !r.available);
   const brandableTaken = brandableResults.filter(r => !r.available);
 
   const premiumCandidates = useMemo(() => {
@@ -313,7 +317,7 @@ function SearchPageContent() {
       const key = candidate.domain.toLowerCase();
       if (seen.has(key)) return;
       seen.add(key);
-      collected.push({ ...candidate, premium: true });
+      collected.push(candidate);
     };
 
     results.filter(r => r.premium).forEach(pushIfNew);
@@ -328,7 +332,15 @@ function SearchPageContent() {
         const enriched = premiumEnrichmentMap[r.domain.toLowerCase()];
         pushIfNew({ ...r, price: enriched?.price || r.price });
       });
-    brandableTaken.forEach(pushIfNew);
+    brandableTaken
+      .filter((result) => {
+        const enriched = premiumEnrichmentMap[result.domain.toLowerCase()];
+        return !!enriched?.premium || !!enriched?.price;
+      })
+      .forEach((result) => {
+        const enriched = premiumEnrichmentMap[result.domain.toLowerCase()];
+        pushIfNew({ ...result, price: enriched?.price || result.price, premium: !!enriched?.premium });
+      });
 
     const enrichedCollected = collected.map(item => {
       const enriched = premiumEnrichmentMap[item.domain.toLowerCase()];
@@ -341,9 +353,22 @@ function SearchPageContent() {
     });
 
     return enrichedCollected
-      .filter(item => item.premium || !!item.price)
+      .filter(item => item.premium)
       .slice(0, 36);
   }, [results, brandableTaken, premiumEnrichmentMap]);
+
+  const premiumDomainSet = useMemo(
+    () => new Set(premiumResults.map((result) => result.domain.toLowerCase())),
+    [premiumResults]
+  );
+  const extensions = useMemo(
+    () => results.filter((result) => result !== primary && !premiumDomainSet.has(result.domain.toLowerCase())),
+    [results, primary, premiumDomainSet]
+  );
+  const taken = useMemo(
+    () => extensions.filter((result) => !result.available),
+    [extensions]
+  );
 
   const midpoint = Math.ceil(extensions.length / 2);
   const col1 = extensions.slice(0, midpoint);
@@ -357,32 +382,40 @@ function SearchPageContent() {
       <Navigation activeTool="search" onToolSelect={() => {}} />
 
       <main className="relative pt-14 sm:pt-20">
-        {/* Query actions */}
-        <div className={`px-3 sm:px-6 py-3 ${isLight ? 'bg-white/80' : 'bg-black/40'} backdrop-blur-sm border-b ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
-          <div className="max-w-5xl mx-auto flex items-center justify-between gap-3 flex-wrap">
-            <div className="flex items-center gap-2 min-w-0">
-              <Icons.Search />
-              <span className={`text-xs sm:text-sm font-mono truncate ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
-                {query ? query : 'No active query'}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleResetSearch}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-colors ${
-                  isLight ? 'border-slate-300 text-slate-700 hover:bg-slate-100' : 'border-white/15 text-white/70 hover:bg-white/10'
-                }`}
-              >
-                Reset
-              </button>
-              <button
-                onClick={handleSearchNewDomain}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
-                  isLight ? 'bg-slate-900 text-white hover:bg-slate-700' : 'bg-white text-black hover:bg-white/90'
-                }`}
-              >
-                Search New Domain
-              </button>
+        <div className={`px-3 sm:px-6 py-3 sm:py-4 ${isLight ? 'bg-white/80' : 'bg-black/40'} backdrop-blur-sm border-b ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
+          <div className="max-w-5xl mx-auto space-y-3">
+            <SearchInterface
+              initialQuery={query}
+              placeholder="Search domains instantly"
+              onSearch={handleLiveSearch}
+              onClear={handleResetSearch}
+              autoFocus={true}
+              showRecentSearches={false}
+              debounceMs={120}
+              isLoading={isLoading}
+            />
+            <div className="flex items-center justify-between gap-3 flex-wrap">
+              <div className="flex items-center gap-2 min-w-0">
+                <Icons.Search />
+                <span className={`text-xs sm:text-sm font-mono truncate ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
+                  {query ? query : 'Enter a domain query to begin'}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <PreferredRegistrarSelect
+                  selectedRegistrar={selectedRegistrar}
+                  onSelectRegistrar={setSelectedRegistrar}
+                  label="Registrar"
+                />
+                <button
+                  onClick={handleResetSearch}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-colors ${
+                    isLight ? 'border-slate-300 text-slate-700 hover:bg-slate-100' : 'border-white/15 text-white/70 hover:bg-white/10'
+                  }`}
+                >
+                  Reset
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -434,15 +467,25 @@ function SearchPageContent() {
             {primary && (
               <div className="mb-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                  <h2 className={`text-2xl sm:text-4xl font-black font-mono ${primary.available ? (isLight ? 'text-emerald-600' : 'text-emerald-400') : (isLight ? 'text-red-600' : 'text-red-400')}`}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (primary.available) {
+                        handleBuy(primary.domain);
+                        return;
+                      }
+                      window.open(`https://who.is/whois/${encodeURIComponent(primary.domain)}`, '_blank', 'noopener,noreferrer');
+                    }}
+                    className={`text-left text-2xl sm:text-4xl font-black font-mono transition-opacity hover:opacity-90 ${primary.available ? (isLight ? 'text-emerald-600' : 'text-emerald-400') : (isLight ? 'text-red-600' : 'text-red-400')}`}
+                  >
                     {primary.domain}
-                  </h2>
-                  <button onClick={() => handleBuy(primary.domain)} className={`px-6 py-2.5 text-sm font-bold rounded-lg transition-colors ${
+                  </button>
+                  <button onClick={() => primary.available ? handleBuy(primary.domain) : window.open(`https://who.is/whois/${encodeURIComponent(primary.domain)}`, '_blank', 'noopener,noreferrer')} className={`px-6 py-2.5 text-sm font-bold rounded-lg transition-colors ${
                     primary.available
                       ? 'bg-emerald-500 text-white hover:bg-emerald-600'
                       : isLight ? 'bg-red-50 text-red-600 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
                   }`}>
-                    {primary.available ? 'Continue' : 'Lookup'} &rarr;
+                    {primary.available ? `Continue with ${selectedRegistrar}` : 'Lookup'} &rarr;
                   </button>
                 </div>
 
@@ -501,8 +544,8 @@ function SearchPageContent() {
                       <Link href="/domain-extensions" className="text-xs font-medium transition-colors hover:underline" style={{ color: 'var(--text-muted)' }}>See all</Link>
                     </div>
                     <div className="grid grid-cols-2 gap-x-4">
-                      <div>{col1.map(r => <DomainRow key={r.domain} result={r} isLight={isLight} onBuy={handleBuy} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} />)}</div>
-                      <div>{col2.map(r => <DomainRow key={r.domain} result={r} isLight={isLight} onBuy={handleBuy} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} />)}</div>
+                      <div>{col1.map(r => <DomainRow key={r.domain} result={r} isLight={isLight} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} selectedRegistrar={selectedRegistrar} onSelectRegistrar={setSelectedRegistrar} />)}</div>
+                      <div>{col2.map(r => <DomainRow key={r.domain} result={r} isLight={isLight} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} selectedRegistrar={selectedRegistrar} onSelectRegistrar={setSelectedRegistrar} />)}</div>
                     </div>
                   </div>
 
@@ -525,7 +568,7 @@ function SearchPageContent() {
                     ) : premiumResults.length > 0 ? (
                       <>
                         {premiumResults.map(r => (
-                          <DomainRow key={r.domain} result={r} isLight={isLight} onBuy={handleBuy} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} />
+                          <DomainRow key={r.domain} result={r} isLight={isLight} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} selectedRegistrar={selectedRegistrar} onSelectRegistrar={setSelectedRegistrar} />
                         ))}
                       </>
                     ) : (
@@ -559,36 +602,75 @@ export default function SearchPage() {
 }
 
 /* ── Domain Extension Row ── */
-function DomainRow({ result, isLight, onBuy, onSave, isSaved }: {
-  result: DomainResult; isLight: boolean; onBuy: (d: string) => void; onSave: (d: string) => void; isSaved: boolean;
+function DomainRow({ result, isLight, onSave, isSaved, selectedRegistrar, onSelectRegistrar }: {
+  result: DomainResult;
+  isLight: boolean;
+  onSave: (d: string) => void;
+  isSaved: boolean;
+  selectedRegistrar: RegistrarName;
+  onSelectRegistrar: (registrar: RegistrarName) => void;
 }) {
   const isAvailable = result.available;
   const price = result.price ? parseFloat(result.price.replace(/[^0-9.]/g, '')) : null;
   const showPremiumPrice = !!result.premium && !isAvailable && !!price;
   const ctaText = showPremiumPrice ? `$${price.toFixed(0)}` : (isAvailable ? (price ? `$${price.toFixed(0)}` : 'Continue') : 'Lookup');
+  const domainHref = isAvailable
+    ? getRegistrarUrl(result.domain, selectedRegistrar)
+    : result.premium && result.buyUrl
+      ? result.buyUrl
+      : `https://who.is/whois/${encodeURIComponent(result.domain)}`;
+  const domainTitle = isAvailable
+    ? `Register on ${selectedRegistrar}`
+    : result.premium && result.buyUrl
+      ? (result.purchaseInfo || 'View premium listing')
+      : 'View WHOIS';
 
   return (
     <div className={`flex items-center justify-between gap-1 py-[5px] px-1 rounded transition-colors ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.03]'}`}>
       <div className="flex items-center gap-2 min-w-0 flex-1">
         <span className={`w-2 h-2 rounded-full shrink-0 ${result.premium ? 'bg-amber-500' : isAvailable ? 'bg-emerald-500' : 'bg-red-500'}`} />
-        <span className={`text-[13px] font-mono truncate ${isAvailable ? (isLight ? 'text-slate-800' : 'text-white/90') : (isLight ? 'text-slate-400' : 'text-white/35')}`}>
+        <a
+          href={domainHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={domainTitle}
+          className={`text-[13px] font-mono truncate transition-colors ${isAvailable ? (isLight ? 'text-slate-800 hover:text-slate-950' : 'text-white/90 hover:text-white') : (isLight ? 'text-slate-400 hover:text-slate-600' : 'text-white/35 hover:text-white/55')}`}
+        >
           {result.domain}
-        </span>
+        </a>
       </div>
       <div className="flex items-center gap-1 shrink-0">
         <button onClick={() => onSave(result.domain)} className={`p-1 rounded transition-colors ${isSaved ? 'text-emerald-400' : isLight ? 'text-slate-200 hover:text-slate-400' : 'text-white/10 hover:text-white/40'}`} aria-label="Save">
           <svg className="w-3.5 h-3.5" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
         </button>
-        <button onClick={() => onBuy(result.domain)} className={`flex items-center gap-0.5 px-2 py-1 text-[11px] font-bold rounded transition-colors ${
-          showPremiumPrice
-            ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
-            : isAvailable
-              ? 'bg-emerald-500 text-white hover:bg-emerald-600'
+        <RegistrarActionMenu
+          domain={result.domain}
+          selectedRegistrar={selectedRegistrar}
+          onSelectRegistrar={onSelectRegistrar}
+          canRegister={isAvailable}
+          primaryLabel={ctaText}
+          premiumUrl={result.premium ? result.buyUrl : undefined}
+          premiumLabel={result.purchaseInfo}
+          primaryButtonClassName={`px-2 py-1 text-[11px] font-bold rounded transition-colors ${
+            showPremiumPrice
+              ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
+              : isAvailable
+                ? 'bg-emerald-500 text-white hover:bg-emerald-600'
+                : isLight ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
+          }`}
+          chevronButtonClassName={`rounded p-1.5 transition-colors ${
+            showPremiumPrice
+              ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
+              : isAvailable
+                ? 'bg-emerald-500 text-white hover:bg-emerald-600'
+                : isLight ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
+          }`}
+          fallbackButtonClassName={`px-2 py-1 text-[11px] font-bold rounded transition-colors ${
+            showPremiumPrice
+              ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
               : isLight ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
-        }`}>
-          {ctaText}
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-        </button>
+          }`}
+        />
       </div>
     </div>
   );

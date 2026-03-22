@@ -63,6 +63,61 @@ type RawData = {
 
 const raw = priceData as RawData;
 
+const CURATED_POPULAR_TLDS = [
+  '.com',
+  '.net',
+  '.org',
+  '.ai',
+  '.io',
+  '.co',
+  '.app',
+  '.dev',
+  '.in',
+  '.us',
+  '.xyz',
+  '.info',
+  '.biz',
+  '.me',
+  '.tv',
+  '.shop',
+  '.store',
+  '.online',
+  '.site',
+  '.tech',
+  '.blog',
+  '.page',
+  '.cloud',
+  '.software',
+  '.live',
+  '.world',
+  '.today',
+  '.one',
+  '.link',
+  '.website',
+  '.space',
+  '.digital',
+  '.email',
+  '.tools',
+  '.support',
+  '.click',
+  '.club',
+  '.news',
+  '.fun',
+  '.cc',
+  '.uk',
+  '.co.uk',
+  '.ca',
+  '.de',
+  '.au',
+  '.eu',
+  '.nl',
+  '.fr',
+  '.it',
+  '.es',
+] as const;
+
+const POPULAR_TLD_ORDER = new Map<string, number>(CURATED_POPULAR_TLDS.map((tld, index) => [tld, index]));
+
 export const TOP_COMPARISON_REGISTRARS = [
   'Spaceship',
   'GoDaddy',
@@ -76,22 +131,36 @@ export const TOP_COMPARISON_REGISTRARS = [
   'Unstoppable Domains',
 ] as const;
 
+function getTrackedCoverage(entry: TldPricingDetail) {
+  return TOP_COMPARISON_REGISTRARS.reduce((count, registrar) => {
+    return count + (getRegistrarOfferForTld(entry, registrar)?.registration.value != null ? 1 : 0);
+  }, 0);
+}
+
+function getCuratedDetails(): TldPricingDetail[] {
+  return raw.extensions
+    .filter((entry) => POPULAR_TLD_ORDER.has(entry.tld))
+    .filter((entry) => getTrackedCoverage(entry) >= 2)
+    .sort((a, b) => (POPULAR_TLD_ORDER.get(a.tld) ?? Number.MAX_SAFE_INTEGER) - (POPULAR_TLD_ORDER.get(b.tld) ?? Number.MAX_SAFE_INTEGER));
+}
+
 export function getAllTldPriceDetails(): TldPricingDetail[] {
-  return raw.extensions;
+  return getCuratedDetails();
 }
 
 export function getTldPriceDatasetMeta() {
+  const curatedDetails = getCuratedDetails();
   return {
     generatedAt: raw.generatedAt,
     sourceName: raw.sourceName,
     sourceUrl: raw.sourceUrl,
-    extensionCount: raw.extensionCount,
+    extensionCount: curatedDetails.length,
     failedExtensions: raw.failedExtensions,
   };
 }
 
 export function getTldPriceSummaryList(): TldPricingSummary[] {
-  return raw.extensions.map((entry) => ({
+  return getCuratedDetails().map((entry) => ({
     tld: entry.tld,
     registrarCount: entry.registrarCount,
     cheapestRegistration: entry.cheapestRegistration,

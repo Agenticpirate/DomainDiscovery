@@ -138,7 +138,7 @@ export const GeneratorContent: React.FC = () => {
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className={`p-4 sm:p-6 ${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl ${isLight ? 'hover:border-blue-300' : 'hover:border-white/20'} ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.04]'} transition-all animate-fade-in`}
+              className={`p-4 sm:p-6 ${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200 hover:border-slate-300 hover:bg-slate-50' : 'border-white/10 hover:border-white/20 hover:bg-white/[0.04]'} rounded-xl transition-all animate-fade-in`}
             >
               <div className="flex items-start gap-3 sm:gap-4">
                 <div className="text-3xl sm:text-4xl">{benefit.icon}</div>
@@ -161,7 +161,7 @@ export const GeneratorContent: React.FC = () => {
           {tips.map((tip, index) => (
             <div
               key={index}
-              className={`p-4 sm:p-6 ${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl ${isLight ? 'hover:border-blue-300' : 'hover:border-white/20'} ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.04]'} transition-all group animate-fade-in`}
+              className={`p-4 sm:p-6 ${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200 hover:border-slate-300 hover:bg-slate-50' : 'border-white/10 hover:border-white/20 hover:bg-white/[0.04]'} rounded-xl transition-all group animate-fade-in`}
             >
               <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${isLight ? 'from-slate-200 to-slate-100' : 'from-white/10 to-white/5'} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform`}>
                 {tip.icon}
@@ -180,7 +180,9 @@ export const GeneratorContent: React.FC = () => {
         </h2>
         <div className="space-y-5 sm:space-y-8">
           <div className="flex gap-4 sm:gap-6 items-start">
-            <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white font-bold text-base sm:text-lg">
+            <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-base sm:text-lg ${
+              isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
+            }`}>
               1
             </div>
             <div>
@@ -193,7 +195,9 @@ export const GeneratorContent: React.FC = () => {
           </div>
 
           <div className="flex gap-4 sm:gap-6 items-start">
-            <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-base sm:text-lg">
+            <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-base sm:text-lg ${
+              isLight ? 'bg-slate-800 text-white' : 'bg-white/85 text-black'
+            }`}>
               2
             </div>
             <div>
@@ -206,20 +210,24 @@ export const GeneratorContent: React.FC = () => {
           </div>
 
           <div className="flex gap-4 sm:gap-6 items-start">
-            <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-base sm:text-lg">
+            <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-base sm:text-lg ${
+              isLight ? 'bg-slate-700 text-white' : 'bg-white/70 text-black'
+            }`}>
               3
             </div>
             <div>
               <h3 className="text-lg sm:text-xl font-bold mb-2">Real-Time Availability Check</h3>
               <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>
                 Each suggestion is instantly checked against live registrar databases. Available domains are 
-                highlighted with a green indicator, so you know exactly which names you can register.
+                highlighted with a clear status indicator, so you know exactly which names you can register.
               </p>
             </div>
           </div>
 
           <div className="flex gap-4 sm:gap-6 items-start">
-            <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-base sm:text-lg">
+            <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-base sm:text-lg ${
+              isLight ? 'bg-slate-600 text-white' : 'bg-white/55 text-black'
+            }`}>
               4
             </div>
             <div>
@@ -242,7 +250,7 @@ export const GeneratorContent: React.FC = () => {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className={`${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl overflow-hidden ${isLight ? 'hover:border-blue-300' : 'hover:border-white/20'} transition-all`}
+              className={`${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200 hover:border-slate-300' : 'border-white/10 hover:border-white/20'} rounded-xl overflow-hidden transition-all`}
             >
               <button
                 onClick={() => setOpenFaq(openFaq === index ? null : index)}
@@ -287,7 +295,7 @@ export const GeneratorContent: React.FC = () => {
             <a
               key={keyword}
               href={`/generator?q=${keyword}`}
-              className={`px-3 py-1.5 sm:px-4 sm:py-2 ${isLight ? 'bg-slate-100' : 'bg-white/5'} ${isLight ? 'hover:bg-slate-200' : 'hover:bg-white/10'} border ${isLight ? 'border-slate-200' : 'border-white/10'} ${isLight ? 'hover:border-blue-300' : 'hover:border-white/20'} rounded-lg text-xs sm:text-sm font-medium transition-all`}
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 ${isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 hover:border-slate-300' : 'bg-white/5 hover:bg-white/10 border-white/10 hover:border-white/20'} border rounded-lg text-xs sm:text-sm font-medium transition-all`}
             >
               {keyword}
             </a>
