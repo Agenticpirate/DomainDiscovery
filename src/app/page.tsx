@@ -71,9 +71,9 @@ export default function Home() {
       <main className="relative pt-[3.5rem] sm:pt-[4.45rem]">
         
         {showMainSearch && (
-          <section className="px-3 sm:px-6 pt-1.5 sm:pt-5 pb-1 sm:pb-2.5">
+          <section className="px-3 sm:px-6 pt-3 sm:pt-5 pb-0 sm:pb-2.5">
             <div className="max-w-[56rem] mx-auto text-center">
-              <h1 className="text-[1.75rem] leading-[1.05] sm:text-[3.7rem] md:text-[4.35rem] font-black tracking-tight mb-0.5 sm:mb-1.5 animate-slide-up">
+              <h1 className="text-[2rem] leading-[1.05] sm:text-[3.7rem] md:text-[4.35rem] font-black tracking-tight mb-1 sm:mb-1.5 animate-slide-up">
                 <span className="block bg-clip-text text-transparent" style={{
                   backgroundImage: isLight
                     ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
@@ -81,12 +81,12 @@ export default function Home() {
                 }}>
                   Find Your Perfect Domain
                 </span>
-                <span className="block text-[0.75rem] sm:text-[1.5rem] md:text-[1.95rem] mt-0 font-bold" style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
+                <span className="block text-[0.85rem] sm:text-[1.5rem] md:text-[1.95rem] mt-0.5 font-bold" style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
               </h1>
               <p className="hidden sm:block text-[12px] sm:text-[14px] max-w-[40rem] mx-auto mb-2.5 sm:mb-3.5" style={{ color: 'var(--text-tertiary)' }}>
                 Search millions of domains with instant results. Compare prices across registrars. Register in one click.
               </p>
-              <p className="sm:hidden text-[10px] max-w-[26rem] mx-auto mb-1.5 leading-tight" style={{ color: 'var(--text-tertiary)' }}>
+              <p className="sm:hidden text-[11px] max-w-[26rem] mx-auto mb-2 leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
                 1,600+ TLDs · Real-time results · Compare prices
               </p>
 

@@ -150,7 +150,7 @@ export const HomePageContent: React.FC = () => {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-2 sm:pt-0">
+      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-0 sm:pt-0">
         <div className="text-center mb-2 sm:mb-4.5">
           <h2 className="text-base sm:text-4xl font-black mb-0.5 sm:mb-2">Popular Extensions</h2>
           <p style={{ color: 'var(--text-tertiary)' }} className="hidden sm:block text-[11px] sm:text-base max-w-xl mx-auto">
