@@ -42,22 +42,12 @@ export const metadata: Metadata = {
     title: "Domain Name Search: Find Available Domains Instantly",
     description:
       "Domain name search with instant results. Check domain availability as you type with results in milliseconds. Find and buy domains with our AI-powered search tool across 1,600+ extensions.",
-    images: [
-      {
-        url: "/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: "DomainDiscovery - The Fastest Domain Search Tool on the Internet",
-        type: "image/svg+xml",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Domain Name Search: Find Available Domains Instantly",
     description:
       "Domain name search with instant results. Check domain availability as you type across 1,600+ extensions. AI-powered search, bulk checker, and price comparison.",
-    images: ["/og-image.svg"],
     creator: "@domainsdiscovery",
   },
   robots: {
