@@ -71,9 +71,9 @@ export default function Home() {
       <main className="relative pt-[3.5rem] sm:pt-[4.45rem]">
         
         {showMainSearch && (
-          <section className="px-3 sm:px-6 pt-2 sm:pt-5 pb-1.5 sm:pb-2.5">
+          <section className="px-3 sm:px-6 pt-1 sm:pt-5 pb-1 sm:pb-2.5">
             <div className="max-w-[56rem] mx-auto text-center">
-              <h1 className="text-[1.45rem] leading-[1.05] sm:text-[3.7rem] md:text-[4.35rem] font-black tracking-tight mb-0.5 sm:mb-1.5 animate-slide-up">
+              <h1 className="text-[1.3rem] leading-[1.05] sm:text-[3.7rem] md:text-[4.35rem] font-black tracking-tight mb-0.5 sm:mb-1.5 animate-slide-up">
                 <span className="block bg-clip-text text-transparent" style={{
                   backgroundImage: isLight
                     ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
@@ -81,12 +81,12 @@ export default function Home() {
                 }}>
                   Find Your Perfect Domain
                 </span>
-                <span className="block text-[0.7rem] sm:text-[1.5rem] md:text-[1.95rem] mt-0 font-bold" style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
+                <span className="block text-[0.6rem] sm:text-[1.5rem] md:text-[1.95rem] mt-0 font-bold" style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
               </h1>
               <p className="hidden sm:block text-[12px] sm:text-[14px] max-w-[40rem] mx-auto mb-2.5 sm:mb-3.5" style={{ color: 'var(--text-tertiary)' }}>
                 Search millions of domains with instant results. Compare prices across registrars. Register in one click.
               </p>
-              <p className="sm:hidden text-[10px] max-w-[26rem] mx-auto mb-1.5 leading-tight" style={{ color: 'var(--text-tertiary)' }}>
+              <p className="sm:hidden text-[9px] max-w-[26rem] mx-auto mb-1 leading-tight" style={{ color: 'var(--text-tertiary)' }}>
                 1,600+ TLDs · Real-time results · Compare prices
               </p>
 
@@ -136,21 +136,10 @@ export default function Home() {
                   <Icons.Globe />
                   Extensions
                 </Link>
-                <Link
-                  href="/generator"
-                  className={`hidden items-center gap-1 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all sm:hidden ${
-                    isLight
-                      ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
-                      : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
-                  }`}
-                >
-                  <Icons.Magic />
-                  AI Generator
-                </Link>
               </div>
 
-              <div className="max-w-[52rem] mx-auto mt-1.5 sm:mt-3.5">
-                <div className={`grid grid-cols-4 gap-0 sm:gap-2.5 px-1 py-1 sm:p-3.5 rounded-lg sm:rounded-2xl ${
+              <div className="max-w-[52rem] mx-auto mt-1 sm:mt-3.5">
+                <div className={`grid grid-cols-4 gap-0 sm:gap-2.5 px-0.5 py-0.5 sm:p-3.5 rounded-lg sm:rounded-2xl ${
                   isLight ? 'bg-white/70 border border-slate-200/60 shadow-sm backdrop-blur-sm' : 'bg-white/[0.02] border border-white/10 backdrop-blur-sm'
                 }`}>
                   {[
@@ -160,8 +149,8 @@ export default function Home() {
                     { value: '99.9%', label: 'Uptime' },
                   ].map((stat) => (
                     <div key={stat.label} className="text-center px-0.5 py-0.5 sm:p-2 rounded-md sm:rounded-xl">
-                      <div className="text-[0.85rem] sm:text-[1.5rem] font-black mb-0 leading-tight" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
-                      <div className="text-[8px] sm:text-xs font-medium leading-tight" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
+                      <div className="text-[0.75rem] sm:text-[1.5rem] font-black mb-0 leading-tight" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
+                      <div className="text-[7px] sm:text-xs font-medium leading-tight" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
                     </div>
                   ))}
                 </div>

@@ -218,7 +218,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
         <div className={`relative backdrop-blur-2xl border rounded-2xl ${
           isLight
             ? 'bg-white/90 border-slate-200/80 shadow-lg shadow-slate-900/[0.04]'
-            : 'bg-black/40 border-white/[0.08] shadow-2xl shadow-black/20'
+            : mobileMenuOpen
+              ? 'bg-[#0a0a0a] border-white/[0.08] shadow-2xl shadow-black/20'
+              : 'bg-black/40 border-white/[0.08] shadow-2xl shadow-black/20'
         }`}>
           <div className={`absolute inset-0 bg-gradient-to-r rounded-2xl pointer-events-none ${
             isLight ? 'from-slate-500/[0.02] via-transparent to-slate-400/[0.02]' : 'from-white/[0.03] via-transparent to-slate-400/[0.03]'
