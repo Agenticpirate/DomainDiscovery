@@ -138,8 +138,8 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div className="max-w-[52rem] mx-auto mt-1 sm:mt-3.5">
-                <div className={`grid grid-cols-4 gap-0 sm:gap-2.5 px-0.5 py-0.5 sm:p-3.5 rounded-lg sm:rounded-2xl ${
+              <div className="max-w-[52rem] mx-auto mt-2.5 sm:mt-3.5">
+                <div className={`grid grid-cols-4 gap-0 sm:gap-2.5 px-1 py-1.5 sm:p-3.5 rounded-lg sm:rounded-2xl ${
                   isLight ? 'bg-white/70 border border-slate-200/60 shadow-sm backdrop-blur-sm' : 'bg-white/[0.02] border border-white/10 backdrop-blur-sm'
                 }`}>
                   {[
@@ -148,9 +148,9 @@ export default function Home() {
                     { value: '1,600+', label: 'TLDs' },
                     { value: '99.9%', label: 'Uptime' },
                   ].map((stat) => (
-                    <div key={stat.label} className="text-center px-0.5 py-0.5 sm:p-2 rounded-md sm:rounded-xl">
-                      <div className="text-[0.75rem] sm:text-[1.5rem] font-black mb-0 leading-tight" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
-                      <div className="text-[7px] sm:text-xs font-medium leading-tight" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
+                    <div key={stat.label} className="text-center px-1 py-1 sm:p-2 rounded-md sm:rounded-xl">
+                      <div className="text-[0.8rem] sm:text-[1.5rem] font-black mb-0 leading-tight" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
+                      <div className="text-[8px] sm:text-xs font-medium leading-tight" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
                     </div>
                   ))}
                 </div>

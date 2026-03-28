@@ -102,7 +102,8 @@ export const HomePageContent: React.FC = () => {
 
   return (
     <div className="space-y-2.5 sm:space-y-7 py-0.5 sm:py-5">
-      <section className="max-w-5xl mx-auto px-3 sm:px-6">
+      {/* "The fastest domain search tool" — hidden on mobile */}
+      <section className="hidden sm:block max-w-5xl mx-auto px-3 sm:px-6">
         <div className="text-center mb-1.5 sm:mb-5">
           <h2 className="text-base sm:text-4xl md:text-[2.8rem] font-black mb-0.5 sm:mb-3 leading-tight">
             The fastest domain search tool
@@ -114,7 +115,8 @@ export const HomePageContent: React.FC = () => {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6">
+      {/* Feature cards — hidden on mobile */}
+      <section className="hidden sm:block max-w-5xl mx-auto px-3 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-3">
           {features.map((feature, index) => (
             <Link key={index} href={feature.href} className={`${cardClasses} p-2 sm:p-4 block`}>
@@ -148,7 +150,7 @@ export const HomePageContent: React.FC = () => {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-10 sm:pt-0">
+      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-2 sm:pt-0">
         <div className="text-center mb-2 sm:mb-4.5">
           <h2 className="text-base sm:text-4xl font-black mb-0.5 sm:mb-2">Popular Extensions</h2>
           <p style={{ color: 'var(--text-tertiary)' }} className="hidden sm:block text-[11px] sm:text-base max-w-xl mx-auto">
