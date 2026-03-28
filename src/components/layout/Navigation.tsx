@@ -32,7 +32,12 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
-  const isLight = theme === 'light';
+  const [mounted, setMounted] = useState(false);
+  const isLight = mounted ? theme === 'light' : false;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -90,19 +95,14 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
       { id: 'search', label: 'Domain name search', description: 'Find available domains instantly with real-time availability checking.', icon: <Icons.Search />, href: '/' },
       { id: 'extensions', label: 'Domain extensions', description: 'Explore hundreds of TLD options including .com, .net, .ai, and more.', icon: <Icons.Layers />, href: '/domain-extensions' },
       { id: 'generator', label: 'Domain generator', description: 'Generate creative domain name ideas using smart keywords and topics.', icon: <Icons.Magic />, href: '/generator' },
-      { id: 'premium', label: 'Premium domains', description: 'Discover premium domains available for sale or aftermarket auction.', icon: <Icons.Star />, href: '/premium' },
       { id: 'bulk', label: 'Bulk domain search', description: 'Check availability for thousands of domains at once.', icon: <Icons.Layers />, href: '/bulk-search' },
-      { id: 'expired', label: 'Expired domains', description: 'Find expired and expiring domain names with AI-powered search tools.', icon: <Icons.Clock />, href: '/expired' },
     ],
   };
 
   const toolsMenu: DropdownMenu = {
     label: 'Tools',
     items: [
-      { id: 'brandable', label: 'Find Brandable Domains', description: 'Discover unique, memorable brandable domain names for your business.', icon: <Icons.Star />, href: '/tools/brandable' },
       { id: 'keyword', label: 'Keyword-Based Domains', description: 'Find domains based on specific keywords and search terms.', icon: <Icons.Search />, href: '/tools/keyword' },
-      { id: 'whois', label: 'WHOIS Lookup', description: 'Look up domain ownership history and registrant information instantly.', icon: <Icons.Info />, href: '/tools/whois' },
-      { id: 'value', label: 'Domain Value Estimator', description: 'Estimate how much a domain might be worth using real market data.', icon: <Icons.Dollar />, href: '/tools/value' },
       { id: 'compare', label: 'Price Comparison', description: 'Compare registrar pricing in real time to find the lowest prices.', icon: <Icons.Dollar />, href: '/tools/compare' },
       { id: 'geo', label: 'Geo Domain Finder', description: 'Find location-based domains for local businesses and regional marketing.', icon: <Icons.Globe />, href: '/tools/geo' },
     ],
@@ -355,7 +355,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
           </div>
 
           {mobileMenuOpen && (
-            <div className={`lg:hidden border-t animate-fade-in ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
+            <div className={`lg:hidden border-t animate-fade-in ${isLight ? 'border-slate-200' : 'border-white/[0.06]'}`}
+              style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
+            >
               {/* Main nav items */}
               <div className="px-3 pt-2 pb-1">
                 {/* Home row */}
@@ -364,13 +366,13 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                   onClick={handleDropdownClose}
                   className={`flex items-center gap-2.5 px-2.5 py-2 rounded-xl mb-1 transition-all ${
                     currentTool === 'search'
-                      ? isLight ? 'bg-indigo-50 text-indigo-700' : 'bg-indigo-500/10 text-indigo-300'
-                      : isLight ? 'hover:bg-slate-100 text-slate-700' : 'hover:bg-white/5 text-white/70'
+                      ? isLight ? 'bg-slate-100 text-slate-900 border border-slate-200' : 'bg-white/[0.08] text-white border border-white/[0.08]'
+                      : isLight ? 'hover:bg-slate-100 text-slate-700' : 'hover:bg-white/[0.04] text-white/70'
                   }`}
                 >
                   <div className={`w-6 h-6 flex items-center justify-center rounded-lg shrink-0 ${
                     currentTool === 'search'
-                      ? isLight ? 'bg-indigo-100 text-indigo-600' : 'bg-indigo-500/20 text-indigo-300'
+                      ? isLight ? 'bg-slate-200 text-slate-900' : 'bg-white/[0.12] text-white'
                       : isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/[0.06] text-white/50'
                   }`}>
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -381,25 +383,25 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 </Link>
 
                 {/* Search section */}
-                <div className={`text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 mb-1 mt-2 ${isLight ? 'text-slate-400' : 'text-white/30'}`}>Search</div>
+                <div className={`text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 mb-1 mt-2 ${isLight ? 'text-slate-400' : 'text-white/25'}`}>Search</div>
                 <div className="grid grid-cols-3 gap-1 mb-2">
                   {searchMenu.items.map((item) => (
                     <Link
                       key={item.id}
                       href={item.href}
                       onClick={handleDropdownClose}
-                      className={`flex flex-col items-center gap-1 px-1 py-2 rounded-xl text-center transition-all ${
+                      className={`flex flex-col items-center gap-1.5 px-1 py-2.5 rounded-xl text-center transition-all ${
                         currentTool === item.id
-                          ? isLight ? 'bg-indigo-50 text-indigo-700' : 'bg-indigo-500/10 text-indigo-300'
-                          : isLight ? 'hover:bg-slate-100 text-slate-600' : 'hover:bg-white/5 text-white/60'
+                          ? isLight ? 'bg-slate-100 text-slate-900 border border-slate-200' : 'bg-white/[0.08] text-white border border-white/[0.08]'
+                          : isLight ? 'hover:bg-slate-50 text-slate-600' : 'hover:bg-white/[0.03] text-white/50'
                       }`}
                     >
-                      <div className={`w-7 h-7 flex items-center justify-center rounded-xl shrink-0 ${
+                      <div className={`w-8 h-8 flex items-center justify-center rounded-xl shrink-0 ${
                         currentTool === item.id
-                          ? isLight ? 'bg-indigo-100 text-indigo-600' : 'bg-indigo-500/20 text-indigo-300'
-                          : isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/[0.06] text-white/40'
+                          ? isLight ? 'bg-slate-200 text-slate-900' : 'bg-white/[0.12] text-white'
+                          : isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/[0.05] text-white/35'
                       }`}>
-                        <div className="w-3.5 h-3.5">{item.icon}</div>
+                        {item.icon}
                       </div>
                       <span className="text-[10px] font-medium leading-tight">{item.label}</span>
                     </Link>
@@ -407,25 +409,25 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 </div>
 
                 {/* Tools section */}
-                <div className={`text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 mb-1 ${isLight ? 'text-slate-400' : 'text-white/30'}`}>Tools</div>
+                <div className={`text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 mb-1 ${isLight ? 'text-slate-400' : 'text-white/25'}`}>Tools</div>
                 <div className="grid grid-cols-3 gap-1">
                   {toolsMenu.items.map((item) => (
                     <Link
                       key={item.id}
                       href={item.href}
                       onClick={handleDropdownClose}
-                      className={`flex flex-col items-center gap-1 px-1 py-2 rounded-xl text-center transition-all ${
+                      className={`flex flex-col items-center gap-1.5 px-1 py-2.5 rounded-xl text-center transition-all ${
                         currentTool === item.id
-                          ? isLight ? 'bg-indigo-50 text-indigo-700' : 'bg-indigo-500/10 text-indigo-300'
-                          : isLight ? 'hover:bg-slate-100 text-slate-600' : 'hover:bg-white/5 text-white/60'
+                          ? isLight ? 'bg-slate-100 text-slate-900 border border-slate-200' : 'bg-white/[0.08] text-white border border-white/[0.08]'
+                          : isLight ? 'hover:bg-slate-50 text-slate-600' : 'hover:bg-white/[0.03] text-white/50'
                       }`}
                     >
-                      <div className={`w-7 h-7 flex items-center justify-center rounded-xl shrink-0 ${
+                      <div className={`w-8 h-8 flex items-center justify-center rounded-xl shrink-0 ${
                         currentTool === item.id
-                          ? isLight ? 'bg-indigo-100 text-indigo-600' : 'bg-indigo-500/20 text-indigo-300'
-                          : isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/[0.06] text-white/40'
+                          ? isLight ? 'bg-slate-200 text-slate-900' : 'bg-white/[0.12] text-white'
+                          : isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/[0.05] text-white/35'
                       }`}>
-                        <div className="w-3.5 h-3.5">{item.icon}</div>
+                        {item.icon}
                       </div>
                       <span className="text-[10px] font-medium leading-tight">{item.label}</span>
                     </Link>
@@ -434,7 +436,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
               </div>
 
               {/* Bottom utility bar */}
-              <div className={`flex items-center justify-between px-4 py-2 mt-1 border-t ${isLight ? 'border-slate-100' : 'border-white/[0.05]'}`}>
+              <div className={`flex items-center justify-between px-4 py-2.5 mt-1 border-t ${isLight ? 'border-slate-100' : 'border-white/[0.05]'}`}>
                 <Link
                   href="/learn"
                   onClick={handleDropdownClose}

@@ -377,7 +377,7 @@ function SearchPageContent() {
   const btnClass = `flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${isLight ? 'border-slate-200 hover:bg-slate-50 text-slate-600' : 'border-white/10 hover:bg-white/5 text-white/60'}`;
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}>
       <PageBackground variant="hero" />
       <Navigation activeTool="search" onToolSelect={() => {}} />
 
@@ -609,7 +609,7 @@ function DomainRow({ result, isLight, onSave, isSaved, selectedRegistrar, onSele
   const isAvailable = result.available;
   const price = result.price ? parseFloat(result.price.replace(/[^0-9.]/g, '')) : null;
   const showPremiumPrice = !!result.premium && !isAvailable && !!price;
-  const ctaText = showPremiumPrice ? `$${price.toFixed(0)}` : (isAvailable ? (price ? `$${price.toFixed(0)}` : 'Continue') : 'Lookup');
+  const ctaText = isAvailable ? 'Go' : (showPremiumPrice ? `$${price!.toFixed(0)}` : 'WHOIS');
   const domainHref = isAvailable
     ? getRegistrarUrl(result.domain, selectedRegistrar)
     : result.premium && result.buyUrl
@@ -636,7 +636,7 @@ function DomainRow({ result, isLight, onSave, isSaved, selectedRegistrar, onSele
         </a>
       </div>
       <div className="flex items-center gap-0.5 shrink-0">
-        <button onClick={() => onSave(result.domain)} className={`p-0.5 sm:p-1 rounded transition-colors ${isSaved ? 'text-emerald-400' : isLight ? 'text-slate-200 hover:text-slate-400' : 'text-white/10 hover:text-white/40'}`} aria-label="Save">
+        <button onClick={() => onSave(result.domain)} className={`hidden sm:block p-0.5 sm:p-1 rounded transition-colors ${isSaved ? 'text-emerald-400' : isLight ? 'text-slate-200 hover:text-slate-400' : 'text-white/10 hover:text-white/40'}`} aria-label="Save">
           <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
         </button>
         <RegistrarActionMenu

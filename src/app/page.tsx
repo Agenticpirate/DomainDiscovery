@@ -16,11 +16,10 @@ import { DomainGenerator } from '@/components/generator/DomainGenerator';
 import { BrandableDomainFinder } from '@/components/domain/BrandableDomainFinder';
 import { KeywordDomainFinder } from '@/components/domain/KeywordDomainFinder';
 import { WHOISLookup } from '@/components/domain/WHOISLookup';
-import { DomainValueEstimate } from '@/components/domain/DomainValueEstimate';
 import { BulkDomainSearch } from '@/components/domain/BulkDomainSearch';
 import { DomainExtensionsView } from '@/components/domain/DomainExtensionsView';
 
-type ToolType = 'search' | 'extensions' | 'generator' | 'premium' | 'bulk' | 'expired' | 'brandable' | 'keyword' | 'whois' | 'value' | 'geo' | 'learn';
+type ToolType = 'search' | 'extensions' | 'generator' | 'bulk' | 'brandable' | 'keyword' | 'whois' | 'geo' | 'learn';
 
 export default function Home() {
   const [activeTool, setActiveTool] = useState<ToolType>('search');
@@ -28,7 +27,7 @@ export default function Home() {
   const [selectedDomain, setSelectedDomain] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
   const { theme } = useTheme();
-  const isLight = theme === 'light';
+  const isLight = mounted ? theme === 'light' : false;
   const router = useRouter();
 
   useEffect(() => {
@@ -64,7 +63,7 @@ export default function Home() {
   const showToolHeader = !showMainSearch && activeTool !== 'bulk' && activeTool !== 'extensions';
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}>
       <PageBackground variant="hero" />
       
       <Navigation activeTool={activeTool} onToolSelect={(tool) => setActiveTool(tool as ToolType)} />
@@ -139,7 +138,7 @@ export default function Home() {
                 </Link>
                 <Link
                   href="/generator"
-                  className={`inline-flex items-center gap-1 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all sm:hidden ${
+                  className={`hidden items-center gap-1 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all sm:hidden ${
                     isLight
                       ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
                       : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
@@ -198,9 +197,6 @@ export default function Home() {
                 {activeTool === 'brandable' && 'Find Brandable Domains'}
                 {activeTool === 'keyword' && 'Keyword-Based Domains'}
                 {activeTool === 'whois' && 'WHOIS Lookup'}
-                {activeTool === 'value' && 'Domain Value Estimator'}
-                {activeTool === 'premium' && 'Premium Domains'}
-                {activeTool === 'expired' && 'Expired Domains'}
                 {activeTool === 'geo' && 'Geo Domain Finder'}
                 {activeTool === 'learn' && 'Learn About Domains'}
               </h1>
@@ -209,9 +205,6 @@ export default function Home() {
                 {activeTool === 'brandable' && 'Discover unique, memorable names for your business'}
                 {activeTool === 'keyword' && 'Find domains based on specific keywords for better SEO'}
                 {activeTool === 'whois' && 'Look up domain ownership and registration details'}
-                {activeTool === 'value' && 'Estimate domain market value based on real data'}
-                {activeTool === 'premium' && 'Discover high-value domains for sale'}
-                {activeTool === 'expired' && 'Find expired and expiring domain names'}
                 {activeTool === 'geo' && 'Find location-based domains for local businesses'}
                 {activeTool === 'learn' && 'Guides and best practices for domain investing'}
               </p>
@@ -246,11 +239,7 @@ export default function Home() {
               </div>
             )}
 
-            {activeTool === 'value' && (
-              <div className="max-w-2xl mx-auto">
-                <DomainValueEstimate domain={selectedDomain} />
-              </div>
-            )}
+
 
             {activeTool === 'bulk' && (
               <BulkDomainSearch onSelect={setSelectedDomain} />
@@ -260,31 +249,7 @@ export default function Home() {
               <DomainExtensionsView searchQuery="" />
             )}
 
-            {activeTool === 'premium' && (
-              <div className="text-center py-16">
-                <div className="inline-flex p-6 rounded-full mb-6" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
-                  <Icons.Star />
-                </div>
-                <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-secondary)' }}>Premium Domains</h3>
-                <p className="text-sm max-w-md mx-auto mb-6" style={{ color: 'var(--text-muted)' }}>
-                  Discover high-value premium domains available for sale or aftermarket auction.
-                </p>
-                <Button variant="secondary">Browse Premium Marketplace</Button>
-              </div>
-            )}
 
-            {activeTool === 'expired' && (
-              <div className="text-center py-16">
-                <div className="inline-flex p-6 rounded-full mb-6" style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}>
-                  <Icons.Clock />
-                </div>
-                <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-secondary)' }}>Expired Domains</h3>
-                <p className="text-sm max-w-md mx-auto mb-6" style={{ color: 'var(--text-muted)' }}>
-                  Find expired and expiring domain names with AI-powered search tools.
-                </p>
-                <Button variant="secondary">Search Expired Domains</Button>
-              </div>
-            )}
 
             {activeTool === 'geo' && (
               <div className="text-center py-16">

@@ -126,10 +126,6 @@ nav .logo-icon-wrapper {
     @apply border-border;
   }
 
-  html {
-    @apply scroll-smooth antialiased;
-  }
-
   body {
     background-color: var(--bg-main);
     color: var(--text-primary);
@@ -138,6 +134,11 @@ nav .logo-icon-wrapper {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+    overflow-x: hidden;
   }
 
   ::-webkit-scrollbar {
@@ -230,6 +231,59 @@ nav .logo-icon-wrapper {
 
   .theme-text-muted {
     color: var(--text-muted);
+  }
+
+  /* Global Typography Override for Prose (Strip all blues) */
+  .prose * {
+    color: var(--text-secondary);
+  }
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6, .prose strong {
+    color: var(--text-primary) !important;
+  }
+  .prose a {
+    color: var(--text-primary) !important;
+    text-decoration: underline !important;
+    text-decoration-color: rgba(255, 255, 255, 0.2) !important;
+    text-underline-offset: 4px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+  }
+  .prose a:hover {
+    text-decoration-color: var(--text-primary) !important;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  }
+  .prose code {
+    background-color: var(--icon-bg);
+    color: var(--text-primary) !important;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+  }
+
+  /* Premium Blog CTA Components */
+  .blog-cta-primary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 rounded-full font-bold text-sm sm:text-base transition-all duration-300;
+    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+    color: #000000 !important;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    text-decoration: none !important;
+  }
+  .blog-cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.15), inset 0 1px 1px rgba(255, 255, 255, 1);
+    background: linear-gradient(135deg, #ffffff 10%, #f1f5f9 100%);
+  }
+  .blog-cta-secondary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 rounded-full font-bold text-sm sm:text-base transition-all duration-300 border;
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+  .blog-cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
   }
 
   .btn-primary {
