@@ -7,32 +7,37 @@ import { useTheme } from '@/contexts/ThemeContext';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const { theme } = useTheme();
-  const isLight = theme === 'light';
+  const isLight = mounted ? theme === 'light' : false;
 
   const footerLinks = {
     'Find domain names': [
       { label: 'Domain name search', href: '/' },
       { label: 'Domain extensions', href: '/domain-extensions' },
       { label: 'Domain generator', href: '/generator' },
-      { label: 'Premium domains', href: '/premium' },
-      { label: 'Expired domains', href: '/expired' },
       { label: 'Bulk domain search', href: '/bulk-search' },
     ],
     'Tools': [
       { label: 'Brandable name generator', href: '/tools/brandable' },
-      { label: 'MCP Server', href: '/tools/mcp' },
-      { label: 'Keyword', href: '/tools/keyword' },
-      { label: 'WHOIS', href: '/tools/whois' },
+      { label: 'Keyword domains', href: '/tools/keyword' },
+      { label: 'Price comparison', href: '/tools/compare' },
       { label: 'Bulk domain search', href: '/bulk-search' },
     ],
     'Resources': [
       { label: 'Learn', href: '/learn' },
+      { label: 'Glossary', href: '/glossary' },
       { label: 'FAQ', href: '/faq' },
       { label: 'Blog', href: '/blog' },
       { label: 'Contact us', href: '/contact' },
     ],
     'Legal': [
+      { label: 'Manifesto', href: '/manifesto' },
       { label: 'Terms of Use', href: '/terms' },
       { label: 'Privacy Policy', href: '/privacy' },
     ],

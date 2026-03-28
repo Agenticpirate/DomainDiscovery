@@ -101,7 +101,7 @@ export const HomePageContent: React.FC = () => {
   const standardTools = tools.filter((tool) => !tool.featured);
 
   return (
-    <div className="space-y-2.5 sm:space-y-7 py-0.5 sm:py-5">
+    <div className="space-y-1.5 sm:space-y-7 py-0.5 sm:py-5">
       {/* "The fastest domain search tool" — hidden on mobile */}
       <section className="hidden sm:block max-w-5xl mx-auto px-3 sm:px-6">
         <div className="text-center mb-1.5 sm:mb-5">
@@ -202,7 +202,7 @@ export const HomePageContent: React.FC = () => {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-0">
+      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-3 sm:pt-0">
         <div className="text-center mb-2 sm:mb-6">
           <h2 className="text-base sm:text-4xl font-black mb-0.5 sm:mb-2">
             Powerful Domain Tools
