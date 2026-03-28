@@ -200,34 +200,34 @@ export const HomePageContent: React.FC = () => {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-12 sm:pt-0">
-        <div className="text-center mb-3 sm:mb-6">
-          <h2 className="text-lg sm:text-4xl font-black mb-1 sm:mb-2">
+      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-6 sm:pt-0">
+        <div className="text-center mb-2 sm:mb-6">
+          <h2 className="text-base sm:text-4xl font-black mb-0.5 sm:mb-2">
             Powerful Domain Tools
           </h2>
-          <p style={{ color: 'var(--text-tertiary)' }} className="text-[11px] sm:text-base max-w-xl mx-auto">
+          <p style={{ color: 'var(--text-tertiary)' }} className="text-[10px] sm:text-base max-w-xl mx-auto">
             Everything you need to find and register the perfect domain
           </p>
         </div>
 
         {/* Featured tools row — equal-width 2-col grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-2 sm:mb-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-3 mb-1.5 sm:mb-3">
           {featuredTools.map((tool) => (
             <Link
               key={tool.title}
               href={tool.href}
-              className={`${smallCardClasses} p-3 sm:p-4 transition-transform duration-200 hover:-translate-y-0.5 block`}
+              className={`${smallCardClasses} p-2 sm:p-4 transition-transform duration-200 hover:-translate-y-0.5 block`}
             >
               <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} variant={isLight ? "default" : "white"} />
-              <div className="relative z-10 flex items-center gap-3">
-                <div className={`${iconBoxClasses} h-10 w-10 sm:h-12 sm:w-12 rounded-xl shrink-0`}>{tool.icon}</div>
+              <div className="relative z-10 flex items-center gap-2 sm:gap-3">
+                <div className={`${iconBoxClasses} h-8 w-8 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl shrink-0`}>{tool.icon}</div>
                 <div className="min-w-0 flex-1">
                   <div className={`flex items-center gap-1.5 mb-0.5`}>
-                    <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{tool.eyebrow}</span>
-                    {tool.badge && <span className={`px-1.5 py-0.5 rounded text-[8px] sm:text-[9px] font-bold ${isLight ? 'bg-slate-100 text-slate-600 border border-slate-200' : 'bg-white/[0.08] text-white/50 border border-white/10'}`}>{tool.badge}</span>}
+                    <span className={`text-[8px] sm:text-[10px] font-semibold uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{tool.eyebrow}</span>
+                    {tool.badge && <span className={`px-1 py-0.5 rounded text-[7px] sm:text-[9px] font-bold ${isLight ? 'bg-slate-100 text-slate-600 border border-slate-200' : 'bg-white/[0.08] text-white/50 border border-white/10'}`}>{tool.badge}</span>}
                   </div>
-                  <h3 className="text-[13px] sm:text-[16px] font-black leading-tight">{tool.title}</h3>
-                  <p className="mt-0.5 text-[11px] sm:text-[13px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>{tool.description}</p>
+                  <h3 className="text-[12px] sm:text-[16px] font-black leading-tight">{tool.title}</h3>
+                  <p className="hidden sm:block mt-0.5 text-[11px] sm:text-[13px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>{tool.description}</p>
                 </div>
                 <svg className={`w-4 h-4 shrink-0 transition-colors ${isLight ? 'text-slate-300 group-hover:text-slate-500' : 'text-white/20 group-hover:text-white/40'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
