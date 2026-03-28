@@ -4,11 +4,18 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 export const HomePageContent: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const { theme } = useTheme();
-  const isLight = theme === 'light';
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isLight = mounted ? theme === 'light' : false;
 
   const features = [
     {
@@ -34,14 +41,6 @@ export const HomePageContent: React.FC = () => {
       href: '/generator',
       cta: 'Try generator',
       badge: 'AI-Powered'
-    },
-    {
-      icon: <Icons.Star />,
-      title: 'Explore premium domain names',
-      description: 'Our smart domain search tool recommends premium domains for sale that will make your website stand out. Discover undervalued domains with existing traffic, backlinks, and domain authority.',
-      href: '/premium',
-      cta: 'Browse premium domains',
-      badge: 'Premium'
     }
   ];
 
@@ -61,10 +60,8 @@ export const HomePageContent: React.FC = () => {
     { icon: <Icons.Sparkles />, title: 'AI Domain Generator', description: 'Generate brandable names and check them instantly.', href: '/generator', eyebrow: 'Featured', badge: 'AI', featured: true },
     { icon: <Icons.Layers />, title: 'Bulk Domain Search', description: 'Run up to 1,000 domains in one pass.', href: '/bulk-search', eyebrow: '1,000 at once' },
     { icon: <Icons.Globe />, title: 'Domain Extensions', description: 'Browse the most useful TLDs and niche extensions.', href: '/domain-extensions', eyebrow: '1,600+ TLDs' },
-    { icon: <Icons.Star />, title: 'Premium Domains', description: 'Review aftermarket names and pricing signals.', href: '/premium' },
     { icon: <Icons.Dollar />, title: 'Price Comparison', description: 'Compare standard registrar pricing side by side.', href: '/tools/compare' },
     { icon: <Icons.Globe />, title: 'Geo Domain Finder', description: 'Surface location-aware names for local brands.', href: '/tools/geo' },
-    { icon: <Icons.Info />, title: 'WHOIS Lookup', description: 'Check ownership and registration details quickly.', href: '/tools/whois' }
   ];
 
   const benefits = [
@@ -76,13 +73,13 @@ export const HomePageContent: React.FC = () => {
     { icon: <Icons.Layers />, title: 'Works Everywhere', description: 'The same workflow stays usable on desktop, tablet, and mobile.', stat: 'Responsive' }
   ];
 
-  const cardClasses = `group h-full rounded-2xl transition-all duration-300 ${
+  const cardClasses = `group relative h-full rounded-2xl transition-all duration-300 ${
     isLight
-      ? 'bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg shadow-sm'
-      : 'bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
+      ? 'bg-white border hover:border-slate-300 hover:shadow-lg shadow-sm border-transparent'
+      : 'bg-white/[0.02] border hover:border-white/20 hover:bg-white/[0.04] border-transparent'
   }`;
 
-  const smallCardClasses = `group h-full rounded-2xl transition-colors duration-200 ${
+  const smallCardClasses = `group relative h-full rounded-2xl transition-colors duration-200 ${
     isLight
       ? 'bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md shadow-sm'
       : 'bg-[#0f1012] border border-white/8 hover:border-white/12'
@@ -118,37 +115,40 @@ export const HomePageContent: React.FC = () => {
       </section>
 
       <section className="max-w-5xl mx-auto px-3 sm:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-1.5 sm:gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-3">
           {features.map((feature, index) => (
-            <Link key={index} href={feature.href} className={`${cardClasses} flex items-center gap-2 p-2 sm:flex-col sm:p-4`}>
-              <div className="flex items-center justify-between gap-1 shrink-0 sm:w-full sm:mb-1">
-                <div className={`${iconBoxClasses} h-7 w-7 sm:h-11 sm:w-11 shrink-0`}>
-                  {feature.icon}
+            <Link key={index} href={feature.href} className={`${cardClasses} p-2 sm:p-4 block`}>
+              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} variant={isLight ? "default" : "white"} />
+              <div className="relative z-10 flex items-center gap-2 sm:flex-col h-full">
+                <div className="flex items-center justify-between gap-1 shrink-0 sm:w-full sm:mb-1">
+                  <div className={`${iconBoxClasses} h-7 w-7 sm:h-11 sm:w-11 shrink-0`}>
+                    {feature.icon}
+                  </div>
+                  {feature.badge && (
+                    <span className={`hidden sm:inline shrink-0 px-1.5 py-0.5 text-[9px] sm:text-[11px] font-semibold rounded-full border ${
+                      isLight ? 'border-slate-200 bg-slate-100 text-slate-700' : 'border-white/10 bg-white/[0.04] text-white/75'
+                    }`}>{feature.badge}</span>
+                  )}
                 </div>
-                {feature.badge && (
-                  <span className={`hidden sm:inline shrink-0 px-1.5 py-0.5 text-[9px] sm:text-[11px] font-semibold rounded-full border ${
-                    isLight ? 'border-slate-200 bg-slate-100 text-slate-700' : 'border-white/10 bg-white/[0.04] text-white/75'
-                  }`}>{feature.badge}</span>
-                )}
-              </div>
-              <div className="min-w-0 flex-1">
-                <h3 className="text-[11px] sm:text-[17px] font-bold leading-tight">
-                  {feature.title}
-                </h3>
-                <p className="hidden sm:block text-[13px] leading-relaxed mt-1 mb-2" style={{ color: 'var(--text-tertiary)' }}>
-                  {feature.description}
-                </p>
-                <span className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold transition-colors mt-auto" style={{ color: 'var(--text-secondary)' }}>
-                  {feature.cta}
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </span>
+                <div className="min-w-0 flex-1 flex flex-col h-full">
+                  <h3 className="text-[11px] sm:text-[17px] font-bold leading-tight">
+                    {feature.title}
+                  </h3>
+                  <p className="hidden sm:block text-[13px] leading-relaxed mt-1 mb-2" style={{ color: 'var(--text-tertiary)' }}>
+                    {feature.description}
+                  </p>
+                  <span className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold transition-colors mt-auto" style={{ color: 'var(--text-secondary)' }}>
+                    {feature.cta}
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  </span>
+                </div>
               </div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6">
+      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-10 sm:pt-0">
         <div className="text-center mb-2 sm:mb-4.5">
           <h2 className="text-base sm:text-4xl font-black mb-0.5 sm:mb-2">Popular Extensions</h2>
           <p style={{ color: 'var(--text-tertiary)' }} className="hidden sm:block text-[11px] sm:text-base max-w-xl mx-auto">
@@ -169,14 +169,17 @@ export const HomePageContent: React.FC = () => {
             <Link
               key={i}
               href="/domain-extensions"
-              className={`group px-1 sm:px-4 py-1.5 sm:py-3 rounded-lg sm:rounded-xl transition-all text-center ${
+              className={`group relative px-1 sm:px-4 py-1.5 sm:py-3 rounded-lg sm:rounded-xl border transition-all text-center block ${
                 isLight
-                  ? 'bg-white border border-slate-200 hover:border-slate-300 shadow-sm'
-                : 'bg-white/[0.02] border border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
+                  ? 'bg-white border-transparent hover:border-slate-300 shadow-sm'
+                : 'bg-white/[0.02] border-transparent hover:border-white/20 hover:bg-white/[0.04]'
               }`}
             >
-              <div className="text-[11px] sm:text-2xl font-black mb-0" style={{ color: 'var(--text-primary)' }}>{item.ext}</div>
-              <div className="text-[8px] sm:text-xs" style={{ color: 'var(--text-tertiary)' }}>{item.desc}</div>
+              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} variant={isLight ? "default" : "white"} />
+              <div className="relative z-10 w-full h-full">
+                <div className="text-[11px] sm:text-2xl font-black mb-0" style={{ color: 'var(--text-primary)' }}>{item.ext}</div>
+                <div className="text-[8px] sm:text-xs" style={{ color: 'var(--text-tertiary)' }}>{item.desc}</div>
+              </div>
             </Link>
           ))}
         </div>
@@ -197,8 +200,8 @@ export const HomePageContent: React.FC = () => {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6">
-        <div className="text-center mb-2 sm:mb-4">
+      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-12 sm:pt-0">
+        <div className="text-center mb-3 sm:mb-6">
           <h2 className="text-lg sm:text-4xl font-black mb-1 sm:mb-2">
             Powerful Domain Tools
           </h2>
@@ -206,47 +209,49 @@ export const HomePageContent: React.FC = () => {
             Everything you need to find and register the perfect domain
           </p>
         </div>
-        <div className="space-y-1.5 sm:space-y-3">
-          {/* Featured tools - horizontal layout, 1 col on mobile */}
-          <div className="space-y-1.5 sm:grid sm:grid-cols-2 sm:gap-2.5 sm:space-y-0">
-            {featuredTools.map((tool) => (
-              <Link
-                key={tool.title}
-                href={tool.href}
-                className={`${smallCardClasses} overflow-hidden p-2.5 sm:p-3.5 transition-transform duration-200 hover:-translate-y-0.5 block`}
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className={`${iconBoxClasses} h-9 w-9 sm:h-11 sm:w-11 rounded-xl shrink-0`}>{tool.icon}</div>
-                  <div className="min-w-0 flex-1">
-                    <div className={`text-[9px] font-semibold uppercase tracking-[0.16em] mb-0.5 ${isLight ? 'text-slate-500' : 'text-white/35'}`}>
-                      {tool.eyebrow} {tool.badge && <span className={`ml-1 px-1 py-0.5 rounded text-[8px] font-bold ${isLight ? 'bg-slate-100 text-slate-600' : 'bg-white/[0.08] text-white/50'}`}>{tool.badge}</span>}
-                    </div>
-                    <h3 className="text-[13px] sm:text-[15px] font-black leading-tight">{tool.title}</h3>
-                    <p className="mt-0.5 text-[11px] sm:text-[12px] leading-relaxed line-clamp-2" style={{ color: 'var(--text-tertiary)' }}>{tool.description}</p>
-                  </div>
-                  <svg className={`w-4 h-4 shrink-0 ${isLight ? 'text-slate-300' : 'text-white/20'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </Link>
-            ))}
-          </div>
 
-          {/* Standard tools - 2 columns on mobile, 3 on desktop */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 sm:gap-2">
-            {standardTools.map((tool) => (
-              <Link
-                key={tool.title}
-                href={tool.href}
-                className={`${smallCardClasses} p-2 sm:p-3`}
-              >
-                <div className="flex items-center gap-2">
-                  <div className={`${smallIconBoxClasses} h-7 w-7 sm:h-8 sm:w-8 shrink-0`}>{tool.icon}</div>
-                  <h3 className="text-[11px] sm:text-sm font-bold leading-tight min-w-0 flex-1">{tool.title}</h3>
+        {/* Featured tools row — equal-width 2-col grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-2 sm:mb-3">
+          {featuredTools.map((tool) => (
+            <Link
+              key={tool.title}
+              href={tool.href}
+              className={`${smallCardClasses} p-3 sm:p-4 transition-transform duration-200 hover:-translate-y-0.5 block`}
+            >
+              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} variant={isLight ? "default" : "white"} />
+              <div className="relative z-10 flex items-center gap-3">
+                <div className={`${iconBoxClasses} h-10 w-10 sm:h-12 sm:w-12 rounded-xl shrink-0`}>{tool.icon}</div>
+                <div className="min-w-0 flex-1">
+                  <div className={`flex items-center gap-1.5 mb-0.5`}>
+                    <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{tool.eyebrow}</span>
+                    {tool.badge && <span className={`px-1.5 py-0.5 rounded text-[8px] sm:text-[9px] font-bold ${isLight ? 'bg-slate-100 text-slate-600 border border-slate-200' : 'bg-white/[0.08] text-white/50 border border-white/10'}`}>{tool.badge}</span>}
+                  </div>
+                  <h3 className="text-[13px] sm:text-[16px] font-black leading-tight">{tool.title}</h3>
+                  <p className="mt-0.5 text-[11px] sm:text-[13px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>{tool.description}</p>
                 </div>
-              </Link>
-            ))}
-          </div>
+                <svg className={`w-4 h-4 shrink-0 transition-colors ${isLight ? 'text-slate-300 group-hover:text-slate-500' : 'text-white/20 group-hover:text-white/40'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Standard tools — even 2x2 grid on mobile, 4-col on desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+          {standardTools.map((tool) => (
+            <Link
+              key={tool.title}
+              href={tool.href}
+              className={`${smallCardClasses} p-2.5 sm:p-3.5 transition-transform duration-200 hover:-translate-y-0.5 block`}
+            >
+              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} variant={isLight ? "default" : "white"} />
+              <div className="relative z-10 flex items-center gap-2.5">
+                <div className={`${smallIconBoxClasses} h-8 w-8 sm:h-9 sm:w-9 shrink-0`}>{tool.icon}</div>
+                <h3 className="text-[11px] sm:text-sm font-bold leading-tight min-w-0 flex-1">{tool.title}</h3>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -260,7 +265,8 @@ export const HomePageContent: React.FC = () => {
         <div className="grid grid-cols-3 md:grid-cols-3 gap-1 sm:gap-2.5">
           {benefits.map((benefit) => (
             <div key={benefit.title} className={`${smallCardClasses} p-1.5 sm:p-3.5`}>
-              <div className="flex items-center gap-1.5 sm:flex-col sm:items-start sm:gap-3">
+              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} variant={isLight ? "default" : "white"} />
+              <div className="relative z-10 flex items-center gap-1.5 sm:flex-col sm:items-start sm:gap-3">
                 <div className={`${smallIconBoxClasses} h-6 w-6 sm:h-10 sm:w-10 shrink-0`}>{benefit.icon}</div>
                 <div className="min-w-0 flex-1">
                   <h3 className="text-[10px] sm:text-base font-bold leading-tight">{benefit.title}</h3>

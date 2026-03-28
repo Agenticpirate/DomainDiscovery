@@ -22,7 +22,7 @@ export default function KeywordPage() {
       {/* Main Content */}
       <main className="relative pt-20 sm:pt-24">
         {/* Hero Section */}
-        <section className="px-4 sm:px-6 pb-5 sm:pb-7">
+        <section className="px-3 sm:px-6 pb-4 sm:pb-7">
           <div className="max-w-4xl mx-auto">
             <Breadcrumb items={[
               { label: 'Tools', href: '/' },
@@ -35,15 +35,15 @@ export default function KeywordPage() {
                 Keyword Domains
               </span>
             </h1>
-            <p className={`text-sm sm:text-base ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-5 sm:mb-6`}>
-              Find domains based on specific keywords and search terms.
+            <p className={`text-xs sm:text-base ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-4 sm:mb-6`}>
+              Generate 1,000+ domain name ideas by combining your keywords with popular prefixes and suffixes. Inspired by Lean Domain Search.
             </p>
           </div>
         </section>
 
         {/* Keyword Finder */}
-        <section className="px-4 sm:px-6 pb-12 sm:pb-14">
-          <div className="max-w-2xl mx-auto">
+        <section className="px-3 sm:px-6 pb-12 sm:pb-14">
+          <div className="max-w-5xl mx-auto">
             <KeywordDomainFinder onSelect={setSelectedDomain} />
           </div>
         </section>

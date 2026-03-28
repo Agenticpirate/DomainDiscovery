@@ -432,9 +432,6 @@ function SearchPageContent() {
             <Link href="/generator" className={`py-2.5 border-b-2 border-transparent font-medium ${isLight ? 'text-slate-400 hover:text-slate-600' : 'text-white/40 hover:text-white/70'}`}>
               <span className="flex items-center gap-1.5"><Icons.Magic /> Generator</span>
             </Link>
-            <Link href="/premium" className={`py-2.5 border-b-2 border-transparent font-medium ${isLight ? 'text-slate-400 hover:text-slate-600' : 'text-white/40 hover:text-white/70'}`}>
-              <span className="flex items-center gap-1.5"><Icons.Star /> Premium</span>
-            </Link>
           </div>
         </div>
 
@@ -513,7 +510,6 @@ function SearchPageContent() {
                     </button>
                     {showMoreActions && (
                       <div className={`absolute top-full left-0 mt-1 rounded-lg z-50 py-1 min-w-[160px] ${isLight ? 'bg-white border border-slate-200 shadow-lg' : 'bg-neutral-900 border border-white/10 shadow-xl'}`}>
-                        <button onClick={() => { window.open(`https://who.is/whois/${primary.domain}`, '_blank'); setShowMoreActions(false); }} className={`w-full text-left px-3 py-2 text-xs transition-colors ${isLight ? 'hover:bg-slate-50 text-slate-600' : 'hover:bg-white/5 text-white/60'}`}>WHOIS Lookup</button>
                         <button onClick={() => { window.open(`https://web.archive.org/web/*/${primary.domain}`, '_blank'); setShowMoreActions(false); }} className={`w-full text-left px-3 py-2 text-xs transition-colors ${isLight ? 'hover:bg-slate-50 text-slate-600' : 'hover:bg-white/5 text-white/60'}`}>Wayback Machine</button>
                         <button onClick={() => { window.open(`https://www.google.com/search?q=site:${primary.domain}`, '_blank'); setShowMoreActions(false); }} className={`w-full text-left px-3 py-2 text-xs transition-colors ${isLight ? 'hover:bg-slate-50 text-slate-600' : 'hover:bg-white/5 text-white/60'}`}>Google Index Check</button>
                       </div>
@@ -543,7 +539,7 @@ function SearchPageContent() {
                       </h3>
                       <Link href="/domain-extensions" className="text-xs font-medium transition-colors hover:underline" style={{ color: 'var(--text-muted)' }}>See all</Link>
                     </div>
-                    <div className="grid grid-cols-2 gap-x-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
                       <div>{col1.map(r => <DomainRow key={r.domain} result={r} isLight={isLight} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} selectedRegistrar={selectedRegistrar} onSelectRegistrar={setSelectedRegistrar} />)}</div>
                       <div>{col2.map(r => <DomainRow key={r.domain} result={r} isLight={isLight} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} selectedRegistrar={selectedRegistrar} onSelectRegistrar={setSelectedRegistrar} />)}</div>
                     </div>
@@ -626,22 +622,22 @@ function DomainRow({ result, isLight, onSave, isSaved, selectedRegistrar, onSele
       : 'View WHOIS';
 
   return (
-    <div className={`flex items-center justify-between gap-1 py-[5px] px-1 rounded transition-colors ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.03]'}`}>
-      <div className="flex items-center gap-2 min-w-0 flex-1">
-        <span className={`w-2 h-2 rounded-full shrink-0 ${result.premium ? 'bg-amber-500' : isAvailable ? 'bg-emerald-500' : 'bg-red-500'}`} />
+    <div className={`flex items-center justify-between gap-1.5 py-[5px] px-1 rounded transition-colors ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.03]'}`}>
+      <div className="flex items-center gap-1.5 min-w-0 flex-1 overflow-hidden">
+        <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full shrink-0 ${result.premium ? 'bg-amber-500' : isAvailable ? 'bg-emerald-500' : 'bg-red-500'}`} />
         <a
           href={domainHref}
           target="_blank"
           rel="noopener noreferrer"
           title={domainTitle}
-          className={`text-[13px] font-mono truncate transition-colors ${isAvailable ? (isLight ? 'text-slate-800 hover:text-slate-950' : 'text-white/90 hover:text-white') : (isLight ? 'text-slate-400 hover:text-slate-600' : 'text-white/35 hover:text-white/55')}`}
+          className={`text-[11px] sm:text-[13px] font-mono transition-colors break-all line-clamp-1 ${isAvailable ? (isLight ? 'text-slate-800 hover:text-slate-950' : 'text-white/90 hover:text-white') : (isLight ? 'text-slate-400 hover:text-slate-600' : 'text-white/35 hover:text-white/55')}`}
         >
           {result.domain}
         </a>
       </div>
-      <div className="flex items-center gap-1 shrink-0">
-        <button onClick={() => onSave(result.domain)} className={`p-1 rounded transition-colors ${isSaved ? 'text-emerald-400' : isLight ? 'text-slate-200 hover:text-slate-400' : 'text-white/10 hover:text-white/40'}`} aria-label="Save">
-          <svg className="w-3.5 h-3.5" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
+      <div className="flex items-center gap-0.5 shrink-0">
+        <button onClick={() => onSave(result.domain)} className={`p-0.5 sm:p-1 rounded transition-colors ${isSaved ? 'text-emerald-400' : isLight ? 'text-slate-200 hover:text-slate-400' : 'text-white/10 hover:text-white/40'}`} aria-label="Save">
+          <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
         </button>
         <RegistrarActionMenu
           domain={result.domain}
@@ -651,21 +647,21 @@ function DomainRow({ result, isLight, onSave, isSaved, selectedRegistrar, onSele
           primaryLabel={ctaText}
           premiumUrl={result.premium ? result.buyUrl : undefined}
           premiumLabel={result.purchaseInfo}
-          primaryButtonClassName={`px-2 py-1 text-[11px] font-bold rounded transition-colors ${
+          primaryButtonClassName={`px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-bold rounded transition-colors ${
             showPremiumPrice
               ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
               : isAvailable
                 ? 'bg-emerald-500 text-white hover:bg-emerald-600'
                 : isLight ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
           }`}
-          chevronButtonClassName={`rounded p-1.5 transition-colors ${
+          chevronButtonClassName={`rounded p-1 sm:p-1.5 transition-colors ${
             showPremiumPrice
               ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
               : isAvailable
                 ? 'bg-emerald-500 text-white hover:bg-emerald-600'
                 : isLight ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
           }`}
-          fallbackButtonClassName={`px-2 py-1 text-[11px] font-bold rounded transition-colors ${
+          fallbackButtonClassName={`px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-bold rounded transition-colors ${
             showPremiumPrice
               ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
               : isLight ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
