@@ -101,9 +101,9 @@ export const HomePageContent: React.FC = () => {
   const standardTools = tools.filter((tool) => !tool.featured);
 
   return (
-    <div className="space-y-1.5 sm:space-y-7 py-0.5 sm:py-5">
+    <div className="py-0.5 sm:py-5">
       {/* "The fastest domain search tool" — hidden on mobile */}
-      <section className="hidden sm:block max-w-5xl mx-auto px-3 sm:px-6">
+      <section className="hidden sm:block max-w-5xl mx-auto px-3 sm:px-6 mb-7">
         <div className="text-center mb-1.5 sm:mb-5">
           <h2 className="text-base sm:text-4xl md:text-[2.8rem] font-black mb-0.5 sm:mb-3 leading-tight">
             The fastest domain search tool
@@ -150,7 +150,7 @@ export const HomePageContent: React.FC = () => {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-0 sm:pt-0">
+      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-0 sm:pt-0 mb-4 sm:mb-7">
         <div className="text-center mb-2 sm:mb-4.5">
           <h2 className="text-base sm:text-4xl font-black mb-0.5 sm:mb-2">Popular Extensions</h2>
           <p style={{ color: 'var(--text-tertiary)' }} className="hidden sm:block text-[11px] sm:text-base max-w-xl mx-auto">
@@ -202,7 +202,7 @@ export const HomePageContent: React.FC = () => {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-3 sm:pt-0">
+      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-3 sm:pt-0 mb-4 sm:mb-7">
         <div className="text-center mb-2 sm:mb-6">
           <h2 className="text-base sm:text-4xl font-black mb-0.5 sm:mb-2">
             Powerful Domain Tools
@@ -257,7 +257,7 @@ export const HomePageContent: React.FC = () => {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6">
+      <section className="max-w-5xl mx-auto px-3 sm:px-6 mb-4 sm:mb-7">
         <div className="text-center mb-1.5 sm:mb-4.5">
           <h2 className="text-base sm:text-4xl font-black mb-0 sm:mb-2">Why DomainDiscovery?</h2>
           <p style={{ color: 'var(--text-tertiary)' }} className="hidden sm:block text-base max-w-xl mx-auto">
@@ -283,7 +283,7 @@ export const HomePageContent: React.FC = () => {
       </section>
 
 
-      <section className="max-w-4xl mx-auto px-3 sm:px-6">
+      <section className="max-w-4xl mx-auto px-3 sm:px-6 mb-4 sm:mb-7">
         <div className="text-center mb-2 sm:mb-5">
           <h2 className="text-base sm:text-4xl font-black mb-0.5 sm:mb-3">FAQs</h2>
           <p className="hidden sm:block text-sm" style={{ color: 'var(--text-tertiary)' }}>
@@ -370,7 +370,7 @@ export const HomePageContent: React.FC = () => {
         </div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-3 sm:px-6">
+      <section className="max-w-4xl mx-auto px-3 sm:px-6 mb-4 sm:mb-7">
         <div className={`p-3.5 sm:p-5 rounded-xl sm:rounded-2xl text-center ${
           isLight
             ? 'bg-gradient-to-br from-slate-50 to-white border border-slate-200 shadow-lg'
