@@ -5,11 +5,11 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export const metadata: Metadata = {
   title: {
-    default: "Domain Name Search: Find Available Domains Instantly | DomainDiscovery",
+    default: "DomainDiscovery — Find Your Perfect Domain in Seconds",
     template: "%s | DomainDiscovery",
   },
   description:
-    "Domain name search with instant results. Check domain availability as you type across 1,600+ extensions. Find and buy domains with our AI-powered search tool. Free domain generator, bulk checker, WHOIS lookup, and price comparison.",
+    "Find your perfect domain in seconds. Search 1,600+ extensions with instant availability results. Free AI domain generator, bulk checker, and price comparison.",
   keywords: [
     "domain search",
     "domain name search",
@@ -21,12 +21,15 @@ export const metadata: Metadata = {
     "domain availability",
     "WHOIS lookup",
     "domain price comparison",
-    "premium domains",
     "domain extensions",
     "TLD search",
     "find domain names",
     "register domain",
     "domain tools",
+    "brandable domain names",
+    "keyword domain finder",
+    "domain valuation",
+    "DNS guide",
   ],
   authors: [{ name: "DomainDiscovery" }],
   creator: "DomainDiscovery",
@@ -39,15 +42,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: "DomainDiscovery",
-    title: "Domain Name Search: Find Available Domains Instantly",
+    title: "DomainDiscovery — Find Your Perfect Domain in Seconds",
     description:
-      "Domain name search with instant results. Check domain availability as you type with results in milliseconds. Find and buy domains with our AI-powered search tool across 1,600+ extensions.",
+      "Search 1,600+ domain extensions with instant availability results. Free AI generator, bulk checker, and price comparison.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Domain Name Search: Find Available Domains Instantly",
+    title: "DomainDiscovery — Find Your Perfect Domain in Seconds",
     description:
-      "Domain name search with instant results. Check domain availability as you type across 1,600+ extensions. AI-powered search, bulk checker, and price comparison.",
+      "Search 1,600+ domain extensions with instant availability results. Free AI generator, bulk checker, and price comparison.",
     creator: "@domainsdiscovery",
   },
   robots: {
@@ -91,7 +94,7 @@ export default function RootLayout({
                 "target": "https://domainsdiscovery.com/search?q={search_term_string}",
                 "query-input": "required name=search_term_string"
               },
-              "description": "Domain name search with instant results. Check domain availability as you type across 1,600+ extensions.",
+              "description": "Find your perfect domain in seconds. Search 1,600+ extensions with instant availability results.",
               "publisher": {
                 "@type": "Organization",
                 "name": "DomainDiscovery",
@@ -122,7 +125,7 @@ export default function RootLayout({
                 "price": "0",
                 "priceCurrency": "USD"
               },
-              "description": "AI-powered lightning fast domain search engine testing real-time availability across thousands of TLD registrar APIs."
+              "description": "Find your perfect domain in seconds. AI-powered domain search engine with real-time availability across 1,600+ TLD extensions."
             })
           }}
         />
