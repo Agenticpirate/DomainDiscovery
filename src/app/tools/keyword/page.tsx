@@ -20,9 +20,9 @@ export default function KeywordPage() {
       <Navigation activeTool="keyword" />
 
       {/* Main Content */}
-      <main className="relative pt-20 sm:pt-24">
+      <main className="relative pt-[4.75rem] sm:pt-24">
         {/* Hero Section */}
-        <section className="px-3 sm:px-6 pb-4 sm:pb-7">
+        <section className="px-3 sm:px-6 pb-3 sm:pb-7">
           <div className="max-w-4xl mx-auto">
             <Breadcrumb items={[
               { label: 'Tools', href: '/' },
@@ -30,12 +30,12 @@ export default function KeywordPage() {
             ]} />
           </div>
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl sm:text-5xl md:text-[3.9rem] font-black tracking-tight mb-3">
+            <h1 className="text-2xl sm:text-5xl md:text-[3.9rem] font-black tracking-tight mb-1.5 sm:mb-3">
               <span className={`bg-gradient-to-r ${isLight ? 'from-slate-900 via-slate-800 to-slate-600' : 'from-white via-white to-white/60'} bg-clip-text text-transparent`}>
                 Keyword Domains
               </span>
             </h1>
-            <p className={`text-xs sm:text-base ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-4 sm:mb-6`}>
+            <p className={`text-xs sm:text-base ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-3 sm:mb-6`}>
               Generate 1,000+ domain name ideas by combining your keywords with popular prefixes and suffixes. Inspired by Lean Domain Search.
             </p>
           </div>

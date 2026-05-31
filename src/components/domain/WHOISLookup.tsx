@@ -20,9 +20,11 @@ interface WHOISData {
 
 interface WHOISLookupProps {
   domain?: string;
+  /** Show the internal title + subtitle. Off by default since callers provide a page heading. */
+  showHeading?: boolean;
 }
 
-export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
+export function WHOISLookup({ domain: initialDomain, showHeading = false }: WHOISLookupProps) {
   const [domain, setDomain] = useState(initialDomain || '');
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<WHOISData | null>(null);
@@ -54,17 +56,19 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
 
   return (
     <div className={`glass-card p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
-      <div className="mb-5">
-        <div className="flex items-center gap-3 mb-2">
-          <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>
-            <Icons.Info />
+      {showHeading && (
+        <div className="mb-5">
+          <div className="flex items-center gap-3 mb-2">
+            <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>
+              <Icons.Info />
+            </div>
+            <h3 className="text-lg font-bold">WHOIS Lookup</h3>
           </div>
-          <h3 className="text-lg font-bold">WHOIS Lookup</h3>
+          <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+            Get domain ownership and registration details instantly
+          </p>
         </div>
-        <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-          Get domain ownership and registration details instantly
-        </p>
-      </div>
+      )}
 
       <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 mb-5">
         <input

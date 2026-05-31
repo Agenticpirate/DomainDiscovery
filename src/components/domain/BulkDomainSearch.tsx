@@ -214,10 +214,20 @@ const ResultsView: React.FC<{
     <div className="flex flex-col gap-3 sm:gap-4 lg:flex-row lg:gap-6 w-full max-w-7xl mx-auto px-2 sm:px-0">
       {/* Sidebar - desktop */}
       <div className={`lg:w-56 lg:shrink-0 space-y-3 sm:space-y-4 ${isLight ? 'lg:text-slate-800' : 'lg:text-white'}`}>
-        <Button onClick={reset} variant="ghost" size="sm" className="justify-start gap-2 -ml-2">
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+        <button
+          onClick={reset}
+          aria-label="Start a new bulk search"
+          className={`group flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-2 sm:py-2.5 text-[13px] sm:text-sm font-semibold transition-all ${
+            isLight
+              ? 'border-amber-300 bg-amber-50 text-amber-700 hover:border-amber-400 hover:bg-amber-100'
+              : 'border-[var(--accent-border)] bg-[var(--accent-tint)] text-[var(--accent-text)] hover:bg-[var(--accent-tint-strong)] hover:border-[var(--accent)]'
+          }`}
+        >
+          <svg className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+          </svg>
           New bulk search
-        </Button>
+        </button>
 
         {/* Mobile: horizontal filter chips */}
         <div className="lg:hidden flex gap-1.5 overflow-x-auto pb-1 -mx-1 px-1">
@@ -230,17 +240,14 @@ const ResultsView: React.FC<{
             <button
               key={x.k}
               onClick={() => setFilter(x.k as FilterType)}
-              className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${filter === x.k ? (isLight ? 'bg-slate-900 text-white' : 'bg-white text-slate-900') : (isLight ? 'bg-white border border-slate-200 text-slate-600' : 'bg-white/10 text-white/70 border border-white/10')}`}
+              className={`shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium whitespace-nowrap transition-all ${filter === x.k ? (isLight ? 'bg-slate-900 text-white' : 'bg-white text-slate-900') : (isLight ? 'bg-white border border-slate-200 text-slate-600' : 'bg-white/[0.06] text-white/70 border border-white/10')}`}
             >
               {x.l} <span className="opacity-60">{x.c}</span>
             </button>
           ))}
-          {/* Mobile export buttons */}
-          <button onClick={exportCSV} className={`shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${isLight ? 'bg-white border border-slate-200 text-slate-600' : 'bg-white/10 text-white/70 border border-white/10'}`}>
-            <Icons.Download />&nbsp;CSV
-          </button>
-          <button onClick={exportPDF} className={`shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${isLight ? 'bg-white border border-slate-200 text-slate-600' : 'bg-white/10 text-white/70 border border-white/10'}`}>
-            <Icons.Download />&nbsp;PDF
+          {/* Mobile sort toggle */}
+          <button onClick={() => setSortAZ(!sortAZ)} className={`shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium whitespace-nowrap ${isLight ? 'bg-white border border-slate-200 text-slate-600' : 'bg-white/[0.06] text-white/70 border border-white/10'}`}>
+            {sortAZ ? 'A-Z' : 'Length'}
           </button>
         </div>
 
@@ -269,7 +276,7 @@ const ResultsView: React.FC<{
           </div>
         </div>
 
-        <div className={`rounded-2xl border p-3 sm:p-4 ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-black/35 backdrop-blur-xl'}`}>
+        <div className={`hidden lg:block rounded-2xl border p-3 sm:p-4 ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-black/35 backdrop-blur-xl'}`}>
           <div className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Filters</div>
           <button onClick={() => setShowTlds(!showTlds)} className={`w-full flex items-center justify-between px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm transition-all ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}>
             <span>TLDs</span>
@@ -348,11 +355,11 @@ const ResultsView: React.FC<{
 
       {/* Results Grid */}
       <div className="flex-1 min-w-0">
-        <div className={`rounded-2xl border p-3 sm:p-4 ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-black/35 backdrop-blur-xl'}`}>
-        <div className="mb-3 sm:mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className={`rounded-2xl border p-2.5 sm:p-4 ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-black/35 backdrop-blur-xl'}`}>
+        <div className="mb-2.5 sm:mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center justify-between gap-3">
             <span className={`text-xs sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{results.length} domains</span>
-            <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+            <div className="flex items-center gap-2 sm:gap-4 text-[11px] sm:text-sm">
               <span className="text-emerald-400">{counts.available} available</span>
               <span className="text-amber-400">{counts.premium} premium</span>
               <span className={isLight ? 'text-slate-400' : 'text-white/40'}>{counts.taken} taken</span>
@@ -367,11 +374,11 @@ const ResultsView: React.FC<{
               className="justify-between sm:justify-start"
             />
             <div className="flex gap-2 sm:hidden">
-              <Button onClick={exportCSV} variant="secondary" size="sm" className="flex-1 gap-2">
+              <Button onClick={exportCSV} variant="secondary" size="sm" className="flex-1 gap-1.5 py-1.5">
               <Icons.Download />
               CSV
               </Button>
-              <Button onClick={exportPDF} variant="secondary" size="sm" className="flex-1 gap-2">
+              <Button onClick={exportPDF} variant="secondary" size="sm" className="flex-1 gap-1.5 py-1.5">
               <Icons.Download />
               PDF
               </Button>
@@ -386,7 +393,7 @@ const ResultsView: React.FC<{
         )}
 
         <div 
-          className={`grid grid-cols-1 xl:grid-cols-2 gap-2 sm:gap-3 max-h-[calc(100vh-180px)] overflow-y-auto pr-0 sm:pr-1 select-none rounded-2xl ${isLight ? '' : '[background-image:none]'}`}
+          className={`grid grid-cols-1 xl:grid-cols-2 gap-1.5 sm:gap-3 max-h-[calc(100vh-180px)] overflow-y-auto pr-0 sm:pr-1 select-none rounded-2xl ${isLight ? '' : '[background-image:none]'}`}
           onContextMenu={(e) => e.preventDefault()}
           onCopy={(e) => e.preventDefault()}
         >
@@ -406,7 +413,7 @@ const ResultsView: React.FC<{
               return (
                 <div
                   key={d.domain}
-                  className={`relative flex items-center justify-between gap-3 p-3 sm:p-3.5 rounded-xl transition-all group ${
+                  className={`relative flex items-center justify-between gap-3 px-3 py-2 sm:p-3.5 rounded-lg sm:rounded-xl transition-all group ${
                     isLight
                       ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-sm'
                       : 'bg-[#101113]/95 border border-white/8 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] hover:border-white/15'

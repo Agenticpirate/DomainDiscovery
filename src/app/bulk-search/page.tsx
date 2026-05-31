@@ -19,8 +19,8 @@ export default function BulkSearchPage() {
       <Navigation activeTool="bulk" />
 
       {/* Main Content */}
-      <main className="relative pt-14 sm:pt-24 px-4">
-        <div className="max-w-7xl mx-auto">
+      <main className="relative pt-[4.75rem] sm:pt-28 px-4">
+        <div className="max-w-7xl mx-auto mb-3 sm:mb-4">
           <Breadcrumb items={[
             { label: 'Search', href: '/' },
             { label: 'Bulk Domain Search' }

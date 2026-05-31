@@ -250,39 +250,37 @@ export const GeoDomainGenerator: React.FC = () => {
   }, [locationType, minPopulation]);
 
   const checkDomainAvailability = useCallback(async (domainsToCheck: GeneratedDomain[]) => {
-    const BATCH_SIZE = 50;
-    const batches: GeneratedDomain[][] = [];
-    
-    for (let i = 0; i < domainsToCheck.length; i += BATCH_SIZE) {
-      batches.push(domainsToCheck.slice(i, i + BATCH_SIZE));
-    }
+    // The availability API counts each request against a tight bulk rate limit
+    // (5/min). Send ONE request (it chunks server-side) instead of many
+    // sequential batches, which would get 429'd and leave domains stuck "checking".
+    const CHECK_LIMIT = 600;
+    const domainNames = domainsToCheck.slice(0, CHECK_LIMIT).map(d => d.domain);
+    if (domainNames.length === 0) return;
 
-    for (const batch of batches) {
-      try {
-        const domainNames = batch.map(d => d.domain);
-        const response = await fetch('/api/domains/instant-check', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ domains: domainNames }),
-        });
+    try {
+      const response = await fetch('/api/domains/instant-check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ domains: domainNames }),
+      });
 
-        if (response.ok) {
-          const results = await response.json();
-          
-          setGeneratedDomains(prev => prev.map(d => {
-            const result = results.find((r: { domain: string; available: boolean }) => r.domain === d.domain);
-            if (result) {
-              return { ...d, status: result.available ? 'available' : 'taken' };
-            }
-            return d;
-          }));
-        }
-      } catch (error) {
-        console.error('Error checking domains:', error);
-        setGeneratedDomains(prev => prev.map(d => 
-          batch.some(b => b.domain === d.domain) ? { ...d, status: 'error' } : d
-        ));
+      if (response.ok) {
+        const results = await response.json();
+        const byDomain = new Map<string, { available: boolean }>(
+          (Array.isArray(results) ? results : []).map((r: { domain: string; available: boolean }) => [r.domain.toLowerCase(), r])
+        );
+        setGeneratedDomains(prev => prev.map(d => {
+          const result = byDomain.get(d.domain.toLowerCase());
+          if (result) return { ...d, status: result.available ? 'available' : 'taken' };
+          // Anything beyond the cap (or unresolved) shouldn't spin forever.
+          return d.status === 'checking' ? { ...d, status: 'taken' } : d;
+        }));
+      } else {
+        setGeneratedDomains(prev => prev.map(d => d.status === 'checking' ? { ...d, status: 'error' } : d));
       }
+    } catch (error) {
+      console.error('Error checking domains:', error);
+      setGeneratedDomains(prev => prev.map(d => d.status === 'checking' ? { ...d, status: 'error' } : d));
     }
   }, []);
 
@@ -409,19 +407,19 @@ export const GeoDomainGenerator: React.FC = () => {
           <label className={`block text-sm font-medium ${isLight ? 'text-slate-600' : 'text-white/70'} mb-3`}>
             Target Locations
           </label>
-          <div className="grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-1.5 sm:gap-2">
             {LOCATION_OPTIONS.map(option => (
               <button
                 key={option.value}
                 onClick={() => setLocationType(option.value as LocationType)}
-                className={`px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border text-xs sm:text-sm font-medium transition-all ${
+                className={`flex items-center gap-1.5 px-2.5 py-2 sm:px-4 sm:py-3 rounded-lg sm:rounded-xl border text-[11px] sm:text-sm font-medium transition-all text-left ${
                   locationType === option.value
                     ? `${isLight ? 'bg-blue-50 border-blue-300 text-blue-700' : 'bg-slate-400/20 border-slate-400/50 text-white'}`
                     : `${isLight ? 'bg-white border-slate-200 text-slate-600 hover:border-blue-300 hover:text-slate-900' : 'bg-white/[0.02] border-white/10 text-white/60 hover:border-white/20 hover:text-white'}`
                 }`}
               >
-                <span className="mr-2">{option.icon}</span>
-                {option.label}
+                <span className="shrink-0">{option.icon}</span>
+                <span className="truncate">{option.label}</span>
               </button>
             ))}
           </div>
@@ -432,7 +430,7 @@ export const GeoDomainGenerator: React.FC = () => {
           <label className={`block text-sm font-medium ${isLight ? 'text-slate-600' : 'text-white/70'} mb-3`}>
             Keyword Position
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
             {[
               { value: 'start', label: 'Keyword First', example: 'plumberlondon.com' },
               { value: 'end', label: 'Location First', example: 'londonplumber.com' },
@@ -441,14 +439,14 @@ export const GeoDomainGenerator: React.FC = () => {
               <button
                 key={option.value}
                 onClick={() => setPosition(option.value as KeywordPosition)}
-                className={`px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border text-left transition-all min-w-0 ${
+                className={`px-2.5 py-2 sm:px-4 sm:py-3 rounded-lg sm:rounded-xl border text-left transition-all min-w-0 ${
                   position === option.value
                     ? `${isLight ? 'bg-blue-50 border-blue-300' : 'bg-slate-400/20 border-slate-400/50'}`
                     : `${isLight ? 'bg-white border-slate-200 hover:border-blue-300' : 'bg-white/[0.02] border-white/10 hover:border-white/20'}`
                 }`}
               >
-                <div className={`text-sm font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>{option.label}</div>
-                <div className={`text-xs ${isLight ? 'text-slate-500' : 'text-white/40'} mt-1`}>{option.example}</div>
+                <div className={`text-[11px] sm:text-sm font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>{option.label}</div>
+                <div className={`text-[10px] sm:text-xs ${isLight ? 'text-slate-500' : 'text-white/40'} mt-0.5 sm:mt-1 truncate`}>{option.example}</div>
               </button>
             ))}
           </div>

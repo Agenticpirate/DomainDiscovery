@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useImperativeHandle, forwardRef } from 'react';
 import { Input } from '@/components/ui/Input';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -16,6 +16,10 @@ interface SearchInterfaceProps {
   isLoading?: boolean;
 }
 
+export interface SearchInterfaceHandle {
+  focusInput: () => void;
+}
+
 interface RecentSearch {
   query: string;
   timestamp: number;
@@ -24,7 +28,7 @@ interface RecentSearch {
 const RECENT_SEARCHES_KEY = 'domain_recent_searches';
 const MAX_RECENT_SEARCHES = 5;
 
-export function SearchInterface({
+export const SearchInterface = forwardRef<SearchInterfaceHandle, SearchInterfaceProps>(function SearchInterface({
   initialQuery = '',
   placeholder = 'Search for your perfect domain...',
   onSearch,
@@ -33,7 +37,7 @@ export function SearchInterface({
   showRecentSearches = true,
   debounceMs = 150,
   isLoading = false,
-}: SearchInterfaceProps) {
+}: SearchInterfaceProps, ref) {
   const [query, setQuery] = useState(initialQuery);
   const [recentSearches, setRecentSearches] = useState<RecentSearch[]>([]);
   const [showRecent, setShowRecent] = useState(false);
@@ -42,6 +46,10 @@ export function SearchInterface({
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const showRecentPanel = showRecent && showRecentSearches && recentSearches.length > 0;
+
+  useImperativeHandle(ref, () => ({
+    focusInput: () => inputRef.current?.focus(),
+  }), []);
 
   useEffect(() => {
     if (showRecentSearches && typeof window !== 'undefined') {
@@ -285,4 +293,6 @@ export function SearchInterface({
       )}
     </div>
   );
-}
+});
+
+SearchInterface.displayName = 'SearchInterface';

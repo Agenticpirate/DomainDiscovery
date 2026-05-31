@@ -2,9 +2,33 @@
 
 ## Overview
 
-DomainsDiscovery.com is a comprehensive domain discovery platform built with Next.js 14 App Router, TypeScript, and Tailwind CSS. The architecture follows a modular, component-based design with clear separation between presentation, business logic, and data layers. The platform prioritizes SEO, performance, and user experience with a modern dark-mode aesthetic.
+DomainsDiscovery.com is a domain discovery platform built with Next.js 14 App Router, TypeScript, and Tailwind CSS. The architecture follows a modular, component-based design with clear separation between presentation (React components/pages), an API route layer (Next.js Route Handlers), integration libraries (`src/lib`), and static JSON data.
 
-The system is designed as a client-heavy application with lightweight API routes that proxy to external domain services. This approach minimizes server costs while maximizing client-side interactivity and responsiveness.
+Domain availability is **not** backed by a single "Domain Availability API". The production availability path is a **three-tier fallback chain** that combines the Instant Domain Search MCP server, the GoDaddy REST API, and DNS-over-HTTPS (DoH) via Cloudflare. DNS resolution is the universal fallback: a DNS `Status` of `3` (NXDOMAIN) is treated as "available". A legacy hash-based mock still exists in `src/services/domainService.ts` for unit/property tests, but it is **not** on the production request path.
+
+This document has been reconciled against the actual implemented codebase. Where the originally-planned design drifted from what was built, the discrepancy is called out explicitly in **Implementation Reconciliation Notes** below rather than hidden.
+
+### Implementation Reconciliation Notes
+
+These are known points where the requirements/original design and the implemented code disagree. They are documented here so the drift is explicit and can be resolved deliberately.
+
+1. **`<50ms` availability response time (Requirement 1.1) is aspirational, not a real end-to-end guarantee.**
+   The production availability path makes live network calls — MCP (700–1200ms timeouts), GoDaddy REST, and/or Cloudflare DoH (700–2000ms timeouts). None of these can guarantee `<50ms`. The only way a response is served in tens of milliseconds is a **cache hit**:
+   - Server-side per-route in-memory caches (e.g. `instant-check` LRU: 5-min TTL, max 10k entries; `search` DNS cache: 10-min TTL; `premium-check`: 10-min TTL).
+   - Client-side caches in `instantDomainService.ts` (30s search cache + in-flight request de-duplication).
+   The `<50ms` figure should be treated as a **client-perceived target for repeat/cached lookups** and as marketing copy on the homepage stats — not a verifiable system property. This should be reworded in the requirements or downgraded to a non-binding goal.
+
+2. **Theme system contradicts the "dark mode" mandate (Requirement 16.1).**
+   `src/contexts/ThemeContext.tsx` implements a **light/dark theme toggle** persisted to `localStorage` (default `dark`, toggles a `light` class on `documentElement`). Requirement 16.1 mandates a dark-only palette. The code supports both themes, so the requirement and implementation conflict. This needs an explicit product decision: either (a) update Requirement 16.1 to allow a light/dark toggle, or (b) remove/disable the light theme. The design does **not** silently pick one — it flags the conflict for resolution.
+
+3. **`whois`, `value`, and `prices` domain endpoints are referenced by the client but not implemented.**
+   `src/services/instantDomainService.ts` calls `GET /api/domains/whois`, `GET /api/domains/value`, and `GET /api/domains/prices`. No route handlers exist for these paths (the only handlers under `src/app/api/domains/` are `check`, `generate`, `instant-check`, `premium-check`, `search`). These client functions will currently fail/return `null`. They are documented below as **planned / not-yet-implemented**. WHOIS (Requirement 5) and Appraisal (Requirement 6) therefore do not have a working backend yet; the appraisal/value heuristics that DO exist live in `src/lib/premiumDetection.ts` and are not yet wired to an endpoint.
+
+4. **Mock vs. real availability — two code paths exist.**
+   `src/services/domainService.ts#getMockAvailability` returns deterministic hash-based availability and is used by the legacy service and its tests. The authoritative production path is the API routes (`/api/domains/*`), which use MCP → GoDaddy → DNS. When reading this design, treat the **API routes as authoritative** and the `domainService.ts` mock as test scaffolding only.
+
+5. **Caching is in-memory per route, not Vercel Edge cache.**
+   The original design implied Vercel Edge caching. In reality each route module holds its own in-memory `Map`/LRU cache, and `apiHelpers.jsonResponse` additionally sets `Cache-Control: public, s-maxage=…, stale-while-revalidate=…` headers (which a CDN *may* honor). The in-memory caches are per-instance and do not survive serverless cold starts or span multiple instances.
 
 ## Architecture
 
@@ -12,332 +36,294 @@ The system is designed as a client-heavy application with lightweight API routes
 graph TB
     subgraph "Client Layer"
         UI[React Components]
-        Hooks[Custom Hooks]
-        State[Client State]
+        ClientSvc[instantDomainService.ts<br/>30s cache + in-flight dedupe]
+        Theme[ThemeContext<br/>light/dark + localStorage]
     end
-    
+
     subgraph "Next.js App Router"
-        Pages[Page Components]
-        Layouts[Layout Components]
-        API[API Routes]
+        Pages[Page Components<br/>flat routes + /tools group]
+        APIRoutes[API Route Handlers<br/>/api/domains/*, /api/tld-prices]
     end
-    
-    subgraph "Services Layer"
-        DomainService[Domain Service]
-        WHOISService[WHOIS Service]
-        AppraisalService[Appraisal Service]
-        GeoService[Geo Service]
-        AnalyticsService[Analytics Service]
+
+    subgraph "Cross-Cutting (src/lib)"
+        RateLimiter[rateLimiter.ts<br/>search/bulk/generate limiters by IP]
+        ApiHelpers[apiHelpers.ts<br/>CORS, jsonResponse, isValidQuery]
+        RouteCache[Per-route in-memory Map/LRU caches]
     end
-    
-    subgraph "External Services"
-        DomainAPI[Domain Availability API]
-        WHOISProvider[WHOIS Provider]
-        Registrars[Affiliate Registrars]
+
+    subgraph "Availability Sourcing — 3-Tier Fallback"
+        MCP[Tier 1: Instant Domain Search MCP<br/>instantDomainMCP.ts]
+        GoDaddy[Tier 2: GoDaddy REST API<br/>godaddyAPI.ts]
+        DNS[Tier 3: Cloudflare DoH<br/>NXDOMAIN = available]
     end
-    
-    subgraph "Data Layer"
-        StaticData[Static JSON Data]
-        Cache[In-Memory Cache]
+
+    subgraph "Enrichment & Data"
+        Premium[premiumDetection.ts<br/>heuristic scoring + value ranges]
+        TldPrices[tldPriceData.ts + tld-price-comparison.json]
+        StaticData[Static JSON: tlds, countries, cities,<br/>keywords, registrars, extensions, geo]
+        LegacyMock[services/domainService.ts<br/>hash-based MOCK — tests only]
     end
-    
-    UI --> Hooks
-    Hooks --> State
+
+    subgraph "Secondary / Server-Side"
+        McpProxy[mcpProxy.ts<br/>GoDaddy MCP endpoint proxy]
+    end
+
+    UI --> ClientSvc
+    UI --> Theme
+    ClientSvc --> APIRoutes
     Pages --> UI
-    Layouts --> Pages
-    UI --> API
-    API --> DomainService
-    API --> WHOISService
-    API --> AppraisalService
-    DomainService --> DomainAPI
-    WHOISService --> WHOISProvider
-    DomainService --> Cache
-    GeoService --> StaticData
-    AnalyticsService --> Registrars
+    APIRoutes --> RateLimiter
+    APIRoutes --> ApiHelpers
+    APIRoutes --> RouteCache
+    APIRoutes --> MCP
+    APIRoutes --> GoDaddy
+    APIRoutes --> DNS
+    MCP -.fallback.-> GoDaddy
+    GoDaddy -.fallback.-> DNS
+    APIRoutes --> Premium
+    APIRoutes --> TldPrices
+    Pages --> StaticData
+    McpProxy --> GoDaddy
 ```
 
 ### High-Level Architecture Decisions
 
-1. **Next.js 14 App Router**: Leverages React Server Components for optimal SEO and initial page load performance
-2. **API Routes as Proxies**: Thin API layer that proxies requests to external services, handling rate limiting and caching
-3. **Static Data Files**: Geographic and TLD data stored as JSON files for fast access without database overhead
-4. **Client-Side State**: React hooks manage UI state; no global state management library needed for this scope
-5. **Edge Caching**: Vercel Edge caching for API responses to minimize external API calls
+1. **Next.js 14 App Router**: React Server Components for SEO and initial load; client components for interactive tools. Routes are **flat** (e.g. `/search`, `/generator`, `/bulk-search`) with a `/tools/*` group for utility tools — not the `(marketing)`/`(tools)` route groups originally proposed.
+2. **API Route Handlers as orchestrators (not thin proxies)**: Each `/api/domains/*` handler implements real orchestration logic — input validation, rate limiting, multi-source sourcing, batching/concurrency control, caching, and premium enrichment. They are heavier than the originally-planned "thin proxy".
+3. **Three-tier availability sourcing**: MCP first (premium/marketplace-aware), GoDaddy second (authoritative pricing/premium), Cloudflare DoH last (universal, free, NXDOMAIN-based). Tiers are feature-flagged (`ENABLE_MCP_SEARCH`, `ENABLE_PREMIUM_ENRICHMENT`).
+4. **Static JSON data**: Geographic, TLD, keyword, registrar, and extension data stored as JSON files under `src/data` for fast access without a database.
+5. **In-memory caching + Cache-Control headers**: Each route holds its own TTL-based `Map`/LRU cache; `apiHelpers.jsonResponse` also emits CDN-friendly `Cache-Control` headers. (See Reconciliation Note 5 — this is not Vercel Edge cache.)
+6. **Per-concern rate limiting keyed by client IP**: separate sliding-window limiters for search (30/min), bulk (5/min), and generation (10/min), with `429` + `Retry-After` and `X-RateLimit-*` headers.
+7. **Light/dark theme via context**: `ThemeContext` persists theme to `localStorage`. (See Reconciliation Note 2 — conflicts with dark-only Requirement 16.1.)
 
 ## Components and Interfaces
 
-### Directory Structure
+### Directory Structure (actual)
 
 ```
 src/
 ├── app/
-│   ├── (marketing)/
-│   │   ├── page.tsx                 # Homepage
-│   │   ├── about/page.tsx
-│   │   ├── contact/page.tsx
-│   │   ├── privacy/page.tsx
-│   │   └── terms/page.tsx
-│   ├── (tools)/
-│   │   ├── generator/page.tsx
-│   │   ├── geo/page.tsx
-│   │   ├── bulk/page.tsx
-│   │   ├── whois/
-│   │   │   ├── page.tsx
-│   │   │   └── [domain]/page.tsx
-│   │   ├── appraisal/page.tsx
-│   │   └── expired/page.tsx
-│   ├── tld/[tld]/page.tsx
-│   ├── blog/
-│   │   ├── page.tsx
-│   │   └── [slug]/page.tsx
-│   ├── api/
-│   │   ├── check/route.ts
-│   │   ├── bulk/route.ts
-│   │   ├── whois/route.ts
-│   │   ├── suggest/route.ts
-│   │   └── appraise/route.ts
+│   ├── page.tsx                     # Homepage
 │   ├── layout.tsx
 │   ├── globals.css
-│   └── sitemap.ts
+│   ├── error.tsx
+│   ├── not-found.tsx
+│   ├── sitemap.ts
+│   ├── opengraph-image.tsx
+│   ├── twitter-image.tsx
+│   ├── enhanced-page.tsx
+│   ├── search/page.tsx              # Instant domain search
+│   ├── generator/page.tsx           # Keyword generator
+│   ├── bulk-search/page.tsx         # Bulk availability checker
+│   ├── expired/page.tsx             # Expired domains finder
+│   ├── premium/page.tsx             # Premium domains
+│   ├── saved-domains/page.tsx       # Saved domains
+│   ├── domain-extensions/page.tsx   # TLD/extension info
+│   ├── blog/page.tsx
+│   ├── learn/
+│   │   ├── page.tsx
+│   │   └── [slug]/                  # Dynamic learn articles
+│   ├── faq/page.tsx
+│   ├── contact/page.tsx
+│   ├── privacy/page.tsx
+│   ├── terms/page.tsx
+│   ├── tools/
+│   │   ├── whois/page.tsx           # WHOIS tool UI (backend not yet implemented)
+│   │   ├── value/page.tsx           # Value/appraisal tool UI (backend not yet implemented)
+│   │   ├── keyword/page.tsx
+│   │   ├── geo/page.tsx
+│   │   ├── brandable/page.tsx
+│   │   └── compare/page.tsx
+│   └── api/
+│       ├── domains/
+│       │   ├── search/route.ts          # POST — MCP + DNS + premium enrichment
+│       │   ├── instant-check/route.ts   # POST/GET — MCP-first + DNS, LRU cache
+│       │   ├── check/route.ts           # POST/GET — pure DNS batch checker
+│       │   ├── generate/route.ts        # POST — MCP variations + fallback generator
+│       │   └── premium-check/route.ts   # POST — GoDaddy + MCP enrichment
+│       └── tld-prices/route.ts          # GET — TLD price dataset
 ├── components/
-│   ├── layout/
-│   │   ├── Navigation.tsx
-│   │   ├── Footer.tsx
-│   │   ├── MobileMenu.tsx
-│   │   └── Breadcrumbs.tsx
-│   ├── ui/
-│   │   ├── Button.tsx
-│   │   ├── Input.tsx
-│   │   ├── Card.tsx
-│   │   ├── Badge.tsx
-│   │   ├── Modal.tsx
-│   │   ├── Tooltip.tsx
-│   │   ├── Skeleton.tsx
-│   │   ├── Toast.tsx
-│   │   └── GlowEffect.tsx
-│   ├── domain/
-│   │   ├── SearchBar.tsx
-│   │   ├── DomainCard.tsx
-│   │   ├── DomainGrid.tsx
-│   │   ├── TLDSelector.tsx
-│   │   ├── AvailabilityBadge.tsx
-│   │   └── RegisterButton.tsx
-│   ├── generator/
-│   │   ├── KeywordInput.tsx
-│   │   ├── GeneratorFilters.tsx
-│   │   └── SuggestionList.tsx
-│   ├── geo/
-│   │   ├── LocationSelector.tsx
-│   │   ├── GeoResults.tsx
-│   │   └── PopulationBadge.tsx
-│   ├── home/
-│   │   ├── HeroSection.tsx
-│   │   ├── FeaturesSection.tsx
-│   │   ├── StatsSection.tsx
-│   │   ├── TestimonialsSection.tsx
-│   │   ├── FAQSection.tsx
-│   │   └── CTASection.tsx
-│   └── seo/
-│       ├── JsonLd.tsx
-│       ├── MetaTags.tsx
-│       └── CanonicalUrl.tsx
-├── hooks/
-│   ├── useDomainSearch.ts
-│   ├── useDomainGenerator.ts
-│   ├── useBulkChecker.ts
-│   ├── useWHOIS.ts
-│   ├── useAppraisal.ts
-│   └── useAnalytics.ts
+│   ├── domain/      # search bar, domain cards/grid, availability badges, etc.
+│   ├── generator/   # keyword input, filters, suggestion list
+│   ├── geo/         # location selector, geo results, population badges
+│   ├── home/        # hero, features, stats, FAQ, CTA sections
+│   ├── layout/      # navigation, footer, mobile menu, breadcrumbs
+│   ├── sections/    # reusable page sections
+│   ├── seo/         # JSON-LD, meta tags, canonical URL helpers
+│   └── ui/          # buttons, inputs, cards, badges, modals, etc.
+├── contexts/
+│   └── ThemeContext.tsx             # light/dark theme (localStorage)
 ├── services/
-│   ├── domainService.ts
-│   ├── whoisService.ts
-│   ├── appraisalService.ts
-│   ├── geoService.ts
-│   └── analyticsService.ts
+│   ├── domainService.ts             # LEGACY hash-based mock (tests only)
+│   └── instantDomainService.ts      # client API wrapper (calls /api/domains/*)
 ├── lib/
+│   ├── apiHelpers.ts                # CORS, jsonResponse/errorResponse, isValidQuery
+│   ├── rateLimiter.ts               # per-concern sliding-window limiters
+│   ├── instantDomainMCP.ts          # Tier 1: Instant Domain Search MCP client
+│   ├── godaddyAPI.ts                # Tier 2: GoDaddy REST API client
+│   ├── mcpProxy.ts                  # secondary GoDaddy MCP endpoint proxy
+│   ├── premiumDetection.ts          # heuristic premium scoring + value ranges
+│   ├── tldPriceData.ts              # TLD price dataset accessors
+│   ├── registrars.ts                # registrar helpers
+│   ├── cache.ts                     # cache utilities
 │   ├── utils.ts
-│   ├── validators.ts
-│   ├── rateLimiter.ts
-│   └── cache.ts
-├── data/
-│   ├── countries.json
-│   ├── cities.json
-│   ├── keywords.json
-│   ├── tlds.json
-│   └── registrars.json
-└── types/
-    ├── domain.ts
-    ├── whois.ts
-    ├── geo.ts
-    └── api.ts
+│   └── validators.ts
+└── data/
+    ├── tlds.json
+    ├── countries.json
+    ├── cities.json
+    ├── cities-expanded.json
+    ├── keywords.json
+    ├── registrars.json
+    ├── extensions.json
+    ├── tld-price-comparison.json
+    ├── us-states.json
+    ├── canada-provinces.json
+    └── australia-states.json
 ```
 
-### Core Component Interfaces
+### Core Component / Result Types
+
+These reflect the shapes actually returned by the API routes and integration libraries.
 
 ```typescript
-// types/domain.ts
-interface DomainCheckResult {
+// Availability result shape returned by /api/domains/search
+interface SearchResult {
+  domain: string;        // e.g. "example.com"
+  available: boolean;
+  tld: string;           // e.g. "com" (no leading dot)
+  price: string;         // hardcoded getPriceForTLD() table, e.g. "$12.99"
+  premium: boolean;
+}
+
+// Result shape returned by /api/domains/instant-check
+interface InstantCheckResult {
   domain: string;
   available: boolean;
-  tld: string;
-  checkedAt: Date;
-  registrarLinks?: RegistrarLink[];
+  premium?: boolean;
+  price?: string;        // marketplace price if premium
+  buyUrl?: string;       // GoDaddy listing URL for premium/marketplace domains
+  purchaseInfo?: string; // e.g. "View listing on GoDaddy"
 }
 
-interface RegistrarLink {
-  name: string;
-  url: string;
+// Result shape returned by /api/domains/check (pure DNS)
+interface DnsCheckResult {
+  domain: string;
+  available: boolean;    // true when Cloudflare DoH Status === 3 (NXDOMAIN)
+}
+
+// Result shape returned by /api/domains/generate
+interface DomainVariation {
+  domain: string;
+  available: boolean;
+  score: number;         // relevance/quality score
+  reason: string;        // human-readable rationale
+}
+
+// Result shape returned by /api/domains/premium-check
+interface PremiumCheckResult {
+  domain: string;
+  available: boolean;
+  premium: boolean;
   price?: string;
-  affiliate: boolean;
+  source: 'godaddy' | 'mcp' | 'cache' | 'fallback';
 }
 
-interface DomainSuggestion {
+// Internal result from instantDomainMCP.ts
+interface MCPDomainCheckResult {
   domain: string;
-  score: number;
-  available?: boolean;
-  source: 'keyword' | 'ai' | 'geo';
+  available: boolean;
+  premium?: boolean;
+  price?: string;        // market price ÷ 100 (cents → dollars)
+  buyUrl?: string;
+  purchaseInfo?: string;
 }
 
-// types/whois.ts
-interface WHOISResult {
+// Internal result from godaddyAPI.ts
+interface GoDaddyResult {
   domain: string;
-  registrar: string;
-  registrant?: RegistrantInfo;
-  dates: {
-    created: Date;
-    updated: Date;
-    expires: Date;
-  };
-  nameServers: string[];
-  dnssec: boolean;
-  rawData: string;
-}
-
-interface RegistrantInfo {
-  name?: string;
-  organization?: string;
-  country?: string;
-  email?: string;
-}
-
-// types/geo.ts
-interface GeoLocation {
-  name: string;
-  type: 'country' | 'city';
-  population: number;
-  countryCode?: string;
-}
-
-interface GeoDomainResult {
-  domain: string;
-  location: GeoLocation;
-  available?: boolean;
-}
-
-// types/api.ts
-interface APIResponse<T> {
-  success: boolean;
-  data?: T;
-  error?: APIError;
-  meta?: {
-    timestamp: number;
-    cached: boolean;
-  };
-}
-
-interface APIError {
-  code: string;
-  message: string;
-  details?: Record<string, unknown>;
+  available: boolean;
+  premium?: boolean;     // heuristic: priceInDollars > 20
+  price?: number;        // micro-units ÷ 1,000,000
 }
 ```
 
 ### Service Layer Interfaces
 
 ```typescript
-// services/domainService.ts
-interface DomainService {
-  checkAvailability(domain: string): Promise<DomainCheckResult>;
-  checkBulk(domains: string[]): Promise<DomainCheckResult[]>;
-  generateSuggestions(keyword: string, options: GeneratorOptions): DomainSuggestion[];
-  getRegistrarLinks(domain: string): RegistrarLink[];
-}
+// services/instantDomainService.ts — CLIENT-side wrapper around /api/domains/*
+// Includes a 30s search cache and in-flight request de-duplication.
+export function searchDomains(
+  query: string,
+  tlds?: string[],
+  options?: { signal?: AbortSignal }
+): Promise<SearchResult[]>;                                   // → POST /api/domains/search
 
-interface GeneratorOptions {
-  tlds: string[];
-  position: 'start' | 'end' | 'both';
-  maxLength: number;
-  excludeNumbers: boolean;
-  excludeHyphens: boolean;
-}
+export function generateDomainVariations(
+  keyword: string, count?: number
+): Promise<DomainVariation[]>;                                // → POST /api/domains/generate
 
-// services/whoisService.ts
-interface WHOISService {
-  lookup(domain: string): Promise<WHOISResult>;
-  parseRawWHOIS(raw: string): WHOISResult;
-}
+export function checkDomainAvailability(
+  domains: string[]
+): Promise<InstantCheckResult[]>;                             // → POST /api/domains/instant-check
 
-// services/appraisalService.ts
-interface AppraisalService {
-  appraise(domain: string): Promise<AppraisalResult>;
-}
+// ⚠ Planned / NOT-YET-IMPLEMENTED — no backend route handlers exist (see Reconciliation Note 3)
+export function getWhoisInfo(domain: string): Promise<unknown | null>;        // → GET /api/domains/whois
+export function getDomainValue(domain: string): Promise<unknown | null>;      // → GET /api/domains/value
+export function getPriceComparison(domain: string): Promise<unknown | null>;  // → GET /api/domains/prices
 
-interface AppraisalResult {
-  domain: string;
-  estimatedValue: {
-    low: number;
-    mid: number;
-    high: number;
-  };
-  confidence: number;
-  factors: AppraisalFactor[];
-}
-
-interface AppraisalFactor {
-  name: string;
-  impact: 'positive' | 'negative' | 'neutral';
-  weight: number;
-  description: string;
-}
-
-// services/geoService.ts
-interface GeoService {
-  getCountries(): GeoLocation[];
-  getCities(countryCode?: string): GeoLocation[];
-  generateGeoDomains(keyword: string, locations: GeoLocation[], tlds: string[]): GeoDomainResult[];
-}
+// services/domainService.ts — LEGACY mock service (used by unit/property tests only)
+export function checkAvailability(domain: string): Promise<DomainCheckResult>; // uses getMockAvailability()
+export function checkBulk(domains: string[]): Promise<DomainCheckResult[]>;
+export function generateSuggestions(keyword: string, options: GeneratorOptions): DomainSuggestion[];
+export function getRegistrarLinks(domain: string): RegistrarLink[];
 ```
 
-### Hook Interfaces
+### Integration Library Interfaces
 
 ```typescript
-// hooks/useDomainSearch.ts
-interface UseDomainSearchReturn {
-  results: DomainCheckResult[];
-  isLoading: boolean;
-  error: Error | null;
-  search: (query: string, tlds: string[]) => Promise<void>;
-  clearResults: () => void;
-}
+// lib/instantDomainMCP.ts — Tier 1 (endpoint: https://instantdomainsearch.com/mcp/streamable-http)
+// Tools: search_domains, check_domain_availability, generate_domain_variations
+// Premium/marketplace-aware. Short timeouts (700–1200ms). Prices parsed from market data (÷100).
+export function checkDomainAvailabilityViaMCP(p: { domains: string[] }): Promise<MCPDomainCheckResult[]>;
+export function searchDomainsViaMCP(p: { query: string; tlds?: string[] }): Promise<MCPDomainCheckResult[]>;
+export function generateDomainVariationsViaMCP(p: { keyword: string; count?: number }): Promise<MCPDomainCheckResult[]>;
 
-// hooks/useBulkChecker.ts
-interface UseBulkCheckerReturn {
-  results: DomainCheckResult[];
-  progress: number;
-  isChecking: boolean;
-  error: Error | null;
-  checkDomains: (domains: string[]) => Promise<void>;
-  exportCSV: () => void;
-  cancel: () => void;
-}
+// lib/godaddyAPI.ts — Tier 2 (https://api.godaddy.com/v1/domains/available, /suggest)
+// Auth: sso-key GODADDY_API_KEY:GODADDY_API_SECRET. Prices in micro-units (÷1,000,000).
+// Batch concurrency 10 with ~100ms inter-batch delay (rate-limit-aware).
+export function checkDomainWithGoDaddy(domain: string): Promise<GoDaddyResult>;
+export function checkDomainsWithGoDaddy(domains: string[]): Promise<GoDaddyResult[]>;
+export function searchDomainsWithGoDaddy(query: string, tlds?: string[]): Promise<GoDaddyResult[]>;
+export function getDomainSuggestions(query: string, limit?: number): Promise<Array<{ domain: string; available: boolean }>>;
 
-// hooks/useAnalytics.ts
-interface UseAnalyticsReturn {
-  trackSearch: (query: string, results: number) => void;
-  trackToolUsage: (tool: string) => void;
-  trackAffiliateClick: (registrar: string, domain: string) => void;
-  trackExport: (type: string, count: number) => void;
-}
+// lib/mcpProxy.ts — secondary/server-side proxy to GoDaddy MCP endpoint
+//   (https://api.godaddy.com/v1/domains/mcp). Provides its own check/search/generate wrappers.
+//   NOTE: this is an alternative path; the primary MCP client is instantDomainMCP.ts.
+export function callInstantDomainSearchMCP(toolName: string, args: Record<string, any>): Promise<any>;
+export function checkDomainsViaMCP(domains: string[]): Promise<Array<{ domain: string; available: boolean; premium?: boolean }>>;
+
+// lib/premiumDetection.ts — heuristic premium scoring (threshold score >= 80) + value estimation
+export function estimatePremiumLikelihood(domain: string): { isProbablyPremium: boolean; confidence: number; reasons: string[] };
+export function estimateDomainValue(domain: string): { min: number; max: number; currency: string };
+
+// lib/tldPriceData.ts — TLD price dataset accessors (backed by data/tld-price-comparison.json)
+export function getTldPriceSummaryList(): TldPricingSummary[];
+export function getTldPriceDetail(tld: string): TldPricingDetail | null;
+export function getTldPriceDatasetMeta(): { generatedAt: string; sourceName: string; sourceUrl: string; extensionCount: number; failedExtensions: string[] };
+
+// lib/rateLimiter.ts — per-concern limiters keyed by client IP
+export function getSearchRateLimiter(): RateLimiter;    // 30 req/min (RATE_LIMIT_REQUESTS_PER_MINUTE)
+export function getBulkRateLimiter(): RateLimiter;      // 5 req/min  (RATE_LIMIT_BULK_REQUESTS_PER_MINUTE)
+export function getGenerateRateLimiter(): RateLimiter;  // 10 req/min (RATE_LIMIT_GENERATE_REQUESTS_PER_MINUTE)
+export function getClientIP(request: Request): string;  // x-forwarded-for → x-real-ip → cf-connecting-ip
+export function rateLimitResponse(result: RateLimitResult, message?: string): Response; // 429 + Retry-After
+
+// lib/apiHelpers.ts — shared response/validation helpers
+export function jsonResponse(data: unknown, request: NextRequest, cacheMaxAge?: number): NextResponse; // CORS + Cache-Control
+export function errorResponse(message: string, status: number): NextResponse;
+export function corsPreflightResponse(request: NextRequest): NextResponse; // 204
+export function isValidQuery(query: string): boolean; // length <= 100, /^[a-zA-Z0-9\s.\-]+$/
 ```
 
 ## Data Models
@@ -345,194 +331,92 @@ interface UseAnalyticsReturn {
 ### Static Data Schemas
 
 ```typescript
-// data/tlds.json schema
+// data/tlds.json
 interface TLDData {
-  tld: string;           // e.g., "com", "io", "ai"
-  name: string;          // e.g., "Commercial"
+  tld: string; name: string;
   type: 'gTLD' | 'ccTLD' | 'newTLD';
-  registry: string;
-  introduced: number;    // year
-  restrictions?: string;
-  popularity: number;    // 1-100 score
-  avgPrice: number;      // USD
+  registry: string; introduced: number;
+  restrictions?: string; popularity: number; avgPrice: number;
 }
 
-// data/countries.json schema
-interface CountryData {
-  name: string;
-  code: string;          // ISO 3166-1 alpha-2
-  population: number;
-  continent: string;
-}
+// data/countries.json
+interface CountryData { name: string; code: string; population: number; continent: string; }
 
-// data/cities.json schema
-interface CityData {
-  name: string;
-  country: string;       // country code
-  population: number;
-  region?: string;
-}
+// data/cities.json and data/cities-expanded.json
+interface CityData { name: string; country: string; population: number; region?: string; }
 
-// data/keywords.json schema
-interface KeywordData {
-  word: string;
-  category: string;      // e.g., "tech", "business", "creative"
-  popularity: number;    // 1-100 score
-}
+// data/keywords.json
+interface KeywordData { word: string; category: string; popularity: number; }
 
-// data/registrars.json schema
+// data/registrars.json
 interface RegistrarData {
-  name: string;
-  slug: string;
-  baseUrl: string;
-  affiliateParam: string;
-  affiliateId: string;
-  supportedTLDs: string[];
-  pricing: Record<string, number>;
+  name: string; slug: string; baseUrl: string;
+  affiliateParam: string; affiliateId: string;
+  supportedTLDs: string[]; pricing: Record<string, number>;
 }
+
+// data/extensions.json — TLD/extension catalog for the domain-extensions page
+// data/tld-price-comparison.json — registrar-by-registrar pricing dataset (see tldPriceData.ts types)
+// data/us-states.json, data/canada-provinces.json, data/australia-states.json — geo subdivisions
 ```
 
-### API Request/Response Schemas
+### API Request/Response Schemas (actual)
 
 ```typescript
-// GET /api/check?domain=example.com
-interface CheckRequest {
-  domain: string;
-}
+// POST /api/domains/search        (rate limit: search, 30/min)
+// MCP first (only if ENABLE_MCP_SEARCH && !exactDomainQuery && tlds.length <= 60), DNS fallback
+// (concurrency 60), optional premium enrichment (ENABLE_PREMIUM_ENRICHMENT). TLDs capped at 320.
+// 10-min in-memory DNS cache. Prices from hardcoded getPriceForTLD() table.
+interface SearchRequest { query: string; tlds?: string[]; }   // tlds default: .com,.net,.org,.ai,.io,.co
+type SearchResponse = SearchResult[];                          // [{ domain, available, tld, price, premium }]
 
-interface CheckResponse extends APIResponse<DomainCheckResult> {}
+// POST /api/domains/instant-check  (rate limit: search for 1, bulk for >1)
+// MCP-first (batch 20) then DNS. LRU cache (max 10k, 5-min TTL). Max 1000 domains.
+interface InstantCheckRequest { domain?: string; domains?: string[]; } // max 1000
+type InstantCheckResponse = InstantCheckResult | InstantCheckResult[];  // single if `domain`, else array
+// GET /api/domains/instant-check?domain=example.com → InstantCheckResult
 
-// POST /api/bulk
-interface BulkRequest {
-  domains: string[];     // max 500
-}
+// POST /api/domains/check          (rate limit: bulk, 5/min)
+// Pure Cloudflare DoH batch checker. Concurrency 20. Max 100 domains.
+interface CheckRequest { domains: string[]; }                  // sliced to 100
+type CheckResponse = DnsCheckResult[];                         // [{ domain, available }]
+// GET /api/domains/check?domain=example.com → { domain, available }  (rate limit: search)
 
-interface BulkResponse extends APIResponse<{
-  results: DomainCheckResult[];
-  processed: number;
-  failed: number;
-}> {}
+// POST /api/domains/generate       (rate limit: generate, 10/min)
+// MCP generate_domain_variations; falls back to prefix/suffix/TLD generator if MCP empty.
+interface GenerateRequest { keyword: string; count?: number; } // count clamped to 1..20
+type GenerateResponse = DomainVariation[];                     // [{ domain, available, score, reason }]
 
-// GET /api/whois?domain=example.com
-interface WHOISRequest {
-  domain: string;
-}
+// POST /api/domains/premium-check  (rate limit: search, 30/min)
+// GoDaddy first (if credentials), then MCP enrichment, then fallback. 10-min cache. Max 60 domains.
+interface PremiumCheckRequest { domains: string[]; }           // max 60
+type PremiumCheckResponse = PremiumCheckResult[];              // [{ domain, available, premium, price, source }]
 
-interface WHOISResponse extends APIResponse<WHOISResult> {}
+// GET /api/tld-prices              (no rate limiter applied)
+//   /api/tld-prices            → { meta, summaries: TldPricingSummary[] }
+//   /api/tld-prices?tld=com    → { meta, detail: TldPricingDetail } | 404 { error: 'TLD not found' }
 
-// GET /api/suggest?keyword=tech&tlds=com,io&count=20
-interface SuggestRequest {
-  keyword: string;
-  tlds?: string[];
-  count?: number;
-  position?: 'start' | 'end' | 'both';
-}
-
-interface SuggestResponse extends APIResponse<DomainSuggestion[]> {}
-
-// GET /api/appraise?domain=example.com
-interface AppraiseRequest {
-  domain: string;
-}
-
-interface AppraiseResponse extends APIResponse<AppraisalResult> {}
+// ⚠ Planned / NOT-YET-IMPLEMENTED (referenced by instantDomainService.ts, no handlers exist):
+//   GET /api/domains/whois?domain=…
+//   GET /api/domains/value?domain=…
+//   GET /api/domains/prices?domain=…
 ```
+
+Note on response envelope: success responses currently return the **bare data** (arrays/objects) via `apiHelpers.jsonResponse`, while errors return `{ error: string }` via `errorResponse`, and rate-limit errors return `{ success: false, error: { code, message, details } }` via `rateLimitResponse`. This is **not** the uniform `APIResponse<T>` envelope the original design proposed — see Property 18 and Testing Strategy for the reconciliation implication.
 
 ### SEO Data Models
 
 ```typescript
-// JSON-LD Schemas
-interface WebApplicationSchema {
-  '@context': 'https://schema.org';
-  '@type': 'WebApplication';
-  name: string;
-  url: string;
-  description: string;
-  applicationCategory: string;
-  operatingSystem: string;
-  offers: {
-    '@type': 'Offer';
-    price: string;
-    priceCurrency: string;
-  };
-}
+interface WebApplicationSchema { '@context': 'https://schema.org'; '@type': 'WebApplication'; /* … */ }
+interface FAQPageSchema { '@context': 'https://schema.org'; '@type': 'FAQPage'; mainEntity: Array<{ /* Q&A */ }>; }
+interface BreadcrumbSchema { '@context': 'https://schema.org'; '@type': 'BreadcrumbList'; itemListElement: Array<{ /* … */ }>; }
 
-interface FAQPageSchema {
-  '@context': 'https://schema.org';
-  '@type': 'FAQPage';
-  mainEntity: Array<{
-    '@type': 'Question';
-    name: string;
-    acceptedAnswer: {
-      '@type': 'Answer';
-      text: string;
-    };
-  }>;
-}
-
-interface BreadcrumbSchema {
-  '@context': 'https://schema.org';
-  '@type': 'BreadcrumbList';
-  itemListElement: Array<{
-    '@type': 'ListItem';
-    position: number;
-    name: string;
-    item: string;
-  }>;
-}
-
-// Page Meta Data
 interface PageMeta {
-  title: string;
-  description: string;
-  keywords: string[];
-  canonical: string;
-  openGraph: {
-    title: string;
-    description: string;
-    image: string;
-    type: string;
-  };
-  twitter: {
-    card: string;
-    title: string;
-    description: string;
-    image: string;
-  };
+  title: string; description: string; keywords: string[]; canonical: string;
+  openGraph: { title: string; description: string; image: string; type: string };
+  twitter: { card: string; title: string; description: string; image: string };
 }
 ```
-
-### Validation Schemas
-
-```typescript
-// Domain validation
-interface DomainValidation {
-  isValid: boolean;
-  normalized: string;
-  errors: string[];
-}
-
-function validateDomain(input: string): DomainValidation {
-  // Validates domain format, length, allowed characters
-  // Returns normalized lowercase domain
-}
-
-// Bulk input validation
-interface BulkValidation {
-  valid: string[];
-  invalid: Array<{ input: string; reason: string }>;
-  duplicates: string[];
-}
-
-function validateBulkInput(input: string | File): Promise<BulkValidation> {
-  // Parses textarea or file input
-  // Validates each domain
-  // Removes duplicates
-  // Enforces 500 domain limit
-}
-```
-
-
 
 ## Correctness Properties
 
@@ -646,6 +530,8 @@ function validateBulkInput(input: string | File): Promise<BulkValidation> {
 
 **Validates: Requirements 11.6**
 
+> Reconciliation note for Property 18: the implemented routes do **not** yet emit a uniform `APIResponse<T>` envelope (success responses return bare data; `errorResponse` returns `{ error }`; only `rateLimitResponse` returns `{ success:false, error:{ code, message } }`). This property currently fails against the code. Either the routes must be wrapped in a consistent envelope, or Requirement 11.6 must be revised to describe the actual contract. Tracked as a discrepancy, not silently changed.
+
 ### Property 19: Page SEO Completeness
 
 *For any* public page in the application, the HTML SHALL include a title tag, meta description, canonical URL, Open Graph tags, and Twitter Card tags.
@@ -694,87 +580,64 @@ function validateBulkInput(input: string | File): Promise<BulkValidation> {
 
 | Error Type | Handling Strategy | User Feedback |
 |------------|-------------------|---------------|
-| Invalid domain format | Validate before submission | Inline error message with format hint |
+| Invalid domain/query format | Validate before submission (`isValidQuery` on server, client guards) | Inline error message with format hint |
 | Empty search query | Prevent submission | Placeholder text guidance |
-| Network timeout | Retry with exponential backoff | "Connection slow, retrying..." toast |
-| API error response | Display error message | Contextual error with retry option |
-| File upload failure | Validate file type/size | "Invalid file format" message |
-| Bulk limit exceeded | Prevent submission | "Maximum 500 domains" warning |
+| Network timeout / abort | `AbortSignal` support in `instantDomainService.searchDomains`; returns `[]` on abort | Silent no-op or "try again" toast |
+| `429` rate limited | Client functions detect `response.status === 429` and return `[]` | "Slow down" / retry-later messaging |
+| API error response | Client functions return `[]`/`null` on non-OK | Contextual empty state |
+| Bulk limit exceeded | Server caps (`check` ≤100, `instant-check` ≤1000, `premium-check` ≤60); UI enforces 500 for bulk UX | "Maximum domains" warning |
 
-### API Error Responses
+### API Error Responses (actual)
 
 ```typescript
-// Standard error codes
-enum APIErrorCode {
-  INVALID_INPUT = 'INVALID_INPUT',
-  RATE_LIMITED = 'RATE_LIMITED',
-  EXTERNAL_SERVICE_ERROR = 'EXTERNAL_SERVICE_ERROR',
-  NOT_FOUND = 'NOT_FOUND',
-  INTERNAL_ERROR = 'INTERNAL_ERROR',
-}
-
-// Error response structure
-interface ErrorResponse {
-  success: false;
-  error: {
-    code: APIErrorCode;
-    message: string;
-    details?: Record<string, unknown>;
-  };
-}
-
-// HTTP status code mapping
-const statusCodeMap: Record<APIErrorCode, number> = {
-  INVALID_INPUT: 400,
-  RATE_LIMITED: 429,
-  EXTERNAL_SERVICE_ERROR: 502,
-  NOT_FOUND: 404,
-  INTERNAL_ERROR: 500,
-};
+// Validation / generic errors (apiHelpers.errorResponse)
+//   { error: string }   with HTTP 400 / 500
+//
+// Rate-limit errors (rateLimiter.rateLimitResponse) — HTTP 429
+//   {
+//     success: false,
+//     error: { code: 'RATE_LIMITED', message: string,
+//              details: { retryAfter, limit, remaining, resetTime } }
+//   }
+//   Headers: Retry-After, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset
 ```
 
-### External Service Failures
+Observed status codes: `400` (invalid/missing input), `404` (`/api/tld-prices?tld=` unknown TLD), `429` (rate limited), `500` (unexpected failure). The uniform `APIErrorCode` enum from the original design is not implemented uniformly (see Property 18 reconciliation note).
 
-1. **Domain Availability API Failure**
-   - Return cached result if available (< 5 minutes old)
-   - Display "Unable to verify availability" status
-   - Log error for monitoring
+### External Service Failures & Graceful Degradation (3-Tier Fallback)
 
-2. **WHOIS Provider Failure**
-   - Display partial data if available
-   - Show "Some information unavailable" notice
-   - Offer retry option
-
-3. **Rate Limit from External API**
-   - Queue request for delayed retry
-   - Display estimated wait time to user
-   - Implement request prioritization
-
-### Graceful Degradation
+The production availability path degrades through the MCP → GoDaddy → DNS chain. Each tier swallows its own errors (logs a warning, returns empty/partial) so the next tier can take over, and an unresolved domain ultimately defaults to `available: false`.
 
 ```typescript
-// Fallback chain for domain checking
-async function checkDomainWithFallback(domain: string): Promise<DomainCheckResult> {
-  try {
-    // Primary: Real-time API check
-    return await primaryDomainAPI.check(domain);
-  } catch (primaryError) {
-    try {
-      // Fallback: Secondary provider
-      return await secondaryDomainAPI.check(domain);
-    } catch (secondaryError) {
-      // Final fallback: Return unknown status
-      return {
-        domain,
-        available: null, // Unknown
-        tld: extractTLD(domain),
-        checkedAt: new Date(),
-        error: 'Unable to verify availability',
-      };
-    }
+// Conceptual model of the implemented fallback (see search/route.ts, instant-check/route.ts,
+// premium-check/route.ts):
+
+async function resolveAvailability(domain: string): Promise<Result> {
+  // Tier 1 — Instant Domain Search MCP (premium/marketplace-aware, short timeouts).
+  //   On error/empty: logged and skipped, fall through.
+  const mcp = await checkDomainAvailabilityViaMCP({ domains: [domain] }).catch(() => []);
+  if (mcp.length) return mcp[0];
+
+  // Tier 2 — GoDaddy REST (only when GODADDY_API_KEY/SECRET present; pricing/premium enrichment).
+  //   On error: logged and skipped, fall through.
+  if (process.env.GODADDY_API_KEY && process.env.GODADDY_API_SECRET) {
+    const gd = await checkDomainsWithGoDaddy([domain]).catch(() => []);
+    if (gd.length) return gd[0];
   }
+
+  // Tier 3 — Cloudflare DoH (universal fallback). NXDOMAIN (Status === 3) ⇒ available.
+  //   On any error/timeout: safe default available = false.
+  const available = await checkViaDNS(domain); // returns false on failure
+  return { domain, available, premium: false };
 }
 ```
+
+Tier-specific behavior:
+
+1. **MCP (Tier 1) failure**: `instantDomainMCP` catches errors and returns `[]`; routes treat unresolved domains as needing DNS/GoDaddy fallback. Timeouts are aggressive (700–1200ms) to keep latency bounded.
+2. **GoDaddy (Tier 2) failure**: per-domain `.catch()` returns `{ domain, available: false }`; batch continues. Missing credentials simply skip the tier. Rate limits are mitigated by concurrency 10 + inter-batch delay.
+3. **DNS (Tier 3) failure/timeout**: `checkViaDNS` returns `false` (safe default — treats unknown as taken) rather than throwing.
+4. **Caching during degradation**: cached results (per-route in-memory) are served before any tier is consulted, providing fast and resilient repeat responses.
 
 ## Testing Strategy
 
@@ -782,53 +645,36 @@ async function checkDomainWithFallback(domain: string): Promise<DomainCheckResul
 
 - **Unit Testing**: Jest with React Testing Library
 - **Property-Based Testing**: fast-check
-- **E2E Testing**: Playwright
-- **API Testing**: Supertest
+- **E2E Testing**: Playwright (critical user flows)
+- **API/route Testing**: Next.js Route Handler invocation with mocked `fetch` (MCP/GoDaddy/Cloudflare)
 
-### Unit Testing Approach
+### What to Mock (important for the 3-tier path)
 
-Unit tests focus on specific examples, edge cases, and error conditions:
+Because production availability makes live network calls, property and route tests MUST mock the network boundary:
 
-```typescript
-// Example: Domain validation unit tests
-describe('validateDomain', () => {
-  it('should accept valid domain formats', () => {
-    expect(validateDomain('example.com').isValid).toBe(true);
-    expect(validateDomain('sub.example.co.uk').isValid).toBe(true);
-  });
-
-  it('should reject invalid domain formats', () => {
-    expect(validateDomain('').isValid).toBe(false);
-    expect(validateDomain('invalid').isValid).toBe(false);
-    expect(validateDomain('-invalid.com').isValid).toBe(false);
-  });
-
-  it('should normalize domains to lowercase', () => {
-    expect(validateDomain('EXAMPLE.COM').normalized).toBe('example.com');
-  });
-});
-```
+- Mock `global.fetch` for Cloudflare DoH (`cloudflare-dns.com`), MCP (`instantdomainsearch.com/mcp/...`), and GoDaddy (`api.godaddy.com`).
+- For pure-logic property tests of the generator, use `services/domainService.ts` (the deterministic hash-based mock) — it has no network dependency and is the intended scaffold for Properties 4, 5, 6.
+- For rate-limiter properties, use `rateLimiter.ts` directly with `resetAllLimiters()` between cases.
 
 ### Property-Based Testing Configuration
 
-Property-based tests verify universal properties across randomized inputs:
-
 ```typescript
 import * as fc from 'fast-check';
+const propertyConfig = { numRuns: 100 }; // minimum 100 iterations per property
 
-// Configuration: Minimum 100 iterations per property
-const propertyConfig = { numRuns: 100 };
-
-// Example: Property test for generator max length
 // Feature: domains-discovery-platform, Property 5: Generator Max Length Enforcement
+// Validates: Requirements 2.3
 describe('Domain Generator Properties', () => {
-  it('should never exceed max length', () => {
+  it('never exceeds max length', () => {
     fc.assert(
       fc.property(
-        fc.string({ minLength: 1, maxLength: 20 }),  // keyword
-        fc.integer({ min: 5, max: 63 }),              // maxLength
+        fc.string({ minLength: 1, maxLength: 20 }),
+        fc.integer({ min: 5, max: 63 }),
         (keyword, maxLength) => {
-          const suggestions = generateDomainSuggestions(keyword, { maxLength });
+          const suggestions = generateSuggestions(keyword, {
+            tlds: ['com'], position: 'both', maxLength,
+            excludeNumbers: false, excludeHyphens: false,
+          });
           return suggestions.every(s => s.domain.split('.')[0].length <= maxLength);
         }
       ),
@@ -838,53 +684,52 @@ describe('Domain Generator Properties', () => {
 });
 ```
 
-### Property Test Implementation Requirements
+### Property Test Implementation Map (reconciled)
 
-Each correctness property from the design document MUST be implemented as a single property-based test:
+Properties whose backing code exists today and are directly testable:
 
-1. **Property 1: TLD Selection Coverage** - Test that search returns exactly one result per selected TLD
-2. **Property 4: Generator Keyword Position** - Test keyword placement for all position options
-3. **Property 5: Generator Max Length** - Test length constraint enforcement
-4. **Property 6: Generator Character Exclusion** - Test filter application
-5. **Property 7: CSV Export Round Trip** - Test export/import preserves data
-6. **Property 8: Geo Population Sorting** - Test descending sort order
-7. **Property 9: Bulk Input Parsing** - Test newline parsing accuracy
-8. **Property 10: Bulk Limit Enforcement** - Test 500 domain limit
-9. **Property 18: API Response Structure** - Test response schema conformance
-10. **Property 22: Rate Limiter** - Test rate limit enforcement
-11. **Property 23: Input Sanitization** - Test dangerous input removal
+- **Property 4, 5, 6** — generator placement / max length / character exclusion → `services/domainService.ts#generateSuggestions`.
+- **Property 7** — CSV export round trip → CSV util + result types (generator/geo/bulk).
+- **Property 8** — geo population descending sort → geo generation logic.
+- **Property 9, 10** — bulk input parsing + 500-domain limit → bulk parser/validator.
+- **Property 22** — rate limiter enforcement (`429` + `Retry-After`) → `lib/rateLimiter.ts` (fully implemented; high-value test).
+- **Property 23** — input sanitization → `apiHelpers.isValidQuery` and any sanitizer.
+- **Property 1** — TLD selection coverage → `/api/domains/search` returns exactly one result per requested TLD (mock `fetch`); note exact-domain queries and the 320-TLD cap as edge cases.
+
+Properties blocked by the reconciliation gaps (write tests once the gap is resolved):
+
+- **Property 11, 12 (WHOIS), 13 (Appraisal)** — blocked: `/api/domains/whois` and `/api/domains/value` are not implemented (Reconciliation Note 3). The appraisal heuristic in `premiumDetection.ts#estimateDomainValue` CAN be unit/property tested for value-range monotonicity even before an endpoint exists.
+- **Property 18** — API response envelope: currently fails (no uniform envelope). Treat as a failing/pending test that documents the discrepancy until the contract is settled.
+- **Property 2, 14, 15, 16, 17, 19, 20, 21, 24, 25** — UI/SEO/analytics rendering: prefer snapshot/DOM-assertion tests over fast-check where behavior does not vary meaningfully with random input.
 
 ### Test Tagging Convention
 
-All property tests MUST include a comment tag referencing the design property:
-
 ```typescript
-// Feature: domains-discovery-platform, Property 5: Generator Max Length Enforcement
-// Validates: Requirements 2.3
+// Feature: domains-discovery-platform, Property 22: Rate Limiter Enforcement
+// Validates: Requirements 14.1, 14.7
 ```
 
-### E2E Testing Strategy
+### E2E Testing Strategy (actual routes)
 
-Playwright tests for critical user flows:
-
-1. **Homepage Search Flow**: Enter domain → View results → Click registrar
-2. **Generator Flow**: Enter keyword → Apply filters → Check all → Export
-3. **Bulk Checker Flow**: Upload file → View progress → Filter results → Export
-4. **WHOIS Flow**: Enter domain → View results → Copy/Share
+1. **Homepage / Search**: enter query on `/` or `/search` → results render with availability badges → registrar/buy link present.
+2. **Generator**: `/generator` → enter keyword → results with score/reason → check-all → export.
+3. **Bulk**: `/bulk-search` → paste/upload domains → progress → filter/sort → export.
+4. **Premium**: `/premium` → premium-flagged results with price/source.
+5. **TLD prices / extensions**: `/domain-extensions` consuming `/api/tld-prices`.
+6. **Tools**: `/tools/whois`, `/tools/value` render their UIs (note: backends pending — assert graceful empty/error state).
 
 ### Test Coverage Targets
 
 | Category | Target Coverage |
 |----------|-----------------|
 | Unit Tests | 80% line coverage |
-| Property Tests | All 25 correctness properties |
-| E2E Tests | All critical user flows |
-| API Tests | All endpoints with success/error cases |
+| Property Tests | All currently-backed properties (see map); blocked ones tracked as pending |
+| E2E Tests | All critical user flows above |
+| Route Tests | All implemented endpoints with success/error/429 cases, network boundary mocked |
 
 ### Continuous Integration
 
 ```yaml
-# Test pipeline stages
 stages:
   - lint: ESLint + Prettier
   - typecheck: TypeScript compilation

@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { Navigation } from '@/components/layout/Navigation';
@@ -9,7 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { HomePageContent } from '@/components/home/HomePageContent';
-import { SearchInterface } from '@/components/domain/SearchInterface';
+import { Hero } from '@/components/home/Hero';
 import { useTheme } from '@/contexts/ThemeContext';
 
 import { DomainGenerator } from '@/components/generator/DomainGenerator';
@@ -68,95 +67,14 @@ export default function Home() {
       
       <Navigation activeTool={activeTool} onToolSelect={(tool) => setActiveTool(tool as ToolType)} />
 
-      <main className="relative pt-[3.5rem] sm:pt-[4.45rem]">
+      <main id="top" className="relative pt-[3.5rem] sm:pt-[4.45rem]">
         
         {showMainSearch && (
-          <section className="px-3 sm:px-6 pt-3 sm:pt-5 pb-0 sm:pb-2.5">
-            <div className="max-w-[56rem] mx-auto text-center">
-              <h1 className="text-[2rem] leading-[1.05] sm:text-[3.7rem] md:text-[4.35rem] font-black tracking-tight mb-1 sm:mb-1.5 animate-slide-up">
-                <span className="block bg-clip-text text-transparent" style={{
-                  backgroundImage: isLight
-                    ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
-                    : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.6))'
-                }}>
-                  Find Your Perfect Domain
-                </span>
-                <span className="block text-[0.85rem] sm:text-[1.5rem] md:text-[1.95rem] mt-0.5 font-bold" style={{ color: 'var(--gradient-subtitle)' }}>in Seconds</span>
-              </h1>
-              <p className="hidden sm:block text-[12px] sm:text-[14px] max-w-[40rem] mx-auto mb-2.5 sm:mb-3.5" style={{ color: 'var(--text-tertiary)' }}>
-                Search millions of domains with instant results. Compare prices across registrars. Register in one click.
-              </p>
-              <p className="sm:hidden text-[11px] max-w-[26rem] mx-auto mb-2 leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
-                1,600+ TLDs · Real-time results · Compare prices
-              </p>
-
-              <div className="max-w-[54rem] mx-auto animate-fade-in">
-                <SearchInterface
-                  initialQuery={searchQuery}
-                  placeholder="Search domain names..."
-                  onSearch={handleHeroSearch}
-                  onClear={handleHeroClear}
-                  autoFocus
-                  showRecentSearches={false}
-                  debounceMs={180}
-                />
-              </div>
-
-              <div className="mt-1.5 flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 sm:mt-2.5">
-                <Link
-                  href="/tools/compare"
-                  className={`inline-flex items-center gap-1 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
-                    isLight
-                      ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
-                      : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
-                  }`}
-                >
-                  <Icons.Dollar />
-                  Compare prices
-                </Link>
-                <Link
-                  href="/bulk-search"
-                  className={`inline-flex items-center gap-1 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
-                    isLight
-                      ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
-                      : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
-                  }`}
-                >
-                  <Icons.Layers />
-                  Bulk check
-                </Link>
-                <Link
-                  href="/domain-extensions"
-                  className={`inline-flex items-center gap-1 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
-                    isLight
-                      ? 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50'
-                      : 'border border-white/10 bg-white/[0.03] text-white/80 hover:border-white/20 hover:bg-white/[0.06]'
-                  }`}
-                >
-                  <Icons.Globe />
-                  Extensions
-                </Link>
-              </div>
-
-              <div className="max-w-[52rem] mx-auto mt-2 sm:mt-3.5">
-                <div className={`grid grid-cols-4 gap-0 sm:gap-2.5 px-1 py-1 sm:p-3.5 rounded-lg sm:rounded-2xl ${
-                  isLight ? 'bg-white/70 border border-slate-200/60 shadow-sm backdrop-blur-sm' : 'bg-white/[0.02] border border-white/10 backdrop-blur-sm'
-                }`}>
-                  {[
-                    { value: '20M+', label: 'Searches' },
-                    { value: '50K+', label: 'Users' },
-                    { value: '1,600+', label: 'TLDs' },
-                    { value: '99.9%', label: 'Uptime' },
-                  ].map((stat) => (
-                    <div key={stat.label} className="text-center px-1 py-1 sm:p-2 rounded-md sm:rounded-xl">
-                      <div className="text-[0.8rem] sm:text-[1.5rem] font-black mb-0 leading-tight" style={{ color: 'var(--text-primary)' }}>{stat.value}</div>
-                      <div className="text-[8px] sm:text-xs font-medium leading-tight" style={{ color: 'var(--text-tertiary)' }}>{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
+          <Hero
+            searchQuery={searchQuery}
+            onSearch={handleHeroSearch}
+            onClear={handleHeroClear}
+          />
         )}
 
         {activeTool === 'extensions' && (
@@ -205,7 +123,7 @@ export default function Home() {
           <div className={activeTool === 'bulk' ? 'w-full' : activeTool === 'extensions' ? 'max-w-7xl mx-auto' : 'max-w-5xl mx-auto'}>
             
             {activeTool === 'generator' && (
-              <div className="max-w-2xl mx-auto">
+              <div className="max-w-5xl mx-auto">
                 <DomainGenerator onSelect={setSelectedDomain} />
               </div>
             )}

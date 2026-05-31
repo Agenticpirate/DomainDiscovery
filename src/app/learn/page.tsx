@@ -68,7 +68,7 @@ export default function LearnPage() {
       <PageBackground variant="default" />
       <Navigation activeTool="learn" />
 
-      <main className="relative pt-16 sm:pt-24">
+      <main className="relative pt-[4.75rem] sm:pt-24">
         {/* Hero */}
         <section className="px-3 sm:px-6 pb-4 sm:pb-7">
           <div className="max-w-4xl mx-auto text-center">

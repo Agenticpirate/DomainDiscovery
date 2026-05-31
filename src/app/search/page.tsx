@@ -109,6 +109,7 @@ function SearchPageContent() {
   const [isBrandableLoading, setIsBrandableLoading] = useState(false);
   const [savedDomains, setSavedDomains] = useState<string[]>([]);
   const [showMoreActions, setShowMoreActions] = useState(false);
+  const [showAllExtensions, setShowAllExtensions] = useState(false);
   const [premiumEnrichmentMap, setPremiumEnrichmentMap] = useState<Record<string, PremiumEnrichment>>({});
   const searchRequestIdRef = useRef(0);
   const premiumFetchKeyRef = useRef('');
@@ -370,9 +371,55 @@ function SearchPageContent() {
     [extensions]
   );
 
-  const midpoint = Math.ceil(extensions.length / 2);
-  const col1 = extensions.slice(0, midpoint);
-  const col2 = extensions.slice(midpoint);
+  // ── Recommended-for-you tier (roadmap Phase 2) ──
+  // Best-fit TLDs a beginner should consider first. We surface the .com plus the
+  // strongest available alternatives so the user can decide in seconds instead
+  // of scanning the full grid.
+  const RECOMMENDED_TLDS = ['.com', '.io', '.co', '.ai', '.app', '.net', '.org', '.dev', '.xyz'];
+  const recommended = useMemo(() => {
+    const byTld = new Map<string, DomainResult>();
+    results.forEach((r) => {
+      const key = `.${r.domain.split('.').slice(1).join('.')}`;
+      if (!byTld.has(key)) byTld.set(key, r);
+    });
+    const picks: DomainResult[] = [];
+    // Always lead with the .com (the primary), available or not.
+    if (primary) picks.push(primary);
+    for (const tld of RECOMMENDED_TLDS) {
+      if (picks.length >= 4) break;
+      const match = byTld.get(tld);
+      if (match && match.domain !== primary?.domain && match.available) picks.push(match);
+    }
+    // Backfill with any other available best-fit TLD if we have fewer than 4.
+    if (picks.length < 4) {
+      for (const r of results) {
+        if (picks.length >= 4) break;
+        if (r.available && !picks.some((p) => p.domain === r.domain)) picks.push(r);
+      }
+    }
+    return picks;
+  }, [results, primary]);
+
+  const recommendedSet = useMemo(
+    () => new Set(recommended.map((r) => r.domain.toLowerCase())),
+    [recommended]
+  );
+
+  // Exclude the recommended picks from the long-tail extension grid so they
+  // aren't duplicated, then collapse the long tail behind a toggle.
+  const longTailExtensions = useMemo(
+    () => extensions.filter((r) => !recommendedSet.has(r.domain.toLowerCase())),
+    [extensions, recommendedSet]
+  );
+  const COLLAPSED_COUNT = 12;
+  const visibleExtensions = showAllExtensions
+    ? longTailExtensions
+    : longTailExtensions.slice(0, COLLAPSED_COUNT);
+  const hiddenCount = longTailExtensions.length - visibleExtensions.length;
+
+  const midpoint = Math.ceil(visibleExtensions.length / 2);
+  const col1 = visibleExtensions.slice(0, midpoint);
+  const col2 = visibleExtensions.slice(midpoint);
 
   const btnClass = `flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${isLight ? 'border-slate-200 hover:bg-slate-50 text-slate-600' : 'border-white/10 hover:bg-white/5 text-white/60'}`;
 
@@ -488,24 +535,24 @@ function SearchPageContent() {
 
                 {/* Action bar */}
                 <div className="flex items-center gap-1.5 mt-2 flex-wrap relative">
-                  <button onClick={() => handleSave(primary.domain)} className={btnClass}>
+                  <button onClick={() => handleSave(primary.domain)} className={btnClass} aria-label="Bookmark domain">
                     <svg className="w-3.5 h-3.5" fill={savedDomains.includes(primary.domain) ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
                     <span className="hidden sm:inline">Bookmark</span>
                   </button>
-                  <button onClick={() => handleCopyURL(primary.domain)} className={btnClass}>
+                  <button onClick={() => handleCopyURL(primary.domain)} className={btnClass} aria-label="Copy domain URL">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                     <span className="hidden sm:inline">Copy URL</span>
                   </button>
-                  <button onClick={() => handlePronounce(primary.domain)} className={btnClass}>
+                  <button onClick={() => handlePronounce(primary.domain)} className={btnClass} aria-label="Pronounce domain">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707A1 1 0 0112 5.586v12.828a1 1 0 01-1.707.707L5.586 15z" /></svg>
                     <span className="hidden sm:inline">Pronounce</span>
                   </button>
-                  <button onClick={() => window.open(`https://www.godaddy.com/domain-value-appraisal/appraisal/?domain=${primary.domain}`, '_blank')} className={btnClass}>
+                  <button onClick={() => window.open(`https://www.godaddy.com/domain-value-appraisal/appraisal/?domain=${primary.domain}`, '_blank')} className={btnClass} aria-label="Appraise domain value">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     <span className="hidden sm:inline">Appraise</span>
                   </button>
                   <div className="relative">
-                    <button onClick={() => setShowMoreActions(!showMoreActions)} className={btnClass}>
+                    <button onClick={() => setShowMoreActions(!showMoreActions)} className={btnClass} aria-label="More actions" aria-haspopup="true" aria-expanded={showMoreActions}>
                       <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
                     </button>
                     {showMoreActions && (
@@ -519,8 +566,35 @@ function SearchPageContent() {
               </div>
             )}
 
+            {/* Recommended for you (roadmap Phase 2) */}
+            {recommended.length > 0 && (
+              <div className="mb-5">
+                <div className="flex items-center gap-2 mb-2.5">
+                  <h2 className="text-sm font-bold" style={{ color: 'var(--text-secondary)' }}>Recommended for you</h2>
+                  <span className="accent-chip text-[10px]">Best fit</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                  {recommended.map((r) => (
+                    <RecommendedCard
+                      key={r.domain}
+                      result={r}
+                      isLight={isLight}
+                      onSave={handleSave}
+                      isSaved={savedDomains.includes(r.domain)}
+                      selectedRegistrar={selectedRegistrar}
+                      onSelectRegistrar={setSelectedRegistrar}
+                    />
+                  ))}
+                </div>
+                <p className="mt-2.5 text-[11px] sm:text-xs flex items-center gap-1.5" style={{ color: 'var(--text-muted)' }}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  .com is the safest choice — it&apos;s the most trusted and memorable extension. The alternatives above are strong available fits.
+                </p>
+              </div>
+            )}
+
             {/* Legend + Grid */}
-            {extensions.length > 0 && (
+            {visibleExtensions.length > 0 && (
               <>
                 {/* Legend */}
                 <div className="flex items-center justify-end gap-4 mb-2">
@@ -535,7 +609,7 @@ function SearchPageContent() {
                   <div className="lg:col-span-2">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="text-sm font-bold" style={{ color: 'var(--text-secondary)' }}>
-                        Domain extensions <span className="font-normal ml-1" style={{ color: 'var(--text-muted)' }}>({taken.length} taken)</span>
+                        All extensions <span className="font-normal ml-1" style={{ color: 'var(--text-muted)' }}>({taken.length} taken)</span>
                       </h3>
                       <Link href="/domain-extensions" className="text-xs font-medium transition-colors hover:underline" style={{ color: 'var(--text-muted)' }}>See all</Link>
                     </div>
@@ -543,6 +617,15 @@ function SearchPageContent() {
                       <div>{col1.map(r => <DomainRow key={r.domain} result={r} isLight={isLight} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} selectedRegistrar={selectedRegistrar} onSelectRegistrar={setSelectedRegistrar} />)}</div>
                       <div>{col2.map(r => <DomainRow key={r.domain} result={r} isLight={isLight} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} selectedRegistrar={selectedRegistrar} onSelectRegistrar={setSelectedRegistrar} />)}</div>
                     </div>
+                    {(hiddenCount > 0 || showAllExtensions) && longTailExtensions.length > COLLAPSED_COUNT && (
+                      <button
+                        onClick={() => setShowAllExtensions((v) => !v)}
+                        className={`mt-3 inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg border transition-colors ${isLight ? 'border-slate-200 text-slate-700 hover:bg-slate-50' : 'border-white/10 text-white/70 hover:bg-white/5'}`}
+                      >
+                        {showAllExtensions ? 'Show fewer' : `See all ${longTailExtensions.length} extensions`}
+                        <svg className={`w-3.5 h-3.5 transition-transform ${showAllExtensions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                      </button>
+                    )}
                   </div>
 
                   {/* Premium domains sidebar */}
@@ -594,6 +677,76 @@ export default function SearchPage() {
     <Suspense fallback={<div className="min-h-screen" style={{ backgroundColor: 'var(--bg-main)' }} />}>
       <SearchPageContent />
     </Suspense>
+  );
+}
+
+/* ── Recommended-for-you card (large, beginner-friendly tier) ── */
+function RecommendedCard({ result, isLight, onSave, isSaved, selectedRegistrar, onSelectRegistrar }: {
+  result: DomainResult;
+  isLight: boolean;
+  onSave: (d: string) => void;
+  isSaved: boolean;
+  selectedRegistrar: RegistrarName;
+  onSelectRegistrar: (registrar: RegistrarName) => void;
+}) {
+  const isAvailable = result.available;
+  const isCom = result.domain.endsWith('.com');
+  const price = result.price ? parseFloat(result.price.replace(/[^0-9.]/g, '')) : null;
+  const showPremiumPrice = !!result.premium && !isAvailable && !!price;
+  const ctaText = isAvailable ? 'Register' : (showPremiumPrice ? `$${price!.toFixed(0)}` : 'Lookup');
+
+  return (
+    <div
+      className={`relative flex items-center justify-between gap-2 rounded-xl border p-3 sm:p-3.5 transition-colors ${
+        isAvailable
+          ? (isLight ? 'border-emerald-200 bg-emerald-50/60 hover:bg-emerald-50' : 'border-emerald-500/25 bg-emerald-500/[0.06] hover:bg-emerald-500/[0.1]')
+          : (isLight ? 'border-slate-200 bg-white hover:bg-slate-50' : 'border-white/10 bg-white/[0.02] hover:bg-white/[0.04]')
+      }`}
+    >
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center gap-1.5 mb-0.5">
+          <span className={`w-2 h-2 rounded-full shrink-0 ${result.premium ? 'bg-amber-500' : isAvailable ? 'bg-emerald-500' : 'bg-red-500'}`} />
+          <span className={`text-sm sm:text-base font-mono font-bold truncate ${isAvailable ? (isLight ? 'text-slate-900' : 'text-white') : (isLight ? 'text-slate-500' : 'text-white/50')}`}>
+            {result.domain}
+          </span>
+          {isCom && (
+            <span className="accent-chip text-[9px] shrink-0">Top pick</span>
+          )}
+        </div>
+        <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
+          {isAvailable ? (price ? `Available · ~$${price.toFixed(0)}/yr` : 'Available now') : (showPremiumPrice ? 'Premium listing' : 'Already registered')}
+        </span>
+      </div>
+      <div className="flex items-center gap-1 shrink-0">
+        <button onClick={() => onSave(result.domain)} className={`p-1.5 rounded-lg transition-colors ${isSaved ? 'text-emerald-500' : isLight ? 'text-slate-300 hover:text-slate-500' : 'text-white/20 hover:text-white/50'}`} aria-label={isSaved ? 'Remove from saved' : 'Save domain'}>
+          <svg className="w-4 h-4" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
+        </button>
+        <RegistrarActionMenu
+          domain={result.domain}
+          selectedRegistrar={selectedRegistrar}
+          onSelectRegistrar={onSelectRegistrar}
+          canRegister={isAvailable}
+          primaryLabel={ctaText}
+          premiumUrl={result.premium ? result.buyUrl : undefined}
+          premiumLabel={result.purchaseInfo}
+          primaryButtonClassName={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors ${
+            isAvailable
+              ? 'bg-emerald-500 text-white hover:bg-emerald-600'
+              : showPremiumPrice
+                ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
+                : isLight ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' : 'bg-white/10 text-white/70 hover:bg-white/15'
+          }`}
+          chevronButtonClassName={`rounded-lg p-1.5 transition-colors ${
+            isAvailable
+              ? 'bg-emerald-500 text-white hover:bg-emerald-600'
+              : showPremiumPrice
+                ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
+                : isLight ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' : 'bg-white/10 text-white/70 hover:bg-white/15'
+          }`}
+          fallbackButtonClassName={`px-3 py-1.5 text-xs font-bold rounded-lg transition-colors ${isLight ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' : 'bg-white/10 text-white/70 hover:bg-white/15'}`}
+        />
+      </div>
+    </div>
   );
 }
 

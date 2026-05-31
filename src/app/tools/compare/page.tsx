@@ -21,7 +21,7 @@ export default function ComparePage() {
       <PageBackground variant="default" />
       <Navigation activeTool="compare" />
 
-      <main className="relative pt-14 sm:pt-24">
+      <main className="relative pt-[4.75rem] sm:pt-24">
         <section className="px-4 pb-4 sm:px-6 sm:pb-8">
           <div className="mx-auto max-w-6xl">
             <Breadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Price Comparison' }]} />

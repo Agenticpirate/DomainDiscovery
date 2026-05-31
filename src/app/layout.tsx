@@ -79,7 +79,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Theme bootstrap — runs before first paint to prevent a flash of the
+            wrong theme (FOUC). Reads the saved choice, falling back to the OS
+            preference, and sets the `.light` class on <html> synchronously so
+            the very first painted frame is already in the correct theme. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}if(t==='light'){document.documentElement.classList.add('light');}document.documentElement.style.colorScheme=t;}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="min-h-screen font-sans antialiased overflow-x-hidden">
         <script
           type="application/ld+json"

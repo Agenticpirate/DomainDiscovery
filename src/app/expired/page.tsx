@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
@@ -9,14 +10,15 @@ import { useTheme } from '@/contexts/ThemeContext';
 
 export default function ExpiredPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeFilters, setActiveFilters] = useState({
-    search: true,
-    extensions: false,
-    godaddy: false,
-    premium: false,
-  });
+  const router = useRouter();
   const { theme } = useTheme();
   const isLight = theme === 'light';
+
+  const submitSearch = () => {
+    const q = searchQuery.trim();
+    if (!q) return;
+    router.push(`/search?q=${encodeURIComponent(q)}`);
+  };
 
   const lifecycleStages = [
     {
@@ -95,37 +97,28 @@ export default function ExpiredPage() {
                   <Icons.Search className={`w-5 h-5 ${isLight ? 'text-slate-400' : 'text-white/40'} shrink-0`} />
                   <input
                     type="text"
-                    placeholder="Start typing here..."
+                    placeholder="Search a name, then check availability..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') submitSearch(); }}
                     className={`flex-1 bg-transparent ${isLight ? 'text-slate-900 placeholder:text-slate-400' : 'text-white placeholder:text-white/40'} outline-none text-base`}
                   />
                   {searchQuery && (
                     <button 
                       onClick={() => setSearchQuery('')}
+                      aria-label="Clear search"
                       className={`p-1.5 ${isLight ? 'hover:bg-slate-100' : 'hover:bg-white/[0.06]'} rounded-lg transition-colors`}
                     >
                       <Icons.X className={`w-4 h-4 ${isLight ? 'text-slate-400' : 'text-white/40'}`} />
                     </button>
                   )}
-                </div>
-
-                {/* Filter Pills */}
-                <div className="flex items-center gap-1.5 sm:gap-2 px-2 pt-2 flex-wrap">
-                  {Object.entries(activeFilters).map(([key, active]) => (
-                    <button
-                      key={key}
-                      onClick={() => setActiveFilters(prev => ({ ...prev, [key]: !active }))}
-                      className={`flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-lg text-[11px] sm:text-xs font-medium transition-all duration-300 ${
-                        active
-                          ? `${isLight ? 'bg-slate-100 text-slate-900 border-slate-300' : 'bg-white/[0.1] text-white border-white/[0.15]'} border`
-                          : `${isLight ? 'bg-transparent text-slate-500 border-slate-200 hover:bg-slate-50 hover:text-slate-700' : 'bg-transparent text-white/50 border-white/[0.08] hover:bg-white/[0.04] hover:text-white/70'} border`
-                      }`}
-                    >
-                      {active && <span className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-slate-900' : 'bg-white'}`}></span>}
-                      <span className="capitalize">{key}</span>
-                    </button>
-                  ))}
+                  <button
+                    onClick={submitSearch}
+                    disabled={!searchQuery.trim()}
+                    className="btn-accent shrink-0 px-3 py-2 text-[13px] disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    Search
+                  </button>
                 </div>
               </div>
             </div>

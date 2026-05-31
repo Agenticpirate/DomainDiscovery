@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -8,6 +8,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 interface GeneratedDomain {
   name: string;
   available: boolean;
+  checked: boolean;
   premium?: boolean;
   price?: string;
   popularity: number;
@@ -32,39 +33,66 @@ interface DomainGeneratorProps {
 }
 
 type FilterType = 'all' | 'starts' | 'ends';
+type AvailFilterType = 'all' | 'available';
 type SortType = 'popularity' | 'alphabetical' | 'length';
 type ViewType = 'grid' | 'list';
+
+// Cap the number of variations we display + check. Every shown domain gets a
+// real availability check (one batched request), so nothing spins forever.
+const MAX_CHECK = 600;
 
 export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const [keyword, setKeyword] = useState('');
+
+  // Pre-fill keyword from ?q= URL param (e.g. popular keyword links)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    if (q && q.trim()) {
+      setKeyword(q.trim());
+    }
+  }, []);
   const [isSearching, setIsSearching] = useState(false);
   const [suggestions, setSuggestions] = useState<GeneratedDomain[]>([]);
   const [filteredSuggestions, setFilteredSuggestions] = useState<GeneratedDomain[]>([]);
   const [filter, setFilter] = useState<FilterType>('all');
+  const [availFilter, setAvailFilter] = useState<AvailFilterType>('all');
   const [sortBy, setSortBy] = useState<SortType>('popularity');
   const [viewType, setViewType] = useState<ViewType>('grid');
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedRegistrar, setSelectedRegistrar] = useState<string>('GoDaddy');
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
   const [showDomainPopup, setShowDomainPopup] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
+  const abortRef = useRef<AbortController | null>(null);
 
   // Instant search with minimal debounce for real-time feedback
   useEffect(() => {
     if (!keyword.trim()) {
+      abortRef.current?.abort();
       setSuggestions([]);
       setFilteredSuggestions([]);
+      setIsSearching(false);
+      setIsChecking(false);
       return;
     }
 
-    // Reduced debounce to 50ms for near-instant feedback
+    // Reduced debounce for near-instant feedback
     const timer = setTimeout(() => {
       handleSearch(keyword);
-    }, 50);
+    }, 180);
 
     return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword]);
+
+  // Clean up any in-flight checks on unmount
+  useEffect(() => {
+    return () => abortRef.current?.abort();
+  }, []);
 
   // Apply filters and sorting
   useEffect(() => {
@@ -85,6 +113,11 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
         break;
     }
 
+    // Apply availability filter
+    if (availFilter === 'available') {
+      filtered = filtered.filter(isAvailableSuggestion);
+    }
+
     // Apply sorting
     switch (sortBy) {
       case 'alphabetical':
@@ -95,82 +128,118 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
         break;
       case 'popularity':
       default:
-        filtered.sort((a, b) => b.popularity - a.popularity);
+        filtered.sort((a, b) => {
+          // Surface available domains first, then by popularity
+          const aAvail = isAvailableSuggestion(a) ? 1 : 0;
+          const bAvail = isAvailableSuggestion(b) ? 1 : 0;
+          if (aAvail !== bAvail) return bAvail - aAvail;
+          return b.popularity - a.popularity;
+        });
         break;
     }
 
     setFilteredSuggestions(filtered);
-  }, [suggestions, filter, sortBy, keyword]);
+  }, [suggestions, filter, availFilter, sortBy, keyword]);
 
   const handleSearch = async (searchKeyword: string) => {
     if (!searchKeyword.trim()) return;
 
+    // Cancel any previous in-flight checks so stale results don't overwrite new ones
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
     setIsSearching(true);
-    
+
     try {
       const cleanKeyword = searchKeyword.toLowerCase().replace(/\s+/g, '');
-      
-      // Generate comprehensive variations with .com only
-      const variations = await generateEnhancedVariations(cleanKeyword);
-      
-      // Check real availability using the same API as bulk search
-      const domainNames = variations.map(v => `${v.name}.com`);
-      await checkDomainsAvailability(domainNames, variations);
-      
+
+      // Generate comprehensive variations with .com only (instant, client-side)
+      const allVariations = await generateEnhancedVariations(cleanKeyword);
+
+      // Keep the strongest variations (highest popularity) within the cap so the
+      // displayed set exactly matches the set we check — no name spins forever.
+      const variations = [...allVariations]
+        .sort((a, b) => b.popularity - a.popularity)
+        .slice(0, MAX_CHECK);
+
+      if (controller.signal.aborted) return;
+
+      // Show all suggestions immediately (unchecked) so the page never looks empty
       setSuggestions(variations);
+      setIsSearching(false);
+
+      // Stream real availability in the background, updating the UI as batches return
+      await checkDomainsAvailability(variations, controller.signal);
     } catch (error) {
       console.error('Domain generation error:', error);
-    } finally {
       setIsSearching(false);
     }
   };
 
-  const checkDomainsAvailability = async (domainNames: string[], variations: GeneratedDomain[]) => {
-    try {
-      const results: Array<{ domain: string; available: boolean; premium?: boolean; price?: string }> = [];
+  const checkDomainsAvailability = async (
+    variations: GeneratedDomain[],
+    signal: AbortSignal
+  ) => {
+    setIsChecking(true);
 
-      for (let i = 0; i < domainNames.length; i += 100) {
-        const batch = domainNames.slice(i, i + 100);
-        const response = await fetch('/api/domains/instant-check', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ domains: batch })
-        });
+    // The availability API counts each request against a tight bulk rate limit
+    // (5/min), so we send ONE request per search (it chunks internally) rather
+    // than many concurrent batches that would get 429'd and leave names stuck.
+    const domainNames = variations.map((v) => `${v.name}.com`);
 
-        if (!response.ok) {
-          continue;
-        }
-
-        const batchResults = await response.json();
-        if (Array.isArray(batchResults)) {
-          results.push(...batchResults);
-        }
-      }
-
-      const resultByDomain = new Map(
-        results.map((result) => [result.domain.toLowerCase(), result])
+    const applyResults = (
+      batchResults: Array<{ domain: string; available?: boolean; premium?: boolean; price?: string }>
+    ) => {
+      if (signal.aborted) return;
+      const byDomain = new Map(batchResults.map((r) => [r.domain.toLowerCase(), r]));
+      setSuggestions((prev) =>
+        prev.map((variation) => {
+          const result = byDomain.get(`${variation.name}.com`.toLowerCase());
+          if (!result) return variation;
+          return {
+            ...variation,
+            checked: true,
+            available: !!result.available && !result.premium,
+            premium: !!result.premium,
+            price: result.price,
+          };
+        })
       );
+    };
 
-      variations.forEach((variation) => {
-        const fullDomain = `${variation.name}.com`.toLowerCase();
-        const result = resultByDomain.get(fullDomain);
-        variation.available = !!result?.available && !result?.premium;
-        variation.premium = !!result?.premium;
-        variation.price = result?.price;
+    try {
+      const response = await fetch('/api/domains/instant-check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ domains: domainNames }),
+        signal,
       });
+
+      if (signal.aborted) return;
+
+      if (response.ok) {
+        const results = await response.json();
+        if (Array.isArray(results)) applyResults(results);
+      } else {
+        // Rate-limited or errored: mark the batch checked so names don't spin
+        // forever (they fall back to a neutral "taken" rather than a stuck state).
+        applyResults(domainNames.map((domain) => ({ domain, available: false, premium: false })));
+      }
     } catch (error) {
-      console.error('Availability check error:', error);
-      variations.forEach((variation) => {
-        variation.available = false;
-        variation.premium = false;
-        variation.price = undefined;
-      });
+      if ((error as Error).name !== 'AbortError') {
+        console.error('Availability check error:', error);
+        applyResults(domainNames.map((domain) => ({ domain, available: false, premium: false })));
+      }
+    } finally {
+      if (!signal.aborted) setIsChecking(false);
     }
   };
 
   const isAvailableSuggestion = (suggestion: GeneratedDomain) => suggestion.available && !suggestion.premium;
   const isPremiumSuggestion = (suggestion: GeneratedDomain) => !suggestion.available && !!suggestion.premium;
-  const isTakenSuggestion = (suggestion: GeneratedDomain) => !suggestion.available && !suggestion.premium;
+  const isTakenSuggestion = (suggestion: GeneratedDomain) => suggestion.checked && !suggestion.available && !suggestion.premium;
+  const isPendingSuggestion = (suggestion: GeneratedDomain) => !suggestion.checked;
 
   const generateEnhancedVariations = async (keyword: string): Promise<GeneratedDomain[]> => {
     const variations: GeneratedDomain[] = [];
@@ -275,6 +344,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     variations.push({
       name: keyword,
       available: false,
+      checked: false,
       popularity: 100,
       category: 'exact',
     });
@@ -284,6 +354,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       variations.push({
         name: alt,
         available: false,
+        checked: false,
         popularity: 98 - index,
         category: 'alternative',
       });
@@ -291,12 +362,14 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       variations.push({
         name: `${keyword}${alt}`,
         available: false,
+        checked: false,
         popularity: 96 - index,
         category: 'compound',
       });
       variations.push({
         name: `${alt}${keyword}`,
         available: false,
+        checked: false,
         popularity: 95 - index,
         category: 'compound',
       });
@@ -308,6 +381,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       variations.push({
         name: `${prefix}${keyword}`,
         available: false,
+        checked: false,
         popularity: pop,
         category: 'prefix',
       });
@@ -319,6 +393,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       variations.push({
         name: `${keyword}${suffix}`,
         available: false,
+        checked: false,
         popularity: pop,
         category: 'suffix',
       });
@@ -333,6 +408,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
         variations.push({
           name: `${prefix}${keyword}${suffix}`,
           available: false,
+          checked: false,
           popularity: 85 - Math.floor((i + j) / 2),
           category: 'compound',
         });
@@ -352,13 +428,20 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
         variations.push({
           name: variant,
           available: false,
+          checked: false,
           popularity: 80 - index,
           category: 'alternative',
         });
       });
     }
 
-    return variations;
+    // De-duplicate by name (prefix/suffix/semantic lists can overlap)
+    const seen = new Set<string>();
+    return variations.filter((v) => {
+      if (seen.has(v.name)) return false;
+      seen.add(v.name);
+      return true;
+    });
   };
 
   const handleDomainClick = (domainName: string) => {
@@ -384,6 +467,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
   const availableCount = suggestions.filter(isAvailableSuggestion).length;
   const premiumCount = suggestions.filter(isPremiumSuggestion).length;
   const takenCount = suggestions.filter(isTakenSuggestion).length;
+  const pendingCount = suggestions.filter(isPendingSuggestion).length;
   const totalCount = suggestions.length;
   const selectedSuggestion = selectedDomain
     ? suggestions.find((suggestion) => suggestion.name === selectedDomain) ?? null
@@ -395,7 +479,6 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       <div className={`glass-card rounded-b-none px-4 py-5 sm:px-6 sm:py-7 ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
         <div className="max-w-3xl mx-auto">
           <div className="mb-4 text-center sm:mb-5">
-            <h2 className="text-xl font-bold sm:text-2xl mb-2">AI-Powered Domain Generator</h2>
             <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
               Generate creative domain name ideas as you type. Instant results with real-time availability.
             </p>
@@ -447,6 +530,14 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   <div className="w-2 h-2 rounded-full bg-red-500/70"></div>
                   <span className={isLight ? 'text-slate-500' : 'text-white/50'}>
                     {takenCount} taken
+                  </span>
+                </div>
+              )}
+              {isChecking && pendingCount > 0 && (
+                <div className="flex items-center gap-2">
+                  <div className={`w-3 h-3 border-2 ${isLight ? 'border-slate-300 border-t-slate-600' : 'border-white/20 border-t-white/70'} rounded-full animate-spin`}></div>
+                  <span className={`${isLight ? 'text-slate-500' : 'text-white/50'} animate-pulse`}>
+                    checking {pendingCount.toLocaleString()}…
                   </span>
                 </div>
               )}
@@ -527,29 +618,44 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
             </div>
 
             {/* View Toggle */}
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2">
+              {/* Available-only filter */}
               <button
-                onClick={() => setViewType('grid')}
-                className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
-                  viewType === 'grid' ? `${isLight ? 'bg-slate-200 text-slate-900' : 'bg-white/10 text-white'}` : `${isLight ? 'text-slate-500 hover:text-slate-700' : 'text-white/40 hover:text-white/70'}`
+                onClick={() => setAvailFilter(availFilter === 'available' ? 'all' : 'available')}
+                className={`flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 rounded-lg text-xs sm:text-sm font-medium border transition-colors ${
+                  availFilter === 'available'
+                    ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-400'
+                    : `${isLight ? 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-200' : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'}`
                 }`}
-                title="Grid view"
+                title="Show available domains only"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                </svg>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                Available{availableCount > 0 ? ` (${availableCount})` : ''}
               </button>
-              <button
-                onClick={() => setViewType('list')}
-                className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
-                  viewType === 'list' ? `${isLight ? 'bg-slate-200 text-slate-900' : 'bg-white/10 text-white'}` : `${isLight ? 'text-slate-500 hover:text-slate-700' : 'text-white/40 hover:text-white/70'}`
-                }`}
-                title="List view"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => setViewType('grid')}
+                  className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
+                    viewType === 'grid' ? `${isLight ? 'bg-slate-200 text-slate-900' : 'bg-white/10 text-white'}` : `${isLight ? 'text-slate-500 hover:text-slate-700' : 'text-white/40 hover:text-white/70'}`
+                  }`}
+                  title="Grid view"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setViewType('list')}
+                  className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
+                    viewType === 'list' ? `${isLight ? 'bg-slate-200 text-slate-900' : 'bg-white/10 text-white'}` : `${isLight ? 'text-slate-500 hover:text-slate-700' : 'text-white/40 hover:text-white/70'}`
+                  }`}
+                  title="List view"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -569,7 +675,9 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                       ? `${isLight ? 'bg-white' : 'bg-white/[0.02]'} ${isLight ? 'border-slate-200' : 'border-white/10'} hover:border-emerald-500/30 hover:bg-emerald-500/5`
                       : isPremiumSuggestion(suggestion)
                         ? `${isLight ? 'bg-amber-50/60 border-amber-200' : 'bg-amber-500/[0.06] border-amber-400/20'}`
-                        : `${isLight ? 'bg-slate-50' : 'bg-white/[0.01]'} ${isLight ? 'border-slate-100' : 'border-white/5'} opacity-70`
+                        : isPendingSuggestion(suggestion)
+                          ? `${isLight ? 'bg-white border-slate-200' : 'bg-white/[0.02] border-white/10'}`
+                          : `${isLight ? 'bg-slate-50' : 'bg-white/[0.01]'} ${isLight ? 'border-slate-100' : 'border-white/5'} opacity-70`
                   }`}
                 >
                   <div className="flex items-center justify-between gap-3">
@@ -599,6 +707,8 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                             Premium
                           </span>
                         </>
+                      ) : isPendingSuggestion(suggestion) ? (
+                        <div className={`w-3.5 h-3.5 border-2 ${isLight ? 'border-slate-200 border-t-slate-400' : 'border-white/10 border-t-white/40'} rounded-full animate-spin`}></div>
                       ) : (
                         <>
                           <div className="w-1.5 h-1.5 rounded-full bg-red-500/50"></div>
@@ -643,6 +753,8 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                       <span className={`text-xs px-3 py-1 rounded font-medium ${isLight ? 'bg-amber-100 text-amber-700' : 'bg-amber-500/10 text-amber-300'}`}>
                         Premium
                       </span>
+                    ) : isPendingSuggestion(suggestion) ? (
+                      <div className={`w-3.5 h-3.5 border-2 ${isLight ? 'border-slate-200 border-t-slate-400' : 'border-white/10 border-t-white/40'} rounded-full animate-spin`}></div>
                     ) : (
                       <span className={`text-xs px-3 py-1 rounded ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
                         Taken

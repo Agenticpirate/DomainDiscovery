@@ -19,7 +19,7 @@ export default function DomainExtensionsPage() {
       <Navigation activeTool="extensions" />
 
       {/* Main Content */}
-      <main className="relative pt-14 sm:pt-22">
+      <main className="relative pt-[4.75rem] sm:pt-24">
         {/* Hero Section */}
         <section className="px-4 sm:px-6 pb-2 sm:pb-5">
           <div className="max-w-7xl mx-auto">

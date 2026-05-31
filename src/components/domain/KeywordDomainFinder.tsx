@@ -53,12 +53,13 @@ interface GeneratedDomain {
 
 interface KeywordDomainFinderProps {
   onSelect?: (domain: string) => void;
+  /** Show the internal title + subtitle. Off by default since callers provide a page heading. */
+  showHeading?: boolean;
 }
 
-const BATCH_SIZE = 80;
-const CHECK_CONCURRENCY = 3;
+const CHECK_LIMIT = 600;
 
-export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
+export function KeywordDomainFinder({ onSelect, showHeading = false }: KeywordDomainFinderProps) {
   const [primaryKeyword, setPrimaryKeyword] = useState('');
   const [secondaryKeyword, setSecondaryKeyword] = useState('');
   const [includeHyphens, setIncludeHyphens] = useState(false);
@@ -147,45 +148,33 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     return domains;
   }, [primaryKeyword, secondaryKeyword, selectedTlds, includeHyphens]);
 
-  /* ── Check availability in batches ── */
+  /* ── Check availability in a single batched request ── */
   const checkAvailabilityInBatches = useCallback(async (domains: GeneratedDomain[]) => {
     const controller = new AbortController();
     abortRef.current = controller;
     setIsChecking(true);
     setCheckedCount(0);
 
-    const domainNames = domains.map((d) => d.domain);
-    let checked = 0;
+    // The availability API enforces a tight bulk rate limit (5/min), so fire a
+    // single request (it chunks server-side) instead of many concurrent ones
+    // that would get 429'd and leave names stuck on "unchecked".
+    const domainNames = domains.slice(0, CHECK_LIMIT).map((d) => d.domain);
 
-    for (let i = 0; i < domainNames.length; i += BATCH_SIZE * CHECK_CONCURRENCY) {
-      if (controller.signal.aborted) break;
+    try {
+      const results = await checkDomainAvailability(domainNames);
+      if (controller.signal.aborted) return;
 
-      const batchPromises: Promise<void>[] = [];
-      for (let j = 0; j < CHECK_CONCURRENCY; j++) {
-        const start = i + j * BATCH_SIZE;
-        const batch = domainNames.slice(start, start + BATCH_SIZE);
-        if (batch.length === 0) continue;
-
-        batchPromises.push(
-          checkDomainAvailability(batch).then((results) => {
-            if (controller.signal.aborted) return;
-            const availMap = new Map(results.map((r) => [r.domain.toLowerCase(), r.available]));
-            setGenerated((prev) =>
-              prev.map((d) => {
-                const avail = availMap.get(d.domain.toLowerCase());
-                return avail !== undefined ? { ...d, available: avail } : d;
-              })
-            );
-            checked += batch.length;
-            setCheckedCount(checked);
-          })
-        );
-      }
-
-      await Promise.all(batchPromises);
+      const availMap = new Map(results.map((r) => [r.domain.toLowerCase(), r.available]));
+      setGenerated((prev) =>
+        prev.map((d) => {
+          const avail = availMap.get(d.domain.toLowerCase());
+          return avail !== undefined ? { ...d, available: avail } : d;
+        })
+      );
+      setCheckedCount(domainNames.length);
+    } finally {
+      if (!controller.signal.aborted) setIsChecking(false);
     }
-
-    setIsChecking(false);
   }, []);
 
   const handleSearch = async () => {
@@ -254,20 +243,21 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
   return (
     <div className={`rounded-2xl border p-3 sm:p-5 ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border-white/10'}`}>
       {/* Header */}
-      <div className="mb-4">
-        <div className="flex items-center gap-2.5 mb-1.5">
-          <div className={`p-1.5 sm:p-2 rounded-lg ${isLight ? 'bg-slate-100' : 'bg-white/5 border border-white/10'}`}>
-            <Icons.Search />
-          </div>
-          <div>
-            <h3 className="text-base sm:text-lg font-black">Keyword Domain Finder</h3>
-            <p className={`text-[11px] sm:text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-              Generate 1,000+ domain name ideas from your keywords
-            </p>
+      {showHeading && (
+        <div className="mb-4">
+          <div className="flex items-center gap-2.5 mb-1.5">
+            <div className={`p-1.5 sm:p-2 rounded-lg ${isLight ? 'bg-slate-100' : 'bg-white/5 border border-white/10'}`}>
+              <Icons.Search />
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-black">Keyword Domain Finder</h3>
+              <p className={`text-[11px] sm:text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+                Generate 1,000+ domain name ideas from your keywords
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-
+      )}
       {/* Inputs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
         <Input

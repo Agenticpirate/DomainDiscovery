@@ -65,6 +65,73 @@ nav .logo-icon-wrapper {
     --badge-bg: rgba(16, 185, 129, 0.1);
     --badge-text: #34d399;
     --badge-border: rgba(16, 185, 129, 0.2);
+    /* Theme parity: dark-theme counterparts of the light-only stats/divider
+       tokens (previously defined on html.light only — Req 2.1/2.6). */
+    --stats-bg: #111111;
+    --section-divider: rgba(255, 255, 255, 0.08);
+
+    /* Signature gold accent — "the color of ambition" */
+    --accent: #E9B44C;
+    --accent-bright: #F6C967;
+    --accent-deep: #C28B2B;
+    --accent-contrast: #1a1306;
+    --accent-text: #F2C25C;
+    --accent-tint: rgba(233, 180, 76, 0.12);
+    --accent-tint-strong: rgba(233, 180, 76, 0.2);
+    --accent-border: rgba(233, 180, 76, 0.34);
+    --accent-glow: rgba(233, 180, 76, 0.28);
+    --gradient-gold: linear-gradient(135deg, #F6C967 0%, #E9B44C 46%, #C28B2B 100%);
+
+    /* Premium glass surface tokens (dark) — more translucent than --glass-bg
+       so the background grid/spotlight refract through it. */
+    --glass-premium-bg: rgba(20, 22, 28, 0.55);
+    --glass-premium-border: rgba(255, 255, 255, 0.10);
+    --glass-premium-edge: rgba(255, 255, 255, 0.22);
+
+    /* Elevation tiers */
+    --elev-1: 0 1px 2px rgba(0,0,0,0.3);
+    --elev-2: 0 4px 16px -2px rgba(0,0,0,0.45);
+    --elev-3: 0 12px 40px -8px rgba(0,0,0,0.6);
+    --elev-gold: 0 8px 30px -6px rgba(233, 180, 76, 0.28);
+
+    /* ── Design-system named scales (theme-independent, single value) ── */
+    /* Named elevation scale: the --elev-1/2/3/gold tiers defined above ARE
+       the named elevation scale (lowest → highest, plus gold accent tier).
+       They are reused as-is; do not redefine or duplicate them. */
+
+    /* Spacing scale (rem) */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 3rem;
+    --space-8: 4rem;
+
+    /* Blur scale (Glass_Surface backdrop radii) */
+    --blur-sm: 8px;
+    --blur-md: 16px;
+    --blur-lg: 24px;
+    --blur-xl: 32px;
+
+    /* Motion primitives — durations + easing curves */
+    --motion-duration-fast: 150ms;
+    --motion-duration-base: 300ms;
+    --motion-duration-slow: 700ms;
+    --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --motion-ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+    --motion-ease-float: ease-in-out;
+
+    /* Typography scale */
+    --text-size-xs: 0.75rem;
+    --text-size-sm: 0.875rem;
+    --text-size-base: 1rem;
+    --text-size-lg: 1.125rem;
+    --text-size-xl: 1.5rem;
+    --text-size-2xl: 2rem;
+    /* Breakpoint-pinned hero size: min 2.5rem at ≤767px, max 5.25rem at ≥1024px */
+    --text-size-hero: clamp(2.5rem, calc(2.5rem + (5.25 - 2.5) * (100vw - 767px) / 257), 5.25rem);
   }
 
   html.light {
@@ -120,6 +187,28 @@ nav .logo-icon-wrapper {
     --badge-border: rgba(16, 185, 129, 0.2);
     --stats-bg: #ffffff;
     --section-divider: #e2e8f0;
+
+    /* Signature gold accent — light theme (deeper for contrast on white) */
+    --accent: #B8860B;
+    --accent-bright: #C9971C;
+    --accent-deep: #936A08;
+    --accent-contrast: #1a1306;
+    --accent-text: #9A6F12;
+    --accent-tint: rgba(184, 134, 11, 0.1);
+    --accent-tint-strong: rgba(184, 134, 11, 0.16);
+    --accent-border: rgba(184, 134, 11, 0.3);
+    --accent-glow: rgba(184, 134, 11, 0.2);
+    --gradient-gold: linear-gradient(135deg, #C9971C 0%, #B8860B 50%, #936A08 100%);
+
+    /* Premium glass surface tokens (light) */
+    --glass-premium-bg: rgba(255, 255, 255, 0.62);
+    --glass-premium-border: rgba(15, 23, 42, 0.08);
+    --glass-premium-edge: rgba(255, 255, 255, 0.9);
+
+    --elev-1: 0 1px 2px rgba(15, 23, 42, 0.06);
+    --elev-2: 0 4px 16px -2px rgba(15, 23, 42, 0.1);
+    --elev-3: 0 12px 40px -8px rgba(15, 23, 42, 0.16);
+    --elev-gold: 0 8px 30px -6px rgba(184, 134, 11, 0.22);
   }
 
   * {
@@ -321,6 +410,157 @@ nav .logo-icon-wrapper {
     background: var(--btn-secondary-hover-bg);
     border-color: var(--card-border-hover);
   }
+
+  /* ── Premium accent system ───────────────────────────────── */
+  .text-accent { color: var(--accent-text); }
+  .bg-accent { background: var(--accent); }
+
+  .text-gradient-gold {
+    background-image: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .btn-accent {
+    background: var(--gradient-gold);
+    color: var(--accent-contrast);
+    font-weight: 700;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: var(--elev-gold), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease;
+  }
+  .btn-accent:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+    box-shadow: 0 14px 44px -8px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  }
+  .btn-accent:active { transform: translateY(0); }
+
+  .accent-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    background: var(--accent-tint);
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+  }
+
+  /* Highlighted chip — a louder gold pill used to draw the eye to a single
+     priority action (e.g. the Bulk check entry). Self-contained: it repeats the
+     base `.accent-chip` layout so it renders correctly even when class-merging
+     (tailwind-merge) drops the base `.accent-chip` as a perceived conflict.
+     Single clean border + a soft outer glow (no stacked ring) so it reads as a
+     brighter sibling of the other chips, not a heavy boxed outline. */
+  .accent-chip-strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    color: var(--accent-text);
+    background: var(--accent-tint-strong);
+    border: 1px solid var(--accent-border);
+    box-shadow: 0 4px 18px -6px var(--accent-glow);
+  }
+  .accent-chip-strong:hover {
+    border-color: var(--accent);
+    box-shadow: 0 6px 22px -6px var(--accent-glow);
+  }
+
+  /* Premium card with layered elevation + gold edge on hover */
+  .premium-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    box-shadow: var(--elev-1);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  .premium-card:hover {
+    transform: translateY(-3px);
+    background: var(--card-bg-hover);
+    border-color: var(--accent-border);
+    box-shadow: var(--elev-3);
+  }
+
+  /* Fluid premium type scale */
+  .display-1 { font-size: clamp(2.5rem, 6vw, 5.25rem); line-height: 1.02; letter-spacing: -0.03em; font-weight: 900; }
+  .display-2 { font-size: clamp(2rem, 4.5vw, 3.5rem); line-height: 1.05; letter-spacing: -0.025em; font-weight: 900; }
+  .heading-1 { font-size: clamp(1.75rem, 3vw, 2.75rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800; }
+  .heading-2 { font-size: clamp(1.375rem, 2vw, 1.875rem); line-height: 1.2; letter-spacing: -0.015em; font-weight: 800; }
+  .eyebrow {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent-text);
+  }
+
+  /* ── Premium glass surface (dark-tech) ───────────────────────────────
+     A more translucent surface than .glass-card so the grid + spotlight
+     behind it actually refract, plus a bright top-edge highlight and an
+     inner sheen that make it read as glass catching light. Additive —
+     does not modify .glass-card or any existing class. */
+  .glass-premium {
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 14%, rgba(255, 255, 255, 0) 40%),
+      var(--glass-premium-bg);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid var(--glass-premium-border);
+    box-shadow:
+      var(--elev-3),
+      inset 0 1px 0 0 var(--glass-premium-edge);
+  }
+  /* Razor top-edge light line — the signature Linear/Vercel glass tell. */
+  .glass-premium::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--glass-premium-edge), transparent);
+    pointer-events: none;
+  }
+
+  /* Subtle gold focus ring used by premium interactive surfaces. */
+  .ring-focus-accent:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* Footer links — muted, brighten to the gold accent on hover. */
+  .footer-link {
+    position: relative;
+  }
+  .footer-link:hover {
+    color: var(--accent-text) !important;
+  }
+
+  /* Soft glow for menu icon tiles. */
+  .icon-glow {
+    box-shadow: 0 0 0 1px var(--card-border), 0 4px 14px -4px rgba(0,0,0,0.4);
+  }
+  .icon-glow-active {
+    box-shadow: 0 0 16px -2px var(--accent-glow), inset 0 0 0 1px var(--accent-border);
+  }
+  .group:hover .icon-glow {
+    box-shadow: 0 0 14px -3px var(--accent-glow);
+  }
 }
 
 @layer utilities {
@@ -334,6 +574,101 @@ nav .logo-icon-wrapper {
 
   .animate-float-soft {
     animation: floatSoft 4.5s ease-in-out infinite;
+  }
+
+  /* Premium entrance — rise + fade with refined easing */
+  .animate-rise {
+    opacity: 0;
+    animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .animate-rise-sm {
+    opacity: 0;
+    animation: riseSm 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .animate-scale-in {
+    opacity: 0;
+    animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Stagger helpers for orchestrated section reveals */
+  .stagger-1 { animation-delay: 0.06s; }
+  .stagger-2 { animation-delay: 0.12s; }
+  .stagger-3 { animation-delay: 0.18s; }
+  .stagger-4 { animation-delay: 0.24s; }
+  .stagger-5 { animation-delay: 0.3s; }
+  .stagger-6 { animation-delay: 0.36s; }
+
+  /* Gold shimmer sweep for premium highlights */
+  .animate-shimmer {
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+  }
+
+  /* Hero ambient motion — subtle, continuous float/drift driven only by the
+     --motion-* tokens (slow loop derived from --motion-duration-slow, eased
+     with --motion-ease-float). Neutralized under prefers-reduced-motion. */
+  .animate-ambient {
+    animation: ambientDrift calc(var(--motion-duration-slow) * 12) var(--motion-ease-float) infinite;
+    will-change: transform;
+  }
+
+  @keyframes ambientDrift {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(0, -8px, 0) scale(1.015); }
+  }
+
+  /* Mandala — a slow, continuous rotation for decorative concentric SVG
+     ringwork behind the hero. Counter-rotating layers compose a kaleidoscopic
+     drift. Token-driven timing; neutralized under prefers-reduced-motion. */
+  .animate-mandala {
+    animation: mandalaSpin calc(var(--motion-duration-slow) * 60) linear infinite;
+    transform-origin: center;
+    will-change: transform;
+  }
+  .animate-mandala-reverse {
+    animation: mandalaSpinReverse calc(var(--motion-duration-slow) * 80) linear infinite;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  /* Mandala core breathing — gentle opacity + scale pulse for the center. */
+  .animate-mandala-pulse {
+    animation: mandalaPulse calc(var(--motion-duration-slow) * 6) var(--motion-ease-float) infinite;
+    transform-origin: center;
+    will-change: transform, opacity;
+  }
+
+  @keyframes mandalaSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes mandalaSpinReverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+  @keyframes mandalaPulse {
+    0%, 100% { transform: scale(1); opacity: 0.55; }
+    50% { transform: scale(1.12); opacity: 1; }
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes riseSm {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes shimmer {
+    to { background-position: 200% center; }
+  }
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+    50% { box-shadow: 0 0 24px 2px var(--accent-glow); }
   }
 
   @keyframes fadeIn {
@@ -386,9 +721,19 @@ nav .logo-icon-wrapper {
     .animate-fade-in,
     .animate-slide-up,
     .animate-float-soft,
+    .animate-rise,
+    .animate-rise-sm,
+    .animate-scale-in,
+    .animate-shimmer,
+    .animate-ambient,
+    .animate-mandala,
+    .animate-mandala-reverse,
+    .animate-mandala-pulse,
     .animate-pulse,
     .animate-spin {
       animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 }

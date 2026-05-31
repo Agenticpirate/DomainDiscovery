@@ -5,9 +5,48 @@ import Link from 'next/link';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+
+/* ── Shared section heading (consistent alignment across the page) ── */
+interface SectionHeadingProps {
+  eyebrow?: string;
+  title: React.ReactNode;
+  subtitle?: string;
+  align?: 'center' | 'left';
+}
+
+const SectionHeading: React.FC<SectionHeadingProps> = ({ eyebrow, title, subtitle, align = 'center' }) => (
+  <div className={`max-w-2xl ${align === 'center' ? 'mx-auto text-center' : 'text-left'} mb-8 sm:mb-12`}>
+    {eyebrow && <div className="eyebrow mb-3">{eyebrow}</div>}
+    <h2 className="heading-1 mb-3" style={{ color: 'var(--text-primary)' }}>{title}</h2>
+    {subtitle && (
+      <p className="text-sm sm:text-[16px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+        {subtitle}
+      </p>
+    )}
+  </div>
+);
+
+/* ── Scroll-reveal wrapper ── */
+const Reveal: React.FC<{ children: React.ReactNode; className?: string; delay?: number }> = ({ children, className = '', delay = 0 }) => {
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}s`,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
 
 export const HomePageContent: React.FC = () => {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
   const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -17,383 +56,289 @@ export const HomePageContent: React.FC = () => {
 
   const isLight = mounted ? theme === 'light' : false;
 
+  /* ── Primary value props (3-up feature row) ── */
   const features = [
     {
       icon: <Icons.Search />,
-      title: 'Search available domain names',
-      description: 'Our tool instantly shows you every domain and extension combination in real-time as you type. Explore domain availability, popularity, and more so you can have full confidence in your domain choice.',
+      title: 'Search every extension at once',
+      description: 'Type once and see live availability across .com, .ai, .io and 1,600+ more. No refreshes, no waiting.',
       href: '/',
-      cta: 'Try search',
-      badge: null
-    },
-    {
-      icon: <Icons.Layers />,
-      title: 'Check 1,600+ domain extensions',
-      description: 'Our domain search tool instantly suggests the most popular, relevant, and cheapest domain extensions (.com, .org, .ai) to choose for your website URL.',
-      href: '/domain-extensions',
-      cta: 'Browse extensions',
-      badge: '1,600+ TLDs'
+      cta: 'Start searching',
+      badge: 'Real-time',
     },
     {
       icon: <Icons.Magic />,
-      title: 'AI domain name generator',
-      description: 'Our AI domain generator searches through millions of available domains to suggest the most creative, shortest, and unique names. Instantly go from idea to buying the domain.',
+      title: 'Generate names with AI',
+      description: 'Turn a keyword into dozens of brandable, available options in seconds, ranked by quality.',
       href: '/generator',
-      cta: 'Try generator',
-      badge: 'AI-Powered'
-    }
+      cta: 'Try the generator',
+      badge: 'AI-powered',
+    },
+    {
+      icon: <Icons.Dollar />,
+      title: 'Always get the best price',
+      description: 'Compare registrar pricing side by side so you never overpay on registration or renewal.',
+      href: '/tools/compare',
+      cta: 'Compare prices',
+      badge: 'Save more',
+    },
+  ];
+
+  /* ── Tool directory ── */
+  const tools = [
+    { icon: <Icons.Search />, title: 'Instant Search', description: 'Live availability as you type across the core extensions.', href: '/', eyebrow: 'Featured', badge: 'Real-time', featured: true },
+    { icon: <Icons.Sparkles />, title: 'AI Generator', description: 'Brandable name ideas, checked for availability instantly.', href: '/generator', eyebrow: 'Featured', badge: 'AI', featured: true },
+    { icon: <Icons.Layers />, title: 'Bulk Search', description: 'Check up to 1,000 domains in a single pass.', href: '/bulk-search', eyebrow: '1,000 at once' },
+    { icon: <Icons.Globe />, title: 'Extensions', description: 'Browse 1,600+ TLDs by category and purpose.', href: '/domain-extensions', eyebrow: '1,600+ TLDs' },
+    { icon: <Icons.Dollar />, title: 'Price Comparison', description: 'Registrar pricing side by side, no markups.', href: '/tools/compare' },
+    { icon: <Icons.Globe />, title: 'Geo Finder', description: 'Location-aware names for local brands.', href: '/tools/geo' },
+  ];
+
+  /* ── Why-us value grid ── */
+  const benefits = [
+    { icon: <Icons.Magic />, title: 'Instant results', description: 'Availability updates as you type, with zero page reloads.' },
+    { icon: <Icons.Sparkles />, title: 'AI suggestions', description: 'Smart, semantic ideas take you from blank page to shortlist.' },
+    { icon: <Icons.Dollar />, title: 'Transparent pricing', description: 'Compare registrars side by side and register at the lowest price.' },
+    { icon: <Icons.Check />, title: 'Private by default', description: 'Your searches stay yours. We never sell or expose your queries.' },
+    { icon: <Icons.Globe />, title: '1,600+ extensions', description: 'From .com to niche TLDs, the coverage stays comprehensive.' },
+    { icon: <Icons.Layers />, title: 'Built to scale', description: 'The same fast workflow on desktop, tablet, and mobile.' },
   ];
 
   const faqs = [
-    { question: 'What is a domain name?', answer: 'A domain name is the address you type into your web browser to visit a website, like "domaindiscovery.com." It identifies a website on the internet, making it easy for people to find and remember. Like your home address helps people find where you live, a domain name helps people find your website. Our domain search tool helps you find available domains instantly.' },
-    { question: 'Why use DomainDiscovery?', answer: 'Our free domain name search delivers lightning-fast results with instant availability checking. As you type, our tool shows available domains in real-time using powerful AI and advanced search infrastructure. With every query, you see available extensions, suggested similar domains, and premium domains to boost your website performance. You also gain access to features including bulk search, domain generator, WHOIS lookup, price comparison, and more.' },
-    { question: 'What if the domain name I want is already taken?', answer: 'If someone already owns the domain name you want, you still have several options: (1) Try a different extension - if someone owns "example.com," check if "example.net," "example.org," or other TLDs remain available. See our full list of 1,600+ available extensions. (2) Create a variation - add a word or change the order of words to create a variation of your desired domain name. Our AI Domain Generator suggests similar available domains. (3) Check premium domains - our premium domain search tool helps you find similar, high-performing domains that may be available for purchase.' },
-    { question: 'How do I check if a domain name is available?', answer: 'Use our domain checker to see if a domain name is available. Type the name you want in the search bar above, and you\'ll receive instant results that check domains across different extensions (like ".com" or ".net") and provide alternative suggestions. Our tool checks availability in real-time across 1,600+ TLD extensions.' },
-    { question: 'What are extensions and TLDs, and which one should I choose?', answer: 'A TLD (Top-Level Domain) represents the part of a domain name that comes after the dot, like ".com" or ".org." The .com extension ranks as the most common and trusted, but many others, such as ".net," ".ai," ".io," or industry-specific extensions like ".tech" or ".shop," offer great alternatives. Our domain extension tool helps you explore different TLD options and find the perfect match for your website.' },
-    { question: 'How do I buy domains?', answer: 'Once you find an available domain using our domain search tool, select a registrar to purchase it. We show you pricing from trusted registrars including GoDaddy, Namecheap, Google Domains, and more, so you can buy with confidence at the best price. After buying, you\'ll connect the domain to your website or hosting provider.' },
-    { question: 'How fast is DomainDiscovery?', answer: 'DomainDiscovery delivers instant search results as you type, with response times optimized for real-time feedback. Our advanced infrastructure and AI-powered search engine ensure you get hundreds of domain suggestions in milliseconds, making it one of the fastest domain search tools available.' },
-    { question: 'Is DomainDiscovery free to use?', answer: 'Yes! DomainDiscovery is completely free to use. You can search unlimited domains, check availability across 1,600+ extensions, use our AI domain generator, compare prices, and access all our tools at no cost. You only pay when you\'re ready to register a domain through your chosen registrar.' }
+    { question: 'Is DomainDiscovery free?', answer: 'Yes, completely. Search unlimited domains, check 1,600+ extensions, use the AI generator, and compare prices at no cost. You only pay the registrar when you register a domain you love.' },
+    { question: 'How do I check if a domain is available?', answer: 'Type any name in the search bar. We check availability in real time across 1,600+ extensions and surface available alternatives instantly — no sign-up required.' },
+    { question: 'What if my domain is already taken?', answer: 'You have options: try a different extension (.io, .co, .ai), use the AI generator for brandable variations, or check the premium market for similar names that may be for sale.' },
+    { question: 'Which extension should I choose?', answer: '.com is still the most trusted, but .ai, .io, .tech, and industry-specific TLDs can be a smart, available fit. Our extensions explorer helps you compare options by purpose and price.' },
+    { question: 'How do I register a domain?', answer: 'Once you find an available name, choose a registrar from the price comparison and register in one click. We surface pricing from GoDaddy, Namecheap, Porkbun, and more so you get the best deal.' },
+    { question: 'How fast are results?', answer: 'Results appear as you type, typically in under a second. Repeat lookups are cached for near-instant feedback across all 1,600+ extensions.' },
   ];
 
-  const tools = [
-    { icon: <Icons.Search />, title: 'Instant Domain Search', description: 'Live results as you type across the core extensions.', href: '/', eyebrow: 'Featured', badge: 'Real-time', featured: true },
-    { icon: <Icons.Sparkles />, title: 'AI Domain Generator', description: 'Generate brandable names and check them instantly.', href: '/generator', eyebrow: 'Featured', badge: 'AI', featured: true },
-    { icon: <Icons.Layers />, title: 'Bulk Domain Search', description: 'Run up to 1,000 domains in one pass.', href: '/bulk-search', eyebrow: '1,000 at once' },
-    { icon: <Icons.Globe />, title: 'Domain Extensions', description: 'Browse the most useful TLDs and niche extensions.', href: '/domain-extensions', eyebrow: '1,600+ TLDs' },
-    { icon: <Icons.Dollar />, title: 'Price Comparison', description: 'Compare standard registrar pricing side by side.', href: '/tools/compare' },
-    { icon: <Icons.Globe />, title: 'Geo Domain Finder', description: 'Surface location-aware names for local brands.', href: '/tools/geo' },
+  const popularExtensions = [
+    { ext: '.com', desc: 'Most trusted' },
+    { ext: '.ai', desc: 'AI & tech' },
+    { ext: '.io', desc: 'Startups' },
+    { ext: '.co', desc: 'Companies' },
+    { ext: '.net', desc: 'Networks' },
+    { ext: '.org', desc: 'Nonprofits' },
+    { ext: '.app', desc: 'Apps' },
+    { ext: '.xyz', desc: 'Creative' },
   ];
-
-  const benefits = [
-    { icon: <Icons.Magic />, title: 'Lightning Fast Search', description: 'Results update as you type, without waiting on page refreshes.', stat: 'Instant' },
-    { icon: <Icons.Sparkles />, title: 'AI-Powered Suggestions', description: 'Semantic suggestions help you move from idea to shortlist faster.', stat: 'AI' },
-    { icon: <Icons.Dollar />, title: 'Smarter Price Visibility', description: 'Registrar pricing stays side by side so cost is easier to compare.', stat: 'Pricing' },
-    { icon: <Icons.Check />, title: 'Private By Default', description: 'Searches stay private with no query history sold or exposed.', stat: 'Private' },
-    { icon: <Icons.Globe />, title: '1,600+ Extensions', description: 'From .com to niche TLDs, the extension coverage stays broad.', stat: 'Coverage' },
-    { icon: <Icons.Layers />, title: 'Works Everywhere', description: 'The same workflow stays usable on desktop, tablet, and mobile.', stat: 'Responsive' }
-  ];
-
-  const cardClasses = `group relative h-full rounded-2xl transition-all duration-300 ${
-    isLight
-      ? 'bg-white border hover:border-slate-300 hover:shadow-lg shadow-sm border-transparent'
-      : 'bg-white/[0.02] border hover:border-white/20 hover:bg-white/[0.04] border-transparent'
-  }`;
-
-  const smallCardClasses = `group relative h-full rounded-2xl transition-colors duration-200 ${
-    isLight
-      ? 'bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md shadow-sm'
-      : 'bg-[#0f1012] border border-white/8 hover:border-white/12'
-  }`;
-
-  const iconBoxClasses = `inline-flex items-center justify-center rounded-2xl border transition-colors ${
-    isLight
-      ? 'border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(241,245,249,0.94))] text-slate-700 shadow-sm'
-      : 'border-white/10 bg-[#17191d] text-white/85'
-  }`;
-
-  const smallIconBoxClasses = `inline-flex shrink-0 items-center justify-center rounded-2xl border transition-colors ${
-    isLight
-      ? 'border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(241,245,249,0.94))] text-slate-700 shadow-sm'
-      : 'border-white/10 bg-[#17191d] text-white/85'
-  }`;
-
-  const featuredTools = tools.filter((tool) => tool.featured);
-  const standardTools = tools.filter((tool) => !tool.featured);
 
   return (
-    <div className="py-0.5 sm:py-5">
-      {/* "The fastest domain search tool" — hidden on mobile */}
-      <section className="hidden sm:block max-w-5xl mx-auto px-3 sm:px-6 mb-7">
-        <div className="text-center mb-1.5 sm:mb-5">
-          <h2 className="text-base sm:text-4xl md:text-[2.8rem] font-black mb-0.5 sm:mb-3 leading-tight">
-            The fastest domain search tool
-          </h2>
-          <p className="hidden sm:block text-sm sm:text-[15px] leading-relaxed max-w-[44rem] mx-auto" style={{ color: 'var(--text-secondary)' }}>
-            DomainDiscovery is the ultimate domain search engine to find, buy, and register available 
-            domain names and extensions (TLDs).
-          </p>
-        </div>
-      </section>
-
-      {/* Feature cards — hidden on mobile */}
-      <section className="hidden sm:block max-w-5xl mx-auto px-3 sm:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-3">
+    <div className="pt-4 sm:pt-10 pb-6 sm:pb-16">
+      {/* ── Primary value props ─────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-16 sm:mb-28">
+        <SectionHeading
+          eyebrow="Why founders choose us"
+          title="The fastest way to find a domain you'll love"
+          subtitle="Everything you need to search, compare, and register — built for speed and clarity from the first keystroke."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
           {features.map((feature, index) => (
-            <Link key={index} href={feature.href} className={`${cardClasses} p-2 sm:p-4 block`}>
-              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} variant={isLight ? "default" : "white"} />
-              <div className="relative z-10 flex items-center gap-2 sm:flex-col h-full">
-                <div className="flex items-center justify-between gap-1 shrink-0 sm:w-full sm:mb-1">
-                  <div className={`${iconBoxClasses} h-7 w-7 sm:h-11 sm:w-11 shrink-0`}>
-                    {feature.icon}
+            <Reveal key={feature.title} delay={index * 0.08}>
+              <Link href={feature.href} className="premium-card group relative block h-full p-6 sm:p-7">
+                <GlowingEffect spread={40} glow disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} variant={isLight ? 'default' : 'white'} />
+                <div className="relative z-10 flex h-full flex-col">
+                  <div className="mb-5 flex items-center justify-between">
+                    <span
+                      className="inline-flex h-12 w-12 items-center justify-center rounded-xl"
+                      style={{ background: 'var(--accent-tint)', color: 'var(--accent-text)', border: '1px solid var(--accent-border)' }}
+                    >
+                      {feature.icon}
+                    </span>
+                    <span className="accent-chip">{feature.badge}</span>
                   </div>
-                  {feature.badge && (
-                    <span className={`hidden sm:inline shrink-0 px-1.5 py-0.5 text-[9px] sm:text-[11px] font-semibold rounded-full border ${
-                      isLight ? 'border-slate-200 bg-slate-100 text-slate-700' : 'border-white/10 bg-white/[0.04] text-white/75'
-                    }`}>{feature.badge}</span>
-                  )}
-                </div>
-                <div className="min-w-0 flex-1 flex flex-col h-full">
-                  <h3 className="text-[11px] sm:text-[17px] font-bold leading-tight">
-                    {feature.title}
-                  </h3>
-                  <p className="hidden sm:block text-[13px] leading-relaxed mt-1 mb-2" style={{ color: 'var(--text-tertiary)' }}>
-                    {feature.description}
-                  </p>
-                  <span className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold transition-colors mt-auto" style={{ color: 'var(--text-secondary)' }}>
+                  <h3 className="heading-2 mb-2 text-[18px] sm:text-[20px]" style={{ color: 'var(--text-primary)' }}>{feature.title}</h3>
+                  <p className="mb-5 text-[14px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{feature.description}</p>
+                  <span className="mt-auto inline-flex items-center gap-1.5 text-[14px] font-semibold" style={{ color: 'var(--accent-text)' }}>
                     {feature.cta}
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                    <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
                   </span>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-0 sm:pt-0 mb-4 sm:mb-7">
-        <div className="text-center mb-2 sm:mb-4.5">
-          <h2 className="text-base sm:text-4xl font-black mb-0.5 sm:mb-2">Popular Extensions</h2>
-          <p style={{ color: 'var(--text-tertiary)' }} className="hidden sm:block text-[11px] sm:text-base max-w-xl mx-auto">
-            Choose from 1,600+ extensions. Find the perfect TLD.
-          </p>
-        </div>
-        <div className="grid grid-cols-4 lg:grid-cols-8 gap-1 sm:gap-2">
-          {[
-            { ext: '.com', desc: 'Popular' },
-            { ext: '.ai', desc: 'AI & Tech' },
-            { ext: '.io', desc: 'Startups' },
-            { ext: '.co', desc: 'Companies' },
-            { ext: '.net', desc: 'Networks' },
-            { ext: '.org', desc: 'Orgs' },
-            { ext: '.app', desc: 'Apps' },
-            { ext: '.xyz', desc: 'Creative' },
-          ].map((item, i) => (
-            <Link
-              key={i}
-              href="/domain-extensions"
-              className={`group relative px-1 sm:px-4 py-1.5 sm:py-3 rounded-lg sm:rounded-xl border transition-all text-center block ${
-                isLight
-                  ? 'bg-white border-transparent hover:border-slate-300 shadow-sm'
-                : 'bg-white/[0.02] border-transparent hover:border-white/20 hover:bg-white/[0.04]'
-              }`}
-            >
-              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} variant={isLight ? "default" : "white"} />
-              <div className="relative z-10 w-full h-full">
-                <div className="text-[11px] sm:text-2xl font-black mb-0" style={{ color: 'var(--text-primary)' }}>{item.ext}</div>
-                <div className="text-[8px] sm:text-xs" style={{ color: 'var(--text-tertiary)' }}>{item.desc}</div>
-              </div>
-            </Link>
-          ))}
-        </div>
-        <div className="text-center mt-1.5 sm:mt-4">
-          <Link
-            href="/domain-extensions"
-            className={`inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl text-[11px] sm:text-sm font-semibold transition-all ${
-              isLight
-                ? 'bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700'
-                : 'bg-white/5 hover:bg-white/10 border border-white/10'
-            }`}
-          >
+      {/* ── Popular extensions ──────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-16 sm:mb-28">
+        <SectionHeading
+          eyebrow="1,600+ extensions"
+          title="Pick the perfect ending"
+          subtitle="From the classics to niche TLDs built for your industry — all checked in real time."
+        />
+        <Reveal>
+          <div className="grid grid-cols-4 lg:grid-cols-8 gap-2.5 sm:gap-3">
+            {popularExtensions.map((item) => (
+              <Link
+                key={item.ext}
+                href="/domain-extensions"
+                className="premium-card group relative flex flex-col items-center justify-center px-2 py-4 sm:py-5 text-center"
+              >
+                <GlowingEffect spread={40} glow disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} variant={isLight ? 'default' : 'white'} />
+                <div className="relative z-10">
+                  <div className="text-[15px] sm:text-2xl font-black mb-0.5 transition-colors group-hover:text-[var(--accent-text)]" style={{ color: 'var(--text-primary)' }}>{item.ext}</div>
+                  <div className="text-[9px] sm:text-[11px] uppercase tracking-wide" style={{ color: 'var(--text-tertiary)' }}>{item.desc}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </Reveal>
+        <div className="mt-7 text-center">
+          <Link href="/domain-extensions" className="btn-secondary inline-flex items-center gap-1.5 px-5 py-2.5 text-[13px]">
             View all 1,600+ extensions
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
           </Link>
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6 pt-3 sm:pt-0 mb-4 sm:mb-7">
-        <div className="text-center mb-2 sm:mb-6">
-          <h2 className="text-base sm:text-4xl font-black mb-0.5 sm:mb-2">
-            Powerful Domain Tools
-          </h2>
-          <p style={{ color: 'var(--text-tertiary)' }} className="text-[10px] sm:text-base max-w-xl mx-auto">
-            Everything you need to find and register the perfect domain
-          </p>
-        </div>
-
-        {/* Featured tools row — equal-width 2-col grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-3 mb-1.5 sm:mb-3">
-          {featuredTools.map((tool) => (
-            <Link
-              key={tool.title}
-              href={tool.href}
-              className={`${smallCardClasses} p-2 sm:p-4 transition-transform duration-200 hover:-translate-y-0.5 block`}
-            >
-              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} variant={isLight ? "default" : "white"} />
-              <div className="relative z-10 flex items-center gap-2 sm:gap-3">
-                <div className={`${iconBoxClasses} h-8 w-8 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl shrink-0`}>{tool.icon}</div>
-                <div className="min-w-0 flex-1">
-                  <div className={`flex items-center gap-1.5 mb-0.5`}>
-                    <span className={`text-[8px] sm:text-[10px] font-semibold uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>{tool.eyebrow}</span>
-                    {tool.badge && <span className={`px-1 py-0.5 rounded text-[7px] sm:text-[9px] font-bold ${isLight ? 'bg-slate-100 text-slate-600 border border-slate-200' : 'bg-white/[0.08] text-white/50 border border-white/10'}`}>{tool.badge}</span>}
+      {/* ── Tools ───────────────────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-16 sm:mb-28">
+        <SectionHeading
+          eyebrow="The complete toolkit"
+          title="Every tool you need in one place"
+          subtitle="A full suite for finding, evaluating, and registering domains — no account required."
+        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          {tools.filter((t) => t.featured).map((tool, i) => (
+            <Reveal key={tool.title} delay={i * 0.08}>
+              <Link href={tool.href} className="premium-card group relative block p-6 sm:p-7">
+                <GlowingEffect spread={40} glow disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} variant={isLight ? 'default' : 'white'} />
+                <div className="relative z-10 flex items-center gap-4">
+                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl" style={{ background: 'var(--accent-tint)', color: 'var(--accent-text)', border: '1px solid var(--accent-border)' }}>{tool.icon}</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-1 flex items-center gap-2">
+                      <span className="eyebrow text-[10px]">{tool.eyebrow}</span>
+                      {tool.badge && <span className="accent-chip py-0.5">{tool.badge}</span>}
+                    </div>
+                    <h3 className="text-[17px] font-black leading-tight" style={{ color: 'var(--text-primary)' }}>{tool.title}</h3>
+                    <p className="mt-1 text-[13px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>{tool.description}</p>
                   </div>
-                  <h3 className="text-[12px] sm:text-[16px] font-black leading-tight">{tool.title}</h3>
-                  <p className="hidden sm:block mt-0.5 text-[11px] sm:text-[13px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>{tool.description}</p>
+                  <svg className="h-5 w-5 shrink-0 transition-all duration-300 group-hover:translate-x-1" style={{ color: 'var(--accent-text)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                 </div>
-                <svg className={`w-4 h-4 shrink-0 transition-colors ${isLight ? 'text-slate-300 group-hover:text-slate-500' : 'text-white/20 group-hover:text-white/40'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-            </Link>
+              </Link>
+            </Reveal>
           ))}
         </div>
-
-        {/* Standard tools — even 2x2 grid on mobile, 4-col on desktop */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
-          {standardTools.map((tool) => (
-            <Link
-              key={tool.title}
-              href={tool.href}
-              className={`${smallCardClasses} p-2.5 sm:p-3.5 transition-transform duration-200 hover:-translate-y-0.5 block`}
-            >
-              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} variant={isLight ? "default" : "white"} />
-              <div className="relative z-10 flex items-center gap-2.5">
-                <div className={`${smallIconBoxClasses} h-8 w-8 sm:h-9 sm:w-9 shrink-0`}>{tool.icon}</div>
-                <h3 className="text-[11px] sm:text-sm font-bold leading-tight min-w-0 flex-1">{tool.title}</h3>
-              </div>
-            </Link>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {tools.filter((t) => !t.featured).map((tool, i) => (
+            <Reveal key={tool.title} delay={i * 0.06}>
+              <Link href={tool.href} className="premium-card group relative block p-5 h-full">
+                <GlowingEffect spread={40} glow disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} variant={isLight ? 'default' : 'white'} />
+                <div className="relative z-10">
+                  <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: 'var(--icon-bg)', color: 'var(--icon-color)', border: '1px solid var(--card-border)' }}>{tool.icon}</span>
+                  <h3 className="text-[14px] font-bold leading-tight" style={{ color: 'var(--text-primary)' }}>{tool.title}</h3>
+                  <p className="mt-1 text-[12px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>{tool.description}</p>
+                </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-3 sm:px-6 mb-4 sm:mb-7">
-        <div className="text-center mb-1.5 sm:mb-4.5">
-          <h2 className="text-base sm:text-4xl font-black mb-0 sm:mb-2">Why DomainDiscovery?</h2>
-          <p style={{ color: 'var(--text-tertiary)' }} className="hidden sm:block text-base max-w-xl mx-auto">
-            Faster, smarter domain search built for founders.
-          </p>
-        </div>
-        <div className="grid grid-cols-3 md:grid-cols-3 gap-1 sm:gap-2.5">
-          {benefits.map((benefit) => (
-            <div key={benefit.title} className={`${smallCardClasses} p-1.5 sm:p-3.5`}>
-              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} variant={isLight ? "default" : "white"} />
-              <div className="relative z-10 flex items-center gap-1.5 sm:flex-col sm:items-start sm:gap-3">
-                <div className={`${smallIconBoxClasses} h-6 w-6 sm:h-10 sm:w-10 shrink-0`}>{benefit.icon}</div>
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-[10px] sm:text-base font-bold leading-tight">{benefit.title}</h3>
-                  <p className="hidden sm:block mt-1.5 text-[13px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
-                    {benefit.description}
-                  </p>
+      {/* ── Why DomainDiscovery ─────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-16 sm:mb-28">
+        <SectionHeading
+          eyebrow="Built different"
+          title="Why founders stick with DomainDiscovery"
+          subtitle="Speed, transparency, and privacy — the things that matter when you're naming what's next."
+        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          {benefits.map((benefit, i) => (
+            <Reveal key={benefit.title} delay={(i % 3) * 0.08}>
+              <div className="premium-card relative h-full p-6">
+                <GlowingEffect spread={40} glow disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} variant={isLight ? 'default' : 'white'} />
+                <div className="relative z-10 flex items-start gap-4">
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style={{ background: 'var(--accent-tint)', color: 'var(--accent-text)', border: '1px solid var(--accent-border)' }}>{benefit.icon}</span>
+                  <div className="min-w-0">
+                    <h3 className="text-[15px] font-bold leading-tight mb-1.5" style={{ color: 'var(--text-primary)' }}>{benefit.title}</h3>
+                    <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{benefit.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
-
-      <section className="max-w-4xl mx-auto px-3 sm:px-6 mb-4 sm:mb-7">
-        <div className="text-center mb-2 sm:mb-5">
-          <h2 className="text-base sm:text-4xl font-black mb-0.5 sm:mb-3">FAQs</h2>
-          <p className="hidden sm:block text-sm" style={{ color: 'var(--text-tertiary)' }}>
-            Everything you need to know about finding and registering domain names
-          </p>
-        </div>
-        <div className="space-y-1">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className={`rounded-lg overflow-hidden transition-all ${
-                isLight
-                  ? 'bg-white border border-slate-200 hover:border-slate-300 shadow-sm'
-                  : 'bg-white/[0.02] border border-white/10 hover:border-white/20'
-              }`}
-            >
-              <button
-                onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className={`w-full px-3 sm:px-5 py-2 sm:py-3 flex items-center justify-between text-left transition-colors ${
-                  isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.02]'
-                }`}
+      {/* ── FAQ ─────────────────────────────────────────────── */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 mb-16 sm:mb-28">
+        <SectionHeading
+          eyebrow="Questions, answered"
+          title="Frequently asked questions"
+        />
+        <div className="space-y-2.5">
+          {faqs.map((faq, index) => {
+            const open = openFaq === index;
+            return (
+              <div
+                key={index}
+                className="premium-card overflow-hidden"
+                style={{ borderColor: open ? 'var(--accent-border)' : undefined }}
               >
-                <h3 className="text-[12px] sm:text-base font-bold pr-3 leading-snug">{faq.question}</h3>
-                <svg
-                  className={`w-4 h-4 flex-shrink-0 transition-transform ${openFaq === index ? 'rotate-180' : ''}`}
-                  style={{ color: 'var(--text-tertiary)' }}
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                <button
+                  onClick={() => setOpenFaq(open ? null : index)}
+                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+                  aria-expanded={open}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <div className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${
-                openFaq === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-              }`}>
-                <div className="overflow-hidden">
-                  <div className="px-3 sm:px-5 pb-2.5 sm:pb-4">
-                    <p className="text-[11px] sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{faq.answer}</p>
+                  <h3 className="text-[14px] sm:text-[15px] font-bold leading-snug" style={{ color: 'var(--text-primary)' }}>{faq.question}</h3>
+                  <span
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-all duration-300"
+                    style={{
+                      background: open ? 'var(--accent)' : 'var(--icon-bg)',
+                      color: open ? 'var(--accent-contrast)' : 'var(--text-tertiary)',
+                      transform: open ? 'rotate(180deg)' : 'none',
+                    }}
+                  >
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
+                  </span>
+                </button>
+                <div className={`grid transition-all duration-300 ease-out ${open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                  <div className="overflow-hidden">
+                    <p className="px-5 pb-4 text-[13px] sm:text-[14px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{faq.answer}</p>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
-      <section className="hidden sm:block max-w-4xl mx-auto px-3 sm:px-6">
-        <div className={`prose max-w-none ${isLight ? 'prose-gray' : 'prose-invert'}`}>
-          <h2 className="text-2xl sm:text-3xl font-black mb-3 sm:mb-4">
-            Find Your Perfect Domain Name with DomainDiscovery
-          </h2>
-          <p className="text-sm sm:text-[15px] leading-relaxed mb-3 sm:mb-4" style={{ color: 'var(--text-secondary)' }}>
-            Finding the perfect domain name is the first step in building your online presence. Whether you&apos;re 
-            launching a startup, creating a personal brand, or establishing an e-commerce store, DomainDiscovery 
-            makes it easy to search, compare, and register domain names instantly.
-          </p>
-          <p className="text-sm sm:text-[15px] leading-relaxed mb-3 sm:mb-4" style={{ color: 'var(--text-secondary)' }}>
-            Our advanced domain search engine checks availability across 1,600+ domain extensions in real-time, 
-            showing you results as you type. With powerful AI-driven suggestions, bulk search capabilities, and 
-            comprehensive price comparison tools, we help you find available domains at the best prices.
-          </p>
-          <h3 className="text-xl sm:text-2xl font-bold mb-2.5 sm:mb-3 mt-5 sm:mt-6">
-            How to Choose the Right Domain Name
-          </h3>
-          <p className="text-sm sm:text-base leading-relaxed mb-3.5" style={{ color: 'var(--text-secondary)' }}>
-            Choosing the right domain name is crucial for your online success. Here are key factors to consider:
-          </p>
-          <ul className="list-disc list-inside space-y-1.5 sm:space-y-1.5 mb-4.5 sm:mb-5" style={{ color: 'var(--text-secondary)' }}>
-            <li><strong style={{ color: 'var(--text-primary)' }}>Keep it short and memorable</strong> - Aim for 6-14 characters for easy recall</li>
-            <li><strong style={{ color: 'var(--text-primary)' }}>Make it easy to spell</strong> - Avoid complex words or unusual spellings</li>
-            <li><strong style={{ color: 'var(--text-primary)' }}>Choose .com when possible</strong> - It&apos;s the most recognized and trusted extension</li>
-            <li><strong style={{ color: 'var(--text-primary)' }}>Avoid numbers and hyphens</strong> - They can cause confusion and typos</li>
-            <li><strong style={{ color: 'var(--text-primary)' }}>Make it brandable</strong> - Choose a name that reflects your brand identity</li>
-            <li><strong style={{ color: 'var(--text-primary)' }}>Check trademark availability</strong> - Ensure your domain doesn&apos;t infringe on existing trademarks</li>
-          </ul>
-          <h3 className="text-xl sm:text-2xl font-bold mb-2.5 sm:mb-3.5 mt-5 sm:mt-7">
-            Domain Extensions: Which TLD Should You Choose?
-          </h3>
-          <p className="text-sm sm:text-[15px] leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
-            While .com remains the most popular choice, modern TLDs like .ai, .io, .tech, and .app offer great 
-            alternatives for specific industries. Our domain extension tool helps you explore all options and find 
-            the perfect match for your website. Industry-specific extensions can help with SEO and immediately 
-            communicate your website&apos;s purpose to visitors.
-          </p>
-        </div>
-      </section>
-
-      <section className="max-w-4xl mx-auto px-3 sm:px-6 mb-4 sm:mb-7">
-        <div className={`p-3.5 sm:p-5 rounded-xl sm:rounded-2xl text-center ${
-          isLight
-            ? 'bg-gradient-to-br from-slate-50 to-white border border-slate-200 shadow-lg'
-            : 'bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10'
-        }`}>
-          <h2 className="text-lg sm:text-4xl font-black mb-1 sm:mb-3.5">
-            Ready to Find Your Perfect Domain?
-          </h2>
-          <p className="mb-2.5 sm:mb-6 max-w-2xl mx-auto text-[11px] sm:text-base" style={{ color: 'var(--text-tertiary)' }}>
-            Free to use · Real-time results · Best prices
-          </p>
-          <a
-            href="#top"
-            className={`inline-flex items-center gap-2 px-4 sm:px-7 py-2 sm:py-3.5 text-xs sm:text-base font-bold rounded-lg sm:rounded-xl transition-all ${
-              isLight
-                ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-lg shadow-slate-900/20'
-                : 'bg-white text-black hover:bg-white/90 shadow-lg shadow-white/10'
-            }`}
+      {/* ── Final CTA ───────────────────────────────────────── */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6">
+        <Reveal>
+          <div
+            className="relative overflow-hidden rounded-3xl px-6 py-12 sm:px-12 sm:py-16 text-center"
+            style={{
+              background: isLight
+                ? 'linear-gradient(135deg, #ffffff, #f8fafc)'
+                : 'linear-gradient(135deg, rgba(233,180,76,0.08), rgba(255,255,255,0.02))',
+              border: '1px solid var(--accent-border)',
+              boxShadow: 'var(--elev-gold)',
+            }}
           >
-            <Icons.Search />
-            Start Searching
-          </a>
-        </div>
+            <div
+              className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full blur-[100px]"
+              style={{ background: 'var(--accent-glow)' }}
+            />
+            <div className="relative z-10">
+              <div className="eyebrow mb-4">Start in seconds</div>
+              <h2 className="display-2 mb-4" style={{ color: 'var(--text-primary)' }}>
+                Your perfect domain is one search away
+              </h2>
+              <p className="mx-auto mb-8 max-w-xl text-[15px] sm:text-[17px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                Free to use, no account needed, real-time results across 1,600+ extensions. Find it before someone else does.
+              </p>
+              <a href="#top" className="btn-accent text-[15px]">
+                <Icons.Search />
+                Search domains now
+              </a>
+            </div>
+          </div>
+        </Reveal>
       </section>
     </div>
   );

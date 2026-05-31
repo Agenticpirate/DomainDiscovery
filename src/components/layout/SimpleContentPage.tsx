@@ -36,7 +36,7 @@ export function SimpleContentPage({
       <PageBackground variant="default" />
       <Navigation activeTool={activeTool} />
 
-      <main className="relative pt-20 sm:pt-24 pb-10 sm:pb-14">
+      <main className="relative pt-[4.75rem] sm:pt-24 pb-10 sm:pb-14">
         <section className="px-3 sm:px-6 pb-6 sm:pb-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight mb-3 sm:mb-4">

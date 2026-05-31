@@ -22,9 +22,11 @@ interface BrandableDomain {
 
 interface BrandableDomainFinderProps {
   onSelect?: (domain: string) => void;
+  /** Show the internal title + subtitle. Off by default since callers provide a page heading. */
+  showHeading?: boolean;
 }
 
-export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) {
+export function BrandableDomainFinder({ onSelect, showHeading = false }: BrandableDomainFinderProps) {
   const [industry, setIndustry] = useState('');
   const [style, setStyle] = useState<'modern' | 'classic' | 'playful' | 'professional'>('modern');
   const [length, setLength] = useState<'short' | 'medium' | 'any'>('short');
@@ -108,21 +110,27 @@ export function BrandableDomainFinder({ onSelect }: BrandableDomainFinderProps) 
     <div className={`glass-card p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
       <div className="mb-5">
         <div className="mb-2 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>
-            <Icons.Star />
-          </div>
-            <h3 className="text-lg font-bold">Find Brandable Domains</h3>
-          </div>
+          {showHeading ? (
+            <div className="flex items-center gap-3">
+              <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>
+                <Icons.Star />
+              </div>
+              <h3 className="text-lg font-bold">Find Brandable Domains</h3>
+            </div>
+          ) : (
+            <span />
+          )}
           <PreferredRegistrarSelect
             selectedRegistrar={selectedRegistrar}
             onSelectRegistrar={setSelectedRegistrar}
             label="Registrar"
           />
         </div>
-        <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-          Discover unique, memorable brandable domain names perfect for your business
-        </p>
+        {showHeading && (
+          <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+            Discover unique, memorable brandable domain names perfect for your business
+          </p>
+        )}
       </div>
 
       {/* Industry Input */}

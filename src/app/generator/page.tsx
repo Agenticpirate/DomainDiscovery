@@ -21,7 +21,7 @@ export default function GeneratorPage() {
       <Navigation activeTool="generator" />
 
       {/* Main Content */}
-      <main className="relative pt-14 sm:pt-24">
+      <main className="relative pt-[4.75rem] sm:pt-24">
         {/* Hero Section */}
         <section className="px-4 sm:px-6 pb-3 sm:pb-7">
           <div className="max-w-4xl mx-auto">

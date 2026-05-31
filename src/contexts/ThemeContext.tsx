@@ -18,13 +18,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true);
-    // Load theme from localStorage
+    // Sync React state with the theme the pre-paint bootstrap script already
+    // applied to <html> (saved choice → OS preference → dark). Reading the DOM
+    // class avoids a second source of truth and keeps state == painted theme.
     if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme') as Theme | null;
-      if (savedTheme) {
-        setThemeState(savedTheme);
-        document.documentElement.classList.toggle('light', savedTheme === 'light');
-      }
+      const domLight = document.documentElement.classList.contains('light');
+      const saved = localStorage.getItem('theme') as Theme | null;
+      const resolved: Theme = saved ?? (domLight ? 'light' : 'dark');
+      setThemeState(resolved);
+      document.documentElement.classList.toggle('light', resolved === 'light');
+      document.documentElement.style.colorScheme = resolved;
     }
   }, []);
 
@@ -33,6 +36,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== 'undefined') {
       localStorage.setItem('theme', newTheme);
       document.documentElement.classList.toggle('light', newTheme === 'light');
+      document.documentElement.style.colorScheme = newTheme;
     }
   };
 

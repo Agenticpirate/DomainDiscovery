@@ -17,7 +17,7 @@ export default function PremiumPage() {
       <Navigation activeTool="premium" />
 
       {/* Main Content */}
-      <main className="relative pt-20 sm:pt-24">
+      <main className="relative pt-[4.75rem] sm:pt-24">
         {/* Hero Section */}
         <section className="px-4 sm:px-6 pb-5 sm:pb-7">
           <div className="max-w-4xl mx-auto text-center">

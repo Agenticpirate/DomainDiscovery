@@ -1,5 +1,0 @@
-{
-  "/api/tld-prices/route": "app/api/tld-prices/route.js",
-  "/tools/compare/page": "app/tools/compare/page.js",
-  "/page": "app/page.js"
-}

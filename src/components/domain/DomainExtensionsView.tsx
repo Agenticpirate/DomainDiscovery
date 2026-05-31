@@ -69,28 +69,19 @@ export function DomainExtensionsView({ searchQuery = '' }: DomainExtensionsViewP
     setIsChecking(true);
 
     const domainsToCheck = EXTENSIONS_BASE_DATA.map(ext => `${cleanKeyword}${ext.tld}`);
-    
-    const batchSize = 50;
-    const results = new Map<string, { available: boolean; premium?: boolean }>();
-    
-    for (let i = 0; i < domainsToCheck.length; i += batchSize) {
-      const batch = domainsToCheck.slice(i, i + batchSize);
-      const batchResults = await checkDomainsAvailability(batch);
-      batchResults.forEach((value, key) => results.set(key, value));
-      
-      setExtensions(prev => prev.map(ext => {
-        const domain = `${cleanKeyword}${ext.tld}`;
-        const result = results.get(domain);
-        if (result) {
-          return { 
-            ...ext, 
-            available: result.available, 
-            checking: false 
-          };
-        }
-        return ext;
-      }));
-    }
+
+    // The availability API counts each request against a tight bulk rate limit
+    // (5/min). Send ONE request (it chunks server-side) instead of ~21 sequential
+    // batches, which would get 429'd and leave most extensions stuck "checking".
+    const results = await checkDomainsAvailability(domainsToCheck);
+
+    setExtensions(prev => prev.map(ext => {
+      const domain = `${cleanKeyword}${ext.tld}`;
+      const result = results.get(domain);
+      return result
+        ? { ...ext, available: result.available, checking: false }
+        : { ...ext, checking: false };
+    }));
 
     setIsChecking(false);
   }, []);
