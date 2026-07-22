@@ -1,0 +1,93 @@
+{
+  "tld": ".xn--lgbbat1ad8j",
+  "slug": "xn--lgbbat1ad8j",
+  "title": "About .xn--lgbbat1ad8j domains",
+  "delegationTitle": "Delegation Record for .\u0627\u0644\u062c\u0632\u0627\u0626\u0631",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code DZ",
+  "designation": "Country-code top-level domain designated for Algeria",
+  "sponsor": "CERIST",
+  "sponsorDetail": "CERIST\nRue des Trois Freres Aissiou\nBen-Aknoun Algiers 16035\nAlgeria",
+  "administrativeContact": "Aouaouche El-Maouhab",
+  "technicalContact": "Aouaouche El-Maouhab",
+  "registryUrl": "http://www.nic.dz",
+  "whoisServer": "whois.nic.dz",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "idn1.nic.dz",
+      "addresses": [
+        "193.194.64.243"
+      ]
+    },
+    {
+      "host": "idn2.nic.dz",
+      "addresses": [
+        "213.179.160.68"
+      ]
+    }
+  ],
+  "about": ".XN--LGBBAT1AD8J is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Algeria. The IANA root zone lists the registry manager as CERIST. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--lgbbat1ad8j.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:07Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--lgbbat1ad8j",
+    "algeria",
+    "cctld",
+    "cerist",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "letter",
+    "level",
+    "local business",
+    "regional brands",
+    "top",
+    "two",
+    "xn--lgbbat1ad8j"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--lgbbat1ad8j is a Country-code top-level domain designated for two-letter country code DZ. Managed by CERIST.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

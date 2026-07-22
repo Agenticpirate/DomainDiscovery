@@ -1,0 +1,103 @@
+{
+  "tld": ".bradesco",
+  "slug": "bradesco",
+  "title": "About .bradesco domains",
+  "delegationTitle": "Delegation Record for .BRADESCO",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Banco Bradesco S.A.",
+  "sponsorDetail": "Banco Bradesco S.A.\nAvenida Yara SN - Cidade de Deus - Pr\u00e9dio Rubi - Osasco\nS\u00e3o Paulo SP 06029-900\nBrazil",
+  "administrativeContact": "Admin Contact",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.nic.bradesco/",
+  "whoisServer": "whois.nic.bradesco",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.bradesco",
+      "addresses": [
+        "65.22.124.2",
+        "2a01:8840:7a:0:0:0:0:2"
+      ]
+    },
+    {
+      "host": "a2.nic.bradesco",
+      "addresses": [
+        "65.22.127.2",
+        "2a01:8840:7d:0:0:0:0:2"
+      ]
+    },
+    {
+      "host": "b0.nic.bradesco",
+      "addresses": [
+        "65.22.125.2",
+        "2a01:8840:7b:0:0:0:0:2"
+      ]
+    },
+    {
+      "host": "c0.nic.bradesco",
+      "addresses": [
+        "65.22.126.2",
+        "2a01:8840:7c:0:0:0:0:2"
+      ]
+    }
+  ],
+  "about": ".BRADESCO is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .BRADESCO is listed by IANA as Banco Bradesco S.A.. Anyone can typically register a .BRADESCO name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nBanco Bradesco S.A. is a Brazilian financial services company headquartered in Osasco, in the state of S\u00e3o Paulo, Brazil. It is the third largest banking institution by assets in Brazil and Latin America. It is also one of fifty most valuable banks in the world. The bank is listed at the B3 in S\u00e3o Paulo, where it is part of the \u00cdndice Bovespa, in the New York Stock Exchange and in the Madrid Stock Exchange.\nIts primary financial services revolve around commercial banking, offering Internet Banking, insurance, pension plans, annuities, credit card services (including football club affinity cards for fans) for customers, and savings bonds. The bank also provides personal and commercial loans, as well as leasing services.\nBradesco has 5,314 branches, 4,834 service branches and 38,430 banking correspondents. Bradesco customers can also use 34,859 automatic teller machines and 12,975 ATMs of the Banco24Horas, a Brazilian third-party ATM network. Bradesco is a pioneer in using the ATM biometric reading system in Brazil, which enables customers to be identified using the vascular pattern of their hands, serving as a complementary password, available at its 31,474 own ATMs and 5,549 ATMs of Banco24Horas.\nInternationally, Bradesco have one branch in New York, two branches in Grand Cayman, and banking or financial subsidiaries or affiliates in London, Luxembourg, Hong Kong, Buenos Aires, Grand Cayman, Tokyo and Mexico.\nBanco Bradesco is constantly expanding and has recently acquired Banco do Estado do Maranh\u00e3o, Banco Mercantil de S\u00e3o Paulo, Banco Ibi S.A., and the Brazilian operations of Banco Bilbao Vizcaya Argentaria (BBVA), J.P. Morgan Fleming Asset Management, American Express and HSBC Brasil. Banco Bradesco grew its value by more than 50 percent compared with 2017.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bradesco.html",
+  "wikipedia": "Banco Bradesco S.A. is a Brazilian financial services company headquartered in Osasco, in the state of S\u00e3o Paulo, Brazil. It is the third largest banking institution by assets in Brazil and Latin America. It is also one of fifty most valuable banks in the world. The bank is listed at the B3 in S\u00e3o Paulo, where it is part of the \u00cdndice Bovespa, in the New York Stock Exchange and in the Madrid Stock Exchange.\nIts primary financial services revolve around commercial banking, offering Internet Banking, insurance, pension plans, annuities, credit card services (including football club affinity cards for fans) for customers, and savings bonds. The bank also provides personal and commercial loans, as well as leasing services.\nBradesco has 5,314 branches, 4,834 service branches and 38,430 banking correspondents. Bradesco customers can also use 34,859 automatic teller machines and 12,975 ATMs of the Banco24Horas, a Brazilian third-party ATM network. Bradesco is a pioneer in using the ATM biometric reading system in Brazil, which enables customers to be identified using the vascular pattern of their hands, serving as a complementary password, available at its 31,474 own ATMs and 5,549 ATMs of Banco24Horas.\nInternationally, Bradesco have one branch in New York, two branches in Grand Cayman, and banking or financial subsidiaries or affiliates in London, Luxembourg, Hong Kong, Buenos Aires, Grand Cayman, Tokyo and Mexico.\nBanco Bradesco is constantly expanding and has recently acquired Banco do Estado do Maranh\u00e3o, Banco Mercantil de S\u00e3o Paulo, Banco Ibi S.A., and the Brazilian operations of Banco Bilbao Vizcaya Argentaria (BBVA), J.P. Morgan Fleming Asset Management, American Express and HSBC Brasil. Banco Bradesco grew its value by more than 50 percent compared with 2017.",
+  "scrapedAt": "2026-07-21T21:36:27Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".bradesco",
+    "banco",
+    "bradesco",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".bradesco is a Generic top-level domain. Managed by Banco Bradesco S.A..",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -1,0 +1,114 @@
+{
+  "tld": ".nagoya",
+  "slug": "nagoya",
+  "title": "About .nagoya domains",
+  "delegationTitle": "Delegation Record for .NAGOYA",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "GMO Registry, Inc.",
+  "sponsorDetail": "GMO Registry, Inc.\n26-1 Sakuragaoka-cho\nShibuya-ku Tokyo\nJapan",
+  "administrativeContact": "Representative Director and CEO",
+  "technicalContact": "Director",
+  "registryUrl": "http://www.gmo-registry.com/en/",
+  "whoisServer": "whois.nic.nagoya",
+  "rdapServer": "https://rdap.gmoregistry.net/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.gmoregistry.net",
+      "addresses": [
+        "37.209.192.4",
+        "2001:dcd:1:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "b.gmoregistry.net",
+      "addresses": [
+        "37.209.194.4",
+        "2001:dcd:2:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "k.gmoregistry.net",
+      "addresses": [
+        "37.209.196.4"
+      ]
+    },
+    {
+      "host": "l.gmoregistry.net",
+      "addresses": [
+        "37.209.198.4",
+        "2001:dcd:4:0:0:0:0:4"
+      ]
+    }
+  ],
+  "about": ".NAGOYA is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .NAGOYA is listed by IANA as GMO Registry, Inc.. Anyone can typically register a .NAGOYA name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.nagoya is the top-level domain for Nagoya City in the Internet's Domain Name System (DNS). The domain is operated by GMO Registry. On 20 February 2014, ICANN and GMO signed the registry agreement, under which GMO Domain Registry operates the .nagoya domain. Like other top-level domains, .nagoya is not geographically restricted to those in Nagoya and domains with the TLD can be used by anyone worldwide.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/nagoya.html",
+  "wikipedia": ".nagoya is the top-level domain for Nagoya City in the Internet's Domain Name System (DNS). The domain is operated by GMO Registry. On 20 February 2014, ICANN and GMO signed the registry agreement, under which GMO Domain Registry operates the .nagoya domain. Like other top-level domains, .nagoya is not geographically restricted to those in Nagoya and domains with the TLD can be used by anyone worldwide.",
+  "scrapedAt": "2026-07-21T21:46:01Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".nagoya",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "nagoya",
+    "registry",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 32,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$13.74",
+      "value": 13.74
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$13.74",
+      "value": 13.74
+    },
+    "sourceUrl": "https://tld-list.com/tld/nagoya"
+  },
+  "summary": ".nagoya is a Generic top-level domain. Managed by GMO Registry, Inc..",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

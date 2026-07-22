@@ -1,0 +1,118 @@
+{
+  "tld": ".tube",
+  "slug": "tube",
+  "title": "About .tube domains",
+  "delegationTitle": "Delegation Record for .TUBE",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Latin American Telecom LLC",
+  "sponsorDetail": "Latin American Telecom LLC\n420 Fort Duquesne Boulevard, Suite 1900\nPittsburgh PA 15222\nUnited States of America (the)",
+  "administrativeContact": "CEO",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://get.tube",
+  "whoisServer": "whois.nic.tube",
+  "rdapServer": "https://rdap.nic.tube/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "anycast10.irondns.net",
+      "addresses": [
+        "195.253.64.12",
+        "2a01:5b0:4:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast23.irondns.net",
+      "addresses": [
+        "195.253.65.11",
+        "2a01:5b0:5:0:0:0:0:b"
+      ]
+    },
+    {
+      "host": "anycast24.irondns.net",
+      "addresses": [
+        "195.253.65.12",
+        "2a01:5b0:5:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast9.irondns.net",
+      "addresses": [
+        "195.253.64.11",
+        "2a01:5b0:4:0:0:0:0:b"
+      ]
+    }
+  ],
+  "about": ".TUBE is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .TUBE is listed by IANA as Latin American Telecom LLC. Anyone can typically register a .TUBE name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/tube.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:51:31Z",
+  "categories": [
+    "creative"
+  ],
+  "useCases": [
+    "Portfolios",
+    "Agencies",
+    "Content creators",
+    "Media"
+  ],
+  "keywords": [
+    ".tube",
+    "agencies",
+    "american",
+    "content creators",
+    "creative",
+    "domain",
+    "generic",
+    "gtld",
+    "latin",
+    "level",
+    "portfolios",
+    "telecom",
+    "top",
+    "tube"
+  ],
+  "primaryCategory": "creative",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 39,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$6.11",
+      "value": 6.11
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$21.59",
+      "value": 21.59
+    },
+    "sourceUrl": "https://tld-list.com/tld/tube"
+  },
+  "summary": ".tube is a Generic top-level domain. Managed by Latin American Telecom LLC.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

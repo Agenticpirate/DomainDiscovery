@@ -1,0 +1,144 @@
+{
+  "tld": ".biz",
+  "slug": "biz",
+  "title": "About .biz domains",
+  "delegationTitle": "Delegation Record for .BIZ",
+  "type": "gTLD",
+  "typeLabel": "Restricted generic top-level domain",
+  "designation": "Restricted generic top-level domain",
+  "sponsor": "Registry Services, LLC",
+  "sponsorDetail": "Registry Services, LLC\n100 S. Mill Ave, Suite 1600\nTempe AZ 85281\nUnited States of America (the)",
+  "administrativeContact": "IANA Contact",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://www.nic.biz",
+  "whoisServer": "whois.nic.biz",
+  "rdapServer": "https://rdap.nic.biz/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.gtld.biz",
+      "addresses": [
+        "156.154.124.65",
+        "2001:502:ad09:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "b.gtld.biz",
+      "addresses": [
+        "156.154.125.65"
+      ]
+    },
+    {
+      "host": "c.gtld.biz",
+      "addresses": [
+        "156.154.127.65"
+      ]
+    },
+    {
+      "host": "m.gtld.biz",
+      "addresses": [
+        "204.74.105.1",
+        "2610:a1:3180:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "n.gtld.biz",
+      "addresses": [
+        "204.74.107.1",
+        "2610:a1:3280:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "w.gtld.biz",
+      "addresses": [
+        "37.209.192.13",
+        "2001:dcd:1:0:0:0:0:13"
+      ]
+    },
+    {
+      "host": "x.gtld.biz",
+      "addresses": [
+        "37.209.194.13",
+        "2001:dcd:2:0:0:0:0:13"
+      ]
+    },
+    {
+      "host": "y.gtld.biz",
+      "addresses": [
+        "37.209.196.13",
+        "2001:dcd:3:0:0:0:0:13"
+      ]
+    }
+  ],
+  "about": ".BIZ is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .BIZ is listed by IANA as Registry Services, LLC. Anyone can typically register a .BIZ name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.biz is a generic top-level domain (gTLD) in the Domain Name System of the Internet. It is intended for registration of domains to be used by businesses. The name is a phonetic spelling of the first syllable of business.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/biz.html",
+  "wikipedia": ".biz is a generic top-level domain (gTLD) in the Domain Name System of the Internet. It is intended for registration of domains to be used by businesses. The name is a phonetic spelling of the first syllable of business.",
+  "scrapedAt": "2026-07-21T21:33:22Z",
+  "categories": [
+    "business"
+  ],
+  "useCases": [
+    "Companies",
+    "Agencies",
+    "Professional services",
+    "B2B"
+  ],
+  "keywords": [
+    ".biz",
+    "agencies",
+    "biz",
+    "business",
+    "companies",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "professional services",
+    "registry",
+    "restricted",
+    "services",
+    "top"
+  ],
+  "primaryCategory": "business",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 53,
+    "cheapestRegistration": {
+      "registrar": "GoDaddy",
+      "price": "$2.17",
+      "value": 2.17
+    },
+    "cheapestRenewal": {
+      "registrar": "Cloudflare",
+      "price": "$13.68",
+      "value": 13.68
+    },
+    "sourceUrl": "https://tld-list.com/tld/biz"
+  },
+  "summary": ".biz is a Restricted generic top-level domain. Managed by Registry Services, LLC.",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

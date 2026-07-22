@@ -1,10 +1,17 @@
+import type { Metadata } from 'next';
 import { SimpleContentPage } from '@/components/layout/SimpleContentPage';
+
+export const metadata: Metadata = {
+  title: 'Terms of Use — DomainDiscovery',
+  description:
+    'Terms governing use of DomainDiscovery domain name search, availability tools, WHOIS, and related research features.',
+};
 
 export default function TermsPage() {
   return (
     <SimpleContentPage
       title="Terms of Use"
-      description="General terms governing access to the website and the use of domain search and research tools."
+      description="General terms governing access to DomainDiscovery and use of domain search and research tools."
       sections={[
         {
           heading: 'Use of the service',

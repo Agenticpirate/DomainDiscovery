@@ -1,0 +1,153 @@
+{
+  "tld": ".qa",
+  "slug": "qa",
+  "title": "About .qa domains",
+  "delegationTitle": "Delegation Record for .QA",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Qatar",
+  "sponsor": "Communications Regulatory Authority",
+  "sponsorDetail": "Communications Regulatory Authority\nAl Nasr Tower B.\nCorniche Road\nDoha 23404\nQatar",
+  "administrativeContact": "Qatar Domains Registry Admin",
+  "technicalContact": "Qatar Domains Registry Tech",
+  "registryUrl": "https://www.cra.gov.qa/",
+  "whoisServer": "whois.registry.qa",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.registry.qa",
+      "addresses": [
+        "178.23.16.104"
+      ]
+    },
+    {
+      "host": "b.registry.qa",
+      "addresses": [
+        "178.23.17.104"
+      ]
+    },
+    {
+      "host": "c.registry.qa",
+      "addresses": [
+        "212.77.192.10"
+      ]
+    },
+    {
+      "host": "d.registry.qa",
+      "addresses": [
+        "212.77.192.13"
+      ]
+    },
+    {
+      "host": "e.registry.qa",
+      "addresses": [
+        "178.23.20.60"
+      ]
+    },
+    {
+      "host": "f.registry.qa",
+      "addresses": [
+        "37.209.192.6",
+        "2001:dcd:1:0:0:0:0:6"
+      ]
+    },
+    {
+      "host": "g.registry.qa",
+      "addresses": [
+        "37.209.194.6",
+        "2001:dcd:2:0:0:0:0:6"
+      ]
+    },
+    {
+      "host": "h.registry.qa",
+      "addresses": [
+        "178.23.22.60",
+        "2a0c:a640:1:22:0:0:0:60"
+      ]
+    },
+    {
+      "host": "i.registry.qa",
+      "addresses": [
+        "204.61.216.62",
+        "2001:500:14:6062:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".QA is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Qatar. The IANA root zone lists the registry manager as Communications Regulatory Authority. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.qa is the Internet country code top-level domain (ccTLD) for State of Qatar.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/qa.html",
+  "wikipedia": ".qa is the Internet country code top-level domain (ccTLD) for State of Qatar.",
+  "scrapedAt": "2026-07-21T21:48:00Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".qa",
+    "authority",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "qa",
+    "qatar",
+    "regional brands",
+    "regulatory",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 19,
+    "cheapestRegistration": {
+      "registrar": "Hexonet",
+      "price": "$24.95",
+      "value": 24.95
+    },
+    "cheapestRenewal": {
+      "registrar": "Hexonet",
+      "price": "$24.95",
+      "value": 24.95
+    },
+    "sourceUrl": "https://tld-list.com/tld/qa"
+  },
+  "summary": ".qa is a Country-code top-level domain. Managed by Communications Regulatory Authority.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

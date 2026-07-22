@@ -1,0 +1,115 @@
+{
+  "tld": ".tel",
+  "slug": "tel",
+  "title": "About .tel domains",
+  "delegationTitle": "Delegation Record for .TEL",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "Telnames Ltd.",
+  "sponsorDetail": "Telnames Ltd.\n16 Charles II Street\nLondon SW1Y 4NW\nUnited Kingdom of Great Britain and Northern Ireland (the)",
+  "administrativeContact": "TLD Administrative Contact",
+  "technicalContact": "ironDNS Support",
+  "registryUrl": "http://www.nic.tel",
+  "whoisServer": "whois.nic.tel",
+  "rdapServer": "https://rdap.nic.tel/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "anycast10.irondns.net",
+      "addresses": [
+        "195.253.64.12",
+        "2a01:5b0:4:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast23.irondns.net",
+      "addresses": [
+        "195.253.65.11",
+        "2a01:5b0:5:0:0:0:0:b"
+      ]
+    },
+    {
+      "host": "anycast24.irondns.net",
+      "addresses": [
+        "195.253.65.12",
+        "2a01:5b0:5:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast9.irondns.net",
+      "addresses": [
+        "195.253.64.11",
+        "2a01:5b0:4:0:0:0:0:b"
+      ]
+    }
+  ],
+  "about": ".TEL is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\nThe domain name .tel is a top-level domain (TLD) in the Domain Name System (DNS) of the Internet. It was approved by ICANN as a sponsored top-level domain, and is operated by Telnames. The domain's purpose is to provide a single name space for Internet communications services.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/tel.html",
+  "wikipedia": "The domain name .tel is a top-level domain (TLD) in the Domain Name System (DNS) of the Internet. It was approved by ICANN as a sponsored top-level domain, and is operated by Telnames. The domain's purpose is to provide a single name space for Internet communications services.",
+  "scrapedAt": "2026-07-21T21:50:50Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".tel",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "level",
+    "sponsored",
+    "stld",
+    "tel",
+    "telnames",
+    "top"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 39,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$9.49",
+      "value": 9.49
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$9.49",
+      "value": 9.49
+    },
+    "sourceUrl": "https://tld-list.com/tld/tel"
+  },
+  "summary": ".tel is a Sponsored top-level domain. Managed by Telnames Ltd..",
+  "wikiCheckedAt": "2026-07-22T04:23:22Z",
+  "wikiEnrichedAt": "2026-07-22T04:23:22Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

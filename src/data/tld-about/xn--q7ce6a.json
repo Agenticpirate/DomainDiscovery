@@ -1,0 +1,115 @@
+{
+  "tld": ".xn--q7ce6a",
+  "slug": "xn--q7ce6a",
+  "title": "About .xn--q7ce6a domains",
+  "delegationTitle": "Delegation Record for .\u0ea5\u0eb2\u0ea7",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code LA",
+  "designation": "Country-code top-level domain designated for None",
+  "sponsor": "Lao National Internet Center (LANIC), Ministry of Technology and Communications",
+  "sponsorDetail": "Lao National Internet Center (LANIC), Ministry of Technology and Communications\nLane Xang Avenue, Chanthaboury\nVientiane 01000\nLao People's Democratic Republic (the)",
+  "administrativeContact": "Deputy Director General of LANIC",
+  "technicalContact": "Director of ccTLD .LA Division",
+  "registryUrl": "https://www.la",
+  "whoisServer": "whois.nic.la",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.xn--q7ce6a.centralnic-dns.com",
+      "addresses": [
+        "194.169.218.17",
+        "2001:67c:13cc:0:0:0:1:17"
+      ]
+    },
+    {
+      "host": "b.xn--q7ce6a.centralnic-dns.com",
+      "addresses": [
+        "185.24.64.17",
+        "2a04:2b00:13cc:0:0:0:1:17"
+      ]
+    },
+    {
+      "host": "c.xn--q7ce6a.centralnic-dns.com",
+      "addresses": [
+        "212.18.248.17",
+        "2a04:2b00:13ee:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "d.xn--q7ce6a.centralnic-dns.com",
+      "addresses": [
+        "212.18.249.17",
+        "2a04:2b00:13ff:0:0:0:0:17"
+      ]
+    }
+  ],
+  "about": ".XN--Q7CE6A is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for None. The IANA root zone lists the registry manager as Lao National Internet Center (LANIC), Ministry of Technology and Communications. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--q7ce6a.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:43Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--q7ce6a",
+    "cctld",
+    "center",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "internet",
+    "lanic",
+    "letter",
+    "level",
+    "local business",
+    "ministry",
+    "national",
+    "none",
+    "regional brands",
+    "technology",
+    "top",
+    "two",
+    "xn--q7ce6a"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--q7ce6a is a Country-code top-level domain designated for two-letter country code LA. Managed by Lao National Internet Center (LANIC), Ministry of Technology and Communications.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

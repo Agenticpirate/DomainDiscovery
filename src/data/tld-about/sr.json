@@ -1,0 +1,114 @@
+{
+  "tld": ".sr",
+  "slug": "sr",
+  "title": "About .sr domains",
+  "delegationTitle": "Delegation Record for .SR",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Suriname",
+  "sponsor": "Telesur",
+  "sponsorDetail": "Telesur\nHeiligenweg 14\nP.O. Box 1839\nParamaribo\nSuriname",
+  "administrativeContact": "John Culbard",
+  "technicalContact": "Furyal Naarden",
+  "registryUrl": "https://isp.datasur.sr/",
+  "whoisServer": "whois.sr",
+  "rdapServer": "https://whois.sr/rdap/",
+  "registrationDate": "1991-09-03",
+  "recordUpdated": "2026-04-17",
+  "nameServers": [
+    {
+      "host": "ns1.nic.sr",
+      "addresses": [
+        "168.195.219.210",
+        "2803:ff40:a251:0:168:195:219:2"
+      ]
+    },
+    {
+      "host": "ns2.nic.sr",
+      "addresses": [
+        "168.195.216.214",
+        "2803:ff40:a000:2501:168:195:216:2"
+      ]
+    },
+    {
+      "host": "ns3.nic.sr",
+      "addresses": [
+        "45.83.205.134",
+        "2a0f:ff40:100:3112:2d53:cd87:0:0"
+      ]
+    }
+  ],
+  "about": ".SR is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Suriname. The IANA root zone lists the registry manager as Telesur. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sr is the Internet country code top-level domain (ccTLD) for Suriname. This top-level domain is operated by Telesur, the local telecom company.\nIt was also used in the Republic of Srpska and former Serbian Krajina to denote \"Srpska Republika\" under the .rs.sr subdomain.\nIt is considered to be a generic top-level domain by Google.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sr.html",
+  "wikipedia": ".sr is the Internet country code top-level domain (ccTLD) for Suriname. This top-level domain is operated by Telesur, the local telecom company.\nIt was also used in the Republic of Srpska and former Serbian Krajina to denote \"Srpska Republika\" under the .rs.sr subdomain.\nIt is considered to be a generic top-level domain by Google.",
+  "scrapedAt": "2026-07-21T21:50:07Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sr",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "sr",
+    "suriname",
+    "telesur",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 10,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$39.99",
+      "value": 39.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$42.99",
+      "value": 42.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/sr"
+  },
+  "summary": ".sr is a Country-code top-level domain. Managed by Telesur.",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "wikiEnrichedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

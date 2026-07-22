@@ -26,7 +26,7 @@ export function DomainSearchBar({
   const isLight = theme === 'light';
 
   return (
-    <div className={`glass-card p-3 ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
+    <div className={`glass-card shine-border no-lift p-3 ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
       <div className="flex items-center gap-3">
         <div className="relative flex-grow">
           <div className={`absolute left-4 top-1/2 -translate-y-1/2 ${isLight ? 'text-slate-400' : 'text-white/30'}`}>

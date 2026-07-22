@@ -1,0 +1,117 @@
+{
+  "tld": ".abc",
+  "slug": "abc",
+  "title": "About .abc domains",
+  "delegationTitle": "Delegation Record for .ABC",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Disney Enterprises, Inc.",
+  "sponsorDetail": "Disney Enterprises, Inc.\n500 South Buena Vista Street\nBurbank CA 91521\nUnited States of America (the)",
+  "administrativeContact": "Executive Director of Technology",
+  "technicalContact": "Howard Eland, Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://abc.com",
+  "whoisServer": "whois.nic.abc",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "v0n0.nic.abc",
+      "addresses": [
+        "65.22.104.28",
+        "2a01:8840:66:0:0:0:0:28"
+      ]
+    },
+    {
+      "host": "v0n1.nic.abc",
+      "addresses": [
+        "65.22.105.28",
+        "2a01:8840:67:0:0:0:0:28"
+      ]
+    },
+    {
+      "host": "v0n2.nic.abc",
+      "addresses": [
+        "65.22.106.28",
+        "2a01:8840:68:0:0:0:0:28"
+      ]
+    },
+    {
+      "host": "v0n3.nic.abc",
+      "addresses": [
+        "161.232.30.28",
+        "2a01:8840:106:0:0:0:0:28"
+      ]
+    },
+    {
+      "host": "v2n0.nic.abc",
+      "addresses": [
+        "65.22.107.28",
+        "2a01:8840:69:0:0:0:0:28"
+      ]
+    },
+    {
+      "host": "v2n1.nic.abc",
+      "addresses": [
+        "161.232.31.28",
+        "2a01:8840:107:0:0:0:0:28"
+      ]
+    }
+  ],
+  "about": ".ABC is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .ABC is listed by IANA as Disney Enterprises, Inc.. Anyone can typically register a .ABC name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.abc is the name of several file extensions:.abc (ActionScript), or ActionScript Byte Code, used in virtual machines\n.abc (Alembic), a computer graphics file format\n.abc (Clean), an intermediate compiling language used in Clean\n.abc, a language for notating music using ASCII characters",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/abc.html",
+  "wikipedia": ".abc is the name of several file extensions:.abc (ActionScript), or ActionScript Byte Code, used in virtual machines\n.abc (Alembic), a computer graphics file format\n.abc (Clean), an intermediate compiling language used in Clean\n.abc, a language for notating music using ASCII characters",
+  "scrapedAt": "2026-07-21T21:33:57Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".abc",
+    "abc",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "disney",
+    "domain",
+    "enterprises",
+    "generic",
+    "gtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".abc is a Generic top-level domain. Managed by Disney Enterprises, Inc..",
+  "wikiEnrichedAt": "2026-07-22T04:13:35Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -1,0 +1,141 @@
+{
+  "tld": ".ps",
+  "slug": "ps",
+  "title": "About .ps domains",
+  "delegationTitle": "Delegation Record for .PS",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Palestinian Territory, Occupied",
+  "sponsor": "Ministry of Telecommunications & Information Technology, Government Computer Center",
+  "sponsorDetail": "Ministry of Telecommunications & Information Technology, Government Computer Center\nAl-Irsal Street.\nRamallah 674\nPalestine, State of",
+  "administrativeContact": "MTIT Representative, PNINA Chairman",
+  "technicalContact": "Technical Contact",
+  "registryUrl": "http://www.nic.ps",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "bilal.pnina.ps",
+      "addresses": [
+        "168.119.39.120"
+      ]
+    },
+    {
+      "host": "fork.sth.dnsnode.net",
+      "addresses": [
+        "77.72.229.254",
+        "2a01:3f0:0:306:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns1.pnina.ps",
+      "addresses": [
+        "194.6.225.20"
+      ]
+    },
+    {
+      "host": "ps-ns.anycast.pch.net",
+      "addresses": [
+        "204.61.216.29",
+        "2001:500:14:6029:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ps.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.105",
+        "2001:67c:e0:0:0:0:0:105"
+      ]
+    },
+    {
+      "host": "rip.psg.com",
+      "addresses": [
+        "147.28.0.39",
+        "2001:418:1:0:0:0:0:39"
+      ]
+    }
+  ],
+  "about": ".PS is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Palestinian Territory, Occupied. The IANA root zone lists the registry manager as Ministry of Telecommunications & Information Technology, Government Computer Center. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ps is the Internet country code top-level domain officially assigned to Palestine.\nIt is administered by the Palestinian National Internet Naming Authority (PNINA).\nRegistrations are processed by certified registrars.\nThe Internationalized country code top-level domain for the State of Palestine is .\u0641\u0644\u0633\u0637\u064a\u0646, which is represented as .xn--ygbi2ammx in Punycode.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ps.html",
+  "wikipedia": ".ps is the Internet country code top-level domain officially assigned to Palestine.\nIt is administered by the Palestinian National Internet Naming Authority (PNINA).\nRegistrations are processed by certified registrars.\nThe Internationalized country code top-level domain for the State of Palestine is .\u0641\u0644\u0633\u0637\u064a\u0646, which is represented as .xn--ygbi2ammx in Punycode.",
+  "scrapedAt": "2026-07-21T21:47:55Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ps",
+    "cctld",
+    "center",
+    "code",
+    "computer",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "government",
+    "information",
+    "level",
+    "local business",
+    "ministry",
+    "occupied",
+    "palestinian",
+    "ps",
+    "regional brands",
+    "technology",
+    "telecommunications",
+    "territory",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 15,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$56.99",
+      "value": 56.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$57.00",
+      "value": 57.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/ps"
+  },
+  "summary": ".ps is a Country-code top-level domain. Managed by Ministry of Telecommunications & Information Technology, Government Computer Center.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

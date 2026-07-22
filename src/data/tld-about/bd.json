@@ -1,0 +1,123 @@
+{
+  "tld": ".bd",
+  "slug": "bd",
+  "title": "About .bd domains",
+  "delegationTitle": "Delegation Record for .BD",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Bangladesh",
+  "sponsor": "Posts and Telecommunications Division",
+  "sponsorDetail": "Posts and Telecommunications Division\nMinistry of Posts, Telecommunications and Information Technology, Government of the People's Republic of Bangladesh\nAbdul Goni Road\nDhaka 1000\nBangladesh",
+  "administrativeContact": "Deputy Secretary",
+  "technicalContact": "Deputy General Manager (Domain)",
+  "registryUrl": "https://bdia.btcl.com.bd/",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1999-05-20",
+  "recordUpdated": "2025-09-01",
+  "nameServers": [
+    {
+      "host": "bd-ns.anycast.pch.net",
+      "addresses": [
+        "204.61.216.108",
+        "2001:500:14:6108:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "dns.bd",
+      "addresses": [
+        "123.49.12.112",
+        "2407:5000:88:5:0:0:0:3"
+      ]
+    },
+    {
+      "host": "jamuna.btcl.net.bd",
+      "addresses": [
+        "203.112.194.231",
+        "2407:5000:88:4:0:0:0:231"
+      ]
+    },
+    {
+      "host": "surma.btcl.net.bd",
+      "addresses": [
+        "203.112.194.232",
+        "2407:5000:88:4:0:0:0:232"
+      ]
+    }
+  ],
+  "about": ".BD is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Bangladesh. The IANA root zone lists the registry manager as Posts and Telecommunications Division. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.bd is the Internet country code top-level domain (ccTLD) for Bangladesh. It is administered by the Ministry of Posts, Telecommunications and Information Technology.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bd.html",
+  "wikipedia": ".bd is the Internet country code top-level domain (ccTLD) for Bangladesh. It is administered by the Ministry of Posts, Telecommunications and Information Technology.",
+  "scrapedAt": "2026-07-21T21:35:41Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".bd",
+    "bangladesh",
+    "bd",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "division",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "posts",
+    "regional brands",
+    "telecommunications",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 4,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$79.99",
+      "value": 79.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$79.99",
+      "value": 79.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/bd"
+  },
+  "summary": ".bd is a Country-code top-level domain. Managed by Posts and Telecommunications Division.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

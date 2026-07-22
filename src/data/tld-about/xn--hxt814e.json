@@ -1,0 +1,122 @@
+{
+  "tld": ".xn--hxt814e",
+  "slug": "xn--hxt814e",
+  "title": "About .xn--hxt814e domains",
+  "delegationTitle": "Delegation Record for .\u7f51\u5e97",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Zodiac Taurus Ltd.",
+  "sponsorDetail": "Zodiac Taurus Ltd.\nBlock A Unit 406, Horizon International Tower No. 6 Zhichun Road\nHaidian District\nBeijing 100088\nChina",
+  "administrativeContact": "CEO",
+  "technicalContact": "Wendy Yang",
+  "registryUrl": "http://www.wangdian.wang",
+  "whoisServer": "whois.gtld.zdns.cn",
+  "rdapServer": "https://rdap.zdnsgtld.com/xn--hxt814e",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.zdnscloud.cn",
+      "addresses": [
+        "203.99.24.1"
+      ]
+    },
+    {
+      "host": "b.zdnscloud.cn",
+      "addresses": [
+        "203.99.25.1"
+      ]
+    },
+    {
+      "host": "c.zdnscloud.com",
+      "addresses": [
+        "203.99.26.1"
+      ]
+    },
+    {
+      "host": "d.zdnscloud.com",
+      "addresses": [
+        "203.99.27.1"
+      ]
+    },
+    {
+      "host": "f.zdnscloud.cn",
+      "addresses": [
+        "116.169.54.111"
+      ]
+    },
+    {
+      "host": "g.zdnscloud.com",
+      "addresses": [
+        "223.72.199.37"
+      ]
+    },
+    {
+      "host": "i.zdnscloud.cn",
+      "addresses": [
+        "2401:8d00:1:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "j.zdnscloud.com",
+      "addresses": [
+        "2401:8d00:2:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".XN--HXT814E is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--HXT814E is listed by IANA as Zodiac Taurus Ltd.. Anyone can typically register a .XN--HXT814E name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--hxt814e.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:51Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--hxt814e",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "level",
+    "taurus",
+    "top",
+    "xn--hxt814e",
+    "zodiac"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--hxt814e is a Generic top-level domain. Managed by Zodiac Taurus Ltd..",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

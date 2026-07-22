@@ -1,0 +1,95 @@
+{
+  "tld": ".mh",
+  "slug": "mh",
+  "title": "About .mh domains",
+  "delegationTitle": "Delegation Record for .MH",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Marshall Islands",
+  "sponsor": "Office of the Cabinet",
+  "sponsorDetail": "Office of the Cabinet\nP.O. Box 2\nMajuro MH 96960\nMarshall Islands (the)",
+  "administrativeContact": "Secretary, Ministry of Transportation and Communications",
+  "technicalContact": "Chief Technical Officer",
+  "registryUrl": "http://www.nic.net.mh/",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1996-08-16",
+  "recordUpdated": "2013-08-03",
+  "nameServers": [
+    {
+      "host": "ns.amarshallinc.com",
+      "addresses": [
+        "71.163.249.97"
+      ]
+    },
+    {
+      "host": "ns.ntamar.net",
+      "addresses": [
+        "117.103.88.33"
+      ]
+    }
+  ],
+  "about": ".MH is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Marshall Islands. The IANA root zone lists the registry manager as Office of the Cabinet. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.mh is the Internet country code top-level domain (ccTLD) for the Marshall Islands. Its registry website has been inactive since the end of 2021, and prior to that had not been updated since 1997. The mechanism of registering domains listed on that site involved downloading an InterNIC template form that had been a dead link for at least several years. \nAs of 2021, a search showed three active websites using a .mh domain: one for the government's Natural Disaster Management Office, one for the school system, and one for a telecommunications company. The Natural Disaster Management Office website went offline a year later. In 2022, the Office of Commerce, Investment & Tourism created a site under the domain, but moved to .org in late 2023. The same year, Wahoo, a store based in Majuro, opened a website under the domain.\nMost of the people who govern a site from the Marshall Islands usually register it under .com, .net or .org. Almost all sites registered to entities in the Marshall Islands are hosted in other countries.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mh.html",
+  "wikipedia": ".mh is the Internet country code top-level domain (ccTLD) for the Marshall Islands. Its registry website has been inactive since the end of 2021, and prior to that had not been updated since 1997. The mechanism of registering domains listed on that site involved downloading an InterNIC template form that had been a dead link for at least several years. \nAs of 2021, a search showed three active websites using a .mh domain: one for the government's Natural Disaster Management Office, one for the school system, and one for a telecommunications company. The Natural Disaster Management Office website went offline a year later. In 2022, the Office of Commerce, Investment & Tourism created a site under the domain, but moved to .org in late 2023. The same year, Wahoo, a store based in Majuro, opened a website under the domain.\nMost of the people who govern a site from the Marshall Islands usually register it under .com, .net or .org. Almost all sites registered to entities in the Marshall Islands are hosted in other countries.",
+  "scrapedAt": "2026-07-21T21:45:11Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".mh",
+    "cabinet",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "islands",
+    "level",
+    "local business",
+    "marshall",
+    "mh",
+    "office",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".mh is a Country-code top-level domain. Managed by Office of the Cabinet.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

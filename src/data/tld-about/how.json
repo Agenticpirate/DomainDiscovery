@@ -1,0 +1,124 @@
+{
+  "tld": ".how",
+  "slug": "how",
+  "title": "About .how domains",
+  "delegationTitle": "Delegation Record for .HOW",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Charleston Road Registry Inc.",
+  "sponsorDetail": "Charleston Road Registry Inc.\n1600 Amphitheatre Parkway\nMountain View CA 94043\nUnited States of America (the)",
+  "administrativeContact": "TLD Admin",
+  "technicalContact": "TLD Engineering",
+  "registryUrl": "https://www.registry.google",
+  "whoisServer": null,
+  "rdapServer": "https://pubapi.registry.google/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns-tld1.charlestonroadregistry.com",
+      "addresses": [
+        "216.239.32.105",
+        "2001:4860:4802:32:0:0:0:69"
+      ]
+    },
+    {
+      "host": "ns-tld2.charlestonroadregistry.com",
+      "addresses": [
+        "216.239.34.105",
+        "2001:4860:4802:34:0:0:0:69"
+      ]
+    },
+    {
+      "host": "ns-tld3.charlestonroadregistry.com",
+      "addresses": [
+        "216.239.36.105",
+        "2001:4860:4802:36:0:0:0:69"
+      ]
+    },
+    {
+      "host": "ns-tld4.charlestonroadregistry.com",
+      "addresses": [
+        "216.239.38.105",
+        "2001:4860:4802:38:0:0:0:69"
+      ]
+    },
+    {
+      "host": "ns-tld5.charlestonroadregistry.com",
+      "addresses": [
+        "216.239.60.105",
+        "2001:4860:4805:0:0:0:0:69"
+      ]
+    }
+  ],
+  "about": ".HOW is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .HOW is listed by IANA as Charleston Road Registry Inc.. Anyone can typically register a .HOW name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nCharleston Road Registry Inc. (CRR), doing business as Google Registry, is a wholly owned subsidiary of Google LLC. It is the domain name registry that Google uses to handle its top-level domains (TLDs).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/how.html",
+  "wikipedia": "Charleston Road Registry Inc. (CRR), doing business as Google Registry, is a wholly owned subsidiary of Google LLC. It is the domain name registry that Google uses to handle its top-level domains (TLDs).",
+  "scrapedAt": "2026-07-21T21:42:15Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".how",
+    "brand",
+    "brandable names",
+    "charleston",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "how",
+    "level",
+    "registry",
+    "road",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 41,
+    "cheapestRegistration": {
+      "registrar": "Cloudflare",
+      "price": "$20.18",
+      "value": 20.18
+    },
+    "cheapestRenewal": {
+      "registrar": "Cloudflare",
+      "price": "$20.18",
+      "value": 20.18
+    },
+    "sourceUrl": "https://tld-list.com/tld/how"
+  },
+  "summary": ".how is a Generic top-level domain. Managed by Charleston Road Registry Inc..",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

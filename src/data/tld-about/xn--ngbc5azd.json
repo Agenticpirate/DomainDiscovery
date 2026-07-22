@@ -1,0 +1,116 @@
+{
+  "tld": ".xn--ngbc5azd",
+  "slug": "xn--ngbc5azd",
+  "title": "About .xn--ngbc5azd domains",
+  "delegationTitle": "Delegation Record for .\u0634\u0628\u0643\u0629",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "International Domain Registry Pty. Ltd.",
+  "sponsorDetail": "International Domain Registry Pty. Ltd.\nLevel 8, 10 Queens Road\nMelbourne VIC 3004\nAustralia",
+  "administrativeContact": "IANA Contact",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://www.dotshabaka.com",
+  "whoisServer": "whois.nic.xn--ngbc5azd",
+  "rdapServer": "https://rdap.nic.xn--ngbc5azd/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.xn--ngbc5azd",
+      "addresses": [
+        "37.209.192.3",
+        "2001:dcd:1:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "b.nic.xn--ngbc5azd",
+      "addresses": [
+        "37.209.194.3",
+        "2001:dcd:2:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "c.nic.xn--ngbc5azd",
+      "addresses": [
+        "37.209.196.3",
+        "2001:dcd:3:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "x.nic.xn--ngbc5azd",
+      "addresses": [
+        "156.154.172.82",
+        "2610:a1:1074:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "y.nic.xn--ngbc5azd",
+      "addresses": [
+        "156.154.173.82",
+        "2610:a1:1075:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "z.nic.xn--ngbc5azd",
+      "addresses": [
+        "156.154.174.82",
+        "2610:a1:1076:0:0:0:1:82"
+      ]
+    }
+  ],
+  "about": ".XN--NGBC5AZD is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--NGBC5AZD is listed by IANA as International Domain Registry Pty. Ltd.. Anyone can typically register a .XN--NGBC5AZD name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--ngbc5azd.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:29Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--ngbc5azd",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "international",
+    "level",
+    "registry",
+    "top",
+    "xn--ngbc5azd"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--ngbc5azd is a Generic top-level domain. Managed by International Domain Registry Pty. Ltd..",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

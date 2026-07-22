@@ -1,0 +1,159 @@
+{
+  "tld": ".mn",
+  "slug": "mn",
+  "title": "About .mn domains",
+  "delegationTitle": "Delegation Record for .MN",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Mongolia",
+  "sponsor": "Datacom Co., Ltd.",
+  "sponsorDetail": "Datacom Co., Ltd.\nGalaxy Tower Office Bldg, #5007,\nMahatma Gandhi Street,\nKhan-Uul district\nUlaanbaatar 17010\nMongolia",
+  "administrativeContact": "Enkhbat Dangaasuren",
+  "technicalContact": "Enkhbold Gombo",
+  "registryUrl": "http://www.nic.mn",
+  "whoisServer": "whois.nic.mn",
+  "rdapServer": null,
+  "registrationDate": "1995-03-02",
+  "recordUpdated": "2022-06-15",
+  "nameServers": [
+    {
+      "host": "a0.cctld.afilias-nst.info",
+      "addresses": [
+        "199.254.59.1",
+        "2001:500:25:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.cctld.afilias-nst.info",
+      "addresses": [
+        "199.249.116.1",
+        "2001:500:44:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.cctld.afilias-nst.org",
+      "addresses": [
+        "199.254.60.1",
+        "2001:500:26:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b2.cctld.afilias-nst.org",
+      "addresses": [
+        "199.249.124.1",
+        "2001:500:4c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.cctld.afilias-nst.info",
+      "addresses": [
+        "199.254.61.1",
+        "2001:500:27:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d0.cctld.afilias-nst.org",
+      "addresses": [
+        "199.254.62.1",
+        "2001:500:28:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns1.magic.mn",
+      "addresses": [
+        "202.131.0.10"
+      ]
+    },
+    {
+      "host": "ns2.magic.mn",
+      "addresses": [
+        "202.72.241.5"
+      ]
+    },
+    {
+      "host": "ns3.magic.mn",
+      "addresses": [
+        "202.131.224.80"
+      ]
+    },
+    {
+      "host": "ns4.magic.mn",
+      "addresses": [
+        "218.100.84.26"
+      ]
+    }
+  ],
+  "about": ".MN is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Mongolia. The IANA root zone lists the registry manager as Datacom Co., Ltd.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.mn is the Internet country code top-level domain (ccTLD) for Mongolia. It is administered by .MN Registry, Datacom. The .MN registry is operated under the thick registry model. Administrative, Billing, Technical and Registrant contacts are required. The Redemption Grace Period (RGP) is available for .MN domains.\nThe following second-level domains registration for free to qualifying entities:\n\n.gov.mn \u2013 government institutions\n.edu.mn \u2013 educational institutions\n.org.mn \u2013 non-profit organizations\n.MN Registry signed the .mn zone with DNSSEC on 18 November 2010.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mn.html",
+  "wikipedia": ".mn is the Internet country code top-level domain (ccTLD) for Mongolia. It is administered by .MN Registry, Datacom. The .MN registry is operated under the thick registry model. Administrative, Billing, Technical and Registrant contacts are required. The Redemption Grace Period (RGP) is available for .MN domains.\nThe following second-level domains registration for free to qualifying entities:\n\n.gov.mn \u2013 government institutions\n.edu.mn \u2013 educational institutions\n.org.mn \u2013 non-profit organizations\n.MN Registry signed the .mn zone with DNSSEC on 18 November 2010.",
+  "scrapedAt": "2026-07-21T21:45:23Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".mn",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "datacom",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "mn",
+    "mongolia",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 28,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$36.88",
+      "value": 36.88
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$36.88",
+      "value": 36.88
+    },
+    "sourceUrl": "https://tld-list.com/tld/mn"
+  },
+  "summary": ".mn is a Country-code top-level domain. Managed by Datacom Co., Ltd..",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

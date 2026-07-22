@@ -1,0 +1,117 @@
+{
+  "tld": ".xn--fct429k",
+  "slug": "xn--fct429k",
+  "title": "About .xn--fct429k domains",
+  "delegationTitle": "Delegation Record for .\u5bb6\u96fb",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Amazon Registry Services, Inc.",
+  "sponsorDetail": "Amazon Registry Services, Inc.\n410 Terry Avenue North\nSeattle WA 98109\nUnited States of America (the)",
+  "administrativeContact": "Program Manager, Registry",
+  "technicalContact": "Howard Eland, Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.nic.xn--fct429k",
+  "whoisServer": "whois.nic.xn--fct429k",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "v0n0.nic.xn--fct429k",
+      "addresses": [
+        "65.22.76.7",
+        "2a01:8840:4a:0:0:0:0:7"
+      ]
+    },
+    {
+      "host": "v0n1.nic.xn--fct429k",
+      "addresses": [
+        "65.22.77.7",
+        "2a01:8840:4b:0:0:0:0:7"
+      ]
+    },
+    {
+      "host": "v0n2.nic.xn--fct429k",
+      "addresses": [
+        "65.22.78.7",
+        "2a01:8840:4c:0:0:0:0:7"
+      ]
+    },
+    {
+      "host": "v0n3.nic.xn--fct429k",
+      "addresses": [
+        "161.232.38.7",
+        "2a01:8840:10c:0:0:0:0:7"
+      ]
+    },
+    {
+      "host": "v2n0.nic.xn--fct429k",
+      "addresses": [
+        "65.22.79.7",
+        "2a01:8840:4d:0:0:0:0:7"
+      ]
+    },
+    {
+      "host": "v2n1.nic.xn--fct429k",
+      "addresses": [
+        "161.232.39.7",
+        "2a01:8840:10d:0:0:0:0:7"
+      ]
+    }
+  ],
+  "about": ".XN--FCT429K is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--FCT429K is listed by IANA as Amazon Registry Services, Inc.. Anyone can typically register a .XN--FCT429K name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--fct429k.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:34Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--fct429k",
+    "amazon",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "level",
+    "registry",
+    "services",
+    "top",
+    "xn--fct429k"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--fct429k is a Generic top-level domain. Managed by Amazon Registry Services, Inc..",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

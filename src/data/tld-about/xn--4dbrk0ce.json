@@ -1,0 +1,136 @@
+{
+  "tld": ".xn--4dbrk0ce",
+  "slug": "xn--4dbrk0ce",
+  "title": "About .xn--4dbrk0ce domains",
+  "delegationTitle": "Delegation Record for .\u05d9\u05e9\u05e8\u05d0\u05dc",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code IL",
+  "designation": "Country-code top-level domain designated for Israel",
+  "sponsor": "The Israel Internet Association (RA)",
+  "sponsorDetail": "The Israel Internet Association (RA)\n6 Bareket St.\nPetach Tikva 4951477\nIsrael",
+  "administrativeContact": "CEO",
+  "technicalContact": "IL Technical Contact",
+  "registryUrl": "http://en.isoc.org.il/il-cctld/accredited-registrars/domain-name-registrars",
+  "whoisServer": "whois.isoc.org.il",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ilns.ilan.net.il",
+      "addresses": [
+        "128.139.35.5"
+      ]
+    },
+    {
+      "host": "lookup.iucc.ac.il",
+      "addresses": [
+        "128.139.34.240",
+        "2001:bf8:900:6:0:0:808b:22f0"
+      ]
+    },
+    {
+      "host": "ns1.ns.il",
+      "addresses": [
+        "194.146.106.122",
+        "2001:67c:1010:31:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns3.ns.il",
+      "addresses": [
+        "194.0.11.103",
+        "2001:678:e:103:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns4.ns.il",
+      "addresses": [
+        "204.61.216.134",
+        "2001:500:14:6134:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "nsa.ns.il",
+      "addresses": [
+        "192.115.7.53",
+        "2a01:4280:7:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "nsb.ns.il",
+      "addresses": [
+        "192.115.7.60",
+        "2a01:4280:7:0:0:0:0:60"
+      ]
+    },
+    {
+      "host": "nse.ns.il",
+      "addresses": [
+        "192.115.4.235"
+      ]
+    }
+  ],
+  "about": ".XN--4DBRK0CE is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Israel. The IANA root zone lists the registry manager as The Israel Internet Association (RA). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--4dbrk0ce.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:02Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--4dbrk0ce",
+    "association",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "internet",
+    "israel",
+    "letter",
+    "level",
+    "local business",
+    "regional brands",
+    "top",
+    "two",
+    "xn--4dbrk0ce"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--4dbrk0ce is a Country-code top-level domain designated for two-letter country code IL. Managed by The Israel Internet Association (RA).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

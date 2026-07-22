@@ -1,0 +1,126 @@
+{
+  "tld": ".xn--kprw13d",
+  "slug": "xn--kprw13d",
+  "title": "About .xn--kprw13d domains",
+  "delegationTitle": "Delegation Record for .\u53f0\u6e7e",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code TW",
+  "designation": "Country-code top-level domain designated for Taiwan, Province of China",
+  "sponsor": "Taiwan Network Information Center (TWNIC)",
+  "sponsorDetail": "Taiwan Network Information Center (TWNIC)\n3F., No. 123, Sec. 4, Bade Rd.\nSongshan Dist.\nTaipei 105\nTaiwan",
+  "administrativeContact": "Jofan Yu",
+  "technicalContact": "Technical Director",
+  "registryUrl": "http://rs.twnic.net.tw",
+  "whoisServer": "whois.twnic.net.tw",
+  "rdapServer": null,
+  "registrationDate": "2010-07-14",
+  "recordUpdated": "2026-04-24",
+  "nameServers": [
+    {
+      "host": "anytld.apnic.net",
+      "addresses": [
+        "202.12.31.53",
+        "2001:dd8:12:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "d.dns.tw",
+      "addresses": [
+        "60.199.165.186",
+        "2001:4541:9010:7:0:0:0:186"
+      ]
+    },
+    {
+      "host": "e.dns.tw",
+      "addresses": [
+        "211.20.231.11",
+        "2001:b000:1e0:c000:0:0:0:11"
+      ]
+    },
+    {
+      "host": "f.dns.tw",
+      "addresses": [
+        "40.65.125.222"
+      ]
+    },
+    {
+      "host": "g.dns.tw",
+      "addresses": [
+        "34.141.111.176"
+      ]
+    },
+    {
+      "host": "h.dns.tw",
+      "addresses": [
+        "204.61.216.119",
+        "2001:500:14:6119:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".XN--KPRW13D is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Taiwan, Province of China. The IANA root zone lists the registry manager as Taiwan Network Information Center (TWNIC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--kprw13d.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:02Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--kprw13d",
+    "cctld",
+    "center",
+    "china",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "letter",
+    "level",
+    "local business",
+    "network",
+    "province",
+    "regional brands",
+    "taiwan",
+    "top",
+    "twnic",
+    "two",
+    "xn--kprw13d"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--kprw13d is a Country-code top-level domain designated for two-letter country code TW. Managed by Taiwan Network Information Center (TWNIC).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

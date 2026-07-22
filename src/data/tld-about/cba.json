@@ -1,0 +1,118 @@
+{
+  "tld": ".cba",
+  "slug": "cba",
+  "title": "About .cba domains",
+  "delegationTitle": "Delegation Record for .CBA",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "COMMONWEALTH BANK OF AUSTRALIA",
+  "sponsorDetail": "COMMONWEALTH BANK OF AUSTRALIA\nGround Floor\nTower 1 201 Sussex Street\nSydney NSW 1155\nAustralia",
+  "administrativeContact": "Domain Admin",
+  "technicalContact": "Domain Admin",
+  "registryUrl": "http://www.commbank.com.au",
+  "whoisServer": "whois.nic.cba",
+  "rdapServer": "https://rdap.nic.cba/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.cba",
+      "addresses": [
+        "37.209.192.9",
+        "2001:dcd:1:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "b.nic.cba",
+      "addresses": [
+        "37.209.194.9",
+        "2001:dcd:2:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "c.nic.cba",
+      "addresses": [
+        "37.209.196.9",
+        "2001:dcd:3:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "x.nic.cba",
+      "addresses": [
+        "156.154.172.82",
+        "2610:a1:1074:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "y.nic.cba",
+      "addresses": [
+        "156.154.173.82",
+        "2610:a1:1075:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "z.nic.cba",
+      "addresses": [
+        "156.154.174.82",
+        "2610:a1:1076:0:0:0:1:82"
+      ]
+    }
+  ],
+  "about": ".CBA is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .CBA is listed by IANA as COMMONWEALTH BANK OF AUSTRALIA. Anyone can typically register a .CBA name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/cba.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:37:08Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".cba",
+    "australia",
+    "bank",
+    "brand",
+    "brandable names",
+    "cba",
+    "commonwealth",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".cba is a Generic top-level domain. Managed by COMMONWEALTH BANK OF AUSTRALIA.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

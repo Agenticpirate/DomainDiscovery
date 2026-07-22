@@ -1,0 +1,128 @@
+{
+  "tld": ".ly",
+  "slug": "ly",
+  "title": "About .ly domains",
+  "delegationTitle": "Delegation Record for .LY",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Libya",
+  "sponsor": "General Authority of Communications and Informatics (GACI)",
+  "sponsorDetail": "General Authority of Communications and Informatics (GACI)\nTelecom Tower\nAl Zawia Street\nTripoli\nLibya",
+  "administrativeContact": "Mr. Riyad ALZITOUNI, Manager of International Corporation Office",
+  "technicalContact": "Khaled Esheh",
+  "registryUrl": "https://wsm.ltt.ly/",
+  "whoisServer": "whois.nic.ly",
+  "rdapServer": "https://rdap.nic.ly",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "dns.lttnet.net",
+      "addresses": [
+        "62.240.36.9"
+      ]
+    },
+    {
+      "host": "dns1.lttnet.net",
+      "addresses": [
+        "62.68.42.9"
+      ]
+    },
+    {
+      "host": "ns-ly.afrinic.net",
+      "addresses": [
+        "196.216.168.24",
+        "2001:43f8:120:0:0:0:0:24"
+      ]
+    },
+    {
+      "host": "pch.ltt.ly",
+      "addresses": [
+        "204.61.216.67",
+        "2001:500:14:6067:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "phloem.uoregon.edu",
+      "addresses": [
+        "128.223.32.35",
+        "2001:468:d01:20:0:0:80df:2023"
+      ]
+    }
+  ],
+  "about": ".LY is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Libya. The IANA root zone lists the registry manager as General Authority of Communications and Informatics (GACI). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ly is the Internet country code top-level domain (ccTLD) for Libya.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ly.html",
+  "wikipedia": ".ly is the Internet country code top-level domain (ccTLD) for Libya.",
+  "scrapedAt": "2026-07-21T21:34:07Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ly",
+    "authority",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "gaci",
+    "general",
+    "geo",
+    "informatics",
+    "level",
+    "libya",
+    "local business",
+    "ly",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 15,
+    "cheapestRegistration": {
+      "registrar": "Netim",
+      "price": "$82.00",
+      "value": 82.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$82.00",
+      "value": 82.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/ly"
+  },
+  "summary": ".ly is a Country-code top-level domain. Managed by General Authority of Communications and Informatics (GACI).",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

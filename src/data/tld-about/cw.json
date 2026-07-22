@@ -1,0 +1,141 @@
+{
+  "tld": ".cw",
+  "slug": "cw",
+  "title": "About .cw domains",
+  "delegationTitle": "Delegation Record for .CW",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Cura\u00e7ao",
+  "sponsor": "University of Curacao",
+  "sponsorDetail": "University of Curacao\nJan Noorduynweg 111\nWillemstad\nCura\u00e7ao",
+  "administrativeContact": "Leendert J.J. Pengel",
+  "technicalContact": "Leendert J.J. Pengel",
+  "registryUrl": "http://www.uoc.cw/cw-registry",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "cw.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.86",
+        "2a13:27c0:30:0:0:0:0:86"
+      ]
+    },
+    {
+      "host": "kadushi.curinfo.cw",
+      "addresses": [
+        "65.208.122.63"
+      ]
+    },
+    {
+      "host": "ns0.ja.net",
+      "addresses": [
+        "193.63.94.20",
+        "128.86.1.20",
+        "2001:630:0:9:0:0:0:14",
+        "2001:630:0:8:0:0:0:14"
+      ]
+    },
+    {
+      "host": "ns01-server.curinfo.cw",
+      "addresses": [
+        "65.208.122.36"
+      ]
+    },
+    {
+      "host": "ns1.bna.cw",
+      "addresses": [
+        "216.122.189.85"
+      ]
+    },
+    {
+      "host": "ns1.dns.cw",
+      "addresses": [
+        "194.0.28.6",
+        "2001:678:2c:0:194:0:28:6"
+      ]
+    },
+    {
+      "host": "ns2.bna.cw",
+      "addresses": [
+        "216.122.189.86"
+      ]
+    }
+  ],
+  "about": ".CW is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Cura\u00e7ao. The IANA root zone lists the registry manager as University of Curacao. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.cw is the Internet country code top-level domain (ccTLD) for Cura\u00e7ao.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/cw.html",
+  "wikipedia": ".cw is the Internet country code top-level domain (ccTLD) for Cura\u00e7ao.",
+  "scrapedAt": "2026-07-21T21:38:22Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".cw",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "cura",
+    "curacao",
+    "cw",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "top",
+    "university"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 6,
+    "cheapestRegistration": {
+      "registrar": "INWX",
+      "price": "$100.79",
+      "value": 100.79
+    },
+    "cheapestRenewal": {
+      "registrar": "INWX",
+      "price": "$100.74",
+      "value": 100.74
+    },
+    "sourceUrl": "https://tld-list.com/tld/cw"
+  },
+  "summary": ".cw is a Country-code top-level domain. Managed by University of Curacao.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

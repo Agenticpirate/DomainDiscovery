@@ -1,0 +1,145 @@
+{
+  "tld": ".nrw",
+  "slug": "nrw",
+  "title": "About .nrw domains",
+  "delegationTitle": "Delegation Record for .NRW",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Minds + Machines GmbH",
+  "sponsorDetail": "Minds + Machines GmbH\nHansestr. 111\nK\u00f6ln 51149\nGermany",
+  "administrativeContact": "IANA Contact",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://mindsandmachines.com",
+  "whoisServer": "whois.nic.nrw",
+  "rdapServer": "https://rdap.nic.nrw/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "anycast10.irondns.net",
+      "addresses": [
+        "195.253.64.12",
+        "2a01:5b0:4:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast23.irondns.net",
+      "addresses": [
+        "195.253.65.11",
+        "2a01:5b0:5:0:0:0:0:b"
+      ]
+    },
+    {
+      "host": "anycast24.irondns.net",
+      "addresses": [
+        "195.253.65.12",
+        "2a01:5b0:5:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast9.irondns.net",
+      "addresses": [
+        "195.253.64.11",
+        "2a01:5b0:4:0:0:0:0:b"
+      ]
+    },
+    {
+      "host": "ari.alpha.tldns.godaddy",
+      "addresses": [
+        "37.209.192.2",
+        "2001:dcd:1:0:0:0:0:2"
+      ]
+    },
+    {
+      "host": "ari.beta.tldns.godaddy",
+      "addresses": [
+        "37.209.194.2",
+        "2001:dcd:2:0:0:0:0:2"
+      ]
+    },
+    {
+      "host": "ari.delta.tldns.godaddy",
+      "addresses": [
+        "37.209.198.2",
+        "2001:dcd:4:0:0:0:0:2"
+      ]
+    },
+    {
+      "host": "ari.gamma.tldns.godaddy",
+      "addresses": [
+        "37.209.196.2",
+        "2001:dcd:3:0:0:0:0:2"
+      ]
+    }
+  ],
+  "about": ".NRW is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .NRW is listed by IANA as Minds + Machines GmbH. Anyone can typically register a .NRW name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.NRW is a top-level domain (TLD) that represents the German state of North Rhine-Westphalia. The official introduction took place on March 24, 2015. and is currently managed by dotNRW GmbH. Although anyone can register for the domain, it is primarily intended for businesses and organizations based in North Rhine-Westphalia.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/nrw.html",
+  "wikipedia": ".NRW is a top-level domain (TLD) that represents the German state of North Rhine-Westphalia. The official introduction took place on March 24, 2015. and is currently managed by dotNRW GmbH. Although anyone can register for the domain, it is primarily intended for businesses and organizations based in North Rhine-Westphalia.",
+  "scrapedAt": "2026-07-21T21:46:36Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".nrw",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gmbh",
+    "gtld",
+    "level",
+    "machines",
+    "minds",
+    "nrw",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 23,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$41.44",
+      "value": 41.44
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$43.40",
+      "value": 43.4
+    },
+    "sourceUrl": "https://tld-list.com/tld/nrw"
+  },
+  "summary": ".nrw is a Generic top-level domain. Managed by Minds + Machines GmbH.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

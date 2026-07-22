@@ -1,0 +1,116 @@
+{
+  "tld": ".game",
+  "slug": "game",
+  "title": "About .game domains",
+  "delegationTitle": "Delegation Record for .GAME",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "XYZ.COM LLC",
+  "sponsorDetail": "XYZ.COM LLC\n4425 Spring Mountain Rd., Suite 2\nLas Vegas NV 89102\nUnited States of America (the)",
+  "administrativeContact": "General Counsel",
+  "technicalContact": "CTO",
+  "registryUrl": "https://nic.game",
+  "whoisServer": "whois.nic.game",
+  "rdapServer": "https://rdap.centralnic.com/game/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.game",
+      "addresses": [
+        "194.169.218.147",
+        "2001:67c:13cc:0:0:0:1:147"
+      ]
+    },
+    {
+      "host": "b.nic.game",
+      "addresses": [
+        "185.24.64.147",
+        "2a04:2b00:13cc:0:0:0:1:147"
+      ]
+    },
+    {
+      "host": "c.nic.game",
+      "addresses": [
+        "212.18.248.147",
+        "2a04:2b00:13ee:0:0:0:0:147"
+      ]
+    },
+    {
+      "host": "d.nic.game",
+      "addresses": [
+        "212.18.249.147",
+        "2a04:2b00:13ff:0:0:0:0:147"
+      ]
+    }
+  ],
+  "about": ".GAME is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .GAME is listed by IANA as XYZ.COM LLC. Anyone can typically register a .GAME name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nUniregistry is a large retail domain name registrar and web services provider; as well as a domain name registry that administers generic top-level domains. In February 2013, the related company Uniregistrar Corporation became an ICANN-accredited registrar and launched under the licensed Uniregistry brand name in 2014. Uniregistry's acquisition by GoDaddy was announced in February 2020.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/game.html",
+  "wikipedia": "Uniregistry is a large retail domain name registrar and web services provider; as well as a domain name registry that administers generic top-level domains. In February 2013, the related company Uniregistrar Corporation became an ICANN-accredited registrar and launched under the licensed Uniregistry brand name in 2014. Uniregistry's acquisition by GoDaddy was announced in February 2020.",
+  "scrapedAt": "2026-07-21T21:40:51Z",
+  "categories": [
+    "sports"
+  ],
+  "useCases": [
+    "Sports brands",
+    "Gaming",
+    "Fitness"
+  ],
+  "keywords": [
+    ".game",
+    "domain",
+    "fitness",
+    "game",
+    "gaming",
+    "generic",
+    "gtld",
+    "level",
+    "sports",
+    "sports brands",
+    "top"
+  ],
+  "primaryCategory": "sports",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 43,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$279.65",
+      "value": 279.65
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$309.77",
+      "value": 309.77
+    },
+    "sourceUrl": "https://tld-list.com/tld/game"
+  },
+  "summary": ".game is a Generic top-level domain. Managed by XYZ.COM LLC.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

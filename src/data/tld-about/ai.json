@@ -1,0 +1,141 @@
+{
+  "tld": ".ai",
+  "slug": "ai",
+  "title": "About .ai domains",
+  "delegationTitle": "Delegation Record for .AI",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Anguilla",
+  "sponsor": "Government of Anguilla",
+  "sponsorDetail": "Government of Anguilla\nCoronation Avenue, PO Box 60\nThe Valley AI2640\nAnguilla",
+  "administrativeContact": "Telecommunications Officer",
+  "technicalContact": "Telecommunications Officer",
+  "registryUrl": "https://nic.ai",
+  "whoisServer": "whois.nic.ai",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": "1995-02-16",
+  "recordUpdated": "2025-02-11",
+  "nameServers": [
+    {
+      "host": "v0n0.nic.ai",
+      "addresses": [
+        "199.115.152.1",
+        "2001:500:a0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "v0n1.nic.ai",
+      "addresses": [
+        "199.115.153.1",
+        "2001:500:a1:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "v0n2.nic.ai",
+      "addresses": [
+        "199.115.154.1",
+        "2001:500:a2:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "v0n3.nic.ai",
+      "addresses": [
+        "199.115.155.1",
+        "2001:500:a3:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "v2n0.nic.ai",
+      "addresses": [
+        "199.115.156.1",
+        "2001:500:a4:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "v2n1.nic.ai",
+      "addresses": [
+        "199.115.157.1",
+        "2001:500:a5:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".AI is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Anguilla. The IANA root zone lists the registry manager as Government of Anguilla. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ai is the Internet country code top-level domain (ccTLD) for Anguilla, a British Overseas Territory in the Caribbean. It is administered by the government of Anguilla.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ai.html",
+  "wikipedia": ".ai is the Internet country code top-level domain (ccTLD) for Anguilla, a British Overseas Territory in the Caribbean. It is administered by the government of Anguilla.",
+  "scrapedAt": "2026-07-21T21:33:18Z",
+  "categories": [
+    "geo",
+    "tech"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands",
+    "Startups",
+    "SaaS",
+    "Developers"
+  ],
+  "keywords": [
+    ".ai",
+    "ai",
+    "anguilla",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "developers",
+    "domain",
+    "for",
+    "geo",
+    "government",
+    "level",
+    "local business",
+    "regional brands",
+    "saas",
+    "startups",
+    "tech",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 38,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$79.98",
+      "value": 79.98
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$79.98",
+      "value": 79.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/ai"
+  },
+  "summary": ".ai is a Country-code top-level domain. Managed by Government of Anguilla.",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

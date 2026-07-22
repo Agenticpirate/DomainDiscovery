@@ -42,7 +42,7 @@ export function DomainResultCard({
   return (
     <div
       className={`
-        group relative p-2.5 sm:p-4 rounded-lg sm:rounded-xl border transition-all duration-200
+        shine-border group relative p-2.5 sm:p-4 rounded-lg sm:rounded-xl border transition-all duration-200
         ${isHighlighted 
           ? `${isLight ? 'bg-slate-100' : 'bg-white/[0.08]'} ${isLight ? 'border-slate-300' : 'border-white/30'} shadow-lg` 
           : `${isLight ? 'bg-slate-50/50' : 'bg-white/[0.02]'} ${isLight ? 'border-slate-200' : 'border-white/10'} ${isLight ? 'hover:border-slate-300' : 'hover:border-white/20'} ${isLight ? 'hover:bg-slate-100/50' : 'hover:bg-white/[0.04]'}`

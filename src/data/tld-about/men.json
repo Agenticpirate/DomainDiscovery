@@ -1,0 +1,131 @@
+{
+  "tld": ".men",
+  "slug": "men",
+  "title": "About .men domains",
+  "delegationTitle": "Delegation Record for .MEN",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Exclusive Registry Limited",
+  "sponsorDetail": "Exclusive Registry Limited\nFamous Four Media/Exclusive Registry Limited\n2nd Floor, Leisure Island Business Centre, Ocean Village\nGibraltar  GX11 1AA\nGibraltar",
+  "administrativeContact": "Edgar Charles Andrew Lavarello",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://nic.men",
+  "whoisServer": "whois.nic.men",
+  "rdapServer": "https://rdap.nic.men/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.men",
+      "addresses": [
+        "37.209.192.10",
+        "2001:dcd:1:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "b.nic.men",
+      "addresses": [
+        "37.209.194.10",
+        "2001:dcd:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.nic.men",
+      "addresses": [
+        "37.209.196.10",
+        "2001:dcd:3:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "x.nic.men",
+      "addresses": [
+        "156.154.172.82",
+        "2610:a1:1074:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "y.nic.men",
+      "addresses": [
+        "156.154.173.82",
+        "2610:a1:1075:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "z.nic.men",
+      "addresses": [
+        "156.154.174.82",
+        "2610:a1:1076:0:0:0:1:82"
+      ]
+    }
+  ],
+  "about": ".MEN is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .MEN is listed by IANA as Exclusive Registry Limited. Anyone can typically register a .MEN name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nGRS Domains is a domain registry service provider based in Gibraltar. GRS Domains supports the gTLDs founded and majority owned by venture capitalist Iain Roache.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/men.html",
+  "wikipedia": "GRS Domains is a domain registry service provider based in Gibraltar. GRS Domains supports the gTLDs founded and majority owned by venture capitalist Iain Roache.",
+  "scrapedAt": "2026-07-21T21:45:04Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".men",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "exclusive",
+    "generic",
+    "gtld",
+    "level",
+    "limited",
+    "men",
+    "registry",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 45,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$3.56",
+      "value": 3.56
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$4.98",
+      "value": 4.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/men"
+  },
+  "summary": ".men is a Generic top-level domain. Managed by Exclusive Registry Limited.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

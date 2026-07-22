@@ -1,0 +1,125 @@
+{
+  "tld": ".cat",
+  "slug": "cat",
+  "title": "About .cat domains",
+  "delegationTitle": "Delegation Record for .CAT",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "Fundacio puntCAT",
+  "sponsorDetail": "Fundacio puntCAT\nPla\u00e7a Nova 5, 7a planta\nBarcelona 08002\nSpain",
+  "administrativeContact": "Director General",
+  "technicalContact": "Werner Staub",
+  "registryUrl": "http://www.domini.cat",
+  "whoisServer": "whois.nic.cat",
+  "rdapServer": "https://rdap.nic.cat/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "anyc1.irondns.net",
+      "addresses": [
+        "195.253.64.4",
+        "2a01:5b0:4:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "cat.ns.nic.es",
+      "addresses": [
+        "194.69.254.15",
+        "2001:67c:21cc:2000:0:0:64:47"
+      ]
+    },
+    {
+      "host": "cat.pch.net",
+      "addresses": [
+        "204.61.216.20",
+        "2001:500:14:6020:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "nsc.nic.de",
+      "addresses": [
+        "194.0.11.110",
+        "2001:678:e:110:0:0:0:53"
+      ]
+    },
+    {
+      "host": "switch.nic.cat",
+      "addresses": [
+        "130.59.31.29",
+        "2001:620:0:ff:0:0:0:2f"
+      ]
+    }
+  ],
+  "about": ".CAT is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\n.cat (spelled out in Catalan: punt cat [\u02c8pu\u014b \u02c8kat]) is a sponsored top-level domain intended to be used to highlight the Catalan language, developed by ICANN and Fundaci\u00f3 puntCAT (now known as Accent Obert).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/cat.html",
+  "wikipedia": ".cat (spelled out in Catalan: punt cat [\u02c8pu\u014b \u02c8kat]) is a sponsored top-level domain intended to be used to highlight the Catalan language, developed by ICANN and Fundaci\u00f3 puntCAT (now known as Accent Obert).",
+  "scrapedAt": "2026-07-21T21:34:56Z",
+  "categories": [
+    "green"
+  ],
+  "useCases": [
+    "Sustainability",
+    "Eco brands",
+    "Pets"
+  ],
+  "keywords": [
+    ".cat",
+    "cat",
+    "domain",
+    "eco brands",
+    "fundacio",
+    "green",
+    "level",
+    "pets",
+    "puntcat",
+    "sponsored",
+    "stld",
+    "sustainability",
+    "top"
+  ],
+  "primaryCategory": "green",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 29,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$9.19",
+      "value": 9.19
+    },
+    "cheapestRenewal": {
+      "registrar": "Hostinger",
+      "price": "$23.19",
+      "value": 23.19
+    },
+    "sourceUrl": "https://tld-list.com/tld/cat"
+  },
+  "summary": ".cat is a Sponsored top-level domain. Managed by Fundacio puntCAT.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

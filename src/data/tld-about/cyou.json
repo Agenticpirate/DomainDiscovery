@@ -1,0 +1,115 @@
+{
+  "tld": ".cyou",
+  "slug": "cyou",
+  "title": "About .cyou domains",
+  "delegationTitle": "Delegation Record for .CYOU",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Shortdot SA",
+  "sponsorDetail": "Shortdot SA\n29 Boulevard de la Grande-Duchesse Charlotte\nLuxembourg L-1331\nLuxembourg",
+  "administrativeContact": "Lars Jensen",
+  "technicalContact": "CTO",
+  "registryUrl": "http://cy.changyou.com",
+  "whoisServer": "whois.nic.cyou",
+  "rdapServer": "https://rdap.centralnic.com/cyou/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.cyou",
+      "addresses": [
+        "194.169.218.120",
+        "2001:67c:13cc:0:0:0:1:120"
+      ]
+    },
+    {
+      "host": "b.nic.cyou",
+      "addresses": [
+        "185.24.64.120",
+        "2a04:2b00:13cc:0:0:0:1:120"
+      ]
+    },
+    {
+      "host": "c.nic.cyou",
+      "addresses": [
+        "212.18.248.120",
+        "2a04:2b00:13ee:0:0:0:0:120"
+      ]
+    },
+    {
+      "host": "d.nic.cyou",
+      "addresses": [
+        "212.18.249.120",
+        "2a04:2b00:13ff:0:0:0:0:120"
+      ]
+    }
+  ],
+  "about": ".CYOU is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .CYOU is listed by IANA as Shortdot SA. Anyone can typically register a .CYOU name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nThe domain name .cyou is a generic top-level domain (gTLD) in the Domain Name System of the Internet. Added in March 2015, this name is marketed as the phrase \"see you.\"\nAccording to Internet Assigned Numbers Authority (IANA) published reports, this domain name was initially delegated to Beijing Gamease Age Digital Technology Co., Ltd., a Beijing company, on March 31, 2015. It was transferred to ShortDot SA, a Luxembourgish company, on May 14, 2020.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/cyou.html",
+  "wikipedia": "The domain name .cyou is a generic top-level domain (gTLD) in the Domain Name System of the Internet. Added in March 2015, this name is marketed as the phrase \"see you.\"\nAccording to Internet Assigned Numbers Authority (IANA) published reports, this domain name was initially delegated to Beijing Gamease Age Digital Technology Co., Ltd., a Beijing company, on March 31, 2015. It was transferred to ShortDot SA, a Luxembourgish company, on May 14, 2020.",
+  "scrapedAt": "2026-07-21T21:38:26Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".cyou",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "cyou",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "shortdot",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 31,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$0.81",
+      "value": 0.81
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$9.76",
+      "value": 9.76
+    },
+    "sourceUrl": "https://tld-list.com/tld/cyou"
+  },
+  "summary": ".cyou is a Generic top-level domain. Managed by Shortdot SA.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

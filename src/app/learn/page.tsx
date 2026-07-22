@@ -1,67 +1,32 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
-import { useTheme } from '@/contexts/ThemeContext';
-import { GlowingEffect } from '@/components/ui/glowing-effect';
+import { LearnCatalog } from '@/components/learn/LearnCatalog';
+import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
+import {
+  LEARN_CLUSTERS,
+  getLearnArticle,
+  getLearnArticles,
+  getLearnCategories,
+  getLearnMeta,
+  getTrendingArticles,
+} from '@/lib/learnArticles';
+import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+
+export const metadata: Metadata = {
+  title: 'Domain Name Guides — Naming, SEO, Valuation & DNS',
+  description:
+    'Free guides on choosing a domain name, brandable vs keyword domains, geo domains, valuation, DNS, auctions, and registration strategy. Learn then search live availability.',
+};
 
 export default function LearnPage() {
-  const { theme } = useTheme();
-  const isLight = theme === 'light';
-
-  const guides = [
-    {
-      title: 'How to Choose the Perfect Domain Name',
-      description: 'Learn the radio test, brandability principles, and SEO factors that separate great domains from forgettable ones. Covers length, spelling, trademarks, and long-term strategy.',
-      href: '/learn/choosing-domain',
-      icon: '📚',
-      readTime: '8 min read',
-      topics: ['Branding', 'SEO', 'Strategy'],
-    },
-    {
-      title: 'Understanding Domain Extensions (TLDs)',
-      description: 'Compare .com, .io, .ai, .app, and 1,600+ other TLDs. Understand how extensions affect SEO, user trust, pricing, and geographic targeting for your website.',
-      href: '/learn/domain-extensions',
-      icon: '🌐',
-      readTime: '10 min read',
-      topics: ['TLDs', 'SEO', 'Pricing'],
-    },
-    {
-      title: 'Domain Valuation Guide',
-      description: 'Discover what makes domains worth $100 or $1 million. Covers length, keywords, brandability, search volume, comparable sales data, and professional appraisal methods.',
-      href: '/learn/domain-valuation',
-      icon: '💰',
-      readTime: '9 min read',
-      topics: ['Valuation', 'Market', 'Investing'],
-    },
-    {
-      title: 'Protecting Your Brand Online',
-      description: 'Secure your brand across extensions, enable WHOIS privacy, configure domain locks, set up DNSSEC, and monitor for trademark infringement and cybersquatting.',
-      href: '/learn/brand-protection',
-      icon: '🛡️',
-      readTime: '7 min read',
-      topics: ['Security', 'Trademarks', 'Privacy'],
-    },
-    {
-      title: 'Domain Investment Strategies',
-      description: 'Build a profitable domain portfolio with strategies for finding undervalued names, managing renewals, pricing inventory, and selling through multiple channels.',
-      href: '/learn/domain-investing',
-      icon: '📈',
-      readTime: '11 min read',
-      topics: ['Investing', 'Portfolio', 'Sales'],
-    },
-    {
-      title: 'Technical DNS Guide',
-      description: 'Master DNS records (A, AAAA, CNAME, MX, TXT), nameserver configuration, propagation timing, SSL setup, email authentication, and troubleshooting common issues.',
-      href: '/learn/dns-guide',
-      icon: '⚙️',
-      readTime: '12 min read',
-      topics: ['DNS', 'Technical', 'Configuration'],
-    },
-  ];
+  const articles = getLearnArticles();
+  const categories = getLearnCategories();
+  const meta = getLearnMeta();
+  const trending = getTrendingArticles(8);
 
   return (
     <div className="min-h-screen">
@@ -69,89 +34,140 @@ export default function LearnPage() {
       <Navigation activeTool="learn" />
 
       <main className="relative pt-16 sm:pt-24">
-        {/* Hero */}
         <section className="px-3 sm:px-6 pb-4 sm:pb-7">
           <div className="max-w-4xl mx-auto text-center">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: 'var(--text-muted)' }}>
+              {meta.count}+ free guides · naming · SEO · DNS
+            </p>
             <h1 className="text-2xl sm:text-5xl md:text-[3.9rem] font-black tracking-tight mb-2 sm:mb-4">
-              <span className={`bg-gradient-to-r ${isLight ? 'from-slate-900 via-slate-800 to-slate-600' : 'from-white via-white to-white/60'} bg-clip-text text-transparent`}>
-                Learn About Domains
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(to right, var(--gradient-hero-from), var(--gradient-hero-from), var(--gradient-hero-to))',
+                }}
+              >
+                Domain name guides that help you choose &amp; rank
               </span>
             </h1>
-            <p className={`text-xs sm:text-base ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto leading-relaxed`}>
-              Comprehensive guides on domain selection, valuation, security, DNS configuration, and investment strategies. Written for beginners and professionals alike.
+            <p className="text-xs sm:text-base max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              Practical education on brandable names, keyword domains, geo domains for local SEO, valuation, auctions,
+              DNS, and legal basics — then apply what you learn with free domain name search, WHOIS, and price compare.
             </p>
           </div>
         </section>
 
-        {/* Guides Grid */}
-        <section className="px-3 sm:px-6 pb-8 sm:pb-14">
+        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.learn} compact />
+
+        {/* Trending strip */}
+        <section className="px-3 sm:px-6 pb-5">
           <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-4">
-              {guides.map((guide) => (
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-sm sm:text-base font-bold">Trending now</h2>
+              <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
+                Updated {meta.generatedAt}
+              </span>
+            </div>
+            <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin">
+              {trending.map((a) => (
                 <Link
-                  key={guide.title}
-                  href={guide.href}
-                  className={`group relative block p-3 sm:p-4 ${isLight ? 'bg-white border-transparent hover:border-blue-300 hover:shadow-lg shadow-sm border' : 'bg-white/[0.02] border-transparent hover:border-white/20 hover:bg-white/[0.04] border'} rounded-xl sm:rounded-2xl transition-all`}
+                  key={a.slug}
+                  href={`/learn/${a.slug}`}
+                  className="shrink-0 rounded-xl border border-white/10 bg-[#0c0c0e] px-3 py-2.5 hover:border-white/25 transition-colors max-w-[220px]"
                 >
-                  <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={2} variant={isLight ? "default" : "white"} />
-                  <div className="relative z-10 w-full h-full">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-2xl sm:text-3xl">{guide.icon}</span>
-                      <span className={`text-[10px] sm:text-xs font-medium ${isLight ? 'text-slate-400' : 'text-white/30'}`}>{guide.readTime}</span>
-                    </div>
-                    <h3 className={`text-sm sm:text-lg font-bold ${isLight ? 'text-slate-900' : 'text-white'} mb-1.5 leading-snug`}>
-                      {guide.title}
-                    </h3>
-                    <p className={`text-[11px] sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} leading-relaxed mb-2.5`}>
-                      {guide.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1">
-                      {guide.topics.map((topic) => (
-                        <span
-                          key={topic}
-                          className={`px-1.5 py-0.5 text-[9px] sm:text-[10px] font-semibold rounded ${
-                            isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/[0.06] text-white/40'
-                          }`}
-                        >
-                          {topic}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                  <div className="text-[10px] font-bold uppercase tracking-wide text-white/35">{a.category}</div>
+                  <div className="mt-0.5 text-[13px] font-semibold leading-snug line-clamp-2">{a.title}</div>
                 </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA */}
+        {/* Phase D topic clusters */}
+        <section className="px-3 sm:px-6 pb-6 sm:pb-8" aria-labelledby="learn-clusters-heading">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-end justify-between gap-3 mb-3">
+              <div>
+                <h2 id="learn-clusters-heading" className="text-sm sm:text-base font-bold">
+                  Start with a topic cluster
+                </h2>
+                <p className="text-[11px] sm:text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
+                  Product-aligned paths — builders first, investing secondary
+                </p>
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
+              {LEARN_CLUSTERS.map((cluster) => {
+                const hub = getLearnArticle(cluster.hubSlug);
+                return (
+                  <div
+                    key={cluster.id}
+                    className="rounded-xl border border-white/10 bg-[#0c0c0e] p-3.5 sm:p-4 flex flex-col"
+                  >
+                    <h3 className="text-[13px] sm:text-sm font-bold leading-snug">{cluster.title}</h3>
+                    <p className="mt-1 text-[11px] sm:text-xs leading-relaxed flex-1" style={{ color: 'var(--text-secondary)' }}>
+                      {cluster.description}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      <Link
+                        href={`/learn/${cluster.hubSlug}`}
+                        className="rounded-lg bg-white text-black px-2.5 py-1.5 text-[11px] font-bold"
+                      >
+                        {hub?.title ? 'Open hub' : 'Open guide'}
+                      </Link>
+                      <Link
+                        href={cluster.toolHref}
+                        className="rounded-lg border border-white/15 px-2.5 py-1.5 text-[11px] font-semibold text-white/75"
+                      >
+                        {cluster.toolLabel}
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         <section className="px-3 sm:px-6 pb-8 sm:pb-14">
           <div className="max-w-5xl mx-auto">
-            <div className={`p-3.5 sm:p-6 ${isLight ? 'bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200/60' : 'bg-gradient-to-br from-slate-400/10 to-transparent border-slate-400/20'} border rounded-xl sm:rounded-2xl`}>
-              <h2 className={`text-base sm:text-2xl font-bold mb-1.5 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>Ready to find your domain?</h2>
-              <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} text-xs sm:text-base mb-3 sm:mb-6`}>
-                Use our tools to search, generate, and compare domain names across 1,600+ extensions.
+            <LearnCatalog articles={articles} categories={categories} />
+          </div>
+        </section>
+
+        <section className="px-3 sm:px-6 pb-8 sm:pb-14">
+          <div className="max-w-5xl mx-auto">
+            <div className="p-3.5 sm:p-6 border border-white/10 bg-[#0c0c0e] rounded-xl sm:rounded-2xl">
+              <h2 className="text-base sm:text-2xl font-bold mb-1.5 sm:mb-3">Ready to apply what you learned?</h2>
+              <p className="text-xs sm:text-base mb-3 sm:mb-5" style={{ color: 'var(--text-secondary)' }}>
+                Search availability, compare regular registrar prices, or look up live RDAP data.
               </p>
-              <div className="flex flex-wrap gap-2 sm:gap-4">
-                <Link
-                  href="/"
-                  className={`px-3 py-2 sm:px-6 sm:py-3 text-xs sm:text-sm ${isLight ? 'bg-slate-900 text-white hover:bg-slate-800' : 'bg-white text-black hover:bg-white/90'} font-semibold rounded-lg transition-colors`}
-                >
-                  Search Domains
+              <div className="flex flex-wrap gap-2 sm:gap-3">
+                <Link href="/" className="px-3 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm bg-white text-black font-semibold rounded-lg">
+                  Search domains
                 </Link>
                 <Link
-                  href="/bulk-search"
-                  className={`px-3 py-2 sm:px-6 sm:py-3 text-xs sm:text-sm ${isLight ? 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50' : 'bg-white/10 text-white hover:bg-white/20'} font-semibold rounded-lg transition-colors`}
+                  href="/tools/compare"
+                  className="px-3 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm border border-white/15 text-white/80 font-semibold rounded-lg"
                 >
-                  Bulk Search
+                  Price compare
                 </Link>
                 <Link
-                  href="/generator"
-                  className={`px-3 py-2 sm:px-6 sm:py-3 text-xs sm:text-sm ${isLight ? 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50' : 'bg-white/10 text-white hover:bg-white/20'} font-semibold rounded-lg transition-colors`}
+                  href="/tools/whois"
+                  className="px-3 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm border border-white/15 text-white/80 font-semibold rounded-lg"
                 >
-                  AI Generator
+                  WHOIS lookup
+                </Link>
+                <Link
+                  href="/blog/tlds"
+                  className="px-3 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm border border-white/15 text-white/80 font-semibold rounded-lg"
+                >
+                  TLD encyclopedia
                 </Link>
               </div>
+              <p className="mt-4 text-[11px] leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                {meta.sourceNotes?.[0]}
+              </p>
             </div>
           </div>
         </section>

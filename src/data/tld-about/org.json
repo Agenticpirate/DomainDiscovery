@@ -1,0 +1,129 @@
+{
+  "tld": ".org",
+  "slug": "org",
+  "title": "About .org domains",
+  "delegationTitle": "Delegation Record for .ORG",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Public Interest Registry (PIR)",
+  "sponsorDetail": "Public Interest Registry (PIR)\n11911 Freedom Drive,\n10th Floor, Suite 1000\nReston VA 20190\nUnited States of America (the)",
+  "administrativeContact": "Director of Operations, Compliance and Customer Support",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://publicinterestregistry.org",
+  "whoisServer": "whois.publicinterestregistry.org",
+  "rdapServer": "https://rdap.publicinterestregistry.org/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.org.afilias-nst.info",
+      "addresses": [
+        "199.19.56.1",
+        "2001:500:e:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.org.afilias-nst.info",
+      "addresses": [
+        "199.249.112.1",
+        "2001:500:40:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.org.afilias-nst.org",
+      "addresses": [
+        "199.19.54.1",
+        "2001:500:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b2.org.afilias-nst.org",
+      "addresses": [
+        "199.249.120.1",
+        "2001:500:48:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.org.afilias-nst.info",
+      "addresses": [
+        "199.19.53.1",
+        "2001:500:b:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d0.org.afilias-nst.org",
+      "addresses": [
+        "199.19.57.1",
+        "2001:500:f:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".ORG is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .ORG is listed by IANA as Public Interest Registry (PIR). Anyone can typically register a .ORG name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nThe domain name org is a generic top-level domain (gTLD) of the Domain Name System (DNS) used for Internet services. The name is truncated from organization. It was one of the original domains established in 1985, and has been operated by the Public Interest Registry since 2003. The domain was originally \"intended as the miscellaneous TLD for organizations that didn't fit anywhere else\". It is commonly used by non-profit organizations, open-source projects, and communities, but is an open domain that can be used by anyone. The number of registered domains in .org increased from fewer than one million in the 1990s to ten million in 2012, and has held steady between ten and eleven million since then.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/org.html",
+  "wikipedia": "The domain name org is a generic top-level domain (gTLD) of the Domain Name System (DNS) used for Internet services. The name is truncated from organization. It was one of the original domains established in 1985, and has been operated by the Public Interest Registry since 2003. The domain was originally \"intended as the miscellaneous TLD for organizations that didn't fit anywhere else\". It is commonly used by non-profit organizations, open-source projects, and communities, but is an open domain that can be used by anyone. The number of registered domains in .org increased from fewer than one million in the 1990s to ten million in 2012, and has held steady between ten and eleven million since then.",
+  "scrapedAt": "2026-07-21T21:33:38Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".org",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "interest",
+    "level",
+    "org",
+    "public",
+    "registry",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 56,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$6.85",
+      "value": 6.85
+    },
+    "cheapestRenewal": {
+      "registrar": "Cloudflare",
+      "price": "$10.11",
+      "value": 10.11
+    },
+    "sourceUrl": "https://tld-list.com/tld/org"
+  },
+  "summary": ".org is a Generic top-level domain. Managed by Public Interest Registry (PIR).",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

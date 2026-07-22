@@ -1,0 +1,119 @@
+{
+  "tld": ".blog",
+  "slug": "blog",
+  "title": "About .blog domains",
+  "delegationTitle": "Delegation Record for .BLOG",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Knock Knock WHOIS There, LLC",
+  "sponsorDetail": "Knock Knock WHOIS There, LLC\n60 29th Street\nSan Francisco CA 94110\nUnited States of America (the)",
+  "administrativeContact": "Head of Business Development",
+  "technicalContact": "Fury Registry Services",
+  "registryUrl": "http://nic.blog",
+  "whoisServer": "whois.nic.blog",
+  "rdapServer": "https://rdap.blog.fury.ca/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.ns.nic.blog",
+      "addresses": [
+        "185.159.197.9",
+        "2620:10a:80aa:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "b.ns.nic.blog",
+      "addresses": [
+        "185.159.198.9",
+        "2620:10a:80ab:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "c.ns.nic.blog",
+      "addresses": [
+        "45.142.220.101",
+        "2a0e:dbc0:0:0:0:0:0:101"
+      ]
+    },
+    {
+      "host": "d.ns.nic.blog",
+      "addresses": [
+        "185.159.199.9",
+        "2620:10a:80ac:0:0:0:0:9"
+      ]
+    }
+  ],
+  "about": ".BLOG is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .BLOG is listed by IANA as Knock Knock WHOIS There, LLC. Anyone can typically register a .BLOG name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nThe domain name .blog is a generic top level domain (gTLD) in the Domain Name System of the Internet. Added in 2016, it is intended to be used for blogs.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/blog.html",
+  "wikipedia": "The domain name .blog is a generic top level domain (gTLD) in the Domain Name System of the Internet. Added in 2016, it is intended to be used for blogs.",
+  "scrapedAt": "2026-07-21T21:33:28Z",
+  "categories": [
+    "creative"
+  ],
+  "useCases": [
+    "Portfolios",
+    "Agencies",
+    "Content creators",
+    "Media"
+  ],
+  "keywords": [
+    ".blog",
+    "agencies",
+    "blog",
+    "content creators",
+    "creative",
+    "domain",
+    "generic",
+    "gtld",
+    "knock",
+    "level",
+    "portfolios",
+    "there",
+    "top",
+    "whois"
+  ],
+  "primaryCategory": "creative",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 48,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$2.05",
+      "value": 2.05
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$20.18",
+      "value": 20.18
+    },
+    "sourceUrl": "https://tld-list.com/tld/blog"
+  },
+  "summary": ".blog is a Generic top-level domain. Managed by Knock Knock WHOIS There, LLC.",
+  "wikiEnrichedAt": "2026-07-22T04:12:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

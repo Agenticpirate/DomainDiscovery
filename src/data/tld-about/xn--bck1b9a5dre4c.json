@@ -1,0 +1,117 @@
+{
+  "tld": ".xn--bck1b9a5dre4c",
+  "slug": "xn--bck1b9a5dre4c",
+  "title": "About .xn--bck1b9a5dre4c domains",
+  "delegationTitle": "Delegation Record for .\u30d5\u30a1\u30c3\u30b7\u30e7\u30f3",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Amazon Registry Services, Inc.",
+  "sponsorDetail": "Amazon Registry Services, Inc.\n410 Terry Avenue North\nSeattle WA 98109\nUnited States of America (the)",
+  "administrativeContact": "Program Manager, Registry",
+  "technicalContact": "Howard Eland, Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.nic.xn--bck1b9a5dre4c",
+  "whoisServer": "whois.nic.xn--bck1b9a5dre4c",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "v0n0.nic.xn--bck1b9a5dre4c",
+      "addresses": [
+        "65.22.76.4",
+        "2a01:8840:4a:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "v0n1.nic.xn--bck1b9a5dre4c",
+      "addresses": [
+        "65.22.77.4",
+        "2a01:8840:4b:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "v0n2.nic.xn--bck1b9a5dre4c",
+      "addresses": [
+        "65.22.78.4",
+        "2a01:8840:4c:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "v0n3.nic.xn--bck1b9a5dre4c",
+      "addresses": [
+        "161.232.38.4",
+        "2a01:8840:10c:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "v2n0.nic.xn--bck1b9a5dre4c",
+      "addresses": [
+        "65.22.79.4",
+        "2a01:8840:4d:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "v2n1.nic.xn--bck1b9a5dre4c",
+      "addresses": [
+        "161.232.39.4",
+        "2a01:8840:10d:0:0:0:0:4"
+      ]
+    }
+  ],
+  "about": ".XN--BCK1B9A5DRE4C is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--BCK1B9A5DRE4C is listed by IANA as Amazon Registry Services, Inc.. Anyone can typically register a .XN--BCK1B9A5DRE4C name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--bck1b9a5dre4c.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:20Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--bck1b9a5dre4c",
+    "amazon",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "level",
+    "registry",
+    "services",
+    "top",
+    "xn--bck1b9a5dre4c"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--bck1b9a5dre4c is a Generic top-level domain. Managed by Amazon Registry Services, Inc..",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

@@ -1,0 +1,119 @@
+{
+  "tld": ".nr",
+  "slug": "nr",
+  "title": "About .nr domains",
+  "delegationTitle": "Delegation Record for .NR",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Nauru",
+  "sponsor": "CENPAC NET",
+  "sponsorDetail": "CENPAC NET\nCivic Centre\nAiwo District\nNauru",
+  "administrativeContact": "Criden Appi",
+  "technicalContact": "Director for ICT",
+  "registryUrl": "http://www.cenpac.net.nr",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1998-03-30",
+  "recordUpdated": "2020-03-09",
+  "nameServers": [
+    {
+      "host": "ns0.cenpac.net.nr",
+      "addresses": [
+        "203.98.224.66"
+      ]
+    },
+    {
+      "host": "ns1.cenpac.net.nr",
+      "addresses": [
+        "203.98.225.9"
+      ]
+    },
+    {
+      "host": "ns2.cenpac.net.nr",
+      "addresses": [
+        "202.144.128.200",
+        "2405:d000:0:100:0:0:0:200"
+      ]
+    },
+    {
+      "host": "phloem.uoregon.edu",
+      "addresses": [
+        "128.223.32.35",
+        "2001:468:d01:20:0:0:80df:2023"
+      ]
+    }
+  ],
+  "about": ".NR is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Nauru. The IANA root zone lists the registry manager as CENPAC NET. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.nr is the Internet country code top-level domain (ccTLD) for Nauru. Domains must be paid, and can be ordered from CenpacNet, Nauru's Internet service provider.\nThe original configuration of the .nr TLD domain was performed by Shaun Moran of ComTech Communications (Australia) in 1998 as part of the first Internet connectivity on the island. There was a lengthy process with IANA to get the .nr domain approved and assigned at the time. The setup of .nr was done in 2002 by Franck Martin using specific custom code.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/nr.html",
+  "wikipedia": ".nr is the Internet country code top-level domain (ccTLD) for Nauru. Domains must be paid, and can be ordered from CenpacNet, Nauru's Internet service provider.\nThe original configuration of the .nr TLD domain was performed by Shaun Moran of ComTech Communications (Australia) in 1998 as part of the first Internet connectivity on the island. There was a lengthy process with IANA to get the .nr domain approved and assigned at the time. The setup of .nr was done in 2002 by Franck Martin using specific custom code.",
+  "scrapedAt": "2026-07-21T21:46:33Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".nr",
+    "cctld",
+    "cenpac",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "nauru",
+    "nr",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 6,
+    "cheapestRegistration": {
+      "registrar": "Marcaria International",
+      "price": "$718.00",
+      "value": 718.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$739.99",
+      "value": 739.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/nr"
+  },
+  "summary": ".nr is a Country-code top-level domain. Managed by CENPAC NET.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

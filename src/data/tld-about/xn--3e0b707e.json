@@ -1,0 +1,125 @@
+{
+  "tld": ".xn--3e0b707e",
+  "slug": "xn--3e0b707e",
+  "title": "About .xn--3e0b707e domains",
+  "delegationTitle": "Delegation Record for .\ud55c\uad6d",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code KR",
+  "designation": "Country-code top-level domain designated for Korea, Republic of",
+  "sponsor": "KISA (Korea Internet & Security Agency)",
+  "sponsorDetail": "KISA (Korea Internet & Security Agency)\n9, Jinheung-gil\nNaju-si Jeollanam-do 58324\nKorea (the Republic of)",
+  "administrativeContact": "KRNIC Policy Team Manager",
+  "technicalContact": "KRNIC Tech Team Manager",
+  "registryUrl": "http://www.nic.or.kr",
+  "whoisServer": "whois.kr",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "b.dns.kr",
+      "addresses": [
+        "210.101.60.1"
+      ]
+    },
+    {
+      "host": "c.dns.kr",
+      "addresses": [
+        "210.101.61.1"
+      ]
+    },
+    {
+      "host": "d.dns.kr",
+      "addresses": [
+        "203.83.159.1",
+        "2001:dcc:4:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "e.dns.kr",
+      "addresses": [
+        "202.30.124.100",
+        "2001:dcc:5:0:0:0:0:100"
+      ]
+    },
+    {
+      "host": "f.dns.kr",
+      "addresses": [
+        "210.101.62.1",
+        "2001:dcc:6:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "g.dns.kr",
+      "addresses": [
+        "202.31.190.1",
+        "2001:dc5:a:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".XN--3E0B707E is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Korea, Republic of. The IANA root zone lists the registry manager as KISA (Korea Internet & Security Agency). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--3e0b707e.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:52:55Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--3e0b707e",
+    "agency",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "internet",
+    "kisa",
+    "korea",
+    "letter",
+    "level",
+    "local business",
+    "regional brands",
+    "republic",
+    "security",
+    "top",
+    "two",
+    "xn--3e0b707e"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--3e0b707e is a Country-code top-level domain designated for two-letter country code KR. Managed by KISA (Korea Internet & Security Agency).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

@@ -1,0 +1,104 @@
+{
+  "tld": ".xn--54b7fta0cc",
+  "slug": "xn--54b7fta0cc",
+  "title": "About .xn--54b7fta0cc domains",
+  "delegationTitle": "Delegation Record for .\u09ac\u09be\u0982\u09b2\u09be",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code BD",
+  "designation": "Country-code top-level domain designated for Bangladesh",
+  "sponsor": "Posts and Telecommunications Division",
+  "sponsorDetail": "Posts and Telecommunications Division\nMinistry of Posts, Telecommunications and Information Technology, Government of the People's Republic of Bangladesh\nAbdul Goni Road\nDhaka 1000\nBangladesh",
+  "administrativeContact": "Deputy Secretary",
+  "technicalContact": "Deputy General Manager (Domain)",
+  "registryUrl": "http://domainreg.btcl.com.bd/",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "bayanno.btcl.net.bd",
+      "addresses": [
+        "180.211.212.213",
+        "2407:5000:88:2:0:0:0:3"
+      ]
+    },
+    {
+      "host": "bd-ns.anycast.pch.net",
+      "addresses": [
+        "204.61.216.108",
+        "2001:500:14:6108:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ekushey.btcl.net.bd",
+      "addresses": [
+        "123.49.50.51",
+        "2407:5000:88:1:0:0:0:2"
+      ]
+    }
+  ],
+  "about": ".XN--54B7FTA0CC is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Bangladesh. The IANA root zone lists the registry manager as Posts and Telecommunications Division. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--54b7fta0cc.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:05Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--54b7fta0cc",
+    "bangladesh",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "division",
+    "domain",
+    "for",
+    "geo",
+    "letter",
+    "level",
+    "local business",
+    "posts",
+    "regional brands",
+    "telecommunications",
+    "top",
+    "two",
+    "xn--54b7fta0cc"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--54b7fta0cc is a Country-code top-level domain designated for two-letter country code BD. Managed by Posts and Telecommunications Division.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

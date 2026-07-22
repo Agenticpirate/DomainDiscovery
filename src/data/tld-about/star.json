@@ -1,0 +1,104 @@
+{
+  "tld": ".star",
+  "slug": "star",
+  "title": "About .star domains",
+  "delegationTitle": "Delegation Record for .STAR",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Star India Private Limited",
+  "sponsorDetail": "Star India Private Limited\nStar House, Off Dr.E.Moses Road, Mahalaxmi\nMumbai Maharashtra 400011\nIndia",
+  "administrativeContact": "Director - Data Engineering & Platforms",
+  "technicalContact": "Howard Eland, Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.startv.com",
+  "whoisServer": "whois.nic.star",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.star",
+      "addresses": [
+        "65.22.56.9",
+        "2a01:8840:36:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "a2.nic.star",
+      "addresses": [
+        "65.22.59.9",
+        "2a01:8840:39:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "b0.nic.star",
+      "addresses": [
+        "65.22.57.9",
+        "2a01:8840:37:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "c0.nic.star",
+      "addresses": [
+        "65.22.58.9",
+        "2a01:8840:38:0:0:0:0:9"
+      ]
+    }
+  ],
+  "about": ".STAR is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .STAR is listed by IANA as Star India Private Limited. Anyone can typically register a .STAR name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/star.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:50:14Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".star",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "india",
+    "level",
+    "limited",
+    "private",
+    "star",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".star is a Generic top-level domain. Managed by Star India Private Limited.",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

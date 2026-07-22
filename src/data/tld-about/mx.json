@@ -1,0 +1,134 @@
+{
+  "tld": ".mx",
+  "slug": "mx",
+  "title": "About .mx domains",
+  "delegationTitle": "Delegation Record for .MX",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Mexico",
+  "sponsor": "NIC-Mexico",
+  "sponsorDetail": "NIC-Mexico\nITESM - Campus Monterrey\nAv. Revolucion 2703 1\nNuevo Sur, Torre 2, Piso 3\nCol. Ladrillera\nMonterrey Nuevo Leon 64830\nMexico",
+  "administrativeContact": "POC ADM IANA",
+  "technicalContact": "POC TECH IANA",
+  "registryUrl": "http://www.registry.mx/",
+  "whoisServer": "whois.mx",
+  "rdapServer": null,
+  "registrationDate": "1989-02-01",
+  "recordUpdated": "2026-02-28",
+  "nameServers": [
+    {
+      "host": "c.mx-ns.mx",
+      "addresses": [
+        "192.100.224.1",
+        "2001:1258:0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "e.mx-ns.mx",
+      "addresses": [
+        "189.201.244.1",
+        "2801:c4:c0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "i.mx-ns.mx",
+      "addresses": [
+        "207.248.68.1",
+        "2801:c4:d0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "m.mx-ns.mx",
+      "addresses": [
+        "200.94.176.1",
+        "2001:13c7:7000:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "o.mx-ns.mx",
+      "addresses": [
+        "200.23.1.1",
+        "2001:1201:0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "x.mx-ns.mx",
+      "addresses": [
+        "201.131.252.1",
+        "2001:1201:10:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".MX is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Mexico. The IANA root zone lists the registry manager as NIC-Mexico. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.mx is the Internet country code top-level domain (ccTLD) for Mexico, which in 2009 was re-opened to new registrations by NIC M\u00e9xico. In 2009, the .mx ccTLD was rolled out in three steps:\n\nSunrise period from 1 May to 31 July 2009, waiting period, registrants who have already registered any other .MX second-level domain were able to register their domain for one year\nWaiting period from 1 August to 31 August 2009, to set up the domains registered in the Sunrise period, and to resolve domain name disputes\nInitial registration period from 1 September to 31 October 2009; in this part the registration will be done with the policy first-come, first-served and only for one year with a special set of prices.\nAfter the three phases, .mx registrations were opened to the public.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mx.html",
+  "wikipedia": ".mx is the Internet country code top-level domain (ccTLD) for Mexico, which in 2009 was re-opened to new registrations by NIC M\u00e9xico. In 2009, the .mx ccTLD was rolled out in three steps:\n\nSunrise period from 1 May to 31 July 2009, waiting period, registrants who have already registered any other .MX second-level domain were able to register their domain for one year\nWaiting period from 1 August to 31 August 2009, to set up the domains registered in the Sunrise period, and to resolve domain name disputes\nInitial registration period from 1 September to 31 October 2009; in this part the registration will be done with the policy first-come, first-served and only for one year with a special set of prices.\nAfter the three phases, .mx registrations were opened to the public.",
+  "scrapedAt": "2026-07-21T21:45:56Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".mx",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "mexico",
+    "mx",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 43,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$17.71",
+      "value": 17.71
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$24.44",
+      "value": 24.44
+    },
+    "sourceUrl": "https://tld-list.com/tld/mx"
+  },
+  "summary": ".mx is a Country-code top-level domain. Managed by NIC-Mexico.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

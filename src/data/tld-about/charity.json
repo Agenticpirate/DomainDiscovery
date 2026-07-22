@@ -1,0 +1,130 @@
+{
+  "tld": ".charity",
+  "slug": "charity",
+  "title": "About .charity domains",
+  "delegationTitle": "Delegation Record for .CHARITY",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Public Interest Registry (PIR)",
+  "sponsorDetail": "Public Interest Registry (PIR)\n11911 Freedom Drive 10th Floor, Suite 1000\nReston VA 20190\nUnited States of America (the)",
+  "administrativeContact": "Director of Operations, Compliance and Customer Support",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://nic.charity",
+  "whoisServer": "whois.nic.charity",
+  "rdapServer": "https://rdap.publicinterestregistry.org/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "v0n0.nic.charity",
+      "addresses": [
+        "65.22.20.61",
+        "2a01:8840:16:0:0:0:0:61"
+      ]
+    },
+    {
+      "host": "v0n1.nic.charity",
+      "addresses": [
+        "65.22.21.61",
+        "2a01:8840:17:0:0:0:0:61"
+      ]
+    },
+    {
+      "host": "v0n2.nic.charity",
+      "addresses": [
+        "65.22.22.61",
+        "2a01:8840:18:0:0:0:0:61"
+      ]
+    },
+    {
+      "host": "v0n3.nic.charity",
+      "addresses": [
+        "161.232.10.61",
+        "2a01:8840:f4:0:0:0:0:61"
+      ]
+    },
+    {
+      "host": "v2n0.nic.charity",
+      "addresses": [
+        "65.22.23.61",
+        "2a01:8840:19:0:0:0:0:61"
+      ]
+    },
+    {
+      "host": "v2n1.nic.charity",
+      "addresses": [
+        "161.232.11.61",
+        "2a01:8840:f5:0:0:0:0:61"
+      ]
+    }
+  ],
+  "about": ".CHARITY is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .CHARITY is listed by IANA as Public Interest Registry (PIR). Anyone can typically register a .CHARITY name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/charity.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:37:22Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".charity",
+    "brand",
+    "brandable names",
+    "charity",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "interest",
+    "level",
+    "public",
+    "registry",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 37,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$4.61",
+      "value": 4.61
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$21.17",
+      "value": 21.17
+    },
+    "sourceUrl": "https://tld-list.com/tld/charity"
+  },
+  "summary": ".charity is a Generic top-level domain. Managed by Public Interest Registry (PIR).",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

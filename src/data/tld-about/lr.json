@@ -1,0 +1,123 @@
+{
+  "tld": ".lr",
+  "slug": "lr",
+  "title": "About .lr domains",
+  "delegationTitle": "Delegation Record for .LR",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Liberia",
+  "sponsor": "Data Technology Solutions, Inc.",
+  "sponsorDetail": "Data Technology Solutions, Inc.\nFirst National Merchant Bank Plaza\nBroadstreet\nMonrovia 10-6053\nLiberia",
+  "administrativeContact": "Mai Bright Urey",
+  "technicalContact": "Randy Bush",
+  "registryUrl": "http://psg.com/dns/lr",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1997-04-09",
+  "recordUpdated": "2026-01-10",
+  "nameServers": [
+    {
+      "host": "fork.sth.dnsnode.net",
+      "addresses": [
+        "77.72.229.254",
+        "2a01:3f0:0:306:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns-lr.afrinic.net",
+      "addresses": [
+        "196.216.168.61",
+        "2001:43f8:120:0:0:0:0:61"
+      ]
+    },
+    {
+      "host": "ns1.rg.net",
+      "addresses": [
+        "46.224.94.61",
+        "2a01:4f8:1c1a:5360:0:0:0:1"
+      ]
+    },
+    {
+      "host": "rip.psg.com",
+      "addresses": [
+        "147.28.0.39",
+        "2001:418:1:0:0:0:0:39"
+      ]
+    }
+  ],
+  "about": ".LR is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Liberia. The IANA root zone lists the registry manager as Data Technology Solutions, Inc.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.lr is the Internet country code top-level domain (ccTLD) for Liberia.  The registration is limited to those with a local presence and intent to use the domain. \nRegistration under the domain requires specific second-level domains (COM.LR, ORG.LR, NET.LR, etc.).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/lr.html",
+  "wikipedia": ".lr is the Internet country code top-level domain (ccTLD) for Liberia.  The registration is limited to those with a local presence and intent to use the domain. \nRegistration under the domain requires specific second-level domains (COM.LR, ORG.LR, NET.LR, etc.).",
+  "scrapedAt": "2026-07-21T21:44:34Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".lr",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "data",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "liberia",
+    "local business",
+    "lr",
+    "regional brands",
+    "solutions",
+    "technology",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 1,
+    "cheapestRegistration": {
+      "registrar": "Gandi.net",
+      "price": "$195.50",
+      "value": 195.5
+    },
+    "cheapestRenewal": {
+      "registrar": "Gandi.net",
+      "price": "$375.98",
+      "value": 375.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/lr"
+  },
+  "summary": ".lr is a Country-code top-level domain. Managed by Data Technology Solutions, Inc..",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,133 @@
+{
+  "tld": ".bank",
+  "slug": "bank",
+  "title": "About .bank domains",
+  "delegationTitle": "Delegation Record for .BANK",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "fTLD Registry Services, LLC",
+  "sponsorDetail": "fTLD Registry Services, LLC\n1300 Eye Street, NW\nSuite 1100 West\nWashington DC 20005\nUnited States of America (the)",
+  "administrativeContact": "Managing Director",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "https://www.ftld.com/",
+  "whoisServer": "whois.nic.bank",
+  "rdapServer": "https://rdap.nic.bank/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "d.nic.bank",
+      "addresses": [
+        "156.154.103.27",
+        "2610:a1:1010:0:0:0:0:27"
+      ]
+    },
+    {
+      "host": "e.nic.bank",
+      "addresses": [
+        "156.154.104.27",
+        "2610:a1:1011:0:0:0:0:27"
+      ]
+    },
+    {
+      "host": "f.nic.bank",
+      "addresses": [
+        "156.154.105.27",
+        "2610:a1:1012:0:0:0:0:27"
+      ]
+    },
+    {
+      "host": "w.nic.bank",
+      "addresses": [
+        "37.209.192.10",
+        "2001:dcd:1:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "x.nic.bank",
+      "addresses": [
+        "37.209.194.10",
+        "2001:dcd:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "y.nic.bank",
+      "addresses": [
+        "37.209.196.10",
+        "2001:dcd:3:0:0:0:0:10"
+      ]
+    }
+  ],
+  "about": ".BANK is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .BANK is listed by IANA as fTLD Registry Services, LLC. Anyone can typically register a .BANK name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.bank is a generic top level domain (gTLD) used in the Domain Name System of the internet. The TLD was officially delegated to fTLD Registry Services on behalf of the Financial Services Roundtable and the American Bankers Association on January 5, 2015.\nThe top-level domain was approved by ICANN in September 2014, but only became available to qualifying institutions the following year in May 2015. The .bank TLD has been included in the HSTS preload-list; as a result, popular web browsers will only connect to a .bank webpage using HTTPS.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bank.html",
+  "wikipedia": ".bank is a generic top level domain (gTLD) used in the Domain Name System of the internet. The TLD was officially delegated to fTLD Registry Services on behalf of the Financial Services Roundtable and the American Bankers Association on January 5, 2015.\nThe top-level domain was approved by ICANN in September 2014, but only became available to qualifying institutions the following year in May 2015. The .bank TLD has been included in the HSTS preload-list; as a result, popular web browsers will only connect to a .bank webpage using HTTPS.",
+  "scrapedAt": "2026-07-21T21:35:27Z",
+  "categories": [
+    "finance"
+  ],
+  "useCases": [
+    "Fintech",
+    "Banks",
+    "Investing"
+  ],
+  "keywords": [
+    ".bank",
+    "bank",
+    "banks",
+    "domain",
+    "finance",
+    "fintech",
+    "ftld",
+    "generic",
+    "gtld",
+    "investing",
+    "level",
+    "registry",
+    "services",
+    "top"
+  ],
+  "primaryCategory": "finance",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 13,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$789.99",
+      "value": 789.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$789.99",
+      "value": 789.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/bank"
+  },
+  "summary": ".bank is a Generic top-level domain. Managed by fTLD Registry Services, LLC.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

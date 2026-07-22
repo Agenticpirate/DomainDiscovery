@@ -1,0 +1,128 @@
+{
+  "tld": ".fj",
+  "slug": "fj",
+  "title": "About .fj domains",
+  "delegationTitle": "Delegation Record for .FJ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Fiji",
+  "sponsor": "The University of the South Pacific",
+  "sponsorDetail": "The University of the South Pacific\nIT Services\nLaucala Bay Campus,\nICT Building A\nSuva\nFiji",
+  "administrativeContact": "Director IT Services",
+  "technicalContact": "Manager Systems & Networks Infrastructure",
+  "registryUrl": "https://www.domains.fj/",
+  "whoisServer": "www.whois.fj",
+  "rdapServer": "https://www.rdap.fj",
+  "registrationDate": "1992-06-03",
+  "recordUpdated": "2025-08-25",
+  "nameServers": [
+    {
+      "host": "ns1.fj",
+      "addresses": [
+        "144.120.146.1",
+        "2402:2940:100:100c:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns2.fj",
+      "addresses": [
+        "144.120.146.65",
+        "2402:2940:100:100d:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns3.fj",
+      "addresses": [
+        "185.38.108.108"
+      ]
+    },
+    {
+      "host": "ns4.fj",
+      "addresses": [
+        "185.28.194.194"
+      ]
+    },
+    {
+      "host": "ns5.fj",
+      "addresses": [
+        "204.61.216.138",
+        "2001:500:14:6138:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".FJ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Fiji. The IANA root zone lists the registry manager as The University of the South Pacific. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.fj is the country code top-level domain (ccTLD) for Fiji. Domain names can not be registered directly under .fj, but must be registered as a third level name. The .fj TLD was registered in 1992 and is currently administered by The University of the South Pacific IT Services.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/fj.html",
+  "wikipedia": ".fj is the country code top-level domain (ccTLD) for Fiji. Domain names can not be registered directly under .fj, but must be registered as a third level name. The .fj TLD was registered in 1992 and is currently administered by The University of the South Pacific IT Services.",
+  "scrapedAt": "2026-07-21T21:40:17Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".fj",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "fiji",
+    "fj",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "pacific",
+    "regional brands",
+    "south",
+    "top",
+    "university"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 1,
+    "cheapestRegistration": {
+      "registrar": "Gandi.net",
+      "price": "$390.00",
+      "value": 390.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Gandi.net",
+      "price": "$655.98",
+      "value": 655.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/fj"
+  },
+  "summary": ".fj is a Country-code top-level domain. Managed by The University of the South Pacific.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,126 @@
+{
+  "tld": ".pg",
+  "slug": "pg",
+  "title": "About .pg domains",
+  "delegationTitle": "Delegation Record for .PG",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Papua New Guinea",
+  "sponsor": "PNG DNS Administration, Vice Chancellors Office, The Papua New Guinea University of Technology",
+  "sponsorDetail": "PNG DNS Administration, Vice Chancellors Office, The Papua New Guinea University of Technology\nPrivate Mail Bag\nLae Morobe\nPapua New Guinea",
+  "administrativeContact": "Network & Communications Manager",
+  "technicalContact": "Systems Engineer",
+  "registryUrl": null,
+  "whoisServer": "whois.nic.pg",
+  "rdapServer": "https://rdap.nic.pg",
+  "registrationDate": "1991-09-26",
+  "recordUpdated": "2025-08-22",
+  "nameServers": [
+    {
+      "host": "dns.pch.pg",
+      "addresses": [
+        "204.61.216.152",
+        "2001:500:14:6152:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "gransy1.nic.pg",
+      "addresses": [
+        "185.28.194.194",
+        "2a00:fea0:dead:0:0:0:0:beef"
+      ]
+    },
+    {
+      "host": "gransy2.nic.pg",
+      "addresses": [
+        "185.38.108.108"
+      ]
+    },
+    {
+      "host": "uot.nic.pg",
+      "addresses": [
+        "202.1.32.125"
+      ]
+    }
+  ],
+  "about": ".PG is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Papua New Guinea. The IANA root zone lists the registry manager as PNG DNS Administration, Vice Chancellors Office, The Papua New Guinea University of Technology. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.pg is the Internet country code top-level domain (ccTLD) for Papua New Guinea.\nRegistrations are made beneath the second-level names .com.pg, .net.pg, .ac.pg, .gov.pg, .mil.pg, and .org.pg.\nThe dispute resolution policy is similar to that of Network Solutions prior to the institution of the UDRP in 2000; a trademark owner can object to a domain registration and this will result in the domain being placed on hold unless the registrant can also demonstrate trademark rights (and post bond to indemnify the registry), or else get a court ruling in their favor.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/pg.html",
+  "wikipedia": ".pg is the Internet country code top-level domain (ccTLD) for Papua New Guinea.\nRegistrations are made beneath the second-level names .com.pg, .net.pg, .ac.pg, .gov.pg, .mil.pg, and .org.pg.\nThe dispute resolution policy is similar to that of Network Solutions prior to the institution of the UDRP in 2000; a trademark owner can object to a domain registration and this will result in the domain being placed on hold unless the registrant can also demonstrate trademark rights (and post bond to indemnify the registry), or else get a court ruling in their favor.",
+  "scrapedAt": "2026-07-21T21:47:12Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".pg",
+    "administration",
+    "cctld",
+    "chancellors",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "guinea",
+    "level",
+    "local business",
+    "new",
+    "office",
+    "papua",
+    "pg",
+    "regional brands",
+    "technology",
+    "top",
+    "university",
+    "vice"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 1,
+    "cheapestRegistration": {
+      "registrar": "Gandi.net",
+      "price": "$260.00",
+      "value": 260.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Gandi.net",
+      "price": "$447.98",
+      "value": 447.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/pg"
+  },
+  "summary": ".pg is a Country-code top-level domain. Managed by PNG DNS Administration, Vice Chancellors Office, The Papua New Guinea University of Technology.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

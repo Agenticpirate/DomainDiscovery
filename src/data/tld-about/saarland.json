@@ -1,0 +1,116 @@
+{
+  "tld": ".saarland",
+  "slug": "saarland",
+  "title": "About .saarland domains",
+  "delegationTitle": "Delegation Record for .SAARLAND",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "dotSaarland GmbH",
+  "sponsorDetail": "dotSaarland GmbH\nIm Oberen Werk 1\nSt. Ingbert 66386\nGermany",
+  "administrativeContact": "Registry Service",
+  "technicalContact": "CTO",
+  "registryUrl": "http://www.nic-saarland.de",
+  "whoisServer": "whois.nic.saarland",
+  "rdapServer": "https://rdap.centralnic.com/saarland",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.saarland",
+      "addresses": [
+        "194.169.218.97",
+        "2001:67c:13cc:0:0:0:1:97"
+      ]
+    },
+    {
+      "host": "b.nic.saarland",
+      "addresses": [
+        "185.24.64.97",
+        "2a04:2b00:13cc:0:0:0:1:97"
+      ]
+    },
+    {
+      "host": "c.nic.saarland",
+      "addresses": [
+        "212.18.248.97",
+        "2a04:2b00:13ee:0:0:0:0:97"
+      ]
+    },
+    {
+      "host": "d.nic.saarland",
+      "addresses": [
+        "212.18.249.97",
+        "2a04:2b00:13ff:0:0:0:0:97"
+      ]
+    }
+  ],
+  "about": ".SAARLAND is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .SAARLAND is listed by IANA as dotSaarland GmbH. Anyone can typically register a .SAARLAND name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.saarland (dotSAARLAND) is an ICANN-approved generic top level domain (TLD). It falls into the category of Geographic TLDs (\"GeoTLDs\"). The new top level domain is meant for all people and businesses in the German Federal State of Saarland and those otherwise associated with Saarland. However, any natural person and any entity is eligible to register domain names in the .SAARLAND TLD.\nThe dotSaarland GmbH (nic.saarland) successfully applied for the right to operate the .SAARLAND extension and to allocate domains for this name space. The application was evaluated and accepted by the responsible Internet authority ICANN (Internet Corporation for Assigned Names and Numbers). The technical registry operator is KSregistry.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/saarland.html",
+  "wikipedia": ".saarland (dotSAARLAND) is an ICANN-approved generic top level domain (TLD). It falls into the category of Geographic TLDs (\"GeoTLDs\"). The new top level domain is meant for all people and businesses in the German Federal State of Saarland and those otherwise associated with Saarland. However, any natural person and any entity is eligible to register domain names in the .SAARLAND TLD.\nThe dotSaarland GmbH (nic.saarland) successfully applied for the right to operate the .SAARLAND extension and to allocate domains for this name space. The application was evaluated and accepted by the responsible Internet authority ICANN (Internet Corporation for Assigned Names and Numbers). The technical registry operator is KSregistry.",
+  "scrapedAt": "2026-07-21T21:48:51Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".saarland",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "dotsaarland",
+    "generic",
+    "gmbh",
+    "gtld",
+    "level",
+    "saarland",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 22,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$20.67",
+      "value": 20.67
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$20.88",
+      "value": 20.88
+    },
+    "sourceUrl": "https://tld-list.com/tld/saarland"
+  },
+  "summary": ".saarland is a Generic top-level domain. Managed by dotSaarland GmbH.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

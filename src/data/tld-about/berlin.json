@@ -1,0 +1,111 @@
+{
+  "tld": ".berlin",
+  "slug": "berlin",
+  "title": "About .berlin domains",
+  "delegationTitle": "Delegation Record for .BERLIN",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "dotBERLIN GmbH & Co. KG",
+  "sponsorDetail": "dotBERLIN GmbH & Co. KG\nGustav-Mueller-Strasse 1\nBerlin 10829\nGermany",
+  "administrativeContact": "Chief Executive Officer",
+  "technicalContact": "Technical Operations",
+  "registryUrl": "http://nic.berlin/",
+  "whoisServer": "whois.nic.berlin",
+  "rdapServer": "https://rdap.nic.berlin/v1/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.dns.nic.berlin",
+      "addresses": [
+        "194.0.25.16",
+        "2001:678:20:0:0:0:0:16"
+      ]
+    },
+    {
+      "host": "m.dns.nic.berlin",
+      "addresses": [
+        "194.0.26.5",
+        "2001:67c:10e0:0:0:0:0:5"
+      ]
+    },
+    {
+      "host": "n.dns.nic.berlin",
+      "addresses": [
+        "194.0.24.5",
+        "2001:678:24:0:0:0:0:5"
+      ]
+    }
+  ],
+  "about": ".BERLIN is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .BERLIN is listed by IANA as dotBERLIN GmbH & Co. KG. Anyone can typically register a .BERLIN name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.berlin (dotBERLIN) is an approved top-level domain (TLD) for the Internet. It is a community-based sponsored top-level domain for Berliners. According to the dotBERLIN Organization, .berlin will allow all Berliners to register their domains under .berlin \nAlong with TLDs such as .cat and .asia, .berlin and other new TLDs fall into the new category of GeoTLDs. The issue of new top level domains in general and .berlin in particular has been discussed at various ICANN-Meetings since 2005.\nA statement by proponents of the .berlin proposal reads thus:\n\n.berlin is the independent top-level domain of the community of Berliners (on) the Internet. The local addresses available with this are concise and create an identity for citizens, companies, and institutions. Those providing and looking for information, goods, and services can thus intuitively come together. The .berlin domains strengthen the feeling of community amongst Berliners, improve communication, and make interaction easier, thus providing a stimulus for innovation and development. Both for Berliners and for non-Berliners, places called Berlin become more attractive as a place to visit, as a commercial location and as a place to live.\nOn July 9, 2009, dotBERLIN managing director Dirk Krischenowski filed an application for a City Top-Level Domain Constituency, an interest group at ICANN. This interest group was the precursor of the Brussels-based GeoTLD Group AISBL, that was formed in September 2016 and whose mission is to \"Promoting Digital Identities for Cities, Regions, Language and Culture on the Internet\".\nOn October 31, 2013, dotBERLIN GmbH & Co. KG signed a registry agreement with ICANN for .berlin. The .berlin domain officially launched on March 18, 2014. As of March 2017, more than 59,000 sites have been registered under the domain.\nIn October 2018, dotBERLIN founded the nonprofit initiative Kiezhelden to support the local dealers. \"Kiez\" \u2013 that is a German word that refers to a city neighborhood, a relatively small community within a larger town. The second part of Kiezhelden, the word \"Helden\", is the German word for \"heroes\". Kiezhelden.berlin aims to strengthen the small boutiques, handicraft shops, restaurants, caf\u00e9s, and local service providers in Berlin's neighborhoods in order to help the neighborhoods to remain as colorful and vibrant as they are.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/berlin.html",
+  "wikipedia": ".berlin (dotBERLIN) is an approved top-level domain (TLD) for the Internet. It is a community-based sponsored top-level domain for Berliners. According to the dotBERLIN Organization, .berlin will allow all Berliners to register their domains under .berlin \nAlong with TLDs such as .cat and .asia, .berlin and other new TLDs fall into the new category of GeoTLDs. The issue of new top level domains in general and .berlin in particular has been discussed at various ICANN-Meetings since 2005.\nA statement by proponents of the .berlin proposal reads thus:\n\n.berlin is the independent top-level domain of the community of Berliners (on) the Internet. The local addresses available with this are concise and create an identity for citizens, companies, and institutions. Those providing and looking for information, goods, and services can thus intuitively come together. The .berlin domains strengthen the feeling of community amongst Berliners, improve communication, and make interaction easier, thus providing a stimulus for innovation and development. Both for Berliners and for non-Berliners, places called Berlin become more attractive as a place to visit, as a commercial location and as a place to live.\nOn July 9, 2009, dotBERLIN managing director Dirk Krischenowski filed an application for a City Top-Level Domain Constituency, an interest group at ICANN. This interest group was the precursor of the Brussels-based GeoTLD Group AISBL, that was formed in September 2016 and whose mission is to \"Promoting Digital Identities for Cities, Regions, Language and Culture on the Internet\".\nOn October 31, 2013, dotBERLIN GmbH & Co. KG signed a registry agreement with ICANN for .berlin. The .berlin domain officially launched on March 18, 2014. As of March 2017, more than 59,000 sites have been registered under the domain.\nIn October 2018, dotBERLIN founded the nonprofit initiative Kiezhelden to support the local dealers. \"Kiez\" \u2013 that is a German word that refers to a city neighborhood, a relatively small community within a larger town. The second part of Kiezhelden, the word \"Helden\", is the German word for \"heroes\". Kiezhelden.berlin aims to strengthen the small boutiques, handicraft shops, restaurants, caf\u00e9s, and local service providers in Berlin's neighborhoods in order to help the neighborhoods to remain as colorful and vibrant as they are.",
+  "scrapedAt": "2026-07-21T21:35:45Z",
+  "categories": [
+    "travel"
+  ],
+  "useCases": [
+    "Travel brands",
+    "Tourism",
+    "Hospitality"
+  ],
+  "keywords": [
+    ".berlin",
+    "berlin",
+    "domain",
+    "dotberlin",
+    "generic",
+    "gmbh",
+    "gtld",
+    "hospitality",
+    "level",
+    "top",
+    "tourism",
+    "travel",
+    "travel brands"
+  ],
+  "primaryCategory": "travel",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 34,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$43.03",
+      "value": 43.03
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$43.03",
+      "value": 43.03
+    },
+    "sourceUrl": "https://tld-list.com/tld/berlin"
+  },
+  "summary": ".berlin is a Generic top-level domain. Managed by dotBERLIN GmbH & Co. KG.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

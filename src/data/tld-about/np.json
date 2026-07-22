@@ -1,0 +1,127 @@
+{
+  "tld": ".np",
+  "slug": "np",
+  "title": "About .np domains",
+  "delegationTitle": "Delegation Record for .NP",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Nepal",
+  "sponsor": "Mercantile Communications Pvt. Ltd.",
+  "sponsorDetail": "Mercantile Communications Pvt. Ltd.\nHitti Pokhari, DurbarMarg, Kathmandu\nP.O.Box 876\nKathmandu Bagmati\nNepal",
+  "administrativeContact": "Sanjib Raj Bhandari",
+  "technicalContact": "Gyanendra Kumar Mishra",
+  "registryUrl": "http://www.mos.com.np",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1995-01-25",
+  "recordUpdated": "2025-07-14",
+  "nameServers": [
+    {
+      "host": "np-ns.npix.net.np",
+      "addresses": [
+        "198.32.126.50"
+      ]
+    },
+    {
+      "host": "np.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.102",
+        "2a13:27c0:30:0:0:0:0:102"
+      ]
+    },
+    {
+      "host": "ns4.apnic.net",
+      "addresses": [
+        "202.12.31.53",
+        "2001:dd8:12:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "pch.nnic.np",
+      "addresses": [
+        "204.61.216.11",
+        "2001:500:14:6011:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "shikhar.mos.com.np",
+      "addresses": [
+        "27.111.31.5"
+      ]
+    }
+  ],
+  "about": ".NP is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Nepal. The IANA root zone lists the registry manager as Mercantile Communications Pvt. Ltd.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.np is the Internet country code top-level domain (ccTLD) for Nepal. It is administered by Mercantile Communication Pvt Ltd.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/np.html",
+  "wikipedia": ".np is the Internet country code top-level domain (ccTLD) for Nepal. It is administered by Mercantile Communication Pvt Ltd.",
+  "scrapedAt": "2026-07-21T21:46:33Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".np",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "mercantile",
+    "nepal",
+    "np",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 1,
+    "cheapestRegistration": {
+      "registrar": "Gandi.net",
+      "price": "$195.00",
+      "value": 195.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Gandi.net",
+      "price": "$335.98",
+      "value": 335.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/np"
+  },
+  "summary": ".np is a Country-code top-level domain. Managed by Mercantile Communications Pvt. Ltd..",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

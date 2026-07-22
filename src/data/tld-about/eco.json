@@ -1,0 +1,117 @@
+{
+  "tld": ".eco",
+  "slug": "eco",
+  "title": "About .eco domains",
+  "delegationTitle": "Delegation Record for .ECO",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Big Room Inc.",
+  "sponsorDetail": "Big Room Inc.\n1231 Pacific Boulevard, Suite 581\nVancouver BC V6Z 0E2\nCanada",
+  "administrativeContact": "Registry Policy and Compliance",
+  "technicalContact": "Fury Registry Services",
+  "registryUrl": "https://go.eco",
+  "whoisServer": "whois.nic.eco",
+  "rdapServer": "https://rdap.eco.fury.ca/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.ns.nic.eco",
+      "addresses": [
+        "185.159.197.4",
+        "2620:10a:80aa:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "b.ns.nic.eco",
+      "addresses": [
+        "185.159.198.4",
+        "2620:10a:80ab:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "c.ns.nic.eco",
+      "addresses": [
+        "45.142.220.101",
+        "2a0e:dbc0:0:0:0:0:0:101"
+      ]
+    },
+    {
+      "host": "d.ns.nic.eco",
+      "addresses": [
+        "185.159.199.4",
+        "2620:10a:80ac:0:0:0:0:4"
+      ]
+    }
+  ],
+  "about": ".ECO is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .ECO is listed by IANA as Big Room Inc.. Anyone can typically register a .ECO name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.eco is a top-level domain (TLD). It was proposed in ICANN's new generic top-level domain (gTLD) program and became available to the general public on April 25, 2017.  The registry is advised by a council of organizations.\nThe .eco domain is unique in that it requires a two-stage activation process. After registering a .eco domain, the domain is registered and placed on a 'hold' status. Registrants are then sent an activation email. This email invites registrants to walk-through a simple process in which they make a public pledge: \"We pledge to support positive change for the planet and to be honest when sharing information on environmental actions.\" registrants are also required to select a number of sustainable development goals that they want to work towards achieving. The pledge and priorities are amalgamated at one location. This allows any member of the public to identify who is behind a particular .eco domain. \nThis approach was designed in consultation with environmental organizations to minimize disinformation and other forms abuse arising from the use of the domain. Registrants are encouraged to link from their .eco website to their .eco profiles as a way of fostering further transparency. The registry also reserves the right to suspend and or take-down domains that contravene their pledge.\nThe .eco domain was highly contested and was one of very few 'community priority domains' selected by ICANN.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/eco.html",
+  "wikipedia": ".eco is a top-level domain (TLD). It was proposed in ICANN's new generic top-level domain (gTLD) program and became available to the general public on April 25, 2017.  The registry is advised by a council of organizations.\nThe .eco domain is unique in that it requires a two-stage activation process. After registering a .eco domain, the domain is registered and placed on a 'hold' status. Registrants are then sent an activation email. This email invites registrants to walk-through a simple process in which they make a public pledge: \"We pledge to support positive change for the planet and to be honest when sharing information on environmental actions.\" registrants are also required to select a number of sustainable development goals that they want to work towards achieving. The pledge and priorities are amalgamated at one location. This allows any member of the public to identify who is behind a particular .eco domain. \nThis approach was designed in consultation with environmental organizations to minimize disinformation and other forms abuse arising from the use of the domain. Registrants are encouraged to link from their .eco website to their .eco profiles as a way of fostering further transparency. The registry also reserves the right to suspend and or take-down domains that contravene their pledge.\nThe .eco domain was highly contested and was one of very few 'community priority domains' selected by ICANN.",
+  "scrapedAt": "2026-07-21T21:34:53Z",
+  "categories": [
+    "green"
+  ],
+  "useCases": [
+    "Sustainability",
+    "Eco brands",
+    "Pets"
+  ],
+  "keywords": [
+    ".eco",
+    "domain",
+    "eco",
+    "eco brands",
+    "generic",
+    "green",
+    "gtld",
+    "level",
+    "pets",
+    "room",
+    "sustainability",
+    "top"
+  ],
+  "primaryCategory": "green",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 34,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$44.69",
+      "value": 44.69
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$59.71",
+      "value": 59.71
+    },
+    "sourceUrl": "https://tld-list.com/tld/eco"
+  },
+  "summary": ".eco is a Generic top-level domain. Managed by Big Room Inc..",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

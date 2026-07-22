@@ -1,0 +1,107 @@
+{
+  "tld": ".hamburg",
+  "slug": "hamburg",
+  "title": "About .hamburg domains",
+  "delegationTitle": "Delegation Record for .HAMBURG",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Hamburg Top-Level-Domain GmbH",
+  "sponsorDetail": "Hamburg Top-Level-Domain GmbH\nNeuer Wall 10\nHamburg 20354\nGermany",
+  "administrativeContact": "Dirk Krischenowski",
+  "technicalContact": "Alexander Mayrhofer",
+  "registryUrl": "http://www.nic.hamburg",
+  "whoisServer": "whois.nic.hamburg",
+  "rdapServer": "https://rdap.nic.hamburg/v1/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.dns.nic.hamburg",
+      "addresses": [
+        "194.0.25.21",
+        "2001:678:20:0:0:0:0:21"
+      ]
+    },
+    {
+      "host": "m.dns.nic.hamburg",
+      "addresses": [
+        "194.0.26.10",
+        "2001:67c:10e0:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "n.dns.nic.hamburg",
+      "addresses": [
+        "194.0.24.10",
+        "2001:678:24:0:0:0:0:10"
+      ]
+    }
+  ],
+  "about": ".HAMBURG is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .HAMBURG is listed by IANA as Hamburg Top-Level-Domain GmbH. Anyone can typically register a .HAMBURG name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/hamburg.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:41:42Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".hamburg",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gmbh",
+    "gtld",
+    "hamburg",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 26,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$43.03",
+      "value": 43.03
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$43.03",
+      "value": 43.03
+    },
+    "sourceUrl": "https://tld-list.com/tld/hamburg"
+  },
+  "summary": ".hamburg is a Generic top-level domain. Managed by Hamburg Top-Level-Domain GmbH.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

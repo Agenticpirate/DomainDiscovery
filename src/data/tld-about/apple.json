@@ -1,0 +1,94 @@
+{
+  "tld": ".apple",
+  "slug": "apple",
+  "title": "About .apple domains",
+  "delegationTitle": "Delegation Record for .APPLE",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Apple Inc.",
+  "sponsorDetail": "Apple Inc.\n1 Infinite Loop\nCupertino CA 95014\nUnited States of America (the)",
+  "administrativeContact": "Counsel-Trademark, Copyright and Domains",
+  "technicalContact": "Director, DNS Services",
+  "registryUrl": "https://www.nic.apple/",
+  "whoisServer": null,
+  "rdapServer": "https://rdap.nic.apple/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "apple-ns.pch.net",
+      "addresses": [
+        "203.119.88.1",
+        "2001:dd8:7:6001:dc:0:0:1"
+      ]
+    },
+    {
+      "host": "c.ns.apple.com",
+      "addresses": [
+        "204.19.119.1",
+        "2620:171:800:714:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d.ns.apple.com",
+      "addresses": [
+        "204.26.57.1",
+        "2620:171:801:714:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".APPLE is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .APPLE is listed by IANA as Apple Inc.. Anyone can typically register a .APPLE name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/apple.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:34:53Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".apple",
+    "apple",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".apple is a Generic top-level domain. Managed by Apple Inc..",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -1,0 +1,132 @@
+{
+  "tld": ".li",
+  "slug": "li",
+  "title": "About .li domains",
+  "delegationTitle": "Delegation Record for .LI",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Liechtenstein",
+  "sponsor": "SWITCH The Swiss Education & Research Network",
+  "sponsorDetail": "SWITCH The Swiss Education & Research Network\nWerdstrasse 2\nZurich CH-8021\nSwitzerland",
+  "administrativeContact": "SWITCH TLD Administration",
+  "technicalContact": "DNS Operations",
+  "registryUrl": "https://www.nic.li",
+  "whoisServer": "whois.nic.li",
+  "rdapServer": null,
+  "registrationDate": "1993-02-26",
+  "recordUpdated": "2026-07-01",
+  "nameServers": [
+    {
+      "host": "a.nic.li",
+      "addresses": [
+        "130.59.31.42",
+        "2001:620:0:ff:0:0:0:57"
+      ]
+    },
+    {
+      "host": "b.nic.li",
+      "addresses": [
+        "130.59.31.44",
+        "2001:620:0:ff:0:0:0:59"
+      ]
+    },
+    {
+      "host": "d.nic.li",
+      "addresses": [
+        "194.0.25.40",
+        "2001:678:20:0:0:0:0:40"
+      ]
+    },
+    {
+      "host": "e.nic.li",
+      "addresses": [
+        "194.0.17.1",
+        "2001:678:3:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "f.nic.li",
+      "addresses": [
+        "194.146.106.14",
+        "2001:67c:1010:3:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".LI is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Liechtenstein. The IANA root zone lists the registry manager as SWITCH The Swiss Education & Research Network. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.li is the Internet country code top-level domain (ccTLD) for Liechtenstein.  The .li TLD was created in 1993.  The domain is sponsored and administered by the University of Liechtenstein in Vaduz. Registration of .li domain names used to be managed by SWITCH, administrator of Switzerland's .ch ccTLD. In February 2013, SWITCH discontinued its .li registration service for private customers, delegating it to a number of recognized partner firms.\nThere are no requirements to apply for the extension. Registrations of internationalized domain names have been accepted since March 2004. Domain names under 3 characters are reserved for the state and its institutions.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/li.html",
+  "wikipedia": ".li is the Internet country code top-level domain (ccTLD) for Liechtenstein.  The .li TLD was created in 1993.  The domain is sponsored and administered by the University of Liechtenstein in Vaduz. Registration of .li domain names used to be managed by SWITCH, administrator of Switzerland's .ch ccTLD. In February 2013, SWITCH discontinued its .li registration service for private customers, delegating it to a number of recognized partner firms.\nThere are no requirements to apply for the extension. Registrations of internationalized domain names have been accepted since March 2004. Domain names under 3 characters are reserved for the state and its institutions.",
+  "scrapedAt": "2026-07-21T21:44:09Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".li",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "education",
+    "for",
+    "geo",
+    "level",
+    "li",
+    "liechtenstein",
+    "local business",
+    "network",
+    "regional brands",
+    "research",
+    "swiss",
+    "switch",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 30,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$8.44",
+      "value": 8.44
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$8.44",
+      "value": 8.44
+    },
+    "sourceUrl": "https://tld-list.com/tld/li"
+  },
+  "summary": ".li is a Country-code top-level domain. Managed by SWITCH The Swiss Education & Research Network.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

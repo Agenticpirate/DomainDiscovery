@@ -1,0 +1,103 @@
+{
+  "tld": ".xn--80ao21a",
+  "slug": "xn--80ao21a",
+  "title": "About .xn--80ao21a domains",
+  "delegationTitle": "Delegation Record for .\u049a\u0410\u0417",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code KZ",
+  "designation": "Country-code top-level domain designated for Kazakhstan",
+  "sponsor": "Association of IT Companies of Kazakhstan",
+  "sponsorDetail": "Association of IT Companies of Kazakhstan\n6/5 Kabanbai Batyra\nOffice 3\nNur-Sultan 020000\nKazakhstan",
+  "administrativeContact": "Nurlan Issin",
+  "technicalContact": "Pavel Gussev",
+  "registryUrl": "http://www.nic.kz/",
+  "whoisServer": "whois.nic.kz",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns.nic.kz",
+      "addresses": [
+        "194.0.21.5",
+        "2001:678:98:1:0:0:0:5"
+      ]
+    },
+    {
+      "host": "ns1.nic.kz",
+      "addresses": [
+        "185.79.212.7",
+        "2a01:7640:9000:0:0:0:0:7"
+      ]
+    },
+    {
+      "host": "ns2.nic.kz",
+      "addresses": [
+        "204.61.216.143",
+        "2001:500:14:6143:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".XN--80AO21A is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Kazakhstan. The IANA root zone lists the registry manager as Association of IT Companies of Kazakhstan. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--80ao21a.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:11Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--80ao21a",
+    "association",
+    "cctld",
+    "code",
+    "companies",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "kazakhstan",
+    "letter",
+    "level",
+    "local business",
+    "regional brands",
+    "top",
+    "two",
+    "xn--80ao21a"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--80ao21a is a Country-code top-level domain designated for two-letter country code KZ. Managed by Association of IT Companies of Kazakhstan.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

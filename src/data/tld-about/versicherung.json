@@ -1,0 +1,107 @@
+{
+  "tld": ".versicherung",
+  "slug": "versicherung",
+  "title": "About .versicherung domains",
+  "delegationTitle": "Delegation Record for .VERSICHERUNG",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "tldbox GmbH",
+  "sponsorDetail": "tldbox GmbH\nJakob-Haringer-Strasse 8/V\nSalzburg 5020\nAustria",
+  "administrativeContact": "Andreas Musielak",
+  "technicalContact": "Technical Operations",
+  "registryUrl": "http://nic.versicherung",
+  "whoisServer": "whois.nic.versicherung",
+  "rdapServer": "https://rdap.nic.versicherung/v1/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.dns.nic.versicherung",
+      "addresses": [
+        "194.0.25.13",
+        "2001:678:20:0:0:0:0:13"
+      ]
+    },
+    {
+      "host": "m.dns.nic.versicherung",
+      "addresses": [
+        "194.0.26.2",
+        "2001:67c:10e0:0:0:0:0:2"
+      ]
+    },
+    {
+      "host": "n.dns.nic.versicherung",
+      "addresses": [
+        "194.0.24.2",
+        "2001:678:24:0:0:0:0:2"
+      ]
+    }
+  ],
+  "about": ".VERSICHERUNG is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .VERSICHERUNG is listed by IANA as tldbox GmbH. Anyone can typically register a .VERSICHERUNG name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/versicherung.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:51:55Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".versicherung",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gmbh",
+    "gtld",
+    "level",
+    "tldbox",
+    "top",
+    "versicherung"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 15,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$114.54",
+      "value": 114.54
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$114.54",
+      "value": 114.54
+    },
+    "sourceUrl": "https://tld-list.com/tld/versicherung"
+  },
+  "summary": ".versicherung is a Generic top-level domain. Managed by tldbox GmbH.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

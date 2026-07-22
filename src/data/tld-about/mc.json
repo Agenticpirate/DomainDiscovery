@@ -1,0 +1,121 @@
+{
+  "tld": ".mc",
+  "slug": "mc",
+  "title": "About .mc domains",
+  "delegationTitle": "Delegation Record for .MC",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Monaco",
+  "sponsor": "Direction des Plateformes et des Ressources Num\u00e9riques",
+  "sponsorDetail": "Direction des Plateformes et des Ressources Num\u00e9riques\n2 rue du Gabian\nc/o DITN\n98000\nMonaco",
+  "administrativeContact": "NIC Administrator",
+  "technicalContact": "NIC Administrator",
+  "registryUrl": "https://www.nic.mc/",
+  "whoisServer": "whois.nic.mc",
+  "rdapServer": null,
+  "registrationDate": "1995-01-20",
+  "recordUpdated": "2025-12-15",
+  "nameServers": [
+    {
+      "host": "mc.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.92",
+        "2a13:27c0:30:0:0:0:0:92"
+      ]
+    },
+    {
+      "host": "ns1.nic.mc",
+      "addresses": [
+        "185.243.3.205"
+      ]
+    },
+    {
+      "host": "ns2.nic.mc",
+      "addresses": [
+        "13.36.89.111"
+      ]
+    },
+    {
+      "host": "ns3.nic.mc",
+      "addresses": [
+        "15.237.153.29"
+      ]
+    }
+  ],
+  "about": ".MC is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Monaco. The IANA root zone lists the registry manager as Direction des Plateformes et des Ressources Num\u00e9riques. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.mc is the Internet country code top-level domain (ccTLD) for the Principality of Monaco. Registrations are made directly at the second level and require a company registration in Monaco. Registration for individuals is not allowed. Domains need to have a minimum length of 3 characters and no unicode domains are possible.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mc.html",
+  "wikipedia": ".mc is the Internet country code top-level domain (ccTLD) for the Principality of Monaco. Registrations are made directly at the second level and require a company registration in Monaco. Registration for individuals is not allowed. Domains need to have a minimum length of 3 characters and no unicode domains are possible.",
+  "scrapedAt": "2026-07-21T21:44:56Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".mc",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "direction",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "mc",
+    "monaco",
+    "plateformes",
+    "regional brands",
+    "ressources",
+    "riques",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 8,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$34.99",
+      "value": 34.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$36.99",
+      "value": 36.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/mc"
+  },
+  "summary": ".mc is a Country-code top-level domain. Managed by Direction des Plateformes et des Ressources Num\u00e9riques.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

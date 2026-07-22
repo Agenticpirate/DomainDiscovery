@@ -1,0 +1,124 @@
+{
+  "tld": ".am",
+  "slug": "am",
+  "title": "About .am domains",
+  "delegationTitle": "Delegation Record for .AM",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Armenia",
+  "sponsor": "\"Internet Society\" Non-governmental Organization",
+  "sponsorDetail": "\"Internet Society\" Non-governmental Organization\n17 A.Khachaturyan str. #3\nYerevan 0012\nArmenia",
+  "administrativeContact": "Igor Mkrtumyan",
+  "technicalContact": "Misak Khachatryan",
+  "registryUrl": "https://www.amnic.net/",
+  "whoisServer": "whois.amnic.net",
+  "rdapServer": null,
+  "registrationDate": "1994-08-26",
+  "recordUpdated": "2024-11-27",
+  "nameServers": [
+    {
+      "host": "fork.sth.dnsnode.net",
+      "addresses": [
+        "77.72.229.254",
+        "2a01:3f0:0:306:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns-cdn.amnic.net",
+      "addresses": [
+        "194.0.1.26",
+        "2001:678:4:0:0:0:0:1a"
+      ]
+    },
+    {
+      "host": "ns-pch.amnic.net",
+      "addresses": [
+        "204.61.216.96",
+        "2001:500:14:6096:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ns-pri.nic.am",
+      "addresses": [
+        "195.43.75.53",
+        "2001:7f9:8:53:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".AM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Armenia. The IANA root zone lists the registry manager as \"Internet Society\" Non-governmental Organization. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.am is the internet country code top-level domain (ccTLD) for Armenia. The Armenia Network Information Centre is managed by the Internet Society of Armenia and is headquartered in Yerevan.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/am.html",
+  "wikipedia": ".am is the internet country code top-level domain (ccTLD) for Armenia. The Armenia Network Information Centre is managed by the Internet Society of Armenia and is headquartered in Yerevan.",
+  "scrapedAt": "2026-07-21T21:34:38Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".am",
+    "am",
+    "armenia",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "governmental",
+    "internet",
+    "level",
+    "local business",
+    "organization",
+    "regional brands",
+    "society",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 32,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$36.35",
+      "value": 36.35
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$36.35",
+      "value": 36.35
+    },
+    "sourceUrl": "https://tld-list.com/tld/am"
+  },
+  "summary": ".am is a Country-code top-level domain. Managed by \"Internet Society\" Non-governmental Organization.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

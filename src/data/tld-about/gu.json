@@ -1,0 +1,119 @@
+{
+  "tld": ".gu",
+  "slug": "gu",
+  "title": "About .gu domains",
+  "delegationTitle": "Delegation Record for .GU",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Guam",
+  "sponsor": "University of Guam",
+  "sponsorDetail": "University of Guam\nOffice of Information Technology\n303 University Drive\nUOG Station\nMangilao 96923\nGuam",
+  "administrativeContact": "Chief Information Officer",
+  "technicalContact": "UOG NOC",
+  "registryUrl": "https://give.uog.edu/shop/",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1994-04-15",
+  "recordUpdated": "2025-09-08",
+  "nameServers": [
+    {
+      "host": "gold.uog.edu",
+      "addresses": [
+        "168.123.250.66"
+      ]
+    },
+    {
+      "host": "green.uog.edu",
+      "addresses": [
+        "168.123.250.56"
+      ]
+    },
+    {
+      "host": "gu.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.78",
+        "2a13:27c0:30:0:0:0:0:78"
+      ]
+    },
+    {
+      "host": "phloem.uoregon.edu",
+      "addresses": [
+        "128.223.32.35",
+        "2001:468:d01:20:0:0:80df:2023"
+      ]
+    }
+  ],
+  "about": ".GU is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Guam. The IANA root zone lists the registry manager as University of Guam. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.gu is the Internet country code top-level domain (ccTLD) for Guam.\nRegistrations are free of charge but are limited to people or companies with a contact in Guam, and are limited to third-level registrations beneath second-level names such as .com.gu.  There has not been very much use of .gu addresses.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gu.html",
+  "wikipedia": ".gu is the Internet country code top-level domain (ccTLD) for Guam.\nRegistrations are free of charge but are limited to people or companies with a contact in Guam, and are limited to third-level registrations beneath second-level names such as .com.gu.  There has not been very much use of .gu addresses.",
+  "scrapedAt": "2026-07-21T21:41:35Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".gu",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "gu",
+    "guam",
+    "level",
+    "local business",
+    "regional brands",
+    "top",
+    "university"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 3,
+    "cheapestRegistration": {
+      "registrar": "INWX",
+      "price": "$296.40",
+      "value": 296.4
+    },
+    "cheapestRenewal": {
+      "registrar": "INWX",
+      "price": "$296.40",
+      "value": 296.4
+    },
+    "sourceUrl": "https://tld-list.com/tld/gu"
+  },
+  "summary": ".gu is a Country-code top-level domain. Managed by University of Guam.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

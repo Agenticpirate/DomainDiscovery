@@ -1,0 +1,143 @@
+{
+  "tld": ".nz",
+  "slug": "nz",
+  "title": "About .nz domains",
+  "delegationTitle": "Delegation Record for .NZ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for New Zealand",
+  "sponsor": "InternetNZ",
+  "sponsorDetail": "InternetNZ\nLevel 13\n18 Willis Street\nWellington Central\nWellington 6011\nNew Zealand",
+  "administrativeContact": "Tumuwhanake | GM Customer and Product",
+  "technicalContact": ".NZ Operations Manager",
+  "registryUrl": "http://www.dnc.org.nz/",
+  "whoisServer": "whois.irs.net.nz",
+  "rdapServer": null,
+  "registrationDate": "1987-01-19",
+  "recordUpdated": "2025-12-15",
+  "nameServers": [
+    {
+      "host": "ns1.dns.net.nz",
+      "addresses": [
+        "202.46.190.130",
+        "2001:dce:2000:2:0:0:0:130"
+      ]
+    },
+    {
+      "host": "ns2.dns.net.nz",
+      "addresses": [
+        "202.46.187.130",
+        "2001:dce:7000:2:0:0:0:130"
+      ]
+    },
+    {
+      "host": "ns3.dns.net.nz",
+      "addresses": [
+        "202.46.188.130",
+        "2001:dce:d453:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns4.dns.net.nz",
+      "addresses": [
+        "202.46.189.130",
+        "2001:dce:d454:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns5.dns.net.nz",
+      "addresses": [
+        "185.159.197.130",
+        "2620:10a:80aa:0:0:0:0:130"
+      ]
+    },
+    {
+      "host": "ns6.dns.net.nz",
+      "addresses": [
+        "185.159.198.130",
+        "2620:10a:80ab:0:0:0:0:130"
+      ]
+    },
+    {
+      "host": "ns7.dns.net.nz",
+      "addresses": [
+        "194.146.106.54",
+        "2001:67c:1010:13:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".NZ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for New Zealand. The IANA root zone lists the registry manager as InternetNZ. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.nz is the Internet country code top-level domain (ccTLD) for New Zealand. It is administered by InternetNZ, with oversight and dispute resolution handled by its subsidiary company, the Domain Name Commission Limited (DNCL). Registrations are processed via authorised registrars. As of March 2026 there were 764,987 registered .nz domains.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/nz.html",
+  "wikipedia": ".nz is the Internet country code top-level domain (ccTLD) for New Zealand. It is administered by InternetNZ, with oversight and dispute resolution handled by its subsidiary company, the Domain Name Commission Limited (DNCL). Registrations are processed via authorised registrars. As of March 2026 there were 764,987 registered .nz domains.",
+  "scrapedAt": "2026-07-21T21:46:39Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".nz",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "internetnz",
+    "level",
+    "local business",
+    "new",
+    "nz",
+    "regional brands",
+    "top",
+    "zealand"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 30,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$16.68",
+      "value": 16.68
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$17.07",
+      "value": 17.07
+    },
+    "sourceUrl": "https://tld-list.com/tld/nz"
+  },
+  "summary": ".nz is a Country-code top-level domain. Managed by InternetNZ.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,133 @@
+{
+  "tld": ".de",
+  "slug": "de",
+  "title": "About .de domains",
+  "delegationTitle": "Delegation Record for .DE",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Germany",
+  "sponsor": "DENIC eG",
+  "sponsorDetail": "DENIC eG\nTheodor-Stern-Kai 1\nFrankfurt am Main 60596\nGermany",
+  "administrativeContact": "Vorstand DENIC eG",
+  "technicalContact": "Business Services",
+  "registryUrl": "http://www.denic.de/",
+  "whoisServer": "whois.denic.de",
+  "rdapServer": null,
+  "registrationDate": "1986-11-05",
+  "recordUpdated": "2023-04-04",
+  "nameServers": [
+    {
+      "host": "a.nic.de",
+      "addresses": [
+        "194.0.0.53",
+        "2001:678:2:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "f.nic.de",
+      "addresses": [
+        "81.91.164.5",
+        "2a02:568:0:2:0:0:0:53"
+      ]
+    },
+    {
+      "host": "l.de.net",
+      "addresses": [
+        "77.67.63.105",
+        "2001:668:1f:11:0:0:0:105"
+      ]
+    },
+    {
+      "host": "n.de.net",
+      "addresses": [
+        "194.146.107.6",
+        "2001:67c:1011:1:0:0:0:53"
+      ]
+    },
+    {
+      "host": "s.de.net",
+      "addresses": [
+        "195.243.137.26",
+        "2003:8:14:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "z.nic.de",
+      "addresses": [
+        "194.246.96.1",
+        "2a02:568:fe02:0:0:0:0:de"
+      ]
+    }
+  ],
+  "about": ".DE is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Germany. The IANA root zone lists the registry manager as DENIC eG. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.de is the country code top-level domain (ccTLD) for Germany. DENIC does not require specific second-level domains, and there are no official ccSLDs under .de ccTLD, as it is the case with the .uk domain range which until 2014 required .co.uk domain for example.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/de.html",
+  "wikipedia": ".de is the country code top-level domain (ccTLD) for Germany. DENIC does not require specific second-level domains, and there are no official ccSLDs under .de ccTLD, as it is the case with the .uk domain range which until 2014 required .co.uk domain for example.",
+  "scrapedAt": "2026-07-21T21:33:58Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".de",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "de",
+    "denic",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "germany",
+    "level",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 44,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$1.99",
+      "value": 1.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$3.95",
+      "value": 3.95
+    },
+    "sourceUrl": "https://tld-list.com/tld/de"
+  },
+  "summary": ".de is a Country-code top-level domain. Managed by DENIC eG.",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -1,0 +1,136 @@
+{
+  "tld": ".swiss",
+  "slug": "swiss",
+  "title": "About .swiss domains",
+  "delegationTitle": "Delegation Record for .SWISS",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Swiss Confederation",
+  "sponsorDetail": "Swiss Confederation\nFederal Office of Communications (OFCOM)\nRue de l'Avenir 44\nP.O Box\nBiel/Bienne BE CH-2501\nSwitzerland",
+  "administrativeContact": ".swiss TLD Administrative Contact",
+  "technicalContact": ".swiss TLD Technical Contact",
+  "registryUrl": "http://www.nic.swiss",
+  "whoisServer": "whois.nic.swiss",
+  "rdapServer": "https://rdap.nic.swiss",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "anycast10.irondns.net",
+      "addresses": [
+        "195.253.64.12",
+        "2a01:5b0:4:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast23.irondns.net",
+      "addresses": [
+        "195.253.65.11",
+        "2a01:5b0:5:0:0:0:0:b"
+      ]
+    },
+    {
+      "host": "anycast24.irondns.net",
+      "addresses": [
+        "195.253.65.12",
+        "2a01:5b0:5:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast9.irondns.net",
+      "addresses": [
+        "195.253.64.11",
+        "2a01:5b0:4:0:0:0:0:b"
+      ]
+    },
+    {
+      "host": "g.nic.swiss",
+      "addresses": [
+        "195.253.64.9",
+        "2a01:5b0:4:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "ns15.rcode0.net",
+      "addresses": [
+        "194.0.25.15",
+        "2001:678:20:0:0:0:0:15"
+      ]
+    },
+    {
+      "host": "u.nic.swiss",
+      "addresses": [
+        "195.253.65.9",
+        "2a01:5b0:5:0:0:0:0:9"
+      ]
+    }
+  ],
+  "about": ".SWISS is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .SWISS is listed by IANA as Swiss Confederation. Anyone can typically register a .SWISS name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.swiss is a top-level domain (TLD) for Switzerland. It was approved by ICANN as a TLD on 16 Oct 2014. This is meant to supplement the traditional .ch TLD.\nThe Federal Office of Communications (OFCOM) began registering .swiss domains as of 7 September 2015. Open registration to other legal entities begins from 11 January 2016.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/swiss.html",
+  "wikipedia": ".swiss is a top-level domain (TLD) for Switzerland. It was approved by ICANN as a TLD on 16 Oct 2014. This is meant to supplement the traditional .ch TLD.\nThe Federal Office of Communications (OFCOM) began registering .swiss domains as of 7 September 2015. Open registration to other legal entities begins from 11 January 2016.",
+  "scrapedAt": "2026-07-21T21:50:32Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".swiss",
+    "brand",
+    "brandable names",
+    "confederation",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "swiss",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 17,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$125.99",
+      "value": 125.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$125.99",
+      "value": 125.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/swiss"
+  },
+  "summary": ".swiss is a Generic top-level domain. Managed by Swiss Confederation.",
+  "wikiCheckedAt": "2026-07-22T04:23:22Z",
+  "wikiEnrichedAt": "2026-07-22T04:23:22Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

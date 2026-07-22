@@ -1,0 +1,135 @@
+{
+  "tld": ".lt",
+  "slug": "lt",
+  "title": "About .lt domains",
+  "delegationTitle": "Delegation Record for .LT",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Lithuania",
+  "sponsor": "Kaunas University of Technology",
+  "sponsorDetail": "Kaunas University of Technology\nInternet Service Centre\nStudentu 48a\nKaunas LT-51367\nLithuania",
+  "administrativeContact": "Tomas Mackus",
+  "technicalContact": "Tomas Simonaitis",
+  "registryUrl": "http://www.domreg.lt",
+  "whoisServer": "whois.domreg.lt",
+  "rdapServer": null,
+  "registrationDate": "1992-06-03",
+  "recordUpdated": "2026-05-01",
+  "nameServers": [
+    {
+      "host": "a.tld.lt",
+      "addresses": [
+        "185.150.40.131"
+      ]
+    },
+    {
+      "host": "b.tld.lt",
+      "addresses": [
+        "194.0.20.1",
+        "2001:678:19:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d.tld.lt",
+      "addresses": [
+        "194.0.3.1",
+        "2001:678:6:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "e.tld.lt",
+      "addresses": [
+        "194.0.18.1"
+      ]
+    },
+    {
+      "host": "f.tld.lt",
+      "addresses": [
+        "194.0.19.1",
+        "2001:678:8c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "r.tld.lt",
+      "addresses": [
+        "194.0.25.46",
+        "2001:678:20:0:0:0:0:46"
+      ]
+    }
+  ],
+  "about": ".LT is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Lithuania. The IANA root zone lists the registry manager as Kaunas University of Technology. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.lt is the Internet country code top-level domain (ccTLD) for Lithuania.\nFollowing the University of Oslo's request to the Norwegian government that a Lithuanian Internet ccTLD be established, .lt was launched on 3 June 1992. Domain name registration was initially limited to the academic community, state institutions and companies, with the first second-level domains\u2014mii.lt, ktu.lt, and vu.lt\u2014being registered in 1993. In 1994 administration of the .lt ccTLD was transferred from Oslo University to the Kaunas University of Technology.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/lt.html",
+  "wikipedia": ".lt is the Internet country code top-level domain (ccTLD) for Lithuania.\nFollowing the University of Oslo's request to the Norwegian government that a Lithuanian Internet ccTLD be established, .lt was launched on 3 June 1992. Domain name registration was initially limited to the academic community, state institutions and companies, with the first second-level domains\u2014mii.lt, ktu.lt, and vu.lt\u2014being registered in 1993. In 1994 administration of the .lt ccTLD was transferred from Oslo University to the Kaunas University of Technology.",
+  "scrapedAt": "2026-07-21T21:44:35Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".lt",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "kaunas",
+    "level",
+    "lithuania",
+    "local business",
+    "lt",
+    "regional brands",
+    "technology",
+    "top",
+    "university"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 27,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$9.57",
+      "value": 9.57
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$10.40",
+      "value": 10.4
+    },
+    "sourceUrl": "https://tld-list.com/tld/lt"
+  },
+  "summary": ".lt is a Country-code top-level domain. Managed by Kaunas University of Technology.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

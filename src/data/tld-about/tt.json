@@ -1,0 +1,118 @@
+{
+  "tld": ".tt",
+  "slug": "tt",
+  "title": "About .tt domains",
+  "delegationTitle": "Delegation Record for .TT",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Trinidad and Tobago",
+  "sponsor": "University of the West Indies, Faculty of Engineering",
+  "sponsorDetail": "University of the West Indies, Faculty of Engineering\nKenneth S. Julien Building, Third Floor, Room 305\nSt. Augustine\nTrinidad and Tobago",
+  "administrativeContact": "Dr. Patrick Hosein",
+  "technicalContact": "Dr. Patrick Hosein",
+  "registryUrl": "http://www.nic.tt",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1991-09-03",
+  "recordUpdated": "2025-08-22",
+  "nameServers": [
+    {
+      "host": "a.lactld.org",
+      "addresses": [
+        "200.0.68.10",
+        "2801:14:a000:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "pch.nic.tt",
+      "addresses": [
+        "204.61.216.63",
+        "2001:500:14:6063:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ripe.nic.tt",
+      "addresses": [
+        "193.0.9.50",
+        "2a13:27c0:30:0:0:0:0:50"
+      ]
+    }
+  ],
+  "about": ".TT is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Trinidad and Tobago. The IANA root zone lists the registry manager as University of the West Indies, Faculty of Engineering. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/tt.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:51:30Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".tt",
+    "and",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "engineering",
+    "faculty",
+    "for",
+    "geo",
+    "indies",
+    "level",
+    "local business",
+    "regional brands",
+    "tobago",
+    "top",
+    "trinidad",
+    "tt",
+    "university",
+    "west"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 9,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$309.99",
+      "value": 309.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$309.99",
+      "value": 309.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/tt"
+  },
+  "summary": ".tt is a Country-code top-level domain. Managed by University of the West Indies, Faculty of Engineering.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

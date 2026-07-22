@@ -1,0 +1,114 @@
+{
+  "tld": ".sbs",
+  "slug": "sbs",
+  "title": "About .sbs domains",
+  "delegationTitle": "Delegation Record for .SBS",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Shortdot SA",
+  "sponsorDetail": "Shortdot SA\n29 Boulevard de la Grande-Duchesse Charlotte\nLuxembourg City L-1331\nLuxembourg",
+  "administrativeContact": "CEO",
+  "technicalContact": "CTO",
+  "registryUrl": "http://nic.icu",
+  "whoisServer": "whois.nic.sbs",
+  "rdapServer": "https://rdap.centralnic.com/sbs/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.sbs",
+      "addresses": [
+        "194.169.218.127",
+        "2001:67c:13cc:0:0:0:1:127"
+      ]
+    },
+    {
+      "host": "b.nic.sbs",
+      "addresses": [
+        "185.24.64.127",
+        "2a04:2b00:13cc:0:0:0:1:127"
+      ]
+    },
+    {
+      "host": "c.nic.sbs",
+      "addresses": [
+        "212.18.248.127",
+        "2a04:2b00:13ee:0:0:0:0:127"
+      ]
+    },
+    {
+      "host": "d.nic.sbs",
+      "addresses": [
+        "212.18.249.127",
+        "2a04:2b00:13ff:0:0:0:0:127"
+      ]
+    }
+  ],
+  "about": ".SBS is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .SBS is listed by IANA as Shortdot SA. Anyone can typically register a .SBS name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sbs.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:49:07Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".sbs",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "sbs",
+    "shortdot",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 29,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$0.97",
+      "value": 0.97
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$9.76",
+      "value": 9.76
+    },
+    "sourceUrl": "https://tld-list.com/tld/sbs"
+  },
+  "summary": ".sbs is a Generic top-level domain. Managed by Shortdot SA.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

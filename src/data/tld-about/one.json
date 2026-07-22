@@ -1,0 +1,128 @@
+{
+  "tld": ".one",
+  "slug": "one",
+  "title": "About .one domains",
+  "delegationTitle": "Delegation Record for .ONE",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "One.com A/S",
+  "sponsorDetail": "One.com A/S\nKalvebod Brygge 24\nCopenhagen DK-1560\nDenmark",
+  "administrativeContact": "Karsten Heimb\u00fcrger",
+  "technicalContact": "Karsten Heimb\u00fcrger",
+  "registryUrl": "https://get.one/",
+  "whoisServer": "whois.nic.one",
+  "rdapServer": "https://rdap.nic.one/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.one",
+      "addresses": [
+        "37.209.192.9",
+        "2001:dcd:1:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "b.nic.one",
+      "addresses": [
+        "37.209.194.9",
+        "2001:dcd:2:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "c.nic.one",
+      "addresses": [
+        "37.209.196.9",
+        "2001:dcd:3:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "x.nic.one",
+      "addresses": [
+        "156.154.172.82",
+        "2610:a1:1074:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "y.nic.one",
+      "addresses": [
+        "156.154.173.82",
+        "2610:a1:1075:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "z.nic.one",
+      "addresses": [
+        "156.154.174.82",
+        "2610:a1:1076:0:0:0:1:82"
+      ]
+    }
+  ],
+  "about": ".ONE is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .ONE is listed by IANA as One.com A/S. Anyone can typically register a .ONE name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.one is a top-level domain. It was proposed in ICANN's New generic top-level domain (gTLD) Program, and became available to the general public on May 20, 2015. One Registry and ARI Registry Services are the registries for the domain.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/one.html",
+  "wikipedia": ".one is a top-level domain. It was proposed in ICANN's New generic top-level domain (gTLD) Program, and became available to the general public on May 20, 2015. One Registry and ARI Registry Services are the registries for the domain.",
+  "scrapedAt": "2026-07-21T21:33:38Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".one",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "one",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 40,
+    "cheapestRegistration": {
+      "registrar": "GoDaddy",
+      "price": "$2.17",
+      "value": 2.17
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$13.88",
+      "value": 13.88
+    },
+    "sourceUrl": "https://tld-list.com/tld/one"
+  },
+  "summary": ".one is a Generic top-level domain. Managed by One.com A/S.",
+  "wikiCheckedAt": "2026-07-22T04:15:21Z",
+  "wikiEnrichedAt": "2026-07-22T04:15:21Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

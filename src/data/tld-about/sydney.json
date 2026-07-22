@@ -1,0 +1,134 @@
+{
+  "tld": ".sydney",
+  "slug": "sydney",
+  "title": "About .sydney domains",
+  "delegationTitle": "Delegation Record for .SYDNEY",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "State of New South Wales, Department of Premier and Cabinet",
+  "sponsorDetail": "State of New South Wales, Department of Premier and Cabinet\n1 Farrer Place\nSydney NSW 2000\nAustralia",
+  "administrativeContact": "IANA Contact",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://iconic.sydney",
+  "whoisServer": "whois.nic.sydney",
+  "rdapServer": "https://rdap.nic.sydney/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.sydney",
+      "addresses": [
+        "37.209.192.10",
+        "2001:dcd:1:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "b.nic.sydney",
+      "addresses": [
+        "37.209.194.10",
+        "2001:dcd:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.nic.sydney",
+      "addresses": [
+        "37.209.196.10",
+        "2001:dcd:3:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "x.nic.sydney",
+      "addresses": [
+        "156.154.172.82",
+        "2610:a1:1074:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "y.nic.sydney",
+      "addresses": [
+        "156.154.173.82",
+        "2610:a1:1075:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "z.nic.sydney",
+      "addresses": [
+        "156.154.174.82",
+        "2610:a1:1076:0:0:0:1:82"
+      ]
+    }
+  ],
+  "about": ".SYDNEY is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .SYDNEY is listed by IANA as State of New South Wales, Department of Premier and Cabinet. Anyone can typically register a .SYDNEY name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.au is the Internet country code top-level domain (ccTLD) for Australia. It was created on 5 March 1986. Domain name policy is managed by .au Domain Administration (auDA).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sydney.html",
+  "wikipedia": ".au is the Internet country code top-level domain (ccTLD) for Australia. It was created on 5 March 1986. Domain name policy is managed by .au Domain Administration (auDA).",
+  "scrapedAt": "2026-07-21T21:50:35Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".sydney",
+    "brand",
+    "brandable names",
+    "cabinet",
+    "corporate brands",
+    "department",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "premier",
+    "south",
+    "state",
+    "sydney",
+    "top",
+    "wales"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 30,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$39.15",
+      "value": 39.15
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$39.15",
+      "value": 39.15
+    },
+    "sourceUrl": "https://tld-list.com/tld/sydney"
+  },
+  "summary": ".sydney is a Generic top-level domain. Managed by State of New South Wales, Department of Premier and Cabinet.",
+  "wikiCheckedAt": "2026-07-22T04:23:22Z",
+  "wikiEnrichedAt": "2026-07-22T04:23:22Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

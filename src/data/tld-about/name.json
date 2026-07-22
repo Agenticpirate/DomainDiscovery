@@ -1,0 +1,118 @@
+{
+  "tld": ".name",
+  "slug": "name",
+  "title": "About .name domains",
+  "delegationTitle": "Delegation Record for .NAME",
+  "type": "gTLD",
+  "typeLabel": "Restricted generic top-level domain",
+  "designation": "Restricted generic top-level domain",
+  "sponsor": "VeriSign Information Services, Inc.",
+  "sponsorDetail": "VeriSign Information Services, Inc.\n12061 Bluemont Way\nReston VA 20190\nUnited States of America (the)",
+  "administrativeContact": "Registry Customer Service",
+  "technicalContact": "Registry Customer Service",
+  "registryUrl": "http://www.nic.name",
+  "whoisServer": "whois.nic.name",
+  "rdapServer": "https://tld-rdap.verisign.com/name/v1/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ac1.nstld.com",
+      "addresses": [
+        "192.42.173.30",
+        "2001:500:120:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "ac2.nstld.com",
+      "addresses": [
+        "192.42.174.30",
+        "2001:500:121:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "ac3.nstld.com",
+      "addresses": [
+        "192.42.175.30",
+        "2001:500:122:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "ac4.nstld.com",
+      "addresses": [
+        "192.42.176.30",
+        "2001:500:123:0:0:0:0:30"
+      ]
+    }
+  ],
+  "about": ".NAME is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .NAME is listed by IANA as VeriSign Information Services, Inc.. Anyone can typically register a .NAME name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.name is a generic top-level domain (gTLD) in the Domain Name System of the Internet. It is intended for use by individuals for representation of their personal name, nicknames, screen names, pseudonyms, or other types of identification labels.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/name.html",
+  "wikipedia": ".name is a generic top-level domain (gTLD) in the Domain Name System of the Internet. It is intended for use by individuals for representation of their personal name, nicknames, screen names, pseudonyms, or other types of identification labels.",
+  "scrapedAt": "2026-07-21T21:46:02Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".name",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "information",
+    "level",
+    "name",
+    "restricted",
+    "services",
+    "top",
+    "verisign"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 42,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$7.25",
+      "value": 7.25
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$7.25",
+      "value": 7.25
+    },
+    "sourceUrl": "https://tld-list.com/tld/name"
+  },
+  "summary": ".name is a Restricted generic top-level domain. Managed by VeriSign Information Services, Inc..",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

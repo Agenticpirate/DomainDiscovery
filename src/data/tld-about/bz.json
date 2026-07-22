@@ -1,0 +1,135 @@
+{
+  "tld": ".bz",
+  "slug": "bz",
+  "title": "About .bz domains",
+  "delegationTitle": "Delegation Record for .BZ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Belize",
+  "sponsor": "University of Belize",
+  "sponsorDetail": "University of Belize\nStann Creek Street Extension\nP.O. Box 340\nBelmopan\nBelize",
+  "administrativeContact": "Juan Carlos Namis",
+  "technicalContact": "Juan Carlos Namis",
+  "registryUrl": "http://www.belizenic.bz",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1991-09-03",
+  "recordUpdated": "2020-11-23",
+  "nameServers": [
+    {
+      "host": "a0.cctld.afilias-nst.info",
+      "addresses": [
+        "199.254.59.1",
+        "2001:500:25:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.cctld.afilias-nst.info",
+      "addresses": [
+        "199.249.116.1",
+        "2001:500:44:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.cctld.afilias-nst.org",
+      "addresses": [
+        "199.254.60.1",
+        "2001:500:26:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b2.cctld.afilias-nst.org",
+      "addresses": [
+        "199.249.124.1",
+        "2001:500:4c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.cctld.afilias-nst.info",
+      "addresses": [
+        "199.254.61.1",
+        "2001:500:27:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d0.cctld.afilias-nst.org",
+      "addresses": [
+        "199.254.62.1",
+        "2001:500:28:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".BZ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Belize. The IANA root zone lists the registry manager as University of Belize. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.bz is the Internet country code top-level domain (ccTLD) for Belize. It is administered by the University of Belize.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bz.html",
+  "wikipedia": ".bz is the Internet country code top-level domain (ccTLD) for Belize. It is administered by the University of Belize.",
+  "scrapedAt": "2026-07-21T21:36:43Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".bz",
+    "belize",
+    "bz",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "top",
+    "university"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 38,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$9.44",
+      "value": 9.44
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$16.88",
+      "value": 16.88
+    },
+    "sourceUrl": "https://tld-list.com/tld/bz"
+  },
+  "summary": ".bz is a Country-code top-level domain. Managed by University of Belize.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

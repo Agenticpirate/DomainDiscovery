@@ -1,0 +1,125 @@
+{
+  "tld": ".bf",
+  "slug": "bf",
+  "title": "About .bf domains",
+  "delegationTitle": "Delegation Record for .BF",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Burkina Faso",
+  "sponsor": "Autorit\u00e9 de R\u00e9gulation des Communications Electroniques et des Postes (ARCEP)",
+  "sponsorDetail": "Autorit\u00e9 de R\u00e9gulation des Communications Electroniques et des Postes (ARCEP)\n01 BP 6437\nOuagadougou 01\nBurkina Faso",
+  "administrativeContact": "TLD Gestionnaire Administratif (DSI/ARCEP)",
+  "technicalContact": "TLD Gestionnaire Technique",
+  "registryUrl": "https://www.registre.bf",
+  "whoisServer": "whois.registre.bf",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.registre.bf",
+      "addresses": [
+        "212.52.146.50"
+      ]
+    },
+    {
+      "host": "dns-tld.ird.fr",
+      "addresses": [
+        "13.39.116.127"
+      ]
+    },
+    {
+      "host": "ns-bf.nic.fr",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "pch.ns.registre.bf",
+      "addresses": [
+        "204.61.216.141",
+        "2001:500:14:6141:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".BF is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Burkina Faso. The IANA root zone lists the registry manager as Autorit\u00e9 de R\u00e9gulation des Communications Electroniques et des Postes (ARCEP). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.bf is the Internet country code top-level domain (ccTLD) for the West African nation of Burkina Faso. It was introduced in 1993.\nIt is administered by the ARCEP since 2011. Previously it was sponsored and administered by Delegational Generale Informatique (DELGI).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bf.html",
+  "wikipedia": ".bf is the Internet country code top-level domain (ccTLD) for the West African nation of Burkina Faso. It was introduced in 1993.\nIt is administered by the ARCEP since 2011. Previously it was sponsored and administered by Delegational Generale Informatique (DELGI).",
+  "scrapedAt": "2026-07-21T21:35:48Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".bf",
+    "arcep",
+    "autorit",
+    "bf",
+    "burkina",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "electroniques",
+    "faso",
+    "for",
+    "geo",
+    "gulation",
+    "level",
+    "local business",
+    "postes",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 8,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$69.99",
+      "value": 69.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$69.99",
+      "value": 69.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/bf"
+  },
+  "summary": ".bf is a Country-code top-level domain. Managed by Autorit\u00e9 de R\u00e9gulation des Communications Electroniques et des Postes (ARCEP).",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

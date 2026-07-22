@@ -1,0 +1,105 @@
+{
+  "tld": ".nra",
+  "slug": "nra",
+  "title": "About .nra domains",
+  "delegationTitle": "Delegation Record for .NRA",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "National Rifle Association of America",
+  "sponsorDetail": "National Rifle Association of America\n11250 Waples Mill Road\nFairfax VA 22030\nUnited States of America (the)",
+  "administrativeContact": "Managing Director",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://contact.nra.org/contact-us.aspx",
+  "whoisServer": "whois.nic.nra",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.nra",
+      "addresses": [
+        "65.22.240.25",
+        "2a01:8840:ea:0:0:0:0:25"
+      ]
+    },
+    {
+      "host": "a2.nic.nra",
+      "addresses": [
+        "65.22.243.25",
+        "2a01:8840:ed:0:0:0:0:25"
+      ]
+    },
+    {
+      "host": "b0.nic.nra",
+      "addresses": [
+        "65.22.241.25",
+        "2a01:8840:eb:0:0:0:0:25"
+      ]
+    },
+    {
+      "host": "c0.nic.nra",
+      "addresses": [
+        "65.22.242.25",
+        "2a01:8840:ec:0:0:0:0:25"
+      ]
+    }
+  ],
+  "about": ".NRA is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .NRA is listed by IANA as National Rifle Association of America. Anyone can typically register a .NRA name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/nra.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:46:35Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".nra",
+    "america",
+    "association",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "national",
+    "nra",
+    "rifle",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".nra is a Generic top-level domain. Managed by National Rifle Association of America.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

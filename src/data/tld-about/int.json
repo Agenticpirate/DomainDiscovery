@@ -1,0 +1,121 @@
+{
+  "tld": ".int",
+  "slug": "int",
+  "title": "About .int domains",
+  "delegationTitle": "Delegation Record for .INT",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "Internet Assigned Numbers Authority",
+  "sponsorDetail": "Internet Assigned Numbers Authority\n12025 Waterfront Drive\nSuite 300\nLos Angeles CA 90094\nUnited States of America (the)",
+  "administrativeContact": "Internet Assigned Numbers Authority",
+  "technicalContact": "Internet Assigned Numbers Authority",
+  "registryUrl": "https://www.iana.org/domains/int",
+  "whoisServer": "whois.iana.org",
+  "rdapServer": "https://rdap.iana.org/",
+  "registrationDate": "1988-11-03",
+  "recordUpdated": "2026-03-10",
+  "nameServers": [
+    {
+      "host": "ns.uu.net",
+      "addresses": [
+        "137.39.1.3"
+      ]
+    },
+    {
+      "host": "ns0.ja.net",
+      "addresses": [
+        "193.63.94.20",
+        "128.86.1.20",
+        "2001:630:0:9:0:0:0:14",
+        "2001:630:0:8:0:0:0:14"
+      ]
+    },
+    {
+      "host": "sec2.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.4",
+        "2a13:27c0:30:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "x.iana-servers.net",
+      "addresses": [
+        "199.43.135.53",
+        "2001:500:8f:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "y.iana-servers.net",
+      "addresses": [
+        "199.43.133.53",
+        "2001:500:8d:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "z.iana-servers.net",
+      "addresses": [
+        "199.43.134.53",
+        "2001:500:8e:0:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".INT is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\nThe domain name int is a sponsored top-level domain (sTLD) in the Domain Name System of the Internet. Its name is derived from the word international, characterizing its use for international organizations and treaty-related purposes. The first use of this domain was by NATO, which had previously been assigned the top-level domain .nato.\nAccording to Internet Assigned Numbers Authority (IANA) policy, based on RFC 1591, the sTLD int is reserved for international treaty-based organizations, United Nations agencies, and organizations or entities having observer status at the UN. int is considered to have the strictest application policies of all TLDs, as it implies that the holder is a subject of international law. For this reason, the application procedure requires the applicant to provide evidence that it is indeed treaty-based by providing a United Nations treaty registration number and that it has independent legal status. Previously, it also was open to Internet infrastructure services; those services have since been required to register in .arpa.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/int.html",
+  "wikipedia": "The domain name int is a sponsored top-level domain (sTLD) in the Domain Name System of the Internet. Its name is derived from the word international, characterizing its use for international organizations and treaty-related purposes. The first use of this domain was by NATO, which had previously been assigned the top-level domain .nato.\nAccording to Internet Assigned Numbers Authority (IANA) policy, based on RFC 1591, the sTLD int is reserved for international treaty-based organizations, United Nations agencies, and organizations or entities having observer status at the UN. int is considered to have the strictest application policies of all TLDs, as it implies that the holder is a subject of international law. For this reason, the application procedure requires the applicant to provide evidence that it is indeed treaty-based by providing a United Nations treaty registration number and that it has independent legal status. Previously, it also was open to Internet infrastructure services; those services have since been required to register in .arpa.",
+  "scrapedAt": "2026-07-21T21:42:42Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".int",
+    "any industry",
+    "assigned",
+    "authority",
+    "domain",
+    "general",
+    "general websites",
+    "int",
+    "internet",
+    "level",
+    "numbers",
+    "sponsored",
+    "stld",
+    "top"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".int is a Sponsored top-level domain. Managed by Internet Assigned Numbers Authority.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

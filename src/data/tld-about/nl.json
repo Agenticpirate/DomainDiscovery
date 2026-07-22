@@ -1,0 +1,116 @@
+{
+  "tld": ".nl",
+  "slug": "nl",
+  "title": "About .nl domains",
+  "delegationTitle": "Delegation Record for .NL",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Netherlands",
+  "sponsor": "SIDN (Stichting Internet Domeinregistratie Nederland)",
+  "sponsorDetail": "SIDN (Stichting Internet Domeinregistratie Nederland)\nP.O. Box 5022\nArnhem 6802 EA\nNetherlands (the)",
+  "administrativeContact": "Roelof Meijer",
+  "technicalContact": "Marc Groeneweg",
+  "registryUrl": "https://www.sidn.nl/",
+  "whoisServer": "whois.domain-registry.nl",
+  "rdapServer": "https://rdap.sidn.nl/",
+  "registrationDate": "1986-04-25",
+  "recordUpdated": "2024-06-20",
+  "nameServers": [
+    {
+      "host": "ns1.dns.nl",
+      "addresses": [
+        "194.0.28.53",
+        "2001:678:2c:0:194:0:28:53"
+      ]
+    },
+    {
+      "host": "ns3.dns.nl",
+      "addresses": [
+        "194.0.25.24",
+        "2001:678:20:0:0:0:0:24"
+      ]
+    },
+    {
+      "host": "ns4.dns.nl",
+      "addresses": [
+        "185.159.199.200",
+        "2620:10a:80ac:0:0:0:0:200"
+      ]
+    }
+  ],
+  "about": ".NL is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Netherlands. The IANA root zone lists the registry manager as SIDN (Stichting Internet Domeinregistratie Nederland). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.nl is the country code top-level domain (ccTLD) for the Netherlands. It is one of the most popular ccTLDs with over six million registered .nl domains as of 29\u00a0September\u00a02020.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/nl.html",
+  "wikipedia": ".nl is the country code top-level domain (ccTLD) for the Netherlands. It is one of the most popular ccTLDs with over six million registered .nl domains as of 29\u00a0September\u00a02020.",
+  "scrapedAt": "2026-07-21T21:34:01Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".nl",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "domeinregistratie",
+    "for",
+    "geo",
+    "internet",
+    "level",
+    "local business",
+    "nederland",
+    "netherlands",
+    "nl",
+    "regional brands",
+    "sidn",
+    "stichting",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 42,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$4.99",
+      "value": 4.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$7.05",
+      "value": 7.05
+    },
+    "sourceUrl": "https://tld-list.com/tld/nl"
+  },
+  "summary": ".nl is a Country-code top-level domain. Managed by SIDN (Stichting Internet Domeinregistratie Nederland).",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

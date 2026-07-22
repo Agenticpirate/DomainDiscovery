@@ -1,0 +1,117 @@
+{
+  "tld": ".xn--w4r85el8fhu5dnra",
+  "slug": "xn--w4r85el8fhu5dnra",
+  "title": "About .xn--w4r85el8fhu5dnra domains",
+  "delegationTitle": "Delegation Record for .\u5609\u91cc\u5927\u9152\u5e97",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Kerry Trading Co. Limited",
+  "sponsorDetail": "Kerry Trading Co. Limited\n31/F Kerry Centre\n683 King\u2019s Road\nQuarry Bay\nHong Kong",
+  "administrativeContact": "Legal Director",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.kerryprops.com",
+  "whoisServer": "whois.nic.xn--w4r85el8fhu5dnra",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "v0n0.nic.xn--w4r85el8fhu5dnra",
+      "addresses": [
+        "65.22.108.23",
+        "2a01:8840:6a:0:0:0:0:23"
+      ]
+    },
+    {
+      "host": "v0n1.nic.xn--w4r85el8fhu5dnra",
+      "addresses": [
+        "65.22.109.23",
+        "2a01:8840:6b:0:0:0:0:23"
+      ]
+    },
+    {
+      "host": "v0n2.nic.xn--w4r85el8fhu5dnra",
+      "addresses": [
+        "65.22.110.23",
+        "2a01:8840:6c:0:0:0:0:23"
+      ]
+    },
+    {
+      "host": "v0n3.nic.xn--w4r85el8fhu5dnra",
+      "addresses": [
+        "161.232.32.23",
+        "2a01:8840:108:0:0:0:0:23"
+      ]
+    },
+    {
+      "host": "v2n0.nic.xn--w4r85el8fhu5dnra",
+      "addresses": [
+        "65.22.111.23",
+        "2a01:8840:6d:0:0:0:0:23"
+      ]
+    },
+    {
+      "host": "v2n1.nic.xn--w4r85el8fhu5dnra",
+      "addresses": [
+        "161.232.33.23",
+        "2a01:8840:109:0:0:0:0:23"
+      ]
+    }
+  ],
+  "about": ".XN--W4R85EL8FHU5DNRA is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--W4R85EL8FHU5DNRA is listed by IANA as Kerry Trading Co. Limited. Anyone can typically register a .XN--W4R85EL8FHU5DNRA name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--w4r85el8fhu5dnra.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:57Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--w4r85el8fhu5dnra",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "kerry",
+    "level",
+    "limited",
+    "top",
+    "trading",
+    "xn--w4r85el8fhu5dnra"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--w4r85el8fhu5dnra is a Generic top-level domain. Managed by Kerry Trading Co. Limited.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

@@ -1,0 +1,114 @@
+{
+  "tld": ".kiwi",
+  "slug": "kiwi",
+  "title": "About .kiwi domains",
+  "delegationTitle": "Delegation Record for .KIWI",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "DOT KIWI LIMITED",
+  "sponsorDetail": "DOT KIWI LIMITED\n18 Viaduct Harbour Avenue\nAttn: Kensington Swan\nAuckland Central\nAuckland 1010\nNew Zealand",
+  "administrativeContact": "Hannah Duder",
+  "technicalContact": "Don Slaunwhite",
+  "registryUrl": "http://hello.kiwi",
+  "whoisServer": "whois.nic.kiwi",
+  "rdapServer": "https://rdap.kiwi.fury.ca/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.ns.nic.kiwi",
+      "addresses": [
+        "185.159.197.1",
+        "2620:10a:80aa:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b.ns.nic.kiwi",
+      "addresses": [
+        "185.159.198.1",
+        "2620:10a:80ab:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c.ns.nic.kiwi",
+      "addresses": [
+        "45.142.220.101",
+        "2a0e:dbc0:0:0:0:0:0:101"
+      ]
+    },
+    {
+      "host": "d.ns.nic.kiwi",
+      "addresses": [
+        "185.159.199.1",
+        "2620:10a:80ac:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".KIWI is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .KIWI is listed by IANA as DOT KIWI LIMITED. Anyone can typically register a .KIWI name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/kiwi.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:43:31Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".kiwi",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "kiwi",
+    "level",
+    "limited",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 36,
+    "cheapestRegistration": {
+      "registrar": "GoDaddy",
+      "price": "$20.17",
+      "value": 20.17
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$22.51",
+      "value": 22.51
+    },
+    "sourceUrl": "https://tld-list.com/tld/kiwi"
+  },
+  "summary": ".kiwi is a Generic top-level domain. Managed by DOT KIWI LIMITED.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

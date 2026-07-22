@@ -1,0 +1,120 @@
+{
+  "tld": ".cz",
+  "slug": "cz",
+  "title": "About .cz domains",
+  "delegationTitle": "Delegation Record for .CZ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Czechia",
+  "sponsor": "CZ.NIC, z.s.p.o",
+  "sponsorDetail": "CZ.NIC, z.s.p.o\nMilesovska 5\nPrague 130 00\nCzechia",
+  "administrativeContact": "Ondrej Filip",
+  "technicalContact": "Martin Peterka",
+  "registryUrl": "http://www.nic.cz/",
+  "whoisServer": "whois.nic.cz",
+  "rdapServer": "https://rdap.nic.cz",
+  "registrationDate": "1993-01-13",
+  "recordUpdated": "2023-03-07",
+  "nameServers": [
+    {
+      "host": "a.ns.nic.cz",
+      "addresses": [
+        "194.0.12.1",
+        "2001:678:f:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b.ns.nic.cz",
+      "addresses": [
+        "194.0.13.1",
+        "2001:678:10:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c.ns.nic.cz",
+      "addresses": [
+        "194.0.14.1",
+        "2001:678:11:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d.ns.nic.cz",
+      "addresses": [
+        "193.29.206.1",
+        "2001:678:1:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".CZ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Czechia. The IANA root zone lists the registry manager as CZ.NIC, z.s.p.o. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.cz is the country code top-level domain (ccTLD) for the Czech Republic administered by CZ.NIC.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/cz.html",
+  "wikipedia": ".cz is the country code top-level domain (ccTLD) for the Czech Republic administered by CZ.NIC.",
+  "scrapedAt": "2026-07-21T21:38:27Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".cz",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "cz",
+    "czechia",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 31,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$8.90",
+      "value": 8.9
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$8.90",
+      "value": 8.9
+    },
+    "sourceUrl": "https://tld-list.com/tld/cz"
+  },
+  "summary": ".cz is a Country-code top-level domain. Managed by CZ.NIC, z.s.p.o.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

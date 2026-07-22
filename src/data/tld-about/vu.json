@@ -1,0 +1,137 @@
+{
+  "tld": ".vu",
+  "slug": "vu",
+  "title": "About .vu domains",
+  "delegationTitle": "Delegation Record for .VU",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Vanuatu",
+  "sponsor": "Telecommunications Radiocommunications and Broadcasting Regulator (TRBR)",
+  "sponsorDetail": "Telecommunications Radiocommunications and Broadcasting Regulator (TRBR)\nKumul Highway\nPort Vila 3547\nVanuatu",
+  "administrativeContact": "Regulator",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://www.hello.vu",
+  "whoisServer": "whois.dnrs.vu",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.tldns.vu",
+      "addresses": [
+        "37.209.192.6",
+        "2001:dcd:1:0:0:0:0:6"
+      ]
+    },
+    {
+      "host": "b.tldns.vu",
+      "addresses": [
+        "37.209.194.6",
+        "2001:dcd:2:0:0:0:0:6"
+      ]
+    },
+    {
+      "host": "c.tldns.vu",
+      "addresses": [
+        "37.209.196.6",
+        "2001:dcd:3:0:0:0:0:6"
+      ]
+    },
+    {
+      "host": "x.tldns.vu",
+      "addresses": [
+        "156.154.103.22",
+        "2610:a1:1010:0:0:0:0:22"
+      ]
+    },
+    {
+      "host": "y.tldns.vu",
+      "addresses": [
+        "156.154.104.22",
+        "2610:a1:1011:0:0:0:0:22"
+      ]
+    },
+    {
+      "host": "z.tldns.vu",
+      "addresses": [
+        "156.154.105.22",
+        "2610:a1:1012:0:0:0:0:22"
+      ]
+    }
+  ],
+  "about": ".VU is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Vanuatu. The IANA root zone lists the registry manager as Telecommunications Radiocommunications and Broadcasting Regulator (TRBR). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/vu.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:52:16Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".vu",
+    "broadcasting",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "radiocommunications",
+    "regional brands",
+    "regulator",
+    "telecommunications",
+    "top",
+    "trbr",
+    "vanuatu",
+    "vu"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 15,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$51.99",
+      "value": 51.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$51.99",
+      "value": 51.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/vu"
+  },
+  "summary": ".vu is a Country-code top-level domain. Managed by Telecommunications Radiocommunications and Broadcasting Regulator (TRBR).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

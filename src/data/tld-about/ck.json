@@ -1,0 +1,106 @@
+{
+  "tld": ".ck",
+  "slug": "ck",
+  "title": "About .ck domains",
+  "delegationTitle": "Delegation Record for .CK",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Cook Islands",
+  "sponsor": "Telecom Cook Islands Ltd.",
+  "sponsorDetail": "Telecom Cook Islands Ltd.\nParekura\nAvarua Rarotonga\nCook Islands (the)",
+  "administrativeContact": "Andreas Pareanga",
+  "technicalContact": "Robert McFadzien",
+  "registryUrl": "http://www.vodafone.co.ck",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1995-08-08",
+  "recordUpdated": "2020-06-17",
+  "nameServers": [
+    {
+      "host": "circa.mcs.vuw.ac.nz",
+      "addresses": [
+        "130.195.5.12"
+      ]
+    },
+    {
+      "host": "downstage.mcs.vuw.ac.nz",
+      "addresses": [
+        "130.195.6.10"
+      ]
+    },
+    {
+      "host": "parau.oyster.net.ck",
+      "addresses": [
+        "202.65.32.128"
+      ]
+    },
+    {
+      "host": "poiparau.oyster.net.ck",
+      "addresses": [
+        "202.65.32.127"
+      ]
+    }
+  ],
+  "about": ".CK is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Cook Islands. The IANA root zone lists the registry manager as Telecom Cook Islands Ltd.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ck is the Internet country code top-level domain (ccTLD) for the Cook Islands.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ck.html",
+  "wikipedia": ".ck is the Internet country code top-level domain (ccTLD) for the Cook Islands.",
+  "scrapedAt": "2026-07-21T21:37:39Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ck",
+    "cctld",
+    "ck",
+    "code",
+    "cook",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "islands",
+    "level",
+    "local business",
+    "regional brands",
+    "telecom",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".ck is a Country-code top-level domain. Managed by Telecom Cook Islands Ltd..",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

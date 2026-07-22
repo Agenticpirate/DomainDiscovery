@@ -1,0 +1,114 @@
+{
+  "tld": ".tl",
+  "slug": "tl",
+  "title": "About .tl domains",
+  "delegationTitle": "Delegation Record for .TL",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Timor-Leste",
+  "sponsor": "Autoridade Nacional de Comunica\u00e7\u00f5es",
+  "sponsorDetail": "Autoridade Nacional de Comunica\u00e7\u00f5es\nAvenida Bispo de Medeiros 8\nDili 10000\nTimor-Leste",
+  "administrativeContact": "Chairperson",
+  "technicalContact": "Garth Miller",
+  "registryUrl": "http://www.nic.tl",
+  "whoisServer": "whois.nic.tl",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns.anycast.nic.tl",
+      "addresses": [
+        "204.61.216.19",
+        "2001:500:14:6019:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ns1.anycastdns.cz",
+      "addresses": [
+        "185.38.108.108",
+        "2a00:fea0:dead:0:0:0:0:beef"
+      ]
+    },
+    {
+      "host": "ns2.anycastdns.cz",
+      "addresses": [
+        "185.28.194.194"
+      ]
+    }
+  ],
+  "about": ".TL is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Timor-Leste. The IANA root zone lists the registry manager as Autoridade Nacional de Comunica\u00e7\u00f5es. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/tl.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:51:11Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".tl",
+    "autoridade",
+    "cctld",
+    "code",
+    "comunica",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "leste",
+    "level",
+    "local business",
+    "nacional",
+    "regional brands",
+    "timor",
+    "tl",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 21,
+    "cheapestRegistration": {
+      "registrar": "MrDomain",
+      "price": "$70.14",
+      "value": 70.14
+    },
+    "cheapestRenewal": {
+      "registrar": "OVHcloud",
+      "price": "$55.99",
+      "value": 55.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/tl"
+  },
+  "summary": ".tl is a Country-code top-level domain. Managed by Autoridade Nacional de Comunica\u00e7\u00f5es.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

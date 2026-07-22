@@ -1,16 +1,36 @@
 {
-  "name": "DomainDiscovery - AI-Powered Domain Tools",
+  "name": "DomainDiscovery — Free Domain Name Search",
   "short_name": "DomainDiscovery",
-  "description": "Discover available domain names instantly with our free domain search, generator, bulk checker, WHOIS lookup, and appraisal tools.",
+  "description": "DomainDiscovery (Domain Discovery) — free domain name search, AI generator, geo domains, bulk check, WHOIS, and price comparison across 1,600+ TLDs.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
-  "theme_color": "#cbd5e1",
+  "theme_color": "#0a0a0a",
+  "lang": "en",
+  "categories": ["business", "utilities", "productivity"],
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/app-icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]

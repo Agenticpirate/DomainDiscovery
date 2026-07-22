@@ -1,0 +1,132 @@
+{
+  "tld": ".xn--ygbi2ammx",
+  "slug": "xn--ygbi2ammx",
+  "title": "About .xn--ygbi2ammx domains",
+  "delegationTitle": "Delegation Record for .\u0641\u0644\u0633\u0637\u064a\u0646",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code PS",
+  "designation": "Country-code top-level domain designated for Palestinian Territory, Occupied",
+  "sponsor": "Ministry of Telecom & Information Technology (MTIT)",
+  "sponsorDetail": "Ministry of Telecom & Information Technology (MTIT)\nAl-Irsal Street\nRamallah West Bank 674\nPalestine, State of",
+  "administrativeContact": "PNINA Chairman",
+  "technicalContact": "Technical Contact",
+  "registryUrl": "http://www.pnina.ps",
+  "whoisServer": "whois.pnina.ps",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "dns1.gov.ps",
+      "addresses": [
+        "213.244.82.147"
+      ]
+    },
+    {
+      "host": "dns3.gov.ps",
+      "addresses": [
+        "185.153.163.3"
+      ]
+    },
+    {
+      "host": "fork.sth.dnsnode.net",
+      "addresses": [
+        "77.72.229.254",
+        "2a01:3f0:0:306:0:0:0:53"
+      ]
+    },
+    {
+      "host": "idn.pnina.ps",
+      "addresses": [
+        "208.64.68.60"
+      ]
+    },
+    {
+      "host": "ns1.pnina.ps",
+      "addresses": [
+        "194.6.225.20"
+      ]
+    },
+    {
+      "host": "ps-ns.anycast.pch.net",
+      "addresses": [
+        "204.61.216.29",
+        "2001:500:14:6029:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ps.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.105",
+        "2001:67c:e0:0:0:0:0:105"
+      ]
+    }
+  ],
+  "about": ".XN--YGBI2AMMX is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Palestinian Territory, Occupied. The IANA root zone lists the registry manager as Ministry of Telecom & Information Technology (MTIT). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--ygbi2ammx.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:55:04Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--ygbi2ammx",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "letter",
+    "level",
+    "local business",
+    "ministry",
+    "mtit",
+    "occupied",
+    "palestinian",
+    "regional brands",
+    "technology",
+    "telecom",
+    "territory",
+    "top",
+    "two",
+    "xn--ygbi2ammx"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--ygbi2ammx is a Country-code top-level domain designated for two-letter country code PS. Managed by Ministry of Telecom & Information Technology (MTIT).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

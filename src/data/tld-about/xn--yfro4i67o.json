@@ -1,0 +1,119 @@
+{
+  "tld": ".xn--yfro4i67o",
+  "slug": "xn--yfro4i67o",
+  "title": "About .xn--yfro4i67o domains",
+  "delegationTitle": "Delegation Record for .\u65b0\u52a0\u5761",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code SG",
+  "designation": "Country-code top-level domain designated for Singapore",
+  "sponsor": "Singapore Network Information Centre (SGNIC) Pte Ltd",
+  "sponsorDetail": "Singapore Network Information Centre (SGNIC) Pte Ltd\n10 Pasir Panjang Road\n#03-01 Mapletree Business City\nSingapore 117438\nSingapore",
+  "administrativeContact": "Head (Technical and Ops)",
+  "technicalContact": "Head (Technical and Ops)",
+  "registryUrl": "http://www.sgnic.sg/",
+  "whoisServer": "whois.zh.sgnic.sg",
+  "rdapServer": "https://rdap.zh.sgnic.sg/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "dsany2.sgnic.sg",
+      "addresses": [
+        "185.159.197.170",
+        "2620:10a:80aa:0:0:0:0:170"
+      ]
+    },
+    {
+      "host": "dsany3.sgnic.sg",
+      "addresses": [
+        "185.159.198.170",
+        "2620:10a:80ab:0:0:0:0:170"
+      ]
+    },
+    {
+      "host": "dsany4.sgnic.sg",
+      "addresses": [
+        "45.142.220.65",
+        "2a0e:dbc0:1:0:0:0:0:65"
+      ]
+    },
+    {
+      "host": "ns4.apnic.net",
+      "addresses": [
+        "202.12.31.53",
+        "2001:dd8:12:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "pch.sgzones.sg",
+      "addresses": [
+        "204.61.216.57",
+        "2001:500:14:6057:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".XN--YFRO4I67O is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Singapore. The IANA root zone lists the registry manager as Singapore Network Information Centre (SGNIC) Pte Ltd. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--yfro4i67o.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:55:03Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--yfro4i67o",
+    "cctld",
+    "centre",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "letter",
+    "level",
+    "local business",
+    "network",
+    "regional brands",
+    "sgnic",
+    "singapore",
+    "top",
+    "two",
+    "xn--yfro4i67o"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--yfro4i67o is a Country-code top-level domain designated for two-letter country code SG. Managed by Singapore Network Information Centre (SGNIC) Pte Ltd.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

@@ -1,0 +1,128 @@
+{
+  "tld": ".gp",
+  "slug": "gp",
+  "title": "About .gp domains",
+  "delegationTitle": "Delegation Record for .GP",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Guadeloupe",
+  "sponsor": "Networking Technologies Group",
+  "sponsorDetail": "Networking Technologies Group\nRue de la Chapelle 232\nZ.I. de Jarry\nBaie-Mahault 97122\nGuadeloupe",
+  "administrativeContact": "Patrick Raimond",
+  "technicalContact": "John Broomfield",
+  "registryUrl": "http://www.nic.gp/",
+  "whoisServer": "whois.nic.gp",
+  "rdapServer": null,
+  "registrationDate": "1996-10-21",
+  "recordUpdated": "2025-09-09",
+  "nameServers": [
+    {
+      "host": "a.lactld.org",
+      "addresses": [
+        "200.0.68.10",
+        "2801:14:a000:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "gp.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.76",
+        "2a13:27c0:30:0:0:0:0:76"
+      ]
+    },
+    {
+      "host": "ns-gp.nic.fr",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns1.nic.gp",
+      "addresses": [
+        "193.218.114.2"
+      ]
+    },
+    {
+      "host": "ns2.nic.gp",
+      "addresses": [
+        "193.218.114.34"
+      ]
+    }
+  ],
+  "about": ".GP is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Guadeloupe. The IANA root zone lists the registry manager as Networking Technologies Group. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.gp is the country code top-level domain (ccTLD) for Guadeloupe. Pricing differs for Guadeloupians compared to other Internet users.\nRegistrations can be made directly at the second level, or at the third level beneath .com.gp, .net.gp, .edu.gp, .asso.gp, or .org.gp. Two digits numbers are accepted for registration.\nNIC.GP has been a member of LACTLD since August 2019.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gp.html",
+  "wikipedia": ".gp is the country code top-level domain (ccTLD) for Guadeloupe. Pricing differs for Guadeloupians compared to other Internet users.\nRegistrations can be made directly at the second level, or at the third level beneath .com.gp, .net.gp, .edu.gp, .asso.gp, or .org.gp. Two digits numbers are accepted for registration.\nNIC.GP has been a member of LACTLD since August 2019.",
+  "scrapedAt": "2026-07-21T21:41:27Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".gp",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "gp",
+    "group",
+    "guadeloupe",
+    "level",
+    "local business",
+    "networking",
+    "regional brands",
+    "technologies",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 13,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$89.99",
+      "value": 89.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$99.99",
+      "value": 99.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/gp"
+  },
+  "summary": ".gp is a Country-code top-level domain. Managed by Networking Technologies Group.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,102 @@
+{
+  "tld": ".xn--t60b56a",
+  "slug": "xn--t60b56a",
+  "title": "About .xn--t60b56a domains",
+  "delegationTitle": "Delegation Record for .\ub2f7\ub137",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "VeriSign Sarl",
+  "sponsorDetail": "VeriSign Sarl\n3 rue des Pilettes\nFribourg CH-1700\nSwitzerland",
+  "administrativeContact": "Registry Customer Service",
+  "technicalContact": "Registry Customer Service",
+  "registryUrl": "http://www.verisigninc.com",
+  "whoisServer": "whois.nic.xn--t60b56a",
+  "rdapServer": "https://tld-rdap.verisign.com/xn--t60b56a/v1/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ac1.nstld.com",
+      "addresses": [
+        "192.42.173.30",
+        "2001:500:120:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "ac2.nstld.com",
+      "addresses": [
+        "192.42.174.30",
+        "2001:500:121:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "ac3.nstld.com",
+      "addresses": [
+        "192.42.175.30",
+        "2001:500:122:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "ac4.nstld.com",
+      "addresses": [
+        "192.42.176.30",
+        "2001:500:123:0:0:0:0:30"
+      ]
+    }
+  ],
+  "about": ".XN--T60B56A is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--T60B56A is listed by IANA as VeriSign Sarl. Anyone can typically register a .XN--T60B56A name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--t60b56a.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:51Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--t60b56a",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "level",
+    "sarl",
+    "top",
+    "verisign",
+    "xn--t60b56a"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--t60b56a is a Generic top-level domain. Managed by VeriSign Sarl.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

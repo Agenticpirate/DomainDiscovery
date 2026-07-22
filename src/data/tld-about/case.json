@@ -1,0 +1,114 @@
+{
+  "tld": ".case",
+  "slug": "case",
+  "title": "About .case domains",
+  "delegationTitle": "Delegation Record for .CASE",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Digity, LLC",
+  "sponsorDetail": "Digity, LLC\n2229 S. Michigan Ave, #303\nChicago IL 60616\nUnited States of America (the)",
+  "administrativeContact": "Director",
+  "technicalContact": "CTO",
+  "registryUrl": "https://www.digity.case/case",
+  "whoisServer": "whois.nic.case",
+  "rdapServer": "https://rdap.centralnic.com/case/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.case",
+      "addresses": [
+        "194.169.218.140",
+        "2001:67c:13cc:0:0:0:1:140"
+      ]
+    },
+    {
+      "host": "b.nic.case",
+      "addresses": [
+        "185.24.64.140",
+        "2a04:2b00:13cc:0:0:0:1:140"
+      ]
+    },
+    {
+      "host": "c.nic.case",
+      "addresses": [
+        "212.18.248.140",
+        "2a04:2b00:13ee:0:0:0:0:140"
+      ]
+    },
+    {
+      "host": "d.nic.case",
+      "addresses": [
+        "212.18.249.140",
+        "2a04:2b00:13ff:0:0:0:0:140"
+      ]
+    }
+  ],
+  "about": ".CASE is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .CASE is listed by IANA as Digity, LLC. Anyone can typically register a .CASE name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/case.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:37:03Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".case",
+    "brand",
+    "brandable names",
+    "case",
+    "corporate brands",
+    "digity",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 16,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$2060.00",
+      "value": 2060.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$2060.00",
+      "value": 2060.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/case"
+  },
+  "summary": ".case is a Generic top-level domain. Managed by Digity, LLC.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

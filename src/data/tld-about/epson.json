@@ -1,0 +1,102 @@
+{
+  "tld": ".epson",
+  "slug": "epson",
+  "title": "About .epson domains",
+  "delegationTitle": "Delegation Record for .EPSON",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Seiko Epson Corporation",
+  "sponsorDetail": "Seiko Epson Corporation\n4-1 Nishishinjuku 2-chome\nShinjuku-ku Tokyo 163-0811\nJapan",
+  "administrativeContact": "Chief Operating Officer",
+  "technicalContact": "Director",
+  "registryUrl": "http://www.epson.com",
+  "whoisServer": "whois.nic.epson",
+  "rdapServer": "https://rdap.gmoregistry.net/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.gmoregistry.net",
+      "addresses": [
+        "37.209.192.4",
+        "2001:dcd:1:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "b.gmoregistry.net",
+      "addresses": [
+        "37.209.194.4",
+        "2001:dcd:2:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "k.gmoregistry.net",
+      "addresses": [
+        "37.209.196.4"
+      ]
+    },
+    {
+      "host": "l.gmoregistry.net",
+      "addresses": [
+        "37.209.198.4",
+        "2001:dcd:4:0:0:0:0:4"
+      ]
+    }
+  ],
+  "about": ".EPSON is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .EPSON is listed by IANA as Seiko Epson Corporation. Anyone can typically register a .EPSON name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/epson.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:39:37Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".epson",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "corporation",
+    "domain",
+    "epson",
+    "generic",
+    "gtld",
+    "level",
+    "seiko",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".epson is a Generic top-level domain. Managed by Seiko Epson Corporation.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DomainDiscovery
 
-## Getting Started
+Free **domain name search** and domain toolkit (also searched as Domain Discovery / Domains Discovery).
 
-First, run the development server:
+Live availability across 1,600+ TLDs, AI name generator, bulk checks, geo domain lists, WHOIS/RDAP, extension browser, price comparison, and Learn guides. Research is free; registration checkout is at a third-party registrar.
+
+## Develop
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+App defaults to [http://localhost:5001](http://localhost:5001).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production env (important)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+NEXT_PUBLIC_BASE_URL=https://www.domainsdiscovery.com
+# Optional GSC HTML-tag token:
+# NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=...
+```
 
-## Learn More
+See `.env.example` for the full list.
 
-To learn more about Next.js, take a look at the following resources:
+## SEO / ops
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Resource | Path |
+|----------|------|
+| Ops runbook (Phase F) | [docs/seo/PHASE-F-OPS.md](docs/seo/PHASE-F-OPS.md) |
+| Query tracking seeds | [docs/seo/query-tracking.json](docs/seo/query-tracking.json) |
+| Content calendar | [docs/seo/content-calendar.md](docs/seo/content-calendar.md) |
+| Index health check | `npm run seo:index-health` |
+| Prod health check | `npm run seo:index-health:prod` |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Machine-readable indexes (not a Google ranking lever): `/llms.txt`, `/llms-full.txt`.
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+npm run typecheck
+npm run seo:index-health
+npm run learn:expand
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+Private / project-specific unless otherwise noted.

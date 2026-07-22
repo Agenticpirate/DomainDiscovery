@@ -1,0 +1,115 @@
+{
+  "tld": ".quebec",
+  "slug": "quebec",
+  "title": "About .quebec domains",
+  "delegationTitle": "Delegation Record for .QUEBEC",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "PointQu\u00e9bec Inc",
+  "sponsorDetail": "PointQu\u00e9bec Inc\n101-82, Sherbrooke Ouest\nMontr\u00e9al QC H2X 1X3\nCanada",
+  "administrativeContact": "Normand Fortier",
+  "technicalContact": "TLD Technical Contact",
+  "registryUrl": "http://www.registre.quebec",
+  "whoisServer": "whois.nic.quebec",
+  "rdapServer": "https://rdap.nic.quebec",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "anycast10.irondns.net",
+      "addresses": [
+        "195.253.64.12",
+        "2a01:5b0:4:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast23.irondns.net",
+      "addresses": [
+        "195.253.65.11",
+        "2a01:5b0:5:0:0:0:0:b"
+      ]
+    },
+    {
+      "host": "anycast24.irondns.net",
+      "addresses": [
+        "195.253.65.12",
+        "2a01:5b0:5:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast9.irondns.net",
+      "addresses": [
+        "195.253.64.11",
+        "2a01:5b0:4:0:0:0:0:b"
+      ]
+    }
+  ],
+  "about": ".QUEBEC is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .QUEBEC is listed by IANA as PointQu\u00e9bec Inc. Anyone can typically register a .QUEBEC name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nThe .quebec domain is a GeoTLD and Community Priority Application that was proposed to ICANN's New gTLD Program by PointQu\u00e9bec.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/quebec.html",
+  "wikipedia": "The .quebec domain is a GeoTLD and Community Priority Application that was proposed to ICANN's New gTLD Program by PointQu\u00e9bec.",
+  "scrapedAt": "2026-07-21T21:48:01Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".quebec",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "pointqu",
+    "quebec",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 31,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$25.73",
+      "value": 25.73
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$25.73",
+      "value": 25.73
+    },
+    "sourceUrl": "https://tld-list.com/tld/quebec"
+  },
+  "summary": ".quebec is a Generic top-level domain. Managed by PointQu\u00e9bec Inc.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

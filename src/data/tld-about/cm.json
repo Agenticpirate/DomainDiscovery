@@ -1,0 +1,144 @@
+{
+  "tld": ".cm",
+  "slug": "cm",
+  "title": "About .cm domains",
+  "delegationTitle": "Delegation Record for .CM",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Cameroon",
+  "sponsor": "Agence Nationale des Technologies de l'Information et de la Communication (ANTIC)",
+  "sponsorDetail": "Agence Nationale des Technologies de l'Information et de la Communication (ANTIC)\nStreet 1.792\nP.O. Box 6170\nYaound\u00e9\nCameroon",
+  "administrativeContact": "Director General",
+  "technicalContact": ".CM System Administrator",
+  "registryUrl": "https://www.nic.cm",
+  "whoisServer": "whois.nic.cm",
+  "rdapServer": "https://rdap.nic.cm/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "auth02.ns.uu.net",
+      "addresses": [
+        "198.6.1.82"
+      ]
+    },
+    {
+      "host": "ns-cm.afrinic.net",
+      "addresses": [
+        "196.216.168.67",
+        "2001:43f8:120:0:0:0:0:67"
+      ]
+    },
+    {
+      "host": "ns-cm.nic.fr",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns.itu.ch",
+      "addresses": [
+        "156.106.192.121",
+        "2a00:7580:60:2141:0:0:0:10"
+      ]
+    },
+    {
+      "host": "ns1.nic.cm",
+      "addresses": [
+        "195.24.205.60"
+      ]
+    },
+    {
+      "host": "ns2.nic.cm",
+      "addresses": [
+        "195.24.205.61"
+      ]
+    },
+    {
+      "host": "phloem.uoregon.edu",
+      "addresses": [
+        "128.223.32.35",
+        "2001:468:d01:20:0:0:80df:2023"
+      ]
+    }
+  ],
+  "about": ".CM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Cameroon. The IANA root zone lists the registry manager as Agence Nationale des Technologies de l'Information et de la Communication (ANTIC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.cm is the country code top-level domain (ccTLD) for the Republic of Cameroon.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/cm.html",
+  "wikipedia": ".cm is the country code top-level domain (ccTLD) for the Republic of Cameroon.",
+  "scrapedAt": "2026-07-21T21:37:48Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".cm",
+    "agence",
+    "antic",
+    "cameroon",
+    "cctld",
+    "cm",
+    "code",
+    "communication",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "level",
+    "local business",
+    "nationale",
+    "regional brands",
+    "technologies",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 26,
+    "cheapestRegistration": {
+      "registrar": "Namecheap",
+      "price": "$140.98",
+      "value": 140.98
+    },
+    "cheapestRenewal": {
+      "registrar": "Namecheap",
+      "price": "$172.98",
+      "value": 172.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/cm"
+  },
+  "summary": ".cm is a Country-code top-level domain. Managed by Agence Nationale des Technologies de l'Information et de la Communication (ANTIC).",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

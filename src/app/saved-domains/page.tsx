@@ -9,6 +9,8 @@ import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
 import { useToast } from '@/components/ui/Toast';
 import { useTheme } from '@/contexts/ThemeContext';
+import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
+import { getRegistrarUrl } from '@/lib/registrars';
 
 interface SavedDomain {
   domain: string;
@@ -21,6 +23,7 @@ export default function SavedDomainsPage() {
   const { showToast } = useToast();
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const { selectedRegistrar } = usePreferredRegistrar();
 
   useEffect(() => {
     setMounted(true);
@@ -94,7 +97,7 @@ export default function SavedDomainsPage() {
   };
 
   const handleBuyDomain = (domain: string) => {
-    window.open(`https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(domain)}`, '_blank');
+    window.open(getRegistrarUrl(domain, selectedRegistrar), '_blank', 'noopener,noreferrer');
   };
 
   const formatDate = (timestamp: number) => {

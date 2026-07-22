@@ -1,0 +1,132 @@
+{
+  "tld": ".bing",
+  "slug": "bing",
+  "title": "About .bing domains",
+  "delegationTitle": "Delegation Record for .BING",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Microsoft Corporation",
+  "sponsorDetail": "Microsoft Corporation\nOne Microsoft Way\nRedmond WA 98052\nUnited States of America (the)",
+  "administrativeContact": "Program Manager",
+  "technicalContact": "TLD Registry Services Technical",
+  "registryUrl": "http://www.microsoft.com",
+  "whoisServer": null,
+  "rdapServer": "https://rdap.nominet.uk/bing/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "dns1.nic.bing",
+      "addresses": [
+        "213.248.219.130",
+        "2a01:618:403:0:0:0:0:130"
+      ]
+    },
+    {
+      "host": "dns2.nic.bing",
+      "addresses": [
+        "103.49.83.130",
+        "2401:fd80:403:0:0:0:0:130"
+      ]
+    },
+    {
+      "host": "dns3.nic.bing",
+      "addresses": [
+        "213.248.223.130",
+        "2a01:618:407:0:0:0:0:130"
+      ]
+    },
+    {
+      "host": "dns4.nic.bing",
+      "addresses": [
+        "43.230.51.130",
+        "2401:fd80:407:0:0:0:0:130"
+      ]
+    },
+    {
+      "host": "dnsa.nic.bing",
+      "addresses": [
+        "156.154.100.3",
+        "2001:502:ad09:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsb.nic.bing",
+      "addresses": [
+        "156.154.101.3",
+        "2001:502:2eda:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsc.nic.bing",
+      "addresses": [
+        "156.154.102.3",
+        "2610:a1:1009:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsd.nic.bing",
+      "addresses": [
+        "156.154.103.3",
+        "2610:a1:1010:0:0:0:0:3"
+      ]
+    }
+  ],
+  "about": ".BING is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .BING is listed by IANA as Microsoft Corporation. Anyone can typically register a .BING name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nMicrosoft Corporation is an American multinational technology company headquartered in Redmond, Washington. The company became influential in the rise of personal computers through software like Windows and has since expanded into areas such as Internet services, cloud computing, artificial intelligence, video gaming, and more. A Big Tech company, Microsoft is the largest software company by revenue, one of the most valuable public companies, and one of the most valuable brands globally.\nFounded in 1975 by Bill Gates and Paul Allen to market BASIC interpreters for the Altair 8800, Microsoft rose to dominate the PC operating system market with MS-DOS in the mid-1980s, followed by Windows. The company's 1986 initial public offering (IPO) and subsequent rise in its share price created three billionaires and an estimated 12,000 millionaires among Microsoft employees. Since the 1990s, it has increasingly diversified its business. Steve Ballmer replaced Gates as CEO in 2000. He oversaw the then-largest of Microsoft's corporate acquisitions in Skype Technologies in 2011, an increased focus on hardware that led to its first in-house PC line\u2014the Surface\u2014in 2012, and the formation of Microsoft Mobile through Nokia. Since Satya Nadella became CEO in 2014, the company has changed focus towards cloud computing and acquired LinkedIn in 2016. Under his direction, the company has expanded its video gaming business to support the Xbox brand, establishing the Microsoft Gaming division in 2022 and acquiring Activision Blizzard in 2023.\nMicrosoft has been dominant in the IBM PC\u2013compatible operating system and office software suite markets since the 1990s. Its best-known software products are the Windows line of operating systems and the Microsoft Office and Microsoft 365 suite of productivity applications, which most notably include the Word word processor, Excel spreadsheet editor, and PowerPoint presentation program. Its flagship hardware products are the Surface lineup of PCs and the Xbox brand of video game consoles, the latter including the Xbox network. The company also provides a range of consumer Internet services such as Bing web search, the MSN web portal, the Outlook.com (Hotmail) email service, and the Microsoft Store.  Microsoft also has Microsoft rewards, a site where you earn points by searching on Bing. In the enterprise and development fields, Microsoft. most notably provides the Azure cloud computing platform, Microsoft SQL Server database software, and Visual Studio.\nMicrosoft became the third publicly traded U.S. company to be valued at over $1 trillion in April 2019. It has been criticized for monopolistic practices, and the company's software received criticism for problems with ease of use, robustness, and security. Microsoft has also been criticized for its role in providing services to Israel during the Gaza war.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bing.html",
+  "wikipedia": "Microsoft Corporation is an American multinational technology company headquartered in Redmond, Washington. The company became influential in the rise of personal computers through software like Windows and has since expanded into areas such as Internet services, cloud computing, artificial intelligence, video gaming, and more. A Big Tech company, Microsoft is the largest software company by revenue, one of the most valuable public companies, and one of the most valuable brands globally.\nFounded in 1975 by Bill Gates and Paul Allen to market BASIC interpreters for the Altair 8800, Microsoft rose to dominate the PC operating system market with MS-DOS in the mid-1980s, followed by Windows. The company's 1986 initial public offering (IPO) and subsequent rise in its share price created three billionaires and an estimated 12,000 millionaires among Microsoft employees. Since the 1990s, it has increasingly diversified its business. Steve Ballmer replaced Gates as CEO in 2000. He oversaw the then-largest of Microsoft's corporate acquisitions in Skype Technologies in 2011, an increased focus on hardware that led to its first in-house PC line\u2014the Surface\u2014in 2012, and the formation of Microsoft Mobile through Nokia. Since Satya Nadella became CEO in 2014, the company has changed focus towards cloud computing and acquired LinkedIn in 2016. Under his direction, the company has expanded its video gaming business to support the Xbox brand, establishing the Microsoft Gaming division in 2022 and acquiring Activision Blizzard in 2023.\nMicrosoft has been dominant in the IBM PC\u2013compatible operating system and office software suite markets since the 1990s. Its best-known software products are the Windows line of operating systems and the Microsoft Office and Microsoft 365 suite of productivity applications, which most notably include the Word word processor, Excel spreadsheet editor, and PowerPoint presentation program. Its flagship hardware products are the Surface lineup of PCs and the Xbox brand of video game consoles, the latter including the Xbox network. The company also provides a range of consumer Internet services such as Bing web search, the MSN web portal, the Outlook.com (Hotmail) email service, and the Microsoft Store.  Microsoft also has Microsoft rewards, a site where you earn points by searching on Bing. In the enterprise and development fields, Microsoft. most notably provides the Azure cloud computing platform, Microsoft SQL Server database software, and Visual Studio.\nMicrosoft became the third publicly traded U.S. company to be valued at over $1 trillion in April 2019. It has been criticized for monopolistic practices, and the company's software received criticism for problems with ease of use, robustness, and security. Microsoft has also been criticized for its role in providing services to Israel during the Gaza war.",
+  "scrapedAt": "2026-07-21T21:35:55Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".bing",
+    "bing",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "corporation",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "microsoft",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".bing is a Generic top-level domain. Managed by Microsoft Corporation.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

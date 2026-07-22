@@ -1,0 +1,115 @@
+{
+  "tld": ".nf",
+  "slug": "nf",
+  "title": "About .nf domains",
+  "delegationTitle": "Delegation Record for .NF",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Norfolk Island",
+  "sponsor": "Norfolk Island Data Services",
+  "sponsorDetail": "Norfolk Island Data Services\n617 Fletcher Christian Rd.\nSouth Pacific 2899\nNorfolk Island",
+  "administrativeContact": "Robert Ryan",
+  "technicalContact": "Project Manager, CoCCA",
+  "registryUrl": "http://nic.nf",
+  "whoisServer": "whois.nic.nf",
+  "rdapServer": "https://rdap.nic.nf",
+  "registrationDate": "1996-03-18",
+  "recordUpdated": "2024-02-20",
+  "nameServers": [
+    {
+      "host": "ns.anycast.nic.nf",
+      "addresses": [
+        "204.61.216.51",
+        "2001:500:14:6051:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ns1.anycastdns.cz",
+      "addresses": [
+        "185.38.108.108",
+        "2a00:fea0:dead:0:0:0:0:beef"
+      ]
+    },
+    {
+      "host": "ns2.anycastdns.cz",
+      "addresses": [
+        "185.28.194.194"
+      ]
+    }
+  ],
+  "about": ".NF is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Norfolk Island. The IANA root zone lists the registry manager as Norfolk Island Data Services. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.nf is the Internet country code top-level domain (ccTLD) for Norfolk Island. While there is no rule requiring a local presence to register domains in this TLD, the pricing is significantly higher than most other domains, which has discouraged its use. Although registrations at the second level are the most expensive, they are still more common than third-level registrations, and most names in use are for sites relating to Norfolk Island.\n.nf is a member of CoCCA, a group of country-code domains making use of common registry and/or dispute resolution services.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/nf.html",
+  "wikipedia": ".nf is the Internet country code top-level domain (ccTLD) for Norfolk Island. While there is no rule requiring a local presence to register domains in this TLD, the pricing is significantly higher than most other domains, which has discouraged its use. Although registrations at the second level are the most expensive, they are still more common than third-level registrations, and most names in use are for sites relating to Norfolk Island.\n.nf is a member of CoCCA, a group of country-code domains making use of common registry and/or dispute resolution services.",
+  "scrapedAt": "2026-07-21T21:46:16Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".nf",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "data",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "island",
+    "level",
+    "local business",
+    "nf",
+    "norfolk",
+    "regional brands",
+    "services",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 16,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$136.99",
+      "value": 136.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$139.99",
+      "value": 139.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/nf"
+  },
+  "summary": ".nf is a Country-code top-level domain. Managed by Norfolk Island Data Services.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

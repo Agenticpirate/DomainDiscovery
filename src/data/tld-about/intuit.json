@@ -1,0 +1,117 @@
+{
+  "tld": ".intuit",
+  "slug": "intuit",
+  "title": "About .intuit domains",
+  "delegationTitle": "Delegation Record for .INTUIT",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Intuit Administrative Services, Inc.",
+  "sponsorDetail": "Intuit Administrative Services, Inc.\nc/o Intuit Inc., 2632 Marine Way\nMountain View CA 94043\nUnited States of America (the)",
+  "administrativeContact": "Christopher Niemi",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "https://www.intuit.com/",
+  "whoisServer": null,
+  "rdapServer": "https://rdap.nic.intuit/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.intuit",
+      "addresses": [
+        "37.209.192.9",
+        "2001:dcd:1:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "b.nic.intuit",
+      "addresses": [
+        "37.209.194.9",
+        "2001:dcd:2:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "c.nic.intuit",
+      "addresses": [
+        "37.209.196.9",
+        "2001:dcd:3:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "ns4.dns.nic.intuit",
+      "addresses": [
+        "156.154.156.82",
+        "2610:a1:1074:0:0:0:0:52"
+      ]
+    },
+    {
+      "host": "ns5.dns.nic.intuit",
+      "addresses": [
+        "156.154.157.82",
+        "2610:a1:1075:0:0:0:0:52"
+      ]
+    },
+    {
+      "host": "ns6.dns.nic.intuit",
+      "addresses": [
+        "156.154.158.82",
+        "2610:a1:1076:0:0:0:0:52"
+      ]
+    }
+  ],
+  "about": ".INTUIT is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .INTUIT is listed by IANA as Intuit Administrative Services, Inc.. Anyone can typically register a .INTUIT name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/intuit.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:42:44Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".intuit",
+    "administrative",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "intuit",
+    "level",
+    "services",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".intuit is a Generic top-level domain. Managed by Intuit Administrative Services, Inc..",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

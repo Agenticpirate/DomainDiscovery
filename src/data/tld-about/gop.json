@@ -1,0 +1,146 @@
+{
+  "tld": ".gop",
+  "slug": "gop",
+  "title": "About .gop domains",
+  "delegationTitle": "Delegation Record for .GOP",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Republican State Leadership Committee, Inc.",
+  "sponsorDetail": "Republican State Leadership Committee, Inc.\n1201 F Street NW, Suite 675\nWashington DC 20004\nUnited States of America (the)",
+  "administrativeContact": "CFO",
+  "technicalContact": "TLD Registry Services Technical",
+  "registryUrl": "http://join.gop",
+  "whoisServer": "whois.nic.gop",
+  "rdapServer": "https://rdap.nominet.uk/gop/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "dns1.nic.gop",
+      "addresses": [
+        "213.248.219.39",
+        "2a01:618:403:0:0:0:0:39"
+      ]
+    },
+    {
+      "host": "dns2.nic.gop",
+      "addresses": [
+        "103.49.83.39",
+        "2401:fd80:403:0:0:0:0:39"
+      ]
+    },
+    {
+      "host": "dns3.nic.gop",
+      "addresses": [
+        "213.248.223.39",
+        "2a01:618:407:0:0:0:0:39"
+      ]
+    },
+    {
+      "host": "dns4.nic.gop",
+      "addresses": [
+        "43.230.51.39",
+        "2401:fd80:407:0:0:0:0:39"
+      ]
+    },
+    {
+      "host": "dnsa.nic.gop",
+      "addresses": [
+        "156.154.100.3",
+        "2001:502:ad09:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsb.nic.gop",
+      "addresses": [
+        "156.154.101.3",
+        "2001:502:2eda:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsc.nic.gop",
+      "addresses": [
+        "156.154.102.3",
+        "2610:a1:1009:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsd.nic.gop",
+      "addresses": [
+        "156.154.103.3",
+        "2610:a1:1010:0:0:0:0:3"
+      ]
+    }
+  ],
+  "about": ".GOP is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .GOP is listed by IANA as Republican State Leadership Committee, Inc.. Anyone can typically register a .GOP name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nThe Republican State Leadership Committee (RSLC) is a political organization designed to assist Republicans in capturing and holding control of state legislatures across the United States. The organization notably raised over $140 million from 2004 to 2014, working across the country. The RSLC's Democratic Party counterpart is the Democratic Legislative Campaign Committee (DLCC).\nThe organization has stated that it \"is the largest caucus of Republican state leaders in the country and the only national organization whose mission is to elect down-ballot, state-level Republican officeholders\" with efforts focused on \"the offices of lieutenant governor, attorney general, secretary of state, state legislator, the judiciary and other down-ticket races.\" The RSLC has also asserted that they have \"more than 150,000 donors in all 50 states.\"\nThe RSLC President position is currently held by Matt Walter. The RSLC has functioned since 2002, while their rivals in the DLCC got started after the 1992 elections.\nAfter Ed Gillespie was announced chairman in January 2010, the RSLC is reported to have laundered $1.5 million from the Poarch Band of Creek Indians to Alabama Speaker Mike Hubbard and a group associated with Jack Abramoff.  From January 2010 to January 2014 the RSLC paid Gillespie $654,000.\nPolitical activist campaigns founded or co-founded by the RSLC include the \"Judicial Fairness Initiative\", the \"Future Majority Project\", and the \"Right Women, Right Now\" initiative. As of the aftermath of the 2014 U.S. elections, the Republican Party controls 68 out of 98 partisan state legislative chambers in the country, with the RSLC a major part of the efforts to hold onto these chambers into the future.\nThe RSLC is also the sponsoring organization of the .gop top-level Internet domain.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gop.html",
+  "wikipedia": "The Republican State Leadership Committee (RSLC) is a political organization designed to assist Republicans in capturing and holding control of state legislatures across the United States. The organization notably raised over $140 million from 2004 to 2014, working across the country. The RSLC's Democratic Party counterpart is the Democratic Legislative Campaign Committee (DLCC).\nThe organization has stated that it \"is the largest caucus of Republican state leaders in the country and the only national organization whose mission is to elect down-ballot, state-level Republican officeholders\" with efforts focused on \"the offices of lieutenant governor, attorney general, secretary of state, state legislator, the judiciary and other down-ticket races.\" The RSLC has also asserted that they have \"more than 150,000 donors in all 50 states.\"\nThe RSLC President position is currently held by Matt Walter. The RSLC has functioned since 2002, while their rivals in the DLCC got started after the 1992 elections.\nAfter Ed Gillespie was announced chairman in January 2010, the RSLC is reported to have laundered $1.5 million from the Poarch Band of Creek Indians to Alabama Speaker Mike Hubbard and a group associated with Jack Abramoff.  From January 2010 to January 2014 the RSLC paid Gillespie $654,000.\nPolitical activist campaigns founded or co-founded by the RSLC include the \"Judicial Fairness Initiative\", the \"Future Majority Project\", and the \"Right Women, Right Now\" initiative. As of the aftermath of the 2014 U.S. elections, the Republican Party controls 68 out of 98 partisan state legislative chambers in the country, with the RSLC a major part of the efforts to hold onto these chambers into the future.\nThe RSLC is also the sponsoring organization of the .gop top-level Internet domain.",
+  "scrapedAt": "2026-07-21T21:41:24Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".gop",
+    "brand",
+    "brandable names",
+    "committee",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gop",
+    "gtld",
+    "leadership",
+    "level",
+    "republican",
+    "state",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 2,
+    "cheapestRegistration": {
+      "registrar": "101domain",
+      "price": "$99.20",
+      "value": 99.2
+    },
+    "cheapestRenewal": {
+      "registrar": "101domain",
+      "price": "$99.20",
+      "value": 99.2
+    },
+    "sourceUrl": "https://tld-list.com/tld/gop"
+  },
+  "summary": ".gop is a Generic top-level domain. Managed by Republican State Leadership Committee, Inc..",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

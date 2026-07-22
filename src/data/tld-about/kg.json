@@ -1,0 +1,116 @@
+{
+  "tld": ".kg",
+  "slug": "kg",
+  "title": "About .kg domains",
+  "delegationTitle": "Delegation Record for .KG",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Kyrgyzstan",
+  "sponsor": "AsiaInfo Telecommunication Enterprise",
+  "sponsorDetail": "AsiaInfo Telecommunication Enterprise\nAbdrahmanova, 175\nBishkek 720011\nKyrgyzstan",
+  "administrativeContact": "Glotov Evgenii V.",
+  "technicalContact": "Sergey D. Piryazev",
+  "registryUrl": "https://www.cctld.kg/",
+  "whoisServer": "whois.kg",
+  "rdapServer": "http://rdap.cctld.kg/",
+  "registrationDate": "1995-07-12",
+  "recordUpdated": "2025-07-23",
+  "nameServers": [
+    {
+      "host": "kg.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.84",
+        "2a13:27c0:30:0:0:0:0:84"
+      ]
+    },
+    {
+      "host": "ns.kg",
+      "addresses": [
+        "195.38.160.36",
+        "2a11:a380:0:0:195:38:160:36"
+      ]
+    },
+    {
+      "host": "ns2.kg",
+      "addresses": [
+        "195.38.160.38",
+        "2a11:a380:0:0:195:38:160:38"
+      ]
+    }
+  ],
+  "about": ".KG is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Kyrgyzstan. The IANA root zone lists the registry manager as AsiaInfo Telecommunication Enterprise. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.kg is the Internet country code top-level domain (ccTLD) for Kyrgyzstan. Although registrations are normally at the second level, there are some specialized third-level registrations such as those under gov.kg and mil.kg.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/kg.html",
+  "wikipedia": ".kg is the Internet country code top-level domain (ccTLD) for Kyrgyzstan. Although registrations are normally at the second level, there are some specialized third-level registrations such as those under gov.kg and mil.kg.",
+  "scrapedAt": "2026-07-21T21:43:24Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".kg",
+    "asiainfo",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "enterprise",
+    "for",
+    "geo",
+    "kg",
+    "kyrgyzstan",
+    "level",
+    "local business",
+    "regional brands",
+    "telecommunication",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 10,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$64.99",
+      "value": 64.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$69.99",
+      "value": 69.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/kg"
+  },
+  "summary": ".kg is a Country-code top-level domain. Managed by AsiaInfo Telecommunication Enterprise.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

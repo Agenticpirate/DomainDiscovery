@@ -1,0 +1,125 @@
+{
+  "tld": ".ba",
+  "slug": "ba",
+  "title": "About .ba domains",
+  "delegationTitle": "Delegation Record for .BA",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Bosnia and Herzegovina",
+  "sponsor": "University Tele-Informatic Center (UTIC)",
+  "sponsorDetail": "University Tele-Informatic Center (UTIC)\nZmaja od Bosne 8 (objekat 33)\nSarajevo 71000\nBosnia and Herzegovina",
+  "administrativeContact": "Aida Radielovic",
+  "technicalContact": "Sanel Sefer",
+  "registryUrl": "http://www.nic.ba",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1996-08-14",
+  "recordUpdated": "2025-12-26",
+  "nameServers": [
+    {
+      "host": "bosna.utic.net.ba",
+      "addresses": [
+        "195.130.35.5"
+      ]
+    },
+    {
+      "host": "lim.utic.net.ba",
+      "addresses": [
+        "194.0.25.38",
+        "2001:678:20:0:0:0:0:38"
+      ]
+    },
+    {
+      "host": "sava.utic.net.ba",
+      "addresses": [
+        "195.130.35.3"
+      ]
+    },
+    {
+      "host": "una.utic.net.ba",
+      "addresses": [
+        "204.61.216.117",
+        "2001:500:14:6117:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".BA is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Bosnia and Herzegovina. The IANA root zone lists the registry manager as University Tele-Informatic Center (UTIC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ba is the Internet country code top-level domain (ccTLD) for Bosnia and Herzegovina. It is administered by the University Teleinformation Center.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ba.html",
+  "wikipedia": ".ba is the Internet country code top-level domain (ccTLD) for Bosnia and Herzegovina. It is administered by the University Teleinformation Center.",
+  "scrapedAt": "2026-07-21T21:35:21Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ba",
+    "and",
+    "ba",
+    "bosnia",
+    "cctld",
+    "center",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "herzegovina",
+    "informatic",
+    "level",
+    "local business",
+    "regional brands",
+    "tele",
+    "top",
+    "university",
+    "utic"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 12,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$56.99",
+      "value": 56.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$57.99",
+      "value": 57.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/ba"
+  },
+  "summary": ".ba is a Country-code top-level domain. Managed by University Tele-Informatic Center (UTIC).",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

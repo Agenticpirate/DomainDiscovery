@@ -1,0 +1,138 @@
+{
+  "tld": ".si",
+  "slug": "si",
+  "title": "About .si domains",
+  "delegationTitle": "Delegation Record for .SI",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Slovenia",
+  "sponsor": "Academic and Research Network of Slovenia (ARNES)",
+  "sponsorDetail": "Academic and Research Network of Slovenia (ARNES)\nTehnolo\u0161ki park 18\nLjubljana 1000\nSlovenia",
+  "administrativeContact": "Barbara Pov\u0161e",
+  "technicalContact": "Benjamin Zwittnig",
+  "registryUrl": "https://www.registry.si/",
+  "whoisServer": "whois.register.si",
+  "rdapServer": "https://rdap.register.si/",
+  "registrationDate": "1992-04-01",
+  "recordUpdated": "2026-03-25",
+  "nameServers": [
+    {
+      "host": "b.dns.si",
+      "addresses": [
+        "153.5.81.140",
+        "2001:1470:8000:53:0:0:0:44"
+      ]
+    },
+    {
+      "host": "f.dns.si",
+      "addresses": [
+        "194.146.106.62",
+        "2001:67c:1010:15:0:0:0:53"
+      ]
+    },
+    {
+      "host": "h.dns.si",
+      "addresses": [
+        "204.61.216.54",
+        "2001:500:14:6054:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "i.dns.si",
+      "addresses": [
+        "194.0.25.22",
+        "2001:678:20:0:0:0:0:22"
+      ]
+    },
+    {
+      "host": "k.dns.si",
+      "addresses": [
+        "185.159.197.11",
+        "2620:10a:80aa:0:0:0:0:11"
+      ]
+    },
+    {
+      "host": "l.dns.si",
+      "addresses": [
+        "185.159.198.11",
+        "2620:10a:80ab:0:0:0:0:11"
+      ]
+    }
+  ],
+  "about": ".SI is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Slovenia. The IANA root zone lists the registry manager as Academic and Research Network of Slovenia (ARNES). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.si is the Internet country code top-level domain (ccTLD) for Slovenia. It is administered by the ARNES, the Academic and Research Network of Slovenia. In 2010, the registry hosted 80,000 domain names. In 2012, that number increased to 100,000. In 2022 this number crossed 150,000.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/si.html",
+  "wikipedia": ".si is the Internet country code top-level domain (ccTLD) for Slovenia. It is administered by the ARNES, the Academic and Research Network of Slovenia. In 2010, the registry hosted 80,000 domain names. In 2012, that number increased to 100,000. In 2022 this number crossed 150,000.",
+  "scrapedAt": "2026-07-21T21:49:42Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".si",
+    "academic",
+    "arnes",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "network",
+    "regional brands",
+    "research",
+    "si",
+    "slovenia",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 22,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$12.29",
+      "value": 12.29
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$13.79",
+      "value": 13.79
+    },
+    "sourceUrl": "https://tld-list.com/tld/si"
+  },
+  "summary": ".si is a Country-code top-level domain. Managed by Academic and Research Network of Slovenia (ARNES).",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "wikiEnrichedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

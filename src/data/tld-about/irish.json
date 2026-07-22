@@ -1,0 +1,130 @@
+{
+  "tld": ".irish",
+  "slug": "irish",
+  "title": "About .irish domains",
+  "delegationTitle": "Delegation Record for .IRISH",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Binky Moon, LLC",
+  "sponsorDetail": "Binky Moon, LLC\nc/o Identity Digital Inc.\n10500 NE 8th Street, Suite 750\nBellevue WA 98004\nUnited States of America (the)",
+  "administrativeContact": "Vice President, Engineering",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "https://www.identity.digital/",
+  "whoisServer": null,
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "v0n0.nic.irish",
+      "addresses": [
+        "65.22.32.27",
+        "2a01:8840:22:0:0:0:0:27"
+      ]
+    },
+    {
+      "host": "v0n1.nic.irish",
+      "addresses": [
+        "65.22.33.27",
+        "2a01:8840:23:0:0:0:0:27"
+      ]
+    },
+    {
+      "host": "v0n2.nic.irish",
+      "addresses": [
+        "65.22.34.27",
+        "2a01:8840:24:0:0:0:0:27"
+      ]
+    },
+    {
+      "host": "v0n3.nic.irish",
+      "addresses": [
+        "161.232.16.27",
+        "2a01:8840:fa:0:0:0:0:27"
+      ]
+    },
+    {
+      "host": "v2n0.nic.irish",
+      "addresses": [
+        "65.22.35.27",
+        "2a01:8840:25:0:0:0:0:27"
+      ]
+    },
+    {
+      "host": "v2n1.nic.irish",
+      "addresses": [
+        "161.232.17.27",
+        "2a01:8840:fb:0:0:0:0:27"
+      ]
+    }
+  ],
+  "about": ".IRISH is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .IRISH is listed by IANA as Binky Moon, LLC. Anyone can typically register a .IRISH name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.irish is a generic top-level domain (gTLD). The rights to run the domain were applied for in June 2012 by Dot-Irish LLC, a for-profit company in California, United States, as part of an expansion of generic top-level domains by ICANN. The application was successful, and the domain opened for registrations on 17 March 2015, with public registration opened on 25 June 2015.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/irish.html",
+  "wikipedia": ".irish is a generic top-level domain (gTLD). The rights to run the domain were applied for in June 2012 by Dot-Irish LLC, a for-profit company in California, United States, as part of an expansion of generic top-level domains by ICANN. The application was successful, and the domain opened for registrations on 17 March 2015, with public registration opened on 25 June 2015.",
+  "scrapedAt": "2026-07-21T21:42:48Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".irish",
+    "binky",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "irish",
+    "level",
+    "moon",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 48,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$4.99",
+      "value": 4.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Cloudflare",
+      "price": "$14.18",
+      "value": 14.18
+    },
+    "sourceUrl": "https://tld-list.com/tld/irish"
+  },
+  "summary": ".irish is a Generic top-level domain. Managed by Binky Moon, LLC.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

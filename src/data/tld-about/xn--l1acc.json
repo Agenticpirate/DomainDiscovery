@@ -1,0 +1,93 @@
+{
+  "tld": ".xn--l1acc",
+  "slug": "xn--l1acc",
+  "title": "About .xn--l1acc domains",
+  "delegationTitle": "Delegation Record for .\u041c\u041e\u041d",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code MN",
+  "designation": "Country-code top-level domain designated for Mongolia",
+  "sponsor": "Datacom Co.,Ltd",
+  "sponsorDetail": "Datacom Co.,Ltd\nGalaxy Tower Office Bldg, #5007,\nMahatma Gandhi Street,\nKhan-Uul district\nUlaanbaatar 17010\nMongolia",
+  "administrativeContact": "Enkhbat Dangaasuren",
+  "technicalContact": "Enkhbold Gombo",
+  "registryUrl": "https://www.datacom.mn/",
+  "whoisServer": "whois.mn",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns10.dns.mn",
+      "addresses": [
+        "202.131.1.4"
+      ]
+    },
+    {
+      "host": "ns11.dns.mn",
+      "addresses": [
+        "202.131.4.12"
+      ]
+    }
+  ],
+  "about": ".XN--L1ACC is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Mongolia. The IANA root zone lists the registry manager as Datacom Co.,Ltd. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--l1acc.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:06Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--l1acc",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "datacom",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "letter",
+    "level",
+    "local business",
+    "mongolia",
+    "regional brands",
+    "top",
+    "two",
+    "xn--l1acc"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--l1acc is a Country-code top-level domain designated for two-letter country code MN. Managed by Datacom Co.,Ltd.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

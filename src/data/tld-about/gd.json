@@ -1,0 +1,125 @@
+{
+  "tld": ".gd",
+  "slug": "gd",
+  "title": "About .gd domains",
+  "delegationTitle": "Delegation Record for .GD",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Grenada",
+  "sponsor": "The National Telecommunications Regulatory Commission (NTRC)",
+  "sponsorDetail": "The National Telecommunications Regulatory Commission (NTRC)\nP.O. Box 854\nSt George's\nGrenada",
+  "administrativeContact": "Mr. Vincent Roberts",
+  "technicalContact": "CTO",
+  "registryUrl": "http://nic.gd",
+  "whoisServer": "whois.nic.gd",
+  "rdapServer": "https://rdap.centralnic.com/gd",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.gd",
+      "addresses": [
+        "194.169.218.88",
+        "2001:67c:13cc:0:0:0:1:88"
+      ]
+    },
+    {
+      "host": "b.nic.gd",
+      "addresses": [
+        "185.24.64.88",
+        "2a04:2b00:13cc:0:0:0:1:88"
+      ]
+    },
+    {
+      "host": "c.nic.gd",
+      "addresses": [
+        "212.18.248.88",
+        "2a04:2b00:13ee:0:0:0:0:88"
+      ]
+    },
+    {
+      "host": "d.nic.gd",
+      "addresses": [
+        "212.18.249.88",
+        "2a04:2b00:13ff:0:0:0:0:88"
+      ]
+    }
+  ],
+  "about": ".GD is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Grenada. The IANA root zone lists the registry manager as The National Telecommunications Regulatory Commission (NTRC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.gd is the country code top-level domain (ccTLD) for Grenada.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gd.html",
+  "wikipedia": ".gd is the country code top-level domain (ccTLD) for Grenada.",
+  "scrapedAt": "2026-07-21T21:40:56Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".gd",
+    "cctld",
+    "code",
+    "commission",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "gd",
+    "geo",
+    "grenada",
+    "level",
+    "local business",
+    "national",
+    "ntrc",
+    "regional brands",
+    "regulatory",
+    "telecommunications",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 28,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$26.75",
+      "value": 26.75
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$26.75",
+      "value": 26.75
+    },
+    "sourceUrl": "https://tld-list.com/tld/gd"
+  },
+  "summary": ".gd is a Country-code top-level domain. Managed by The National Telecommunications Regulatory Commission (NTRC).",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

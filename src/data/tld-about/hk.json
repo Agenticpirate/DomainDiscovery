@@ -1,0 +1,159 @@
+{
+  "tld": ".hk",
+  "slug": "hk",
+  "title": "About .hk domains",
+  "delegationTitle": "Delegation Record for .HK",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Hong Kong",
+  "sponsor": "Hong Kong Internet Registration Corporation Ltd.",
+  "sponsorDetail": "Hong Kong Internet Registration Corporation Ltd.\nUnit 501, Level 5, Core C, Cyberport 3\n100 Cyberport Road\nHong Kong",
+  "administrativeContact": "Cherry Lam",
+  "technicalContact": "John Lam",
+  "registryUrl": "http://www.hkirc.hk",
+  "whoisServer": "whois.hkirc.hk",
+  "rdapServer": null,
+  "registrationDate": "1990-01-03",
+  "recordUpdated": "2026-01-07",
+  "nameServers": [
+    {
+      "host": "c.hkirc.net.hk",
+      "addresses": [
+        "203.119.2.218",
+        "2001:dca:4000:0:0:0:cb77:2da"
+      ]
+    },
+    {
+      "host": "d.hkirc.net.hk",
+      "addresses": [
+        "203.119.87.218",
+        "2001:dca:2000:0:0:0:cb77:57da"
+      ]
+    },
+    {
+      "host": "m.hkirc.net.hk",
+      "addresses": [
+        "125.208.49.10",
+        "2001:dc7:feff:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "t.hkirc.net.hk",
+      "addresses": [
+        "202.12.31.53",
+        "2001:dd8:12:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "u.hkirc.net.hk",
+      "addresses": [
+        "210.201.138.58",
+        "2404:0:10a0:0:0:0:0:58"
+      ]
+    },
+    {
+      "host": "v.hkirc.net.hk",
+      "addresses": [
+        "204.61.216.46",
+        "2001:500:14:6046:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "x.hkirc.net.hk",
+      "addresses": [
+        "202.45.188.39",
+        "2405:3001:1:3a:0:0:0:27"
+      ]
+    },
+    {
+      "host": "y.hkirc.net.hk",
+      "addresses": [
+        "137.189.6.21",
+        "2405:3000:3:6:0:0:0:15"
+      ]
+    },
+    {
+      "host": "z.hkirc.net.hk",
+      "addresses": [
+        "194.146.106.70",
+        "2001:67c:1010:17:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".HK is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Hong Kong. The IANA root zone lists the registry manager as Hong Kong Internet Registration Corporation Ltd.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.hk is the country code top-level domain (ccTLD) for the Hong Kong Special Administrative Region. Introduced on 3 January 1990, it is administered by the Hong Kong Internet Registration Corporation (HKIRC).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/hk.html",
+  "wikipedia": ".hk is the country code top-level domain (ccTLD) for the Hong Kong Special Administrative Region. Introduced on 3 January 1990, it is administered by the Hong Kong Internet Registration Corporation (HKIRC).",
+  "scrapedAt": "2026-07-21T21:41:56Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".hk",
+    "cctld",
+    "code",
+    "corporation",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "hk",
+    "hong",
+    "internet",
+    "kong",
+    "level",
+    "local business",
+    "regional brands",
+    "registration",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 24,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$12.23",
+      "value": 12.23
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$19.11",
+      "value": 19.11
+    },
+    "sourceUrl": "https://tld-list.com/tld/hk"
+  },
+  "summary": ".hk is a Country-code top-level domain. Managed by Hong Kong Internet Registration Corporation Ltd..",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

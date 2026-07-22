@@ -1,9 +1,14 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/Button';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
+import {
+  REGISTRARS,
+  getRegistrarUrl,
+  type RegistrarName,
+} from '@/lib/registrars';
+import generatorKeywords from '@/data/generator-keywords.json';
 
 interface GeneratedDomain {
   name: string;
@@ -14,157 +19,259 @@ interface GeneratedDomain {
   category: 'exact' | 'prefix' | 'suffix' | 'compound' | 'alternative';
 }
 
-interface Registrar {
-  name: string;
-  url: string;
-}
-
-const REGISTRARS: Registrar[] = [
-  { name: 'GoDaddy', url: 'https://www.godaddy.com/domainsearch/find?domainToCheck=' },
-  { name: 'Namecheap', url: 'https://www.namecheap.com/domains/registration/results/?domain=' },
-  { name: 'Google Domains', url: 'https://domains.google.com/registrar/search?searchTerm=' },
-  { name: 'Cloudflare', url: 'https://www.cloudflare.com/products/registrar/' },
-  { name: 'Name.com', url: 'https://www.name.com/domain/search/' },
-];
-
 interface DomainGeneratorProps {
   onSelect?: (domain: string) => void;
 }
 
-type FilterType = 'all' | 'starts' | 'ends';
+type FilterType = 'all' | 'starts' | 'ends' | 'available' | 'taken' | 'premium';
 type SortType = 'popularity' | 'alphabetical' | 'length';
 type ViewType = 'grid' | 'list';
+type SeedCategory = keyof typeof generatorKeywords.seeds | 'all';
+
+const SEED_CATEGORY_LABELS: Record<string, string> = {
+  all: 'All',
+  trending: 'Trending',
+  tech: 'Tech',
+  business: 'Business',
+  creative: 'Creative',
+  ecommerce: 'E‑commerce',
+  health: 'Health',
+  education: 'Education',
+  lifestyle: 'Lifestyle',
+  finance: 'Finance',
+  social: 'Social',
+  everyday: 'Everyday',
+};
+
+const GENERATOR_PREFIXES = generatorKeywords.prefixes as string[];
+const GENERATOR_SUFFIXES = generatorKeywords.suffixes as string[];
+const GENERATOR_SEMANTIC = generatorKeywords.semantic as Record<string, string[]>;
+const GENERATOR_SEEDS = generatorKeywords.seeds as Record<string, string[]>;
+const DISPLAY_PAGE = 120;
+const CHECK_BATCH = 80;
+/** Cap full generation near LDS scale while keeping the UI usable */
+const MAX_GENERATED = 5000;
 
 export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const [keyword, setKeyword] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const [checkProgress, setCheckProgress] = useState({ done: 0, total: 0 });
   const [suggestions, setSuggestions] = useState<GeneratedDomain[]>([]);
   const [filteredSuggestions, setFilteredSuggestions] = useState<GeneratedDomain[]>([]);
   const [filter, setFilter] = useState<FilterType>('all');
   const [sortBy, setSortBy] = useState<SortType>('popularity');
   const [viewType, setViewType] = useState<ViewType>('grid');
-  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
-  const [selectedRegistrar, setSelectedRegistrar] = useState<string>('GoDaddy');
+  const [selectedRegistrar, setSelectedRegistrar] = useState<RegistrarName>('GoDaddy');
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
   const [showDomainPopup, setShowDomainPopup] = useState(false);
+  const [seedCategory, setSeedCategory] = useState<SeedCategory>('trending');
+  const [visibleCount, setVisibleCount] = useState(DISPLAY_PAGE);
+  const [minLen, setMinLen] = useState(3);
+  const [maxLen, setMaxLen] = useState(20);
+  const [includeCompounds, setIncludeCompounds] = useState(true);
+  const searchGenRef = React.useRef(0);
 
-  // Instant search with minimal debounce for real-time feedback
+  const seedWords = useMemo(() => {
+    if (seedCategory === 'all') {
+      return (generatorKeywords.allSeeds as string[]).slice(0, 64);
+    }
+    return (GENERATOR_SEEDS[seedCategory] || []).slice(0, 40);
+  }, [seedCategory]);
+
+  const lexiconStats = generatorKeywords.stats as {
+    prefixes: number;
+    suffixes: number;
+    seedWords: number;
+    totalLexicon: number;
+  };
+
+  // Deep-link / content chips: ?q= or custom "generator-seed" event
+  useEffect(() => {
+    const applySeed = (value: string) => {
+      const next = value.trim().toLowerCase();
+      if (!next) return;
+      setKeyword(next);
+    };
+
+    try {
+      const q = new URLSearchParams(window.location.search).get('q');
+      if (q) applySeed(q);
+    } catch {
+      /* ignore */
+    }
+
+    const onSeed = (e: Event) => {
+      const detail = (e as CustomEvent<{ keyword?: string }>).detail;
+      if (detail?.keyword) applySeed(detail.keyword);
+    };
+    window.addEventListener('generator-seed', onSeed as EventListener);
+    return () => window.removeEventListener('generator-seed', onSeed as EventListener);
+  }, []);
+
+  // Generate as user types (debounced slightly so multi-char keywords feel smooth)
   useEffect(() => {
     if (!keyword.trim()) {
       setSuggestions([]);
       setFilteredSuggestions([]);
+      setCheckProgress({ done: 0, total: 0 });
       return;
     }
 
-    // Reduced debounce to 50ms for near-instant feedback
     const timer = setTimeout(() => {
-      handleSearch(keyword);
-    }, 50);
+      void handleSearch(keyword);
+    }, 180);
 
     return () => clearTimeout(timer);
-  }, [keyword]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyword, includeCompounds]);
 
-  // Apply filters and sorting
+  // Apply filters and sorting (client-side on full result set)
   useEffect(() => {
     let filtered = [...suggestions];
-    const cleanKeyword = keyword.toLowerCase().trim();
+    const cleanKeyword = keyword.toLowerCase().replace(/\s+/g, '');
 
-    // Apply filter
+    filtered = filtered.filter((d) => {
+      const len = d.name.length;
+      return len >= minLen && len <= maxLen;
+    });
+
     switch (filter) {
       case 'starts':
-        filtered = filtered.filter(d => d.name.startsWith(cleanKeyword));
+        filtered = filtered.filter((d) => d.name.startsWith(cleanKeyword));
         break;
       case 'ends':
-        filtered = filtered.filter(d => d.name.endsWith(cleanKeyword));
+        filtered = filtered.filter((d) => d.name.endsWith(cleanKeyword));
+        break;
+      case 'available':
+        filtered = filtered.filter((d) => d.available && !d.premium);
+        break;
+      case 'taken':
+        filtered = filtered.filter((d) => !d.available && !d.premium);
+        break;
+      case 'premium':
+        filtered = filtered.filter((d) => !!d.premium);
         break;
       case 'all':
       default:
-        // Show all results
         break;
     }
 
-    // Apply sorting
     switch (sortBy) {
       case 'alphabetical':
         filtered.sort((a, b) => a.name.localeCompare(b.name));
         break;
       case 'length':
-        filtered.sort((a, b) => a.name.length - b.name.length);
+        filtered.sort((a, b) => a.name.length - b.name.length || a.name.localeCompare(b.name));
         break;
       case 'popularity':
       default:
-        filtered.sort((a, b) => b.popularity - a.popularity);
+        filtered.sort((a, b) => b.popularity - a.popularity || a.name.localeCompare(b.name));
         break;
     }
 
     setFilteredSuggestions(filtered);
-  }, [suggestions, filter, sortBy, keyword]);
+  }, [suggestions, filter, sortBy, keyword, minLen, maxLen]);
+
+  useEffect(() => {
+    setVisibleCount(DISPLAY_PAGE);
+  }, [keyword, filter, sortBy, minLen, maxLen]);
 
   const handleSearch = async (searchKeyword: string) => {
     if (!searchKeyword.trim()) return;
 
+    const gen = ++searchGenRef.current;
     setIsSearching(true);
-    
+
     try {
       const cleanKeyword = searchKeyword.toLowerCase().replace(/\s+/g, '');
-      
-      // Generate comprehensive variations with .com only
-      const variations = await generateEnhancedVariations(cleanKeyword);
-      
-      // Check real availability using the same API as bulk search
-      const domainNames = variations.map(v => `${v.name}.com`);
-      await checkDomainsAvailability(domainNames, variations);
-      
-      setSuggestions(variations);
+
+      // Full LDS-style expansion (prefix + suffix + optional compounds) — thousands of ideas
+      let variations = generateEnhancedVariations(cleanKeyword, includeCompounds);
+      variations = variations
+        .sort((a, b) => b.popularity - a.popularity)
+        .slice(0, MAX_GENERATED);
+
+      if (gen !== searchGenRef.current) return;
+
+      setSuggestions(variations.map((v) => ({ ...v })));
+      setCheckProgress({ done: 0, total: variations.length });
+
+      // Progressive availability: first batches update UI as they complete
+      await checkDomainsAvailabilityProgressive(variations, gen);
     } catch (error) {
       console.error('Domain generation error:', error);
     } finally {
-      setIsSearching(false);
+      if (gen === searchGenRef.current) {
+        setIsSearching(false);
+      }
     }
   };
 
-  const checkDomainsAvailability = async (domainNames: string[], variations: GeneratedDomain[]) => {
+  const checkDomainsAvailabilityProgressive = async (
+    variations: GeneratedDomain[],
+    gen: number
+  ) => {
+    const resultByDomain = new Map<
+      string,
+      { available: boolean; premium?: boolean; price?: string }
+    >();
+
+    const applyMap = () => {
+      if (gen !== searchGenRef.current) return;
+      setSuggestions((prev) =>
+        prev.map((variation) => {
+          const fullDomain = `${variation.name}.com`.toLowerCase();
+          const result = resultByDomain.get(fullDomain);
+          if (!result) return variation;
+          return {
+            ...variation,
+            available: !!result.available && !result.premium,
+            premium: !!result.premium,
+            price: result.price,
+          };
+        })
+      );
+    };
+
     try {
-      const results: Array<{ domain: string; available: boolean; premium?: boolean; price?: string }> = [];
+      for (let i = 0; i < variations.length; i += CHECK_BATCH) {
+        if (gen !== searchGenRef.current) return;
 
-      for (let i = 0; i < domainNames.length; i += 100) {
-        const batch = domainNames.slice(i, i + 100);
-        const response = await fetch('/api/domains/instant-check', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ domains: batch })
-        });
-
-        if (!response.ok) {
-          continue;
+        const batch = variations.slice(i, i + CHECK_BATCH).map((v) => `${v.name}.com`);
+        try {
+          const response = await fetch('/api/domains/instant-check', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ domains: batch }),
+          });
+          if (response.ok) {
+            const batchResults = await response.json();
+            if (Array.isArray(batchResults)) {
+              batchResults.forEach(
+                (r: { domain: string; available: boolean; premium?: boolean; price?: string }) => {
+                  if (r?.domain) {
+                    resultByDomain.set(r.domain.toLowerCase(), r);
+                  }
+                }
+              );
+            }
+          }
+        } catch {
+          /* continue batches */
         }
 
-        const batchResults = await response.json();
-        if (Array.isArray(batchResults)) {
-          results.push(...batchResults);
+        applyMap();
+        if (gen === searchGenRef.current) {
+          setCheckProgress({
+            done: Math.min(i + CHECK_BATCH, variations.length),
+            total: variations.length,
+          });
         }
       }
-
-      const resultByDomain = new Map(
-        results.map((result) => [result.domain.toLowerCase(), result])
-      );
-
-      variations.forEach((variation) => {
-        const fullDomain = `${variation.name}.com`.toLowerCase();
-        const result = resultByDomain.get(fullDomain);
-        variation.available = !!result?.available && !result?.premium;
-        variation.premium = !!result?.premium;
-        variation.price = result?.price;
-      });
     } catch (error) {
       console.error('Availability check error:', error);
-      variations.forEach((variation) => {
-        variation.available = false;
-        variation.premium = false;
-        variation.price = undefined;
-      });
     }
   };
 
@@ -172,190 +279,112 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
   const isPremiumSuggestion = (suggestion: GeneratedDomain) => !suggestion.available && !!suggestion.premium;
   const isTakenSuggestion = (suggestion: GeneratedDomain) => !suggestion.available && !suggestion.premium;
 
-  const generateEnhancedVariations = async (keyword: string): Promise<GeneratedDomain[]> => {
+  /**
+   * Lean Domain Search–style expansion:
+   * every prefix + keyword, every keyword + suffix (+ optional compounds/morphs).
+   * Yields thousands of names for a single seed (e.g. "agentic" → 5k+).
+   */
+  const generateEnhancedVariations = (
+    keyword: string,
+    withCompounds: boolean
+  ): GeneratedDomain[] => {
     const variations: GeneratedDomain[] = [];
-    
-    // Semantic/contextual word mappings for domain-specific understanding
-    const semanticMappings: Record<string, string[]> = {
-      'cloud': ['sky', 'compute', 'server', 'host', 'storage', 'data'],
-      'mint': ['finance', 'money', 'fresh', 'new', 'budget', 'wealth'],
-      'spark': ['ignite', 'data', 'analytics', 'energy', 'bright', 'idea'],
-      'search': ['find', 'discover', 'seek', 'explore', 'hunt', 'lookup'],
-      'shop': ['store', 'market', 'buy', 'commerce', 'retail', 'mall'],
-      'tech': ['technology', 'digital', 'software', 'innovation', 'code', 'dev'],
-      'ai': ['artificial', 'intelligence', 'smart', 'machine', 'learning', 'neural'],
-      'blog': ['write', 'post', 'journal', 'news', 'article', 'content'],
-      'app': ['application', 'mobile', 'software', 'platform', 'tool', 'service'],
-      'web': ['internet', 'online', 'site', 'digital', 'cyber', 'net'],
+    const seen = new Set<string>();
+
+    const push = (name: string, popularity: number, category: GeneratedDomain['category']) => {
+      const clean = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (!clean || clean.length < 2 || clean.length > 32 || seen.has(clean)) return;
+      if (/^\d+$/.test(clean)) return;
+      if (clean === keyword && category !== 'exact') return;
+      seen.add(clean);
+      variations.push({ name: clean, available: false, popularity, category });
     };
-    
-    // Get semantic alternatives for the keyword
-    const semanticAlternatives = semanticMappings[keyword.toLowerCase()] || [];
-    
-    // Comprehensive prefix list (200+ prefixes from Lean Domain Search + trending words)
-    const prefixes = [
-      // Top prefixes from Lean Domain Search
-      'my', 'the', 'get', 'best', 'top', 'new', 'pro', 'super', 'mega', 'ultra',
-      'all', 'your', 'our', 'one', 'first', 'last', 'next', 'real', 'true', 'pure',
-      'free', 'easy', 'quick', 'fast', 'smart', 'cool', 'hot', 'big', 'great', 'good',
-      'try', 'use', 'go', 'hey', 'hi', 'hello', 'welcome', 'join', 'meet', 'find',
-      // Action words
-      'buy', 'shop', 'save', 'make', 'build', 'create', 'start', 'launch', 'grow', 'boost',
-      'learn', 'teach', 'share', 'connect', 'discover', 'explore', 'search', 'browse', 'view', 'watch',
-      // Quality/Status
-      'premium', 'elite', 'prime', 'plus', 'max', 'ultra', 'mega', 'super', 'hyper', 'turbo',
-      'expert', 'master', 'genius', 'wizard', 'guru', 'ninja', 'hero', 'star', 'ace', 'king',
-      // Modern/Tech
-      'digital', 'cyber', 'tech', 'smart', 'cloud', 'web', 'net', 'online', 'virtual', 'meta',
-      'crypto', 'blockchain', 'ai', 'ml', 'data', 'code', 'dev', 'app', 'mobile', 'social',
-      // Time/Frequency
-      'daily', 'weekly', 'monthly', 'instant', 'rapid', 'express', 'flash', 'now', 'today', 'live',
-      'always', 'ever', 'never', 'forever', 'constant', 'infinite', 'endless', 'eternal', 'timeless', 'classic',
-      // Size/Scale
-      'mini', 'micro', 'small', 'tiny', 'compact', 'lite', 'light', 'slim', 'thin', 'nano',
-      'giant', 'huge', 'massive', 'grand', 'epic', 'vast', 'wide', 'broad', 'full', 'complete',
-      // Location/Direction
-      'local', 'global', 'world', 'universal', 'international', 'national', 'regional', 'urban', 'metro', 'city',
-      'north', 'south', 'east', 'west', 'central', 'main', 'downtown', 'uptown', 'midtown', 'inner',
-      // Emotion/Feeling
-      'happy', 'joy', 'love', 'peace', 'zen', 'calm', 'chill', 'relax', 'comfort', 'cozy',
-      'fun', 'play', 'game', 'party', 'celebrate', 'festive', 'bright', 'sunny', 'fresh', 'clean',
-      // Business/Professional
-      'biz', 'corp', 'inc', 'group', 'team', 'crew', 'squad', 'guild', 'club', 'society',
-      'agency', 'studio', 'firm', 'company', 'enterprise', 'venture', 'startup', 'launch', 'forge', 'craft',
-      // Trending 2024-2026
-      'quantum', 'neural', 'edge', 'core', 'nexus', 'vertex', 'apex', 'zenith', 'peak', 'summit',
-      'fusion', 'synergy', 'harmony', 'unity', 'alliance', 'collective', 'network', 'mesh', 'grid', 'matrix'
-    ];
-    
-    // Comprehensive suffix list (200+ suffixes from Lean Domain Search + trending words)
-    const suffixes = [
-      // Top suffixes from Lean Domain Search
-      'online', 'hub', 'central', 'zone', 'spot', 'place', 'space', 'point', 'center', 'station',
-      'world', 'land', 'ville', 'city', 'town', 'burg', 'port', 'bay', 'beach', 'island',
-      // Tech/Digital
-      'app', 'web', 'net', 'tech', 'digital', 'cyber', 'cloud', 'data', 'code', 'dev',
-      'ai', 'ml', 'bot', 'api', 'sdk', 'platform', 'system', 'engine', 'core', 'stack',
-      // Business/Service
-      'pro', 'plus', 'max', 'elite', 'premium', 'prime', 'expert', 'master', 'guru', 'ninja',
-      'lab', 'labs', 'studio', 'works', 'forge', 'factory', 'shop', 'store', 'mart', 'market',
-      // Action/Function
-      'ify', 'ize', 'er', 'or', 'ist', 'ster', 'maker', 'builder', 'creator', 'generator',
-      'finder', 'searcher', 'hunter', 'tracker', 'scanner', 'detector', 'analyzer', 'monitor', 'watcher', 'guard',
-      // Community/Social
-      'community', 'social', 'network', 'connect', 'link', 'bridge', 'portal', 'gateway', 'door', 'path',
-      'circle', 'group', 'team', 'crew', 'squad', 'guild', 'club', 'society', 'league', 'union',
-      // Content/Media
-      'blog', 'vlog', 'cast', 'pod', 'stream', 'tube', 'tv', 'radio', 'media', 'press',
-      'news', 'post', 'feed', 'wire', 'channel', 'show', 'series', 'episode', 'story', 'tale',
-      // Commerce/Transaction
-      'shop', 'store', 'mart', 'market', 'bazaar', 'exchange', 'trade', 'deal', 'sale', 'buy',
-      'cart', 'checkout', 'pay', 'wallet', 'vault', 'bank', 'fund', 'capital', 'invest', 'wealth',
-      // Time/Status
-      'now', 'today', 'live', 'instant', 'express', 'rapid', 'fast', 'quick', 'swift', 'speed',
-      'daily', 'weekly', 'monthly', 'yearly', 'always', 'forever', 'ever', 'never', 'once', 'twice',
-      // Quality/Feature
-      'base', 'core', 'main', 'key', 'prime', 'first', 'best', 'top', 'peak', 'max',
-      'ultra', 'mega', 'super', 'hyper', 'turbo', 'boost', 'power', 'force', 'energy', 'fuel',
-      // Location/Container
-      'box', 'kit', 'pack', 'bundle', 'suite', 'set', 'collection', 'library', 'archive', 'vault',
-      'room', 'house', 'home', 'nest', 'den', 'cave', 'shelter', 'haven', 'oasis', 'paradise',
-      // Direction/Movement
-      'go', 'move', 'flow', 'stream', 'wave', 'tide', 'current', 'drift', 'shift', 'swing',
-      'rise', 'climb', 'soar', 'fly', 'jump', 'leap', 'bounce', 'spring', 'launch', 'blast',
-      // Modern/Trending
-      'verse', 'metaverse', 'realm', 'dimension', 'universe', 'cosmos', 'galaxy', 'star', 'nova', 'nebula',
-      'quantum', 'neural', 'edge', 'mesh', 'grid', 'matrix', 'nexus', 'vertex', 'apex', 'zenith',
-      // Descriptive
-      'ly', 'ful', 'less', 'ish', 'able', 'ible', 'ous', 'ious', 'ive', 'ative',
-      'wise', 'like', 'style', 'mode', 'form', 'type', 'kind', 'sort', 'class', 'grade'
-    ];
-    
-    // Exact match with .com (highest popularity)
-    variations.push({
-      name: keyword,
-      available: false,
-      popularity: 100,
-      category: 'exact',
-    });
-    
-    // Add semantic alternatives as high-priority suggestions
+
+    const prefixes = GENERATOR_PREFIXES;
+    const suffixes = GENERATOR_SUFFIXES;
+    const semanticAlternatives = GENERATOR_SEMANTIC[keyword.toLowerCase()] || [];
+
+    // Exact match first
+    push(keyword, 100, 'exact');
+
+    // Semantic alternatives
     semanticAlternatives.forEach((alt, index) => {
-      variations.push({
-        name: alt,
-        available: false,
-        popularity: 98 - index,
-        category: 'alternative',
-      });
-      // Also add compound with original keyword
-      variations.push({
-        name: `${keyword}${alt}`,
-        available: false,
-        popularity: 96 - index,
-        category: 'compound',
-      });
-      variations.push({
-        name: `${alt}${keyword}`,
-        available: false,
-        popularity: 95 - index,
-        category: 'compound',
-      });
+      push(alt, 98 - index, 'alternative');
+      if (withCompounds) {
+        push(`${keyword}${alt}`, 96 - index, 'compound');
+        push(`${alt}${keyword}`, 95 - index, 'compound');
+      }
     });
 
-    // ALL Prefix variations with .com (200+ variations)
+    // Full prefix library (LDS core)
     prefixes.forEach((prefix, index) => {
-      const pop = 95 - Math.floor(index / 5);
-      variations.push({
-        name: `${prefix}${keyword}`,
-        available: false,
-        popularity: pop,
-        category: 'prefix',
-      });
+      if (prefix === keyword) return;
+      push(`${prefix}${keyword}`, Math.max(50, 95 - Math.floor(index / 40)), 'prefix');
     });
 
-    // ALL Suffix variations with .com (200+ variations)
+    // Full suffix library (LDS core)
     suffixes.forEach((suffix, index) => {
-      const pop = 93 - Math.floor(index / 5);
-      variations.push({
-        name: `${keyword}${suffix}`,
-        available: false,
-        popularity: pop,
-        category: 'suffix',
-      });
+      if (suffix === keyword) return;
+      push(`${keyword}${suffix}`, Math.max(48, 93 - Math.floor(index / 40)), 'suffix');
     });
 
-    // Expanded compound variations (prefix + keyword + suffix) - Top 50 prefixes x Top 20 suffixes
-    const topPrefixes = prefixes.slice(0, 50);
-    const topSuffixes = suffixes.slice(0, 20);
-    
-    topPrefixes.forEach((prefix, i) => {
-      topSuffixes.slice(0, 5).forEach((suffix, j) => {
-        variations.push({
-          name: `${prefix}${keyword}${suffix}`,
-          available: false,
-          popularity: 85 - Math.floor((i + j) / 2),
-          category: 'compound',
+    // Optional high-value compounds (top prefixes × top suffixes)
+    if (withCompounds) {
+      const topPrefixes = prefixes.slice(0, 60);
+      const topSuffixes = suffixes.slice(0, 25);
+      topPrefixes.forEach((prefix, i) => {
+        topSuffixes.forEach((suffix, j) => {
+          push(`${prefix}${keyword}${suffix}`, Math.max(30, 82 - Math.floor((i + j) / 4)), 'compound');
         });
       });
-    });
+    }
 
-    // Alternative creative variations with .com
-    if (keyword.length > 3) {
-      const creative = [
-        `${keyword}r`, `${keyword}ly`, `${keyword}ify`, `${keyword}er`, `${keyword}or`,
-        `i${keyword}`, `e${keyword}`, `${keyword}s`, `${keyword}ing`, `${keyword}ed`,
-        `${keyword}ist`, `${keyword}ster`, `${keyword}able`, `${keyword}ful`, `${keyword}less`,
-        `${keyword}ize`, `${keyword}wise`, `${keyword}like`, `${keyword}ish`, `${keyword}ous`,
+    // Brand morphs
+    if (keyword.length >= 3) {
+      const morphs = [
+        `${keyword}ly`,
+        `${keyword}ify`,
+        `${keyword}er`,
+        `${keyword}or`,
+        `${keyword}io`,
+        `${keyword}hq`,
+        `${keyword}ai`,
+        `${keyword}app`,
+        `${keyword}pro`,
+        `${keyword}hub`,
+        `get${keyword}`,
+        `my${keyword}`,
+        `try${keyword}`,
+        `go${keyword}`,
+        `the${keyword}`,
+        `i${keyword}`,
+        `e${keyword}`,
+        `${keyword}s`,
+        `${keyword}ing`,
+        `${keyword}able`,
+        `${keyword}ful`,
+        `${keyword}less`,
+        `${keyword}ize`,
+        `${keyword}wise`,
+        `${keyword}ster`,
       ];
-      
-      creative.forEach((variant, index) => {
-        variations.push({
-          name: variant,
-          available: false,
-          popularity: 80 - index,
-          category: 'alternative',
-        });
-      });
+      morphs.forEach((variant, index) => push(variant, 78 - index, 'alternative'));
+    }
+
+    // Multi-word seeds
+    const parts = keyword.split(/(?=[A-Z])|[\s\-_]+/).filter(Boolean).map((p) => p.toLowerCase());
+    if (parts.length >= 2) {
+      const [a, b] = [parts[0], parts[1]];
+      [
+        `${a}${b}`,
+        `${b}${a}`,
+        `${a}${b}hq`,
+        `${a}${b}app`,
+        `${a}${b}pro`,
+        `get${a}${b}`,
+        `my${a}${b}`,
+        `go${a}${b}`,
+      ].forEach((v, i) => push(v, 90 - i, 'compound'));
     }
 
     return variations;
@@ -366,19 +395,15 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     setShowDomainPopup(true);
   };
 
-  const handleBuyDomain = (domainName: string, registrar: string) => {
-    const reg = REGISTRARS.find(r => r.name === registrar);
-    if (reg) {
-      window.open(`${reg.url}${encodeURIComponent(domainName)}.com`, '_blank');
-    }
+  const handleBuyDomain = (domainName: string, registrar: RegistrarName) => {
+    const fullDomain = domainName.includes('.') ? domainName : `${domainName}.com`;
+    window.open(getRegistrarUrl(fullDomain, registrar), '_blank', 'noopener,noreferrer');
     setShowDomainPopup(false);
   };
 
   const handleComClick = (domainName: string) => {
-    const reg = REGISTRARS.find(r => r.name === selectedRegistrar);
-    if (reg) {
-      window.open(`${reg.url}${encodeURIComponent(domainName)}.com`, '_blank');
-    }
+    const fullDomain = domainName.includes('.') ? domainName : `${domainName}.com`;
+    window.open(getRegistrarUrl(fullDomain, selectedRegistrar), '_blank', 'noopener,noreferrer');
   };
 
   const availableCount = suggestions.filter(isAvailableSuggestion).length;
@@ -389,65 +414,209 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     ? suggestions.find((suggestion) => suggestion.name === selectedDomain) ?? null
     : null;
 
+  const chipClass = isLight
+    ? 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
+    : 'bg-white/[0.04] border border-white/10 text-white/60 hover:border-white/20 hover:text-white/80';
+
   return (
-    <div className="space-y-0">
-      {/* Search Input */}
-      <div className={`glass-card rounded-b-none px-4 py-5 sm:px-6 sm:py-7 ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
+    <div className="space-y-3 sm:space-y-4">
+      {/* Unified search panel — single border, no nested input box */}
+      <div
+        className={`shine-border rounded-2xl border p-3 sm:p-4 ${
+          isLight
+            ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.04]'
+            : 'bg-white/[0.03] border-white/10'
+        }`}
+      >
         <div className="max-w-3xl mx-auto">
-          <div className="mb-4 text-center sm:mb-5">
-            <h2 className="text-xl font-bold sm:text-2xl mb-2">AI-Powered Domain Generator</h2>
-            <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
-              Generate creative domain name ideas as you type. Instant results with real-time availability.
-            </p>
-          </div>
-          
-          <div className="relative">
+          {/* One continuous control — input has NO inner border/box */}
+          <div
+            className={`flex items-center gap-1.5 sm:gap-2 rounded-xl sm:rounded-2xl p-1 sm:p-1.5 transition-all ${
+              isLight
+                ? 'bg-slate-50 border border-slate-200 focus-within:border-slate-300 focus-within:bg-white focus-within:shadow-sm'
+                : 'bg-black/30 border border-white/10 focus-within:border-white/22'
+            }`}
+          >
+            <div
+              className={`hidden sm:flex ml-2 shrink-0 items-center justify-center w-8 h-8 ${
+                isLight ? 'text-slate-400' : 'text-white/35'
+              }`}
+            >
+              <Icons.Search />
+            </div>
+
             <input
               type="text"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch(keyword)}
-              placeholder="Enter your keyword or business idea (e.g., cloud, mint, spark, shop)..."
-              className={`w-full ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl px-4 py-3 text-base sm:px-6 sm:py-4 sm:text-lg ${isLight ? 'text-slate-900' : 'text-white'} ${isLight ? 'placeholder:text-slate-400' : 'placeholder:text-white/30'} focus:outline-none focus:ring-2 ${isLight ? 'focus:ring-blue-300' : 'focus:ring-white/20'} ${isLight ? 'focus:border-blue-300' : 'focus:border-white/20'} transition-all`}
+              placeholder="Enter a keyword (cloud, mint, spark, shop…)"
               autoFocus
+              autoComplete="off"
+              spellCheck={false}
+              className={`flex-1 min-w-0 bg-transparent border-0 outline-none ring-0 shadow-none focus:outline-none focus:ring-0 focus:border-0 text-[14px] sm:text-[15px] font-medium py-2.5 pl-3 sm:pl-0 pr-1 ${
+                isLight
+                  ? 'text-slate-900 placeholder:text-slate-400'
+                  : 'text-white placeholder:text-white/35'
+              }`}
+              aria-label="Domain keyword"
+              style={{ boxShadow: 'none', WebkitAppearance: 'none' }}
             />
+
+            {keyword && (
+              <button
+                type="button"
+                onClick={() => {
+                  setKeyword('');
+                  setSuggestions([]);
+                  setFilteredSuggestions([]);
+                }}
+                className={`shrink-0 p-1.5 rounded-lg transition-colors ${
+                  isLight ? 'text-slate-400 hover:text-slate-700' : 'text-white/35 hover:text-white/70'
+                }`}
+                aria-label="Clear"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+
             {isSearching && (
-              <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                <div className={`w-5 h-5 border-2 ${isLight ? 'border-slate-300 border-t-slate-600' : 'border-white/20 border-t-white'} rounded-full animate-spin`} />
+              <div className="shrink-0 mr-1">
+                <div
+                  className={`w-4 h-4 border-2 rounded-full animate-spin ${
+                    isLight ? 'border-slate-200 border-t-slate-700' : 'border-white/15 border-t-white'
+                  }`}
+                />
               </div>
             )}
+
+            <button
+              type="button"
+              onClick={() => handleSearch(keyword)}
+              disabled={!keyword.trim() || isSearching}
+              className={`btn-brand shrink-0 inline-flex items-center gap-1 rounded-lg sm:rounded-xl px-3 sm:px-5 py-2 sm:py-2.5 text-[12px] sm:text-[13px] font-bold disabled:opacity-40 disabled:cursor-not-allowed`}
+            >
+              <span>Generate</span>
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </button>
           </div>
 
+          {/* Curated keyword library — industry seeds from top generators */}
+          <div className="mt-3 space-y-2">
+            <div className="flex flex-wrap items-center justify-center gap-1">
+              {(
+                [
+                  'trending',
+                  'tech',
+                  'business',
+                  'creative',
+                  'ecommerce',
+                  'finance',
+                  'health',
+                  'education',
+                  'lifestyle',
+                  'social',
+                  'all',
+                ] as SeedCategory[]
+              ).map((cat) => {
+                const active = seedCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setSeedCategory(cat)}
+                    className={`shrink-0 rounded-full px-2 py-0.5 text-[9px] sm:text-[10px] font-bold border transition-all ${
+                      active
+                        ? isLight
+                          ? 'bg-slate-900 text-white border-slate-900'
+                          : 'bg-white text-black border-white'
+                        : isLight
+                          ? 'bg-transparent text-slate-500 border-transparent hover:bg-slate-50'
+                          : 'bg-transparent text-white/40 border-transparent hover:bg-white/[0.04]'
+                    }`}
+                  >
+                    {SEED_CATEGORY_LABELS[cat] || cat}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-1.5 max-h-[4.5rem] sm:max-h-none overflow-y-auto">
+              {seedWords.map((example) => (
+                <button
+                  key={example}
+                  type="button"
+                  onClick={() => setKeyword(example)}
+                  className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold transition-all ${
+                    keyword === example
+                      ? isLight
+                        ? 'bg-slate-900 text-white border border-slate-900'
+                        : 'bg-white text-black border border-white'
+                      : chipClass
+                  }`}
+                >
+                  {example}
+                </button>
+              ))}
+            </div>
+            <p className="text-center text-[9px] sm:text-[10px]" style={{ color: 'var(--text-muted)' }}>
+              {lexiconStats.prefixes.toLocaleString()} prefixes · {lexiconStats.suffixes.toLocaleString()}{' '}
+              suffixes · {lexiconStats.seedWords.toLocaleString()} seeds · up to{' '}
+              {MAX_GENERATED.toLocaleString()} ideas per keyword
+            </p>
+          </div>
+
+          {/* Live stats + check progress */}
           {keyword && totalCount > 0 && (
-            <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm">
-              <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${isLight ? 'bg-slate-400' : 'bg-white/40'}`}></div>
-                <span className={isLight ? 'text-slate-500' : 'text-white/50'}>
-                  <span className={`font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>{totalCount}</span> suggestions
+            <div className="mt-3 space-y-1.5">
+              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[11px] sm:text-[12px]">
+                <span className="tabular-nums" style={{ color: 'var(--text-muted)' }}>
+                  <span className="font-bold" style={{ color: 'var(--text-primary)' }}>
+                    {totalCount.toLocaleString()}
+                  </span>{' '}
+                  ideas
                 </span>
+                {availableCount > 0 && (
+                  <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-500">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    {availableCount.toLocaleString()} available
+                  </span>
+                )}
+                {premiumCount > 0 && (
+                  <span className="inline-flex items-center gap-1.5 font-semibold text-amber-500">
+                    <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+                    {premiumCount.toLocaleString()} premium
+                  </span>
+                )}
+                {takenCount > 0 && (
+                  <span className="tabular-nums" style={{ color: 'var(--text-muted)' }}>
+                    {takenCount.toLocaleString()} taken
+                  </span>
+                )}
               </div>
-              {availableCount > 0 && (
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                  <span className="text-emerald-400 font-semibold">
-                    {availableCount} available now
-                  </span>
-                </div>
-              )}
-              {premiumCount > 0 && (
-                <div className="flex items-center gap-2">
-                  <div className={`w-2 h-2 rounded-full ${isLight ? 'bg-amber-500' : 'bg-amber-400'}`}></div>
-                  <span className={`${isLight ? 'text-amber-700' : 'text-amber-300'} font-semibold`}>
-                    {premiumCount} premium
-                  </span>
-                </div>
-              )}
-              {takenCount > 0 && (
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-red-500/70"></div>
-                  <span className={isLight ? 'text-slate-500' : 'text-white/50'}>
-                    {takenCount} taken
-                  </span>
+              {checkProgress.total > 0 && checkProgress.done < checkProgress.total && (
+                <div className="max-w-md mx-auto">
+                  <div
+                    className={`h-1 rounded-full overflow-hidden ${
+                      isLight ? 'bg-slate-200' : 'bg-white/10'
+                    }`}
+                  >
+                    <div
+                      className={`h-full rounded-full transition-all ${
+                        isLight ? 'bg-emerald-500' : 'bg-emerald-400'
+                      }`}
+                      style={{
+                        width: `${Math.round((checkProgress.done / checkProgress.total) * 100)}%`,
+                      }}
+                    />
+                  </div>
+                  <p className="text-center text-[9px] mt-1" style={{ color: 'var(--text-muted)' }}>
+                    Checking availability {checkProgress.done.toLocaleString()} /{' '}
+                    {checkProgress.total.toLocaleString()}
+                  </p>
                 </div>
               )}
             </div>
@@ -455,243 +624,363 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
         </div>
       </div>
 
-      {/* Controls Bar */}
+      {/* Controls + results */}
       {keyword && totalCount > 0 && (
-        <div className={`glass-card ${isLight ? 'border-slate-200' : 'border-white/10'} border-t-0 rounded-t-none`}>
-          <div className="px-4 py-3 sm:px-6 sm:py-4 flex items-center justify-between flex-wrap gap-3">
-            <div className="flex items-center gap-3 flex-wrap">
-              {/* Registrar Selector */}
-              <div className="flex items-center gap-2">
-                <span className={`text-xs sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>Registrar:</span>
+        <div
+          className={`shine-border rounded-2xl border overflow-hidden ${
+            isLight
+              ? 'bg-white border-slate-200 shadow-sm'
+              : 'bg-white/[0.025] border-white/10'
+          }`}
+        >
+          <div
+            className={`flex flex-col gap-2 px-3 sm:px-4 py-2.5 border-b ${
+              isLight ? 'border-slate-100' : 'border-white/[0.06]'
+            }`}
+          >
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                 <select
                   value={selectedRegistrar}
-                  onChange={(e) => setSelectedRegistrar(e.target.value)}
-                  className={`${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-lg px-2.5 py-1.5 text-xs sm:px-3 sm:text-sm ${isLight ? 'text-slate-900' : 'text-white'} focus:outline-none focus:ring-2 ${isLight ? 'focus:ring-blue-300' : 'focus:ring-white/20'}`}
+                  onChange={(e) => setSelectedRegistrar(e.target.value as RegistrarName)}
+                  className={`rounded-lg border px-2 py-1.5 text-[11px] sm:text-[12px] font-semibold outline-none ${
+                    isLight
+                      ? 'bg-slate-50 border-slate-200 text-slate-800'
+                      : 'bg-white/[0.04] border-white/10 text-white/80'
+                  }`}
+                  aria-label="Registrar"
                 >
                   {REGISTRARS.map((reg) => (
                     <option key={reg.name} value={reg.name}>
-                      {reg.name}
+                      {reg.host}
                     </option>
                   ))}
                 </select>
-              </div>
-              {/* Sort */}
-              <div className="flex items-center gap-2">
-                <span className={`text-xs sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>Sort:</span>
+
+                {/* Sort — popularity / length / alphabetical */}
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as SortType)}
-                  className={`${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-lg px-2.5 py-1.5 text-xs sm:px-3 sm:text-sm ${isLight ? 'text-slate-900' : 'text-white'} focus:outline-none focus:ring-2 ${isLight ? 'focus:ring-blue-300' : 'focus:ring-white/20'}`}
+                  className={`rounded-lg border px-2 py-1.5 text-[11px] sm:text-[12px] font-semibold outline-none ${
+                    isLight
+                      ? 'bg-slate-50 border-slate-200 text-slate-800'
+                      : 'bg-white/[0.04] border-white/10 text-white/80'
+                  }`}
+                  aria-label="Sort results"
                 >
-                  <option value="popularity">Popularity</option>
-                  <option value="alphabetical">Alphabetical</option>
-                  <option value="length">Length</option>
+                  <option value="popularity">Sort: Popularity</option>
+                  <option value="length">Sort: Length</option>
+                  <option value="alphabetical">Sort: Alphabetical</option>
+                </select>
+
+                {/* Term position filter */}
+                <select
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value as FilterType)}
+                  className={`rounded-lg border px-2 py-1.5 text-[11px] sm:text-[12px] font-semibold outline-none ${
+                    isLight
+                      ? 'bg-slate-50 border-slate-200 text-slate-800'
+                      : 'bg-white/[0.04] border-white/10 text-white/80'
+                  }`}
+                  aria-label="Filter results"
+                >
+                  <option value="all">Filter: All</option>
+                  <option value="starts">Starts with term</option>
+                  <option value="ends">Ends with term</option>
+                  <option value="available">Available only</option>
+                  <option value="taken">Taken only</option>
+                  <option value="premium">Premium only</option>
                 </select>
               </div>
 
-              {/* Filter */}
-              <div className="relative">
+              <div className="flex items-center gap-0.5">
                 <button
-                  onClick={() => setShowFilterDropdown(!showFilterDropdown)}
-                  className={`flex items-center gap-2 px-2.5 py-1.5 sm:px-3 ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-lg text-xs sm:text-sm ${isLight ? 'text-slate-900' : 'text-white'} ${isLight ? 'hover:bg-slate-200' : 'hover:bg-white/10'} transition-colors`}
+                  type="button"
+                  onClick={() => setViewType('grid')}
+                  className={`p-1.5 rounded-lg transition-colors ${
+                    viewType === 'grid'
+                      ? isLight
+                        ? 'bg-slate-900 text-white'
+                        : 'bg-white text-black'
+                      : isLight
+                        ? 'text-slate-400 hover:text-slate-700'
+                        : 'text-white/35 hover:text-white/70'
+                  }`}
+                  title="Grid"
                 >
-                  <span className={isLight ? 'text-slate-500' : 'text-white/50'}>Filter:</span>
-                  <span className={`capitalize ${isLight ? 'text-slate-900' : 'text-white'}`}>{filter === 'all' ? 'All' : filter === 'starts' ? 'Starts with term' : 'Ends with term'}</span>
-                  <Icons.ChevronDown />
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                  </svg>
                 </button>
-                {showFilterDropdown && (
-                  <div className={`absolute left-0 top-full mt-1 w-44 sm:w-48 ${isLight ? 'bg-white' : 'bg-[#1a1a1a]'} border ${isLight ? 'border-slate-200' : 'border-white/20'} rounded-lg shadow-xl z-50 py-1`}>
-                    {[
-                      { value: 'all', label: 'All' },
-                      { value: 'starts', label: 'Starts with term' },
-                      { value: 'ends', label: 'Ends with term' },
-                    ].map((option) => (
-                      <button
-                        key={option.value}
-                        onClick={() => {
-                          setFilter(option.value as FilterType);
-                          setShowFilterDropdown(false);
-                        }}
-                        className={`w-full text-left px-3 py-2 text-sm transition-colors ${
-                          filter === option.value
-                            ? `${isLight ? 'bg-slate-100 text-slate-900' : 'bg-white/10 text-white'} font-medium`
-                            : `${isLight ? 'text-slate-700 hover:bg-slate-50 hover:text-slate-900' : 'text-white/80 hover:bg-white/5 hover:text-white'}`
-                        }`}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
+                <button
+                  type="button"
+                  onClick={() => setViewType('list')}
+                  className={`p-1.5 rounded-lg transition-colors ${
+                    viewType === 'list'
+                      ? isLight
+                        ? 'bg-slate-900 text-white'
+                        : 'bg-white text-black'
+                      : isLight
+                        ? 'text-slate-400 hover:text-slate-700'
+                        : 'text-white/35 hover:text-white/70'
+                  }`}
+                  title="List"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
               </div>
             </div>
 
-            {/* View Toggle */}
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={() => setViewType('grid')}
-                className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
-                  viewType === 'grid' ? `${isLight ? 'bg-slate-200 text-slate-900' : 'bg-white/10 text-white'}` : `${isLight ? 'text-slate-500 hover:text-slate-700' : 'text-white/40 hover:text-white/70'}`
+            {/* Extra customization */}
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[10px] sm:text-[11px]">
+              <label className="inline-flex items-center gap-1.5 font-medium" style={{ color: 'var(--text-muted)' }}>
+                Min
+                <input
+                  type="number"
+                  min={2}
+                  max={maxLen}
+                  value={minLen}
+                  onChange={(e) => setMinLen(Math.max(2, Math.min(Number(e.target.value) || 2, maxLen)))}
+                  className={`w-12 rounded-md border px-1.5 py-1 tabular-nums outline-none ${
+                    isLight
+                      ? 'bg-slate-50 border-slate-200 text-slate-800'
+                      : 'bg-white/[0.04] border-white/10 text-white/80'
+                  }`}
+                />
+              </label>
+              <label className="inline-flex items-center gap-1.5 font-medium" style={{ color: 'var(--text-muted)' }}>
+                Max
+                <input
+                  type="number"
+                  min={minLen}
+                  max={32}
+                  value={maxLen}
+                  onChange={(e) => setMaxLen(Math.min(32, Math.max(Number(e.target.value) || 20, minLen)))}
+                  className={`w-12 rounded-md border px-1.5 py-1 tabular-nums outline-none ${
+                    isLight
+                      ? 'bg-slate-50 border-slate-200 text-slate-800'
+                      : 'bg-white/[0.04] border-white/10 text-white/80'
+                  }`}
+                />
+                chars
+              </label>
+              <label
+                className={`inline-flex items-center gap-1.5 cursor-pointer select-none font-medium ${
+                  isLight ? 'text-slate-600' : 'text-white/55'
                 }`}
-                title="Grid view"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                </svg>
-              </button>
-              <button
-                onClick={() => setViewType('list')}
-                className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
-                  viewType === 'list' ? `${isLight ? 'bg-slate-200 text-slate-900' : 'bg-white/10 text-white'}` : `${isLight ? 'text-slate-500 hover:text-slate-700' : 'text-white/40 hover:text-white/70'}`
-                }`}
-                title="List view"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
+                <input
+                  type="checkbox"
+                  checked={includeCompounds}
+                  onChange={(e) => setIncludeCompounds(e.target.checked)}
+                  className="rounded border-slate-400"
+                />
+                Compounds (prefix+keyword+suffix)
+              </label>
+              <span className="tabular-nums ml-auto" style={{ color: 'var(--text-muted)' }}>
+                Showing {Math.min(visibleCount, filteredSuggestions.length).toLocaleString()} of{' '}
+                {filteredSuggestions.length.toLocaleString()}
+              </span>
             </div>
           </div>
-        </div>
-      )}
 
-      {/* Results */}
-      {filteredSuggestions.length > 0 && (
-        <div className={`glass-card ${isLight ? 'border-slate-200' : 'border-white/10'} border-t-0 rounded-t-none`}>
-          {viewType === 'grid' ? (
-            /* Grid View */
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 p-3 sm:gap-2.5 sm:p-4">
-              {filteredSuggestions.map((suggestion, i) => (
-                <div
-                  key={i}
-                  className={`group p-3.5 sm:p-4 border rounded-lg transition-all ${
-                    isAvailableSuggestion(suggestion)
-                      ? `${isLight ? 'bg-white' : 'bg-white/[0.02]'} ${isLight ? 'border-slate-200' : 'border-white/10'} hover:border-emerald-500/30 hover:bg-emerald-500/5`
-                      : isPremiumSuggestion(suggestion)
-                        ? `${isLight ? 'bg-amber-50/60 border-amber-200' : 'bg-amber-500/[0.06] border-amber-400/20'}`
-                        : `${isLight ? 'bg-slate-50' : 'bg-white/[0.01]'} ${isLight ? 'border-slate-100' : 'border-white/5'} opacity-70`
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-3">
+          {filteredSuggestions.length > 0 ? (
+            viewType === 'grid' ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1.5 sm:gap-2 p-2 sm:p-3">
+                {filteredSuggestions.slice(0, visibleCount).map((suggestion, i) => (
+                  <div
+                    key={`${suggestion.name}-${i}`}
+                    className={`shine-border no-lift group flex items-center justify-between gap-2 rounded-xl border px-2.5 py-2.5 transition-all ${
+                      isAvailableSuggestion(suggestion)
+                        ? isLight
+                          ? 'bg-white border-slate-200 hover:border-emerald-300 hover:shadow-sm'
+                          : 'bg-white/[0.02] border-white/10 hover:border-emerald-500/30'
+                        : isPremiumSuggestion(suggestion)
+                          ? isLight
+                            ? 'bg-amber-50/50 border-amber-200'
+                            : 'bg-amber-500/[0.05] border-amber-400/20'
+                          : isLight
+                            ? 'bg-slate-50/80 border-slate-100 opacity-80'
+                            : 'bg-white/[0.015] border-white/[0.06] opacity-75'
+                    }`}
+                  >
                     <button
+                      type="button"
                       onClick={() => handleDomainClick(suggestion.name)}
-                      className="flex-1 min-w-0 text-left"
+                      className="flex items-center gap-1.5 min-w-0 flex-1 text-left"
                     >
-                      <div className={`font-bold text-sm sm:text-base truncate ${isLight ? 'hover:text-slate-700' : 'hover:text-white/80'} transition-colors`}>
+                      <span
+                        className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                          isAvailableSuggestion(suggestion)
+                            ? 'bg-emerald-500'
+                            : isPremiumSuggestion(suggestion)
+                              ? 'bg-amber-400'
+                              : isLight
+                                ? 'bg-rose-400'
+                                : 'bg-rose-400/80'
+                        }`}
+                      />
+                      <span className="font-mono text-[12px] sm:text-[13px] font-bold truncate">
                         {suggestion.name}
-                      </div>
-                    </button>
-                    <div className="flex items-center gap-2">
-                      {isAvailableSuggestion(suggestion) ? (
-                        <>
-                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                          <button
-                            onClick={() => handleComClick(suggestion.name)}
-                            className="text-xs font-semibold px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-colors"
-                          >
-                            .com
-                          </button>
-                        </>
-                      ) : isPremiumSuggestion(suggestion) ? (
-                        <>
-                          <div className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-amber-500' : 'bg-amber-400'}`}></div>
-                          <span className={`text-xs px-2 py-1 rounded font-medium ${isLight ? 'bg-amber-100 text-amber-700' : 'bg-amber-500/10 text-amber-300'}`}>
-                            Premium
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <div className="w-1.5 h-1.5 rounded-full bg-red-500/50"></div>
-                          <span className={`text-xs px-2 py-1 ${isLight ? 'text-slate-400' : 'text-white/30'}`}>Taken</span>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  {isPremiumSuggestion(suggestion) && suggestion.price && (
-                    <div className={`mt-2 text-xs ${isLight ? 'text-amber-700' : 'text-amber-300'}`}>
-                      Listed from {suggestion.price}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            /* List View */
-            <div className={`divide-y ${isLight ? 'divide-slate-100' : 'divide-white/5'}`}>
-              {filteredSuggestions.map((suggestion, i) => (
-                <div
-                  key={i}
-                  className={`px-4 py-2.5 sm:px-6 sm:py-3 ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.02]'} transition-all group`}
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <button
-                      onClick={() => handleDomainClick(suggestion.name)}
-                      className="flex-1 min-w-0 text-left"
-                    >
-                      <span className={`font-semibold text-sm truncate ${isLight ? 'hover:text-slate-700' : 'hover:text-white/80'} transition-colors`}>
-                        {suggestion.name}
+                        <span className={isLight ? 'text-slate-400' : 'text-white/35'}>.com</span>
                       </span>
                     </button>
                     {isAvailableSuggestion(suggestion) ? (
                       <button
+                        type="button"
                         onClick={() => handleComClick(suggestion.name)}
-                        className="text-xs px-3 py-1 rounded transition-colors text-blue-400 hover:text-blue-300 hover:bg-blue-400/10"
+                        className={`shrink-0 rounded-md px-2 py-1 text-[10px] font-bold transition-colors ${
+                          isLight
+                            ? 'bg-emerald-600 text-white hover:bg-emerald-500'
+                            : 'bg-emerald-500 text-black hover:bg-emerald-400'
+                        }`}
                       >
-                        .com
+                        Continue
                       </button>
                     ) : isPremiumSuggestion(suggestion) ? (
-                      <span className={`text-xs px-3 py-1 rounded font-medium ${isLight ? 'bg-amber-100 text-amber-700' : 'bg-amber-500/10 text-amber-300'}`}>
-                        Premium
-                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleDomainClick(suggestion.name)}
+                        title="Search this premium domain at registrars"
+                        className={`shrink-0 rounded-md px-2 py-1 text-[10px] font-bold transition-colors ${
+                          isLight
+                            ? 'bg-amber-100 text-amber-800 hover:bg-amber-200'
+                            : 'bg-amber-500/20 text-amber-200 hover:bg-amber-500/30'
+                        }`}
+                      >
+                        {suggestion.price || 'Premium'}
+                      </button>
                     ) : (
-                      <span className={`text-xs px-3 py-1 rounded ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
+                      <button
+                        type="button"
+                        onClick={() => handleDomainClick(suggestion.name)}
+                        title="Search this domain at registrars"
+                        className={`shrink-0 rounded-md px-2 py-1 text-[10px] font-medium transition-colors ${
+                          isLight
+                            ? 'text-slate-500 hover:bg-slate-100'
+                            : 'text-white/40 hover:bg-white/[0.06] hover:text-white/70'
+                        }`}
+                      >
                         Taken
-                      </span>
+                      </button>
                     )}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            ) : (
+              <div className={`divide-y ${isLight ? 'divide-slate-100' : 'divide-white/[0.05]'}`}>
+                {filteredSuggestions.slice(0, visibleCount).map((suggestion, i) => (
+                  <div
+                    key={`${suggestion.name}-${i}`}
+                    className={`flex items-center justify-between gap-3 px-3 sm:px-4 py-2 ${
+                      isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.03]'
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => handleDomainClick(suggestion.name)}
+                      className="flex items-center gap-2 min-w-0 flex-1 text-left"
+                    >
+                      <span
+                        className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                          isAvailableSuggestion(suggestion)
+                            ? 'bg-emerald-500'
+                            : isPremiumSuggestion(suggestion)
+                              ? 'bg-amber-400'
+                              : isLight
+                                ? 'bg-rose-400'
+                                : 'bg-rose-400/80'
+                        }`}
+                      />
+                      <span className="font-mono text-[12px] sm:text-[13px] font-semibold truncate">
+                        {suggestion.name}.com
+                      </span>
+                    </button>
+                    {isAvailableSuggestion(suggestion) ? (
+                      <button
+                        type="button"
+                        onClick={() => handleComClick(suggestion.name)}
+                        className={`shrink-0 rounded-md px-2.5 py-1 text-[10px] font-bold ${
+                          isLight
+                            ? 'bg-emerald-600 text-white'
+                            : 'bg-emerald-500 text-black'
+                        }`}
+                      >
+                        Continue
+                      </button>
+                    ) : isPremiumSuggestion(suggestion) ? (
+                      <button
+                        type="button"
+                        onClick={() => handleDomainClick(suggestion.name)}
+                        title="Search this premium domain at registrars"
+                        className="shrink-0 rounded-md px-2.5 py-1 text-[10px] font-bold text-amber-500 hover:bg-amber-500/10 transition-colors"
+                      >
+                        {suggestion.price || 'Premium'}
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => handleDomainClick(suggestion.name)}
+                        title="Search this domain at registrars"
+                        className="shrink-0 rounded-md px-2.5 py-1 text-[10px] transition-colors hover:opacity-80"
+                        style={{ color: 'var(--text-muted)' }}
+                      >
+                        Taken
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )
+          ) : (
+            <div className="text-center py-12 px-4">
+              <p className="text-sm font-semibold mb-1">No matches for this filter</p>
+              <p className="text-[12px]" style={{ color: 'var(--text-muted)' }}>
+                “{keyword}” has {suggestions.length.toLocaleString()} total results — try Filter → All
+              </p>
+            </div>
+          )}
+
+          {filteredSuggestions.length > visibleCount && (
+            <div
+              className={`flex items-center justify-center gap-3 py-3 border-t ${
+                isLight ? 'border-slate-100' : 'border-white/[0.06]'
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() =>
+                  setVisibleCount((n) => Math.min(n + DISPLAY_PAGE, filteredSuggestions.length))
+                }
+                className={`text-[12px] font-bold ${
+                  isLight ? 'text-slate-800 hover:text-black' : 'text-white/85 hover:text-white'
+                }`}
+              >
+                View more ({(filteredSuggestions.length - visibleCount).toLocaleString()} left)
+              </button>
+              <button
+                type="button"
+                onClick={() => setVisibleCount(filteredSuggestions.length)}
+                className="text-[11px] font-semibold"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                Show all
+              </button>
             </div>
           )}
         </div>
       )}
 
-      {/* Empty State */}
+      {/* Compact hint only — no large empty card */}
       {!keyword && (
-        <div className={`glass-card px-4 py-10 sm:p-12 ${isLight ? 'border-slate-200' : 'border-white/10'} border-t-0 rounded-t-none text-center`}>
-          <div className={`inline-flex p-3.5 sm:p-4 rounded-full ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} mb-4 sm:mb-6`}>
-            <Icons.Magic />
-          </div>
-          <h3 className="text-lg font-semibold mb-2">Start Generating Domain Names</h3>
-          <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-md mx-auto mb-6`}>
-            Enter a keyword above to generate hundreds of creative domain name suggestions instantly.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-2 max-w-lg mx-auto">
-            <span className={`text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>Try:</span>
-            {['cloud', 'mint', 'spark', 'shop', 'tech', 'ai', 'blog'].map(example => (
-              <button
-                key={example}
-                onClick={() => setKeyword(example)}
-                className={`px-3 py-1.5 text-xs font-medium ${isLight ? 'bg-slate-100' : 'bg-white/5'} ${isLight ? 'hover:bg-slate-200' : 'hover:bg-white/10'} border ${isLight ? 'border-slate-200' : 'border-white/10'} ${isLight ? 'hover:border-blue-300' : 'hover:border-white/20'} rounded-lg transition-colors`}
-              >
-                {example}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* No Results */}
-      {keyword && filteredSuggestions.length === 0 && !isSearching && suggestions.length > 0 && (
-        <div className={`glass-card px-4 py-10 sm:p-12 ${isLight ? 'border-slate-200' : 'border-white/10'} border-t-0 rounded-t-none text-center`}>
-          <div className={`inline-flex p-3.5 sm:p-4 rounded-full ${isLight ? 'bg-slate-100' : 'bg-white/5'} border ${isLight ? 'border-slate-200' : 'border-white/10'} mb-4 sm:mb-6`}>
-            <Icons.Search className="w-8 h-8" />
-          </div>
-          <h3 className="text-lg font-semibold mb-2">No Results Found</h3>
-          <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-md mx-auto`}>
-            Try changing your filter. Your keyword &quot;{keyword}&quot; has {suggestions.length} total results.
-          </p>
-        </div>
+        <p
+          className="text-center text-[11px] sm:text-[12px] py-1"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          Pick a keyword chip or type above — results appear here with live .com availability.
+        </p>
       )}
 
       {/* Domain Popup */}
@@ -710,17 +999,18 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
             
             {selectedSuggestion && isAvailableSuggestion(selectedSuggestion) && (
               <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} mb-6`}>
-                Choose your preferred registrar to purchase this domain:
+                Choose a registrar to search and register this domain:
               </p>
             )}
             {selectedSuggestion && isPremiumSuggestion(selectedSuggestion) && (
               <p className={`text-sm ${isLight ? 'text-amber-700' : 'text-amber-300'} mb-6`}>
-                This domain is listed as premium{selectedSuggestion.price ? ` from ${selectedSuggestion.price}` : ''}. It is not a standard available registration.
+                This domain is listed as premium{selectedSuggestion.price ? ` from ${selectedSuggestion.price}` : ''}.
+                Open a registrar below to search the exact name and see live pricing or aftermarket options.
               </p>
             )}
             {selectedSuggestion && isTakenSuggestion(selectedSuggestion) && (
               <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} mb-6`}>
-                This domain appears to be taken and is not currently available for standard registration.
+                This domain appears taken. You can still open a registrar to search the name or check aftermarket listings.
               </p>
             )}
             
@@ -728,17 +1018,30 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               {REGISTRARS.map((registrar) => (
                 <button
                   key={registrar.name}
-                  onClick={() => handleBuyDomain(selectedDomain, registrar.name)}
-                  disabled={!selectedSuggestion || !isAvailableSuggestion(selectedSuggestion)}
+                  type="button"
+                  onClick={() => selectedDomain && handleBuyDomain(selectedDomain, registrar.name)}
                   className={`w-full text-left px-4 py-3 border rounded-lg transition-colors group ${
-                    !selectedSuggestion || !isAvailableSuggestion(selectedSuggestion)
-                      ? `${isLight ? 'bg-slate-50 text-slate-400 border-slate-200' : 'bg-white/[0.03] text-white/30 border-white/10 cursor-not-allowed'}`
-                      : `${isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200' : 'bg-white/5 hover:bg-white/10 border-white/10'}`
+                    isLight
+                      ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-900'
+                      : 'bg-white/5 hover:bg-white/10 border-white/10 text-white'
                   }`}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold">{registrar.name}</span>
-                    <svg className={`w-4 h-4 ${isLight ? 'text-slate-400 group-hover:text-slate-900' : 'text-white/40 group-hover:text-white'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="flex items-center gap-2.5 min-w-0">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={registrar.logo}
+                        alt=""
+                        width={20}
+                        height={20}
+                        className={`h-5 w-5 shrink-0 rounded-md object-contain ${
+                          isLight ? 'bg-white ring-1 ring-slate-200' : 'bg-white/95 ring-1 ring-white/10'
+                        }`}
+                        loading="lazy"
+                      />
+                      <span className="font-semibold truncate">{registrar.host}</span>
+                    </span>
+                    <svg className={`w-4 h-4 shrink-0 ${isLight ? 'text-slate-400 group-hover:text-slate-900' : 'text-white/40 group-hover:text-white'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>

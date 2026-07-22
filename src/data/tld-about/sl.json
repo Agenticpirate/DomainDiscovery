@@ -1,0 +1,106 @@
+{
+  "tld": ".sl",
+  "slug": "sl",
+  "title": "About .sl domains",
+  "delegationTitle": "Delegation Record for .SL",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Sierra Leone",
+  "sponsor": "Sierratel",
+  "sponsorDetail": "Sierratel\n7 Wallace Johnson Street\nFreetown\nSierra Leone",
+  "administrativeContact": "Adel Suliman",
+  "technicalContact": "Adam Ben-Gur",
+  "registryUrl": "https://www.nic.sl",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1997-05-09",
+  "recordUpdated": "2021-10-08",
+  "nameServers": [
+    {
+      "host": "ns1.neoip.com",
+      "addresses": [
+        "51.195.14.249"
+      ]
+    },
+    {
+      "host": "ns2.neoip.com",
+      "addresses": [
+        "45.83.41.38"
+      ]
+    }
+  ],
+  "about": ".SL is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Sierra Leone. The IANA root zone lists the registry manager as Sierratel. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sl is the Internet country code top-level domain (ccTLD) for Sierra Leone.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sl.html",
+  "wikipedia": ".sl is the Internet country code top-level domain (ccTLD) for Sierra Leone.",
+  "scrapedAt": "2026-07-21T21:49:50Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sl",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "leone",
+    "level",
+    "local business",
+    "regional brands",
+    "sierra",
+    "sierratel",
+    "sl",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 13,
+    "cheapestRegistration": {
+      "registrar": "Netim",
+      "price": "$63.00",
+      "value": 63.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$63.00",
+      "value": 63.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/sl"
+  },
+  "summary": ".sl is a Country-code top-level domain. Managed by Sierratel.",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "wikiEnrichedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,141 @@
+{
+  "tld": ".mv",
+  "slug": "mv",
+  "title": "About .mv domains",
+  "delegationTitle": "Delegation Record for .MV",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Maldives",
+  "sponsor": "Dhivehi Raajjeyge Gulhun PLC",
+  "sponsorDetail": "Dhivehi Raajjeyge Gulhun PLC\nDhiraagu Head Office,\nAmeenee Magu,\nP.O. Box 2082,\nMale Maafannu 20403\nMaldives",
+  "administrativeContact": "NOC Engineer",
+  "technicalContact": "Network Administrator - NOC",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1996-09-25",
+  "recordUpdated": "2026-02-05",
+  "nameServers": [
+    {
+      "host": "baraveli.ns.mv",
+      "addresses": [
+        "188.166.71.229",
+        "2a03:b0c0:2:f0:0:1:46a5:8001"
+      ]
+    },
+    {
+      "host": "boli.ns.mv",
+      "addresses": [
+        "103.31.84.199",
+        "2406:e400:a:1:0:0:0:1"
+      ]
+    },
+    {
+      "host": "mv-ns.anycast.pch.net",
+      "addresses": [
+        "204.61.216.24",
+        "2001:500:14:6024:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ns.dhivehinet.net.mv",
+      "addresses": [
+        "202.1.192.196"
+      ]
+    },
+    {
+      "host": "ns.mv",
+      "addresses": [
+        "202.1.192.196"
+      ]
+    },
+    {
+      "host": "ns2.dhivehinet.net.mv",
+      "addresses": [
+        "202.1.201.201"
+      ]
+    },
+    {
+      "host": "sangu.ns.mv",
+      "addresses": [
+        "27.114.188.1",
+        "2406:e400:1:1:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".MV is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Maldives. The IANA root zone lists the registry manager as Dhivehi Raajjeyge Gulhun PLC. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.mv is the Internet country code top-level domain (ccTLD) for the Republic of Maldives. It is administered by Dhiraagu Pvt Ltd, a telecommunications company.\nMainly due to the unavailability of an online registration service, a whois lookup and large maintenance cost, the Maldivian ccTLD is used predominantly by government agencies and large businesses. Smaller companies and organisations prefer generic TLDs such as .com and .net.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mv.html",
+  "wikipedia": ".mv is the Internet country code top-level domain (ccTLD) for the Republic of Maldives. It is administered by Dhiraagu Pvt Ltd, a telecommunications company.\nMainly due to the unavailability of an online registration service, a whois lookup and large maintenance cost, the Maldivian ccTLD is used predominantly by government agencies and large businesses. Smaller companies and organisations prefer generic TLDs such as .com and .net.",
+  "scrapedAt": "2026-07-21T21:45:54Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".mv",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "dhivehi",
+    "domain",
+    "for",
+    "geo",
+    "gulhun",
+    "level",
+    "local business",
+    "maldives",
+    "mv",
+    "raajjeyge",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 5,
+    "cheapestRegistration": {
+      "registrar": "101domain",
+      "price": "$265.99",
+      "value": 265.99
+    },
+    "cheapestRenewal": {
+      "registrar": "101domain",
+      "price": "$318.99",
+      "value": 318.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/mv"
+  },
+  "summary": ".mv is a Country-code top-level domain. Managed by Dhivehi Raajjeyge Gulhun PLC.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

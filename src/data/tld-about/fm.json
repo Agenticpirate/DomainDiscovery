@@ -1,0 +1,136 @@
+{
+  "tld": ".fm",
+  "slug": "fm",
+  "title": "About .fm domains",
+  "delegationTitle": "Delegation Record for .FM",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Micronesia, Federated States of",
+  "sponsor": "FSM Telecommunications Corporation",
+  "sponsorDetail": "FSM Telecommunications Corporation\nP.O. Box 1210\nKolonia Pohnpei 96941\nMicronesia (Federated States of)",
+  "administrativeContact": "Chief Executive Officer",
+  "technicalContact": "IT Manager",
+  "registryUrl": "https://www.dot.fm/",
+  "whoisServer": "whois.nic.fm",
+  "rdapServer": "https://rdap.centralnic.com/fm/",
+  "registrationDate": "1995-04-19",
+  "recordUpdated": "2024-08-07",
+  "nameServers": [
+    {
+      "host": "a.nic.fm",
+      "addresses": [
+        "194.169.218.26",
+        "2001:67c:13cc:0:0:0:1:26"
+      ]
+    },
+    {
+      "host": "b.nic.fm",
+      "addresses": [
+        "185.24.64.26",
+        "2a04:2b00:13cc:0:0:0:1:26"
+      ]
+    },
+    {
+      "host": "c.nic.fm",
+      "addresses": [
+        "212.18.248.26",
+        "2a04:2b00:13ee:0:0:0:0:26"
+      ]
+    },
+    {
+      "host": "d.nic.fm",
+      "addresses": [
+        "212.18.249.26",
+        "2a04:2b00:13ff:0:0:0:0:26"
+      ]
+    },
+    {
+      "host": "e.nic.fm",
+      "addresses": [
+        "204.61.216.137",
+        "2001:500:14:6137:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "f.nic.fm",
+      "addresses": [
+        "206.51.254.3",
+        "2620:171:804:ad2:0:0:0:3"
+      ]
+    }
+  ],
+  "about": ".FM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Micronesia, Federated States of. The IANA root zone lists the registry manager as FSM Telecommunications Corporation. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.fm is the country code top-level domain (ccTLD) for the Federated States of Micronesia, an independent island nation located in the Pacific Ocean.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/fm.html",
+  "wikipedia": ".fm is the country code top-level domain (ccTLD) for the Federated States of Micronesia, an independent island nation located in the Pacific Ocean.",
+  "scrapedAt": "2026-07-21T21:34:07Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".fm",
+    "cctld",
+    "code",
+    "corporation",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "federated",
+    "fm",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "micronesia",
+    "regional brands",
+    "states",
+    "telecommunications",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 43,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$67.98",
+      "value": 67.98
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$68.25",
+      "value": 68.25
+    },
+    "sourceUrl": "https://tld-list.com/tld/fm"
+  },
+  "summary": ".fm is a Country-code top-level domain. Managed by FSM Telecommunications Corporation.",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

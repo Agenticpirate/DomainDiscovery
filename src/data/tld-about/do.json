@@ -1,0 +1,150 @@
+{
+  "tld": ".do",
+  "slug": "do",
+  "title": "About .do domains",
+  "delegationTitle": "Delegation Record for .DO",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Dominican Republic",
+  "sponsor": "Pontificia Universidad Catolica Madre y Maestra, Recinto Santo Tomas de Aquino",
+  "sponsorDetail": "Pontificia Universidad Catolica Madre y Maestra, Recinto Santo Tomas de Aquino\nAve. Abraham Lincoln Esq. Romulo Betancourt\nSanto Domingo 2748\nDominican Republic (the)",
+  "administrativeContact": "VICERRECTORIA DE ADMINISTRACION Y FINANZAS",
+  "technicalContact": "Clara Collado",
+  "registryUrl": "http://www.nic.do",
+  "whoisServer": "whois.nic.do",
+  "rdapServer": null,
+  "registrationDate": "1991-08-25",
+  "recordUpdated": "2025-08-21",
+  "nameServers": [
+    {
+      "host": "a.lactld.org",
+      "addresses": [
+        "200.0.68.10",
+        "2801:14:a000:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "ns.nic.do",
+      "addresses": [
+        "190.113.72.177",
+        "2001:13e0:85d0:106:0:0:0:177"
+      ]
+    },
+    {
+      "host": "ns1.nic.do",
+      "addresses": [
+        "190.113.72.178",
+        "2001:13e0:85d0:106:0:0:0:178"
+      ]
+    },
+    {
+      "host": "ns2.nic.do",
+      "addresses": [
+        "190.113.65.12",
+        "2001:13e0:0:1:0:0:0:12"
+      ]
+    },
+    {
+      "host": "ns4.nic.do",
+      "addresses": [
+        "204.61.216.124",
+        "2001:500:14:6124:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ns5.nic.do",
+      "addresses": [
+        "190.113.65.13",
+        "2001:13e0:0:1:0:0:0:13"
+      ]
+    },
+    {
+      "host": "phloem.uoregon.edu",
+      "addresses": [
+        "128.223.32.35",
+        "2001:468:d01:20:0:0:80df:2023"
+      ]
+    }
+  ],
+  "about": ".DO is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Dominican Republic. The IANA root zone lists the registry manager as Pontificia Universidad Catolica Madre y Maestra, Recinto Santo Tomas de Aquino. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.do is the country code top-level domain (ccTLD) for the Dominican Republic. The Network Information Center .do has administered the domain since 1991.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/do.html",
+  "wikipedia": ".do is the country code top-level domain (ccTLD) for the Dominican Republic. The Network Information Center .do has administered the domain since 1991.",
+  "scrapedAt": "2026-07-21T21:39:03Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".do",
+    "catolica",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "do",
+    "domain",
+    "dominican",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "madre",
+    "maestra",
+    "pontificia",
+    "recinto",
+    "regional brands",
+    "republic",
+    "santo",
+    "tomas",
+    "top",
+    "universidad"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 16,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$42.99",
+      "value": 42.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$49.99",
+      "value": 49.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/do"
+  },
+  "summary": ".do is a Country-code top-level domain. Managed by Pontificia Universidad Catolica Madre y Maestra, Recinto Santo Tomas de Aquino.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -1,0 +1,114 @@
+{
+  "tld": ".lat",
+  "slug": "lat",
+  "title": "About .lat domains",
+  "delegationTitle": "Delegation Record for .LAT",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "XYZ.COM LLC",
+  "sponsorDetail": "XYZ.COM LLC\n4425 Spring Mountain Rd., Suite 2\nLas Vegas NV 89102\nUnited States of America (the)",
+  "administrativeContact": "General Counsel",
+  "technicalContact": "CTO",
+  "registryUrl": "https://nic.lat",
+  "whoisServer": "whois.nic.lat",
+  "rdapServer": "https://rdap.centralnic.com/lat/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.lat",
+      "addresses": [
+        "194.169.218.156",
+        "2001:67c:13cc:0:0:0:1:156"
+      ]
+    },
+    {
+      "host": "b.nic.lat",
+      "addresses": [
+        "185.24.64.156",
+        "2a04:2b00:13cc:0:0:0:1:156"
+      ]
+    },
+    {
+      "host": "c.nic.lat",
+      "addresses": [
+        "212.18.248.156",
+        "2a04:2b00:13ee:0:0:0:0:156"
+      ]
+    },
+    {
+      "host": "d.nic.lat",
+      "addresses": [
+        "212.18.249.156",
+        "2a04:2b00:13ff:0:0:0:0:156"
+      ]
+    }
+  ],
+  "about": ".LAT is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .LAT is listed by IANA as XYZ.COM LLC. Anyone can typically register a .LAT name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.lat is an Internet generic top-level domain (gTLD) for Latin American communities and users wherever they may reside.\nThe eCOM-LAC (Federation of Latin-America and the Caribbean for the Internet and Electronic Commerce) appointed NIC M\u00e9xico, manager of the .mx ccTLD, its partner regarding a gTLD such as this. The full proposal was originally supposed to be presented to Internet Corporation for Assigned Names and Numbers (ICANN) during 2008 but was later to be presented by mid-2011.\nThere were initial communications that presented the idea of this new top-level domain as a regional one but further news detailed the community orientation of the proposal. Other names that were being considered are .latin and .latino. Similar proposals had already been approved like the Asian gTLD (.asia) and the European Union's ccTLD (.eu).\nIt was approved in 2015. \nIn late 2022, the domain was acquired by XYZ LLC, based in Santa Monica, California.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/lat.html",
+  "wikipedia": ".lat is an Internet generic top-level domain (gTLD) for Latin American communities and users wherever they may reside.\nThe eCOM-LAC (Federation of Latin-America and the Caribbean for the Internet and Electronic Commerce) appointed NIC M\u00e9xico, manager of the .mx ccTLD, its partner regarding a gTLD such as this. The full proposal was originally supposed to be presented to Internet Corporation for Assigned Names and Numbers (ICANN) during 2008 but was later to be presented by mid-2011.\nThere were initial communications that presented the idea of this new top-level domain as a regional one but further news detailed the community orientation of the proposal. Other names that were being considered are .latin and .latino. Similar proposals had already been approved like the Asian gTLD (.asia) and the European Union's ccTLD (.eu).\nIt was approved in 2015. \nIn late 2022, the domain was acquired by XYZ LLC, based in Santa Monica, California.",
+  "scrapedAt": "2026-07-21T21:43:57Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".lat",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "lat",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 38,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$1.24",
+      "value": 1.24
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$22.97",
+      "value": 22.97
+    },
+    "sourceUrl": "https://tld-list.com/tld/lat"
+  },
+  "summary": ".lat is a Generic top-level domain. Managed by XYZ.COM LLC.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

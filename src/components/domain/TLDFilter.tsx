@@ -45,7 +45,7 @@ export function TLDFilter({ onSelect }: TLDFilterProps) {
   const displayTLDs = showAll ? POPULAR_TLDS : POPULAR_TLDS.filter((t) => t.popular);
 
   return (
-    <div className={`glass-card p-6 ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
+    <div className={`glass-card shine-border p-6 ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
       <div className="flex items-center justify-between mb-4">
         <h3 className={`text-sm font-bold uppercase tracking-widest ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
           Filter by Extension

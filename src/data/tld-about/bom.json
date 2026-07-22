@@ -1,0 +1,119 @@
+{
+  "tld": ".bom",
+  "slug": "bom",
+  "title": "About .bom domains",
+  "delegationTitle": "Delegation Record for .BOM",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "N\u00facleo de Informa\u00e7\u00e3o e Coordena\u00e7\u00e3o do Ponto BR - NIC.br",
+  "sponsorDetail": "N\u00facleo de Informa\u00e7\u00e3o e Coordena\u00e7\u00e3o do Ponto BR - NIC.br\nAv. das Na\u00e7\u00f5es Unidas, 11541, 7. andar\nS\u00e3o Paulo SP 04578-000\nBrazil",
+  "administrativeContact": "Demi Getschko",
+  "technicalContact": "Frederico Augusto de Carvalho Neves",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": "https://rdap.gtlds.nic.br/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.dns.br",
+      "addresses": [
+        "200.219.148.10",
+        "2001:12f8:6:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "b.dns.br",
+      "addresses": [
+        "200.189.41.10",
+        "2001:12f8:8:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.dns.br",
+      "addresses": [
+        "200.192.233.10",
+        "2001:12f8:a:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "d.dns.br",
+      "addresses": [
+        "200.219.154.10",
+        "2001:12f8:4:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "e.dns.br",
+      "addresses": [
+        "200.229.248.10",
+        "2001:12f8:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "f.dns.br",
+      "addresses": [
+        "200.219.159.10",
+        "2001:12f8:c:0:0:0:0:10"
+      ]
+    }
+  ],
+  "about": ".BOM is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .BOM is listed by IANA as N\u00facleo de Informa\u00e7\u00e3o e Coordena\u00e7\u00e3o do Ponto BR - NIC.br. Anyone can typically register a .BOM name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bom.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:36:15Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".bom",
+    "bom",
+    "brand",
+    "brandable names",
+    "cleo",
+    "coordena",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "informa",
+    "level",
+    "ponto",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".bom is a Generic top-level domain. Managed by N\u00facleo de Informa\u00e7\u00e3o e Coordena\u00e7\u00e3o do Ponto BR - NIC.br.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

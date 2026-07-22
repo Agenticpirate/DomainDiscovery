@@ -1,0 +1,143 @@
+{
+  "tld": ".med",
+  "slug": "med",
+  "title": "About .med domains",
+  "delegationTitle": "Delegation Record for .MED",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Medistry LLC",
+  "sponsorDetail": "Medistry LLC\n3029 Prospect Ave\nCleveland OH 44115\nUnited States of America (the)",
+  "administrativeContact": "Ray Fassett",
+  "technicalContact": "TLD Registry Services Technical",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": "https://rdap.nominet.uk/med/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "dns1.nic.med",
+      "addresses": [
+        "213.248.219.124",
+        "2a01:618:403:0:0:0:0:124"
+      ]
+    },
+    {
+      "host": "dns2.nic.med",
+      "addresses": [
+        "103.49.83.124",
+        "2401:fd80:403:0:0:0:0:124"
+      ]
+    },
+    {
+      "host": "dns3.nic.med",
+      "addresses": [
+        "213.248.223.124",
+        "2a01:618:407:0:0:0:0:124"
+      ]
+    },
+    {
+      "host": "dns4.nic.med",
+      "addresses": [
+        "43.230.51.124",
+        "2401:fd80:407:0:0:0:0:124"
+      ]
+    },
+    {
+      "host": "dnsa.nic.med",
+      "addresses": [
+        "156.154.100.3",
+        "2001:502:ad09:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsb.nic.med",
+      "addresses": [
+        "156.154.101.3",
+        "2001:502:2eda:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsc.nic.med",
+      "addresses": [
+        "156.154.102.3",
+        "2610:a1:1009:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsd.nic.med",
+      "addresses": [
+        "156.154.103.3",
+        "2610:a1:1010:0:0:0:0:3"
+      ]
+    }
+  ],
+  "about": ".MED is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .MED is listed by IANA as Medistry LLC. Anyone can typically register a .MED name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.med is a top-level domain for the internet, launched on 3 December 2015, intended for websites related to medicine. Med like all the other top-level domain needs to be delegated to an organization.\nGoogle and the Cleveland Clinic both submitted applications to control this top-level domain, but both were rejected after objections by the International Chamber of Commerce in 2014. The decision against Cleveland Clinic's application was reversed later that same year.\nIn 2015, the application of Medistry LLC, a subsidiary of Second Generation Ltd, was accepted.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/med.html",
+  "wikipedia": ".med is a top-level domain for the internet, launched on 3 December 2015, intended for websites related to medicine. Med like all the other top-level domain needs to be delegated to an organization.\nGoogle and the Cleveland Clinic both submitted applications to control this top-level domain, but both were rejected after objections by the International Chamber of Commerce in 2014. The decision against Cleveland Clinic's application was reversed later that same year.\nIn 2015, the application of Medistry LLC, a subsidiary of Second Generation Ltd, was accepted.",
+  "scrapedAt": "2026-07-21T21:45:00Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".med",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "med",
+    "medistry",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 4,
+    "cheapestRegistration": {
+      "registrar": "Name.com",
+      "price": "$139.99",
+      "value": 139.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Gandi.net",
+      "price": "$190.00",
+      "value": 190.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/med"
+  },
+  "summary": ".med is a Generic top-level domain. Managed by Medistry LLC.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

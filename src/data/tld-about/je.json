@@ -1,0 +1,136 @@
+{
+  "tld": ".je",
+  "slug": "je",
+  "title": "About .je domains",
+  "delegationTitle": "Delegation Record for .JE",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Jersey",
+  "sponsor": "Island Networks (Jersey) Ltd.",
+  "sponsorDetail": "Island Networks (Jersey) Ltd.\nFifth Floor\n37 Esplanade\nSt Helier JE1 1AW\nJersey",
+  "administrativeContact": "Managing Director",
+  "technicalContact": "JE-Hostmaster",
+  "registryUrl": "http://www.nic.je",
+  "whoisServer": "whois.je",
+  "rdapServer": null,
+  "registrationDate": "1996-08-08",
+  "recordUpdated": "2024-02-12",
+  "nameServers": [
+    {
+      "host": "c.ci-servers.org",
+      "addresses": [
+        "194.146.106.86",
+        "2001:67c:1010:22:0:0:0:53"
+      ]
+    },
+    {
+      "host": "dns1.nominetdns.uk",
+      "addresses": [
+        "213.248.219.254",
+        "2a01:618:403:0:0:0:0:254"
+      ]
+    },
+    {
+      "host": "dns2.nominetdns.uk",
+      "addresses": [
+        "103.49.83.254",
+        "2401:fd80:403:0:0:0:0:254"
+      ]
+    },
+    {
+      "host": "dns3.nominetdns.uk",
+      "addresses": [
+        "213.248.223.254",
+        "2a01:618:407:0:0:0:0:254"
+      ]
+    },
+    {
+      "host": "dns4.nominetdns.uk",
+      "addresses": [
+        "43.230.51.254",
+        "2401:fd80:407:0:0:0:0:254"
+      ]
+    },
+    {
+      "host": "e.ci-servers.net",
+      "addresses": [
+        "204.61.216.74",
+        "2001:500:14:6074:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".JE is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Jersey. The IANA root zone lists the registry manager as Island Networks (Jersey) Ltd.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.je is the country code top-level domain for Jersey. The domain is administered by Island Networks, who also administer the .gg domain for neighbouring territory Guernsey. In 2003, a Google Search website was made available for Jersey, which uses the .je domain.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/je.html",
+  "wikipedia": ".je is the country code top-level domain for Jersey. The domain is administered by Island Networks, who also administer the .gg domain for neighbouring territory Guernsey. In 2003, a Google Search website was made available for Jersey, which uses the .je domain.",
+  "scrapedAt": "2026-07-21T21:43:00Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".je",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "island",
+    "je",
+    "jersey",
+    "level",
+    "local business",
+    "networks",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 28,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$51.60",
+      "value": 51.6
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$51.60",
+      "value": 51.6
+    },
+    "sourceUrl": "https://tld-list.com/tld/je"
+  },
+  "summary": ".je is a Country-code top-level domain. Managed by Island Networks (Jersey) Ltd..",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

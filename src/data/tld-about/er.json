@@ -1,0 +1,103 @@
+{
+  "tld": ".er",
+  "slug": "er",
+  "title": "About .er domains",
+  "delegationTitle": "Delegation Record for .ER",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Eritrea",
+  "sponsor": "Eritrea Telecommunication Services Corporation (EriTel)",
+  "sponsorDetail": "Eritrea Telecommunication Services Corporation (EriTel)\nSemaetat St. No. 11\nAsmara Asmara 234\nEritrea",
+  "administrativeContact": "General Manager",
+  "technicalContact": "Network Operations Center Manager",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1996-09-24",
+  "recordUpdated": "2025-10-28",
+  "nameServers": [
+    {
+      "host": "er.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.72",
+        "2a13:27c0:30:0:0:0:0:72"
+      ]
+    },
+    {
+      "host": "sawanew.noc.net.er",
+      "addresses": [
+        "196.200.96.1"
+      ]
+    },
+    {
+      "host": "zaranew.noc.net.er",
+      "addresses": [
+        "196.200.96.2"
+      ]
+    }
+  ],
+  "about": ".ER is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Eritrea. The IANA root zone lists the registry manager as Eritrea Telecommunication Services Corporation (EriTel). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.er is the country code top-level domain (ccTLD) for Eritrea.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/er.html",
+  "wikipedia": ".er is the country code top-level domain (ccTLD) for Eritrea.",
+  "scrapedAt": "2026-07-21T21:39:39Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".er",
+    "cctld",
+    "code",
+    "corporation",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "er",
+    "eritel",
+    "eritrea",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "services",
+    "telecommunication",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".er is a Country-code top-level domain. Managed by Eritrea Telecommunication Services Corporation (EriTel).",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

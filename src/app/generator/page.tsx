@@ -7,6 +7,10 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { DomainGenerator } from '@/components/generator/DomainGenerator';
 import { GeneratorContent } from '@/components/generator/GeneratorContent';
+import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
+import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
+import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
+import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function GeneratorPage() {
@@ -15,44 +19,74 @@ export default function GeneratorPage() {
   const isLight = theme === 'light';
 
   return (
-    <div className="min-h-screen">
+    <div
+      className="min-h-screen overflow-x-hidden"
+      style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
+    >
       <PageBackground variant="hero" />
-      
+
       <Navigation activeTool="generator" />
 
-      {/* Main Content */}
-      <main className="relative pt-14 sm:pt-24">
-        {/* Hero Section */}
-        <section className="px-4 sm:px-6 pb-3 sm:pb-7">
-          <div className="max-w-4xl mx-auto">
-            <Breadcrumb items={[
-              { label: 'Home', href: '/' },
-              { label: 'Domain Generator' }
-            ]} />
-          </div>
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-xl sm:text-5xl md:text-[3.9rem] font-black tracking-tight mb-1 sm:mb-3">
-              <span className={`bg-gradient-to-r ${isLight ? 'from-slate-900 via-slate-800 to-slate-600' : 'from-white via-white to-white/60'} bg-clip-text text-transparent`}>
-                Domain Name Generator
-              </span>
-            </h1>
-            <p className={`hidden sm:block text-sm sm:text-base ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-5 sm:mb-6`}>
-              Generate hundreds of creative domain name ideas instantly. Find the perfect name for your website, business, or project.
-            </p>
+      <main className="relative pt-[3.25rem] sm:pt-[4.5rem]">
+        {/* Hero */}
+        <section className="px-3.5 sm:px-6 pt-3 sm:pt-8 pb-2 sm:pb-4">
+          <div className="max-w-6xl mx-auto">
+            <Breadcrumb
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Domain Generator' },
+              ]}
+            />
+
+            <div className="mt-2 sm:mt-5 text-center max-w-2xl mx-auto">
+              <div
+                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 mb-2.5 sm:mb-3.5 text-[10px] sm:text-[11px] font-semibold tracking-wide border ${
+                  isLight
+                    ? 'bg-white text-slate-600 border-slate-200 shadow-sm'
+                    : 'bg-white/[0.04] text-white/60 border-white/10'
+                }`}
+              >
+                <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-500' : 'bg-white/70'}`} />
+                3,000+ prefixes & suffixes · Up to 5,000 ideas · Live .com checks
+              </div>
+
+              <h1 className="text-[1.65rem] sm:text-4xl md:text-[2.85rem] font-black tracking-tight leading-[1.08] mb-2 sm:mb-3">
+                <span
+                  className="bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage: isLight
+                      ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
+                      : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.55))',
+                  }}
+                >
+                  Domain name generator
+                </span>
+              </h1>
+              <p
+                className="text-[13px] sm:text-[15px] leading-relaxed max-w-xl mx-auto"
+                style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.55)' }}
+              >
+                Type a keyword like “agentic” or “buddy” — we pair it with thousands of top domain prefixes and
+                suffixes (Lean Domain Search style), then check .com availability as results stream in.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* Generator */}
-        <section className="px-4 sm:px-6 pb-8 sm:pb-14" id="top">
-          <div className="max-w-5xl mx-auto">
+        {/* Generator tool */}
+        <section className="px-3.5 sm:px-6 pb-8 sm:pb-12" id="top">
+          <div className="max-w-6xl mx-auto">
             <DomainGenerator onSelect={setSelectedDomain} />
           </div>
         </section>
 
-        {/* Educational Content & FAQs */}
-        <section className={`border-t ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
+        {/* Guides + FAQs */}
+        <section className={`border-t ${isLight ? 'border-slate-200' : 'border-white/[0.06]'}`}>
           <GeneratorContent />
         </section>
+
+        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.generator} compact />
+        <SeoGuidePack {...TOOL_GUIDE_PACKS.generator} />
       </main>
 
       <Footer />

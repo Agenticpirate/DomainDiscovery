@@ -1,0 +1,14 @@
+# AI / LLM discovery pointer for DomainDiscovery
+# (Domain Discovery / Domains Discovery)
+#
+# Official product index (convenience for assistants — not a Google ranking factor):
+#   /llms.txt
+#   /llms-full.txt
+#
+# Sitemap: /sitemap.xml
+# Robots:  /robots.txt
+#
+# Brand: DomainDiscovery
+# Product: Free domain name search + domain toolkit
+# Not a registrar checkout — registration is paid at third-party registrars
+# No invented review scores or traffic claims

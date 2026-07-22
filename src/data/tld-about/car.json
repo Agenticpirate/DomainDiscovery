@@ -1,0 +1,114 @@
+{
+  "tld": ".car",
+  "slug": "car",
+  "title": "About .car domains",
+  "delegationTitle": "Delegation Record for .CAR",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "XYZ.COM LLC",
+  "sponsorDetail": "XYZ.COM LLC\n4425 Spring Mountain Rd., Suite 2\nLas Vegas NV 89102\nUnited States of America (the)",
+  "administrativeContact": "General Counsel",
+  "technicalContact": "CTO",
+  "registryUrl": "http://www.nic.car",
+  "whoisServer": "whois.nic.car",
+  "rdapServer": "https://rdap.centralnic.com/car/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.car",
+      "addresses": [
+        "194.169.218.130",
+        "2001:67c:13cc:0:0:0:1:130"
+      ]
+    },
+    {
+      "host": "b.nic.car",
+      "addresses": [
+        "185.24.64.130",
+        "2a04:2b00:13cc:0:0:0:1:130"
+      ]
+    },
+    {
+      "host": "c.nic.car",
+      "addresses": [
+        "212.18.248.130",
+        "2a04:2b00:13ee:0:0:0:0:130"
+      ]
+    },
+    {
+      "host": "d.nic.car",
+      "addresses": [
+        "212.18.249.130",
+        "2a04:2b00:13ff:0:0:0:0:130"
+      ]
+    }
+  ],
+  "about": ".CAR is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .CAR is listed by IANA as XYZ.COM LLC. Anyone can typically register a .CAR name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nUniregistry is a large retail domain name registrar and web services provider; as well as a domain name registry that administers generic top-level domains. In February 2013, the related company Uniregistrar Corporation became an ICANN-accredited registrar and launched under the licensed Uniregistry brand name in 2014. Uniregistry's acquisition by GoDaddy was announced in February 2020.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/car.html",
+  "wikipedia": "Uniregistry is a large retail domain name registrar and web services provider; as well as a domain name registry that administers generic top-level domains. In February 2013, the related company Uniregistrar Corporation became an ICANN-accredited registrar and launched under the licensed Uniregistry brand name in 2014. Uniregistry's acquisition by GoDaddy was announced in February 2020.",
+  "scrapedAt": "2026-07-21T21:36:56Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".car",
+    "brand",
+    "brandable names",
+    "car",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 38,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$1863.20",
+      "value": 1863.2
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$2060.87",
+      "value": 2060.87
+    },
+    "sourceUrl": "https://tld-list.com/tld/car"
+  },
+  "summary": ".car is a Generic top-level domain. Managed by XYZ.COM LLC.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

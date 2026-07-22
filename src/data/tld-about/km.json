@@ -1,0 +1,112 @@
+{
+  "tld": ".km",
+  "slug": "km",
+  "title": "About .km domains",
+  "delegationTitle": "Delegation Record for .KM",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Comoros",
+  "sponsor": "Comores Telecom",
+  "sponsorDetail": "Comores Telecom\nPlace Volovolo BP 7000\nMoroni 98123\nComoros (the)",
+  "administrativeContact": "General Manager",
+  "technicalContact": "IT Engineer",
+  "registryUrl": "http://www.domaine.km/",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1998-06-08",
+  "recordUpdated": "2020-06-01",
+  "nameServers": [
+    {
+      "host": "dns1.nic.km",
+      "addresses": [
+        "197.255.224.18"
+      ]
+    },
+    {
+      "host": "dns2.nic.km",
+      "addresses": [
+        "197.255.224.66"
+      ]
+    },
+    {
+      "host": "ns-km.afrinic.net",
+      "addresses": [
+        "196.216.168.46",
+        "2001:43f8:120:0:0:0:0:46"
+      ]
+    }
+  ],
+  "about": ".KM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Comoros. The IANA root zone lists the registry manager as Comores Telecom. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/km.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:43:32Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".km",
+    "cctld",
+    "code",
+    "comores",
+    "comoros",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "km",
+    "level",
+    "local business",
+    "regional brands",
+    "telecom",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 3,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$209.99",
+      "value": 209.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$209.99",
+      "value": 209.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/km"
+  },
+  "summary": ".km is a Country-code top-level domain. Managed by Comores Telecom.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

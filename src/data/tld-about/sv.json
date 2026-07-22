@@ -1,0 +1,140 @@
+{
+  "tld": ".sv",
+  "slug": "sv",
+  "title": "About .sv domains",
+  "delegationTitle": "Delegation Record for .SV",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for El Salvador",
+  "sponsor": "SVNet",
+  "sponsorDetail": "SVNet\nCalle la Reforma No. 249, Colonia San Benito\nSan Salvador\nEl Salvador",
+  "administrativeContact": "Rafael Ibarra",
+  "technicalContact": "Gilberto Lara",
+  "registryUrl": "http://www.svnet.sv",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1994-11-04",
+  "recordUpdated": "2026-07-14",
+  "nameServers": [
+    {
+      "host": "a.lactld.org",
+      "addresses": [
+        "200.0.68.10",
+        "2801:14:a000:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "dns-ext.nic.cr",
+      "addresses": [
+        "200.107.82.219",
+        "2001:13c7:7004:110:0:0:0:219"
+      ]
+    },
+    {
+      "host": "ix.red.sv",
+      "addresses": [
+        "168.243.17.2"
+      ]
+    },
+    {
+      "host": "ns.dns.br",
+      "addresses": [
+        "200.160.0.5",
+        "2001:12ff:0:a20:0:0:0:5"
+      ]
+    },
+    {
+      "host": "nsca.nic.cr",
+      "addresses": [
+        "200.107.82.38",
+        "2001:13c7:7004:1:0:0:0:38"
+      ]
+    },
+    {
+      "host": "p.ns.sv",
+      "addresses": [
+        "204.61.216.112",
+        "2001:500:14:6112:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "sir.red.sv",
+      "addresses": [
+        "131.100.140.162"
+      ]
+    }
+  ],
+  "about": ".SV is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for El Salvador. The IANA root zone lists the registry manager as SVNet. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sv is the Internet country code top-level domain (ccTLD) for El Salvador.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sv.html",
+  "wikipedia": ".sv is the Internet country code top-level domain (ccTLD) for El Salvador.",
+  "scrapedAt": "2026-07-21T21:50:30Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sv",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "salvador",
+    "sv",
+    "svnet",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 11,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$99.99",
+      "value": 99.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$109.99",
+      "value": 109.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/sv"
+  },
+  "summary": ".sv is a Country-code top-level domain. Managed by SVNet.",
+  "wikiCheckedAt": "2026-07-22T04:23:22Z",
+  "wikiEnrichedAt": "2026-07-22T04:23:22Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

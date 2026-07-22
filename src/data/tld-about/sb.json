@@ -1,0 +1,116 @@
+{
+  "tld": ".sb",
+  "slug": "sb",
+  "title": "About .sb domains",
+  "delegationTitle": "Delegation Record for .SB",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Solomon Islands",
+  "sponsor": "Solomon Telekom Company Limited",
+  "sponsorDetail": "Solomon Telekom Company Limited\nTelekom Haus\nMendana Avenue\nP.O. Box 148\nHoniara City Council\nHoniara\nSolomon Islands",
+  "administrativeContact": "Manager Information Systems",
+  "technicalContact": "Senior Engineer SBNIC",
+  "registryUrl": "http://www.nic.net.sb/",
+  "whoisServer": "whois.nic.net.sb",
+  "rdapServer": null,
+  "registrationDate": "1994-04-19",
+  "recordUpdated": "2022-11-21",
+  "nameServers": [
+    {
+      "host": "ns1.anycastdns.cz",
+      "addresses": [
+        "185.38.108.108",
+        "2a00:fea0:dead:0:0:0:0:beef"
+      ]
+    },
+    {
+      "host": "ns2.anycastdns.cz",
+      "addresses": [
+        "185.28.194.194"
+      ]
+    },
+    {
+      "host": "pch.nic.sb",
+      "addresses": [
+        "204.61.216.31",
+        "2001:500:14:6031:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".SB is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Solomon Islands. The IANA root zone lists the registry manager as Solomon Telekom Company Limited. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sb is the Internet country code top-level domain (ccTLD) for Solomon Islands. It is administered through the Council of Country Code Administrators (CoCCA).\nThe country code derives from the name of the country prior to independence according to the ISO 3166 standard (Solomon Islands, British).\nThe Principality of Seborga sometimes uses this domain name for its websites.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sb.html",
+  "wikipedia": ".sb is the Internet country code top-level domain (ccTLD) for Solomon Islands. It is administered through the Council of Country Code Administrators (CoCCA).\nThe country code derives from the name of the country prior to independence according to the ISO 3166 standard (Solomon Islands, British).\nThe Principality of Seborga sometimes uses this domain name for its websites.",
+  "scrapedAt": "2026-07-21T21:49:05Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sb",
+    "cctld",
+    "code",
+    "company",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "islands",
+    "level",
+    "limited",
+    "local business",
+    "regional brands",
+    "sb",
+    "solomon",
+    "telekom",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 14,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$49.99",
+      "value": 49.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$52.50",
+      "value": 52.5
+    },
+    "sourceUrl": "https://tld-list.com/tld/sb"
+  },
+  "summary": ".sb is a Country-code top-level domain. Managed by Solomon Telekom Company Limited.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

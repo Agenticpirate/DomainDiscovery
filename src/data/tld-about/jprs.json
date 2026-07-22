@@ -1,0 +1,111 @@
+{
+  "tld": ".jprs",
+  "slug": "jprs",
+  "title": "About .jprs domains",
+  "delegationTitle": "Delegation Record for .JPRS",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Japan Registry Services Co., Ltd.",
+  "sponsorDetail": "Japan Registry Services Co., Ltd.\n3-8-1 Nishi-Kanda\nChiyoda-ku Tokyo\nJapan",
+  "administrativeContact": "DotJPRS Administrative Contact",
+  "technicalContact": "DotJPRS Technical Contact",
+  "registryUrl": "https://nic.jprs/",
+  "whoisServer": "whois.nic.jprs",
+  "rdapServer": "https://rdap.nic.jprs/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "tld1.nic.jprs",
+      "addresses": [
+        "103.47.2.1",
+        "2001:dda:0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "tld2.nic.jprs",
+      "addresses": [
+        "117.104.133.16",
+        "2001:218:3001:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "tld3.nic.jprs",
+      "addresses": [
+        "65.22.40.1",
+        "2a01:8840:1ba:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "tld4.nic.jprs",
+      "addresses": [
+        "103.198.210.1",
+        "2403:2880:0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "tld5.nic.jprs",
+      "addresses": [
+        "65.22.40.129",
+        "2a01:8840:1ba:0:0:0:0:129"
+      ]
+    }
+  ],
+  "about": ".JPRS is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .JPRS is listed by IANA as Japan Registry Services Co., Ltd.. Anyone can typically register a .JPRS name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/jprs.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:43:16Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".jprs",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "japan",
+    "jprs",
+    "level",
+    "registry",
+    "services",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".jprs is a Generic top-level domain. Managed by Japan Registry Services Co., Ltd..",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

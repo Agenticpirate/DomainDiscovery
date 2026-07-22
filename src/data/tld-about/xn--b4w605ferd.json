@@ -1,0 +1,104 @@
+{
+  "tld": ".xn--b4w605ferd",
+  "slug": "xn--b4w605ferd",
+  "title": "About .xn--b4w605ferd domains",
+  "delegationTitle": "Delegation Record for .\u6de1\u9a6c\u9521",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Temasek Holdings (Private) Limited",
+  "sponsorDetail": "Temasek Holdings (Private) Limited\n60B Orchard Road\n#06-18 Tower 2\nThe Atrium@Orchard\nSingapore 238891\nSingapore",
+  "administrativeContact": "Business Development Executive",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.temasek.com.sg/nicdan4ma3xi1",
+  "whoisServer": "whois.nic.xn--b4w605ferd",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.xn--b4w605ferd",
+      "addresses": [
+        "65.22.140.1",
+        "2a01:8840:8a:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.nic.xn--b4w605ferd",
+      "addresses": [
+        "65.22.143.1",
+        "2a01:8840:8d:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.nic.xn--b4w605ferd",
+      "addresses": [
+        "65.22.141.1",
+        "2a01:8840:8b:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.nic.xn--b4w605ferd",
+      "addresses": [
+        "65.22.142.1",
+        "2a01:8840:8c:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".XN--B4W605FERD is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--B4W605FERD is listed by IANA as Temasek Holdings (Private) Limited. Anyone can typically register a .XN--B4W605FERD name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--b4w605ferd.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:20Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--b4w605ferd",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "holdings",
+    "level",
+    "limited",
+    "private",
+    "temasek",
+    "top",
+    "xn--b4w605ferd"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--b4w605ferd is a Generic top-level domain. Managed by Temasek Holdings (Private) Limited.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

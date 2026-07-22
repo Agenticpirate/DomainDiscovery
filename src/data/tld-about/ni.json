@@ -1,0 +1,137 @@
+{
+  "tld": ".ni",
+  "slug": "ni",
+  "title": "About .ni domains",
+  "delegationTitle": "Delegation Record for .NI",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Nicaragua",
+  "sponsor": "Universidad Nacional del Ingernieria. Division de Tecnologias de la Informacion.",
+  "sponsorDetail": "Universidad Nacional del Ingernieria. Division de Tecnologias de la Informacion.\nSede Central Avenida Universitaria\nManagua 5595\nNicaragua",
+  "administrativeContact": "Jairo Rene Tinoco Salgado",
+  "technicalContact": "Jairo Rene Tinoco Salgado",
+  "registryUrl": "http://www.nic.ni",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1989-10-13",
+  "recordUpdated": "2026-07-02",
+  "nameServers": [
+    {
+      "host": "dns-ext.nic.cr",
+      "addresses": [
+        "200.107.82.219",
+        "2001:13c7:7004:110:0:0:0:219"
+      ]
+    },
+    {
+      "host": "ns.ni",
+      "addresses": [
+        "165.98.1.2"
+      ]
+    },
+    {
+      "host": "ns2.ni",
+      "addresses": [
+        "200.9.187.2"
+      ]
+    },
+    {
+      "host": "ns3.ni",
+      "addresses": [
+        "200.119.166.36"
+      ]
+    },
+    {
+      "host": "ns4.ni",
+      "addresses": [
+        "34.236.38.63",
+        "2600:1f10:40b2:a5d6:6f85:ee80:d86c:6b90"
+      ]
+    },
+    {
+      "host": "ns5.ni",
+      "addresses": [
+        "204.61.216.156",
+        "2001:500:14:6156:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".NI is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Nicaragua. The IANA root zone lists the registry manager as Universidad Nacional del Ingernieria. Division de Tecnologias de la Informacion.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ni is the Internet country code top-level domain (ccTLD) for Nicaragua.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ni.html",
+  "wikipedia": ".ni is the Internet country code top-level domain (ccTLD) for Nicaragua.",
+  "scrapedAt": "2026-07-21T21:46:20Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ni",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "division",
+    "domain",
+    "for",
+    "geo",
+    "informacion",
+    "ingernieria",
+    "level",
+    "local business",
+    "nacional",
+    "ni",
+    "nicaragua",
+    "regional brands",
+    "tecnologias",
+    "top",
+    "universidad"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 9,
+    "cheapestRegistration": {
+      "registrar": "Gandi.net",
+      "price": "$590.97",
+      "value": 590.97
+    },
+    "cheapestRenewal": {
+      "registrar": "MrDomain",
+      "price": "$675.22",
+      "value": 675.22
+    },
+    "sourceUrl": "https://tld-list.com/tld/ni"
+  },
+  "summary": ".ni is a Country-code top-level domain. Managed by Universidad Nacional del Ingernieria. Division de Tecnologias de la Informacion..",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

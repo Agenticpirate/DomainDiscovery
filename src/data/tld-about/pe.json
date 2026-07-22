@@ -1,0 +1,121 @@
+{
+  "tld": ".pe",
+  "slug": "pe",
+  "title": "About .pe domains",
+  "delegationTitle": "Delegation Record for .PE",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Peru",
+  "sponsor": "Red Cientifica Peruana",
+  "sponsorDetail": "Red Cientifica Peruana\nJr. Gonzales Prada # 585\nSurquillo Lima 15047\nPeru",
+  "administrativeContact": "Rolando Toledo",
+  "technicalContact": "David Rios",
+  "registryUrl": "http://www.nic.pe",
+  "whoisServer": "kero.yachay.pe",
+  "rdapServer": null,
+  "registrationDate": "1991-11-25",
+  "recordUpdated": "2026-03-25",
+  "nameServers": [
+    {
+      "host": "a.lactld.org",
+      "addresses": [
+        "200.0.68.10",
+        "2801:14:a000:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "pch.rcp.pe",
+      "addresses": [
+        "204.61.216.85",
+        "2001:500:14:6085:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "pe1.dnsnode.net",
+      "addresses": [
+        "194.146.106.82",
+        "2001:67c:1010:20:0:0:0:53"
+      ]
+    },
+    {
+      "host": "quipu.rcp.net.pe",
+      "addresses": [
+        "200.1.176.4"
+      ]
+    }
+  ],
+  "about": ".PE is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Peru. The IANA root zone lists the registry manager as Red Cientifica Peruana. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.pe is the Internet country code top-level domain (ccTLD) for Peru. It was created on 25 November 1991.\nIt is managed since its creation by the Red Cient\u00edfica Peruana (RCP).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/pe.html",
+  "wikipedia": ".pe is the Internet country code top-level domain (ccTLD) for Peru. It was created on 25 November 1991.\nIt is managed since its creation by the Red Cient\u00edfica Peruana (RCP).",
+  "scrapedAt": "2026-07-21T21:47:09Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".pe",
+    "cctld",
+    "cientifica",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "pe",
+    "peru",
+    "peruana",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 25,
+    "cheapestRegistration": {
+      "registrar": "Namecheap",
+      "price": "$75.98",
+      "value": 75.98
+    },
+    "cheapestRenewal": {
+      "registrar": "GoDaddy",
+      "price": "$79.99",
+      "value": 79.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/pe"
+  },
+  "summary": ".pe is a Country-code top-level domain. Managed by Red Cientifica Peruana.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

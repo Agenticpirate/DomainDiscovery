@@ -1,0 +1,135 @@
+{
+  "tld": ".mz",
+  "slug": "mz",
+  "title": "About .mz domains",
+  "delegationTitle": "Delegation Record for .MZ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Mozambique",
+  "sponsor": "Centro de Informatica de Universidade Eduardo Mondlane",
+  "sponsorDetail": "Centro de Informatica de Universidade Eduardo Mondlane\nAv. Julius Nyerere, Campus Universitario\nMaputo 1000\nMozambique",
+  "administrativeContact": "David Bila",
+  "technicalContact": "Antonio Godinho",
+  "registryUrl": null,
+  "whoisServer": "whois.nic.mz",
+  "rdapServer": null,
+  "registrationDate": "1992-09-04",
+  "recordUpdated": "2020-03-09",
+  "nameServers": [
+    {
+      "host": "anyns.uem.mz",
+      "addresses": [
+        "204.61.216.14"
+      ]
+    },
+    {
+      "host": "dzowo.uem.mz",
+      "addresses": [
+        "196.3.96.66"
+      ]
+    },
+    {
+      "host": "ns-mz.afrinic.net",
+      "addresses": [
+        "196.216.168.40",
+        "2001:43f8:120:0:0:0:0:40"
+      ]
+    },
+    {
+      "host": "oceano.uem.mz",
+      "addresses": [
+        "196.3.96.69"
+      ]
+    },
+    {
+      "host": "phloem.uoregon.edu",
+      "addresses": [
+        "128.223.32.35",
+        "2001:468:d01:20:0:0:80df:2023"
+      ]
+    },
+    {
+      "host": "zebra.uem.mz",
+      "addresses": [
+        "196.3.96.67"
+      ]
+    }
+  ],
+  "about": ".MZ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Mozambique. The IANA root zone lists the registry manager as Centro de Informatica de Universidade Eduardo Mondlane. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.mz is the Internet country code top-level domain (ccTLD) for Mozambique. Registrations are at the third level beneath the second-level names co.mz, net.mz, adv.mz, mil.mz, org.mz, ac.mz,  gov.mz and edu.mz.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mz.html",
+  "wikipedia": ".mz is the Internet country code top-level domain (ccTLD) for Mozambique. Registrations are at the third level beneath the second-level names co.mz, net.mz, adv.mz, mil.mz, org.mz, ac.mz,  gov.mz and edu.mz.",
+  "scrapedAt": "2026-07-21T21:45:57Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".mz",
+    "cctld",
+    "centro",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "eduardo",
+    "for",
+    "geo",
+    "informatica",
+    "level",
+    "local business",
+    "mondlane",
+    "mozambique",
+    "mz",
+    "regional brands",
+    "top",
+    "universidade"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 1,
+    "cheapestRegistration": {
+      "registrar": "Gandi.net",
+      "price": "$265.45",
+      "value": 265.45
+    },
+    "cheapestRenewal": {
+      "registrar": "Gandi.net",
+      "price": "$503.98",
+      "value": 503.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/mz"
+  },
+  "summary": ".mz is a Country-code top-level domain. Managed by Centro de Informatica de Universidade Eduardo Mondlane.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

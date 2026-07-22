@@ -1,0 +1,136 @@
+{
+  "tld": ".kr",
+  "slug": "kr",
+  "title": "About .kr domains",
+  "delegationTitle": "Delegation Record for .KR",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Korea, Republic of",
+  "sponsor": "Korea Internet & Security Agency (KISA)",
+  "sponsorDetail": "Korea Internet & Security Agency (KISA)\n9, Jinheung-gil\nNaju-si Jeollanam-do 58324\nKorea (the Republic of)",
+  "administrativeContact": "Kilnam Chon",
+  "technicalContact": "KRNIC Tech Team Manager",
+  "registryUrl": "http://www.nic.or.kr/",
+  "whoisServer": "whois.kr",
+  "rdapServer": null,
+  "registrationDate": "1986-09-29",
+  "recordUpdated": "2026-01-07",
+  "nameServers": [
+    {
+      "host": "b.dns.kr",
+      "addresses": [
+        "210.101.60.1"
+      ]
+    },
+    {
+      "host": "c.dns.kr",
+      "addresses": [
+        "210.101.61.1"
+      ]
+    },
+    {
+      "host": "d.dns.kr",
+      "addresses": [
+        "203.83.159.1",
+        "2001:dcc:4:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "e.dns.kr",
+      "addresses": [
+        "202.30.124.100",
+        "2001:dcc:5:0:0:0:0:100"
+      ]
+    },
+    {
+      "host": "f.dns.kr",
+      "addresses": [
+        "210.101.62.1",
+        "2001:dcc:6:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "g.dns.kr",
+      "addresses": [
+        "202.31.190.1",
+        "2001:dc5:a:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".KR is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Korea, Republic of. The IANA root zone lists the registry manager as Korea Internet & Security Agency (KISA). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/kr.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:43:38Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".kr",
+    "agency",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "internet",
+    "kisa",
+    "korea",
+    "kr",
+    "level",
+    "local business",
+    "regional brands",
+    "republic",
+    "security",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 17,
+    "cheapestRegistration": {
+      "registrar": "GoDaddy",
+      "price": "$21.99",
+      "value": 21.99
+    },
+    "cheapestRenewal": {
+      "registrar": "GoDaddy",
+      "price": "$21.99",
+      "value": 21.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/kr"
+  },
+  "summary": ".kr is a Country-code top-level domain. Managed by Korea Internet & Security Agency (KISA).",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,132 @@
+{
+  "tld": ".xn--mix891f",
+  "slug": "xn--mix891f",
+  "title": "About .xn--mix891f domains",
+  "delegationTitle": "Delegation Record for .\u6fb3\u9580",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code MO",
+  "designation": "Country-code top-level domain designated for Macao",
+  "sponsor": "Macao Post and Telecommunications Bureau (CTT)",
+  "sponsorDetail": "Macao Post and Telecommunications Bureau (CTT)\nLargo do Senado, Edf. Sede dos CTT\nMacau\nMacao",
+  "administrativeContact": "MONIC Administrative Contact",
+  "technicalContact": "MONIC Technical Contact",
+  "registryUrl": "https://www.monic.mo",
+  "whoisServer": "whois.monic.mo",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.monic.mo",
+      "addresses": [
+        "202.175.87.47",
+        "2001:f90:2:8:0:0:0:2"
+      ]
+    },
+    {
+      "host": "b.monic.mo",
+      "addresses": [
+        "202.175.87.48",
+        "2001:f90:2:8:0:0:0:3"
+      ]
+    },
+    {
+      "host": "c.monic.mo",
+      "addresses": [
+        "202.175.87.49",
+        "2001:f90:2:8:0:0:0:4"
+      ]
+    },
+    {
+      "host": "d.monic.mo",
+      "addresses": [
+        "202.175.51.115",
+        "2001:f90:8:0:0:0:0:2"
+      ]
+    },
+    {
+      "host": "e.monic.mo",
+      "addresses": [
+        "202.175.51.116",
+        "2001:f90:8:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "ns17.cdns.net",
+      "addresses": [
+        "194.0.1.17",
+        "2001:678:4:0:0:0:0:11"
+      ]
+    },
+    {
+      "host": "ns2.cuhk.edu.hk",
+      "addresses": [
+        "137.189.6.21",
+        "2405:3000:3:6:0:0:0:15"
+      ]
+    }
+  ],
+  "about": ".XN--MIX891F is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Macao. The IANA root zone lists the registry manager as Macao Post and Telecommunications Bureau (CTT). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--mix891f.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:27Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--mix891f",
+    "bureau",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "letter",
+    "level",
+    "local business",
+    "macao",
+    "post",
+    "regional brands",
+    "telecommunications",
+    "top",
+    "two",
+    "xn--mix891f"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--mix891f is a Country-code top-level domain designated for two-letter country code MO. Managed by Macao Post and Telecommunications Bureau (CTT).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

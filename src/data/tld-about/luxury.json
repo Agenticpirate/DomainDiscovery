@@ -1,0 +1,114 @@
+{
+  "tld": ".luxury",
+  "slug": "luxury",
+  "title": "About .luxury domains",
+  "delegationTitle": "Delegation Record for .LUXURY",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Luxury Partners LLC",
+  "sponsorDetail": "Luxury Partners LLC\n888 South Figueroa Street, Suite 2150\nLos Angeles CA 90017\nUnited States of America (the)",
+  "administrativeContact": "Jennifer Molina",
+  "technicalContact": "CTO",
+  "registryUrl": "https://join.luxury/",
+  "whoisServer": "whois.nic.luxury",
+  "rdapServer": "https://rdap.centralnic.com/luxury/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.luxury",
+      "addresses": [
+        "194.169.218.98",
+        "2001:67c:13cc:0:0:0:1:98"
+      ]
+    },
+    {
+      "host": "b.nic.luxury",
+      "addresses": [
+        "185.24.64.98",
+        "2a04:2b00:13cc:0:0:0:1:98"
+      ]
+    },
+    {
+      "host": "c.nic.luxury",
+      "addresses": [
+        "212.18.248.98",
+        "2a04:2b00:13ee:0:0:0:0:98"
+      ]
+    },
+    {
+      "host": "d.nic.luxury",
+      "addresses": [
+        "212.18.249.98",
+        "2a04:2b00:13ff:0:0:0:0:98"
+      ]
+    }
+  ],
+  "about": ".LUXURY is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .LUXURY is listed by IANA as Luxury Partners LLC. Anyone can typically register a .LUXURY name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/luxury.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:44:41Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".luxury",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "luxury",
+    "partners",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 41,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$13.18",
+      "value": 13.18
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$25.95",
+      "value": 25.95
+    },
+    "sourceUrl": "https://tld-list.com/tld/luxury"
+  },
+  "summary": ".luxury is a Generic top-level domain. Managed by Luxury Partners LLC.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

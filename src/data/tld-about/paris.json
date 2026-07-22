@@ -1,0 +1,110 @@
+{
+  "tld": ".paris",
+  "slug": "paris",
+  "title": "About .paris domains",
+  "delegationTitle": "Delegation Record for .PARIS",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "City of Paris",
+  "sponsorDetail": "City of Paris\nVille de Paris\n5 rue Lobau\nParis 75004\nFrance",
+  "administrativeContact": "Account Manager",
+  "technicalContact": "TLD Technical Contact",
+  "registryUrl": "http://mondomaine.paris.fr/",
+  "whoisServer": "whois.nic.paris",
+  "rdapServer": "https://rdap.nic.paris",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "d.nic.fr",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "f.ext.nic.fr",
+      "addresses": [
+        "194.146.106.46",
+        "2001:67c:1010:11:0:0:0:53"
+      ]
+    },
+    {
+      "host": "g.ext.nic.fr",
+      "addresses": [
+        "194.0.36.1",
+        "2001:678:4c:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".PARIS is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .PARIS is listed by IANA as City of Paris. Anyone can typically register a .PARIS name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.paris is a top-level domain for the city of Paris, France. It was introduced in June 2008 by ICANN, and the first 100 \".paris\" web addresses were assigned in mid-2014.\nAt the time of launch, domain names corresponding to Parisian places (streets, squares, etc.) were reserved for the authorities concerned. Others, very generic, were blocked without the registry having yet made a decision on the allocation method.\nFrom September to November 2014, the rightful owners of trademarks (protected, company names, names of French municipalities) were given priority in registering .paris domain names. It was also possible to register, without having any particular rights, domain names before the general public opening at a higher rate, or even at auction if several candidates coveted the same domain name.\nSince 2 December 2014, .paris is open to the general public. The available domain names are allocated on a first-come, first-served basis.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/paris.html",
+  "wikipedia": ".paris is a top-level domain for the city of Paris, France. It was introduced in June 2008 by ICANN, and the first 100 \".paris\" web addresses were assigned in mid-2014.\nAt the time of launch, domain names corresponding to Parisian places (streets, squares, etc.) were reserved for the authorities concerned. Others, very generic, were blocked without the registry having yet made a decision on the allocation method.\nFrom September to November 2014, the rightful owners of trademarks (protected, company names, names of French municipalities) were given priority in registering .paris domain names. It was also possible to register, without having any particular rights, domain names before the general public opening at a higher rate, or even at auction if several candidates coveted the same domain name.\nSince 2 December 2014, .paris is open to the general public. The available domain names are allocated on a first-come, first-served basis.",
+  "scrapedAt": "2026-07-21T21:47:03Z",
+  "categories": [
+    "travel"
+  ],
+  "useCases": [
+    "Travel brands",
+    "Tourism",
+    "Hospitality"
+  ],
+  "keywords": [
+    ".paris",
+    "city",
+    "domain",
+    "generic",
+    "gtld",
+    "hospitality",
+    "level",
+    "paris",
+    "top",
+    "tourism",
+    "travel",
+    "travel brands"
+  ],
+  "primaryCategory": "travel",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 26,
+    "cheapestRegistration": {
+      "registrar": "GoDaddy",
+      "price": "$65.17",
+      "value": 65.17
+    },
+    "cheapestRenewal": {
+      "registrar": "GoDaddy",
+      "price": "$65.17",
+      "value": 65.17
+    },
+    "sourceUrl": "https://tld-list.com/tld/paris"
+  },
+  "summary": ".paris is a Generic top-level domain. Managed by City of Paris.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

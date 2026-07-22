@@ -1,0 +1,182 @@
+{
+  "tld": ".com",
+  "slug": "com",
+  "title": "About .com domains",
+  "delegationTitle": "Delegation Record for .COM",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "VeriSign Global Registry Services",
+  "sponsorDetail": "VeriSign Global Registry Services\n12061 Bluemont Way\nReston VA 20190\nUnited States of America (the)",
+  "administrativeContact": "Registry Customer Service",
+  "technicalContact": "Registry Customer Service",
+  "registryUrl": "http://www.verisigninc.com",
+  "whoisServer": "whois.verisign-grs.com",
+  "rdapServer": "https://rdap.verisign.com/com/v1/",
+  "registrationDate": "1985-01-01",
+  "recordUpdated": "2026-03-10",
+  "nameServers": [
+    {
+      "host": "a.gtld-servers.net",
+      "addresses": [
+        "192.5.6.30",
+        "2001:503:a83e:0:0:0:2:30"
+      ]
+    },
+    {
+      "host": "b.gtld-servers.net",
+      "addresses": [
+        "192.33.14.30",
+        "2001:503:231d:0:0:0:2:30"
+      ]
+    },
+    {
+      "host": "c.gtld-servers.net",
+      "addresses": [
+        "192.26.92.30",
+        "2001:503:83eb:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "d.gtld-servers.net",
+      "addresses": [
+        "192.31.80.30",
+        "2001:500:856e:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "e.gtld-servers.net",
+      "addresses": [
+        "192.12.94.30",
+        "2001:502:1ca1:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "f.gtld-servers.net",
+      "addresses": [
+        "192.35.51.30",
+        "2001:503:d414:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "g.gtld-servers.net",
+      "addresses": [
+        "192.42.93.30",
+        "2001:503:eea3:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "h.gtld-servers.net",
+      "addresses": [
+        "192.54.112.30",
+        "2001:502:8cc:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "i.gtld-servers.net",
+      "addresses": [
+        "192.43.172.30",
+        "2001:503:39c1:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "j.gtld-servers.net",
+      "addresses": [
+        "192.48.79.30",
+        "2001:502:7094:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "k.gtld-servers.net",
+      "addresses": [
+        "192.52.178.30",
+        "2001:503:d2d:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "l.gtld-servers.net",
+      "addresses": [
+        "192.41.162.30",
+        "2001:500:d937:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "m.gtld-servers.net",
+      "addresses": [
+        "192.55.83.30",
+        "2001:501:b1f9:0:0:0:0:30"
+      ]
+    }
+  ],
+  "about": ".COM is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .COM is listed by IANA as VeriSign Global Registry Services. Anyone can typically register a .COM name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nThe domain com is a top-level domain (TLD) in the Domain Name System (DNS) of the Internet. Created in the first group of Internet domains in March of 1985, it is short for commercial, as it was originally intended for subdomains for commercial organizations. Later, the domain opened for general purposes.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/com.html",
+  "wikipedia": "The domain com is a top-level domain (TLD) in the Domain Name System (DNS) of the Internet. Created in the first group of Internet domains in March of 1985, it is short for commercial, as it was originally intended for subdomains for commercial organizations. Later, the domain opened for general purposes.",
+  "scrapedAt": "2026-07-21T21:33:38Z",
+  "categories": [
+    "business"
+  ],
+  "useCases": [
+    "Companies",
+    "Agencies",
+    "Professional services",
+    "B2B"
+  ],
+  "keywords": [
+    ".com",
+    "agencies",
+    "business",
+    "com",
+    "companies",
+    "domain",
+    "generic",
+    "global",
+    "gtld",
+    "level",
+    "professional services",
+    "registry",
+    "services",
+    "top",
+    "verisign"
+  ],
+  "primaryCategory": "business",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 56,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$7.95",
+      "value": 7.95
+    },
+    "cheapestRenewal": {
+      "registrar": "Cloudflare",
+      "price": "$9.77",
+      "value": 9.77
+    },
+    "sourceUrl": "https://tld-list.com/tld/com"
+  },
+  "summary": ".com is a Generic top-level domain. Managed by VeriSign Global Registry Services.",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

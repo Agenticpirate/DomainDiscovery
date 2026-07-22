@@ -1,0 +1,127 @@
+{
+  "tld": ".au",
+  "slug": "au",
+  "title": "About .au domains",
+  "delegationTitle": "Delegation Record for .AU",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Australia",
+  "sponsor": ".au Domain Administration (auDA)",
+  "sponsorDetail": ".au Domain Administration (auDA)\nLevel 19\n8 Exhibition Street\nMelbourne VIC 3000\nAustralia",
+  "administrativeContact": "Chief Operating Officer",
+  "technicalContact": "Chief Technical Officer",
+  "registryUrl": "https://www.auda.org.au/domains/au-domains/",
+  "whoisServer": "whois.auda.org.au",
+  "rdapServer": "https://rdap.cctld.au/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.au",
+      "addresses": [
+        "58.65.254.1",
+        "2407:6e00:254:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "q.au",
+      "addresses": [
+        "65.22.196.1",
+        "2a01:8840:be:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "r.au",
+      "addresses": [
+        "65.22.197.1",
+        "2a01:8840:bf:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "s.au",
+      "addresses": [
+        "65.22.198.1",
+        "2a01:8840:c0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "t.au",
+      "addresses": [
+        "65.22.199.1",
+        "2a01:8840:c1:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".AU is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Australia. The IANA root zone lists the registry manager as .au Domain Administration (auDA). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.au is the Internet country code top-level domain (ccTLD) for Australia. It was created on 5\u00a0March 1986. Domain name policy is managed by .au Domain Administration (auDA).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/au.html",
+  "wikipedia": ".au is the Internet country code top-level domain (ccTLD) for Australia. It was created on 5\u00a0March 1986. Domain name policy is managed by .au Domain Administration (auDA).",
+  "scrapedAt": "2026-07-21T21:33:58Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".au",
+    "administration",
+    "au",
+    "auda",
+    "australia",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 24,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$9.99",
+      "value": 9.99
+    },
+    "cheapestRenewal": {
+      "registrar": "GoDaddy",
+      "price": "$14.99",
+      "value": 14.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/au"
+  },
+  "summary": ".au is a Country-code top-level domain. Managed by .au Domain Administration (auDA).",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

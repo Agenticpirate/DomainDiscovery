@@ -1,0 +1,114 @@
+{
+  "tld": ".shop",
+  "slug": "shop",
+  "title": "About .shop domains",
+  "delegationTitle": "Delegation Record for .SHOP",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "GMO Registry, Inc.",
+  "sponsorDetail": "GMO Registry, Inc.\n26-1 Sakuragaoka-cho\nShibuya-ku Tokyo\nJapan",
+  "administrativeContact": "Representative Director and CEO",
+  "technicalContact": "Director",
+  "registryUrl": "http://www.gmoregistry.com/en/",
+  "whoisServer": "whois.nic.shop",
+  "rdapServer": "https://rdap.gmoregistry.net/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.gmoregistry.net",
+      "addresses": [
+        "37.209.192.4",
+        "2001:dcd:1:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "b.gmoregistry.net",
+      "addresses": [
+        "37.209.194.4",
+        "2001:dcd:2:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "k.gmoregistry.net",
+      "addresses": [
+        "37.209.196.4"
+      ]
+    },
+    {
+      "host": "l.gmoregistry.net",
+      "addresses": [
+        "37.209.198.4",
+        "2001:dcd:4:0:0:0:0:4"
+      ]
+    }
+  ],
+  "about": ".SHOP is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .SHOP is listed by IANA as GMO Registry, Inc.. Anyone can typically register a .SHOP name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.shop is a generic top-level domain (gTLD) launched in September 2016. Nine companies including Google, Amazon and Famous Four Media filed applications for .shop in the 2012 ICANN new gTLD application round. GMO Registry became the registry operator after prevailing in an ICANN public auction in January 2016.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/shop.html",
+  "wikipedia": ".shop is a generic top-level domain (gTLD) launched in September 2016. Nine companies including Google, Amazon and Famous Four Media filed applications for .shop in the 2012 ICANN new gTLD application round. GMO Registry became the registry operator after prevailing in an ICANN public auction in January 2016.",
+  "scrapedAt": "2026-07-21T21:33:24Z",
+  "categories": [
+    "ecommerce"
+  ],
+  "useCases": [
+    "Online stores",
+    "Retail",
+    "Marketplaces"
+  ],
+  "keywords": [
+    ".shop",
+    "domain",
+    "ecommerce",
+    "generic",
+    "gtld",
+    "level",
+    "marketplaces",
+    "online stores",
+    "registry",
+    "retail",
+    "shop",
+    "top"
+  ],
+  "primaryCategory": "ecommerce",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 50,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$0.90",
+      "value": 0.9
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$25.21",
+      "value": 25.21
+    },
+    "sourceUrl": "https://tld-list.com/tld/shop"
+  },
+  "summary": ".shop is a Generic top-level domain. Managed by GMO Registry, Inc..",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,107 @@
+{
+  "tld": ".wien",
+  "slug": "wien",
+  "title": "About .wien domains",
+  "delegationTitle": "Delegation Record for .WIEN",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "punkt.wien GmbH",
+  "sponsorDetail": "punkt.wien GmbH\nSchoenbrunner Strasse 231\nVienna 1120\nAustria",
+  "administrativeContact": "Ronald Schwaerzler",
+  "technicalContact": "Technical Operations",
+  "registryUrl": "https://www.nic.wien",
+  "whoisServer": "whois.nic.wien",
+  "rdapServer": "https://rdap.ryce-rsp.com/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "dns.ryce-rsp.com",
+      "addresses": [
+        "194.0.11.114",
+        "2001:678:e:114:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns1.dns.business",
+      "addresses": [
+        "157.90.205.138",
+        "2a01:4f8:252:4295:0:0:9d5a:cd8a"
+      ]
+    },
+    {
+      "host": "ns1.ryce-rsp.com",
+      "addresses": [
+        "193.56.204.111",
+        "2a0c:8f40:0:701:0:0:0:111"
+      ]
+    }
+  ],
+  "about": ".WIEN is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .WIEN is listed by IANA as punkt.wien GmbH. Anyone can typically register a .WIEN name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/wien.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:52:33Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".wien",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gmbh",
+    "gtld",
+    "level",
+    "punkt",
+    "top",
+    "wien"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 24,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$40.65",
+      "value": 40.65
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$40.65",
+      "value": 40.65
+    },
+    "sourceUrl": "https://tld-list.com/tld/wien"
+  },
+  "summary": ".wien is a Generic top-level domain. Managed by punkt.wien GmbH.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

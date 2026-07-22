@@ -1,0 +1,125 @@
+{
+  "tld": ".xn--mgb9awbf",
+  "slug": "xn--mgb9awbf",
+  "title": "About .xn--mgb9awbf domains",
+  "delegationTitle": "Delegation Record for .\u0639\u0645\u0627\u0646",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code OM",
+  "designation": "Country-code top-level domain designated for Oman",
+  "sponsor": "Telecommunications Regulatory Authority (TRA)",
+  "sponsorDetail": "Telecommunications Regulatory Authority (TRA)\nP.O. Box 3555, P.C 111, Seeb\nMuscat\nOman",
+  "administrativeContact": "Domain Name Exective Manager",
+  "technicalContact": "Domain Name Manager",
+  "registryUrl": "http://www.registry.om",
+  "whoisServer": "whois.registry.om",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "cctld.alpha.aridns.net.au",
+      "addresses": [
+        "37.209.192.6",
+        "2001:dcd:1:0:0:0:0:6"
+      ]
+    },
+    {
+      "host": "cctld.beta.aridns.net.au",
+      "addresses": [
+        "37.209.194.6",
+        "2001:dcd:2:0:0:0:0:6"
+      ]
+    },
+    {
+      "host": "cctld.delta.aridns.net.au",
+      "addresses": [
+        "37.209.198.6",
+        "2001:dcd:4:0:0:0:0:6"
+      ]
+    },
+    {
+      "host": "cctld.gamma.aridns.net.au",
+      "addresses": [
+        "37.209.196.6",
+        "2001:dcd:3:0:0:0:0:6"
+      ]
+    },
+    {
+      "host": "ns1.registry.om",
+      "addresses": [
+        "185.27.88.50",
+        "2a00:9120:1:0:0:0:0:50"
+      ]
+    },
+    {
+      "host": "ns2.registry.om",
+      "addresses": [
+        "185.27.89.50",
+        "2a00:9120:2:0:0:0:0:50"
+      ]
+    }
+  ],
+  "about": ".XN--MGB9AWBF is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Oman. The IANA root zone lists the registry manager as Telecommunications Regulatory Authority (TRA). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--mgb9awbf.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:08Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--mgb9awbf",
+    "authority",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "letter",
+    "level",
+    "local business",
+    "oman",
+    "regional brands",
+    "regulatory",
+    "telecommunications",
+    "top",
+    "two",
+    "xn--mgb9awbf"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--mgb9awbf is a Country-code top-level domain designated for two-letter country code OM. Managed by Telecommunications Regulatory Authority (TRA).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

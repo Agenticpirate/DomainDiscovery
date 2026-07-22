@@ -1,0 +1,120 @@
+{
+  "tld": ".sk",
+  "slug": "sk",
+  "title": "About .sk domains",
+  "delegationTitle": "Delegation Record for .SK",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Slovakia",
+  "sponsor": "SK-NIC, a.s.",
+  "sponsorDetail": "SK-NIC, a.s.\nNamestie SNP 14\nBratislava 81106\nSlovakia",
+  "administrativeContact": "GAC delegate",
+  "technicalContact": "Technical Director",
+  "registryUrl": "http://www.sk-nic.sk",
+  "whoisServer": "whois.sk-nic.sk",
+  "rdapServer": null,
+  "registrationDate": "1993-03-29",
+  "recordUpdated": "2026-03-16",
+  "nameServers": [
+    {
+      "host": "e.tld.sk",
+      "addresses": [
+        "194.169.218.16",
+        "2001:67c:13cc:0:0:0:1:16"
+      ]
+    },
+    {
+      "host": "f.tld.sk",
+      "addresses": [
+        "185.24.64.16",
+        "2a04:2b00:13cc:0:0:0:1:16"
+      ]
+    },
+    {
+      "host": "g.tld.sk",
+      "addresses": [
+        "212.18.248.16",
+        "2a04:2b00:13ee:0:0:0:0:16"
+      ]
+    },
+    {
+      "host": "h.tld.sk",
+      "addresses": [
+        "212.18.249.16",
+        "2a04:2b00:13ff:0:0:0:0:16"
+      ]
+    }
+  ],
+  "about": ".SK is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Slovakia. The IANA root zone lists the registry manager as SK-NIC, a.s.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sk is the Internet country code top-level domain (ccTLD) for Slovakia. It is administered by SK-NIC a.s.\nSK-NIC, a. s., is the administrator of the top-level domain .sk. It has been recognised since the mid-1990s by the manager of the DNS root zone, the Internet Assigned Numbers Authority, as the delegated manager of .SK (changing its name from EUNET Slovakia to EuroWeb Slovakia in 1999 and to SK-NIC in 2006).\nIn 2006, SK-NIC transferred some of the competences of domain administration to the State, and submitted to levels of service requirements and a policy-making committee comprising representatives of the internet community as well as the Government.\nSK-NIC is the country-code Top Level Domain registry in Europe with most resellers, with over 5900 accredited registrars at its maximum in Slovakia. There are three other ccTLDs registries in the European region with over 1000 registrars, and as an example there are over 40 registrars in neighbouring Czech Republic or over 300 in Germany, largest registry domain-wide.\nAll staff and technology used by SK-NIC, a.s., is situated in Slovakia, where it advertises 100% of DNS availability rate.\nCentralNic acquired SK-Nic from a private Netherlands-based company in December 2017.\nBefore the split in 1993, the former Czechoslovakia used the domain .cs.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sk.html",
+  "wikipedia": ".sk is the Internet country code top-level domain (ccTLD) for Slovakia. It is administered by SK-NIC a.s.\nSK-NIC, a. s., is the administrator of the top-level domain .sk. It has been recognised since the mid-1990s by the manager of the DNS root zone, the Internet Assigned Numbers Authority, as the delegated manager of .SK (changing its name from EUNET Slovakia to EuroWeb Slovakia in 1999 and to SK-NIC in 2006).\nIn 2006, SK-NIC transferred some of the competences of domain administration to the State, and submitted to levels of service requirements and a policy-making committee comprising representatives of the internet community as well as the Government.\nSK-NIC is the country-code Top Level Domain registry in Europe with most resellers, with over 5900 accredited registrars at its maximum in Slovakia. There are three other ccTLDs registries in the European region with over 1000 registrars, and as an example there are over 40 registrars in neighbouring Czech Republic or over 300 in Germany, largest registry domain-wide.\nAll staff and technology used by SK-NIC, a.s., is situated in Slovakia, where it advertises 100% of DNS availability rate.\nCentralNic acquired SK-Nic from a private Netherlands-based company in December 2017.\nBefore the split in 1993, the former Czechoslovakia used the domain .cs.",
+  "scrapedAt": "2026-07-21T21:49:46Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sk",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "sk",
+    "slovakia",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 18,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$13.49",
+      "value": 13.49
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$14.99",
+      "value": 14.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/sk"
+  },
+  "summary": ".sk is a Country-code top-level domain. Managed by SK-NIC, a.s..",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "wikiEnrichedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

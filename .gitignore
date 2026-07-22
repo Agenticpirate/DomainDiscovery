@@ -6,3 +6,11 @@ npm-debug.log*
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
+
+# Local domain watches + free email outbox
+/data/domain-watches.json
+/data/email-outbox/
+/data/price-verify-state.json
+/data/price-verify-logs/
+/data/firecrawl-raw/
+/data/unstoppable-dns-prices.json

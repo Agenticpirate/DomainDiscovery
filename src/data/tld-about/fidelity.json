@@ -1,0 +1,103 @@
+{
+  "tld": ".fidelity",
+  "slug": "fidelity",
+  "title": "About .fidelity domains",
+  "delegationTitle": "Delegation Record for .FIDELITY",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Fidelity Brokerage Services LLC",
+  "sponsorDetail": "Fidelity Brokerage Services LLC\n82 Devonshire Street\nBoston MA 02109\nUnited States of America (the)",
+  "administrativeContact": "Director Product Management",
+  "technicalContact": "Howard Eland, Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://fidelity.com",
+  "whoisServer": "whois.nic.fidelity",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.fidelity",
+      "addresses": [
+        "65.22.112.48",
+        "2a01:8840:6e:0:0:0:0:48"
+      ]
+    },
+    {
+      "host": "a2.nic.fidelity",
+      "addresses": [
+        "65.22.115.48",
+        "2a01:8840:71:0:0:0:0:48"
+      ]
+    },
+    {
+      "host": "b0.nic.fidelity",
+      "addresses": [
+        "65.22.113.48",
+        "2a01:8840:6f:0:0:0:0:48"
+      ]
+    },
+    {
+      "host": "c0.nic.fidelity",
+      "addresses": [
+        "65.22.114.48",
+        "2a01:8840:70:0:0:0:0:48"
+      ]
+    }
+  ],
+  "about": ".FIDELITY is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .FIDELITY is listed by IANA as Fidelity Brokerage Services LLC. Anyone can typically register a .FIDELITY name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/fidelity.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:40:07Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".fidelity",
+    "brand",
+    "brandable names",
+    "brokerage",
+    "corporate brands",
+    "domain",
+    "fidelity",
+    "generic",
+    "gtld",
+    "level",
+    "services",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".fidelity is a Generic top-level domain. Managed by Fidelity Brokerage Services LLC.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

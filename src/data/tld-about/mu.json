@@ -1,0 +1,136 @@
+{
+  "tld": ".mu",
+  "slug": "mu",
+  "title": "About .mu domains",
+  "delegationTitle": "Delegation Record for .MU",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Mauritius",
+  "sponsor": "Internet Direct Ltd",
+  "sponsorDetail": "Internet Direct Ltd\n48 Remy Ollier Street\nPort Louis\nMauritius",
+  "administrativeContact": "Administrator",
+  "technicalContact": "Tech Administrator",
+  "registryUrl": "http://www.nic.mu/",
+  "whoisServer": "whois.tld.mu",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": "1995-10-06",
+  "recordUpdated": "2025-02-26",
+  "nameServers": [
+    {
+      "host": "v0n0.tld.mu",
+      "addresses": [
+        "199.254.59.33",
+        "2001:500:25:0:0:0:0:33"
+      ]
+    },
+    {
+      "host": "v0n1.tld.mu",
+      "addresses": [
+        "199.254.60.33",
+        "2001:500:26:0:0:0:0:33"
+      ]
+    },
+    {
+      "host": "v0n2.tld.mu",
+      "addresses": [
+        "199.254.61.33",
+        "2001:500:27:0:0:0:0:33"
+      ]
+    },
+    {
+      "host": "v0n3.tld.mu",
+      "addresses": [
+        "199.254.62.33",
+        "2001:500:28:0:0:0:0:33"
+      ]
+    },
+    {
+      "host": "v2n0.tld.mu",
+      "addresses": [
+        "199.249.116.33",
+        "2001:500:44:0:0:0:0:33"
+      ]
+    },
+    {
+      "host": "v2n1.tld.mu",
+      "addresses": [
+        "199.249.124.33",
+        "2001:500:4c:0:0:0:0:33"
+      ]
+    }
+  ],
+  "about": ".MU is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Mauritius. The IANA root zone lists the registry manager as Internet Direct Ltd. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.mu is the Internet country code top-level domain (ccTLD) for Mauritius. It is administered by the Mauritius Network Information Centre and registrations are processed via accredited registrars. Some registrars market it as the .music and .museum TLD.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mu.html",
+  "wikipedia": ".mu is the Internet country code top-level domain (ccTLD) for Mauritius. It is administered by the Mauritius Network Information Centre and registrations are processed via accredited registrars. Some registrars market it as the .music and .museum TLD.",
+  "scrapedAt": "2026-07-21T21:45:50Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".mu",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "direct",
+    "domain",
+    "for",
+    "geo",
+    "internet",
+    "level",
+    "local business",
+    "mauritius",
+    "mu",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 22,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$51.99",
+      "value": 51.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$52.99",
+      "value": 52.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/mu"
+  },
+  "summary": ".mu is a Country-code top-level domain. Managed by Internet Direct Ltd.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,133 @@
+{
+  "tld": ".ws",
+  "slug": "ws",
+  "title": "About .ws domains",
+  "delegationTitle": "Delegation Record for .WS",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Samoa",
+  "sponsor": "Government of Samoa Ministry of Foreign Affairs & Trade",
+  "sponsorDetail": "Government of Samoa Ministry of Foreign Affairs & Trade\nP.O. Box 1861\nApia\nSamoa",
+  "administrativeContact": "CEO",
+  "technicalContact": "CEO",
+  "registryUrl": "http://www.website.ws",
+  "whoisServer": "whois.website.ws",
+  "rdapServer": null,
+  "registrationDate": "1995-07-14",
+  "recordUpdated": "2021-05-26",
+  "nameServers": [
+    {
+      "host": "a.dns.ws",
+      "addresses": [
+        "194.146.106.146",
+        "2001:67c:1010:37:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns2.dns.ws",
+      "addresses": [
+        "64.70.19.80"
+      ]
+    },
+    {
+      "host": "ns5.dns.ws",
+      "addresses": [
+        "64.70.19.70"
+      ]
+    },
+    {
+      "host": "s.dns.ws",
+      "addresses": [
+        "77.72.229.248",
+        "2a01:3f0:0:311:0:0:0:53"
+      ]
+    },
+    {
+      "host": "us3.dns.ws",
+      "addresses": [
+        "64.70.78.70"
+      ]
+    },
+    {
+      "host": "us4.dns.ws",
+      "addresses": [
+        "64.70.78.80"
+      ]
+    }
+  ],
+  "about": ".WS is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Samoa. The IANA root zone lists the registry manager as Government of Samoa Ministry of Foreign Affairs & Trade. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ws.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:52:41Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ws",
+    "affairs",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "foreign",
+    "geo",
+    "government",
+    "level",
+    "local business",
+    "ministry",
+    "regional brands",
+    "samoa",
+    "top",
+    "trade",
+    "ws"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 44,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$5.95",
+      "value": 5.95
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$21.90",
+      "value": 21.9
+    },
+    "sourceUrl": "https://tld-list.com/tld/ws"
+  },
+  "summary": ".ws is a Country-code top-level domain. Managed by Government of Samoa Ministry of Foreign Affairs & Trade.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

@@ -1,0 +1,106 @@
+{
+  "tld": ".xn--hgbk6aj7f53bba",
+  "slug": "xn--hgbk6aj7f53bba",
+  "title": "About .xn--hgbk6aj7f53bba domains",
+  "delegationTitle": "Delegation Record for .\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc",
+  "type": "other",
+  "typeLabel": "Test top-level domain",
+  "designation": "Test top-level domain",
+  "sponsor": null,
+  "sponsorDetail": null,
+  "administrativeContact": null,
+  "technicalContact": null,
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "Number\u00a0Resources",
+      "addresses": [
+        "Number",
+        "Registries",
+        "RIR",
+        "Allocation",
+        "Data",
+        "Abuse",
+        "Information"
+      ]
+    },
+    {
+      "host": "Protocols",
+      "addresses": [
+        "Protocol",
+        "Registries",
+        "Time",
+        "Zone",
+        "Database"
+      ]
+    },
+    {
+      "host": "About\u00a0Us",
+      "addresses": [
+        "News",
+        "Performance",
+        "The",
+        "Organization",
+        "Archive",
+        "Contact",
+        "Us"
+      ]
+    }
+  ],
+  "about": ".XN--HGBK6AJ7F53BBA is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--hgbk6aj7f53bba.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:50Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--hgbk6aj7f53bba",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "level",
+    "other",
+    "test",
+    "top",
+    "xn--hgbk6aj7f53bba"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--hgbk6aj7f53bba is a Test top-level domain. Managed by Registry operator listed by IANA.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

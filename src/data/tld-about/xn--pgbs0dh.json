@@ -1,0 +1,125 @@
+{
+  "tld": ".xn--pgbs0dh",
+  "slug": "xn--pgbs0dh",
+  "title": "About .xn--pgbs0dh domains",
+  "delegationTitle": "Delegation Record for .\u062a\u0648\u0646\u0633",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code TN",
+  "designation": "Country-code top-level domain designated for Tunisia",
+  "sponsor": "Agence Tunisienne d'Internet",
+  "sponsorDetail": "Agence Tunisienne d'Internet\n13 Rue Jugurtha Mutuelle-ville\nTunis 1002\nTunisia",
+  "administrativeContact": "Mrs. Wafa Dahmani",
+  "technicalContact": "Network Information Center - NIC",
+  "registryUrl": "http://www.ati.tn",
+  "whoisServer": "whois.ati.tn",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns-tn.afrinic.net",
+      "addresses": [
+        "196.216.168.25",
+        "2001:43f8:120:0:0:0:0:25"
+      ]
+    },
+    {
+      "host": "ns1.ati.tn",
+      "addresses": [
+        "41.228.62.63",
+        "2c0f:fab0:ffff:4:41:228:62:63"
+      ]
+    },
+    {
+      "host": "ns2.ati.tn",
+      "addresses": [
+        "41.228.63.62",
+        "2c0f:fab0:ffff:5:41:228:63:62"
+      ]
+    },
+    {
+      "host": "ns2.nic.fr",
+      "addresses": [
+        "192.93.0.4",
+        "2001:660:3005:1:0:0:1:2"
+      ]
+    },
+    {
+      "host": "pch.ati.tn",
+      "addresses": [
+        "204.61.216.94",
+        "2001:500:14:6094:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "rip.psg.com",
+      "addresses": [
+        "147.28.0.39",
+        "2001:418:1:0:0:0:0:39"
+      ]
+    }
+  ],
+  "about": ".XN--PGBS0DH is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Tunisia. The IANA root zone lists the registry manager as Agence Tunisienne d'Internet. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--pgbs0dh.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:41Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--pgbs0dh",
+    "agence",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "internet",
+    "letter",
+    "level",
+    "local business",
+    "regional brands",
+    "top",
+    "tunisia",
+    "tunisienne",
+    "two",
+    "xn--pgbs0dh"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--pgbs0dh is a Country-code top-level domain designated for two-letter country code TN. Managed by Agence Tunisienne d'Internet.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

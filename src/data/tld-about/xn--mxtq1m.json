@@ -1,0 +1,101 @@
+{
+  "tld": ".xn--mxtq1m",
+  "slug": "xn--mxtq1m",
+  "title": "About .xn--mxtq1m domains",
+  "delegationTitle": "Delegation Record for .\u653f\u5e9c",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Net-Chinese Co., Ltd.",
+  "sponsorDetail": "Net-Chinese Co., Ltd.\n12F., No.46, Sec. 2, Zhongshan N. Rd., Zhongshan Dist.\nTaipei City\nTaiwan",
+  "administrativeContact": "Jofan Yu",
+  "technicalContact": "Director of Technical Department",
+  "registryUrl": "http://www.netc.tw",
+  "whoisServer": "whois.nic.xn--mxtq1m",
+  "rdapServer": "https://rdap.twnic.tw/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.xn--mxtq1m",
+      "addresses": [
+        "202.169.175.130",
+        "2001:c08:175:128:0:0:175:128"
+      ]
+    },
+    {
+      "host": "b.nic.xn--mxtq1m",
+      "addresses": [
+        "203.73.24.25",
+        "2001:cd8:800:0:0:0:0:25"
+      ]
+    },
+    {
+      "host": "c.nic.xn--mxtq1m",
+      "addresses": [
+        "211.20.231.7",
+        "2001:b000:1e0:c000:0:0:0:7"
+      ]
+    },
+    {
+      "host": "d.nic.xn--mxtq1m",
+      "addresses": [
+        "60.199.165.185",
+        "2001:4541:9010:7:0:0:0:185"
+      ]
+    }
+  ],
+  "about": ".XN--MXTQ1M is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--MXTQ1M is listed by IANA as Net-Chinese Co., Ltd.. Anyone can typically register a .XN--MXTQ1M name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--mxtq1m.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:28Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--mxtq1m",
+    "any industry",
+    "chinese",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "level",
+    "top",
+    "xn--mxtq1m"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--mxtq1m is a Generic top-level domain. Managed by Net-Chinese Co., Ltd..",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

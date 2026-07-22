@@ -1,0 +1,118 @@
+{
+  "tld": ".london",
+  "slug": "london",
+  "title": "About .london domains",
+  "delegationTitle": "Delegation Record for .LONDON",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Dot London Domains Limited",
+  "sponsorDetail": "Dot London Domains Limited\nLondon & Partners, 169 Union Street\nLondon SE1 0LL\nUnited Kingdom of Great Britain and Northern Ireland (the)",
+  "administrativeContact": "Jo Darwin",
+  "technicalContact": "CTO",
+  "registryUrl": "http://dotlondondomains.london/",
+  "whoisServer": "whois.nic.london",
+  "rdapServer": "https://rdap.centralnic.com/london/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.london",
+      "addresses": [
+        "194.169.218.141",
+        "2001:67c:13cc:0:0:0:1:141"
+      ]
+    },
+    {
+      "host": "b.nic.london",
+      "addresses": [
+        "185.24.64.141",
+        "2a04:2b00:13cc:0:0:0:1:141"
+      ]
+    },
+    {
+      "host": "c.nic.london",
+      "addresses": [
+        "212.18.248.141",
+        "2a04:2b00:13ee:0:0:0:0:141"
+      ]
+    },
+    {
+      "host": "d.nic.london",
+      "addresses": [
+        "212.18.249.141",
+        "2a04:2b00:13ff:0:0:0:0:141"
+      ]
+    }
+  ],
+  "about": ".LONDON is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .LONDON is listed by IANA as Dot London Domains Limited. Anyone can typically register a .LONDON name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.london (stylised in official materials as .LONDON) is a top-level domain (TLD) for London, England. It was approved by ICANN as a city-level TLD on 7 June 2013. On 29 April 2014, the domain name went on sale for the first time. London and Partners, which promotes the city, said that .london would carry a premium because of its exclusivity.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/london.html",
+  "wikipedia": ".london (stylised in official materials as .LONDON) is a top-level domain (TLD) for London, England. It was approved by ICANN as a city-level TLD on 7 June 2013. On 29 April 2014, the domain name went on sale for the first time. London and Partners, which promotes the city, said that .london would carry a premium because of its exclusivity.",
+  "scrapedAt": "2026-07-21T21:44:29Z",
+  "categories": [
+    "travel"
+  ],
+  "useCases": [
+    "Travel brands",
+    "Tourism",
+    "Hospitality"
+  ],
+  "keywords": [
+    ".london",
+    "domain",
+    "domains",
+    "generic",
+    "gtld",
+    "hospitality",
+    "level",
+    "limited",
+    "london",
+    "top",
+    "tourism",
+    "travel",
+    "travel brands"
+  ],
+  "primaryCategory": "travel",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 46,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$10.18",
+      "value": 10.18
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$26.46",
+      "value": 26.46
+    },
+    "sourceUrl": "https://tld-list.com/tld/london"
+  },
+  "summary": ".london is a Generic top-level domain. Managed by Dot London Domains Limited.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,125 @@
+{
+  "tld": ".gl",
+  "slug": "gl",
+  "title": "About .gl domains",
+  "delegationTitle": "Delegation Record for .GL",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Greenland",
+  "sponsor": "TELE Greenland A/S",
+  "sponsorDetail": "TELE Greenland A/S\nFarip Aqqutaa 8\nPO Box 1002\nNuuk 3900\nGreenland",
+  "administrativeContact": "Network Planning Department (NPL)",
+  "technicalContact": "Operations Support Systems Department (OSS)",
+  "registryUrl": "http://www.nic.gl/",
+  "whoisServer": "whois.nic.gl",
+  "rdapServer": null,
+  "registrationDate": "1994-04-08",
+  "recordUpdated": "2024-12-19",
+  "nameServers": [
+    {
+      "host": "a.nic.gl",
+      "addresses": [
+        "194.177.224.12"
+      ]
+    },
+    {
+      "host": "b.nic.gl",
+      "addresses": [
+        "194.177.224.15"
+      ]
+    },
+    {
+      "host": "d.nic.gl",
+      "addresses": [
+        "204.61.216.49",
+        "2001:500:14:6049:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ns1.anycastdns.cz",
+      "addresses": [
+        "185.38.108.108",
+        "2a00:fea0:dead:0:0:0:0:beef"
+      ]
+    },
+    {
+      "host": "ns2.anycastdns.cz",
+      "addresses": [
+        "185.28.194.194"
+      ]
+    }
+  ],
+  "about": ".GL is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Greenland. The IANA root zone lists the registry manager as TELE Greenland A/S. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.gl is the country code top-level domain (ccTLD) in the Domain Name System of the Internet for Greenland.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gl.html",
+  "wikipedia": ".gl is the country code top-level domain (ccTLD) in the Domain Name System of the Internet for Greenland.",
+  "scrapedAt": "2026-07-21T21:41:08Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".gl",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "gl",
+    "greenland",
+    "level",
+    "local business",
+    "regional brands",
+    "tele",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 21,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$30.76",
+      "value": 30.76
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$30.76",
+      "value": 30.76
+    },
+    "sourceUrl": "https://tld-list.com/tld/gl"
+  },
+  "summary": ".gl is a Country-code top-level domain. Managed by TELE Greenland A/S.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

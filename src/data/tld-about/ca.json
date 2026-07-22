@@ -1,0 +1,126 @@
+{
+  "tld": ".ca",
+  "slug": "ca",
+  "title": "About .ca domains",
+  "delegationTitle": "Delegation Record for .CA",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Canada",
+  "sponsor": "Canadian Internet Registration Authority (CIRA) Autorit\u00e9 Canadienne pour les enregistrements Internet (ACEI)",
+  "sponsorDetail": "Canadian Internet Registration Authority (CIRA) Autorit\u00e9 Canadienne pour les enregistrements Internet (ACEI)\n319 McRae Avenue, Suite 700\nOttawa ON K1Z 0B9\nCanada",
+  "administrativeContact": "Chief Information Officer",
+  "technicalContact": "DNS Admin",
+  "registryUrl": "http://www.cira.ca/",
+  "whoisServer": "whois.cira.ca",
+  "rdapServer": "https://rdap.ca.fury.ca/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "any.ca-servers.ca",
+      "addresses": [
+        "199.4.144.2",
+        "2001:500:a7:0:0:0:0:2"
+      ]
+    },
+    {
+      "host": "c.ca-servers.ca",
+      "addresses": [
+        "185.159.196.2",
+        "2620:10a:8053:0:0:0:0:2"
+      ]
+    },
+    {
+      "host": "d.ca-servers.ca",
+      "addresses": [
+        "45.142.220.101",
+        "2a0e:dbc0:0:0:0:0:0:101"
+      ]
+    },
+    {
+      "host": "j.ca-servers.ca",
+      "addresses": [
+        "198.182.167.1",
+        "2001:500:83:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".CA is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Canada. The IANA root zone lists the registry manager as Canadian Internet Registration Authority (CIRA) Autorit\u00e9 Canadienne pour les enregistrements Internet (ACEI). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ca is the Internet country code top-level domain (ccTLD) for Canada. The domain name registry that operates it is the Canadian Internet Registration Authority (CIRA).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ca.html",
+  "wikipedia": ".ca is the Internet country code top-level domain (ccTLD) for Canada. The domain name registry that operates it is the Canadian Internet Registration Authority (CIRA).",
+  "scrapedAt": "2026-07-21T21:33:57Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ca",
+    "authority",
+    "autorit",
+    "ca",
+    "canada",
+    "canadian",
+    "canadienne",
+    "cctld",
+    "cira",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "internet",
+    "level",
+    "local business",
+    "pour",
+    "regional brands",
+    "registration",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 43,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$8.86",
+      "value": 8.86
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$9.32",
+      "value": 9.32
+    },
+    "sourceUrl": "https://tld-list.com/tld/ca"
+  },
+  "summary": ".ca is a Country-code top-level domain. Managed by Canadian Internet Registration Authority (CIRA) Autorit\u00e9 Canadienne pour les enregistrements Internet (ACEI).",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -1,0 +1,117 @@
+{
+  "tld": ".xn--mgba3a3ejt",
+  "slug": "xn--mgba3a3ejt",
+  "title": "About .xn--mgba3a3ejt domains",
+  "delegationTitle": "Delegation Record for .\u0627\u0631\u0627\u0645\u0643\u0648",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Aramco Services Company",
+  "sponsorDetail": "Aramco Services Company\n9009 West Loop South\nHouston TX 77096\nUnited States of America (the)",
+  "administrativeContact": "Coleman Works",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://www.aramco.com",
+  "whoisServer": null,
+  "rdapServer": "https://rdap.nic.xn--mgba3a3ejt/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.xn--mgba3a3ejt",
+      "addresses": [
+        "37.209.192.9",
+        "2001:dcd:1:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "b.nic.xn--mgba3a3ejt",
+      "addresses": [
+        "37.209.194.9",
+        "2001:dcd:2:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "c.nic.xn--mgba3a3ejt",
+      "addresses": [
+        "37.209.196.9",
+        "2001:dcd:3:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "ns4.dns.nic.xn--mgba3a3ejt",
+      "addresses": [
+        "156.154.156.15",
+        "2610:a1:1074:0:0:0:0:f"
+      ]
+    },
+    {
+      "host": "ns5.dns.nic.xn--mgba3a3ejt",
+      "addresses": [
+        "156.154.157.15",
+        "2610:a1:1075:0:0:0:0:f"
+      ]
+    },
+    {
+      "host": "ns6.dns.nic.xn--mgba3a3ejt",
+      "addresses": [
+        "156.154.158.15",
+        "2610:a1:1076:0:0:0:0:f"
+      ]
+    }
+  ],
+  "about": ".XN--MGBA3A3EJT is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--MGBA3A3EJT is listed by IANA as Aramco Services Company. Anyone can typically register a .XN--MGBA3A3EJT name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--mgba3a3ejt.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:09Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--mgba3a3ejt",
+    "any industry",
+    "aramco",
+    "company",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "level",
+    "services",
+    "top",
+    "xn--mgba3a3ejt"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--mgba3a3ejt is a Generic top-level domain. Managed by Aramco Services Company.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

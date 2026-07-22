@@ -1,0 +1,103 @@
+{
+  "tld": ".barefoot",
+  "slug": "barefoot",
+  "title": "About .barefoot domains",
+  "delegationTitle": "Delegation Record for .BAREFOOT",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Gallo Vineyards, Inc.",
+  "sponsorDetail": "Gallo Vineyards, Inc.\n600 Yosemite Blvd.\nModesto CA 95354\nUnited States of America (the)",
+  "administrativeContact": "Principal IT Architect",
+  "technicalContact": "Howard Eland, Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.barefootwine.com",
+  "whoisServer": "whois.nic.barefoot",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.barefoot",
+      "addresses": [
+        "65.22.56.17",
+        "2a01:8840:36:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "a2.nic.barefoot",
+      "addresses": [
+        "65.22.59.17",
+        "2a01:8840:39:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "b0.nic.barefoot",
+      "addresses": [
+        "65.22.57.17",
+        "2a01:8840:37:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "c0.nic.barefoot",
+      "addresses": [
+        "65.22.58.17",
+        "2a01:8840:38:0:0:0:0:17"
+      ]
+    }
+  ],
+  "about": ".BAREFOOT is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .BAREFOOT is listed by IANA as Gallo Vineyards, Inc.. Anyone can typically register a .BAREFOOT name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/barefoot.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:35:31Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".barefoot",
+    "barefoot",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "gallo",
+    "generic",
+    "gtld",
+    "level",
+    "top",
+    "vineyards"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".barefoot is a Generic top-level domain. Managed by Gallo Vineyards, Inc..",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

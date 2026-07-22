@@ -1,0 +1,141 @@
+{
+  "tld": ".cr",
+  "slug": "cr",
+  "title": "About .cr domains",
+  "delegationTitle": "Delegation Record for .CR",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Costa Rica",
+  "sponsor": "National Academy of Sciences (Academia Nacional de Ciencias)",
+  "sponsorDetail": "National Academy of Sciences (Academia Nacional de Ciencias)\nSan Pedro Montes de Oca\nSan Jos\u00e9 1367-2050\nCosta Rica",
+  "administrativeContact": "Guy F. de Teramond",
+  "technicalContact": "Ricardo Samper Jimenez",
+  "registryUrl": "http://www.nic.cr/",
+  "whoisServer": "whois.nic.cr",
+  "rdapServer": "https://rdap.nic.cr/",
+  "registrationDate": "1990-09-10",
+  "recordUpdated": "2026-02-17",
+  "nameServers": [
+    {
+      "host": "a.lactld.org",
+      "addresses": [
+        "200.0.68.10",
+        "2801:14:a000:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "ca1.nic.cr",
+      "addresses": [
+        "185.159.197.100",
+        "2620:10a:80aa:0:0:0:0:100"
+      ]
+    },
+    {
+      "host": "ca2.nic.cr",
+      "addresses": [
+        "185.159.198.100",
+        "2620:10a:80ab:0:0:0:0:100"
+      ]
+    },
+    {
+      "host": "de.nic.cr",
+      "addresses": [
+        "194.0.11.107",
+        "2001:678:e:107:0:0:0:53"
+      ]
+    },
+    {
+      "host": "dns.nic.cr",
+      "addresses": [
+        "200.107.82.100",
+        "2001:13c7:7004:1:0:0:0:d100"
+      ]
+    },
+    {
+      "host": "p.nic.cr",
+      "addresses": [
+        "204.61.216.89",
+        "2001:500:14:6089:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".CR is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Costa Rica. The IANA root zone lists the registry manager as National Academy of Sciences (Academia Nacional de Ciencias). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.cr is the country code top-level domain (ccTLD) of Costa Rica.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/cr.html",
+  "wikipedia": ".cr is the country code top-level domain (ccTLD) of Costa Rica.",
+  "scrapedAt": "2026-07-21T21:38:11Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".cr",
+    "academia",
+    "academy",
+    "cctld",
+    "ciencias",
+    "code",
+    "costa",
+    "country",
+    "country presence",
+    "cr",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "nacional",
+    "national",
+    "regional brands",
+    "rica",
+    "sciences",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 17,
+    "cheapestRegistration": {
+      "registrar": "Netim",
+      "price": "$92.50",
+      "value": 92.5
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$92.50",
+      "value": 92.5
+    },
+    "sourceUrl": "https://tld-list.com/tld/cr"
+  },
+  "summary": ".cr is a Country-code top-level domain. Managed by National Academy of Sciences (Academia Nacional de Ciencias).",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

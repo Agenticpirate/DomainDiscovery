@@ -1,0 +1,112 @@
+{
+  "tld": ".gm",
+  "slug": "gm",
+  "title": "About .gm domains",
+  "delegationTitle": "Delegation Record for .GM",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Gambia",
+  "sponsor": "GM-NIC",
+  "sponsorDetail": "GM-NIC\nNIC Gambia (GM-NIC) c/o Jokkolabs Banjul 10 Sait Matty Road, The Gambia\nBakau\nGambia (the)",
+  "administrativeContact": "Jorn Grotnes",
+  "technicalContact": "Torstein Grotnes",
+  "registryUrl": "http://www.nic.gm",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1997-03-28",
+  "recordUpdated": "2025-02-27",
+  "nameServers": [
+    {
+      "host": "ns-gm.afrinic.net",
+      "addresses": [
+        "196.216.168.29",
+        "2001:43f8:120:0:0:0:0:29"
+      ]
+    },
+    {
+      "host": "ns1.nic.gm",
+      "addresses": [
+        "194.63.250.217"
+      ]
+    },
+    {
+      "host": "ns2.nic.gm",
+      "addresses": [
+        "209.250.227.199",
+        "2a05:f480:1000:235:5400:4ff:fee5:2f89"
+      ]
+    }
+  ],
+  "about": ".GM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Gambia. The IANA root zone lists the registry manager as GM-NIC. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.gm is the country code top-level domain (ccTLD) of The Gambia.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gm.html",
+  "wikipedia": ".gm is the country code top-level domain (ccTLD) of The Gambia.",
+  "scrapedAt": "2026-07-21T21:41:13Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".gm",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "gambia",
+    "geo",
+    "gm",
+    "level",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 9,
+    "cheapestRegistration": {
+      "registrar": "INWX",
+      "price": "$66.00",
+      "value": 66.0
+    },
+    "cheapestRenewal": {
+      "registrar": "MrDomain",
+      "price": "$31.85",
+      "value": 31.85
+    },
+    "sourceUrl": "https://tld-list.com/tld/gm"
+  },
+  "summary": ".gm is a Country-code top-level domain. Managed by GM-NIC.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

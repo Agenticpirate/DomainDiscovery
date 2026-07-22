@@ -1,0 +1,132 @@
+{
+  "tld": ".id",
+  "slug": "id",
+  "title": "About .id domains",
+  "delegationTitle": "Delegation Record for .ID",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Indonesia",
+  "sponsor": "Perkumpulan Pengelola Nama Domain Internet Indonesia (PANDI)",
+  "sponsorDetail": "Perkumpulan Pengelola Nama Domain Internet Indonesia (PANDI)\nIcon Business Park, Unit L1-L2\nJalan Raya Cisauk - LAPAN\nTangerang Banten 15345\nIndonesia",
+  "administrativeContact": "Admin Contact",
+  "technicalContact": "Tech Contact",
+  "registryUrl": "https://pandi.id",
+  "whoisServer": "whois.id",
+  "rdapServer": "https://rdap.pandi.id/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "b.dns.id",
+      "addresses": [
+        "103.19.179.179",
+        "2402:ee80:b:0:0:0:0:b"
+      ]
+    },
+    {
+      "host": "c.dns.id",
+      "addresses": [
+        "103.19.178.178",
+        "2402:ee80:c:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "d.dns.id",
+      "addresses": [
+        "45.126.57.57",
+        "2402:ee80:d:0:0:0:0:d"
+      ]
+    },
+    {
+      "host": "e.dns.id",
+      "addresses": [
+        "103.19.177.177",
+        "2001:df5:4000:4:0:0:0:4"
+      ]
+    },
+    {
+      "host": "ns4.apnic.net",
+      "addresses": [
+        "202.12.31.53",
+        "2001:dd8:12:0:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".ID is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Indonesia. The IANA root zone lists the registry manager as Perkumpulan Pengelola Nama Domain Internet Indonesia (PANDI). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.id is the Internet country code top-level domain (ccTLD) for Indonesia. It was first registered in February 1993. Since 2007, it is managed by the Indonesian Internet Domain Name Administrator (Indonesian: Pengelola Nama Domain Internet Indonesia or PANDI), based on regulation set by Decree of Minister of Communication and Information Technology (now Ministry of Communication and Digital Affairs).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/id.html",
+  "wikipedia": ".id is the Internet country code top-level domain (ccTLD) for Indonesia. It was first registered in February 1993. Since 2007, it is managed by the Indonesian Internet Domain Name Administrator (Indonesian: Pengelola Nama Domain Internet Indonesia or PANDI), based on regulation set by Decree of Minister of Communication and Information Technology (now Ministry of Communication and Digital Affairs).",
+  "scrapedAt": "2026-07-21T21:42:25Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".id",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "id",
+    "indonesia",
+    "internet",
+    "level",
+    "local business",
+    "nama",
+    "pandi",
+    "pengelola",
+    "perkumpulan",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 28,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$12.99",
+      "value": 12.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Hostinger",
+      "price": "$15.99",
+      "value": 15.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/id"
+  },
+  "summary": ".id is a Country-code top-level domain. Managed by Perkumpulan Pengelola Nama Domain Internet Indonesia (PANDI).",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

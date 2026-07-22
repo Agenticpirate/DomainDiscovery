@@ -1,0 +1,142 @@
+{
+  "tld": ".lu",
+  "slug": "lu",
+  "title": "About .lu domains",
+  "delegationTitle": "Delegation Record for .LU",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Luxembourg",
+  "sponsor": "RESTENA",
+  "sponsorDetail": "RESTENA\n2, Avenue de l'Universit\u00e9\nEsch-sur-Alzette L-4365\nLuxembourg",
+  "administrativeContact": "Gilles Massen",
+  "technicalContact": "NOC",
+  "registryUrl": "http://www.dns.lu",
+  "whoisServer": "whois.dns.lu",
+  "rdapServer": null,
+  "registrationDate": "1995-01-27",
+  "recordUpdated": "2026-06-18",
+  "nameServers": [
+    {
+      "host": "1.ns.lu",
+      "addresses": [
+        "158.64.229.18",
+        "2001:a18:4:1:0:0:0:18"
+      ]
+    },
+    {
+      "host": "g.dns.lu",
+      "addresses": [
+        "194.0.23.5",
+        "2001:678:1b:5:0:0:0:5"
+      ]
+    },
+    {
+      "host": "i.dns.lu",
+      "addresses": [
+        "194.146.106.66",
+        "2001:67c:1010:16:0:0:0:53"
+      ]
+    },
+    {
+      "host": "j.dns.lu",
+      "addresses": [
+        "77.72.229.247",
+        "2a01:3f0:0:307:0:0:0:53"
+      ]
+    },
+    {
+      "host": "k.dns.lu",
+      "addresses": [
+        "194.0.1.13",
+        "2001:678:4:0:0:0:0:d"
+      ]
+    },
+    {
+      "host": "p.dns.lu",
+      "addresses": [
+        "194.0.42.42",
+        "2001:678:60:0:0:0:42:42"
+      ]
+    },
+    {
+      "host": "r.ns.lu",
+      "addresses": [
+        "194.0.25.47",
+        "2001:678:20:0:0:0:0:47"
+      ]
+    }
+  ],
+  "about": ".LU is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Luxembourg. The IANA root zone lists the registry manager as RESTENA. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.lu is the Internet country code top-level domain (ccTLD) for Luxembourg. .lu domains are administered by RESTENA. Since 1 February 2010, the administrative contact does not need to be based in Luxembourg.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/lu.html",
+  "wikipedia": ".lu is the Internet country code top-level domain (ccTLD) for Luxembourg. .lu domains are administered by RESTENA. Since 1 February 2010, the administrative contact does not need to be based in Luxembourg.",
+  "scrapedAt": "2026-07-21T21:44:37Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".lu",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "lu",
+    "luxembourg",
+    "regional brands",
+    "restena",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 23,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$17.99",
+      "value": 17.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Hostinger",
+      "price": "$19.99",
+      "value": 19.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/lu"
+  },
+  "summary": ".lu is a Country-code top-level domain. Managed by RESTENA.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

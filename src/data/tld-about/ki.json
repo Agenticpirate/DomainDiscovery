@@ -1,0 +1,117 @@
+{
+  "tld": ".ki",
+  "slug": "ki",
+  "title": "About .ki domains",
+  "delegationTitle": "Delegation Record for .KI",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Kiribati",
+  "sponsor": "Ministry of Information, Communications and Transport (MICT)",
+  "sponsorDetail": "Ministry of Information, Communications and Transport (MICT)\nBetio\nTarawa\nKiribati",
+  "administrativeContact": "Director of National ICT",
+  "technicalContact": "Kaboterenga Romatoa",
+  "registryUrl": "http://www.nic.ki",
+  "whoisServer": "whois.nic.ki",
+  "rdapServer": null,
+  "registrationDate": "1995-04-19",
+  "recordUpdated": "2024-02-06",
+  "nameServers": [
+    {
+      "host": "anycastdns1.nic.ki",
+      "addresses": [
+        "185.38.108.108",
+        "2a00:fea0:dead:0:0:0:0:beef"
+      ]
+    },
+    {
+      "host": "anycastdns2.nic.ki",
+      "addresses": [
+        "185.28.194.194"
+      ]
+    },
+    {
+      "host": "pch.nic.ki",
+      "addresses": [
+        "204.61.216.26",
+        "2001:500:14:6026:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".KI is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Kiribati. The IANA root zone lists the registry manager as Ministry of Information, Communications and Transport (MICT). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ki is the Internet country code top-level domain (ccTLD) for Kiribati.\nFrom the early 1990s to the early 2000s the domain was managed on behalf of the Republic of Kiribati by Connect.com.au, an Australian ISP, with the Pacific Islands Forum Fisheries Agency, based in Honiara, Solomon Islands as original sponsor, then transferred to the Ministry of Fisheries and Marine Resources Development of Kiribati and finally to the Ministry of Communications, Transport, and Tourism Development.  In 2002 direct management of the ccTLD was transferred to Telecom Services Kiribati Limited. This initial set up was done by Franck Martin. As of 2007, the registry is being handled by the Telecommunications Authority of Kiribati using a system of multiple registrars similar to that used by gTLDs; however, few sites are using .ki domains. Because of the location of Kiribati and limited Internet connection, it is not uncommon for a website in Kiribati, such as a government website, to be very slow or inaccessible; however, many .ki sites are hosted outside Kiribati.\n.ki is a member of CoCCA, a group of country-code domains making use of common registry and/or dispute resolution services.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ki.html",
+  "wikipedia": ".ki is the Internet country code top-level domain (ccTLD) for Kiribati.\nFrom the early 1990s to the early 2000s the domain was managed on behalf of the Republic of Kiribati by Connect.com.au, an Australian ISP, with the Pacific Islands Forum Fisheries Agency, based in Honiara, Solomon Islands as original sponsor, then transferred to the Ministry of Fisheries and Marine Resources Development of Kiribati and finally to the Ministry of Communications, Transport, and Tourism Development.  In 2002 direct management of the ccTLD was transferred to Telecom Services Kiribati Limited. This initial set up was done by Franck Martin. As of 2007, the registry is being handled by the Telecommunications Authority of Kiribati using a system of multiple registrars similar to that used by gTLDs; however, few sites are using .ki domains. Because of the location of Kiribati and limited Internet connection, it is not uncommon for a website in Kiribati, such as a government website, to be very slow or inaccessible; however, many .ki sites are hosted outside Kiribati.\n.ki is a member of CoCCA, a group of country-code domains making use of common registry and/or dispute resolution services.",
+  "scrapedAt": "2026-07-21T21:43:26Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ki",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "ki",
+    "kiribati",
+    "level",
+    "local business",
+    "mict",
+    "ministry",
+    "regional brands",
+    "top",
+    "transport"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 16,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$909.99",
+      "value": 909.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$909.99",
+      "value": 909.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/ki"
+  },
+  "summary": ".ki is a Country-code top-level domain. Managed by Ministry of Information, Communications and Transport (MICT).",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

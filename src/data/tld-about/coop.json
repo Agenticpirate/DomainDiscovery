@@ -1,0 +1,115 @@
+{
+  "tld": ".coop",
+  "slug": "coop",
+  "title": "About .coop domains",
+  "delegationTitle": "Delegation Record for .COOP",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "DotCooperation LLC",
+  "sponsorDetail": "DotCooperation LLC\n1775 I Street NW, 8th Floor\nWashington DC 20006\nUnited States of America (the)",
+  "administrativeContact": "Violetta Nafpaktiti",
+  "technicalContact": "Vice President, Engineering",
+  "registryUrl": "http://www.nic.coop",
+  "whoisServer": "whois.nic.coop",
+  "rdapServer": "https://rdap.registry.coop/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns01.trs-dns.com",
+      "addresses": [
+        "64.96.1.1",
+        "2620:57:4001:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns01.trs-dns.net",
+      "addresses": [
+        "64.96.2.1",
+        "2620:57:4002:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns10.trs-dns.info",
+      "addresses": [
+        "64.78.204.1",
+        "2620:171:812:1534:8:0:0:1"
+      ]
+    },
+    {
+      "host": "ns10.trs-dns.org",
+      "addresses": [
+        "64.78.205.1",
+        "2620:171:813:1534:8:0:0:1"
+      ]
+    }
+  ],
+  "about": ".COOP is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\n.coop is a sponsored top-level domain (sTLD) in the Domain Name System of the Internet. It is intended for the use of cooperatives, their wholly owned subsidiaries, and other organizations that exist to promote or support cooperatives.\nThe coop TLD was proposed by the National Cooperative Business Association (NCBA) as a response to the announcement by the Internet Corporation for Assigned Names and Numbers (ICANN) in late 2000 of a phased release of seven new generic top-level domains in an expansion of the Internet domain name space.\nThe proposal was backed by many cooperatives and similar trade groups around the world, including the International Cooperative Alliance (ICA). The technical infrastructure for the coop TLD was developed by the worker cooperative Poptel in the United Kingdom and became operational on January 30, 2002.\nThe domain's sponsoring organization is DotCooperation LLC (also known as dotCoop), which is a wholly owned subsidiary of the National Cooperative Business Association (NCBA). DotCooperation is responsible for the TLD operation, including the enforcement of registration requirements. In 2005, the Midcounties Co-operative assumed operation of the domain registry through a subsidiary unit (Midcounties Co-operative Domains). DynDNS was contracted as the sole DNS provider for the registry in 2006.\nActive coop domain holders are automatically included in an online coop directory and registrants receive a periodic newsletter. Registrations are processed via accredited ICANN domain name registrars or their resellers.\ncoop domains are in use around the world; however, many co-ops, as businesses in the global community, also maintain domain names in other generic or country code top-level domains to identify themselves both as a co-op and as a business.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/coop.html",
+  "wikipedia": ".coop is a sponsored top-level domain (sTLD) in the Domain Name System of the Internet. It is intended for the use of cooperatives, their wholly owned subsidiaries, and other organizations that exist to promote or support cooperatives.\nThe coop TLD was proposed by the National Cooperative Business Association (NCBA) as a response to the announcement by the Internet Corporation for Assigned Names and Numbers (ICANN) in late 2000 of a phased release of seven new generic top-level domains in an expansion of the Internet domain name space.\nThe proposal was backed by many cooperatives and similar trade groups around the world, including the International Cooperative Alliance (ICA). The technical infrastructure for the coop TLD was developed by the worker cooperative Poptel in the United Kingdom and became operational on January 30, 2002.\nThe domain's sponsoring organization is DotCooperation LLC (also known as dotCoop), which is a wholly owned subsidiary of the National Cooperative Business Association (NCBA). DotCooperation is responsible for the TLD operation, including the enforcement of registration requirements. In 2005, the Midcounties Co-operative assumed operation of the domain registry through a subsidiary unit (Midcounties Co-operative Domains). DynDNS was contracted as the sole DNS provider for the registry in 2006.\nActive coop domain holders are automatically included in an online coop directory and registrants receive a periodic newsletter. Registrations are processed via accredited ICANN domain name registrars or their resellers.\ncoop domains are in use around the world; however, many co-ops, as businesses in the global community, also maintain domain names in other generic or country code top-level domains to identify themselves both as a co-op and as a business.",
+  "scrapedAt": "2026-07-21T21:38:05Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".coop",
+    "any industry",
+    "coop",
+    "domain",
+    "dotcooperation",
+    "general",
+    "general websites",
+    "level",
+    "sponsored",
+    "stld",
+    "top"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 18,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$72.99",
+      "value": 72.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$73.99",
+      "value": 73.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/coop"
+  },
+  "summary": ".coop is a Sponsored top-level domain. Managed by DotCooperation LLC.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

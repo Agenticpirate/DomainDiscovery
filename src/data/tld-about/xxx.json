@@ -1,0 +1,127 @@
+{
+  "tld": ".xxx",
+  "slug": "xxx",
+  "title": "About .xxx domains",
+  "delegationTitle": "Delegation Record for .XXX",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "ICM Registry LLC",
+  "sponsorDetail": "ICM Registry LLC\n100 S. Mill Ave, Suite 1600\nTempe AZ 85281\nUnited States of America (the)",
+  "administrativeContact": "IANA Contact",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://nic.xxx",
+  "whoisServer": "whois.nic.xxx",
+  "rdapServer": "https://rdap.nic.xxx/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.xxx",
+      "addresses": [
+        "37.209.192.10",
+        "2001:dcd:1:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "b.nic.xxx",
+      "addresses": [
+        "37.209.194.10",
+        "2001:dcd:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.nic.xxx",
+      "addresses": [
+        "37.209.196.10",
+        "2001:dcd:3:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "x.nic.xxx",
+      "addresses": [
+        "156.154.172.82",
+        "2610:a1:1074:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "y.nic.xxx",
+      "addresses": [
+        "156.154.173.82",
+        "2610:a1:1075:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "z.nic.xxx",
+      "addresses": [
+        "156.154.174.82",
+        "2610:a1:1076:0:0:0:1:82"
+      ]
+    }
+  ],
+  "about": ".XXX is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xxx.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:55:08Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xxx",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "level",
+    "registry",
+    "sponsored",
+    "stld",
+    "top",
+    "xxx"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 38,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$51.95",
+      "value": 51.95
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$88.03",
+      "value": 88.03
+    },
+    "sourceUrl": "https://tld-list.com/tld/xxx"
+  },
+  "summary": ".xxx is a Sponsored top-level domain. Managed by ICM Registry LLC.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

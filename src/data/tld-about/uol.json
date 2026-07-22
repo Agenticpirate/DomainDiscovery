@@ -1,0 +1,116 @@
+{
+  "tld": ".uol",
+  "slug": "uol",
+  "title": "About .uol domains",
+  "delegationTitle": "Delegation Record for .UOL",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "UBN INTERNET LTDA.",
+  "sponsorDetail": "UBN INTERNET LTDA.\nAv. Marcos Penteado Ulhoa Rodrigues, 700 - Parte\nSantana de Parna\u00edba SP 06543-001\nBrazil",
+  "administrativeContact": "UOL Network Engineering",
+  "technicalContact": "NIC.br Registry Services - Tech Contact",
+  "registryUrl": "https://nic.uol/",
+  "whoisServer": null,
+  "rdapServer": "https://rdap.gtlds.nic.br/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.dns.br",
+      "addresses": [
+        "200.219.148.10",
+        "2001:12f8:6:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "b.dns.br",
+      "addresses": [
+        "200.189.41.10",
+        "2001:12f8:8:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.dns.br",
+      "addresses": [
+        "200.192.233.10",
+        "2001:12f8:a:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "d.dns.br",
+      "addresses": [
+        "200.219.154.10",
+        "2001:12f8:4:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "e.dns.br",
+      "addresses": [
+        "200.229.248.10",
+        "2001:12f8:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "f.dns.br",
+      "addresses": [
+        "200.219.159.10",
+        "2001:12f8:c:0:0:0:0:10"
+      ]
+    }
+  ],
+  "about": ".UOL is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .UOL is listed by IANA as UBN INTERNET LTDA.. Anyone can typically register a .UOL name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/uol.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:51:44Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".uol",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "internet",
+    "level",
+    "ltda",
+    "top",
+    "uol"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".uol is a Generic top-level domain. Managed by UBN INTERNET LTDA..",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

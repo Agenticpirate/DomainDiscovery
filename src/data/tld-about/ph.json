@@ -1,0 +1,121 @@
+{
+  "tld": ".ph",
+  "slug": "ph",
+  "title": "About .ph domains",
+  "delegationTitle": "Delegation Record for .PH",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Philippines",
+  "sponsor": "PH Domain Foundation",
+  "sponsorDetail": "PH Domain Foundation\n27/F Jollibee Plaza\nF. Ortigas Ave. Ortigas Center\nPasig Metro Manila 1600\nPhilippines (the)",
+  "administrativeContact": "DOTPH Administrative Contact",
+  "technicalContact": "DOTPH Technical Contact",
+  "registryUrl": "http://dot.ph",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1990-09-14",
+  "recordUpdated": "2024-01-30",
+  "nameServers": [
+    {
+      "host": "1.ns.ph",
+      "addresses": [
+        "206.51.255.1",
+        "2620:171:805:ad2:7068:0:0:1"
+      ]
+    },
+    {
+      "host": "ns2.cuhk.edu.hk",
+      "addresses": [
+        "137.189.6.21",
+        "2405:3000:3:6:0:0:0:15"
+      ]
+    },
+    {
+      "host": "ns4.apnic.net",
+      "addresses": [
+        "202.12.31.53",
+        "2001:dd8:12:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ph.communitydns.net",
+      "addresses": [
+        "194.0.1.23",
+        "2001:678:4:0:0:0:0:17"
+      ]
+    }
+  ],
+  "about": ".PH is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Philippines. The IANA root zone lists the registry manager as PH Domain Foundation. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ph is the Internet country code top-level domain (ccTLD) for the Philippines.\nThe official domain registry of the .ph domain is dotPH Domains Inc. dotPH holds and maintains the database of PH domain names, specifically .ph, .com.ph, .net.ph, and .org.ph. Its domain name registrars are not only individuals, businesses, and organizations in the Philippines, but also those in other parts of the world.\nThe PH domain is currently administered by Jos\u00e9 Emmanuel \"Joel\" Disini, who is also dotPH's current CEO. Disini has been the domain administrator since Jon Postel assigned him the domain in 1990. The domain is sponsored by the PH Domain Foundation, a social outreach arm of dotPH which was also founded by Disini together with a group of IT professionals in August 1999.\nIn 1994, the administration of the .gov.ph domain was sub-delegated to the Government of the Philippines. In like manner, .edu.ph was sub-delegated to the Philippine Network Foundation, Inc. (PHNET).\nAside from being the registry, dotPH sells domains and web-related services such as web hosting, co-location, private registration and e-mail forwarding. dotPH also offers a free referral service which connects Small- and Medium-sized Enterprises with a network of over 300 accredited professional Filipino web designers. It formerly offered a free blogging service through .i.ph domains.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ph.html",
+  "wikipedia": ".ph is the Internet country code top-level domain (ccTLD) for the Philippines.\nThe official domain registry of the .ph domain is dotPH Domains Inc. dotPH holds and maintains the database of PH domain names, specifically .ph, .com.ph, .net.ph, and .org.ph. Its domain name registrars are not only individuals, businesses, and organizations in the Philippines, but also those in other parts of the world.\nThe PH domain is currently administered by Jos\u00e9 Emmanuel \"Joel\" Disini, who is also dotPH's current CEO. Disini has been the domain administrator since Jon Postel assigned him the domain in 1990. The domain is sponsored by the PH Domain Foundation, a social outreach arm of dotPH which was also founded by Disini together with a group of IT professionals in August 1999.\nIn 1994, the administration of the .gov.ph domain was sub-delegated to the Government of the Philippines. In like manner, .edu.ph was sub-delegated to the Philippine Network Foundation, Inc. (PHNET).\nAside from being the registry, dotPH sells domains and web-related services such as web hosting, co-location, private registration and e-mail forwarding. dotPH also offers a free referral service which connects Small- and Medium-sized Enterprises with a network of over 300 accredited professional Filipino web designers. It formerly offered a free blogging service through .i.ph domains.",
+  "scrapedAt": "2026-07-21T21:47:13Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ph",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "foundation",
+    "geo",
+    "level",
+    "local business",
+    "ph",
+    "philippines",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 32,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$46.00",
+      "value": 46.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$46.00",
+      "value": 46.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/ph"
+  },
+  "summary": ".ph is a Country-code top-level domain. Managed by PH Domain Foundation.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "updated": "2026-07-22",
+  "property": "https://www.domainsdiscovery.com",
+  "notes": "Import into a sheet. Track monthly: clicks, impressions, CTR, avg position. Split brand vs non-brand.",
+  "segments": {
+    "brand": {
+      "description": "Brand navigational — expect high CTR when shown",
+      "queries": [
+        "domaindiscovery",
+        "domain discovery",
+        "domains discovery",
+        "domainsdiscovery",
+        "domain discovery search",
+        "domainsdiscovery.com"
+      ]
+    },
+    "domain_search": {
+      "description": "Primary product intent",
+      "queries": [
+        "domain name search",
+        "domain availability checker",
+        "check domain availability",
+        "free domain search",
+        "instant domain search",
+        "domain search tool",
+        "is domain available"
+      ],
+      "landingHints": ["/", "/search", "/learn/domain-name-search-guide"]
+    },
+    "registration": {
+      "description": "Educational / commercial investigation",
+      "queries": [
+        "how to register a domain",
+        "how to buy a domain",
+        "domain registration",
+        "register a domain name",
+        "what is domain registration"
+      ],
+      "landingHints": [
+        "/learn/how-to-register-a-domain",
+        "/learn/domain-registration-explained",
+        "/learn/how-to-buy-a-domain"
+      ]
+    },
+    "tools": {
+      "description": "Named tools",
+      "queries": [
+        "bulk domain search",
+        "bulk domain checker",
+        "whois lookup",
+        "rdap lookup",
+        "geo domain generator",
+        "city domain generator",
+        "domain price comparison",
+        "ai domain name generator",
+        "domain name generator",
+        "domain value estimator",
+        "keyword domain finder"
+      ],
+      "landingHints": [
+        "/bulk-search",
+        "/tools/whois",
+        "/tools/geo",
+        "/tools/compare",
+        "/generator",
+        "/tools/value",
+        "/tools/keyword"
+      ]
+    },
+    "tlds_geo": {
+      "description": "Extensions and local SEO",
+      "queries": [
+        "what is a tld",
+        "domain extensions",
+        "cctld local seo",
+        "geo domains",
+        "local business domain name"
+      ],
+      "landingHints": [
+        "/domain-extensions",
+        "/learn/what-is-a-tld-domain-extension",
+        "/learn/geo-domains-local-seo",
+        "/learn/cctld-local-seo"
+      ]
+    },
+    "brand_product": {
+      "description": "What is / free tool questions",
+      "queries": [
+        "what is domaindiscovery",
+        "is domaindiscovery free",
+        "domain discovery whois",
+        "domain discovery geo"
+      ],
+      "landingHints": ["/learn/what-is-domaindiscovery", "/faq"]
+    }
+  },
+  "gscWorkflow": [
+    "Export Performance queries (last 28 days) monthly",
+    "Tag each query with segment: brand | domain_search | registration | tools | tlds_geo | other",
+    "Sort non-brand by impressions; rewrite title/meta for high impressions low CTR",
+    "Sort position 8-20; schedule content polish from content-calendar.md",
+    "Record tool clicks from organic landing pages when analytics available"
+  ],
+  "successSignals": [
+    "Non-brand impressions growing on tool queries",
+    "Brand CTR stable and high",
+    "Learn pillars earning impressions without soft-404 coverage issues",
+    "Increasing assisted conversions: search sessions → registrar outbound (if measured)"
+  ]
+}

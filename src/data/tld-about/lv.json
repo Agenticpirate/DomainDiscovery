@@ -1,0 +1,147 @@
+{
+  "tld": ".lv",
+  "slug": "lv",
+  "title": "About .lv domains",
+  "delegationTitle": "Delegation Record for .LV",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Latvia",
+  "sponsor": "University of Latvia, Institute of Mathematics and Computer Science, Department of Network Solutions (DNS)",
+  "sponsorDetail": "University of Latvia, Institute of Mathematics and Computer Science, Department of Network Solutions (DNS)\nRainis Boulevard 29\nRiga LV-1459\nLatvia",
+  "administrativeContact": "Guntis Barzdins",
+  "technicalContact": "Ivo Kutts",
+  "registryUrl": "http://www.nic.lv/",
+  "whoisServer": "whois.nic.lv",
+  "rdapServer": null,
+  "registrationDate": "1993-04-29",
+  "recordUpdated": "2025-08-22",
+  "nameServers": [
+    {
+      "host": "a.nic.lv",
+      "addresses": [
+        "194.0.48.1",
+        "2001:678:7c:0:0:0:0:7c"
+      ]
+    },
+    {
+      "host": "b.nic.lv",
+      "addresses": [
+        "92.240.70.1"
+      ]
+    },
+    {
+      "host": "c.nic.lv",
+      "addresses": [
+        "185.159.199.140",
+        "2620:10a:80ac:0:0:0:0:140"
+      ]
+    },
+    {
+      "host": "d.nic.lv",
+      "addresses": [
+        "194.0.8.1",
+        "2001:678:b:1:0:0:0:1"
+      ]
+    },
+    {
+      "host": "n.nic.lv",
+      "addresses": [
+        "194.146.106.150",
+        "2001:67c:1010:38:0:0:0:53"
+      ]
+    },
+    {
+      "host": "nu.nic.lv",
+      "addresses": [
+        "77.72.229.249",
+        "2a01:3f0:0:312:0:0:0:53"
+      ]
+    },
+    {
+      "host": "sunic.sunet.se",
+      "addresses": [
+        "192.36.125.2",
+        "2001:6b0:7:0:0:0:0:2"
+      ]
+    }
+  ],
+  "about": ".LV is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Latvia. The IANA root zone lists the registry manager as University of Latvia, Institute of Mathematics and Computer Science, Department of Network Solutions (DNS). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.lv is the Internet country code top-level domain (ccTLD) for Latvia. It was introduced on 29 April 1993, two years after the country's independence.\nRegistration is permitted at the second level, and this is the form of registration currently encouraged by the registry; however, registrations are also accepted at the third level beneath a number of subdomains:\n\n.com.lv - commercial entities\n.edu.lv - educational institutions\n.gov.lv - government and semi-government entities.\n.org.lv - various forms of affiliation groups\n.mil.lv - defense/military entities of Latvia\n.id.lv - individuals\n.net.lv - network infrastructure providers\n.asn.lv - associations\n.conf.lv - conferences and exhibitions requiring short duration Internet connectivity\nRegistration is open to foreigners, though the dispute policy says that precedence is generally given to domestic users.  There does not appear to be much non-Latvian use of this TLD; exceptions include a few sites apparently using it to suggest Las Vegas\u2014much as .la is used for Los Angeles\u2014or \"love\"\u2014as in \"my.lv,\" \"we.lv,\" or \"true.lv\"\u2014and \"live\"\u2014as in  \"xbx.lv\" used by Microsoft for shortening links to their Xbox Live service\u2014but these types of uses are not widespread.\nInternationalized domain names may also be registered.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/lv.html",
+  "wikipedia": ".lv is the Internet country code top-level domain (ccTLD) for Latvia. It was introduced on 29 April 1993, two years after the country's independence.\nRegistration is permitted at the second level, and this is the form of registration currently encouraged by the registry; however, registrations are also accepted at the third level beneath a number of subdomains:\n\n.com.lv - commercial entities\n.edu.lv - educational institutions\n.gov.lv - government and semi-government entities.\n.org.lv - various forms of affiliation groups\n.mil.lv - defense/military entities of Latvia\n.id.lv - individuals\n.net.lv - network infrastructure providers\n.asn.lv - associations\n.conf.lv - conferences and exhibitions requiring short duration Internet connectivity\nRegistration is open to foreigners, though the dispute policy says that precedence is generally given to domestic users.  There does not appear to be much non-Latvian use of this TLD; exceptions include a few sites apparently using it to suggest Las Vegas\u2014much as .la is used for Los Angeles\u2014or \"love\"\u2014as in \"my.lv,\" \"we.lv,\" or \"true.lv\"\u2014and \"live\"\u2014as in  \"xbx.lv\" used by Microsoft for shortening links to their Xbox Live service\u2014but these types of uses are not widespread.\nInternationalized domain names may also be registered.",
+  "scrapedAt": "2026-07-21T21:44:41Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".lv",
+    "cctld",
+    "code",
+    "computer",
+    "country",
+    "country presence",
+    "department",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "institute",
+    "latvia",
+    "level",
+    "local business",
+    "lv",
+    "mathematics",
+    "network",
+    "regional brands",
+    "science",
+    "top",
+    "university"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 25,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$11.20",
+      "value": 11.2
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$11.20",
+      "value": 11.2
+    },
+    "sourceUrl": "https://tld-list.com/tld/lv"
+  },
+  "summary": ".lv is a Country-code top-level domain. Managed by University of Latvia, Institute of Mathematics and Computer Science, Department of Network Solutions (DNS).",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

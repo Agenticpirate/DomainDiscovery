@@ -1,0 +1,138 @@
+{
+  "tld": ".pl",
+  "slug": "pl",
+  "title": "About .pl domains",
+  "delegationTitle": "Delegation Record for .PL",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Poland",
+  "sponsor": "Research and Academic Computer Network",
+  "sponsorDetail": "Research and Academic Computer Network\nKolska 12\nWarsaw 01-045\nPoland",
+  "administrativeContact": "NASK Admin-C",
+  "technicalContact": "NASK Tech-C",
+  "registryUrl": "https://www.dns.pl/en/",
+  "whoisServer": "whois.dns.pl",
+  "rdapServer": "https://rdap.dns.pl",
+  "registrationDate": "1990-07-30",
+  "recordUpdated": "2026-04-24",
+  "nameServers": [
+    {
+      "host": "a-dns.pl",
+      "addresses": [
+        "192.102.225.53",
+        "2001:7f9:0:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "b-dns.pl",
+      "addresses": [
+        "192.195.72.53",
+        "2001:7f9:c:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "d-dns.pl",
+      "addresses": [
+        "185.159.197.48",
+        "2620:10a:80aa:0:0:0:0:48"
+      ]
+    },
+    {
+      "host": "f-dns.pl",
+      "addresses": [
+        "194.0.25.29",
+        "2001:678:20:0:0:0:0:29"
+      ]
+    },
+    {
+      "host": "h-dns.pl",
+      "addresses": [
+        "185.159.198.48",
+        "2620:10a:80ab:0:0:0:0:48"
+      ]
+    },
+    {
+      "host": "j-dns.pl",
+      "addresses": [
+        "204.61.217.4",
+        "2001:500:14:7004:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".PL is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Poland. The IANA root zone lists the registry manager as Research and Academic Computer Network. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.pl is the Internet country code top-level domain (ccTLD) for Poland, administered by NASK, the Polish research and development organization. It is one of the founding members of CENTR.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/pl.html",
+  "wikipedia": ".pl is the Internet country code top-level domain (ccTLD) for Poland, administered by NASK, the Polish research and development organization. It is one of the founding members of CENTR.",
+  "scrapedAt": "2026-07-21T21:47:30Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".pl",
+    "academic",
+    "cctld",
+    "code",
+    "computer",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "network",
+    "pl",
+    "poland",
+    "regional brands",
+    "research",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 31,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$4.99",
+      "value": 4.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$16.00",
+      "value": 16.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/pl"
+  },
+  "summary": ".pl is a Country-code top-level domain. Managed by Research and Academic Computer Network.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

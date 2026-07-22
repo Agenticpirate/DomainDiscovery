@@ -1,0 +1,129 @@
+{
+  "tld": ".ee",
+  "slug": "ee",
+  "title": "About .ee domains",
+  "delegationTitle": "Delegation Record for .EE",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Estonia",
+  "sponsor": "Eesti Interneti Sihtasutus (EIS)",
+  "sponsorDetail": "Eesti Interneti Sihtasutus (EIS)\nPaldiski mnt. 80\nTallinn Harjumaa 10617\nEstonia",
+  "administrativeContact": "Member of the Management Board",
+  "technicalContact": "System Administrator",
+  "registryUrl": "http://www.internet.ee",
+  "whoisServer": "whois.tld.ee",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "b.tld.ee",
+      "addresses": [
+        "194.146.106.110",
+        "2001:67c:1010:28:0:0:0:53"
+      ]
+    },
+    {
+      "host": "e.tld.ee",
+      "addresses": [
+        "204.61.216.36",
+        "2001:678:94:53:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ee.cert.ee",
+      "addresses": [
+        "46.226.142.147",
+        "2a00:6a00:ad1:814:0:0:0:147"
+      ]
+    },
+    {
+      "host": "ee.eenet.ee",
+      "addresses": [
+        "193.40.132.5",
+        "2001:bb8:4001:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns.tld.ee",
+      "addresses": [
+        "195.43.87.10"
+      ]
+    }
+  ],
+  "about": ".EE is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Estonia. The IANA root zone lists the registry manager as Eesti Interneti Sihtasutus (EIS). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ee is the internet country code top-level domain (ccTLD) of Estonia, operated by the Estonian Internet Foundation.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ee.html",
+  "wikipedia": ".ee is the internet country code top-level domain (ccTLD) of Estonia, operated by the Estonian Internet Foundation.",
+  "scrapedAt": "2026-07-21T21:39:29Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ee",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "ee",
+    "eesti",
+    "estonia",
+    "for",
+    "geo",
+    "interneti",
+    "level",
+    "local business",
+    "regional brands",
+    "sihtasutus",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 16,
+    "cheapestRegistration": {
+      "registrar": "Netim",
+      "price": "$12.50",
+      "value": 12.5
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$12.50",
+      "value": 12.5
+    },
+    "sourceUrl": "https://tld-list.com/tld/ee"
+  },
+  "summary": ".ee is a Country-code top-level domain. Managed by Eesti Interneti Sihtasutus (EIS).",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

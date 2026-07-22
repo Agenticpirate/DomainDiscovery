@@ -1,0 +1,121 @@
+{
+  "tld": ".gw",
+  "slug": "gw",
+  "title": "About .gw domains",
+  "delegationTitle": "Delegation Record for .GW",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Guinea-Bissau",
+  "sponsor": "Autoridade Reguladora Nacional - Tecnologias de Informa\u00e7\u00e3o e Comunica\u00e7\u00e3o da Guin\u00e9-Bissau",
+  "sponsorDetail": "Autoridade Reguladora Nacional - Tecnologias de Informa\u00e7\u00e3o e Comunica\u00e7\u00e3o da Guin\u00e9-Bissau\nAvenida Domingos Ramos\nPra\u00e7a Ernesto Che Guevara\nBissau 1372\nGuinea-Bissau",
+  "administrativeContact": "Davi Severiano Goia Cabral D'almada",
+  "technicalContact": "Assis Neves Guerreiro",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "gw01.dns.pt",
+      "addresses": [
+        "185.39.208.19",
+        "2a04:6d80:0:0:0:0:0:19"
+      ]
+    },
+    {
+      "host": "gw03.dns.pt",
+      "addresses": [
+        "204.61.216.114",
+        "2001:500:14:6114:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "h.dns.pt",
+      "addresses": [
+        "194.146.106.138",
+        "2001:67c:1010:35:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".GW is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Guinea-Bissau. The IANA root zone lists the registry manager as Autoridade Reguladora Nacional - Tecnologias de Informa\u00e7\u00e3o e Comunica\u00e7\u00e3o da Guin\u00e9-Bissau. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.gw is the Internet country code top-level domain (ccTLD) for Guinea-Bissau.\nThe .gw country code top-level domain was delegated multiple times to different entities.\nThe domain was introduced to the root zone on 4 February 1997, and management of it was most recently delegated by IANA to ARN (Autoridade Reguladora Nacional \u2013 Tecnologias de Informa\u00e7\u00e3o e Comunica\u00e7\u00e3o da Guin\u00e9-Bissau) on 10 July 2014.\nThe .gw domain name was launched to public registration in November 2014 with the technical help of Associa\u00e7\u00e3o DNS.PT (Registry of .PT ccTLD).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gw.html",
+  "wikipedia": ".gw is the Internet country code top-level domain (ccTLD) for Guinea-Bissau.\nThe .gw country code top-level domain was delegated multiple times to different entities.\nThe domain was introduced to the root zone on 4 February 1997, and management of it was most recently delegated by IANA to ARN (Autoridade Reguladora Nacional \u2013 Tecnologias de Informa\u00e7\u00e3o e Comunica\u00e7\u00e3o da Guin\u00e9-Bissau) on 10 July 2014.\nThe .gw domain name was launched to public registration in November 2014 with the technical help of Associa\u00e7\u00e3o DNS.PT (Registry of .PT ccTLD).",
+  "scrapedAt": "2026-07-21T21:41:40Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".gw",
+    "autoridade",
+    "bissau",
+    "cctld",
+    "code",
+    "comunica",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "guin",
+    "guinea",
+    "gw",
+    "informa",
+    "level",
+    "local business",
+    "nacional",
+    "regional brands",
+    "reguladora",
+    "tecnologias",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 7,
+    "cheapestRegistration": {
+      "registrar": "Netim",
+      "price": "$38.00",
+      "value": 38.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$38.00",
+      "value": 38.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/gw"
+  },
+  "summary": ".gw is a Country-code top-level domain. Managed by Autoridade Reguladora Nacional - Tecnologias de Informa\u00e7\u00e3o e Comunica\u00e7\u00e3o da Guin\u00e9-Bissau.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

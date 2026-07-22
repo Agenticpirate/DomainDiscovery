@@ -1,0 +1,115 @@
+{
+  "tld": ".xn--qxa6a",
+  "slug": "xn--qxa6a",
+  "title": "About .xn--qxa6a domains",
+  "delegationTitle": "Delegation Record for .\u0395\u03a5",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code EU",
+  "designation": "Country-code top-level domain designated for None",
+  "sponsor": "EURid vzw",
+  "sponsorDetail": "EURid vzw\nTelecomlaan 9 / 7\nDiegem 1831\nBelgium",
+  "administrativeContact": "Peter Janssen",
+  "technicalContact": "Technical Department",
+  "registryUrl": "https://www.registry.eu",
+  "whoisServer": "whois.eu",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "be.dns.eu",
+      "addresses": [
+        "149.38.1.26"
+      ]
+    },
+    {
+      "host": "si.dns.eu",
+      "addresses": [
+        "193.2.221.62",
+        "2001:1470:8000:100:0:0:0:62"
+      ]
+    },
+    {
+      "host": "w.dns.eu",
+      "addresses": [
+        "194.0.25.28",
+        "2001:678:20:0:0:0:0:28"
+      ]
+    },
+    {
+      "host": "x.dns.eu",
+      "addresses": [
+        "185.151.141.1",
+        "2a02:568:fe00:0:0:0:0:6575"
+      ]
+    },
+    {
+      "host": "y.dns.eu",
+      "addresses": [
+        "194.146.106.90",
+        "2001:67c:1010:23:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".XN--QXA6A is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for None. The IANA root zone lists the registry manager as EURid vzw. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--qxa6a.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:45Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--qxa6a",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "eurid",
+    "for",
+    "geo",
+    "letter",
+    "level",
+    "local business",
+    "none",
+    "regional brands",
+    "top",
+    "two",
+    "xn--qxa6a"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--qxa6a is a Country-code top-level domain designated for two-letter country code EU. Managed by EURid vzw.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

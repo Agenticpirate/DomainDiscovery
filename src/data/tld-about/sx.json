@@ -1,0 +1,118 @@
+{
+  "tld": ".sx",
+  "slug": "sx",
+  "title": "About .sx domains",
+  "delegationTitle": "Delegation Record for .SX",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain",
+  "sponsor": "SX Registry SA B.V.",
+  "sponsorDetail": "SX Registry SA B.V.\nSkyline Drive #2\nIndigo Bay\nSint Maarten (Dutch part)",
+  "administrativeContact": "CEO",
+  "technicalContact": "Don Slaunwhite",
+  "registryUrl": "http://registry.sx",
+  "whoisServer": "whois.sx",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns1.ns.sx",
+      "addresses": [
+        "185.159.197.10",
+        "2620:10a:80aa:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "ns2.ns.sx",
+      "addresses": [
+        "185.159.198.10",
+        "2620:10a:80ab:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "ns3.ns.sx",
+      "addresses": [
+        "185.159.199.10",
+        "2620:10a:80ac:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "ns4.ns.sx",
+      "addresses": [
+        "45.142.220.101",
+        "2a0e:dbc0:0:0:0:0:0:101"
+      ]
+    }
+  ],
+  "about": ".SX is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for its designated country or territory. The IANA root zone lists the registry manager as SX Registry SA B.V.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sx is the country code top-level domain (ccTLD) in the Domain Name System of the Internet for Sint Maarten.\nSint Maarten became an autonomous country within the Kingdom of the Netherlands on 10 October 2010. On 15 December 2010, the ISO 3166 Maintenance Agency allocated SX as the ISO 3166-1 alpha-2 code for Sint Maarten, as other possible combinations such as .sm, .ma, and .mt had already been allocated.\nThe sx top-level domain is run on the CIRA Fury Registry Platform. Registrars of sx domains must be accredited by the registry.\nAfter an initial sunrise period to claim trademarked names, and registration periods for local priority, and landrush assignments the registry opened general availability registrations to the public on 15 November 2012. A local presence is not required of domain name registrants.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sx.html",
+  "wikipedia": ".sx is the country code top-level domain (ccTLD) in the Domain Name System of the Internet for Sint Maarten.\nSint Maarten became an autonomous country within the Kingdom of the Netherlands on 10 October 2010. On 15 December 2010, the ISO 3166 Maintenance Agency allocated SX as the ISO 3166-1 alpha-2 code for Sint Maarten, as other possible combinations such as .sm, .ma, and .mt had already been allocated.\nThe sx top-level domain is run on the CIRA Fury Registry Platform. Registrars of sx domains must be accredited by the registry.\nAfter an initial sunrise period to claim trademarked names, and registration periods for local priority, and landrush assignments the registry opened general availability registrations to the public on 15 November 2012. A local presence is not required of domain name registrants.",
+  "scrapedAt": "2026-07-21T21:50:33Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sx",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "domain",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "registry",
+    "sx",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 24,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$23.75",
+      "value": 23.75
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$23.75",
+      "value": 23.75
+    },
+    "sourceUrl": "https://tld-list.com/tld/sx"
+  },
+  "summary": ".sx is a Country-code top-level domain. Managed by SX Registry SA B.V..",
+  "wikiCheckedAt": "2026-07-22T04:23:22Z",
+  "wikiEnrichedAt": "2026-07-22T04:23:22Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

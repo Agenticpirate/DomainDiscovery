@@ -1,0 +1,107 @@
+{
+  "tld": ".ne",
+  "slug": "ne",
+  "title": "About .ne domains",
+  "delegationTitle": "Delegation Record for .NE",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Niger",
+  "sponsor": "SONITEL",
+  "sponsorDetail": "SONITEL\nRue de l'Uranium\nNiamey 208\nNiger (the)",
+  "administrativeContact": "Kimba YAYE",
+  "technicalContact": "Sadou SOLOKE",
+  "registryUrl": "http://www.intnet.ne",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1996-04-24",
+  "recordUpdated": "2023-11-09",
+  "nameServers": [
+    {
+      "host": "bow.rain.fr",
+      "addresses": [
+        "194.51.3.49"
+      ]
+    },
+    {
+      "host": "ne.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.101",
+        "2001:67c:e0:0:0:0:0:101"
+      ]
+    },
+    {
+      "host": "ns-ne.afrinic.net",
+      "addresses": [
+        "196.216.168.45",
+        "2001:43f8:120:0:0:0:0:45"
+      ]
+    },
+    {
+      "host": "ns.intnet.ne",
+      "addresses": [
+        "41.138.54.10"
+      ]
+    }
+  ],
+  "about": ".NE is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Niger. The IANA root zone lists the registry manager as SONITEL. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ne is the Internet country code top-level domain (ccTLD) for Niger.\nUnrelated to the .ne top-level domain, \"ne\" is sometimes used as a second-level domain within other country-code domains, in which registrants may register second-level domains of the form .ne.xx, where xx is the ccTLD. Two examples are Japan (.ne.jp) and South Korea. .ne domain names can be registered via certain accredited registrars.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ne.html",
+  "wikipedia": ".ne is the Internet country code top-level domain (ccTLD) for Niger.\nUnrelated to the .ne top-level domain, \"ne\" is sometimes used as a second-level domain within other country-code domains, in which registrants may register second-level domains of the form .ne.xx, where xx is the ccTLD. Two examples are Japan (.ne.jp) and South Korea. .ne domain names can be registered via certain accredited registrars.",
+  "scrapedAt": "2026-07-21T21:46:08Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ne",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "ne",
+    "niger",
+    "regional brands",
+    "sonitel",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".ne is a Country-code top-level domain. Managed by SONITEL.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

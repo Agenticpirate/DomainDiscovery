@@ -53,7 +53,11 @@ export function SimpleContentPage({
             {sections.map((section) => (
               <article
                 key={section.heading}
-                className={`${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border-white/10'} border rounded-2xl p-4 sm:p-6`}
+                className={`shine-border group ${
+                  isLight
+                    ? 'bg-white border-slate-200 shadow-sm'
+                    : 'bg-white/[0.02] border-white/10'
+                } border rounded-2xl p-4 sm:p-6`}
               >
                 <h2 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>
                   {section.heading}
@@ -73,7 +77,9 @@ export function SimpleContentPage({
 
             {cta && (
               <div
-                className={`${isLight ? 'bg-slate-50 border-slate-200' : 'bg-white/[0.02] border-white/10'} border rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3`}
+                className={`shine-border ${
+                  isLight ? 'bg-slate-50 border-slate-200' : 'bg-white/[0.02] border-white/10'
+                } border rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3`}
               >
                 <div>
                   <div className={`text-base sm:text-lg font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>

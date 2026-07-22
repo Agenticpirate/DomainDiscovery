@@ -1,0 +1,143 @@
+{
+  "tld": ".my",
+  "slug": "my",
+  "title": "About .my domains",
+  "delegationTitle": "Delegation Record for .MY",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Malaysia",
+  "sponsor": "MYNIC Berhad",
+  "sponsorDetail": "MYNIC Berhad\nLevel 3, Tower 2, Menara Cyber Axis\nJalan Impact\nCyberjaya Selangor Darul Ehsan 63000\nMalaysia",
+  "administrativeContact": "Chief Executive Officer",
+  "technicalContact": "Chief Executive Officer",
+  "registryUrl": "http://www.mynic.my",
+  "whoisServer": "whois.mynic.my",
+  "rdapServer": null,
+  "registrationDate": "1987-06-08",
+  "recordUpdated": "2026-04-18",
+  "nameServers": [
+    {
+      "host": "a.mynic.centralnic-dns.com",
+      "addresses": [
+        "194.169.218.114",
+        "2001:67c:13cc:0:0:0:1:114"
+      ]
+    },
+    {
+      "host": "b.mynic.centralnic-dns.com",
+      "addresses": [
+        "185.24.64.114",
+        "2a04:2b00:13cc:0:0:0:1:114"
+      ]
+    },
+    {
+      "host": "c.mynic.centralnic-dns.com",
+      "addresses": [
+        "212.18.248.114",
+        "2a04:2b00:13ee:0:0:0:0:114"
+      ]
+    },
+    {
+      "host": "d.mynic.centralnic-dns.com",
+      "addresses": [
+        "212.18.249.114",
+        "2a04:2b00:13ff:0:0:0:0:114"
+      ]
+    },
+    {
+      "host": "e.nic.my",
+      "addresses": [
+        "152.69.217.125",
+        "2603:c024:4518:ad60:242:0:0:2"
+      ]
+    },
+    {
+      "host": "ns01.trs-dns.com",
+      "addresses": [
+        "64.96.1.1",
+        "2620:57:4001:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns01.trs-dns.net",
+      "addresses": [
+        "64.96.2.1",
+        "2620:57:4002:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".MY is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Malaysia. The IANA root zone lists the registry manager as MYNIC Berhad. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.my is the Internet country code top-level domain (ccTLD) for Malaysia. MYNIC is the agency responsible for the domain, and is under the Ministry of Digital and regulated by the Malaysian Communication and Multimedia Commission (MCMC).\nMYNIC administers the name space for .my, as well as its subdomains: .com.my, .org.my, .net.my, .biz.my, .coop.my, .edu.my, .gov.my, .mil.my, and .name.my. This involves the registration of domain names as well as the maintenance and operation of a domain name registry (a central database for .my domain names).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/my.html",
+  "wikipedia": ".my is the Internet country code top-level domain (ccTLD) for Malaysia. MYNIC is the agency responsible for the domain, and is under the Ministry of Digital and regulated by the Malaysian Communication and Multimedia Commission (MCMC).\nMYNIC administers the name space for .my, as well as its subdomains: .com.my, .org.my, .net.my, .biz.my, .coop.my, .edu.my, .gov.my, .mil.my, and .name.my. This involves the registration of domain names as well as the maintenance and operation of a domain name registry (a central database for .my domain names).",
+  "scrapedAt": "2026-07-21T21:45:56Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".my",
+    "berhad",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "malaysia",
+    "my",
+    "mynic",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 28,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$1.34",
+      "value": 1.34
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$25.88",
+      "value": 25.88
+    },
+    "sourceUrl": "https://tld-list.com/tld/my"
+  },
+  "summary": ".my is a Country-code top-level domain. Managed by MYNIC Berhad.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,114 @@
+{
+  "tld": ".kred",
+  "slug": "kred",
+  "title": "About .kred domains",
+  "delegationTitle": "Delegation Record for .KRED",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "KredTLD Pty Ltd",
+  "sponsorDetail": "KredTLD Pty Ltd\nLevel 6\n1 Chifley Square\nSydney NSW 2000\nAustralia",
+  "administrativeContact": "Jodee Rich",
+  "technicalContact": "CTO",
+  "registryUrl": "http://www.peoplebrowsr.com",
+  "whoisServer": null,
+  "rdapServer": "https://rdap.centralnic.com/kred/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.kred",
+      "addresses": [
+        "194.169.218.79",
+        "2001:67c:13cc:0:0:0:1:79"
+      ]
+    },
+    {
+      "host": "b.nic.kred",
+      "addresses": [
+        "185.24.64.79",
+        "2a04:2b00:13cc:0:0:0:1:79"
+      ]
+    },
+    {
+      "host": "c.nic.kred",
+      "addresses": [
+        "212.18.248.79",
+        "2a04:2b00:13ee:0:0:0:0:79"
+      ]
+    },
+    {
+      "host": "d.nic.kred",
+      "addresses": [
+        "212.18.249.79",
+        "2a04:2b00:13ff:0:0:0:0:79"
+      ]
+    }
+  ],
+  "about": ".KRED is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .KRED is listed by IANA as KredTLD Pty Ltd. Anyone can typically register a .KRED name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/kred.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:43:41Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".kred",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "kred",
+    "kredtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 1,
+    "cheapestRegistration": {
+      "registrar": "101domain",
+      "price": "$60.19",
+      "value": 60.19
+    },
+    "cheapestRenewal": {
+      "registrar": "101domain",
+      "price": "$65.19",
+      "value": 65.19
+    },
+    "sourceUrl": "https://tld-list.com/tld/kred"
+  },
+  "summary": ".kred is a Generic top-level domain. Managed by KredTLD Pty Ltd.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

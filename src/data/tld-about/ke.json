@@ -1,0 +1,126 @@
+{
+  "tld": ".ke",
+  "slug": "ke",
+  "title": "About .ke domains",
+  "delegationTitle": "Delegation Record for .KE",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Kenya",
+  "sponsor": "Kenya Network Information Center (KeNIC)",
+  "sponsorDetail": "Kenya Network Information Center (KeNIC)\nP.O. Box 1461\nWaiyaki Way, CCK Complex\nNairobi 00606\nKenya",
+  "administrativeContact": "Andrew Lewela Mwanyota",
+  "technicalContact": "Ahmed Landi",
+  "registryUrl": "http://www.kenic.or.ke",
+  "whoisServer": "whois.kenic.or.ke",
+  "rdapServer": "https://rdap.kenic.or.ke",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "kenic.anycastdns.cz",
+      "addresses": [
+        "185.38.108.108",
+        "185.28.194.194"
+      ]
+    },
+    {
+      "host": "mzizi.kenic.or.ke",
+      "addresses": [
+        "196.13.202.53",
+        "196.1.4.130",
+        "196.1.4.3",
+        "2001:43f8:10:0:50c0:a8ff:feee:30"
+      ]
+    },
+    {
+      "host": "ns-ke.afrinic.net",
+      "addresses": [
+        "196.216.168.22",
+        "2001:43f8:120:0:0:0:0:22"
+      ]
+    },
+    {
+      "host": "ns.anycast.kenic.or.ke",
+      "addresses": [
+        "204.61.216.7",
+        "2001:500:14:6007:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".KE is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Kenya. The IANA root zone lists the registry manager as Kenya Network Information Center (KeNIC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ke is the Internet country code top-level domain (ccTLD) for Kenya.\nKENIC, short for Kenya Network Information Centre, is the authoritative agency responsible for managing the registrations and issuance of the .ke domain.\nIn 2002, KENIC assumed control of the .ke domain when it had a meager number of less than 1,000 registrations.\nPrior to KENIC's involvement, the administration of the domain was overseen by two individuals: Shem Ochuodho from Kenya and Randy Bush from America, both esteemed tech experts.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ke.html",
+  "wikipedia": ".ke is the Internet country code top-level domain (ccTLD) for Kenya.\nKENIC, short for Kenya Network Information Centre, is the authoritative agency responsible for managing the registrations and issuance of the .ke domain.\nIn 2002, KENIC assumed control of the .ke domain when it had a meager number of less than 1,000 registrations.\nPrior to KENIC's involvement, the administration of the domain was overseen by two individuals: Shem Ochuodho from Kenya and Randy Bush from America, both esteemed tech experts.",
+  "scrapedAt": "2026-07-21T21:43:20Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ke",
+    "cctld",
+    "center",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "ke",
+    "kenic",
+    "kenya",
+    "level",
+    "local business",
+    "network",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 15,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$40.36",
+      "value": 40.36
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$40.36",
+      "value": 40.36
+    },
+    "sourceUrl": "https://tld-list.com/tld/ke"
+  },
+  "summary": ".ke is a Country-code top-level domain. Managed by Kenya Network Information Center (KeNIC).",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

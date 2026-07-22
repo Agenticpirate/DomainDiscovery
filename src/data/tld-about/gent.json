@@ -1,0 +1,115 @@
+{
+  "tld": ".gent",
+  "slug": "gent",
+  "title": "About .gent domains",
+  "delegationTitle": "Delegation Record for .GENT",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Easyhost bv",
+  "sponsorDetail": "Easyhost bv\nSkaldenstraat 121\nGent 9042\nBelgium",
+  "administrativeContact": "Jimmy Cappaert",
+  "technicalContact": "CTO",
+  "registryUrl": "https://www.nic.gent",
+  "whoisServer": "whois.nic.gent",
+  "rdapServer": "https://rdap.centralnic.com/gent",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.gent",
+      "addresses": [
+        "194.169.218.89",
+        "2001:67c:13cc:0:0:0:1:89"
+      ]
+    },
+    {
+      "host": "b.nic.gent",
+      "addresses": [
+        "185.24.64.89",
+        "2a04:2b00:13cc:0:0:0:1:89"
+      ]
+    },
+    {
+      "host": "c.nic.gent",
+      "addresses": [
+        "212.18.248.89",
+        "2a04:2b00:13ee:0:0:0:0:89"
+      ]
+    },
+    {
+      "host": "d.nic.gent",
+      "addresses": [
+        "212.18.249.89",
+        "2a04:2b00:13ff:0:0:0:0:89"
+      ]
+    }
+  ],
+  "about": ".GENT is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .GENT is listed by IANA as Easyhost bv. Anyone can typically register a .GENT name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.gent is a GeoTLD for Ghent (Dutch: Gent, French: Gand), Flanders in Belgium.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gent.html",
+  "wikipedia": ".gent is a GeoTLD for Ghent (Dutch: Gent, French: Gand), Flanders in Belgium.",
+  "scrapedAt": "2026-07-21T21:40:59Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".gent",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "easyhost",
+    "generic",
+    "gent",
+    "gtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 16,
+    "cheapestRegistration": {
+      "registrar": "Netim",
+      "price": "$25.50",
+      "value": 25.5
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$25.50",
+      "value": 25.5
+    },
+    "sourceUrl": "https://tld-list.com/tld/gent"
+  },
+  "summary": ".gent is a Generic top-level domain. Managed by Easyhost bv.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -6,49 +6,31 @@ import { Icons } from '@/components/ui/Icons';
 import { Input } from '@/components/ui/Input';
 import { useTheme } from '@/contexts/ThemeContext';
 import { checkDomainAvailability } from '@/services/instantDomainService';
+import { PreferredRegistrarSelect, RegistrarActionMenu } from '@/components/domain/RegistrarControls';
+import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
+import keywordTool from '@/data/keyword-tool.json';
 
-/* ── Lean-Domain-Search-style prefix / suffix word lists ── */
-const PREFIXES = [
-  'get','my','the','go','try','use','hey','join','be','we',
-  'all','any','one','top','best','new','pro','super','ultra','mega',
-  'hyper','smart','fast','quick','easy','simple','open','free','real','true',
-  'just','only','pure','prime','first','next','ever','over','up','on',
-  'in','re','un','pre','out','no','so','do','hi','ok',
-  'air','big','hot','cool','zen','ace','max','mini','micro','nano',
-  'auto','cyber','digi','eco','geo','bio','neo','meta','omni','poly',
-  'multi','inter','cross','trans','co','de','ex','sub','mis','non',
-];
+const PREFIXES = keywordTool.prefixes as string[];
+const SUFFIXES = keywordTool.suffixes as string[];
+type PopularSeed = { word: string; popularity: number; category: string; hot?: boolean };
+const POPULAR = keywordTool.popular as PopularSeed[];
 
-const SUFFIXES = [
-  'hub','pro','app','hq','lab','now','live','zone','spot','base',
-  'pad','box','kit','set','way','net','web','dev','tech','ai',
-  'io','co','ly','ify','ful','er','ize','up','it','on',
-  'go','me','us','to','at','in','fx','rx','mx','ox',
-  'able','ware','works','craft','smith','mind','flow','wave','pulse','spark',
-  'fire','bolt','dash','rush','flip','snap','click','tap','pop','buzz',
-  'nest','dock','port','gate','link','path','loop','core','edge','peak',
-  'rise','shift','stack','vault','cloud','space','world','land','city','town',
-  'crew','team','clan','tribe','guild','force','squad','group','club','circle',
-  'plus','max','prime','elite','ultra','super','master','chief','boss','king',
-  'star','nova','pixel','byte','bit','data','code','node','wire','grid',
-  'line','point','mark','sign','tag','log','map','plan','list','rank',
-  'shop','store','deal','cart','pay','sell','buy','trade','market','sales',
-  'fit','health','life','care','well','med','vital','active','energy','power',
-  'learn','study','skill','guide','book','read','know','wise','brain','think',
-  'play','game','fun','joy','happy','party','show','stream','video','music',
-  'home','place','nest','urban','eco','green','solar','clean','blue','sky',
-  'design','studio','art','craft','create','make','build','media','brand','style',
-];
+const PREFIX_RANK = new Map(PREFIXES.map((w, i) => [w, i]));
+const SUFFIX_RANK = new Map(SUFFIXES.map((w, i) => [w, i]));
+const SEED_POP = new Map(POPULAR.map((p) => [p.word.toLowerCase(), p.popularity]));
 
 type SortMode = 'popularity' | 'length' | 'alpha';
 type FilterMode = 'all' | 'starts' | 'ends';
-type AvailFilter = 'all' | 'available' | 'taken';
+type AvailFilter = 'all' | 'available' | 'taken' | 'unchecked';
+type TypeFilter = 'all' | 'exact' | 'prefix' | 'suffix' | 'combo' | 'hyphen';
 
 interface GeneratedDomain {
   domain: string;
   type: 'exact' | 'prefix' | 'suffix' | 'combo' | 'hyphen';
-  available: boolean | null; // null = unchecked
+  available: boolean | null;
   words: string[];
+  popularity: number;
+  length: number;
 }
 
 interface KeywordDomainFinderProps {
@@ -58,6 +40,26 @@ interface KeywordDomainFinderProps {
 const BATCH_SIZE = 80;
 const CHECK_CONCURRENCY = 3;
 
+/** Compact popular row only — not the full 5k library on screen */
+const POPULAR_CHIPS = POPULAR.filter((p) => p.hot || p.popularity >= 94)
+  .sort((a, b) => b.popularity - a.popularity)
+  .slice(0, 20);
+
+function scorePopularity(type: GeneratedDomain['type'], words: string[]): number {
+  const seedBoost = Math.max(0, ...words.map((w) => (SEED_POP.get(w) ?? 0) - 40));
+  if (type === 'exact') return 1000 + seedBoost;
+  if (type === 'prefix') {
+    const rank = PREFIX_RANK.get(words[0] || '') ?? 999;
+    return 900 - Math.min(rank, 800) + seedBoost * 0.5;
+  }
+  if (type === 'suffix') {
+    const rank = SUFFIX_RANK.get(words[words.length - 1] || '') ?? 999;
+    return 850 - Math.min(rank, 800) + seedBoost * 0.5;
+  }
+  if (type === 'combo') return 700 - words.length * 20 + seedBoost * 0.3;
+  return 500 + seedBoost * 0.2;
+}
+
 export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
   const [primaryKeyword, setPrimaryKeyword] = useState('');
   const [secondaryKeyword, setSecondaryKeyword] = useState('');
@@ -66,16 +68,33 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
   const [sortMode, setSortMode] = useState<SortMode>('popularity');
   const [filterMode, setFilterMode] = useState<FilterMode>('all');
   const [availFilter, setAvailFilter] = useState<AvailFilter>('all');
+  const [typeFilter, setTypeFilter] = useState<TypeFilter>('all');
+  const [minLen, setMinLen] = useState(2);
+  const [maxLen, setMaxLen] = useState(24);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [generated, setGenerated] = useState<GeneratedDomain[]>([]);
   const [checkedCount, setCheckedCount] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(100);
+  const [visibleCount, setVisibleCount] = useState(160);
   const abortRef = useRef<AbortController | null>(null);
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const { selectedRegistrar, setSelectedRegistrar } = usePreferredRegistrar();
 
-  const availableTlds = ['.com', '.net', '.org', '.io', '.co', '.ai', '.app', '.dev', '.xyz', '.tech', '.me', '.shop'];
+  const availableTlds = [
+    '.com',
+    '.net',
+    '.org',
+    '.io',
+    '.co',
+    '.ai',
+    '.app',
+    '.dev',
+    '.xyz',
+    '.tech',
+    '.me',
+    '.shop',
+  ];
 
   const toggleTld = (tld: string) => {
     setSelectedTlds((prev) =>
@@ -83,89 +102,21 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     );
   };
 
-  /* ── Generate all domain combinations (client-side, instant) ── */
-  const generateCombinations = useCallback(() => {
-    const primary = primaryKeyword.toLowerCase().replace(/[^a-z0-9]/g, '');
-    if (!primary) return;
-
-    const secondary = secondaryKeyword
-      .split(',')
-      .map((k) => k.trim().toLowerCase().replace(/[^a-z0-9]/g, ''))
-      .filter((k) => k.length > 0);
-
-    const seen = new Set<string>();
-    const domains: GeneratedDomain[] = [];
-
-    const add = (domain: string, type: GeneratedDomain['type'], words: string[]) => {
-      const key = domain.toLowerCase();
-      if (seen.has(key) || key.length > 63 + key.lastIndexOf('.')) return;
-      seen.add(key);
-      domains.push({ domain: key, type, available: null, words });
-    };
-
-    for (const tld of selectedTlds) {
-      // Exact match
-      add(`${primary}${tld}`, 'exact', [primary]);
-
-      // Prefix combos: prefix + primary
-      for (const prefix of PREFIXES) {
-        add(`${prefix}${primary}${tld}`, 'prefix', [prefix, primary]);
-        if (includeHyphens) {
-          add(`${prefix}-${primary}${tld}`, 'hyphen', [prefix, primary]);
-        }
-      }
-
-      // Suffix combos: primary + suffix
-      for (const suffix of SUFFIXES) {
-        add(`${primary}${suffix}${tld}`, 'suffix', [primary, suffix]);
-        if (includeHyphens) {
-          add(`${primary}-${suffix}${tld}`, 'hyphen', [primary, suffix]);
-        }
-      }
-
-      // Secondary keyword combos
-      for (const sec of secondary) {
-        add(`${primary}${sec}${tld}`, 'combo', [primary, sec]);
-        add(`${sec}${primary}${tld}`, 'combo', [sec, primary]);
-        if (includeHyphens) {
-          add(`${primary}-${sec}${tld}`, 'hyphen', [primary, sec]);
-          add(`${sec}-${primary}${tld}`, 'hyphen', [sec, primary]);
-        }
-
-        // Secondary + prefixes/suffixes
-        for (const prefix of PREFIXES.slice(0, 15)) {
-          add(`${prefix}${primary}${sec}${tld}`, 'combo', [prefix, primary, sec]);
-          add(`${prefix}${sec}${primary}${tld}`, 'combo', [prefix, sec, primary]);
-        }
-        for (const suffix of SUFFIXES.slice(0, 15)) {
-          add(`${primary}${sec}${suffix}${tld}`, 'combo', [primary, sec, suffix]);
-          add(`${sec}${primary}${suffix}${tld}`, 'combo', [sec, primary, suffix]);
-        }
-      }
-    }
-
-    return domains;
-  }, [primaryKeyword, secondaryKeyword, selectedTlds, includeHyphens]);
-
-  /* ── Check availability in batches ── */
   const checkAvailabilityInBatches = useCallback(async (domains: GeneratedDomain[]) => {
     const controller = new AbortController();
     abortRef.current = controller;
     setIsChecking(true);
     setCheckedCount(0);
-
     const domainNames = domains.map((d) => d.domain);
     let checked = 0;
 
     for (let i = 0; i < domainNames.length; i += BATCH_SIZE * CHECK_CONCURRENCY) {
       if (controller.signal.aborted) break;
-
       const batchPromises: Promise<void>[] = [];
       for (let j = 0; j < CHECK_CONCURRENCY; j++) {
         const start = i + j * BATCH_SIZE;
         const batch = domainNames.slice(start, start + BATCH_SIZE);
         if (batch.length === 0) continue;
-
         batchPromises.push(
           checkDomainAvailability(batch).then((results) => {
             if (controller.signal.aborted) return;
@@ -181,30 +132,122 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           })
         );
       }
-
       await Promise.all(batchPromises);
     }
-
     setIsChecking(false);
   }, []);
 
-  const handleSearch = async () => {
-    if (!primaryKeyword.trim()) return;
+  const buildDomainsForPrimary = useCallback(
+    (primaryRaw: string, secondaryRaw?: string) => {
+      const primary = primaryRaw.toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (!primary) return [] as GeneratedDomain[];
+
+      const secondary = (secondaryRaw ?? secondaryKeyword)
+        .split(',')
+        .map((k) => k.trim().toLowerCase().replace(/[^a-z0-9]/g, ''))
+        .filter(Boolean);
+      const seen = new Set<string>();
+      const out: GeneratedDomain[] = [];
+      const add = (domain: string, type: GeneratedDomain['type'], words: string[]) => {
+        const key = domain.toLowerCase();
+        if (seen.has(key)) return;
+        const name = key.split('.')[0] || '';
+        if (name.length < 2 || name.length > 63) return;
+        seen.add(key);
+        out.push({
+          domain: key,
+          type,
+          available: null,
+          words,
+          popularity: scorePopularity(type, words),
+          length: name.length,
+        });
+      };
+
+      for (const tld of selectedTlds) {
+        add(`${primary}${tld}`, 'exact', [primary]);
+        for (const prefix of PREFIXES) {
+          if (prefix === primary) continue;
+          add(`${prefix}${primary}${tld}`, 'prefix', [prefix, primary]);
+          if (includeHyphens) add(`${prefix}-${primary}${tld}`, 'hyphen', [prefix, primary]);
+        }
+        for (const suffix of SUFFIXES) {
+          if (suffix === primary) continue;
+          add(`${primary}${suffix}${tld}`, 'suffix', [primary, suffix]);
+          if (includeHyphens) add(`${primary}-${suffix}${tld}`, 'hyphen', [primary, suffix]);
+        }
+        for (const sec of secondary) {
+          add(`${primary}${sec}${tld}`, 'combo', [primary, sec]);
+          add(`${sec}${primary}${tld}`, 'combo', [sec, primary]);
+          if (includeHyphens) {
+            add(`${primary}-${sec}${tld}`, 'hyphen', [primary, sec]);
+            add(`${sec}-${primary}${tld}`, 'hyphen', [sec, primary]);
+          }
+          for (const prefix of PREFIXES.slice(0, 40)) {
+            add(`${prefix}${primary}${sec}${tld}`, 'combo', [prefix, primary, sec]);
+          }
+          for (const suffix of SUFFIXES.slice(0, 40)) {
+            add(`${primary}${sec}${suffix}${tld}`, 'combo', [primary, sec, suffix]);
+          }
+        }
+      }
+      return out;
+    },
+    [secondaryKeyword, selectedTlds, includeHyphens]
+  );
+
+  const canSearch = Boolean(
+    primaryKeyword.trim() ||
+      secondaryKeyword
+        .split(',')
+        .map((k) => k.trim())
+        .filter(Boolean).length
+  );
+
+  const handleSearch = async (seed?: string) => {
+    // Free typing works anytime — popular chips are optional shortcuts only
+    let primary = (seed ?? primaryKeyword).trim();
+    let secondaryParts = secondaryKeyword
+      .split(',')
+      .map((k) => k.trim())
+      .filter(Boolean);
+
+    if (seed) {
+      setPrimaryKeyword(seed);
+      primary = seed;
+    } else if (!primary && secondaryParts.length > 0) {
+      primary = secondaryParts[0];
+      secondaryParts = secondaryParts.slice(1);
+      setPrimaryKeyword(primary);
+      setSecondaryKeyword(secondaryParts.join(', '));
+    }
+
+    // Normalize; support multi-word primary → first token + rest as secondary
+    primary = primary.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim();
+    const primaryTokens = primary.split(/[\s-]+/).filter(Boolean);
+    if (primaryTokens.length > 1) {
+      primary = primaryTokens[0];
+      secondaryParts = Array.from(new Set([...primaryTokens.slice(1), ...secondaryParts]));
+      setPrimaryKeyword(primary);
+      setSecondaryKeyword(secondaryParts.join(', '));
+    } else {
+      primary = primaryTokens[0] || primary.replace(/[^a-z0-9]/g, '');
+    }
+
+    if (!primary) return;
+
     abortRef.current?.abort();
     setIsGenerating(true);
-    setVisibleCount(100);
+    setVisibleCount(160);
     setAvailFilter('all');
 
-    const domains = generateCombinations();
-    if (!domains || domains.length === 0) {
+    const domains = buildDomainsForPrimary(primary, secondaryParts.join(', '));
+    if (!domains.length) {
       setIsGenerating(false);
       return;
     }
-
     setGenerated(domains);
     setIsGenerating(false);
-
-    // Start availability checking in background
     void checkAvailabilityInBatches(domains);
   };
 
@@ -213,270 +256,624 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     setIsChecking(false);
   };
 
-  /* ── Filtering & sorting ── */
   const filtered = useMemo(() => {
     let list = [...generated];
     const primary = primaryKeyword.toLowerCase().replace(/[^a-z0-9]/g, '');
+    list = list.filter((d) => d.length >= minLen && d.length <= maxLen);
 
-    if (filterMode === 'starts') {
-      list = list.filter((d) => {
-        const name = d.domain.split('.')[0];
-        return name.startsWith(primary);
-      });
-    } else if (filterMode === 'ends') {
-      list = list.filter((d) => {
-        const name = d.domain.split('.')[0];
-        return name.endsWith(primary);
-      });
-    }
+    if (filterMode === 'starts') list = list.filter((d) => d.domain.split('.')[0].startsWith(primary));
+    else if (filterMode === 'ends') list = list.filter((d) => d.domain.split('.')[0].endsWith(primary));
 
-    if (availFilter === 'available') {
-      list = list.filter((d) => d.available === true);
-    } else if (availFilter === 'taken') {
-      list = list.filter((d) => d.available === false);
-    }
+    if (typeFilter !== 'all') list = list.filter((d) => d.type === typeFilter);
+    if (availFilter === 'available') list = list.filter((d) => d.available === true);
+    else if (availFilter === 'taken') list = list.filter((d) => d.available === false);
+    else if (availFilter === 'unchecked') list = list.filter((d) => d.available === null);
 
-    if (sortMode === 'length') {
-      list.sort((a, b) => a.domain.split('.')[0].length - b.domain.split('.')[0].length);
-    } else if (sortMode === 'alpha') {
-      list.sort((a, b) => a.domain.localeCompare(b.domain));
-    }
-    // 'popularity' keeps original order (prefixes/suffixes ordered by frequency)
+    if (sortMode === 'length') list.sort((a, b) => a.length - b.length || a.domain.localeCompare(b.domain));
+    else if (sortMode === 'alpha') list.sort((a, b) => a.domain.localeCompare(b.domain));
+    else list.sort((a, b) => b.popularity - a.popularity || a.length - b.length);
 
     return list;
-  }, [generated, filterMode, availFilter, sortMode, primaryKeyword]);
+  }, [generated, filterMode, availFilter, sortMode, primaryKeyword, typeFilter, minLen, maxLen]);
 
   const visible = filtered.slice(0, visibleCount);
-  const availableCount = generated.filter((d) => d.available === true).length;
-  const takenCount = generated.filter((d) => d.available === false).length;
-  const uncheckedCount = generated.filter((d) => d.available === null).length;
+
+  // Counts respect keyword position + length (same base as result list)
+  const positionPool = useMemo(() => {
+    const primary = primaryKeyword.toLowerCase().replace(/[^a-z0-9]/g, '');
+    return generated.filter((d) => {
+      if (d.length < minLen || d.length > maxLen) return false;
+      if (typeFilter !== 'all' && d.type !== typeFilter) return false;
+      const name = d.domain.split('.')[0] || '';
+      if (filterMode === 'starts') return !!primary && name.startsWith(primary);
+      if (filterMode === 'ends') return !!primary && name.endsWith(primary);
+      return true;
+    });
+  }, [generated, primaryKeyword, filterMode, minLen, maxLen, typeFilter]);
+
+  const availableCount = positionPool.filter((d) => d.available === true).length;
+  const takenCount = positionPool.filter((d) => d.available === false).length;
+  const uncheckedCount = positionPool.filter((d) => d.available === null).length;
+  const positionTotal = positionPool.length;
+  const progressPct =
+    generated.length > 0 ? Math.round((checkedCount / Math.max(generated.length, 1)) * 100) : 0;
+
+  const pill = (active: boolean) =>
+    `inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold rounded-lg border transition-colors ${
+      active
+        ? isLight
+          ? 'bg-slate-900 text-white border-slate-900'
+          : 'bg-white text-black border-white'
+        : isLight
+          ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+          : 'bg-white/[0.04] text-white/65 border-white/10 hover:bg-white/[0.08] hover:text-white'
+    }`;
 
   return (
-    <div className={`rounded-2xl border p-3 sm:p-5 ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border-white/10'}`}>
-      {/* Header */}
-      <div className="mb-4">
-        <div className="flex items-center gap-2.5 mb-1.5">
-          <div className={`p-1.5 sm:p-2 rounded-lg ${isLight ? 'bg-slate-100' : 'bg-white/5 border border-white/10'}`}>
-            <Icons.Search />
-          </div>
-          <div>
-            <h3 className="text-base sm:text-lg font-black">Keyword Domain Finder</h3>
-            <p className={`text-[11px] sm:text-xs ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-              Generate 1,000+ domain name ideas from your keywords
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Inputs */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
-        <Input
-          label="Primary Keyword"
-          value={primaryKeyword}
-          onChange={(e) => setPrimaryKeyword(e.target.value)}
-          placeholder="e.g., startup, coffee, travel..."
-          onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-        />
-        <Input
-          label="Secondary Keywords (comma separated)"
-          value={secondaryKeyword}
-          onChange={(e) => setSecondaryKeyword(e.target.value)}
-          placeholder="e.g., hub, pro, digital..."
-          onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-        />
-      </div>
-
-      {/* TLD Selection */}
-      <div className="mb-3">
-        <label className={`block text-[10px] sm:text-xs font-bold uppercase tracking-widest ${isLight ? 'text-slate-500' : 'text-white/40'} mb-2`}>
-          Extensions
-        </label>
-        <div className="flex flex-wrap gap-1 sm:gap-1.5">
-          {availableTlds.map((tld) => (
-            <button
-              key={tld}
-              onClick={() => toggleTld(tld)}
-              className={`px-2 py-1 text-[11px] sm:text-xs font-mono font-semibold rounded-lg border transition-colors ${
-                selectedTlds.includes(tld)
-                  ? isLight ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-black border-white'
-                  : isLight ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300' : 'bg-white/[0.03] text-white/60 border-white/10 hover:border-white/20'
+    <div className="space-y-3 sm:space-y-4 animate-fade-in">
+      {/* Main card — restored structure, cleaner */}
+      <div
+        className={`rounded-2xl border p-3.5 sm:p-5 ${
+          isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
+        }`}
+      >
+        <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+          <div className="flex items-center gap-2.5">
+            <div
+              className={`p-2 rounded-xl border ${
+                isLight ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-black border-white'
               }`}
             >
-              {tld}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Options + Search */}
-      <div className="flex items-center justify-between gap-3 mb-4">
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={includeHyphens}
-            onChange={(e) => setIncludeHyphens(e.target.checked)}
-            className="w-3.5 h-3.5 rounded"
+              <Icons.Search />
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-black tracking-tight">Keyword domain finder</h3>
+              <p className="text-[11px] sm:text-xs" style={{ color: 'var(--text-muted)' }}>
+                {PREFIXES.length.toLocaleString()}+ prefixes · {SUFFIXES.length.toLocaleString()}+ suffixes ·{' '}
+                {POPULAR.length.toLocaleString()}+ seeds
+              </p>
+            </div>
+          </div>
+          <PreferredRegistrarSelect
+            selectedRegistrar={selectedRegistrar}
+            onSelectRegistrar={setSelectedRegistrar}
+            label="Registrar"
           />
-          <span className={`text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-white/60'}`}>Include hyphens</span>
-        </label>
-        <Button onClick={handleSearch} isLoading={isGenerating} size="sm" className="px-4 sm:px-6">
-          Find Domains
-        </Button>
+        </div>
+
+        {/* Compact popular suggestions — not the full word list */}
+        <div className="mb-4">
+          <p className="text-[10px] font-bold uppercase tracking-wider mb-1.5" style={{ color: 'var(--text-muted)' }}>
+            Popular
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {POPULAR_CHIPS.map((item) => (
+              <button
+                key={item.word}
+                type="button"
+                onClick={() => void handleSearch(item.word)}
+                className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold transition-colors ${
+                  isLight
+                    ? 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-900 hover:text-white hover:border-slate-900'
+                    : 'bg-white/[0.04] text-white/70 border-white/10 hover:bg-white hover:text-black hover:border-white'
+                }`}
+              >
+                {item.word}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+          <Input
+            label="Primary keyword"
+            value={primaryKeyword}
+            onChange={(e) => setPrimaryKeyword(e.target.value)}
+            placeholder="Type any word — e.g. ai, coffee, travel…"
+            autoComplete="off"
+            spellCheck={false}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                void handleSearch();
+              }
+            }}
+          />
+          <Input
+            label="Secondary (optional)"
+            value={secondaryKeyword}
+            onChange={(e) => setSecondaryKeyword(e.target.value)}
+            placeholder="Optional — e.g. hub, pro, buddy"
+            autoComplete="off"
+            spellCheck={false}
+            helperText="Combines with primary (aibuddy, buddyai, …). Works alone if primary is empty."
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                void handleSearch();
+              }
+            }}
+          />
+        </div>
+
+        {/* Filters shown before search */}
+        <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div>
+            <label
+              className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
+                isLight ? 'text-slate-500' : 'text-white/40'
+              }`}
+            >
+              Keyword position
+            </label>
+            <div className="flex flex-wrap gap-1.5">
+              {(
+                [
+                  { id: 'all' as const, label: 'All matches', hint: 'Prefixes, suffixes & combos' },
+                  { id: 'starts' as const, label: 'Starts with', hint: 'keyword… (e.g. agenticlab.com)' },
+                  { id: 'ends' as const, label: 'Ends with', hint: '…keyword (e.g. getagentic.com)' },
+                ] as const
+              ).map((opt) => (
+                <button
+                  key={opt.id}
+                  type="button"
+                  title={opt.hint}
+                  onClick={() => setFilterMode(opt.id)}
+                  className={`px-3 py-1.5 text-[11px] sm:text-[12px] font-semibold rounded-lg border transition-colors ${
+                    filterMode === opt.id
+                      ? isLight
+                        ? 'bg-slate-900 text-white border-slate-900'
+                        : 'bg-white text-black border-white'
+                      : isLight
+                        ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                        : 'bg-white/[0.03] text-white/65 border-white/10 hover:border-white/20'
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label
+              className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
+                isLight ? 'text-slate-500' : 'text-white/40'
+              }`}
+            >
+              Sort by
+            </label>
+            <div className="flex flex-wrap gap-1.5">
+              {(
+                [
+                  { id: 'popularity' as const, label: 'Popularity' },
+                  { id: 'alpha' as const, label: 'Alphabetical' },
+                  { id: 'length' as const, label: 'Length' },
+                ] as const
+              ).map((opt) => (
+                <button
+                  key={opt.id}
+                  type="button"
+                  onClick={() => setSortMode(opt.id)}
+                  className={`px-3 py-1.5 text-[11px] sm:text-[12px] font-semibold rounded-lg border transition-colors ${
+                    sortMode === opt.id
+                      ? isLight
+                        ? 'bg-slate-900 text-white border-slate-900'
+                        : 'bg-white text-black border-white'
+                      : isLight
+                        ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                        : 'bg-white/[0.03] text-white/65 border-white/10 hover:border-white/20'
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+        <p className="mb-4 -mt-2 text-[10px] sm:text-[11px]" style={{ color: 'var(--text-muted)' }}>
+          {filterMode === 'starts' && 'Position: names that begin with your keyword. '}
+          {filterMode === 'ends' && 'Position: names that end with your keyword. '}
+          {filterMode === 'all' && 'Position: all combinations. '}
+          {sortMode === 'popularity' && 'Sort: most popular patterns first.'}
+          {sortMode === 'alpha' && 'Sort: A–Z by domain name.'}
+          {sortMode === 'length' && 'Sort: shortest names first.'}
+        </p>
+
+        <div className="mb-4">
+          <label
+            className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
+              isLight ? 'text-slate-500' : 'text-white/40'
+            }`}
+          >
+            Extensions
+          </label>
+          <div className="flex flex-wrap gap-1.5">
+            {availableTlds.map((tld) => (
+              <button
+                key={tld}
+                type="button"
+                onClick={() => toggleTld(tld)}
+                className={`px-2.5 py-1 text-[11px] sm:text-xs font-mono font-semibold rounded-lg border transition-colors ${
+                  selectedTlds.includes(tld)
+                    ? isLight
+                      ? 'bg-slate-900 text-white border-slate-900'
+                      : 'bg-white text-black border-white'
+                    : isLight
+                      ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                      : 'bg-white/[0.03] text-white/60 border-white/10 hover:border-white/20'
+                }`}
+              >
+                {tld}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={includeHyphens}
+                onChange={(e) => setIncludeHyphens(e.target.checked)}
+                className="w-3.5 h-3.5 rounded"
+              />
+              <span className={`text-[12px] ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
+                Include hyphens
+              </span>
+            </label>
+            {(primaryKeyword || secondaryKeyword) && (
+              <button
+                type="button"
+                onClick={() => {
+                  abortRef.current?.abort();
+                  setPrimaryKeyword('');
+                  setSecondaryKeyword('');
+                  setGenerated([]);
+                  setIsChecking(false);
+                  setCheckedCount(0);
+                }}
+                className={`text-[12px] font-semibold ${
+                  isLight ? 'text-slate-400 hover:text-slate-700' : 'text-white/35 hover:text-white/70'
+                }`}
+              >
+                Clear
+              </button>
+            )}
+          </div>
+
+          {/* Always visible CTA — enabled when primary OR secondary has text */}
+          <button
+            type="button"
+            onClick={() => void handleSearch()}
+            disabled={!canSearch || isGenerating}
+            className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-2.5 text-[13px] font-bold transition-opacity duration-150 w-full sm:w-auto ${
+              !canSearch || isGenerating
+                ? isLight
+                  ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                  : 'bg-white/15 text-white/35 cursor-not-allowed'
+                : isLight
+                  ? 'bg-slate-900 text-white hover:bg-slate-800'
+                  : 'bg-white text-black hover:bg-white/90'
+            }`}
+          >
+            {isGenerating ? (
+              <>
+                <span className="h-3.5 w-3.5 rounded-full border-2 border-current border-t-transparent animate-spin" />
+                Building…
+              </>
+            ) : (
+              <>
+                <Icons.Search className="w-4 h-4" />
+                Find domains
+              </>
+            )}
+          </button>
+        </div>
+        {!canSearch && (
+          <p className="mt-2 text-[11px] text-center sm:text-right" style={{ color: 'var(--text-muted)' }}>
+            Type a primary or secondary keyword, then click Find domains
+          </p>
+        )}
       </div>
 
       {/* Results */}
       {generated.length > 0 && (
-        <div className="animate-fade-in">
-          {/* Stats bar */}
-          <div className={`flex items-center justify-between gap-2 py-2 px-2 rounded-lg mb-2 ${isLight ? 'bg-slate-50' : 'bg-white/[0.03]'}`}>
-            <div className="flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs flex-wrap">
-              <span className={isLight ? 'text-slate-700 font-bold' : 'text-white/80 font-bold'}>{generated.length.toLocaleString()} names</span>
-              {availableCount > 0 && <span className="text-emerald-500 font-semibold">{availableCount} available</span>}
-              {takenCount > 0 && <span className={isLight ? 'text-slate-400' : 'text-white/30'}>{takenCount} taken</span>}
-              {isChecking && <span className={`${isLight ? 'text-blue-500' : 'text-blue-400'} animate-pulse`}>checking...</span>}
+        <div
+          className={`rounded-2xl border overflow-hidden ${
+            isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
+          }`}
+        >
+          <div
+            className={`px-3 sm:px-4 py-3 border-b space-y-2.5 ${
+              isLight ? 'border-slate-100' : 'border-white/[0.06]'
+            }`}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px]">
+                <span className={`font-bold tabular-nums ${isLight ? 'text-slate-900' : 'text-white'}`}>
+                  {filtered.length.toLocaleString()}
+                  <span className={`font-medium ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
+                    {' '}
+                    / {positionTotal.toLocaleString()}
+                    <span className="hidden sm:inline">
+                      {' '}
+                      ({generated.length.toLocaleString()} total)
+                    </span>
+                  </span>
+                </span>
+                {availableCount > 0 && (
+                  <span className="text-emerald-500 font-semibold">{availableCount} available</span>
+                )}
+                {takenCount > 0 && (
+                  <span className={isLight ? 'text-slate-400' : 'text-white/30'}>{takenCount} taken</span>
+                )}
+                {uncheckedCount > 0 && isChecking && (
+                  <span className={isLight ? 'text-slate-500' : 'text-white/45'}>
+                    checking {checkedCount.toLocaleString()}…
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <PreferredRegistrarSelect
+                  selectedRegistrar={selectedRegistrar}
+                  onSelectRegistrar={setSelectedRegistrar}
+                  label="Register at"
+                  className="text-[11px]"
+                />
+                {isChecking && (
+                  <button type="button" onClick={handleStop} className={pill(false)}>
+                    Stop
+                  </button>
+                )}
+              </div>
             </div>
-            <div className="flex items-center gap-1">
-              {isChecking && (
-                <button onClick={handleStop} className={`px-2 py-0.5 text-[10px] font-semibold rounded border transition-colors ${isLight ? 'border-slate-200 text-slate-500 hover:bg-slate-100' : 'border-white/10 text-white/50 hover:bg-white/5'}`}>
-                  Stop
-                </button>
-              )}
-            </div>
-          </div>
 
-          {/* Sort & Filter controls */}
-          <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
-            <div className="flex items-center gap-1">
-              {(['popularity', 'length', 'alpha'] as SortMode[]).map((mode) => (
-                <button
-                  key={mode}
-                  onClick={() => setSortMode(mode)}
-                  className={`px-2 py-1 text-[10px] sm:text-[11px] font-semibold rounded-md transition-colors ${
-                    sortMode === mode
-                      ? isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
-                      : isLight ? 'text-slate-500 hover:bg-slate-100' : 'text-white/40 hover:bg-white/5'
-                  }`}
-                >
-                  {mode === 'popularity' ? 'Popular' : mode === 'length' ? 'Short' : 'A-Z'}
+            {isChecking && (
+              <div className={`h-1 rounded-full overflow-hidden ${isLight ? 'bg-slate-100' : 'bg-white/10'}`}>
+                <div
+                  className="h-full rounded-full bg-emerald-500 transition-all duration-300"
+                  style={{ width: `${Math.min(100, progressPct)}%` }}
+                />
+              </div>
+            )}
+
+            {/* Position + sort also editable after results (same state as form) */}
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="text-[9px] font-bold uppercase tracking-wide mr-0.5" style={{ color: 'var(--text-muted)' }}>
+                Position
+              </span>
+              {(
+                [
+                  { id: 'all' as const, label: 'All' },
+                  { id: 'starts' as const, label: 'Starts' },
+                  { id: 'ends' as const, label: 'Ends' },
+                ] as const
+              ).map((m) => (
+                <button key={m.id} type="button" onClick={() => setFilterMode(m.id)} className={pill(filterMode === m.id)}>
+                  {m.label}
+                </button>
+              ))}
+              <span className="text-[9px] font-bold uppercase tracking-wide ml-1 mr-0.5" style={{ color: 'var(--text-muted)' }}>
+                Sort
+              </span>
+              {(
+                [
+                  { id: 'popularity' as const, label: 'Popularity' },
+                  { id: 'alpha' as const, label: 'Alphabetical' },
+                  { id: 'length' as const, label: 'Length' },
+                ] as const
+              ).map((m) => (
+                <button key={m.id} type="button" onClick={() => setSortMode(m.id)} className={pill(sortMode === m.id)}>
+                  {m.label}
                 </button>
               ))}
             </div>
-            <div className="flex items-center gap-1">
-              {(['all', 'starts', 'ends'] as FilterMode[]).map((mode) => (
-                <button
-                  key={mode}
-                  onClick={() => setFilterMode(mode)}
-                  className={`px-2 py-1 text-[10px] sm:text-[11px] font-semibold rounded-md transition-colors ${
-                    filterMode === mode
-                      ? isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
-                      : isLight ? 'text-slate-500 hover:bg-slate-100' : 'text-white/40 hover:bg-white/5'
+
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-1.5">
+                {(
+                  [
+                    { id: 'all' as const, label: `All (${positionTotal})` },
+                    { id: 'available' as const, label: `Available (${availableCount})` },
+                    { id: 'taken' as const, label: `Taken (${takenCount})` },
+                    { id: 'unchecked' as const, label: `Pending (${uncheckedCount})` },
+                  ] as const
+                ).map((m) => (
+                  <button key={m.id} type="button" onClick={() => setAvailFilter(m.id)} className={pill(availFilter === m.id)}>
+                    {m.label}
+                  </button>
+                ))}
+              </div>
+              <div className="flex flex-wrap items-center gap-1.5">
+                <select
+                  value={typeFilter}
+                  onChange={(e) => setTypeFilter(e.target.value as TypeFilter)}
+                  className={`rounded-lg border px-2 py-1 text-[11px] font-semibold outline-none ${
+                    isLight
+                      ? 'bg-white border-slate-200 text-slate-700'
+                      : 'bg-white/[0.04] border-white/10 text-white/70'
                   }`}
                 >
-                  {mode === 'all' ? 'All' : mode === 'starts' ? 'Starts with' : 'Ends with'}
-                </button>
-              ))}
+                  <option value="all">Type: All</option>
+                  <option value="exact">Exact</option>
+                  <option value="prefix">Prefix</option>
+                  <option value="suffix">Suffix</option>
+                  <option value="combo">Combo</option>
+                  <option value="hyphen">Hyphen</option>
+                </select>
+                <label className="inline-flex items-center gap-1 text-[10px]" style={{ color: 'var(--text-muted)' }}>
+                  Len
+                  <input
+                    type="number"
+                    min={2}
+                    max={maxLen}
+                    value={minLen}
+                    onChange={(e) => setMinLen(Math.max(2, Math.min(Number(e.target.value) || 2, maxLen)))}
+                    className={`w-10 rounded-md border px-1 py-1 tabular-nums outline-none ${
+                      isLight ? 'bg-white border-slate-200' : 'bg-white/[0.04] border-white/10'
+                    }`}
+                  />
+                  –
+                  <input
+                    type="number"
+                    min={minLen}
+                    max={40}
+                    value={maxLen}
+                    onChange={(e) => setMaxLen(Math.min(40, Math.max(Number(e.target.value) || 24, minLen)))}
+                    className={`w-10 rounded-md border px-1 py-1 tabular-nums outline-none ${
+                      isLight ? 'bg-white border-slate-200' : 'bg-white/[0.04] border-white/10'
+                    }`}
+                  />
+                </label>
+              </div>
             </div>
           </div>
 
-          {/* Availability filter */}
-          <div className="flex items-center gap-1 mb-3">
-            {(['all', 'available', 'taken'] as AvailFilter[]).map((mode) => (
-              <button
-                key={mode}
-                onClick={() => setAvailFilter(mode)}
-                className={`flex items-center gap-1 px-2 py-1 text-[10px] sm:text-[11px] font-semibold rounded-md transition-colors ${
-                  availFilter === mode
-                    ? isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
-                    : isLight ? 'text-slate-500 hover:bg-slate-100' : 'text-white/40 hover:bg-white/5'
-                }`}
-              >
-                {mode === 'available' && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />}
-                {mode === 'taken' && <span className="w-1.5 h-1.5 rounded-full bg-red-500" />}
-                {mode === 'all' ? `All (${filtered.length})` : mode === 'available' ? `Available (${availableCount})` : `Taken (${takenCount})`}
-              </button>
-            ))}
+          <div className="max-h-[min(68vh,calc(100vh-16rem))] overflow-y-auto overscroll-contain">
+            <div
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px"
+              style={{ backgroundColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)' }}
+            >
+              {visible.map((item) => (
+                <DomainRow
+                  key={item.domain}
+                  item={item}
+                  isLight={isLight}
+                  selectedRegistrar={selectedRegistrar}
+                  onSelectRegistrar={setSelectedRegistrar}
+                  onSelect={onSelect}
+                />
+              ))}
+            </div>
+            {visible.length === 0 && (
+              <p className="text-center py-12 text-[12px]" style={{ color: 'var(--text-muted)' }}>
+                No domains match these filters
+              </p>
+            )}
           </div>
 
-          {/* Domain grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-3">
-            {visible.map((item) => (
-              <DomainItem
-                key={item.domain}
-                item={item}
-                isLight={isLight}
-                onSelect={onSelect}
-              />
-            ))}
-          </div>
-
-          {/* Load more */}
           {visibleCount < filtered.length && (
-            <div className="text-center mt-3">
+            <div
+              className={`flex items-center justify-center gap-4 py-2.5 border-t ${
+                isLight ? 'border-slate-100 bg-slate-50/50' : 'border-white/[0.06] bg-black/20'
+              }`}
+            >
               <button
-                onClick={() => setVisibleCount((prev) => prev + 200)}
-                className={`px-4 py-2 text-xs font-semibold rounded-lg border transition-colors ${
-                  isLight ? 'border-slate-200 text-slate-600 hover:bg-slate-50' : 'border-white/10 text-white/60 hover:bg-white/5'
-                }`}
+                type="button"
+                onClick={() => setVisibleCount((n) => n + 200)}
+                className={pill(false)}
               >
-                Show more ({Math.min(200, filtered.length - visibleCount)} of {(filtered.length - visibleCount).toLocaleString()} remaining)
+                Show more ({Math.min(200, filtered.length - visibleCount)} of{' '}
+                {(filtered.length - visibleCount).toLocaleString()})
+              </button>
+              <button
+                type="button"
+                onClick={() => setVisibleCount(filtered.length)}
+                className="text-[11px] font-semibold"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                Show all {filtered.length.toLocaleString()}
               </button>
             </div>
           )}
         </div>
       )}
 
-      {/* Empty state */}
       {generated.length === 0 && !isGenerating && (
-        <div className={`text-center py-6 sm:py-10 rounded-xl ${isLight ? 'bg-slate-50' : 'bg-white/[0.02]'}`}>
-          <p className={`text-xs sm:text-sm ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
-            Enter a keyword and click &quot;Find Domains&quot; to generate 1,000+ name ideas
-          </p>
-        </div>
+        <p className="text-center text-[12px]" style={{ color: 'var(--text-muted)' }}>
+          Type any keyword (or use Popular), pick a registrar, then Find domains — prefixes, suffixes & live checks included.
+        </p>
       )}
     </div>
   );
 }
 
-/* ── Individual domain row ── */
-function DomainItem({ item, isLight, onSelect }: { item: GeneratedDomain; isLight: boolean; onSelect?: (domain: string) => void }) {
+function DomainRow({
+  item,
+  isLight,
+  selectedRegistrar,
+  onSelectRegistrar,
+  onSelect,
+}: {
+  item: GeneratedDomain;
+  isLight: boolean;
+  selectedRegistrar: import('@/lib/registrars').RegistrarName;
+  onSelectRegistrar: (r: import('@/lib/registrars').RegistrarName) => void;
+  onSelect?: (domain: string) => void;
+}) {
   const isAvailable = item.available === true;
   const isTaken = item.available === false;
   const isUnchecked = item.available === null;
+  const canRegister = isAvailable; // taken → WHOIS fallback; available → registrar menu
 
   return (
     <div
-      className={`flex items-center justify-between gap-1.5 py-[5px] px-1.5 rounded transition-colors cursor-pointer ${
-        isAvailable
-          ? isLight ? 'hover:bg-emerald-50' : 'hover:bg-emerald-500/5'
-          : isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.03]'
+      className={`flex items-center gap-1.5 px-2 sm:px-2.5 py-1.5 sm:py-2 min-w-0 transition-colors ${
+        isLight ? 'bg-white hover:bg-slate-50' : 'bg-[#0c0c0e] hover:bg-[#121214]'
       }`}
-      onClick={() => onSelect?.(item.domain)}
     >
-      <div className="flex items-center gap-1.5 min-w-0 flex-1">
-        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-          isUnchecked ? (isLight ? 'bg-slate-300' : 'bg-white/20') :
-          isAvailable ? 'bg-emerald-500' : 'bg-red-400'
-        }`} />
-        <span className={`text-[11px] sm:text-[13px] font-mono break-all line-clamp-1 ${
-          isAvailable
-            ? isLight ? 'text-slate-900 font-semibold' : 'text-white font-semibold'
-            : isTaken
-              ? isLight ? 'text-slate-400' : 'text-white/30'
-              : isLight ? 'text-slate-600' : 'text-white/60'
-        }`}>
+      <button
+        type="button"
+        className="flex items-center gap-1.5 min-w-0 flex-1 text-left"
+        onClick={() => onSelect?.(item.domain)}
+      >
+        <span
+          className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+            isUnchecked
+              ? isLight
+                ? 'bg-slate-300'
+                : 'bg-white/20'
+              : isAvailable
+                ? 'bg-emerald-500 shadow-[0_0_6px_rgba(52,211,153,0.45)]'
+                : 'bg-red-400/85'
+          }`}
+        />
+        <span
+          className={`font-mono text-[11px] sm:text-[12px] truncate ${
+            isAvailable
+              ? isLight
+                ? 'text-slate-900 font-semibold'
+                : 'text-white font-semibold'
+              : isTaken
+                ? isLight
+                  ? 'text-slate-400'
+                  : 'text-white/30'
+                : isLight
+                  ? 'text-slate-600'
+                  : 'text-white/55'
+          }`}
+        >
           {item.domain}
         </span>
-      </div>
-      {isAvailable && (
-        <a
-          href={`https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(item.domain)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="shrink-0 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold rounded bg-emerald-500 text-white hover:bg-emerald-600 transition-colors"
-        >
-          Register
-        </a>
+      </button>
+
+      {!isUnchecked && (
+        <div className="shrink-0" onClick={(e) => e.stopPropagation()}>
+          <RegistrarActionMenu
+            domain={item.domain}
+            selectedRegistrar={selectedRegistrar}
+            onSelectRegistrar={onSelectRegistrar}
+            canRegister={canRegister}
+            primaryLabel="Go"
+            primaryButtonClassName={`text-[10px] px-1.5 py-0.5 rounded-md font-bold transition-colors ${
+              isLight
+                ? 'bg-slate-900 text-white hover:bg-slate-800'
+                : 'bg-white text-black hover:bg-white/90'
+            }`}
+            chevronButtonClassName={`rounded-md p-1 transition-colors ${
+              isLight
+                ? 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
+                : 'text-white/40 hover:text-white/80 hover:bg-white/[0.08]'
+            }`}
+            fallbackButtonClassName={`text-[10px] px-1.5 py-0.5 rounded-md font-semibold transition-colors ${
+              isLight
+                ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                : 'bg-white/[0.06] text-white/60 hover:bg-white/10'
+            }`}
+          />
+        </div>
       )}
     </div>
   );

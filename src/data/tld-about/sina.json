@@ -1,0 +1,107 @@
+{
+  "tld": ".sina",
+  "slug": "sina",
+  "title": "About .sina domains",
+  "delegationTitle": "Delegation Record for .SINA",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Sina Corporation",
+  "sponsorDetail": "Sina Corporation\n20F Ideal Haza No. 59 Bei Si Huan Xi Road\nHaidian District\nBeijing 100080\nChina",
+  "administrativeContact": "Director, Legal Dept.",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.sina.com",
+  "whoisServer": "whois.nic.sina",
+  "rdapServer": "https://rdap.ngtld.cn/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ta.ngtld.cn",
+      "addresses": [
+        "42.83.130.1",
+        "2001:dc7:ffd1:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "tb.ngtld.cn",
+      "addresses": [
+        "42.83.131.1",
+        "2001:dc7:ffd2:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "tc.ngtld.cn",
+      "addresses": [
+        "42.83.132.1",
+        "2001:dc7:ffd3:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "td.ngtld.cn",
+      "addresses": [
+        "42.83.133.1"
+      ]
+    },
+    {
+      "host": "te.ngtld.cn",
+      "addresses": [
+        "42.83.134.1"
+      ]
+    }
+  ],
+  "about": ".SINA is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .SINA is listed by IANA as Sina Corporation. Anyone can typically register a .SINA name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sina.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:49:44Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".sina",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "corporation",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "sina",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".sina is a Generic top-level domain. Managed by Sina Corporation.",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

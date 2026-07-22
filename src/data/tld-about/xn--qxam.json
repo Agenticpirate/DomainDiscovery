@@ -1,0 +1,121 @@
+{
+  "tld": ".xn--qxam",
+  "slug": "xn--qxam",
+  "title": "About .xn--qxam domains",
+  "delegationTitle": "Delegation Record for .\u0395\u039b",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code GR",
+  "designation": "Country-code top-level domain designated for Greece",
+  "sponsor": "ICS-FORTH GR",
+  "sponsorDetail": "ICS-FORTH GR\n100 Nikolaou Plastira str.\nVassilika Vouton\nHeraklion Crete GR-70013\nGreece",
+  "administrativeContact": "Vaggelis Segredakis",
+  "technicalContact": "Panagiotis Sikas",
+  "registryUrl": "http://www.gr",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "estia.ics.forth.gr",
+      "addresses": [
+        "139.91.191.3",
+        "2001:648:2c30:0:0:0:191:3"
+      ]
+    },
+    {
+      "host": "gr-a.ics.forth.gr",
+      "addresses": [
+        "194.0.25.48",
+        "2001:678:20:0:0:0:0:48"
+      ]
+    },
+    {
+      "host": "gr-at.ics.forth.gr",
+      "addresses": [
+        "78.104.145.227"
+      ]
+    },
+    {
+      "host": "gr-d.ics.forth.gr",
+      "addresses": [
+        "194.0.11.102",
+        "2001:678:e:102:0:0:0:53"
+      ]
+    },
+    {
+      "host": "gr-m.ics.forth.gr",
+      "addresses": [
+        "194.0.4.10",
+        "2001:678:7:0:0:0:4:10"
+      ]
+    },
+    {
+      "host": "grdns.ics.forth.gr",
+      "addresses": [
+        "139.91.1.1"
+      ]
+    }
+  ],
+  "about": ".XN--QXAM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Greece. The IANA root zone lists the registry manager as ICS-FORTH GR. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--qxam.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:46Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--qxam",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "forth",
+    "geo",
+    "greece",
+    "letter",
+    "level",
+    "local business",
+    "regional brands",
+    "top",
+    "two",
+    "xn--qxam"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--qxam is a Country-code top-level domain designated for two-letter country code GR. Managed by ICS-FORTH GR.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

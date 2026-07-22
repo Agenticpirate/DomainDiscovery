@@ -1,0 +1,145 @@
+{
+  "tld": ".lb",
+  "slug": "lb",
+  "title": "About .lb domains",
+  "delegationTitle": "Delegation Record for .LB",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Lebanon",
+  "sponsor": "Internet Society Lebanon",
+  "sponsorDetail": "Internet Society Lebanon\nSpears Street\nHamra\nP.O. Box: 113-6596\nBeirut\nLebanon",
+  "administrativeContact": "Jacques Bakaev, Internet Society Lebanon Secretary",
+  "technicalContact": "Randy Bush",
+  "registryUrl": "https://www.lbdr.org.lb",
+  "whoisServer": "whois.lbdr.org.lb",
+  "rdapServer": "https://rdap.lbdr.org.lb",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "b.ns.lb",
+      "addresses": [
+        "147.28.0.39",
+        "2001:418:1:0:0:0:0:39"
+      ]
+    },
+    {
+      "host": "i.ns.lb",
+      "addresses": [
+        "77.72.229.254",
+        "2a01:3f0:0:306:0:0:0:53"
+      ]
+    },
+    {
+      "host": "m.ns.lb",
+      "addresses": [
+        "78.141.235.25",
+        "2001:19f0:7401:890d:5400:4ff:fea8:9ffa"
+      ]
+    },
+    {
+      "host": "n.ns.lb",
+      "addresses": [
+        "158.38.0.181",
+        "2001:700:0:503:0:0:aa:5302"
+      ]
+    },
+    {
+      "host": "nabil.ns.lb",
+      "addresses": [
+        "185.91.97.18",
+        "2a05:e380:2:4:0:0:0:2"
+      ]
+    },
+    {
+      "host": "r.ns.lb",
+      "addresses": [
+        "105.16.170.1",
+        "2c0f:feb0:c:1:0:0:1:1"
+      ]
+    },
+    {
+      "host": "s.ns.lb",
+      "addresses": [
+        "105.16.115.1",
+        "2c0f:feb0:2:1:0:0:1:8001"
+      ]
+    },
+    {
+      "host": "t.ns.lb",
+      "addresses": [
+        "139.84.235.208",
+        "2a05:f480:3000:205f:5400:4ff:fea4:e565"
+      ]
+    },
+    {
+      "host": "w.ns.lb",
+      "addresses": [
+        "203.178.141.64",
+        "2001:200:0:2:0:0:53:1"
+      ]
+    }
+  ],
+  "about": ".LB is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Lebanon. The IANA root zone lists the registry manager as Internet Society Lebanon. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.lb is the Internet country code top-level domain (ccTLD) for Lebanon.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/lb.html",
+  "wikipedia": ".lb is the Internet country code top-level domain (ccTLD) for Lebanon.",
+  "scrapedAt": "2026-07-21T21:44:00Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".lb",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "internet",
+    "lb",
+    "lebanon",
+    "level",
+    "local business",
+    "regional brands",
+    "society",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".lb is a Country-code top-level domain. Managed by Internet Society Lebanon.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

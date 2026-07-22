@@ -1,0 +1,105 @@
+{
+  "tld": ".gb",
+  "slug": "gb",
+  "title": "About .gb domains",
+  "delegationTitle": "Delegation Record for .GB",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for United Kingdom",
+  "sponsor": "Reserved Domain - IANA",
+  "sponsorDetail": "Reserved Domain - IANA",
+  "administrativeContact": "Naming Administrator",
+  "technicalContact": "Naming Administrator",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1985-07-24",
+  "recordUpdated": "2024-09-10",
+  "nameServers": [
+    {
+      "host": "ns.uu.net",
+      "addresses": [
+        "137.39.1.3"
+      ]
+    },
+    {
+      "host": "ns0.ja.net",
+      "addresses": [
+        "193.63.94.20",
+        "128.86.1.20",
+        "2001:630:0:9:0:0:0:14",
+        "2001:630:0:8:0:0:0:14"
+      ]
+    },
+    {
+      "host": "ns4.ja.net",
+      "addresses": [
+        "193.62.157.66",
+        "2001:630:0:47:0:0:0:42"
+      ]
+    }
+  ],
+  "about": ".GB is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for United Kingdom. The IANA root zone lists the registry manager as Reserved Domain - IANA. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.gb is a reserved Internet country code top-level domain (ccTLD) for the United Kingdom, derived from Great Britain.\nThe domain was introduced with RFC 920 in October 1984 that set out the creation of ccTLD generally using country codes derived from the corresponding two-letter code in the ISO 3166-1 list. However, the .uk domain had been created separately a few months before the compilation of this list. Consequently, .gb was never widely used. It is no longer possible to register under this domain.\n.gb was used for a number of years, mainly by British government organisations and commercial e-mail services using X.400-based e-mail infrastructure. This simplified translating between DNS domains and X.400 addresses, which used \"GB\" as a country code.\nWith the demise of X.400 e-mail and IANA's general aim of one TLD per country, use of .gb declined; the domain remains in existence, but it is not currently open to new domain registrations.\nAs of 2025, there are at least three subdomains resolving through DNS (although none serve a web page or use): hermes.dra.hmg.gb, delos.dra.hmg.gb, and dfhnet.dra.hmg.gb. They were originally owned by the Defence Research Agency, which became the Defence Evaluation and Research Agency in 1995 and was split into QinetiQ and the Defence Science and Technology Laboratory in 2001; the websites became defunct some time thereafter.\nAs of November 2022, Central Digital and Data Office's intention was to inform ICANN early in 2023 that the UK wishes to retire the .gb ccTLD.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gb.html",
+  "wikipedia": ".gb is a reserved Internet country code top-level domain (ccTLD) for the United Kingdom, derived from Great Britain.\nThe domain was introduced with RFC 920 in October 1984 that set out the creation of ccTLD generally using country codes derived from the corresponding two-letter code in the ISO 3166-1 list. However, the .uk domain had been created separately a few months before the compilation of this list. Consequently, .gb was never widely used. It is no longer possible to register under this domain.\n.gb was used for a number of years, mainly by British government organisations and commercial e-mail services using X.400-based e-mail infrastructure. This simplified translating between DNS domains and X.400 addresses, which used \"GB\" as a country code.\nWith the demise of X.400 e-mail and IANA's general aim of one TLD per country, use of .gb declined; the domain remains in existence, but it is not currently open to new domain registrations.\nAs of 2025, there are at least three subdomains resolving through DNS (although none serve a web page or use): hermes.dra.hmg.gb, delos.dra.hmg.gb, and dfhnet.dra.hmg.gb. They were originally owned by the Defence Research Agency, which became the Defence Evaluation and Research Agency in 1995 and was split into QinetiQ and the Defence Science and Technology Laboratory in 2001; the websites became defunct some time thereafter.\nAs of November 2022, Central Digital and Data Office's intention was to inform ICANN early in 2023 that the UK wishes to retire the .gb ccTLD.",
+  "scrapedAt": "2026-07-21T21:40:54Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".gb",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "gb",
+    "geo",
+    "iana",
+    "kingdom",
+    "level",
+    "local business",
+    "regional brands",
+    "reserved",
+    "top",
+    "united"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".gb is a Country-code top-level domain. Managed by Reserved Domain - IANA.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

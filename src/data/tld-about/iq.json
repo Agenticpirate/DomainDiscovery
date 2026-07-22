@@ -1,0 +1,122 @@
+{
+  "tld": ".iq",
+  "slug": "iq",
+  "title": "About .iq domains",
+  "delegationTitle": "Delegation Record for .IQ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Iraq",
+  "sponsor": "Communications and Media Commission (CMC)",
+  "sponsorDetail": "Communications and Media Commission (CMC)\nAl-Masbah Hay Babel\nDist. 929 St. 32 House 18\nBaghdad\nIraq",
+  "administrativeContact": "Administrative Role Account",
+  "technicalContact": "Technical Role Account",
+  "registryUrl": "https://registrar.cmc.iq",
+  "whoisServer": "whois.cmc.iq",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns.cmc.iq",
+      "addresses": [
+        "194.117.57.105"
+      ]
+    },
+    {
+      "host": "ns01.trs-dns.com",
+      "addresses": [
+        "64.96.1.1",
+        "2620:57:4001:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns01.trs-dns.net",
+      "addresses": [
+        "64.96.2.1",
+        "2620:57:4002:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "nsp-anycast.cmc.iq",
+      "addresses": [
+        "194.117.58.42",
+        "2001:500:14:8001:ad:0:0:42"
+      ]
+    }
+  ],
+  "about": ".IQ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Iraq. The IANA root zone lists the registry manager as Communications and Media Commission (CMC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.iq is the Internet country code top-level domain (ccTLD) for Iraq.\nThis domain was in limbo for several years, as the delegated manager was imprisoned in Texas on charges of alleged connections to Hamas (a State Department designated terrorist organization), for which he was later convicted in 2005. Some talk of redelegation and relaunching began taking place at the time of the 2003 invasion of Iraq, and in 2005 a redelegation to the National Communications and Media Commission of Iraq was approved by ICANN.\nRegistrations are within these categories:\n\n.iq \u2013 general\n.gov.iq \u2013 governmental entities\n.edu.iq \u2013 higher education institutions\n.sch.iq \u2013 public and private schools\n.com.iq \u2013 commercial entities recognised by the Ministry of Trade and/or other relevant authorities\n.mil.iq \u2013 military institutions\n.org.iq \u2013 non-profit organizations\n.net.iq \u2013 network service providers recognised by the Ministry of Trade\n.name.iq \u2013 individuals\nWhois services can be found at whois.cmc.iq (Archived 2017-05-20 at the Wayback Machine).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/iq.html",
+  "wikipedia": ".iq is the Internet country code top-level domain (ccTLD) for Iraq.\nThis domain was in limbo for several years, as the delegated manager was imprisoned in Texas on charges of alleged connections to Hamas (a State Department designated terrorist organization), for which he was later convicted in 2005. Some talk of redelegation and relaunching began taking place at the time of the 2003 invasion of Iraq, and in 2005 a redelegation to the National Communications and Media Commission of Iraq was approved by ICANN.\nRegistrations are within these categories:\n\n.iq \u2013 general\n.gov.iq \u2013 governmental entities\n.edu.iq \u2013 higher education institutions\n.sch.iq \u2013 public and private schools\n.com.iq \u2013 commercial entities recognised by the Ministry of Trade and/or other relevant authorities\n.mil.iq \u2013 military institutions\n.org.iq \u2013 non-profit organizations\n.net.iq \u2013 network service providers recognised by the Ministry of Trade\n.name.iq \u2013 individuals\nWhois services can be found at whois.cmc.iq (Archived 2017-05-20 at the Wayback Machine).",
+  "scrapedAt": "2026-07-21T21:42:47Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".iq",
+    "cctld",
+    "code",
+    "commission",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "iq",
+    "iraq",
+    "level",
+    "local business",
+    "media",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 11,
+    "cheapestRegistration": {
+      "registrar": "Marcaria International",
+      "price": "$229.00",
+      "value": 229.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$259.99",
+      "value": 259.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/iq"
+  },
+  "summary": ".iq is a Country-code top-level domain. Managed by Communications and Media Commission (CMC).",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,142 @@
+{
+  "tld": ".ua",
+  "slug": "ua",
+  "title": "About .ua domains",
+  "delegationTitle": "Delegation Record for .UA",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Ukraine",
+  "sponsor": "Hostmaster Ltd.",
+  "sponsorDetail": "Hostmaster Ltd.\nvul Vavilovykh 18\nKyiv 04060\nUkraine",
+  "administrativeContact": "Dmitry Kohmanyuk",
+  "technicalContact": "Igor Sviridov",
+  "registryUrl": "https://www.hostmaster.ua/",
+  "whoisServer": "whois.ua",
+  "rdapServer": "https://rdap.hostmaster.ua",
+  "registrationDate": "1992-12-01",
+  "recordUpdated": "2024-11-30",
+  "nameServers": [
+    {
+      "host": "bg.ns.ua",
+      "addresses": [
+        "185.136.96.185",
+        "185.136.97.185",
+        "2a06:fb00:1:0:0:0:4:185",
+        "2a06:fb00:1:0:0:0:2:185"
+      ]
+    },
+    {
+      "host": "cz.ns.ua",
+      "addresses": [
+        "185.43.134.15",
+        "2001:148f:fffd:0:0:0:0:15"
+      ]
+    },
+    {
+      "host": "ho1.ns.ua",
+      "addresses": [
+        "195.47.253.1",
+        "2001:67c:258:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "in1.ns.ua",
+      "addresses": [
+        "74.123.224.40",
+        "2604:ee00:0:101:0:0:0:40"
+      ]
+    },
+    {
+      "host": "nn.ns.ua",
+      "addresses": [
+        "194.58.197.4",
+        "2a01:3f1:c001:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "pch.ns.ua",
+      "addresses": [
+        "204.61.216.12",
+        "2001:500:14:6012:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "rcz.ns.ua",
+      "addresses": [
+        "193.46.128.10",
+        "2a02:850:ffe0:0:0:0:0:10"
+      ]
+    }
+  ],
+  "about": ".UA is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Ukraine. The IANA root zone lists the registry manager as Hostmaster Ltd.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ua.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:51:38Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ua",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "hostmaster",
+    "level",
+    "local business",
+    "regional brands",
+    "top",
+    "ua",
+    "ukraine"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 12,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$39.99",
+      "value": 39.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$44.99",
+      "value": 44.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/ua"
+  },
+  "summary": ".ua is a Country-code top-level domain. Managed by Hostmaster Ltd..",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

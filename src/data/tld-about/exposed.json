@@ -1,0 +1,130 @@
+{
+  "tld": ".exposed",
+  "slug": "exposed",
+  "title": "About .exposed domains",
+  "delegationTitle": "Delegation Record for .EXPOSED",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Binky Moon, LLC",
+  "sponsorDetail": "Binky Moon, LLC\nc/o Identity Digital Inc.\n10500 NE 8th Street, Suite 750\nBellevue WA 98004\nUnited States of America (the)",
+  "administrativeContact": "Vice President, Engineering",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "https://www.identity.digital/",
+  "whoisServer": null,
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "v0n0.nic.exposed",
+      "addresses": [
+        "65.22.24.58",
+        "2a01:8840:1a:0:0:0:0:58"
+      ]
+    },
+    {
+      "host": "v0n1.nic.exposed",
+      "addresses": [
+        "65.22.25.58",
+        "2a01:8840:1b:0:0:0:0:58"
+      ]
+    },
+    {
+      "host": "v0n2.nic.exposed",
+      "addresses": [
+        "65.22.26.58",
+        "2a01:8840:1c:0:0:0:0:58"
+      ]
+    },
+    {
+      "host": "v0n3.nic.exposed",
+      "addresses": [
+        "161.232.12.58",
+        "2a01:8840:f6:0:0:0:0:58"
+      ]
+    },
+    {
+      "host": "v2n0.nic.exposed",
+      "addresses": [
+        "65.22.27.58",
+        "2a01:8840:1d:0:0:0:0:58"
+      ]
+    },
+    {
+      "host": "v2n1.nic.exposed",
+      "addresses": [
+        "161.232.13.58",
+        "2a01:8840:f7:0:0:0:0:58"
+      ]
+    }
+  ],
+  "about": ".EXPOSED is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .EXPOSED is listed by IANA as Binky Moon, LLC. Anyone can typically register a .EXPOSED name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nDonuts Inc. was a domain name registrar and registry providing paid domain names under 270 new generic top-level domains (gTLDs), as made possible by ICANN's gTLD expansion program, as well as 173 other TLDs including .au (ccTLD) and .org (gTLD managed by the Public Interest Registry), through its own registry status (for example, managing the .social gTLD) and contracts between its subsidiaries and other registries.\nIt was co-founded in 2010 by Paul Stahura, Jonathon Nevett, Richard Tindal, and Daniel Schindler. The company was headquartered in Bellevue, Washington.\nIn July 2017, Donuts acquired Rightside, along with domain registrar Name.com.\nOn August 11, 2018, Donuts entered into an agreement to be acquired by private equity firm Abry Partners.\nIn October 2018, Donuts named Akram Atallah as Chief Executive Officer.\nIn December 2020, Donuts acquired the registry division of Afilias, Inc., a registry, registrar and mobile software developer headquartered outside of Philadelphia, Pennsylvania.\nIn January 2021, Ethos Capital acquired Donuts after their failed bid to gain control over the .org internet domain.\nIn 2022, Afilias and Donuts Inc. were merged under Identity Digital.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/exposed.html",
+  "wikipedia": "Donuts Inc. was a domain name registrar and registry providing paid domain names under 270 new generic top-level domains (gTLDs), as made possible by ICANN's gTLD expansion program, as well as 173 other TLDs including .au (ccTLD) and .org (gTLD managed by the Public Interest Registry), through its own registry status (for example, managing the .social gTLD) and contracts between its subsidiaries and other registries.\nIt was co-founded in 2010 by Paul Stahura, Jonathon Nevett, Richard Tindal, and Daniel Schindler. The company was headquartered in Bellevue, Washington.\nIn July 2017, Donuts acquired Rightside, along with domain registrar Name.com.\nOn August 11, 2018, Donuts entered into an agreement to be acquired by private equity firm Abry Partners.\nIn October 2018, Donuts named Akram Atallah as Chief Executive Officer.\nIn December 2020, Donuts acquired the registry division of Afilias, Inc., a registry, registrar and mobile software developer headquartered outside of Philadelphia, Pennsylvania.\nIn January 2021, Ethos Capital acquired Donuts after their failed bid to gain control over the .org internet domain.\nIn 2022, Afilias and Donuts Inc. were merged under Identity Digital.",
+  "scrapedAt": "2026-07-21T21:39:51Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".exposed",
+    "binky",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "exposed",
+    "generic",
+    "gtld",
+    "level",
+    "moon",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 47,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$14.91",
+      "value": 14.91
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$15.68",
+      "value": 15.68
+    },
+    "sourceUrl": "https://tld-list.com/tld/exposed"
+  },
+  "summary": ".exposed is a Generic top-level domain. Managed by Binky Moon, LLC.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

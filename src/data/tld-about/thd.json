@@ -1,0 +1,105 @@
+{
+  "tld": ".thd",
+  "slug": "thd",
+  "title": "About .thd domains",
+  "delegationTitle": "Delegation Record for .THD",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Home Depot Product Authority, LLC",
+  "sponsorDetail": "Home Depot Product Authority, LLC\n2455 Paces Ferry Road, NW\nAtlanta GA 30339\nUnited States of America (the)",
+  "administrativeContact": "Senior Corporate Counsel",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.homedepot.com",
+  "whoisServer": "whois.nic.thd",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.thd",
+      "addresses": [
+        "65.22.192.9",
+        "2a01:8840:ba:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "a2.nic.thd",
+      "addresses": [
+        "65.22.195.9",
+        "2a01:8840:bd:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "b0.nic.thd",
+      "addresses": [
+        "65.22.193.9",
+        "2a01:8840:bb:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "c0.nic.thd",
+      "addresses": [
+        "65.22.194.9",
+        "2a01:8840:bc:0:0:0:0:9"
+      ]
+    }
+  ],
+  "about": ".THD is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .THD is listed by IANA as Home Depot Product Authority, LLC. Anyone can typically register a .THD name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/thd.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:50:59Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".thd",
+    "authority",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "depot",
+    "domain",
+    "generic",
+    "gtld",
+    "home",
+    "level",
+    "product",
+    "thd",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".thd is a Generic top-level domain. Managed by Home Depot Product Authority, LLC.",
+  "wikiCheckedAt": "2026-07-22T04:23:22Z",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

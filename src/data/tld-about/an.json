@@ -1,0 +1,115 @@
+{
+  "tld": ".an",
+  "slug": "an",
+  "title": "About .an domains",
+  "delegationTitle": "Delegation Record for .AN",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Netherlands Antilles",
+  "sponsor": null,
+  "sponsorDetail": null,
+  "administrativeContact": null,
+  "technicalContact": null,
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "Number\u00a0Resources",
+      "addresses": [
+        "Number",
+        "Registries",
+        "RIR",
+        "Allocation",
+        "Data",
+        "Abuse",
+        "Information"
+      ]
+    },
+    {
+      "host": "Protocols",
+      "addresses": [
+        "Protocol",
+        "Registries",
+        "Time",
+        "Zone",
+        "Database"
+      ]
+    },
+    {
+      "host": "About\u00a0Us",
+      "addresses": [
+        "News",
+        "Performance",
+        "The",
+        "Organization",
+        "Archive",
+        "Contact",
+        "Us"
+      ]
+    }
+  ],
+  "about": ".AN is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Netherlands Antilles. The IANA root zone lists the registry manager as the national registry operator. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.an was the Internet country code top-level domain (ccTLD) for the former Netherlands Antilles. It was administered by the University of the Netherlands Antilles. The domain was phased out after the Netherlands Antilles were dissolved in 2010. As of November 2010 the .an domain remained live with over 800 domains registered under .an, including secondary levels. On 31 July 2015, use of the domain was discontinued.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/an.html",
+  "wikipedia": ".an was the Internet country code top-level domain (ccTLD) for the former Netherlands Antilles. It was administered by the University of the Netherlands Antilles. The domain was phased out after the Netherlands Antilles were dissolved in 2010. As of November 2010 the .an domain remained live with over 800 domains registered under .an, including secondary levels. On 31 July 2015, use of the domain was discontinued.",
+  "scrapedAt": "2026-07-21T21:34:45Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".an",
+    "an",
+    "antilles",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "netherlands",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".an is a Country-code top-level domain. Managed by Registry operator listed by IANA.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

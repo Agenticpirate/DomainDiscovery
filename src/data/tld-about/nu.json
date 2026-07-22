@@ -1,0 +1,136 @@
+{
+  "tld": ".nu",
+  "slug": "nu",
+  "title": "About .nu domains",
+  "delegationTitle": "Delegation Record for .NU",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Niue",
+  "sponsor": "The IUSN Foundation",
+  "sponsorDetail": "The IUSN Foundation\nP.O. Box 91\nAlofi 1010\nNiue",
+  "administrativeContact": "Emani Fakaotimanava-Lui",
+  "technicalContact": "NU Technical Contact",
+  "registryUrl": "https://www.internetstiftelsen.se",
+  "whoisServer": "whois.iis.nu",
+  "rdapServer": null,
+  "registrationDate": "1997-06-20",
+  "recordUpdated": "2025-07-03",
+  "nameServers": [
+    {
+      "host": "a.ns.nu",
+      "addresses": [
+        "194.146.106.22",
+        "2001:67c:1010:5:0:0:0:53"
+      ]
+    },
+    {
+      "host": "c.ns.nu",
+      "addresses": [
+        "192.36.144.107",
+        "2a01:3f0:0:301:0:0:0:53"
+      ]
+    },
+    {
+      "host": "d.ns.nu",
+      "addresses": [
+        "213.108.25.4",
+        "2001:67c:124c:e000:0:0:0:4"
+      ]
+    },
+    {
+      "host": "m.ns.nu",
+      "addresses": [
+        "194.0.11.112",
+        "2001:678:e:112:0:0:0:53"
+      ]
+    },
+    {
+      "host": "y.ns.nu",
+      "addresses": [
+        "185.159.197.150",
+        "2620:10a:80aa:0:0:0:0:150"
+      ]
+    },
+    {
+      "host": "z.ns.nu",
+      "addresses": [
+        "185.159.198.150",
+        "2620:10a:80ab:0:0:0:0:150"
+      ]
+    }
+  ],
+  "about": ".NU is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Niue. The IANA root zone lists the registry manager as The IUSN Foundation. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.nu is the Internet country code top-level domain (ccTLD) assigned to the island state of Niue. It was one of the first ccTLDs to be marketed to the Internet at large as an alternative to the gTLDs .com, .net, and .org. \nPlaying on the phonetic similarity between nu and new in English, and the fact that nu means \"now\" in several northern European languages, it was promoted as a new TLD with an abundance of good domain names available. The .nu domain is now controlled by the Internet Foundation in Sweden amid opposition from the government of Niue.\nGoogle treats .nu as a generic top-level domain (gTLD) because \"users and website owners frequently see [the domain] as being more generic than country-targeted.\"",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/nu.html",
+  "wikipedia": ".nu is the Internet country code top-level domain (ccTLD) assigned to the island state of Niue. It was one of the first ccTLDs to be marketed to the Internet at large as an alternative to the gTLDs .com, .net, and .org. \nPlaying on the phonetic similarity between nu and new in English, and the fact that nu means \"now\" in several northern European languages, it was promoted as a new TLD with an abundance of good domain names available. The .nu domain is now controlled by the Internet Foundation in Sweden amid opposition from the government of Niue.\nGoogle treats .nu as a generic top-level domain (gTLD) because \"users and website owners frequently see [the domain] as being more generic than country-targeted.\"",
+  "scrapedAt": "2026-07-21T21:46:38Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".nu",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "foundation",
+    "geo",
+    "iusn",
+    "level",
+    "local business",
+    "niue",
+    "nu",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 25,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$17.99",
+      "value": 17.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Hostinger",
+      "price": "$17.99",
+      "value": 17.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/nu"
+  },
+  "summary": ".nu is a Country-code top-level domain. Managed by The IUSN Foundation.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

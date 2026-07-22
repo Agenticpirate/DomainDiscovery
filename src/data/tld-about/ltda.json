@@ -1,0 +1,115 @@
+{
+  "tld": ".ltda",
+  "slug": "ltda",
+  "title": "About .ltda domains",
+  "delegationTitle": "Delegation Record for .LTDA",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "InterNetX Corp.",
+  "sponsorDetail": "InterNetX Corp.\n1001 Brickell Bay Drive, Suite 2700 Q-2\nMiami FL 33131\nUnited States of America (the)",
+  "administrativeContact": "CEO",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.internetx.info",
+  "whoisServer": "whois.nic.ltda",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.ltda",
+      "addresses": [
+        "65.22.116.17",
+        "2a01:8840:72:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "a2.nic.ltda",
+      "addresses": [
+        "65.22.119.17",
+        "2a01:8840:75:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "b0.nic.ltda",
+      "addresses": [
+        "65.22.117.17",
+        "2a01:8840:73:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "c0.nic.ltda",
+      "addresses": [
+        "65.22.118.17",
+        "2a01:8840:74:0:0:0:0:17"
+      ]
+    }
+  ],
+  "about": ".LTDA is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .LTDA is listed by IANA as InterNetX Corp.. Anyone can typically register a .LTDA name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ltda.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:44:37Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".ltda",
+    "brand",
+    "brandable names",
+    "corp",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "internetx",
+    "level",
+    "ltda",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 27,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$29.33",
+      "value": 29.33
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$30.15",
+      "value": 30.15
+    },
+    "sourceUrl": "https://tld-list.com/tld/ltda"
+  },
+  "summary": ".ltda is a Generic top-level domain. Managed by InterNetX Corp..",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

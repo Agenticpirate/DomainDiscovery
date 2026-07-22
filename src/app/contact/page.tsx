@@ -1,10 +1,17 @@
+import type { Metadata } from 'next';
 import { SimpleContentPage } from '@/components/layout/SimpleContentPage';
+
+export const metadata: Metadata = {
+  title: 'Contact DomainDiscovery — Support & Partnerships',
+  description:
+    'Contact DomainDiscovery (Domain Discovery) for product feedback, bug reports, and partnership inquiries about domain search tools.',
+};
 
 export default function ContactPage() {
   return (
     <SimpleContentPage
       title="Contact"
-      description="Get in touch about product feedback, partnerships, bug reports, or feature requests."
+      description="Get in touch about product feedback, partnerships, bug reports, or feature requests for DomainDiscovery domain name search tools."
       sections={[
         {
           heading: 'Support',

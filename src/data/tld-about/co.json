@@ -1,0 +1,123 @@
+{
+  "tld": ".co",
+  "slug": "co",
+  "title": "About .co domains",
+  "delegationTitle": "Delegation Record for .CO",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Colombia",
+  "sponsor": "Ministry of Information and Communications Technologies (MinTIC)",
+  "sponsorDetail": "Ministry of Information and Communications Technologies (MinTIC)\nEdificio Murillo Toro\nCra.8 #Entre Calles 12A y 12B\nBogot\u00e1 D.C. Cundinamarca 111711\nColombia",
+  "administrativeContact": "Thiago Grijo Dal-Toe",
+  "technicalContact": "CTO",
+  "registryUrl": "http://www.registry.co",
+  "whoisServer": "whois.registry.co",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.registrydns.co",
+      "addresses": [
+        "194.169.218.57",
+        "2001:67c:13cc:0:0:0:1:57"
+      ]
+    },
+    {
+      "host": "b.registrydns.co",
+      "addresses": [
+        "185.24.64.57",
+        "2a04:2b00:13cc:0:0:0:1:57"
+      ]
+    },
+    {
+      "host": "c.registrydns.co",
+      "addresses": [
+        "212.18.248.57",
+        "2a04:2b00:13ee:0:0:0:0:57"
+      ]
+    },
+    {
+      "host": "d.registrydns.co",
+      "addresses": [
+        "212.18.249.57",
+        "2a04:2b00:13ff:0:0:0:0:57"
+      ]
+    }
+  ],
+  "about": ".CO is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Colombia. The IANA root zone lists the registry manager as Ministry of Information and Communications Technologies (MinTIC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.co is the Internet country code top-level domain (ccTLD) assigned to Colombia.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/co.html",
+  "wikipedia": ".co is the Internet country code top-level domain (ccTLD) assigned to Colombia.",
+  "scrapedAt": "2026-07-21T21:33:19Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".co",
+    "cctld",
+    "co",
+    "code",
+    "colombia",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "level",
+    "local business",
+    "ministry",
+    "mintic",
+    "regional brands",
+    "technologies",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 53,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$3.48",
+      "value": 3.48
+    },
+    "cheapestRenewal": {
+      "registrar": "Cloudflare",
+      "price": "$24.00",
+      "value": 24.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/co"
+  },
+  "summary": ".co is a Country-code top-level domain. Managed by Ministry of Information and Communications Technologies (MinTIC).",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

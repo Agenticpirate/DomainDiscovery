@@ -1,0 +1,114 @@
+{
+  "tld": ".monster",
+  "slug": "monster",
+  "title": "About .monster domains",
+  "delegationTitle": "Delegation Record for .MONSTER",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "XYZ.COM LLC",
+  "sponsorDetail": "XYZ.COM LLC\n4425 Spring Mountain Rd., Suite 2\nLas Vegas NV 89102\nUnited States of America (the)",
+  "administrativeContact": "General Counsel",
+  "technicalContact": "CTO",
+  "registryUrl": "https://nic.monster/",
+  "whoisServer": "whois.nic.monster",
+  "rdapServer": "https://rdap.centralnic.com/monster",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.monster",
+      "addresses": [
+        "194.169.218.83",
+        "2001:67c:13cc:0:0:0:1:83"
+      ]
+    },
+    {
+      "host": "b.nic.monster",
+      "addresses": [
+        "185.24.64.83",
+        "2a04:2b00:13cc:0:0:0:1:83"
+      ]
+    },
+    {
+      "host": "c.nic.monster",
+      "addresses": [
+        "212.18.248.83",
+        "2a04:2b00:13ee:0:0:0:0:83"
+      ]
+    },
+    {
+      "host": "d.nic.monster",
+      "addresses": [
+        "212.18.249.83",
+        "2a04:2b00:13ff:0:0:0:0:83"
+      ]
+    }
+  ],
+  "about": ".MONSTER is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .MONSTER is listed by IANA as XYZ.COM LLC. Anyone can typically register a .MONSTER name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.monster is a generic top-level domain (gTLD) owned by XYZ.com. Originally delegated in 2014 by the employment website Monster.com as a brand-specific domain name, .monster was acquired by XYZ in 2019 as a general domain.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/monster.html",
+  "wikipedia": ".monster is a generic top-level domain (gTLD) owned by XYZ.com. Originally delegated in 2014 by the employment website Monster.com as a brand-specific domain name, .monster was acquired by XYZ in 2019 as a general domain.",
+  "scrapedAt": "2026-07-21T21:45:33Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".monster",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "monster",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 37,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$1.24",
+      "value": 1.24
+    },
+    "cheapestRenewal": {
+      "registrar": "NameSilo",
+      "price": "$11.48",
+      "value": 11.48
+    },
+    "sourceUrl": "https://tld-list.com/tld/monster"
+  },
+  "summary": ".monster is a Generic top-level domain. Managed by XYZ.COM LLC.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

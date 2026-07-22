@@ -1,0 +1,116 @@
+{
+  "tld": ".zuerich",
+  "slug": "zuerich",
+  "title": "About .zuerich domains",
+  "delegationTitle": "Delegation Record for .ZUERICH",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Kanton Z\u00fcrich (Canton of Zurich)",
+  "sponsorDetail": "Kanton Z\u00fcrich (Canton of Zurich)\nNeumuehlequai 10\nZurich Zurich CH-8090\nSwitzerland",
+  "administrativeContact": "Head of Communications",
+  "technicalContact": "CTO",
+  "registryUrl": "https://nic.zuerich",
+  "whoisServer": "whois.nic.zuerich",
+  "rdapServer": "https://rdap.centralnic.com/zuerich",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.zuerich",
+      "addresses": [
+        "194.169.218.107",
+        "2001:67c:13cc:0:0:0:1:107"
+      ]
+    },
+    {
+      "host": "b.nic.zuerich",
+      "addresses": [
+        "185.24.64.107",
+        "2a04:2b00:13cc:0:0:0:1:107"
+      ]
+    },
+    {
+      "host": "c.nic.zuerich",
+      "addresses": [
+        "212.18.248.107",
+        "2a04:2b00:13ee:0:0:0:0:107"
+      ]
+    },
+    {
+      "host": "d.nic.zuerich",
+      "addresses": [
+        "212.18.249.107",
+        "2a04:2b00:13ff:0:0:0:0:107"
+      ]
+    }
+  ],
+  "about": ".ZUERICH is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .ZUERICH is listed by IANA as Kanton Z\u00fcrich (Canton of Zurich). Anyone can typically register a .ZUERICH name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/zuerich.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:55:25Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".zuerich",
+    "brand",
+    "brandable names",
+    "canton",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "kanton",
+    "level",
+    "rich",
+    "top",
+    "zuerich",
+    "zurich"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 10,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$86.69",
+      "value": 86.69
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$89.99",
+      "value": 89.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/zuerich"
+  },
+  "summary": ".zuerich is a Generic top-level domain. Managed by Kanton Z\u00fcrich (Canton of Zurich).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

@@ -1,0 +1,102 @@
+{
+  "tld": ".mckinsey",
+  "slug": "mckinsey",
+  "title": "About .mckinsey domains",
+  "delegationTitle": "Delegation Record for .MCKINSEY",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "McKinsey Holdings, Inc.",
+  "sponsorDetail": "McKinsey Holdings, Inc.\n555 California Street\nSan Francisco CA 94194\nUnited States of America (the)",
+  "administrativeContact": "Associate General Counsel",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.mckinsey.com/",
+  "whoisServer": "whois.nic.mckinsey",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.mckinsey",
+      "addresses": [
+        "65.22.236.25",
+        "2a01:8840:e6:0:0:0:0:25"
+      ]
+    },
+    {
+      "host": "a2.nic.mckinsey",
+      "addresses": [
+        "65.22.239.25",
+        "2a01:8840:e9:0:0:0:0:25"
+      ]
+    },
+    {
+      "host": "b0.nic.mckinsey",
+      "addresses": [
+        "65.22.237.25",
+        "2a01:8840:e7:0:0:0:0:25"
+      ]
+    },
+    {
+      "host": "c0.nic.mckinsey",
+      "addresses": [
+        "65.22.238.25",
+        "2a01:8840:e8:0:0:0:0:25"
+      ]
+    }
+  ],
+  "about": ".MCKINSEY is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .MCKINSEY is listed by IANA as McKinsey Holdings, Inc.. Anyone can typically register a .MCKINSEY name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mckinsey.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:44:59Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".mckinsey",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "holdings",
+    "level",
+    "mckinsey",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".mckinsey is a Generic top-level domain. Managed by McKinsey Holdings, Inc..",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

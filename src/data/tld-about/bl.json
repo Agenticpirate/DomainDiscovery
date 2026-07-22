@@ -1,0 +1,117 @@
+{
+  "tld": ".bl",
+  "slug": "bl",
+  "title": "About .bl domains",
+  "delegationTitle": "Delegation Record for .BL",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Saint Barth\u00e9lemy",
+  "sponsor": "Not assigned",
+  "sponsorDetail": "Not assigned",
+  "administrativeContact": "Not assigned",
+  "technicalContact": "Not assigned",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "2007-10-11",
+  "recordUpdated": "2007-10-10",
+  "nameServers": [
+    {
+      "host": "Number\u00a0Resources",
+      "addresses": [
+        "Number",
+        "Registries",
+        "RIR",
+        "Allocation",
+        "Data",
+        "Abuse",
+        "Information"
+      ]
+    },
+    {
+      "host": "Protocols",
+      "addresses": [
+        "Protocol",
+        "Registries",
+        "Time",
+        "Zone",
+        "Database"
+      ]
+    },
+    {
+      "host": "About\u00a0Us",
+      "addresses": [
+        "News",
+        "Performance",
+        "The",
+        "Organization",
+        "Archive",
+        "Contact",
+        "Us"
+      ]
+    }
+  ],
+  "about": ".BL is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Saint Barth\u00e9lemy. The IANA root zone lists the registry manager as Not assigned. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.bl is an unused Internet country code top-level domain reserved for Saint Barth\u00e9lemy, an overseas collectivity of France located in the Leeward Islands of the northeastern Caribbean.\nIn September 2007, a decision by the ISO 3166 Maintenance Agency assigned BL as the ISO 3166-1 alpha-2 code for Saint Barth\u00e9lemy which resulted in the domain being allocated. This domain has been officially recognized by the Internet Assigned Numbers Authority since October 2007, yet it remains inactive within the Domain Name System root zone and has never been delegated to a registry operator. Local entities instead rely on France's national domain, .fr, and Guadeloupe's domain, .gp.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bl.html",
+  "wikipedia": ".bl is an unused Internet country code top-level domain reserved for Saint Barth\u00e9lemy, an overseas collectivity of France located in the Leeward Islands of the northeastern Caribbean.\nIn September 2007, a decision by the ISO 3166 Maintenance Agency assigned BL as the ISO 3166-1 alpha-2 code for Saint Barth\u00e9lemy which resulted in the domain being allocated. This domain has been officially recognized by the Internet Assigned Numbers Authority since October 2007, yet it remains inactive within the Domain Name System root zone and has never been delegated to a registry operator. Local entities instead rely on France's national domain, .fr, and Guadeloupe's domain, .gp.",
+  "scrapedAt": "2026-07-21T21:35:59Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".bl",
+    "assigned",
+    "barth",
+    "bl",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "lemy",
+    "level",
+    "local business",
+    "regional brands",
+    "saint",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".bl is a Country-code top-level domain. Managed by Not assigned.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

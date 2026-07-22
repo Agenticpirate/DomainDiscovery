@@ -1,0 +1,131 @@
+{
+  "tld": ".photo",
+  "slug": "photo",
+  "title": "About .photo domains",
+  "delegationTitle": "Delegation Record for .PHOTO",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Registry Services, LLC",
+  "sponsorDetail": "Registry Services, LLC\n100 S. Mill Ave, Suite 1600\nTempe AZ 85281\nUnited States of America (the)",
+  "administrativeContact": "IANA Contact",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://nic.photo/",
+  "whoisServer": "whois.nic.photo",
+  "rdapServer": "https://rdap.nic.photo/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.photo",
+      "addresses": [
+        "37.209.192.10",
+        "2001:dcd:1:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "b.nic.photo",
+      "addresses": [
+        "37.209.194.10",
+        "2001:dcd:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.nic.photo",
+      "addresses": [
+        "37.209.196.10",
+        "2001:dcd:3:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "x.nic.photo",
+      "addresses": [
+        "156.154.172.82",
+        "2610:a1:1074:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "y.nic.photo",
+      "addresses": [
+        "156.154.173.82",
+        "2610:a1:1075:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "z.nic.photo",
+      "addresses": [
+        "156.154.174.82",
+        "2610:a1:1076:0:0:0:1:82"
+      ]
+    }
+  ],
+  "about": ".PHOTO is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .PHOTO is listed by IANA as Registry Services, LLC. Anyone can typically register a .PHOTO name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nUniregistry is a large retail domain name registrar and web services provider; as well as a domain name registry that administers generic top-level domains. In February 2013, the related company Uniregistrar Corporation became an ICANN-accredited registrar and launched under the licensed Uniregistry brand name in 2014. Uniregistry's acquisition by GoDaddy was announced in February 2020.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/photo.html",
+  "wikipedia": "Uniregistry is a large retail domain name registrar and web services provider; as well as a domain name registry that administers generic top-level domains. In February 2013, the related company Uniregistrar Corporation became an ICANN-accredited registrar and launched under the licensed Uniregistry brand name in 2014. Uniregistry's acquisition by GoDaddy was announced in February 2020.",
+  "scrapedAt": "2026-07-21T21:34:45Z",
+  "categories": [
+    "creative"
+  ],
+  "useCases": [
+    "Portfolios",
+    "Agencies",
+    "Content creators",
+    "Media"
+  ],
+  "keywords": [
+    ".photo",
+    "agencies",
+    "content creators",
+    "creative",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "photo",
+    "portfolios",
+    "registry",
+    "services",
+    "top"
+  ],
+  "primaryCategory": "creative",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 45,
+    "cheapestRegistration": {
+      "registrar": "NameSilo",
+      "price": "$22.99",
+      "value": 22.99
+    },
+    "cheapestRenewal": {
+      "registrar": "NameSilo",
+      "price": "$22.99",
+      "value": 22.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/photo"
+  },
+  "summary": ".photo is a Generic top-level domain. Managed by Registry Services, LLC.",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

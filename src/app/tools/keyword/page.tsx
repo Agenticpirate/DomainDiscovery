@@ -6,6 +6,8 @@ import { Footer } from '@/components/layout/Footer';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { KeywordDomainFinder } from '@/components/domain/KeywordDomainFinder';
+import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
+import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function KeywordPage() {
@@ -16,37 +18,34 @@ export default function KeywordPage() {
   return (
     <div className="min-h-screen">
       <PageBackground variant="default" />
-      
       <Navigation activeTool="keyword" />
 
-      {/* Main Content */}
-      <main className="relative pt-20 sm:pt-24">
-        {/* Hero Section */}
-        <section className="px-3 sm:px-6 pb-4 sm:pb-7">
-          <div className="max-w-4xl mx-auto">
-            <Breadcrumb items={[
-              { label: 'Tools', href: '/' },
-              { label: 'Keyword Domains' }
-            ]} />
-          </div>
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl sm:text-5xl md:text-[3.9rem] font-black tracking-tight mb-3">
-              <span className={`bg-gradient-to-r ${isLight ? 'from-slate-900 via-slate-800 to-slate-600' : 'from-white via-white to-white/60'} bg-clip-text text-transparent`}>
-                Keyword Domains
-              </span>
-            </h1>
-            <p className={`text-xs sm:text-base ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-4 sm:mb-6`}>
-              Generate 1,000+ domain name ideas by combining your keywords with popular prefixes and suffixes. Inspired by Lean Domain Search.
-            </p>
-          </div>
+      <main className="relative pt-14 sm:pt-20 px-3 sm:px-4 pb-10 sm:pb-14">
+        <div className="max-w-7xl mx-auto">
+          <Breadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Keyword Domains' }]} />
+        </div>
+
+        <section className="max-w-3xl mx-auto text-center pt-3 sm:pt-5 pb-4 sm:pb-6">
+          <h1
+            className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2 ${
+              isLight ? 'text-slate-900' : 'text-white'
+            }`}
+          >
+            Keyword domains
+          </h1>
+          <p className={`text-sm sm:text-[15px] leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
+            Expand a keyword with thousands of prefixes & suffixes. Pick your registrar, then register available names.
+          </p>
+          {selectedDomain && (
+            <p className="mt-2 text-[12px] font-mono font-semibold text-emerald-500">Selected: {selectedDomain}</p>
+          )}
         </section>
 
-        {/* Keyword Finder */}
-        <section className="px-3 sm:px-6 pb-12 sm:pb-14">
-          <div className="max-w-5xl mx-auto">
-            <KeywordDomainFinder onSelect={setSelectedDomain} />
-          </div>
+        <section className="max-w-6xl mx-auto">
+          <KeywordDomainFinder onSelect={setSelectedDomain} />
         </section>
+
+        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.keyword} compact />
       </main>
 
       <Footer />

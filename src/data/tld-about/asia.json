@@ -1,0 +1,130 @@
+{
+  "tld": ".asia",
+  "slug": "asia",
+  "title": "About .asia domains",
+  "delegationTitle": "Delegation Record for .ASIA",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "DotAsia Organisation Ltd.",
+  "sponsorDetail": "DotAsia Organisation Ltd.\n12/F, Daily House\n35-37 Haiphong Road\nTsim Sha Tsui Kowloon\nHong Kong",
+  "administrativeContact": "DotAsia Administrative Contact",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.registry.asia",
+  "whoisServer": "whois.nic.asia",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.asia.afilias-nst.info",
+      "addresses": [
+        "199.19.55.1",
+        "2001:500:d:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.asia.afilias-nst.info",
+      "addresses": [
+        "199.249.114.1",
+        "2001:500:42:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.asia.afilias-nst.asia",
+      "addresses": [
+        "199.254.28.1",
+        "2001:500:16:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b2.asia.afilias-nst.org",
+      "addresses": [
+        "199.249.122.1",
+        "2001:500:4a:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.asia.afilias-nst.info",
+      "addresses": [
+        "199.254.29.1",
+        "2001:500:17:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d0.asia.afilias-nst.asia",
+      "addresses": [
+        "199.254.30.1",
+        "2001:500:18:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".ASIA is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\nThe top-level domain .asia is the officially designated regional domain in the Internet for Asia and the Pacific. It is a sponsored generic top-level-domain (sTLD) operated by the DotAsia Organisation Ltd. The domain is open to companies, individuals and organisations that have a connection to the region. Asia domains can be seen and used by international and Asian businesses; regional conferences and symposiums; as well as Asian artists and celebrities.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/asia.html",
+  "wikipedia": "The top-level domain .asia is the officially designated regional domain in the Internet for Asia and the Pacific. It is a sponsored generic top-level-domain (sTLD) operated by the DotAsia Organisation Ltd. The domain is open to companies, individuals and organisations that have a connection to the region. Asia domains can be seen and used by international and Asian businesses; regional conferences and symposiums; as well as Asian artists and celebrities.",
+  "scrapedAt": "2026-07-21T21:34:09Z",
+  "categories": [
+    "travel"
+  ],
+  "useCases": [
+    "Travel brands",
+    "Tourism",
+    "Hospitality"
+  ],
+  "keywords": [
+    ".asia",
+    "asia",
+    "domain",
+    "dotasia",
+    "hospitality",
+    "level",
+    "organisation",
+    "sponsored",
+    "stld",
+    "top",
+    "tourism",
+    "travel",
+    "travel brands"
+  ],
+  "primaryCategory": "travel",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 46,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$1.68",
+      "value": 1.68
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$10.68",
+      "value": 10.68
+    },
+    "sourceUrl": "https://tld-list.com/tld/asia"
+  },
+  "summary": ".asia is a Sponsored top-level domain. Managed by DotAsia Organisation Ltd..",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

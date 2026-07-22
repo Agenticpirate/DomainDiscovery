@@ -1,0 +1,140 @@
+{
+  "tld": ".sc",
+  "slug": "sc",
+  "title": "About .sc domains",
+  "delegationTitle": "Delegation Record for .SC",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Seychelles",
+  "sponsor": "VCS Pty Ltd",
+  "sponsorDetail": "VCS Pty Ltd\nP.O. Box 1000\nVictoria Mahe\nSeychelles",
+  "administrativeContact": "Arnold A. Chetty",
+  "technicalContact": "Marc Houareau",
+  "registryUrl": "http://www.nic.sc",
+  "whoisServer": "whois.nic.sc",
+  "rdapServer": null,
+  "registrationDate": "1997-05-09",
+  "recordUpdated": "2026-06-08",
+  "nameServers": [
+    {
+      "host": "a0.cctld.afilias-nst.info",
+      "addresses": [
+        "199.254.59.1",
+        "2001:500:25:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.cctld.afilias-nst.info",
+      "addresses": [
+        "199.249.116.1",
+        "2001:500:44:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.cctld.afilias-nst.org",
+      "addresses": [
+        "199.254.60.1",
+        "2001:500:26:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b2.cctld.afilias-nst.org",
+      "addresses": [
+        "199.249.124.1",
+        "2001:500:4c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.cctld.afilias-nst.info",
+      "addresses": [
+        "199.254.61.1",
+        "2001:500:27:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d0.cctld.afilias-nst.org",
+      "addresses": [
+        "199.254.62.1",
+        "2001:500:28:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns1.nic.sc",
+      "addresses": [
+        "41.86.57.54"
+      ]
+    }
+  ],
+  "about": ".SC is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Seychelles. The IANA root zone lists the registry manager as VCS Pty Ltd. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sc is the Internet country code top-level domain (ccTLD) for Seychelles. The TLD was previously also marketed to businesses in Scotland and the U.S. state of South Carolina, although the domains are subject to Seychelles registry rules. While SCregistrars, a company which marketed .sc domains to a target audience of Scottish sites, has since closed down, the .sc extension remains available through the Afilias Global platform via various well-known registrars internationally for direct registration at second-level.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sc.html",
+  "wikipedia": ".sc is the Internet country code top-level domain (ccTLD) for Seychelles. The TLD was previously also marketed to businesses in Scotland and the U.S. state of South Carolina, although the domains are subject to Seychelles registry rules. While SCregistrars, a company which marketed .sc domains to a target audience of Scottish sites, has since closed down, the .sc extension remains available through the Afilias Global platform via various well-known registrars internationally for direct registration at second-level.",
+  "scrapedAt": "2026-07-21T21:49:07Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sc",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "sc",
+    "seychelles",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 32,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$42.40",
+      "value": 42.4
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$82.88",
+      "value": 82.88
+    },
+    "sourceUrl": "https://tld-list.com/tld/sc"
+  },
+  "summary": ".sc is a Country-code top-level domain. Managed by VCS Pty Ltd.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

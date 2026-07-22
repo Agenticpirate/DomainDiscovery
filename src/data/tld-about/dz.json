@@ -1,0 +1,134 @@
+{
+  "tld": ".dz",
+  "slug": "dz",
+  "title": "About .dz domains",
+  "delegationTitle": "Delegation Record for .DZ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Algeria",
+  "sponsor": "CERIST",
+  "sponsorDetail": "CERIST\nRue des Trois Freres Aissiou\nBen-Aknoun Algiers 16035\nAlgeria",
+  "administrativeContact": "Aouaouche El-Maouhab",
+  "technicalContact": "Aouaouche El-Maouhab",
+  "registryUrl": "http://www.nic.dz",
+  "whoisServer": "whois.nic.dz",
+  "rdapServer": null,
+  "registrationDate": "1994-01-03",
+  "recordUpdated": "2025-10-10",
+  "nameServers": [
+    {
+      "host": "ns-dz.afrinic.net",
+      "addresses": [
+        "196.216.168.36",
+        "2001:43f8:120:0:0:0:0:36"
+      ]
+    },
+    {
+      "host": "ns1.nic.dz",
+      "addresses": [
+        "193.194.64.242",
+        "2001:4340:1030:2:0:0:0:2"
+      ]
+    },
+    {
+      "host": "ns2.nic.dz",
+      "addresses": [
+        "213.179.160.66"
+      ]
+    },
+    {
+      "host": "ns3.nic.fr",
+      "addresses": [
+        "192.134.0.49",
+        "2001:660:3006:1:0:0:1:1"
+      ]
+    },
+    {
+      "host": "ns4.nic.dz",
+      "addresses": [
+        "204.61.216.103",
+        "2001:500:14:6103:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ns5.nic.dz",
+      "addresses": [
+        "193.0.9.71",
+        "2a13:27c0:30:0:0:0:0:71"
+      ]
+    }
+  ],
+  "about": ".DZ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Algeria. The IANA root zone lists the registry manager as CERIST. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.dz is the country code top-level domain (ccTLD) for Algeria (from Dzayer, the local name for Algeria).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/dz.html",
+  "wikipedia": ".dz is the country code top-level domain (ccTLD) for Algeria (from Dzayer, the local name for Algeria).",
+  "scrapedAt": "2026-07-21T21:39:22Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".dz",
+    "algeria",
+    "cctld",
+    "cerist",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "dz",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 7,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$34.99",
+      "value": 34.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$36.99",
+      "value": 36.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/dz"
+  },
+  "summary": ".dz is a Country-code top-level domain. Managed by CERIST.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -1,0 +1,117 @@
+{
+  "tld": ".xn--90ais",
+  "slug": "xn--90ais",
+  "title": "About .xn--90ais domains",
+  "delegationTitle": "Delegation Record for .\u0411\u0415\u041b",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code BY",
+  "designation": "Country-code top-level domain designated for Belarus",
+  "sponsor": "Belarusian Cloud Technologies LLC",
+  "sponsorDetail": "Belarusian Cloud Technologies LLC\nC. Zetkin Str. 24, office 602\nMinsk 220004\nBelarus",
+  "administrativeContact": "Head of Sector",
+  "technicalContact": "General Director",
+  "registryUrl": "https://cctld.by",
+  "whoisServer": "whois.cctld.by",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "dns1.tld.becloudby.com",
+      "addresses": [
+        "93.125.25.72",
+        "2a00:c827:a:2:0:0:0:2"
+      ]
+    },
+    {
+      "host": "dns2.tld.becloudby.tech",
+      "addresses": [
+        "93.125.25.73",
+        "2a00:c827:a:3:0:0:0:2"
+      ]
+    },
+    {
+      "host": "dns3.tld.becloudby.tech",
+      "addresses": [
+        "185.98.83.4",
+        "2a01:ba80:e:c:1:0:0:4c"
+      ]
+    },
+    {
+      "host": "dns4.tld.becloudby.tech",
+      "addresses": [
+        "31.44.1.137",
+        "2a0e:b81:8001:1001:0:0:0:2"
+      ]
+    },
+    {
+      "host": "dns7.tld.becloudby.com",
+      "addresses": [
+        "31.44.5.245"
+      ]
+    }
+  ],
+  "about": ".XN--90AIS is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Belarus. The IANA root zone lists the registry manager as Belarusian Cloud Technologies LLC. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--90ais.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:16Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--90ais",
+    "belarus",
+    "belarusian",
+    "cctld",
+    "cloud",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "letter",
+    "level",
+    "local business",
+    "regional brands",
+    "technologies",
+    "top",
+    "two",
+    "xn--90ais"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--90ais is a Country-code top-level domain designated for two-letter country code BY. Managed by Belarusian Cloud Technologies LLC.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

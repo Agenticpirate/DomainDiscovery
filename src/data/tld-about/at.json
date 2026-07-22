@@ -1,0 +1,142 @@
+{
+  "tld": ".at",
+  "slug": "at",
+  "title": "About .at domains",
+  "delegationTitle": "Delegation Record for .AT",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Austria",
+  "sponsor": "nic.at GmbH",
+  "sponsorDetail": "nic.at GmbH\nJakob-Haringer-Strasse 8\nSalzburg 5020\nAustria",
+  "administrativeContact": "Geschaeftsfuehrer NIC.AT",
+  "technicalContact": "Technik NIC.AT",
+  "registryUrl": "http://www.nic.at/",
+  "whoisServer": "whois.nic.at",
+  "rdapServer": null,
+  "registrationDate": "1988-01-20",
+  "recordUpdated": "2025-05-14",
+  "nameServers": [
+    {
+      "host": "d.ns.at",
+      "addresses": [
+        "81.91.161.98",
+        "2a02:568:20:1:0:0:0:d"
+      ]
+    },
+    {
+      "host": "j.ns.at",
+      "addresses": [
+        "194.146.106.50",
+        "2001:67c:1010:12:0:0:0:53"
+      ]
+    },
+    {
+      "host": "n.ns.at",
+      "addresses": [
+        "81.91.173.130",
+        "2a02:568:281:0:0:0:0:130"
+      ]
+    },
+    {
+      "host": "ns1.univie.ac.at",
+      "addresses": [
+        "78.104.144.2",
+        "2001:628:2030:4301:0:0:0:2"
+      ]
+    },
+    {
+      "host": "ns2.univie.ac.at",
+      "addresses": [
+        "192.92.125.2",
+        "2001:678:1c:0:0:0:0:2"
+      ]
+    },
+    {
+      "host": "r.ns.at",
+      "addresses": [
+        "194.0.25.10",
+        "2001:678:20:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "u.ns.at",
+      "addresses": [
+        "185.102.12.2",
+        "2a02:850:ffff:0:0:0:0:2"
+      ]
+    }
+  ],
+  "about": ".AT is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Austria. The IANA root zone lists the registry manager as nic.at GmbH. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.at is the Internet country code top-level domain (ccTLD) for Austria. It was introduced on 20 January 1988 and initially administered by the University of Vienna, before being taken over in 1998 by nic.at, based in Salzburg.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/at.html",
+  "wikipedia": ".at is the Internet country code top-level domain (ccTLD) for Austria. It was introduced on 20 January 1988 and initially administered by the University of Vienna, before being taken over in 1998 by nic.at, based in Salzburg.",
+  "scrapedAt": "2026-07-21T21:35:04Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".at",
+    "at",
+    "austria",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "gmbh",
+    "level",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 38,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$11.24",
+      "value": 11.24
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$11.24",
+      "value": 11.24
+    },
+    "sourceUrl": "https://tld-list.com/tld/at"
+  },
+  "summary": ".at is a Country-code top-level domain. Managed by nic.at GmbH.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -1,0 +1,126 @@
+{
+  "tld": ".aero",
+  "slug": "aero",
+  "title": "About .aero domains",
+  "delegationTitle": "Delegation Record for .AERO",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "Societe Internationale de Telecommunications Aeronautique (SITA INC USA)",
+  "sponsorDetail": "Societe Internationale de Telecommunications Aeronautique (SITA INC USA)\n3100 Cumberland Boulevard\nAtlanta GA 30339\nUnited States of America (the)",
+  "administrativeContact": "Vice President, Engineering",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.information.aero",
+  "whoisServer": "whois.aero",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.aero",
+      "addresses": [
+        "199.254.51.1",
+        "2001:500:1d:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.nic.aero",
+      "addresses": [
+        "199.249.115.1",
+        "2001:500:43:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.nic.aero",
+      "addresses": [
+        "199.254.52.1",
+        "2001:500:1e:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b2.nic.aero",
+      "addresses": [
+        "199.249.123.1",
+        "2001:500:4b:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.nic.aero",
+      "addresses": [
+        "199.254.54.1",
+        "2001:500:20:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".AERO is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\n.aero (derived from aeronautics) is a sponsored top-level domain (sTLD) used in the Domain Name System of the Internet.  It is the first sponsored top-level domain based on a single industrial theme. The .aero domain is reserved for companies, organizations, associations, government agencies, and individuals in aerospace-related fields. It was created in 2002 and is operated by SITA.  SITA created and operates the Dot Aero Council.\nTwo-letter codes under .aero are reserved for airlines according to the IATA Airline Designators. While three-letter codes were initially reserved for airports (IATA airport code), they were released for registration by the larger aviation and aerospace community on December 1, 2008.\nThe aero top-level domain was initially approved in 2001 for a 5-year term expiring December 17, 2006 as part of a proof-of-concept of new top-level domains. The agreement was extended in October 2006 for a six-month term until June 17, 2007, and continued to be renewed on a June\u2013December six-month cycle through June 17, 2009. In 2009, SITA and ICANN completed a new 10-year sponsorship agreement for the operation of .aero.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/aero.html",
+  "wikipedia": ".aero (derived from aeronautics) is a sponsored top-level domain (sTLD) used in the Domain Name System of the Internet.  It is the first sponsored top-level domain based on a single industrial theme. The .aero domain is reserved for companies, organizations, associations, government agencies, and individuals in aerospace-related fields. It was created in 2002 and is operated by SITA.  SITA created and operates the Dot Aero Council.\nTwo-letter codes under .aero are reserved for airlines according to the IATA Airline Designators. While three-letter codes were initially reserved for airports (IATA airport code), they were released for registration by the larger aviation and aerospace community on December 1, 2008.\nThe aero top-level domain was initially approved in 2001 for a 5-year term expiring December 17, 2006 as part of a proof-of-concept of new top-level domains. The agreement was extended in October 2006 for a six-month term until June 17, 2007, and continued to be renewed on a June\u2013December six-month cycle through June 17, 2009. In 2009, SITA and ICANN completed a new 10-year sponsorship agreement for the operation of .aero.",
+  "scrapedAt": "2026-07-21T21:34:18Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".aero",
+    "aero",
+    "aeronautique",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "internationale",
+    "level",
+    "sita",
+    "societe",
+    "sponsored",
+    "stld",
+    "telecommunications",
+    "top"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 19,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$44.99",
+      "value": 44.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$44.99",
+      "value": 44.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/aero"
+  },
+  "summary": ".aero is a Sponsored top-level domain. Managed by Societe Internationale de Telecommunications Aeronautique (SITA INC USA).",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

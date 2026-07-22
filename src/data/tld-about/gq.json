@@ -1,0 +1,122 @@
+{
+  "tld": ".gq",
+  "slug": "gq",
+  "title": "About .gq domains",
+  "delegationTitle": "Delegation Record for .GQ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Equatorial Guinea",
+  "sponsor": "GETESA",
+  "sponsorDetail": "GETESA\nCalle Rey Boncoro N 219 APDO 494\nMalabo\nEquatorial Guinea",
+  "administrativeContact": "CTO",
+  "technicalContact": "Jefe Departamento Sistemas",
+  "registryUrl": "http://www.dominio.gq",
+  "whoisServer": "whois.dominio.gq",
+  "rdapServer": null,
+  "registrationDate": "1997-07-10",
+  "recordUpdated": "2023-08-14",
+  "nameServers": [
+    {
+      "host": "a.ns.gq",
+      "addresses": [
+        "185.21.168.65",
+        "2a04:1b00:10:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b.ns.gq",
+      "addresses": [
+        "185.21.169.65",
+        "2a04:1b00:11:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c.ns.gq",
+      "addresses": [
+        "185.21.170.65",
+        "2a04:1b00:12:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d.ns.gq",
+      "addresses": [
+        "185.21.171.65",
+        "2a04:1b00:13:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".GQ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Equatorial Guinea. The IANA root zone lists the registry manager as GETESA. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.gq is the country code top-level domain (ccTLD) for Equatorial Guinea. \nThe .gq registry allows the creation of emoji domain names.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gq.html",
+  "wikipedia": ".gq is the country code top-level domain (ccTLD) for Equatorial Guinea. \nThe .gq registry allows the creation of emoji domain names.",
+  "scrapedAt": "2026-07-21T21:41:28Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".gq",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "equatorial",
+    "for",
+    "geo",
+    "getesa",
+    "gq",
+    "guinea",
+    "level",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 7,
+    "cheapestRegistration": {
+      "registrar": "INWX",
+      "price": "$9.98",
+      "value": 9.98
+    },
+    "cheapestRenewal": {
+      "registrar": "INWX",
+      "price": "$9.98",
+      "value": 9.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/gq"
+  },
+  "summary": ".gq is a Country-code top-level domain. Managed by GETESA.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

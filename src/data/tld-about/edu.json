@@ -1,0 +1,180 @@
+{
+  "tld": ".edu",
+  "slug": "edu",
+  "title": "About .edu domains",
+  "delegationTitle": "Delegation Record for .EDU",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "EDUCAUSE",
+  "sponsorDetail": "EDUCAUSE\n282 Century Place, Suite 5000\nLouisville CO 80027\nUnited States of America (the)",
+  "administrativeContact": "Information Services Administration",
+  "technicalContact": "Registry Customer Service",
+  "registryUrl": "http://www.educause.edu/edudomain",
+  "whoisServer": "whois.educause.edu",
+  "rdapServer": null,
+  "registrationDate": "1985-01-01",
+  "recordUpdated": "2026-03-10",
+  "nameServers": [
+    {
+      "host": "a.edu-servers.net",
+      "addresses": [
+        "192.5.6.30",
+        "2001:503:a83e:0:0:0:2:30"
+      ]
+    },
+    {
+      "host": "b.edu-servers.net",
+      "addresses": [
+        "192.33.14.30",
+        "2001:503:231d:0:0:0:2:30"
+      ]
+    },
+    {
+      "host": "c.edu-servers.net",
+      "addresses": [
+        "192.26.92.30",
+        "2001:503:83eb:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "d.edu-servers.net",
+      "addresses": [
+        "192.31.80.30",
+        "2001:500:856e:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "e.edu-servers.net",
+      "addresses": [
+        "192.12.94.30",
+        "2001:502:1ca1:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "f.edu-servers.net",
+      "addresses": [
+        "192.35.51.30",
+        "2001:503:d414:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "g.edu-servers.net",
+      "addresses": [
+        "192.42.93.30",
+        "2001:503:eea3:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "h.edu-servers.net",
+      "addresses": [
+        "192.54.112.30",
+        "2001:502:8cc:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "i.edu-servers.net",
+      "addresses": [
+        "192.43.172.30",
+        "2001:503:39c1:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "j.edu-servers.net",
+      "addresses": [
+        "192.48.79.30",
+        "2001:502:7094:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "k.edu-servers.net",
+      "addresses": [
+        "192.52.178.30",
+        "2001:503:d2d:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "l.edu-servers.net",
+      "addresses": [
+        "192.41.162.30",
+        "2001:500:d937:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "m.edu-servers.net",
+      "addresses": [
+        "192.55.83.30",
+        "2001:501:b1f9:0:0:0:0:30"
+      ]
+    }
+  ],
+  "about": ".EDU is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\nedu is a sponsored top-level domain (sTLD) in the Domain Name System of the Internet. The domain was implemented in 1985 to create a domain name hierarchy for organizations with a focus on education. At the time, it was open for registration for entities from any region. Since October 29, 2001, new registrants for second-level domain names have been required to be United States-accredited institutions of higher education.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/edu.html",
+  "wikipedia": "edu is a sponsored top-level domain (sTLD) in the Domain Name System of the Internet. The domain was implemented in 1985 to create a domain name hierarchy for organizations with a focus on education. At the time, it was open for registration for entities from any region. Since October 29, 2001, new registrants for second-level domain names have been required to be United States-accredited institutions of higher education.",
+  "scrapedAt": "2026-07-21T21:39:28Z",
+  "categories": [
+    "education"
+  ],
+  "useCases": [
+    "Schools",
+    "Courses",
+    "Edtech"
+  ],
+  "keywords": [
+    ".edu",
+    "courses",
+    "domain",
+    "edtech",
+    "edu",
+    "education",
+    "educause",
+    "level",
+    "schools",
+    "sponsored",
+    "stld",
+    "top"
+  ],
+  "primaryCategory": "education",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 1,
+    "cheapestRegistration": {
+      "registrar": "Marcaria International",
+      "price": "$169.00",
+      "value": 169.0
+    },
+    "cheapestRenewal": {
+      "registrar": null,
+      "price": null,
+      "value": null
+    },
+    "sourceUrl": "https://tld-list.com/tld/edu"
+  },
+  "summary": ".edu is a Sponsored top-level domain. Managed by EDUCAUSE.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

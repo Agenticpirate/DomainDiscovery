@@ -1,0 +1,126 @@
+{
+  "tld": ".br",
+  "slug": "br",
+  "title": "About .br domains",
+  "delegationTitle": "Delegation Record for .BR",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Brazil",
+  "sponsor": "Comite Gestor da Internet no Brasil",
+  "sponsorDetail": "Comite Gestor da Internet no Brasil\nAv. das Na\u00e7\u00f5es Unidas, 11541, 7. andar\nS\u00e3o Paulo SP 04578-000\nBrazil",
+  "administrativeContact": "Demi Getschko",
+  "technicalContact": "Frederico Augusto de Carvalho Neves",
+  "registryUrl": "http://registro.br/",
+  "whoisServer": "whois.registro.br",
+  "rdapServer": "https://rdap.registro.br/",
+  "registrationDate": "1989-04-18",
+  "recordUpdated": "2023-11-14",
+  "nameServers": [
+    {
+      "host": "a.dns.br",
+      "addresses": [
+        "200.219.148.10",
+        "2001:12f8:6:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "b.dns.br",
+      "addresses": [
+        "200.189.41.10",
+        "2001:12f8:8:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.dns.br",
+      "addresses": [
+        "200.192.233.10",
+        "2001:12f8:a:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "d.dns.br",
+      "addresses": [
+        "200.219.154.10",
+        "2001:12f8:4:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "e.dns.br",
+      "addresses": [
+        "200.229.248.10",
+        "2001:12f8:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "f.dns.br",
+      "addresses": [
+        "200.219.159.10",
+        "2001:12f8:c:0:0:0:0:10"
+      ]
+    }
+  ],
+  "about": ".BR is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Brazil. The IANA root zone lists the registry manager as Comite Gestor da Internet no Brasil. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.br is the Internet country code top-level domain (ccTLD) for Brazil. It was administered by the Brazilian Internet Steering Committee until 2005 when it started being administered by Brazilian Network Information Center. A local contact is required for any registration. Registrations of domain names with Portuguese characters are also accepted.\nWith the exception of universities, the second-level domain is fixed and selected from a list that defines the category. For example, .art.br is in the art (music, folklore etc.) category, and .org.br is in the non-governmental organization category. Institutions of tertiary education were allowed to use the ccSLD .edu.br, although some use .com.br and others (mainly public universities) use .br. There are also some other few exceptions that were allowed to use the second level domain until the end of 2000. As of April 2010, most domain registrations ignore categories and register in the .com.br domain, which has over 90% of all registered domains. The .jus.br (Judiciary), and .b.br (banks) domains have mandatory DNSSEC use.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/br.html",
+  "wikipedia": ".br is the Internet country code top-level domain (ccTLD) for Brazil. It was administered by the Brazilian Internet Steering Committee until 2005 when it started being administered by Brazilian Network Information Center. A local contact is required for any registration. Registrations of domain names with Portuguese characters are also accepted.\nWith the exception of universities, the second-level domain is fixed and selected from a list that defines the category. For example, .art.br is in the art (music, folklore etc.) category, and .org.br is in the non-governmental organization category. Institutions of tertiary education were allowed to use the ccSLD .edu.br, although some use .com.br and others (mainly public universities) use .br. There are also some other few exceptions that were allowed to use the second level domain until the end of 2000. As of April 2010, most domain registrations ignore categories and register in the .com.br domain, which has over 90% of all registered domains. The .jus.br (Judiciary), and .b.br (banks) domains have mandatory DNSSEC use.",
+  "scrapedAt": "2026-07-21T21:36:26Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".br",
+    "br",
+    "brasil",
+    "brazil",
+    "cctld",
+    "code",
+    "comite",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "gestor",
+    "internet",
+    "level",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".br is a Country-code top-level domain. Managed by Comite Gestor da Internet no Brasil.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

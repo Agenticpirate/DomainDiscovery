@@ -1,0 +1,139 @@
+{
+  "tld": ".sd",
+  "slug": "sd",
+  "title": "About .sd domains",
+  "delegationTitle": "Delegation Record for .SD",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Sudan",
+  "sponsor": "Sudan Internet Society",
+  "sponsorDetail": "Sudan Internet Society\nAl Fayha Buld, 4th Floor\nP.O.Box 13713, Code 11111\nKhartoum\nSudan (the)",
+  "administrativeContact": "SD Administration Management",
+  "technicalContact": "SD Technical Management",
+  "registryUrl": "http://www.isoc.sd",
+  "whoisServer": "whois.nic.sd",
+  "rdapServer": "https://rdap.nic.sd",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ans1.canar.sd",
+      "addresses": [
+        "196.29.180.14"
+      ]
+    },
+    {
+      "host": "ans1.sis.sd",
+      "addresses": [
+        "196.29.166.134"
+      ]
+    },
+    {
+      "host": "ans2.canar.sd",
+      "addresses": [
+        "196.29.164.14"
+      ]
+    },
+    {
+      "host": "ans2.sis.sd",
+      "addresses": [
+        "102.130.251.10"
+      ]
+    },
+    {
+      "host": "ns-sd.afrinic.net",
+      "addresses": [
+        "196.216.168.26",
+        "2001:43f8:120:0:0:0:0:26"
+      ]
+    },
+    {
+      "host": "pch.sis.sd",
+      "addresses": [
+        "204.61.216.97",
+        "2001:500:14:6097:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "sd.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.109",
+        "2001:67c:e0:0:0:0:0:109"
+      ]
+    }
+  ],
+  "about": ".SD is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Sudan. The IANA root zone lists the registry manager as Sudan Internet Society. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sd is the Internet country code top-level domain (ccTLD) for Sudan.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sd.html",
+  "wikipedia": ".sd is the Internet country code top-level domain (ccTLD) for Sudan.",
+  "scrapedAt": "2026-07-21T21:49:18Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sd",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "internet",
+    "level",
+    "local business",
+    "regional brands",
+    "sd",
+    "society",
+    "sudan",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 7,
+    "cheapestRegistration": {
+      "registrar": "Netim",
+      "price": "$95.00",
+      "value": 95.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$95.00",
+      "value": 95.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/sd"
+  },
+  "summary": ".sd is a Country-code top-level domain. Managed by Sudan Internet Society.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

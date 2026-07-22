@@ -1,0 +1,137 @@
+{
+  "tld": ".xn--mgbc0a9azcg",
+  "slug": "xn--mgbc0a9azcg",
+  "title": "About .xn--mgbc0a9azcg domains",
+  "delegationTitle": "Delegation Record for .\u0627\u0644\u0645\u063a\u0631\u0628",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code MA",
+  "designation": "Country-code top-level domain designated for Morocco",
+  "sponsor": "Agence Nationale de R\u00e9glementation des T\u00e9l\u00e9communications (ANRT)",
+  "sponsorDetail": "Agence Nationale de R\u00e9glementation des T\u00e9l\u00e9communications (ANRT)\nAvenue Ennakhil, Complexe d'Affaires\nAile Sud, Hay Ryad\nRabat 10100\nMorocco",
+  "administrativeContact": "General Director of ANRT",
+  "technicalContact": "TLD Technical Contact",
+  "registryUrl": "http://www.registre.ma",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.tld.ma",
+      "addresses": [
+        "81.192.171.83",
+        "81.192.171.131",
+        "2001:4288:1800:186:0:0:0:3"
+      ]
+    },
+    {
+      "host": "b.tld.ma",
+      "addresses": [
+        "81.192.171.132",
+        "81.192.171.84",
+        "2001:4288:1800:186:0:0:0:4"
+      ]
+    },
+    {
+      "host": "c.tld.ma",
+      "addresses": [
+        "81.192.171.115",
+        "81.192.171.139",
+        "2001:4288:1800:386:0:0:0:3"
+      ]
+    },
+    {
+      "host": "d.tld.ma",
+      "addresses": [
+        "81.192.171.116",
+        "81.192.171.140",
+        "2001:4288:1800:386:0:0:0:4"
+      ]
+    },
+    {
+      "host": "e.tld.ma",
+      "addresses": [
+        "105.73.80.236"
+      ]
+    },
+    {
+      "host": "f.tld.ma",
+      "addresses": [
+        "41.214.240.4",
+        "2c0f:fb20:100:fc:0:0:0:33"
+      ]
+    },
+    {
+      "host": "ns-ma.nic.fr",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".XN--MGBC0A9AZCG is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Morocco. The IANA root zone lists the registry manager as Agence Nationale de R\u00e9glementation des T\u00e9l\u00e9communications (ANRT). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--mgbc0a9azcg.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:19Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--mgbc0a9azcg",
+    "agence",
+    "anrt",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "glementation",
+    "letter",
+    "level",
+    "local business",
+    "morocco",
+    "nationale",
+    "regional brands",
+    "top",
+    "two",
+    "xn--mgbc0a9azcg"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--mgbc0a9azcg is a Country-code top-level domain designated for two-letter country code MA. Managed by Agence Nationale de R\u00e9glementation des T\u00e9l\u00e9communications (ANRT).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

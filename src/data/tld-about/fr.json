@@ -1,0 +1,119 @@
+{
+  "tld": ".fr",
+  "slug": "fr",
+  "title": "About .fr domains",
+  "delegationTitle": "Delegation Record for .FR",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for France",
+  "sponsor": "Association Fran\u00e7aise pour le Nommage Internet en Coop\u00e9ration (A.F.N.I.C.)",
+  "sponsorDetail": "Association Fran\u00e7aise pour le Nommage Internet en Coop\u00e9ration (A.F.N.I.C.)\n7, avenue du 8 mai 1945\nGuyancourt 78280\nFrance",
+  "administrativeContact": "TLD Admin Contact",
+  "technicalContact": "TLD Technical Contact",
+  "registryUrl": "https://www.nic.fr",
+  "whoisServer": "whois.nic.fr",
+  "rdapServer": "https://rdap.nic.fr/",
+  "registrationDate": "1986-09-02",
+  "recordUpdated": "2025-07-31",
+  "nameServers": [
+    {
+      "host": "d.nic.fr",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "f.ext.nic.fr",
+      "addresses": [
+        "194.146.106.46",
+        "2001:67c:1010:11:0:0:0:53"
+      ]
+    },
+    {
+      "host": "g.ext.nic.fr",
+      "addresses": [
+        "194.0.36.1",
+        "2001:678:4c:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".FR is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for France. The IANA root zone lists the registry manager as Association Fran\u00e7aise pour le Nommage Internet en Coop\u00e9ration (A.F.N.I.C.). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.fr is the Internet country code top-level domain (ccTLD) in the Domain Name System of the Internet for France administered by the AFNIC.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/fr.html",
+  "wikipedia": ".fr is the Internet country code top-level domain (ccTLD) in the Domain Name System of the Internet for France administered by the AFNIC.",
+  "scrapedAt": "2026-07-21T21:34:02Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".fr",
+    "aise",
+    "association",
+    "cctld",
+    "code",
+    "coop",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "fr",
+    "fran",
+    "france",
+    "geo",
+    "internet",
+    "level",
+    "local business",
+    "nommage",
+    "pour",
+    "ration",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 36,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$7.00",
+      "value": 7.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$7.00",
+      "value": 7.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/fr"
+  },
+  "summary": ".fr is a Country-code top-level domain. Managed by Association Fran\u00e7aise pour le Nommage Internet en Coop\u00e9ration (A.F.N.I.C.).",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

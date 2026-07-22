@@ -1,0 +1,131 @@
+{
+  "tld": ".ong",
+  "slug": "ong",
+  "title": "About .ong domains",
+  "delegationTitle": "Delegation Record for .ONG",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Public Interest Registry",
+  "sponsorDetail": "Public Interest Registry\n11911 Freedom Drive,\n10th Floor, Suite 1000\nReston VA 20190\nUnited States of America (the)",
+  "administrativeContact": "Director of Operations, Compliance and Customer Support",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://nic.ong",
+  "whoisServer": "whois.nic.ong",
+  "rdapServer": "https://rdap.publicinterestregistry.org/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.ong",
+      "addresses": [
+        "199.19.56.1",
+        "2001:500:e:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.nic.ong",
+      "addresses": [
+        "199.249.112.1",
+        "2001:500:40:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.nic.ong",
+      "addresses": [
+        "199.19.54.1",
+        "2001:500:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b2.nic.ong",
+      "addresses": [
+        "199.249.120.1",
+        "2001:500:48:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.nic.ong",
+      "addresses": [
+        "199.19.53.1",
+        "2001:500:b:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d0.nic.ong",
+      "addresses": [
+        "199.19.57.1",
+        "2001:500:f:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".ONG is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .ONG is listed by IANA as Public Interest Registry. Anyone can typically register a .ONG name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nThe domain names .ngo and .ong are generic top-level domains (gTLD) of the Domain Name System (DNS) used in the Internet, sponsored and managed by the Public Interest Registry. The backend is provided by Afilias. The .ngo domain name is an acronym which stands for \"non-governmental organization\", reflecting the intended usage of the domain.\nIn June 2011, ICANN expanded the Internet's naming system to allow applications for new top-level domain names. The Public Interest Registry declared publicly an interest in the .ngo domain in August 2011 and applied for it in May 2012. The PIR simultaneously applied for the top-level domain .ong, which is a similarly recognisable initialism for \"organisation non gouvernementale\" in French, and equivalent terms in many other Romance languages such as Spanish, Portuguese, Italian and Romanian.\nUnlike the more prevalent .org domain, which is also managed by the Public Interest Registry, .ngo will require validation of the registrant's non-governmental status. Non-governmental organizations told the Public Interest Registry they needed a closed domain that validated the legitimacy of websites accepting online donations to avoid fraud. The Public Interest Registry plans to use the funds from selling .ngo domains to develop an \"NGO Community Program\" to reach out to NGOs in developing nations. It also intends to create a directory service of NGOs to support their SEO and visibility, and develop a closed community for NGOs to learn from each other. The new domains have been publicly available since May 6, 2015.\nOriginally, registrants did not purchase an .ngo or .ong domain name separately, and a single registration was valid for two domain names which end in either .ngo or .ong but were otherwise identical. This policy was relaxed in June 2022, and .ngo and .ong domain names can now be purchased independently of each other.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ong.html",
+  "wikipedia": "The domain names .ngo and .ong are generic top-level domains (gTLD) of the Domain Name System (DNS) used in the Internet, sponsored and managed by the Public Interest Registry. The backend is provided by Afilias. The .ngo domain name is an acronym which stands for \"non-governmental organization\", reflecting the intended usage of the domain.\nIn June 2011, ICANN expanded the Internet's naming system to allow applications for new top-level domain names. The Public Interest Registry declared publicly an interest in the .ngo domain in August 2011 and applied for it in May 2012. The PIR simultaneously applied for the top-level domain .ong, which is a similarly recognisable initialism for \"organisation non gouvernementale\" in French, and equivalent terms in many other Romance languages such as Spanish, Portuguese, Italian and Romanian.\nUnlike the more prevalent .org domain, which is also managed by the Public Interest Registry, .ngo will require validation of the registrant's non-governmental status. Non-governmental organizations told the Public Interest Registry they needed a closed domain that validated the legitimacy of websites accepting online donations to avoid fraud. The Public Interest Registry plans to use the funds from selling .ngo domains to develop an \"NGO Community Program\" to reach out to NGOs in developing nations. It also intends to create a directory service of NGOs to support their SEO and visibility, and develop a closed community for NGOs to learn from each other. The new domains have been publicly available since May 6, 2015.\nOriginally, registrants did not purchase an .ngo or .ong domain name separately, and a single registration was valid for two domain names which end in either .ngo or .ong but were otherwise identical. This policy was relaxed in June 2022, and .ngo and .ong domain names can now be purchased independently of each other.",
+  "scrapedAt": "2026-07-21T21:46:49Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".ong",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "interest",
+    "level",
+    "ong",
+    "public",
+    "registry",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 25,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$16.70",
+      "value": 16.7
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$16.70",
+      "value": 16.7
+    },
+    "sourceUrl": "https://tld-list.com/tld/ong"
+  },
+  "summary": ".ong is a Generic top-level domain. Managed by Public Interest Registry.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

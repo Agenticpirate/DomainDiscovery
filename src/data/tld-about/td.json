@@ -1,0 +1,125 @@
+{
+  "tld": ".td",
+  "slug": "td",
+  "title": "About .td domains",
+  "delegationTitle": "Delegation Record for .TD",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Chad",
+  "sponsor": "l'Agence de D\u00e9veloppement des Technologies de l'Information et de la Communication (ADETIC)",
+  "sponsorDetail": "l'Agence de D\u00e9veloppement des Technologies de l'Information et de la Communication (ADETIC)\nRue du Colonel Hassan Moursal Kourda\nP.O. Box 240\nN'Djamena\nChad",
+  "administrativeContact": "Ingenieur en R\u00e9seaux Telecoms",
+  "technicalContact": "Chef de Service Gestion du Noms de Domaines et des Adresses IP",
+  "registryUrl": "http://www.nic.td",
+  "whoisServer": "whois.nic.td",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "anycastdns1.nic.td",
+      "addresses": [
+        "185.38.108.108",
+        "2a00:fea0:dead:0:0:0:0:beef"
+      ]
+    },
+    {
+      "host": "anycastdns2.nic.td",
+      "addresses": [
+        "185.28.194.194"
+      ]
+    },
+    {
+      "host": "ns-td.afrinic.net",
+      "addresses": [
+        "196.216.168.31",
+        "2001:43f8:120:0:0:0:0:31"
+      ]
+    },
+    {
+      "host": "pch.nic.td",
+      "addresses": [
+        "204.61.216.129",
+        "2001:500:14:6129:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".TD is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Chad. The IANA root zone lists the registry manager as l'Agence de D\u00e9veloppement des Technologies de l'Information et de la Communication (ADETIC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.td is the Internet country code top-level domain (ccTLD) for Chad (French: Tchad) made available for use in 1997.\nIt is administered by NIC.TD and Managed by Agence de D\u00e9veloppement des Technologies de l'Information et de la Communication.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/td.html",
+  "wikipedia": ".td is the Internet country code top-level domain (ccTLD) for Chad (French: Tchad) made available for use in 1997.\nIt is administered by NIC.TD and Managed by Agence de D\u00e9veloppement des Technologies de l'Information et de la Communication.",
+  "scrapedAt": "2026-07-21T21:50:47Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".td",
+    "adetic",
+    "agence",
+    "cctld",
+    "chad",
+    "code",
+    "communication",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "level",
+    "local business",
+    "regional brands",
+    "td",
+    "technologies",
+    "top",
+    "veloppement"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 7,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$79.99",
+      "value": 79.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$82.89",
+      "value": 82.89
+    },
+    "sourceUrl": "https://tld-list.com/tld/td"
+  },
+  "summary": ".td is a Country-code top-level domain. Managed by l'Agence de D\u00e9veloppement des Technologies de l'Information et de la Communication (ADETIC).",
+  "wikiCheckedAt": "2026-07-22T04:23:22Z",
+  "wikiEnrichedAt": "2026-07-22T04:23:22Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,103 @@
+{
+  "tld": ".viva",
+  "slug": "viva",
+  "title": "About .viva domains",
+  "delegationTitle": "Delegation Record for .VIVA",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Saudi Telecom Company",
+  "sponsorDetail": "Saudi Telecom Company\n8214 Al Imam Saud Ibn Abdul Aziz Branch Road\nAl Mursalat\nPO Box 87912\nRiyadh 11652\nSaudi Arabia",
+  "administrativeContact": "Head of Registry Services",
+  "technicalContact": "CTO",
+  "registryUrl": "http://www.stc.com.sa",
+  "whoisServer": "whois.nic.viva",
+  "rdapServer": "https://rdap.centralnic.com/viva",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.viva",
+      "addresses": [
+        "194.169.218.28",
+        "2001:67c:13cc:0:0:0:1:28"
+      ]
+    },
+    {
+      "host": "b.nic.viva",
+      "addresses": [
+        "185.24.64.28",
+        "2a04:2b00:13cc:0:0:0:1:28"
+      ]
+    },
+    {
+      "host": "c.nic.viva",
+      "addresses": [
+        "212.18.248.28",
+        "2a04:2b00:13ee:0:0:0:0:28"
+      ]
+    },
+    {
+      "host": "d.nic.viva",
+      "addresses": [
+        "212.18.249.28",
+        "2a04:2b00:13ff:0:0:0:0:28"
+      ]
+    }
+  ],
+  "about": ".VIVA is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .VIVA is listed by IANA as Saudi Telecom Company. Anyone can typically register a .VIVA name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/viva.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:52:07Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".viva",
+    "brand",
+    "brandable names",
+    "company",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "saudi",
+    "telecom",
+    "top",
+    "viva"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".viva is a Generic top-level domain. Managed by Saudi Telecom Company.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

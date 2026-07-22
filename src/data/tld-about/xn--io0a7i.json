@@ -1,0 +1,111 @@
+{
+  "tld": ".xn--io0a7i",
+  "slug": "xn--io0a7i",
+  "title": "About .xn--io0a7i domains",
+  "delegationTitle": "Delegation Record for .\u7f51\u7edc",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "China Internet Network Information Center (CNNIC)",
+  "sponsorDetail": "China Internet Network Information Center (CNNIC)\nBuilding 4, No.9 Beijing Auto Museum West Road, Fengtai District\nBeijing 100070\nChina",
+  "administrativeContact": "Yulin Liu",
+  "technicalContact": "Anlei Hu",
+  "registryUrl": "http://www.cnnic.cn",
+  "whoisServer": "whois.ngtld.cn",
+  "rdapServer": "https://rdap.ngtld.cn/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.ngtld.cn",
+      "addresses": [
+        "125.208.40.1",
+        "2001:dc7:ffc1:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b.ngtld.cn",
+      "addresses": [
+        "125.208.41.1",
+        "2001:dc7:ffc2:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c.ngtld.cn",
+      "addresses": [
+        "125.208.42.1",
+        "2001:dc7:ffc3:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d.ngtld.cn",
+      "addresses": [
+        "125.208.43.1"
+      ]
+    },
+    {
+      "host": "e.ngtld.cn",
+      "addresses": [
+        "125.208.44.1"
+      ]
+    }
+  ],
+  "about": ".XN--IO0A7I is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--IO0A7I is listed by IANA as China Internet Network Information Center (CNNIC). Anyone can typically register a .XN--IO0A7I name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--io0a7i.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:53Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--io0a7i",
+    "any industry",
+    "center",
+    "china",
+    "cnnic",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "information",
+    "internet",
+    "level",
+    "network",
+    "top",
+    "xn--io0a7i"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--io0a7i is a Generic top-level domain. Managed by China Internet Network Information Center (CNNIC).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

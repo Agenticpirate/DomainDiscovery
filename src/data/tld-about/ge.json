@@ -1,0 +1,118 @@
+{
+  "tld": ".ge",
+  "slug": "ge",
+  "title": "About .ge domains",
+  "delegationTitle": "Delegation Record for .GE",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Georgia",
+  "sponsor": "Caucasus Online LLC",
+  "sponsorDetail": "Caucasus Online LLC\n160 Tsimandzgvrishvili st.\nTbilisi 0112\nGeorgia",
+  "administrativeContact": "Khatuna Shubitidze",
+  "technicalContact": "Viktor Mazmanov",
+  "registryUrl": "http://nic.ge",
+  "whoisServer": "whois.nic.ge",
+  "rdapServer": null,
+  "registrationDate": "1992-12-02",
+  "recordUpdated": "2025-06-11",
+  "nameServers": [
+    {
+      "host": "ns1.nic.ge",
+      "addresses": [
+        "185.19.99.30"
+      ]
+    },
+    {
+      "host": "ns2.nic.ge",
+      "addresses": [
+        "185.19.98.98"
+      ]
+    },
+    {
+      "host": "ns3.nic.ge",
+      "addresses": [
+        "3.66.58.155"
+      ]
+    },
+    {
+      "host": "ns4.nic.ge",
+      "addresses": [
+        "35.153.81.228"
+      ]
+    }
+  ],
+  "about": ".GE is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Georgia. The IANA root zone lists the registry manager as Caucasus Online LLC. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ge is the country code top-level domain (ccTLD) for Georgia.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ge.html",
+  "wikipedia": ".ge is the country code top-level domain (ccTLD) for Georgia.",
+  "scrapedAt": "2026-07-21T21:40:58Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ge",
+    "caucasus",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "ge",
+    "geo",
+    "georgia",
+    "level",
+    "local business",
+    "online",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 12,
+    "cheapestRegistration": {
+      "registrar": "INWX",
+      "price": "$17.90",
+      "value": 17.9
+    },
+    "cheapestRenewal": {
+      "registrar": "INWX",
+      "price": "$17.90",
+      "value": 17.9
+    },
+    "sourceUrl": "https://tld-list.com/tld/ge"
+  },
+  "summary": ".ge is a Country-code top-level domain. Managed by Caucasus Online LLC.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

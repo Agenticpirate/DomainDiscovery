@@ -1,0 +1,128 @@
+{
+  "tld": ".bi",
+  "slug": "bi",
+  "title": "About .bi domains",
+  "delegationTitle": "Delegation Record for .BI",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Burundi",
+  "sponsor": "Centre National de l'Informatique",
+  "sponsorDetail": "Centre National de l'Informatique\n155 - 161 Chaussee P. L. Rwagasore\nBP 2270\nBujumbura\nBurundi",
+  "administrativeContact": "CNI",
+  "technicalContact": "CNI",
+  "registryUrl": "http://www.nic.bi",
+  "whoisServer": "whois1.nic.bi",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "anyns.nic.bi",
+      "addresses": [
+        "204.61.216.61",
+        "2001:500:14:6061:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "bi.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.62",
+        "2a13:27c0:30:0:0:0:0:62"
+      ]
+    },
+    {
+      "host": "ns-bi.afrinic.net",
+      "addresses": [
+        "196.216.168.23",
+        "2001:43f8:120:0:0:0:0:23"
+      ]
+    },
+    {
+      "host": "ns.nic.bi",
+      "addresses": [
+        "196.2.8.205"
+      ]
+    },
+    {
+      "host": "ns1.nic.bi",
+      "addresses": [
+        "196.2.12.205"
+      ]
+    }
+  ],
+  "about": ".BI is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Burundi. The IANA root zone lists the registry manager as Centre National de l'Informatique. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.bi is the Internet country code top-level domain (ccTLD) for Burundi. It is administered by the Burundi National Center of Information Technology.\nThe .bi domain was first delegated in October 1996. It was delegated to the entire country on July 16, 2002.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bi.html",
+  "wikipedia": ".bi is the Internet country code top-level domain (ccTLD) for Burundi. It is administered by the Burundi National Center of Information Technology.\nThe .bi domain was first delegated in October 1996. It was delegated to the entire country on July 16, 2002.",
+  "scrapedAt": "2026-07-21T21:35:52Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".bi",
+    "bi",
+    "burundi",
+    "cctld",
+    "centre",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "informatique",
+    "level",
+    "local business",
+    "national",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 15,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$48.25",
+      "value": 48.25
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$48.25",
+      "value": 48.25
+    },
+    "sourceUrl": "https://tld-list.com/tld/bi"
+  },
+  "summary": ".bi is a Country-code top-level domain. Managed by Centre National de l'Informatique.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

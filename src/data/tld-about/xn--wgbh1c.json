@@ -1,0 +1,109 @@
+{
+  "tld": ".xn--wgbh1c",
+  "slug": "xn--wgbh1c",
+  "title": "About .xn--wgbh1c domains",
+  "delegationTitle": "Delegation Record for .\u0645\u0635\u0631",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code EG",
+  "designation": "Country-code top-level domain designated for Egypt",
+  "sponsor": "National Telecommunication Regulatory Authority - NTRA",
+  "sponsorDetail": "National Telecommunication Regulatory Authority - NTRA\nSmart Village, B4 K28\nCairo-Alex Desert Rd.\n6th October\n12577\nEgypt",
+  "administrativeContact": "Manal Ismail",
+  "technicalContact": "Christine Arida",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns1.dotmasr.eg",
+      "addresses": [
+        "81.21.97.155"
+      ]
+    },
+    {
+      "host": "ns2.dotmasr.eg",
+      "addresses": [
+        "81.21.99.11"
+      ]
+    },
+    {
+      "host": "ns3.dotmasr.eg",
+      "addresses": [
+        "81.10.38.11"
+      ]
+    },
+    {
+      "host": "ns4.dotmasr.eg",
+      "addresses": [
+        "204.61.216.106"
+      ]
+    }
+  ],
+  "about": ".XN--WGBH1C is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Egypt. The IANA root zone lists the registry manager as National Telecommunication Regulatory Authority - NTRA. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--wgbh1c.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:59Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--wgbh1c",
+    "authority",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "egypt",
+    "for",
+    "geo",
+    "letter",
+    "level",
+    "local business",
+    "national",
+    "ntra",
+    "regional brands",
+    "regulatory",
+    "telecommunication",
+    "top",
+    "two",
+    "xn--wgbh1c"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--wgbh1c is a Country-code top-level domain designated for two-letter country code EG. Managed by National Telecommunication Regulatory Authority - NTRA.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

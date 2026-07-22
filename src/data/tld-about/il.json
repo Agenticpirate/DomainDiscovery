@@ -1,0 +1,136 @@
+{
+  "tld": ".il",
+  "slug": "il",
+  "title": "About .il domains",
+  "delegationTitle": "Delegation Record for .IL",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Israel",
+  "sponsor": "The Israel Internet Association (RA)",
+  "sponsorDetail": "The Israel Internet Association (RA)\nBareket 6, POB 7210\nPetach Tikva 4951774\nIsrael",
+  "administrativeContact": "Doron Shikmoni",
+  "technicalContact": "IL Technical Contact",
+  "registryUrl": "http://www.isoc.org.il/domains",
+  "whoisServer": "whois.isoc.org.il",
+  "rdapServer": null,
+  "registrationDate": "1985-10-24",
+  "recordUpdated": "2026-02-24",
+  "nameServers": [
+    {
+      "host": "ilns.ilan.net.il",
+      "addresses": [
+        "128.139.35.5"
+      ]
+    },
+    {
+      "host": "lookup.iucc.ac.il",
+      "addresses": [
+        "128.139.34.240",
+        "2001:bf8:900:6:0:0:808b:22f0"
+      ]
+    },
+    {
+      "host": "ns1.ns.il",
+      "addresses": [
+        "194.146.106.122",
+        "2001:67c:1010:31:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns3.ns.il",
+      "addresses": [
+        "194.0.11.103",
+        "2001:678:e:103:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns4.ns.il",
+      "addresses": [
+        "204.61.216.134",
+        "2001:500:14:6134:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "nsa.ns.il",
+      "addresses": [
+        "192.115.7.53",
+        "2a01:4280:7:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "nsb.ns.il",
+      "addresses": [
+        "192.115.7.60",
+        "2a01:4280:7:0:0:0:0:60"
+      ]
+    },
+    {
+      "host": "nse.ns.il",
+      "addresses": [
+        "192.115.4.235"
+      ]
+    }
+  ],
+  "about": ".IL is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Israel. The IANA root zone lists the registry manager as The Israel Internet Association (RA). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.il is the Internet country code top-level domain (ccTLD) of Israel, administered by the Israel Internet Association and managed by NIC - ISRAEL which hosts the DNS root server and manages the Israeli Internet Exchange, that supports IPv4 and IPv6.\nThe .il top-level domain is one of the earliest registered ccTLDs. When Israel registered it, on 24 October 1985, it was the third registration of any ccTLD, after .us and .uk, which were registered earlier that year.\nAs of 19 August 2023 there are 285,060 domain names registered under the .il ccTLD in Israel.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/il.html",
+  "wikipedia": ".il is the Internet country code top-level domain (ccTLD) of Israel, administered by the Israel Internet Association and managed by NIC - ISRAEL which hosts the DNS root server and manages the Israeli Internet Exchange, that supports IPv4 and IPv6.\nThe .il top-level domain is one of the earliest registered ccTLDs. When Israel registered it, on 24 October 1985, it was the third registration of any ccTLD, after .us and .uk, which were registered earlier that year.\nAs of 19 August 2023 there are 285,060 domain names registered under the .il ccTLD in Israel.",
+  "scrapedAt": "2026-07-21T21:42:31Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".il",
+    "association",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "il",
+    "internet",
+    "israel",
+    "level",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".il is a Country-code top-level domain. Managed by The Israel Internet Association (RA).",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

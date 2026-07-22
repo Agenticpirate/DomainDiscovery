@@ -13,6 +13,10 @@ import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import { getRegistrarUrl, type RegistrarName } from '@/lib/registrars';
 import { searchDomains, checkDomainAvailability } from '@/services/instantDomainService';
+import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
+import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
+import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
+import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
 import extensionsData from '@/data/extensions.json';
 
 interface DomainResult {
@@ -109,6 +113,8 @@ function SearchPageContent() {
   const [isBrandableLoading, setIsBrandableLoading] = useState(false);
   const [savedDomains, setSavedDomains] = useState<string[]>([]);
   const [showMoreActions, setShowMoreActions] = useState(false);
+  const [extFilter, setExtFilter] = useState<'all' | 'available' | 'premium' | 'taken'>('all');
+  const [showAllExts, setShowAllExts] = useState(false);
   const [premiumEnrichmentMap, setPremiumEnrichmentMap] = useState<Record<string, PremiumEnrichment>>({});
   const searchRequestIdRef = useRef(0);
   const premiumFetchKeyRef = useRef('');
@@ -228,18 +234,20 @@ function SearchPageContent() {
 
   const handleSave = (domain: string) => {
     const isSaved = savedDomains.includes(domain);
-    const newSaved = isSaved ? savedDomains.filter(d => d !== domain) : [...savedDomains, domain];
+    const newSaved = isSaved ? savedDomains.filter((d) => d !== domain) : [...savedDomains, domain];
     setSavedDomains(newSaved);
     try {
       localStorage.setItem('saved_domains', JSON.stringify(newSaved));
       window.dispatchEvent(new Event('savedDomainsUpdated'));
       showToast(isSaved ? `Removed ${domain}` : `Saved ${domain}`, 'success', 1500);
-    } catch {}
+    } catch {
+      /* ignore storage errors */
+    }
   };
 
-  const handleCopyURL = (domain: string) => {
-    navigator.clipboard.writeText(domain);
-    showToast('Copied to clipboard!', 'success', 1500);
+  /** Block clipboard copy of domain names — save only */
+  const blockCopy = (e: React.ClipboardEvent | React.MouseEvent) => {
+    e.preventDefault();
   };
 
   const handlePronounce = (domain: string) => {
@@ -361,229 +369,489 @@ function SearchPageContent() {
     () => new Set(premiumResults.map((result) => result.domain.toLowerCase())),
     [premiumResults]
   );
-  const extensions = useMemo(
-    () => results.filter((result) => result !== primary && !premiumDomainSet.has(result.domain.toLowerCase())),
-    [results, primary, premiumDomainSet]
+
+  /** All results in one dense grid (primary + extensions + premium) — full-space IDS style */
+  const allGridResults = useMemo(() => {
+    const map = new Map<string, DomainResult>();
+    const push = (r: DomainResult) => {
+      const key = r.domain.toLowerCase();
+      const existing = map.get(key);
+      if (!existing) {
+        map.set(key, r);
+        return;
+      }
+      // Prefer premium enrichment / price
+      if (r.premium || r.price) {
+        map.set(key, { ...existing, ...r, premium: r.premium || existing.premium });
+      }
+    };
+    results.forEach(push);
+    premiumResults.forEach(push);
+    return Array.from(map.values());
+  }, [results, premiumResults]);
+
+  const availableExts = useMemo(
+    () => allGridResults.filter((r) => r.available && !premiumDomainSet.has(r.domain.toLowerCase())),
+    [allGridResults, premiumDomainSet]
   );
   const taken = useMemo(
-    () => extensions.filter((result) => !result.available),
-    [extensions]
+    () => allGridResults.filter((r) => !r.available && !premiumDomainSet.has(r.domain.toLowerCase())),
+    [allGridResults, premiumDomainSet]
+  );
+  const premiumOnly = useMemo(
+    () => allGridResults.filter((r) => premiumDomainSet.has(r.domain.toLowerCase()) || r.premium),
+    [allGridResults, premiumDomainSet]
   );
 
-  const midpoint = Math.ceil(extensions.length / 2);
-  const col1 = extensions.slice(0, midpoint);
-  const col2 = extensions.slice(midpoint);
+  const filteredExtensions = useMemo(() => {
+    let list: DomainResult[];
+    if (extFilter === 'available') list = availableExts;
+    else if (extFilter === 'taken') list = taken;
+    else if (extFilter === 'premium') list = premiumOnly;
+    else list = allGridResults;
 
-  const btnClass = `flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${isLight ? 'border-slate-200 hover:bg-slate-50 text-slate-600' : 'border-white/10 hover:bg-white/5 text-white/60'}`;
+    if (extFilter === 'all') {
+      // Available first, then premium, then taken — fills the grid like the reference
+      list = [...list].sort((a, b) => {
+        const score = (r: DomainResult) => {
+          if (r.available) return 0;
+          if (r.premium || premiumDomainSet.has(r.domain.toLowerCase())) return 1;
+          return 2;
+        };
+        return score(a) - score(b);
+      });
+    }
+    return list;
+  }, [extFilter, allGridResults, availableExts, taken, premiumOnly, premiumDomainSet]);
+
+  // Full-space: show many rows by default; mobile still compact
+  const EXT_PREVIEW_MOBILE = 24;
+  const EXT_PREVIEW_DESKTOP = 80;
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const apply = () => setIsDesktop(mq.matches);
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
+  const extPreview = isDesktop ? EXT_PREVIEW_DESKTOP : EXT_PREVIEW_MOBILE;
+  const visibleExtensions = showAllExts
+    ? filteredExtensions
+    : filteredExtensions.slice(0, extPreview);
+  const hiddenExtCount = Math.max(0, filteredExtensions.length - visibleExtensions.length);
+
+  useEffect(() => {
+    setShowAllExts(false);
+  }, [query, extFilter]);
+
+  const btnClass = `inline-flex items-center gap-1 px-2 py-1 text-[10px] sm:text-[11px] font-semibold rounded-full border transition-colors ${
+    isLight
+      ? 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50'
+      : 'border-white/12 bg-white/[0.04] text-white/65 hover:border-white/20 hover:bg-white/[0.07]'
+  }`;
+
+  const primarySaved = primary ? savedDomains.includes(primary.domain) : false;
+  const checkedCount = allGridResults.length;
+  const progressPct = isLoading
+    ? Math.min(92, Math.max(12, Math.round((checkedCount / Math.max(ALL_TLDS.length, 1)) * 100)))
+    : checkedCount > 0
+      ? 100
+      : 0;
+
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}>
+    <div
+      className="min-h-screen overflow-x-hidden select-none"
+      style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
+      onCopy={blockCopy}
+      onCut={blockCopy}
+    >
       <PageBackground variant="hero" />
       <Navigation activeTool="search" onToolSelect={() => {}} />
 
-      <main className="relative pt-14 sm:pt-20">
-        <div className={`px-3 sm:px-6 py-3 sm:py-4 ${isLight ? 'bg-white/80' : 'bg-black/40'} backdrop-blur-sm border-b ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
-          <div className="max-w-5xl mx-auto space-y-3">
-            <SearchInterface
-              initialQuery={query}
-              placeholder="Search domains instantly"
-              onSearch={handleLiveSearch}
-              onClear={handleResetSearch}
-              autoFocus={true}
-              showRecentSearches={false}
-              debounceMs={120}
-              isLoading={isLoading}
-            />
-            <div className="flex items-center justify-between gap-3 flex-wrap">
-              <div className="flex items-center gap-2 min-w-0">
-                <Icons.Search />
-                <span className={`text-xs sm:text-sm font-mono truncate ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
-                  {query ? query : 'Enter a domain query to begin'}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <PreferredRegistrarSelect
-                  selectedRegistrar={selectedRegistrar}
-                  onSelectRegistrar={setSelectedRegistrar}
-                  label="Registrar"
+      <main className="relative pt-[3.05rem] sm:pt-[3.9rem] pb-6">
+        {/* Full-width sticky chrome — matches reference density */}
+        <div
+          className={`sticky top-[2.95rem] sm:top-[3.75rem] z-40 border-b backdrop-blur-xl ${
+            isLight ? 'bg-white/95 border-slate-200' : 'bg-black/70 border-white/[0.07]'
+          }`}
+        >
+          <div className="w-full max-w-[100rem] mx-auto px-2.5 sm:px-4 lg:px-5 py-1.5 sm:py-2">
+            <div className="flex items-center gap-2">
+              <div className="min-w-0 flex-1">
+                <SearchInterface
+                  initialQuery={query}
+                  placeholder="Search a domain…"
+                  onSearch={handleLiveSearch}
+                  onClear={handleResetSearch}
+                  autoFocus={true}
+                  showRecentSearches={false}
+                  debounceMs={120}
+                  isLoading={isLoading}
                 />
-                <button
-                  onClick={handleResetSearch}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg border transition-colors ${
-                    isLight ? 'border-slate-300 text-slate-700 hover:bg-slate-100' : 'border-white/15 text-white/70 hover:bg-white/10'
-                  }`}
-                >
-                  Reset
-                </button>
               </div>
+              <PreferredRegistrarSelect
+                selectedRegistrar={selectedRegistrar}
+                onSelectRegistrar={setSelectedRegistrar}
+                label=""
+                className="hidden md:flex shrink-0 [&>span]:hidden [&>select]:min-w-[7rem] [&>select]:py-1.5 [&>select]:px-2 [&>select]:text-[11px]"
+              />
+            </div>
+
+            <div className="mt-1.5 flex items-center gap-1 sm:gap-1.5 overflow-x-auto scrollbar-hide">
+              {[
+                { href: '/search', label: 'Search', active: true },
+                { href: '/domain-extensions', label: 'Extensions', active: false },
+                { href: '/generator', label: 'Generator', active: false },
+                { href: '/premium', label: 'Aftermarket', active: false },
+                { href: '/tools', label: 'Research', active: false },
+              ].map((tab) =>
+                tab.active ? (
+                  <span
+                    key={tab.label}
+                    className={`shrink-0 inline-flex items-center gap-1 px-2 py-1 text-[11px] font-bold border-b-2 ${
+                      isLight
+                        ? 'text-slate-900 border-slate-900'
+                        : 'text-white border-white'
+                    }`}
+                  >
+                    {tab.label}
+                  </span>
+                ) : (
+                  <Link
+                    key={tab.label}
+                    href={tab.href}
+                    className={`shrink-0 inline-flex items-center px-2 py-1 text-[11px] font-semibold border-b-2 border-transparent ${
+                      isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/40 hover:text-white/75'
+                    }`}
+                  >
+                    {tab.label}
+                  </Link>
+                )
+              )}
+              <div className="flex-1" />
+              {query && (
+                <button type="button" onClick={handleResetSearch} className={`${btnClass} shrink-0`}>
+                  Clear
+                </button>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className={`px-3 sm:px-6 border-b ${isLight ? 'border-slate-200 bg-white/60' : 'border-white/5 bg-black/20'} backdrop-blur-sm`}>
-          <div className="max-w-5xl mx-auto flex items-center gap-5 text-sm">
-            <button className={`py-2.5 border-b-2 font-medium ${isLight ? 'border-slate-900 text-slate-900' : 'border-white text-white'}`}>
-              <span className="flex items-center gap-1.5"><Icons.Search /> Search</span>
-            </button>
-            <Link href="/domain-extensions" className={`py-2.5 border-b-2 border-transparent font-medium ${isLight ? 'text-slate-400 hover:text-slate-600' : 'text-white/40 hover:text-white/70'}`}>
-              <span className="flex items-center gap-1.5"><Icons.Layers /> Extensions</span>
-            </Link>
-            <Link href="/generator" className={`py-2.5 border-b-2 border-transparent font-medium ${isLight ? 'text-slate-400 hover:text-slate-600' : 'text-white/40 hover:text-white/70'}`}>
-              <span className="flex items-center gap-1.5"><Icons.Magic /> Generator</span>
-            </Link>
-          </div>
-        </div>
+        <div className="w-full max-w-[100rem] mx-auto px-2 sm:px-3 lg:px-4 py-2 sm:py-2.5">
+          {isLoading && results.length === 0 && (
+            <div className="py-16 text-center">
+              <div className="inline-flex items-center gap-2">
+                <div
+                  className="w-3.5 h-3.5 border-2 rounded-full animate-spin"
+                  style={{
+                    borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)',
+                    borderTopColor: isLight ? '#0f172a' : '#fff',
+                  }}
+                />
+                <span className="text-[13px] font-medium" style={{ color: 'var(--text-muted)' }}>
+                  Checking…
+                </span>
+              </div>
+            </div>
+          )}
 
-        {/* Results */}
-        <div className="px-3 sm:px-6 py-4 sm:py-6">
-          <div className="max-w-5xl mx-auto">
+          {!isLoading && results.length === 0 && !query && (
+            <div className="text-center py-16">
+              <p className="text-[15px] font-bold mb-1">Search any name</p>
+              <p className="text-[12px]" style={{ color: 'var(--text-muted)' }}>
+                Live availability across {ALL_TLDS.length}+ extensions
+              </p>
+            </div>
+          )}
 
-            {/* Loading */}
-            {isLoading && results.length === 0 && (
-              <div className="py-20 text-center">
-                <div className="inline-flex items-center gap-3">
-                  <div className="w-5 h-5 border-2 rounded-full animate-spin" style={{ borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)', borderTopColor: isLight ? '#334155' : '#fff' }} />
-                  <span style={{ color: 'var(--text-muted)' }}>Searching domains...</span>
+          {/* Status strip + filters — full width like reference */}
+          {checkedCount > 0 && (
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2 sm:mb-2.5">
+              <div className="flex items-center gap-2 min-w-0 flex-1">
+                <span className="text-[12px] sm:text-[13px] font-bold shrink-0">Domain search</span>
+                <div
+                  className={`h-1 flex-1 max-w-[12rem] sm:max-w-[16rem] rounded-full overflow-hidden ${
+                    isLight ? 'bg-slate-200' : 'bg-white/10'
+                  }`}
+                >
+                  <div
+                    className={`h-full rounded-full transition-all duration-500 ${
+                      isLight ? 'bg-emerald-500' : 'bg-emerald-400'
+                    }`}
+                    style={{ width: `${progressPct}%` }}
+                  />
                 </div>
+                <span className="text-[10px] sm:text-[11px] tabular-nums shrink-0" style={{ color: 'var(--text-muted)' }}>
+                  {isLoading ? `${checkedCount}…` : `${taken.length} taken`}
+                </span>
               </div>
-            )}
 
-            {/* Empty */}
-            {!isLoading && results.length === 0 && !query && (
-              <div className="text-center py-20">
-                <div className={`inline-flex p-5 rounded-full mb-4 ${isLight ? 'bg-slate-100' : 'bg-white/5'}`}><Icons.Search /></div>
-                <h2 className="text-lg font-semibold mb-1" style={{ color: 'var(--text-secondary)' }}>Search for a domain</h2>
-                <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-                  Type a name above to check availability across {ALL_TLDS.length}+ extensions
-                </p>
-              </div>
-            )}
-
-            {/* Primary domain highlight */}
-            {primary && (
-              <div className="mb-3">
-                <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap sm:justify-end">
+                {(
+                  [
+                    {
+                      id: 'available' as const,
+                      label: 'Available',
+                      n: availableExts.length,
+                      dot: isLight ? 'bg-emerald-500' : 'bg-emerald-400',
+                    },
+                    {
+                      id: 'premium' as const,
+                      label: 'Premium',
+                      n: premiumOnly.length,
+                      dot: 'bg-amber-400',
+                    },
+                    {
+                      id: 'taken' as const,
+                      label: 'Taken',
+                      n: taken.length,
+                      dot: isLight ? 'bg-rose-500' : 'bg-rose-400',
+                    },
+                    {
+                      id: 'all' as const,
+                      label: 'All',
+                      n: checkedCount,
+                      dot: isLight ? 'bg-slate-400' : 'bg-white/40',
+                    },
+                  ] as const
+                ).map((f) => (
                   <button
+                    key={f.id}
                     type="button"
-                    onClick={() => {
-                      if (primary.available) {
-                        handleBuy(primary.domain);
-                        return;
-                      }
-                      window.open(`https://who.is/whois/${encodeURIComponent(primary.domain)}`, '_blank', 'noopener,noreferrer');
-                    }}
-                    className={`text-left text-xl sm:text-4xl font-black font-mono transition-opacity hover:opacity-90 truncate min-w-0 ${primary.available ? (isLight ? 'text-emerald-600' : 'text-emerald-400') : (isLight ? 'text-red-600' : 'text-red-400')}`}
+                    onClick={() => setExtFilter(f.id)}
+                    className={`inline-flex items-center gap-1.5 rounded-full px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold border transition-colors tabular-nums ${
+                      extFilter === f.id
+                        ? isLight
+                          ? 'bg-slate-900 text-white border-slate-900'
+                          : 'bg-white text-black border-white'
+                        : isLight
+                          ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                          : 'bg-white/[0.04] text-white/55 border-white/10 hover:border-white/20'
+                    }`}
                   >
-                    {primary.domain}
+                    <span className={`h-1.5 w-1.5 rounded-full ${f.dot}`} />
+                    {f.label}
+                    <span className="opacity-70">{f.n}</span>
                   </button>
-                  <button onClick={() => primary.available ? handleBuy(primary.domain) : window.open(`https://who.is/whois/${encodeURIComponent(primary.domain)}`, '_blank', 'noopener,noreferrer')} className={`shrink-0 px-3 sm:px-6 py-1.5 sm:py-2.5 text-xs sm:text-sm font-bold rounded-lg transition-colors ${
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Compact primary strip — not a huge card */}
+          {primary && (
+            <div
+              className={`shine-border no-lift flex flex-wrap items-center justify-between gap-2 rounded-xl border px-2.5 sm:px-3 py-2 mb-2 sm:mb-2.5 ${
+                isLight
+                  ? 'bg-white border-slate-200'
+                  : 'bg-white/[0.03] border-white/10'
+              }`}
+            >
+              <div className="flex items-center gap-2 min-w-0">
+                <span
+                  className={`h-2 w-2 rounded-full shrink-0 ${
                     primary.available
-                      ? 'bg-emerald-500 text-white hover:bg-emerald-600'
-                      : isLight ? 'bg-red-50 text-red-600 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
-                  }`}>
-                    {primary.available ? `Buy` : 'Lookup'} &rarr;
+                      ? isLight
+                        ? 'bg-emerald-500'
+                        : 'bg-emerald-400'
+                      : isLight
+                        ? 'bg-rose-500'
+                        : 'bg-rose-400'
+                  }`}
+                />
+                <span
+                  className={`font-mono text-[13px] sm:text-[15px] font-bold truncate select-none ${
+                    primary.available
+                      ? isLight
+                        ? 'text-slate-900'
+                        : 'text-white'
+                      : isLight
+                        ? 'text-slate-500'
+                        : 'text-white/45'
+                  }`}
+                  onCopy={blockCopy}
+                >
+                  {primary.domain}
+                </span>
+                <span
+                  className={`text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full ${
+                    primary.available
+                      ? isLight
+                        ? 'bg-emerald-50 text-emerald-700'
+                        : 'bg-emerald-400/15 text-emerald-300'
+                      : isLight
+                        ? 'bg-rose-50 text-rose-600'
+                        : 'bg-rose-400/15 text-rose-300'
+                  }`}
+                >
+                  {primary.available ? 'Available' : 'Taken'}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <button type="button" onClick={() => handlePronounce(primary.domain)} className={btnClass}>
+                  Pronounce
+                </button>
+                <div className="relative">
+                  <button type="button" onClick={() => setShowMoreActions(!showMoreActions)} className={btnClass}>
+                    More
                   </button>
+                  {showMoreActions && (
+                    <div
+                      className={`absolute top-full right-0 mt-1 rounded-lg z-50 py-0.5 min-w-[140px] border ${
+                        isLight
+                          ? 'bg-white border-slate-200 shadow-lg'
+                          : 'bg-neutral-900 border-white/10 shadow-xl'
+                      }`}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => {
+                          window.open(
+                            `https://www.godaddy.com/domain-value-appraisal/appraisal/?domain=${primary.domain}`,
+                            '_blank'
+                          );
+                          setShowMoreActions(false);
+                        }}
+                        className={`w-full text-left px-2.5 py-1.5 text-[11px] font-medium ${
+                          isLight ? 'hover:bg-slate-50 text-slate-600' : 'hover:bg-white/5 text-white/60'
+                        }`}
+                      >
+                        Value
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          window.open(`https://web.archive.org/web/*/${primary.domain}`, '_blank');
+                          setShowMoreActions(false);
+                        }}
+                        className={`w-full text-left px-2.5 py-1.5 text-[11px] font-medium ${
+                          isLight ? 'hover:bg-slate-50 text-slate-600' : 'hover:bg-white/5 text-white/60'
+                        }`}
+                      >
+                        Wayback
+                      </button>
+                    </div>
+                  )}
                 </div>
+                <button
+                  type="button"
+                  onClick={() => handleSave(primary.domain)}
+                  className={`h-8 w-8 inline-flex items-center justify-center rounded-lg border ${
+                    primarySaved
+                      ? isLight
+                        ? 'bg-slate-900 text-white border-slate-900'
+                        : 'bg-white text-black border-white'
+                      : isLight
+                        ? 'border-slate-200 text-slate-500'
+                        : 'border-white/12 text-white/45'
+                  }`}
+                  aria-label="Save"
+                >
+                  <svg className="w-3.5 h-3.5" fill={primarySaved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    primary.available
+                      ? handleBuy(primary.domain)
+                      : window.open(
+                          `https://who.is/whois/${encodeURIComponent(primary.domain)}`,
+                          '_blank',
+                          'noopener,noreferrer'
+                        )
+                  }
+                  className={`inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-[11px] font-bold ${
+                    primary.available
+                      ? isLight
+                        ? 'bg-emerald-600 text-white hover:bg-emerald-500'
+                        : 'bg-emerald-500 text-black hover:bg-emerald-400'
+                      : isLight
+                        ? 'bg-slate-100 text-slate-600'
+                        : 'bg-white/10 text-white/70'
+                  }`}
+                >
+                  {primary.available ? 'Continue' : 'Lookup'}
+                </button>
+              </div>
+            </div>
+          )}
 
-                {/* Action bar */}
-                <div className="flex items-center gap-1.5 mt-2 flex-wrap relative">
-                  <button onClick={() => handleSave(primary.domain)} className={btnClass}>
-                    <svg className="w-3.5 h-3.5" fill={savedDomains.includes(primary.domain) ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
-                    <span className="hidden sm:inline">Bookmark</span>
-                  </button>
-                  <button onClick={() => handleCopyURL(primary.domain)} className={btnClass}>
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-                    <span className="hidden sm:inline">Copy URL</span>
-                  </button>
-                  <button onClick={() => handlePronounce(primary.domain)} className={btnClass}>
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707A1 1 0 0112 5.586v12.828a1 1 0 01-1.707.707L5.586 15z" /></svg>
-                    <span className="hidden sm:inline">Pronounce</span>
-                  </button>
-                  <button onClick={() => window.open(`https://www.godaddy.com/domain-value-appraisal/appraisal/?domain=${primary.domain}`, '_blank')} className={btnClass}>
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    <span className="hidden sm:inline">Appraise</span>
-                  </button>
-                  <div className="relative">
-                    <button onClick={() => setShowMoreActions(!showMoreActions)} className={btnClass}>
-                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+          {/* Full-viewport multi-column domain grid */}
+          {checkedCount > 0 && (
+            <div>
+              {visibleExtensions.length === 0 ? (
+                <p className="text-center text-[12px] py-12" style={{ color: 'var(--text-muted)' }}>
+                  Nothing in this filter
+                </p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-x-1 gap-y-0">
+                  {visibleExtensions.map((r) => (
+                    <DomainRow
+                      key={r.domain}
+                      result={r}
+                      isLight={isLight}
+                      onSave={handleSave}
+                      isSaved={savedDomains.includes(r.domain)}
+                      selectedRegistrar={selectedRegistrar}
+                      onSelectRegistrar={setSelectedRegistrar}
+                      onBlockCopy={blockCopy}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {(hiddenExtCount > 0 || showAllExts) && (
+                <div className="flex items-center justify-center gap-3 py-3 mt-1">
+                  {hiddenExtCount > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => setShowAllExts(true)}
+                      className={`text-[12px] font-bold ${isLight ? 'text-slate-800' : 'text-white/85'}`}
+                    >
+                      View {hiddenExtCount} more
                     </button>
-                    {showMoreActions && (
-                      <div className={`absolute top-full left-0 mt-1 rounded-lg z-50 py-1 min-w-[160px] ${isLight ? 'bg-white border border-slate-200 shadow-lg' : 'bg-neutral-900 border border-white/10 shadow-xl'}`}>
-                        <button onClick={() => { window.open(`https://web.archive.org/web/*/${primary.domain}`, '_blank'); setShowMoreActions(false); }} className={`w-full text-left px-3 py-2 text-xs transition-colors ${isLight ? 'hover:bg-slate-50 text-slate-600' : 'hover:bg-white/5 text-white/60'}`}>Wayback Machine</button>
-                        <button onClick={() => { window.open(`https://www.google.com/search?q=site:${primary.domain}`, '_blank'); setShowMoreActions(false); }} className={`w-full text-left px-3 py-2 text-xs transition-colors ${isLight ? 'hover:bg-slate-50 text-slate-600' : 'hover:bg-white/5 text-white/60'}`}>Google Index Check</button>
-                      </div>
-                    )}
-                  </div>
+                  )}
+                  {showAllExts && (
+                    <button
+                      type="button"
+                      onClick={() => setShowAllExts(false)}
+                      className="text-[12px] font-semibold"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
+                      Show less
+                    </button>
+                  )}
+                  <Link href="/domain-extensions" className="text-[11px] font-semibold" style={{ color: 'var(--text-muted)' }}>
+                    Full catalog →
+                  </Link>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
+          )}
 
-            {/* Legend + Grid */}
-            {extensions.length > 0 && (
-              <>
-                {/* Legend */}
-                <div className="flex items-center justify-end gap-4 mb-2">
-                  <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" /><span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>Available</span></div>
-                  <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-amber-500" /><span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>Premium</span></div>
-                  <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-500" /><span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>Taken</span></div>
-                </div>
-
-                {/* 3-column layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6">
-                  {/* Domain extensions - 2 cols */}
-                  <div className="lg:col-span-2">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-sm font-bold" style={{ color: 'var(--text-secondary)' }}>
-                        Domain extensions <span className="font-normal ml-1" style={{ color: 'var(--text-muted)' }}>({taken.length} taken)</span>
-                      </h3>
-                      <Link href="/domain-extensions" className="text-xs font-medium transition-colors hover:underline" style={{ color: 'var(--text-muted)' }}>See all</Link>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
-                      <div>{col1.map(r => <DomainRow key={r.domain} result={r} isLight={isLight} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} selectedRegistrar={selectedRegistrar} onSelectRegistrar={setSelectedRegistrar} />)}</div>
-                      <div>{col2.map(r => <DomainRow key={r.domain} result={r} isLight={isLight} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} selectedRegistrar={selectedRegistrar} onSelectRegistrar={setSelectedRegistrar} />)}</div>
-                    </div>
-                  </div>
-
-                  {/* Premium domains sidebar */}
-                  <div>
-                    <div className="flex items-center justify-between mb-2 mt-4 lg:mt-0">
-                      <h3 className="text-sm font-bold" style={{ color: 'var(--text-secondary)' }}>
-                        Premium domains
-                        {premiumResults.length > 0 && (
-                          <span className="font-normal ml-1 text-amber-500">({premiumResults.length})</span>
-                        )}
-                      </h3>
-                      <Link href="/premium" className="text-xs font-medium transition-colors hover:underline" style={{ color: 'var(--text-muted)' }}>See all</Link>
-                    </div>
-                    {isBrandableLoading ? (
-                      <div className="flex items-center gap-2 py-6 justify-center">
-                        <div className="w-3 h-3 border-2 rounded-full animate-spin" style={{ borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)', borderTopColor: isLight ? '#334155' : '#fff' }} />
-                        <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Building premium suggestions...</span>
-                      </div>
-                    ) : premiumResults.length > 0 ? (
-                      <>
-                        {premiumResults.map(r => (
-                          <DomainRow key={r.domain} result={r} isLight={isLight} onSave={handleSave} isSaved={savedDomains.includes(r.domain)} selectedRegistrar={selectedRegistrar} onSelectRegistrar={setSelectedRegistrar} />
-                        ))}
-                      </>
-                    ) : (
-                      <p className="text-xs py-4" style={{ color: 'var(--text-muted)' }}>No premium suggestions yet. Try a new keyword.</p>
-                    )}
-                  </div>
-                </div>
-              </>
-            )}
-
-            {/* Loading more */}
-            {isLoading && results.length > 0 && (
-              <div className="flex items-center justify-center gap-2 py-4">
-                <div className="w-3 h-3 border-2 rounded-full animate-spin" style={{ borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)', borderTopColor: isLight ? '#334155' : '#fff' }} />
-                <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Checking more extensions...</span>
-              </div>
-            )}
-          </div>
+          {isLoading && results.length > 0 && (
+            <div className="flex items-center justify-center gap-1.5 py-2">
+              <div
+                className="w-2.5 h-2.5 border-2 rounded-full animate-spin"
+                style={{
+                  borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)',
+                  borderTopColor: isLight ? '#0f172a' : '#fff',
+                }}
+              />
+              <span className="text-[10px] font-medium" style={{ color: 'var(--text-muted)' }}>
+                Checking more extensions…
+              </span>
+            </div>
+          )}
         </div>
+
+        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.search} compact />
+        <SeoGuidePack {...TOOL_GUIDE_PACKS.search} />
       </main>
     </div>
   );
@@ -597,75 +865,139 @@ export default function SearchPage() {
   );
 }
 
-/* ── Domain Extension Row ── */
-function DomainRow({ result, isLight, onSave, isSaved, selectedRegistrar, onSelectRegistrar }: {
+/* ── Dense grid row — Continue / Lookup / $price (IDS-style, full-width columns) ── */
+function DomainRow({
+  result,
+  isLight,
+  onSave,
+  isSaved,
+  selectedRegistrar,
+  onSelectRegistrar,
+  onBlockCopy,
+}: {
   result: DomainResult;
   isLight: boolean;
   onSave: (d: string) => void;
   isSaved: boolean;
   selectedRegistrar: RegistrarName;
   onSelectRegistrar: (registrar: RegistrarName) => void;
+  onBlockCopy: (e: React.ClipboardEvent | React.MouseEvent) => void;
 }) {
   const isAvailable = result.available;
   const price = result.price ? parseFloat(result.price.replace(/[^0-9.]/g, '')) : null;
-  const showPremiumPrice = !!result.premium && !isAvailable && !!price;
-  const ctaText = isAvailable ? 'Go' : (showPremiumPrice ? `$${price!.toFixed(0)}` : 'WHOIS');
-  const domainHref = isAvailable
-    ? getRegistrarUrl(result.domain, selectedRegistrar)
-    : result.premium && result.buyUrl
-      ? result.buyUrl
-      : `https://who.is/whois/${encodeURIComponent(result.domain)}`;
-  const domainTitle = isAvailable
-    ? `Register on ${selectedRegistrar}`
-    : result.premium && result.buyUrl
-      ? (result.purchaseInfo || 'View premium listing')
-      : 'View WHOIS';
+  const showPremiumPrice = (!!result.premium || !!price) && !isAvailable && !!price && price > 50;
+  const isPremium = !!result.premium || showPremiumPrice;
+
+  const ctaText = isAvailable
+    ? 'Continue'
+    : showPremiumPrice
+      ? `$${price!.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+      : 'Lookup';
+
+  // Available + premium: open preferred registrar search for this exact domain
+  const domainHref =
+    isAvailable || isPremium
+      ? getRegistrarUrl(result.domain, selectedRegistrar)
+      : result.buyUrl
+        ? result.buyUrl
+        : `https://who.is/whois/${encodeURIComponent(result.domain)}`;
+  const domainTitle =
+    isAvailable || isPremium
+      ? `Search ${result.domain} on ${selectedRegistrar}`
+      : result.buyUrl
+        ? result.purchaseInfo || 'View listing'
+        : 'View WHOIS';
+
+  const statusDot = isAvailable
+    ? isLight
+      ? 'bg-emerald-500'
+      : 'bg-emerald-400'
+    : isPremium
+      ? 'bg-amber-400'
+      : isLight
+        ? 'bg-rose-500'
+        : 'bg-rose-400';
+
+  const ctaClass = isAvailable
+    ? isLight
+      ? 'bg-emerald-600 text-white hover:bg-emerald-500'
+      : 'bg-emerald-500/90 text-black hover:bg-emerald-400'
+    : showPremiumPrice
+      ? isLight
+        ? 'bg-amber-500 text-black hover:bg-amber-400'
+        : 'bg-amber-400 text-black hover:bg-amber-300'
+      : isLight
+        ? 'bg-slate-100 text-rose-600 hover:bg-slate-200'
+        : 'bg-white/[0.08] text-rose-300 hover:bg-white/12';
 
   return (
-    <div className={`flex items-center justify-between gap-1.5 py-[5px] px-1 rounded transition-colors ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.03]'}`}>
+    <div
+      className={`shine-border no-lift group flex items-center justify-between gap-1.5 rounded-lg py-1.5 px-1.5 sm:px-2 transition-colors ${
+        isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.035]'
+      }`}
+    >
       <div className="flex items-center gap-1.5 min-w-0 flex-1 overflow-hidden">
-        <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full shrink-0 ${result.premium ? 'bg-amber-500' : isAvailable ? 'bg-emerald-500' : 'bg-red-500'}`} />
+        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot}`} />
         <a
           href={domainHref}
           target="_blank"
           rel="noopener noreferrer"
           title={domainTitle}
-          className={`text-[11px] sm:text-[13px] font-mono transition-colors break-all line-clamp-1 ${isAvailable ? (isLight ? 'text-slate-800 hover:text-slate-950' : 'text-white/90 hover:text-white') : (isLight ? 'text-slate-400 hover:text-slate-600' : 'text-white/35 hover:text-white/55')}`}
+          onCopy={onBlockCopy}
+          className={`font-mono text-[11px] sm:text-[12.5px] select-none transition-colors truncate ${
+            isAvailable
+              ? isLight
+                ? 'text-slate-800 hover:text-slate-950'
+                : 'text-white/90 hover:text-white'
+              : isLight
+                ? 'text-slate-500 hover:text-slate-700'
+                : 'text-white/45 hover:text-white/70'
+          }`}
         >
           {result.domain}
         </a>
       </div>
       <div className="flex items-center gap-0.5 shrink-0">
-        <button onClick={() => onSave(result.domain)} className={`hidden sm:block p-0.5 sm:p-1 rounded transition-colors ${isSaved ? 'text-emerald-400' : isLight ? 'text-slate-200 hover:text-slate-400' : 'text-white/10 hover:text-white/40'}`} aria-label="Save">
-          <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
+        <button
+          type="button"
+          onClick={() => onSave(result.domain)}
+          className={`p-1 rounded-md transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100 ${
+            isSaved
+              ? isLight
+                ? 'text-slate-900 opacity-100'
+                : 'text-white opacity-100'
+              : isLight
+                ? 'text-slate-300 hover:text-slate-600'
+                : 'text-white/25 hover:text-white/55'
+          }`}
+          aria-label={isSaved ? 'Remove save' : 'Save domain'}
+          title={isSaved ? 'Saved' : 'Save'}
+        >
+          <svg
+            className="w-3 h-3"
+            fill={isSaved ? 'currentColor' : 'none'}
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+            />
+          </svg>
         </button>
         <RegistrarActionMenu
           domain={result.domain}
           selectedRegistrar={selectedRegistrar}
           onSelectRegistrar={onSelectRegistrar}
-          canRegister={isAvailable}
-          primaryLabel={ctaText}
+          canRegister={isAvailable || isPremium}
+          primaryLabel={isAvailable ? ctaText : isPremium ? (showPremiumPrice ? ctaText : 'Search') : ctaText}
           premiumUrl={result.premium ? result.buyUrl : undefined}
           premiumLabel={result.purchaseInfo}
-          primaryButtonClassName={`px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-bold rounded transition-colors ${
-            showPremiumPrice
-              ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
-              : isAvailable
-                ? 'bg-emerald-500 text-white hover:bg-emerald-600'
-                : isLight ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
-          }`}
-          chevronButtonClassName={`rounded p-1 sm:p-1.5 transition-colors ${
-            showPremiumPrice
-              ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
-              : isAvailable
-                ? 'bg-emerald-500 text-white hover:bg-emerald-600'
-                : isLight ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
-          }`}
-          fallbackButtonClassName={`px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-bold rounded transition-colors ${
-            showPremiumPrice
-              ? (isLight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600')
-              : isLight ? 'bg-red-50 text-red-500 hover:bg-red-100' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
-          }`}
+          primaryButtonClassName={`min-w-[4.25rem] px-2 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors ${ctaClass}`}
+          chevronButtonClassName={`rounded-md p-1 transition-colors ${ctaClass}`}
+          fallbackButtonClassName={`min-w-[4.25rem] px-2 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors ${ctaClass}`}
         />
       </div>
     </div>

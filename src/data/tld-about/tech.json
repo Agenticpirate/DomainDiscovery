@@ -1,0 +1,117 @@
+{
+  "tld": ".tech",
+  "slug": "tech",
+  "title": "About .tech domains",
+  "delegationTitle": "Delegation Record for .TECH",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Radix Technologies Inc.",
+  "sponsorDetail": "Radix Technologies Inc.\nServices Cayman Limited, P.O. Box 10008, Willow House, Cricket Square, Grand Cayman\nKY1-1001\nCayman Islands (the)",
+  "administrativeContact": "Director",
+  "technicalContact": "Vice President, Engineering",
+  "registryUrl": "https://radix.website/",
+  "whoisServer": "whois.nic.tech",
+  "rdapServer": "https://rdap.radix.host/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns01.trs-dns.com",
+      "addresses": [
+        "64.96.1.1",
+        "2620:57:4001:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns01.trs-dns.net",
+      "addresses": [
+        "64.96.2.1",
+        "2620:57:4002:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns10.trs-dns.info",
+      "addresses": [
+        "64.78.204.1",
+        "2620:171:812:1534:8:0:0:1"
+      ]
+    },
+    {
+      "host": "ns10.trs-dns.org",
+      "addresses": [
+        "64.78.205.1",
+        "2620:171:813:1534:8:0:0:1"
+      ]
+    }
+  ],
+  "about": ".TECH is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .TECH is listed by IANA as Radix Technologies Inc.. Anyone can typically register a .TECH name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.Tech is a generic top-level domain (gTLD) of the Domain Name System (DNS) used in the Internet. The name is truncated from technology.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/tech.html",
+  "wikipedia": ".Tech is a generic top-level domain (gTLD) of the Domain Name System (DNS) used in the Internet. The name is truncated from technology.",
+  "scrapedAt": "2026-07-21T21:33:27Z",
+  "categories": [
+    "tech"
+  ],
+  "useCases": [
+    "Startups",
+    "SaaS",
+    "Developers",
+    "AI products",
+    "Apps"
+  ],
+  "keywords": [
+    ".tech",
+    "developers",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "radix",
+    "saas",
+    "startups",
+    "tech",
+    "technologies",
+    "top"
+  ],
+  "primaryCategory": "tech",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 52,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$6.42",
+      "value": 6.42
+    },
+    "cheapestRenewal": {
+      "registrar": "Cloudflare",
+      "price": "$40.18",
+      "value": 40.18
+    },
+    "sourceUrl": "https://tld-list.com/tld/tech"
+  },
+  "summary": ".tech is a Generic top-level domain. Managed by Radix Technologies Inc..",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

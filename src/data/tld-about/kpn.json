@@ -1,0 +1,102 @@
+{
+  "tld": ".kpn",
+  "slug": "kpn",
+  "title": "About .kpn domains",
+  "delegationTitle": "Delegation Record for .KPN",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Koninklijke KPN N.V.",
+  "sponsorDetail": "Koninklijke KPN N.V.\nMaanplein 55\nThe Hague 2516 CK\nNetherlands (the)",
+  "administrativeContact": "Laura Jansen",
+  "technicalContact": "CTO",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": "https://rdap.centralnic.com/kpn",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.kpn",
+      "addresses": [
+        "194.169.218.90",
+        "2001:67c:13cc:0:0:0:1:90"
+      ]
+    },
+    {
+      "host": "b.nic.kpn",
+      "addresses": [
+        "185.24.64.90",
+        "2a04:2b00:13cc:0:0:0:1:90"
+      ]
+    },
+    {
+      "host": "c.nic.kpn",
+      "addresses": [
+        "212.18.248.90",
+        "2a04:2b00:13ee:0:0:0:0:90"
+      ]
+    },
+    {
+      "host": "d.nic.kpn",
+      "addresses": [
+        "212.18.249.90",
+        "2a04:2b00:13ff:0:0:0:0:90"
+      ]
+    }
+  ],
+  "about": ".KPN is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .KPN is listed by IANA as Koninklijke KPN N.V.. Anyone can typically register a .KPN name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/kpn.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:43:38Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".kpn",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "koninklijke",
+    "kpn",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".kpn is a Generic top-level domain. Managed by Koninklijke KPN N.V..",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

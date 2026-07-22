@@ -1,0 +1,110 @@
+{
+  "tld": ".xn--mgbtx2b",
+  "slug": "xn--mgbtx2b",
+  "title": "About .xn--mgbtx2b domains",
+  "delegationTitle": "Delegation Record for .\u0639\u0631\u0627\u0642",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code IQ",
+  "designation": "Country-code top-level domain designated for Iraq",
+  "sponsor": "Communications and Media Commission (CMC)",
+  "sponsorDetail": "Communications and Media Commission (CMC)\nAl-Masbah Hay Babel\nDist. 929 St. 32 House 18\nBaghdad\nIraq",
+  "administrativeContact": "CEO",
+  "technicalContact": "CEO",
+  "registryUrl": "http://www.cmc.iq/en/iq.html",
+  "whoisServer": "whois.cmc.iq",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns.cmc.iq",
+      "addresses": [
+        "194.117.57.105"
+      ]
+    },
+    {
+      "host": "ns01.trs-dns.com",
+      "addresses": [
+        "64.96.1.1",
+        "2620:57:4001:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns01.trs-dns.net",
+      "addresses": [
+        "64.96.2.1",
+        "2620:57:4002:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "nsp-anycast.cmc.iq",
+      "addresses": [
+        "194.117.58.42",
+        "2001:500:14:8001:ad:0:0:42"
+      ]
+    }
+  ],
+  "about": ".XN--MGBTX2B is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Iraq. The IANA root zone lists the registry manager as Communications and Media Commission (CMC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--mgbtx2b.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:25Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--mgbtx2b",
+    "cctld",
+    "code",
+    "commission",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "iraq",
+    "letter",
+    "level",
+    "local business",
+    "media",
+    "regional brands",
+    "top",
+    "two",
+    "xn--mgbtx2b"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--mgbtx2b is a Country-code top-level domain designated for two-letter country code IQ. Managed by Communications and Media Commission (CMC).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

@@ -1,0 +1,116 @@
+{
+  "tld": ".eh",
+  "slug": "eh",
+  "title": "About .eh domains",
+  "delegationTitle": "Delegation Record for .EH",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Western Sahara",
+  "sponsor": "Not assigned",
+  "sponsorDetail": "Not assigned",
+  "administrativeContact": "Not assigned",
+  "technicalContact": "Not assigned",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": "1999-09-26",
+  "nameServers": [
+    {
+      "host": "Number\u00a0Resources",
+      "addresses": [
+        "Number",
+        "Registries",
+        "RIR",
+        "Allocation",
+        "Data",
+        "Abuse",
+        "Information"
+      ]
+    },
+    {
+      "host": "Protocols",
+      "addresses": [
+        "Protocol",
+        "Registries",
+        "Time",
+        "Zone",
+        "Database"
+      ]
+    },
+    {
+      "host": "About\u00a0Us",
+      "addresses": [
+        "News",
+        "Performance",
+        "The",
+        "Organization",
+        "Archive",
+        "Contact",
+        "Us"
+      ]
+    }
+  ],
+  "about": ".EH is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Western Sahara. The IANA root zone lists the registry manager as Not assigned. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\nWestern Sahara is a disputed territory, and as such it has no country code top-level domain (ccTLD). .eh is reserved for this purpose, and will be assigned if the Western Sahara conflict results in an agreement between the Sahrawi Arab Democratic Republic and Morocco. IANA has not designated a ccTLD manager for the .eh domain.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/eh.html",
+  "wikipedia": "Western Sahara is a disputed territory, and as such it has no country code top-level domain (ccTLD). .eh is reserved for this purpose, and will be assigned if the Western Sahara conflict results in an agreement between the Sahrawi Arab Democratic Republic and Morocco. IANA has not designated a ccTLD manager for the .eh domain.",
+  "scrapedAt": "2026-07-21T21:39:30Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".eh",
+    "assigned",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "eh",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "sahara",
+    "top",
+    "western"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".eh is a Country-code top-level domain. Managed by Not assigned.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

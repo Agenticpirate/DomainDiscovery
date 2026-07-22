@@ -1,0 +1,119 @@
+{
+  "tld": ".im",
+  "slug": "im",
+  "title": "About .im domains",
+  "delegationTitle": "Delegation Record for .IM",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Isle of Man",
+  "sponsor": "Isle of Man Government",
+  "sponsorDetail": "Isle of Man Government\nBucks Road\nDouglas Isle of Man IM1\nUnited Kingdom of Great Britain and Northern Ireland (the)",
+  "administrativeContact": "Brian Osborn",
+  "technicalContact": "Phil Adcock",
+  "registryUrl": "http://www.nic.im",
+  "whoisServer": "whois.nic.im",
+  "rdapServer": null,
+  "registrationDate": "1996-09-11",
+  "recordUpdated": "2018-11-24",
+  "nameServers": [
+    {
+      "host": "barney.advsys.co.uk",
+      "addresses": [
+        "217.23.160.50"
+      ]
+    },
+    {
+      "host": "hoppy.iom.com",
+      "addresses": [
+        "217.23.163.140"
+      ]
+    },
+    {
+      "host": "ns4.ja.net",
+      "addresses": [
+        "193.62.157.66",
+        "2001:630:0:47:0:0:0:42"
+      ]
+    },
+    {
+      "host": "pebbles.iom.com",
+      "addresses": [
+        "83.218.14.53"
+      ]
+    }
+  ],
+  "about": ".IM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Isle of Man. The IANA root zone lists the registry manager as Isle of Man Government. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.im is the Internet country code top-level domain (ccTLD) for the Isle of Man. It is administered by the Government of the Isle of Man and managed on a day-to-day basis by Domicilium, an offshore Internet Service Provider based on the Isle of Man.\nOn 1 July 2006, .im registration was made available to anyone in the world, including one, two, and three letter domains directly under .im, which opens up the possibility of .im domain hacks. The domain has gained popularity among companies who produce instant messaging (IM) software with names registered by Adium, ejabberd, Coccinella, Gitter, Meebo, Pandion, Pidgin, Prosody, Trillian, and Yahoo! among others. It is also used by the website elgooG. .IM is also used in German-, French- and Italian-speaking countries (i.e. Germany, Austria, Luxemburg, Switzerland, France, Italy and part of Belgium) for Real Estate purposes (Immobilien in German, Immobilier in French, Immobiliare in Italian). The abundance of available short names has also made the domain popular for personal use.\nCurrently, domain registrations cost \u00a340.00 per year for domains of three letters or more, although they can be purchased much more cheaply through resellers. Premium domains with two character names are available for \u00a3495.00, and premium domains with one character names are available for \u00a3995.00.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/im.html",
+  "wikipedia": ".im is the Internet country code top-level domain (ccTLD) for the Isle of Man. It is administered by the Government of the Isle of Man and managed on a day-to-day basis by Domicilium, an offshore Internet Service Provider based on the Isle of Man.\nOn 1 July 2006, .im registration was made available to anyone in the world, including one, two, and three letter domains directly under .im, which opens up the possibility of .im domain hacks. The domain has gained popularity among companies who produce instant messaging (IM) software with names registered by Adium, ejabberd, Coccinella, Gitter, Meebo, Pandion, Pidgin, Prosody, Trillian, and Yahoo! among others. It is also used by the website elgooG. .IM is also used in German-, French- and Italian-speaking countries (i.e. Germany, Austria, Luxemburg, Switzerland, France, Italy and part of Belgium) for Real Estate purposes (Immobilien in German, Immobilier in French, Immobiliare in Italian). The abundance of available short names has also made the domain popular for personal use.\nCurrently, domain registrations cost \u00a340.00 per year for domains of three letters or more, although they can be purchased much more cheaply through resellers. Premium domains with two character names are available for \u00a3495.00, and premium domains with one character names are available for \u00a3995.00.",
+  "scrapedAt": "2026-07-21T21:42:31Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".im",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "government",
+    "im",
+    "isle",
+    "level",
+    "local business",
+    "man",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 29,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$4.18",
+      "value": 4.18
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$6.73",
+      "value": 6.73
+    },
+    "sourceUrl": "https://tld-list.com/tld/im"
+  },
+  "summary": ".im is a Country-code top-level domain. Managed by Isle of Man Government.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

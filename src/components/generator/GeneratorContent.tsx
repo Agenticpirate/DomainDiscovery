@@ -11,140 +11,412 @@ export const GeneratorContent: React.FC = () => {
 
   const faqs = [
     {
-      question: 'What is a domain name generator?',
-      answer: 'A domain name generator is an AI-powered tool that helps you discover creative, available domain names based on your keywords. It generates hundreds of variations including prefixes, suffixes, and semantic alternatives, then checks their real-time availability across registrars. Perfect for finding the ideal domain when your first choice is taken.'
-    },
-    {
-      question: 'How does the DomainDiscovery generator work?',
-      answer: 'Our generator uses advanced algorithms to create domain suggestions as you type. It combines your keyword with 200+ prefixes, 200+ suffixes, and semantic alternatives to generate unique combinations. Each suggestion is checked for real-time availability using our instant domain search API, ensuring you only see domains you can actually register.'
-    },
-    {
-      question: 'Why should I use a domain name generator?',
-      answer: 'Domain generators save hours of manual brainstorming and checking. They provide creative alternatives you might not think of, help you find available domains when popular names are taken, and offer instant availability checking across multiple TLDs. Our generator is especially useful for finding brandable, memorable names that match your business vision.'
-    },
-    {
-      question: 'Can I trust the availability results?',
-      answer: 'Yes! Our generator uses real-time availability checking through the same API that powers our instant domain search. Results are accurate at the moment they\'re displayed. However, popular domains can be registered quickly, so we recommend securing your choice as soon as you find the perfect name.'
-    },
-    {
-      question: 'How specific should my keywords be?',
-      answer: 'Start with broad, single-word keywords for maximum variety (e.g., "cloud", "mint", "spark"). The generator works best with 3-10 character keywords. More specific terms give targeted results, while broader terms provide diverse options. Try both approaches to explore different naming directions for your project.'
-    },
-    {
-      question: 'What makes a good domain name?',
-      answer: 'Great domains are short (under 15 characters), memorable, easy to spell, and relevant to your brand. Avoid hyphens, numbers, and complex spellings. Choose .com when possible for maximum credibility. Our generator prioritizes these qualities, showing the most brandable suggestions first.'
-    },
-    {
-      question: 'Can I use this for brainstorming without registering immediately?',
-      answer: 'Absolutely! The generator is perfect for exploring ideas and saving favorites for later. However, remember that available domains can be registered by others at any time. If you find a name you love, consider registering it quickly to secure it, even if you\'re not ready to build your site yet.'
-    },
-    {
-      question: 'What are semantic alternatives?',
-      answer: 'Semantic alternatives are contextually related words that share meaning with your keyword. For example, "cloud" suggests "compute", "server", and "storage" in tech contexts. Our AI understands domain-specific meanings, so "mint" generates finance-related terms like "budget" and "wealth", not just plant-related words. This helps you discover relevant, industry-appropriate domain names.'
-    }
-  ];
-
-  const tips = [
-    {
-      icon: <Icons.Star />,
-      title: 'Start with core keywords',
-      description: 'Use simple, memorable words that represent your brand or niche. Single words work best for generating diverse options.'
-    },
-    {
       icon: <Icons.Magic />,
-      title: 'Explore semantic alternatives',
-      description: 'Try keywords like "cloud", "mint", or "spark" to see how our AI suggests contextually relevant domain names based on industry meanings.'
+      question: 'What is a domain name generator?',
+      answer:
+        'An AI tool that turns a keyword into creative, brandable domain ideas — prefixes, suffixes, morphs, and semantic alternatives — then checks real-time availability so you can register winners fast.',
     },
     {
-      icon: <Icons.Check />,
-      title: 'Prioritize .com domains',
-      description: 'While other TLDs are valid, .com remains the most trusted and memorable extension for most businesses and projects.'
+      icon: <Icons.Layers />,
+      question: 'How does the DomainDiscovery generator work?',
+      answer:
+        'Your keyword expands with 3,000+ prefixes and suffixes, semantic maps, and brand morphs — up to 5,000 unique .com ideas. Availability streams in progressive batches while you browse.',
     },
     {
-      icon: <Icons.Globe />,
-      title: 'Keep it short and simple',
-      description: 'Aim for domains under 15 characters. Shorter names are easier to remember, type, and share across social media and marketing materials.'
+      icon: <Icons.Sparkles />,
+      question: 'Why should I use a domain name generator?',
+      answer:
+        'It saves hours of manual brainstorming, surfaces names you would not invent alone, and shows live availability so you only chase domains you can actually buy.',
+    },
+    {
+      icon: <Icons.Shield />,
+      question: 'Can I trust the availability results?',
+      answer:
+        'Yes — we use the same live check API as our domain search. Results are accurate at the moment shown; popular names can still get taken, so register quickly when you find a fit.',
     },
     {
       icon: <Icons.Search />,
-      title: 'Check trademark conflicts',
-      description: 'Before finalizing your domain, search for existing trademarks to avoid legal issues. Use USPTO or your country\'s trademark database.'
+      question: 'How specific should my keywords be?',
+      answer:
+        'Start with short single words (3–10 characters) like “cloud”, “mint”, or “spark”. Broad terms maximize variety; tighter terms focus industry meaning. Try both.',
     },
     {
+      icon: <Icons.Check />,
+      question: 'What makes a good domain name?',
+      answer:
+        'Short (ideally under 15 characters), memorable, easy to spell, and brand-relevant. Avoid hyphens and numbers when possible. Prefer .com for trust and recall.',
+    },
+    {
+      icon: <Icons.Star />,
+      question: 'Can I brainstorm without registering immediately?',
+      answer:
+        'Yes — explore freely with no account. Remember available names can disappear anytime; if you love one, register it even if you are not ready to launch.',
+    },
+    {
+      icon: <Icons.Globe />,
+      question: 'What are semantic alternatives?',
+      answer:
+        'Related words by industry context — “cloud” → compute, host, storage; “mint” → finance, wealth. That yields relevant brandable names, not random word soup.',
+    },
+  ];
+
+  const tips: {
+    step: string;
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+    tags?: string[];
+  }[] = [
+    {
+      step: '01',
+      icon: <Icons.Star />,
+      title: 'Start with core keywords',
+      description:
+        'Use simple, memorable words that represent your brand or niche. Single words work best for generating diverse options.',
+      tags: ['Brand', 'Niche'],
+    },
+    {
+      step: '02',
+      icon: <Icons.Magic />,
+      title: 'Explore semantic alternatives',
+      description:
+        'Context-aware keywords surface industry-relevant names — not random padding — so suggestions match your market.',
+      tags: ['cloud', 'mint', 'spark'],
+    },
+    {
+      step: '03',
+      icon: <Icons.Check />,
+      title: 'Prioritize .com domains',
+      description:
+        'Other TLDs work, but .com remains the most trusted and memorable extension for most businesses and projects.',
+      tags: ['.com'],
+    },
+    {
+      step: '04',
+      icon: <Icons.Globe />,
+      title: 'Keep it short and simple',
+      description:
+        'Aim for under 15 characters. Shorter names are easier to remember, type, and share in marketing and social.',
+      tags: ['≤15 chars'],
+    },
+    {
+      step: '05',
+      icon: <Icons.Search />,
+      title: 'Check trademark conflicts',
+      description:
+        'Before you buy, search existing trademarks in official databases for your region so the brand stays clear to own.',
+      tags: ['Clearance'],
+    },
+    {
+      step: '06',
       icon: <Icons.Dollar />,
       title: 'Act fast on good finds',
-      description: 'Available domains can be registered by anyone at any time. When you find the perfect name, register it immediately to secure it.'
-    }
+      description:
+        'Available domains can disappear anytime. When you find the right name, register it immediately to lock it in.',
+      tags: ['Register'],
+    },
   ];
 
   const benefits = [
     {
-      title: 'Instant Results',
-      description: 'Generate hundreds of domain suggestions in milliseconds with real-time availability checking.',
-      icon: '⚡'
+      title: 'Thousands of ideas',
+      description:
+        'Type one keyword and expand it into up to 5,000 brandable .com combinations — prefixes, suffixes, morphs, and compounds.',
+      stat: '5K',
+      statLabel: 'ideas / keyword',
+      icon: <Icons.Sparkles />,
     },
     {
-      title: 'AI-Powered Creativity',
-      description: 'Our semantic engine understands context, suggesting relevant alternatives you might never think of.',
-      icon: '🤖'
+      title: 'Semantic creativity',
+      description:
+        'Context-aware alternatives (cloud → compute, host, storage) so suggestions match your industry, not random padding.',
+      stat: '25+',
+      statLabel: 'semantic maps',
+      icon: <Icons.Magic />,
     },
     {
-      title: 'Real-Time Availability',
-      description: 'Every suggestion is checked against live registrar data, ensuring accuracy and saving you time.',
-      icon: '✓'
+      title: 'Live availability',
+      description:
+        'Results stream with progressive .com checks against live registrar data — see available names as they land.',
+      stat: 'Live',
+      statLabel: '.com checks',
+      icon: <Icons.Check />,
     },
     {
-      title: 'Comprehensive Coverage',
-      description: 'We combine 200+ prefixes, 200+ suffixes, and semantic alternatives for maximum variety.',
-      icon: '🎯'
-    }
+      title: 'Massive keyword library',
+      description:
+        '3,000+ prefixes and suffixes drawn from top domain naming patterns (my, online, hub, network, jobs, buddy…).',
+      stat: '3K+',
+      statLabel: 'affixes',
+      icon: <Icons.Layers />,
+    },
   ];
 
   return (
-    <div className="space-y-10 py-10 sm:space-y-14 sm:py-14">
-      {/* What is Domain Generator Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl font-black mb-4 sm:mb-6 text-center">
-          What is an AI Domain Name Generator?
-        </h2>
-        <div className={`prose ${isLight ? 'prose-slate' : 'prose-invert'} max-w-none`}>
-          <p className={`${isLight ? 'text-slate-600' : 'text-white/70'} leading-relaxed text-base sm:text-lg mb-4 sm:mb-6`}>
-            An AI domain name generator is a powerful tool that helps entrepreneurs, businesses, and creators 
-            discover the perfect domain name for their online presence. Instead of manually brainstorming and 
-            checking availability one domain at a time, our generator uses advanced algorithms to create hundreds 
-            of creative, brandable domain suggestions based on your keywords.
+    <div className="space-y-10 py-10 sm:space-y-12 sm:py-12">
+      {/* What is Domain Generator — premium explainer */}
+      <section className="max-w-6xl mx-auto px-3.5 sm:px-6">
+        <div className="text-center mb-5 sm:mb-8">
+          <p
+            className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            Domain discovery, explained
           </p>
-          <p className={`${isLight ? 'text-slate-600' : 'text-white/70'} leading-relaxed text-base sm:text-lg mb-4 sm:mb-6`}>
-            What makes our generator unique is its <strong className={isLight ? 'text-slate-900' : 'text-white'}>semantic understanding</strong>. 
-            Unlike basic generators that just add random prefixes and suffixes, our AI understands domain-specific 
-            context. When you search for &quot;cloud&quot;, it knows you likely mean cloud computing, not weather. When you 
-            type &quot;mint&quot;, it suggests finance-related terms, not herbs. This contextual awareness helps you find 
-            domains that truly match your industry and vision.
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight mb-2">
+            What is an AI domain name generator?
+          </h2>
+          <p
+            className="text-[13px] sm:text-[15px] max-w-2xl mx-auto leading-relaxed"
+            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+          >
+            A faster way to invent brandable names: one keyword becomes thousands of ideas, ranked by meaning,
+            with live availability so you only chase domains you can buy.
           </p>
-          <p className={`${isLight ? 'text-slate-600' : 'text-white/70'} leading-relaxed text-base sm:text-lg`}>
-            Every suggestion is checked for real-time availability across major registrars, so you can immediately 
-            register domains that catch your eye. Whether you&apos;re launching a startup, building a personal brand, 
-            or exploring new project ideas, our generator streamlines the entire domain discovery process.
-          </p>
+        </div>
+
+        <div
+          className={`shine-border relative overflow-hidden rounded-2xl border p-5 sm:p-7 mb-3 sm:mb-4 ${
+            isLight
+              ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.03]'
+              : 'bg-white/[0.03] border-white/10'
+          }`}
+        >
+          <div
+            className={`pointer-events-none absolute inset-x-0 top-0 h-px ${
+              isLight
+                ? 'bg-gradient-to-r from-transparent via-slate-300 to-transparent'
+                : 'bg-gradient-to-r from-transparent via-white/20 to-transparent'
+            }`}
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
+            <div className="lg:col-span-7 space-y-3.5 sm:space-y-4">
+              <p
+                className="text-[13px] sm:text-[15px] leading-relaxed"
+                style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.65)' }}
+              >
+                Instead of brainstorming and checking names one by one, the generator expands your keyword into
+                creative, brandable .com suggestions — prefixes, suffixes, morphs, and compounds — so founders,
+                creators, and teams can explore a full shortlist in minutes.
+              </p>
+              <p
+                className="text-[13px] sm:text-[15px] leading-relaxed"
+                style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.65)' }}
+              >
+                What sets it apart is{' '}
+                <span className={`font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>
+                  semantic understanding
+                </span>
+                . Basic tools pad random words; we read domain context so industry intent stays intact — computing
+                for cloud, finance for mint — and names match your vision, not the weather report.
+              </p>
+              <p
+                className="text-[13px] sm:text-[15px] leading-relaxed"
+                style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.65)' }}
+              >
+                Every idea is checked live against registrar data. Spot a winner, open your preferred registrar,
+                and register before someone else does.
+              </p>
+            </div>
+
+            <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-2">
+              {[
+                {
+                  label: 'Keyword in',
+                  detail: 'Brand word or niche term',
+                  icon: <Icons.Search />,
+                },
+                {
+                  label: 'Semantic expand',
+                  detail: 'Industry-aware variations',
+                  icon: <Icons.Magic />,
+                },
+                {
+                  label: 'Live .com out',
+                  detail: 'Available · premium · taken',
+                  icon: <Icons.Check />,
+                },
+              ].map((item, i) => (
+                <div
+                  key={item.label}
+                  className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 sm:py-3 ${
+                    isLight
+                      ? 'bg-slate-50/80 border-slate-200'
+                      : 'bg-black/40 border-white/[0.08]'
+                  }`}
+                >
+                  <div
+                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border [&>svg]:h-3.5 [&>svg]:w-3.5 ${
+                      isLight
+                        ? 'bg-white text-slate-800 border-slate-200'
+                        : 'bg-white/[0.08] text-white border-white/10'
+                    }`}
+                  >
+                    {item.icon}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`text-[10px] font-black tabular-nums ${
+                          isLight ? 'text-slate-300' : 'text-white/25'
+                        }`}
+                      >
+                        0{i + 1}
+                      </span>
+                      <span className="text-[12px] sm:text-[13px] font-bold tracking-tight">
+                        {item.label}
+                      </span>
+                    </div>
+                    <p
+                      className="text-[11px] leading-snug mt-0.5"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
+                      {item.detail}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
+          {[
+            {
+              title: 'For startups',
+              text: 'Ship a shortlist before your next brand workshop.',
+            },
+            {
+              title: 'For creators',
+              text: 'Find a clean name for the channel, product, or studio.',
+            },
+            {
+              title: 'For experiments',
+              text: 'Test project ideas without burning hours on WHOIS.',
+            },
+          ].map((card) => (
+            <div
+              key={card.title}
+              className={`rounded-xl border px-3.5 py-3 sm:px-4 sm:py-3.5 ${
+                isLight
+                  ? 'bg-white border-slate-200'
+                  : 'bg-white/[0.02] border-white/[0.08]'
+              }`}
+            >
+              <div
+                className={`text-[12px] sm:text-[13px] font-bold mb-1 ${
+                  isLight ? 'text-slate-900' : 'text-white'
+                }`}
+              >
+                {card.title}
+              </div>
+              <p
+                className="text-[11px] sm:text-[12px] leading-relaxed"
+                style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.45)' }}
+              >
+                {card.text}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Benefits Grid */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl font-black mb-6 sm:mb-10 text-center">
-          Why Use Our Domain Generator?
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-          {benefits.map((benefit, index) => (
+      {/* Why use — premium benefits */}
+      <section className="max-w-6xl mx-auto px-3.5 sm:px-6">
+        <div className="text-center mb-5 sm:mb-8">
+          <p
+            className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            Built for founders
+          </p>
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight mb-2">
+            Why use our domain generator?
+          </h2>
+          <p
+            className="text-[13px] sm:text-[14px] max-w-xl mx-auto leading-relaxed"
+            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+          >
+            One keyword. Thousands of brandable names. Live availability. Sort, filter, and register when you find the one.
+          </p>
+        </div>
+
+        {/* Stat strip */}
+        <div
+          className={`shine-border grid grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl border overflow-hidden mb-4 sm:mb-6 ${
+            isLight ? 'border-slate-200 bg-slate-200' : 'border-white/10 bg-white/10'
+          }`}
+        >
+          {[
+            { value: '3,000+', label: 'Prefixes & suffixes' },
+            { value: '5,000', label: 'Ideas per keyword' },
+            { value: 'Live', label: '.com availability' },
+            { value: '8', label: 'Registrar options' },
+          ].map((s) => (
             <div
-              key={index}
-              className={`p-4 sm:p-6 ${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200 hover:border-slate-300 hover:bg-slate-50' : 'border-white/10 hover:border-white/20 hover:bg-white/[0.04]'} rounded-xl transition-all animate-fade-in`}
+              key={s.label}
+              className={`px-3 py-3.5 sm:py-4 text-center ${
+                isLight ? 'bg-white' : 'bg-[#0a0a0a]'
+              }`}
             >
-              <div className="flex items-start gap-3 sm:gap-4">
-                <div className="text-3xl sm:text-4xl">{benefit.icon}</div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-bold mb-2">{benefit.title}</h3>
-                  <p className={`text-sm ${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>{benefit.description}</p>
+              <div className="text-base sm:text-xl font-black tracking-tight tabular-nums">{s.value}</div>
+              <div
+                className="text-[9px] sm:text-[10px] font-medium mt-0.5"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+          {benefits.map((benefit) => (
+            <div
+              key={benefit.title}
+              className={`shine-border group relative rounded-2xl border p-4 sm:p-5 transition-all duration-300 ${
+                isLight
+                  ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.03] hover:border-slate-300 hover:shadow-md'
+                  : 'bg-white/[0.03] border-white/10 hover:border-white/18 hover:bg-white/[0.05]'
+              }`}
+            >
+              <div className="flex items-start gap-3 sm:gap-3.5">
+                <div
+                  className={`flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl border transition-transform duration-300 group-hover:scale-105 [&>svg]:w-4 [&>svg]:h-4 ${
+                    isLight
+                      ? 'bg-slate-900 text-white border-slate-900'
+                      : 'bg-white text-black border-white'
+                  }`}
+                >
+                  {benefit.icon}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <h3 className="text-[14px] sm:text-[15px] font-bold tracking-tight leading-snug">
+                      {benefit.title}
+                    </h3>
+                    <div className="text-right shrink-0">
+                      <div
+                        className={`text-[13px] sm:text-[14px] font-black tabular-nums leading-none ${
+                          isLight ? 'text-slate-900' : 'text-white'
+                        }`}
+                      >
+                        {benefit.stat}
+                      </div>
+                      <div
+                        className="text-[8px] sm:text-[9px] font-medium mt-0.5 uppercase tracking-wide"
+                        style={{ color: 'var(--text-muted)' }}
+                      >
+                        {benefit.statLabel}
+                      </div>
+                    </div>
+                  </div>
+                  <p
+                    className="text-[12px] sm:text-[13px] leading-relaxed"
+                    style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+                  >
+                    {benefit.description}
+                  </p>
                 </div>
               </div>
             </div>
@@ -152,175 +424,448 @@ export const GeneratorContent: React.FC = () => {
         </div>
       </section>
 
-      {/* Tips Section */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl font-black mb-6 sm:mb-10 text-center">
-          Expert Tips for Choosing Domain Names
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {tips.map((tip, index) => (
-            <div
-              key={index}
-              className={`p-4 sm:p-6 ${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200 hover:border-slate-300 hover:bg-slate-50' : 'border-white/10 hover:border-white/20 hover:bg-white/[0.04]'} rounded-xl transition-all group animate-fade-in`}
-            >
-              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${isLight ? 'from-slate-200 to-slate-100' : 'from-white/10 to-white/5'} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform`}>
-                {tip.icon}
-              </div>
-              <h3 className={`font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{tip.title}</h3>
-              <p className={`text-sm ${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>{tip.description}</p>
-            </div>
-          ))}
+      {/* Expert tips — clean solid cards, no sheen lines */}
+      <section className="max-w-6xl mx-auto px-3.5 sm:px-6">
+        <div className="text-center mb-5 sm:mb-8">
+          <p
+            className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            Naming playbook
+          </p>
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight mb-2">
+            Expert tips for choosing domain names
+          </h2>
+          <p
+            className="text-[13px] sm:text-[14px] max-w-lg mx-auto leading-relaxed"
+            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+          >
+            Six rules that separate forgettable names from brandable ones you can own with confidence.
+          </p>
         </div>
-      </section>
 
-      {/* How It Works */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl font-black mb-6 sm:mb-10 text-center">
-          How Our AI Generator Works
-        </h2>
-        <div className="space-y-5 sm:space-y-8">
-          <div className="flex gap-4 sm:gap-6 items-start">
-            <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-base sm:text-lg ${
-              isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
-            }`}>
-              1
-            </div>
-            <div>
-              <h3 className="text-lg sm:text-xl font-bold mb-2">Enter Your Keyword</h3>
-              <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>
-                Type a single word that represents your brand, niche, or business idea. Our AI starts generating 
-                suggestions instantly as you type, providing real-time feedback.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-4 sm:gap-6 items-start">
-            <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-base sm:text-lg ${
-              isLight ? 'bg-slate-800 text-white' : 'bg-white/85 text-black'
-            }`}>
-              2
-            </div>
-            <div>
-              <h3 className="text-lg sm:text-xl font-bold mb-2">AI Generates Variations</h3>
-              <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>
-                Our semantic engine creates hundreds of variations using prefixes, suffixes, and contextually 
-                relevant alternatives. It understands industry-specific meanings to suggest truly relevant names.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-4 sm:gap-6 items-start">
-            <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-base sm:text-lg ${
-              isLight ? 'bg-slate-700 text-white' : 'bg-white/70 text-black'
-            }`}>
-              3
-            </div>
-            <div>
-              <h3 className="text-lg sm:text-xl font-bold mb-2">Real-Time Availability Check</h3>
-              <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>
-                Each suggestion is instantly checked against live registrar databases. Available domains are 
-                highlighted with a clear status indicator, so you know exactly which names you can register.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-4 sm:gap-6 items-start">
-            <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-bold text-base sm:text-lg ${
-              isLight ? 'bg-slate-600 text-white' : 'bg-white/55 text-black'
-            }`}>
-              4
-            </div>
-            <div>
-              <h3 className="text-lg sm:text-xl font-bold mb-2">Register Your Domain</h3>
-              <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed`}>
-                Click any available domain to register it instantly through your preferred registrar. We support 
-                GoDaddy, Namecheap, Google Domains, and more for your convenience.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl font-black mb-6 sm:mb-10 text-center">
-          Domain Generator FAQs
-        </h2>
-        <div className="space-y-3">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className={`${isLight ? 'bg-white' : 'bg-white/[0.02]'} border ${isLight ? 'border-slate-200 hover:border-slate-300' : 'border-white/10 hover:border-white/20'} rounded-xl overflow-hidden transition-all`}
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px rounded-2xl border overflow-hidden ${
+            isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-white/[0.08]'
+          }`}
+        >
+          {tips.map((tip) => (
+            <article
+              key={tip.step}
+              className={`group flex flex-col p-4 sm:p-5 transition-colors duration-200 ${
+                isLight
+                  ? 'bg-white hover:bg-slate-50'
+                  : 'bg-[#0c0c0e] hover:bg-[#121214]'
+              }`}
             >
-              <button
-                onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className={`w-full px-4 py-3 sm:px-6 sm:py-4 flex items-center justify-between text-left ${isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.02]'} transition-colors`}
-              >
-                <h3 className={`font-semibold ${isLight ? 'text-slate-900' : 'text-white'} pr-4`}>{faq.question}</h3>
-                <svg
-                  className={`w-5 h-5 ${isLight ? 'text-slate-500' : 'text-white/50'} flex-shrink-0 transition-transform ${
-                    openFaq === index ? 'rotate-180' : ''
+              <div className="flex items-center justify-between gap-2 mb-3.5">
+                <div
+                  className={`flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border transition-colors duration-200 [&>svg]:w-3.5 [&>svg]:h-3.5 ${
+                    isLight
+                      ? 'bg-slate-100 text-slate-700 border-slate-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900'
+                      : 'bg-white/[0.06] text-white/75 border-white/[0.1] group-hover:bg-white group-hover:text-black group-hover:border-white'
                   }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              {openFaq === index && (
-                <div className="px-4 pb-4 sm:px-6">
-                  <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} leading-relaxed text-sm sm:text-base`}>{faq.answer}</p>
+                  {tip.icon}
+                </div>
+                <span
+                  className={`text-[11px] sm:text-[12px] font-black tabular-nums tracking-tight ${
+                    isLight ? 'text-slate-300' : 'text-white/20'
+                  }`}
+                >
+                  {tip.step}
+                </span>
+              </div>
+
+              <h3
+                className={`text-[13px] sm:text-[14px] font-bold tracking-tight leading-snug mb-1.5 ${
+                  isLight ? 'text-slate-900' : 'text-white'
+                }`}
+              >
+                {tip.title}
+              </h3>
+              <p
+                className="text-[12px] sm:text-[12.5px] leading-relaxed flex-1"
+                style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}
+              >
+                {tip.description}
+              </p>
+
+              {tip.tags && tip.tags.length > 0 && (
+                <div className="mt-3.5 flex flex-wrap gap-1.5">
+                  {tip.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className={`inline-flex items-center rounded-md border px-2 py-0.5 text-[10px] font-semibold tracking-wide ${
+                        isLight
+                          ? 'bg-slate-50 text-slate-600 border-slate-200'
+                          : 'bg-white/[0.04] text-white/50 border-white/[0.08]'
+                      }`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               )}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* How it works — premium step rail */}
+      <section className="max-w-6xl mx-auto px-3.5 sm:px-6">
+        <div className="text-center mb-5 sm:mb-8">
+          <p
+            className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            Simple flow
+          </p>
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight mb-2">
+            How our AI generator works
+          </h2>
+          <p
+            className="text-[13px] sm:text-[14px] max-w-lg mx-auto leading-relaxed"
+            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+          >
+            From keyword to registration in four clean steps — no account, no clutter.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
+          {[
+            {
+              step: '01',
+              title: 'Enter your keyword',
+              description:
+                'Type a brand word or pick a chip (ai, cloud, buddy…). Suggestions start as you type.',
+              meta: 'Instant input',
+            },
+            {
+              step: '02',
+              title: 'Expand variations',
+              description:
+                'We pair it with 3,000+ prefixes & suffixes, semantic maps, and brand morphs — up to 5,000 ideas.',
+              meta: '3K+ affixes',
+            },
+            {
+              step: '03',
+              title: 'Check availability',
+              description:
+                'Live .com status streams in batches. Available, premium, and taken names are clearly marked.',
+              meta: 'Live .com',
+            },
+            {
+              step: '04',
+              title: 'Register & go',
+              description:
+                'Continue on available names via GoDaddy, Spaceship, Namecheap, Porkbun, Atom, and more.',
+              meta: '8 registrars',
+            },
+          ].map((item) => (
+            <div
+              key={item.step}
+              className={`shine-border group rounded-2xl border p-4 sm:p-5 transition-[border-color,background-color,box-shadow] duration-300 ${
+                isLight
+                  ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.03] hover:border-slate-300 hover:shadow-md'
+                  : 'bg-white/[0.03] border-white/10 hover:border-white/16 hover:bg-white/[0.05]'
+              }`}
+            >
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <div
+                  className={`flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border text-[11px] sm:text-[12px] font-black tabular-nums transition-colors duration-300 ${
+                    isLight
+                      ? 'bg-slate-900 text-white border-slate-900'
+                      : 'bg-white text-black border-white'
+                  }`}
+                >
+                  {item.step}
+                </div>
+                <span
+                  className={`inline-flex rounded-full px-2 py-0.5 text-[9px] sm:text-[10px] font-bold border ${
+                    isLight
+                      ? 'bg-slate-50 text-slate-500 border-slate-200'
+                      : 'bg-white/[0.04] text-white/40 border-white/10'
+                  }`}
+                >
+                  {item.meta}
+                </span>
+              </div>
+
+              <h3
+                className={`text-[13px] sm:text-[14px] font-bold tracking-tight leading-snug mb-1.5 ${
+                  isLight ? 'text-slate-900' : 'text-white'
+                }`}
+              >
+                {item.title}
+              </h3>
+              <p
+                className="text-[12px] sm:text-[12.5px] leading-relaxed"
+                style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}
+              >
+                {item.description}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Popular Keywords Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl font-black mb-4 sm:mb-6 text-center">
-          Popular Domain Keywords to Try
-        </h2>
-        <p className={`text-center ${isLight ? 'text-slate-600' : 'text-white/60'} mb-6 sm:mb-8 text-sm sm:text-base`}>
-          Click any keyword below to see instant domain suggestions with semantic alternatives
-        </p>
-        <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3">
-          {[
-            'cloud', 'mint', 'spark', 'shop', 'tech', 'ai', 'blog', 'app', 'web', 'digital',
-            'smart', 'data', 'code', 'crypto', 'social', 'market', 'hub', 'pro', 'studio', 'labs',
-            'network', 'platform', 'engine', 'portal', 'vault', 'forge', 'craft', 'nexus', 'core', 'edge'
-          ].map((keyword) => (
-            <a
-              key={keyword}
-              href={`/generator?q=${keyword}`}
-              className={`px-3 py-1.5 sm:px-4 sm:py-2 ${isLight ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 hover:border-slate-300' : 'bg-white/5 hover:bg-white/10 border-white/10 hover:border-white/20'} border rounded-lg text-xs sm:text-sm font-medium transition-all`}
-            >
-              {keyword}
-            </a>
-          ))}
+      {/* FAQs — compact, icons, minimal open animation */}
+      <section className="max-w-5xl mx-auto px-3.5 sm:px-6">
+        <div className="text-center mb-4 sm:mb-6">
+          <p
+            className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            Quick answers
+          </p>
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight mb-1.5">
+            Domain generator FAQs
+          </h2>
+          <p
+            className="text-[12px] sm:text-[13px] max-w-md mx-auto"
+            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+          >
+            Everything about keywords, availability, and brandable names.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5 sm:gap-2 items-start">
+          {faqs.map((faq, index) => {
+            const open = openFaq === index;
+            return (
+              <div
+                key={faq.question}
+                className={`shine-border rounded-xl border overflow-hidden transition-[border-color,box-shadow,background-color] duration-300 ${
+                  open
+                    ? isLight
+                      ? 'bg-white border-slate-300 shadow-sm z-[1]'
+                      : 'bg-white/[0.06] border-white/18 z-[1]'
+                    : isLight
+                      ? 'bg-white border-slate-200 hover:border-slate-300'
+                      : 'bg-white/[0.03] border-white/10 hover:border-white/16'
+                }`}
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpenFaq(open ? null : index)}
+                  className="w-full flex items-center gap-2 sm:gap-2.5 text-left px-2.5 py-2 sm:px-3 sm:py-2.5"
+                  aria-expanded={open}
+                >
+                  <span
+                    className={`flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg border transition-colors duration-300 [&>svg]:w-3.5 [&>svg]:h-3.5 ${
+                      open
+                        ? isLight
+                          ? 'bg-slate-900 text-white border-slate-900'
+                          : 'bg-white text-black border-white'
+                        : isLight
+                          ? 'bg-slate-50 text-slate-600 border-slate-200'
+                          : 'bg-white/[0.05] text-white/65 border-white/10'
+                    }`}
+                  >
+                    {faq.icon}
+                  </span>
+                  <span
+                    className={`flex-1 text-[12px] sm:text-[13px] font-bold leading-snug pr-1 ${
+                      isLight ? 'text-slate-900' : 'text-white'
+                    }`}
+                  >
+                    {faq.question}
+                  </span>
+                  <span
+                    className={`shrink-0 flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full text-xs font-bold transition-transform duration-300 ease-out ${
+                      open
+                        ? isLight
+                          ? 'bg-slate-900 text-white rotate-45'
+                          : 'bg-white text-black rotate-45'
+                        : isLight
+                          ? 'bg-slate-100 text-slate-500'
+                          : 'bg-white/[0.06] text-white/40'
+                    }`}
+                    aria-hidden
+                  >
+                    +
+                  </span>
+                </button>
+
+                <div
+                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                    open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p
+                      className="px-2.5 sm:px-3 pb-2.5 pl-[2.75rem] sm:pl-[3.25rem] text-[11px] sm:text-[12px] leading-relaxed"
+                      style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+                    >
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        <div className={`p-6 sm:p-10 bg-gradient-to-br ${isLight ? 'from-slate-100 to-white' : 'from-white/[0.05] to-white/[0.02]'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-2xl`}>
-          <h2 className="text-2xl sm:text-3xl font-black mb-4">
-            Ready to Find Your Perfect Domain?
-          </h2>
-          <p className={`${isLight ? 'text-slate-600' : 'text-white/60'} mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base`}>
-            Start generating creative, available domain names instantly. Our AI-powered tool makes 
-            finding the perfect domain fast, easy, and free.
-          </p>
-          <a
-            href="#top"
-            className={`inline-flex items-center gap-2 px-5 py-3 sm:px-8 sm:py-4 ${isLight ? 'bg-slate-900 text-white hover:bg-slate-800' : 'bg-white text-black hover:bg-white/90'} font-bold rounded-xl transition-all shadow-lg ${isLight ? 'shadow-slate-300' : 'shadow-white/10'}`}
+      {/* Popular keywords + CTA — clean premium footer */}
+      <section className="max-w-6xl mx-auto px-3.5 sm:px-6">
+        <div className="text-center mb-5 sm:mb-7">
+          <p
+            className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
+            style={{ color: 'var(--text-muted)' }}
           >
-            <Icons.Magic />
-            Start Generating Domains
-          </a>
+            Jump in
+          </p>
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight mb-1.5">
+            Popular keywords to try
+          </h2>
+          <p
+            className="text-[12px] sm:text-[14px] max-w-md mx-auto leading-relaxed"
+            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+          >
+            One tap seeds the generator — prefixes, suffixes, and live .com checks start immediately.
+          </p>
         </div>
+
+        {(() => {
+          const seedKeyword = (keyword: string) => {
+            const url = new URL(window.location.href);
+            url.searchParams.set('q', keyword);
+            window.history.replaceState({}, '', url.toString());
+            window.dispatchEvent(new CustomEvent('generator-seed', { detail: { keyword } }));
+            document.getElementById('top')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          };
+
+          const groups = [
+            {
+              label: 'Trending',
+              blurb: 'Hot brand stems right now',
+              words: ['ai', 'agent', 'copilot', 'nova', 'pulse', 'spark', 'nexus', 'edge', 'core', 'stack'],
+            },
+            {
+              label: 'Tech',
+              blurb: 'Product & platform names',
+              words: ['cloud', 'data', 'code', 'app', 'hub', 'lab', 'crypto', 'digital', 'platform', 'engine'],
+            },
+            {
+              label: 'Brand',
+              blurb: 'Commerce & studio vibes',
+              words: ['mint', 'shop', 'pro', 'studio', 'forge', 'craft', 'vault', 'portal', 'network', 'market'],
+            },
+          ] as const;
+
+          return (
+            <>
+              <div
+                className={`grid grid-cols-1 lg:grid-cols-3 gap-px rounded-2xl border overflow-hidden mb-3 sm:mb-4 ${
+                  isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-white/[0.08]'
+                }`}
+              >
+                {groups.map((group) => (
+                  <div
+                    key={group.label}
+                    className={`flex flex-col p-4 sm:p-5 ${
+                      isLight ? 'bg-white' : 'bg-[#0c0c0e]'
+                    }`}
+                  >
+                    <div className="mb-3 sm:mb-3.5">
+                      <div className="flex items-baseline justify-between gap-2 mb-0.5">
+                        <h3
+                          className={`text-[13px] sm:text-[14px] font-bold tracking-tight ${
+                            isLight ? 'text-slate-900' : 'text-white'
+                          }`}
+                        >
+                          {group.label}
+                        </h3>
+                        <span
+                          className={`text-[10px] font-semibold tabular-nums ${
+                            isLight ? 'text-slate-400' : 'text-white/30'
+                          }`}
+                        >
+                          {group.words.length}
+                        </span>
+                      </div>
+                      <p
+                        className="text-[11px] leading-snug"
+                        style={{ color: 'var(--text-muted)' }}
+                      >
+                        {group.blurb}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 content-start flex-1">
+                      {group.words.map((keyword) => (
+                        <button
+                          key={keyword}
+                          type="button"
+                          onClick={() => seedKeyword(keyword)}
+                          className={`inline-flex items-center rounded-lg border px-2.5 py-1.5 text-[11px] sm:text-[12px] font-semibold transition-colors duration-150 ${
+                            isLight
+                              ? 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-900 hover:text-white hover:border-slate-900'
+                              : 'bg-white/[0.04] text-white/70 border-white/[0.1] hover:bg-white hover:text-black hover:border-white'
+                          }`}
+                        >
+                          {keyword}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA — solid black / silver, no sheen lines */}
+              <div
+                className={`relative overflow-hidden rounded-2xl border px-5 py-6 sm:px-10 sm:py-8 ${
+                  isLight
+                    ? 'bg-slate-900 border-slate-900 text-white shadow-xl shadow-slate-900/15'
+                    : 'bg-[#0c0c0e] border-white/[0.12]'
+                }`}
+              >
+                <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 sm:gap-6">
+                  <div className="text-center lg:text-left max-w-lg mx-auto lg:mx-0">
+                    <h2 className="text-lg sm:text-2xl font-black tracking-tight mb-1.5 text-white">
+                      Ready to find your perfect domain?
+                    </h2>
+                    <p className="text-[12px] sm:text-[13px] leading-relaxed text-white/55">
+                      Free · Live availability · Thousands of brandable ideas — no account required.
+                    </p>
+                    <div className="mt-3 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-1">
+                      {['3,000+ affixes', 'Live .com checks', '8 registrars'].map((item) => (
+                        <span
+                          key={item}
+                          className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-medium text-white/40"
+                        >
+                          <span className="h-1 w-1 rounded-full bg-white/35" aria-hidden />
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-center lg:justify-end gap-2 shrink-0">
+                    <a
+                      href="#top"
+                      className="inline-flex items-center gap-1.5 rounded-xl px-4 sm:px-5 py-2.5 text-[12px] sm:text-[13px] font-bold bg-white text-black hover:bg-white/90 transition-colors duration-150"
+                    >
+                      <span className="[&>svg]:h-3.5 [&>svg]:w-3.5">
+                        <Icons.Magic />
+                      </span>
+                      Start generating
+                    </a>
+                    <a
+                      href="/search"
+                      className="inline-flex items-center gap-1.5 rounded-xl px-4 sm:px-5 py-2.5 text-[12px] sm:text-[13px] font-semibold border border-white/15 text-white/80 hover:bg-white/[0.06] hover:text-white transition-colors duration-150"
+                    >
+                      <Icons.Search className="w-3.5 h-3.5" />
+                      Full search
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </>
+          );
+        })()}
       </section>
     </div>
   );

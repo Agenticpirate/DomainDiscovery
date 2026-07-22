@@ -1,0 +1,130 @@
+{
+  "tld": ".al",
+  "slug": "al",
+  "title": "About .al domains",
+  "delegationTitle": "Delegation Record for .AL",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Albania",
+  "sponsor": "Electronic and Postal Communications Authority - AKEP",
+  "sponsorDetail": "Electronic and Postal Communications Authority - AKEP\nRruga Myslym Shyri, Nr 42\nTirana 1001\nAlbania",
+  "administrativeContact": "Technical Director",
+  "technicalContact": "Arli Minga",
+  "registryUrl": "https://akep.al/e-aplikime-domain/",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1992-04-21",
+  "recordUpdated": "2026-07-03",
+  "nameServers": [
+    {
+      "host": "munnari.oz.au",
+      "addresses": [
+        "202.29.151.3",
+        "2001:3c8:9009:181:0:0:0:2"
+      ]
+    },
+    {
+      "host": "ns1.nic.al",
+      "addresses": [
+        "194.1.149.230"
+      ]
+    },
+    {
+      "host": "ns2.nic.al",
+      "addresses": [
+        "194.1.149.229"
+      ]
+    },
+    {
+      "host": "nsx.nic.al",
+      "addresses": [
+        "194.0.11.108",
+        "2001:678:e:108:0:0:0:53"
+      ]
+    },
+    {
+      "host": "rip.psg.com",
+      "addresses": [
+        "147.28.0.39",
+        "2001:418:1:0:0:0:0:39"
+      ]
+    }
+  ],
+  "about": ".AL is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Albania. The IANA root zone lists the registry manager as Electronic and Postal Communications Authority - AKEP. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.al is the Internet country code top-level domain (ccTLD) for Albania. It is administered by the Electronic and Postal Communications Authority of Albania (AKEP).\nAKEP recommends that .al domain registrations be performed with one of the AKEP accredited registrars. There are also international registrars that resell .al domains. Domain names should be between 2 and 63 characters. Although the Albanian language has a number of special characters, the registry has not enabled the use of IDN characters.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/al.html",
+  "wikipedia": ".al is the Internet country code top-level domain (ccTLD) for Albania. It is administered by the Electronic and Postal Communications Authority of Albania (AKEP).\nAKEP recommends that .al domain registrations be performed with one of the AKEP accredited registrars. There are also international registrars that resell .al domains. Domain names should be between 2 and 63 characters. Although the Albanian language has a number of special characters, the registry has not enabled the use of IDN characters.",
+  "scrapedAt": "2026-07-21T21:34:30Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".al",
+    "akep",
+    "al",
+    "albania",
+    "authority",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "electronic",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "postal",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 13,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$13.99",
+      "value": 13.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$13.99",
+      "value": 13.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/al"
+  },
+  "summary": ".al is a Country-code top-level domain. Managed by Electronic and Postal Communications Authority - AKEP.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

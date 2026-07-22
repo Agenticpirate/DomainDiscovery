@@ -1,0 +1,139 @@
+{
+  "tld": ".ag",
+  "slug": "ag",
+  "title": "About .ag domains",
+  "delegationTitle": "Delegation Record for .AG",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Antigua and Barbuda",
+  "sponsor": "UHSA School of Medicine",
+  "sponsorDetail": "UHSA School of Medicine\nP.O. Box 510\nSaint John's\nAntigua and Barbuda",
+  "administrativeContact": "George S. Daniel",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.nic.ag",
+  "whoisServer": "whois.nic.ag",
+  "rdapServer": null,
+  "registrationDate": "1991-09-03",
+  "recordUpdated": "2021-02-08",
+  "nameServers": [
+    {
+      "host": "a0.cctld.afilias-nst.info",
+      "addresses": [
+        "199.254.59.1",
+        "2001:500:25:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.cctld.afilias-nst.info",
+      "addresses": [
+        "199.249.116.1",
+        "2001:500:44:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.cctld.afilias-nst.org",
+      "addresses": [
+        "199.254.60.1",
+        "2001:500:26:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b2.cctld.afilias-nst.org",
+      "addresses": [
+        "199.249.124.1",
+        "2001:500:4c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.cctld.afilias-nst.info",
+      "addresses": [
+        "199.254.61.1",
+        "2001:500:27:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d0.cctld.afilias-nst.org",
+      "addresses": [
+        "199.254.62.1",
+        "2001:500:28:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".AG is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Antigua and Barbuda. The IANA root zone lists the registry manager as UHSA School of Medicine. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ag is the Internet country code top-level domain (ccTLD) for Antigua and Barbuda. As of 2021 the .ag CcTLD is maintained by the UHSA School of Medicine.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ag.html",
+  "wikipedia": ".ag is the Internet country code top-level domain (ccTLD) for Antigua and Barbuda. As of 2021 the .ag CcTLD is maintained by the UHSA School of Medicine.",
+  "scrapedAt": "2026-07-21T21:34:22Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ag",
+    "ag",
+    "and",
+    "antigua",
+    "barbuda",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "medicine",
+    "regional brands",
+    "school",
+    "top",
+    "uhsa"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 31,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$41.25",
+      "value": 41.25
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$77.88",
+      "value": 77.88
+    },
+    "sourceUrl": "https://tld-list.com/tld/ag"
+  },
+  "summary": ".ag is a Country-code top-level domain. Managed by UHSA School of Medicine.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

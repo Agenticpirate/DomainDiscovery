@@ -1,0 +1,141 @@
+{
+  "tld": ".ie",
+  "slug": "ie",
+  "title": "About .ie domains",
+  "delegationTitle": "Delegation Record for .IE",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Ireland",
+  "sponsor": "University College Dublin, Computing Services, Computer Centre",
+  "sponsorDetail": "University College Dublin, Computing Services, Computer Centre\nBelfield\nDublin Dublin 4\nIreland",
+  "administrativeContact": "Chief Executive",
+  "technicalContact": "Technical Services Manager",
+  "registryUrl": "http://www.weare.ie",
+  "whoisServer": "whois.weare.ie",
+  "rdapServer": null,
+  "registrationDate": "1988-01-27",
+  "recordUpdated": "2025-08-22",
+  "nameServers": [
+    {
+      "host": "a.ns.ie",
+      "addresses": [
+        "77.72.72.40",
+        "2a01:4b0:0:0:0:0:0:40"
+      ]
+    },
+    {
+      "host": "c.ns.ie",
+      "addresses": [
+        "194.146.106.98",
+        "2001:67c:1010:25:0:0:0:53"
+      ]
+    },
+    {
+      "host": "d.ns.ie",
+      "addresses": [
+        "77.72.229.245",
+        "2a01:3f0:0:309:0:0:0:53"
+      ]
+    },
+    {
+      "host": "e.ns.ie",
+      "addresses": [
+        "185.159.199.210",
+        "2620:10a:80ac:0:0:0:0:210"
+      ]
+    },
+    {
+      "host": "h.ns.ie",
+      "addresses": [
+        "192.93.0.4",
+        "2001:660:3005:1:0:0:1:2"
+      ]
+    },
+    {
+      "host": "i.ns.ie",
+      "addresses": [
+        "194.0.25.35",
+        "2001:678:20:0:0:0:0:35"
+      ]
+    }
+  ],
+  "about": ".IE is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Ireland. The IANA root zone lists the registry manager as University College Dublin, Computing Services, Computer Centre. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ie is the country code top-level domain (ccTLD) which corresponds with the ISO 3166-1 alpha-2 code for Ireland. The Internet Assigned Numbers Authority (IANA) list the Computing Services Computer Centre of University College Dublin as its sponsoring organisation for the .ie domain. Since 2000 the business of administrating the domain registry has been handled by IE Domain Registry Limited. Domain name registration is open to individuals located in, or with a significant connection with, any part of the island of Ireland.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ie.html",
+  "wikipedia": ".ie is the country code top-level domain (ccTLD) which corresponds with the ISO 3166-1 alpha-2 code for Ireland. The Internet Assigned Numbers Authority (IANA) list the Computing Services Computer Centre of University College Dublin as its sponsoring organisation for the .ie domain. Since 2000 the business of administrating the domain registry has been handled by IE Domain Registry Limited. Domain name registration is open to individuals located in, or with a significant connection with, any part of the island of Ireland.",
+  "scrapedAt": "2026-07-21T21:42:26Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ie",
+    "cctld",
+    "centre",
+    "code",
+    "college",
+    "computer",
+    "computing",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "dublin",
+    "for",
+    "geo",
+    "ie",
+    "ireland",
+    "level",
+    "local business",
+    "regional brands",
+    "services",
+    "top",
+    "university"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 24,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$16.54",
+      "value": 16.54
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$22.06",
+      "value": 22.06
+    },
+    "sourceUrl": "https://tld-list.com/tld/ie"
+  },
+  "summary": ".ie is a Country-code top-level domain. Managed by University College Dublin, Computing Services, Computer Centre.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,116 @@
+{
+  "tld": ".hiv",
+  "slug": "hiv",
+  "title": "About .hiv domains",
+  "delegationTitle": "Delegation Record for .HIV",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Internet Naming Co.",
+  "sponsorDetail": "Internet Naming Co.\n23 Lime Tree Bay, West Bay\nGrand Cayman KY1-1505\nCayman Islands (the)",
+  "administrativeContact": "Shayan Rostam",
+  "technicalContact": "Francisco Obispo",
+  "registryUrl": "https://internetnaming.co",
+  "whoisServer": "whois.registry.click",
+  "rdapServer": "https://rdap.registry.click/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns01.trs-dns.com",
+      "addresses": [
+        "64.96.1.1",
+        "2620:57:4001:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns01.trs-dns.net",
+      "addresses": [
+        "64.96.2.1",
+        "2620:57:4002:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns10.trs-dns.info",
+      "addresses": [
+        "64.78.204.1",
+        "2620:171:812:1534:8:0:0:1"
+      ]
+    },
+    {
+      "host": "ns10.trs-dns.org",
+      "addresses": [
+        "64.78.205.1",
+        "2620:171:813:1534:8:0:0:1"
+      ]
+    }
+  ],
+  "about": ".HIV is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .HIV is listed by IANA as Internet Naming Co.. Anyone can typically register a .HIV name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.hiv is a generic top-level domain (gTLD) proposed by the Berlin-based nonprofit dotHIV and owned by Uniregistry as of September 2014. It is the first open charitable gTLD and its ICANN designation states that the domain's operator is precluded from making a profit. Funds raised from .hiv domain sales will initially benefit projects to increase access to HIV/AIDS treatment in Rwanda, South Africa, Turkey, and the United States.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/hiv.html",
+  "wikipedia": ".hiv is a generic top-level domain (gTLD) proposed by the Berlin-based nonprofit dotHIV and owned by Uniregistry as of September 2014. It is the first open charitable gTLD and its ICANN designation states that the domain's operator is precluded from making a profit. Funds raised from .hiv domain sales will initially benefit projects to increase access to HIV/AIDS treatment in Rwanda, South Africa, Turkey, and the United States.",
+  "scrapedAt": "2026-07-21T21:41:55Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".hiv",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "hiv",
+    "internet",
+    "level",
+    "naming",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 29,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$184.55",
+      "value": 184.55
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$184.55",
+      "value": 184.55
+    },
+    "sourceUrl": "https://tld-list.com/tld/hiv"
+  },
+  "summary": ".hiv is a Generic top-level domain. Managed by Internet Naming Co..",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

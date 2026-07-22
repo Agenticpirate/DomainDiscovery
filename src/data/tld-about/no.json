@@ -1,0 +1,134 @@
+{
+  "tld": ".no",
+  "slug": "no",
+  "title": "About .no domains",
+  "delegationTitle": "Delegation Record for .NO",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Norway",
+  "sponsor": "Norid A/S",
+  "sponsorDetail": "Norid A/S\nAbelsgate 5\nTrondheim N-7465\nNorway",
+  "administrativeContact": "Hilde Thunem",
+  "technicalContact": "Jarle Greipsland",
+  "registryUrl": "http://www.norid.no",
+  "whoisServer": "whois.norid.no",
+  "rdapServer": "https://rdap.norid.no/",
+  "registrationDate": "1987-03-17",
+  "recordUpdated": "2022-01-14",
+  "nameServers": [
+    {
+      "host": "i.nic.no",
+      "addresses": [
+        "194.146.106.6",
+        "2001:67c:1010:1:0:0:0:53"
+      ]
+    },
+    {
+      "host": "njet.norid.no",
+      "addresses": [
+        "156.154.101.12"
+      ]
+    },
+    {
+      "host": "not.norid.no",
+      "addresses": [
+        "156.154.100.12",
+        "2001:502:ad09:0:0:0:0:12"
+      ]
+    },
+    {
+      "host": "x.nic.no",
+      "addresses": [
+        "128.39.8.40",
+        "2001:700:0:412f:0:0:0:40"
+      ]
+    },
+    {
+      "host": "y.nic.no",
+      "addresses": [
+        "193.75.4.22",
+        "2001:8c0:8200:1:0:0:0:2"
+      ]
+    },
+    {
+      "host": "z.nic.no",
+      "addresses": [
+        "158.38.8.133",
+        "2001:700:0:52d:158:38:8:133"
+      ]
+    }
+  ],
+  "about": ".NO is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Norway. The IANA root zone lists the registry manager as Norid A/S. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.no is the Internet country code top-level domain (ccTLD) for Norway. Norid, the domain name registry, is based in Trondheim and is owned by the state-owned Uninett and operates under supervision of the Norwegian Communications Authority. As of 24 December 2022, there were 843,749 registered .no domains. Organizations with a presence in Norway and registration at the Br\u00f8nn\u00f8ysund Register Centre are limited to 100 domains each. Individuals residing in Norway may register in the second-level domain priv.no and, as of 17 June 2014, directly under .no. Other second-level domains exist for organizations of certain types, such as municipalities and schools. The strict regulations have resulted in near-absence of cybersquatting and warehousing.\nManagement of a ccTLD was awarded to P\u00e5l Spilling in 1987, but was taken over by Uninett four years later. The 1000th domain was registered in 1995. Norid is the result of several re-organizations within Uninett, in 2003 becoming a separate limited company. Norway has also been allocated two other ccTLDs, .sj for Svalbard and Jan Mayen and .bv for Bouvet Island; neither are open to registration. Originally only a single domain was permitted per organization, and this was manually checked by Norid to ensure compliance with trademark ownership. The regulations were liberalized in 2001, when the process was automated and a retrospective dispute resolution scheme was introduced. This resulted in a boom of registrations, with the accumulated registrations exceeding 100,000 in the course of the year. Domain names may consist of the twenty-six basic Latin letters, digits and the hyphen, and beginning in 2004 three Norwegian language letters and twenty Sami language letters have been permitted. All-numeric domains were introduced in 2007 and priv.no in 2011.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/no.html",
+  "wikipedia": ".no is the Internet country code top-level domain (ccTLD) for Norway. Norid, the domain name registry, is based in Trondheim and is owned by the state-owned Uninett and operates under supervision of the Norwegian Communications Authority. As of 24 December 2022, there were 843,749 registered .no domains. Organizations with a presence in Norway and registration at the Br\u00f8nn\u00f8ysund Register Centre are limited to 100 domains each. Individuals residing in Norway may register in the second-level domain priv.no and, as of 17 June 2014, directly under .no. Other second-level domains exist for organizations of certain types, such as municipalities and schools. The strict regulations have resulted in near-absence of cybersquatting and warehousing.\nManagement of a ccTLD was awarded to P\u00e5l Spilling in 1987, but was taken over by Uninett four years later. The 1000th domain was registered in 1995. Norid is the result of several re-organizations within Uninett, in 2003 becoming a separate limited company. Norway has also been allocated two other ccTLDs, .sj for Svalbard and Jan Mayen and .bv for Bouvet Island; neither are open to registration. Originally only a single domain was permitted per organization, and this was manually checked by Norid to ensure compliance with trademark ownership. The regulations were liberalized in 2001, when the process was automated and a retrospective dispute resolution scheme was introduced. This resulted in a boom of registrations, with the accumulated registrations exceeding 100,000 in the course of the year. Domain names may consist of the twenty-six basic Latin letters, digits and the hyphen, and beginning in 2004 three Norwegian language letters and twenty Sami language letters have been permitted. All-numeric domains were introduced in 2007 and priv.no in 2011.",
+  "scrapedAt": "2026-07-21T21:46:26Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".no",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "no",
+    "norid",
+    "norway",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 21,
+    "cheapestRegistration": {
+      "registrar": "GoDaddy",
+      "price": "$12.99",
+      "value": 12.99
+    },
+    "cheapestRenewal": {
+      "registrar": "GoDaddy",
+      "price": "$12.99",
+      "value": 12.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/no"
+  },
+  "summary": ".no is a Country-code top-level domain. Managed by Norid A/S.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

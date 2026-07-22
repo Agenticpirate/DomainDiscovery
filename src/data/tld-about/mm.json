@@ -1,0 +1,119 @@
+{
+  "tld": ".mm",
+  "slug": "mm",
+  "title": "About .mm domains",
+  "delegationTitle": "Delegation Record for .MM",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Myanmar",
+  "sponsor": "Ministry of Transport and Communications",
+  "sponsorDetail": "Ministry of Transport and Communications\nZayya Htar Ni Street\nNay Pyi Taw Mandalay Division 150111\nMyanmar",
+  "administrativeContact": "Director General",
+  "technicalContact": "Deputy Director",
+  "registryUrl": "http://www.ptd.gov.mm/",
+  "whoisServer": "whois.registry.gov.mm",
+  "rdapServer": null,
+  "registrationDate": "1997-02-04",
+  "recordUpdated": "2025-07-28",
+  "nameServers": [
+    {
+      "host": "a.nic.net.mm",
+      "addresses": [
+        "37.209.192.4"
+      ]
+    },
+    {
+      "host": "b.nic.net.mm",
+      "addresses": [
+        "37.209.194.4"
+      ]
+    },
+    {
+      "host": "c.nic.net.mm",
+      "addresses": [
+        "37.209.196.4"
+      ]
+    },
+    {
+      "host": "d.nic.net.mm",
+      "addresses": [
+        "37.209.198.4"
+      ]
+    }
+  ],
+  "about": ".MM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Myanmar. The IANA root zone lists the registry manager as Ministry of Transport and Communications. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.mm is the Internet country code top-level domain (ccTLD) for Myanmar. It was assigned in 1997. Before 1989, the ISO 3166 alpha-2 code for Burma was BU, but no .bu ccTLD was assigned.\nOn 12 June 2011, the ISO 3166-1 code for Myanmar changed to reflect the MM used for the ccTLD.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mm.html",
+  "wikipedia": ".mm is the Internet country code top-level domain (ccTLD) for Myanmar. It was assigned in 1997. Before 1989, the ISO 3166 alpha-2 code for Burma was BU, but no .bu ccTLD was assigned.\nOn 12 June 2011, the ISO 3166-1 code for Myanmar changed to reflect the MM used for the ccTLD.",
+  "scrapedAt": "2026-07-21T21:45:22Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".mm",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "ministry",
+    "mm",
+    "myanmar",
+    "regional brands",
+    "top",
+    "transport"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 1,
+    "cheapestRegistration": {
+      "registrar": "Gandi.net",
+      "price": "$190.64",
+      "value": 190.64
+    },
+    "cheapestRenewal": {
+      "registrar": "Gandi.net",
+      "price": "$359.98",
+      "value": 359.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/mm"
+  },
+  "summary": ".mm is a Country-code top-level domain. Managed by Ministry of Transport and Communications.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

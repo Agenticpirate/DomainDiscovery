@@ -1,0 +1,100 @@
+{
+  "tld": ".xn--mgba3a4f16a",
+  "slug": "xn--mgba3a4f16a",
+  "title": "About .xn--mgba3a4f16a domains",
+  "delegationTitle": "Delegation Record for .\u0627\u06cc\u0631\u0627\u0646",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code IR",
+  "designation": "Country-code top-level domain designated for Iran, Islamic Republic of",
+  "sponsor": "Institute for Research in Fundamental Sciences (IPM)",
+  "sponsorDetail": "Institute for Research in Fundamental Sciences (IPM)\nShahid Bahonar (Niavaran) Square\nTehran 1954851167\nIran (Islamic Republic of)",
+  "administrativeContact": "Director",
+  "technicalContact": "CTO",
+  "registryUrl": "http://www.nic.ir",
+  "whoisServer": "whois.nic.ir",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.ir",
+      "addresses": [
+        "193.189.123.2",
+        "2001:678:b0:0:193:189:123:2"
+      ]
+    },
+    {
+      "host": "b.nic.ir",
+      "addresses": [
+        "193.189.122.83",
+        "2001:678:b1:0:193:189:122:83"
+      ]
+    }
+  ],
+  "about": ".XN--MGBA3A4F16A is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Iran, Islamic Republic of. The IANA root zone lists the registry manager as Institute for Research in Fundamental Sciences (IPM). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--mgba3a4f16a.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:10Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--mgba3a4f16a",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "fundamental",
+    "geo",
+    "institute",
+    "iran",
+    "islamic",
+    "letter",
+    "level",
+    "local business",
+    "regional brands",
+    "republic",
+    "research",
+    "sciences",
+    "top",
+    "two",
+    "xn--mgba3a4f16a"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--mgba3a4f16a is a Country-code top-level domain designated for two-letter country code IR. Managed by Institute for Research in Fundamental Sciences (IPM).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

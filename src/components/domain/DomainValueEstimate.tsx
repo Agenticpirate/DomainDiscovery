@@ -61,7 +61,7 @@ export function DomainValueEstimate({ domain: initialDomain }: DomainValueEstima
   };
 
   return (
-    <div className={`glass-card p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
+    <div className={`glass-card shine-border p-3.5 sm:p-4 ${isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'}`}>
       <div className="mb-5">
         <div className="flex items-center gap-3 mb-2">
           <div className={`p-2 rounded-lg ${isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border border-white/10'}`}>

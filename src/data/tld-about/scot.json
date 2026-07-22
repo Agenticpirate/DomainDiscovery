@@ -1,0 +1,116 @@
+{
+  "tld": ".scot",
+  "slug": "scot",
+  "title": "About .scot domains",
+  "delegationTitle": "Delegation Record for .SCOT",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Dot Scot Registry Limited",
+  "sponsorDetail": "Dot Scot Registry Limited\nSuite 119, 111 West George Street\nGlasgow Scotland G2 1QX\nUnited Kingdom of Great Britain and Northern Ireland (the)",
+  "administrativeContact": ".scot Administrative Contact",
+  "technicalContact": ".scot Technical Contact",
+  "registryUrl": "https://dot.scot/",
+  "whoisServer": "whois.nic.scot",
+  "rdapServer": "https://rdap.nic.scot/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "anycast10.irondns.net",
+      "addresses": [
+        "195.253.64.12",
+        "2a01:5b0:4:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast23.irondns.net",
+      "addresses": [
+        "195.253.65.11",
+        "2a01:5b0:5:0:0:0:0:b"
+      ]
+    },
+    {
+      "host": "anycast24.irondns.net",
+      "addresses": [
+        "195.253.65.12",
+        "2a01:5b0:5:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast9.irondns.net",
+      "addresses": [
+        "195.253.64.11",
+        "2a01:5b0:4:0:0:0:0:b"
+      ]
+    }
+  ],
+  "about": ".SCOT is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .SCOT is listed by IANA as Dot Scot Registry Limited. Anyone can typically register a .SCOT name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.scot  is a GeoTLD for Scotland and Scottish culture, including the Gaelic and Scots languages.\nOriginally, .sco was proposed in a campaign.\nIn 2008 dotCYMRU, dotEUS, dotSCOT and dotBZH formed ECLID. Later it was decided to allow newly proposed top-level domains for introduction some time in 2013, and a list of applications for these was published in June 2012; the domain .scot was included.\nOn 27 January 2014, dotScot Registry, a not-for-profit organisation established in 2009, announced that it had agreed terms to operate the .scot domain name, with plans to get it up and running later in summer of 2014.\nOn 15 July 2014, .scot was officially launched. The first .scot domain name to go live was calico.scot, registered by hosting company Calico Internet Ltd.\nOn 17 February 2015, the Scottish Government migrated its website from Scotland.gov.uk to gov.scot. Likewise, the Scottish Parliament moved from Scottish.parliament.uk to parliament.scot in May 2016, to coincide with the 2016 elections.\nThe 2017 Global Amendment to the base New GeoTLD Registry Agreement is effective as of 31 July 2017.\nOn 3 May 2018 the dotScot Registry lifted registration restrictions on locality domains (based on towns, etc.) and other premium names.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/scot.html",
+  "wikipedia": ".scot  is a GeoTLD for Scotland and Scottish culture, including the Gaelic and Scots languages.\nOriginally, .sco was proposed in a campaign.\nIn 2008 dotCYMRU, dotEUS, dotSCOT and dotBZH formed ECLID. Later it was decided to allow newly proposed top-level domains for introduction some time in 2013, and a list of applications for these was published in June 2012; the domain .scot was included.\nOn 27 January 2014, dotScot Registry, a not-for-profit organisation established in 2009, announced that it had agreed terms to operate the .scot domain name, with plans to get it up and running later in summer of 2014.\nOn 15 July 2014, .scot was officially launched. The first .scot domain name to go live was calico.scot, registered by hosting company Calico Internet Ltd.\nOn 17 February 2015, the Scottish Government migrated its website from Scotland.gov.uk to gov.scot. Likewise, the Scottish Parliament moved from Scottish.parliament.uk to parliament.scot in May 2016, to coincide with the 2016 elections.\nThe 2017 Global Amendment to the base New GeoTLD Registry Agreement is effective as of 31 July 2017.\nOn 3 May 2018 the dotScot Registry lifted registration restrictions on locality domains (based on towns, etc.) and other premium names.",
+  "scrapedAt": "2026-07-21T21:49:18Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".scot",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "limited",
+    "registry",
+    "scot",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 30,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$30.56",
+      "value": 30.56
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$30.56",
+      "value": 30.56
+    },
+    "sourceUrl": "https://tld-list.com/tld/scot"
+  },
+  "summary": ".scot is a Generic top-level domain. Managed by Dot Scot Registry Limited.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,119 @@
+{
+  "tld": ".mil",
+  "slug": "mil",
+  "title": "About .mil domains",
+  "delegationTitle": "Delegation Record for .MIL",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "DoD Network Information Center",
+  "sponsorDetail": "DoD Network Information Center\nDISA-Columbus\n300 North James Road\nWhitehall OH 43213\nUnited States of America (the)",
+  "administrativeContact": "DoD NIC Registry Services",
+  "technicalContact": "DoD NIC Registry Services",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1985-01-01",
+  "recordUpdated": "2026-03-10",
+  "nameServers": [
+    {
+      "host": "con1.nipr.mil",
+      "addresses": [
+        "199.252.157.234",
+        "2608:140:c:157:0:0:0:234"
+      ]
+    },
+    {
+      "host": "con2.nipr.mil",
+      "addresses": [
+        "199.252.162.234",
+        "2608:120:c:162:0:0:0:234"
+      ]
+    },
+    {
+      "host": "eur1.nipr.mil",
+      "addresses": [
+        "199.252.154.234",
+        "2608:4122:2:154:0:0:0:234"
+      ]
+    },
+    {
+      "host": "eur2.nipr.mil",
+      "addresses": [
+        "199.252.143.234",
+        "2608:4163:1:143:0:0:0:234"
+      ]
+    },
+    {
+      "host": "pac1.nipr.mil",
+      "addresses": [
+        "199.252.180.234",
+        "2608:c184:1:180:0:0:0:234"
+      ]
+    },
+    {
+      "host": "pac2.nipr.mil",
+      "addresses": [
+        "199.252.155.234",
+        "2608:c144:1:155:0:0:0:234"
+      ]
+    }
+  ],
+  "about": ".MIL is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\nThe domain name mil is the sponsored top-level domain (sTLD) in the Domain Name System of the Internet for the United States Department of Defense and its subsidiary or affiliated organizations. The name is derived from military. It was one of the first top-level domains, created in January 1985. As in the case with .gov, the United States is the only country that has a top-level domain for its military, a direct result of the United States' military's role in the creation of the Internet.\nOther countries often use second-level domains for this purpose, e.g., mod.uk for the United Kingdom's Ministry of Defence. Canada uses norad.mil with the United States as they jointly operate the North American Aerospace Defense Command.\nDespite having a dedicated top-level domain, the US military also uses com domains for some of its recruitment sites, such as goarmy.com, as well as for the Defense Commissary Agency's website www.commissaries.com and most non-appropriated fund instrumentalities such as military MWR organizations and military exchanges. Also, the military uses edu domains for its service academies: the United States Military Academy, United States Coast Guard Academy, United States Naval Academy, and the United States Air Force Academy can all be reached using either an edu or a mil domain name. The official athletic program sites of the three academies that are members of NCAA Division I (Army, Navy, Air Force) use com domains, as well as Coast Guard, which is a member of NCAA Division III. The United States Department of Defense (also referred to as the Department of War) itself uses gov for its home page, with at least three second-level domains within mil (defense, dod, pentagon) redirecting to its domain name war.gov Archived September 5, 2025, at the Wayback Machine (formerly dod.gov).\nThe United States Coast Guard, like other military services, uses the mil domain, although during statutory peacetime the service falls under the United States Department of Homeland Security.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mil.html",
+  "wikipedia": "The domain name mil is the sponsored top-level domain (sTLD) in the Domain Name System of the Internet for the United States Department of Defense and its subsidiary or affiliated organizations. The name is derived from military. It was one of the first top-level domains, created in January 1985. As in the case with .gov, the United States is the only country that has a top-level domain for its military, a direct result of the United States' military's role in the creation of the Internet.\nOther countries often use second-level domains for this purpose, e.g., mod.uk for the United Kingdom's Ministry of Defence. Canada uses norad.mil with the United States as they jointly operate the North American Aerospace Defense Command.\nDespite having a dedicated top-level domain, the US military also uses com domains for some of its recruitment sites, such as goarmy.com, as well as for the Defense Commissary Agency's website www.commissaries.com and most non-appropriated fund instrumentalities such as military MWR organizations and military exchanges. Also, the military uses edu domains for its service academies: the United States Military Academy, United States Coast Guard Academy, United States Naval Academy, and the United States Air Force Academy can all be reached using either an edu or a mil domain name. The official athletic program sites of the three academies that are members of NCAA Division I (Army, Navy, Air Force) use com domains, as well as Coast Guard, which is a member of NCAA Division III. The United States Department of Defense (also referred to as the Department of War) itself uses gov for its home page, with at least three second-level domains within mil (defense, dod, pentagon) redirecting to its domain name war.gov Archived September 5, 2025, at the Wayback Machine (formerly dod.gov).\nThe United States Coast Guard, like other military services, uses the mil domain, although during statutory peacetime the service falls under the United States Department of Homeland Security.",
+  "scrapedAt": "2026-07-21T21:45:14Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".mil",
+    "any industry",
+    "center",
+    "domain",
+    "general",
+    "general websites",
+    "information",
+    "level",
+    "mil",
+    "network",
+    "sponsored",
+    "stld",
+    "top"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".mil is a Sponsored top-level domain. Managed by DoD Network Information Center.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

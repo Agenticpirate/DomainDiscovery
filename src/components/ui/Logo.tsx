@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface LogoProps {
@@ -9,85 +10,71 @@ interface LogoProps {
   className?: string;
 }
 
+const iconPx = {
+  sm: 34,
+  md: 38,
+  lg: 52,
+} as const;
+
+const textSizeClasses = {
+  sm: 'text-[13px]',
+  md: 'text-[14px] sm:text-[15px]',
+  lg: 'text-lg',
+} as const;
+
+/**
+ * Metal D mark + wordmark — silver / slate brand only (no orange).
+ */
 export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, className = '' }) => {
   const { theme } = useTheme();
   const isLight = theme === 'light';
-  const sizeClasses = {
-    sm: 'w-8 h-8',
-    md: 'w-7 h-7 sm:w-8 sm:h-8',
-    lg: 'w-14 h-14',
-  };
-
-  const textSizeClasses = {
-    sm: 'text-sm',
-    md: 'text-[14px] sm:text-[16px]',
-    lg: 'text-xl',
-  };
+  const px = iconPx[size];
 
   return (
-    <div className={`flex items-center gap-1.5 ${className}`} style={{ maxWidth: '100%' }}>
+    <div className={`flex items-center gap-2 ${className}`} style={{ maxWidth: '100%' }}>
       <div
-        className="logo-icon-wrapper relative group shrink-0"
+        className="logo-icon-wrapper relative shrink-0"
         style={{
-          width: size === 'lg' ? 56 : size === 'md' ? 32 : 28,
-          height: size === 'lg' ? 56 : size === 'md' ? 32 : 28,
-          minWidth: size === 'lg' ? 56 : size === 'md' ? 32 : 28,
-          maxWidth: size === 'lg' ? 56 : size === 'md' ? 32 : 28,
-          flexShrink: 0,
-          borderRadius: '0.75rem',
-          overflow: 'hidden',
+          width: px,
+          height: px,
+          minWidth: px,
+          maxWidth: px,
+          // Kill any warm/orange ambient glow from filters or assets
+          filter: 'none',
+          boxShadow: 'none',
+          background: 'transparent',
         }}
       >
-        <div
-          className={`absolute inset-0 transition-opacity ${
-            isLight
-              ? 'bg-gradient-to-br from-slate-400 via-slate-300 to-slate-500 opacity-50 group-hover:opacity-70'
-              : 'bg-gradient-to-br from-slate-300 via-slate-200 to-slate-400 opacity-40 group-hover:opacity-60'
-          }`}
-          style={{ filter: 'blur(0px)' }}
+        <Image
+          src="/logo.png"
+          alt="DomainDiscovery"
+          width={px}
+          height={px}
+          priority
+          className="h-full w-full object-contain"
+          style={{ filter: 'none', boxShadow: 'none' }}
+          unoptimized
         />
-        <div
-          className={`relative flex items-center justify-center transition-all ${
-            isLight
-              ? 'bg-gradient-to-br from-slate-700 via-slate-600 to-slate-800 shadow-sm border border-slate-500/30'
-              : 'bg-gradient-to-br from-slate-200 via-slate-100 to-slate-300 shadow-sm border border-white/40'
-          }`}
-          style={{ width: '100%', height: '100%', borderRadius: '0.75rem' }}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ width: '65%', height: '65%', color: isLight ? '#f1f5f9' : '#334155' }}
-          >
-            <path
-              d="M12 3L4 7.5V16.5L12 21L20 16.5V7.5L12 3Z"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none"
-            />
-            <circle cx="12" cy="12" r="4" fill="currentColor" opacity="0.9" />
-            <circle cx="12" cy="12" r="1.5" fill={isLight ? '#475569' : 'white'} fillOpacity="0.6" />
-          </svg>
-        </div>
       </div>
       {showText && (
-        <div className="flex flex-col text-left min-w-0">
-          <div className={`${textSizeClasses[size]} font-black tracking-tight leading-none`}>
+        <div className="flex min-w-0 flex-col text-left leading-none">
+          <div className={`${textSizeClasses[size]} font-black tracking-tight`}>
             <span
               className="bg-clip-text text-transparent"
               style={{
+                // Brand silver / slate only — never orange
                 backgroundImage: isLight
-                  ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
-                  : 'linear-gradient(to right, #ffffff, #f1f5f9, #cbd5e1)',
+                  ? 'linear-gradient(to right, #0f172a, #1e293b, #64748b)'
+                  : 'linear-gradient(to right, #ffffff, #f1f5f9, #94a3b8)',
               }}
             >
               DomainDiscovery
             </span>
           </div>
-          <span className={`text-[8px] sm:text-[9px] font-semibold uppercase tracking-[0.16em] ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
+          <span
+            className="mt-0.5 text-[7px] sm:text-[8px] font-semibold uppercase tracking-[0.14em]"
+            style={{ color: isLight ? '#64748b' : '#94a3b8' }}
+          >
             AI-Powered
           </span>
         </div>
@@ -96,39 +83,36 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, classN
   );
 };
 
-export const LogoIcon: React.FC<{ size?: number; className?: string }> = ({ size = 40, className = '' }) => {
+export const LogoIcon: React.FC<{ size?: number; className?: string }> = ({
+  size = 40,
+  className = '',
+}) => {
   return (
-    <div className={`relative group ${className}`}>
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-300 via-slate-200 to-slate-400 rounded-2xl blur-lg opacity-40" />
-      <div 
-        className="relative rounded-2xl bg-gradient-to-br from-slate-200 via-slate-100 to-slate-300 flex items-center justify-center shadow-xl shadow-slate-900/20 border border-white/40"
-        style={{ width: size, height: size }}
-      >
-        <svg 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          className="text-slate-700"
-          style={{ width: size * 0.65, height: size * 0.65 }}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path 
-            d="M12 3L4 7.5V16.5L12 21L20 16.5V7.5L12 3Z" 
-            stroke="currentColor" 
-            strokeWidth="1.8" 
-            strokeLinecap="round" 
-            strokeLinejoin="round"
-            fill="none"
-          />
-          <circle 
-            cx="12" 
-            cy="12" 
-            r="4" 
-            fill="currentColor"
-            opacity="0.9"
-          />
-          <circle cx="12" cy="12" r="1.5" fill="white" fillOpacity="0.6" />
-        </svg>
-      </div>
-    </div>
+    <Image
+      src="/logo.png"
+      alt="DomainDiscovery"
+      width={size}
+      height={size}
+      className={`object-contain ${className}`}
+      style={{ width: size, height: size }}
+      unoptimized
+    />
+  );
+};
+
+export const LogoMark: React.FC<{ size?: number; className?: string }> = ({
+  size = 40,
+  className = '',
+}) => {
+  return (
+    <Image
+      src="/logo.png"
+      alt="DomainDiscovery"
+      width={size}
+      height={size}
+      className={`object-contain ${className}`}
+      style={{ width: size, height: size }}
+      unoptimized
+    />
   );
 };

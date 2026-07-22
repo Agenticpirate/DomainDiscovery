@@ -1,0 +1,156 @@
+{
+  "tld": ".pt",
+  "slug": "pt",
+  "title": "About .pt domains",
+  "delegationTitle": "Delegation Record for .PT",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Portugal",
+  "sponsor": "Associa\u00e7\u00e3o DNS.PT",
+  "sponsorDetail": "Associa\u00e7\u00e3o DNS.PT\nRua E\u00e7a de Queiroz, 29\nLisboa 1050-095\nPortugal",
+  "administrativeContact": "Luisa Ribeiro Lopes",
+  "technicalContact": "Assis Guerreiro",
+  "registryUrl": "http://www.dns.pt/",
+  "whoisServer": "whois.dns.pt",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.dns.pt",
+      "addresses": [
+        "185.39.208.1",
+        "2a04:6d80:0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b.dns.pt",
+      "addresses": [
+        "194.0.25.23",
+        "2001:678:20:0:0:0:0:23"
+      ]
+    },
+    {
+      "host": "c.dns.pt",
+      "addresses": [
+        "204.61.216.105",
+        "2001:500:14:6105:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "d.dns.pt",
+      "addresses": [
+        "185.39.210.1",
+        "2a04:6d82:0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "e.dns.pt",
+      "addresses": [
+        "193.136.192.64",
+        "2001:690:a00:4001:0:0:0:64"
+      ]
+    },
+    {
+      "host": "g.dns.pt",
+      "addresses": [
+        "193.136.2.226",
+        "2001:690:a80:4001:0:0:0:100"
+      ]
+    },
+    {
+      "host": "h.dns.pt",
+      "addresses": [
+        "194.146.106.138",
+        "2001:67c:1010:35:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns.dns.br",
+      "addresses": [
+        "200.160.0.5",
+        "2001:12ff:0:a20:0:0:0:5"
+      ]
+    },
+    {
+      "host": "ns2.nic.fr",
+      "addresses": [
+        "192.93.0.4",
+        "2001:660:3005:1:0:0:1:2"
+      ]
+    }
+  ],
+  "about": ".PT is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Portugal. The IANA root zone lists the registry manager as Associa\u00e7\u00e3o DNS.PT. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.pt is the Internet country code top-level domain (ccTLD) for Portugal and is managed by Associa\u00e7\u00e3o DNS.PT.\nIt has the following second-level domains:\n\n.com.pt: no restrictions; online registration\n.edu.pt: education\n.gov.pt: Government of Portugal\n.int.pt: international organizations or diplomatic missions in Portugal\n.net.pt: telecommunications providers\n.nome.pt: individuals (nome is Portuguese for name)\n.org.pt: Non-profit organizations\n.publ.pt: publications (e.g. newspapers)\n.co.pt\n.lda.pt\nAs from the 1 May 2012 Registration directly at second-level is available, without restrictions. On the first week there was a 28984 new domains register under the .pt. \nSince July 1, 2005, some characters with diacritics have been supported in domain names (IDN). Currently permitted characters: \u00e0, \u00e1, \u00e2, \u00e3, \u00e7, \u00e9, \u00ea, \u00ed, \u00f3, \u00f4, \u00f5, \u00fa, \u00fc. These are the only accentuated characters used in Portuguese words, although \"\u00fc\" has been deprecated by the Portuguese-Language Orthographic Agreement of 1990.\nApart from .gov.pt, Portuguese subdomains were slow to catch on, because many people had already registered under .pt when the new ones became available. Many companies, colleges and people still prefer to use a .pt because these are harder to get and simpler to remember. However, the .com.pt subdomain is being heavily promoted by the registry, and now has numerous registrations and active Web sites. Others such as .nome.pt for individuals are still uncommon.\nIn the early years, FCCN (Funda\u00e7\u00e3o para a Computa\u00e7\u00e3o Cient\u00edfica Nacional) tried to keep control of the .pt domain using stringent rules, which were adjusted a number of times. The precedent set by domains which were already registered but which would not be able to be registered under updated rules led to lawyers requesting the registry of any domain based on the principle of equal treatment. When the situation was out of control, FCCN tried to promote subdomains like com.pt. Nevertheless, since the registration directly under .pt was still available, users tended to prefer these.\nIt is estimated that the .pt suffix comprises a little less than 10% of all the Portuguese-language Internet. It is the third most popular Portuguese-language suffix, after .br and .com, and ahead of .net, .org and .info, all above 10 million pages.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/pt.html",
+  "wikipedia": ".pt is the Internet country code top-level domain (ccTLD) for Portugal and is managed by Associa\u00e7\u00e3o DNS.PT.\nIt has the following second-level domains:\n\n.com.pt: no restrictions; online registration\n.edu.pt: education\n.gov.pt: Government of Portugal\n.int.pt: international organizations or diplomatic missions in Portugal\n.net.pt: telecommunications providers\n.nome.pt: individuals (nome is Portuguese for name)\n.org.pt: Non-profit organizations\n.publ.pt: publications (e.g. newspapers)\n.co.pt\n.lda.pt\nAs from the 1 May 2012 Registration directly at second-level is available, without restrictions. On the first week there was a 28984 new domains register under the .pt. \nSince July 1, 2005, some characters with diacritics have been supported in domain names (IDN). Currently permitted characters: \u00e0, \u00e1, \u00e2, \u00e3, \u00e7, \u00e9, \u00ea, \u00ed, \u00f3, \u00f4, \u00f5, \u00fa, \u00fc. These are the only accentuated characters used in Portuguese words, although \"\u00fc\" has been deprecated by the Portuguese-Language Orthographic Agreement of 1990.\nApart from .gov.pt, Portuguese subdomains were slow to catch on, because many people had already registered under .pt when the new ones became available. Many companies, colleges and people still prefer to use a .pt because these are harder to get and simpler to remember. However, the .com.pt subdomain is being heavily promoted by the registry, and now has numerous registrations and active Web sites. Others such as .nome.pt for individuals are still uncommon.\nIn the early years, FCCN (Funda\u00e7\u00e3o para a Computa\u00e7\u00e3o Cient\u00edfica Nacional) tried to keep control of the .pt domain using stringent rules, which were adjusted a number of times. The precedent set by domains which were already registered but which would not be able to be registered under updated rules led to lawyers requesting the registry of any domain based on the principle of equal treatment. When the situation was out of control, FCCN tried to promote subdomains like com.pt. Nevertheless, since the registration directly under .pt was still available, users tended to prefer these.\nIt is estimated that the .pt suffix comprises a little less than 10% of all the Portuguese-language Internet. It is the third most popular Portuguese-language suffix, after .br and .com, and ahead of .net, .org and .info, all above 10 million pages.",
+  "scrapedAt": "2026-07-21T21:47:56Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".pt",
+    "associa",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "portugal",
+    "pt",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 25,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$11.56",
+      "value": 11.56
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$11.56",
+      "value": 11.56
+    },
+    "sourceUrl": "https://tld-list.com/tld/pt"
+  },
+  "summary": ".pt is a Country-code top-level domain. Managed by Associa\u00e7\u00e3o DNS.PT.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

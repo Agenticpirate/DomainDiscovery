@@ -1,0 +1,155 @@
+{
+  "tld": ".ma",
+  "slug": "ma",
+  "title": "About .ma domains",
+  "delegationTitle": "Delegation Record for .MA",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Morocco",
+  "sponsor": "Agence Nationale de R\u00e9glementation des T\u00e9l\u00e9communications (ANRT)",
+  "sponsorDetail": "Agence Nationale de R\u00e9glementation des T\u00e9l\u00e9communications (ANRT)\nAvenue Ennakhil, Complexe d'Affaires\nAile Sud, Hay Ryad\nRabat 10100\nMorocco",
+  "administrativeContact": "General Director of ANRT",
+  "technicalContact": "TLD Technical Contact",
+  "registryUrl": "http://www.registre.ma",
+  "whoisServer": "whois.registre.ma",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.tld.ma",
+      "addresses": [
+        "81.192.171.83",
+        "81.192.171.131",
+        "2001:4288:1800:186:0:0:0:3"
+      ]
+    },
+    {
+      "host": "b.tld.ma",
+      "addresses": [
+        "81.192.171.132",
+        "81.192.171.84",
+        "2001:4288:1800:186:0:0:0:4"
+      ]
+    },
+    {
+      "host": "c.tld.ma",
+      "addresses": [
+        "81.192.171.115",
+        "81.192.171.139",
+        "2001:4288:1800:386:0:0:0:3"
+      ]
+    },
+    {
+      "host": "d.tld.ma",
+      "addresses": [
+        "81.192.171.116",
+        "81.192.171.140",
+        "2001:4288:1800:386:0:0:0:4"
+      ]
+    },
+    {
+      "host": "dns.inria.fr",
+      "addresses": [
+        "193.51.208.13"
+      ]
+    },
+    {
+      "host": "e.tld.ma",
+      "addresses": [
+        "105.73.80.236"
+      ]
+    },
+    {
+      "host": "f.tld.ma",
+      "addresses": [
+        "41.214.240.4",
+        "2c0f:fb20:100:fc:0:0:0:33"
+      ]
+    },
+    {
+      "host": "ns-ma.nic.fr",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".MA is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Morocco. The IANA root zone lists the registry manager as Agence Nationale de R\u00e9glementation des T\u00e9l\u00e9communications (ANRT). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ma is the Internet country code top-level domain (ccTLD) for Morocco (French: Maroc). A local registrar with a local Moroccan company as administrative contact is needed to register a .ma or .co.ma domain name. Further restrictions are imposed on the registering of other second-level domains (such as .net.ma or .gov.ma).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ma.html",
+  "wikipedia": ".ma is the Internet country code top-level domain (ccTLD) for Morocco (French: Maroc). A local registrar with a local Moroccan company as administrative contact is needed to register a .ma or .co.ma domain name. Further restrictions are imposed on the registering of other second-level domains (such as .net.ma or .gov.ma).",
+  "scrapedAt": "2026-07-21T21:44:42Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ma",
+    "agence",
+    "anrt",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "glementation",
+    "level",
+    "local business",
+    "ma",
+    "morocco",
+    "nationale",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 16,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$34.99",
+      "value": 34.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Hostinger",
+      "price": "$39.99",
+      "value": 39.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/ma"
+  },
+  "summary": ".ma is a Country-code top-level domain. Managed by Agence Nationale de R\u00e9glementation des T\u00e9l\u00e9communications (ANRT).",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

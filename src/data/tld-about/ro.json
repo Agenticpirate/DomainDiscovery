@@ -1,0 +1,136 @@
+{
+  "tld": ".ro",
+  "slug": "ro",
+  "title": "About .ro domains",
+  "delegationTitle": "Delegation Record for .RO",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Romania",
+  "sponsor": "National Institute for R&D in Informatics",
+  "sponsorDetail": "National Institute for R&D in Informatics\nBd. Averescu 8-10\nSector 1\nBucharest 011454\nRomania",
+  "administrativeContact": "Ionut Eugen SANDU",
+  "technicalContact": ".ro TLD Tech Contact",
+  "registryUrl": "http://www.rotld.ro/",
+  "whoisServer": "whois.rotld.ro",
+  "rdapServer": null,
+  "registrationDate": "1993-02-26",
+  "recordUpdated": "2026-04-28",
+  "nameServers": [
+    {
+      "host": "dns-at.rotld.ro",
+      "addresses": [
+        "78.104.145.6",
+        "2001:628:453:bb:0:0:0:6"
+      ]
+    },
+    {
+      "host": "dns-c.rotld.ro",
+      "addresses": [
+        "194.0.11.113",
+        "2001:678:e:113:0:0:0:53"
+      ]
+    },
+    {
+      "host": "dns-ro.denic.de",
+      "addresses": [
+        "81.91.161.99"
+      ]
+    },
+    {
+      "host": "primary.rotld.ro",
+      "addresses": [
+        "192.162.16.18",
+        "2a03:5e80:0:4:192:162:16:18"
+      ]
+    },
+    {
+      "host": "sec-dns-a.rotld.ro",
+      "addresses": [
+        "192.162.16.20",
+        "2a03:5e80:0:4:192:162:16:20"
+      ]
+    },
+    {
+      "host": "sec-dns-b.rotld.ro",
+      "addresses": [
+        "193.230.31.230",
+        "2a03:5e80:0:5:193:230:31:230"
+      ]
+    }
+  ],
+  "about": ".RO is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Romania. The IANA root zone lists the registry manager as National Institute for R&D in Informatics. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ro is the Internet country code top-level domain (ccTLD) for Romania. It is administered by the National Institute for R&D in Informatics. As of December 2007, about 250,000 domains were registered under the .ro domain. In June 2008 there were around 6.8 million Google results for the .ro domain. In June 2012, there were 732,867 .ro domain names, while in September 2017, there were 928,357.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ro.html",
+  "wikipedia": ".ro is the Internet country code top-level domain (ccTLD) for Romania. It is administered by the National Institute for R&D in Informatics. As of December 2007, about 250,000 domains were registered under the .ro domain. In June 2008 there were around 6.8 million Google results for the .ro domain. In June 2012, there were 732,867 .ro domain names, while in September 2017, there were 928,357.",
+  "scrapedAt": "2026-07-21T21:48:36Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ro",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "informatics",
+    "institute",
+    "level",
+    "local business",
+    "national",
+    "regional brands",
+    "ro",
+    "romania",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 24,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$10.34",
+      "value": 10.34
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$10.34",
+      "value": 10.34
+    },
+    "sourceUrl": "https://tld-list.com/tld/ro"
+  },
+  "summary": ".ro is a Country-code top-level domain. Managed by National Institute for R&D in Informatics.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

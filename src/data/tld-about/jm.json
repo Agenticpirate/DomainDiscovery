@@ -1,0 +1,121 @@
+{
+  "tld": ".jm",
+  "slug": "jm",
+  "title": "About .jm domains",
+  "delegationTitle": "Delegation Record for .JM",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Jamaica",
+  "sponsor": "University of West Indies",
+  "sponsorDetail": "University of West Indies\n7 Gibraltar Road\nMona Kingston 7\nJamaica",
+  "administrativeContact": "Jeremy M. Whyte",
+  "technicalContact": "Domain Master",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1991-09-24",
+  "recordUpdated": "2025-07-10",
+  "nameServers": [
+    {
+      "host": "jm.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.82",
+        "2a13:27c0:30:0:0:0:0:82"
+      ]
+    },
+    {
+      "host": "ns.jm",
+      "addresses": [
+        "196.2.1.6"
+      ]
+    },
+    {
+      "host": "ns3-jm.fsl.org.jm",
+      "addresses": [
+        "196.3.191.66"
+      ]
+    },
+    {
+      "host": "phloem.uoregon.edu",
+      "addresses": [
+        "128.223.32.35",
+        "2001:468:d01:20:0:0:80df:2023"
+      ]
+    }
+  ],
+  "about": ".JM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Jamaica. The IANA root zone lists the registry manager as University of West Indies. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.jm is the Internet country code top-level domain (ccTLD) for Jamaica.  Registrations are at the third level beneath the second level names com.jm, net.jm, org.jm, edu.jm, gov.jm, and mil.jm. Registrations are processed by hand rather than automatically, so registrants are asked to allow 30 days for the registrations to be completed. Updates to domain names (such as changes to nameservers) can only be authorized by the technical or registrant e-mail addresses.  Registration of .jm domains is handled by Mona Information Technology Services (MITS) at the University of the West Indies. Registration is free, although there has been some discussion about MITS making the service commercial in the coming years.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/jm.html",
+  "wikipedia": ".jm is the Internet country code top-level domain (ccTLD) for Jamaica.  Registrations are at the third level beneath the second level names com.jm, net.jm, org.jm, edu.jm, gov.jm, and mil.jm. Registrations are processed by hand rather than automatically, so registrants are asked to allow 30 days for the registrations to be completed. Updates to domain names (such as changes to nameservers) can only be authorized by the technical or registrant e-mail addresses.  Registration of .jm domains is handled by Mona Information Technology Services (MITS) at the University of the West Indies. Registration is free, although there has been some discussion about MITS making the service commercial in the coming years.",
+  "scrapedAt": "2026-07-21T21:43:07Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".jm",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "indies",
+    "jamaica",
+    "jm",
+    "level",
+    "local business",
+    "regional brands",
+    "top",
+    "university",
+    "west"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 1,
+    "cheapestRegistration": {
+      "registrar": "Gandi.net",
+      "price": "$176.00",
+      "value": 176.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Gandi.net",
+      "price": "$311.98",
+      "value": 311.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/jm"
+  },
+  "summary": ".jm is a Country-code top-level domain. Managed by University of West Indies.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

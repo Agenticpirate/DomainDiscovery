@@ -1,0 +1,116 @@
+{
+  "tld": ".fans",
+  "slug": "fans",
+  "title": "About .fans domains",
+  "delegationTitle": "Delegation Record for .FANS",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "ZDNS International Limited",
+  "sponsorDetail": "ZDNS International Limited\n4, South 4th Street, Zhongguancun\nHaidian District\nBeijing 100190\nChina",
+  "administrativeContact": "VP",
+  "technicalContact": "CTO",
+  "registryUrl": "http://www.nic.fans/",
+  "whoisServer": "whois.nic.fans",
+  "rdapServer": "https://rdap.centralnic.com/fans",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.fans",
+      "addresses": [
+        "194.169.218.39",
+        "2001:67c:13cc:0:0:0:1:39"
+      ]
+    },
+    {
+      "host": "b.nic.fans",
+      "addresses": [
+        "185.24.64.39",
+        "2a04:2b00:13cc:0:0:0:1:39"
+      ]
+    },
+    {
+      "host": "c.nic.fans",
+      "addresses": [
+        "212.18.248.39",
+        "2a04:2b00:13ee:0:0:0:0:39"
+      ]
+    },
+    {
+      "host": "d.nic.fans",
+      "addresses": [
+        "212.18.249.39",
+        "2a04:2b00:13ff:0:0:0:0:39"
+      ]
+    }
+  ],
+  "about": ".FANS is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .FANS is listed by IANA as ZDNS International Limited. Anyone can typically register a .FANS name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/fans.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:39:58Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".fans",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "fans",
+    "generic",
+    "gtld",
+    "international",
+    "level",
+    "limited",
+    "top",
+    "zdns"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 45,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$4.18",
+      "value": 4.18
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$8.46",
+      "value": 8.46
+    },
+    "sourceUrl": "https://tld-list.com/tld/fans"
+  },
+  "summary": ".fans is a Generic top-level domain. Managed by ZDNS International Limited.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,152 @@
+{
+  "tld": ".vn",
+  "slug": "vn",
+  "title": "About .vn domains",
+  "delegationTitle": "Delegation Record for .VN",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Viet Nam",
+  "sponsor": "Viet Nam Internet Network Information Center (VNNIC)",
+  "sponsorDetail": "Viet Nam Internet Network Information Center (VNNIC)\nMinistry of Information and Communications of Socialist Republic of Viet Nam\n18 Nguyen Du\nHanoi 100000\nViet Nam",
+  "administrativeContact": "Nguyen Hong Thang",
+  "technicalContact": "Nguyen Truong Thanh",
+  "registryUrl": "https://www.vnnic.vn/",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1994-04-14",
+  "recordUpdated": "2023-07-19",
+  "nameServers": [
+    {
+      "host": "a.dns-servers.vn",
+      "addresses": [
+        "194.0.1.18",
+        "2001:678:4:0:0:0:0:12"
+      ]
+    },
+    {
+      "host": "b.dns-servers.vn",
+      "addresses": [
+        "203.119.73.105",
+        "2001:dc8:1:2:0:0:0:105"
+      ]
+    },
+    {
+      "host": "c.dns-servers.vn",
+      "addresses": [
+        "203.119.38.105",
+        "2001:dc8:c000:7:0:0:0:105"
+      ]
+    },
+    {
+      "host": "d.dns-servers.vn",
+      "addresses": [
+        "203.119.44.105",
+        "2001:dc8:8000:2:0:0:0:105"
+      ]
+    },
+    {
+      "host": "e.dns-servers.vn",
+      "addresses": [
+        "203.119.60.105",
+        "2001:dc8:1000:2:0:0:0:105"
+      ]
+    },
+    {
+      "host": "f.dns-servers.vn",
+      "addresses": [
+        "203.119.68.105",
+        "2001:dc8:d000:2:0:0:0:105"
+      ]
+    },
+    {
+      "host": "g.dns-servers.vn",
+      "addresses": [
+        "204.61.216.115",
+        "2001:500:14:6115:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "h.dns-servers.vn",
+      "addresses": [
+        "202.47.142.105",
+        "2001:dc8:6000:0:0:0:0:105"
+      ]
+    }
+  ],
+  "about": ".VN is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Viet Nam. The IANA root zone lists the registry manager as Viet Nam Internet Network Information Center (VNNIC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/vn.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:52:09Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".vn",
+    "cctld",
+    "center",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "internet",
+    "level",
+    "local business",
+    "nam",
+    "network",
+    "regional brands",
+    "top",
+    "viet",
+    "vn",
+    "vnnic"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 15,
+    "cheapestRegistration": {
+      "registrar": "EuroDNS",
+      "price": "$21.11",
+      "value": 21.11
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$36.99",
+      "value": 36.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/vn"
+  },
+  "summary": ".vn is a Country-code top-level domain. Managed by Viet Nam Internet Network Information Center (VNNIC).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

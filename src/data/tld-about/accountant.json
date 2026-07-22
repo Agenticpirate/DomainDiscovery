@@ -1,0 +1,129 @@
+{
+  "tld": ".accountant",
+  "slug": "accountant",
+  "title": "About .accountant domains",
+  "delegationTitle": "Delegation Record for .ACCOUNTANT",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "dot Accountant Limited",
+  "sponsorDetail": "dot Accountant Limited\n2nd Floor, Leisure Island Business Centre, Ocean Village\nGibraltar  GX11 1AA\nGibraltar",
+  "administrativeContact": "Edgar Charles Andrew Lavarello",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://nic.accountant",
+  "whoisServer": "whois.nic.accountant",
+  "rdapServer": "https://rdap.nic.accountant/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.accountant",
+      "addresses": [
+        "37.209.192.10",
+        "2001:dcd:1:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "b.nic.accountant",
+      "addresses": [
+        "37.209.194.10",
+        "2001:dcd:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.nic.accountant",
+      "addresses": [
+        "37.209.196.10",
+        "2001:dcd:3:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "ns1.dns.nic.accountant",
+      "addresses": [
+        "156.154.144.195",
+        "2610:a1:1071:0:0:0:0:c3"
+      ]
+    },
+    {
+      "host": "ns2.dns.nic.accountant",
+      "addresses": [
+        "156.154.145.195",
+        "2610:a1:1072:0:0:0:0:c3"
+      ]
+    },
+    {
+      "host": "ns3.dns.nic.accountant",
+      "addresses": [
+        "156.154.159.195",
+        "2610:a1:1073:0:0:0:0:c3"
+      ]
+    }
+  ],
+  "about": ".ACCOUNTANT is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .ACCOUNTANT is listed by IANA as dot Accountant Limited. Anyone can typically register a .ACCOUNTANT name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nGRS Domains is a domain registry service provider based in Gibraltar. GRS Domains supports the gTLDs founded and majority owned by venture capitalist Iain Roache.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/accountant.html",
+  "wikipedia": "GRS Domains is a domain registry service provider based in Gibraltar. GRS Domains supports the gTLDs founded and majority owned by venture capitalist Iain Roache.",
+  "scrapedAt": "2026-07-21T21:34:06Z",
+  "categories": [
+    "legal"
+  ],
+  "useCases": [
+    "Law firms",
+    "Legal services"
+  ],
+  "keywords": [
+    ".accountant",
+    "accountant",
+    "domain",
+    "generic",
+    "gtld",
+    "law firms",
+    "legal",
+    "legal services",
+    "level",
+    "limited",
+    "top"
+  ],
+  "primaryCategory": "legal",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 44,
+    "cheapestRegistration": {
+      "registrar": "Cloudflare",
+      "price": "$20.16",
+      "value": 20.16
+    },
+    "cheapestRenewal": {
+      "registrar": "Cloudflare",
+      "price": "$20.16",
+      "value": 20.16
+    },
+    "sourceUrl": "https://tld-list.com/tld/accountant"
+  },
+  "summary": ".accountant is a Generic top-level domain. Managed by dot Accountant Limited.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

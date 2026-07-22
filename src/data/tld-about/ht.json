@@ -1,0 +1,115 @@
+{
+  "tld": ".ht",
+  "slug": "ht",
+  "title": "About .ht domains",
+  "delegationTitle": "Delegation Record for .HT",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Haiti",
+  "sponsor": "Consortium FDS/RDDH",
+  "sponsorDetail": "Consortium FDS/RDDH\n17, 2e Ruelle Wilson, Pacot\nPort au Prince\nHaiti",
+  "administrativeContact": "Admin Contact",
+  "technicalContact": "Contact Technique",
+  "registryUrl": "http://www.nic.ht",
+  "whoisServer": "whois.nic.ht",
+  "rdapServer": "https://rdap.nic.ht/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.lactld.org",
+      "addresses": [
+        "200.0.68.10",
+        "2801:14:a000:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "ns-ht.nic.fr",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "pch.nic.ht",
+      "addresses": [
+        "204.61.216.38",
+        "2001:500:14:6038:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".HT is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Haiti. The IANA root zone lists the registry manager as Consortium FDS/RDDH. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ht is the Internet country code top-level domain (ccTLD) for Haiti. It was introduced in 1997 and is managed R\u00e9seau de D\u00e9veloppement Durable d'Ha\u00efti (RDDH) with assistance from the State University of Haiti. \nAlthough it was originally intended for Haitian people and businesses, per NIC Ha\u00efti, anyone in the world can register a .ht domain name.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ht.html",
+  "wikipedia": ".ht is the Internet country code top-level domain (ccTLD) for Haiti. It was introduced in 1997 and is managed R\u00e9seau de D\u00e9veloppement Durable d'Ha\u00efti (RDDH) with assistance from the State University of Haiti. \nAlthough it was originally intended for Haitian people and businesses, per NIC Ha\u00efti, anyone in the world can register a .ht domain name.",
+  "scrapedAt": "2026-07-21T21:42:17Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ht",
+    "cctld",
+    "code",
+    "consortium",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "haiti",
+    "ht",
+    "level",
+    "local business",
+    "rddh",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 21,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$84.99",
+      "value": 84.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$88.89",
+      "value": 88.89
+    },
+    "sourceUrl": "https://tld-list.com/tld/ht"
+  },
+  "summary": ".ht is a Country-code top-level domain. Managed by Consortium FDS/RDDH.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

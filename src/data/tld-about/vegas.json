@@ -1,0 +1,114 @@
+{
+  "tld": ".vegas",
+  "slug": "vegas",
+  "title": "About .vegas domains",
+  "delegationTitle": "Delegation Record for .VEGAS",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Dot Vegas, Inc.",
+  "sponsorDetail": "Dot Vegas, Inc.\n6325 S. Jones Blvd., Suite 500\nLas Vegas NV 89118\nUnited States of America (the)",
+  "administrativeContact": "CEO",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.nic.vegas",
+  "whoisServer": "whois.nic.vegas",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.vegas",
+      "addresses": [
+        "65.22.68.17",
+        "2a01:8840:42:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "a2.nic.vegas",
+      "addresses": [
+        "65.22.71.17",
+        "2a01:8840:45:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "b0.nic.vegas",
+      "addresses": [
+        "65.22.69.17",
+        "2a01:8840:43:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "c0.nic.vegas",
+      "addresses": [
+        "65.22.70.17",
+        "2a01:8840:44:0:0:0:0:17"
+      ]
+    }
+  ],
+  "about": ".VEGAS is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .VEGAS is listed by IANA as Dot Vegas, Inc.. Anyone can typically register a .VEGAS name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/vegas.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:51:53Z",
+  "categories": [
+    "travel"
+  ],
+  "useCases": [
+    "Travel brands",
+    "Tourism",
+    "Hospitality"
+  ],
+  "keywords": [
+    ".vegas",
+    "domain",
+    "generic",
+    "gtld",
+    "hospitality",
+    "level",
+    "top",
+    "tourism",
+    "travel",
+    "travel brands",
+    "vegas"
+  ],
+  "primaryCategory": "travel",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 43,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$16.48",
+      "value": 16.48
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$43.59",
+      "value": 43.59
+    },
+    "sourceUrl": "https://tld-list.com/tld/vegas"
+  },
+  "summary": ".vegas is a Generic top-level domain. Managed by Dot Vegas, Inc..",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

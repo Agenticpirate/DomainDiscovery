@@ -1,0 +1,138 @@
+{
+  "tld": ".cn",
+  "slug": "cn",
+  "title": "About .cn domains",
+  "delegationTitle": "Delegation Record for .CN",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for China",
+  "sponsor": "China Internet Network Information Center (CNNIC)",
+  "sponsorDetail": "China Internet Network Information Center (CNNIC)\nBuilding 4, No.9 Beijing Auto Museum West Road, Fengtai District\nBeijing 100070\nChina",
+  "administrativeContact": "Yulin Liu",
+  "technicalContact": "Anlei Hu",
+  "registryUrl": "http://www.cnnic.cn/",
+  "whoisServer": "whois.cnnic.cn",
+  "rdapServer": null,
+  "registrationDate": "1990-11-28",
+  "recordUpdated": "2025-07-17",
+  "nameServers": [
+    {
+      "host": "a.dns.cn",
+      "addresses": [
+        "203.119.25.1",
+        "2001:dc7:0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b.dns.cn",
+      "addresses": [
+        "203.119.26.1",
+        "2001:dc7:1:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c.dns.cn",
+      "addresses": [
+        "203.119.27.1",
+        "2001:dc7:2:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d.dns.cn",
+      "addresses": [
+        "203.119.28.1",
+        "2001:dc7:1000:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "e.dns.cn",
+      "addresses": [
+        "203.119.29.1",
+        "2001:dc7:3:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns.cernet.net",
+      "addresses": [
+        "202.112.0.44"
+      ]
+    }
+  ],
+  "about": ".CN is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for China. The IANA root zone lists the registry manager as China Internet Network Information Center (CNNIC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.cn is the country code top-level domain (ccTLD) for the People's Republic of China. Introduced on 28 November 1990, the domain is administered by China Internet Network Information Center, a public institution affiliated with the Ministry of Industry and Information Technology. The domain is the largest ccTLD in the world.\nThe Chinese script internationalized country codes are \".\u4e2d\u56fd\" (\"China\" in Simplified Chinese) and \".\u4e2d\u570b\" (\"China\" in Traditional Chinese). Entities connected to Hong Kong, Macau, and Taiwan typically use .hk, .mo, and .tw, respectively, despite the availability of corresponding second-level domains under .cn for those regions.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/cn.html",
+  "wikipedia": ".cn is the country code top-level domain (ccTLD) for the People's Republic of China. Introduced on 28 November 1990, the domain is administered by China Internet Network Information Center, a public institution affiliated with the Ministry of Industry and Information Technology. The domain is the largest ccTLD in the world.\nThe Chinese script internationalized country codes are \".\u4e2d\u56fd\" (\"China\" in Simplified Chinese) and \".\u4e2d\u570b\" (\"China\" in Traditional Chinese). Entities connected to Hong Kong, Macau, and Taiwan typically use .hk, .mo, and .tw, respectively, despite the availability of corresponding second-level domains under .cn for those regions.",
+  "scrapedAt": "2026-07-21T21:37:48Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".cn",
+    "cctld",
+    "center",
+    "china",
+    "cn",
+    "cnnic",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "internet",
+    "level",
+    "local business",
+    "network",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 30,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$5.01",
+      "value": 5.01
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$5.01",
+      "value": 5.01
+    },
+    "sourceUrl": "https://tld-list.com/tld/cn"
+  },
+  "summary": ".cn is a Country-code top-level domain. Managed by China Internet Network Information Center (CNNIC).",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -1,0 +1,167 @@
+{
+  "tld": ".fi",
+  "slug": "fi",
+  "title": "About .fi domains",
+  "delegationTitle": "Delegation Record for .FI",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Finland",
+  "sponsor": "Finnish Transport and Communications Agency Traficom",
+  "sponsorDetail": "Finnish Transport and Communications Agency Traficom\nPO Box 320\nTRAFICOM\nHelsinki 00059\nFinland",
+  "administrativeContact": "Domain Names",
+  "technicalContact": "Sami Salmensuo",
+  "registryUrl": "https://domain.fi",
+  "whoisServer": "whois.fi",
+  "rdapServer": "https://rdap.fi/rdap/rdap/",
+  "registrationDate": "1986-12-17",
+  "recordUpdated": "2025-09-15",
+  "nameServers": [
+    {
+      "host": "a.fi",
+      "addresses": [
+        "193.166.4.1",
+        "2001:708:10:53:0:0:0:53"
+      ]
+    },
+    {
+      "host": "b.fi",
+      "addresses": [
+        "194.146.106.26",
+        "2001:67c:1010:6:0:0:0:53"
+      ]
+    },
+    {
+      "host": "c.fi",
+      "addresses": [
+        "194.0.11.104",
+        "2001:678:e:104:0:0:0:53"
+      ]
+    },
+    {
+      "host": "d.fi",
+      "addresses": [
+        "77.72.229.253",
+        "2a01:3f0:0:302:0:0:0:53"
+      ]
+    },
+    {
+      "host": "e.fi",
+      "addresses": [
+        "194.0.1.14",
+        "2001:678:4:0:0:0:0:e"
+      ]
+    },
+    {
+      "host": "f.fi",
+      "addresses": [
+        "80.248.170.230",
+        "2a03:d640:100:1:0:0:0:6"
+      ]
+    },
+    {
+      "host": "g.fi",
+      "addresses": [
+        "204.61.216.98",
+        "2001:500:14:6098:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "i.fi",
+      "addresses": [
+        "194.0.25.30",
+        "2001:678:20:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "j.fi",
+      "addresses": [
+        "185.159.199.190",
+        "2620:10a:80ac:0:0:0:0:190"
+      ]
+    },
+    {
+      "host": "k.fi",
+      "addresses": [
+        "213.186.229.226",
+        "2001:14b8:188d:0:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".FI is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Finland. The IANA root zone lists the registry manager as Finnish Transport and Communications Agency Traficom. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.fi is the Internet country code top-level domain (ccTLD) for Finland. It is operated by TRAFICOM, the Finnish Transport and Communications Agency.\nOn 4 December 1986, an application to register a top-level domain for Finland was sent by the Finnish Unix Users Group from Tampere. The application was accepted and the administration of .fi TLD was granted to Tampere University of Technology. Later the administration was transferred first to FICIX and later to TRAFICOM.\nIn the past TRAFICOM regulated .fi domains very strictly. Domain names were only admitted to company names or companies that owned trademarks. This policy led to Finnish companies applying for domains under other top-level domains. The policy was changed on 1 September 2003. Since September 2016 anyone worldwide is permitted to register domain names under the .fi TLD.\n.fi was once best known among non-Finnish internet users as the TLD of the Penet remailer (anon.penet.fi), a privately operated server which enabled users to post e-mail and Usenet messages anonymously in the early 1990s. Another popular .fi address in the early 1990s was nic.funet.fi, one of the largest public file servers at the time which made Finland the only country outside the US that sent out more data than it received.\nSince 1 September 2005, .fi domains may contain letters from the Finnish alphabet (\u00e4, \u00e5, \u00f6), though they are not recommended to be used as the primary domain. Since 1 March 2006, private persons have also been able to apply for a domain name. Some restrictions still apply, for example, company names or trademarks can only be applied for by the companies concerned.\nIt can also be (although not popular) be used for domain hacking as well. Examples like Spotify who has a domain hack called Spoti.fi.\nFICORA began supporting Domain Name System Security (DNSSEC) on .fi domain names in late 2010.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/fi.html",
+  "wikipedia": ".fi is the Internet country code top-level domain (ccTLD) for Finland. It is operated by TRAFICOM, the Finnish Transport and Communications Agency.\nOn 4 December 1986, an application to register a top-level domain for Finland was sent by the Finnish Unix Users Group from Tampere. The application was accepted and the administration of .fi TLD was granted to Tampere University of Technology. Later the administration was transferred first to FICIX and later to TRAFICOM.\nIn the past TRAFICOM regulated .fi domains very strictly. Domain names were only admitted to company names or companies that owned trademarks. This policy led to Finnish companies applying for domains under other top-level domains. The policy was changed on 1 September 2003. Since September 2016 anyone worldwide is permitted to register domain names under the .fi TLD.\n.fi was once best known among non-Finnish internet users as the TLD of the Penet remailer (anon.penet.fi), a privately operated server which enabled users to post e-mail and Usenet messages anonymously in the early 1990s. Another popular .fi address in the early 1990s was nic.funet.fi, one of the largest public file servers at the time which made Finland the only country outside the US that sent out more data than it received.\nSince 1 September 2005, .fi domains may contain letters from the Finnish alphabet (\u00e4, \u00e5, \u00f6), though they are not recommended to be used as the primary domain. Since 1 March 2006, private persons have also been able to apply for a domain name. Some restrictions still apply, for example, company names or trademarks can only be applied for by the companies concerned.\nIt can also be (although not popular) be used for domain hacking as well. Examples like Spotify who has a domain hack called Spoti.fi.\nFICORA began supporting Domain Name System Security (DNSSEC) on .fi domain names in late 2010.",
+  "scrapedAt": "2026-07-21T21:40:05Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".fi",
+    "agency",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "fi",
+    "finland",
+    "finnish",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "top",
+    "traficom",
+    "transport"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 27,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$16.99",
+      "value": 16.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Hostinger",
+      "price": "$19.99",
+      "value": 19.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/fi"
+  },
+  "summary": ".fi is a Country-code top-level domain. Managed by Finnish Transport and Communications Agency Traficom.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,155 @@
+{
+  "tld": ".xn--mgberp4a5d4ar",
+  "slug": "xn--mgberp4a5d4ar",
+  "title": "About .xn--mgberp4a5d4ar domains",
+  "delegationTitle": "Delegation Record for .\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code SA",
+  "designation": "Country-code top-level domain designated for Saudi Arabia",
+  "sponsor": "Communications, Space and Technology Commission",
+  "sponsorDetail": "Communications, Space and Technology Commission\nP.O. Box 75606\nCST Main Building, AlRuhmaniah Area\nKing Fahad Street\nRiyadh 11588\nSaudi Arabia",
+  "administrativeContact": "Head of Saudi Network Information Center",
+  "technicalContact": "Saudi Domain Names Director",
+  "registryUrl": "http://www.nic.net.sa/",
+  "whoisServer": "whois.nic.net.sa",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "c1.dns.sa",
+      "addresses": [
+        "86.111.192.9",
+        "2001:67c:18c8:c0:0:0:0:c1"
+      ]
+    },
+    {
+      "host": "c2.dns.sa",
+      "addresses": [
+        "86.111.196.9",
+        "2001:67c:130:10:0:0:0:9"
+      ]
+    },
+    {
+      "host": "i1.dns.sa",
+      "addresses": [
+        "212.138.118.118",
+        "2001:1490:0:800:0:0:0:118"
+      ]
+    },
+    {
+      "host": "m1.dns.sa",
+      "addresses": [
+        "86.51.77.213",
+        "2a02:ce0:1:30:0:0:0:5"
+      ]
+    },
+    {
+      "host": "m2.dns.sa",
+      "addresses": [
+        "86.51.28.37",
+        "2a02:ce0:1:91:0:0:0:5"
+      ]
+    },
+    {
+      "host": "n1.dns.sa",
+      "addresses": [
+        "194.146.106.102",
+        "2001:67c:1010:26:0:0:0:53"
+      ]
+    },
+    {
+      "host": "p1.dns.sa",
+      "addresses": [
+        "204.61.216.41",
+        "2001:500:14:6041:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "s1.dns.sa",
+      "addresses": [
+        "37.107.223.170",
+        "2001:16a0:1:3002:0:0:0:2"
+      ]
+    },
+    {
+      "host": "s2.dns.sa",
+      "addresses": [
+        "37.107.255.170",
+        "2001:16a0:2:3002:0:0:0:2"
+      ]
+    },
+    {
+      "host": "sh1.dns.sa",
+      "addresses": [
+        "213.236.36.92",
+        "2a02:d70:64:68:0:0:0:2"
+      ]
+    }
+  ],
+  "about": ".XN--MGBERP4A5D4AR is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Saudi Arabia. The IANA root zone lists the registry manager as Communications, Space and Technology Commission. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--mgberp4a5d4ar.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:21Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--mgberp4a5d4ar",
+    "arabia",
+    "cctld",
+    "code",
+    "commission",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "letter",
+    "level",
+    "local business",
+    "regional brands",
+    "saudi",
+    "space",
+    "technology",
+    "top",
+    "two",
+    "xn--mgberp4a5d4ar"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--mgberp4a5d4ar is a Country-code top-level domain designated for two-letter country code SA. Managed by Communications, Space and Technology Commission.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

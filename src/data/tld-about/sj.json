@@ -1,0 +1,126 @@
+{
+  "tld": ".sj",
+  "slug": "sj",
+  "title": "About .sj domains",
+  "delegationTitle": "Delegation Record for .SJ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Svalbard and Jan Mayen",
+  "sponsor": "Norid A/S",
+  "sponsorDetail": "Norid A/S\nAbelsgate 5\nTrondheim N-7465\nNorway",
+  "administrativeContact": "Hilde Thunem",
+  "technicalContact": "Jarle Greipsland",
+  "registryUrl": "https://www.norid.no/en/omnorid/toppdomenet-sj/",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1997-08-21",
+  "recordUpdated": "2022-01-14",
+  "nameServers": [
+    {
+      "host": "nac.no",
+      "addresses": [
+        "128.39.2.22",
+        "2001:700:0:102:0:0:0:aa53"
+      ]
+    },
+    {
+      "host": "nn.uninett.no",
+      "addresses": [
+        "158.38.0.181",
+        "2001:700:0:503:0:0:aa:5302"
+      ]
+    },
+    {
+      "host": "server.nordu.net",
+      "addresses": [
+        "193.10.252.19",
+        "2001:948:4:2:0:0:0:19"
+      ]
+    },
+    {
+      "host": "x.nic.no",
+      "addresses": [
+        "128.39.8.40",
+        "2001:700:0:412f:0:0:0:40"
+      ]
+    },
+    {
+      "host": "y.nic.no",
+      "addresses": [
+        "193.75.4.22",
+        "2001:8c0:8200:1:0:0:0:2"
+      ]
+    },
+    {
+      "host": "z.nic.no",
+      "addresses": [
+        "158.38.8.133",
+        "2001:700:0:52d:158:38:8:133"
+      ]
+    }
+  ],
+  "about": ".SJ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Svalbard and Jan Mayen. The IANA root zone lists the registry manager as Norid A/S. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sj is the Internet country code top-level domain (ccTLD) reserved for the designation Svalbard and Jan Mayen. The domain name registry is Norid, but .sj is not open for registration. The issuing of the domain was based on the ISO 3166 designation of Svalbard and Jan Mayen, which consists of two separately administrated integrated territories of Norway: the Arctic archipelago Svalbard and the nearly uninhabited volcanic island Jan Mayen. .sj was designated on 21 August 1997, at the same time as Bouvet Island was allocated .bv. Both were placed under the .no registry Norid, which is also the sponsor. Norwegian policy states that .no is sufficient for those institutions connected to both Svalbard and Jan Mayen, and therefore the domain is not open to registration. It is Norwegian policy not to commercialize domain resources, so there are no plans to sell .sj. Should the domain later come into use, it will be under regulation of the Norwegian Communications Authority and follow the same policy as .no. There are two second-level domains reserved for the two areas: svalbard.no and jan-mayen.no, but other web addresses are also used.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sj.html",
+  "wikipedia": ".sj is the Internet country code top-level domain (ccTLD) reserved for the designation Svalbard and Jan Mayen. The domain name registry is Norid, but .sj is not open for registration. The issuing of the domain was based on the ISO 3166 designation of Svalbard and Jan Mayen, which consists of two separately administrated integrated territories of Norway: the Arctic archipelago Svalbard and the nearly uninhabited volcanic island Jan Mayen. .sj was designated on 21 August 1997, at the same time as Bouvet Island was allocated .bv. Both were placed under the .no registry Norid, which is also the sponsor. Norwegian policy states that .no is sufficient for those institutions connected to both Svalbard and Jan Mayen, and therefore the domain is not open to registration. It is Norwegian policy not to commercialize domain resources, so there are no plans to sell .sj. Should the domain later come into use, it will be under regulation of the Norwegian Communications Authority and follow the same policy as .no. There are two second-level domains reserved for the two areas: svalbard.no and jan-mayen.no, but other web addresses are also used.",
+  "scrapedAt": "2026-07-21T21:49:45Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sj",
+    "and",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "jan",
+    "level",
+    "local business",
+    "mayen",
+    "norid",
+    "regional brands",
+    "sj",
+    "svalbard",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".sj is a Country-code top-level domain. Managed by Norid A/S.",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "wikiEnrichedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

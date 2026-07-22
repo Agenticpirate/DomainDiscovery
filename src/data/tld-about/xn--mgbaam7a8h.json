@@ -1,0 +1,109 @@
+{
+  "tld": ".xn--mgbaam7a8h",
+  "slug": "xn--mgbaam7a8h",
+  "title": "About .xn--mgbaam7a8h domains",
+  "delegationTitle": "Delegation Record for .\u0627\u0645\u0627\u0631\u0627\u062a",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code AE",
+  "designation": "Country-code top-level domain designated for United Arab Emirates",
+  "sponsor": "Telecommunications and Digital Government Regulatory Authority (TDRA)",
+  "sponsorDetail": "Telecommunications and Digital Government Regulatory Authority (TDRA)\nP.O. Box 116688\nDubai\nUnited Arab Emirates (the)",
+  "administrativeContact": "Director Policies and Programs",
+  "technicalContact": "Senior Manager .aeDA",
+  "registryUrl": "http://aeda.ae/",
+  "whoisServer": "whois.aeda.net.ae",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns1.aedns.ae",
+      "addresses": [
+        "79.98.120.73",
+        "2a00:d30:120:0:0:0:0:73"
+      ]
+    },
+    {
+      "host": "ns2.aedns.ae",
+      "addresses": [
+        "79.98.121.73",
+        "2a00:d30:121:0:0:0:0:73"
+      ]
+    },
+    {
+      "host": "nsext-pch.aedns.ae",
+      "addresses": [
+        "199.4.137.1",
+        "2001:500:7d:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".XN--MGBAAM7A8H is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for United Arab Emirates. The IANA root zone lists the registry manager as Telecommunications and Digital Government Regulatory Authority (TDRA). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--mgbaam7a8h.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:12Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--mgbaam7a8h",
+    "arab",
+    "authority",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "digital",
+    "domain",
+    "emirates",
+    "for",
+    "geo",
+    "government",
+    "letter",
+    "level",
+    "local business",
+    "regional brands",
+    "regulatory",
+    "tdra",
+    "telecommunications",
+    "top",
+    "two",
+    "united",
+    "xn--mgbaam7a8h"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--mgbaam7a8h is a Country-code top-level domain designated for two-letter country code AE. Managed by Telecommunications and Digital Government Regulatory Authority (TDRA).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

@@ -3,8 +3,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Button } from '../ui/Button';
 import { Icons } from '../ui/Icons';
-import { Badge } from '../ui/Badge';
-import { BulkDomainSearchLanding } from './BulkDomainSearchLanding';
+import { BulkDomainSearchLanding, BULK_SAMPLE_TEXT, type BulkAddOptions } from './BulkDomainSearchLanding';
 import { PreferredRegistrarSelect, RegistrarActionMenu } from './RegistrarControls';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
@@ -17,8 +16,119 @@ interface DomainTag {
   price?: string;
   buyUrl?: string;
   purchaseInfo?: string;
+  /** 0–100 brand / opportunity score (local heuristic) */
+  score?: number;
 }
 type FilterType = 'all' | 'available' | 'taken' | 'premium';
+type SortMode = 'az' | 'score' | 'length';
+
+/** Brand / opportunity score for bulk results (no API score from instant-check). */
+function computeDomainScore(
+  domain: string,
+  status: DomainTag['status'],
+  price?: string
+): number {
+  const name = (domain.split('.')[0] || domain).toLowerCase();
+  const tld = (domain.split('.').pop() || 'com').toLowerCase();
+  let score = 42;
+
+  if (status === 'available') score += 28;
+  else if (status === 'premium') score += 14;
+  else if (status === 'taken') score -= 18;
+  else if (status === 'checking') score += 2;
+
+  if (name.length <= 3) score += 22;
+  else if (name.length <= 5) score += 16;
+  else if (name.length <= 7) score += 12;
+  else if (name.length <= 10) score += 6;
+  else if (name.length <= 14) score += 2;
+  else score -= 6;
+
+  if (/^[a-z]+$/.test(name)) score += 8;
+  if (!/\d/.test(name)) score += 4;
+  if (!/-/.test(name)) score += 5;
+  if (tld === 'com') score += 6;
+  else if (['io', 'ai', 'co', 'app'].includes(tld)) score += 3;
+
+  // Slight premium price signal: very high list prices can still score well as brand assets
+  if (status === 'premium' && price) {
+    const n = parseFloat(price.replace(/[^0-9.]/g, ''));
+    if (!Number.isNaN(n)) {
+      if (n >= 10000) score += 4;
+      else if (n >= 1000) score += 2;
+    }
+  }
+
+  return Math.max(1, Math.min(99, Math.round(score)));
+}
+
+function CrownIcon({ className = 'w-3 h-3' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 2h14v2H5v-2z" />
+    </svg>
+  );
+}
+
+function StatusIcon({
+  status,
+  isLight,
+}: {
+  status: DomainTag['status'];
+  isLight: boolean;
+}) {
+  if (status === 'premium') {
+    return (
+      <span
+        className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
+          isLight ? 'bg-amber-100 text-amber-600' : 'bg-amber-500/15 text-amber-400'
+        }`}
+        title="Premium"
+      >
+        <CrownIcon className="w-3 h-3" />
+      </span>
+    );
+  }
+  if (status === 'available') {
+    return (
+      <span
+        className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
+          isLight ? 'bg-emerald-100 text-emerald-600' : 'bg-emerald-500/15 text-emerald-400'
+        }`}
+        title="Available"
+      >
+        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+        </svg>
+      </span>
+    );
+  }
+  if (status === 'checking') {
+    return (
+      <span
+        className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
+          isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/[0.06] text-white/40'
+        }`}
+        title="Checking"
+      >
+        <span className="h-2 w-2 rounded-full border-2 border-current border-t-transparent animate-spin" />
+      </span>
+    );
+  }
+  // taken / error
+  return (
+    <span
+      className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
+        isLight ? 'bg-rose-50 text-rose-500' : 'bg-rose-500/10 text-rose-400/90'
+      }`}
+      title="Taken"
+    >
+      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </span>
+  );
+}
 
 interface BulkSearchSnapshot {
   id: string;
@@ -48,6 +158,7 @@ function serializeDomains(domains: DomainTag[]) {
       price: domain.price ?? '',
       buyUrl: domain.buyUrl ?? '',
       purchaseInfo: domain.purchaseInfo ?? '',
+      score: domain.score ?? '',
     }))
   );
 }
@@ -66,13 +177,22 @@ function sanitizeStoredDomains(value: unknown): DomainTag[] {
         ['checking', 'available', 'taken', 'premium', 'error'].includes(String(item.status))
       );
     })
-    .map((item) => ({
-      domain: item.domain,
-      status: item.status,
-      price: item.price,
-      buyUrl: item.buyUrl,
-      purchaseInfo: item.purchaseInfo,
-    }))
+    .map((item) => {
+      const status = item.status as DomainTag['status'];
+      const rawScore = (item as DomainTag).score;
+      const score =
+        typeof rawScore === 'number' && rawScore > 0
+          ? rawScore
+          : computeDomainScore(item.domain, status, item.price);
+      return {
+        domain: item.domain,
+        status,
+        price: item.price,
+        buyUrl: item.buyUrl,
+        purchaseInfo: item.purchaseInfo,
+        score,
+      };
+    })
     .slice(0, 1000);
 }
 
@@ -158,8 +278,8 @@ const ResultsView: React.FC<{
   domains: DomainTag[];
   filter: FilterType;
   setFilter: (f: FilterType) => void;
-  sortAZ: boolean;
-  setSortAZ: (v: boolean) => void;
+  sortMode: SortMode;
+  setSortMode: (v: SortMode) => void;
   tldFilter: string[];
   setTldFilter: (v: string[]) => void;
   showTlds: boolean;
@@ -177,8 +297,8 @@ const ResultsView: React.FC<{
   domains,
   filter,
   setFilter,
-  sortAZ,
-  setSortAZ,
+  sortMode,
+  setSortMode,
   tldFilter,
   setTldFilter,
   showTlds,
@@ -203,259 +323,404 @@ const ResultsView: React.FC<{
     else if (filter === 'taken') list = list.filter(d => d.status === 'taken');
     else if (filter === 'premium') list = list.filter(d => d.status === 'premium');
     if (tldFilter.length) list = list.filter(d => tldFilter.includes(d.domain.split('.').pop() || ''));
-    list.sort((a, b) => sortAZ ? a.domain.localeCompare(b.domain) : a.domain.length - b.domain.length);
+    list.sort((a, b) => {
+      if (sortMode === 'score') {
+        const sa = a.score ?? computeDomainScore(a.domain, a.status, a.price);
+        const sb = b.score ?? computeDomainScore(b.domain, b.status, b.price);
+        return sb - sa || a.domain.localeCompare(b.domain);
+      }
+      if (sortMode === 'length') {
+        return a.domain.length - b.domain.length || a.domain.localeCompare(b.domain);
+      }
+      return a.domain.localeCompare(b.domain);
+    });
     return list;
-  }, [domains, filter, tldFilter, sortAZ]);
+  }, [domains, filter, tldFilter, sortMode]);
 
   const results = filtered();
   const counts = getDomainCounts(domains);
+  const checkingPct = Math.round((progress.done / Math.max(progress.total, 1)) * 100);
+  const avgScore =
+    results.length > 0
+      ? Math.round(
+          results.reduce(
+            (sum, d) => sum + (d.score ?? computeDomainScore(d.domain, d.status, d.price)),
+            0
+          ) / results.length
+        )
+      : 0;
+
+  const chip = (active: boolean) =>
+    `inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] sm:text-[12px] font-semibold transition-colors whitespace-nowrap ${
+      active
+        ? isLight
+          ? 'bg-slate-900 text-white border-slate-900'
+          : 'bg-white text-black border-white'
+        : isLight
+          ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+          : 'bg-white/[0.04] text-white/65 border-white/10 hover:bg-white/[0.08] hover:text-white'
+    }`;
+
+  const cycleSort = () => {
+    setSortMode(sortMode === 'az' ? 'score' : sortMode === 'score' ? 'length' : 'az');
+  };
+  const sortLabel = sortMode === 'az' ? 'A–Z' : sortMode === 'score' ? 'Score' : 'Length';
 
   return (
-    <div className="flex flex-col gap-3 sm:gap-4 lg:flex-row lg:gap-6 w-full max-w-7xl mx-auto px-2 sm:px-0">
-      {/* Sidebar - desktop */}
-      <div className={`lg:w-56 lg:shrink-0 space-y-3 sm:space-y-4 ${isLight ? 'lg:text-slate-800' : 'lg:text-white'}`}>
-        <Button onClick={reset} variant="ghost" size="sm" className="justify-start gap-2 -ml-2">
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-          New bulk search
-        </Button>
-
-        {/* Mobile: horizontal filter chips */}
-        <div className="lg:hidden flex gap-1.5 overflow-x-auto pb-1 -mx-1 px-1">
-          {[
-            { k: 'all', l: 'All', c: counts.all },
-            { k: 'available', l: '✓ Available', c: counts.available },
-            { k: 'taken', l: 'Taken', c: counts.taken },
-            { k: 'premium', l: '★ Premium', c: counts.premium },
-          ].map(x => (
-            <button
-              key={x.k}
-              onClick={() => setFilter(x.k as FilterType)}
-              className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${filter === x.k ? (isLight ? 'bg-slate-900 text-white' : 'bg-white text-slate-900') : (isLight ? 'bg-white border border-slate-200 text-slate-600' : 'bg-white/10 text-white/70 border border-white/10')}`}
-            >
-              {x.l} <span className="opacity-60">{x.c}</span>
-            </button>
-          ))}
-          {/* Mobile export buttons */}
-          <button onClick={exportCSV} className={`shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${isLight ? 'bg-white border border-slate-200 text-slate-600' : 'bg-white/10 text-white/70 border border-white/10'}`}>
-            <Icons.Download />&nbsp;CSV
-          </button>
-          <button onClick={exportPDF} className={`shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${isLight ? 'bg-white border border-slate-200 text-slate-600' : 'bg-white/10 text-white/70 border border-white/10'}`}>
-            <Icons.Download />&nbsp;PDF
-          </button>
-        </div>
-
-        {/* Desktop: sidebar */}
-        <div className={`hidden lg:block rounded-2xl border p-3 sm:p-4 ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-black/35 backdrop-blur-xl'}`}>
-          <div className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Display</div>
-          <div className="space-y-0.5">
-          {[
-            { k: 'all', l: 'All domains', c: counts.all, color: 'bg-white/20' },
-            { k: 'available', l: 'Available', c: counts.available, color: 'bg-emerald-500' },
-            { k: 'taken', l: 'Taken', c: counts.taken, color: 'bg-red-500/60' },
-            { k: 'premium', l: 'Premium', c: counts.premium, color: 'bg-amber-500' },
-          ].map(x => (
-            <button
-              key={x.k}
-              onClick={() => setFilter(x.k as FilterType)}
-              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all ${filter === x.k ? (isLight ? 'bg-slate-100 text-slate-900' : 'bg-white/10 text-white') : (isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5')}`}
-            >
-              <span className="flex items-center gap-2">
-                <span className={`w-2 h-2 rounded-full ${x.color}`} />
-                {x.l}
-              </span>
-              <span className={`text-xs ${isLight ? 'text-slate-400' : 'text-white/40'}`}>{x.c}</span>
-            </button>
-          ))}
-          </div>
-        </div>
-
-        <div className={`rounded-2xl border p-3 sm:p-4 ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-black/35 backdrop-blur-xl'}`}>
-          <div className={`text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Filters</div>
-          <button onClick={() => setShowTlds(!showTlds)} className={`w-full flex items-center justify-between px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm transition-all ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}>
-            <span>TLDs</span>
-            {tldFilter.length > 0 && <Badge variant="success" size="sm">{tldFilter.length}</Badge>}
-          </button>
-          {showTlds && tlds.length > 0 && (
-            <div className={`pl-4 py-2 space-y-1 border-l ml-3 mt-2 ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
-              {tlds.map(t => (
-                <label key={t} className={`flex items-center gap-2 text-xs cursor-pointer ${isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/50 hover:text-white'}`}>
-                  <input type="checkbox" checked={tldFilter.includes(t)} onChange={e => setTldFilter(e.target.checked ? [...tldFilter, t] : tldFilter.filter(x => x !== t))} className="w-3 h-3 rounded border-white/20 bg-transparent text-emerald-500 focus:ring-0" />
-                  .{t}
-                </label>
-              ))}
-            </div>
-          )}
-          <button onClick={() => setSortAZ(!sortAZ)} className={`w-full flex items-center gap-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm transition-all ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/5'}`}>
-            Sort: {sortAZ ? 'A-Z' : 'Length'}
-          </button>
-        </div>
-
-        <div className={`hidden lg:block rounded-2xl border p-4 ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-black/35 backdrop-blur-xl'}`}>
-          <div className={`text-xs font-semibold uppercase tracking-wider mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Actions</div>
-          <p className={`text-xs mb-3 italic ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Export includes available, taken, and premium domains.</p>
-          <div className="space-y-2">
-            <Button onClick={exportCSV} variant="secondary" size="sm" className="w-full justify-start gap-2">
-              <Icons.Download />
-              Export CSV
-            </Button>
-            <Button onClick={exportPDF} variant="secondary" size="sm" className="w-full justify-start gap-2">
-              <Icons.Download />
-              Export PDF
-            </Button>
-          </div>
-          {recentSearches.length > 0 && (
-            <div className="mt-5">
-              <div className={`text-xs font-semibold uppercase tracking-wider mb-3 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Recent searches</div>
-              <div className="space-y-2">
-                {recentSearches.slice(0, 4).map((snapshot) => {
-                  const snapshotCounts = getDomainCounts(snapshot.domains);
-                  return (
-                    <div
-                      key={snapshot.id}
-                      className={`rounded-lg border p-2.5 ${isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-white/[0.02]'}`}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => onLoadSearch(snapshot)}
-                        className="w-full text-left"
-                      >
-                        <div className={`text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white/90'}`}>
-                          {snapshot.domains.length} domains
-                        </div>
-                        <div className={`mt-1 text-xs ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-                          {snapshotCounts.available} available • {snapshotCounts.taken} taken • {snapshotCounts.premium} premium
-                        </div>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => onDeleteSearch(snapshot.id)}
-                        className={`mt-2 text-xs ${isLight ? 'text-slate-400 hover:text-red-500' : 'text-white/35 hover:text-red-400'}`}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  );
-                })}
+    <div className="w-full max-w-7xl mx-auto px-0 sm:px-0 pb-6 sm:pb-10 animate-fade-in">
+      {/* Compact premium toolbar — full width */}
+      <div
+        className={`rounded-2xl border mb-2.5 sm:mb-3 ${
+          isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
+        }`}
+      >
+        <div className="flex flex-col gap-2.5 sm:gap-3 p-3 sm:p-3.5">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-2 min-w-0">
+              {/* Highlighted New search */}
+              <button
+                type="button"
+                onClick={reset}
+                className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-2 text-[12px] sm:text-[13px] font-bold transition-all shadow-md ${
+                  isLight
+                    ? 'bg-slate-900 text-white border-slate-900 hover:bg-slate-800 shadow-slate-900/20 ring-2 ring-slate-900/10'
+                    : 'bg-white text-black border-white hover:bg-white/90 shadow-black/40 ring-2 ring-white/15'
+                }`}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                New search
+              </button>
+              <div className={`h-4 w-px hidden sm:block ${isLight ? 'bg-slate-200' : 'bg-white/10'}`} />
+              <div className="flex flex-wrap items-center gap-1.5">
+                {[
+                  { k: 'all' as FilterType, l: 'All', c: counts.all, icon: null as React.ReactNode },
+                  {
+                    k: 'available' as FilterType,
+                    l: 'Available',
+                    c: counts.available,
+                    icon: (
+                      <svg className="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    k: 'premium' as FilterType,
+                    l: 'Premium',
+                    c: counts.premium,
+                    icon: <CrownIcon className="w-3 h-3 text-amber-400" />,
+                  },
+                  {
+                    k: 'taken' as FilterType,
+                    l: 'Taken',
+                    c: counts.taken,
+                    icon: (
+                      <svg className="w-3 h-3 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    ),
+                  },
+                ].map((x) => (
+                  <button key={x.k} type="button" onClick={() => setFilter(x.k)} className={chip(filter === x.k)}>
+                    {x.icon}
+                    {x.l}
+                    <span className={`tabular-nums ${filter === x.k ? 'opacity-80' : 'opacity-50'}`}>{x.c}</span>
+                  </button>
+                ))}
               </div>
             </div>
+
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <PreferredRegistrarSelect
+                selectedRegistrar={selectedRegistrar}
+                onSelectRegistrar={setSelectedRegistrar}
+                label="Registrar"
+                className="justify-start"
+              />
+              <button type="button" onClick={cycleSort} className={chip(sortMode !== 'az')} title="Cycle sort: A–Z → Score → Length">
+                Sort: {sortLabel}
+              </button>
+              <button type="button" onClick={() => setShowTlds(!showTlds)} className={chip(showTlds || tldFilter.length > 0)}>
+                TLD{tldFilter.length > 0 ? ` (${tldFilter.length})` : ''}
+              </button>
+              <button type="button" onClick={exportCSV} className={chip(false)}>
+                <Icons.Download />
+                CSV
+              </button>
+              <button type="button" onClick={exportPDF} className={chip(false)}>
+                <Icons.Download />
+                PDF
+              </button>
+            </div>
+          </div>
+
+          {showTlds && tlds.length > 0 && (
+            <div
+              className={`flex flex-wrap gap-1.5 pt-2 border-t animate-fade-in ${
+                isLight ? 'border-slate-100' : 'border-white/[0.06]'
+              }`}
+            >
+              {tlds.map((t) => {
+                const on = tldFilter.includes(t);
+                return (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() =>
+                      setTldFilter(on ? tldFilter.filter((x) => x !== t) : [...tldFilter, t])
+                    }
+                    className={chip(on)}
+                  >
+                    .{t}
+                  </button>
+                );
+              })}
+              {tldFilter.length > 0 && (
+                <button type="button" onClick={() => setTldFilter([])} className={chip(false)}>
+                  Clear TLDs
+                </button>
+              )}
+            </div>
           )}
-          <Button onClick={reset} variant="ghost" size="sm" className="w-full justify-start gap-2 text-red-400 hover:text-red-300 hover:bg-red-500/10">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
-            Reset
-          </Button>
+
+          <div
+            className={`flex flex-wrap items-center justify-between gap-2 pt-2 border-t ${
+              isLight ? 'border-slate-100' : 'border-white/[0.06]'
+            }`}
+          >
+            <p className={`text-[11px] sm:text-[12px] font-medium ${isLight ? 'text-slate-600' : 'text-white/55'}`}>
+              Showing{' '}
+              <span className={`tabular-nums font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
+                {results.length.toLocaleString()}
+              </span>{' '}
+              of{' '}
+              <span className="tabular-nums">{counts.all.toLocaleString()}</span> domains
+              {results.length > 0 && (
+                <span className={`ml-1.5 ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
+                  · avg score{' '}
+                  <span className={`tabular-nums font-bold ${isLight ? 'text-slate-700' : 'text-white/70'}`}>
+                    {avgScore}
+                  </span>
+                </span>
+              )}
+              <span className={`hidden sm:inline ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
+                {' '}
+                · scroll for full list (max 1k)
+              </span>
+            </p>
+            {counts.checking > 0 ? (
+              <div className="flex items-center gap-2 min-w-[140px] sm:min-w-[200px]">
+                <div className={`h-1.5 flex-1 rounded-full overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
+                  <div
+                    className="h-full rounded-full transition-all duration-300"
+                    style={{
+                      width: `${checkingPct}%`,
+                      background: isLight
+                        ? 'linear-gradient(90deg,#0f172a,#334155)'
+                        : 'linear-gradient(90deg,rgba(255,255,255,0.45),#fff)',
+                    }}
+                  />
+                </div>
+                <span className={`text-[10px] font-mono tabular-nums ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
+                  {progress.done}/{progress.total}
+                </span>
+              </div>
+            ) : (
+              <span className={`text-[10px] sm:text-[11px] font-semibold ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
+                Check complete
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Results Grid */}
-      <div className="flex-1 min-w-0">
-        <div className={`rounded-2xl border p-3 sm:p-4 ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-black/35 backdrop-blur-xl'}`}>
-        <div className="mb-3 sm:mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center justify-between gap-3">
-            <span className={`text-xs sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{results.length} domains</span>
-            <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm">
-              <span className="text-emerald-400">{counts.available} available</span>
-              <span className="text-amber-400">{counts.premium} premium</span>
-              <span className={isLight ? 'text-slate-400' : 'text-white/40'}>{counts.taken} taken</span>
-              {counts.checking > 0 && <span className={isLight ? 'text-slate-400' : 'text-white/40'}>{counts.checking} checking</span>}
-            </div>
-          </div>
-          <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center">
-            <PreferredRegistrarSelect
-              selectedRegistrar={selectedRegistrar}
-              onSelectRegistrar={setSelectedRegistrar}
-              label="Registrar"
-              className="justify-between sm:justify-start"
-            />
-            <div className="flex gap-2 sm:hidden">
-              <Button onClick={exportCSV} variant="secondary" size="sm" className="flex-1 gap-2">
-              <Icons.Download />
-              CSV
-              </Button>
-              <Button onClick={exportPDF} variant="secondary" size="sm" className="flex-1 gap-2">
-              <Icons.Download />
-              PDF
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {counts.checking > 0 && (
-          <div className={`h-1 rounded-full mb-4 overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
-            <div className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 transition-all duration-300" style={{ width: `${(progress.done / Math.max(progress.total, 1)) * 100}%` }} />
-          </div>
-        )}
-
-        <div 
-          className={`grid grid-cols-1 xl:grid-cols-2 gap-2 sm:gap-3 max-h-[calc(100vh-180px)] overflow-y-auto pr-0 sm:pr-1 select-none rounded-2xl ${isLight ? '' : '[background-image:none]'}`}
+      {/* Dense 4-col results — scroll full list (max 1k) */}
+      <div
+        className={`rounded-2xl border overflow-hidden ${
+          isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
+        }`}
+      >
+        <div
+          className="max-h-[min(72vh,calc(100vh-11.5rem))] sm:max-h-[min(78vh,calc(100vh-12rem))] overflow-y-auto overscroll-contain select-none"
           onContextMenu={(e) => e.preventDefault()}
           onCopy={(e) => e.preventDefault()}
         >
-          {results.map(d => (
-            (() => {
-              const domainHref = d.status === 'available'
-                ? getRegistrarUrl(d.domain, selectedRegistrar)
-                : d.status === 'premium' && d.buyUrl
-                  ? d.buyUrl
-                : `https://who.is/whois/${encodeURIComponent(d.domain)}`;
-              const domainTitle = d.status === 'available'
-                ? `Register on ${selectedRegistrar}`
-                : d.status === 'premium' && d.buyUrl
-                  ? (d.purchaseInfo || 'View premium listing')
-                  : 'View WHOIS';
+          {results.length === 0 ? (
+            <div className={`text-center py-16 px-4 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
+              <p className="text-sm font-semibold mb-1">No domains match this filter</p>
+              <p className="text-[12px]">Switch to All or clear TLD filters</p>
+            </div>
+          ) : (
+            <div
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px"
+              style={{ backgroundColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)' }}
+            >
+              {results.map((d) => {
+                const domainHref =
+                  d.status === 'available' || d.status === 'premium'
+                    ? getRegistrarUrl(d.domain, selectedRegistrar)
+                    : d.buyUrl
+                      ? d.buyUrl
+                      : `https://who.is/whois/${encodeURIComponent(d.domain)}`;
+                const domainTitle =
+                  d.status === 'available' || d.status === 'premium'
+                    ? `Search ${d.domain} on ${selectedRegistrar}`
+                    : d.buyUrl
+                      ? d.purchaseInfo || 'View listing'
+                      : 'View WHOIS';
+                const canAct = d.status === 'available' || d.status === 'premium';
+                const score = d.score ?? computeDomainScore(d.domain, d.status, d.price);
+                const scoreTone =
+                  score >= 75
+                    ? isLight
+                      ? 'text-emerald-700 bg-emerald-50 border-emerald-200'
+                      : 'text-emerald-300 bg-emerald-500/10 border-emerald-500/25'
+                    : score >= 55
+                      ? isLight
+                        ? 'text-slate-700 bg-slate-100 border-slate-200'
+                        : 'text-white/75 bg-white/[0.06] border-white/12'
+                      : isLight
+                        ? 'text-slate-500 bg-slate-50 border-slate-200'
+                        : 'text-white/45 bg-white/[0.03] border-white/[0.08]';
 
-              return (
-                <div
-                  key={d.domain}
-                  className={`relative flex items-center justify-between gap-3 p-3 sm:p-3.5 rounded-xl transition-all group ${
-                    isLight
-                      ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-sm'
-                      : 'bg-[#101113]/95 border border-white/8 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] hover:border-white/15'
-                  }`}
-                >
-                  {!isLight && (
-                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(255,255,255,0.03),transparent_55%)]" />
-                  )}
-                  <div className="relative flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                    <span className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full shrink-0 ${
-                      d.status === 'checking' ? 'bg-white/40 animate-pulse' :
-                      d.status === 'available' ? 'bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.8)] animate-pulse' :
-                      d.status === 'premium' ? 'bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.8)] animate-pulse' :
-                      'bg-red-400 shadow-[0_0_10px_rgba(248,113,113,0.6)]'
-                    }`} />
+                return (
+                  <div
+                    key={d.domain}
+                    className={`group flex items-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-2 min-w-0 transition-colors ${
+                      isLight
+                        ? 'bg-white hover:bg-slate-50'
+                        : 'bg-[#0c0c0e] hover:bg-[#121214]'
+                    } ${
+                      d.status === 'premium'
+                        ? isLight
+                          ? 'ring-1 ring-inset ring-amber-200/80'
+                          : 'ring-1 ring-inset ring-amber-500/15'
+                        : ''
+                    }`}
+                  >
+                    <StatusIcon status={d.status} isLight={isLight} />
                     <a
                       href={domainHref}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`min-w-0 font-mono text-xs sm:text-sm truncate transition-colors cursor-pointer ${isLight ? 'text-slate-800 hover:text-slate-950' : 'text-white/92 hover:text-white'}`}
                       title={domainTitle}
+                      className={`min-w-0 flex-1 font-mono text-[11px] sm:text-[12px] truncate transition-colors ${
+                        isLight
+                          ? 'text-slate-800 hover:text-slate-950'
+                          : 'text-white/88 hover:text-white'
+                      }`}
                     >
                       {d.domain}
                     </a>
-                    {d.status === 'premium' && <Badge variant="warning" size="sm">Premium</Badge>}
-                    {d.price && <span className={`shrink-0 text-[11px] sm:text-xs font-medium ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{d.price}</span>}
+                    <span
+                      className={`shrink-0 inline-flex items-center rounded border px-1 py-0.5 text-[9px] font-bold tabular-nums leading-none ${scoreTone}`}
+                      title={`Brand score ${score}/100 — based on length, cleanliness, TLD, and availability`}
+                    >
+                      {score}
+                    </span>
+                    {d.price && d.status !== 'taken' && d.status !== 'checking' && (
+                      <span
+                        className={`shrink-0 text-[9px] sm:text-[10px] font-medium tabular-nums max-w-[4.5rem] truncate hidden md:inline ${
+                          isLight ? 'text-slate-400' : 'text-white/35'
+                        }`}
+                        title={d.price}
+                      >
+                        {d.price}
+                      </span>
+                    )}
+                    <div className="relative shrink-0 opacity-90 group-hover:opacity-100">
+                      <RegistrarActionMenu
+                        domain={d.domain}
+                        selectedRegistrar={selectedRegistrar}
+                        onSelectRegistrar={setSelectedRegistrar}
+                        canRegister={canAct}
+                        primaryLabel={d.status === 'premium' ? 'Go' : d.status === 'available' ? 'Go' : 'Info'}
+                        premiumUrl={d.status === 'premium' ? d.buyUrl : undefined}
+                        premiumLabel={d.purchaseInfo}
+                        primaryButtonClassName={`text-[10px] px-1.5 py-0.5 rounded-md font-bold transition-colors ${
+                          isLight
+                            ? 'bg-slate-900 text-white hover:bg-slate-800'
+                            : 'bg-white text-black hover:bg-white/90'
+                        }`}
+                        chevronButtonClassName={`rounded-md p-1 transition-colors ${
+                          isLight
+                            ? 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
+                            : 'text-white/35 hover:text-white/70 hover:bg-white/[0.06]'
+                        }`}
+                        fallbackButtonClassName={`text-[10px] px-1.5 py-0.5 rounded-md font-semibold transition-colors ${
+                          isLight
+                            ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                            : 'bg-white/[0.06] text-white/60 hover:bg-white/10'
+                        }`}
+                      />
+                    </div>
                   </div>
-                  <div className="relative shrink-0">
-                    <RegistrarActionMenu
-                      domain={d.domain}
-                      selectedRegistrar={selectedRegistrar}
-                      onSelectRegistrar={setSelectedRegistrar}
-                      canRegister={d.status === 'available'}
-                      primaryLabel="Register"
-                      premiumUrl={d.status === 'premium' ? d.buyUrl : undefined}
-                      premiumLabel={d.purchaseInfo}
-                      primaryButtonClassName="text-[11px] px-2 py-0.5 rounded bg-white text-slate-950 font-semibold transition-colors hover:bg-slate-100"
-                      chevronButtonClassName={`rounded p-2 ${isLight ? 'text-slate-400 hover:text-slate-600 hover:bg-slate-100' : 'text-neutral-600 hover:text-neutral-400 hover:bg-neutral-800'}`}
-                      fallbackButtonClassName={`text-[11px] px-2 py-0.5 rounded font-semibold transition-colors ${isLight ? 'bg-slate-100 text-slate-700 hover:bg-slate-200' : 'bg-white/8 text-white/80 hover:bg-white/12'}`}
-                    />
-                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {results.length > 0 && (
+          <div
+            className={`flex flex-wrap items-center justify-between gap-2 px-3 py-2 border-t text-[10px] sm:text-[11px] ${
+              isLight ? 'border-slate-100 text-slate-400 bg-slate-50/80' : 'border-white/[0.06] text-white/30 bg-black/20'
+            }`}
+          >
+            <span>
+              {results.length.toLocaleString()} row{results.length === 1 ? '' : 's'} in view
+              {filter !== 'all' ? ` · filter: ${filter}` : ''}
+            </span>
+            <span className="font-medium">Scroll for full list · max 1,000 domains</span>
+          </div>
+        )}
+      </div>
+
+      {recentSearches.length > 0 && (
+        <div className="mt-3 sm:mt-4">
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <p
+              className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Recent bulk searches
+            </p>
+          </div>
+          <div className="flex gap-2 overflow-x-auto pb-1">
+            {recentSearches.slice(0, 6).map((snapshot) => {
+              const sc = getDomainCounts(snapshot.domains);
+              return (
+                <div
+                  key={snapshot.id}
+                  className={`shrink-0 rounded-xl border px-3 py-2 min-w-[150px] ${
+                    isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-[#0c0c0e]'
+                  }`}
+                >
+                  <button type="button" onClick={() => onLoadSearch(snapshot)} className="w-full text-left">
+                    <div className={`text-[12px] font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
+                      {snapshot.domains.length} domains
+                    </div>
+                    <div className="text-[10px] mt-0.5" style={{ color: 'var(--text-muted)' }}>
+                      {sc.available} free · {sc.premium} prem · {sc.taken} taken
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onDeleteSearch(snapshot.id)}
+                    className={`mt-1.5 text-[10px] font-medium ${
+                      isLight ? 'text-slate-400 hover:text-red-500' : 'text-white/30 hover:text-red-400'
+                    }`}
+                  >
+                    Remove
+                  </button>
                 </div>
               );
-            })()
-          ))}
+            })}
+          </div>
         </div>
-        {results.length === 0 && <div className={`text-center py-12 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>No domains match your filter</div>}
-        </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -465,7 +730,7 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
   const [domains, setDomains] = useState<DomainTag[]>([]);
   const [recentSearches, setRecentSearches] = useState<BulkSearchSnapshot[]>([]);
   const [filter, setFilter] = useState<FilterType>('all');
-  const [sortAZ, setSortAZ] = useState(true);
+  const [sortMode, setSortMode] = useState<SortMode>('score');
   const [tldFilter, setTldFilter] = useState<string[]>([]);
   const [showTlds, setShowTlds] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -475,8 +740,13 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
   const checkRef = useRef(false);
   const queuedCheckRef = useRef<string[]>([]);
   const lastPersistedSnapshotRef = useRef('');
+  const domainsRef = useRef<DomainTag[]>([]);
   const { showToast } = useToast();
   const { selectedRegistrar, setSelectedRegistrar } = usePreferredRegistrar();
+
+  useEffect(() => {
+    domainsRef.current = domains;
+  }, [domains]);
 
   // Prevent context menu on domain names
   useEffect(() => {
@@ -550,6 +820,7 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
         price: domain.price,
         buyUrl: domain.buyUrl,
         purchaseInfo: domain.purchaseInfo,
+        score: domain.score ?? computeDomainScore(domain.domain, domain.status, domain.price),
       })),
     };
 
@@ -561,53 +832,152 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
     setRecentSearches(nextHistory);
   }, [domains, checking]);
 
-  const parse = (t: string) => {
+  const parse = (t: string, options?: BulkAddOptions) => {
+    const defaultTld = (options?.defaultTld || 'com').replace(/^\./, '').toLowerCase();
+    const autoAppend = options?.autoAppendTld !== false;
+    const stripWww = options?.stripWww !== false;
+    const max = Math.min(Math.max(options?.maxDomains || 1000, 1), 1000);
     const out: string[] = [];
-    for (let l of t.split(/[\n,;\s]+/).map(x => x.trim().toLowerCase())) {
+
+    // Prefer line / comma / semicolon / tab splits (spaces only as secondary separators)
+    const tokens = t
+      .split(/[\n\r,;\t]+/)
+      .flatMap((chunk) => chunk.split(/\s+/))
+      .map((x) => x.trim().toLowerCase())
+      .filter(Boolean);
+
+    for (let l of tokens) {
+      // Strip quotes from CSV/JSON-ish exports
+      l = l.replace(/^["']+|["']+$/g, '');
+      if (!l || l === 'domain' || l === 'domains' || l === 'name') continue;
+
+      if (stripWww) {
+        l = l.replace(/^https?:\/\//, '').replace(/^www\./, '').split('/')[0].split('?')[0];
+      } else {
+        l = l.replace(/^https?:\/\//, '').split('/')[0].split('?')[0];
+      }
+
       if (!l) continue;
-      l = l.replace(/^https?:\/\//, '').split('/')[0];
-      if (!/\.[a-z]{2,}$/.test(l)) l += '.com';
-      if (/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z]{2,})+$/.test(l) && !out.includes(l)) out.push(l);
+      if (autoAppend && !/\.[a-z]{2,}$/i.test(l)) {
+        l = `${l}.${defaultTld}`;
+      }
+      if (/^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z]{2,})+$/i.test(l) && !out.includes(l)) {
+        out.push(l);
+      }
+      if (out.length >= max) break;
     }
-    return out.slice(0, 1000);
+    return out.slice(0, max);
   };
 
-  const add = useCallback((t: string) => {
-    const names = parse(t), existing = domains.map(d => d.domain);
-    const newOnes: DomainTag[] = names.filter(n => !existing.includes(n)).map(d => ({ domain: d, status: 'checking' }));
-    if (newOnes.length) { setDomains([...domains, ...newOnes].slice(0, 1000)); checkBg(newOnes.map(d => d.domain)); }
-  }, [domains]);
-
-  const checkBg = async (list: string[]) => {
+  const checkBg = useCallback(async (list: string[]) => {
+    if (!list.length) return;
     if (checkRef.current) {
       queuedCheckRef.current = Array.from(new Set([...queuedCheckRef.current, ...list]));
       return;
     }
-    checkRef.current = true; setChecking(true); setProgress({ done: 0, total: list.length });
+    checkRef.current = true;
+    setChecking(true);
+    setProgress({ done: 0, total: list.length });
     let done = 0;
     await checkDomainsInstant(list, (d, a, p, price, buyUrl, purchaseInfo) => {
-      done++; setProgress(x => ({ ...x, done }));
-      setDomains(prev => prev.map(x => x.domain === d ? {
-        ...x,
-        status: a ? 'available' : p ? 'premium' : 'taken',
-        price: a ? (price || getPrice(d.split('.').pop() || 'com')) : p ? price : undefined,
-        buyUrl: p ? buyUrl : undefined,
-        purchaseInfo: p ? purchaseInfo : undefined,
-      } : x));
+      done++;
+      setProgress((x) => ({ ...x, done }));
+      const key = d.toLowerCase();
+      setDomains((prev) =>
+        prev.map((x) => {
+          if (x.domain.toLowerCase() !== key) return x;
+          const status: DomainTag['status'] = a ? 'available' : p ? 'premium' : 'taken';
+          const nextPrice = a ? price || getPrice(x.domain.split('.').pop() || 'com') : p ? price : undefined;
+          return {
+            ...x,
+            status,
+            price: nextPrice,
+            buyUrl: p ? buyUrl : undefined,
+            purchaseInfo: p ? purchaseInfo : undefined,
+            score: computeDomainScore(x.domain, status, nextPrice),
+          };
+        })
+      );
     });
-    checkRef.current = false; setChecking(false);
+    checkRef.current = false;
+    setChecking(false);
 
     if (queuedCheckRef.current.length > 0) {
       const nextBatch = [...queuedCheckRef.current];
       queuedCheckRef.current = [];
       await checkBg(nextBatch);
     }
+  }, []);
+
+  const add = useCallback(
+    (t: string, options?: BulkAddOptions) => {
+      const max = Math.min(Math.max(options?.maxDomains || 1000, 1), 1000);
+      const names = parse(t, options);
+      if (!names.length) {
+        showToast('No valid domains found in that input', 'error');
+        return 0;
+      }
+
+      const prev = domainsRef.current;
+      const existing = new Set(prev.map((d) => d.domain.toLowerCase()));
+      const room = Math.max(0, max - prev.length);
+      const newOnes: DomainTag[] = names
+        .filter((n) => !existing.has(n.toLowerCase()))
+        .slice(0, room)
+        .map((d) => ({
+          domain: d,
+          status: 'checking' as const,
+          score: computeDomainScore(d, 'checking'),
+        }));
+
+      if (!newOnes.length) {
+        showToast('Those domains are already in your list', 'info');
+        return 0;
+      }
+
+      const next = [...prev, ...newOnes].slice(0, max);
+      domainsRef.current = next;
+      setDomains(next);
+      void checkBg(newOnes.map((d) => d.domain));
+      showToast(`Added ${newOnes.length} domain${newOnes.length === 1 ? '' : 's'}`, 'success');
+      return newOnes.length;
+    },
+    [checkBg, showToast]
+  );
+
+  const loadSample = useCallback(
+    (options?: BulkAddOptions) => {
+      const added = add(BULK_SAMPLE_TEXT, options);
+      if (added > 0) {
+        // Keep user on the input panel with tags visible (not results until they click Search all)
+        setShowResults(false);
+      }
+    },
+    [add]
+  );
+
+  const reset = () => {
+    setDomains([]);
+    setShowResults(false);
+    setInput('');
+    setFilter('all');
+    setSortMode('score');
+    setTldFilter([]);
+    setShowTlds(false);
+    setProgress({ done: 0, total: 0 });
+    checkRef.current = false;
+    setChecking(false);
+    domainsRef.current = [];
   };
 
-  const reset = () => { setDomains([]); setShowResults(false); setInput(''); setFilter('all'); setSortAZ(true); setTldFilter([]); setShowTlds(false); setProgress({ done: 0, total: 0 }); checkRef.current = false; setChecking(false); };
-
   const exportCSV = () => {
-    const csv = ['Domain,Status,Price,TLD', ...domains.map((d) => `${d.domain},${d.status},${d.price || ''},.${d.domain.split('.').pop() || ''}`)].join('\n');
+    const csv = [
+      'Domain,Status,Score,Price,TLD',
+      ...domains.map((d) => {
+        const score = d.score ?? computeDomainScore(d.domain, d.status, d.price);
+        return `${d.domain},${d.status},${score},${d.price || ''},.${d.domain.split('.').pop() || ''}`;
+      }),
+    ].join('\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
     a.download = `bulk-domains-${new Date().toISOString().split('T')[0]}.csv`;
@@ -670,8 +1040,12 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
       }
 
       section.items.forEach((domain, index) => {
+        const score = domain.score ?? computeDomainScore(domain.domain, domain.status, domain.price);
         const priceLabel = domain.price ? `  ${domain.price}` : domain.status === 'premium' ? '  Premium pricing' : '';
-        writeLine(`${index + 1}. ${domain.domain}  ${domain.status.toUpperCase()}${priceLabel}`, { fontSize: 10 });
+        writeLine(
+          `${index + 1}. ${domain.domain}  ${domain.status.toUpperCase()}  score:${score}${priceLabel}`,
+          { fontSize: 10 }
+        );
       });
 
       y += 6;
@@ -684,14 +1058,19 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
   const counts = getDomainCounts(domains);
 
   const loadPreviousSearch = useCallback((snapshot: BulkSearchSnapshot) => {
-    setDomains(snapshot.domains);
+    const withScores = snapshot.domains.map((d) => ({
+      ...d,
+      score: d.score ?? computeDomainScore(d.domain, d.status, d.price),
+    }));
+    domainsRef.current = withScores;
+    setDomains(withScores);
     setShowResults(true);
     setFilter('all');
-    setSortAZ(true);
+    setSortMode('score');
     setTldFilter([]);
     setShowTlds(false);
-    setProgress({ done: snapshot.domains.length, total: snapshot.domains.length });
-    showToast(`Loaded ${snapshot.domains.length} domains from a recent bulk search`, 'success');
+    setProgress({ done: withScores.length, total: withScores.length });
+    showToast(`Loaded ${withScores.length} domains from a recent bulk search`, 'success');
   }, [showToast]);
 
   const deletePreviousSearch = useCallback((snapshotId: string) => {
@@ -708,8 +1087,8 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
         domains={domains}
         filter={filter}
         setFilter={setFilter}
-        sortAZ={sortAZ}
-        setSortAZ={setSortAZ}
+        sortMode={sortMode}
+        setSortMode={setSortMode}
         tldFilter={tldFilter}
         setTldFilter={setTldFilter}
         showTlds={showTlds}
@@ -727,10 +1106,47 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
     );
   }
 
-  // File upload handler
-  const handleFileUpload = (file: File) => {
+  // File upload handler — CSV / TXT / TSV / JSON
+  const handleFileUpload = (file: File, options?: BulkAddOptions) => {
     const reader = new FileReader();
-    reader.onload = (ev) => add(ev.target?.result as string);
+    reader.onload = (ev) => {
+      const raw = String(ev.target?.result || '');
+      const name = file.name.toLowerCase();
+      let text = raw;
+
+      if (name.endsWith('.json') || raw.trim().startsWith('[') || raw.trim().startsWith('{')) {
+        try {
+          const parsed = JSON.parse(raw) as unknown;
+          if (Array.isArray(parsed)) {
+            text = parsed
+              .map((item) => {
+                if (typeof item === 'string') return item;
+                if (item && typeof item === 'object') {
+                  const row = item as Record<string, unknown>;
+                  return String(row.domain || row.name || row.host || '');
+                }
+                return '';
+              })
+              .filter(Boolean)
+              .join('\n');
+          } else if (parsed && typeof parsed === 'object') {
+            const obj = parsed as Record<string, unknown>;
+            const list = (obj.domains || obj.data || obj.results) as unknown;
+            if (Array.isArray(list)) {
+              text = list
+                .map((item) => (typeof item === 'string' ? item : String((item as { domain?: string })?.domain || '')))
+                .filter(Boolean)
+                .join('\n');
+            }
+          }
+        } catch {
+          // fall through to raw text parse
+        }
+      }
+
+      add(text, options);
+    };
+    reader.onerror = () => showToast('Could not read that file', 'error');
     reader.readAsText(file);
   };
 
@@ -743,6 +1159,7 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
       domains={domains}
       setDomains={setDomains}
       onAdd={add}
+      onLoadSample={loadSample}
       onCheck={() => domains.length > 0 && setShowResults(true)}
       onReset={reset}
       onFileUpload={handleFileUpload}

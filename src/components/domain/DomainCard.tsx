@@ -20,7 +20,7 @@ export const DomainCard: React.FC<DomainCardProps> = ({ result }) => {
   const isLight = theme === 'light';
 
   return (
-    <div className={`relative glass-card p-6 ${isLight ? 'border-slate-200' : 'border-white/10'} hover:${isLight ? 'border-slate-300' : 'border-white/20'} transition-all duration-500 group overflow-hidden`}>
+    <div className={`relative glass-card shine-border p-6 ${isLight ? 'border-slate-200' : 'border-white/10'} transition-all duration-500 group overflow-hidden`}>
       {/* Subtle white glow on hover */}
       <div className="absolute inset-0 bg-white/0 group-hover:bg-white/[0.02] transition-all duration-500" />
       

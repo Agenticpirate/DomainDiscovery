@@ -1,0 +1,138 @@
+{
+  "tld": ".th",
+  "slug": "th",
+  "title": "About .th domains",
+  "delegationTitle": "Delegation Record for .TH",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Thailand",
+  "sponsor": "Thai Network Information Center Foundation",
+  "sponsorDetail": "Thai Network Information Center Foundation\n159 Thanon Phichai\nKhwaeng Thanon Nakhon Chaisi, Khet Dusit\nBangkok 10300\nThailand",
+  "administrativeContact": "Chaya Limchitti",
+  "technicalContact": "Pensri Arunwatanamongkol",
+  "registryUrl": "http://www.thnic.co.th",
+  "whoisServer": "whois.thnic.co.th",
+  "rdapServer": "https://rdap.thains.co.th",
+  "registrationDate": "1988-09-07",
+  "recordUpdated": "2025-01-23",
+  "nameServers": [
+    {
+      "host": "a.thains.co.th",
+      "addresses": [
+        "122.155.23.64",
+        "2001:c38:2000:183:0:0:0:30"
+      ]
+    },
+    {
+      "host": "b.thains.co.th",
+      "addresses": [
+        "203.159.64.64",
+        "2405:3340:e011:3000:0:0:0:30"
+      ]
+    },
+    {
+      "host": "c.thains.co.th",
+      "addresses": [
+        "194.0.1.28",
+        "2001:678:4:0:0:0:0:1c"
+      ]
+    },
+    {
+      "host": "nn1.thains.co.th",
+      "addresses": [
+        "194.146.106.154",
+        "2001:67c:1010:39:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns.thnic.net",
+      "addresses": [
+        "202.28.0.1"
+      ]
+    },
+    {
+      "host": "p.thains.co.th",
+      "addresses": [
+        "204.61.216.126",
+        "2001:500:14:6126:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".TH is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Thailand. The IANA root zone lists the registry manager as Thai Network Information Center Foundation. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.th is the Internet country code top-level domain (ccTLD) for Thailand.\nIt is administered by T.H.NIC Co., Ltd. (THNIC), the corporate entity of Thai Network Information Center Foundation.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/th.html",
+  "wikipedia": ".th is the Internet country code top-level domain (ccTLD) for Thailand.\nIt is administered by T.H.NIC Co., Ltd. (THNIC), the corporate entity of Thai Network Information Center Foundation.",
+  "scrapedAt": "2026-07-21T21:50:58Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".th",
+    "cctld",
+    "center",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "foundation",
+    "geo",
+    "information",
+    "level",
+    "local business",
+    "network",
+    "regional brands",
+    "th",
+    "thai",
+    "thailand",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 5,
+    "cheapestRegistration": {
+      "registrar": "101domain",
+      "price": "$4462.99",
+      "value": 4462.99
+    },
+    "cheapestRenewal": {
+      "registrar": "101domain",
+      "price": "$4462.99",
+      "value": 4462.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/th"
+  },
+  "summary": ".th is a Country-code top-level domain. Managed by Thai Network Information Center Foundation.",
+  "wikiCheckedAt": "2026-07-22T04:23:22Z",
+  "wikiEnrichedAt": "2026-07-22T04:23:22Z",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

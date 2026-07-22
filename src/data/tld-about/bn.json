@@ -1,0 +1,125 @@
+{
+  "tld": ".bn",
+  "slug": "bn",
+  "title": "About .bn domains",
+  "delegationTitle": "Delegation Record for .BN",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Brunei Darussalam",
+  "sponsor": "Authority for Info-communications Technology Industry of Brunei Darussalam (AITI)",
+  "sponsorDetail": "Authority for Info-communications Technology Industry of Brunei Darussalam (AITI)\nBlock 13, Simpang 32-5, Kampung Anggerek Desa, Jalan Berakas\nBandar Seri Begawan BB3713\nBrunei Darussalam",
+  "administrativeContact": "Domain Administrator",
+  "technicalContact": "Technical Support",
+  "registryUrl": "http://www.bnnic.bn",
+  "whoisServer": "whois.bnnic.bn",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "bn-ns.anycast.pch.net",
+      "addresses": [
+        "204.61.216.87",
+        "2001:500:14:6087:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ns1.bnnic.bn",
+      "addresses": [
+        "194.0.1.33"
+      ]
+    },
+    {
+      "host": "ns2.bnnic.bn",
+      "addresses": [
+        "202.93.214.163"
+      ]
+    },
+    {
+      "host": "ns4.apnic.net",
+      "addresses": [
+        "202.12.31.53",
+        "2001:dd8:12:0:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".BN is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Brunei Darussalam. The IANA root zone lists the registry manager as Authority for Info-communications Technology Industry of Brunei Darussalam (AITI). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.bn is the Internet country code top-level domain (ccTLD) for Brunei.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bn.html",
+  "wikipedia": ".bn is the Internet country code top-level domain (ccTLD) for Brunei.",
+  "scrapedAt": "2026-07-21T21:36:09Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".bn",
+    "aiti",
+    "authority",
+    "bn",
+    "brunei",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "darussalam",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "industry",
+    "info",
+    "level",
+    "local business",
+    "regional brands",
+    "technology",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 2,
+    "cheapestRegistration": {
+      "registrar": "Marcaria International",
+      "price": "$240.00",
+      "value": 240.0
+    },
+    "cheapestRenewal": {
+      "registrar": "101domain",
+      "price": "$248.99",
+      "value": 248.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/bn"
+  },
+  "summary": ".bn is a Country-code top-level domain. Managed by Authority for Info-communications Technology Industry of Brunei Darussalam (AITI).",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -1,0 +1,128 @@
+{
+  "tld": ".sn",
+  "slug": "sn",
+  "title": "About .sn domains",
+  "delegationTitle": "Delegation Record for .SN",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Senegal",
+  "sponsor": "Universite Cheikh Anta Diop",
+  "sponsorDetail": "Universite Cheikh Anta Diop\nCURI - NIC SENEGAL\nCampus UCAD 3\nB.P. 5005\nDakar-Fann\nSenegal",
+  "administrativeContact": "Gestionnaire administratif",
+  "technicalContact": "Gestionnaire Technique",
+  "registryUrl": "https://www.cctld.sn",
+  "whoisServer": "whois.nic.sn",
+  "rdapServer": "https://rdap.nic.sn/whois43/",
+  "registrationDate": "1993-03-19",
+  "recordUpdated": "2026-03-12",
+  "nameServers": [
+    {
+      "host": "dns-tld.ird.fr",
+      "addresses": [
+        "13.39.116.127"
+      ]
+    },
+    {
+      "host": "ns-sn.nic.fr",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns.ucad.sn",
+      "addresses": [
+        "196.1.95.1"
+      ]
+    },
+    {
+      "host": "ns1.sonatel.sn",
+      "addresses": [
+        "213.154.64.11"
+      ]
+    },
+    {
+      "host": "sn.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.111",
+        "2a13:27c0:30:0:0:0:0:111"
+      ]
+    }
+  ],
+  "about": ".SN is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Senegal. The IANA root zone lists the registry manager as Universite Cheikh Anta Diop. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sn is the Internet country code top-level domain (ccTLD) for Senegal. Technical operation of the TLD is handled by AFNIC. Domains are sold through 68 accredited registrars.\nThe following 2nd level domains are available for third-level domain name registration:\n\nart.sn\ncom.sn\nedu.sn\ngouv.sn\norg.sn\nperso.sn\nuniv.sn\nSome companies like Epson use the TLD as a domain hack for \"Setup Navi\" in the user manual.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sn.html",
+  "wikipedia": ".sn is the Internet country code top-level domain (ccTLD) for Senegal. Technical operation of the TLD is handled by AFNIC. Domains are sold through 68 accredited registrars.\nThe following 2nd level domains are available for third-level domain name registration:\n\nart.sn\ncom.sn\nedu.sn\ngouv.sn\norg.sn\nperso.sn\nuniv.sn\nSome companies like Epson use the TLD as a domain hack for \"Setup Navi\" in the user manual.",
+  "scrapedAt": "2026-07-21T21:49:54Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sn",
+    "anta",
+    "cctld",
+    "cheikh",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "diop",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "senegal",
+    "sn",
+    "top",
+    "universite"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 13,
+    "cheapestRegistration": {
+      "registrar": "OVHcloud",
+      "price": "$27.99",
+      "value": 27.99
+    },
+    "cheapestRenewal": {
+      "registrar": "OVHcloud",
+      "price": "$27.99",
+      "value": 27.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/sn"
+  },
+  "summary": ".sn is a Country-code top-level domain. Managed by Universite Cheikh Anta Diop.",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "wikiEnrichedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

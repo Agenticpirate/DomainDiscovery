@@ -1,10 +1,17 @@
+import type { Metadata } from 'next';
 import { SimpleContentPage } from '@/components/layout/SimpleContentPage';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy — DomainDiscovery',
+  description:
+    'How DomainDiscovery handles browser storage, shortlists, and third-party registrar interactions for free domain name search.',
+};
 
 export default function PrivacyPage() {
   return (
     <SimpleContentPage
       title="Privacy Policy"
-      description="A concise overview of how site data, browser storage, and third-party registrar interactions are handled."
+      description="A concise overview of how DomainDiscovery handles site data, browser storage, and third-party registrar interactions."
       sections={[
         {
           heading: 'Local browser storage',

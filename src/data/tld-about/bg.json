@@ -1,0 +1,135 @@
+{
+  "tld": ".bg",
+  "slug": "bg",
+  "title": "About .bg domains",
+  "delegationTitle": "Delegation Record for .BG",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Bulgaria",
+  "sponsor": "Register.BG",
+  "sponsorDetail": "Register.BG\n40, Slivnitsa blvd\nVarna 9000\nBulgaria",
+  "administrativeContact": "Dragomir Slavov",
+  "technicalContact": "Daniel Kalchev",
+  "registryUrl": "http://www.register.bg",
+  "whoisServer": "whois.register.bg",
+  "rdapServer": null,
+  "registrationDate": "1995-01-03",
+  "recordUpdated": "2021-02-24",
+  "nameServers": [
+    {
+      "host": "a.nic.bg",
+      "addresses": [
+        "192.92.129.99",
+        "2a02:6a80:0:0:192:92:129:99"
+      ]
+    },
+    {
+      "host": "b.nic.bg",
+      "addresses": [
+        "193.68.3.232",
+        "2a02:6a80:0:0:193:68:3:232"
+      ]
+    },
+    {
+      "host": "c.nic.bg",
+      "addresses": [
+        "193.68.99.99",
+        "2a02:6a80:0:0:193:68:99:99"
+      ]
+    },
+    {
+      "host": "d.nic.bg",
+      "addresses": [
+        "194.0.32.1",
+        "2001:678:3c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "e.nic.bg",
+      "addresses": [
+        "185.143.80.1",
+        "2a02:6a80:530e:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "p.nic.bg",
+      "addresses": [
+        "204.61.216.110",
+        "2001:500:14:6110:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".BG is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Bulgaria. The IANA root zone lists the registry manager as Register.BG. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.bg is the country code top-level domain (ccTLD) for Bulgaria in the Domain Name System of the Internet. As of 2025, it is operated by Register.BG, the official registry responsible for managing domain registrations in the .bg namespace.\n.bg domains can be registered by individuals and entities within the European Union, as well as by foreign companies that maintain a registered branch or commercial representative in Bulgaria. Since 2024, domain transfers and renewals can also be processed entirely online through the Register.BG portal. The price of domain registration is \u20ac30 per year (\u20ac36 including VAT). \nUntil mid-2006, the price was a one-time registration fee of 86 Leva plus 86 Leva per year (total of 207 Leva including VAT for the first year). For local standards this was a very high price, and many Bulgarian sites were registered under .com (esp -bg.com), .org, or .net domains, as the registration costs were significantly lower (13 to 20 Leva per year) and less of a bureaucratic hassle.\nFrom 25 August 2008, Register.BG simplified the procedures, allowing the registration of domain names in the .bg zone without providing documented grounds (trademarks, company names) for the name. Eventual disputes are to be solved via the newly established Arbitration committee.\nSince 18 September 2006, Register.bg proposes new, third-level domains in the a.bg, b.bg, etc., subdomains (a Latin letter or a digit +.bg), lower cost (\u20ac12/year incl. VAT), with less restrictions and no dispute resolution. They are targeted mainly at private individuals.\nThe domain has supported Domain Name System Security Extensions (DNSSEC) since October 2007, with full deployment across all accredited registrars completed in 2023 to enhance protection against DNS spoofing attacks.\nOn 5 September 2009, Register.bg began accepting second- and third-level domain names in Cyrillic using only letters from the Bulgarian alphabet. In 2022, the policy was expanded to allow mixed-script domain names under certain conditions to accommodate brand identity needs.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bg.html",
+  "wikipedia": ".bg is the country code top-level domain (ccTLD) for Bulgaria in the Domain Name System of the Internet. As of 2025, it is operated by Register.BG, the official registry responsible for managing domain registrations in the .bg namespace.\n.bg domains can be registered by individuals and entities within the European Union, as well as by foreign companies that maintain a registered branch or commercial representative in Bulgaria. Since 2024, domain transfers and renewals can also be processed entirely online through the Register.BG portal. The price of domain registration is \u20ac30 per year (\u20ac36 including VAT). \nUntil mid-2006, the price was a one-time registration fee of 86 Leva plus 86 Leva per year (total of 207 Leva including VAT for the first year). For local standards this was a very high price, and many Bulgarian sites were registered under .com (esp -bg.com), .org, or .net domains, as the registration costs were significantly lower (13 to 20 Leva per year) and less of a bureaucratic hassle.\nFrom 25 August 2008, Register.BG simplified the procedures, allowing the registration of domain names in the .bg zone without providing documented grounds (trademarks, company names) for the name. Eventual disputes are to be solved via the newly established Arbitration committee.\nSince 18 September 2006, Register.bg proposes new, third-level domains in the a.bg, b.bg, etc., subdomains (a Latin letter or a digit +.bg), lower cost (\u20ac12/year incl. VAT), with less restrictions and no dispute resolution. They are targeted mainly at private individuals.\nThe domain has supported Domain Name System Security Extensions (DNSSEC) since October 2007, with full deployment across all accredited registrars completed in 2023 to enhance protection against DNS spoofing attacks.\nOn 5 September 2009, Register.bg began accepting second- and third-level domain names in Cyrillic using only letters from the Bulgarian alphabet. In 2022, the policy was expanded to allow mixed-script domain names under certain conditions to accommodate brand identity needs.",
+  "scrapedAt": "2026-07-21T21:35:49Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".bg",
+    "bg",
+    "bulgaria",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "register",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 17,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$36.99",
+      "value": 36.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$36.99",
+      "value": 36.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/bg"
+  },
+  "summary": ".bg is a Country-code top-level domain. Managed by Register.BG.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

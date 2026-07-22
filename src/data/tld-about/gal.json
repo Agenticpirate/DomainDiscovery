@@ -1,0 +1,116 @@
+{
+  "tld": ".gal",
+  "slug": "gal",
+  "title": "About .gal domains",
+  "delegationTitle": "Delegation Record for .GAL",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Asociaci\u00f3n puntoGAL",
+  "sponsorDetail": "Asociaci\u00f3n puntoGAL\nTabernas 11\nA Coru\u00f1a Galicia 15701\nSpain",
+  "administrativeContact": "TLD Administrative Contact",
+  "technicalContact": "TLD TechAdmin",
+  "registryUrl": "http://asociacion.dominio.gal/",
+  "whoisServer": "whois.nic.gal",
+  "rdapServer": "https://rdap.nic.gal/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "anycast10.irondns.net",
+      "addresses": [
+        "195.253.64.12",
+        "2a01:5b0:4:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast23.irondns.net",
+      "addresses": [
+        "195.253.65.11",
+        "2a01:5b0:5:0:0:0:0:b"
+      ]
+    },
+    {
+      "host": "anycast24.irondns.net",
+      "addresses": [
+        "195.253.65.12",
+        "2a01:5b0:5:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "anycast9.irondns.net",
+      "addresses": [
+        "195.253.64.11",
+        "2a01:5b0:4:0:0:0:0:b"
+      ]
+    }
+  ],
+  "about": ".GAL is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .GAL is listed by IANA as Asociaci\u00f3n puntoGAL. Anyone can typically register a .GAL name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.gal (Galician pronunciation: [\u02c8punt\u028a \u02c8\u0263al]) is a GeoTLD intended to highlight the Galician people, Galician language, and Galician culture. It was approved on 14 June 2013 by ICANN, and the first 93 domains went online on July 25, 2014, a date chosen to echo Galicia\u2019s National Day and strengthen its cultural significance.\nThe initiative was backed by more than 13,700 people and 110 institutions in Galicia, including relevant agencies of culture such as the Royal Galician Academy, the Galician Culture Council, and the three Galician universities. Asociaci\u00f3n PuntoGal is committed to establishing a foundation to reinvest the money in projects that promote Galician language and culture in the field of new technologies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gal.html",
+  "wikipedia": ".gal (Galician pronunciation: [\u02c8punt\u028a \u02c8\u0263al]) is a GeoTLD intended to highlight the Galician people, Galician language, and Galician culture. It was approved on 14 June 2013 by ICANN, and the first 93 domains went online on July 25, 2014, a date chosen to echo Galicia\u2019s National Day and strengthen its cultural significance.\nThe initiative was backed by more than 13,700 people and 110 institutions in Galicia, including relevant agencies of culture such as the Royal Galician Academy, the Galician Culture Council, and the three Galician universities. Asociaci\u00f3n PuntoGal is committed to establishing a foundation to reinvest the money in projects that promote Galician language and culture in the field of new technologies.",
+  "scrapedAt": "2026-07-21T21:40:46Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".gal",
+    "asociaci",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "gal",
+    "generic",
+    "gtld",
+    "level",
+    "puntogal",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 18,
+    "cheapestRegistration": {
+      "registrar": "MrDomain",
+      "price": "$12.77",
+      "value": 12.77
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$46.99",
+      "value": 46.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/gal"
+  },
+  "summary": ".gal is a Generic top-level domain. Managed by Asociaci\u00f3n puntoGAL.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

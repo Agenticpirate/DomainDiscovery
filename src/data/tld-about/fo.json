@@ -1,0 +1,136 @@
+{
+  "tld": ".fo",
+  "slug": "fo",
+  "title": "About .fo domains",
+  "delegationTitle": "Delegation Record for .FO",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Faroe Islands",
+  "sponsor": "FO Council",
+  "sponsorDetail": "FO Council\nTingh\u00fasvegur 59\nT\u00f3rshavn 110\nFaroe Islands (the)",
+  "administrativeContact": "Gu\u00f0run Poulsen",
+  "technicalContact": "CTO",
+  "registryUrl": "http://www.nic.fo/",
+  "whoisServer": "whois.nic.fo",
+  "rdapServer": "https://rdap.centralnic.com/fo",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.fo",
+      "addresses": [
+        "194.169.218.27",
+        "2001:67c:13cc:0:0:0:1:27"
+      ]
+    },
+    {
+      "host": "b.nic.fo",
+      "addresses": [
+        "185.24.64.27",
+        "2a04:2b00:13cc:0:0:0:1:27"
+      ]
+    },
+    {
+      "host": "c.nic.fo",
+      "addresses": [
+        "212.18.248.27",
+        "2a04:2b00:13ee:0:0:0:0:27"
+      ]
+    },
+    {
+      "host": "d.nic.fo",
+      "addresses": [
+        "212.18.249.27",
+        "2a04:2b00:13ff:0:0:0:0:27"
+      ]
+    },
+    {
+      "host": "mimi.nic.fo",
+      "addresses": [
+        "77.72.229.243",
+        "2a01:3f0:0:315:0:0:0:53"
+      ]
+    },
+    {
+      "host": "xn--gurun-jta.nic.fo",
+      "addresses": [
+        "194.146.106.158",
+        "2001:67c:1010:40:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".FO is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Faroe Islands. The IANA root zone lists the registry manager as FO Council. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.fo is the country code top-level domain (ccTLD) for the Faroe Islands.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/fo.html",
+  "wikipedia": ".fo is the country code top-level domain (ccTLD) for the Faroe Islands.",
+  "scrapedAt": "2026-07-21T21:40:25Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".fo",
+    "cctld",
+    "code",
+    "council",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "faroe",
+    "fo",
+    "for",
+    "geo",
+    "islands",
+    "level",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 21,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$49.88",
+      "value": 49.88
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$49.88",
+      "value": 49.88
+    },
+    "sourceUrl": "https://tld-list.com/tld/fo"
+  },
+  "summary": ".fo is a Country-code top-level domain. Managed by FO Council.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

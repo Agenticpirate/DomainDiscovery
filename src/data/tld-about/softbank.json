@@ -1,0 +1,103 @@
+{
+  "tld": ".softbank",
+  "slug": "softbank",
+  "title": "About .softbank domains",
+  "delegationTitle": "Delegation Record for .SOFTBANK",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "SoftBank Group Corp.",
+  "sponsorDetail": "SoftBank Group Corp.\n1-9-1 Higashi-shimbashi\nMinato-ku Tokyo 105-7303\nJapan",
+  "administrativeContact": "Chief Operating Officer",
+  "technicalContact": "Director",
+  "registryUrl": "http://softbank.com/",
+  "whoisServer": "whois.nic.softbank",
+  "rdapServer": "https://rdap.gmoregistry.net/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.gmoregistry.net",
+      "addresses": [
+        "37.209.192.4",
+        "2001:dcd:1:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "b.gmoregistry.net",
+      "addresses": [
+        "37.209.194.4",
+        "2001:dcd:2:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "k.gmoregistry.net",
+      "addresses": [
+        "37.209.196.4"
+      ]
+    },
+    {
+      "host": "l.gmoregistry.net",
+      "addresses": [
+        "37.209.198.4",
+        "2001:dcd:4:0:0:0:0:4"
+      ]
+    }
+  ],
+  "about": ".SOFTBANK is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .SOFTBANK is listed by IANA as SoftBank Group Corp.. Anyone can typically register a .SOFTBANK name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nSoftBank Group Corp. (\u30bd\u30d5\u30c8\u30d0\u30f3\u30af\u30b0\u30eb\u30fc\u30d7\u682a\u5f0f\u4f1a\u793e, SofutoBanku Gur\u016bpu Kabushiki gaisha) is a Japanese multinational investment holding company headquartered in Minato, Tokyo, that focuses on investment management. The group primarily invests in companies operating in technology that offer goods and services to customers in a multitude of markets and industries ranging from the internet to automation. With over $100 billion in capital at its onset, SoftBank's Vision Fund is the world's largest technology-focused venture capital fund. Fund investors included sovereign wealth funds from countries in the Middle East.\nThe company is known for the leadership of its controversial founder and largest shareholder Masayoshi Son. Its investee companies, subsidiaries and divisions, including several unprofitable unicorns, operate in robotics, artificial intelligence, software, logistics, transportation, biotechnology, robotic process automation, proptech, real estate, hospitality, broadband, fixed-line telecommunications, e-commerce, information technology, finance, media and marketing, and other areas. Among its international stockholdings are stakes in Arm (semiconductors), Alibaba (e-commerce), OYO Rooms (hospitality), WeWork (coworking) and Deutsche Telekom (telecommunications). SoftBank Corporation, its spun-out affiliate and former flagship business, is the third-largest wireless carrier in Japan, with 45.621 million subscribers as of March 2021.\nSoftBank was ranked in the 2025 Forbes Global 2000 list as the 130th largest public company in the world.\nThe logo of SoftBank is based on the flag of the Kaientai, a naval trading company founded in 1865, near the end of the Tokugawa shogunate, by Sakamoto Ry\u014dma.\nAlthough SoftBank does not affiliate itself to any traditional keiretsu, it has close ties with Mizuho Financial Group, its primary lender.\nOn January 21, 2025, it was announced that Softbank, along with OpenAI, MGX, and Oracle, would launch what was announced to be an artificial intelligence infrastructure system in conjunction with the U.S. government, titled Stargate. The project is estimated to cost $500 billion. U.S. president Donald Trump stated that the infrastructure was developed to have American-made AI in the United States. The project will be funded over the course of the next four years.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/softbank.html",
+  "wikipedia": "SoftBank Group Corp. (\u30bd\u30d5\u30c8\u30d0\u30f3\u30af\u30b0\u30eb\u30fc\u30d7\u682a\u5f0f\u4f1a\u793e, SofutoBanku Gur\u016bpu Kabushiki gaisha) is a Japanese multinational investment holding company headquartered in Minato, Tokyo, that focuses on investment management. The group primarily invests in companies operating in technology that offer goods and services to customers in a multitude of markets and industries ranging from the internet to automation. With over $100 billion in capital at its onset, SoftBank's Vision Fund is the world's largest technology-focused venture capital fund. Fund investors included sovereign wealth funds from countries in the Middle East.\nThe company is known for the leadership of its controversial founder and largest shareholder Masayoshi Son. Its investee companies, subsidiaries and divisions, including several unprofitable unicorns, operate in robotics, artificial intelligence, software, logistics, transportation, biotechnology, robotic process automation, proptech, real estate, hospitality, broadband, fixed-line telecommunications, e-commerce, information technology, finance, media and marketing, and other areas. Among its international stockholdings are stakes in Arm (semiconductors), Alibaba (e-commerce), OYO Rooms (hospitality), WeWork (coworking) and Deutsche Telekom (telecommunications). SoftBank Corporation, its spun-out affiliate and former flagship business, is the third-largest wireless carrier in Japan, with 45.621 million subscribers as of March 2021.\nSoftBank was ranked in the 2025 Forbes Global 2000 list as the 130th largest public company in the world.\nThe logo of SoftBank is based on the flag of the Kaientai, a naval trading company founded in 1865, near the end of the Tokugawa shogunate, by Sakamoto Ry\u014dma.\nAlthough SoftBank does not affiliate itself to any traditional keiretsu, it has close ties with Mizuho Financial Group, its primary lender.\nOn January 21, 2025, it was announced that Softbank, along with OpenAI, MGX, and Oracle, would launch what was announced to be an artificial intelligence infrastructure system in conjunction with the U.S. government, titled Stargate. The project is estimated to cost $500 billion. U.S. president Donald Trump stated that the infrastructure was developed to have American-made AI in the United States. The project will be funded over the course of the next four years.",
+  "scrapedAt": "2026-07-21T21:49:57Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".softbank",
+    "brand",
+    "brandable names",
+    "corp",
+    "corporate brands",
+    "domain",
+    "generic",
+    "group",
+    "gtld",
+    "level",
+    "softbank",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".softbank is a Generic top-level domain. Managed by SoftBank Group Corp..",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "wikiEnrichedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

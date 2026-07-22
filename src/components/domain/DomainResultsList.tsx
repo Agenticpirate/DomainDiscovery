@@ -54,7 +54,7 @@ export function DomainResultsList({
       {results.map((result, i) => (
         <div
           key={i}
-          className={`glass-card p-3 ${isLight ? 'border-slate-200 hover:border-slate-300' : 'border-white/10 hover:border-white/20'} transition-all duration-300 group animate-fade-in`}
+          className={`glass-card shine-border p-3 ${isLight ? 'border-slate-200 hover:border-slate-300' : 'border-white/10 hover:border-white/20'} transition-all duration-300 group animate-fade-in`}
           style={{ animationDelay: `${i * 30}ms` }}
         >
           <div className="flex items-center justify-between gap-3">

@@ -1,0 +1,121 @@
+{
+  "tld": ".tk",
+  "slug": "tk",
+  "title": "About .tk domains",
+  "delegationTitle": "Delegation Record for .TK",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Tokelau",
+  "sponsor": "Telecommunication Tokelau Corporation (Teletok)",
+  "sponsorDetail": "Telecommunication Tokelau Corporation (Teletok)\nFenuafala\nFakaofo\nTokelau",
+  "administrativeContact": "CEO Teletok",
+  "technicalContact": "Joost Zuurbier",
+  "registryUrl": "http://www.dot.tk",
+  "whoisServer": "whois.dot.tk",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.ns.tk",
+      "addresses": [
+        "194.0.38.1",
+        "2001:678:50:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b.ns.tk",
+      "addresses": [
+        "194.0.39.1",
+        "2001:678:54:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c.ns.tk",
+      "addresses": [
+        "194.0.40.1",
+        "2001:678:58:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d.ns.tk",
+      "addresses": [
+        "194.0.41.1",
+        "2001:678:5c:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".TK is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Tokelau. The IANA root zone lists the registry manager as Telecommunication Tokelau Corporation (Teletok). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/tk.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:51:10Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".tk",
+    "cctld",
+    "code",
+    "corporation",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "telecommunication",
+    "teletok",
+    "tk",
+    "tokelau",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 10,
+    "cheapestRegistration": {
+      "registrar": "Hexonet",
+      "price": "$6.92",
+      "value": 6.92
+    },
+    "cheapestRenewal": {
+      "registrar": "Hexonet",
+      "price": "$6.92",
+      "value": 6.92
+    },
+    "sourceUrl": "https://tld-list.com/tld/tk"
+  },
+  "summary": ".tk is a Country-code top-level domain. Managed by Telecommunication Tokelau Corporation (Teletok).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

@@ -1,0 +1,135 @@
+{
+  "tld": ".melbourne",
+  "slug": "melbourne",
+  "title": "About .melbourne domains",
+  "delegationTitle": "Delegation Record for .MELBOURNE",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "The Crown in right of the State of Victoria, represented by its Department of State Development, Business and Innovation",
+  "sponsorDetail": "The Crown in right of the State of Victoria, represented by its Department of State Development, Business and Innovation\nLevel 20, 80 Collins Street\nMelbourne VIC 3000\nAustralia",
+  "administrativeContact": "IANA Contact",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "https://www.live.melbourne/",
+  "whoisServer": "whois.nic.melbourne",
+  "rdapServer": "https://rdap.nic.melbourne/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.melbourne",
+      "addresses": [
+        "37.209.192.10",
+        "2001:dcd:1:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "b.nic.melbourne",
+      "addresses": [
+        "37.209.194.10",
+        "2001:dcd:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.nic.melbourne",
+      "addresses": [
+        "37.209.196.10",
+        "2001:dcd:3:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "x.nic.melbourne",
+      "addresses": [
+        "156.154.172.82",
+        "2610:a1:1074:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "y.nic.melbourne",
+      "addresses": [
+        "156.154.173.82",
+        "2610:a1:1075:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "z.nic.melbourne",
+      "addresses": [
+        "156.154.174.82",
+        "2610:a1:1076:0:0:0:1:82"
+      ]
+    }
+  ],
+  "about": ".MELBOURNE is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .MELBOURNE is listed by IANA as The Crown in right of the State of Victoria, represented by its Department of State Development, Business and Innovation. Anyone can typically register a .MELBOURNE name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.au is the Internet country code top-level domain (ccTLD) for Australia. It was created on 5 March 1986. Domain name policy is managed by .au Domain Administration (auDA).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/melbourne.html",
+  "wikipedia": ".au is the Internet country code top-level domain (ccTLD) for Australia. It was created on 5 March 1986. Domain name policy is managed by .au Domain Administration (auDA).",
+  "scrapedAt": "2026-07-21T21:45:02Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".melbourne",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "crown",
+    "department",
+    "development",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "melbourne",
+    "represented",
+    "right",
+    "state",
+    "top",
+    "victoria"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 30,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$39.15",
+      "value": 39.15
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$39.15",
+      "value": 39.15
+    },
+    "sourceUrl": "https://tld-list.com/tld/melbourne"
+  },
+  "summary": ".melbourne is a Generic top-level domain. Managed by The Crown in right of the State of Victoria, represented by its Department of State Development, Business and Innovation.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

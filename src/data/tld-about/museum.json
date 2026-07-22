@@ -1,0 +1,109 @@
+{
+  "tld": ".museum",
+  "slug": "museum",
+  "title": "About .museum domains",
+  "delegationTitle": "Delegation Record for .MUSEUM",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "Museum Domain Management Association",
+  "sponsorDetail": "Museum Domain Management Association\nInternational Council of Museums\n22 rue de Palestro\nParis 75002\nFrance",
+  "administrativeContact": "Account Manager",
+  "technicalContact": "TLD Technical Contact",
+  "registryUrl": "https://about.museum",
+  "whoisServer": "whois.nic.museum",
+  "rdapServer": "https://rdap.nic.museum",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "d.nic.fr",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "f.ext.nic.fr",
+      "addresses": [
+        "194.146.106.46",
+        "2001:67c:1010:11:0:0:0:53"
+      ]
+    },
+    {
+      "host": "g.ext.nic.fr",
+      "addresses": [
+        "194.0.36.1",
+        "2001:678:4c:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".MUSEUM is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\n.museum is a sponsored top-level domain (sTLD) in the Domain Name System of the Internet used exclusively by museums, museum associations, and individual members of the museum profession, as these groups are defined by the International Council of Museums (ICOM).\nIn joint action with the J. Paul Getty Trust, ICOM established the Museum Domain Management Association (MuseDoma), headed by Cary Karp, for the purpose of submitting an application to ICANN for the creation of the new generic top-level domain (gTLD), and to operate a registry. The .museum domain was entered into the DNS root on 20 October 2001, and was the first sponsored top-level domain to be instituted through ICANN's action.\nThe purpose of this domain is to reserve a segment of the DNS name space reserved for the use of museums; a name space whose conventions are defined by the museum community.  The .museum TLD grants users a quick and intuitive way to verify the authenticity of a museum site.  Conversely, since it is a type of formal third-party certification, museums using this name space obtain a way to assure visitors of the site's validity.\nOne of the initial ideas with the .museum tld was to create a network of official museum websites, and operate a central indexing tool to make all of their hosted content searchable, discoverable.\nIn addition to the eligibility requirements specified in the .museum charter, naming conventions apply to the labeling of subdomains. Extensive support is also being introduced for internationalized domain names, as described at welcome.museum.\nRegistrations are processed via accredited registrars.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/museum.html",
+  "wikipedia": ".museum is a sponsored top-level domain (sTLD) in the Domain Name System of the Internet used exclusively by museums, museum associations, and individual members of the museum profession, as these groups are defined by the International Council of Museums (ICOM).\nIn joint action with the J. Paul Getty Trust, ICOM established the Museum Domain Management Association (MuseDoma), headed by Cary Karp, for the purpose of submitting an application to ICANN for the creation of the new generic top-level domain (gTLD), and to operate a registry. The .museum domain was entered into the DNS root on 20 October 2001, and was the first sponsored top-level domain to be instituted through ICANN's action.\nThe purpose of this domain is to reserve a segment of the DNS name space reserved for the use of museums; a name space whose conventions are defined by the museum community.  The .museum TLD grants users a quick and intuitive way to verify the authenticity of a museum site.  Conversely, since it is a type of formal third-party certification, museums using this name space obtain a way to assure visitors of the site's validity.\nOne of the initial ideas with the .museum tld was to create a network of official museum websites, and operate a central indexing tool to make all of their hosted content searchable, discoverable.\nIn addition to the eligibility requirements specified in the .museum charter, naming conventions apply to the labeling of subdomains. Extensive support is also being introduced for internationalized domain names, as described at welcome.museum.\nRegistrations are processed via accredited registrars.",
+  "scrapedAt": "2026-07-21T21:45:51Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".museum",
+    "any industry",
+    "association",
+    "domain",
+    "general",
+    "general websites",
+    "level",
+    "management",
+    "museum",
+    "sponsored",
+    "stld",
+    "top"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 14,
+    "cheapestRegistration": {
+      "registrar": "Netim",
+      "price": "$44.00",
+      "value": 44.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$44.00",
+      "value": 44.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/museum"
+  },
+  "summary": ".museum is a Sponsored top-level domain. Managed by Museum Domain Management Association.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

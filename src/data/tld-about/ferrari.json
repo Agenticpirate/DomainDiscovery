@@ -1,0 +1,104 @@
+{
+  "tld": ".ferrari",
+  "slug": "ferrari",
+  "title": "About .ferrari domains",
+  "delegationTitle": "Delegation Record for .FERRARI",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Fiat Chrysler Automobiles N.V.",
+  "sponsorDetail": "Fiat Chrysler Automobiles N.V.\n25 St. James's Street\nLondon SW1A 1HA\nUnited Kingdom of Great Britain and Northern Ireland (the)",
+  "administrativeContact": "Digital Department",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.ferrari.com/en_us/",
+  "whoisServer": "whois.nic.ferrari",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.ferrari",
+      "addresses": [
+        "65.22.124.25",
+        "2a01:8840:7a:0:0:0:0:25"
+      ]
+    },
+    {
+      "host": "a2.nic.ferrari",
+      "addresses": [
+        "65.22.127.25",
+        "2a01:8840:7d:0:0:0:0:25"
+      ]
+    },
+    {
+      "host": "b0.nic.ferrari",
+      "addresses": [
+        "65.22.125.25",
+        "2a01:8840:7b:0:0:0:0:25"
+      ]
+    },
+    {
+      "host": "c0.nic.ferrari",
+      "addresses": [
+        "65.22.126.25",
+        "2a01:8840:7c:0:0:0:0:25"
+      ]
+    }
+  ],
+  "about": ".FERRARI is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .FERRARI is listed by IANA as Fiat Chrysler Automobiles N.V.. Anyone can typically register a .FERRARI name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ferrari.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:40:03Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".ferrari",
+    "automobiles",
+    "brand",
+    "brandable names",
+    "chrysler",
+    "corporate brands",
+    "domain",
+    "ferrari",
+    "fiat",
+    "generic",
+    "gtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".ferrari is a Generic top-level domain. Managed by Fiat Chrysler Automobiles N.V..",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,117 @@
+{
+  "tld": ".xn--mgbx4cd0ab",
+  "slug": "xn--mgbx4cd0ab",
+  "title": "About .xn--mgbx4cd0ab domains",
+  "delegationTitle": "Delegation Record for .\u0645\u0644\u064a\u0633\u064a\u0627",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code MY",
+  "designation": "Country-code top-level domain designated for Malaysia",
+  "sponsor": "MYNIC Berhad",
+  "sponsorDetail": "MYNIC Berhad\nLevel 3, Tower 2, Menara Cyber Axis\nJalan Impact\nCyberjaya Selangor Darul Ehsan 63000\nMalaysia",
+  "administrativeContact": "Chief Executive Officer",
+  "technicalContact": "Chief Executive Officer",
+  "registryUrl": "http://www.mynic.my",
+  "whoisServer": "whois.mynic.my",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.mynic.centralnic-dns.com",
+      "addresses": [
+        "194.169.218.114",
+        "2001:67c:13cc:0:0:0:1:114"
+      ]
+    },
+    {
+      "host": "b.mynic.centralnic-dns.com",
+      "addresses": [
+        "185.24.64.114",
+        "2a04:2b00:13cc:0:0:0:1:114"
+      ]
+    },
+    {
+      "host": "c.mynic.centralnic-dns.com",
+      "addresses": [
+        "212.18.248.114",
+        "2a04:2b00:13ee:0:0:0:0:114"
+      ]
+    },
+    {
+      "host": "d.mynic.centralnic-dns.com",
+      "addresses": [
+        "212.18.249.114",
+        "2a04:2b00:13ff:0:0:0:0:114"
+      ]
+    },
+    {
+      "host": "e.nic.my",
+      "addresses": [
+        "152.69.217.125",
+        "2603:c024:4518:ad60:242:0:0:2"
+      ]
+    }
+  ],
+  "about": ".XN--MGBX4CD0AB is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Malaysia. The IANA root zone lists the registry manager as MYNIC Berhad. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--mgbx4cd0ab.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:26Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--mgbx4cd0ab",
+    "berhad",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "letter",
+    "level",
+    "local business",
+    "malaysia",
+    "mynic",
+    "regional brands",
+    "top",
+    "two",
+    "xn--mgbx4cd0ab"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--mgbx4cd0ab is a Country-code top-level domain designated for two-letter country code MY. Managed by MYNIC Berhad.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

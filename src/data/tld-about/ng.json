@@ -1,0 +1,129 @@
+{
+  "tld": ".ng",
+  "slug": "ng",
+  "title": "About .ng domains",
+  "delegationTitle": "Delegation Record for .NG",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Nigeria",
+  "sponsor": "Nigeria Internet Registration Association",
+  "sponsorDetail": "Nigeria Internet Registration Association\n8 Funso Williams Avenue\nAlaka Surulere\nLagos\nNigeria",
+  "administrativeContact": "President",
+  "technicalContact": "DNS Administrator",
+  "registryUrl": "https://www.nira.org.ng/",
+  "whoisServer": "whois.nic.net.ng",
+  "rdapServer": "https://rdap.nic.net.ng",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns2.nic.net.ng",
+      "addresses": [
+        "204.61.216.40",
+        "2001:500:14:6040:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ns3.nic.net.ng",
+      "addresses": [
+        "185.38.108.108",
+        "2a00:fea0:dead:0:0:0:0:beef"
+      ]
+    },
+    {
+      "host": "ns4.nic.net.ng",
+      "addresses": [
+        "185.28.194.194"
+      ]
+    },
+    {
+      "host": "ns5.nic.net.ng",
+      "addresses": [
+        "196.216.168.41",
+        "2001:43f8:120:0:0:0:0:41"
+      ]
+    },
+    {
+      "host": "nsa.nic.net.ng",
+      "addresses": [
+        "41.222.79.3",
+        "2c0f:f098:0:0:0:0:0:3"
+      ]
+    }
+  ],
+  "about": ".NG is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Nigeria. The IANA root zone lists the registry manager as Nigeria Internet Registration Association. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ng is the Internet country code top-level domain (ccTLD) for Nigeria. It is overseen by the Nigeria Internet Registration Association (NIRA).",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ng.html",
+  "wikipedia": ".ng is the Internet country code top-level domain (ccTLD) for Nigeria. It is overseen by the Nigeria Internet Registration Association (NIRA).",
+  "scrapedAt": "2026-07-21T21:46:18Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ng",
+    "association",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "internet",
+    "level",
+    "local business",
+    "ng",
+    "nigeria",
+    "regional brands",
+    "registration",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 19,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$9.02",
+      "value": 9.02
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$9.02",
+      "value": 9.02
+    },
+    "sourceUrl": "https://tld-list.com/tld/ng"
+  },
+  "summary": ".ng is a Country-code top-level domain. Managed by Nigeria Internet Registration Association.",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

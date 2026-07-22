@@ -1,0 +1,130 @@
+{
+  "tld": ".pro",
+  "slug": "pro",
+  "title": "About .pro domains",
+  "delegationTitle": "Delegation Record for .PRO",
+  "type": "gTLD",
+  "typeLabel": "Restricted generic top-level domain",
+  "designation": "Restricted generic top-level domain",
+  "sponsor": "Identity Digital Limited",
+  "sponsorDetail": "Identity Digital Limited\nc/o Identity Digital Inc.\n10500 NE 8th Street, Suite 750\nBellevue WA 98004\nUnited States of America (the)",
+  "administrativeContact": "Vice President, Engineering",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "https://www.identity.digital/",
+  "whoisServer": null,
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.pro.afilias-nst.info",
+      "addresses": [
+        "199.182.0.1",
+        "2001:500:c0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.pro.afilias-nst.info",
+      "addresses": [
+        "199.182.32.1",
+        "2001:500:e0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.pro.afilias-nst.org",
+      "addresses": [
+        "199.182.1.1",
+        "2001:500:c1:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b2.pro.afilias-nst.org",
+      "addresses": [
+        "199.182.40.1",
+        "2001:500:e1:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.pro.afilias-nst.info",
+      "addresses": [
+        "199.182.16.1",
+        "2001:500:d0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d0.pro.afilias-nst.org",
+      "addresses": [
+        "199.182.17.1",
+        "2001:500:d1:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".PRO is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .PRO is listed by IANA as Identity Digital Limited. Anyone can typically register a .PRO name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\nThe domain name pro is a generic top-level domain in the Domain Name System of the Internet. Its name is derived from professional, indicating its intended use by certified professionals.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/pro.html",
+  "wikipedia": "The domain name pro is a generic top-level domain in the Domain Name System of the Internet. Its name is derived from professional, indicating its intended use by certified professionals.",
+  "scrapedAt": "2026-07-21T21:34:08Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".pro",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "digital",
+    "domain",
+    "generic",
+    "gtld",
+    "identity",
+    "level",
+    "limited",
+    "pro",
+    "restricted",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 51,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$1.99",
+      "value": 1.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Cloudflare",
+      "price": "$17.68",
+      "value": 17.68
+    },
+    "sourceUrl": "https://tld-list.com/tld/pro"
+  },
+  "summary": ".pro is a Restricted generic top-level domain. Managed by Identity Digital Limited.",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

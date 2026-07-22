@@ -1,0 +1,135 @@
+{
+  "tld": ".shia",
+  "slug": "shia",
+  "title": "About .shia domains",
+  "delegationTitle": "Delegation Record for .SHIA",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Emergency Back-End Registry Operator Program - ICANN",
+  "sponsorDetail": "Emergency Back-End Registry Operator Program - ICANN\n12025 Waterfront Dr., Suite 300\nLos Angeles CA 90094\nUnited States of America (the)",
+  "administrativeContact": "EBERO Event Director",
+  "technicalContact": "Nominet EBERO Event Manager",
+  "registryUrl": "https://icann.org/ebero",
+  "whoisServer": null,
+  "rdapServer": "https://rdap.nominet.uk/shia/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "dns1.emdns.uk",
+      "addresses": [
+        "213.248.217.153",
+        "2a01:618:401:0:0:0:0:153"
+      ]
+    },
+    {
+      "host": "dns2.emdns.uk",
+      "addresses": [
+        "103.49.81.153",
+        "2401:fd80:401:0:0:0:0:153"
+      ]
+    },
+    {
+      "host": "dns3.emdns.uk",
+      "addresses": [
+        "213.248.221.153",
+        "2a01:618:405:0:0:0:0:153"
+      ]
+    },
+    {
+      "host": "dns4.emdns.uk",
+      "addresses": [
+        "43.230.49.153",
+        "2401:fd80:405:0:0:0:0:153"
+      ]
+    },
+    {
+      "host": "dnsa.emdns.uk",
+      "addresses": [
+        "156.154.100.3",
+        "2001:502:ad09:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsb.emdns.uk",
+      "addresses": [
+        "156.154.101.3",
+        "2001:502:2eda:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsc.emdns.uk",
+      "addresses": [
+        "156.154.102.3",
+        "2610:a1:1009:0:0:0:0:3"
+      ]
+    },
+    {
+      "host": "dnsd.emdns.uk",
+      "addresses": [
+        "156.154.103.3",
+        "2610:a1:1010:0:0:0:0:3"
+      ]
+    }
+  ],
+  "about": ".SHIA is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .SHIA is listed by IANA as Emergency Back-End Registry Operator Program - ICANN. Anyone can typically register a .SHIA name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/shia.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:49:35Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".shia",
+    "back",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "emergency",
+    "generic",
+    "gtld",
+    "icann",
+    "level",
+    "operator",
+    "program",
+    "registry",
+    "shia",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".shia is a Generic top-level domain. Managed by Emergency Back-End Registry Operator Program - ICANN.",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

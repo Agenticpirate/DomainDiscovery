@@ -1,0 +1,137 @@
+{
+  "tld": ".dk",
+  "slug": "dk",
+  "title": "About .dk domains",
+  "delegationTitle": "Delegation Record for .DK",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Denmark",
+  "sponsor": "Dansk Internet Forum",
+  "sponsorDetail": "Dansk Internet Forum\n\u00d8restads Boulevard 108, 11th floor\nCopenhagen DK-2300\nDenmark",
+  "administrativeContact": "Punktum dk Administrative Contact",
+  "technicalContact": "Punktum dk Technical Contact",
+  "registryUrl": "https://punktum.dk/",
+  "whoisServer": "whois.punktum.dk",
+  "rdapServer": null,
+  "registrationDate": "1987-07-14",
+  "recordUpdated": "2026-06-17",
+  "nameServers": [
+    {
+      "host": "b.nic.dk",
+      "addresses": [
+        "193.163.102.222",
+        "2a01:630:0:80:0:0:0:53"
+      ]
+    },
+    {
+      "host": "c.nic.dk",
+      "addresses": [
+        "185.159.199.45",
+        "2620:10a:80ac:0:0:0:0:45"
+      ]
+    },
+    {
+      "host": "h.nic.dk",
+      "addresses": [
+        "46.30.126.214",
+        "2a00:1b18:1:2:0:0:0:53"
+      ]
+    },
+    {
+      "host": "l.nic.dk",
+      "addresses": [
+        "130.226.213.138",
+        "2001:878:0:e000:82:e2:d5:8a"
+      ]
+    },
+    {
+      "host": "s.nic.dk",
+      "addresses": [
+        "194.0.28.7",
+        "2001:678:2c:0:194:0:28:7"
+      ]
+    },
+    {
+      "host": "t.nic.dk",
+      "addresses": [
+        "185.43.134.16",
+        "2001:148f:fffd:0:0:0:0:16"
+      ]
+    }
+  ],
+  "about": ".DK is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Denmark. The IANA root zone lists the registry manager as Dansk Internet Forum. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.dk is the country code top-level domain (ccTLD) for Denmark. The supervision of the .dk top-level domain is handled exclusively by Punktum dk. Any new .dk domain name has to be applied for via an approved registrar. Then the domain name applicant can ask the registrar to manage their domain name or have it managed directly by the Punktum dk. Registrations of domain names with the characters \u00e6, \u00f8, \u00e5, \u00f6, \u00e4, \u00fc, \u00e9, and \u1e9e are also allowed.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/dk.html",
+  "wikipedia": ".dk is the country code top-level domain (ccTLD) for Denmark. The supervision of the .dk top-level domain is handled exclusively by Punktum dk. Any new .dk domain name has to be applied for via an approved registrar. Then the domain name applicant can ask the registrar to manage their domain name or have it managed directly by the Punktum dk. Registrations of domain names with the characters \u00e6, \u00f8, \u00e5, \u00f6, \u00e4, \u00fc, \u00e9, and \u1e9e are also allowed.",
+  "scrapedAt": "2026-07-21T21:39:00Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".dk",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "dansk",
+    "denmark",
+    "designated",
+    "dk",
+    "domain",
+    "for",
+    "forum",
+    "geo",
+    "internet",
+    "level",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 26,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$9.99",
+      "value": 9.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Hostinger",
+      "price": "$11.99",
+      "value": 11.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/dk"
+  },
+  "summary": ".dk is a Country-code top-level domain. Managed by Dansk Internet Forum.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "wikiEnrichedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

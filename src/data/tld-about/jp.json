@@ -1,0 +1,149 @@
+{
+  "tld": ".jp",
+  "slug": "jp",
+  "title": "About .jp domains",
+  "delegationTitle": "Delegation Record for .JP",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Japan",
+  "sponsor": "Japan Registry Services Co., Ltd.",
+  "sponsorDetail": "Japan Registry Services Co., Ltd.\nChiyoda First Bldg. East 13F\n3-8-1 Nishi-Kanda\nChiyoda-ku Tokyo 101-0065\nJapan",
+  "administrativeContact": "Koki Higashida",
+  "technicalContact": "Koki Higashida",
+  "registryUrl": "https://jprs.jp/",
+  "whoisServer": "whois.jprs.jp",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.dns.jp",
+      "addresses": [
+        "203.119.1.1",
+        "2001:dc4:0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b.dns.jp",
+      "addresses": [
+        "202.12.30.131",
+        "2001:dc2:0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c.dns.jp",
+      "addresses": [
+        "156.154.100.5",
+        "2001:502:ad09:0:0:0:0:5"
+      ]
+    },
+    {
+      "host": "d.dns.jp",
+      "addresses": [
+        "210.138.175.244",
+        "2001:240:0:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "e.dns.jp",
+      "addresses": [
+        "192.50.43.53",
+        "2001:200:c000:0:0:0:0:35"
+      ]
+    },
+    {
+      "host": "f.dns.jp",
+      "addresses": [
+        "150.100.6.8",
+        "2001:2f8:0:100:0:0:0:153"
+      ]
+    },
+    {
+      "host": "g.dns.jp",
+      "addresses": [
+        "203.119.40.1"
+      ]
+    },
+    {
+      "host": "h.dns.jp",
+      "addresses": [
+        "161.232.72.25",
+        "2a01:8840:1bc:0:0:0:0:25"
+      ]
+    }
+  ],
+  "about": ".JP is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Japan. The IANA root zone lists the registry manager as Japan Registry Services Co., Ltd.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.jp is the Internet country code top-level domain (ccTLD) for Japan. It was established in 1986 and is administered by the Japan Registry Services.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/jp.html",
+  "wikipedia": ".jp is the Internet country code top-level domain (ccTLD) for Japan. It was established in 1986 and is administered by the Japan Registry Services.",
+  "scrapedAt": "2026-07-21T21:43:14Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".jp",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "japan",
+    "jp",
+    "level",
+    "local business",
+    "regional brands",
+    "registry",
+    "services",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 26,
+    "cheapestRegistration": {
+      "registrar": "Hostinger",
+      "price": "$29.99",
+      "value": 29.99
+    },
+    "cheapestRenewal": {
+      "registrar": "GoDaddy",
+      "price": "$32.99",
+      "value": 32.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/jp"
+  },
+  "summary": ".jp is a Country-code top-level domain. Managed by Japan Registry Services Co., Ltd..",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

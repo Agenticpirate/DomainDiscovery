@@ -1,0 +1,137 @@
+{
+  "tld": ".ru",
+  "slug": "ru",
+  "title": "About .ru domains",
+  "delegationTitle": "Delegation Record for .RU",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Russian Federation",
+  "sponsor": "Coordination Center for TLD RU",
+  "sponsorDetail": "Coordination Center for TLD RU\n8 Marta street 1, bld 12\nMoscow 127083\nRussian Federation (the)",
+  "administrativeContact": ".RU domain Administrative group",
+  "technicalContact": "Technical Center of Internet",
+  "registryUrl": "http://www.cctld.ru/en",
+  "whoisServer": "whois.tcinet.ru",
+  "rdapServer": null,
+  "registrationDate": "1994-04-07",
+  "recordUpdated": "2026-07-14",
+  "nameServers": [
+    {
+      "host": "a.dns.ripn.net",
+      "addresses": [
+        "193.232.128.6",
+        "2001:678:17:0:193:232:128:6"
+      ]
+    },
+    {
+      "host": "b.dns.ripn.net",
+      "addresses": [
+        "194.85.252.62",
+        "2001:678:16:0:194:85:252:62"
+      ]
+    },
+    {
+      "host": "c.tld-servers.ru",
+      "addresses": [
+        "194.190.122.17",
+        "2a09:bd00:1:0:194:190:122:17"
+      ]
+    },
+    {
+      "host": "d.dns.ripn.net",
+      "addresses": [
+        "194.190.124.17",
+        "2001:678:18:0:194:190:124:17"
+      ]
+    },
+    {
+      "host": "e.dns.ripn.net",
+      "addresses": [
+        "193.232.142.17",
+        "2001:678:15:0:193:232:142:17"
+      ]
+    },
+    {
+      "host": "f.dns.ripn.net",
+      "addresses": [
+        "193.232.156.17",
+        "2001:678:14:0:193:232:156:17"
+      ]
+    }
+  ],
+  "about": ".RU is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Russian Federation. The IANA root zone lists the registry manager as Coordination Center for TLD RU. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ru is the Latin alphabet Internet country code top-level domain (ccTLD) for Russia introduced on 7 April 1994. The Russian alphabet internationalized country code is .\u0440\u0444.\nControl of .ru is assigned to the Coordination Center for TLD RU (CC for TLD RU), the current official registry. On 1 January 2005, the former registry, the Russian Institute for Public Networks (RIPN), stopped new registrations directly under .ru, but still carried out registry operations for domain names under the second-level domains .com.ru, .net.ru, .org.ru and .pp.ru.\nThe company RELCOM also proposes third-level registrations beneath various second-level domains such as .msk.ru (Moscow), while Macomnet Telcom proposes third-level registrations beneath .int.ru simultaneously.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ru.html",
+  "wikipedia": ".ru is the Latin alphabet Internet country code top-level domain (ccTLD) for Russia introduced on 7 April 1994. The Russian alphabet internationalized country code is .\u0440\u0444.\nControl of .ru is assigned to the Coordination Center for TLD RU (CC for TLD RU), the current official registry. On 1 January 2005, the former registry, the Russian Institute for Public Networks (RIPN), stopped new registrations directly under .ru, but still carried out registry operations for domain names under the second-level domains .com.ru, .net.ru, .org.ru and .pp.ru.\nThe company RELCOM also proposes third-level registrations beneath various second-level domains such as .msk.ru (Moscow), while Macomnet Telcom proposes third-level registrations beneath .int.ru simultaneously.",
+  "scrapedAt": "2026-07-21T21:48:43Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ru",
+    "cctld",
+    "center",
+    "code",
+    "coordination",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "federation",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "ru",
+    "russian",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 19,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$3.69",
+      "value": 3.69
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$3.99",
+      "value": 3.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/ru"
+  },
+  "summary": ".ru is a Country-code top-level domain. Managed by Coordination Center for TLD RU.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,152 @@
+{
+  "tld": ".pr",
+  "slug": "pr",
+  "title": "About .pr domains",
+  "delegationTitle": "Delegation Record for .PR",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Puerto Rico",
+  "sponsor": "Gauss Research Laboratory Inc.",
+  "sponsorDetail": "Gauss Research Laboratory Inc.\nCalle Vesta 801\nSan Juan 00923\nPuerto Rico",
+  "administrativeContact": "Registry Administrative Contact",
+  "technicalContact": "Registry Technical Contact",
+  "registryUrl": "http://www.nic.pr",
+  "whoisServer": "whois.afilias-srs.net",
+  "rdapServer": null,
+  "registrationDate": "1989-08-27",
+  "recordUpdated": "2022-07-20",
+  "nameServers": [
+    {
+      "host": "a.lactld.org",
+      "addresses": [
+        "200.0.68.10",
+        "2801:14:a000:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "a0.pr.afilias-nst.info",
+      "addresses": [
+        "199.254.59.17",
+        "2001:500:25:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "a2.pr.afilias-nst.info",
+      "addresses": [
+        "199.249.116.17",
+        "2001:500:44:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "b0.pr.afilias-nst.org",
+      "addresses": [
+        "199.254.60.17",
+        "2001:500:26:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "b2.pr.afilias-nst.org",
+      "addresses": [
+        "199.249.124.17",
+        "2001:500:4c:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "c0.pr.afilias-nst.info",
+      "addresses": [
+        "199.254.61.17",
+        "2001:500:27:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "d0.pr.afilias-nst.org",
+      "addresses": [
+        "199.254.62.17",
+        "2001:500:28:0:0:0:0:17"
+      ]
+    },
+    {
+      "host": "pr-dns.denic.de",
+      "addresses": [
+        "194.0.11.111",
+        "2001:678:e:111:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".PR is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Puerto Rico. The IANA root zone lists the registry manager as Gauss Research Laboratory Inc.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.pr is the Internet country code top-level domain (ccTLD) for Puerto Rico.\nA .pr.us second-level domain has been reserved for Puerto Rico under the .us locality namespace, but it is unused. Agencies of the government of Puerto Rico use either .gov.pr or, more recently, subdomains of pr.gov, where the main government portal is located.\nIn March 2010, National Public Radio launched a URL shortener using the domain hack \"n.pr\".\nThe domain is occasionally used by public relations firms.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/pr.html",
+  "wikipedia": ".pr is the Internet country code top-level domain (ccTLD) for Puerto Rico.\nA .pr.us second-level domain has been reserved for Puerto Rico under the .us locality namespace, but it is unused. Agencies of the government of Puerto Rico use either .gov.pr or, more recently, subdomains of pr.gov, where the main government portal is located.\nIn March 2010, National Public Radio launched a URL shortener using the domain hack \"n.pr\".\nThe domain is occasionally used by public relations firms.",
+  "scrapedAt": "2026-07-21T21:47:42Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".pr",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "gauss",
+    "geo",
+    "laboratory",
+    "level",
+    "local business",
+    "pr",
+    "puerto",
+    "regional brands",
+    "research",
+    "rico",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 22,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$550.00",
+      "value": 550.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$1030.88",
+      "value": 1030.88
+    },
+    "sourceUrl": "https://tld-list.com/tld/pr"
+  },
+  "summary": ".pr is a Country-code top-level domain. Managed by Gauss Research Laboratory Inc..",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,160 @@
+{
+  "tld": ".arpa",
+  "slug": "arpa",
+  "title": "About .arpa domains",
+  "delegationTitle": "Delegation Record for .ARPA",
+  "type": "infrastructure",
+  "typeLabel": "Infrastructure top-level domain",
+  "designation": "Infrastructure top-level domain",
+  "sponsor": "Internet Architecture Board (IAB)",
+  "sponsorDetail": "Internet Architecture Board (IAB)\nc/o IETF Administration LLC\n1000 N. West St.\nSuite 1200\nWilmington DE 19801\nUnited States of America (the)",
+  "administrativeContact": "Internet Architecture Board (IAB)",
+  "technicalContact": "Internet Assigned Numbers Authority (IANA)",
+  "registryUrl": "https://www.iana.org/domains/arpa",
+  "whoisServer": "whois.iana.org",
+  "rdapServer": null,
+  "registrationDate": "1985-01-01",
+  "recordUpdated": "2023-11-27",
+  "nameServers": [
+    {
+      "host": "a.ns.arpa",
+      "addresses": [
+        "198.41.0.4",
+        "2001:503:ba3e:0:0:0:2:30"
+      ]
+    },
+    {
+      "host": "b.ns.arpa",
+      "addresses": [
+        "170.247.170.2",
+        "2801:1b8:10:0:0:0:0:b"
+      ]
+    },
+    {
+      "host": "c.ns.arpa",
+      "addresses": [
+        "192.33.4.12",
+        "2001:500:2:0:0:0:0:c"
+      ]
+    },
+    {
+      "host": "d.ns.arpa",
+      "addresses": [
+        "199.7.91.13",
+        "2001:500:2d:0:0:0:0:d"
+      ]
+    },
+    {
+      "host": "e.ns.arpa",
+      "addresses": [
+        "192.203.230.10",
+        "2001:500:a8:0:0:0:0:e"
+      ]
+    },
+    {
+      "host": "f.ns.arpa",
+      "addresses": [
+        "192.5.5.241",
+        "2001:500:2f:0:0:0:0:f"
+      ]
+    },
+    {
+      "host": "g.ns.arpa",
+      "addresses": [
+        "192.112.36.4",
+        "2001:500:12:0:0:0:0:d0d"
+      ]
+    },
+    {
+      "host": "h.ns.arpa",
+      "addresses": [
+        "198.97.190.53",
+        "2001:500:1:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "i.ns.arpa",
+      "addresses": [
+        "192.36.148.17",
+        "2001:7fe:0:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "k.ns.arpa",
+      "addresses": [
+        "193.0.14.129",
+        "2001:7fd:0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "l.ns.arpa",
+      "addresses": [
+        "199.7.83.42",
+        "2001:500:9f:0:0:0:0:42"
+      ]
+    },
+    {
+      "host": "m.ns.arpa",
+      "addresses": [
+        "202.12.27.33",
+        "2001:dc3:0:0:0:0:0:35"
+      ]
+    }
+  ],
+  "about": ".ARPA is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\nThe domain name arpa is a top-level domain (TLD) in the Domain Name System (DNS) of the Internet. It is used predominantly for the management of technical network infrastructure. Prominent among such functions are the subdomains in-addr.arpa and ip6.arpa, which provide namespaces for reverse DNS lookup of IPv4 and IPv6 addresses, respectively.\nThe name originally was the acronym for the Advanced Research Projects Agency (ARPA), the funding organization in the United States that developed the ARPANET, the precursor of the Internet. It was the first domain defined for the network in preparation for a hierarchical naming system for the delegation of authority, autonomy, and responsibility. It was originally intended only to serve in a temporary function for facilitating the systematic naming of the ARPANET computers. However, it became practically difficult to remove the domain after infrastructural uses had been sanctioned. As a result, the name was redefined as the backronym Address and Routing Parameter Area.\nDomain-name registrations in arpa are not possible, and new subdomains are infrequently added by the Internet Engineering Task Force.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/arpa.html",
+  "wikipedia": "The domain name arpa is a top-level domain (TLD) in the Domain Name System (DNS) of the Internet. It is used predominantly for the management of technical network infrastructure. Prominent among such functions are the subdomains in-addr.arpa and ip6.arpa, which provide namespaces for reverse DNS lookup of IPv4 and IPv6 addresses, respectively.\nThe name originally was the acronym for the Advanced Research Projects Agency (ARPA), the funding organization in the United States that developed the ARPANET, the precursor of the Internet. It was the first domain defined for the network in preparation for a hierarchical naming system for the delegation of authority, autonomy, and responsibility. It was originally intended only to serve in a temporary function for facilitating the systematic naming of the ARPANET computers. However, it became practically difficult to remove the domain after infrastructural uses had been sanctioned. As a result, the name was redefined as the backronym Address and Routing Parameter Area.\nDomain-name registrations in arpa are not possible, and new subdomains are infrequently added by the Internet Engineering Task Force.",
+  "scrapedAt": "2026-07-21T21:35:00Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".arpa",
+    "any industry",
+    "architecture",
+    "arpa",
+    "board",
+    "domain",
+    "general",
+    "general websites",
+    "infrastructure",
+    "internet",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".arpa is a Infrastructure top-level domain. Managed by Internet Architecture Board (IAB).",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

@@ -19,8 +19,8 @@ export interface RegistrarOffer {
   whoisPrivacy: PriceCell;
   taxAndFees?: string;
   features?: string[];
-  rating?: number;
-  reviewCount?: number;
+  rating?: number | null;
+  reviewCount?: number | null;
   payments?: string[];
   score: number | null;
 }
@@ -63,7 +63,8 @@ type RawData = {
 
 const raw = priceData as RawData;
 
-const CURATED_POPULAR_TLDS = [
+/** High-signal extensions pinned to the top of the matrix. */
+const PRIORITY_TLDS = [
   '.com',
   '.net',
   '.org',
@@ -116,7 +117,7 @@ const CURATED_POPULAR_TLDS = [
   '.es',
 ] as const;
 
-const POPULAR_TLD_ORDER = new Map<string, number>(CURATED_POPULAR_TLDS.map((tld, index) => [tld, index]));
+const PRIORITY_ORDER = new Map<string, number>(PRIORITY_TLDS.map((tld, index) => [tld, index]));
 
 export const TOP_COMPARISON_REGISTRARS = [
   'Spaceship',
@@ -131,36 +132,75 @@ export const TOP_COMPARISON_REGISTRARS = [
   'Unstoppable Domains',
 ] as const;
 
+export const REGISTRAR_LOGO_PATHS: Record<string, string> = {
+  Spaceship: '/registrars/spaceship.png',
+  GoDaddy: '/registrars/godaddy.png',
+  Namecheap: '/registrars/namecheap.png',
+  Porkbun: '/registrars/porkbun.png',
+  Dynadot: '/registrars/dynadot.png',
+  NameSilo: '/registrars/namesilo.png',
+  Sav: '/registrars/sav.png',
+  Cloudflare: '/registrars/cloudflare.png',
+  Hostinger: '/registrars/hostinger.png',
+  'Unstoppable Domains': '/registrars/unstoppable.png',
+};
+
 function getTrackedCoverage(entry: TldPricingDetail) {
   return TOP_COMPARISON_REGISTRARS.reduce((count, registrar) => {
     return count + (getRegistrarOfferForTld(entry, registrar)?.registration.value != null ? 1 : 0);
   }, 0);
 }
 
-function getCuratedDetails(): TldPricingDetail[] {
+/** Any registrar offer with a real registration price (includes secondary / fallback). */
+function getAnyPriceCoverage(entry: TldPricingDetail) {
+  return entry.registrars.reduce((count, offer) => {
+    return count + (offer.registration?.value != null ? 1 : 0);
+  }, 0);
+}
+
+/**
+ * All extensions with at least one registrar price.
+ * Priority TLDs first, then by tracked coverage, then alphabetical.
+ */
+function getVisibleDetails(): TldPricingDetail[] {
   return raw.extensions
-    .filter((entry) => POPULAR_TLD_ORDER.has(entry.tld))
-    .filter((entry) => getTrackedCoverage(entry) >= 2)
-    .sort((a, b) => (POPULAR_TLD_ORDER.get(a.tld) ?? Number.MAX_SAFE_INTEGER) - (POPULAR_TLD_ORDER.get(b.tld) ?? Number.MAX_SAFE_INTEGER));
+    .filter((entry) => getAnyPriceCoverage(entry) >= 1)
+    .sort((a, b) => {
+      const orderA = PRIORITY_ORDER.get(a.tld) ?? Number.MAX_SAFE_INTEGER;
+      const orderB = PRIORITY_ORDER.get(b.tld) ?? Number.MAX_SAFE_INTEGER;
+      if (orderA !== orderB) {
+        return orderA - orderB;
+      }
+      const coverageDiff = getTrackedCoverage(b) - getTrackedCoverage(a);
+      if (coverageDiff !== 0) {
+        return coverageDiff;
+      }
+      const anyDiff = getAnyPriceCoverage(b) - getAnyPriceCoverage(a);
+      if (anyDiff !== 0) {
+        return anyDiff;
+      }
+      return a.tld.localeCompare(b.tld);
+    });
 }
 
 export function getAllTldPriceDetails(): TldPricingDetail[] {
-  return getCuratedDetails();
+  return getVisibleDetails();
 }
 
 export function getTldPriceDatasetMeta() {
-  const curatedDetails = getCuratedDetails();
+  const details = getVisibleDetails();
   return {
     generatedAt: raw.generatedAt,
     sourceName: raw.sourceName,
     sourceUrl: raw.sourceUrl,
-    extensionCount: curatedDetails.length,
+    extensionCount: details.length,
+    rawExtensionCount: raw.extensionCount,
     failedExtensions: raw.failedExtensions,
   };
 }
 
 export function getTldPriceSummaryList(): TldPricingSummary[] {
-  return getCuratedDetails().map((entry) => ({
+  return getVisibleDetails().map((entry) => ({
     tld: entry.tld,
     registrarCount: entry.registrarCount,
     cheapestRegistration: entry.cheapestRegistration,

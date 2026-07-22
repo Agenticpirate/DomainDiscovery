@@ -1,0 +1,126 @@
+{
+  "tld": ".cf",
+  "slug": "cf",
+  "title": "About .cf domains",
+  "delegationTitle": "Delegation Record for .CF",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Central African Republic",
+  "sponsor": "Societe Centrafricaine de Telecommunications (SOCATEL)",
+  "sponsorDetail": "Societe Centrafricaine de Telecommunications (SOCATEL)\nRue guerillot\nBangui BP 939\nCentral African Republic (the)",
+  "administrativeContact": "Directeur General",
+  "technicalContact": "Manager ICT",
+  "registryUrl": "http://www.dot.cf",
+  "whoisServer": "whois.dot.cf",
+  "rdapServer": null,
+  "registrationDate": "1996-04-24",
+  "recordUpdated": "2015-12-29",
+  "nameServers": [
+    {
+      "host": "a.ns.cf",
+      "addresses": [
+        "185.21.168.17",
+        "2a04:1b00:4:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b.ns.cf",
+      "addresses": [
+        "185.21.169.17",
+        "2a04:1b00:5:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c.ns.cf",
+      "addresses": [
+        "185.21.170.17",
+        "2a04:1b00:6:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d.ns.cf",
+      "addresses": [
+        "185.21.171.17",
+        "2a04:1b00:7:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".CF is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Central African Republic. The IANA root zone lists the registry manager as Societe Centrafricaine de Telecommunications (SOCATEL). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.cf is the Internet country code top-level domain (ccTLD) for the Central African Republic. It is administered by the Central African Society of Telecommunications.\nDot CF, also known as Dot CrossFire, is an initiative of the Societe Centrafricaine de Telecommunications (SOCATEL, headquartered in Bangui) in partnership with Freenom (previously known as Freedom Registry).\nThe domain was made available for registration free of charge on Freenom's website, regardless of whether the individual who registers the domain has any connection with the Central African Republic. Exceptions included \"high value\" domain names, which include trademark domain names for most Fortune 500 companies, and common dictionary terms. Potentially valuable domains which are fewer than 4 characters were also marked \"High Value\". The same applied to other domains offered via Freenom, such as .tk and .ml.\nThe .cf registry allowed the creation of emoji domain names.\nFollowing Freenom's lawsuit with Meta and its settlement in 2024, it was unclear who would take up registration of the domain, as Freenom announced it would be exiting the domain business. The Central African Republic now owns the domain, and has closed off any further registries for the domain.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/cf.html",
+  "wikipedia": ".cf is the Internet country code top-level domain (ccTLD) for the Central African Republic. It is administered by the Central African Society of Telecommunications.\nDot CF, also known as Dot CrossFire, is an initiative of the Societe Centrafricaine de Telecommunications (SOCATEL, headquartered in Bangui) in partnership with Freenom (previously known as Freedom Registry).\nThe domain was made available for registration free of charge on Freenom's website, regardless of whether the individual who registers the domain has any connection with the Central African Republic. Exceptions included \"high value\" domain names, which include trademark domain names for most Fortune 500 companies, and common dictionary terms. Potentially valuable domains which are fewer than 4 characters were also marked \"High Value\". The same applied to other domains offered via Freenom, such as .tk and .ml.\nThe .cf registry allowed the creation of emoji domain names.\nFollowing Freenom's lawsuit with Meta and its settlement in 2024, it was unclear who would take up registration of the domain, as Freenom announced it would be exiting the domain business. The Central African Republic now owns the domain, and has closed off any further registries for the domain.",
+  "scrapedAt": "2026-07-21T21:37:16Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".cf",
+    "african",
+    "cctld",
+    "centrafricaine",
+    "central",
+    "cf",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "republic",
+    "socatel",
+    "societe",
+    "telecommunications",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 6,
+    "cheapestRegistration": {
+      "registrar": "INWX",
+      "price": "$9.98",
+      "value": 9.98
+    },
+    "cheapestRenewal": {
+      "registrar": "INWX",
+      "price": "$9.98",
+      "value": 9.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/cf"
+  },
+  "summary": ".cf is a Country-code top-level domain. Managed by Societe Centrafricaine de Telecommunications (SOCATEL).",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

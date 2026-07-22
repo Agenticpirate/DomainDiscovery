@@ -1,0 +1,131 @@
+{
+  "tld": ".bj",
+  "slug": "bj",
+  "title": "About .bj domains",
+  "delegationTitle": "Delegation Record for .BJ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Benin",
+  "sponsor": "Autorit\u00e9 de R\u00e9gulation des Communications Electroniques et de la Poste du B\u00e9nin (ARCEP BENIN)",
+  "sponsorDetail": "Autorit\u00e9 de R\u00e9gulation des Communications Electroniques et de la Poste du B\u00e9nin (ARCEP BENIN)\nCotonou /Ganhi, Immeuble Maersk House, Zone OCBN\nCotonou 01BP 2034\nBenin",
+  "administrativeContact": "Secr\u00e9taire Ex\u00e9cutif (Executive Secretary)",
+  "technicalContact": "Tonouhewa Deo Gratias",
+  "registryUrl": "http://www.nic.bj",
+  "whoisServer": "whois.nic.bj",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns-bj.afrinic.net",
+      "addresses": [
+        "196.216.168.33",
+        "2001:43f8:120:0:0:0:0:33"
+      ]
+    },
+    {
+      "host": "ns-bj.nic.fr",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns1.nic.bj",
+      "addresses": [
+        "154.65.28.218"
+      ]
+    },
+    {
+      "host": "ns2.nic.bj",
+      "addresses": [
+        "41.85.191.2"
+      ]
+    },
+    {
+      "host": "pch.nic.bj",
+      "addresses": [
+        "204.61.216.125",
+        "2001:500:14:6125:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".BJ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Benin. The IANA root zone lists the registry manager as Autorit\u00e9 de R\u00e9gulation des Communications Electroniques et de la Poste du B\u00e9nin (ARCEP BENIN). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.bj is the Internet country code top-level domain (ccTLD) for Benin administered by the ARCEP Benin.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/bj.html",
+  "wikipedia": ".bj is the Internet country code top-level domain (ccTLD) for Benin administered by the ARCEP Benin.",
+  "scrapedAt": "2026-07-21T21:35:58Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".bj",
+    "arcep",
+    "autorit",
+    "benin",
+    "bj",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "electroniques",
+    "for",
+    "geo",
+    "gulation",
+    "level",
+    "local business",
+    "poste",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 9,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$19.99",
+      "value": 19.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$24.99",
+      "value": 24.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/bj"
+  },
+  "summary": ".bj is a Country-code top-level domain. Managed by Autorit\u00e9 de R\u00e9gulation des Communications Electroniques et de la Poste du B\u00e9nin (ARCEP BENIN).",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

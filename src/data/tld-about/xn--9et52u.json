@@ -1,0 +1,123 @@
+{
+  "tld": ".xn--9et52u",
+  "slug": "xn--9et52u",
+  "title": "About .xn--9et52u domains",
+  "delegationTitle": "Delegation Record for .\u65f6\u5c1a",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "RISE VICTORY LIMITED",
+  "sponsorDetail": "RISE VICTORY LIMITED\n201A, Wing On Plaza\n62 Mody Road\nTsimshatsui East Kowloon\nHong Kong",
+  "administrativeContact": "CEO",
+  "technicalContact": "Wendy Yang",
+  "registryUrl": "http://www.shishang.wang",
+  "whoisServer": "whois.gtld.zdns.cn",
+  "rdapServer": "https://rdap.zdnsgtld.com/xn--9et52u",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.zdnscloud.cn",
+      "addresses": [
+        "203.99.24.1"
+      ]
+    },
+    {
+      "host": "b.zdnscloud.cn",
+      "addresses": [
+        "203.99.25.1"
+      ]
+    },
+    {
+      "host": "c.zdnscloud.com",
+      "addresses": [
+        "203.99.26.1"
+      ]
+    },
+    {
+      "host": "d.zdnscloud.com",
+      "addresses": [
+        "203.99.27.1"
+      ]
+    },
+    {
+      "host": "f.zdnscloud.cn",
+      "addresses": [
+        "116.169.54.111"
+      ]
+    },
+    {
+      "host": "g.zdnscloud.com",
+      "addresses": [
+        "223.72.199.37"
+      ]
+    },
+    {
+      "host": "i.zdnscloud.cn",
+      "addresses": [
+        "2401:8d00:1:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "j.zdnscloud.com",
+      "addresses": [
+        "2401:8d00:2:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".XN--9ET52U is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--9ET52U is listed by IANA as RISE VICTORY LIMITED. Anyone can typically register a .XN--9ET52U name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--9et52u.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:17Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--9et52u",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "level",
+    "limited",
+    "rise",
+    "top",
+    "victory",
+    "xn--9et52u"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--9et52u is a Generic top-level domain. Managed by RISE VICTORY LIMITED.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

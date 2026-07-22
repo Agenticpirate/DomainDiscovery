@@ -2,55 +2,58 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ToastProvider } from "@/components/ui/Toast";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import {
+  getOrganizationJsonLd,
+  getSiteBaseUrl,
+  getSoftwareApplicationJsonLd,
+  getWebSiteJsonLd,
+  SITE_BRAND,
+} from "@/lib/seoSiteFacts";
 
 export const metadata: Metadata = {
   title: {
-    default: "DomainDiscovery — Find Your Perfect Domain in Seconds",
+    default: "Domain Name Search — Free Instant Availability | DomainDiscovery",
     template: "%s | DomainDiscovery",
   },
   description:
-    "Find your perfect domain in seconds. Search 1,600+ extensions with instant availability results. Free AI domain generator, bulk checker, and price comparison.",
+    "Free domain name search with live availability across 1,600+ TLDs. AI domain generator, bulk checker, geo domains, WHOIS lookup, and registrar price comparison — no account required.",
   keywords: [
-    "domain search",
     "domain name search",
     "domain availability checker",
     "instant domain search",
-    "domain name generator",
+    "check domain availability",
     "AI domain generator",
+    "domain name generator",
     "bulk domain search",
-    "domain availability",
+    "geo domain generator",
     "WHOIS lookup",
     "domain price comparison",
     "domain extensions",
     "TLD search",
-    "find domain names",
-    "register domain",
-    "domain tools",
     "brandable domain names",
     "keyword domain finder",
     "domain valuation",
-    "DNS guide",
+    "local SEO domains",
+    "register domain",
   ],
-  authors: [{ name: "DomainDiscovery" }],
-  creator: "DomainDiscovery",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "https://domainsdiscovery.com"
-  ),
+  authors: [{ name: SITE_BRAND.name }],
+  creator: SITE_BRAND.name,
+  metadataBase: new URL(getSiteBaseUrl()),
 
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "/",
-    siteName: "DomainDiscovery",
-    title: "DomainDiscovery — Find Your Perfect Domain in Seconds",
+    siteName: SITE_BRAND.name,
+    title: "Domain Name Search — Free Instant Availability | DomainDiscovery",
     description:
-      "Search 1,600+ domain extensions with instant availability results. Free AI generator, bulk checker, and price comparison.",
+      "Check domain availability across 1,600+ extensions. Free AI generator, bulk search, geo domains, WHOIS, and price compare.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DomainDiscovery — Find Your Perfect Domain in Seconds",
+    title: "Domain Name Search — Free Instant Availability | DomainDiscovery",
     description:
-      "Search 1,600+ domain extensions with instant availability results. Free AI generator, bulk checker, and price comparison.",
+      "Check domain availability across 1,600+ extensions. Free AI generator, bulk search, geo domains, WHOIS, and price compare.",
     creator: "@domainsdiscovery",
   },
   robots: {
@@ -65,12 +68,23 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: process.env.NEXT_PUBLIC_BASE_URL || "https://domainsdiscovery.com",
-    languages: {
-      'en-US': '/en-US',
-    },
+    canonical: getSiteBaseUrl(),
   },
+  // Google Search Console meta verification (Phase F). Set in production env only.
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
   manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    other: [{ rel: "mask-icon", url: "/logo-mark.svg" }],
+  },
 };
 
 export default function RootLayout({
@@ -84,49 +98,19 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "name": "DomainDiscovery",
-              "url": "https://domainsdiscovery.com",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://domainsdiscovery.com/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-              },
-              "description": "Find your perfect domain in seconds. Search 1,600+ extensions with instant availability results.",
-              "publisher": {
-                "@type": "Organization",
-                "name": "DomainDiscovery",
-                "logo": {
-                  "@type": "ImageObject",
-                  "url": "https://domainsdiscovery.com/icon.svg"
-                }
-              }
-            })
+            __html: JSON.stringify(getWebSiteJsonLd()),
           }}
         />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              "name": "DomainDiscovery Search Engine",
-              "applicationCategory": "UtilitiesApplication",
-              "operatingSystem": "All",
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "ratingCount": "1248"
-              },
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              },
-              "description": "Find your perfect domain in seconds. AI-powered domain search engine with real-time availability across 1,600+ TLD extensions."
-            })
+            __html: JSON.stringify(getOrganizationJsonLd()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getSoftwareApplicationJsonLd()),
           }}
         />
         <ThemeProvider>

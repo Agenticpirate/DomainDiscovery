@@ -15,7 +15,19 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:ci": "jest --ci --coverage --maxWorkers=2"
+    "test:ci": "jest --ci --coverage --maxWorkers=2",
+    "prices:unstoppable": "python3 scripts/refresh_unstoppable_prices.py",
+    "prices:tld-list": "python3 scripts/refresh_tld_prices.py --all --workers 2 --delay 0.7 --resume --checkpoint-every 40",
+    "prices:tld-list:full": "python3 scripts/refresh_tld_prices.py --all --workers 2 --delay 0.7 --resume --checkpoint-every 40",
+    "prices:weekly": "python3 scripts/weekly_price_verify.py --batch-size 100 --workers 2",
+    "prices:firecrawl": "python3 scripts/firecrawl_tld_fallback.py --from-failed --limit 20",
+    "tlds:about": "python3 scripts/scrape_tld_about.py --priority-only --wiki",
+    "tlds:about:all": "python3 scripts/scrape_tld_about.py --all --resume --delay 0.35",
+    "tlds:about:wiki": "python3 scripts/scrape_tld_about.py --wiki-only --delay 0.2",
+    "tlds:about:meta": "python3 scripts/enrich_tld_about_meta.py",
+    "seo:index-health": "node scripts/seo-index-health.mjs",
+    "seo:index-health:prod": "node scripts/seo-index-health.mjs --base https://www.domainsdiscovery.com",
+    "learn:expand": "node scripts/expand-learn-phase-d.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.3",

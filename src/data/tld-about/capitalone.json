@@ -1,0 +1,118 @@
+{
+  "tld": ".capitalone",
+  "slug": "capitalone",
+  "title": "About .capitalone domains",
+  "delegationTitle": "Delegation Record for .CAPITALONE",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Capital One Financial Corporation",
+  "sponsorDetail": "Capital One Financial Corporation\n1680 Capital One Drive\nMcLean VA 22102\nUnited States of America (the)",
+  "administrativeContact": "Brand Governance",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://www.capitalone.com",
+  "whoisServer": "whois.nic.capitalone",
+  "rdapServer": "https://rdap.nic.capitalone",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.capitalone",
+      "addresses": [
+        "37.209.192.9",
+        "2001:dcd:1:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "b.nic.capitalone",
+      "addresses": [
+        "37.209.194.9",
+        "2001:dcd:2:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "c.nic.capitalone",
+      "addresses": [
+        "37.209.196.9",
+        "2001:dcd:3:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "x.nic.capitalone",
+      "addresses": [
+        "156.154.172.82",
+        "2610:a1:1074:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "y.nic.capitalone",
+      "addresses": [
+        "156.154.173.82",
+        "2610:a1:1075:0:0:0:1:82"
+      ]
+    },
+    {
+      "host": "z.nic.capitalone",
+      "addresses": [
+        "156.154.174.82",
+        "2610:a1:1076:0:0:0:1:82"
+      ]
+    }
+  ],
+  "about": ".CAPITALONE is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .CAPITALONE is listed by IANA as Capital One Financial Corporation. Anyone can typically register a .CAPITALONE name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/capitalone.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:36:55Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".capitalone",
+    "brand",
+    "brandable names",
+    "capital",
+    "capitalone",
+    "corporate brands",
+    "corporation",
+    "domain",
+    "financial",
+    "generic",
+    "gtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".capitalone is a Generic top-level domain. Managed by Capital One Financial Corporation.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

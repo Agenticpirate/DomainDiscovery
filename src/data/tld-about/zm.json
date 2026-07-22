@@ -1,0 +1,116 @@
+{
+  "tld": ".zm",
+  "slug": "zm",
+  "title": "About .zm domains",
+  "delegationTitle": "Delegation Record for .ZM",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Zambia",
+  "sponsor": "Zambia Information and Communications Technology Authority (ZICTA)",
+  "sponsorDetail": "Zambia Information and Communications Technology Authority (ZICTA)\nStand 4909, Corner of Independence and United Nations Avenue\nLusaka Lusaka 10101\nZambia",
+  "administrativeContact": "Manager - Standards and Networks",
+  "technicalContact": "Manager - Standards and Networks",
+  "registryUrl": "https://registry.zicta.zm",
+  "whoisServer": "whois.zicta.zm",
+  "rdapServer": "https://rdap.nic.zm",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "gransy.nic.zm",
+      "addresses": [
+        "185.38.108.108",
+        "185.28.194.194"
+      ]
+    },
+    {
+      "host": "ns-zm.afrinic.net",
+      "addresses": [
+        "196.216.168.44",
+        "2001:43f8:120:0:0:0:0:44"
+      ]
+    },
+    {
+      "host": "pch.nic.zm",
+      "addresses": [
+        "204.61.216.73",
+        "2001:500:14:6073:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".ZM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Zambia. The IANA root zone lists the registry manager as Zambia Information and Communications Technology Authority (ZICTA). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/zm.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:55:23Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".zm",
+    "authority",
+    "cctld",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "level",
+    "local business",
+    "regional brands",
+    "technology",
+    "top",
+    "zambia",
+    "zicta",
+    "zm"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 3,
+    "cheapestRegistration": {
+      "registrar": "Gandi.net",
+      "price": "$74.70",
+      "value": 74.7
+    },
+    "cheapestRenewal": {
+      "registrar": "Gandi.net",
+      "price": "$143.98",
+      "value": 143.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/zm"
+  },
+  "summary": ".zm is a Country-code top-level domain. Managed by Zambia Information and Communications Technology Authority (ZICTA).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

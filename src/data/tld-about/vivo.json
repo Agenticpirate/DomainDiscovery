@@ -1,0 +1,116 @@
+{
+  "tld": ".vivo",
+  "slug": "vivo",
+  "title": "About .vivo domains",
+  "delegationTitle": "Delegation Record for .VIVO",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Telefonica Brasil S.A.",
+  "sponsorDetail": "Telefonica Brasil S.A.\nAv. Luis Carlos Berrini, 1.376\nS\u00e3o Paulo SP 04571-936\nBrazil",
+  "administrativeContact": "Luciana Teixeiras",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://www.vivo.com.br",
+  "whoisServer": null,
+  "rdapServer": "https://rdap.nic.vivo/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.vivo",
+      "addresses": [
+        "37.209.192.9",
+        "2001:dcd:1:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "b.nic.vivo",
+      "addresses": [
+        "37.209.194.9",
+        "2001:dcd:2:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "c.nic.vivo",
+      "addresses": [
+        "37.209.196.9",
+        "2001:dcd:3:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "ns1.dns.nic.vivo",
+      "addresses": [
+        "156.154.169.57",
+        "2610:a1:1071:0:0:0:1:39"
+      ]
+    },
+    {
+      "host": "ns2.dns.nic.vivo",
+      "addresses": [
+        "156.154.170.57",
+        "2610:a1:1072:0:0:0:1:39"
+      ]
+    },
+    {
+      "host": "ns3.dns.nic.vivo",
+      "addresses": [
+        "156.154.171.57",
+        "2610:a1:1073:0:0:0:1:39"
+      ]
+    }
+  ],
+  "about": ".VIVO is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .VIVO is listed by IANA as Telefonica Brasil S.A.. Anyone can typically register a .VIVO name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/vivo.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:52:07Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".vivo",
+    "brand",
+    "brandable names",
+    "brasil",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "telefonica",
+    "top",
+    "vivo"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".vivo is a Generic top-level domain. Managed by Telefonica Brasil S.A..",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

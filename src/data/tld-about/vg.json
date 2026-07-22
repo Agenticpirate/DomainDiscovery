@@ -1,0 +1,123 @@
+{
+  "tld": ".vg",
+  "slug": "vg",
+  "title": "About .vg domains",
+  "delegationTitle": "Delegation Record for .VG",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Virgin Islands, British",
+  "sponsor": "Telecommunications Regulatory Commission of the Virgin Islands",
+  "sponsorDetail": "Telecommunications Regulatory Commission of the Virgin Islands\n27 Fish Lock Road, 3rd Floor\nRoad Town, Tortola\nRoad Town Tortola VG 1110\nVirgin Islands (British)",
+  "administrativeContact": "Chief Executive Officer",
+  "technicalContact": "CTO",
+  "registryUrl": "http://nic.vg",
+  "whoisServer": "whois.nic.vg",
+  "rdapServer": "https://rdap.centralnic.com/vg",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.vg",
+      "addresses": [
+        "194.169.218.104",
+        "2001:67c:13cc:0:0:0:1:104"
+      ]
+    },
+    {
+      "host": "b.nic.vg",
+      "addresses": [
+        "185.24.64.104",
+        "2a04:2b00:13cc:0:0:0:1:104"
+      ]
+    },
+    {
+      "host": "c.nic.vg",
+      "addresses": [
+        "212.18.248.104",
+        "2a04:2b00:13ee:0:0:0:0:104"
+      ]
+    },
+    {
+      "host": "d.nic.vg",
+      "addresses": [
+        "212.18.249.104",
+        "2a04:2b00:13ff:0:0:0:0:104"
+      ]
+    }
+  ],
+  "about": ".VG is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Virgin Islands, British. The IANA root zone lists the registry manager as Telecommunications Regulatory Commission of the Virgin Islands. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/vg.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:51:57Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".vg",
+    "british",
+    "cctld",
+    "code",
+    "commission",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "islands",
+    "level",
+    "local business",
+    "regional brands",
+    "regulatory",
+    "telecommunications",
+    "top",
+    "vg",
+    "virgin"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 30,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$26.88",
+      "value": 26.88
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$26.88",
+      "value": 26.88
+    },
+    "sourceUrl": "https://tld-list.com/tld/vg"
+  },
+  "summary": ".vg is a Country-code top-level domain. Managed by Telecommunications Regulatory Commission of the Virgin Islands.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

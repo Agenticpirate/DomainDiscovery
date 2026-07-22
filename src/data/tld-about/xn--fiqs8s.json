@@ -1,0 +1,120 @@
+{
+  "tld": ".xn--fiqs8s",
+  "slug": "xn--fiqs8s",
+  "title": "About .xn--fiqs8s domains",
+  "delegationTitle": "Delegation Record for .\u4e2d\u56fd",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code CN",
+  "designation": "Country-code top-level domain designated for China",
+  "sponsor": "China Internet Network Information Center (CNNIC)",
+  "sponsorDetail": "China Internet Network Information Center (CNNIC)\nBuilding 4, No.9 West Road , Automobile Museum, Fengtai District\nBeijing 100070\nChina",
+  "administrativeContact": "Yulin Liu",
+  "technicalContact": "Anlei Hu",
+  "registryUrl": "http://www.cnnic.cn",
+  "whoisServer": "whois.cnnic.cn",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "h.dns.cn",
+      "addresses": [
+        "125.208.32.1",
+        "2001:dc7:fffe:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "i.dns.cn",
+      "addresses": [
+        "125.208.33.1",
+        "2001:dc7:ffff:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "j.dns.cn",
+      "addresses": [
+        "125.208.34.1",
+        "2001:dc7:fffd:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "k.dns.cn",
+      "addresses": [
+        "125.208.35.1",
+        "2001:dc7:fffc:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "l.dns.cn",
+      "addresses": [
+        "125.208.36.1",
+        "2001:dc7:fffb:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".XN--FIQS8S is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for China. The IANA root zone lists the registry manager as China Internet Network Information Center (CNNIC). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--fiqs8s.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:38Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--fiqs8s",
+    "cctld",
+    "center",
+    "china",
+    "cnnic",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "internet",
+    "letter",
+    "level",
+    "local business",
+    "network",
+    "regional brands",
+    "top",
+    "two",
+    "xn--fiqs8s"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--fiqs8s is a Country-code top-level domain designated for two-letter country code CN. Managed by China Internet Network Information Center (CNNIC).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

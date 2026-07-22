@@ -1,0 +1,117 @@
+{
+  "tld": ".aq",
+  "slug": "aq",
+  "title": "About .aq domains",
+  "delegationTitle": "Delegation Record for .AQ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Antarctica",
+  "sponsor": "Antarctica Network Information Centre Limited",
+  "sponsorDetail": "Antarctica Network Information Centre Limited\n40 Cameo Grove\nMarshland\nChristchurch 8083\nNew Zealand",
+  "administrativeContact": "Peter Mott",
+  "technicalContact": "IANA Administrator",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1992-02-26",
+  "recordUpdated": "2025-01-21",
+  "nameServers": [
+    {
+      "host": "fork.sth.dnsnode.net",
+      "addresses": [
+        "77.72.229.254",
+        "2a01:3f0:0:306:0:0:0:53"
+      ]
+    },
+    {
+      "host": "ns1.anycast.dns.aq",
+      "addresses": [
+        "204.61.216.132",
+        "2001:500:14:6132:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ns99.dns.net.nz",
+      "addresses": [
+        "202.46.190.131",
+        "2001:dce:2000:2:0:0:0:131"
+      ]
+    }
+  ],
+  "about": ".AQ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Antarctica. The IANA root zone lists the registry manager as Antarctica Network Information Centre Limited. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.aq is the Internet country code top-level domain (ccTLD) for Antarctica (itself not a country). It is derived from the French Antarctique and is reserved for organizations that work in Antarctica or promote the Antarctic and Southern Ocean regions. It is administered by Peter Mott of Antarctica Network Information Centre Limited from Christchurch, New Zealand.\n.aq domain names are available free of charge, and registration is granted for a period of 24 months. However, registrants must have a \"physical presence\" in Antarctica which, aside from working on the continent, can include:\n\nUnattended installations owned or operated by the registrant, or\nShort term visits to the ice by the registrant or its employees, in which a letter signed by the officer in charge of the base or expedition is required.\nAs a general rule, registrants are only allocated a single .aq domain name. The registry does not have a website. Registration is only possible by contacting Antarctica Network Information Centre Limited.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/aq.html",
+  "wikipedia": ".aq is the Internet country code top-level domain (ccTLD) for Antarctica (itself not a country). It is derived from the French Antarctique and is reserved for organizations that work in Antarctica or promote the Antarctic and Southern Ocean regions. It is administered by Peter Mott of Antarctica Network Information Centre Limited from Christchurch, New Zealand.\n.aq domain names are available free of charge, and registration is granted for a period of 24 months. However, registrants must have a \"physical presence\" in Antarctica which, aside from working on the continent, can include:\n\nUnattended installations owned or operated by the registrant, or\nShort term visits to the ice by the registrant or its employees, in which a letter signed by the officer in charge of the base or expedition is required.\nAs a general rule, registrants are only allocated a single .aq domain name. The registry does not have a website. Registration is only possible by contacting Antarctica Network Information Centre Limited.",
+  "scrapedAt": "2026-07-21T21:34:54Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".aq",
+    "antarctica",
+    "aq",
+    "cctld",
+    "centre",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "level",
+    "limited",
+    "local business",
+    "network",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 7,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$52.99",
+      "value": 52.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$44.99",
+      "value": 44.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/aq"
+  },
+  "summary": ".aq is a Country-code top-level domain. Managed by Antarctica Network Information Centre Limited.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

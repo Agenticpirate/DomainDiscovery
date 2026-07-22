@@ -1,0 +1,101 @@
+{
+  "tld": ".xn--mgbai9azgqp6j",
+  "slug": "xn--mgbai9azgqp6j",
+  "title": "About .xn--mgbai9azgqp6j domains",
+  "delegationTitle": "Delegation Record for .\u067e\u0627\u06a9\u0633\u062a\u0627\u0646",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code PK",
+  "designation": "Country-code top-level domain designated for Pakistan",
+  "sponsor": "National Telecommunication Corporation",
+  "sponsorDetail": "National Telecommunication Corporation\nNTC HQ Sector G-5/2\nIslamabad 44000\nPakistan",
+  "administrativeContact": "Miraj Gul",
+  "technicalContact": "Muhammad Kashif Fayyaz",
+  "registryUrl": null,
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns1.ntc.org.pk",
+      "addresses": [
+        "43.250.84.53"
+      ]
+    },
+    {
+      "host": "ns2.ntc.org.pk",
+      "addresses": [
+        "43.250.84.54"
+      ]
+    },
+    {
+      "host": "ns3.ntc.org.pk",
+      "addresses": [
+        "36.50.76.15"
+      ]
+    }
+  ],
+  "about": ".XN--MGBAI9AZGQP6J is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Pakistan. The IANA root zone lists the registry manager as National Telecommunication Corporation. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--mgbai9azgqp6j.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:54:15Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--mgbai9azgqp6j",
+    "cctld",
+    "code",
+    "corporation",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "letter",
+    "level",
+    "local business",
+    "national",
+    "pakistan",
+    "regional brands",
+    "telecommunication",
+    "top",
+    "two",
+    "xn--mgbai9azgqp6j"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--mgbai9azgqp6j is a Country-code top-level domain designated for two-letter country code PK. Managed by National Telecommunication Corporation.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

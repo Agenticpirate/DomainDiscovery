@@ -1,0 +1,132 @@
+{
+  "tld": ".club",
+  "slug": "club",
+  "title": "About .club domains",
+  "delegationTitle": "Delegation Record for .CLUB",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Registry Services, LLC",
+  "sponsorDetail": "Registry Services, LLC\n100 S. Mill Ave, Suite 1600\nTempe AZ 85281\nUnited States of America (the)",
+  "administrativeContact": "IANA Contact",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://nic.club/",
+  "whoisServer": "whois.nic.club",
+  "rdapServer": "https://rdap.nic.club/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.club",
+      "addresses": [
+        "37.209.192.10",
+        "2001:dcd:1:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "b.nic.club",
+      "addresses": [
+        "37.209.194.10",
+        "2001:dcd:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.nic.club",
+      "addresses": [
+        "37.209.196.10",
+        "2001:dcd:3:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "ns1.dns.nic.club",
+      "addresses": [
+        "156.154.144.215",
+        "2610:a1:1071:0:0:0:0:d7"
+      ]
+    },
+    {
+      "host": "ns2.dns.nic.club",
+      "addresses": [
+        "156.154.145.215",
+        "2610:a1:1072:0:0:0:0:d7"
+      ]
+    },
+    {
+      "host": "ns3.dns.nic.club",
+      "addresses": [
+        "156.154.159.215",
+        "2610:a1:1073:0:0:0:0:d7"
+      ]
+    }
+  ],
+  "about": ".CLUB is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .CLUB is listed by IANA as Registry Services, LLC. Anyone can typically register a .CLUB name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.club, often stylized as .CLUB and sometimes dot-club, is a top-level domain (TLD). It was proposed in ICANN's new generic top-level domain (gTLD) program, and became available to the general public on May 7, 2014. GoDaddy is the domain name registry for the string.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/club.html",
+  "wikipedia": ".club, often stylized as .CLUB and sometimes dot-club, is a top-level domain (TLD). It was proposed in ICANN's new generic top-level domain (gTLD) program, and became available to the general public on May 7, 2014. GoDaddy is the domain name registry for the string.",
+  "scrapedAt": "2026-07-21T21:33:49Z",
+  "categories": [
+    "lifestyle"
+  ],
+  "useCases": [
+    "Personal brands",
+    "Communities",
+    "Lifestyle products"
+  ],
+  "keywords": [
+    ".club",
+    "club",
+    "communities",
+    "domain",
+    "generic",
+    "gtld",
+    "level",
+    "lifestyle",
+    "lifestyle products",
+    "personal brands",
+    "registry",
+    "services",
+    "top"
+  ],
+  "primaryCategory": "lifestyle",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 51,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$1.24",
+      "value": 1.24
+    },
+    "cheapestRenewal": {
+      "registrar": "Cloudflare",
+      "price": "$11.13",
+      "value": 11.13
+    },
+    "sourceUrl": "https://tld-list.com/tld/club"
+  },
+  "summary": ".club is a Generic top-level domain. Managed by Registry Services, LLC.",
+  "wikiCheckedAt": "2026-07-22T04:16:13Z",
+  "wikiEnrichedAt": "2026-07-22T04:16:13Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

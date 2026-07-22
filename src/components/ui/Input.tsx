@@ -33,17 +33,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const hasError = !!error;
     const hasSuccess = !!success;
 
+    // Smooth border-only focus — avoid transition-all (it flashes ring/shadow)
     const baseStyles =
-      'w-full rounded-xl px-3 py-2.5 text-sm sm:px-3.5 sm:py-2.5 transition-all duration-150 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed';
-
-    const themeStyles =
-      'bg-[var(--input-bg)] border text-[var(--text-primary)] placeholder:text-[var(--input-placeholder)]';
+      'w-full rounded-xl px-3 py-2.5 text-sm sm:px-3.5 sm:py-2.5 border bg-[var(--input-bg)] text-[var(--text-primary)] placeholder:text-[var(--input-placeholder)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 shadow-none transition-[border-color,background-color] duration-200 ease-out disabled:opacity-50 disabled:cursor-not-allowed';
 
     const stateStyles = hasError
-      ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500/20'
+      ? 'border-red-500/50 focus:border-red-400/80'
       : hasSuccess
-      ? 'border-emerald-500/50 focus:border-emerald-500 focus:ring-emerald-500/20'
-      : 'border-[var(--input-border)] focus:border-[var(--input-border-focus)] focus:ring-[var(--input-ring)]';
+      ? 'border-emerald-500/50 focus:border-emerald-400/80'
+      : 'border-[var(--input-border)] focus:border-[var(--input-border-focus)]';
 
     const paddingStyles = leftIcon
       ? 'pl-10 sm:pl-11'
@@ -71,7 +69,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             id={inputId}
-            className={cn(baseStyles, themeStyles, stateStyles, paddingStyles, className)}
+            className={cn(baseStyles, stateStyles, paddingStyles, className)}
             disabled={disabled}
             aria-invalid={hasError}
             aria-describedby={

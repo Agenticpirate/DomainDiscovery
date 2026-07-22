@@ -1,0 +1,119 @@
+{
+  "tld": ".music",
+  "slug": "music",
+  "title": "About .music domains",
+  "delegationTitle": "Delegation Record for .MUSIC",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "DotMusic Limited",
+  "sponsorDetail": "DotMusic Limited\n19 Mesolongiou Street\nLimassol 3032\nCyprus",
+  "administrativeContact": "Constantinos Roussos",
+  "technicalContact": "Francisco Obispo (CTO)",
+  "registryUrl": "https://nic.music/",
+  "whoisServer": "whois.registryservices.music",
+  "rdapServer": "https://rdap.registryservices.music/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns01.trs-dns.com",
+      "addresses": [
+        "64.96.1.1",
+        "2620:57:4001:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns01.trs-dns.net",
+      "addresses": [
+        "64.96.2.1",
+        "2620:57:4002:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns10.trs-dns.info",
+      "addresses": [
+        "64.78.204.1",
+        "2620:171:812:1534:8:0:0:1"
+      ]
+    },
+    {
+      "host": "ns10.trs-dns.org",
+      "addresses": [
+        "64.78.205.1",
+        "2620:171:813:1534:8:0:0:1"
+      ]
+    }
+  ],
+  "about": ".MUSIC is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .MUSIC is listed by IANA as DotMusic Limited. Anyone can typically register a .MUSIC name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.music is a community-based top-level domain name (TLD) operated for the benefit of the global music community. It was one of the most highly contested new gTLDs, with eight applicants in contention.\nOn April 17, 2019, the .MUSIC registry, the International Federation of the Phonographic Industry, Conf\u00e9d\u00e9ration Internationale des Soci\u00e9t\u00e9s d'Auteurs et Compositeurs, the International Federation of Musicians, the International Federation of Arts Councils and Culture Agencies,  the Recording Industry Association of America, the National Music Publishers' Association, The Recording Academy, the Independent Music Companies Association, the Worldwide Independent Network, the American Association of Independent Music, the NSAI, the National Association of Music Merchants (NAMM), and the Independent Music Publishers International Forum (IMPF) announced that the global music community based application, that was supported by a global music coalition with members representing over 95% of global music consumed, was approved by the Internet Corporation for Assigned Names and Numbers (ICANN). The .MUSIC registry agreement was signed on May 4, 2021.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/music.html",
+  "wikipedia": ".music is a community-based top-level domain name (TLD) operated for the benefit of the global music community. It was one of the most highly contested new gTLDs, with eight applicants in contention.\nOn April 17, 2019, the .MUSIC registry, the International Federation of the Phonographic Industry, Conf\u00e9d\u00e9ration Internationale des Soci\u00e9t\u00e9s d'Auteurs et Compositeurs, the International Federation of Musicians, the International Federation of Arts Councils and Culture Agencies,  the Recording Industry Association of America, the National Music Publishers' Association, The Recording Academy, the Independent Music Companies Association, the Worldwide Independent Network, the American Association of Independent Music, the NSAI, the National Association of Music Merchants (NAMM), and the Independent Music Publishers International Forum (IMPF) announced that the global music community based application, that was supported by a global music coalition with members representing over 95% of global music consumed, was approved by the Internet Corporation for Assigned Names and Numbers (ICANN). The .MUSIC registry agreement was signed on May 4, 2021.",
+  "scrapedAt": "2026-07-21T21:34:44Z",
+  "categories": [
+    "creative"
+  ],
+  "useCases": [
+    "Portfolios",
+    "Agencies",
+    "Content creators",
+    "Media"
+  ],
+  "keywords": [
+    ".music",
+    "agencies",
+    "content creators",
+    "creative",
+    "domain",
+    "dotmusic",
+    "generic",
+    "gtld",
+    "level",
+    "limited",
+    "music",
+    "portfolios",
+    "top"
+  ],
+  "primaryCategory": "creative",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 17,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$38.50",
+      "value": 38.5
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$38.50",
+      "value": 38.5
+    },
+    "sourceUrl": "https://tld-list.com/tld/music"
+  },
+  "summary": ".music is a Generic top-level domain. Managed by DotMusic Limited.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

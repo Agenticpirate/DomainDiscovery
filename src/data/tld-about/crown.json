@@ -1,0 +1,103 @@
+{
+  "tld": ".crown",
+  "slug": "crown",
+  "title": "About .crown domains",
+  "delegationTitle": "Delegation Record for .CROWN",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Crown Equipment Corporation",
+  "sponsorDetail": "Crown Equipment Corporation\n44 S. Washington Street\nNew Bremen OH 45869\nUnited States of America (the)",
+  "administrativeContact": "Ron Meyer",
+  "technicalContact": "Don Slaunwhite, Fury Registry Services",
+  "registryUrl": "http://www.crown.com/",
+  "whoisServer": "whois.nic.crown",
+  "rdapServer": "https://rdap.crown.fury.ca/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.ns.nic.crown",
+      "addresses": [
+        "185.159.197.5",
+        "2620:10a:80aa:0:0:0:0:5"
+      ]
+    },
+    {
+      "host": "b.ns.nic.crown",
+      "addresses": [
+        "185.159.198.5",
+        "2620:10a:80ab:0:0:0:0:5"
+      ]
+    },
+    {
+      "host": "c.ns.nic.crown",
+      "addresses": [
+        "45.142.220.101",
+        "2a0e:dbc0:0:0:0:0:0:101"
+      ]
+    },
+    {
+      "host": "d.ns.nic.crown",
+      "addresses": [
+        "185.159.199.5",
+        "2620:10a:80ac:0:0:0:0:5"
+      ]
+    }
+  ],
+  "about": ".CROWN is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .CROWN is listed by IANA as Crown Equipment Corporation. Anyone can typically register a .CROWN name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/crown.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:38:16Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".crown",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "corporation",
+    "crown",
+    "domain",
+    "equipment",
+    "generic",
+    "gtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".crown is a Generic top-level domain. Managed by Crown Equipment Corporation.",
+  "wikiCheckedAt": "2026-07-22T04:18:51Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

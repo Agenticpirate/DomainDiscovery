@@ -1,0 +1,146 @@
+{
+  "tld": ".hu",
+  "slug": "hu",
+  "title": "About .hu domains",
+  "delegationTitle": "Delegation Record for .HU",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Hungary",
+  "sponsor": "Council of Hungarian Internet Providers (CHIP)",
+  "sponsorDetail": "Council of Hungarian Internet Providers (CHIP)\nBl\u00e1thy Ott\u00f3 utca 9.\nBudapest H-1089\nHungary",
+  "administrativeContact": "J\u00e1nos Zsak\u00f3",
+  "technicalContact": "CHIP Hostmaster",
+  "registryUrl": "https://www.domain.hu",
+  "whoisServer": "whois.nic.hu",
+  "rdapServer": null,
+  "registrationDate": "1990-11-07",
+  "recordUpdated": "2025-09-12",
+  "nameServers": [
+    {
+      "host": "a.hu",
+      "addresses": [
+        "5.28.0.97",
+        "2a00:e6a0:3:1014:0:0:0:97"
+      ]
+    },
+    {
+      "host": "b.hu",
+      "addresses": [
+        "193.41.82.18",
+        "2a0f:7ec0:100:100:0:0:0:53"
+      ]
+    },
+    {
+      "host": "c.hu",
+      "addresses": [
+        "195.111.1.92",
+        "2001:738:2:2:0:0:0:53"
+      ]
+    },
+    {
+      "host": "d.hu",
+      "addresses": [
+        "5.28.0.99",
+        "2a00:e6a0:3:1014:0:0:53:99"
+      ]
+    },
+    {
+      "host": "e.hu",
+      "addresses": [
+        "194.0.25.11",
+        "2001:678:20:0:0:0:0:11"
+      ]
+    },
+    {
+      "host": "f.hu",
+      "addresses": [
+        "194.0.9.1",
+        "2001:678:c:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "p.hu",
+      "addresses": [
+        "204.61.216.146",
+        "2001:500:14:6146:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".HU is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Hungary. The IANA root zone lists the registry manager as Council of Hungarian Internet Providers (CHIP). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.hu is the Internet country code top-level domain (ccTLD) for Hungary. Registrations are processed via accredited registrars.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/hu.html",
+  "wikipedia": ".hu is the Internet country code top-level domain (ccTLD) for Hungary. Registrations are processed via accredited registrars.",
+  "scrapedAt": "2026-07-21T21:42:19Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".hu",
+    "cctld",
+    "chip",
+    "code",
+    "council",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "hu",
+    "hungarian",
+    "hungary",
+    "internet",
+    "level",
+    "local business",
+    "providers",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 18,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$6.69",
+      "value": 6.69
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$6.99",
+      "value": 6.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/hu"
+  },
+  "summary": ".hu is a Country-code top-level domain. Managed by Council of Hungarian Internet Providers (CHIP).",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

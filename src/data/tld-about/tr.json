@@ -1,0 +1,134 @@
+{
+  "tld": ".tr",
+  "slug": "tr",
+  "title": "About .tr domains",
+  "delegationTitle": "Delegation Record for .TR",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for T\u00fcrkiye",
+  "sponsor": "Bilgi Teknolojileri ve \u0130leti\u015fim Kurumu (BTK)",
+  "sponsorDetail": "Bilgi Teknolojileri ve \u0130leti\u015fim Kurumu (BTK)\nEskisehir Yolu 10.Km No:276 \u00c7ankaya\nAnkara 06530\nT\u00fcrkiye",
+  "administrativeContact": "Vice President",
+  "technicalContact": "Engineer",
+  "registryUrl": "http://www.trabis.gov.tr",
+  "whoisServer": "whois.trabis.gov.tr",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns43.ns.tr",
+      "addresses": [
+        "185.7.0.4",
+        "2001:a98:13:0:0:0:0:43"
+      ]
+    },
+    {
+      "host": "ns44.ns.tr",
+      "addresses": [
+        "185.7.0.5",
+        "2001:a98:13:0:0:0:0:44"
+      ]
+    },
+    {
+      "host": "ns61.ns.tr",
+      "addresses": [
+        "206.51.254.1",
+        "2620:171:804:ad2:0:0:0:1"
+      ]
+    },
+    {
+      "host": "ns71.ns.tr",
+      "addresses": [
+        "185.67.32.53"
+      ]
+    },
+    {
+      "host": "ns72.ns.tr",
+      "addresses": [
+        "40.68.114.66",
+        "2603:1020:201:10:0:0:0:111"
+      ]
+    },
+    {
+      "host": "ns73.ns.tr",
+      "addresses": [
+        "31.145.253.159"
+      ]
+    },
+    {
+      "host": "ns74.ns.tr",
+      "addresses": [
+        "31.145.253.160"
+      ]
+    },
+    {
+      "host": "ns75.ns.tr",
+      "addresses": [
+        "88.255.61.201"
+      ]
+    }
+  ],
+  "about": ".TR is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for T\u00fcrkiye. The IANA root zone lists the registry manager as Bilgi Teknolojileri ve \u0130leti\u015fim Kurumu (BTK). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/tr.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:51:23Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".tr",
+    "bilgi",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "kurumu",
+    "leti",
+    "level",
+    "local business",
+    "regional brands",
+    "rkiye",
+    "teknolojileri",
+    "top",
+    "tr"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".tr is a Country-code top-level domain. Managed by Bilgi Teknolojileri ve \u0130leti\u015fim Kurumu (BTK).",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

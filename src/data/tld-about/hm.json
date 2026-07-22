@@ -1,0 +1,115 @@
+{
+  "tld": ".hm",
+  "slug": "hm",
+  "title": "About .hm domains",
+  "delegationTitle": "Delegation Record for .HM",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Heard Island and McDonald Islands",
+  "sponsor": "HM Domain Registry",
+  "sponsorDetail": "HM Domain Registry\nPO Box 383\nDickson ACT 2602\nAustralia",
+  "administrativeContact": "Edward Sweeney",
+  "technicalContact": "HM Hostmaster",
+  "registryUrl": "http://www.registry.hm",
+  "whoisServer": "whois.registry.hm",
+  "rdapServer": null,
+  "registrationDate": "1997-07-24",
+  "recordUpdated": "2026-07-07",
+  "nameServers": [
+    {
+      "host": "ns1.registry.hm",
+      "addresses": [
+        "223.252.41.82"
+      ]
+    },
+    {
+      "host": "ns2.registry.hm",
+      "addresses": [
+        "223.252.41.83"
+      ]
+    },
+    {
+      "host": "ns3.registry.hm",
+      "addresses": [
+        "128.199.180.188"
+      ]
+    }
+  ],
+  "about": ".HM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Heard Island and McDonald Islands. The IANA root zone lists the registry manager as HM Domain Registry. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.hm is the Internet country code top-level domain (ccTLD) of the Heard and McDonald Islands, uninhabited islands in the southern Indian Ocean under the sovereign control of Australia.\nThe .hm registry was added in July 1997. The Australian government, the only entity with any formal ties to the territory, does not use the domain, instead using .au, the domain for Australia, for the islands' official website. An Australian registrar, the HM Domain Registry (registry.hm), manages the domain and has opened it to outside registration. Any entity can register an .hm domain, with all domains directly registered at the second level.\nThe domain zone is being used by several websites related to Khanty-Mansiysk (Russia). Examples are a local engineering company Istok and Avto HM VK group's short link.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/hm.html",
+  "wikipedia": ".hm is the Internet country code top-level domain (ccTLD) of the Heard and McDonald Islands, uninhabited islands in the southern Indian Ocean under the sovereign control of Australia.\nThe .hm registry was added in July 1997. The Australian government, the only entity with any formal ties to the territory, does not use the domain, instead using .au, the domain for Australia, for the islands' official website. An Australian registrar, the HM Domain Registry (registry.hm), manages the domain and has opened it to outside registration. Any entity can register an .hm domain, with all domains directly registered at the second level.\nThe domain zone is being used by several websites related to Khanty-Mansiysk (Russia). Examples are a local engineering company Istok and Avto HM VK group's short link.",
+  "scrapedAt": "2026-07-21T21:41:57Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".hm",
+    "and",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "heard",
+    "hm",
+    "island",
+    "islands",
+    "level",
+    "local business",
+    "mcdonald",
+    "regional brands",
+    "registry",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 9,
+    "cheapestRegistration": {
+      "registrar": "Netim",
+      "price": "$44.00",
+      "value": 44.0
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$44.00",
+      "value": 44.0
+    },
+    "sourceUrl": "https://tld-list.com/tld/hm"
+  },
+  "summary": ".hm is a Country-code top-level domain. Managed by HM Domain Registry.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

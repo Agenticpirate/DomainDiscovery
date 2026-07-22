@@ -1,0 +1,118 @@
+{
+  "tld": ".hotels",
+  "slug": "hotels",
+  "title": "About .hotels domains",
+  "delegationTitle": "Delegation Record for .HOTELS",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Booking.com B.V.",
+  "sponsorDetail": "Booking.com B.V.\nHerengracht 597\nAmsterdam Noord-Holland 1017 CE\nNetherlands (the)",
+  "administrativeContact": "Christopher Niemi",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://www.booking.com",
+  "whoisServer": "whois.nic.hotels",
+  "rdapServer": "https://rdap.nic.hotels/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.hotels",
+      "addresses": [
+        "37.209.192.10",
+        "2001:dcd:1:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "b.nic.hotels",
+      "addresses": [
+        "37.209.194.10",
+        "2001:dcd:2:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.nic.hotels",
+      "addresses": [
+        "37.209.196.10",
+        "2001:dcd:3:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "ns1.dns.nic.hotels",
+      "addresses": [
+        "156.154.169.3",
+        "2610:a1:1071:0:0:0:1:3"
+      ]
+    },
+    {
+      "host": "ns2.dns.nic.hotels",
+      "addresses": [
+        "156.154.170.3",
+        "2610:a1:1072:0:0:0:1:3"
+      ]
+    },
+    {
+      "host": "ns3.dns.nic.hotels",
+      "addresses": [
+        "156.154.171.3",
+        "2610:a1:1073:0:0:0:1:3"
+      ]
+    }
+  ],
+  "about": ".HOTELS is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .HOTELS is listed by IANA as Booking.com B.V.. Anyone can typically register a .HOTELS name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/hotels.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:42:12Z",
+  "categories": [
+    "travel"
+  ],
+  "useCases": [
+    "Travel brands",
+    "Tourism",
+    "Hospitality"
+  ],
+  "keywords": [
+    ".hotels",
+    "booking",
+    "domain",
+    "generic",
+    "gtld",
+    "hospitality",
+    "hotels",
+    "level",
+    "top",
+    "tourism",
+    "travel",
+    "travel brands"
+  ],
+  "primaryCategory": "travel",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".hotels is a Generic top-level domain. Managed by Booking.com B.V..",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

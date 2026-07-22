@@ -1,0 +1,131 @@
+{
+  "tld": ".ci",
+  "slug": "ci",
+  "title": "About .ci domains",
+  "delegationTitle": "Delegation Record for .CI",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for C\u00f4te d&#x27;Ivoire",
+  "sponsor": "Autorit\u00e9 de R\u00e9gulation des T\u00e9l\u00e9communications/TIC de C\u00f4te d\u2019lvoire (ARTCI)",
+  "sponsorDetail": "Autorit\u00e9 de R\u00e9gulation des T\u00e9l\u00e9communications/TIC de C\u00f4te d\u2019lvoire (ARTCI)\n18 BP 2203 18 Marcory Anoumanbo\nAbidjan\nC\u00f4te d'Ivoire",
+  "administrativeContact": "YAPOGA NICAISE",
+  "technicalContact": "BOYER JEAN YANNICK",
+  "registryUrl": "https://registry.nic.ci/login.jsp",
+  "whoisServer": "whois.nic.ci",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "any.nic.ci",
+      "addresses": [
+        "204.61.216.120",
+        "2001:500:14:6120:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ci.hosting.nic.fr",
+      "addresses": [
+        "192.134.0.49",
+        "2001:660:3006:1:0:0:1:1"
+      ]
+    },
+    {
+      "host": "ns-ci.afrinic.net",
+      "addresses": [
+        "196.216.168.30",
+        "2001:43f8:120:0:0:0:0:30"
+      ]
+    },
+    {
+      "host": "ns.nic.ci",
+      "addresses": [
+        "196.49.0.84"
+      ]
+    },
+    {
+      "host": "phloem.uoregon.edu",
+      "addresses": [
+        "128.223.32.35",
+        "2001:468:d01:20:0:0:80df:2023"
+      ]
+    }
+  ],
+  "about": ".CI is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for C\u00f4te d&#x27;Ivoire. The IANA root zone lists the registry manager as Autorit\u00e9 de R\u00e9gulation des T\u00e9l\u00e9communications/TIC de C\u00f4te d\u2019lvoire (ARTCI). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ci is the Internet country code top-level domain (ccTLD) for C\u00f4te d'Ivoire.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ci.html",
+  "wikipedia": ".ci is the Internet country code top-level domain (ccTLD) for C\u00f4te d'Ivoire.",
+  "scrapedAt": "2026-07-21T21:37:31Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ci",
+    "artci",
+    "autorit",
+    "cctld",
+    "ci",
+    "code",
+    "communications",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "gulation",
+    "ivoire",
+    "level",
+    "local business",
+    "lvoire",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 14,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$16.99",
+      "value": 16.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$18.49",
+      "value": 18.49
+    },
+    "sourceUrl": "https://tld-list.com/tld/ci"
+  },
+  "summary": ".ci is a Country-code top-level domain. Managed by Autorit\u00e9 de R\u00e9gulation des T\u00e9l\u00e9communications/TIC de C\u00f4te d\u2019lvoire (ARTCI).",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

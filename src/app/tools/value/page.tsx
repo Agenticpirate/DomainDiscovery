@@ -6,6 +6,8 @@ import { Footer } from '@/components/layout/Footer';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { DomainValueEstimate } from '@/components/domain/DomainValueEstimate';
+import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
+import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function ValuePage() {
@@ -41,11 +43,13 @@ export default function ValuePage() {
         </section>
 
         {/* Value Estimator */}
-        <section className="px-4 sm:px-6 pb-12 sm:pb-14">
+        <section className="px-4 sm:px-6 pb-8 sm:pb-10">
           <div className="max-w-2xl mx-auto">
             <DomainValueEstimate />
           </div>
         </section>
+
+        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.value} compact />
       </main>
 
       <Footer />

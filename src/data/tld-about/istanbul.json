@@ -1,0 +1,116 @@
+{
+  "tld": ".istanbul",
+  "slug": "istanbul",
+  "title": "About .istanbul domains",
+  "delegationTitle": "Delegation Record for .ISTANBUL",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Istanbul Metropolitan Municipality",
+  "sponsorDetail": "Istanbul Metropolitan Municipality\nIstanbul Metropolitan Municipality Department of Electrical Engineering Hac\u0131 ahmet mahallesi Muhsin yaz\u0131c\u0131o\u011flu caddesi no:1\nBeyo\u011flu/\u0130stanbul 34440\nTurkey",
+  "administrativeContact": "Registry Manager",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.nic.istanbul",
+  "whoisServer": "whois.nic.istanbul",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.istanbul",
+      "addresses": [
+        "65.22.144.9",
+        "2a01:8840:8e:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "a2.nic.istanbul",
+      "addresses": [
+        "65.22.147.9",
+        "2a01:8840:91:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "b0.nic.istanbul",
+      "addresses": [
+        "65.22.145.9",
+        "2a01:8840:8f:0:0:0:0:9"
+      ]
+    },
+    {
+      "host": "c0.nic.istanbul",
+      "addresses": [
+        "65.22.146.9",
+        "2a01:8840:90:0:0:0:0:9"
+      ]
+    }
+  ],
+  "about": ".ISTANBUL is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .ISTANBUL is listed by IANA as Istanbul Metropolitan Municipality. Anyone can typically register a .ISTANBUL name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.istanbul and .ist  are approved top level domains (TLD) for the Internet. It is a community-based sponsored top-level domain by Istanbul Metropolitan Municipality and subsidiary Medya A.\u015e. According to the Medya A.\u015e., .istanbul will improve awareness on Istanbul's historical heritage and help economic growth by allowing unlimited and open registration of the names.\nAlong with TLDs such as .cat and .asia, .istanbul and other new TLDs fall into the new category of GeoTLDs.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/istanbul.html",
+  "wikipedia": ".istanbul and .ist  are approved top level domains (TLD) for the Internet. It is a community-based sponsored top-level domain by Istanbul Metropolitan Municipality and subsidiary Medya A.\u015e. According to the Medya A.\u015e., .istanbul will improve awareness on Istanbul's historical heritage and help economic growth by allowing unlimited and open registration of the names.\nAlong with TLDs such as .cat and .asia, .istanbul and other new TLDs fall into the new category of GeoTLDs.",
+  "scrapedAt": "2026-07-21T21:42:52Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".istanbul",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gtld",
+    "istanbul",
+    "level",
+    "metropolitan",
+    "municipality",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 22,
+    "cheapestRegistration": {
+      "registrar": "NameSilo",
+      "price": "$17.50",
+      "value": 17.5
+    },
+    "cheapestRenewal": {
+      "registrar": "NameSilo",
+      "price": "$17.50",
+      "value": 17.5
+    },
+    "sourceUrl": "https://tld-list.com/tld/istanbul"
+  },
+  "summary": ".istanbul is a Generic top-level domain. Managed by Istanbul Metropolitan Municipality.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

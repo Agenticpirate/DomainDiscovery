@@ -1,0 +1,129 @@
+{
+  "tld": ".as",
+  "slug": "as",
+  "title": "About .as domains",
+  "delegationTitle": "Delegation Record for .AS",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for American Samoa",
+  "sponsor": "AS Domain Registry",
+  "sponsorDetail": "AS Domain Registry\nP.O. Box 997303\nPago Pago 96799\nAmerican Samoa",
+  "administrativeContact": "Registrar",
+  "technicalContact": "GDNS Hostmaster",
+  "registryUrl": "http://www.nic.as",
+  "whoisServer": "whois.nic.as",
+  "rdapServer": "https://rdap.nic.as",
+  "registrationDate": "1997-06-12",
+  "recordUpdated": "2026-06-06",
+  "nameServers": [
+    {
+      "host": "ns1.asnic.biz",
+      "addresses": [
+        "213.248.219.254",
+        "2a01:618:403:0:0:0:0:254"
+      ]
+    },
+    {
+      "host": "ns2.asnic.info",
+      "addresses": [
+        "103.49.83.254",
+        "2401:fd80:403:0:0:0:0:254"
+      ]
+    },
+    {
+      "host": "ns3.asnic.org",
+      "addresses": [
+        "213.248.223.254",
+        "2a01:618:407:0:0:0:0:254"
+      ]
+    },
+    {
+      "host": "ns4.asnic.uk",
+      "addresses": [
+        "43.230.51.254",
+        "2401:fd80:407:0:0:0:0:254"
+      ]
+    },
+    {
+      "host": "ns5.asnic.us",
+      "addresses": [
+        "23.128.97.53",
+        "2607:7c80:53:0:0:0:0:53"
+      ]
+    }
+  ],
+  "about": ".AS is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for American Samoa. The IANA root zone lists the registry manager as AS Domain Registry. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.as is the Internet country code top-level domain (ccTLD) for American Samoa.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/as.html",
+  "wikipedia": ".as is the Internet country code top-level domain (ccTLD) for American Samoa.",
+  "scrapedAt": "2026-07-21T21:35:02Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".as",
+    "american",
+    "as",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "registry",
+    "samoa",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 21,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$57.50",
+      "value": 57.5
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$57.50",
+      "value": 57.5
+    },
+    "sourceUrl": "https://tld-list.com/tld/as"
+  },
+  "summary": ".as is a Country-code top-level domain. Managed by AS Domain Registry.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

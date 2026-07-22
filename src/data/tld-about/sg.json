@@ -1,0 +1,131 @@
+{
+  "tld": ".sg",
+  "slug": "sg",
+  "title": "About .sg domains",
+  "delegationTitle": "Delegation Record for .SG",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Singapore",
+  "sponsor": "Singapore Network Information Centre (SGNIC) Pte Ltd",
+  "sponsorDetail": "Singapore Network Information Centre (SGNIC) Pte Ltd\n10 Pasir Panjang Road\n#03-01 Mapletree Business City\nSingapore 117438\nSingapore",
+  "administrativeContact": "Head (Technical and Ops)",
+  "technicalContact": "Head (Technical and Ops)",
+  "registryUrl": "http://www.sgnic.sg",
+  "whoisServer": "whois.sgnic.sg",
+  "rdapServer": "https://rdap.sgnic.sg/rdap/",
+  "registrationDate": "1988-10-19",
+  "recordUpdated": "2026-02-04",
+  "nameServers": [
+    {
+      "host": "dsany2.sgnic.sg",
+      "addresses": [
+        "185.159.197.170",
+        "2620:10a:80aa:0:0:0:0:170"
+      ]
+    },
+    {
+      "host": "dsany3.sgnic.sg",
+      "addresses": [
+        "185.159.198.170",
+        "2620:10a:80ab:0:0:0:0:170"
+      ]
+    },
+    {
+      "host": "dsany4.sgnic.sg",
+      "addresses": [
+        "45.142.220.65",
+        "2a0e:dbc0:1:0:0:0:0:65"
+      ]
+    },
+    {
+      "host": "ns4.apnic.net",
+      "addresses": [
+        "202.12.31.53",
+        "2001:dd8:12:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "pch.sgzones.sg",
+      "addresses": [
+        "204.61.216.57",
+        "2001:500:14:6057:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".SG is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Singapore. The IANA root zone lists the registry manager as Singapore Network Information Centre (SGNIC) Pte Ltd. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sg is the Internet country code top-level domain (ccTLD) for Singapore. It was first registered in September 1988. It is administered by the Singapore Network Information Centre (SGNIC). Registrations are processed via accredited registrars.\nIn 2011, two new internationalized country code top-level domains were registered for Singapore, intended for domain names in the local languages. These domains are .\u65b0\u52a0\u5761 (encoded as .xn--yfro4i67o) for Chinese websites, and .\u0b9a\u0bbf\u0b99\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0bc2\u0bb0\u0bcd (encoded as .xn--clchc0ea0b2g2a9gcd), for Tamil websites.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sg.html",
+  "wikipedia": ".sg is the Internet country code top-level domain (ccTLD) for Singapore. It was first registered in September 1988. It is administered by the Singapore Network Information Centre (SGNIC). Registrations are processed via accredited registrars.\nIn 2011, two new internationalized country code top-level domains were registered for Singapore, intended for domain names in the local languages. These domains are .\u65b0\u52a0\u5761 (encoded as .xn--yfro4i67o) for Chinese websites, and .\u0b9a\u0bbf\u0b99\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0bc2\u0bb0\u0bcd (encoded as .xn--clchc0ea0b2g2a9gcd), for Tamil websites.",
+  "scrapedAt": "2026-07-21T21:49:30Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sg",
+    "cctld",
+    "centre",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "level",
+    "local business",
+    "network",
+    "regional brands",
+    "sg",
+    "sgnic",
+    "singapore",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 22,
+    "cheapestRegistration": {
+      "registrar": "Namecheap",
+      "price": "$56.98",
+      "value": 56.98
+    },
+    "cheapestRenewal": {
+      "registrar": "GoDaddy",
+      "price": "$59.99",
+      "value": 59.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/sg"
+  },
+  "summary": ".sg is a Country-code top-level domain. Managed by Singapore Network Information Centre (SGNIC) Pte Ltd.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

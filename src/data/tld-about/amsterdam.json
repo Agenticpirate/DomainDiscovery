@@ -1,0 +1,108 @@
+{
+  "tld": ".amsterdam",
+  "slug": "amsterdam",
+  "title": "About .amsterdam domains",
+  "delegationTitle": "Delegation Record for .AMSTERDAM",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Gemeente Amsterdam",
+  "sponsorDetail": "Gemeente Amsterdam\nAmstel 1\nAmsterdam 1011 PN\nNetherlands (the)",
+  "administrativeContact": "Managing Director",
+  "technicalContact": "Operational Director",
+  "registryUrl": "http://www.nic.amsterdam",
+  "whoisServer": "whois.nic.amsterdam",
+  "rdapServer": "https://rdap.nic.amsterdam",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns1.dns.amsterdam",
+      "addresses": [
+        "194.0.28.4",
+        "2001:678:2c:0:194:0:28:4"
+      ]
+    },
+    {
+      "host": "ns3.dns.amsterdam",
+      "addresses": [
+        "194.0.25.26",
+        "2001:678:20:0:0:0:0:26"
+      ]
+    },
+    {
+      "host": "ns4.dns.amsterdam",
+      "addresses": [
+        "185.159.199.202",
+        "2620:10a:80ac:0:0:0:0:202"
+      ]
+    }
+  ],
+  "about": ".AMSTERDAM is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .AMSTERDAM is listed by IANA as Gemeente Amsterdam. Anyone can typically register a .AMSTERDAM name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.\n\n.amsterdam is a top-level domain in the city of Amsterdam. ICANN gave the City of Amsterdam permission to operate the domain on 24 July 2014 as a part of its new gTLD programme.  The public has been able to register .amsterdam web addresses since September 2017.\nUsage of the TLD has been very limited and its introduction has been criticised for its lack of cost-effectiveness. In 2019, the number of domains registered under the TLD decreased by 9.1%.\nRegistration Data Access Protocol was enabled for .amsterdam domains in July 2018.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/amsterdam.html",
+  "wikipedia": ".amsterdam is a top-level domain in the city of Amsterdam. ICANN gave the City of Amsterdam permission to operate the domain on 24 July 2014 as a part of its new gTLD programme.  The public has been able to register .amsterdam web addresses since September 2017.\nUsage of the TLD has been very limited and its introduction has been criticised for its lack of cost-effectiveness. In 2019, the number of domains registered under the TLD decreased by 9.1%.\nRegistration Data Access Protocol was enabled for .amsterdam domains in July 2018.",
+  "scrapedAt": "2026-07-21T21:34:44Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".amsterdam",
+    "amsterdam",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "gemeente",
+    "generic",
+    "gtld",
+    "level",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 23,
+    "cheapestRegistration": {
+      "registrar": "GoDaddy",
+      "price": "$55.17",
+      "value": 55.17
+    },
+    "cheapestRenewal": {
+      "registrar": "GoDaddy",
+      "price": "$55.17",
+      "value": 55.17
+    },
+    "sourceUrl": "https://tld-list.com/tld/amsterdam"
+  },
+  "summary": ".amsterdam is a Generic top-level domain. Managed by Gemeente Amsterdam.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

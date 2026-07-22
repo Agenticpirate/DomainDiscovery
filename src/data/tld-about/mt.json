@@ -1,0 +1,118 @@
+{
+  "tld": ".mt",
+  "slug": "mt",
+  "title": "About .mt domains",
+  "delegationTitle": "Delegation Record for .MT",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Malta",
+  "sponsor": "NIC (Malta)",
+  "sponsorDetail": "NIC (Malta)\nUniversity Campus\nMsida MSD 2080\nMalta",
+  "administrativeContact": "NIC (Malta) Administrative Contact",
+  "technicalContact": "NIC (Malta) Technical Contact",
+  "registryUrl": "https://www.nic.org.mt/",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": "1992-12-02",
+  "recordUpdated": "2020-01-23",
+  "nameServers": [
+    {
+      "host": "a.ns.mt",
+      "addresses": [
+        "193.188.47.252"
+      ]
+    },
+    {
+      "host": "b.ns.mt",
+      "addresses": [
+        "193.188.34.241"
+      ]
+    },
+    {
+      "host": "f.ns.mt",
+      "addresses": [
+        "192.93.0.4",
+        "2001:660:3005:1:0:0:1:2"
+      ]
+    },
+    {
+      "host": "p.ns.mt",
+      "addresses": [
+        "204.61.216.45",
+        "2001:500:14:6045:ad:0:0:1"
+      ]
+    }
+  ],
+  "about": ".MT is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Malta. The IANA root zone lists the registry manager as NIC (Malta). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.mt is the Internet country code top-level domain (ccTLD) for Malta.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mt.html",
+  "wikipedia": ".mt is the Internet country code top-level domain (ccTLD) for Malta.",
+  "scrapedAt": "2026-07-21T21:45:47Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".mt",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "malta",
+    "mt",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 14,
+    "cheapestRegistration": {
+      "registrar": "Netim",
+      "price": "$50.50",
+      "value": 50.5
+    },
+    "cheapestRenewal": {
+      "registrar": "Netim",
+      "price": "$33.50",
+      "value": 33.5
+    },
+    "sourceUrl": "https://tld-list.com/tld/mt"
+  },
+  "summary": ".mt is a Country-code top-level domain. Managed by NIC (Malta).",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

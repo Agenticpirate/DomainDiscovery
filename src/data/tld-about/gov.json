@@ -1,0 +1,106 @@
+{
+  "tld": ".gov",
+  "slug": "gov",
+  "title": "About .gov domains",
+  "delegationTitle": "Delegation Record for .GOV",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "Cybersecurity and Infrastructure Security Agency",
+  "sponsorDetail": "Cybersecurity and Infrastructure Security Agency\nCSD/CB - Attn: .gov TLD\nCISA - NGR STOP 0645\n1110 N. Glebe Rd.\nArlington VA 20598-0645\nUnited States of America (the)",
+  "administrativeContact": "Registry Manager",
+  "technicalContact": "Registry Customer Service",
+  "registryUrl": "https://get.gov",
+  "whoisServer": "whois.nic.gov",
+  "rdapServer": "https://rdap.nic.gov/rdap/",
+  "registrationDate": "1985-01-01",
+  "recordUpdated": "2026-03-10",
+  "nameServers": [
+    {
+      "host": "a.ns.gov",
+      "addresses": [
+        "199.33.230.1",
+        "2001:503:ff40:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b.ns.gov",
+      "addresses": [
+        "199.33.231.1",
+        "2001:503:ff41:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c.ns.gov",
+      "addresses": [
+        "199.33.232.1",
+        "2001:503:ff42:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "d.ns.gov",
+      "addresses": [
+        "199.33.233.1",
+        "2001:503:ff43:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".GOV is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\nThe domain name .gov is a sponsored top-level domain (sTLD) in the Domain Name System of the Internet. The name is derived from the word government, indicating its restricted use by \ngovernment entities in the United States. The TLD is administered by the Cybersecurity and Infrastructure Security Agency (CISA), a component of the United States Department of Homeland Security.\ngov is one of the original six top-level domains, defined in RFC 920. Though \"originally intended for any kind of government office or agency\", only U.S.-based government entities may register gov domain names, a result of the Internet originating as a U.S. government-sponsored research network. \nOther countries typically delegate a second-level domain for government operations on their country-code top-level domain (ccTLD); for example, gov.uk is the domain for the Government of the United Kingdom, and gc.ca is the domain for the Government of Canada. The United States is the only country that has a government-specific top-level domain in addition to its ccTLD (us), a direct result of the United States federal government's role in the creation of the Internet.\ngov domains are registered at get.gov.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gov.html",
+  "wikipedia": "The domain name .gov is a sponsored top-level domain (sTLD) in the Domain Name System of the Internet. The name is derived from the word government, indicating its restricted use by \ngovernment entities in the United States. The TLD is administered by the Cybersecurity and Infrastructure Security Agency (CISA), a component of the United States Department of Homeland Security.\ngov is one of the original six top-level domains, defined in RFC 920. Though \"originally intended for any kind of government office or agency\", only U.S.-based government entities may register gov domain names, a result of the Internet originating as a U.S. government-sponsored research network. \nOther countries typically delegate a second-level domain for government operations on their country-code top-level domain (ccTLD); for example, gov.uk is the domain for the Government of the United Kingdom, and gc.ca is the domain for the Government of Canada. The United States is the only country that has a government-specific top-level domain in addition to its ccTLD (us), a direct result of the United States federal government's role in the creation of the Internet.\ngov domains are registered at get.gov.",
+  "scrapedAt": "2026-07-21T21:41:26Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".gov",
+    "agency",
+    "any industry",
+    "cybersecurity",
+    "domain",
+    "general",
+    "general websites",
+    "gov",
+    "infrastructure",
+    "level",
+    "security",
+    "sponsored",
+    "stld",
+    "top"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".gov is a Sponsored top-level domain. Managed by Cybersecurity and Infrastructure Security Agency.",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

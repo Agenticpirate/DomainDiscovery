@@ -1,0 +1,130 @@
+{
+  "tld": ".gives",
+  "slug": "gives",
+  "title": "About .gives domains",
+  "delegationTitle": "Delegation Record for .GIVES",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Public Interest Registry (PIR)",
+  "sponsorDetail": "Public Interest Registry (PIR)\n11911 Freedom Drive 10th Floor, Suite 1000\nReston VA 20190\nUnited States of America (the)",
+  "administrativeContact": "Director of Operations, Compliance and Customer Support",
+  "technicalContact": "Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://nic.gives",
+  "whoisServer": "whois.nic.gives",
+  "rdapServer": "https://rdap.publicinterestregistry.org/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "v0n0.nic.gives",
+      "addresses": [
+        "65.22.32.61",
+        "2a01:8840:22:0:0:0:0:61"
+      ]
+    },
+    {
+      "host": "v0n1.nic.gives",
+      "addresses": [
+        "65.22.33.61",
+        "2a01:8840:23:0:0:0:0:61"
+      ]
+    },
+    {
+      "host": "v0n2.nic.gives",
+      "addresses": [
+        "65.22.34.61",
+        "2a01:8840:24:0:0:0:0:61"
+      ]
+    },
+    {
+      "host": "v0n3.nic.gives",
+      "addresses": [
+        "161.232.16.61",
+        "2a01:8840:fa:0:0:0:0:61"
+      ]
+    },
+    {
+      "host": "v2n0.nic.gives",
+      "addresses": [
+        "65.22.35.61",
+        "2a01:8840:25:0:0:0:0:61"
+      ]
+    },
+    {
+      "host": "v2n1.nic.gives",
+      "addresses": [
+        "161.232.17.61",
+        "2a01:8840:fb:0:0:0:0:61"
+      ]
+    }
+  ],
+  "about": ".GIVES is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .GIVES is listed by IANA as Public Interest Registry (PIR). Anyone can typically register a .GIVES name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/gives.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:41:07Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".gives",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "domain",
+    "generic",
+    "gives",
+    "gtld",
+    "interest",
+    "level",
+    "public",
+    "registry",
+    "top"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 44,
+    "cheapestRegistration": {
+      "registrar": "Porkbun",
+      "price": "$4.61",
+      "value": 4.61
+    },
+    "cheapestRenewal": {
+      "registrar": "Sav",
+      "price": "$21.17",
+      "value": 21.17
+    },
+    "sourceUrl": "https://tld-list.com/tld/gives"
+  },
+  "summary": ".gives is a Generic top-level domain. Managed by Public Interest Registry (PIR).",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

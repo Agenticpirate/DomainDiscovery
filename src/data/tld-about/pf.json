@@ -1,0 +1,116 @@
+{
+  "tld": ".pf",
+  "slug": "pf",
+  "title": "About .pf domains",
+  "delegationTitle": "Delegation Record for .PF",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for French Polynesia",
+  "sponsor": "Gouvernement de la Polyn\u00e9sie fran\u00e7aise",
+  "sponsorDetail": "Gouvernement de la Polyn\u00e9sie fran\u00e7aise\nAvenue POUVANAA A OOPA\nPapeete Tahiti 98714\nFrench Polynesia",
+  "administrativeContact": "Chef de service",
+  "technicalContact": "System & Network Administrator",
+  "registryUrl": null,
+  "whoisServer": "whois.registry.pf",
+  "rdapServer": null,
+  "registrationDate": "1996-03-19",
+  "recordUpdated": "2025-10-03",
+  "nameServers": [
+    {
+      "host": "ns03.pf",
+      "addresses": [
+        "103.254.227.99",
+        "2402:6d00:1000:0:0:0:0:5"
+      ]
+    },
+    {
+      "host": "ns1.mana.pf",
+      "addresses": [
+        "202.3.225.10"
+      ]
+    },
+    {
+      "host": "ns2.mana.pf",
+      "addresses": [
+        "202.3.225.20"
+      ]
+    }
+  ],
+  "about": ".PF is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for French Polynesia. The IANA root zone lists the registry manager as Gouvernement de la Polyn\u00e9sie fran\u00e7aise. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.pf is the Internet country code top-level domain (ccTLD) for French Polynesia. The name pf derived from the French name of Polyn\u00e9sie fran\u00e7aise.\nA local contact has to be appointed to register a domain name under .pf. The only 2nd level domain available for public registrations at the third level is .org.pf, but most registrations are made directly at the second level.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/pf.html",
+  "wikipedia": ".pf is the Internet country code top-level domain (ccTLD) for French Polynesia. The name pf derived from the French name of Polyn\u00e9sie fran\u00e7aise.\nA local contact has to be appointed to register a domain name under .pf. The only 2nd level domain available for public registrations at the third level is .org.pf, but most registrations are made directly at the second level.",
+  "scrapedAt": "2026-07-21T21:47:10Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".pf",
+    "aise",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "fran",
+    "french",
+    "geo",
+    "gouvernement",
+    "level",
+    "local business",
+    "pf",
+    "polyn",
+    "polynesia",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 5,
+    "cheapestRegistration": {
+      "registrar": "Marcaria International",
+      "price": "$209.00",
+      "value": 209.0
+    },
+    "cheapestRenewal": {
+      "registrar": "INWX",
+      "price": "$262.80",
+      "value": 262.8
+    },
+    "sourceUrl": "https://tld-list.com/tld/pf"
+  },
+  "summary": ".pf is a Country-code top-level domain. Managed by Gouvernement de la Polyn\u00e9sie fran\u00e7aise.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,146 @@
+{
+  "tld": ".mw",
+  "slug": "mw",
+  "title": "About .mw domains",
+  "delegationTitle": "Delegation Record for .MW",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Malawi",
+  "sponsor": "Malawi Sustainable Development Network Programme (Malawi SDNP)",
+  "sponsorDetail": "Malawi Sustainable Development Network Programme (Malawi SDNP)\nRoom 51, Polytechnic\nP.O. Box 31762\nChichiri\nBlantyre 3\nMalawi",
+  "administrativeContact": "The Coordinator (Dr. Paulos B. Nyirenda)",
+  "technicalContact": "The Information Specialist",
+  "registryUrl": "http://www.registrar.mw",
+  "whoisServer": "whois.nic.mw",
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "chambo.sdnp.org.mw",
+      "addresses": [
+        "102.219.183.67",
+        "196.45.188.5"
+      ]
+    },
+    {
+      "host": "domwe.sdn.mw",
+      "addresses": [
+        "41.87.5.162",
+        "196.45.190.9"
+      ]
+    },
+    {
+      "host": "mw-e.ns.nic.cz",
+      "addresses": [
+        "185.43.134.10",
+        "2001:148f:fffd:0:0:0:0:10"
+      ]
+    },
+    {
+      "host": "mw.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.99",
+        "2a13:27c0:30:0:0:0:0:99"
+      ]
+    },
+    {
+      "host": "ns4.apnic.net",
+      "addresses": [
+        "202.12.31.53",
+        "2001:dd8:12:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "pch1.nic.mw",
+      "addresses": [
+        "204.61.216.131",
+        "2001:500:14:6131:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "rip.psg.com",
+      "addresses": [
+        "147.28.0.39",
+        "2001:418:1:0:0:0:0:39"
+      ]
+    }
+  ],
+  "about": ".MW is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Malawi. The IANA root zone lists the registry manager as Malawi Sustainable Development Network Programme (Malawi SDNP). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.mw is the Internet country code top-level domain (ccTLD) for Malawi. After initial delegation, in 2002 the IANA recommended that administration of the ccTLD be transferred to the Malawi Sustainable Development Network Programme from Computer Solutions Ltd. The recommendation was implemented.\nRegistry prices for .mw domains are US$40 per year.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/mw.html",
+  "wikipedia": ".mw is the Internet country code top-level domain (ccTLD) for Malawi. After initial delegation, in 2002 the IANA recommended that administration of the ccTLD be transferred to the Malawi Sustainable Development Network Programme from Computer Solutions Ltd. The recommendation was implemented.\nRegistry prices for .mw domains are US$40 per year.",
+  "scrapedAt": "2026-07-21T21:45:55Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".mw",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "development",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "malawi",
+    "mw",
+    "network",
+    "programme",
+    "regional brands",
+    "sdnp",
+    "sustainable",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 15,
+    "cheapestRegistration": {
+      "registrar": "Dynadot",
+      "price": "$59.96",
+      "value": 59.96
+    },
+    "cheapestRenewal": {
+      "registrar": "Dynadot",
+      "price": "$59.96",
+      "value": 59.96
+    },
+    "sourceUrl": "https://tld-list.com/tld/mw"
+  },
+  "summary": ".mw is a Country-code top-level domain. Managed by Malawi Sustainable Development Network Programme (Malawi SDNP).",
+  "wikiCheckedAt": "2026-07-22T04:21:03Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:03Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,125 @@
+{
+  "tld": ".ac",
+  "slug": "ac",
+  "title": "About .ac domains",
+  "delegationTitle": "Delegation Record for .AC",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Ascension Island",
+  "sponsor": "Internet Computer Bureau Limited",
+  "sponsorDetail": "Internet Computer Bureau Limited\nc/o Sure (Ascension Island)\nGeorgetown ASCN 1ZZ\nAscension Island",
+  "administrativeContact": "Managing Director",
+  "technicalContact": "Technical Director",
+  "registryUrl": "http://www.nic.ac/",
+  "whoisServer": "whois.nic.ac",
+  "rdapServer": null,
+  "registrationDate": "1997-12-19",
+  "recordUpdated": "2023-03-07",
+  "nameServers": [
+    {
+      "host": "a0.nic.ac",
+      "addresses": [
+        "65.22.160.1",
+        "2a01:8840:9e:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.nic.ac",
+      "addresses": [
+        "65.22.163.1",
+        "2a01:8840:a1:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.nic.ac",
+      "addresses": [
+        "65.22.161.1",
+        "2a01:8840:9f:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.nic.ac",
+      "addresses": [
+        "65.22.162.1",
+        "2a01:8840:a0:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".AC is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Ascension Island. The IANA root zone lists the registry manager as Internet Computer Bureau Limited. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\nThe .ac top-level domain is the Internet country code (ccTLD) for Saint Helena, Ascension and Tristan da Cunha, used primarily for Ascension Island (Saint Helena has its own ccTLD, .sh). It is administered by NIC.AC, a subsidiary of the Afilias-owned company Internet Computer Bureau.\nRegistration for the domain is open to anyone. The registry accepts registrations of internationalised domain names.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ac.html",
+  "wikipedia": "The .ac top-level domain is the Internet country code (ccTLD) for Saint Helena, Ascension and Tristan da Cunha, used primarily for Ascension Island (Saint Helena has its own ccTLD, .sh). It is administered by NIC.AC, a subsidiary of the Afilias-owned company Internet Computer Bureau.\nRegistration for the domain is open to anyone. The registry accepts registrations of internationalised domain names.",
+  "scrapedAt": "2026-07-21T21:34:02Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ac",
+    "ac",
+    "ascension",
+    "bureau",
+    "cctld",
+    "code",
+    "computer",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "internet",
+    "island",
+    "level",
+    "limited",
+    "local business",
+    "regional brands",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 40,
+    "cheapestRegistration": {
+      "registrar": "Spaceship",
+      "price": "$25.88",
+      "value": 25.88
+    },
+    "cheapestRenewal": {
+      "registrar": "Porkbun",
+      "price": "$26.06",
+      "value": 26.06
+    },
+    "sourceUrl": "https://tld-list.com/tld/ac"
+  },
+  "summary": ".ac is a Country-code top-level domain. Managed by Internet Computer Bureau Limited.",
+  "wikiCheckedAt": "2026-07-22T04:17:46Z",
+  "wikiEnrichedAt": "2026-07-22T04:17:46Z",
+  "metaEnrichedAt": "2026-07-22T04:41:00Z"
+}

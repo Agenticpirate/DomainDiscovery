@@ -1,0 +1,103 @@
+{
+  "tld": ".xn--i1b6b1a6a2e",
+  "slug": "xn--i1b6b1a6a2e",
+  "title": "About .xn--i1b6b1a6a2e domains",
+  "delegationTitle": "Delegation Record for .\u0938\u0902\u0917\u0920\u0928",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Public Interest Registry",
+  "sponsorDetail": "Public Interest Registry\n11911 Freedom Drive,\n10th Floor, Suite 1000\nReston VA 20190\nUnited States of America (the)",
+  "administrativeContact": "Director of Operations, Compliance and Customer Support",
+  "technicalContact": "Director, DNS Infrastructure Group",
+  "registryUrl": "http://nic.xn--i1b6b1a6a2e",
+  "whoisServer": "whois.nic.xn--i1b6b1a6a2e",
+  "rdapServer": "https://rdap.publicinterestregistry.org/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a0.nic.xn--i1b6b1a6a2e",
+      "addresses": [
+        "65.22.184.1",
+        "2a01:8840:b2:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "a2.nic.xn--i1b6b1a6a2e",
+      "addresses": [
+        "65.22.187.1",
+        "2a01:8840:b5:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "b0.nic.xn--i1b6b1a6a2e",
+      "addresses": [
+        "65.22.185.1",
+        "2a01:8840:b3:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "c0.nic.xn--i1b6b1a6a2e",
+      "addresses": [
+        "65.22.186.1",
+        "2a01:8840:b4:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".XN--I1B6B1A6A2E is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .XN--I1B6B1A6A2E is listed by IANA as Public Interest Registry. Anyone can typically register a .XN--I1B6B1A6A2E name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--i1b6b1a6a2e.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:52Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".xn--i1b6b1a6a2e",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "generic",
+    "gtld",
+    "interest",
+    "level",
+    "public",
+    "registry",
+    "top",
+    "xn--i1b6b1a6a2e"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--i1b6b1a6a2e is a Generic top-level domain. Managed by Public Interest Registry.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

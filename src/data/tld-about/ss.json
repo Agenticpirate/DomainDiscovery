@@ -1,0 +1,117 @@
+{
+  "tld": ".ss",
+  "slug": "ss",
+  "title": "About .ss domains",
+  "delegationTitle": "Delegation Record for .SS",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for South Sudan",
+  "sponsor": "National Communication Authority (NCA)",
+  "sponsorDetail": "National Communication Authority (NCA)\n2nd Floor-Ministry of ICT & Postal Services Main Building\nP.O. Box 531\nJuba\nSouth Sudan",
+  "administrativeContact": "Admin",
+  "technicalContact": "Technical Support",
+  "registryUrl": "https://nic.ss/",
+  "whoisServer": "whois.nic.ss",
+  "rdapServer": "https://rdap.nic.ss",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns-ss.afrinic.net",
+      "addresses": [
+        "196.216.168.27",
+        "2001:43f8:120:0:0:0:0:27"
+      ]
+    },
+    {
+      "host": "pch.nic.ss",
+      "addresses": [
+        "204.61.216.130",
+        "2001:500:14:6130:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "ssnic.anycastdns.cz",
+      "addresses": [
+        "185.38.108.108",
+        "185.28.194.194"
+      ]
+    }
+  ],
+  "about": ".SS is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for South Sudan. The IANA root zone lists the registry manager as National Communication Authority (NCA). Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.ss is the designated country code top-level domain (ccTLD) for South Sudan in the Domain Name System of the Internet. It is derived from the ISO 3166-1 alpha-2 code for South Sudan, which is SS. According to CIO East Africa, the TLD was allocated on 10 August 2011 following the country's declaration of independence from Sudan. The TLD was registered on 31 August 2011, but not added to the DNS root zone and was thus not operational. It was approved at the ICANN Board meeting on 27 January 2019 and was added to the DNS root zone on 2 February 2019.\nBefore .ss was successfully registered, the country's Undersecretary for Telecommunications had initially been concerned about the ccTLD request's possible rejection due to SS also being an abbreviation for the Schutzstaffel, the paramilitary force of Nazi Germany.\nBefore the independence of South Sudan, the applicable domain was .sd, Sudan's top-level Internet domain.\nRegistration of .ss second-level domain names launched in three phases starting 1 June 2020, with general availability starting 1 September 2020. In July 2024 the registry announced registration directly under .ss would open for all applicants on 1 November 2024.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/ss.html",
+  "wikipedia": ".ss is the designated country code top-level domain (ccTLD) for South Sudan in the Domain Name System of the Internet. It is derived from the ISO 3166-1 alpha-2 code for South Sudan, which is SS. According to CIO East Africa, the TLD was allocated on 10 August 2011 following the country's declaration of independence from Sudan. The TLD was registered on 31 August 2011, but not added to the DNS root zone and was thus not operational. It was approved at the ICANN Board meeting on 27 January 2019 and was added to the DNS root zone on 2 February 2019.\nBefore .ss was successfully registered, the country's Undersecretary for Telecommunications had initially been concerned about the ccTLD request's possible rejection due to SS also being an abbreviation for the Schutzstaffel, the paramilitary force of Nazi Germany.\nBefore the independence of South Sudan, the applicable domain was .sd, Sudan's top-level Internet domain.\nRegistration of .ss second-level domain names launched in three phases starting 1 June 2020, with general availability starting 1 September 2020. In July 2024 the registry announced registration directly under .ss would open for all applicants on 1 November 2024.",
+  "scrapedAt": "2026-07-21T21:50:09Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".ss",
+    "authority",
+    "cctld",
+    "code",
+    "communication",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "national",
+    "regional brands",
+    "south",
+    "ss",
+    "sudan",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 5,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$61.99",
+      "value": 61.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$61.99",
+      "value": 61.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/ss"
+  },
+  "summary": ".ss is a Country-code top-level domain. Managed by National Communication Authority (NCA).",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "wikiEnrichedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

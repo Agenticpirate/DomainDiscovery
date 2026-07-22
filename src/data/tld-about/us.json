@@ -1,0 +1,149 @@
+{
+  "tld": ".us",
+  "slug": "us",
+  "title": "About .us domains",
+  "delegationTitle": "Delegation Record for .US",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for United States",
+  "sponsor": "Registry Services, LLC",
+  "sponsorDetail": "Registry Services, LLC\n100 S. Mill Ave, Suite 1600\nTempe AZ 85281\nUnited States of America (the)",
+  "administrativeContact": "IANA Contact",
+  "technicalContact": "IANA Contact",
+  "registryUrl": "http://www.nic.us",
+  "whoisServer": "whois.nic.us",
+  "rdapServer": null,
+  "registrationDate": "1985-02-15",
+  "recordUpdated": "2024-08-29",
+  "nameServers": [
+    {
+      "host": "b.cctld.us",
+      "addresses": [
+        "156.154.125.70",
+        "2001:502:ad09:0:0:0:0:29"
+      ]
+    },
+    {
+      "host": "f.cctld.us",
+      "addresses": [
+        "209.173.58.70",
+        "2001:500:3682:0:0:0:0:11"
+      ]
+    },
+    {
+      "host": "k.cctld.us",
+      "addresses": [
+        "156.154.128.70",
+        "2001:503:e239:0:0:0:3:1"
+      ]
+    },
+    {
+      "host": "m.cctld.us",
+      "addresses": [
+        "204.74.105.1",
+        "2610:a1:3180:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "n.cctld.us",
+      "addresses": [
+        "204.74.107.1",
+        "2610:a1:3280:0:0:0:0:53"
+      ]
+    },
+    {
+      "host": "w.cctld.us",
+      "addresses": [
+        "37.209.192.15",
+        "2001:dcd:1:0:0:0:0:15"
+      ]
+    },
+    {
+      "host": "x.cctld.us",
+      "addresses": [
+        "37.209.194.15",
+        "2001:dcd:2:0:0:0:0:15"
+      ]
+    },
+    {
+      "host": "y.cctld.us",
+      "addresses": [
+        "37.209.196.15",
+        "2001:dcd:3:0:0:0:0:15"
+      ]
+    }
+  ],
+  "about": ".US is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for United States. The IANA root zone lists the registry manager as Registry Services, LLC. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.us is the Internet country code top-level domain (ccTLD) for the United States. It was established in February 1985. Registrants of us domains must be U.S. citizens, residents, or organizations \u2013 or foreign entities with a presence in the United States or a territory of the United States. Most registrants in the U.S. have registered for .com, .net, .org and other gTLDs, instead of us, which has primarily been used by state and local governments, even though private entities may also register us domains. The domain is managed by Registry Services, LLC, an acquired subsidiary domain name registry of GoDaddy, on behalf of the United States Department of Commerce.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/us.html",
+  "wikipedia": ".us is the Internet country code top-level domain (ccTLD) for the United States. It was established in February 1985. Registrants of us domains must be U.S. citizens, residents, or organizations \u2013 or foreign entities with a presence in the United States or a territory of the United States. Most registrants in the U.S. have registered for .com, .net, .org and other gTLDs, instead of us, which has primarily been used by state and local governments, even though private entities may also register us domains. The domain is managed by Registry Services, LLC, an acquired subsidiary domain name registry of GoDaddy, on behalf of the United States Department of Commerce.",
+  "scrapedAt": "2026-07-21T21:33:21Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".us",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "level",
+    "local business",
+    "regional brands",
+    "registry",
+    "services",
+    "states",
+    "top",
+    "united",
+    "us"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 50,
+    "cheapestRegistration": {
+      "registrar": "Sav",
+      "price": "$3.64",
+      "value": 3.64
+    },
+    "cheapestRenewal": {
+      "registrar": "Spaceship",
+      "price": "$6.48",
+      "value": 6.48
+    },
+    "sourceUrl": "https://tld-list.com/tld/us"
+  },
+  "summary": ".us is a Country-code top-level domain. Managed by Registry Services, LLC.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

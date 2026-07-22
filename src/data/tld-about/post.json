@@ -1,0 +1,131 @@
+{
+  "tld": ".post",
+  "slug": "post",
+  "title": "About .post domains",
+  "delegationTitle": "Delegation Record for .POST",
+  "type": "sTLD",
+  "typeLabel": "Sponsored top-level domain",
+  "designation": "Sponsored top-level domain",
+  "sponsor": "Universal Postal Union",
+  "sponsorDetail": "Universal Postal Union\nWeltpoststrasse 4\nBern CH-3015\nSwitzerland",
+  "administrativeContact": "TLD Administrator",
+  "technicalContact": "Howard Eland, Senior Director, DNS Infrastructure Group",
+  "registryUrl": "http://www.upu.int",
+  "whoisServer": "whois.nic.post",
+  "rdapServer": "https://rdap.identitydigital.services/rdap/",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "v0n0.nic.post",
+      "addresses": [
+        "65.22.0.1",
+        "2a01:8840:0:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "v0n1.nic.post",
+      "addresses": [
+        "65.22.1.1",
+        "2a01:8840:1:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "v0n2.nic.post",
+      "addresses": [
+        "65.22.2.1",
+        "2a01:8840:2:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "v0n3.nic.post",
+      "addresses": [
+        "65.22.3.1",
+        "2a01:8840:3:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "v2n0.nic.post",
+      "addresses": [
+        "65.22.4.1",
+        "2a01:8840:4:0:0:0:0:1"
+      ]
+    },
+    {
+      "host": "v2n1.nic.post",
+      "addresses": [
+        "65.22.5.1",
+        "2a01:8840:5:0:0:0:0:1"
+      ]
+    }
+  ],
+  "about": ".POST is a top-level domain delegated in the IANA root zone. See the official IANA delegation record for manager and technical contacts.\n\n.post is a sponsored top-level domain (STLD), available exclusively for the postal sector, and is secured by DNSSEC. The domain aims to integrate the physical, financial, and electronic dimensions of postal services to enable and facilitate e-post, e-finance, e-commerce, and e-government services. ICANN approved the domain on April 8, 2005, as a sponsored TLD in the second group of new TLD applications evaluated in 2004.\nIn 2004, the Universal Postal Union (UPU), based in Bern, was the first United Nations agency to secure a top-level domain (TLD) from ICANN.\nIn 2009, ICANN and the UPU signed a historic agreement, giving the UPU managing authority over .post as a top-level domain. The agreement came about after negotiations and public review through ICANN's public comment process, reviews within the UPU governing councils, and consideration by ICANN's Board of Directors.\nHaving been delegated authority for .post, the UPU develops, implements, and monitors government rules for it. It is also responsible for attributing domain names to postal-sector stakeholders who meet the eligibility criteria.\nThe STLD was added to the IANA TLD registry on August 8, 2012.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/post.html",
+  "wikipedia": ".post is a sponsored top-level domain (STLD), available exclusively for the postal sector, and is secured by DNSSEC. The domain aims to integrate the physical, financial, and electronic dimensions of postal services to enable and facilitate e-post, e-finance, e-commerce, and e-government services. ICANN approved the domain on April 8, 2005, as a sponsored TLD in the second group of new TLD applications evaluated in 2004.\nIn 2004, the Universal Postal Union (UPU), based in Bern, was the first United Nations agency to secure a top-level domain (TLD) from ICANN.\nIn 2009, ICANN and the UPU signed a historic agreement, giving the UPU managing authority over .post as a top-level domain. The agreement came about after negotiations and public review through ICANN's public comment process, reviews within the UPU governing councils, and consideration by ICANN's Board of Directors.\nHaving been delegated authority for .post, the UPU develops, implements, and monitors government rules for it. It is also responsible for attributing domain names to postal-sector stakeholders who meet the eligibility criteria.\nThe STLD was added to the IANA TLD registry on August 8, 2012.",
+  "scrapedAt": "2026-07-21T21:47:41Z",
+  "categories": [
+    "general"
+  ],
+  "useCases": [
+    "General websites",
+    "Any industry"
+  ],
+  "keywords": [
+    ".post",
+    "any industry",
+    "domain",
+    "general",
+    "general websites",
+    "level",
+    "post",
+    "postal",
+    "sponsored",
+    "stld",
+    "top",
+    "union",
+    "universal"
+  ],
+  "primaryCategory": "general",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 3,
+    "cheapestRegistration": {
+      "registrar": "101domain",
+      "price": "$275.19",
+      "value": 275.19
+    },
+    "cheapestRenewal": {
+      "registrar": "101domain",
+      "price": "$275.19",
+      "value": 275.19
+    },
+    "sourceUrl": "https://tld-list.com/tld/post"
+  },
+  "summary": ".post is a Sponsored top-level domain. Managed by Universal Postal Union.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "wikiEnrichedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

@@ -1,0 +1,106 @@
+{
+  "tld": ".pohl",
+  "slug": "pohl",
+  "title": "About .pohl domains",
+  "delegationTitle": "Delegation Record for .POHL",
+  "type": "gTLD",
+  "typeLabel": "Generic top-level domain",
+  "designation": "Generic top-level domain",
+  "sponsor": "Deutsche Verm\u00f6gensberatung Aktiengesellschaft DVAG",
+  "sponsorDetail": "Deutsche Verm\u00f6gensberatung Aktiengesellschaft DVAG\nWilhelm-Leuschner-Strasse 24\nHessen\nFrankfurt am Main 60329\nGermany",
+  "administrativeContact": "Director, Digital Media",
+  "technicalContact": "CTO",
+  "registryUrl": "http://www.dvag-registry.de",
+  "whoisServer": "whois.nic.pohl",
+  "rdapServer": "https://rdap.centralnic.com/pohl",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "a.nic.pohl",
+      "addresses": [
+        "194.169.218.96",
+        "2001:67c:13cc:0:0:0:1:96"
+      ]
+    },
+    {
+      "host": "b.nic.pohl",
+      "addresses": [
+        "185.24.64.96",
+        "2a04:2b00:13cc:0:0:0:1:96"
+      ]
+    },
+    {
+      "host": "c.nic.pohl",
+      "addresses": [
+        "212.18.248.96",
+        "2a04:2b00:13ee:0:0:0:0:96"
+      ]
+    },
+    {
+      "host": "d.nic.pohl",
+      "addresses": [
+        "212.18.249.96",
+        "2a04:2b00:13ff:0:0:0:0:96"
+      ]
+    }
+  ],
+  "about": ".POHL is a generic top-level domain (gTLD) delegated in the DNS root zone. The registry operator responsible for .POHL is listed by IANA as Deutsche Verm\u00f6gensberatung Aktiengesellschaft DVAG. Anyone can typically register a .POHL name through an accredited registrar, subject to the registry\u2019s registration policy and ICANN consensus policies.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 1,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/pohl.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:47:38Z",
+  "categories": [
+    "brand"
+  ],
+  "useCases": [
+    "Brandable names",
+    "Corporate brands"
+  ],
+  "keywords": [
+    ".pohl",
+    "aktiengesellschaft",
+    "brand",
+    "brandable names",
+    "corporate brands",
+    "deutsche",
+    "domain",
+    "dvag",
+    "generic",
+    "gensberatung",
+    "gtld",
+    "level",
+    "pohl",
+    "top",
+    "verm"
+  ],
+  "primaryCategory": "brand",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".pohl is a Generic top-level domain. Managed by Deutsche Verm\u00f6gensberatung Aktiengesellschaft DVAG.",
+  "wikiCheckedAt": "2026-07-22T04:21:44Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

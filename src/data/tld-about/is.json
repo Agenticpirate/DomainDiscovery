@@ -1,0 +1,130 @@
+{
+  "tld": ".is",
+  "slug": "is",
+  "title": "About .is domains",
+  "delegationTitle": "Delegation Record for .IS",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Iceland",
+  "sponsor": "ISNIC - Internet \u00e1 \u00cdslandi hf.",
+  "sponsorDetail": "ISNIC - Internet \u00e1 \u00cdslandi hf.\nKatr\u00ednart\u00fan 2\nReykjavik 105\nIceland",
+  "administrativeContact": "ISNIC Board",
+  "technicalContact": "ISNIC Hostmaster",
+  "registryUrl": "https://www.isnic.is/",
+  "whoisServer": "whois.isnic.is",
+  "rdapServer": "https://rdap.isnic.is/rdap/",
+  "registrationDate": "1987-11-18",
+  "recordUpdated": "2026-02-18",
+  "nameServers": [
+    {
+      "host": "a.nic.is",
+      "addresses": [
+        "185.93.156.10",
+        "2001:67c:6c:56:0:0:0:10"
+      ]
+    },
+    {
+      "host": "c.nic.is",
+      "addresses": [
+        "204.61.216.116",
+        "2001:500:14:6116:ad:0:0:1"
+      ]
+    },
+    {
+      "host": "d.nic.is",
+      "addresses": [
+        "194.146.106.58",
+        "2001:67c:1010:14:0:0:0:53"
+      ]
+    },
+    {
+      "host": "e.nic.is",
+      "addresses": [
+        "194.0.25.41",
+        "2001:678:20:0:0:0:0:41"
+      ]
+    },
+    {
+      "host": "f.nic.is",
+      "addresses": [
+        "185.93.157.22",
+        "2001:67c:6c:1000:0:0:0:22"
+      ]
+    }
+  ],
+  "about": ".IS is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Iceland. The IANA root zone lists the registry manager as ISNIC - Internet \u00e1 \u00cdslandi hf.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.is (dot is) is the country code top-level domain (ccTLD) for Iceland. The country code is derived from the first two letters of \u00cdsland, which is the Icelandic word for Iceland. Registration of .is domains is open to all people and companies without any special restriction.\nThe first .is domain, hi.is, is the domain of H\u00e1sk\u00f3li \u00cdslands (University of Iceland). It was registered on 11 December 1986, making it one of the earliest ever domain registrations on the Internet. The domain is managed by ISNIC, a private corporation.\nAccording to the McAfee report \"Mapping the Mal Web,\" .is was evaluated as one of the top 10 most secure TLDs in the world in the years 2007 and 2008. As of May 2024, there were just over 91,000 .is domains registered.\nAs of October 2016, .is domains can be registered for up to five years.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/is.html",
+  "wikipedia": ".is (dot is) is the country code top-level domain (ccTLD) for Iceland. The country code is derived from the first two letters of \u00cdsland, which is the Icelandic word for Iceland. Registration of .is domains is open to all people and companies without any special restriction.\nThe first .is domain, hi.is, is the domain of H\u00e1sk\u00f3li \u00cdslands (University of Iceland). It was registered on 11 December 1986, making it one of the earliest ever domain registrations on the Internet. The domain is managed by ISNIC, a private corporation.\nAccording to the McAfee report \"Mapping the Mal Web,\" .is was evaluated as one of the top 10 most secure TLDs in the world in the years 2007 and 2008. As of May 2024, there were just over 91,000 .is domains registered.\nAs of October 2016, .is domains can be registered for up to five years.",
+  "scrapedAt": "2026-07-21T21:42:49Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".is",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "iceland",
+    "internet",
+    "is",
+    "isnic",
+    "level",
+    "local business",
+    "regional brands",
+    "slandi",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 24,
+    "cheapestRegistration": {
+      "registrar": "Namecheap",
+      "price": "$66.98",
+      "value": 66.98
+    },
+    "cheapestRenewal": {
+      "registrar": "Namecheap",
+      "price": "$79.98",
+      "value": 79.98
+    },
+    "sourceUrl": "https://tld-list.com/tld/is"
+  },
+  "summary": ".is is a Country-code top-level domain. Managed by ISNIC - Internet \u00e1 \u00cdslandi hf..",
+  "wikiCheckedAt": "2026-07-22T04:20:01Z",
+  "wikiEnrichedAt": "2026-07-22T04:20:01Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

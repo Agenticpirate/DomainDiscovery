@@ -1,0 +1,121 @@
+{
+  "tld": ".sm",
+  "slug": "sm",
+  "title": "About .sm domains",
+  "delegationTitle": "Delegation Record for .SM",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for San Marino",
+  "sponsor": "Telecom Italia San Marino S.p.A.",
+  "sponsorDetail": "Telecom Italia San Marino S.p.A.\nVia Ventotto Luglio, 212\nBorgo Maggiore 47893\nSan Marino",
+  "administrativeContact": "TISM Hostmaster",
+  "technicalContact": "TISM Hostmaster",
+  "registryUrl": "https://www.nic.sm",
+  "whoisServer": "whois.nic.sm",
+  "rdapServer": null,
+  "registrationDate": "1995-08-16",
+  "recordUpdated": "2025-07-07",
+  "nameServers": [
+    {
+      "host": "dns.intelcom.sm",
+      "addresses": [
+        "194.183.64.11"
+      ]
+    },
+    {
+      "host": "dns.omniway.sm",
+      "addresses": [
+        "194.183.64.10"
+      ]
+    },
+    {
+      "host": "ns3.telecomitalia.sm",
+      "addresses": [
+        "194.0.27.12",
+        "2001:678:28:0:c2:b7:40:12"
+      ]
+    },
+    {
+      "host": "sm.cctld.authdns.ripe.net",
+      "addresses": [
+        "193.0.9.110",
+        "2a13:27c0:30:0:0:0:0:110"
+      ]
+    }
+  ],
+  "about": ".SM is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for San Marino. The IANA root zone lists the registry manager as Telecom Italia San Marino S.p.A.. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.\n\n.sm is the Internet country code top-level domain (ccTLD) for San Marino.\nThe domain is administered by the Office of Information Technology, Data and Statistics and managed by Telecom Italia San Marino.\nThe domain is occasionally used as a domain hack for sites ending in the -ism suffix.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/sm.html",
+  "wikipedia": ".sm is the Internet country code top-level domain (ccTLD) for San Marino.\nThe domain is administered by the Office of Information Technology, Data and Statistics and managed by Telecom Italia San Marino.\nThe domain is occasionally used as a domain hack for sites ending in the -ism suffix.",
+  "scrapedAt": "2026-07-21T21:49:52Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".sm",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "italia",
+    "level",
+    "local business",
+    "marino",
+    "regional brands",
+    "san",
+    "sm",
+    "telecom",
+    "top"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 6,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$139.99",
+      "value": 139.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$139.99",
+      "value": 139.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/sm"
+  },
+  "summary": ".sm is a Country-code top-level domain. Managed by Telecom Italia San Marino S.p.A..",
+  "wikiCheckedAt": "2026-07-22T04:22:48Z",
+  "wikiEnrichedAt": "2026-07-22T04:22:48Z",
+  "metaEnrichedAt": "2026-07-22T04:41:01Z"
+}

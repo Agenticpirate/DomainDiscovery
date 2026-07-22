@@ -1,0 +1,150 @@
+{
+  "tld": ".uz",
+  "slug": "uz",
+  "title": "About .uz domains",
+  "delegationTitle": "Delegation Record for .UZ",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain",
+  "designation": "Country-code top-level domain designated for Uzbekistan",
+  "sponsor": "Single Integrator for Creation and Support of State Information Systems UZINFOCOM",
+  "sponsorDetail": "Single Integrator for Creation and Support of State Information Systems UZINFOCOM\n28-B\nNavoi street\nTashkent 100011\nUzbekistan",
+  "administrativeContact": "Emil I. Gimranov",
+  "technicalContact": "Azizbek A. Kadirov",
+  "registryUrl": "http://www.cctld.uz/",
+  "whoisServer": "whois.cctld.uz",
+  "rdapServer": "https://rdap.cctld.uz",
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "ns1.uz",
+      "addresses": [
+        "91.212.89.244"
+      ]
+    },
+    {
+      "host": "ns2.uz",
+      "addresses": [
+        "82.115.52.4"
+      ]
+    },
+    {
+      "host": "ns3.uz",
+      "addresses": [
+        "185.74.6.29",
+        "2a05:45c7:e001:0:0:0:0:4"
+      ]
+    },
+    {
+      "host": "ns4.uz",
+      "addresses": [
+        "83.69.136.139"
+      ]
+    },
+    {
+      "host": "ns5.uz",
+      "addresses": [
+        "217.12.81.129"
+      ]
+    },
+    {
+      "host": "ns6.uz",
+      "addresses": [
+        "83.69.129.33",
+        "80.241.0.234",
+        "2a01:7640:0:d:0:0:0:2"
+      ]
+    },
+    {
+      "host": "ns7.uz",
+      "addresses": [
+        "72.167.34.137",
+        "2603:3:6101:8ac0:0:0:0:0"
+      ]
+    },
+    {
+      "host": "ns8.uz",
+      "addresses": [
+        "91.212.89.233"
+      ]
+    }
+  ],
+  "about": ".UZ is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Uzbekistan. The IANA root zone lists the registry manager as Single Integrator for Creation and Support of State Information Systems UZINFOCOM. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/uz.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:51:47Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".uz",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "creation",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "information",
+    "integrator",
+    "level",
+    "local business",
+    "regional brands",
+    "single",
+    "state",
+    "support",
+    "systems",
+    "top",
+    "uz",
+    "uzbekistan",
+    "uzinfocom"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": true,
+    "registrarCount": 10,
+    "cheapestRegistration": {
+      "registrar": "Regery",
+      "price": "$28.99",
+      "value": 28.99
+    },
+    "cheapestRenewal": {
+      "registrar": "Regery",
+      "price": "$28.99",
+      "value": 28.99
+    },
+    "sourceUrl": "https://tld-list.com/tld/uz"
+  },
+  "summary": ".uz is a Country-code top-level domain. Managed by Single Integrator for Creation and Support of State Information Systems UZINFOCOM.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

@@ -1,0 +1,131 @@
+{
+  "tld": ".xn--fzc2c9e2c",
+  "slug": "xn--fzc2c9e2c",
+  "title": "About .xn--fzc2c9e2c domains",
+  "delegationTitle": "Delegation Record for .\u0dbd\u0d82\u0d9a\u0dcf",
+  "type": "ccTLD",
+  "typeLabel": "Country-code top-level domain designated for two-letter country code LK",
+  "designation": "Country-code top-level domain designated for Sri Lanka",
+  "sponsor": "LK Domain Registry",
+  "sponsorDetail": "LK Domain Registry\nBernards Business Park\n106 Dutugemunu St.\nDehiwala 10350\nSri Lanka",
+  "administrativeContact": "Prof. Gihan Dias",
+  "technicalContact": "Hostmaster",
+  "registryUrl": "http://www.domains.lk",
+  "whoisServer": null,
+  "rdapServer": null,
+  "registrationDate": null,
+  "recordUpdated": null,
+  "nameServers": [
+    {
+      "host": "lk.communitydns.net",
+      "addresses": [
+        "194.0.1.27"
+      ]
+    },
+    {
+      "host": "nic.lk-anycast.pch.net",
+      "addresses": [
+        "204.61.216.27"
+      ]
+    },
+    {
+      "host": "ns-c.nic.lk",
+      "addresses": [
+        "203.143.19.3"
+      ]
+    },
+    {
+      "host": "ns-d.nic.lk",
+      "addresses": [
+        "123.231.6.18"
+      ]
+    },
+    {
+      "host": "ns-l.nic.lk",
+      "addresses": [
+        "192.248.8.17"
+      ]
+    },
+    {
+      "host": "ns-t.nic.lk",
+      "addresses": [
+        "203.94.66.129"
+      ]
+    },
+    {
+      "host": "ns1.ac.lk",
+      "addresses": [
+        "192.248.1.162",
+        "2401:dd00:1:0:0:0:0:162"
+      ]
+    },
+    {
+      "host": "ns3.ac.lk",
+      "addresses": [
+        "202.124.166.178"
+      ]
+    }
+  ],
+  "about": ".XN--FZC2C9E2C is a country-code top-level domain (ccTLD) in the DNS root zone. It is designated for Sri Lanka. The IANA root zone lists the registry manager as LK Domain Registry. Registration policies (who may register, local presence, pricing) are set by the registry and its accredited registrars \u2014 not by IANA.",
+  "whoCanRegister": "Eligibility is defined by the registry operator and its registrars. Most gTLDs are open to anyone worldwide. Many ccTLDs are also open globally; some require local presence, citizenship, or trademark rights. Always confirm current policy with the registry or your registrar.",
+  "registrationRestrictions": {
+    "minLength": 2,
+    "maxLength": 63,
+    "canUse": "Letters (a\u2013z), numbers (0\u20139), and hyphens (not first/last or consecutive in restricted cases)",
+    "cannotUse": "Special characters (e.g. & # @) in standard LDH labels",
+    "idns": "Varies by registry \u2014 check IDN support with the registry or your registrar",
+    "note": "Character rules below follow common ICANN LDH conventions. Individual registries and registrars may impose extra eligibility, length, or residency rules."
+  },
+  "features": {
+    "registrationLength": "Typically 1\u201310 years (registry policy varies)",
+    "renewalLength": "Typically 1\u201310 years (registry policy varies)",
+    "autoRenew": "Depends on registrar settings",
+    "backorders": "Registrar-dependent",
+    "transfersIn": "Supported for most ICANN gTLDs via Auth/EPP code; ccTLDs vary",
+    "transfersOut": "Supported when the registry allows EPP transfers",
+    "transferLock": "Supported on most gTLDs (clientTransferProhibited)",
+    "domainPrivacy": "Registrar WHOIS/RDAP privacy \u2014 not set by IANA",
+    "domainProtection": "Registrar add-on",
+    "contactUpdates": "Supported via registrar",
+    "note": "Operational features (privacy, parking, protection) are registrar-level, not defined by the IANA root zone record."
+  },
+  "source": "IANA Root Zone Database",
+  "sourceUrl": "https://www.iana.org/domains/root/db/xn--fzc2c9e2c.html",
+  "wikipedia": null,
+  "scrapedAt": "2026-07-21T21:53:41Z",
+  "categories": [
+    "geo"
+  ],
+  "useCases": [
+    "Local business",
+    "Country presence",
+    "Regional brands"
+  ],
+  "keywords": [
+    ".xn--fzc2c9e2c",
+    "cctld",
+    "code",
+    "country",
+    "country presence",
+    "designated",
+    "domain",
+    "for",
+    "geo",
+    "lanka",
+    "letter",
+    "level",
+    "local business",
+    "regional brands",
+    "registry",
+    "sri",
+    "top",
+    "two",
+    "xn--fzc2c9e2c"
+  ],
+  "primaryCategory": "geo",
+  "pricing": {
+    "hasPricing": false
+  },
+  "summary": ".xn--fzc2c9e2c is a Country-code top-level domain designated for two-letter country code LK. Managed by LK Domain Registry.",
+  "metaEnrichedAt": "2026-07-22T04:41:02Z"
+}

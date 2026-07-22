@@ -33,7 +33,7 @@ export default async function Image() {
           }}
         />
 
-        {/* Logo */}
+        {/* Logo — silver D + search mark */}
         <div
           style={{
             display: 'flex',
@@ -41,15 +41,21 @@ export default async function Image() {
             justifyContent: 'center',
             width: '72px',
             height: '72px',
-            borderRadius: '18px',
+            borderRadius: '16px',
             background: 'linear-gradient(135deg, #e2e8f0, #f1f5f9, #cbd5e1)',
-            marginBottom: '32px',
+            marginBottom: '28px',
           }}
         >
-          <svg width="42" height="42" viewBox="0 0 24 24" fill="none">
-            <path d="M12 3L4 7.5V16.5L12 21L20 16.5V7.5L12 3Z" stroke="#334155" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-            <circle cx="12" cy="12" r="4" fill="#334155" opacity="0.9"/>
-            <circle cx="12" cy="12" r="1.5" fill="white" fillOpacity="0.6"/>
+          <svg width="42" height="42" viewBox="0 0 96 96" fill="none">
+            <path
+              fill="#334155"
+              d="M18 12h26c22.091 0 40 17.909 40 40s-17.909 40-40 40H18V12zm14 12v56h12c15.464 0 28-12.536 28-28S59.464 24 44 24H32z"
+            />
+            <circle cx="46" cy="48" r="12" stroke="#334155" strokeWidth="6.5" fill="none"/>
+            <path
+              fill="#334155"
+              d="M55.2 58.8a3.5 3.5 0 0 1 4.95 0l10.6 10.6a3.5 3.5 0 1 1-4.95 4.95L55.2 63.74a3.5 3.5 0 0 1 0-4.95z"
+            />
           </svg>
         </div>
 
