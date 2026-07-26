@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface SimpleContentPageProps {
@@ -19,6 +20,8 @@ interface SimpleContentPageProps {
     href: string;
     label: string;
   };
+  /** Optional trail for page guide alignment */
+  breadcrumbLabel?: string;
 }
 
 export function SimpleContentPage({
@@ -27,6 +30,7 @@ export function SimpleContentPage({
   description,
   sections,
   cta,
+  breadcrumbLabel,
 }: SimpleContentPageProps) {
   const { theme } = useTheme();
   const isLight = theme === 'light';
@@ -36,8 +40,14 @@ export function SimpleContentPage({
       <PageBackground variant="default" />
       <Navigation activeTool={activeTool} />
 
-      <main className="relative pt-20 sm:pt-24 pb-10 sm:pb-14">
-        <section className="px-3 sm:px-6 pb-6 sm:pb-8">
+      <main className={`${PAGE_MAIN_CLASS} pb-10 sm:pb-14`}>
+        <PageBreadcrumb
+          items={[
+            { label: 'Home', href: '/' },
+            { label: breadcrumbLabel || title },
+          ]}
+        />
+        <section className="page-gutter pb-6 sm:pb-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight mb-3 sm:mb-4">
               {title}
@@ -48,14 +58,14 @@ export function SimpleContentPage({
           </div>
         </section>
 
-        <section className="px-3 sm:px-6">
+        <section className="page-gutter">
           <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4">
             {sections.map((section) => (
               <article
                 key={section.heading}
                 className={`shine-border group ${
                   isLight
-                    ? 'bg-white border-slate-200 shadow-sm'
+                    ? 'bg-white border-indigo-100 shadow-sm shadow-indigo-500/5'
                     : 'bg-white/[0.02] border-white/10'
                 } border rounded-2xl p-4 sm:p-6`}
               >

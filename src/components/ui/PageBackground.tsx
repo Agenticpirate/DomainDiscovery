@@ -43,8 +43,12 @@ export const PageBackground: React.FC<PageBackgroundProps> = ({
 
         {variant === 'hero' && isLight && (
           <>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.8),transparent_40%)]" />
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-[300px] sm:w-[1000px] sm:h-[440px] bg-gradient-to-b from-slate-200/[0.45] via-slate-100/[0.2] to-transparent rounded-full blur-[90px]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.75),transparent_45%)]" />
+            {/* Colorful soft orbs — light mode only */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-[300px] sm:w-[1000px] sm:h-[440px] bg-gradient-to-b from-indigo-300/35 via-sky-200/20 to-transparent rounded-full blur-[90px]" />
+            <div className="absolute top-16 left-[8%] w-[280px] h-[200px] bg-violet-300/25 rounded-full blur-[90px]" />
+            <div className="absolute top-24 right-[10%] w-[260px] h-[180px] bg-sky-300/30 rounded-full blur-[80px]" />
+            <div className="absolute top-[40%] left-1/3 w-[200px] h-[140px] bg-emerald-200/15 rounded-full blur-[70px]" />
           </>
         )}
 
@@ -53,7 +57,10 @@ export const PageBackground: React.FC<PageBackgroundProps> = ({
         )}
 
         {variant === 'default' && isLight && (
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-gradient-to-b from-slate-200/[0.25] to-transparent rounded-full blur-[80px]" />
+          <>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-gradient-to-b from-indigo-200/30 via-sky-100/20 to-transparent rounded-full blur-[80px]" />
+            <div className="absolute top-32 right-[15%] w-[220px] h-[160px] bg-violet-200/20 rounded-full blur-[70px]" />
+          </>
         )}
 
         {variant === 'minimal' && !isLight && (

@@ -147,15 +147,6 @@ export async function getWhoisInfo(domain: string) {
   }
 }
 
-export async function getDomainValue(domain: string) {
-  try {
-    const response = await fetch(`/api/domains/value?domain=${encodeURIComponent(domain)}`);
-    if (!response.ok) return null;
-    return await response.json();
-  } catch {
-    return null;
-  }
-}
 
 export async function getPriceComparison(domain: string) {
   try {

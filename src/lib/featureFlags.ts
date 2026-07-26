@@ -8,4 +8,9 @@ export const FEATURE_FLAGS = {
    * Disabled for now — re-enable when we promote the feature.
    */
   domainWatch: false,
+  /**
+   * AI Domain Assistant (auto rank + MCP tools).
+   * Phase 0–1: auto API live; UI/MCP follow.
+   */
+  domainAgent: true,
 } as const;

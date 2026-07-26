@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ToastProvider } from "@/components/ui/Toast";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import {
   getOrganizationJsonLd,
   getSiteBaseUrl,
@@ -69,6 +70,13 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: getSiteBaseUrl(),
+    types: {
+      // Machine-readable product indexes for assistants (not a Google ranking lever)
+      'text/plain': [
+        { url: '/llms.txt', title: 'llms.txt' },
+        { url: '/llms-full.txt', title: 'llms-full.txt' },
+      ],
+    },
   },
   // Google Search Console meta verification (Phase F). Set in production env only.
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
@@ -94,6 +102,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Temporary Impact.com site verification — remove after verified */}
+        <meta
+          name="impact-site-verification"
+          content="94371be8-1bcb-4f36-b961-098e0c4eee46"
+          // Impact's snippet uses `value`; include both so crawlers that expect either pass
+          {...{ value: "94371be8-1bcb-4f36-b961-098e0c4eee46" }}
+        />
+      </head>
       <body className="min-h-screen font-sans antialiased overflow-x-hidden">
         <script
           type="application/ld+json"
@@ -115,6 +132,7 @@ export default function RootLayout({
         />
         <ThemeProvider>
           <ToastProvider>
+            <ScrollToTop />
             {children}
           </ToastProvider>
         </ThemeProvider>

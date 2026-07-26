@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Saved Domains — Local Shortlist',
+  title: 'Saved Domains — Local Folders & Shortlist',
   description:
-    'View domains you saved on this device while researching with DomainDiscovery. Shortlists stay local in your browser by default.',
+    'Organize domains into custom folders on this device. Shortlists stay in your browser only — download a CSV backup; we do not store them on our servers.',
   robots: {
     index: false,
     follow: true,

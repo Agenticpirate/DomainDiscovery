@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -77,9 +78,15 @@ export default function ExpiredPage() {
       <Navigation activeTool="expired" />
 
       {/* Main Content */}
-      <main className="relative pt-24 sm:pt-32 pb-14 sm:pb-24">
+      <main className={`${PAGE_MAIN_CLASS} pb-14 sm:pb-24`}>
+        <PageBreadcrumb
+          items={[
+            { label: 'Tools', href: '/' },
+            { label: 'Expired Domains' },
+          ]}
+        />
         {/* Hero Section */}
-        <section className="px-3 sm:px-6 pb-10 sm:pb-16">
+        <section className="page-gutter pb-10 sm:pb-16">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl sm:text-6xl md:text-7xl font-black tracking-tight mb-4 sm:mb-6 leading-[1.1]">
               Expired Domains
@@ -133,7 +140,7 @@ export default function ExpiredPage() {
         </section>
 
         {/* Domain Lifecycle Section */}
-        <section className="px-3 sm:px-6 pb-14 sm:pb-20">
+        <section className="page-gutter pb-14 sm:pb-20">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8 sm:mb-16">
               <h2 className="text-2xl sm:text-4xl font-black mb-3 sm:mb-4 tracking-tight">
@@ -178,7 +185,7 @@ export default function ExpiredPage() {
         </section>
 
         {/* Info Cards Section */}
-        <section className="px-3 sm:px-6">
+        <section className="page-gutter">
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               {infoCards.map((card, index) => (

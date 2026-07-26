@@ -122,36 +122,41 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
         octx.textAlign = 'center';
         octx.textBaseline = 'middle';
 
-        // Large type — fill most of the box height/width, stay centered
-        let fontSize = Math.min(cssH * 0.72, cssW / (text.length * 0.42));
-        fontSize = Math.max(44, Math.min(fontSize, isMobile ? 64 : 96));
+        // Fit full brand name — larger on mobile, still never crop left/right
+        const sidePad = isMobile ? 10 : 20;
+        const maxTextW = Math.max(80, cssW - sidePad * 2);
+        const maxByH = cssH * (isMobile ? 0.58 : 0.62);
+        const maxByCap = isMobile ? 56 : 96;
+        let fontSize = Math.min(maxByH, maxByCap, cssW / Math.max(6, text.length * 0.32));
+        fontSize = Math.max(isMobile ? 28 : 28, fontSize);
+
+        const applyFont = (size: number) => {
+          octx.font = `800 ${size}px "Inter", "SF Pro Display", "Segoe UI", system-ui, -apple-system, sans-serif`;
+        };
+        // Shrink until the full string measures within the safe width
+        const floor = isMobile ? 24 : 22;
+        for (let guard = 0; guard < 24; guard++) {
+          applyFont(fontSize);
+          const w = octx.measureText(text).width;
+          if (w <= maxTextW || fontSize <= floor) break;
+          fontSize = Math.max(floor, fontSize * (maxTextW / w) * 0.98);
+        }
+        applyFont(fontSize);
+
         const midX = cssW / 2;
         const midY = cssH / 2;
-        fontMetaRef.current = { size: fontSize, y: midY };
-
-        octx.font = `800 ${fontSize}px "Inter", "SF Pro Display", "Segoe UI", system-ui, -apple-system, sans-serif`;
-        octx.fillText(text, midX, midY);
-
-        // Measure and re-center if font metrics skew baseline
         const metrics = octx.measureText(text);
-        const actualH =
-          (metrics.actualBoundingBoxAscent || fontSize * 0.7) +
-          (metrics.actualBoundingBoxDescent || fontSize * 0.2);
-        // redraw slightly optical-centered
-        if (actualH > 0) {
-          octx.clearRect(0, 0, cssW, cssH);
-          const opticalY =
-            midY +
-            ((metrics.actualBoundingBoxAscent || fontSize * 0.7) -
-              (metrics.actualBoundingBoxDescent || fontSize * 0.2)) *
-              0.08;
-          octx.fillText(text, midX, opticalY);
-          fontMetaRef.current = { size: fontSize, y: opticalY };
-        }
+        const opticalY =
+          midY +
+          ((metrics.actualBoundingBoxAscent || fontSize * 0.7) -
+            (metrics.actualBoundingBoxDescent || fontSize * 0.2)) *
+            0.08;
+        fontMetaRef.current = { size: fontSize, y: opticalY };
+        octx.fillText(text, midX, opticalY);
 
         const { data } = octx.getImageData(0, 0, cssW, cssH);
         // Slightly larger brand dots for big type, still crisp
-        const brandGap = isMobile ? 2.5 : 2.15;
+        const brandGap = isMobile ? 2.2 : 2.15;
 
         for (let y = 0; y < cssH; y += brandGap) {
           for (let x = 0; x < cssW; x += brandGap) {
@@ -207,8 +212,9 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
 
     const resize = () => {
       const rect = wrap.getBoundingClientRect();
-      const cssW = Math.max(280, Math.floor(rect.width));
-      const cssH = height;
+      const cssW = Math.max(240, Math.floor(rect.width));
+      // Room for larger mobile wordmark; desktop uses full height
+      const cssH = cssW < 480 ? Math.min(height, 128) : height;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.floor(cssW * dpr);
       canvas.height = Math.floor(cssH * dpr);

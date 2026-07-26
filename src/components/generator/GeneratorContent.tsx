@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
+import { PremiumFaqGrid } from '@/components/sections/PremiumFaqGrid';
 
 export const GeneratorContent: React.FC = () => {
   const { theme } = useTheme();
   const isLight = theme === 'light';
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const faqs = [
     {
@@ -610,103 +610,14 @@ export const GeneratorContent: React.FC = () => {
         </div>
       </section>
 
-      {/* FAQs — compact, icons, minimal open animation */}
-      <section className="max-w-5xl mx-auto px-3.5 sm:px-6">
-        <div className="text-center mb-4 sm:mb-6">
-          <p
-            className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            Quick answers
-          </p>
-          <h2 className="text-xl sm:text-3xl font-black tracking-tight mb-1.5">
-            Domain generator FAQs
-          </h2>
-          <p
-            className="text-[12px] sm:text-[13px] max-w-md mx-auto"
-            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
-          >
-            Everything about keywords, availability, and brandable names.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5 sm:gap-2 items-start">
-          {faqs.map((faq, index) => {
-            const open = openFaq === index;
-            return (
-              <div
-                key={faq.question}
-                className={`shine-border rounded-xl border overflow-hidden transition-[border-color,box-shadow,background-color] duration-300 ${
-                  open
-                    ? isLight
-                      ? 'bg-white border-slate-300 shadow-sm z-[1]'
-                      : 'bg-white/[0.06] border-white/18 z-[1]'
-                    : isLight
-                      ? 'bg-white border-slate-200 hover:border-slate-300'
-                      : 'bg-white/[0.03] border-white/10 hover:border-white/16'
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenFaq(open ? null : index)}
-                  className="w-full flex items-center gap-2 sm:gap-2.5 text-left px-2.5 py-2 sm:px-3 sm:py-2.5"
-                  aria-expanded={open}
-                >
-                  <span
-                    className={`flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg border transition-colors duration-300 [&>svg]:w-3.5 [&>svg]:h-3.5 ${
-                      open
-                        ? isLight
-                          ? 'bg-slate-900 text-white border-slate-900'
-                          : 'bg-white text-black border-white'
-                        : isLight
-                          ? 'bg-slate-50 text-slate-600 border-slate-200'
-                          : 'bg-white/[0.05] text-white/65 border-white/10'
-                    }`}
-                  >
-                    {faq.icon}
-                  </span>
-                  <span
-                    className={`flex-1 text-[12px] sm:text-[13px] font-bold leading-snug pr-1 ${
-                      isLight ? 'text-slate-900' : 'text-white'
-                    }`}
-                  >
-                    {faq.question}
-                  </span>
-                  <span
-                    className={`shrink-0 flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full text-xs font-bold transition-transform duration-300 ease-out ${
-                      open
-                        ? isLight
-                          ? 'bg-slate-900 text-white rotate-45'
-                          : 'bg-white text-black rotate-45'
-                        : isLight
-                          ? 'bg-slate-100 text-slate-500'
-                          : 'bg-white/[0.06] text-white/40'
-                    }`}
-                    aria-hidden
-                  >
-                    +
-                  </span>
-                </button>
-
-                <div
-                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
-                    open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <p
-                      className="px-2.5 sm:px-3 pb-2.5 pl-[2.75rem] sm:pl-[3.25rem] text-[11px] sm:text-[12px] leading-relaxed"
-                      style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
-                    >
-                      {faq.answer}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {/* Homepage FAQ design system */}
+      <PremiumFaqGrid
+        id="generator-faqs"
+        title="Domain generator FAQs"
+        subtitle="Everything about keywords, availability, and brandable names."
+        items={faqs}
+        maxWidthClass="max-w-4xl"
+      />
 
       {/* Popular keywords + CTA — clean premium footer */}
       <section className="max-w-6xl mx-auto px-3.5 sm:px-6">

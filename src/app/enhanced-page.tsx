@@ -7,7 +7,6 @@ import { DomainResultsList } from '@/components/domain/DomainResultsList';
 import { TLDFilter } from '@/components/domain/TLDFilter';
 import { PriceComparison } from '@/components/domain/PriceComparison';
 import { WHOISLookup } from '@/components/domain/WHOISLookup';
-import { DomainValueEstimate } from '@/components/domain/DomainValueEstimate';
 import { DomainGenerator } from '@/components/generator/DomainGenerator';
 import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
@@ -142,7 +141,6 @@ export default function EnhancedHome() {
             <div className="lg:col-span-2">
               {activeTool === 'generator' && <DomainGenerator onSelect={setSelectedDomain} />}
               {activeTool === 'whois' && <WHOISLookup domain={selectedDomain} />}
-              {activeTool === 'value' && <DomainValueEstimate domain={selectedDomain} />}
               {activeTool === 'search' && results.length === 0 && (
                 <div className="glass-card p-12 border-white/10 text-center">
                   <div className="mb-6 inline-flex p-8 rounded-full bg-white/5 border border-white/10">
@@ -332,8 +330,7 @@ export default function EnhancedHome() {
                 <li className="hover:text-white cursor-pointer transition-colors">Domain Search</li>
                 <li className="hover:text-white cursor-pointer transition-colors">AI Generator</li>
                 <li className="hover:text-white cursor-pointer transition-colors">WHOIS Lookup</li>
-                <li className="hover:text-white cursor-pointer transition-colors">Value Estimator</li>
-              </ul>
+                              </ul>
             </div>
             <div>
               <h5 className="font-bold mb-6 text-sm uppercase tracking-widest text-white/60">Company</h5>

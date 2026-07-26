@@ -49,6 +49,21 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/api/', '/share/'],
       },
+      {
+        userAgent: 'OAI-SearchBot',
+        allow: '/',
+        disallow: ['/api/', '/share/'],
+      },
+      {
+        userAgent: 'anthropic-ai',
+        allow: '/',
+        disallow: ['/api/', '/share/'],
+      },
+      {
+        userAgent: 'Bytespider',
+        allow: '/',
+        disallow: ['/api/', '/share/'],
+      },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,

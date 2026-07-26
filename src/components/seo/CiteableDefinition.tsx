@@ -32,7 +32,7 @@ export function CiteableDefinition({ definition, className = '', compact = false
         className={`mx-auto max-w-3xl rounded-2xl border p-4 sm:p-5 ${
           isLight
             ? 'border-slate-200 bg-white shadow-sm'
-            : 'border-white/10 bg-white/[0.02]'
+            : 'border-white/10 bg-[#0c0c0e]'
         }`}
       >
         <p

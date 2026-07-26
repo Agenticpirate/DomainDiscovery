@@ -1,43 +1,23 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
 import { DomainTicker } from '@/components/home/DomainTicker';
 import { StatsBar } from '@/components/home/StatsBar';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
+import { PremiumFaqGrid } from '@/components/sections/PremiumFaqGrid';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 
 export const HomePageContent: React.FC = () => {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
-  const faqSectionRef = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Close FAQ on outside click / Escape — keeps layout calm
-  React.useEffect(() => {
-    if (openFaq === null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpenFaq(null);
-    };
-    const onPointer = (e: MouseEvent | TouchEvent) => {
-      const root = faqSectionRef.current;
-      if (root && !root.contains(e.target as Node)) setOpenFaq(null);
-    };
-    window.addEventListener('keydown', onKey);
-    document.addEventListener('mousedown', onPointer);
-    document.addEventListener('touchstart', onPointer);
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      document.removeEventListener('mousedown', onPointer);
-      document.removeEventListener('touchstart', onPointer);
-    };
-  }, [openFaq]);
 
   const isLight = mounted ? theme === 'light' : false;
 
@@ -72,6 +52,16 @@ export const HomePageContent: React.FC = () => {
   ];
 
   const tools = [
+    {
+      icon: <Icons.Magic />,
+      title: 'AI Domain Assistant',
+      description: 'Describe your business — auto-find and rank brand domains with live checks.',
+      href: '/assistant',
+      featured: true,
+      badge: 'Auto',
+      cta: 'Open assistant',
+      hideOnMobile: false,
+    },
     {
       icon: <Icons.Sparkles />,
       title: 'AI Domain Generator',
@@ -118,7 +108,8 @@ export const HomePageContent: React.FC = () => {
       title: 'WHOIS Lookup',
       description: 'RDAP/WHOIS ownership, dates, and registration history.',
       href: '/tools/whois',
-      hideOnMobile: false,
+      // Mobile tools grid: hide WHOIS (still shown on desktop lg+)
+      hideOnMobile: true,
     },
     {
       icon: <Icons.Globe />,
@@ -134,14 +125,6 @@ export const HomePageContent: React.FC = () => {
       href: '/tools/keyword',
       badge: '5K+',
       hideOnMobile: false,
-    },
-    {
-      icon: <Icons.Chart />,
-      title: 'Domain Value Estimator',
-      description: 'Quick appraisal signals for aftermarket and brandable names.',
-      href: '/tools/value',
-      badge: 'Appraisal',
-      hideOnMobile: true,
     },
   ];
 
@@ -212,7 +195,7 @@ export const HomePageContent: React.FC = () => {
       icon: <Icons.Sparkles />,
       question: 'What free domain tools does DomainDiscovery include?',
       answer:
-        'Instant domain search, AI domain generator, bulk domain checker (up to 1,000 names), geo domain generator for city/country lists, keyword domain finder, WHOIS/RDAP lookup, TLD browser, registrar price comparison, and a value estimator — no account required.',
+        'Instant domain search, AI domain generator, bulk domain checker (up to 1,000 names), geo domain generator for city/country lists, keyword domain finder, WHOIS/RDAP lookup, TLD browser, registrar price comparison, — no account required.',
     },
     {
       icon: <Icons.Search />,
@@ -263,10 +246,10 @@ export const HomePageContent: React.FC = () => {
     ? 'bg-slate-50 border-slate-200 text-slate-700'
     : 'bg-white/[0.04] border-white/10 text-white/80';
 
-  /** All tools share elevated treatment + silver border shine on hover */
+  /** Solid fills so ambient dots stay behind cards, not inside them */
   const toolCard = isLight
-    ? 'shine-border bg-white border border-slate-200 shadow-sm shadow-slate-900/[0.03] hover:shadow-md hover:shadow-slate-900/[0.05] hover:-translate-y-0.5'
-    : 'shine-border bg-gradient-to-b from-white/[0.055] to-white/[0.02] border border-white/[0.1] hover:from-white/[0.08] hover:to-white/[0.03] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)]';
+    ? 'shine-border isolate bg-white border border-slate-200 shadow-sm shadow-slate-900/[0.03] hover:shadow-md hover:shadow-slate-900/[0.05] hover:-translate-y-0.5'
+    : 'shine-border isolate bg-[#0c0c0e] border border-white/[0.1] hover:bg-[#101014] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)] hover:border-white/[0.14]';
 
   const toolIcon = isLight
     ? 'bg-slate-100 border-slate-200 text-slate-700 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900'
@@ -344,16 +327,21 @@ export const HomePageContent: React.FC = () => {
         Desktop order: Tools → Popular Extensions → Why
       */}
       <div className="flex flex-col">
-      {/* Tools — 2-col compact on mobile so hero stays primary */}
-      <section className="section-shell order-1 !mb-5 sm:!mb-8">
-        <div className="text-center mb-1.5 sm:mb-3.5">
+      {/* Tools — full-bleed ambient field (edge-to-edge), content constrained */}
+      <SectionAmbient
+        intensity="dots"
+        solidBase={false}
+        className="order-1 w-full !mb-5 sm:!mb-8 py-6 sm:py-10"
+        contentClassName="section-shell !mb-0"
+      >
+        <div className="relative z-[1] text-center mb-1.5 sm:mb-3.5">
           <h2 className="section-title">Domain tools for search, geo &amp; WHOIS</h2>
           <p className="hidden sm:block section-sub">
             Instant search, AI names, bulk checks, geo domains, extensions, pricing, and RDAP lookup
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 sm:gap-2.5">
+        <div className="relative z-[1] grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 sm:gap-2.5">
           {tools.map((tool, i) => (
             <Link
               key={tool.title}
@@ -363,21 +351,28 @@ export const HomePageContent: React.FC = () => {
               } ${toolCard}`}
               style={{ animationDelay: `${i * 0.04}s` }}
             >
+              {/* Solid underlay blocks ambient dots from showing through the card */}
               <div
-                className={`pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:block ${
+                aria-hidden
+                className={`pointer-events-none absolute inset-0 rounded-[inherit] ${
+                  isLight ? 'bg-white' : 'bg-[#0c0c0e]'
+                }`}
+              />
+              <div
+                className={`pointer-events-none absolute inset-0 z-[1] opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:block ${
                   isLight
-                    ? 'bg-gradient-to-br from-slate-100/80 via-transparent to-transparent'
-                    : 'bg-gradient-to-br from-white/[0.06] via-transparent to-transparent'
+                    ? 'bg-gradient-to-br from-slate-100/90 via-transparent to-transparent'
+                    : 'bg-gradient-to-br from-white/[0.05] via-transparent to-transparent'
                 }`}
               />
 
               <div
-                className={`relative flex h-7 w-7 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl border transition-all duration-300 ${toolIcon}`}
+                className={`relative z-[2] flex h-7 w-7 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl border transition-all duration-300 ${toolIcon}`}
               >
                 {tool.icon}
               </div>
 
-              <div className="relative min-w-0 flex-1">
+              <div className="relative z-[2] min-w-0 flex-1">
                 <div className="flex items-center gap-1">
                   <h3 className="text-[10px] sm:text-[13px] font-bold leading-tight line-clamp-2 sm:truncate">
                     <span className="sm:hidden">
@@ -409,7 +404,7 @@ export const HomePageContent: React.FC = () => {
               </div>
 
               <svg
-                className={`relative w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 transition-all duration-300 group-hover:translate-x-0.5 ${
+                className={`relative z-[2] w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 transition-all duration-300 group-hover:translate-x-0.5 ${
                   isLight
                     ? 'text-slate-300 group-hover:text-slate-600'
                     : 'text-white/25 group-hover:text-white/60'
@@ -423,7 +418,7 @@ export const HomePageContent: React.FC = () => {
             </Link>
           ))}
         </div>
-      </section>
+      </SectionAmbient>
 
       {/* Popular Extensions — last on mobile (after Why); mid-page on desktop */}
       <section className="section-shell order-3 sm:order-2 !mt-2 sm:!mt-0 !mb-5 sm:!mb-8">
@@ -818,140 +813,14 @@ export const HomePageContent: React.FC = () => {
         <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.home} compact />
       </div>
 
-      {/*
-        FAQs — last content block before footer menu.
-        Questions stay fixed-height; answer plays in a stable stage below so
-        sections above never reflow. Click only (no hover open).
-      */}
-      <section
-        ref={faqSectionRef}
+      {/* Homepage FAQ design system — shared PremiumFaqGrid */}
+      <PremiumFaqGrid
         id="faqs"
-        className="section-shell max-w-4xl !mb-2 sm:!mb-6"
-        aria-labelledby="faqs-heading"
-      >
-        <div className="text-center mb-1.5 sm:mb-4">
-          <h2 id="faqs-heading" className="section-title">
-            FAQs
-          </h2>
-          <p className="hidden sm:block section-sub">
-            Everything you need to know about finding and registering domains
-          </p>
-        </div>
-
-        {/* Fixed question grid — never grows when an answer is open */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 sm:gap-2.5">
-          {faqs.map((faq, index) => {
-            const open = openFaq === index;
-            return (
-              <button
-                key={faq.question}
-                type="button"
-                onClick={() => setOpenFaq(open ? null : index)}
-                aria-expanded={open}
-                aria-controls="faq-answer-stage"
-                className={`shine-border tool-card-enter group relative flex items-center gap-2 sm:gap-2.5 w-full min-h-[3rem] sm:min-h-[3.35rem] px-2 py-1.5 sm:px-3.5 sm:py-3 text-left rounded-lg sm:rounded-xl transition-[border-color,box-shadow,background-color,transform] duration-300 ease-out ${
-                  open
-                    ? isLight
-                      ? 'bg-white border border-slate-300 shadow-md scale-[1.01]'
-                      : 'bg-gradient-to-b from-white/[0.08] to-white/[0.03] border border-white/22 shadow-[0_8px_28px_rgba(0,0,0,0.28)] scale-[1.01]'
-                    : isLight
-                      ? 'bg-white border border-slate-200 hover:border-slate-300 hover:shadow-sm'
-                      : 'bg-white/[0.03] border border-white/10 hover:border-white/18 hover:bg-white/[0.05]'
-                }`}
-                style={{ animationDelay: `${index * 0.035}s` }}
-              >
-                <div
-                  className={`flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg border transition-all duration-300 ease-out ${
-                    open
-                      ? isLight
-                        ? 'bg-slate-900 text-white border-slate-900'
-                        : 'bg-white text-black border-white'
-                      : isLight
-                        ? 'bg-slate-100 text-slate-600 border-slate-200 group-hover:bg-slate-200'
-                        : 'bg-white/[0.06] text-white/70 border-white/10 group-hover:bg-white/10'
-                  }`}
-                >
-                  {faq.icon}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-[11px] sm:text-[13px] font-bold leading-snug pr-1 line-clamp-2 sm:line-clamp-none">
-                    {faq.question}
-                  </h3>
-                </div>
-                <span
-                  className={`shrink-0 flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full text-xs sm:text-sm font-bold transition-transform duration-300 ease-out ${
-                    open
-                      ? isLight
-                        ? 'bg-slate-900 text-white rotate-45'
-                        : 'bg-white text-black rotate-45'
-                      : isLight
-                        ? 'bg-slate-100 text-slate-500'
-                        : 'bg-white/[0.06] text-white/45'
-                  }`}
-                  aria-hidden
-                >
-                  +
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Stable answer stage — fixed min-height when open so footer doesn't jump around */}
-        <div
-          id="faq-answer-stage"
-          className={`faq-answer-stage mt-2 sm:mt-3 transition-[min-height] duration-300 ease-out ${
-            openFaq !== null ? 'min-h-[7.25rem] sm:min-h-[6.5rem]' : 'min-h-0'
-          }`}
-          aria-live="polite"
-        >
-          {openFaq !== null && faqs[openFaq] && (
-            <div
-              key={openFaq}
-              className={`faq-answer-panel shine-border rounded-xl border px-3.5 py-3 sm:px-4 sm:py-3.5 ${
-                isLight
-                  ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.04]'
-                  : 'bg-white/[0.04] border-white/12 shadow-[0_12px_32px_rgba(0,0,0,0.28)]'
-              }`}
-            >
-              <div className="flex items-start gap-2.5">
-                <div
-                  className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border ${
-                    isLight
-                      ? 'bg-slate-900 text-white border-slate-900'
-                      : 'bg-white text-black border-white'
-                  }`}
-                >
-                  {faqs[openFaq].icon}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[12px] sm:text-[13px] font-bold mb-1 leading-snug">
-                    {faqs[openFaq].question}
-                  </p>
-                  <p
-                    className="text-[11px] sm:text-[12.5px] leading-relaxed"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
-                    {faqs[openFaq].answer}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setOpenFaq(null)}
-                  className={`shrink-0 flex h-7 w-7 items-center justify-center rounded-full text-sm font-bold transition-colors ${
-                    isLight
-                      ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                      : 'bg-white/[0.08] text-white/60 hover:bg-white/[0.14] hover:text-white'
-                  }`}
-                  aria-label="Close answer"
-                >
-                  ×
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+        title="FAQs"
+        subtitle="Everything you need to know about finding and registering domains"
+        items={faqs}
+        className="!mb-2 sm:!mb-6"
+      />
     </div>
   );
 };

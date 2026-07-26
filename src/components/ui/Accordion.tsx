@@ -15,15 +15,15 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ title, content, isOpen, o
   const isLight = theme === 'light';
 
   return (
-    <div className={`border rounded-xl overflow-hidden transition-all ${
+    <div className={`relative isolate border rounded-xl overflow-hidden transition-all ${
       isLight
         ? 'border-slate-200 bg-white hover:border-slate-300 shadow-sm'
-        : 'border-white/10 bg-white/[0.02] hover:border-white/20'
+        : 'border-white/10 bg-[#0c0c0e] hover:border-white/20'
     }`}>
       <button
         onClick={onToggle}
         className={`w-full px-6 py-4 flex items-center justify-between text-left transition-colors ${
-          isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.02]'
+          isLight ? 'hover:bg-slate-50' : 'hover:bg-[#121214]'
         }`}
       >
         <span className={`text-lg font-semibold pr-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>{title}</span>

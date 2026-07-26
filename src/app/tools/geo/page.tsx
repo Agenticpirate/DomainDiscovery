@@ -4,8 +4,9 @@ import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
-import { Breadcrumb } from '@/components/ui/Breadcrumb';
+import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { GeoDomainGenerator } from '@/components/geo/GeoDomainGenerator';
 import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
@@ -30,207 +31,246 @@ const STEPS = [
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
+/**
+ * Dots only in gutters — never through hero chrome, tool, or education plates.
+ */
+const GEO_HERO_DOT_CSS = `
+.geo-page [data-ambient-dots="single"] {
+  -webkit-mask-image: radial-gradient(
+    ellipse 88% 90% at 50% 28%,
+    transparent 0%,
+    transparent 48%,
+    rgba(0, 0, 0, 0.35) 68%,
+    black 88%
+  ) !important;
+  mask-image: radial-gradient(
+    ellipse 88% 90% at 50% 28%,
+    transparent 0%,
+    transparent 48%,
+    rgba(0, 0, 0, 0.35) 68%,
+    black 88%
+  ) !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+  -webkit-mask-size: 100% 100% !important;
+  mask-size: 100% 100% !important;
+}
+.geo-page .geo-solid-plate {
+  isolation: isolate;
+  position: relative;
+  z-index: 1;
+}
+.geo-page .shine-border::before,
+.geo-page .shine-border::after {
+  display: none !important;
+  opacity: 0 !important;
+  content: none !important;
+}
+`;
+
 export default function GeoPage() {
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const reduceMotion = useReducedMotion();
 
+  const solid = isLight ? '#ffffff' : '#0a0a0c';
+  const solidInset = isLight ? '#f8fafc' : '#121214';
+  const muted = isLight ? 'text-slate-500' : 'text-white/45';
+  const secondary = isLight ? 'text-slate-600' : 'text-white/55';
+
   const fadeUp = (delay = 0) =>
     reduceMotion
       ? { initial: false as const, animate: { opacity: 1, y: 0 } }
       : {
-          initial: { opacity: 0, y: 16 },
+          initial: { opacity: 0, y: 12 },
           animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.55, delay, ease: easeOut },
+          transition: { duration: 0.45, delay, ease: easeOut },
         };
 
-  const staggerParent = reduceMotion
-    ? {}
-    : {
-        initial: 'hidden',
-        animate: 'show',
-        variants: {
-          hidden: {},
-          show: { transition: { staggerChildren: 0.06, delayChildren: 0.2 } },
-        },
-      };
-
-  const staggerItem = reduceMotion
-    ? {}
-    : {
-        variants: {
-          hidden: { opacity: 0, y: 10 },
-          show: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.4, ease: easeOut },
-          },
-        },
-      };
-
   return (
-    <div className="min-h-screen">
+    <div
+      className="geo-page min-h-screen overflow-x-clip"
+      style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
+    >
+      <style dangerouslySetInnerHTML={{ __html: GEO_HERO_DOT_CSS }} />
       <PageBackground variant="hero" />
       <Navigation activeTool="geo" />
 
-      <main className="relative pt-20 sm:pt-24">
-        <section className="px-4 sm:px-6 pb-5 sm:pb-7">
-          <div className="mx-auto max-w-6xl">
-            <motion.div {...fadeUp(0)}>
-              <Breadcrumb
-                items={[
-                  { label: 'Tools', href: '/' },
-                  { label: 'Geo Domain Generator' },
-                ]}
-              />
-            </motion.div>
+      <main className={PAGE_MAIN_CLASS}>
+        <PageBreadcrumb
+          items={[
+            { label: 'Tools', href: '/' },
+            { label: 'Geo Domain Generator' },
+          ]}
+        />
 
-            <div className="mt-5 grid gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:items-end">
-              <div className="min-w-0">
-                <motion.p
-                  {...fadeUp(0.05)}
-                  className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
-                    isLight ? 'text-slate-400' : 'text-white/35'
-                  }`}
-                >
-                  Local SEO · City & country domains
-                </motion.p>
-
-                <motion.h1
-                  {...fadeUp(0.1)}
-                  className={`mt-2 text-3xl font-black tracking-tight sm:text-4xl md:text-[2.75rem] md:leading-[1.08] ${
-                    isLight ? 'text-slate-900' : 'text-white'
-                  }`}
-                >
-                  Geo domain generator
-                  <br className="hidden sm:block" />
-                  <span className="sm:mt-1 sm:inline-block"> for local SEO campaigns</span>
-                </motion.h1>
-
-                <motion.p
-                  {...fadeUp(0.16)}
-                  className={`mt-3 max-w-xl text-sm leading-relaxed sm:text-[15px] ${
-                    isLight ? 'text-slate-500' : 'text-white/50'
-                  }`}
-                >
-                  Build city- and country-level domain lists for any niche (plumber, dentist, realtor, and more).
-                  Populations display in millions; city figures use city-proper counts (World Population Review 2026).
-                  Live-check free, premium, and registered names — then export CSV for your local SEO inventory.
-                </motion.p>
-
-                <motion.div
-                  {...staggerParent}
-                  className="mt-5 flex flex-wrap gap-2"
-                >
-                  {FEATURES.map((f) => (
-                    <motion.div
-                      key={f.label}
-                      {...staggerItem}
-                      whileHover={
-                        reduceMotion
-                          ? undefined
-                          : { y: -2, transition: { duration: 0.2 } }
-                      }
-                      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[11px] font-semibold transition-shadow ${
-                        isLight
-                          ? 'border-slate-200/90 bg-white/80 text-slate-700 shadow-sm hover:shadow-md'
-                          : 'border-white/[0.08] bg-white/[0.04] text-white/70 hover:border-white/15 hover:bg-white/[0.06]'
-                      }`}
-                    >
-                      <span
-                        className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                          isLight ? 'bg-emerald-500' : 'bg-emerald-400'
-                        } ${reduceMotion ? '' : 'animate-pulse-soft'}`}
-                      />
-                      {f.label}
-                      <span
-                        className={
-                          isLight ? 'font-medium text-slate-400' : 'font-medium text-white/35'
-                        }
-                      >
-                        {f.hint}
-                      </span>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </div>
-
-              <motion.div
-                {...fadeUp(0.18)}
-                whileHover={
-                  reduceMotion
-                    ? undefined
-                    : { y: -3, transition: { duration: 0.25, ease: easeOut } }
-                }
-                className={`rounded-2xl border p-4 sm:p-5 ${
-                  isLight
-                    ? 'border-slate-200/90 bg-white/70 shadow-[0_12px_40px_-20px_rgba(15,23,42,0.25)] backdrop-blur-sm'
-                    : 'border-white/[0.08] bg-white/[0.03] shadow-[0_20px_50px_-28px_rgba(0,0,0,0.7)]'
-                }`}
-              >
-                <div
-                  className={`text-[10px] font-bold uppercase tracking-[0.16em] ${
-                    isLight ? 'text-slate-400' : 'text-white/35'
-                  }`}
-                >
-                  How it works
+        {/* —— Compact intro: tool first —— */}
+        <SectionAmbient intensity="page" contentClassName="page-gutter pb-3 sm:pb-4">
+          <div className="mx-auto max-w-6xl relative z-[1]">
+            {/* One-liner heading only — long copy lives below the generator */}
+            <motion.header
+              {...fadeUp(0.04)}
+              className="geo-solid-plate rounded-xl sm:rounded-2xl border px-3 py-2.5 sm:px-5 sm:py-3.5"
+              style={{
+                backgroundColor: solid,
+                borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)',
+              }}
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 min-w-0">
+                <div className="min-w-0">
+                  <p
+                    className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] mb-0.5 ${muted}`}
+                  >
+                    Local SEO · City & country domains
+                  </p>
+                  <h1
+                    className={`text-[1.2rem] sm:text-2xl md:text-[1.75rem] font-black tracking-tight leading-tight ${
+                      isLight ? 'text-slate-900' : 'text-white'
+                    }`}
+                  >
+                    Geo domain generator for local SEO
+                  </h1>
+                  <p className={`mt-0.5 text-[11px] sm:text-[13px] leading-snug ${secondary}`}>
+                    <span className="sm:hidden">City &amp; country lists · live check · CSV export</span>
+                    <span className="hidden sm:inline">
+                      Build city- and country-level domain lists, live-check availability, export CSV.
+                    </span>
+                  </p>
                 </div>
-                <ol className="mt-3 space-y-0">
-                  {STEPS.map((s, i) => (
-                    <motion.li
-                      key={s.n}
-                      initial={reduceMotion ? false : { opacity: 0, x: 12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.4,
-                        delay: reduceMotion ? 0 : 0.28 + i * 0.07,
-                        ease: easeOut,
-                      }}
-                      className={`flex items-start gap-3 rounded-xl px-2 py-2 transition-colors ${
-                        isLight ? 'hover:bg-slate-50/80' : 'hover:bg-white/[0.03]'
+                <div className="hidden sm:flex shrink-0 flex-wrap gap-1.5 justify-end">
+                  {['Cities', 'Countries', 'Live check', 'CSV'].map((t) => (
+                    <span
+                      key={t}
+                      className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
+                        isLight ? 'border-slate-200 text-slate-600' : 'border-white/10 text-white/55'
                       }`}
+                      style={{ backgroundColor: solidInset }}
                     >
-                      <span
-                        className={`mt-0.5 font-mono text-[11px] font-bold tabular-nums ${
-                          isLight ? 'text-slate-300' : 'text-white/25'
-                        }`}
-                      >
-                        {s.n}
-                      </span>
-                      <div className="min-w-0">
-                        <div
-                          className={`text-sm font-bold ${
-                            isLight ? 'text-slate-800' : 'text-white/90'
-                          }`}
-                        >
-                          {s.title}
-                        </div>
-                        <div
-                          className={`text-[12px] ${
-                            isLight ? 'text-slate-500' : 'text-white/40'
-                          }`}
-                        >
-                          {s.body}
-                        </div>
-                      </div>
-                    </motion.li>
+                      {t}
+                    </span>
                   ))}
-                </ol>
-              </motion.div>
-            </div>
+                </div>
+              </div>
+            </motion.header>
           </div>
-        </section>
+        </SectionAmbient>
 
+        {/* —— Actual tool — primary surface —— */}
         <motion.section
-          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: reduceMotion ? 0 : 0.32, ease: easeOut }}
-          className="px-4 sm:px-6 pb-16 sm:pb-20"
+          transition={{ duration: 0.45, delay: reduceMotion ? 0 : 0.08, ease: easeOut }}
+          className="page-gutter pb-6 sm:pb-10 relative z-[1]"
         >
           <div className="mx-auto max-w-6xl">
             <GeoDomainGenerator />
           </div>
         </motion.section>
+
+        {/* —— Education after the tool —— */}
+        <section className="page-gutter pb-10 sm:pb-16 relative z-[1]">
+          <div className="mx-auto max-w-6xl space-y-4 sm:space-y-6">
+            {/* About + features */}
+            <div
+              className="geo-solid-plate rounded-xl sm:rounded-2xl border p-3.5 sm:p-6"
+              style={{
+                backgroundColor: solid,
+                borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)',
+              }}
+            >
+              <p className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] mb-1.5 ${muted}`}>
+                About this tool
+              </p>
+              <h2
+                className={`text-[0.95rem] sm:text-xl font-black tracking-tight mb-1.5 sm:mb-2 ${
+                  isLight ? 'text-slate-900' : 'text-white'
+                }`}
+              >
+                City &amp; country domains for local SEO campaigns
+              </h2>
+              <p className={`text-[12px] sm:text-[14px] leading-relaxed max-w-3xl ${secondary}`}>
+                Build city- and country-level domain lists for any niche (plumber, dentist, realtor, and more).
+                Populations display in millions; city figures use city-proper counts (World Population Review 2026).
+                Live-check free, premium, and registered names — then export CSV for your local SEO inventory.
+              </p>
+
+              <div className="mt-3 sm:mt-4 flex flex-wrap gap-1.5 sm:gap-2">
+                {FEATURES.map((f) => (
+                  <div
+                    key={f.label}
+                    className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold ${
+                      isLight
+                        ? 'border-slate-200 text-slate-700'
+                        : 'border-white/12 text-white/80'
+                    }`}
+                    style={{ backgroundColor: solidInset }}
+                  >
+                    <span
+                      className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                        isLight ? 'bg-emerald-500' : 'bg-emerald-400'
+                      }`}
+                    />
+                    <span className="leading-none">{f.label}</span>
+                    <span
+                      className={`font-medium leading-none ${
+                        isLight ? 'text-slate-400' : 'text-white/40'
+                      }`}
+                    >
+                      {f.hint}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* How it works */}
+            <div
+              className="geo-solid-plate rounded-xl sm:rounded-2xl border p-3.5 sm:p-6"
+              style={{
+                backgroundColor: solid,
+                borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)',
+              }}
+            >
+              <p className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] mb-2 sm:mb-3 ${muted}`}>
+                How it works
+              </p>
+              <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+                {STEPS.map((s) => (
+                  <li
+                    key={s.n}
+                    className="flex sm:flex-col items-start gap-2.5 sm:gap-2 rounded-lg sm:rounded-xl border p-2.5 sm:p-3 min-w-0"
+                    style={{
+                      backgroundColor: solidInset,
+                      borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)',
+                    }}
+                  >
+                    <span
+                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border font-mono text-[10px] font-bold tabular-nums ${
+                        isLight
+                          ? 'border-slate-200 bg-white text-slate-600'
+                          : 'border-white/10 bg-[#0a0a0c] text-white/50'
+                      }`}
+                    >
+                      {s.n}
+                    </span>
+                    <div className="min-w-0">
+                      <div
+                        className={`text-[12px] sm:text-[13px] font-bold leading-snug ${
+                          isLight ? 'text-slate-800' : 'text-white'
+                        }`}
+                      >
+                        {s.title}
+                      </div>
+                      <div className={`mt-0.5 text-[11px] sm:text-[12px] leading-snug ${muted}`}>
+                        {s.body}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </section>
 
         <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.geo} compact />
         <SeoGuidePack {...TOOL_GUIDE_PACKS.geo} />

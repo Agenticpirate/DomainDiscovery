@@ -1,11 +1,11 @@
 /**
- * Production Rate Limiter
- * 
- * Supports two backends:
- * 1. Redis (distributed, for multi-instance deployments) — set REDIS_URL env var
- * 2. In-memory with LRU eviction (single instance fallback)
- * 
- * The in-memory store uses an LRU map capped at 50k entries to prevent OOM.
+ * Production Rate Limiter (process-local, legacy domain/search routes).
+ *
+ * Agent/MCP scale path uses `@/lib/scale` (distributed Redis when REDIS_URL is set,
+ * dual light/heavy tiers, per-agent quotas, concurrency load-shed).
+ *
+ * This module remains for search/bulk/generate legacy IP buckets + shared types.
+ * In-memory store uses an LRU map capped at 50k entries to prevent OOM.
  */
 
 export interface RateLimitResult {

@@ -2,8 +2,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
-import { Breadcrumb } from '@/components/ui/Breadcrumb';
+import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { getTldAboutIndex, getTldAboutMeta } from '@/lib/tldAboutData';
 
 export const dynamic = 'force-dynamic';
@@ -29,11 +30,11 @@ export default function BlogPage() {
       <PageBackground variant="default" />
       <Navigation />
 
-      <main className="relative pt-20 sm:pt-24 px-4 sm:px-6 pb-14">
+      <main className={`${PAGE_MAIN_CLASS} pb-14`}>
+        <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Blog' }]} />
+        <SectionAmbient intensity="page" contentClassName="page-gutter">
         <div className="max-w-6xl mx-auto">
-          <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Blog' }]} />
-
-          <header className="mt-4 sm:mt-6 max-w-3xl">
+          <header className="mt-2 sm:mt-4 max-w-3xl">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>
               TLD encyclopedia · domain strategy
             </p>
@@ -45,6 +46,10 @@ export default function BlogPage() {
               context drawn from the public IANA Root Zone Database — plus strategy notes for buyers and local SEO teams.
             </p>
           </header>
+        </div>
+        </SectionAmbient>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
           {/* Stats */}
           <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl border overflow-hidden border-white/10 bg-white/[0.08]">

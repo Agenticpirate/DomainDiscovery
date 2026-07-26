@@ -47,7 +47,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
         const saved = localStorage.getItem('saved_domains');
         if (saved) {
           const domains = JSON.parse(saved);
-          setSavedDomainsCount(domains.length);
+          setSavedDomainsCount(Array.isArray(domains) ? domains.length : 0);
+        } else {
+          setSavedDomainsCount(0);
         }
       } catch (error) {
         console.error('Failed to load saved domains count:', error);
@@ -68,11 +70,11 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   const currentTool = (() => {
     if (pathname === '/bulk-search' || pathname.startsWith('/bulk-search/')) return 'bulk';
     if (pathname.startsWith('/domain-extensions')) return 'extensions';
+    if (pathname.startsWith('/assistant')) return 'assistant';
     if (pathname.startsWith('/generator')) return 'generator';
     if (pathname === '/search' || pathname.startsWith('/search?')) return 'search';
     if (pathname.startsWith('/tools/whois')) return 'whois';
     if (pathname.startsWith('/tools/keyword') || pathname.startsWith('/tools/brandable')) return 'keyword';
-    if (pathname.startsWith('/tools/value')) return 'value';
     if (pathname.startsWith('/tools/compare')) return 'compare';
     if (pathname.startsWith('/tools/geo')) return 'geo';
     if (pathname === '/' || pathname === '') return 'home';
@@ -107,6 +109,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     items: [
       { id: 'search', label: 'Domain name search', description: 'Find available domains instantly with real-time availability checking.', icon: <Icons.Search className={iconSm} />, href: '/' },
       { id: 'extensions', label: 'Domain extensions', description: 'Explore hundreds of TLD options including .com, .net, .ai, and more.', icon: <Icons.Layers className={iconSm} />, href: '/domain-extensions' },
+      { id: 'assistant', label: 'AI Domain Assistant', description: 'Describe your business — auto-generate, check, and rank brand domains.', icon: <Icons.Magic className={iconSm} />, href: '/assistant' },
       { id: 'generator', label: 'Domain generator', description: 'Generate creative domain name ideas using smart keywords and topics.', icon: <Icons.Magic className={iconSm} />, href: '/generator' },
       { id: 'bulk', label: 'Bulk domain search', description: 'Check availability for thousands of domains at once.', icon: <Icons.Bulk className={iconSm} />, href: '/bulk-search' },
     ],
@@ -135,10 +138,10 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
 
   const navBtnBase = `group flex items-center gap-1.5 px-2 py-1.5 text-[12px] sm:text-[13px] font-medium rounded-xl transition-all duration-200 min-h-[34px]`;
   const navBtnActive = isLight
-    ? 'text-slate-900 bg-gradient-to-b from-slate-100 to-slate-50 border border-slate-200 shadow-sm backdrop-blur-xl'
+    ? 'text-indigo-900 bg-gradient-to-b from-indigo-50 to-sky-50 border border-indigo-200 shadow-sm shadow-indigo-500/10 backdrop-blur-xl'
     : 'text-white bg-gradient-to-b from-white/[0.12] to-white/[0.08] border border-white/20 shadow-lg shadow-black/20 backdrop-blur-xl';
   const navBtnInactive = isLight
-    ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-transparent hover:border-slate-200'
+    ? 'text-slate-600 hover:text-indigo-800 hover:bg-indigo-50/80 border border-transparent hover:border-indigo-100'
     : 'text-white/70 hover:text-white hover:bg-gradient-to-b hover:from-white/[0.08] hover:to-white/[0.04] border border-transparent hover:border-white/[0.15]';
 
   const renderDropdown = (menu: DropdownMenu, menuKey: string) => (
@@ -241,11 +244,13 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
       <div className="max-w-7xl mx-auto">
         <div className={`relative backdrop-blur-2xl border rounded-2xl ${
           isLight
-            ? 'bg-white/80 border-slate-200/70 shadow-lg shadow-slate-900/[0.04]'
+            ? 'bg-white/85 border-indigo-200/70 shadow-lg shadow-indigo-500/[0.08]'
             : 'bg-black/40 border-white/[0.08] shadow-2xl shadow-black/20'
         }`}>
           <div className={`absolute inset-0 bg-gradient-to-r rounded-2xl pointer-events-none ${
-            isLight ? 'from-slate-500/[0.02] via-transparent to-slate-400/[0.02]' : 'from-white/[0.03] via-transparent to-slate-400/[0.03]'
+            isLight
+              ? 'from-indigo-400/[0.06] via-transparent to-sky-400/[0.07]'
+              : 'from-white/[0.03] via-transparent to-slate-400/[0.03]'
           }`} />
           
           <div className="relative px-2 sm:px-3 py-1.5 sm:py-1.5">

@@ -47,7 +47,6 @@ const CORE = [
   { path: '/tools/whois', name: 'whois', expect: ['whois'] },
   { path: '/tools/compare', name: 'compare', expect: ['price', 'compare'] },
   { path: '/tools/keyword', name: 'keyword', expect: ['keyword'] },
-  { path: '/tools/value', name: 'value', expect: ['value', 'domain'] },
   { path: '/learn', name: 'learn', expect: ['learn', 'guide'] },
   { path: '/faq', name: 'faq', expect: ['faq', 'domain'] },
   { path: '/blog', name: 'blog', expect: ['blog'] },

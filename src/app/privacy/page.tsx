@@ -1,32 +1,36 @@
 import type { Metadata } from 'next';
-import { SimpleContentPage } from '@/components/layout/SimpleContentPage';
+import { LegalDocumentPage } from '@/components/layout/LegalDocumentPage';
+import {
+  DD_CONTACT,
+  LEGAL_EFFECTIVE,
+  LEGAL_LAST_UPDATED,
+  ddPrivacySections,
+} from '@/lib/legal/domainDiscoveryLegal';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — DomainDiscovery',
+  title: 'Privacy Policy',
   description:
-    'How DomainDiscovery handles browser storage, shortlists, and third-party registrar interactions for free domain name search.',
+    'DomainDiscovery Privacy Policy: how we handle browser storage, search data, third-party registrars, U.S. privacy rights (including CCPA/CPRA), and COPPA.',
+  robots: { index: true, follow: true },
 };
 
 export default function PrivacyPage() {
   return (
-    <SimpleContentPage
+    <LegalDocumentPage
+      brandName={DD_CONTACT.brand}
       title="Privacy Policy"
-      description="A concise overview of how DomainDiscovery handles site data, browser storage, and third-party registrar interactions."
-      sections={[
-        {
-          heading: 'Local browser storage',
-          body: [
-            'Some features, such as saved domains and recent searches, may use browser storage so the experience remains fast and personalized on your device.',
-          ],
-        },
-        {
-          heading: 'Third-party requests',
-          body: [
-            'When you search domains or follow registrar links, some data may be sent to APIs or registrars needed to complete those actions. Their policies govern how they handle that data.',
-          ],
-        },
+      description="How DomainDiscovery collects, uses, and protects information for free domain name search and research tools. Written for U.S. users, including California privacy rights."
+      lastUpdated={LEGAL_LAST_UPDATED}
+      effectiveDate={LEGAL_EFFECTIVE}
+      contactEmail={DD_CONTACT.support}
+      sections={ddPrivacySections}
+      relatedLinks={[
+        { label: 'Terms of Use', href: '/terms' },
+        { label: 'Cookie Policy', href: '/cookies' },
+        { label: 'Disclaimer', href: '/disclaimer' },
+        { label: 'Contact', href: '/contact' },
       ]}
-      cta={{ href: '/', label: 'Continue to Search' }}
+      cta={{ href: '/', label: 'Back to Search' }}
     />
   );
 }

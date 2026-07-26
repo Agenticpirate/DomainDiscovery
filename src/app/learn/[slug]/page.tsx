@@ -1,16 +1,23 @@
-import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
-import { Breadcrumb } from '@/components/ui/Breadcrumb';
+import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
+import { LearnArticleView } from '@/components/learn/LearnArticleView';
 import {
+  extractFaqPairs,
+  getArticleDefinition,
+  getArticleKeyTakeaways,
+  getArticleToc,
+  getArticleWordCount,
   getClusterForSlug,
   getLearnArticle,
   getLearnSlugs,
   getRelatedArticles,
   getTrendingArticles,
+  isFaqSection,
 } from '@/lib/learnArticles';
 import { getSiteBaseUrl, SITE_BRAND } from '@/lib/seoSiteFacts';
 
@@ -33,16 +40,32 @@ export function generateMetadata({ params }: PageProps): Metadata {
     article.description.length > 155
       ? `${article.description.slice(0, 152)}…`
       : article.description;
+  const url = `${BASE}/learn/${article.slug}`;
+  const keywords = [
+    ...article.topics,
+    article.category,
+    'domain name',
+    'domain search',
+    SITE_BRAND.name,
+  ];
 
   return {
     title,
     description,
+    keywords,
+    authors: [{ name: SITE_BRAND.name, url: BASE }],
+    creator: SITE_BRAND.name,
+    publisher: SITE_BRAND.name,
     openGraph: {
       title: article.title,
       description,
       type: 'article',
-      url: `${BASE}/learn/${article.slug}`,
+      url,
       publishedTime: article.publishedAt,
+      modifiedTime: article.publishedAt,
+      section: article.category,
+      tags: article.topics,
+      siteName: SITE_BRAND.name,
     },
     twitter: {
       card: 'summary_large_image',
@@ -50,7 +73,14 @@ export function generateMetadata({ params }: PageProps): Metadata {
       description,
     },
     alternates: {
-      canonical: `${BASE}/learn/${article.slug}`,
+      canonical: url,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
     },
   };
 }
@@ -68,6 +98,14 @@ export default function LearnArticlePage({ params }: PageProps) {
 
   const pageUrl = `${BASE}/learn/${article.slug}`;
   const datePublished = article.publishedAt || '2026-07-22';
+  const wordCount = getArticleWordCount(article);
+  const toc = getArticleToc(article);
+  const definition = getArticleDefinition(article);
+  const takeaways = getArticleKeyTakeaways(article, 5);
+
+  const faqPairs = article.sections
+    .filter(isFaqSection)
+    .flatMap((s) => extractFaqPairs(s));
 
   const articleLd = {
     '@context': 'https://schema.org',
@@ -76,21 +114,34 @@ export default function LearnArticlePage({ params }: PageProps) {
     description: article.description,
     datePublished,
     dateModified: datePublished,
-    mainEntityOfPage: pageUrl,
+    wordCount,
+    keywords: article.topics.join(', '),
+    articleSection: article.category,
+    inLanguage: 'en-US',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': pageUrl,
+    },
     author: {
       '@type': 'Organization',
       name: SITE_BRAND.name,
       alternateName: [...SITE_BRAND.alternateNames],
+      url: BASE,
     },
     publisher: {
       '@type': 'Organization',
       name: SITE_BRAND.name,
       alternateName: [...SITE_BRAND.alternateNames],
+      url: BASE,
       logo: {
         '@type': 'ImageObject',
         url: `${BASE}/logo.png`,
       },
     },
+    about: article.topics.map((t) => ({
+      '@type': 'Thing',
+      name: t,
+    })),
   };
 
   const breadcrumbLd = {
@@ -103,6 +154,60 @@ export default function LearnArticlePage({ params }: PageProps) {
     ],
   };
 
+  const webPageLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': pageUrl,
+    url: pageUrl,
+    name: article.title,
+    description: article.description,
+    datePublished,
+    dateModified: datePublished,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: SITE_BRAND.name,
+      url: BASE,
+    },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['[data-aeo-definition]', '#key-takeaways', 'h1'],
+    },
+    hasPart: toc.map((t) => ({
+      '@type': 'WebPageElement',
+      name: t.heading,
+      url: `${pageUrl}#${t.id}`,
+    })),
+  };
+
+  const faqLd =
+    faqPairs.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqPairs.map((f) => ({
+            '@type': 'Question',
+            name: f.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: f.answer,
+            },
+          })),
+        }
+      : null;
+
+  /** Crawlable outline for AI agents / non-JS (mirrors TOC). */
+  const tocLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `Table of contents — ${article.title}`,
+    itemListElement: toc.map((t, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: t.heading,
+      url: `${pageUrl}#${t.id}`,
+    })),
+  };
+
   const toolCtas = [
     { href: '/', label: 'Domain search' },
     { href: '/tools/geo', label: 'Geo domains' },
@@ -112,11 +217,85 @@ export default function LearnArticlePage({ params }: PageProps) {
     { href: '/bulk-search', label: 'Bulk check' },
   ];
 
+  /**
+   * Ambient dots only in blank gutters — never under text/cards.
+   * 1) Mask clears the center reading column
+   * 2) Solid shell paints over anything left under content
+   */
+  const PAGE_DOT_CSS = `
+/* Clear dots under the article column; keep them only at page edges */
+.learn-article-page [data-ambient-dots="single"] {
+  -webkit-mask-image: radial-gradient(
+    ellipse 78% 92% at 50% 42%,
+    transparent 0%,
+    transparent 48%,
+    rgba(0, 0, 0, 0.35) 68%,
+    black 88%
+  ) !important;
+  mask-image: radial-gradient(
+    ellipse 78% 92% at 50% 42%,
+    transparent 0%,
+    transparent 48%,
+    rgba(0, 0, 0, 0.35) 68%,
+    black 88%
+  ) !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+  -webkit-mask-size: 100% 100% !important;
+  mask-size: 100% 100% !important;
+}
+
+/* Opaque reading shell + cards */
+.learn-article-page .learn-article-shell {
+  background-color: #0a0a0c !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  isolation: isolate;
+  position: relative;
+  z-index: 1;
+}
+html.light .learn-article-page .learn-article-shell {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+.learn-article-page .learn-article-shell .learn-plate {
+  background-color: #121214 !important;
+}
+html.light .learn-article-page .learn-article-shell .learn-plate {
+  background-color: #f8fafc !important;
+}
+.learn-article-page .learn-article-shell .learn-plate-deep {
+  background-color: #0a0a0c !important;
+}
+html.light .learn-article-page .learn-article-shell .learn-plate-deep {
+  background-color: #ffffff !important;
+}
+/* Sticky chrome stays opaque */
+.learn-article-page .learn-article-sticky {
+  background-color: #0a0a0c !important;
+}
+html.light .learn-article-page .learn-article-sticky {
+  background-color: #ffffff !important;
+}
+
+.learn-article-page .shine-border::before,
+.learn-article-page .shine-border::after {
+  display: none !important;
+  opacity: 0 !important;
+  content: none !important;
+}
+`;
+
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}>
+    <div
+      className="learn-article-page min-h-screen overflow-x-clip"
+      style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
+    >
+      <style dangerouslySetInnerHTML={{ __html: PAGE_DOT_CSS }} />
       <PageBackground variant="default" />
       <Navigation activeTool="learn" />
 
+      {/* JSON-LD — server-rendered for crawlers & LLM fetchers */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
@@ -125,165 +304,79 @@ export default function LearnArticlePage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(tocLd) }}
+      />
+      {faqLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
+      )}
 
-      <main className="relative pt-20 sm:pt-24 px-4 sm:px-6 pb-14">
-        <div className="max-w-3xl mx-auto">
-          <Breadcrumb
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Learn', href: '/learn' },
-              { label: article.title },
-            ]}
-          />
-
-          <header className="mt-5 sm:mt-7">
-            <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white/55">
-                {article.category}
-              </span>
-              {article.trending && (
-                <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-200">
-                  Trending
-                </span>
-              )}
-              <span className="text-[11px] text-white/35">{article.readTime}</span>
-              {article.publishedAt && (
-                <span className="text-[11px] text-white/35">Updated {article.publishedAt}</span>
-              )}
-            </div>
-            <div className="text-3xl mb-2" aria-hidden>
-              {article.icon}
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-[1.1]">
-              {article.title}
-            </h1>
-            <p className="mt-3 text-sm sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              {article.description}
-            </p>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {article.topics.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-md bg-white/[0.06] px-2 py-0.5 text-[11px] font-semibold text-white/45"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </header>
-
-          <article className="mt-8 space-y-4">
-            {article.sections.map((section) => (
-              <section
-                key={section.heading}
-                className="rounded-2xl border border-white/10 bg-[#0c0c0e] p-5 sm:p-6"
-              >
-                <h2 className="text-lg sm:text-xl font-bold mb-3">{section.heading}</h2>
-                {section.body.map((para, i) => (
-                  <p
-                    key={i}
-                    className="text-[14px] sm:text-[15px] leading-relaxed mb-3 last:mb-0"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
-                    {para}
-                  </p>
-                ))}
-              </section>
-            ))}
-          </article>
-
-          <section className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
-            <h2 className="text-base font-bold mb-2">Try DomainDiscovery tools</h2>
-            <p className="text-sm mb-3" style={{ color: 'var(--text-secondary)' }}>
-              DomainDiscovery (Domain Discovery) is free domain name search plus geo lists, WHOIS, bulk
-              checks, and price compare — no account required.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {toolCtas.map((c) => (
-                <Link
-                  key={c.href}
-                  href={c.href}
-                  className="rounded-xl border border-white/15 px-3 py-2 text-xs sm:text-sm font-semibold text-white/85 hover:border-white/30 transition-colors"
-                >
-                  {c.label}
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          <div className="mt-6 flex flex-wrap gap-2">
-            <Link href="/" className="rounded-xl bg-white text-black px-4 py-2.5 text-sm font-bold">
-              Search domains
-            </Link>
-            <Link
-              href="/learn"
-              className="rounded-xl border border-white/15 px-4 py-2.5 text-sm font-semibold text-white/80"
-            >
-              All guides
-            </Link>
-            <Link
-              href="/faq"
-              className="rounded-xl border border-white/15 px-4 py-2.5 text-sm font-semibold text-white/80"
-            >
-              FAQ
-            </Link>
+      {/* Noscript / crawler-visible outline + definition (GEO/LLM) */}
+      <div className="sr-only" aria-hidden="false">
+        <h1>{article.title}</h1>
+        <p>{definition}</p>
+        <h2>Key takeaways</h2>
+        <ul>
+          {takeaways.map((t) => (
+            <li key={t.slice(0, 40)}>{t}</li>
+          ))}
+        </ul>
+        <h2>Table of contents</h2>
+        <ol>
+          {toc.map((t) => (
+            <li key={t.id}>
+              <a href={`#${t.id}`}>{t.heading}</a>
+            </li>
+          ))}
+        </ol>
+        {faqPairs.map((f) => (
+          <div key={f.question}>
+            <h3>{f.question}</h3>
+            <p>{f.answer}</p>
           </div>
+        ))}
+      </div>
 
-          {cluster && (
-            <section className="mt-10 rounded-2xl border border-white/10 bg-white/[0.02] p-4 sm:p-5">
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/35 mb-1">
-                Topic cluster
-              </p>
-              <h2 className="text-base sm:text-lg font-bold mb-1">{cluster.title}</h2>
-              <p className="text-sm text-white/50 mb-3">{cluster.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {cluster.hubSlug !== article.slug && (
-                  <Link
-                    href={`/learn/${cluster.hubSlug}`}
-                    className="rounded-full bg-white text-black px-3 py-1.5 text-xs font-bold"
-                  >
-                    Cluster hub
-                  </Link>
-                )}
-                <Link
-                  href={cluster.toolHref}
-                  className="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/80"
-                >
-                  {cluster.toolLabel}
-                </Link>
-                <Link
-                  href="/learn"
-                  className="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/80"
-                >
-                  All clusters
-                </Link>
-              </div>
-            </section>
-          )}
-
-          {(related.length > 0 || moreTrending.length > 0) && (
-            <section className="mt-12 border-t border-white/5 pt-8">
-              <h2 className="text-lg font-bold mb-3">Continue learning</h2>
-              <div className="grid sm:grid-cols-2 gap-2">
-                {[...related, ...moreTrending]
-                  .filter((a, i, arr) => arr.findIndex((x) => x.slug === a.slug) === i)
-                  .slice(0, 4)
-                  .map((a) => (
-                    <Link
-                      key={a.slug}
-                      href={`/learn/${a.slug}`}
-                      className="rounded-xl border border-white/10 bg-[#0c0c0e] p-3.5 hover:border-white/20 transition-colors"
-                    >
-                      <div className="text-[10px] font-bold uppercase tracking-wide text-white/35">
-                        {a.category}
-                      </div>
-                      <div className="mt-1 text-sm font-semibold leading-snug">{a.title}</div>
-                    </Link>
-                  ))}
-              </div>
-            </section>
-          )}
-        </div>
+      <main className={`${PAGE_MAIN_CLASS} pb-4 sm:pb-14`}>
+        <PageBreadcrumb
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Learn', href: '/learn' },
+            { label: article.title },
+          ]}
+        />
+        <SectionAmbient
+          intensity="page"
+          contentClassName="page-gutter pb-4 sm:pb-8 max-w-full min-w-0 overflow-x-clip"
+        >
+          <div className="max-w-3xl lg:max-w-5xl mx-auto w-full min-w-0 relative z-[1]">
+            <div className="learn-article-shell rounded-xl sm:rounded-2xl border border-white/10 p-3 sm:p-5 md:p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.35)]">
+              <LearnArticleView
+                article={article}
+                cluster={cluster ?? null}
+                related={related.map((a) => ({
+                  slug: a.slug,
+                  title: a.title,
+                  category: a.category,
+                }))}
+                moreTrending={moreTrending.map((a) => ({
+                  slug: a.slug,
+                  title: a.title,
+                  category: a.category,
+                }))}
+                toolCtas={toolCtas}
+              />
+            </div>
+          </div>
+        </SectionAmbient>
       </main>
 
       <Footer />

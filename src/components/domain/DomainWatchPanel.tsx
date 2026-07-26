@@ -77,7 +77,7 @@ function DomainWatchPanelActive({ domain }: DomainWatchPanelProps) {
   return (
     <div
       className={`rounded-xl border p-3.5 sm:p-4 ${
-        isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-white/[0.03]'
+        isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-[#0c0c0e]'
       }`}
     >
       <div className="flex items-start justify-between gap-3 mb-3">
@@ -144,7 +144,7 @@ function DomainWatchPanelActive({ domain }: DomainWatchPanelProps) {
           className={`flex-1 border rounded-xl py-2.5 px-3 text-sm focus:outline-none focus:ring-2 ${
             isLight
               ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:ring-slate-400/20'
-              : 'bg-black/40 border-white/10 text-white placeholder:text-white/30 focus:border-white/30 focus:ring-white/10'
+              : 'bg-[#121214] border-white/10 text-white placeholder:text-white/30 focus:border-white/30 focus:ring-white/10'
           }`}
         />
         <Button

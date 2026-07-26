@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
+import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { LearnCatalog } from '@/components/learn/LearnCatalog';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import {
@@ -33,8 +35,9 @@ export default function LearnPage() {
       <PageBackground variant="default" />
       <Navigation activeTool="learn" />
 
-      <main className="relative pt-16 sm:pt-24">
-        <section className="px-3 sm:px-6 pb-4 sm:pb-7">
+      <main className={PAGE_MAIN_CLASS}>
+        <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Learn' }]} />
+        <SectionAmbient intensity="page" contentClassName="page-gutter pb-4 sm:pb-7">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: 'var(--text-muted)' }}>
               {meta.count}+ free guides · naming · SEO · DNS
@@ -55,7 +58,7 @@ export default function LearnPage() {
               DNS, and legal basics — then apply what you learn with free domain name search, WHOIS, and price compare.
             </p>
           </div>
-        </section>
+        </SectionAmbient>
 
         <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.learn} compact />
 

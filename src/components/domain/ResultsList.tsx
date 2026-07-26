@@ -222,7 +222,7 @@ export function ResultsList({
           {[...Array(5)].map((_, i) => (
             <div
               key={i}
-              className="h-32 bg-white/[0.02] border border-white/10 rounded-xl animate-pulse"
+              className="h-32 bg-[#0c0c0e] border border-white/10 rounded-xl animate-pulse"
               style={{ animationDelay: `${i * 100}ms` }}
             />
           ))}

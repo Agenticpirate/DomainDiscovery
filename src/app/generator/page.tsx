@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
-import { Breadcrumb } from '@/components/ui/Breadcrumb';
+import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { DomainGenerator } from '@/components/generator/DomainGenerator';
 import { GeneratorContent } from '@/components/generator/GeneratorContent';
 import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
@@ -27,18 +28,17 @@ export default function GeneratorPage() {
 
       <Navigation activeTool="generator" />
 
-      <main className="relative pt-[3.25rem] sm:pt-[4.5rem]">
+      <main className={PAGE_MAIN_CLASS}>
+        <PageBreadcrumb
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Domain Generator' },
+          ]}
+        />
         {/* Hero */}
-        <section className="px-3.5 sm:px-6 pt-3 sm:pt-8 pb-2 sm:pb-4">
+        <SectionAmbient intensity="page" contentClassName="page-gutter pb-2 sm:pb-4">
           <div className="max-w-6xl mx-auto">
-            <Breadcrumb
-              items={[
-                { label: 'Home', href: '/' },
-                { label: 'Domain Generator' },
-              ]}
-            />
-
-            <div className="mt-2 sm:mt-5 text-center max-w-2xl mx-auto">
+            <div className="mt-1 sm:mt-3 text-center max-w-2xl mx-auto">
               <div
                 className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 mb-2.5 sm:mb-3.5 text-[10px] sm:text-[11px] font-semibold tracking-wide border ${
                   isLight
@@ -71,7 +71,7 @@ export default function GeneratorPage() {
               </p>
             </div>
           </div>
-        </section>
+        </SectionAmbient>
 
         {/* Generator tool */}
         <section className="px-3.5 sm:px-6 pb-8 sm:pb-12" id="top">

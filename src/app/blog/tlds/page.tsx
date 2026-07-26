@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
-import { Breadcrumb } from '@/components/ui/Breadcrumb';
+import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { getTldAboutIndex, getTldAboutMeta } from '@/lib/tldAboutData';
 
@@ -35,17 +35,17 @@ export default function BlogTldsPage() {
       <PageBackground variant="default" />
       <Navigation />
 
-      <main className="relative pt-20 sm:pt-24 px-4 sm:px-6 pb-14">
+      <main className={`${PAGE_MAIN_CLASS} pb-14`}>
+        <PageBreadcrumb
+          items={[
+            { label: 'Home', href: '/' },
+            { label: 'Blog', href: '/blog' },
+            { label: 'TLD encyclopedia' },
+          ]}
+        />
+        <div className="page-gutter">
         <div className="max-w-6xl mx-auto">
-          <Breadcrumb
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Blog', href: '/blog' },
-              { label: 'TLD encyclopedia' },
-            ]}
-          />
-
-          <header className="mt-4 sm:mt-6 max-w-3xl">
+          <header className="mt-2 sm:mt-4 max-w-3xl">
             <h1 className="text-3xl sm:text-4xl font-black tracking-tight">TLD encyclopedia</h1>
             <p className="mt-2 text-sm sm:text-base" style={{ color: 'var(--text-secondary)' }}>
               {meta.count} extension about pages from the IANA Root Zone Database
@@ -83,6 +83,7 @@ export default function BlogTldsPage() {
               </section>
             );
           })}
+        </div>
         </div>
       </main>
 

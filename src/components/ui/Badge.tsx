@@ -17,13 +17,14 @@ export const Badge: React.FC<BadgeProps> = ({
   const baseStyles =
     'inline-flex items-center justify-center font-semibold rounded-full whitespace-nowrap';
 
+  // Solid fills so ambient dots never show through badges
   const variants = {
-    default: 'bg-white/10 text-white border border-white/20',
-    success: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    error: 'bg-red-500/10 text-red-400 border border-red-500/20',
-    warning: 'bg-amber-500/10 text-amber-400 border border-amber-500/20',
-    info: 'bg-blue-500/10 text-blue-400 border border-blue-500/20',
-    neutral: 'bg-gray-500/10 text-gray-400 border border-gray-500/20',
+    default: 'bg-[#121214] text-white border border-white/20',
+    success: 'bg-emerald-950 text-emerald-300 border border-emerald-500/30',
+    error: 'bg-rose-950 text-rose-300 border border-rose-500/30',
+    warning: 'bg-amber-950 text-amber-200 border border-amber-500/30',
+    info: 'bg-sky-950 text-sky-300 border border-sky-500/30',
+    neutral: 'bg-[#121214] text-white/55 border border-white/12',
   };
 
   const sizes = {

@@ -141,23 +141,3 @@ function isDictionaryWord(word: string): boolean {
   return DICTIONARY_WORDS.has(word.toLowerCase());
 }
 
-/**
- * Estimate domain value range
- */
-export function estimateDomainValue(domain: string): {
-  min: number;
-  max: number;
-  currency: string;
-} {
-  const { confidence } = estimatePremiumLikelihood(domain);
-  
-  if (confidence >= 80) {
-    return { min: 5000, max: 50000, currency: 'USD' };
-  } else if (confidence >= 60) {
-    return { min: 1000, max: 10000, currency: 'USD' };
-  } else if (confidence >= 40) {
-    return { min: 100, max: 2000, currency: 'USD' };
-  } else {
-    return { min: 10, max: 100, currency: 'USD' };
-  }
-}

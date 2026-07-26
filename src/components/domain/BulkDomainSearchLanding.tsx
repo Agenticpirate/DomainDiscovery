@@ -5,31 +5,6 @@ import Link from 'next/link';
 import { Button } from '../ui/Button';
 import { Icons } from '../ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
-
-// Subtle gradient glow component - more professional look
-const GradientGlow: React.FC<{ className?: string }> = ({ className = '' }) => {
-  return (
-    <div 
-      className={`absolute rounded-full blur-[100px] ${className}`}
-    />
-  );
-};
-
-// Animated dots grid
-const DotsGrid: React.FC<{ className?: string }> = ({ className = '' }) => {
-  return (
-    <div className={`grid grid-cols-8 gap-2 ${className}`}>
-      {Array.from({ length: 64 }).map((_, i) => (
-        <div 
-          key={i} 
-          className="w-1.5 h-1.5 rounded-full bg-white/10 animate-pulse"
-          style={{ animationDelay: `${i * 50}ms` }}
-        />
-      ))}
-    </div>
-  );
-};
-
 // Feature card with hover animation
 const FeatureCard: React.FC<{ 
   icon: React.ReactNode; 
@@ -282,21 +257,28 @@ const SearchInputSection: React.FC<{
           : 'bg-white text-black border-white'
         : isLight
           ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-          : 'bg-white/[0.04] text-white/70 border-white/10 hover:bg-white/[0.08] hover:text-white'
+          : 'bg-[#121214] text-white/70 border-white/10 hover:bg-[#16161a] hover:text-white'
     }`;
 
   return (
     <div className="max-w-4xl mx-auto px-2 sm:px-0 animate-fade-in">
       <div
-        className={`relative overflow-hidden rounded-2xl border transition-colors duration-200 ${
+        className={`relative isolate overflow-hidden rounded-2xl border transition-colors duration-200 ${
           isDragging
             ? isLight
               ? 'border-slate-400 bg-slate-50 ring-2 ring-slate-300/50'
-              : 'border-white/30 bg-white/[0.06] ring-2 ring-white/15'
+              : 'border-white/30 ring-2 ring-white/15'
             : isLight
               ? 'bg-white border-slate-200 shadow-xl shadow-slate-900/[0.05]'
-              : 'bg-[#0c0c0e] border-white/[0.12]'
+              : 'border-white/[0.12]'
         }`}
+        style={{
+          backgroundColor: isLight
+            ? undefined
+            : isDragging
+              ? '#121214'
+              : '#0c0c0e',
+        }}
         onDragOver={(e) => {
           e.preventDefault();
           setIsDragging(true);
@@ -304,9 +286,15 @@ const SearchInputSection: React.FC<{
         onDragLeave={() => setIsDragging(false)}
         onDrop={handleDrop}
       >
+        {/* Opaque plate — ambient dots never show through the search card */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-[inherit]"
+          style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+        />
         {/* Header */}
         <div
-          className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-4 sm:px-5 pt-4 sm:pt-5 pb-3 border-b ${
+          className={`relative z-[1] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-4 sm:px-5 pt-4 sm:pt-5 pb-3 border-b ${
             isLight ? 'border-slate-100' : 'border-white/[0.06]'
           }`}
         >
@@ -337,9 +325,10 @@ const SearchInputSection: React.FC<{
         {/* Instructions */}
         {showHowTo && (
           <div
-            className={`px-4 sm:px-5 py-3 border-b animate-fade-in ${
-              isLight ? 'bg-slate-50/80 border-slate-100' : 'bg-white/[0.02] border-white/[0.06]'
+            className={`relative z-[1] px-4 sm:px-5 py-3 border-b animate-fade-in ${
+              isLight ? 'border-slate-100' : 'border-white/[0.06]'
             }`}
+            style={{ backgroundColor: isLight ? '#f8fafc' : '#0c0c0e' }}
           >
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 text-left">
               {[
@@ -394,9 +383,10 @@ const SearchInputSection: React.FC<{
         {/* Advanced options */}
         {showAdvanced && (
           <div
-            className={`px-4 sm:px-5 py-3 border-b animate-fade-in ${
-              isLight ? 'border-slate-100 bg-white' : 'border-white/[0.06] bg-black/20'
+            className={`relative z-[1] px-4 sm:px-5 py-3 border-b animate-fade-in ${
+              isLight ? 'border-slate-100' : 'border-white/[0.06]'
             }`}
+            style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-left">
               <label className="block">
@@ -473,7 +463,7 @@ const SearchInputSection: React.FC<{
           </div>
         )}
 
-        <div className="p-4 sm:p-5">
+        <div className="relative z-[1] p-4 sm:p-5">
           {domains.length === 0 ? (
             <div className="relative text-left">
               <textarea
@@ -527,9 +517,13 @@ const SearchInputSection: React.FC<{
                     className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] sm:text-[12px] font-medium select-none animate-fade-in ${
                       isLight
                         ? 'bg-white text-slate-700 border border-slate-200'
-                        : 'bg-white/[0.05] text-white/85 border border-white/10'
+                        : 'text-white/85 border border-white/10'
                     }`}
-                    style={{ animationDelay: `${Math.min(i, 20) * 20}ms`, userSelect: 'none' }}
+                    style={{
+                      animationDelay: `${Math.min(i, 20) * 20}ms`,
+                      userSelect: 'none',
+                      backgroundColor: isLight ? undefined : '#121214',
+                    }}
                   >
                     <span
                       className={`w-1.5 h-1.5 rounded-full shrink-0 ${
@@ -714,32 +708,57 @@ const SearchInputSection: React.FC<{
                       <span className="ml-1 opacity-70">· {counts.checking} checking</span>
                     )}
                   </span>
+                ) : input.trim() ? (
+                  <span className="font-medium">
+                    Draft ready · tap <span className={isLight ? 'text-slate-800' : 'text-white/80'}>Search all</span>
+                  </span>
                 ) : (
-                  <span>⌘/Ctrl + Enter to add · Shift + Enter for new line</span>
+                  <span className="sm:hidden">Paste domains, then Search all</span>
+                )}
+                {!domains.length && !input.trim() && (
+                  <span className="hidden sm:inline">⌘/Ctrl + Enter to add · Shift + Enter for new line</span>
                 )}
               </div>
-              <button
-                type="button"
-                onClick={onCheck}
-                disabled={!domains.length}
-                className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-[12px] sm:text-[13px] font-bold transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed ${
-                  isLight
-                    ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/15'
-                    : 'bg-white text-black hover:bg-white/90 shadow-lg shadow-black/30'
-                }`}
-              >
-                {checking && counts.checking === domains.length ? (
-                  <>
-                    <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                    Checking…
-                  </>
-                ) : (
-                  <>
-                    <Icons.Search className="w-3.5 h-3.5" />
-                    Search all{domains.length > 0 ? ` (${domains.length})` : ''}
-                  </>
-                )}
-              </button>
+              {(() => {
+                const draft = input.trim();
+                const canSearch = domains.length > 0 || draft.length > 0;
+                const countHint = domains.length > 0 ? domains.length : undefined;
+                return (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (draft) {
+                        onAdd(draft, bulkOptions);
+                        setInput('');
+                      }
+                      onCheck();
+                    }}
+                    disabled={!canSearch || (checking && counts.checking === domains.length && domains.length > 0)}
+                    aria-disabled={!canSearch}
+                    className={`inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl px-5 py-2.5 sm:py-3 text-[12px] sm:text-[13px] font-bold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                      canSearch
+                        ? isLight
+                          ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/20 focus-visible:ring-slate-400 focus-visible:ring-offset-white'
+                          : 'bg-white text-black hover:bg-white/95 shadow-[0_8px_24px_rgba(0,0,0,0.45)] ring-1 ring-white/20 focus-visible:ring-white focus-visible:ring-offset-[#0c0c0e]'
+                        : isLight
+                          ? 'bg-slate-900 text-white shadow-md shadow-slate-900/15 cursor-not-allowed'
+                          : 'bg-white text-black shadow-lg shadow-black/30 ring-1 ring-white/15 cursor-not-allowed'
+                    } disabled:cursor-not-allowed`}
+                  >
+                    {checking && domains.length > 0 && counts.checking === domains.length ? (
+                      <>
+                        <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                        Checking…
+                      </>
+                    ) : (
+                      <>
+                        <Icons.Search className="w-3.5 h-3.5" />
+                        Search all{countHint != null ? ` (${countHint})` : draft ? '' : ''}
+                      </>
+                    )}
+                  </button>
+                );
+              })()}
             </div>
           </div>
         </div>
@@ -822,47 +841,128 @@ export const BulkDomainSearchLanding: React.FC<{
 
   return (
     <div className="w-full">
-      {/* Hero Section */}
+      {/* Hero — aligned with home page (no solid blank scrim plate) */}
       <section className="relative text-center pb-6 sm:pb-12 pt-2 sm:pt-6">
-        {/* Subtle background gradient - professional look */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-slate-500/[0.07] via-slate-400/[0.05] to-transparent rounded-full blur-3xl" />
-          <GradientGlow className="w-[600px] h-[300px] bg-slate-400/[0.08] top-20 left-1/4 -translate-x-1/2" />
-          <GradientGlow className="w-[500px] h-[250px] bg-slate-500/[0.06] top-32 right-1/4 translate-x-1/2" />
-        </div>
-
-        <div className={`relative transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <p
-            className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2 sm:mb-3"
-            style={{ color: 'var(--text-muted)' }}
+        <div
+          className={`relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto transition-all duration-1000 ${
+            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          {/* Badge — same language as home hero */}
+          <div
+            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 mb-2.5 sm:mb-5 text-[10px] sm:text-[12px] font-semibold tracking-wide ${
+              isLight
+                ? 'bg-slate-100 text-slate-600 border border-slate-200'
+                : 'bg-white/[0.04] text-white/65 border border-white/10'
+            }`}
           >
-            Multi-domain availability
-          </p>
-          <h1 className="text-2xl sm:text-5xl md:text-6xl font-black tracking-tight mb-2 sm:mb-5">
-            <span className={`bg-gradient-to-r bg-clip-text text-transparent ${isLight ? 'from-slate-900 via-slate-800 to-slate-600' : 'from-white via-white to-white/55'}`}>
+            <span className="relative flex h-1.5 w-1.5">
+              <span
+                className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-50 ${
+                  isLight ? 'bg-slate-400' : 'bg-white/50'
+                }`}
+              />
+              <span
+                className={`relative inline-flex rounded-full h-1.5 w-1.5 ${
+                  isLight ? 'bg-slate-600' : 'bg-white/80'
+                }`}
+              />
+            </span>
+            <span className="sm:hidden">Multi-domain availability</span>
+            <span className="hidden sm:inline">
+              Multi-domain availability · Up to 1,000 names · Live checks
+            </span>
+          </div>
+
+          <h1 className="text-[1.7rem] leading-[1.08] sm:text-[3.65rem] md:text-[4.35rem] font-black tracking-tight mb-1.5 sm:mb-3.5">
+            <span
+              className="block bg-clip-text text-transparent"
+              style={{
+                backgroundImage: isLight
+                  ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
+                  : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.55))',
+              }}
+            >
               Bulk domain search
             </span>
+            <span
+              className="block text-[0.88rem] sm:text-[1.55rem] md:text-[1.95rem] mt-0.5 sm:mt-1.5 font-bold"
+              style={{ color: 'var(--gradient-subtitle)' }}
+            >
+              Check thousands of names at once
+            </span>
           </h1>
-          <p className={`text-sm sm:text-lg md:text-xl max-w-2xl mx-auto mb-3 sm:mb-6 leading-relaxed px-3 sm:px-4 ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
-            Paste a list, import a file, or type names — check up to 1,000 domains with live availability, premium flags, and registrar links.
+
+          <p
+            className={`text-[13px] sm:text-lg max-w-2xl mx-auto mb-4 sm:mb-7 leading-relaxed px-1 ${
+              isLight ? 'text-slate-500' : 'text-white/50'
+            }`}
+          >
+            Paste a list, import a file, or type names — live availability, premium flags, and registrar links.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-4 sm:mb-8 px-3">
-            {['Copy & paste', 'CSV · TXT · JSON', 'Live checks', 'Export results'].map((label) => (
+
+          {/* Feature chips — freestanding like home (no outer blank dock) */}
+          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-5 sm:mb-8 px-1">
+            {(
+              [
+                {
+                  label: 'Copy & paste',
+                  icon: (
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M8 5H6.5A1.5 1.5 0 0 0 5 6.5v12A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 17.5 5H16M9 5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v1H9V5Z" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: 'CSV · TXT · JSON',
+                  icon: (
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 16V4m0 12-3.5-3.5M12 16l3.5-3.5M5 18.5h14" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: 'Live checks',
+                  icon: (
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
+                      <circle cx="12" cy="12" r="3" />
+                      <path strokeLinecap="round" d="M12 4.5v2M12 17.5v2M4.5 12h2M17.5 12h2" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: 'Export results',
+                  icon: (
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0-12 3.5 3.5M12 4 8.5 7.5M5 18.5h14" />
+                    </svg>
+                  ),
+                },
+              ] as const
+            ).map((item) => (
               <span
-                key={label}
-                className={`rounded-full border px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold ${
+                key={item.label}
+                className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 sm:px-3.5 sm:py-2 text-[10px] sm:text-[12px] font-semibold transition-colors ${
                   isLight
-                    ? 'border-slate-200 bg-white text-slate-600'
-                    : 'border-white/10 bg-white/[0.04] text-white/55'
+                    ? 'border-slate-200 bg-white text-slate-600 shadow-sm'
+                    : 'border-white/10 bg-[#0c0c0e] text-white/70'
                 }`}
+                style={{ backgroundColor: isLight ? undefined : '#0c0c0e' }}
               >
-                {label}
+                <span
+                  className={`inline-flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full ${
+                    isLight ? 'bg-slate-100 text-slate-600' : 'bg-white/[0.08] text-white/80'
+                  }`}
+                >
+                  {item.icon}
+                </span>
+                {item.label}
               </span>
             ))}
           </div>
 
           {/* Search Input Section */}
-          <div ref={searchRef} className="mb-4 sm:mb-8">
+          <div ref={searchRef} className="relative z-[1] mb-4 sm:mb-8 text-left">
             <SearchInputSection
               input={input}
               setInput={setInput}
@@ -880,8 +980,19 @@ export const BulkDomainSearchLanding: React.FC<{
           </div>
 
           {recentSearches.length > 0 && (
-            <div className="mx-auto max-w-5xl px-2 sm:px-0">
-              <div className={`shine-border rounded-2xl border p-3 sm:p-4 text-left ${isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-white/[0.03]'}`}>
+            <div className="relative z-[1] mx-auto max-w-5xl px-2 sm:px-0">
+              <div
+                className={`shine-border relative isolate overflow-hidden rounded-2xl border p-3 sm:p-4 text-left ${
+                  isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'
+                }`}
+                style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+              >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                />
+                <div className="relative z-[1]">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <h3 className={`text-sm sm:text-base font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>Recent bulk searches</h3>
@@ -904,7 +1015,8 @@ export const BulkDomainSearchLanding: React.FC<{
                     return (
                       <div
                         key={snapshot.id}
-                        className={`rounded-xl border p-3 ${isLight ? 'border-slate-200 bg-slate-50/70' : 'border-white/10 bg-black/20'}`}
+                        className={`rounded-xl border p-3 ${isLight ? 'border-slate-200' : 'border-white/10'}`}
+                        style={{ backgroundColor: isLight ? '#f8fafc' : '#121214' }}
                       >
                         <button type="button" onClick={() => onLoadPreviousSearch(snapshot)} className="w-full text-left">
                           <div className={`text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white/90'}`}>
@@ -932,6 +1044,7 @@ export const BulkDomainSearchLanding: React.FC<{
                       </div>
                     );
                   })}
+                </div>
                 </div>
               </div>
             </div>
@@ -1871,66 +1984,6 @@ brandforge`}</code>
         </div>
       </section>
 
-      {/* Final CTA — solid premium panel */}
-      <section className={`py-8 sm:py-12 border-t ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
-        <div className="max-w-6xl mx-auto px-3 sm:px-6">
-          <div
-            className={`relative overflow-hidden rounded-2xl border px-5 py-7 sm:px-10 sm:py-10 ${
-              isLight
-                ? 'bg-slate-900 border-slate-900 text-white shadow-xl shadow-slate-900/15'
-                : 'bg-[#0c0c0e] border-white/[0.12]'
-            }`}
-          >
-            <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 sm:gap-6">
-              <div className="text-center lg:text-left max-w-xl mx-auto lg:mx-0">
-                <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-white/40 mb-2">
-                  Free · no account
-                </p>
-                <h2 className="text-xl sm:text-3xl font-black tracking-tight text-white mb-2">
-                  Start your bulk domain search now
-                </h2>
-                <p className="text-[13px] sm:text-[14px] leading-relaxed text-white/55">
-                  Paste hundreds of names, stream live availability, and open registrars in one click — completely free.
-                </p>
-                <div className="mt-3 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-1">
-                  {['Up to 1,000 domains', 'Live checks', 'CSV & PDF export'].map((item) => (
-                    <span
-                      key={item}
-                      className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-medium text-white/40"
-                    >
-                      <span className="h-1 w-1 rounded-full bg-white/35" aria-hidden />
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-center lg:justify-end gap-2 shrink-0">
-                <button
-                  type="button"
-                  onClick={scrollToSearch}
-                  className="inline-flex items-center gap-1.5 rounded-xl px-5 py-2.5 sm:px-6 sm:py-3 text-[12px] sm:text-[13px] font-bold bg-white text-black hover:bg-white/90 transition-colors"
-                >
-                  Start bulk search
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (onLoadSample) onLoadSample();
-                    scrollToSearch();
-                  }}
-                  className="inline-flex items-center gap-1.5 rounded-xl border border-white/15 px-4 py-2.5 sm:px-5 sm:py-3 text-[12px] sm:text-[13px] font-semibold text-white/80 hover:bg-white/[0.06] hover:text-white transition-colors"
-                >
-                  Load sample
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

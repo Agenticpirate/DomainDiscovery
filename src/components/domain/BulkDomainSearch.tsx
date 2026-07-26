@@ -1160,7 +1160,11 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
       setDomains={setDomains}
       onAdd={add}
       onLoadSample={loadSample}
-      onCheck={() => domains.length > 0 && setShowResults(true)}
+      onCheck={() => {
+        // Landing may commit draft textarea text via onAdd in the same click —
+        // always advance to results; empty list is handled by the results UI.
+        setShowResults(true);
+      }}
       onReset={reset}
       onFileUpload={handleFileUpload}
       checking={checking}

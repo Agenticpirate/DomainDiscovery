@@ -422,8 +422,11 @@ export function PriceComparison({
     if (idx < 0) return;
     const scroller = tableScrollRef.current;
     if (!scroller) return;
-    // Sticky TLD + cover cols ~172px; each registrar col ~100px
-    const left = Math.max(0, 172 + idx * 100 - 80);
+    // Sticky TLD (~54px mobile / ~100px+cover desktop); registrar col ~74px mobile / ~100px desktop
+    const isNarrow = typeof window !== 'undefined' && window.innerWidth < 640;
+    const stickyW = isNarrow ? 54 : 172;
+    const colW = isNarrow ? 74 : 100;
+    const left = Math.max(0, stickyW + idx * colW - (isNarrow ? 40 : 80));
     scroller.scrollTo({ left, behavior: 'smooth' });
   }, [registrarFilter, tableRegistrars]);
 
@@ -467,8 +470,10 @@ export function PriceComparison({
       return;
     }
 
+    const step =
+      typeof window !== 'undefined' && window.innerWidth < 640 ? 180 : 320;
     tableScroller.scrollBy({
-      left: direction === 'left' ? -320 : 320,
+      left: direction === 'left' ? -step : step,
       behavior: 'smooth',
     });
   }, []);
@@ -622,43 +627,47 @@ export function PriceComparison({
   const availableQuickTlds = QUICK_TLDS.filter((tld) => detailsByTld.has(tld));
 
   return (
-    <div className="space-y-3 sm:space-y-4">
+    <div className="space-y-2.5 sm:space-y-4">
       {/* Main comparison shell */}
-      <div className={`rounded-2xl border overflow-hidden ${panelTone(isLight)}`}>
-        {/* Toolbar */}
-        <div className={`border-b px-3 py-3 sm:px-4 sm:py-3.5 ${isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-white/[0.02]'}`}>
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+      <div className={`rounded-xl sm:rounded-2xl border overflow-hidden ${panelTone(isLight)}`}>
+        {/* Toolbar — compact on mobile */}
+        <div
+          className={`border-b px-2.5 py-2.5 sm:px-4 sm:py-3.5 ${
+            isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-[#0a0a0c]'
+          }`}
+        >
+          <div className="flex flex-col gap-2 sm:gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div className="min-w-0">
-              <div className="flex flex-wrap items-center gap-2">
-                <h3 className={`text-base sm:text-lg font-black tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                <h3 className={`text-[14px] sm:text-lg font-black tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
                   Price matrix
                 </h3>
                 <span
-                  className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
-                    isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-white/[0.04] text-white/55'
+                  className={`rounded-full border px-1.5 py-0.5 sm:px-2 text-[9px] sm:text-[10px] font-semibold ${
+                    isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-[#121214] text-white/55'
                   }`}
                 >
                   {hasActiveFilters && summaries
-                    ? `${filteredSummaries.length.toLocaleString()} of ${summaries.length.toLocaleString()} TLDs`
+                    ? `${filteredSummaries.length.toLocaleString()} of ${summaries.length.toLocaleString()}`
                     : `${filteredSummaries.length.toLocaleString()} TLDs`}
                 </span>
                 <span
-                  className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
-                    isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-white/[0.04] text-white/55'
+                  className={`hidden sm:inline-flex rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
+                    isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-[#121214] text-white/55'
                   }`}
                 >
                   Updated {formatDate(meta.generatedAt)}
                 </span>
               </div>
-              <p className={`mt-1 text-[12px] sm:text-[13px] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
+              <p className={`hidden sm:block mt-1 text-[13px] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
                 Search any extension, filter by one registrar, or click a row for the full breakdown. Cheapest{' '}
                 {matrixLabel.toLowerCase()} is highlighted.
               </p>
             </div>
 
             <div
-              className={`inline-flex rounded-xl border p-0.5 self-start ${
-                isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-black/30'
+              className={`inline-flex rounded-lg sm:rounded-xl border p-0.5 self-start ${
+                isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-[#121214]'
               }`}
               role="group"
               aria-label="Price type"
@@ -667,7 +676,7 @@ export function PriceComparison({
                 [
                   ['registration', 'Reg'],
                   ['renewal', 'Renew'],
-                  ['transfer', 'Transfer'],
+                  ['transfer', 'Xfer'],
                 ] as const
               ).map(([key, label]) => {
                 const active = matrixPriceKey === key;
@@ -676,7 +685,7 @@ export function PriceComparison({
                     key={key}
                     type="button"
                     onClick={() => setMatrixPriceKey(key)}
-                    className={`rounded-[10px] px-3 py-1.5 text-xs font-semibold transition ${
+                    className={`rounded-md sm:rounded-[10px] px-2.5 py-1 sm:px-3 sm:py-1.5 text-[11px] sm:text-xs font-semibold transition ${
                       active
                         ? isLight
                           ? 'bg-slate-900 text-white shadow-sm'
@@ -693,19 +702,19 @@ export function PriceComparison({
             </div>
           </div>
 
-          {/* Search: extension + registrar — primary discovery paths */}
+          {/* Search filters — denser on mobile */}
           <div
-            className={`mt-3 grid gap-2.5 rounded-xl border p-2.5 sm:p-3 lg:grid-cols-[1.15fr_1fr_auto] ${
-              isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-black/25'
+            className={`mt-2 sm:mt-3 grid gap-2 sm:gap-2.5 rounded-xl border p-2 sm:p-3 lg:grid-cols-[1.15fr_1fr_auto] ${
+              isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-[#0a0a0c]'
             }`}
           >
             <label className="block min-w-0">
               <span
-                className={`mb-1 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
+                className={`mb-0.5 sm:mb-1 flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] ${
                   isLight ? 'text-slate-500' : 'text-white/45'
                 }`}
               >
-                <span aria-hidden>⌕</span> Find extension
+                Find extension
               </span>
               <div className="flex gap-1.5">
                 <Input
@@ -717,14 +726,14 @@ export function PriceComparison({
                       jumpToExtensionQuery();
                     }
                   }}
-                  placeholder="e.g. .ai  ·  hamburg  ·  co.uk"
+                  placeholder="e.g. .ai · .com · hamburg"
                   aria-label="Search or jump to a domain extension"
-                  className="h-10 w-full"
+                  className="h-9 sm:h-10 w-full text-[13px]"
                 />
                 <button
                   type="button"
                   onClick={jumpToExtensionQuery}
-                  className={`h-10 shrink-0 rounded-xl border px-3 text-xs font-bold transition ${
+                  className={`h-9 w-9 sm:h-10 sm:w-auto sm:px-3 shrink-0 rounded-lg sm:rounded-xl border text-[11px] sm:text-xs font-bold transition flex items-center justify-center ${
                     isLight
                       ? 'border-slate-900 bg-slate-900 text-white hover:bg-slate-800'
                       : 'border-white bg-white text-black hover:bg-white/90'
@@ -733,28 +742,28 @@ export function PriceComparison({
                   Go
                 </button>
               </div>
-              <span className={`mt-1 block text-[11px] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
+              <span className={`mt-0.5 hidden sm:block text-[11px] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
                 Type any TLD and press Enter to open it directly
               </span>
             </label>
 
             <label className="block min-w-0">
               <span
-                className={`mb-1 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
+                className={`mb-0.5 sm:mb-1 flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] ${
                   isLight ? 'text-slate-500' : 'text-white/45'
                 }`}
               >
-                <span aria-hidden>◎</span> Filter by registrar
+                Filter by registrar
               </span>
               <select
                 id="compare-registrar-filter"
                 value={registrarFilter}
                 onChange={(event) => setRegistrarFilter(event.target.value)}
                 aria-label="Show only extensions sold by this registrar"
-                className={`h-10 w-full rounded-xl border px-3 text-sm font-medium outline-none ${
+                className={`h-9 sm:h-10 w-full rounded-lg sm:rounded-xl border px-2.5 sm:px-3 text-[13px] sm:text-sm font-medium outline-none ${
                   isLight
                     ? 'border-slate-200 bg-slate-50 text-slate-900'
-                    : 'border-white/10 bg-white/[0.04] text-white'
+                    : 'border-white/10 bg-[#121214] text-white'
                 }`}
               >
                 <option value="all">All registrars</option>
@@ -764,14 +773,14 @@ export function PriceComparison({
                   </option>
                 ))}
               </select>
-              <span className={`mt-1 block text-[11px] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
+              <span className={`mt-0.5 hidden sm:block text-[11px] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
                 Show only TLDs that registrar sells
               </span>
             </label>
 
             <label className="block min-w-0 lg:min-w-[150px]">
               <span
-                className={`mb-1 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
+                className={`mb-0.5 sm:mb-1 flex items-center gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] ${
                   isLight ? 'text-slate-500' : 'text-white/45'
                 }`}
               >
@@ -782,10 +791,10 @@ export function PriceComparison({
                 value={sortKey}
                 onChange={(event) => setSortKey(event.target.value as SortKey)}
                 aria-label="Sort extensions"
-                className={`h-10 w-full rounded-xl border px-2.5 text-sm font-medium outline-none ${
+                className={`h-9 sm:h-10 w-full rounded-lg sm:rounded-xl border px-2.5 text-[13px] sm:text-sm font-medium outline-none ${
                   isLight
                     ? 'border-slate-200 bg-slate-50 text-slate-900'
-                    : 'border-white/10 bg-white/[0.04] text-white'
+                    : 'border-white/10 bg-[#121214] text-white'
                 }`}
               >
                 <option value="recommended">Most popular</option>
@@ -799,10 +808,10 @@ export function PriceComparison({
             </label>
           </div>
 
-          {/* Registrar quick-pick chips */}
-          <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+          {/* Registrar chips — horizontal scroll on mobile (no wrap explosion) */}
+          <div className="mt-2 sm:mt-2.5 flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-hide sm:flex-wrap sm:overflow-visible">
             <span
-              className={`mr-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
+              className={`shrink-0 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] ${
                 isLight ? 'text-slate-400' : 'text-white/35'
               }`}
             >
@@ -811,14 +820,14 @@ export function PriceComparison({
             <button
               type="button"
               onClick={() => setRegistrarFilter('all')}
-              className={`rounded-lg border px-2 py-1 text-[11px] font-semibold transition ${
+              className={`shrink-0 rounded-md sm:rounded-lg border px-1.5 py-0.5 sm:px-2 sm:py-1 text-[10px] sm:text-[11px] font-semibold transition ${
                 registrarFilter === 'all'
                   ? isLight
                     ? 'border-slate-900 bg-slate-900 text-white'
                     : 'border-white bg-white text-black'
                   : isLight
                     ? 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
-                    : 'border-white/10 bg-white/[0.03] text-white/60 hover:border-white/20'
+                    : 'border-white/10 bg-[#121214] text-white/60 hover:border-white/20'
               }`}
             >
               All
@@ -832,28 +841,28 @@ export function PriceComparison({
                   type="button"
                   onClick={() => setRegistrarFilter(active ? 'all' : name)}
                   title={`Show only extensions listed by ${name}`}
-                  className={`inline-flex items-center gap-1 rounded-lg border px-2 py-1 text-[11px] font-semibold transition ${
+                  className={`shrink-0 inline-flex items-center gap-1 rounded-md sm:rounded-lg border px-1.5 py-0.5 sm:px-2 sm:py-1 text-[10px] sm:text-[11px] font-semibold transition ${
                     active
                       ? isLight
                         ? 'border-slate-900 bg-slate-900 text-white'
                         : 'border-white bg-white text-black'
                       : isLight
                         ? 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
-                        : 'border-white/10 bg-white/[0.03] text-white/70 hover:border-white/20 hover:text-white'
+                        : 'border-white/10 bg-[#121214] text-white/70 hover:border-white/20 hover:text-white'
                   }`}
                 >
                   <RegistrarMark name={name} isLight={!active && isLight} />
-                  {short}
+                  <span className="hidden xs:inline sm:inline">{short}</span>
                 </button>
               );
             })}
           </div>
 
-          {/* Quick TLD chips */}
+          {/* Quick TLD chips — compact scroll on mobile */}
           {availableQuickTlds.length > 0 && (
-            <div className="mt-2 flex flex-wrap items-center gap-1.5">
+            <div className="mt-1.5 sm:mt-2 flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-hide sm:flex-wrap sm:overflow-visible">
               <span
-                className={`mr-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
+                className={`shrink-0 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] ${
                   isLight ? 'text-slate-400' : 'text-white/35'
                 }`}
               >
@@ -869,14 +878,14 @@ export function PriceComparison({
                       setQuery(tld);
                       selectTld(tld);
                     }}
-                    className={`rounded-lg border px-2.5 py-1 text-[11px] font-bold tracking-tight transition ${
+                    className={`shrink-0 rounded-md sm:rounded-lg border px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-[11px] font-bold tracking-tight transition ${
                       active
                         ? isLight
                           ? 'border-slate-900 bg-slate-900 text-white'
                           : 'border-white bg-white text-black'
                         : isLight
                           ? 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
-                          : 'border-white/10 bg-white/[0.03] text-white/70 hover:border-white/20 hover:text-white'
+                          : 'border-white/10 bg-[#121214] text-white/70 hover:border-white/20 hover:text-white'
                     }`}
                   >
                     {tld}
@@ -931,17 +940,20 @@ export function PriceComparison({
         {/* Matrix + detail */}
         <div className="grid xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)]">
           {/* Matrix column */}
-          <div className={`p-3 sm:p-4 xl:border-r ${isLight ? 'xl:border-slate-200' : 'xl:border-white/10'}`}>
+          <div className={`p-2 sm:p-4 xl:border-r ${isLight ? 'xl:border-slate-200' : 'xl:border-white/10'}`}>
             {canScrollTable && (
               <div
-                className={`mb-3 flex items-center justify-between gap-3 rounded-xl border px-3 py-2 ${
-                  isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-white/[0.03]'
+                className={`mb-2 sm:mb-3 flex items-center justify-between gap-2 sm:gap-3 rounded-lg sm:rounded-xl border px-2 py-1.5 sm:px-3 sm:py-2 ${
+                  isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-[#121214]'
                 }`}
               >
-                <div className={`text-[11px] font-semibold uppercase tracking-[0.14em] ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
-                  {registrarFilter !== 'all'
-                    ? `Focused on ${registrarFilter === 'Unstoppable Domains' ? 'Unstoppable' : registrarFilter} · scroll for others`
-                    : 'Scroll for all 10 registrars · click a column header to filter'}
+                <div className={`text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
+                  <span className="sm:hidden">Swipe for more registrars</span>
+                  <span className="hidden sm:inline">
+                    {registrarFilter !== 'all'
+                      ? `Focused on ${registrarFilter === 'Unstoppable Domains' ? 'Unstoppable' : registrarFilter} · scroll for others`
+                      : 'Scroll for all 10 registrars · click a column header to filter'}
+                  </span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <button
@@ -975,7 +987,7 @@ export function PriceComparison({
             <div className="relative">
               {!isScrolledToStart && (
                 <div
-                  className={`pointer-events-none absolute inset-y-0 left-0 z-20 w-6 ${
+                  className={`pointer-events-none absolute inset-y-0 left-0 z-20 w-4 sm:w-6 ${
                     isLight
                       ? 'bg-gradient-to-r from-white to-transparent'
                       : 'bg-gradient-to-r from-[#0c0c0e] to-transparent'
@@ -984,7 +996,7 @@ export function PriceComparison({
               )}
               {!isScrolledToEnd && (
                 <div
-                  className={`pointer-events-none absolute inset-y-0 right-0 z-20 w-6 ${
+                  className={`pointer-events-none absolute inset-y-0 right-0 z-20 w-4 sm:w-6 ${
                     isLight
                       ? 'bg-gradient-to-l from-white to-transparent'
                       : 'bg-gradient-to-l from-[#0c0c0e] to-transparent'
@@ -995,8 +1007,13 @@ export function PriceComparison({
               <div
                 ref={tableScrollRef}
                 onScroll={() => syncScrollPosition('table')}
-                className={`max-h-[min(62vh,640px)] overflow-auto rounded-xl border ${
-                  isLight ? 'border-slate-200' : 'border-white/10'
+                role="region"
+                aria-label="Domain price comparison matrix. Swipe horizontally for more registrars. Select a row to view details."
+                tabIndex={0}
+                className={`max-h-[min(58vh,640px)] sm:max-h-[min(62vh,640px)] overflow-auto rounded-lg sm:rounded-xl border focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 ${
+                  isLight
+                    ? 'border-slate-200 focus-visible:ring-slate-400 focus-visible:ring-offset-white'
+                    : 'border-white/10 focus-visible:ring-white/40 focus-visible:ring-offset-[#0c0c0e]'
                 }`}
               >
                 <div
@@ -1006,18 +1023,29 @@ export function PriceComparison({
                   style={{ width: `${tableScrollWidth}px` }}
                 />
 
-                <table className="min-w-[1080px] w-full text-sm">
+                {/*
+                  Mobile: denser sticky TLD + coverage under TLD; cover col hidden;
+                  tighter registrar cols. Desktop min-width preserved via sm:min-w.
+                */}
+                <table className="w-full text-sm min-w-[720px] sm:min-w-[1080px]">
+                  <caption className="sr-only">
+                    Registration prices by extension and registrar. Cheapest price in each row is highlighted.
+                    Use arrow buttons or swipe to see more registrars. Press Enter on a row for full breakdown.
+                  </caption>
                   <thead className={`sticky top-0 z-30 ${isLight ? 'bg-slate-50' : 'bg-[#111]'}`}>
                     <tr>
                       <th
-                        className={`sticky left-0 z-40 min-w-[100px] px-3 py-2.5 text-left text-[10px] font-bold uppercase tracking-[0.16em] ${
+                        scope="col"
+                        className={`sticky left-0 z-40 w-[3.35rem] min-w-[3.35rem] max-w-[3.35rem] sm:w-auto sm:min-w-[100px] sm:max-w-none px-1.5 sm:px-3 py-1.5 sm:py-2.5 text-left text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] ${
                           isLight ? 'bg-slate-50 text-slate-500' : 'bg-[#111] text-white/45'
                         }`}
                       >
-                        TLD
+                        <span className="sm:hidden">Ext</span>
+                        <span className="hidden sm:inline">TLD</span>
                       </th>
                       <th
-                        className={`min-w-[72px] px-2 py-2.5 text-left text-[10px] font-bold uppercase tracking-[0.14em] ${
+                        scope="col"
+                        className={`hidden sm:table-cell min-w-[52px] sm:min-w-[72px] px-1.5 sm:px-2 py-2 sm:py-2.5 text-left text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.12em] ${
                           isLight ? 'text-slate-500' : 'text-white/45'
                         }`}
                       >
@@ -1025,10 +1053,19 @@ export function PriceComparison({
                       </th>
                       {tableRegistrars.map((registrar) => {
                         const focused = registrarFilter === registrar;
+                        const shortName =
+                          registrar === 'Unstoppable Domains'
+                            ? 'Unstoppable'
+                            : registrar === 'Namecheap'
+                              ? 'Namecheap'
+                              : registrar.length > 10
+                                ? registrar.slice(0, 8) + '…'
+                                : registrar;
                         return (
                           <th
                             key={registrar}
-                            className={`min-w-[100px] px-2 py-2.5 text-left cursor-pointer transition ${
+                            scope="col"
+                            className={`min-w-[4.6rem] sm:min-w-[100px] px-1 sm:px-2 py-1.5 sm:py-2.5 text-left cursor-pointer transition ${
                               focused
                                 ? isLight
                                   ? 'bg-slate-200/80 text-slate-900'
@@ -1038,16 +1075,20 @@ export function PriceComparison({
                                   : 'text-white/55 hover:bg-white/[0.04]'
                             }`}
                             onClick={() => setRegistrarFilter(focused ? 'all' : registrar)}
+                            aria-pressed={focused}
                             title={
                               focused
                                 ? `Showing only TLDs listed by ${registrar}. Click to clear.`
                                 : `Filter matrix to ${registrar} only`
                             }
                           >
-                            <div className="flex items-center gap-1.5">
+                            <div className="flex items-center gap-1 sm:gap-1.5 min-w-0">
                               <RegistrarMark name={registrar} isLight={isLight} />
-                              <span className="text-[10px] font-bold uppercase tracking-[0.08em] leading-tight">
+                              <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-[0.08em] leading-tight">
                                 {registrar === 'Unstoppable Domains' ? 'Unstoppable' : registrar}
+                              </span>
+                              <span className="sm:hidden text-[8px] font-bold uppercase tracking-tight leading-none truncate max-w-[2.8rem]">
+                                {shortName}
                               </span>
                             </div>
                           </th>
@@ -1090,6 +1131,7 @@ export function PriceComparison({
                             role="button"
                             tabIndex={0}
                             aria-pressed={active}
+                            aria-label={`${summary.tld}, listed by ${coverage} of ${tableRegistrars.length} registrars${active ? ', selected' : ''}`}
                             onClick={() => selectTld(summary.tld)}
                             onKeyDown={(event) => {
                               if (event.key === 'Enter' || event.key === ' ') {
@@ -1097,14 +1139,15 @@ export function PriceComparison({
                                 selectTld(summary.tld);
                               }
                             }}
-                            className={`cursor-pointer border-t transition-colors ${
+                            className={`cursor-pointer border-t transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-inset ${
                               isLight
-                                ? 'border-slate-100 hover:bg-slate-50/80'
-                                : 'border-white/[0.06] hover:bg-white/[0.03]'
+                                ? 'border-slate-100 hover:bg-slate-50/80 focus-visible:ring-slate-400'
+                                : 'border-white/[0.06] hover:bg-white/[0.03] focus-visible:ring-white/30'
                             } ${active ? (isLight ? 'bg-slate-50' : 'bg-white/[0.04]') : ''}`}
                           >
-                            <td
-                              className={`sticky left-0 z-10 min-w-[100px] px-3 py-2.5 ${
+                            <th
+                              scope="row"
+                              className={`sticky left-0 z-10 w-[3.35rem] min-w-[3.35rem] max-w-[3.35rem] sm:w-auto sm:min-w-[100px] sm:max-w-none px-1.5 sm:px-3 py-1.5 sm:py-2.5 text-left font-normal ${
                                 active
                                   ? isLight
                                     ? 'bg-slate-900 text-white'
@@ -1114,10 +1157,27 @@ export function PriceComparison({
                                     : 'bg-[#0c0c0e] text-white'
                               }`}
                             >
-                              <span className="font-black tracking-tight tabular-nums">{summary.tld}</span>
-                            </td>
+                              <span className="flex flex-col gap-0 min-w-0">
+                                <span className="font-black tracking-tight tabular-nums text-[12px] sm:text-sm leading-tight truncate">
+                                  {summary.tld}
+                                </span>
+                                <span
+                                  className={`sm:hidden text-[8px] font-semibold tabular-nums leading-none mt-0.5 ${
+                                    active
+                                      ? isLight
+                                        ? 'text-white/55'
+                                        : 'text-black/45'
+                                      : isLight
+                                        ? 'text-slate-400'
+                                        : 'text-white/35'
+                                  }`}
+                                >
+                                  {coverage}/{tableRegistrars.length}
+                                </span>
+                              </span>
+                            </th>
                             <td
-                              className={`whitespace-nowrap px-2 py-2.5 text-[12px] font-medium tabular-nums ${
+                              className={`hidden sm:table-cell whitespace-nowrap px-1.5 sm:px-2 py-2 sm:py-2.5 text-[11px] sm:text-[12px] font-medium tabular-nums ${
                                 isLight ? 'text-slate-500' : 'text-white/45'
                               }`}
                             >
@@ -1130,7 +1190,7 @@ export function PriceComparison({
                               return (
                                 <td
                                   key={`${summary.tld}-${price.registrar}`}
-                                  className={`whitespace-nowrap px-2 py-2.5 ${
+                                  className={`whitespace-nowrap px-1 sm:px-2 py-1.5 sm:py-2.5 ${
                                     colFocused
                                       ? isLight
                                         ? 'bg-slate-100/90 text-slate-800'
@@ -1140,21 +1200,35 @@ export function PriceComparison({
                                         : 'text-white/75'
                                   }`}
                                 >
-                                  <span
-                                    className={
-                                      price.value == null
-                                        ? isLight
-                                          ? 'text-slate-300'
-                                          : 'text-white/20'
-                                        : isCheapest
+                                  {price.value == null ? (
+                                    <span
+                                      className={`inline-flex min-w-[2.5rem] sm:min-w-0 justify-center rounded-md px-1 py-0.5 text-[10px] sm:text-[12px] font-medium tabular-nums ${
+                                        isLight ? 'text-slate-300' : 'text-white/25'
+                                      }`}
+                                      aria-label="Not listed"
+                                    >
+                                      —
+                                    </span>
+                                  ) : (
+                                    <span
+                                      className={
+                                        isCheapest
                                           ? isLight
-                                            ? 'inline-flex rounded-md bg-slate-900 px-1.5 py-0.5 text-[12px] font-bold tabular-nums text-white'
-                                            : 'inline-flex rounded-md bg-white px-1.5 py-0.5 text-[12px] font-bold tabular-nums text-black'
-                                          : 'text-[13px] font-semibold tabular-nums'
-                                    }
-                                  >
-                                    {price.display}
-                                  </span>
+                                            ? 'inline-flex rounded-md bg-slate-900 px-1.5 py-0.5 text-[10px] sm:text-[12px] font-bold tabular-nums text-white shadow-sm'
+                                            : 'inline-flex rounded-md bg-white px-1.5 py-0.5 text-[10px] sm:text-[12px] font-bold tabular-nums text-black shadow-sm'
+                                          : isLight
+                                            ? 'inline-flex rounded-md border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-[10px] sm:text-[12px] font-semibold tabular-nums text-slate-800 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-[13px]'
+                                            : 'inline-flex rounded-md border border-white/10 bg-[#121214] px-1.5 py-0.5 text-[10px] sm:text-[12px] font-semibold tabular-nums text-white/85 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-[13px]'
+                                      }
+                                      title={
+                                        isCheapest
+                                          ? `Best price for ${summary.tld} at ${price.registrar}`
+                                          : `${price.display} at ${price.registrar}`
+                                      }
+                                    >
+                                      {price.display}
+                                    </span>
+                                  )}
                                 </td>
                               );
                             })}
@@ -1167,36 +1241,51 @@ export function PriceComparison({
               </div>
             </div>
 
-            <p className={`mt-2.5 text-[11px] leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/35'}`}>
-              — = not listed on {meta.sourceName}. Promo + regular pairs show the regular list price. Source updated{' '}
-              {formatDate(meta.generatedAt)}.
+            <p className={`mt-2 text-[10px] sm:text-[11px] leading-snug sm:leading-relaxed break-words ${isLight ? 'text-slate-500' : 'text-white/35'}`}>
+              <span className="sm:hidden">
+                — not listed · white pill = best price in row · swipe for more registrars · source {formatDate(meta.generatedAt)}
+              </span>
+              <span className="hidden sm:inline">
+                — = not listed on {meta.sourceName}. Promo + regular pairs show the regular list price. Source updated{' '}
+                {formatDate(meta.generatedAt)}.
+              </span>
             </p>
           </div>
 
-          {/* Detail column */}
-          <div ref={detailRef} className="p-3 sm:p-4 space-y-3">
-            <div className={`rounded-xl border p-3.5 sm:p-4 ${metricTone(isLight)}`}>
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <div className={`text-[10px] font-bold uppercase tracking-[0.2em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-                    Selected extension
+          {/* Detail column — extra-dense on mobile; desktop spacing unchanged */}
+          <div ref={detailRef} className="p-2 sm:p-4 space-y-2 sm:space-y-3 border-t xl:border-t-0 border-white/10">
+            <div
+              className={`rounded-lg sm:rounded-xl border p-2 sm:p-4 ${
+                isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#0a0a0c] border-white/10'
+              }`}
+            >
+              <div className="flex items-center sm:items-start justify-between gap-2 sm:gap-3">
+                <div className="min-w-0 flex sm:block items-baseline gap-2">
+                  <div className="min-w-0">
+                    <div className={`text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+                      Selected extension
+                    </div>
+                    <h3 className={`mt-0 text-lg sm:text-3xl font-black tracking-tight tabular-nums leading-none sm:mt-0.5 ${isLight ? 'text-slate-900' : 'text-white'}`}>
+                      {detail.tld}
+                    </h3>
                   </div>
-                  <h3 className={`mt-1 text-2xl sm:text-3xl font-black tracking-tight tabular-nums ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                    {detail.tld}
-                  </h3>
-                  <p className={`mt-1 text-[12px] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-                    {selectedSupportCount}/{tableRegistrars.length} tracked registrars list this TLD
+                  <p className={`text-[9px] sm:text-[12px] sm:mt-0.5 shrink-0 ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
+                    <span className="sm:hidden">{selectedSupportCount}/{tableRegistrars.length} list it</span>
+                    <span className="hidden sm:inline">
+                      {selectedSupportCount}/{tableRegistrars.length} registrars list this TLD
+                    </span>
                   </p>
                 </div>
                 {loading && (
-                  <span className={`text-[11px] ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Loading…</span>
+                  <span className={`text-[10px] sm:text-[11px] ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Loading…</span>
                 )}
               </div>
 
-              <div className="mt-3 grid grid-cols-2 gap-2">
+              <div className="mt-1.5 sm:mt-3 grid grid-cols-2 gap-1 sm:gap-2">
                 <MetricCard
                   isLight={isLight}
                   label="Cheapest reg"
+                  labelShort="Reg"
                   value={detail.cheapestRegistration.price ?? '—'}
                   meta={detail.cheapestRegistration.registrar ?? '—'}
                   emphasize
@@ -1204,18 +1293,21 @@ export function PriceComparison({
                 <MetricCard
                   isLight={isLight}
                   label="Cheapest renew"
+                  labelShort="Renew"
                   value={detail.cheapestRenewal.price ?? '—'}
                   meta={detail.cheapestRenewal.registrar ?? '—'}
                 />
                 <MetricCard
                   isLight={isLight}
                   label="Cheapest transfer"
+                  labelShort="Xfer"
                   value={detail.cheapestTransfer.price ?? '—'}
                   meta={detail.cheapestTransfer.registrar ?? '—'}
                 />
                 <MetricCard
                   isLight={isLight}
                   label="Best value"
+                  labelShort="Value"
                   value={detail.bestValue.score?.toFixed(2) ?? '—'}
                   meta={detail.bestValue.registrar ?? '—'}
                 />
@@ -1223,12 +1315,12 @@ export function PriceComparison({
             </div>
 
             <div>
-              <div className="mb-2.5 flex items-center justify-between gap-2">
-                <div>
-                  <h4 className={`text-sm font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
+              <div className="mb-1.5 sm:mb-2 flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <h4 className={`text-[12px] sm:text-sm font-bold leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
                     Registrar breakdown
                   </h4>
-                  <p className={`text-[11px] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+                  <p className={`text-[9px] sm:text-[11px] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
                     Sorted by {detailSortKey === 'score' ? 'value score' : detailSortKey}
                   </p>
                 </div>
@@ -1236,10 +1328,10 @@ export function PriceComparison({
                   value={detailSortKey}
                   onChange={(event) => setDetailSortKey(event.target.value as DetailSortKey)}
                   aria-label="Sort registrars"
-                  className={`h-8 rounded-lg border px-2 text-[11px] font-medium outline-none ${
+                  className={`h-6 sm:h-8 rounded-md sm:rounded-lg border px-1.5 sm:px-2 text-[9px] sm:text-[11px] font-medium outline-none ${
                     isLight
                       ? 'border-slate-200 bg-white text-slate-800'
-                      : 'border-white/10 bg-white/[0.04] text-white'
+                      : 'border-white/10 bg-[#121214] text-white'
                   }`}
                 >
                   <option value="registration">Reg price</option>
@@ -1259,7 +1351,7 @@ export function PriceComparison({
                   {loadError}
                 </div>
               ) : (
-                <div className="max-h-[min(58vh,560px)] space-y-2 overflow-y-auto pr-0.5">
+                <div className="max-h-[min(48vh,560px)] sm:max-h-[min(58vh,560px)] space-y-1 sm:space-y-2 overflow-y-auto pr-0.5">
                   {selectedRegistrarOffers.map((offer, index) => (
                     <RegistrarCard
                       key={`${detail.tld}-${offer.registrar}`}
@@ -1284,50 +1376,58 @@ export function PriceComparison({
 function MetricCard({
   isLight,
   label,
+  labelShort,
   value,
   meta,
   emphasize = false,
 }: {
   isLight: boolean;
   label: string;
+  labelShort?: string;
   value: string;
   meta: string;
   emphasize?: boolean;
 }) {
   return (
     <div
-      className={`rounded-xl border p-2.5 sm:p-3 ${
+      className={`rounded-md sm:rounded-xl border px-1.5 py-1 sm:p-3 min-w-0 ${
         emphasize
           ? isLight
             ? 'border-slate-900 bg-slate-900 text-white'
-            : 'border-white bg-white text-black'
-          : metricTone(isLight)
+            : 'border-white/25 bg-[#121214] text-white ring-1 ring-white/20'
+          : isLight
+            ? 'bg-white border-slate-200'
+            : 'bg-[#121214] border-white/10'
       }`}
     >
       <div
-        className={`text-[10px] font-semibold uppercase leading-4 tracking-[0.1em] ${
+        className={`text-[7px] sm:text-[10px] font-semibold uppercase leading-none tracking-[0.08em] sm:tracking-[0.1em] ${
           emphasize
             ? isLight
               ? 'text-white/55'
-              : 'text-black/50'
+              : 'text-white/45'
             : isLight
               ? 'text-slate-500'
               : 'text-white/45'
         }`}
       >
-        {label}
+        <span className="sm:hidden">{labelShort || label}</span>
+        <span className="hidden sm:inline">{label}</span>
       </div>
-      <div className="mt-1 text-base font-black tabular-nums sm:text-lg">{value}</div>
+      <div className="mt-0.5 text-[13px] sm:text-lg font-black tabular-nums leading-none sm:leading-tight">
+        {value}
+      </div>
       <div
-        className={`mt-0.5 truncate text-[11px] leading-5 ${
+        className={`mt-0.5 truncate text-[9px] sm:text-[11px] leading-none sm:leading-tight ${
           emphasize
             ? isLight
               ? 'text-white/55'
-              : 'text-black/50'
+              : 'text-white/40'
             : isLight
               ? 'text-slate-500'
               : 'text-white/45'
         }`}
+        title={meta}
       >
         {meta}
       </div>
@@ -1355,42 +1455,55 @@ function RegistrarCard({
     offer.renewal.value == null &&
     offer.transfer.value == null;
 
+  const displayName =
+    offer.registrar === 'Unstoppable Domains' ? 'Unstoppable' : offer.registrar;
+
   return (
     <div
-      className={`rounded-xl border p-3 transition-colors ${
+      className={`rounded-md sm:rounded-xl border p-1.5 sm:p-3 transition-colors ${
         isCheapestReg
           ? isLight
             ? 'border-slate-900/30 bg-slate-50'
-            : 'border-white/20 bg-white/[0.05]'
+            : 'border-white/20 bg-[#121214]'
           : isLight
             ? 'border-slate-200 bg-white hover:border-slate-300'
-            : 'border-white/10 bg-white/[0.02] hover:border-white/15'
+            : 'border-white/10 bg-[#0a0a0c] hover:border-white/15'
       } ${isUnsupported ? 'opacity-60' : ''}`}
     >
-      <div className="flex items-start justify-between gap-2 mb-2.5">
-        <div className="flex items-center gap-2 min-w-0">
+      {/* Header — single compact row on mobile */}
+      <div className="flex items-center justify-between gap-1.5 sm:gap-2 mb-1 sm:mb-2.5 min-w-0">
+        <div className="flex items-center gap-1 sm:gap-2 min-w-0">
           <span
-            className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-[10px] font-black tabular-nums ${
+            className={`flex h-4 w-4 sm:h-6 sm:w-6 shrink-0 items-center justify-center rounded sm:rounded-md text-[8px] sm:text-[10px] font-black tabular-nums ${
               rank === 1
                 ? isLight
                   ? 'bg-slate-900 text-white'
                   : 'bg-white text-black'
                 : isLight
                   ? 'bg-slate-100 text-slate-500'
-                  : 'bg-white/[0.06] text-white/40'
+                  : 'bg-[#121214] text-white/40 border border-white/10'
             }`}
           >
             {rank}
           </span>
-          <RegistrarMark name={offer.registrar} isLight={isLight} size="md" />
-          <div className="min-w-0">
-            <div className={`truncate text-[13px] font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
-              {offer.registrar}
+          <span className="hidden sm:inline-flex">
+            <RegistrarMark name={offer.registrar} isLight={isLight} size="sm" />
+          </span>
+          <span className="sm:hidden shrink-0 scale-90 origin-left">
+            <RegistrarMark name={offer.registrar} isLight={isLight} size="sm" />
+          </span>
+          <div className="min-w-0 flex items-center gap-1 sm:block">
+            <div
+              className={`truncate text-[11px] sm:text-[13px] font-bold leading-tight ${
+                isLight ? 'text-slate-900' : 'text-white'
+              }`}
+            >
+              {displayName}
             </div>
-            <div className="mt-0.5 flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-0.5 sm:gap-1 sm:mt-0.5 shrink-0">
               {isCheapestReg && (
                 <span
-                  className={`rounded px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
+                  className={`rounded px-1 py-px text-[7px] sm:text-[9px] font-bold uppercase tracking-wide leading-none ${
                     isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
                   }`}
                 >
@@ -1399,7 +1512,7 @@ function RegistrarCard({
               )}
               {isCheapestRenew && !isCheapestReg && (
                 <span
-                  className={`rounded px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
+                  className={`rounded px-1 py-px text-[7px] sm:text-[9px] font-bold uppercase tracking-wide leading-none ${
                     isLight ? 'bg-slate-200 text-slate-700' : 'bg-white/10 text-white/70'
                   }`}
                 >
@@ -1408,7 +1521,7 @@ function RegistrarCard({
               )}
               {isBestValue && (
                 <span
-                  className={`rounded px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
+                  className={`rounded px-1 py-px text-[7px] sm:text-[9px] font-bold uppercase tracking-wide leading-none ${
                     isLight ? 'bg-slate-200 text-slate-700' : 'bg-white/10 text-white/70'
                   }`}
                 >
@@ -1416,14 +1529,16 @@ function RegistrarCard({
                 </span>
               )}
               {isUnsupported && (
-                <span className={`text-[10px] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>Not listed</span>
+                <span className={`text-[9px] sm:text-[10px] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
+                  Not listed
+                </span>
               )}
             </div>
           </div>
         </div>
         {offer.score != null && (
           <span
-            className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-bold tabular-nums ${
+            className={`shrink-0 rounded-full border px-1 sm:px-2 py-px sm:py-0.5 text-[8px] sm:text-[10px] font-bold tabular-nums ${
               isLight ? 'border-slate-200 text-slate-600' : 'border-white/10 text-white/55'
             }`}
           >
@@ -1432,35 +1547,47 @@ function RegistrarCard({
         )}
       </div>
 
-      <div className="grid grid-cols-4 gap-1.5">
+      {/* Prices — 3 cols mobile (Reg/Renew/Xfer), 4 on desktop (+Privacy) */}
+      <div className="grid grid-cols-3 sm:grid-cols-4 gap-0.5 sm:gap-1.5">
         <PricePill isLight={isLight} label="Reg" value={offer.registration.display ?? '—'} highlight={isCheapestReg} />
         <PricePill isLight={isLight} label="Renew" value={offer.renewal.display ?? '—'} highlight={isCheapestRenew} />
         <PricePill isLight={isLight} label="Xfer" value={offer.transfer.display ?? '—'} />
-        <PricePill
-          isLight={isLight}
-          label="Privacy"
-          value={
-            offer.whoisPrivacy.display === 'Unsupported'
-              ? 'N/A'
-              : offer.whoisPrivacy.value === 0
-                ? 'Free'
-                : offer.whoisPrivacy.display ?? '—'
-          }
-        />
+        <div className="hidden sm:block">
+          <PricePill
+            isLight={isLight}
+            label="Privacy"
+            value={
+              offer.whoisPrivacy.display === 'Unsupported'
+                ? 'N/A'
+                : offer.whoisPrivacy.value === 0
+                  ? 'Free'
+                  : offer.whoisPrivacy.display ?? '—'
+            }
+          />
+        </div>
       </div>
 
       {offer.features && offer.features.length > 0 && (
-        <div className="mt-2 flex flex-wrap gap-1">
-          {offer.features.slice(0, 4).map((feature) => (
+        <div className="mt-1 sm:mt-2 flex flex-wrap gap-0.5 sm:gap-1">
+          {offer.features.slice(0, 2).map((feature) => (
             <span
               key={feature}
-              className={`rounded-md px-1.5 py-0.5 text-[10px] ${
-                isLight ? 'bg-slate-100 text-slate-600' : 'bg-white/[0.05] text-white/50'
+              className={`rounded px-1 py-px sm:rounded-md sm:px-1.5 sm:py-0.5 text-[8px] sm:text-[10px] leading-tight ${
+                isLight ? 'bg-slate-100 text-slate-600' : 'bg-[#121214] text-white/50 border border-white/8'
               }`}
             >
               {feature}
             </span>
           ))}
+          {offer.features.length > 2 && (
+            <span
+              className={`hidden sm:inline rounded-md px-1.5 py-0.5 text-[10px] ${
+                isLight ? 'bg-slate-100 text-slate-500' : 'bg-[#121214] text-white/40 border border-white/8'
+              }`}
+            >
+              +{offer.features.length - 2}
+            </span>
+          )}
         </div>
       )}
     </div>
@@ -1480,18 +1607,18 @@ function PricePill({
 }) {
   return (
     <div
-      className={`rounded-lg border px-1.5 py-1.5 text-center ${
+      className={`min-w-0 rounded sm:rounded-lg border px-0.5 py-0.5 sm:px-1.5 sm:py-1.5 text-center ${
         highlight
           ? isLight
             ? 'border-slate-900 bg-slate-900 text-white'
-            : 'border-white bg-white text-black'
+            : 'border-white/30 bg-white text-black'
           : isLight
             ? 'border-slate-100 bg-slate-50'
-            : 'border-white/[0.06] bg-black/20'
+            : 'border-white/10 bg-[#121214]'
       }`}
     >
       <div
-        className={`text-[9px] font-semibold uppercase tracking-wide ${
+        className={`text-[7px] sm:text-[9px] font-semibold uppercase tracking-wide leading-none ${
           highlight
             ? isLight
               ? 'text-white/55'
@@ -1503,7 +1630,9 @@ function PricePill({
       >
         {label}
       </div>
-      <div className="mt-0.5 text-[12px] font-bold tabular-nums leading-tight">{value}</div>
+      <div className="mt-px sm:mt-0.5 text-[10px] sm:text-[12px] font-bold tabular-nums leading-tight truncate">
+        {value}
+      </div>
     </div>
   );
 }

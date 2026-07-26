@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { normalizeShareDomain, buildWhoisSharePath } from '@/lib/whoisShareMeta';
 import { WhoisSharePublicCard } from '@/components/domain/WhoisSharePublicCard';
 import { getSiteBaseUrl, SITE_BRAND } from '@/lib/seoSiteFacts';
+import { Footer } from '@/components/layout/Footer';
+import { Navigation } from '@/components/layout/Navigation';
 
 type PageProps = {
   params: Promise<{ domain: string }> | { domain: string };
@@ -84,8 +86,9 @@ export default async function WhoisSharePage({ params }: PageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#07070a] text-white">
-      <div className="mx-auto flex min-h-screen max-w-3xl flex-col px-4 py-10 sm:py-14">
+    <div className="min-h-screen bg-[#07070a] text-white flex flex-col">
+      <Navigation />
+      <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-10 sm:py-14 pt-20 sm:pt-24">
         <div className="mb-8 text-center">
           <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
             DomainDiscovery · shared WHOIS
@@ -117,6 +120,7 @@ export default async function WhoisSharePage({ params }: PageProps) {
           Free public RDAP via IANA bootstrap. Contact fields are often redacted for privacy.
         </p>
       </div>
+      <Footer />
     </div>
   );
 }

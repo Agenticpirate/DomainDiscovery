@@ -21,7 +21,8 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles = "inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
   
   const variants = {
-    primary: "bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] hover:opacity-90 active:opacity-80 shadow-sm focus-visible:ring-[var(--input-ring)] focus-visible:ring-offset-[var(--bg-main)]",
+    primary:
+      "bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] hover:bg-[var(--btn-primary-hover)] active:opacity-90 shadow-md shadow-[var(--shadow-color)] focus-visible:ring-[var(--input-ring)] focus-visible:ring-offset-[var(--bg-main)]",
     secondary: "bg-[var(--btn-secondary-bg)] text-[var(--btn-secondary-text)] border border-[var(--btn-secondary-border)] hover:bg-[var(--btn-secondary-hover-bg)] focus-visible:ring-[var(--input-ring)] focus-visible:ring-offset-[var(--bg-main)]",
     tertiary: "bg-transparent hover:bg-[var(--card-bg-hover)] focus-visible:ring-[var(--input-ring)] focus-visible:ring-offset-[var(--bg-main)]",
     success: "bg-emerald-500 text-white hover:bg-emerald-600 active:bg-emerald-700 shadow-sm focus-visible:ring-emerald-500/30 focus-visible:ring-offset-[var(--bg-main)]",

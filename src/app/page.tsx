@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { HomePageContent } from '@/components/home/HomePageContent';
 import { HeroSearch } from '@/components/home/HeroSearch';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -49,15 +50,19 @@ export default function Home() {
       <Navigation />
 
       <main className="relative pt-[3.15rem] sm:pt-[4.25rem]">
-        {/* Hero — mobile unchanged; desktop: richer copy, full CTAs, brand palette */}
-        <section className="relative px-3.5 sm:px-6 pt-3.5 sm:pt-12 md:pt-14 pb-3 sm:pb-10">
-          <div className="w-full max-w-[42rem] sm:max-w-[58rem] mx-auto text-center">
+        {/* Hero — dots clear under center copy (intensity=hero), solid search plate */}
+        <SectionAmbient
+          intensity="hero"
+          contentClassName="px-3.5 sm:px-6 pt-3.5 sm:pt-12 md:pt-14 pb-3 sm:pb-10"
+        >
+          <div className="relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto text-center">
             <div
-              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 mb-2.5 sm:mb-5 text-[10px] sm:text-[12px] font-semibold tracking-wide ${
+              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 mb-2.5 sm:mb-5 text-[10px] sm:text-[12px] font-semibold tracking-wide border ${
                 isLight
-                  ? 'bg-slate-100 text-slate-600 border border-slate-200'
-                  : 'bg-white/[0.04] text-white/65 border border-white/10'
+                  ? 'bg-slate-100 text-slate-600 border-slate-200'
+                  : 'text-white/65 border-white/10'
               }`}
+              style={isLight ? undefined : { backgroundColor: '#0c0c0e' }}
             >
               <span className="relative flex h-1.5 w-1.5">
                 <span
@@ -111,14 +116,22 @@ export default function Home() {
               Live availability · 1,600+ TLDs · Free tools
             </p>
 
-            {/* Highlighted search panel — primary CTA zone */}
+            {/* Search panel — solid fill so ambient dots never show through */}
             <div
-              className={`shine-border rounded-2xl p-2.5 sm:p-5 max-w-[40rem] sm:max-w-[50rem] mx-auto ${
+              className={`shine-border relative z-[2] isolate rounded-2xl p-2.5 sm:p-5 max-w-[40rem] sm:max-w-[50rem] mx-auto overflow-hidden ${
                 isLight
                   ? 'bg-white border border-slate-200 shadow-lg shadow-slate-900/[0.06]'
-                  : 'bg-white/[0.04] border border-white/12 shadow-[0_8px_32px_rgba(0,0,0,0.35)] sm:shadow-[0_16px_48px_rgba(0,0,0,0.4)]'
+                  : 'bg-[#0a0a0c] border border-white/12 shadow-[0_8px_32px_rgba(0,0,0,0.35)] sm:shadow-[0_16px_48px_rgba(0,0,0,0.4)]'
               }`}
             >
+              {/* Opaque underlay blocks hero dots inside the bar */}
+              <div
+                aria-hidden
+                className={`pointer-events-none absolute inset-0 rounded-2xl ${
+                  isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+                }`}
+              />
+              <div className="relative z-[1]">
               <HeroSearch
                 initialQuery={searchQuery}
                 onSearch={handleHeroSearch}
@@ -129,12 +142,13 @@ export default function Home() {
               <div className="mt-2.5 sm:mt-3.5 grid grid-cols-2 gap-2 max-w-[18rem] sm:max-w-none mx-auto sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-3">
                 <Link
                   href="/bulk-search"
-                  className={`inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 sm:px-4 sm:py-2.5 text-[11px] sm:text-[13px] font-semibold transition-all ${
+                  className={`cta-shine cta-shine-primary group/cta inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 sm:px-4 sm:py-2.5 text-[11px] sm:text-[13px] font-semibold ${
                     isLight
                       ? 'bg-slate-900 text-white hover:bg-slate-800'
                       : 'bg-white text-black hover:bg-white/90'
                   }`}
                 >
+                  <span className="cta-shine-sweep" aria-hidden />
                   <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
@@ -150,12 +164,14 @@ export default function Home() {
                 </Link>
                 <Link
                   href="/tools/geo"
-                  className={`inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 sm:px-4 sm:py-2.5 text-[11px] sm:text-[13px] font-semibold transition-all ${
+                  className={`cta-shine cta-shine-secondary group/cta inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 sm:px-4 sm:py-2.5 text-[11px] sm:text-[13px] font-semibold ${
                     isLight
                       ? 'bg-slate-100 text-slate-800 border border-slate-200 hover:border-slate-300'
-                      : 'bg-white/[0.06] text-white border border-white/15 hover:border-white/30'
+                      : 'text-white border border-white/15 hover:border-white/30'
                   }`}
+                  style={isLight ? undefined : { backgroundColor: '#121214' }}
                 >
+                  <span className="cta-shine-sweep" aria-hidden />
                   <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -175,9 +191,10 @@ export default function Home() {
                 <span className="opacity-40">·</span>
                 <span>No account required</span>
               </p>
+              </div>
             </div>
           </div>
-        </section>
+        </SectionAmbient>
 
         <HomePageContent />
       </main>

@@ -4,7 +4,9 @@ import React, { useState, useEffect, useCallback, useMemo, useRef, Suspense } fr
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Navigation } from '@/components/layout/Navigation';
+import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { Icons } from '@/components/ui/Icons';
 import { PreferredRegistrarSelect, RegistrarActionMenu } from '@/components/domain/RegistrarControls';
 import { SearchInterface } from '@/components/domain/SearchInterface';
@@ -17,6 +19,7 @@ import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
 import extensionsData from '@/data/extensions.json';
 
 interface DomainResult {
@@ -122,13 +125,12 @@ function SearchPageContent() {
   const { theme } = useTheme();
   const { showToast } = useToast();
   const { selectedRegistrar, setSelectedRegistrar } = usePreferredRegistrar();
-  const isLight = theme === 'light';
+  const [mounted, setMounted] = useState(false);
+  const isLight = mounted ? theme === 'light' : false;
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem('saved_domains');
-      if (saved) setSavedDomains(JSON.parse(saved));
-    } catch {}
+    setMounted(true);
+    setSavedDomains(getSavedDomainNames());
   }, []);
 
   const doSearch = useCallback(async (q: string) => {
@@ -233,16 +235,9 @@ function SearchPageContent() {
   }, [selectedRegistrar]);
 
   const handleSave = (domain: string) => {
-    const isSaved = savedDomains.includes(domain);
-    const newSaved = isSaved ? savedDomains.filter((d) => d !== domain) : [...savedDomains, domain];
-    setSavedDomains(newSaved);
-    try {
-      localStorage.setItem('saved_domains', JSON.stringify(newSaved));
-      window.dispatchEvent(new Event('savedDomainsUpdated'));
-      showToast(isSaved ? `Removed ${domain}` : `Saved ${domain}`, 'success', 1500);
-    } catch {
-      /* ignore storage errors */
-    }
+    const { saved } = toggleSavedDomain(domain);
+    setSavedDomains(getSavedDomainNames());
+    showToast(saved ? `Saved ${domain}` : `Removed ${domain}`, 'success', 1500);
   };
 
   /** Block clipboard copy of domain names — save only */
@@ -471,10 +466,11 @@ function SearchPageContent() {
       <Navigation activeTool="search" onToolSelect={() => {}} />
 
       <main className="relative pt-[3.05rem] sm:pt-[3.9rem] pb-6">
-        {/* Full-width sticky chrome — matches reference density */}
+        <SectionAmbient intensity="page" solidBase={false} className="min-h-[70vh] w-full">
+        {/* Full-width sticky chrome — solid so dots stay behind */}
         <div
-          className={`sticky top-[2.95rem] sm:top-[3.75rem] z-40 border-b backdrop-blur-xl ${
-            isLight ? 'bg-white/95 border-slate-200' : 'bg-black/70 border-white/[0.07]'
+          className={`relative z-[1] sticky top-[2.95rem] sm:top-[3.75rem] z-40 border-b backdrop-blur-xl ${
+            isLight ? 'bg-white/95 border-slate-200' : 'bg-[#050505]/92 border-white/[0.07]'
           }`}
         >
           <div className="w-full max-w-[100rem] mx-auto px-2.5 sm:px-4 lg:px-5 py-1.5 sm:py-2">
@@ -806,29 +802,85 @@ function SearchPageContent() {
               )}
 
               {(hiddenExtCount > 0 || showAllExts) && (
-                <div className="flex items-center justify-center gap-3 py-3 mt-1">
-                  {hiddenExtCount > 0 && (
-                    <button
-                      type="button"
-                      onClick={() => setShowAllExts(true)}
-                      className={`text-[12px] font-bold ${isLight ? 'text-slate-800' : 'text-white/85'}`}
+                <div className="mt-4 flex flex-col items-center gap-3 py-6">
+                  {/* Quiet divider */}
+                  <div
+                    aria-hidden
+                    className={`h-px w-12 ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}
+                  />
+
+                  <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
+                    {hiddenExtCount > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => setShowAllExts(true)}
+                        className={`group inline-flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-[13px] font-semibold tracking-[-0.01em] transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                          isLight
+                            ? 'border-slate-900/10 bg-white text-slate-900 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.12)] hover:border-slate-900/20 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_12px_28px_-12px_rgba(15,23,42,0.16)] focus-visible:ring-slate-300 focus-visible:ring-offset-white'
+                            : 'border-white/[0.1] bg-white/[0.06] text-white shadow-[0_1px_0_rgba(255,255,255,0.06)_inset] backdrop-blur-sm hover:border-white/18 hover:bg-white/[0.09] focus-visible:ring-white/25 focus-visible:ring-offset-[#050505]'
+                        }`}
+                      >
+                        <span className="tracking-tight">
+                          View{' '}
+                          <span
+                            className={`tabular-nums ${
+                              isLight ? 'text-slate-500' : 'text-white/50'
+                            }`}
+                          >
+                            {hiddenExtCount.toLocaleString()}
+                          </span>{' '}
+                          more
+                        </span>
+                        <svg
+                          className={`h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-px ${
+                            isLight ? 'text-slate-400' : 'text-white/40'
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.75}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                    )}
+
+                    {showAllExts && (
+                      <button
+                        type="button"
+                        onClick={() => setShowAllExts(false)}
+                        className={`inline-flex items-center gap-1.5 rounded-full border px-4 py-2.5 text-[12px] font-medium tracking-tight transition-colors duration-200 ${
+                          isLight
+                            ? 'border-slate-200 bg-transparent text-slate-500 hover:border-slate-300 hover:text-slate-800'
+                            : 'border-white/[0.08] bg-transparent text-white/45 hover:border-white/15 hover:text-white/80'
+                        }`}
+                      >
+                        Show less
+                      </button>
+                    )}
+
+                    <Link
+                      href="/domain-extensions"
+                      className={`group inline-flex items-center gap-1.5 rounded-full px-3.5 py-2.5 text-[12px] font-medium tracking-tight transition-colors duration-200 ${
+                        isLight
+                          ? 'text-slate-400 hover:text-slate-800'
+                          : 'text-white/35 hover:text-white/75'
+                      }`}
                     >
-                      View {hiddenExtCount} more
-                    </button>
-                  )}
-                  {showAllExts && (
-                    <button
-                      type="button"
-                      onClick={() => setShowAllExts(false)}
-                      className="text-[12px] font-semibold"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      Show less
-                    </button>
-                  )}
-                  <Link href="/domain-extensions" className="text-[11px] font-semibold" style={{ color: 'var(--text-muted)' }}>
-                    Full catalog →
-                  </Link>
+                      Full catalog
+                      <span
+                        aria-hidden
+                        className="inline-block transition-transform duration-300 group-hover:translate-x-0.5"
+                      >
+                        →
+                      </span>
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
@@ -852,7 +904,10 @@ function SearchPageContent() {
 
         <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.search} compact />
         <SeoGuidePack {...TOOL_GUIDE_PACKS.search} />
+        </SectionAmbient>
       </main>
+
+      <Footer />
     </div>
   );
 }

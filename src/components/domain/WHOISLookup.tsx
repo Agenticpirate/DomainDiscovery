@@ -193,7 +193,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
 
   const fieldShell = isLight
     ? 'bg-white border-slate-200 hover:border-slate-300'
-    : 'bg-white/[0.02] border-white/10 hover:border-white/20';
+    : 'bg-[#0c0c0e] border-white/10 hover:border-white/20';
 
   const labelClass = `text-[10px] font-bold uppercase tracking-widest ${
     isLight ? 'text-slate-500' : 'text-white/40'
@@ -236,7 +236,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
           className={`flex-1 border rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-2 transition-all ${
             isLight
               ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:ring-slate-400/20'
-              : 'bg-black/40 border-white/10 text-white placeholder:text-white/30 focus:border-white/30 focus:ring-white/10'
+              : 'bg-[#121214] border-white/10 text-white placeholder:text-white/30 focus:border-white/30 focus:ring-white/10'
           }`}
         />
         <Button onClick={() => handleLookup()} isLoading={isLoading} className="w-full sm:w-auto">

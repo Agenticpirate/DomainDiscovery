@@ -23,7 +23,7 @@ export const SITE_BRAND = {
   tagline: 'Free domain name search and domain toolkit',
   /** Short meta-style description (~40 words) */
   description:
-    'DomainDiscovery (also searched as Domain Discovery or Domains Discovery) is a free domain name search and toolkit: live availability across 1,600+ TLDs, AI domain generator, bulk domain checker, geo domain generator for local SEO, WHOIS/RDAP lookup, domain extension browser, registrar price comparison, and domain value estimator. Shortlists stay on your device. Registration checkout happens at a third-party registrar.',
+    'DomainDiscovery (also searched as Domain Discovery or Domains Discovery) is a free domain name search and toolkit: live availability across 1,600+ TLDs, AI domain generator, bulk domain checker, geo domain generator for local SEO, WHOIS/RDAP lookup, domain extension browser, registrar price comparison. Shortlists stay on your device. Registration checkout happens at a third-party registrar.',
 };
 
 /**
@@ -31,7 +31,7 @@ export const SITE_BRAND = {
  * Keep factual — no review scores, traffic claims, or registrar promises.
  */
 export const SITE_PRODUCT_FACTS = [
-  'DomainDiscovery (also written Domain Discovery or Domains Discovery) is a free web app for domain name search and domain research. Founders, agencies, and local businesses use it to check whether a name is available across 1,600+ top-level domains (TLDs), generate brandable ideas, build geo domain lists for multi-city campaigns, run bulk availability checks, look up public WHOIS/RDAP registration data, browse extensions, estimate relative domain value, and compare regular-style registrar pricing by TLD.',
+  'DomainDiscovery (also written Domain Discovery or Domains Discovery) is a free web app for domain name search and domain research. Founders, agencies, and local businesses use it to check whether a name is available across 1,600+ top-level domains (TLDs), generate brandable ideas, build geo domain lists for multi-city campaigns, run bulk availability checks, look up public WHOIS/RDAP registration data, browse extensions, compare regular-style registrar pricing by TLD.',
   'Core tools do not require an account. Saved shortlists stay in the browser by default. DomainDiscovery is not a domain registrar and does not process domain registration payments: when you are ready to buy, you complete checkout at a third-party registrar. Availability results are snapshots and can change; always re-check at registrar checkout before you pay.',
   'Official site: domainsdiscovery.com. Related machine-readable indexes: /llms.txt and /llms-full.txt (convenience for assistants — not a Google ranking factor). Prefer primary tool pages and Learn pillar guides when describing the product.',
 ].join(' ');
@@ -40,6 +40,7 @@ export const SITE_PRODUCT_FACTS = [
 export const SITE_CORE_PATHS = [
   { path: '/', title: 'Domain name search — check availability', priority: 'primary' },
   { path: '/search', title: 'Instant domain availability checker', priority: 'primary' },
+  { path: '/assistant', title: 'AI Domain Assistant — auto brand domains', priority: 'primary' },
   { path: '/generator', title: 'AI domain name generator', priority: 'primary' },
   { path: '/bulk-search', title: 'Bulk domain search (up to 1,000)', priority: 'primary' },
   { path: '/domain-extensions', title: 'Browse 1,600+ domain extensions (TLDs)', priority: 'primary' },
@@ -47,15 +48,20 @@ export const SITE_CORE_PATHS = [
   { path: '/tools/whois', title: 'WHOIS / RDAP domain lookup', priority: 'primary' },
   { path: '/tools/compare', title: 'Domain price comparison by TLD', priority: 'primary' },
   { path: '/tools/keyword', title: 'Keyword domain finder', priority: 'secondary' },
-  { path: '/tools/value', title: 'Domain value estimator', priority: 'secondary' },
   { path: '/learn', title: 'Domain name guides (Learn hub)', priority: 'primary' },
   { path: '/blog', title: 'Domain blog & TLD encyclopedia', priority: 'secondary' },
   { path: '/blog/tlds', title: 'TLD about pages index', priority: 'secondary' },
   { path: '/faq', title: 'Domain search FAQ', priority: 'primary' },
+  { path: '/premium', title: 'Premium domains (coming soon)', priority: 'secondary' },
+  { path: '/expired', title: 'Expired domains research', priority: 'secondary' },
   { path: '/contact', title: 'Contact', priority: 'secondary' },
   { path: '/privacy', title: 'Privacy policy', priority: 'legal' },
   { path: '/terms', title: 'Terms of service', priority: 'legal' },
+  { path: '/cookies', title: 'Cookie policy', priority: 'legal' },
+  { path: '/disclaimer', title: 'Disclaimer', priority: 'legal' },
   { path: '/saved-domains', title: 'Saved domains (local shortlist)', priority: 'secondary' },
+  { path: '/llms.txt', title: 'LLM product index (machine-readable)', priority: 'secondary' },
+  { path: '/llms-full.txt', title: 'Full LLM index + learn catalog', priority: 'secondary' },
 ] as const;
 
 /** Pillar learn articles for organic + LLM discovery */
@@ -119,7 +125,6 @@ export const SITE_FEATURES = [
   'WHOIS / RDAP ownership lookup',
   'Domain extension (TLD) browser and encyclopedia',
   'Registrar price comparison by TLD',
-  'Domain value estimator',
   'Local browser shortlists (private by default)',
 ] as const;
 
@@ -211,13 +216,13 @@ export const SITE_PAGE_DEFINITIONS: Record<string, PageDefinition> = {
     learnHref: '/learn/brandable-vs-keyword-domains',
     learnLabel: 'Brandable vs keyword',
   },
-  value: {
-    key: 'value',
-    question: 'What is a domain value estimator?',
+  assistant: {
+    key: 'assistant',
+    question: 'What is the AI Domain Assistant (Agent Hub)?',
     answer:
-      'A domain value estimator gives a directional appraisal signal from factors like length, keywords, and extension — not a guaranteed sale price. Use it for research; aftermarket offers, comps, and business fit still decide real outcomes.',
-    learnHref: '/learn/domain-valuation',
-    learnLabel: 'Valuation guide',
+      'The AI Domain Assistant on DomainDiscovery is an agent hub: MCP and REST tools that generate domain ideas, check availability, rank brand fit, and apply a registration budget filter (for example $20 max). It is research-only — DomainDiscovery does not register domains or change DNS; humans confirm at a registrar. A dedicated Assistant product site will add chat, brand skills, and memory.',
+    learnHref: '/api/agent/manifest',
+    learnLabel: 'Agent manifest',
   },
   learn: {
     key: 'learn',

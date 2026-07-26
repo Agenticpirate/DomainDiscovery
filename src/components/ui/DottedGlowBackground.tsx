@@ -8,6 +8,11 @@ type Dot = {
   y: number;
   phase: number;
   speed: number;
+  /** Sharp twinkle phase (independent of soft pulse) */
+  twinkle: number;
+  twinkleSpeed: number;
+  /** Chance this dot does bright sparkles */
+  sparkle: boolean;
 };
 
 interface DottedGlowBackgroundProps {
@@ -23,20 +28,23 @@ interface DottedGlowBackgroundProps {
   speedMax?: number;
   /** Global speed multiplier */
   speedScale?: number;
+  /** Slight sparkle / twinkle on a subset of dots (default true) */
+  sparkle?: boolean;
 }
 
 /**
  * Aceternity-style dotted glow background — brand silver/slate palette.
- * Canvas dots with staggered opacity pulse + soft glow.
+ * Soft pulse + optional sharp sparkle so the field feels alive without washing text.
  */
 export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
   className = '',
   gap = 16,
   radius = 1.25,
-  opacity = 0.28,
+  opacity = 0.32,
   speedMin = 0.25,
   speedMax = 0.7,
   speedScale = 0.55,
+  sparkle = true,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -66,11 +74,17 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
       const startY = (h % gap) / 2;
       for (let y = startY; y < h; y += gap) {
         for (let x = startX; x < w; x += gap) {
+          // ~14% of dots get occasional bright sparkles
+          const isSparkler = sparkle && Math.random() < 0.14;
           dots.push({
             x,
             y,
             phase: Math.random() * Math.PI * 2,
             speed: (speedMin + Math.random() * (speedMax - speedMin)) * speedScale,
+            twinkle: Math.random() * Math.PI * 2,
+            // Slower twinkle rates → occasional flashes, not constant glitter
+            twinkleSpeed: (0.35 + Math.random() * 0.9) * speedScale,
+            sparkle: isSparkler,
           });
         }
       }
@@ -94,9 +108,9 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
     const ro = new ResizeObserver(() => resize());
     ro.observe(wrap);
 
-    // Brand palette — light: soft slate dots; dark: silver (unchanged feel)
-    const baseRgb = isLight ? '71, 85, 105' : '226, 232, 240';
-    const glowRgb = isLight ? '148, 163, 184' : '255, 255, 255';
+    // Brand palette — light: soft indigo/sky sparkles; dark: silver (unchanged)
+    const baseRgb = isLight ? '99, 102, 241' : '236, 240, 248';
+    const sparkRgb = isLight ? '14, 165, 233' : '255, 255, 255';
 
     let last = performance.now();
 
@@ -108,45 +122,39 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
       const w = canvas.clientWidth;
       const h = canvas.clientHeight;
       ctx.clearRect(0, 0, w, h);
+      // Keep canvas transparent — page black shows through
       ctx.globalAlpha = opacity;
-
-      // Very soft radial wash (low shine)
-      const grd = ctx.createRadialGradient(
-        w * 0.5,
-        h * 0.5,
-        Math.min(w, h) * 0.08,
-        w * 0.5,
-        h * 0.5,
-        Math.max(w, h) * 0.55
-      );
-      if (isLight) {
-        grd.addColorStop(0, 'rgba(148, 163, 184, 0.02)');
-        grd.addColorStop(1, 'rgba(255, 255, 255, 0)');
-      } else {
-        grd.addColorStop(0, 'rgba(255, 255, 255, 0.015)');
-        grd.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      }
-      ctx.fillStyle = grd;
-      ctx.fillRect(0, 0, w, h);
 
       const dots = dotsRef.current;
       for (let i = 0; i < dots.length; i++) {
         const d = dots[i];
         d.phase += d.speed * dt;
+        d.twinkle += d.twinkleSpeed * dt;
 
-        // Gentle pulse — low amplitude so it doesn’t overpower UI
-        const pulse = 0.22 + 0.45 * (0.5 + 0.5 * Math.sin(d.phase));
-        const glowPeak = Math.pow(0.5 + 0.5 * Math.sin(d.phase * 1.2 + 0.6), 4);
+        // Soft ambient pulse (always on)
+        const pulse = 0.42 + 0.48 * (0.5 + 0.5 * Math.sin(d.phase));
+        let a = pulse * (isLight ? 0.28 : 0.58);
+        let r = radius * (0.92 + pulse * 0.22);
 
-        const a = pulse * (isLight ? 0.18 : 0.38);
-        const r = radius * (0.85 + pulse * 0.25);
+        // Sharp sparkle — pow keeps peaks brief and bright
+        if (d.sparkle) {
+          const tw = Math.pow(Math.max(0, Math.sin(d.twinkle)), 10);
+          if (tw > 0.08) {
+            a = Math.min(1, a + tw * (isLight ? 0.45 : 0.75));
+            r = radius * (1.05 + tw * 0.85);
 
-        // Minimal glow — only rare soft peaks (softer in light)
-        if (glowPeak > 0.72) {
-          ctx.beginPath();
-          ctx.fillStyle = `rgba(${glowRgb}, ${glowPeak * (isLight ? 0.035 : 0.06)})`;
-          ctx.arc(d.x, d.y, r * 2.1, 0, Math.PI * 2);
-          ctx.fill();
+            // Soft glow halo for the flash only
+            const glow = tw * (isLight ? 3.5 : 5.5);
+            ctx.save();
+            ctx.shadowBlur = glow;
+            ctx.shadowColor = `rgba(${sparkRgb}, ${0.35 + tw * 0.55})`;
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(${sparkRgb}, ${0.55 + tw * 0.45})`;
+            ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+            continue;
+          }
         }
 
         ctx.beginPath();
@@ -166,15 +174,15 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
       cancelAnimationFrame(rafRef.current);
       ro.disconnect();
     };
-  }, [mounted, isLight, gap, radius, opacity, speedMin, speedMax, speedScale]);
+  }, [mounted, isLight, gap, radius, opacity, speedMin, speedMax, speedScale, sparkle]);
 
   return (
     <div
       ref={wrapRef}
-      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+      className={`pointer-events-none absolute inset-0 z-0 overflow-hidden ${className}`}
       aria-hidden
     >
-      <canvas ref={canvasRef} className="block h-full w-full" />
+      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 block h-full w-full" />
     </div>
   );
 };

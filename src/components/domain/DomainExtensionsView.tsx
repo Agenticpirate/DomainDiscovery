@@ -314,23 +314,33 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
 
   const hasLiveResults = extensions.some((e) => e.available !== null);
 
+  const plate = isLight ? '#ffffff' : '#0a0a0c';
+  const plateInset = isLight ? '#f8fafc' : '#121214';
+
   /** Compact preview sits directly under filters, always before Guides / education */
   const resultsPreview = (
     <div
       ref={previewRef}
       id="extensions-catalog"
-      className="scroll-mt-24 mb-5 sm:mb-6"
+      className="scroll-mt-20 sm:scroll-mt-24 mb-3 sm:mb-6"
     >
       <div
-        className={`shine-border rounded-2xl border p-3 sm:p-4 ${
+        className={`shine-border relative isolate overflow-hidden rounded-xl sm:rounded-2xl border p-2.5 sm:p-4 ${
           isLight
-            ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.03]'
-            : 'bg-white/[0.03] border-white/10'
+            ? 'border-slate-200 shadow-sm shadow-slate-900/[0.03]'
+            : 'border-white/10'
         }`}
+        style={{ backgroundColor: plate }}
       >
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-3">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-[inherit] z-0"
+          style={{ backgroundColor: plate }}
+        />
+        <div className="relative z-[1]">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-3">
           <div className="min-w-0">
-            <h2 className="text-[14px] sm:text-base font-black tracking-tight">
+            <h2 className="text-[13px] sm:text-base font-black tracking-tight">
               {isNameSearch
                 ? selectedCategory === 'All'
                   ? `Results for “${cleanKeyword}”`
@@ -339,14 +349,14 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                   ? 'Browse extensions'
                   : `Browse · ${selectedCategory}`}
             </h2>
-            <p className="text-[11px] sm:text-[12px] mt-0.5" style={{ color: 'var(--text-tertiary)' }}>
+            <p className="text-[10px] sm:text-[12px] mt-0.5" style={{ color: 'var(--text-tertiary)' }}>
               {filteredExtensions.length === 0
                 ? 'No extensions in this filter.'
                 : isNameSearch
                   ? `Showing ${visibleExtensions.length} of ${filteredExtensions.length}${
                       !isChecking && hasLiveResults ? ` · ${availableCount} available` : ''
                     }`
-                  : `Showing ${visibleExtensions.length} of ${filteredExtensions.length} · type a name to check availability`}
+                  : `Showing ${visibleExtensions.length} of ${filteredExtensions.length}`}
             </p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
@@ -354,7 +364,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
               <button
                 type="button"
                 onClick={() => pickCategory('All')}
-                className={`text-[11px] sm:text-[12px] font-semibold ${
+                className={`text-[10px] sm:text-[12px] font-semibold ${
                   isLight ? 'text-slate-600 hover:text-black' : 'text-white/55 hover:text-white/85'
                 }`}
               >
@@ -364,7 +374,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
             {isNameSearch && cleanKeyword && (
               <Link
                 href={`/search?q=${encodeURIComponent(cleanKeyword)}`}
-                className={`text-[11px] sm:text-[12px] font-bold ${
+                className={`text-[10px] sm:text-[12px] font-bold ${
                   isLight ? 'text-slate-900' : 'text-white/85'
                 }`}
               >
@@ -432,8 +442,9 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                   className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 text-[12px] sm:text-[13px] font-semibold border transition-all ${
                     isLight
                       ? 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
-                      : 'bg-white/[0.04] text-white/70 border-white/12 hover:border-white/25'
+                      : 'text-white/70 border-white/12 hover:border-white/25'
                   }`}
+                  style={isLight ? undefined : { backgroundColor: '#121214' }}
                 >
                   Show all {filteredExtensions.length}
                 </button>
@@ -448,8 +459,9 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                   className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 text-[12px] sm:text-[13px] font-semibold border transition-all ${
                     isLight
                       ? 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
-                      : 'bg-white/[0.04] text-white/70 border-white/12 hover:border-white/25'
+                      : 'text-white/70 border-white/12 hover:border-white/25'
                   }`}
+                  style={isLight ? undefined : { backgroundColor: '#121214' }}
                 >
                   Show less
                 </button>
@@ -466,27 +478,35 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
             )}
           </>
         )}
+        </div>
       </div>
     </div>
   );
 
   return (
-    <div className="w-full">
-      {/* Control panel — primary “search all extensions” */}
+    <div className="w-full min-w-0 max-w-full">
+      {/* Control panel — solid plate (dots cannot paint through) */}
       <div
         id="extensions-search"
-        className={`shine-border rounded-2xl border p-3 sm:p-4 mb-5 sm:mb-6 scroll-mt-24 ${
+        className={`shine-border relative isolate overflow-hidden rounded-xl sm:rounded-2xl border p-2.5 sm:p-4 mb-3 sm:mb-6 scroll-mt-20 sm:scroll-mt-24 w-full min-w-0 max-w-full ${
           isLight
-            ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.04]'
-            : 'bg-white/[0.03] border-white/10'
+            ? 'border-slate-200 shadow-sm shadow-slate-900/[0.04]'
+            : 'border-white/10'
         }`}
+        style={{ backgroundColor: plate }}
       >
-        <div className="flex items-center justify-between gap-2 mb-2.5 sm:mb-3">
-          <div>
-            <p className="text-[12px] sm:text-[13px] font-bold">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-[inherit] z-0"
+          style={{ backgroundColor: plate }}
+        />
+        <div className="relative z-[1]">
+        <div className="flex items-center justify-between gap-2 mb-2 sm:mb-3">
+          <div className="min-w-0">
+            <p className="text-[12px] sm:text-[13px] font-bold leading-tight">
               Search all {totalTlds.toLocaleString()} extensions
             </p>
-            <p className="text-[10px] sm:text-[11px]" style={{ color: 'var(--text-tertiary)' }}>
+            <p className="hidden sm:block text-[11px] mt-0.5" style={{ color: 'var(--text-tertiary)' }}>
               Type a brand name to check every TLD live — filter by category anytime
             </p>
           </div>
@@ -494,16 +514,17 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
             className={`hidden sm:inline-flex text-[10px] font-bold uppercase tracking-wide px-2 py-1 rounded-full border ${
               isLight
                 ? 'bg-slate-50 text-slate-600 border-slate-200'
-                : 'bg-white/[0.04] text-white/55 border-white/10'
+                : 'text-white/55 border-white/10'
             }`}
+            style={isLight ? undefined : { backgroundColor: plateInset }}
           >
             All TLDs
           </span>
         </div>
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
           <div className="relative flex-1 min-w-0">
             <div
-              className={`absolute left-3.5 top-1/2 -translate-y-1/2 ${
+              className={`absolute left-3 top-1/2 -translate-y-1/2 sm:left-3.5 ${
                 isLight ? 'text-slate-400' : 'text-white/35'
               }`}
             >
@@ -518,19 +539,20 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                   window.location.href = `/search?q=${encodeURIComponent(cleanKeyword)}`;
                 }
               }}
-              placeholder={`Search all ${totalTlds.toLocaleString()} extensions (e.g. nova, pulse, studio)…`}
-              className={`w-full rounded-xl pl-10 pr-10 py-3 sm:py-3.5 text-[13px] sm:text-[15px] font-medium outline-none transition-shadow ${
+              placeholder={`Search all ${totalTlds.toLocaleString()} TLDs…`}
+              className={`w-full rounded-xl pl-9 sm:pl-10 pr-9 sm:pr-10 py-2.5 sm:py-3.5 text-[13px] sm:text-[15px] font-medium outline-none transition-shadow ${
                 isLight
                   ? 'bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-200'
-                  : 'bg-black/30 border border-white/10 text-white placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-white/10'
+                  : 'border border-white/10 text-white placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-white/10'
               }`}
+              style={{ backgroundColor: plateInset }}
               aria-label="Search keyword across all domain extensions"
             />
             {localSearch && (
               <button
                 type="button"
                 onClick={() => setLocalSearch('')}
-                className={`absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded-md ${
+                className={`absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded-md ${
                   isLight ? 'text-slate-400 hover:text-slate-700' : 'text-white/40 hover:text-white/80'
                 }`}
                 aria-label="Clear search"
@@ -542,20 +564,21 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
             )}
           </div>
 
+          {/* Compact on mobile — avoid full-width blank white bar look */}
           <Link
             href={cleanKeyword ? `/search?q=${encodeURIComponent(cleanKeyword)}` : '/search'}
-            className={`group shrink-0 inline-flex items-center justify-center gap-2 rounded-full px-4 sm:px-5 py-3 sm:py-3.5 text-[12px] sm:text-[13px] font-bold transition-all ${
+            className={`group shrink-0 inline-flex w-full sm:w-auto items-center justify-center gap-1.5 rounded-full px-3.5 py-2.5 sm:px-5 sm:py-3.5 text-[11px] sm:text-[13px] font-bold transition-all ${
               isLight
                 ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/15'
                 : 'bg-white text-black hover:bg-white/90 shadow-lg shadow-black/30'
             }`}
           >
-            <Icons.Search className="w-4 h-4" />
+            <Icons.Search className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span className="whitespace-nowrap">
-              {cleanKeyword ? 'Open full search' : 'Search all extensions'}
+              {cleanKeyword ? 'Full search' : 'Search all'}
             </span>
             <svg
-              className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+              className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -566,14 +589,15 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
         </div>
 
         {/* Status chips — scoped to active category filter */}
-        <div className="flex items-center gap-2 shrink-0 flex-wrap mt-2.5 sm:mt-3">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 flex-wrap mt-2 sm:mt-3">
           {isChecking && (
             <span
-              className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1.5 rounded-full border ${
+              className={`inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full border ${
                 isLight
                   ? 'bg-slate-50 text-slate-600 border-slate-200'
-                  : 'bg-white/[0.04] text-white/60 border-white/10'
+                  : 'text-white/60 border-white/10'
               }`}
+              style={isLight ? undefined : { backgroundColor: plateInset }}
             >
               <span
                 className={`h-1.5 w-1.5 rounded-full animate-pulse ${
@@ -597,21 +621,23 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                 {selectedCategory !== 'All' ? ` in ${selectedCategory}` : ''}
               </span>
               <span
-                className={`text-[11px] font-medium px-2.5 py-1.5 rounded-full border ${
+                className={`text-[10px] sm:text-[11px] font-medium px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full border ${
                   isLight
                     ? 'bg-white text-slate-500 border-slate-200'
-                    : 'bg-white/[0.04] text-white/45 border-white/10'
+                    : 'text-white/45 border-white/10'
                 }`}
+                style={isLight ? undefined : { backgroundColor: plateInset }}
               >
                 {takenCount} taken
               </span>
               {selectedCategory !== 'All' && (
                 <span
-                  className={`text-[11px] font-medium px-2.5 py-1.5 rounded-full border ${
+                  className={`text-[10px] sm:text-[11px] font-medium px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full border ${
                     isLight
                       ? 'bg-slate-50 text-slate-600 border-slate-200'
-                      : 'bg-white/[0.04] text-white/45 border-white/10'
+                      : 'text-white/45 border-white/10'
                   }`}
+                  style={isLight ? undefined : { backgroundColor: plateInset }}
                 >
                   {filteredExtensions.length} in filter
                 </span>
@@ -620,25 +646,71 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
           )}
           {!activeQuery && (
             <span
-              className={`text-[11px] font-medium px-2.5 py-1.5 rounded-full border ${
+              className={`text-[10px] sm:text-[11px] font-medium px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full border ${
                 isLight
                   ? 'bg-slate-50 text-slate-500 border-slate-200'
-                  : 'bg-white/[0.04] text-white/45 border-white/10'
+                  : 'text-white/45 border-white/10'
               }`}
+              style={isLight ? undefined : { backgroundColor: plateInset }}
             >
-              {catalogCount.toLocaleString()} listings · type a name to check all
+              <span className="sm:hidden">{catalogCount.toLocaleString()} listings</span>
+              <span className="hidden sm:inline">
+                {catalogCount.toLocaleString()} listings · type a name to check all
+              </span>
             </span>
           )}
         </div>
 
-        {/* Category filters — work for browse AND full name search */}
+        {/* Category filters — compact enhanced strip on mobile; wrap grid on desktop */}
         <div
-          className="mt-3 pt-3 border-t"
+          className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t"
           style={{ borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)' }}
         >
-          <div className="flex items-center justify-between gap-2 mb-2">
+          {/* Mobile header — tight, pill active state */}
+          <div className="flex sm:hidden items-center justify-between gap-2 mb-1.5 min-w-0">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <span
+                className="text-[9px] font-bold uppercase tracking-[0.08em] shrink-0"
+                style={{ color: 'var(--text-tertiary)' }}
+              >
+                Filter
+              </span>
+              {selectedCategory !== 'All' && (
+                <span
+                  className={`inline-flex items-center max-w-[9.5rem] truncate rounded-full px-1.5 py-0.5 text-[9px] font-bold border ${
+                    isLight
+                      ? 'bg-slate-900 text-white border-slate-900'
+                      : 'bg-white text-black border-white'
+                  }`}
+                >
+                  {selectedCategory}
+                </span>
+              )}
+            </div>
+            {selectedCategory !== 'All' ? (
+              <button
+                type="button"
+                onClick={() => pickCategory('All')}
+                className={`shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold border ${
+                  isLight
+                    ? 'bg-white text-slate-600 border-slate-200'
+                    : 'text-white/65 border-white/12'
+                }`}
+                style={isLight ? undefined : { backgroundColor: plateInset }}
+              >
+                Clear
+              </button>
+            ) : (
+              <span className="text-[9px] font-medium tabular-nums" style={{ color: 'var(--text-muted)' }}>
+                swipe →
+              </span>
+            )}
+          </div>
+
+          {/* Desktop header */}
+          <div className="hidden sm:flex items-center justify-between gap-2 mb-2">
             <span
-              className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wide"
+              className="text-[11px] font-bold uppercase tracking-wide"
               style={{ color: 'var(--text-tertiary)' }}
             >
               Categories
@@ -652,7 +724,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
               <button
                 type="button"
                 onClick={() => pickCategory('All')}
-                className={`text-[10px] sm:text-[11px] font-semibold ${
+                className={`text-[11px] font-semibold ${
                   isLight ? 'text-slate-600 hover:text-slate-900' : 'text-white/50 hover:text-white/80'
                 }`}
               >
@@ -660,62 +732,89 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
               </button>
             )}
           </div>
-          <div className="flex flex-nowrap gap-1.5 overflow-x-auto pb-0.5 scrollbar-hide sm:flex-wrap sm:overflow-visible">
-            {categories.map((cat) => {
-              const active = selectedCategory === cat;
-              const baseCount =
-                cat === 'All'
-                  ? isNameSearch
-                    ? totalTlds
-                    : catalogCount
-                  : isNameSearch
-                    ? UNIQUE_CATEGORY_SIZE.get(cat) || CATEGORY_SIZE.get(cat) || 0
-                    : CATEGORY_SIZE.get(cat) || 0;
 
-              // During live name search show available count in that category
-              const liveAvail = hasLiveResults && isNameSearch ? availableByCategory.get(cat) : undefined;
-              const countLabel =
-                liveAvail !== undefined ? String(liveAvail) : String(baseCount);
+          {/* Chip strip */}
+          <div className="relative min-w-0">
+            {/* Mobile right-edge fade — scroll affordance */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-7 sm:hidden"
+              style={{
+                background: isLight
+                  ? 'linear-gradient(to right, transparent, #ffffff)'
+                  : `linear-gradient(to right, transparent, ${plate})`,
+              }}
+            />
+            <div
+              className="flex flex-nowrap gap-1 overflow-x-auto overscroll-x-contain pb-0.5 -mx-0.5 px-0.5 snap-x snap-mandatory scrollbar-hide sm:flex-wrap sm:overflow-visible sm:gap-1.5 sm:snap-none sm:mx-0 sm:px-0"
+              role="listbox"
+              aria-label="Extension categories"
+            >
+              {categories.map((cat) => {
+                const active = selectedCategory === cat;
+                const baseCount =
+                  cat === 'All'
+                    ? isNameSearch
+                      ? totalTlds
+                      : catalogCount
+                    : isNameSearch
+                      ? UNIQUE_CATEGORY_SIZE.get(cat) || CATEGORY_SIZE.get(cat) || 0
+                      : CATEGORY_SIZE.get(cat) || 0;
 
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => pickCategory(cat)}
-                  aria-pressed={active}
-                  className={`shrink-0 inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-[10px] sm:text-[11px] font-semibold whitespace-nowrap transition-all border ${
-                    active
-                      ? isLight
-                        ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                        : 'bg-white text-black border-white'
-                      : isLight
-                        ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                        : 'bg-white/[0.03] text-white/55 border-white/10 hover:border-white/20 hover:text-white/80'
-                  }`}
-                >
-                  {cat}
-                  <span
-                    className={`text-[9px] font-bold tabular-nums ${
+                // During live name search show available count in that category
+                const liveAvail = hasLiveResults && isNameSearch ? availableByCategory.get(cat) : undefined;
+                const countNum = liveAvail !== undefined ? liveAvail : baseCount;
+                const countLabel =
+                  countNum >= 1000 ? countNum.toLocaleString() : String(countNum);
+
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    role="option"
+                    aria-selected={active}
+                    onClick={() => pickCategory(cat)}
+                    aria-pressed={active}
+                    className={`shrink-0 snap-start inline-flex items-center gap-1 sm:gap-1 rounded-full whitespace-nowrap transition-all border ${
                       active
                         ? isLight
-                          ? 'text-white/60'
-                          : 'text-black/50'
+                          ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                          : 'bg-white text-black border-white shadow-[0_2px_10px_rgba(0,0,0,0.35)]'
                         : isLight
-                          ? 'text-slate-400'
-                          : 'text-white/30'
-                    }`}
-                    title={
-                      liveAvail !== undefined
-                        ? `Available in ${cat}`
-                        : `Extensions in ${cat}`
+                          ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                          : 'text-white/60 border-white/10 hover:border-white/20 hover:text-white/85'
+                    } px-2 py-1 text-[10px] font-semibold sm:px-2.5 sm:py-1.5 sm:text-[11px]`}
+                    style={
+                      active || isLight
+                        ? undefined
+                        : { backgroundColor: plateInset }
                     }
                   >
-                    {countLabel}
-                  </span>
-                </button>
-              );
-            })}
+                    <span className="leading-none">{cat === 'All' ? 'All' : cat}</span>
+                    <span
+                      className={`inline-flex items-center justify-center min-w-[1.1rem] rounded-full px-1 py-px text-[8px] sm:text-[9px] font-bold tabular-nums leading-none ${
+                        active
+                          ? isLight
+                            ? 'bg-white/15 text-white/75'
+                            : 'bg-black/10 text-black/55'
+                          : isLight
+                            ? 'bg-slate-100 text-slate-500'
+                            : 'bg-white/[0.06] text-white/40'
+                      }`}
+                      title={
+                        liveAvail !== undefined
+                          ? `Available in ${cat}`
+                          : `Extensions in ${cat}`
+                      }
+                    >
+                      {countLabel}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
+        </div>
         </div>
       </div>
 
@@ -782,17 +881,24 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
       onClick={handleClick}
       disabled={!canClick}
       title={showFullDomain && cleanKeyword ? fullDomain : extension.tld}
-      className={`shine-border group relative flex flex-col p-2.5 sm:p-3 rounded-xl border text-left transition-all duration-200 ${
+      className={`shine-border group relative isolate flex flex-col p-2 sm:p-3 rounded-xl border text-left transition-all duration-200 ${
         canClick ? 'cursor-pointer' : 'cursor-default'
       } ${
         isLight
-          ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.03]'
-          : 'bg-white/[0.03] border-white/10 hover:bg-white/[0.05]'
+          ? 'border-slate-200 shadow-sm shadow-slate-900/[0.03] hover:shadow-md'
+          : 'border-white/10 hover:border-white/16'
       }`}
+      style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
     >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-[inherit] z-0"
+        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+      />
+      <div className="relative z-[1] flex flex-col flex-1">
       <div className="flex items-start justify-between gap-1.5 mb-1">
         <div
-          className={`font-mono text-[12px] sm:text-[14px] font-black tracking-tight leading-snug break-all ${
+          className={`font-mono text-[11px] sm:text-[14px] font-black tracking-tight leading-snug break-all ${
             isLight ? 'text-slate-900' : 'text-white'
           }`}
         >
@@ -829,6 +935,7 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
         {showStatus && statusLabel && (
           <span className={`text-[9px] sm:text-[10px] font-semibold ${statusText}`}>{statusLabel}</span>
         )}
+      </div>
       </div>
     </button>
   );
