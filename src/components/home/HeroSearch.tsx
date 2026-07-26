@@ -93,21 +93,101 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
   // Fewer chips on mobile for a cleaner row
   const chips = popularSearches.slice(0, 4);
 
+  const fieldShell = embedded
+    ? isLight
+      ? 'bg-slate-50 border border-slate-200 focus-within:border-slate-300'
+      : 'bg-black/30 border border-white/10 focus-within:border-white/25'
+    : isLight
+      ? 'bg-white border border-slate-200 shadow-sm focus-within:border-slate-300 focus-within:shadow-md'
+      : 'bg-white/[0.04] border border-white/10 backdrop-blur-xl focus-within:border-white/20';
+
+  const aiBtnClass = `inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-[12px] sm:text-[12px] font-bold transition-all ${
+    aiMode
+      ? isLight
+        ? 'bg-slate-900 text-white'
+        : 'bg-white text-black'
+      : isLight
+        ? 'bg-slate-100 text-slate-600 border border-slate-200 hover:bg-slate-200'
+        : 'bg-white/[0.06] text-white/65 border border-white/10 hover:bg-white/10'
+  }`;
+
+  const searchBtnClass =
+    'btn-brand inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-[12px] sm:text-[13px] font-bold';
+
+  const aiIcon = (
+    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.8}
+        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+      />
+    </svg>
+  );
+
+  const searchArrow = (
+    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+    </svg>
+  );
+
   return (
     <div className="w-full max-w-full sm:max-w-[46rem] mx-auto">
+      {/* —— Mobile: field alone, then AI + Search below —— */}
+      <div className="sm:hidden w-full space-y-2">
+        <div className={`flex items-center gap-2 rounded-xl p-1.5 transition-all ${fieldShell}`}>
+          <div
+            className={`ml-1.5 shrink-0 flex items-center justify-center w-8 h-8 ${
+              isLight ? 'text-slate-400' : 'text-white/35'
+            }`}
+          >
+            <Icons.Search />
+          </div>
+          <input
+            ref={inputRef}
+            value={query}
+            onChange={(e) => handleChange(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                submit();
+              }
+            }}
+            placeholder={aiMode ? 'Describe a brand idea…' : 'Search domain names...'}
+            autoFocus
+            className={`flex-1 min-w-0 bg-transparent border-none outline-none text-[15px] font-medium py-2.5 pr-2 ${
+              isLight
+                ? 'text-slate-900 placeholder:text-slate-400'
+                : 'text-white placeholder:text-white/35'
+            }`}
+            aria-label="Search domain names"
+          />
+        </div>
+
+        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] gap-2">
+          <button
+            type="button"
+            onClick={() => setAiMode((v) => !v)}
+            className={`${aiBtnClass} w-full`}
+            title="Toggle AI generator mode"
+            aria-pressed={aiMode}
+          >
+            {aiIcon}
+            <span>AI</span>
+          </button>
+          <button type="button" onClick={() => submit()} className={`${searchBtnClass} w-full`}>
+            <span>{aiMode ? 'Generate' : 'Search'}</span>
+            {searchArrow}
+          </button>
+        </div>
+      </div>
+
+      {/* —— Desktop / tablet: field + AI + Search on one row —— */}
       <div
-        className={`flex items-center gap-1.5 sm:gap-2 rounded-xl sm:rounded-2xl p-1 sm:p-1.5 transition-all ${
-          embedded
-            ? isLight
-              ? 'bg-slate-50 border border-slate-200 focus-within:border-slate-300'
-              : 'bg-black/30 border border-white/10 focus-within:border-white/25'
-            : isLight
-              ? 'bg-white border border-slate-200 shadow-sm focus-within:border-slate-300 focus-within:shadow-md'
-              : 'bg-white/[0.04] border border-white/10 backdrop-blur-xl focus-within:border-white/20'
-        }`}
+        className={`hidden sm:flex items-center gap-2 rounded-2xl p-1.5 transition-all ${fieldShell}`}
       >
         <div
-          className={`hidden sm:flex ml-2 shrink-0 items-center justify-center w-8 h-8 ${
+          className={`ml-2 shrink-0 flex items-center justify-center w-8 h-8 ${
             isLight ? 'text-slate-400' : 'text-white/35'
           }`}
         >
@@ -115,7 +195,6 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
         </div>
 
         <input
-          ref={inputRef}
           value={query}
           onChange={(e) => handleChange(e.target.value)}
           onKeyDown={(e) => {
@@ -125,8 +204,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
             }
           }}
           placeholder={aiMode ? 'Describe a brand idea…' : 'Search domain names...'}
-          autoFocus
-          className={`flex-1 min-w-0 bg-transparent border-none outline-none text-[14px] sm:text-[15px] font-medium py-2.5 sm:py-2.5 pl-3 sm:pl-0 pr-1 ${
+          className={`flex-1 min-w-0 bg-transparent border-none outline-none text-[15px] font-medium py-2.5 pr-1 ${
             isLight
               ? 'text-slate-900 placeholder:text-slate-400'
               : 'text-white placeholder:text-white/35'
@@ -137,37 +215,30 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
         <button
           type="button"
           onClick={() => setAiMode((v) => !v)}
-          className={`shrink-0 inline-flex items-center gap-1 rounded-lg px-2 sm:px-2.5 py-2 sm:py-2 text-[11px] sm:text-[12px] font-bold transition-all ${
-            aiMode
-              ? isLight
-                ? 'bg-slate-900 text-white'
-                : 'bg-white text-black'
-              : isLight
-                ? 'bg-slate-100 text-slate-600 border border-slate-200 hover:bg-slate-200'
-                : 'bg-white/[0.06] text-white/65 border border-white/10 hover:bg-white/10'
-          }`}
+          className={`${aiBtnClass} shrink-0 px-2.5 py-2`}
           title="Toggle AI generator mode"
+          aria-pressed={aiMode}
         >
-          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-          </svg>
+          {aiIcon}
           <span>AI</span>
         </button>
 
         <button
           type="button"
           onClick={() => submit()}
-          className="btn-brand shrink-0 inline-flex items-center gap-1 rounded-lg sm:rounded-xl px-3 sm:px-5 py-2 sm:py-2.5 text-[12px] sm:text-[13px] font-bold"
+          className={`${searchBtnClass} shrink-0 px-5 py-2.5`}
         >
           <span>{aiMode ? 'Generate' : 'Search'}</span>
-          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
+          {searchArrow}
         </button>
       </div>
 
       <div className="mt-2 sm:mt-2.5 flex flex-nowrap sm:flex-wrap items-center justify-center gap-1.5 overflow-x-auto scrollbar-none">
-        <span className={`shrink-0 text-[10px] sm:text-[11px] font-medium ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+        <span
+          className={`shrink-0 text-[10px] sm:text-[11px] font-medium ${
+            isLight ? 'text-slate-500' : 'text-white/40'
+          }`}
+        >
           Try:
         </span>
         {chips.map((term) => (
@@ -180,7 +251,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
               lastRoutedRef.current = term;
               onSearch(term);
             }}
-            className={`shrink-0 rounded-full px-2 sm:px-2.5 py-1 sm:py-1 text-[10px] sm:text-[11px] font-semibold transition-all ${
+            className={`shrink-0 rounded-full px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold transition-all ${
               isLight
                 ? 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
                 : 'bg-white/[0.04] border border-white/10 text-white/60 hover:border-white/20 hover:text-white/80'
