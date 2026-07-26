@@ -9,7 +9,6 @@ import { StatsBar } from '@/components/home/StatsBar';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { PremiumFaqGrid } from '@/components/sections/PremiumFaqGrid';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
-import { SectionAmbient } from '@/components/ui/SectionAmbient';
 
 export const HomePageContent: React.FC = () => {
   const { theme } = useTheme();
@@ -327,98 +326,97 @@ export const HomePageContent: React.FC = () => {
         Desktop order: Tools → Popular Extensions → Why
       */}
       <div className="flex flex-col">
-      {/* Tools — full-bleed ambient field (edge-to-edge), content constrained */}
-      <SectionAmbient
-        intensity="dots"
-        solidBase={false}
+      {/* Tools — solid background only (no ambient bubbles/dots) */}
+      <section
         className="order-1 w-full !mb-5 sm:!mb-8 py-6 sm:py-10"
-        contentClassName="section-shell !mb-0"
+        style={{ backgroundColor: 'var(--bg-main)' }}
       >
-        <div className="relative z-[1] text-center mb-1.5 sm:mb-3.5">
-          <h2 className="section-title">Domain tools for search, geo &amp; WHOIS</h2>
-          <p className="hidden sm:block section-sub">
-            Instant search, AI names, bulk checks, geo domains, extensions, pricing, and RDAP lookup
-          </p>
-        </div>
+        <div className="section-shell !mb-0">
+          <div className="relative z-[1] text-center mb-1.5 sm:mb-3.5">
+            <h2 className="section-title">Domain tools for search, geo &amp; WHOIS</h2>
+            <p className="hidden sm:block section-sub">
+              Instant search, AI names, bulk checks, geo domains, extensions, pricing, and RDAP lookup
+            </p>
+          </div>
 
-        <div className="relative z-[1] grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 sm:gap-2.5">
-          {tools.map((tool, i) => (
-            <Link
-              key={tool.title}
-              href={tool.href}
-              className={`tool-card-enter group relative rounded-lg sm:rounded-xl px-2 py-2 sm:p-3.5 transition-all duration-300 items-center gap-1.5 sm:gap-2.5 min-h-0 sm:min-h-[4.75rem] overflow-hidden ${
-                tool.hideOnMobile ? 'hidden lg:flex' : 'flex'
-              } ${toolCard}`}
-              style={{ animationDelay: `${i * 0.04}s` }}
-            >
-              {/* Solid underlay blocks ambient dots from showing through the card */}
-              <div
-                aria-hidden
-                className={`pointer-events-none absolute inset-0 rounded-[inherit] ${
-                  isLight ? 'bg-white' : 'bg-[#0c0c0e]'
-                }`}
-              />
-              <div
-                className={`pointer-events-none absolute inset-0 z-[1] opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:block ${
-                  isLight
-                    ? 'bg-gradient-to-br from-slate-100/90 via-transparent to-transparent'
-                    : 'bg-gradient-to-br from-white/[0.05] via-transparent to-transparent'
-                }`}
-              />
-
-              <div
-                className={`relative z-[2] flex h-7 w-7 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl border transition-all duration-300 ${toolIcon}`}
+          <div className="relative z-[1] grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 sm:gap-2.5">
+            {tools.map((tool, i) => (
+              <Link
+                key={tool.title}
+                href={tool.href}
+                className={`tool-card-enter group relative rounded-lg sm:rounded-xl px-2 py-2 sm:p-3.5 transition-all duration-300 items-center gap-1.5 sm:gap-2.5 min-h-0 sm:min-h-[4.75rem] overflow-hidden ${
+                  tool.hideOnMobile ? 'hidden lg:flex' : 'flex'
+                } ${toolCard}`}
+                style={{ animationDelay: `${i * 0.04}s` }}
               >
-                {tool.icon}
-              </div>
+                <div
+                  aria-hidden
+                  className={`pointer-events-none absolute inset-0 rounded-[inherit] ${
+                    isLight ? 'bg-white' : 'bg-[#0c0c0e]'
+                  }`}
+                />
+                <div
+                  className={`pointer-events-none absolute inset-0 z-[1] opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:block ${
+                    isLight
+                      ? 'bg-gradient-to-br from-slate-100/90 via-transparent to-transparent'
+                      : 'bg-gradient-to-br from-white/[0.05] via-transparent to-transparent'
+                  }`}
+                />
 
-              <div className="relative z-[2] min-w-0 flex-1">
-                <div className="flex items-center gap-1">
-                  <h3 className="text-[10px] sm:text-[13px] font-bold leading-tight line-clamp-2 sm:truncate">
-                    <span className="sm:hidden">
-                      {tool.title
-                        .replace(/^Domain /, '')
-                        .replace(/ Domains?/g, '')
-                        .replace(' Finder', '')}
-                    </span>
-                    <span className="hidden sm:inline">{tool.title}</span>
-                  </h3>
-                  {tool.badge && (
-                    <span
-                      className={`hidden sm:inline text-[8px] font-bold px-1.5 py-0.5 rounded-full shrink-0 border ${
-                        isLight
-                          ? 'bg-slate-100 text-slate-600 border-slate-200'
-                          : 'bg-white/[0.06] text-white/60 border-white/10'
-                      }`}
-                    >
-                      {tool.badge}
-                    </span>
-                  )}
-                </div>
-                <p
-                  className="hidden sm:block text-[11px] leading-snug mt-0.5 line-clamp-2"
-                  style={{ color: 'var(--text-tertiary)' }}
+                <div
+                  className={`relative z-[2] flex h-7 w-7 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl border transition-all duration-300 ${toolIcon}`}
                 >
-                  {tool.description}
-                </p>
-              </div>
+                  {tool.icon}
+                </div>
 
-              <svg
-                className={`relative z-[2] w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 transition-all duration-300 group-hover:translate-x-0.5 ${
-                  isLight
-                    ? 'text-slate-300 group-hover:text-slate-600'
-                    : 'text-white/25 group-hover:text-white/60'
-                }`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          ))}
+                <div className="relative z-[2] min-w-0 flex-1">
+                  <div className="flex items-center gap-1">
+                    <h3 className="text-[10px] sm:text-[13px] font-bold leading-tight line-clamp-2 sm:truncate">
+                      <span className="sm:hidden">
+                        {tool.title
+                          .replace(/^Domain /, '')
+                          .replace(/ Domains?/g, '')
+                          .replace(' Finder', '')}
+                      </span>
+                      <span className="hidden sm:inline">{tool.title}</span>
+                    </h3>
+                    {tool.badge && (
+                      <span
+                        className={`hidden sm:inline text-[8px] font-bold px-1.5 py-0.5 rounded-full shrink-0 border ${
+                          isLight
+                            ? 'bg-slate-100 text-slate-600 border-slate-200'
+                            : 'bg-white/[0.06] text-white/60 border-white/10'
+                        }`}
+                      >
+                        {tool.badge}
+                      </span>
+                    )}
+                  </div>
+                  <p
+                    className="hidden sm:block text-[11px] leading-snug mt-0.5 line-clamp-2"
+                    style={{ color: 'var(--text-tertiary)' }}
+                  >
+                    {tool.description}
+                  </p>
+                </div>
+
+                <svg
+                  className={`relative z-[2] w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 transition-all duration-300 group-hover:translate-x-0.5 ${
+                    isLight
+                      ? 'text-slate-300 group-hover:text-slate-600'
+                      : 'text-white/25 group-hover:text-white/60'
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            ))}
+          </div>
         </div>
-      </SectionAmbient>
+      </section>
 
       {/* Popular Extensions — last on mobile (after Why); mid-page on desktop */}
       <section className="section-shell order-3 sm:order-2 !mt-2 sm:!mt-0 !mb-5 sm:!mb-8">
