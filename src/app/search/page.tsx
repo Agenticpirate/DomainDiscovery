@@ -502,46 +502,49 @@ function SearchPageContent() {
               />
             </div>
 
-            {/* Tabs scroll inside only — never expand page width */}
-            <div className="mt-1.5 w-full max-w-full min-w-0 overflow-x-auto overscroll-x-contain scrollbar-hide">
-              <div className="flex items-center gap-1 sm:gap-1.5 w-max max-w-none pr-1">
-              {[
-                { href: '/search', label: 'Search', active: true },
-                { href: '/domain-extensions', label: 'Extensions', active: false },
-                { href: '/generator', label: 'Generator', active: false },
-                { href: '/premium', label: 'Aftermarket', active: false },
-                { href: '/tools', label: 'Research', active: false },
-              ].map((tab) =>
-                tab.active ? (
-                  <span
-                    key={tab.label}
-                    className={`shrink-0 inline-flex items-center gap-1 px-2 py-1 text-[11px] font-bold border-b-2 ${
-                      isLight
-                        ? 'text-slate-900 border-slate-900'
-                        : 'text-white border-white'
-                    }`}
-                  >
-                    {tab.label}
-                  </span>
-                ) : (
-                  <Link
-                    key={tab.label}
-                    href={tab.href}
-                    className={`shrink-0 inline-flex items-center px-2 py-1 text-[11px] font-semibold border-b-2 border-transparent ${
-                      isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/40 hover:text-white/75'
-                    }`}
-                  >
-                    {tab.label}
-                  </Link>
-                )
-              )}
-              <div className="flex-1 min-w-[0.5rem]" />
+            {/* Tabs: scroll row + Clear fixed so labels never collide */}
+            <div className="mt-1.5 flex items-center gap-1.5 w-full max-w-full min-w-0">
+              <div className="min-w-0 flex-1 overflow-x-auto overscroll-x-contain scrollbar-hide">
+                <div className="flex items-center gap-0.5 sm:gap-1 w-max pr-1">
+                  {[
+                    { href: '/search', label: 'Search', active: true },
+                    { href: '/domain-extensions', label: 'Extensions', active: false },
+                    { href: '/generator', label: 'Generator', active: false },
+                    { href: '/premium', label: 'Aftermarket', active: false },
+                    { href: '/tools', label: 'Research', active: false },
+                  ].map((tab) =>
+                    tab.active ? (
+                      <span
+                        key={tab.label}
+                        className={`shrink-0 inline-flex items-center px-2 py-1 text-[11px] font-bold border-b-2 ${
+                          isLight
+                            ? 'text-slate-900 border-slate-900'
+                            : 'text-white border-white'
+                        }`}
+                      >
+                        {tab.label}
+                      </span>
+                    ) : (
+                      <Link
+                        key={tab.label}
+                        href={tab.href}
+                        className={`shrink-0 inline-flex items-center px-2 py-1 text-[11px] font-semibold border-b-2 border-transparent ${
+                          isLight
+                            ? 'text-slate-500 hover:text-slate-800'
+                            : 'text-white/40 hover:text-white/75'
+                        }`}
+                      >
+                        {tab.label}
+                      </Link>
+                    )
+                  )}
+                </div>
+              </div>
               {query && (
                 <button type="button" onClick={handleResetSearch} className={`${btnClass} shrink-0`}>
                   Clear
                 </button>
               )}
-              </div>
             </div>
           </div>
         </div>
@@ -577,13 +580,17 @@ function SearchPageContent() {
             </div>
           )}
 
-          {/* Status strip + filters — full width like reference */}
+          {/* Status + filter chips — mobile 2×2 grid so chips never overlap */}
           {checkedCount > 0 && (
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2 sm:mb-2.5">
-              <div className="flex items-center gap-2 min-w-0 flex-1">
-                <span className="text-[12px] sm:text-[13px] font-bold shrink-0">Domain search</span>
+            <div
+              className={`mb-2.5 sm:mb-3 w-full max-w-full min-w-0 rounded-xl border p-2 sm:p-2.5 box-border ${
+                isLight ? 'bg-white border-slate-200' : 'bg-[#0c0c0e] border-white/[0.08]'
+              }`}
+            >
+              <div className="flex items-center gap-2 min-w-0 mb-2">
+                <span className="text-[11px] sm:text-[12px] font-bold shrink-0">Results</span>
                 <div
-                  className={`h-1 flex-1 max-w-[12rem] sm:max-w-[16rem] rounded-full overflow-hidden ${
+                  className={`h-1 flex-1 min-w-0 rounded-full overflow-hidden ${
                     isLight ? 'bg-slate-200' : 'bg-white/10'
                   }`}
                 >
@@ -594,63 +601,92 @@ function SearchPageContent() {
                     style={{ width: `${progressPct}%` }}
                   />
                 </div>
-                <span className="text-[10px] sm:text-[11px] tabular-nums shrink-0" style={{ color: 'var(--text-muted)' }}>
-                  {isLoading ? `${checkedCount}…` : `${taken.length} taken`}
+                <span
+                  className="text-[10px] sm:text-[11px] tabular-nums shrink-0"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  {isLoading ? `${checkedCount}…` : `${checkedCount} checked`}
                 </span>
               </div>
 
               <div
-                className={`flex items-center gap-1 sm:gap-1.5 flex-wrap sm:justify-end rounded-xl p-1 ${
-                  isLight ? 'bg-slate-50' : 'bg-[#0c0c0e]'
-                }`}
+                className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 w-full max-w-full"
+                role="tablist"
+                aria-label="Filter results by status"
               >
                 {(
                   [
                     {
                       id: 'available' as const,
                       label: 'Available',
+                      short: 'Avail',
                       n: availableExts.length,
                       dot: isLight ? 'bg-emerald-500' : 'bg-emerald-400',
                     },
                     {
                       id: 'premium' as const,
                       label: 'Premium',
+                      short: 'Prem',
                       n: premiumOnly.length,
                       dot: 'bg-amber-400',
                     },
                     {
                       id: 'taken' as const,
                       label: 'Taken',
+                      short: 'Taken',
                       n: taken.length,
                       dot: isLight ? 'bg-rose-500' : 'bg-rose-400',
                     },
                     {
                       id: 'all' as const,
                       label: 'All',
+                      short: 'All',
                       n: checkedCount,
                       dot: isLight ? 'bg-slate-400' : 'bg-white/40',
                     },
                   ] as const
-                ).map((f) => (
-                  <button
-                    key={f.id}
-                    type="button"
-                    onClick={() => setExtFilter(f.id)}
-                    className={`inline-flex items-center gap-1.5 rounded-full px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold border transition-colors tabular-nums ${
-                      extFilter === f.id
-                        ? isLight
-                          ? 'bg-slate-900 text-white border-slate-900'
-                          : 'bg-white text-black border-white'
-                        : isLight
-                          ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-                          : 'bg-[#121214] text-white/70 border-white/10 hover:border-white/20'
-                    }`}
-                  >
-                    <span className={`h-1.5 w-1.5 rounded-full ${f.dot}`} />
-                    {f.label}
-                    <span className="opacity-70">{f.n}</span>
-                  </button>
-                ))}
+                ).map((f) => {
+                  const active = extFilter === f.id;
+                  return (
+                    <button
+                      key={f.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={active}
+                      onClick={() => setExtFilter(f.id)}
+                      className={`flex items-center justify-between gap-1.5 min-w-0 w-full rounded-lg px-2.5 py-2 text-left border transition-colors ${
+                        active
+                          ? isLight
+                            ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                            : 'bg-white text-black border-white shadow-sm'
+                          : isLight
+                            ? 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
+                            : 'bg-[#121214] text-white/75 border-white/10 hover:border-white/20'
+                      }`}
+                    >
+                      <span className="flex items-center gap-1.5 min-w-0">
+                        <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${f.dot}`} />
+                        <span className="text-[11px] sm:text-[12px] font-bold truncate">
+                          <span className="sm:hidden">{f.short}</span>
+                          <span className="hidden sm:inline">{f.label}</span>
+                        </span>
+                      </span>
+                      <span
+                        className={`text-[11px] sm:text-[12px] font-bold tabular-nums shrink-0 ${
+                          active
+                            ? isLight
+                              ? 'text-white/80'
+                              : 'text-black/70'
+                            : isLight
+                              ? 'text-slate-500'
+                              : 'text-white/45'
+                        }`}
+                      >
+                        {f.n}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           )}
