@@ -457,7 +457,7 @@ function SearchPageContent() {
 
   return (
     <div
-      className="min-h-screen overflow-x-hidden select-none"
+      className="min-h-screen w-full max-w-full overflow-x-clip select-none"
       style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
       onCopy={blockCopy}
       onCut={blockCopy}
@@ -466,18 +466,23 @@ function SearchPageContent() {
       <PageBackground variant="minimal" />
       <Navigation activeTool="search" onToolSelect={() => {}} />
 
-      <main className="relative pt-[3.05rem] sm:pt-[3.9rem] pb-6">
+      <main className="relative w-full max-w-full overflow-x-clip pt-[3.05rem] sm:pt-[3.9rem] pb-6">
         {/* Dots disabled on search — results must stay free of ambient bubbles */}
-        <SectionAmbient intensity="page" solidBase disabled className="min-h-[70vh] w-full">
+        <SectionAmbient
+          intensity="page"
+          solidBase
+          disabled
+          className="min-h-[70vh] w-full max-w-full overflow-x-clip"
+        >
         {/* Full-width sticky chrome — fully opaque (no glass bleed) */}
         <div
-          className={`relative sticky top-[2.95rem] sm:top-[3.75rem] z-40 border-b ${
+          className={`relative sticky top-[2.95rem] sm:top-[3.75rem] z-40 border-b w-full max-w-full overflow-x-clip ${
             isLight ? 'bg-white border-slate-200' : 'bg-[#050505] border-white/[0.07]'
           }`}
         >
-          <div className="w-full max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-1.5 sm:py-2">
-            <div className="flex items-center gap-2 min-w-0">
-              <div className="min-w-0 flex-1">
+          <div className="w-full max-w-full sm:max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-1.5 sm:py-2 box-border">
+            <div className="flex items-center gap-2 min-w-0 w-full max-w-full">
+              <div className="min-w-0 flex-1 overflow-hidden">
                 <SearchInterface
                   initialQuery={query}
                   placeholder="Search a domain…"
@@ -497,7 +502,9 @@ function SearchPageContent() {
               />
             </div>
 
-            <div className="mt-1.5 flex items-center gap-1 sm:gap-1.5 overflow-x-auto scrollbar-hide -mx-0.5 px-0.5">
+            {/* Tabs scroll inside only — never expand page width */}
+            <div className="mt-1.5 w-full max-w-full min-w-0 overflow-x-auto overscroll-x-contain scrollbar-hide">
+              <div className="flex items-center gap-1 sm:gap-1.5 w-max max-w-none pr-1">
               {[
                 { href: '/search', label: 'Search', active: true },
                 { href: '/domain-extensions', label: 'Extensions', active: false },
@@ -534,13 +541,14 @@ function SearchPageContent() {
                   Clear
                 </button>
               )}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Results panel — solid plate, no ambient through domain list */}
+        {/* Results panel — solid plate, locked to viewport width (no side pan) */}
         <div
-          className="w-full max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5"
+          className="w-full max-w-full sm:max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 box-border overflow-x-clip"
           style={{ backgroundColor: isLight ? '#ffffff' : '#050505' }}
         >
           {isLoading && results.length === 0 && (
@@ -650,13 +658,13 @@ function SearchPageContent() {
           {/* Compact primary strip — solid, full domain visible on mobile */}
           {primary && (
             <div
-              className={`shine-border no-lift flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl border px-3 sm:px-3.5 py-2.5 sm:py-2 mb-2 sm:mb-2.5 ${
+              className={`shine-border no-lift flex flex-col gap-2 rounded-xl border px-3 sm:px-3.5 py-2.5 sm:py-2 mb-2 sm:mb-2.5 w-full max-w-full min-w-0 box-border ${
                 isLight
                   ? 'bg-white border-slate-200 shadow-sm'
                   : 'bg-[#0c0c0e] border-white/10'
               }`}
             >
-              <div className="flex items-center gap-2 min-w-0 w-full sm:w-auto sm:flex-1">
+              <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 w-full min-w-0">
                 <span
                   className={`h-2 w-2 rounded-full shrink-0 ${
                     primary.available
@@ -696,7 +704,7 @@ function SearchPageContent() {
                   {primary.available ? 'Available' : 'Taken'}
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 shrink-0 w-full sm:w-auto justify-end">
+              <div className="flex items-center gap-1.5 shrink-0 w-full max-w-full flex-wrap justify-end">
                 <button type="button" onClick={() => handlePronounce(primary.domain)} className={btnClass}>
                   <span className="sm:hidden">Say</span>
                   <span className="hidden sm:inline">Pronounce</span>
@@ -788,10 +796,10 @@ function SearchPageContent() {
             </div>
           )}
 
-          {/* Domain grid — solid rows, full names, compact CTAs */}
+          {/* Domain grid — solid rows, full names, compact CTAs; never wider than viewport */}
           {checkedCount > 0 && (
             <div
-              className={`rounded-xl border p-1 sm:p-1.5 ${
+              className={`rounded-xl border p-1 sm:p-1.5 w-full max-w-full min-w-0 overflow-x-clip box-border ${
                 isLight ? 'bg-white border-slate-200' : 'bg-[#0a0a0c] border-white/[0.08]'
               }`}
             >
@@ -800,7 +808,7 @@ function SearchPageContent() {
                   Nothing in this filter
                 </p>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-x-1 gap-y-0.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-x-1 gap-y-0.5 w-full max-w-full min-w-0">
                   {visibleExtensions.map((r) => (
                     <DomainRow
                       key={r.domain}
@@ -1017,13 +1025,13 @@ function DomainRow({
 
   return (
     <div
-      className={`shine-border no-lift group flex items-center justify-between gap-2 rounded-lg py-2 px-2 sm:px-2.5 transition-colors ${
+      className={`shine-border no-lift group grid w-full max-w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-lg py-2 px-2 sm:px-2.5 transition-colors box-border ${
         isLight
           ? 'bg-white hover:bg-slate-50 border border-transparent hover:border-slate-200'
           : 'bg-[#0a0a0c] hover:bg-[#101014] border border-transparent hover:border-white/10'
       }`}
     >
-      <div className="flex items-center gap-2 min-w-0 flex-1">
+      <div className="flex items-center gap-2 min-w-0 overflow-hidden">
         <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot}`} />
         <a
           href={domainHref}
@@ -1031,7 +1039,7 @@ function DomainRow({
           rel="noopener noreferrer"
           title={domainTitle}
           onCopy={onBlockCopy}
-          className={`font-mono text-[12px] sm:text-[12.5px] leading-snug select-none transition-colors break-all sm:truncate min-w-0 ${
+          className={`font-mono text-[12px] sm:text-[12.5px] leading-snug select-none transition-colors break-all min-w-0 ${
             isAvailable
               ? isLight
                 ? 'text-slate-900 hover:text-slate-950'
@@ -1044,7 +1052,7 @@ function DomainRow({
           {result.domain}
         </a>
       </div>
-      <div className="flex items-center gap-0.5 shrink-0">
+      <div className="flex items-center gap-0.5 shrink-0 justify-end">
         <button
           type="button"
           onClick={() => onSave(result.domain)}
@@ -1082,9 +1090,9 @@ function DomainRow({
           primaryLabel={ctaLabel}
           premiumUrl={result.premium ? result.buyUrl : undefined}
           premiumLabel={result.purchaseInfo}
-          primaryButtonClassName={`min-w-0 sm:min-w-[4.25rem] px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors ${ctaClass}`}
+          primaryButtonClassName={`min-w-0 sm:min-w-[4.25rem] px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors whitespace-nowrap ${ctaClass}`}
           chevronButtonClassName={`rounded-md p-1 transition-colors ${ctaClass}`}
-          fallbackButtonClassName={`min-w-0 sm:min-w-[4.25rem] px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors ${ctaClass}`}
+          fallbackButtonClassName={`min-w-0 sm:min-w-[4.25rem] px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors whitespace-nowrap ${ctaClass}`}
         />
       </div>
     </div>

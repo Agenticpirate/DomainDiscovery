@@ -111,7 +111,7 @@ export default function RootLayout({
           {...{ value: "94371be8-1bcb-4f36-b961-098e0c4eee46" }}
         />
       </head>
-      <body className="min-h-screen font-sans antialiased overflow-x-hidden">
+      <body className="min-h-screen w-full max-w-full font-sans antialiased overflow-x-clip">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

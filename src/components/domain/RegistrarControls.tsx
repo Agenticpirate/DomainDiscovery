@@ -235,9 +235,9 @@ export function RegistrarActionMenu({
     : null;
 
   return (
-    <div className="relative z-10" ref={containerRef}>
+    <div className="relative z-10 shrink-0 max-w-full" ref={containerRef}>
       {canRegister ? (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5 sm:gap-1 max-w-full">
           <button
             type="button"
             onClick={() => openRegistrar(selectedRegistrar)}

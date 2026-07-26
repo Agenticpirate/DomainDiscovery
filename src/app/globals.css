@@ -35,6 +35,18 @@ nav a:has(.logo-icon-wrapper) {
 
 
 @layer base {
+  /* Prevent horizontal page pan / rubber-band on mobile (search results, long labels) */
+  html {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  body {
+    overflow-x: clip;
+    max-width: 100%;
+    overscroll-behavior-x: none;
+  }
+
   :root {
     --font-sans: "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     --font-mono: "SFMono-Regular", "JetBrains Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
