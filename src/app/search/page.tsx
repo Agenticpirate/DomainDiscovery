@@ -476,7 +476,7 @@ function SearchPageContent() {
         >
         {/* Full-width sticky chrome — fully opaque (no glass bleed) */}
         <div
-          className={`relative sticky top-[2.95rem] sm:top-[3.75rem] z-40 border-b w-full max-w-full overflow-x-clip ${
+          className={`relative sticky top-[2.95rem] sm:top-[3.75rem] z-40 border-b w-full max-w-full ${
             isLight ? 'bg-white border-slate-200' : 'bg-[#050505] border-white/[0.07]'
           }`}
         >
@@ -546,6 +546,107 @@ function SearchPageContent() {
                 </button>
               )}
             </div>
+
+            {/* Status filters live in sticky chrome so they never clip under the bar */}
+            {checkedCount > 0 && (
+              <div className="mt-2 w-full max-w-full">
+                <div className="flex items-center gap-2 mb-1.5 min-w-0">
+                  <div
+                    className={`h-1 flex-1 min-w-0 rounded-full overflow-hidden ${
+                      isLight ? 'bg-slate-200' : 'bg-white/10'
+                    }`}
+                  >
+                    <div
+                      className={`h-full rounded-full transition-all duration-500 ${
+                        isLight ? 'bg-emerald-500' : 'bg-emerald-400'
+                      }`}
+                      style={{ width: `${progressPct}%` }}
+                    />
+                  </div>
+                  <span
+                    className="text-[10px] font-medium tabular-nums shrink-0"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
+                    {isLoading ? `Checking ${checkedCount}…` : `${checkedCount} extensions`}
+                  </span>
+                </div>
+
+                <div
+                  role="tablist"
+                  aria-label="Filter by availability status"
+                  className="grid grid-cols-4 gap-1.5 w-full"
+                >
+                  {(
+                    [
+                      {
+                        id: 'available' as const,
+                        label: 'Available',
+                        n: availableExts.length,
+                        dot: isLight ? 'bg-emerald-500' : 'bg-emerald-400',
+                      },
+                      {
+                        id: 'premium' as const,
+                        label: 'Premium',
+                        n: premiumOnly.length,
+                        dot: 'bg-amber-400',
+                      },
+                      {
+                        id: 'taken' as const,
+                        label: 'Taken',
+                        n: taken.length,
+                        dot: isLight ? 'bg-rose-500' : 'bg-rose-400',
+                      },
+                      {
+                        id: 'all' as const,
+                        label: 'All',
+                        n: checkedCount,
+                        dot: isLight ? 'bg-slate-400' : 'bg-white/50',
+                      },
+                    ] as const
+                  ).map((f) => {
+                    const active = extFilter === f.id;
+                    return (
+                      <button
+                        key={f.id}
+                        type="button"
+                        role="tab"
+                        aria-selected={active}
+                        onClick={() => setExtFilter(f.id)}
+                        className={`flex flex-col items-center justify-center gap-0.5 min-h-[44px] w-full rounded-xl border px-1 py-1.5 transition-colors ${
+                          active
+                            ? isLight
+                              ? 'bg-slate-900 text-white border-slate-900'
+                              : 'bg-white text-black border-white'
+                            : isLight
+                              ? 'bg-slate-50 text-slate-700 border-slate-200'
+                              : 'bg-[#121214] text-white border-white/12'
+                        }`}
+                      >
+                        <span className="flex items-center justify-center gap-1 max-w-full">
+                          <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${f.dot}`} />
+                          <span className="text-[10px] sm:text-[11px] font-bold leading-tight text-center">
+                            {f.label}
+                          </span>
+                        </span>
+                        <span
+                          className={`text-[13px] sm:text-[14px] font-black tabular-nums leading-none ${
+                            active
+                              ? isLight
+                                ? 'text-white'
+                                : 'text-black'
+                              : isLight
+                                ? 'text-slate-900'
+                                : 'text-white'
+                          }`}
+                        >
+                          {f.n}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -577,108 +678,6 @@ function SearchPageContent() {
               <p className="text-[12px]" style={{ color: 'var(--text-muted)' }}>
                 Live availability across {ALL_TLDS.length}+ extensions
               </p>
-            </div>
-          )}
-
-          {/* Filter chips: natural-width pills (no flex crush) — full labels always */}
-          {checkedCount > 0 && (
-            <div className="mb-2 sm:mb-2.5 w-full max-w-full min-w-0">
-              <div className="flex items-center gap-2 min-w-0 mb-1.5 px-0.5">
-                <div
-                  className={`h-0.5 flex-1 min-w-0 rounded-full overflow-hidden ${
-                    isLight ? 'bg-slate-200' : 'bg-white/[0.08]'
-                  }`}
-                >
-                  <div
-                    className={`h-full rounded-full transition-all duration-500 ${
-                      isLight ? 'bg-emerald-500' : 'bg-emerald-400/90'
-                    }`}
-                    style={{ width: `${progressPct}%` }}
-                  />
-                </div>
-                <span
-                  className="text-[10px] font-medium tabular-nums shrink-0"
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  {isLoading ? `Checking ${checkedCount}…` : `${checkedCount} extensions`}
-                </span>
-              </div>
-
-              {/* Horizontal scroll only if needed; chips never shrink labels */}
-              <div
-                role="tablist"
-                aria-label="Filter results by status"
-                className="w-full max-w-full min-w-0 overflow-x-auto overscroll-x-contain scrollbar-hide -mx-0.5 px-0.5"
-              >
-                <div className="inline-flex items-center gap-1.5 min-w-min pb-0.5">
-                  {(
-                    [
-                      {
-                        id: 'available' as const,
-                        label: 'Available',
-                        n: availableExts.length,
-                        dot: isLight ? 'bg-emerald-500' : 'bg-emerald-400',
-                      },
-                      {
-                        id: 'premium' as const,
-                        label: 'Premium',
-                        n: premiumOnly.length,
-                        dot: 'bg-amber-400',
-                      },
-                      {
-                        id: 'taken' as const,
-                        label: 'Taken',
-                        n: taken.length,
-                        dot: isLight ? 'bg-rose-500' : 'bg-rose-400',
-                      },
-                      {
-                        id: 'all' as const,
-                        label: 'All',
-                        n: checkedCount,
-                        dot: isLight ? 'bg-slate-400' : 'bg-white/45',
-                      },
-                    ] as const
-                  ).map((f) => {
-                    const active = extFilter === f.id;
-                    return (
-                      <button
-                        key={f.id}
-                        type="button"
-                        role="tab"
-                        aria-selected={active}
-                        onClick={() => setExtFilter(f.id)}
-                        className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1.5 transition-all duration-200 ${
-                          active
-                            ? isLight
-                              ? 'bg-slate-900 text-white border-slate-900'
-                              : 'bg-white text-black border-white'
-                            : isLight
-                              ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-                              : 'bg-[#121214] text-white/70 border-white/[0.1] hover:border-white/20'
-                        }`}
-                      >
-                        <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${f.dot}`} />
-                        <span className="text-[11px] font-semibold whitespace-nowrap leading-none">
-                          {f.label}
-                        </span>
-                        <span
-                          className={`text-[11px] font-bold tabular-nums leading-none ${
-                            active
-                              ? isLight
-                                ? 'text-white/75'
-                                : 'text-black/60'
-                              : isLight
-                                ? 'text-slate-400'
-                                : 'text-white/40'
-                          }`}
-                        >
-                          {f.n}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
             </div>
           )}
 
@@ -1058,8 +1057,8 @@ function DomainRow({
           : 'bg-[#0a0a0c] hover:bg-[#101014] border border-transparent hover:border-white/10'
       }`}
     >
-      <div className="flex items-center gap-2 min-w-0 overflow-hidden">
-        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot}`} />
+      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 overflow-hidden">
+        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot}`} aria-hidden />
         <a
           href={domainHref}
           target="_blank"
@@ -1078,6 +1077,23 @@ function DomainRow({
         >
           {result.domain}
         </a>
+        <span
+          className={`shrink-0 rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
+            isAvailable
+              ? isLight
+                ? 'bg-emerald-50 text-emerald-700'
+                : 'bg-emerald-400/15 text-emerald-300'
+              : isPremium
+                ? isLight
+                  ? 'bg-amber-50 text-amber-700'
+                  : 'bg-amber-400/15 text-amber-300'
+                : isLight
+                  ? 'bg-rose-50 text-rose-600'
+                  : 'bg-rose-400/15 text-rose-300'
+          }`}
+        >
+          {isAvailable ? 'Available' : isPremium ? 'Premium' : 'Taken'}
+        </span>
       </div>
       <div className="flex items-center gap-0.5 shrink-0 justify-end">
         <button
