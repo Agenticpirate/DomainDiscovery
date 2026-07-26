@@ -5,7 +5,6 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
-import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { DomainGenerator } from '@/components/generator/DomainGenerator';
 import { GeneratorContent } from '@/components/generator/GeneratorContent';
 import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
@@ -24,7 +23,8 @@ export default function GeneratorPage() {
       className="min-h-screen overflow-x-hidden"
       style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
     >
-      <PageBackground variant="hero" />
+      {/* No ambient dots on tool/output page */}
+      <PageBackground variant="minimal" />
 
       <Navigation activeTool="generator" />
 
@@ -35,8 +35,8 @@ export default function GeneratorPage() {
             { label: 'Domain Generator' },
           ]}
         />
-        {/* Hero */}
-        <SectionAmbient intensity="page" contentClassName="page-gutter pb-2 sm:pb-4">
+        {/* Hero — solid surface only */}
+        <div className="page-gutter pb-2 sm:pb-4">
           <div className="max-w-6xl mx-auto">
             <div className="mt-1 sm:mt-3 text-center max-w-2xl mx-auto">
               <div
@@ -71,7 +71,7 @@ export default function GeneratorPage() {
               </p>
             </div>
           </div>
-        </SectionAmbient>
+        </div>
 
         {/* Generator tool */}
         <section className="px-3.5 sm:px-6 pb-8 sm:pb-12" id="top">

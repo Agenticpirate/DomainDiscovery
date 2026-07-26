@@ -6,7 +6,6 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
-import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { GeoDomainGenerator } from '@/components/geo/GeoDomainGenerator';
 import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
@@ -30,43 +29,6 @@ const STEPS = [
 ];
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
-
-/**
- * Dots only in gutters — never through hero chrome, tool, or education plates.
- */
-const GEO_HERO_DOT_CSS = `
-.geo-page [data-ambient-dots="single"] {
-  -webkit-mask-image: radial-gradient(
-    ellipse 88% 90% at 50% 28%,
-    transparent 0%,
-    transparent 48%,
-    rgba(0, 0, 0, 0.35) 68%,
-    black 88%
-  ) !important;
-  mask-image: radial-gradient(
-    ellipse 88% 90% at 50% 28%,
-    transparent 0%,
-    transparent 48%,
-    rgba(0, 0, 0, 0.35) 68%,
-    black 88%
-  ) !important;
-  -webkit-mask-repeat: no-repeat !important;
-  mask-repeat: no-repeat !important;
-  -webkit-mask-size: 100% 100% !important;
-  mask-size: 100% 100% !important;
-}
-.geo-page .geo-solid-plate {
-  isolation: isolate;
-  position: relative;
-  z-index: 1;
-}
-.geo-page .shine-border::before,
-.geo-page .shine-border::after {
-  display: none !important;
-  opacity: 0 !important;
-  content: none !important;
-}
-`;
 
 export default function GeoPage() {
   const { theme } = useTheme();
@@ -92,8 +54,8 @@ export default function GeoPage() {
       className="geo-page min-h-screen overflow-x-clip"
       style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
     >
-      <style dangerouslySetInnerHTML={{ __html: GEO_HERO_DOT_CSS }} />
-      <PageBackground variant="hero" />
+      {/* No ambient dots on geo tool */}
+      <PageBackground variant="minimal" />
       <Navigation activeTool="geo" />
 
       <main className={PAGE_MAIN_CLASS}>
@@ -104,10 +66,9 @@ export default function GeoPage() {
           ]}
         />
 
-        {/* —— Compact intro: tool first —— */}
-        <SectionAmbient intensity="page" contentClassName="page-gutter pb-3 sm:pb-4">
+        {/* —— Compact intro: tool first (solid only) —— */}
+        <div className="page-gutter pb-3 sm:pb-4">
           <div className="mx-auto max-w-6xl relative z-[1]">
-            {/* One-liner heading only — long copy lives below the generator */}
             <motion.header
               {...fadeUp(0.04)}
               className="geo-solid-plate rounded-xl sm:rounded-2xl border px-3 py-2.5 sm:px-5 sm:py-3.5"
@@ -153,7 +114,7 @@ export default function GeoPage() {
               </div>
             </motion.header>
           </div>
-        </SectionAmbient>
+        </div>
 
         {/* —— Actual tool — primary surface —— */}
         <motion.section

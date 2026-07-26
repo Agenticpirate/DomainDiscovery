@@ -5,7 +5,6 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
-import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { DomainExtensionsView } from '@/components/domain/DomainExtensionsView';
 import { ExtensionsGuideContent } from '@/components/domain/ExtensionsGuideContent';
 import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
@@ -193,7 +192,8 @@ export default function DomainExtensionsPage() {
       style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
     >
       <style dangerouslySetInnerHTML={{ __html: PAGE_MOBILE_CSS }} />
-      <PageBackground variant="hero" />
+      {/* No ambient dots on extensions tool */}
+      <PageBackground variant="minimal" />
 
       <Navigation activeTool="extensions" />
 
@@ -204,12 +204,9 @@ export default function DomainExtensionsPage() {
             { label: 'Domain Extensions' },
           ]}
         />
-        <SectionAmbient
-          intensity="page"
-          contentClassName="page-gutter pb-2 sm:pb-4 max-w-full min-w-0 overflow-x-clip"
-        >
+        <div className="page-gutter pb-2 sm:pb-4 max-w-full min-w-0 overflow-x-clip">
           <div className="mx-auto w-full min-w-0 max-w-6xl">
-            {/* Hero — compact on mobile; solid chips so dots stay out of UI */}
+            {/* Hero — compact on mobile; solid surface only */}
             <div className="relative mt-1 sm:mt-3 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-2.5 sm:gap-6 mb-3 sm:mb-6">
               <div className="relative z-[1] max-w-2xl">
                 <div
@@ -339,7 +336,7 @@ export default function DomainExtensionsPage() {
               }
             />
           </div>
-        </SectionAmbient>
+        </div>
 
         {/* Hide long SEO packs on mobile to keep tool compact */}
         <div className="hidden sm:block">
