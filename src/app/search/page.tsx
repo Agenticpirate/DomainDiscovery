@@ -580,69 +580,64 @@ function SearchPageContent() {
             </div>
           )}
 
-          {/* Status + filter chips — mobile 2×2 grid so chips never overlap */}
+          {/* Compact premium segmented filter — full labels, single control */}
           {checkedCount > 0 && (
-            <div
-              className={`mb-2.5 sm:mb-3 w-full max-w-full min-w-0 rounded-xl border p-2 sm:p-2.5 box-border ${
-                isLight ? 'bg-white border-slate-200' : 'bg-[#0c0c0e] border-white/[0.08]'
-              }`}
-            >
-              <div className="flex items-center gap-2 min-w-0 mb-2">
-                <span className="text-[11px] sm:text-[12px] font-bold shrink-0">Results</span>
+            <div className="mb-2 sm:mb-2.5 w-full max-w-full min-w-0">
+              <div className="flex items-center gap-2 min-w-0 mb-1.5 px-0.5">
                 <div
-                  className={`h-1 flex-1 min-w-0 rounded-full overflow-hidden ${
-                    isLight ? 'bg-slate-200' : 'bg-white/10'
+                  className={`h-0.5 flex-1 min-w-0 rounded-full overflow-hidden ${
+                    isLight ? 'bg-slate-200' : 'bg-white/[0.08]'
                   }`}
                 >
                   <div
                     className={`h-full rounded-full transition-all duration-500 ${
-                      isLight ? 'bg-emerald-500' : 'bg-emerald-400'
+                      isLight ? 'bg-emerald-500' : 'bg-emerald-400/90'
                     }`}
                     style={{ width: `${progressPct}%` }}
                   />
                 </div>
                 <span
-                  className="text-[10px] sm:text-[11px] tabular-nums shrink-0"
-                  style={{ color: 'var(--text-muted)' }}
+                  className="text-[9px] sm:text-[10px] font-medium tabular-nums tracking-wide shrink-0 uppercase"
+                  style={{ color: 'var(--text-muted)', letterSpacing: '0.04em' }}
                 >
-                  {isLoading ? `${checkedCount}…` : `${checkedCount} checked`}
+                  {isLoading ? `Checking ${checkedCount}` : `${checkedCount} extensions`}
                 </span>
               </div>
 
               <div
-                className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 w-full max-w-full"
                 role="tablist"
                 aria-label="Filter results by status"
+                className={`flex w-full max-w-full min-w-0 rounded-full border p-0.5 ${
+                  isLight
+                    ? 'bg-slate-100/90 border-slate-200/80'
+                    : 'bg-white/[0.04] border-white/[0.08]'
+                }`}
               >
                 {(
                   [
                     {
                       id: 'available' as const,
                       label: 'Available',
-                      short: 'Avail',
                       n: availableExts.length,
                       dot: isLight ? 'bg-emerald-500' : 'bg-emerald-400',
                     },
                     {
                       id: 'premium' as const,
                       label: 'Premium',
-                      short: 'Prem',
                       n: premiumOnly.length,
                       dot: 'bg-amber-400',
                     },
                     {
                       id: 'taken' as const,
                       label: 'Taken',
-                      short: 'Taken',
                       n: taken.length,
                       dot: isLight ? 'bg-rose-500' : 'bg-rose-400',
                     },
                     {
                       id: 'all' as const,
                       label: 'All',
-                      short: 'All',
                       n: checkedCount,
-                      dot: isLight ? 'bg-slate-400' : 'bg-white/40',
+                      dot: isLight ? 'bg-slate-400' : 'bg-white/45',
                     },
                   ] as const
                 ).map((f) => {
@@ -654,32 +649,35 @@ function SearchPageContent() {
                       role="tab"
                       aria-selected={active}
                       onClick={() => setExtFilter(f.id)}
-                      className={`flex items-center justify-between gap-1.5 min-w-0 w-full rounded-lg px-2.5 py-2 text-left border transition-colors ${
+                      className={`relative flex flex-1 min-w-0 flex-col sm:flex-row items-center justify-center gap-0 sm:gap-1 rounded-full px-1 py-1.5 sm:px-2 sm:py-1.5 transition-all duration-200 ${
                         active
                           ? isLight
-                            ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                            : 'bg-white text-black border-white shadow-sm'
+                            ? 'bg-white text-slate-900 shadow-sm shadow-slate-900/10'
+                            : 'bg-white/[0.12] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.12)]'
                           : isLight
-                            ? 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
-                            : 'bg-[#121214] text-white/75 border-white/10 hover:border-white/20'
+                            ? 'text-slate-500 hover:text-slate-800'
+                            : 'text-white/45 hover:text-white/75'
                       }`}
                     >
-                      <span className="flex items-center gap-1.5 min-w-0">
-                        <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${f.dot}`} />
-                        <span className="text-[11px] sm:text-[12px] font-bold truncate">
-                          <span className="sm:hidden">{f.short}</span>
-                          <span className="hidden sm:inline">{f.label}</span>
+                      <span className="flex items-center gap-1 min-w-0 max-w-full">
+                        <span
+                          className={`h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full shrink-0 ${f.dot} ${
+                            active ? 'opacity-100' : 'opacity-70'
+                          }`}
+                        />
+                        <span className="text-[9px] sm:text-[11px] font-semibold tracking-tight truncate leading-none">
+                          {f.label}
                         </span>
                       </span>
                       <span
-                        className={`text-[11px] sm:text-[12px] font-bold tabular-nums shrink-0 ${
+                        className={`text-[9px] sm:text-[10px] font-semibold tabular-nums leading-none ${
                           active
                             ? isLight
-                              ? 'text-white/80'
-                              : 'text-black/70'
-                            : isLight
                               ? 'text-slate-500'
-                              : 'text-white/45'
+                              : 'text-white/55'
+                            : isLight
+                              ? 'text-slate-400'
+                              : 'text-white/30'
                         }`}
                       >
                         {f.n}
