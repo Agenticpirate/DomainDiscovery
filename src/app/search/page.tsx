@@ -462,19 +462,21 @@ function SearchPageContent() {
       onCopy={blockCopy}
       onCut={blockCopy}
     >
-      <PageBackground variant="hero" />
+      {/* No hero orbs / dots on search output — solid surface only */}
+      <PageBackground variant="minimal" />
       <Navigation activeTool="search" onToolSelect={() => {}} />
 
       <main className="relative pt-[3.05rem] sm:pt-[3.9rem] pb-6">
-        <SectionAmbient intensity="page" solidBase={false} className="min-h-[70vh] w-full">
-        {/* Full-width sticky chrome — solid so dots stay behind */}
+        {/* Dots disabled on search — results must stay free of ambient bubbles */}
+        <SectionAmbient intensity="page" solidBase disabled className="min-h-[70vh] w-full">
+        {/* Full-width sticky chrome — fully opaque (no glass bleed) */}
         <div
-          className={`relative z-[1] sticky top-[2.95rem] sm:top-[3.75rem] z-40 border-b backdrop-blur-xl ${
-            isLight ? 'bg-white/95 border-slate-200' : 'bg-[#050505]/92 border-white/[0.07]'
+          className={`relative sticky top-[2.95rem] sm:top-[3.75rem] z-40 border-b ${
+            isLight ? 'bg-white border-slate-200' : 'bg-[#050505] border-white/[0.07]'
           }`}
         >
-          <div className="w-full max-w-[100rem] mx-auto px-2.5 sm:px-4 lg:px-5 py-1.5 sm:py-2">
-            <div className="flex items-center gap-2">
+          <div className="w-full max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-1.5 sm:py-2">
+            <div className="flex items-center gap-2 min-w-0">
               <div className="min-w-0 flex-1">
                 <SearchInterface
                   initialQuery={query}
@@ -495,7 +497,7 @@ function SearchPageContent() {
               />
             </div>
 
-            <div className="mt-1.5 flex items-center gap-1 sm:gap-1.5 overflow-x-auto scrollbar-hide">
+            <div className="mt-1.5 flex items-center gap-1 sm:gap-1.5 overflow-x-auto scrollbar-hide -mx-0.5 px-0.5">
               {[
                 { href: '/search', label: 'Search', active: true },
                 { href: '/domain-extensions', label: 'Extensions', active: false },
@@ -526,7 +528,7 @@ function SearchPageContent() {
                   </Link>
                 )
               )}
-              <div className="flex-1" />
+              <div className="flex-1 min-w-[0.5rem]" />
               {query && (
                 <button type="button" onClick={handleResetSearch} className={`${btnClass} shrink-0`}>
                   Clear
@@ -536,7 +538,11 @@ function SearchPageContent() {
           </div>
         </div>
 
-        <div className="w-full max-w-[100rem] mx-auto px-2 sm:px-3 lg:px-4 py-2 sm:py-2.5">
+        {/* Results panel — solid plate, no ambient through domain list */}
+        <div
+          className="w-full max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5"
+          style={{ backgroundColor: isLight ? '#ffffff' : '#050505' }}
+        >
           {isLoading && results.length === 0 && (
             <div className="py-16 text-center">
               <div className="inline-flex items-center gap-2">
@@ -585,7 +591,11 @@ function SearchPageContent() {
                 </span>
               </div>
 
-              <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap sm:justify-end">
+              <div
+                className={`flex items-center gap-1 sm:gap-1.5 flex-wrap sm:justify-end rounded-xl p-1 ${
+                  isLight ? 'bg-slate-50' : 'bg-[#0c0c0e]'
+                }`}
+              >
                 {(
                   [
                     {
@@ -625,7 +635,7 @@ function SearchPageContent() {
                           : 'bg-white text-black border-white'
                         : isLight
                           ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-                          : 'bg-white/[0.04] text-white/55 border-white/10 hover:border-white/20'
+                          : 'bg-[#121214] text-white/70 border-white/10 hover:border-white/20'
                     }`}
                   >
                     <span className={`h-1.5 w-1.5 rounded-full ${f.dot}`} />
@@ -637,16 +647,16 @@ function SearchPageContent() {
             </div>
           )}
 
-          {/* Compact primary strip — not a huge card */}
+          {/* Compact primary strip — solid, full domain visible on mobile */}
           {primary && (
             <div
-              className={`shine-border no-lift flex flex-wrap items-center justify-between gap-2 rounded-xl border px-2.5 sm:px-3 py-2 mb-2 sm:mb-2.5 ${
+              className={`shine-border no-lift flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 rounded-xl border px-3 sm:px-3.5 py-2.5 sm:py-2 mb-2 sm:mb-2.5 ${
                 isLight
-                  ? 'bg-white border-slate-200'
-                  : 'bg-white/[0.03] border-white/10'
+                  ? 'bg-white border-slate-200 shadow-sm'
+                  : 'bg-[#0c0c0e] border-white/10'
               }`}
             >
-              <div className="flex items-center gap-2 min-w-0">
+              <div className="flex items-center gap-2 min-w-0 w-full sm:w-auto sm:flex-1">
                 <span
                   className={`h-2 w-2 rounded-full shrink-0 ${
                     primary.available
@@ -659,21 +669,21 @@ function SearchPageContent() {
                   }`}
                 />
                 <span
-                  className={`font-mono text-[13px] sm:text-[15px] font-bold truncate select-none ${
+                  className={`font-mono text-[13px] sm:text-[15px] font-bold break-all select-none min-w-0 ${
                     primary.available
                       ? isLight
                         ? 'text-slate-900'
                         : 'text-white'
                       : isLight
                         ? 'text-slate-500'
-                        : 'text-white/45'
+                        : 'text-white/70'
                   }`}
                   onCopy={blockCopy}
                 >
                   {primary.domain}
                 </span>
                 <span
-                  className={`text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full ${
+                  className={`shrink-0 text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full ${
                     primary.available
                       ? isLight
                         ? 'bg-emerald-50 text-emerald-700'
@@ -686,9 +696,10 @@ function SearchPageContent() {
                   {primary.available ? 'Available' : 'Taken'}
                 </span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 shrink-0 w-full sm:w-auto justify-end">
                 <button type="button" onClick={() => handlePronounce(primary.domain)} className={btnClass}>
-                  Pronounce
+                  <span className="sm:hidden">Say</span>
+                  <span className="hidden sm:inline">Pronounce</span>
                 </button>
                 <div className="relative">
                   <button type="button" onClick={() => setShowMoreActions(!showMoreActions)} className={btnClass}>
@@ -735,14 +746,14 @@ function SearchPageContent() {
                 <button
                   type="button"
                   onClick={() => handleSave(primary.domain)}
-                  className={`h-8 w-8 inline-flex items-center justify-center rounded-lg border ${
+                  className={`h-8 w-8 inline-flex items-center justify-center rounded-lg border shrink-0 ${
                     primarySaved
                       ? isLight
                         ? 'bg-slate-900 text-white border-slate-900'
                         : 'bg-white text-black border-white'
                       : isLight
-                        ? 'border-slate-200 text-slate-500'
-                        : 'border-white/12 text-white/45'
+                        ? 'border-slate-200 text-slate-500 bg-white'
+                        : 'border-white/12 text-white/45 bg-[#0c0c0e]'
                   }`}
                   aria-label="Save"
                 >
@@ -761,7 +772,7 @@ function SearchPageContent() {
                           'noopener,noreferrer'
                         )
                   }
-                  className={`inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-[11px] font-bold ${
+                  className={`inline-flex items-center gap-1 rounded-lg px-2.5 sm:px-3 py-1.5 text-[11px] font-bold shrink-0 ${
                     primary.available
                       ? isLight
                         ? 'bg-emerald-600 text-white hover:bg-emerald-500'
@@ -777,15 +788,19 @@ function SearchPageContent() {
             </div>
           )}
 
-          {/* Full-viewport multi-column domain grid */}
+          {/* Domain grid — solid rows, full names, compact CTAs */}
           {checkedCount > 0 && (
-            <div>
+            <div
+              className={`rounded-xl border p-1 sm:p-1.5 ${
+                isLight ? 'bg-white border-slate-200' : 'bg-[#0a0a0c] border-white/[0.08]'
+              }`}
+            >
               {visibleExtensions.length === 0 ? (
                 <p className="text-center text-[12px] py-12" style={{ color: 'var(--text-muted)' }}>
                   Nothing in this filter
                 </p>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-x-1 gap-y-0">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-x-1 gap-y-0.5">
                   {visibleExtensions.map((r) => (
                     <DomainRow
                       key={r.domain}
@@ -985,13 +1000,30 @@ function DomainRow({
         ? 'bg-slate-100 text-rose-600 hover:bg-slate-200'
         : 'bg-white/[0.08] text-rose-300 hover:bg-white/12';
 
+  const desktopCta = isAvailable
+    ? ctaText
+    : isPremium
+      ? showPremiumPrice
+        ? ctaText
+        : 'Search'
+      : ctaText;
+  // Compact mobile label so domain names are not crushed by "Continue"
+  const ctaLabel = (
+    <>
+      <span className="sm:hidden">{isAvailable ? 'Go' : showPremiumPrice ? ctaText : 'WHOIS'}</span>
+      <span className="hidden sm:inline">{desktopCta}</span>
+    </>
+  );
+
   return (
     <div
-      className={`shine-border no-lift group flex items-center justify-between gap-1.5 rounded-lg py-1.5 px-1.5 sm:px-2 transition-colors ${
-        isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.035]'
+      className={`shine-border no-lift group flex items-center justify-between gap-2 rounded-lg py-2 px-2 sm:px-2.5 transition-colors ${
+        isLight
+          ? 'bg-white hover:bg-slate-50 border border-transparent hover:border-slate-200'
+          : 'bg-[#0a0a0c] hover:bg-[#101014] border border-transparent hover:border-white/10'
       }`}
     >
-      <div className="flex items-center gap-1.5 min-w-0 flex-1 overflow-hidden">
+      <div className="flex items-center gap-2 min-w-0 flex-1">
         <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot}`} />
         <a
           href={domainHref}
@@ -999,14 +1031,14 @@ function DomainRow({
           rel="noopener noreferrer"
           title={domainTitle}
           onCopy={onBlockCopy}
-          className={`font-mono text-[11px] sm:text-[12.5px] select-none transition-colors truncate ${
+          className={`font-mono text-[12px] sm:text-[12.5px] leading-snug select-none transition-colors break-all sm:truncate min-w-0 ${
             isAvailable
               ? isLight
-                ? 'text-slate-800 hover:text-slate-950'
-                : 'text-white/90 hover:text-white'
+                ? 'text-slate-900 hover:text-slate-950'
+                : 'text-white hover:text-white'
               : isLight
-                ? 'text-slate-500 hover:text-slate-700'
-                : 'text-white/45 hover:text-white/70'
+                ? 'text-slate-600 hover:text-slate-800'
+                : 'text-white/70 hover:text-white/90'
           }`}
         >
           {result.domain}
@@ -1016,20 +1048,20 @@ function DomainRow({
         <button
           type="button"
           onClick={() => onSave(result.domain)}
-          className={`p-1 rounded-md transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100 ${
+          className={`p-1.5 rounded-md transition-colors sm:opacity-0 sm:group-hover:opacity-100 sm:focus:opacity-100 ${
             isSaved
               ? isLight
                 ? 'text-slate-900 opacity-100'
                 : 'text-white opacity-100'
               : isLight
-                ? 'text-slate-300 hover:text-slate-600'
-                : 'text-white/25 hover:text-white/55'
+                ? 'text-slate-400 hover:text-slate-600'
+                : 'text-white/40 hover:text-white/70'
           }`}
           aria-label={isSaved ? 'Remove save' : 'Save domain'}
           title={isSaved ? 'Saved' : 'Save'}
         >
           <svg
-            className="w-3 h-3"
+            className="w-3.5 h-3.5"
             fill={isSaved ? 'currentColor' : 'none'}
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -1047,12 +1079,12 @@ function DomainRow({
           selectedRegistrar={selectedRegistrar}
           onSelectRegistrar={onSelectRegistrar}
           canRegister={isAvailable || isPremium}
-          primaryLabel={isAvailable ? ctaText : isPremium ? (showPremiumPrice ? ctaText : 'Search') : ctaText}
+          primaryLabel={ctaLabel}
           premiumUrl={result.premium ? result.buyUrl : undefined}
           premiumLabel={result.purchaseInfo}
-          primaryButtonClassName={`min-w-[4.25rem] px-2 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors ${ctaClass}`}
+          primaryButtonClassName={`min-w-0 sm:min-w-[4.25rem] px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors ${ctaClass}`}
           chevronButtonClassName={`rounded-md p-1 transition-colors ${ctaClass}`}
-          fallbackButtonClassName={`min-w-[4.25rem] px-2 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors ${ctaClass}`}
+          fallbackButtonClassName={`min-w-0 sm:min-w-[4.25rem] px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors ${ctaClass}`}
         />
       </div>
     </div>

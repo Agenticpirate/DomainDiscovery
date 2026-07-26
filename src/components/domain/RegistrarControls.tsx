@@ -63,7 +63,7 @@ export function RegistrarActionMenu({
   selectedRegistrar: RegistrarName;
   onSelectRegistrar: (registrar: RegistrarName) => void;
   canRegister: boolean;
-  primaryLabel: string;
+  primaryLabel: React.ReactNode;
   primaryButtonClassName?: string;
   chevronButtonClassName?: string;
   fallbackButtonClassName?: string;
