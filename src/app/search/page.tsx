@@ -499,55 +499,70 @@ function SearchPageContent() {
               />
             </div>
 
-            {/* Tabs: scroll row + Clear fixed so labels never collide */}
-            <div className="mt-1.5 flex items-center gap-1.5 w-full max-w-full min-w-0">
-              <div className="allow-x-scroll min-w-0 flex-1 overflow-x-auto overscroll-x-contain scrollbar-hide">
-                <div className="flex items-center gap-0.5 sm:gap-1 w-max max-w-none pr-1">
-                  {[
-                    { href: '/search', label: 'Search', active: true },
-                    { href: '/domain-extensions', label: 'Extensions', active: false },
-                    { href: '/generator', label: 'Generator', active: false },
-                    { href: '/premium', label: 'Aftermarket', active: false },
-                    { href: '/tools', label: 'Research', active: false },
-                  ].map((tab) =>
-                    tab.active ? (
-                      <span
-                        key={tab.label}
-                        className={`shrink-0 inline-flex items-center px-2 py-1 text-[11px] font-bold border-b-2 ${
-                          isLight
-                            ? 'text-slate-900 border-slate-900'
-                            : 'text-white border-white'
-                        }`}
-                      >
+            {/* Tool switcher — premium pill track (Search · Extensions · …) */}
+            <div className="mt-2 flex items-stretch gap-1.5 w-full max-w-full min-w-0">
+              <nav
+                aria-label="Domain tools"
+                className={`allow-x-scroll min-w-0 flex-1 overflow-x-auto overscroll-x-contain scrollbar-hide rounded-2xl border p-1 ${
+                  isLight
+                    ? 'bg-slate-100/90 border-slate-200'
+                    : 'bg-white/[0.04] border-white/[0.09]'
+                }`}
+              >
+                <div className="flex items-center gap-0.5 sm:gap-1 w-max min-w-full sm:min-w-0 sm:w-full">
+                  {(
+                    [
+                      { href: '/search', label: 'Search', active: true },
+                      { href: '/domain-extensions', label: 'Extensions', active: false },
+                      { href: '/generator', label: 'Generator', active: false },
+                      { href: '/premium', label: 'Aftermarket', active: false },
+                      { href: '/tools', label: 'Research', active: false },
+                    ] as const
+                  ).map((tab) => {
+                    const cls = `shrink-0 inline-flex flex-1 sm:flex-1 items-center justify-center rounded-xl px-2.5 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-[12px] font-semibold tracking-tight transition-all duration-200 whitespace-nowrap ${
+                      tab.active
+                        ? isLight
+                          ? 'bg-white text-slate-900 shadow-sm shadow-slate-900/10 ring-1 ring-slate-200/80'
+                          : 'bg-white text-black shadow-[0_1px_0_rgba(255,255,255,0.12)_inset] ring-1 ring-white/10'
+                        : isLight
+                          ? 'text-slate-500 hover:text-slate-800 hover:bg-white/70'
+                          : 'text-white/45 hover:text-white/85 hover:bg-white/[0.06]'
+                    }`;
+                    return tab.active ? (
+                      <span key={tab.label} className={cls} aria-current="page">
                         {tab.label}
                       </span>
                     ) : (
-                      <Link
-                        key={tab.label}
-                        href={tab.href}
-                        className={`shrink-0 inline-flex items-center px-2 py-1 text-[11px] font-semibold border-b-2 border-transparent ${
-                          isLight
-                            ? 'text-slate-500 hover:text-slate-800'
-                            : 'text-white/40 hover:text-white/75'
-                        }`}
-                      >
+                      <Link key={tab.label} href={tab.href} className={cls}>
                         {tab.label}
                       </Link>
-                    )
-                  )}
+                    );
+                  })}
                 </div>
-              </div>
+              </nav>
               {query && (
-                <button type="button" onClick={handleResetSearch} className={`${btnClass} shrink-0`}>
-                  Clear
+                <button
+                  type="button"
+                  onClick={handleResetSearch}
+                  className={`shrink-0 inline-flex items-center justify-center gap-1 rounded-2xl border px-3 py-1.5 text-[11px] font-semibold transition-colors ${
+                    isLight
+                      ? 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                      : 'border-white/12 bg-[#121214] text-white/65 hover:text-white hover:border-white/20'
+                  }`}
+                  title="Clear search"
+                >
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  <span className="hidden xs:inline sm:inline">Clear</span>
                 </button>
               )}
             </div>
 
-            {/* Status filters live in sticky chrome so they never clip under the bar */}
+            {/* Availability status filters — sticky, compact, high contrast */}
             {checkedCount > 0 && (
-              <div className="mt-2 w-full max-w-full">
-                <div className="flex items-center gap-2 mb-1.5 min-w-0">
+              <div className="mt-2.5 w-full max-w-full min-w-0">
+                <div className="flex items-center gap-2 mb-1.5 min-w-0 px-0.5">
                   <div
                     className={`h-1 flex-1 min-w-0 rounded-full overflow-hidden ${
                       isLight ? 'bg-slate-200' : 'bg-white/10'
@@ -571,7 +586,11 @@ function SearchPageContent() {
                 <div
                   role="tablist"
                   aria-label="Filter by availability status"
-                  className="grid grid-cols-4 gap-1.5 w-full"
+                  className={`grid grid-cols-4 gap-1 w-full rounded-2xl border p-1 ${
+                    isLight
+                      ? 'bg-slate-50 border-slate-200'
+                      : 'bg-white/[0.03] border-white/[0.08]'
+                  }`}
                 >
                   {(
                     [
@@ -609,19 +628,19 @@ function SearchPageContent() {
                         role="tab"
                         aria-selected={active}
                         onClick={() => setExtFilter(f.id)}
-                        className={`flex flex-col items-center justify-center gap-0.5 min-h-[44px] w-full rounded-xl border px-1 py-1.5 transition-colors ${
+                        className={`flex flex-col items-center justify-center gap-0.5 min-h-[42px] w-full min-w-0 rounded-xl px-1 py-1.5 transition-all duration-200 ${
                           active
                             ? isLight
-                              ? 'bg-slate-900 text-white border-slate-900'
-                              : 'bg-white text-black border-white'
+                              ? 'bg-white text-slate-900 shadow-sm ring-1 ring-slate-200/90'
+                              : 'bg-white text-black shadow-sm'
                             : isLight
-                              ? 'bg-slate-50 text-slate-700 border-slate-200'
-                              : 'bg-[#121214] text-white border-white/12'
+                              ? 'text-slate-600 hover:bg-white/80'
+                              : 'text-white/70 hover:bg-white/[0.05]'
                         }`}
                       >
                         <span className="flex items-center justify-center gap-1 max-w-full">
                           <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${f.dot}`} />
-                          <span className="text-[10px] sm:text-[11px] font-bold leading-tight text-center">
+                          <span className="text-[10px] sm:text-[11px] font-bold leading-tight text-center truncate">
                             {f.label}
                           </span>
                         </span>
@@ -629,10 +648,10 @@ function SearchPageContent() {
                           className={`text-[13px] sm:text-[14px] font-black tabular-nums leading-none ${
                             active
                               ? isLight
-                                ? 'text-white'
+                                ? 'text-slate-900'
                                 : 'text-black'
                               : isLight
-                                ? 'text-slate-900'
+                                ? 'text-slate-800'
                                 : 'text-white'
                           }`}
                         >
