@@ -333,7 +333,10 @@ export const HomePageContent: React.FC = () => {
       >
         <div className="section-shell !mb-0">
           <div className="relative z-[1] text-center mb-1.5 sm:mb-3.5">
-            <h2 className="section-title">Domain tools for search, geo &amp; WHOIS</h2>
+            <h2 className="section-title">
+              <span className="sm:hidden">Free domain name search &amp; tools</span>
+              <span className="hidden sm:inline">Domain tools for search, geo &amp; WHOIS</span>
+            </h2>
             <p className="hidden sm:block section-sub">
               Instant search, AI names, bulk checks, geo domains, extensions, pricing, and RDAP lookup
             </p>
