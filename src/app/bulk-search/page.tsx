@@ -9,7 +9,7 @@ import { BulkDomainSearch } from '@/components/domain/BulkDomainSearch';
 
 export default function BulkSearchPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-main)' }}>
+    <div className="page-x-lock min-h-screen overflow-x-hidden" style={{ backgroundColor: 'var(--bg-main)' }}>
       {/* No ambient dots on bulk tool — solid surface for results readability */}
       <PageBackground variant="minimal" />
 

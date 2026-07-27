@@ -454,7 +454,7 @@ function SearchPageContent() {
 
   return (
     <div
-      className="min-h-screen w-full max-w-full overflow-x-clip select-none"
+      className="page-x-lock min-h-screen w-full max-w-full overflow-x-hidden select-none"
       style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
       onCopy={blockCopy}
       onCut={blockCopy}
@@ -463,13 +463,13 @@ function SearchPageContent() {
       <PageBackground variant="minimal" />
       <Navigation activeTool="search" onToolSelect={() => {}} />
 
-      <main className="relative w-full max-w-full overflow-x-clip pt-[3.05rem] sm:pt-[3.9rem] pb-6">
+      <main className="relative w-full max-w-full min-w-0 overflow-x-hidden pt-[3.05rem] sm:pt-[3.9rem] pb-6">
         {/* Dots disabled on search — results must stay free of ambient bubbles */}
         <SectionAmbient
           intensity="page"
           solidBase
           disabled
-          className="min-h-[70vh] w-full max-w-full overflow-x-clip"
+          className="min-h-[70vh] w-full max-w-full min-w-0 overflow-x-hidden"
         >
         {/* Full-width sticky chrome — fully opaque (no glass bleed) */}
         <div
@@ -501,8 +501,8 @@ function SearchPageContent() {
 
             {/* Tabs: scroll row + Clear fixed so labels never collide */}
             <div className="mt-1.5 flex items-center gap-1.5 w-full max-w-full min-w-0">
-              <div className="min-w-0 flex-1 overflow-x-auto overscroll-x-contain scrollbar-hide">
-                <div className="flex items-center gap-0.5 sm:gap-1 w-max pr-1">
+              <div className="allow-x-scroll min-w-0 flex-1 overflow-x-auto overscroll-x-contain scrollbar-hide">
+                <div className="flex items-center gap-0.5 sm:gap-1 w-max max-w-none pr-1">
                   {[
                     { href: '/search', label: 'Search', active: true },
                     { href: '/domain-extensions', label: 'Extensions', active: false },
@@ -649,7 +649,7 @@ function SearchPageContent() {
 
         {/* Results panel — solid plate, locked to viewport width (no side pan) */}
         <div
-          className="w-full max-w-full sm:max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 box-border overflow-x-clip"
+          className="w-full max-w-full min-w-0 sm:max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 box-border overflow-x-hidden"
           style={{ backgroundColor: isLight ? '#ffffff' : '#050505' }}
         >
           {isLoading && results.length === 0 && (
@@ -1051,34 +1051,37 @@ function DomainRow({
 
   return (
     <div
-      className={`shine-border no-lift group grid w-full max-w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-lg py-2 px-2 sm:px-2.5 transition-colors box-border ${
+      className={`shine-border no-lift group grid w-full max-w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-1.5 sm:gap-2 rounded-lg py-2 px-2 sm:px-2.5 transition-colors box-border overflow-hidden ${
         isLight
           ? 'bg-white hover:bg-slate-50 border border-transparent hover:border-slate-200'
           : 'bg-[#0a0a0c] hover:bg-[#101014] border border-transparent hover:border-white/10'
       }`}
     >
-      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 overflow-hidden">
-        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot}`} aria-hidden />
-        <a
-          href={domainHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          title={domainTitle}
-          onCopy={onBlockCopy}
-          className={`font-mono text-[12px] sm:text-[12.5px] leading-snug select-none transition-colors break-all min-w-0 ${
-            isAvailable
-              ? isLight
-                ? 'text-slate-900 hover:text-slate-950'
-                : 'text-white hover:text-white'
-              : isLight
-                ? 'text-slate-600 hover:text-slate-800'
-                : 'text-white/70 hover:text-white/90'
-          }`}
-        >
-          {result.domain}
-        </a>
+      {/* Name + status — stacked on narrow so row never forces page-wide pan */}
+      <div className="flex flex-col gap-0.5 min-w-0 overflow-hidden pr-1">
+        <div className="flex items-center gap-1.5 min-w-0">
+          <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot}`} aria-hidden />
+          <a
+            href={domainHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={domainTitle}
+            onCopy={onBlockCopy}
+            className={`font-mono text-[12px] sm:text-[12.5px] leading-snug select-none transition-colors truncate min-w-0 ${
+              isAvailable
+                ? isLight
+                  ? 'text-slate-900 hover:text-slate-950'
+                  : 'text-white hover:text-white'
+                : isLight
+                  ? 'text-slate-600 hover:text-slate-800'
+                  : 'text-white/70 hover:text-white/90'
+            }`}
+          >
+            {result.domain}
+          </a>
+        </div>
         <span
-          className={`shrink-0 rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
+          className={`ml-3 w-fit rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
             isAvailable
               ? isLight
                 ? 'bg-emerald-50 text-emerald-700'
@@ -1095,7 +1098,7 @@ function DomainRow({
           {isAvailable ? 'Available' : isPremium ? 'Premium' : 'Taken'}
         </span>
       </div>
-      <div className="flex items-center gap-0.5 shrink-0 justify-end">
+      <div className="flex items-center gap-0.5 shrink-0 justify-end max-w-[45%]">
         <button
           type="button"
           onClick={(e) => {

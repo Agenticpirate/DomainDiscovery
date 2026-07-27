@@ -35,16 +35,45 @@ nav a:has(.logo-icon-wrapper) {
 
 
 @layer base {
-  /* Prevent horizontal page pan / rubber-band on mobile (search results, long labels) */
+  /*
+   * Lock horizontal drag on mobile (search/results “screenshot” feel).
+   * touch-action: pan-y = only vertical scroll; left/right drag does not pan the page.
+   */
   html {
-    overflow-x: clip;
+    overflow-x: hidden;
     max-width: 100%;
+    width: 100%;
+    overscroll-behavior-x: none;
+    touch-action: pan-y;
   }
 
   body {
-    overflow-x: clip;
+    overflow-x: hidden;
     max-width: 100%;
+    width: 100%;
+    position: relative;
     overscroll-behavior-x: none;
+    touch-action: pan-y;
+  }
+
+  /* Search (and similar tool) pages — stick viewport, no sideways pull */
+  .page-x-lock {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    overscroll-behavior-x: none;
+    touch-action: pan-y;
+    position: relative;
+  }
+
+  .page-x-lock * {
+    /* Nested scroll areas (tabs) may opt in; default is vertical only */
+    max-width: 100%;
+  }
+
+  .page-x-lock .allow-x-scroll {
+    max-width: none;
+    touch-action: pan-x pan-y;
   }
 
   :root {
