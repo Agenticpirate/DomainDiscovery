@@ -9,7 +9,6 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import { getRegistrarUrl, type RegistrarName } from '@/lib/registrars';
-import { pronounceDomain } from '@/lib/pronounceDomain';
 
 interface DomainTag {
   domain: string;
@@ -631,30 +630,6 @@ const ResultsView: React.FC<{
                         {d.price}
                       </span>
                     )}
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        pronounceDomain(d.domain);
-                      }}
-                      className={`shrink-0 p-1 rounded-md transition-colors ${
-                        isLight
-                          ? 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
-                          : 'text-white/40 hover:text-white/80 hover:bg-white/[0.06]'
-                      }`}
-                      aria-label={`Pronounce ${d.domain}`}
-                      title="Say domain name"
-                    >
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15.536 8.464a5 5 0 010 7.072M12 6v12m0 0l-4-4H5a1 1 0 01-1-1v-2a1 1 0 011-1h3l4-4zM18.364 5.636a9 9 0 010 12.728"
-                        />
-                      </svg>
-                    </button>
                     <div className="relative shrink-0 opacity-90 group-hover:opacity-100">
                       <RegistrarActionMenu
                         domain={d.domain}
