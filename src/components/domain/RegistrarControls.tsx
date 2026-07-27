@@ -180,68 +180,91 @@ export function RegistrarActionMenu({
             visibility: menuStyle.visibility,
           }}
           className={cn(
-            'z-[90] rounded-xl border p-1.5 shadow-2xl',
+            'z-[100] max-h-[min(70vh,22rem)] overflow-y-auto overscroll-contain rounded-2xl border p-2 shadow-2xl',
             isLight
-              ? 'border-slate-200 bg-white/96 shadow-slate-900/10 backdrop-blur-xl'
-              : 'border-white/10 bg-[#111214]/96 shadow-black/60 backdrop-blur-xl'
+              ? 'border-slate-200 bg-white shadow-slate-900/15'
+              : 'border-white/12 bg-[#0c0c0e] shadow-black/70'
           )}
         >
-          <div className={cn('px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.22em]', isLight ? 'text-slate-400' : 'text-white/35')}>
-            Register at
+          <div
+            className={cn(
+              'px-2.5 pt-1 pb-2 text-[10px] font-bold uppercase tracking-[0.16em]',
+              isLight ? 'text-slate-400' : 'text-white/40'
+            )}
+          >
+            Open at registrar
           </div>
-          {REGISTRARS.map((registrar) => (
-            <button
-              key={registrar.name}
-              type="button"
-              onClick={() => openRegistrar(registrar.name)}
-              className={cn(
-                'flex w-full items-center justify-between gap-2 rounded-lg px-2.5 py-2 text-left text-[12px] font-medium transition-colors',
-                isLight
-                  ? 'text-slate-700 hover:bg-slate-50 hover:text-slate-950'
-                  : 'text-white/78 hover:bg-white/[0.05] hover:text-white'
-              )}
-            >
-              <span className="flex items-center gap-2.5 min-w-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={registrar.logo}
-                  alt=""
-                  width={18}
-                  height={18}
+          <div className="space-y-0.5">
+            {REGISTRARS.map((registrar) => {
+              const selected = registrar.name === selectedRegistrar;
+              return (
+                <button
+                  key={registrar.name}
+                  type="button"
+                  onClick={() => openRegistrar(registrar.name)}
                   className={cn(
-                    'h-[18px] w-[18px] shrink-0 rounded-md object-contain',
-                    isLight ? 'bg-white ring-1 ring-slate-200' : 'bg-white/95 ring-1 ring-white/10'
+                    'flex w-full items-center justify-between gap-2 rounded-xl px-2.5 py-2.5 text-left text-[13px] font-medium transition-colors',
+                    selected
+                      ? isLight
+                        ? 'bg-slate-900 text-white'
+                        : 'bg-white text-black'
+                      : isLight
+                        ? 'text-slate-700 hover:bg-slate-50'
+                        : 'text-white/80 hover:bg-white/[0.06]'
                   )}
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span className="truncate">{registrar.host}</span>
-              </span>
-              <span className="flex items-center gap-1.5 shrink-0">
-                {registrar.name === selectedRegistrar && (
-                  <svg className={cn('h-3.5 w-3.5', isLight ? 'text-slate-400' : 'text-white/60')} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M5 13l4 4L19 7" />
-                  </svg>
-                )}
-                <svg className={cn('h-3.5 w-3.5', isLight ? 'text-slate-300' : 'text-white/20')} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 5l7 7-7 7" />
-                </svg>
-              </span>
-            </button>
-          ))}
+                >
+                  <span className="flex items-center gap-2.5 min-w-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={registrar.logo}
+                      alt=""
+                      width={20}
+                      height={20}
+                      className={cn(
+                        'h-5 w-5 shrink-0 rounded-md object-contain p-0.5',
+                        isLight ? 'bg-white ring-1 ring-slate-200' : 'bg-white ring-1 ring-black/5'
+                      )}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span className="truncate">{registrar.host}</span>
+                  </span>
+                  {selected && (
+                    <svg
+                      className={cn('h-4 w-4 shrink-0', isLight ? 'text-white/80' : 'text-black/70')}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>,
         document.body
       )
     : null;
 
+  // Unified pill: primary action + chevron share one rounded control (no messy split blobs)
+  const joinedShell = cn(
+    'inline-flex items-stretch overflow-hidden rounded-full shadow-sm',
+    isLight ? 'ring-1 ring-black/5' : 'ring-1 ring-white/10'
+  );
+
   return (
     <div className="relative z-10 shrink-0 max-w-full" ref={containerRef}>
       {canRegister ? (
-        <div className="flex items-center gap-0.5 sm:gap-1 max-w-full">
+        <div className={joinedShell}>
           <button
             type="button"
             onClick={() => openRegistrar(selectedRegistrar)}
-            className={primaryButtonClassName}
+            className={cn(
+              'inline-flex items-center justify-center gap-1 pl-3 pr-2 py-1.5 text-[11px] sm:text-[12px] font-bold transition-colors',
+              primaryButtonClassName
+            )}
             title={`Register on ${selectedRegistrar}`}
           >
             {primaryLabel}
@@ -252,11 +275,16 @@ export function RegistrarActionMenu({
             aria-haspopup="menu"
             aria-expanded={open}
             onClick={() => setOpen((current) => !current)}
-            className={chevronButtonClassName}
+            className={cn(
+              'inline-flex items-center justify-center border-l px-2 py-1.5 transition-colors',
+              isLight ? 'border-black/10' : 'border-black/15',
+              chevronButtonClassName
+            )}
             title="Choose registrar"
+            aria-label="Choose registrar"
           >
-            <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M19 9l-7 7-7-7" />
             </svg>
           </button>
         </div>
@@ -264,10 +292,13 @@ export function RegistrarActionMenu({
         <button
           type="button"
           onClick={handleFallbackClick}
-          className={fallbackButtonClassName}
+          className={cn(
+            'inline-flex items-center justify-center rounded-full px-3 py-1.5 text-[11px] sm:text-[12px] font-bold transition-colors',
+            fallbackButtonClassName
+          )}
           title={premiumLabel || (premiumUrl ? 'View premium listing' : 'View WHOIS')}
         >
-          {premiumUrl ? 'View Listing' : 'WHOIS'}
+          {premiumUrl ? 'View' : 'WHOIS'}
         </button>
       )}
       {menu}

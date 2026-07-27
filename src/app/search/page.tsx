@@ -694,18 +694,18 @@ function SearchPageContent() {
             </div>
           )}
 
-          {/* Compact primary strip — solid, full domain visible on mobile */}
+          {/* Primary domain card — always fully visible under sticky chrome */}
           {primary && (
             <div
-              className={`shine-border no-lift flex flex-col gap-2 rounded-xl border px-3 sm:px-3.5 py-2.5 sm:py-2 mb-2 sm:mb-2.5 w-full max-w-full min-w-0 box-border ${
+              className={`shine-border no-lift flex flex-col gap-2.5 rounded-2xl border px-3 py-3 mb-2.5 w-full max-w-full min-w-0 box-border scroll-mt-40 ${
                 isLight
                   ? 'bg-white border-slate-200 shadow-sm'
                   : 'bg-[#0c0c0e] border-white/10'
               }`}
             >
-              <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 w-full min-w-0">
+              <div className="flex items-start gap-2 min-w-0 w-full">
                 <span
-                  className={`h-2 w-2 rounded-full shrink-0 ${
+                  className={`mt-1.5 h-2 w-2 rounded-full shrink-0 ${
                     primary.available
                       ? isLight
                         ? 'bg-emerald-500'
@@ -715,45 +715,56 @@ function SearchPageContent() {
                         : 'bg-rose-400'
                   }`}
                 />
-                <span
-                  className={`font-mono text-[13px] sm:text-[15px] font-bold break-all select-none min-w-0 ${
-                    primary.available
-                      ? isLight
-                        ? 'text-slate-900'
-                        : 'text-white'
-                      : isLight
-                        ? 'text-slate-500'
-                        : 'text-white/70'
-                  }`}
-                  onCopy={blockCopy}
-                >
-                  {primary.domain}
-                </span>
-                <span
-                  className={`shrink-0 text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full ${
-                    primary.available
-                      ? isLight
-                        ? 'bg-emerald-50 text-emerald-700'
-                        : 'bg-emerald-400/15 text-emerald-300'
-                      : isLight
-                        ? 'bg-rose-50 text-rose-600'
-                        : 'bg-rose-400/15 text-rose-300'
-                  }`}
-                >
-                  {primary.available ? 'Available' : 'Taken'}
-                </span>
+                <div className="min-w-0 flex-1">
+                  <p
+                    className={`font-mono text-[14px] sm:text-[15px] font-bold break-all select-none leading-snug ${
+                      primary.available
+                        ? isLight
+                          ? 'text-slate-900'
+                          : 'text-white'
+                        : isLight
+                          ? 'text-slate-600'
+                          : 'text-white/75'
+                    }`}
+                    onCopy={blockCopy}
+                  >
+                    {primary.domain}
+                  </p>
+                  <span
+                    className={`mt-1 inline-flex text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-md ${
+                      primary.available
+                        ? isLight
+                          ? 'bg-emerald-50 text-emerald-700'
+                          : 'bg-emerald-400/15 text-emerald-300'
+                        : isLight
+                          ? 'bg-rose-50 text-rose-600'
+                          : 'bg-rose-400/15 text-rose-300'
+                    }`}
+                  >
+                    {primary.available ? 'Available' : 'Taken'}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-1.5 shrink-0 w-full max-w-full flex-wrap justify-end">
-                <div className="relative">
-                  <button type="button" onClick={() => setShowMoreActions(!showMoreActions)} className={btnClass}>
+
+              <div className="flex items-center gap-2 w-full min-w-0">
+                <div className="relative shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setShowMoreActions(!showMoreActions)}
+                    className={`inline-flex h-9 items-center rounded-full border px-3 text-[11px] font-semibold ${
+                      isLight
+                        ? 'border-slate-200 bg-slate-50 text-slate-600'
+                        : 'border-white/12 bg-[#121214] text-white/70'
+                    }`}
+                  >
                     More
                   </button>
                   {showMoreActions && (
                     <div
-                      className={`absolute top-full right-0 mt-1 rounded-lg z-50 py-0.5 min-w-[140px] border ${
+                      className={`absolute top-full left-0 mt-1.5 z-50 min-w-[10.5rem] rounded-2xl border p-1.5 shadow-xl ${
                         isLight
-                          ? 'bg-white border-slate-200 shadow-lg'
-                          : 'bg-neutral-900 border-white/10 shadow-xl'
+                          ? 'bg-white border-slate-200'
+                          : 'bg-[#0c0c0e] border-white/12'
                       }`}
                     >
                       <button
@@ -765,11 +776,11 @@ function SearchPageContent() {
                           );
                           setShowMoreActions(false);
                         }}
-                        className={`w-full text-left px-2.5 py-1.5 text-[11px] font-medium ${
-                          isLight ? 'hover:bg-slate-50 text-slate-600' : 'hover:bg-white/5 text-white/60'
+                        className={`w-full rounded-xl text-left px-3 py-2.5 text-[12px] font-medium ${
+                          isLight ? 'hover:bg-slate-50 text-slate-700' : 'hover:bg-white/[0.06] text-white/80'
                         }`}
                       >
-                        Value
+                        Value estimate
                       </button>
                       <button
                         type="button"
@@ -777,11 +788,11 @@ function SearchPageContent() {
                           window.open(`https://web.archive.org/web/*/${primary.domain}`, '_blank');
                           setShowMoreActions(false);
                         }}
-                        className={`w-full text-left px-2.5 py-1.5 text-[11px] font-medium ${
-                          isLight ? 'hover:bg-slate-50 text-slate-600' : 'hover:bg-white/5 text-white/60'
+                        className={`w-full rounded-xl text-left px-3 py-2.5 text-[12px] font-medium ${
+                          isLight ? 'hover:bg-slate-50 text-slate-700' : 'hover:bg-white/[0.06] text-white/80'
                         }`}
                       >
-                        Wayback
+                        Wayback Machine
                       </button>
                     </div>
                   )}
@@ -789,14 +800,14 @@ function SearchPageContent() {
                 <button
                   type="button"
                   onClick={() => handleSave(primary.domain)}
-                  className={`h-8 w-8 inline-flex items-center justify-center rounded-lg border shrink-0 ${
+                  className={`h-9 w-9 inline-flex items-center justify-center rounded-full border shrink-0 ${
                     primarySaved
                       ? isLight
                         ? 'bg-slate-900 text-white border-slate-900'
                         : 'bg-white text-black border-white'
                       : isLight
                         ? 'border-slate-200 text-slate-500 bg-white'
-                        : 'border-white/12 text-white/45 bg-[#0c0c0e]'
+                        : 'border-white/12 text-white/50 bg-[#121214]'
                   }`}
                   aria-label="Save"
                 >
@@ -815,14 +826,14 @@ function SearchPageContent() {
                           'noopener,noreferrer'
                         )
                   }
-                  className={`inline-flex items-center gap-1 rounded-lg px-2.5 sm:px-3 py-1.5 text-[11px] font-bold shrink-0 ${
+                  className={`ml-auto inline-flex h-9 items-center justify-center rounded-full px-4 text-[12px] font-bold shrink-0 ${
                     primary.available
                       ? isLight
                         ? 'bg-emerald-600 text-white hover:bg-emerald-500'
                         : 'bg-emerald-500 text-black hover:bg-emerald-400'
                       : isLight
-                        ? 'bg-slate-100 text-slate-600'
-                        : 'bg-white/10 text-white/70'
+                        ? 'bg-slate-900 text-white'
+                        : 'bg-white text-black'
                   }`}
                 >
                   {primary.available ? 'Continue' : 'Lookup'}
@@ -1031,17 +1042,17 @@ function DomainRow({
         ? 'bg-rose-500'
         : 'bg-rose-400';
 
-  const ctaClass = isAvailable
+  const ctaFill = isAvailable
     ? isLight
       ? 'bg-emerald-600 text-white hover:bg-emerald-500'
-      : 'bg-emerald-500/90 text-black hover:bg-emerald-400'
+      : 'bg-emerald-500 text-black hover:bg-emerald-400'
     : showPremiumPrice
       ? isLight
         ? 'bg-amber-500 text-black hover:bg-amber-400'
         : 'bg-amber-400 text-black hover:bg-amber-300'
       : isLight
-        ? 'bg-slate-100 text-rose-600 hover:bg-slate-200'
-        : 'bg-white/[0.08] text-rose-300 hover:bg-white/12';
+        ? 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+        : 'bg-white/12 text-white/80 hover:bg-white/18';
 
   const desktopCta = isAvailable
     ? ctaText
@@ -1050,75 +1061,69 @@ function DomainRow({
         ? ctaText
         : 'Search'
       : ctaText;
-  // Compact mobile label so domain names are not crushed by "Continue"
-  const ctaLabel = (
-    <>
-      <span className="sm:hidden">{isAvailable ? 'Go' : showPremiumPrice ? ctaText : 'WHOIS'}</span>
-      <span className="hidden sm:inline">{desktopCta}</span>
-    </>
-  );
+  const ctaLabel = isAvailable ? 'Go' : showPremiumPrice ? ctaText : isPremium ? 'Buy' : 'WHOIS';
 
   return (
     <div
-      className={`shine-border no-lift group grid w-full max-w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-1.5 sm:gap-2 rounded-lg py-2 px-2 sm:px-2.5 transition-colors box-border overflow-hidden ${
+      className={`shine-border no-lift group flex items-center gap-2 w-full max-w-full min-w-0 rounded-xl py-2.5 px-2.5 sm:px-3 transition-colors box-border overflow-hidden ${
         isLight
-          ? 'bg-white hover:bg-slate-50 border border-transparent hover:border-slate-200'
-          : 'bg-[#0a0a0c] hover:bg-[#101014] border border-transparent hover:border-white/10'
+          ? 'bg-white hover:bg-slate-50 border border-slate-100'
+          : 'bg-[#0a0a0c] hover:bg-[#101014] border border-white/[0.06]'
       }`}
     >
-      {/* Name + status — stacked on narrow so row never forces page-wide pan */}
-      <div className="flex flex-col gap-0.5 min-w-0 overflow-hidden pr-1">
-        <div className="flex items-center gap-1.5 min-w-0">
-          <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot}`} aria-hidden />
+      <div className="flex items-center gap-2 min-w-0 flex-1 overflow-hidden">
+        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot}`} aria-hidden />
+        <div className="min-w-0 flex-1 overflow-hidden">
           <a
             href={domainHref}
             target="_blank"
             rel="noopener noreferrer"
             title={domainTitle}
             onCopy={onBlockCopy}
-            className={`font-mono text-[12px] sm:text-[12.5px] leading-snug select-none transition-colors truncate min-w-0 ${
+            className={`block font-mono text-[12.5px] sm:text-[13px] leading-snug select-none transition-colors truncate ${
               isAvailable
                 ? isLight
                   ? 'text-slate-900 hover:text-slate-950'
                   : 'text-white hover:text-white'
                 : isLight
                   ? 'text-slate-600 hover:text-slate-800'
-                  : 'text-white/70 hover:text-white/90'
+                  : 'text-white/75 hover:text-white/90'
             }`}
           >
             {result.domain}
           </a>
-        </div>
-        <span
-          className={`ml-3 w-fit rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
-            isAvailable
-              ? isLight
-                ? 'bg-emerald-50 text-emerald-700'
-                : 'bg-emerald-400/15 text-emerald-300'
-              : isPremium
+          <span
+            className={`mt-0.5 inline-flex rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
+              isAvailable
                 ? isLight
-                  ? 'bg-amber-50 text-amber-700'
-                  : 'bg-amber-400/15 text-amber-300'
-                : isLight
-                  ? 'bg-rose-50 text-rose-600'
-                  : 'bg-rose-400/15 text-rose-300'
-          }`}
-        >
-          {isAvailable ? 'Available' : isPremium ? 'Premium' : 'Taken'}
-        </span>
+                  ? 'bg-emerald-50 text-emerald-700'
+                  : 'bg-emerald-400/15 text-emerald-300'
+                : isPremium
+                  ? isLight
+                    ? 'bg-amber-50 text-amber-700'
+                    : 'bg-amber-400/15 text-amber-300'
+                  : isLight
+                    ? 'bg-rose-50 text-rose-600'
+                    : 'bg-rose-400/15 text-rose-300'
+            }`}
+          >
+            {isAvailable ? 'Available' : isPremium ? 'Premium' : 'Taken'}
+          </span>
+        </div>
       </div>
-      <div className="flex items-center gap-0.5 shrink-0 justify-end max-w-[45%]">
+
+      <div className="flex items-center gap-1.5 shrink-0">
         <button
           type="button"
           onClick={() => onSave(result.domain)}
-          className={`p-1.5 rounded-md transition-colors sm:opacity-0 sm:group-hover:opacity-100 sm:focus:opacity-100 ${
+          className={`h-8 w-8 inline-flex items-center justify-center rounded-full border transition-colors ${
             isSaved
               ? isLight
-                ? 'text-slate-900 opacity-100'
-                : 'text-white opacity-100'
+                ? 'text-slate-900 border-slate-900 bg-slate-100'
+                : 'text-white border-white/30 bg-white/10'
               : isLight
-                ? 'text-slate-400 hover:text-slate-600'
-                : 'text-white/40 hover:text-white/70'
+                ? 'text-slate-400 border-slate-200 hover:text-slate-700'
+                : 'text-white/40 border-white/10 hover:text-white/75'
           }`}
           aria-label={isSaved ? 'Remove save' : 'Save domain'}
           title={isSaved ? 'Saved' : 'Save'}
@@ -1142,12 +1147,17 @@ function DomainRow({
           selectedRegistrar={selectedRegistrar}
           onSelectRegistrar={onSelectRegistrar}
           canRegister={isAvailable || isPremium}
-          primaryLabel={ctaLabel}
+          primaryLabel={
+            <>
+              <span className="sm:hidden">{ctaLabel}</span>
+              <span className="hidden sm:inline">{desktopCta}</span>
+            </>
+          }
           premiumUrl={result.premium ? result.buyUrl : undefined}
           premiumLabel={result.purchaseInfo}
-          primaryButtonClassName={`min-w-0 sm:min-w-[4.25rem] px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors whitespace-nowrap ${ctaClass}`}
-          chevronButtonClassName={`rounded-md p-1 transition-colors ${ctaClass}`}
-          fallbackButtonClassName={`min-w-0 sm:min-w-[4.25rem] px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold rounded-md transition-colors whitespace-nowrap ${ctaClass}`}
+          primaryButtonClassName={ctaFill}
+          chevronButtonClassName={ctaFill}
+          fallbackButtonClassName={ctaFill}
         />
       </div>
     </div>

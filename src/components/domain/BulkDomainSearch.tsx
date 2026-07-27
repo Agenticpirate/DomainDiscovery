@@ -639,21 +639,21 @@ const ResultsView: React.FC<{
                         primaryLabel={d.status === 'premium' ? 'Go' : d.status === 'available' ? 'Go' : 'Info'}
                         premiumUrl={d.status === 'premium' ? d.buyUrl : undefined}
                         premiumLabel={d.purchaseInfo}
-                        primaryButtonClassName={`text-[10px] px-1.5 py-0.5 rounded-md font-bold transition-colors ${
+                        primaryButtonClassName={
                           isLight
                             ? 'bg-slate-900 text-white hover:bg-slate-800'
                             : 'bg-white text-black hover:bg-white/90'
-                        }`}
-                        chevronButtonClassName={`rounded-md p-1 transition-colors ${
+                        }
+                        chevronButtonClassName={
                           isLight
-                            ? 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
-                            : 'text-white/35 hover:text-white/70 hover:bg-white/[0.06]'
-                        }`}
-                        fallbackButtonClassName={`text-[10px] px-1.5 py-0.5 rounded-md font-semibold transition-colors ${
+                            ? 'bg-slate-900 text-white hover:bg-slate-800'
+                            : 'bg-white text-black hover:bg-white/90'
+                        }
+                        fallbackButtonClassName={
                           isLight
                             ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                            : 'bg-white/[0.06] text-white/60 hover:bg-white/10'
-                        }`}
+                            : 'bg-white/[0.08] text-white/70 hover:bg-white/12'
+                        }
                       />
                     </div>
                   </div>
