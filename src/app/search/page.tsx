@@ -115,7 +115,6 @@ function SearchPageContent() {
   const [isLoading, setIsLoading] = useState(false);
   const [isBrandableLoading, setIsBrandableLoading] = useState(false);
   const [savedDomains, setSavedDomains] = useState<string[]>([]);
-  const [showMoreActions, setShowMoreActions] = useState(false);
   const [extFilter, setExtFilter] = useState<'all' | 'available' | 'premium' | 'taken'>('all');
   const [showAllExts, setShowAllExts] = useState(false);
   const [premiumEnrichmentMap, setPremiumEnrichmentMap] = useState<Record<string, PremiumEnrichment>>({});
@@ -230,10 +229,6 @@ function SearchPageContent() {
     }
   }, [initialQuery, doSearch]);
 
-  const handleBuy = useCallback((domain: string) => {
-    window.open(getRegistrarUrl(domain, selectedRegistrar), '_blank', 'noopener,noreferrer');
-  }, [selectedRegistrar]);
-
   const handleSave = (domain: string) => {
     const { saved } = toggleSavedDomain(domain);
     setSavedDomains(getSavedDomainNames());
@@ -245,7 +240,6 @@ function SearchPageContent() {
     e.preventDefault();
   };
 
-  const primary = results.find(r => r.domain.endsWith('.com')) || results[0];
   const brandableTaken = brandableResults.filter(r => !r.available);
 
   const premiumCandidates = useMemo(() => {
@@ -438,7 +432,6 @@ function SearchPageContent() {
       : 'border-white/12 bg-white/[0.04] text-white/65 hover:border-white/20 hover:bg-white/[0.07]'
   }`;
 
-  const primarySaved = primary ? savedDomains.includes(primary.domain) : false;
   const checkedCount = allGridResults.length;
   const progressPct = isLoading
     ? Math.min(92, Math.max(12, Math.round((checkedCount / Math.max(ALL_TLDS.length, 1)) * 100)))
@@ -694,155 +687,7 @@ function SearchPageContent() {
             </div>
           )}
 
-          {/* Primary domain card — always fully visible under sticky chrome */}
-          {primary && (
-            <div
-              className={`shine-border no-lift flex flex-col gap-2.5 rounded-2xl border px-3 py-3 mb-2.5 w-full max-w-full min-w-0 box-border scroll-mt-40 ${
-                isLight
-                  ? 'bg-white border-slate-200 shadow-sm'
-                  : 'bg-[#0c0c0e] border-white/10'
-              }`}
-            >
-              <div className="flex items-start gap-2 min-w-0 w-full">
-                <span
-                  className={`mt-1.5 h-2 w-2 rounded-full shrink-0 ${
-                    primary.available
-                      ? isLight
-                        ? 'bg-emerald-500'
-                        : 'bg-emerald-400'
-                      : isLight
-                        ? 'bg-rose-500'
-                        : 'bg-rose-400'
-                  }`}
-                />
-                <div className="min-w-0 flex-1">
-                  <p
-                    className={`font-mono text-[14px] sm:text-[15px] font-bold break-all select-none leading-snug ${
-                      primary.available
-                        ? isLight
-                          ? 'text-slate-900'
-                          : 'text-white'
-                        : isLight
-                          ? 'text-slate-600'
-                          : 'text-white/75'
-                    }`}
-                    onCopy={blockCopy}
-                  >
-                    {primary.domain}
-                  </p>
-                  <span
-                    className={`mt-1 inline-flex text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-md ${
-                      primary.available
-                        ? isLight
-                          ? 'bg-emerald-50 text-emerald-700'
-                          : 'bg-emerald-400/15 text-emerald-300'
-                        : isLight
-                          ? 'bg-rose-50 text-rose-600'
-                          : 'bg-rose-400/15 text-rose-300'
-                    }`}
-                  >
-                    {primary.available ? 'Available' : 'Taken'}
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 w-full min-w-0">
-                <div className="relative shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => setShowMoreActions(!showMoreActions)}
-                    className={`inline-flex h-9 items-center rounded-full border px-3 text-[11px] font-semibold ${
-                      isLight
-                        ? 'border-slate-200 bg-slate-50 text-slate-600'
-                        : 'border-white/12 bg-[#121214] text-white/70'
-                    }`}
-                  >
-                    More
-                  </button>
-                  {showMoreActions && (
-                    <div
-                      className={`absolute top-full left-0 mt-1.5 z-50 min-w-[10.5rem] rounded-2xl border p-1.5 shadow-xl ${
-                        isLight
-                          ? 'bg-white border-slate-200'
-                          : 'bg-[#0c0c0e] border-white/12'
-                      }`}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => {
-                          window.open(
-                            `https://www.godaddy.com/domain-value-appraisal/appraisal/?domain=${primary.domain}`,
-                            '_blank'
-                          );
-                          setShowMoreActions(false);
-                        }}
-                        className={`w-full rounded-xl text-left px-3 py-2.5 text-[12px] font-medium ${
-                          isLight ? 'hover:bg-slate-50 text-slate-700' : 'hover:bg-white/[0.06] text-white/80'
-                        }`}
-                      >
-                        Value estimate
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          window.open(`https://web.archive.org/web/*/${primary.domain}`, '_blank');
-                          setShowMoreActions(false);
-                        }}
-                        className={`w-full rounded-xl text-left px-3 py-2.5 text-[12px] font-medium ${
-                          isLight ? 'hover:bg-slate-50 text-slate-700' : 'hover:bg-white/[0.06] text-white/80'
-                        }`}
-                      >
-                        Wayback Machine
-                      </button>
-                    </div>
-                  )}
-                </div>
-                <button
-                  type="button"
-                  onClick={() => handleSave(primary.domain)}
-                  className={`h-9 w-9 inline-flex items-center justify-center rounded-full border shrink-0 ${
-                    primarySaved
-                      ? isLight
-                        ? 'bg-slate-900 text-white border-slate-900'
-                        : 'bg-white text-black border-white'
-                      : isLight
-                        ? 'border-slate-200 text-slate-500 bg-white'
-                        : 'border-white/12 text-white/50 bg-[#121214]'
-                  }`}
-                  aria-label="Save"
-                >
-                  <svg className="w-3.5 h-3.5" fill={primarySaved ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    primary.available
-                      ? handleBuy(primary.domain)
-                      : window.open(
-                          `https://who.is/whois/${encodeURIComponent(primary.domain)}`,
-                          '_blank',
-                          'noopener,noreferrer'
-                        )
-                  }
-                  className={`ml-auto inline-flex h-9 items-center justify-center rounded-full px-4 text-[12px] font-bold shrink-0 ${
-                    primary.available
-                      ? isLight
-                        ? 'bg-emerald-600 text-white hover:bg-emerald-500'
-                        : 'bg-emerald-500 text-black hover:bg-emerald-400'
-                      : isLight
-                        ? 'bg-slate-900 text-white'
-                        : 'bg-white text-black'
-                  }`}
-                >
-                  {primary.available ? 'Continue' : 'Lookup'}
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Domain grid — solid rows, full names, compact CTAs; never wider than viewport */}
+          {/* Domain grid — full list (no separate primary strip that clipped under sticky chrome) */}
           {checkedCount > 0 && (
             <div
               className={`rounded-xl border p-1 sm:p-1.5 w-full max-w-full min-w-0 overflow-x-clip box-border ${
