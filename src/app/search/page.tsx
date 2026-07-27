@@ -442,7 +442,7 @@ function SearchPageContent() {
 
   return (
     <div
-      className="page-x-lock min-h-screen w-full max-w-full overflow-x-hidden select-none"
+      className="page-x-lock flex h-[100dvh] max-h-[100dvh] w-full max-w-full flex-col overflow-hidden select-none"
       style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
       onCopy={blockCopy}
       onCut={blockCopy}
@@ -451,17 +451,22 @@ function SearchPageContent() {
       <PageBackground variant="minimal" />
       <Navigation activeTool="search" onToolSelect={() => {}} />
 
-      <main className="relative w-full max-w-full min-w-0 overflow-x-hidden pt-[3.05rem] sm:pt-[3.9rem] pb-6">
-        {/* Dots disabled on search — results must stay free of ambient bubbles */}
+      {/*
+        Split layout: chrome is flex-none (never overlaps results).
+        Only the results pane scrolls — fixes first row clipped under sticky filters.
+      */}
+      <main className="relative flex min-h-0 w-full max-w-full flex-1 flex-col overflow-hidden pt-[3.05rem] sm:pt-[3.9rem]">
         <SectionAmbient
           intensity="page"
           solidBase
           disabled
-          className="min-h-[70vh] w-full max-w-full min-w-0 overflow-x-hidden"
+          spotlight={false}
+          className="flex min-h-0 w-full max-w-full flex-1 flex-col overflow-hidden"
+          contentClassName="flex min-h-0 w-full max-w-full flex-1 flex-col overflow-hidden"
         >
-        {/* Full-width sticky chrome — fully opaque (no glass bleed) */}
+        {/* Search chrome — fixed height, not sticky over the list */}
         <div
-          className={`relative sticky top-[2.95rem] sm:top-[3.75rem] z-40 border-b w-full max-w-full ${
+          className={`relative z-40 w-full max-w-full shrink-0 border-b ${
             isLight ? 'bg-white border-slate-200' : 'bg-[#050505] border-white/[0.07]'
           }`}
         >
@@ -656,11 +661,12 @@ function SearchPageContent() {
           </div>
         </div>
 
-        {/* Results panel — solid plate, locked to viewport width (no side pan) */}
+        {/* Results pane — only this region scrolls; chrome stays clear above */}
         <div
-          className="w-full max-w-full min-w-0 sm:max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 box-border overflow-x-hidden"
+          className="min-h-0 w-full max-w-full flex-1 overflow-x-hidden overflow-y-auto overscroll-y-contain"
           style={{ backgroundColor: isLight ? '#ffffff' : '#050505' }}
         >
+        <div className="mx-auto w-full max-w-full min-w-0 sm:max-w-[100rem] box-border px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3">
           {isLoading && results.length === 0 && (
             <div className="py-16 text-center">
               <div className="inline-flex items-center gap-2">
@@ -816,12 +822,16 @@ function SearchPageContent() {
           )}
         </div>
 
-        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.search} compact />
-        <SeoGuidePack {...TOOL_GUIDE_PACKS.search} />
+        <div className="hidden sm:block">
+          <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.search} compact />
+          <SeoGuidePack {...TOOL_GUIDE_PACKS.search} />
+        </div>
+        <div className="pb-6 sm:pb-8">
+          <Footer />
+        </div>
+        </div>
         </SectionAmbient>
       </main>
-
-      <Footer />
     </div>
   );
 }
