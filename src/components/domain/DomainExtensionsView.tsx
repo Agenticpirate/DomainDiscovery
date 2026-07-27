@@ -145,6 +145,8 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
 
   // Browse starts on Featured so the page isn’t buried under 1,000 cards
   const [selectedCategory, setSelectedCategory] = useState<string>('Featured');
+  /** Availability filter during live name search */
+  const [statusFilter, setStatusFilter] = useState<'all' | 'available' | 'taken'>('all');
   const [extensions, setExtensions] = useState<Extension[]>(() =>
     EXTENSIONS_BASE_DATA.map((ext) => ({ ...ext, available: null, checking: false }))
   );
@@ -256,8 +258,9 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
    * - Name search + All: dedupe by TLD so .com isn’t listed twice.
    * - Name search + Technology: only Technology TLDs (even if that TLD also lives in Popular).
    * - TLD filter (starts with "."): match tld / name / category text.
+   * - Status filter (available / taken) applies after category during live name search.
    */
-  const filteredExtensions = useMemo(() => {
+  const categoryFilteredExtensions = useMemo(() => {
     let filtered = extensions;
 
     if (selectedCategory !== 'All') {
@@ -288,6 +291,24 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
     return filtered;
   }, [extensions, selectedCategory, activeQuery, isNameSearch, isTldFilter]);
 
+  const availableCount = useMemo(
+    () => categoryFilteredExtensions.filter((e) => e.available === true).length,
+    [categoryFilteredExtensions]
+  );
+  const takenCount = useMemo(
+    () => categoryFilteredExtensions.filter((e) => e.available === false).length,
+    [categoryFilteredExtensions]
+  );
+
+  const filteredExtensions = useMemo(() => {
+    if (!isNameSearch || statusFilter === 'all') return categoryFilteredExtensions;
+    if (statusFilter === 'available') {
+      return categoryFilteredExtensions.filter((e) => e.available === true);
+    }
+    // taken — include confirmed taken only
+    return categoryFilteredExtensions.filter((e) => e.available === false);
+  }, [categoryFilteredExtensions, isNameSearch, statusFilter]);
+
   // Auto-expand Featured → All when a name search begins so users see every TLD.
   // If they already picked Technology / Country / etc., keep that filter sticky.
   const prevSearchRef = useRef('');
@@ -301,10 +322,16 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
     }
   }, [localSearch]);
 
-  // Reset preview size when the name query changes (category reset is in pickCategory)
+  // Reset preview size + status filter when the name query changes
   useEffect(() => {
     setVisibleCount(PREVIEW_INITIAL);
+    setStatusFilter('all');
   }, [localSearch, searchQuery]);
+
+  // Reset preview when status filter changes
+  useEffect(() => {
+    setVisibleCount(PREVIEW_INITIAL);
+  }, [statusFilter]);
 
   const visibleExtensions = useMemo(
     () => filteredExtensions.slice(0, visibleCount),
@@ -312,15 +339,6 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
   );
   const hiddenCount = Math.max(0, filteredExtensions.length - visibleExtensions.length);
   const canViewMore = hiddenCount > 0;
-
-  const availableCount = useMemo(
-    () => filteredExtensions.filter((e) => e.available === true).length,
-    [filteredExtensions]
-  );
-  const takenCount = useMemo(
-    () => filteredExtensions.filter((e) => e.available === false).length,
-    [filteredExtensions]
-  );
 
   const totalTlds = UNIQUE_TLD_BASE.length;
   const catalogCount = EXTENSIONS_BASE_DATA.length;
@@ -375,19 +393,29 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
           <div className="min-w-0">
             <h2 className="text-[13px] sm:text-base font-black tracking-tight">
               {isNameSearch
-                ? selectedCategory === 'All'
-                  ? `Results for “${cleanKeyword}”`
-                  : `“${cleanKeyword}” · ${selectedCategory}`
+                ? statusFilter === 'available'
+                  ? `Available · “${cleanKeyword}”`
+                  : statusFilter === 'taken'
+                    ? `Taken · “${cleanKeyword}”`
+                    : selectedCategory === 'All'
+                      ? `Results for “${cleanKeyword}”`
+                      : `“${cleanKeyword}” · ${selectedCategory}`
                 : selectedCategory === 'All'
                   ? 'Browse extensions'
                   : `Browse · ${selectedCategory}`}
             </h2>
             <p className="text-[10px] sm:text-[12px] mt-0.5" style={{ color: 'var(--text-tertiary)' }}>
               {filteredExtensions.length === 0
-                ? 'No extensions in this filter.'
+                ? statusFilter === 'taken'
+                  ? 'No taken domains in this filter.'
+                  : statusFilter === 'available'
+                    ? 'No available domains in this filter yet.'
+                    : 'No extensions in this filter.'
                 : isNameSearch
                   ? `Showing ${visibleExtensions.length} of ${filteredExtensions.length}${
-                      !isChecking && hasLiveResults ? ` · ${availableCount} available` : ''
+                      !isChecking && hasLiveResults && statusFilter === 'all'
+                        ? ` · ${availableCount} available · ${takenCount} taken`
+                        : ''
                     }`
                   : `Showing ${visibleExtensions.length} of ${filteredExtensions.length}`}
             </p>
@@ -419,21 +447,44 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
 
         {filteredExtensions.length === 0 ? (
           <div className="text-center py-10">
-            <p className="font-semibold text-sm mb-1">No extensions found</p>
-            <p className="text-[12px]" style={{ color: 'var(--text-tertiary)' }}>
-              Try another category or clear the filter.
+            <p className="font-semibold text-sm mb-1">
+              {statusFilter === 'taken'
+                ? 'No taken domains here'
+                : statusFilter === 'available'
+                  ? 'No available domains here'
+                  : 'No extensions found'}
             </p>
-            {selectedCategory !== 'All' && (
-              <button
-                type="button"
-                onClick={() => pickCategory('All')}
-                className={`mt-3 text-[12px] font-semibold ${
-                  isLight ? 'text-slate-800' : 'text-white/80'
-                }`}
-              >
-                Show all categories
-              </button>
-            )}
+            <p className="text-[12px]" style={{ color: 'var(--text-tertiary)' }}>
+              {statusFilter !== 'all'
+                ? 'Try All, or switch category.'
+                : 'Try another category or clear the filter.'}
+            </p>
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+              {statusFilter !== 'all' && (
+                <button
+                  type="button"
+                  onClick={() => setStatusFilter('all')}
+                  className={`text-[12px] font-semibold rounded-full px-3 py-1.5 border ${
+                    isLight
+                      ? 'bg-slate-900 text-white border-slate-900'
+                      : 'bg-white text-black border-white'
+                  }`}
+                >
+                  Show all statuses
+                </button>
+              )}
+              {selectedCategory !== 'All' && (
+                <button
+                  type="button"
+                  onClick={() => pickCategory('All')}
+                  className={`text-[12px] font-semibold ${
+                    isLight ? 'text-slate-800' : 'text-white/80'
+                  }`}
+                >
+                  Show all categories
+                </button>
+              )}
+            </div>
           </div>
         ) : (
           <>
@@ -624,7 +675,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
           </Link>
         </div>
 
-        {/* Status chips — scoped to active category filter */}
+        {/* Status chips — filter available vs taken during live name search */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 flex-wrap mt-2 sm:mt-3">
           {isChecking && (
             <span
@@ -644,41 +695,71 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
               {selectedCategory !== 'All' ? ` ${selectedCategory}` : ' all TLDs'}…
             </span>
           )}
-          {!isChecking && isNameSearch && hasLiveResults && (
-            <>
-              <span
-                className={`text-[11px] font-semibold px-2.5 py-1.5 rounded-full border ${
-                  isLight
-                    ? 'bg-slate-900 text-white border-slate-900'
-                    : 'bg-white text-black border-white'
-                }`}
-              >
-                {availableCount} available
-                {selectedCategory !== 'All' ? ` in ${selectedCategory}` : ''}
-              </span>
-              <span
-                className={`text-[10px] sm:text-[11px] font-medium px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full border ${
-                  isLight
-                    ? 'bg-white text-slate-500 border-slate-200'
-                    : 'text-white/45 border-white/10'
-                }`}
-                style={isLight ? undefined : { backgroundColor: plateInset }}
-              >
-                {takenCount} taken
-              </span>
-              {selectedCategory !== 'All' && (
-                <span
-                  className={`text-[10px] sm:text-[11px] font-medium px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full border ${
-                    isLight
-                      ? 'bg-slate-50 text-slate-600 border-slate-200'
-                      : 'text-white/45 border-white/10'
-                  }`}
-                  style={isLight ? undefined : { backgroundColor: plateInset }}
-                >
-                  {filteredExtensions.length} in filter
-                </span>
-              )}
-            </>
+          {isNameSearch && hasLiveResults && (
+            <div
+              className={`inline-flex items-center gap-0.5 rounded-full border p-0.5 ${
+                isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10'
+              }`}
+              style={isLight ? undefined : { backgroundColor: plateInset }}
+              role="group"
+              aria-label="Filter by availability status"
+            >
+              {(
+                [
+                  {
+                    id: 'all' as const,
+                    label: 'All',
+                    n: categoryFilteredExtensions.length,
+                    dot: isLight ? 'bg-slate-400' : 'bg-white/45',
+                  },
+                  {
+                    id: 'available' as const,
+                    label: 'Available',
+                    n: availableCount,
+                    dot: isLight ? 'bg-emerald-500' : 'bg-emerald-400',
+                  },
+                  {
+                    id: 'taken' as const,
+                    label: 'Taken',
+                    n: takenCount,
+                    dot: isLight ? 'bg-rose-500' : 'bg-rose-400',
+                  },
+                ] as const
+              ).map((chip) => {
+                const active = statusFilter === chip.id;
+                return (
+                  <button
+                    key={chip.id}
+                    type="button"
+                    onClick={() => setStatusFilter(chip.id)}
+                    aria-pressed={active}
+                    className={`inline-flex items-center gap-1 sm:gap-1.5 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
+                      active
+                        ? chip.id === 'available'
+                          ? isLight
+                            ? 'bg-emerald-600 text-white shadow-sm'
+                            : 'bg-emerald-500 text-black shadow-sm'
+                          : chip.id === 'taken'
+                            ? isLight
+                              ? 'bg-rose-600 text-white shadow-sm'
+                              : 'bg-rose-500 text-black shadow-sm'
+                            : isLight
+                              ? 'bg-slate-900 text-white shadow-sm'
+                              : 'bg-white text-black shadow-sm'
+                        : isLight
+                          ? 'text-slate-600 hover:bg-white hover:text-slate-900'
+                          : 'text-white/55 hover:bg-white/[0.06] hover:text-white/85'
+                    }`}
+                  >
+                    <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${chip.dot}`} aria-hidden />
+                    <span>
+                      {chip.label}
+                      <span className="ml-0.5 tabular-nums opacity-80">{chip.n}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           )}
           {!activeQuery && (
             <span
@@ -886,6 +967,7 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
         'noopener,noreferrer'
       );
     } else if (extension.available === false) {
+      // Taken: open full search so user can check aftermarket / alternatives for that name
       window.location.href = `/search?q=${encodeURIComponent(cleanKeyword)}`;
     }
   };
@@ -895,18 +977,28 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
   let statusLabel = '';
   let statusDot = isLight ? 'bg-slate-300' : 'bg-white/25';
   let statusText = isLight ? 'text-slate-400' : 'text-white/35';
+  let cardBorder = isLight ? 'border-slate-200' : 'border-white/10';
+  let cardHover = isLight ? 'hover:shadow-md' : 'hover:border-white/16';
 
   if (extension.checking) {
     statusLabel = 'Checking';
     statusDot = isLight ? 'bg-slate-400 animate-pulse' : 'bg-white/50 animate-pulse';
   } else if (extension.available === true) {
     statusLabel = 'Available';
-    statusDot = isLight ? 'bg-slate-800' : 'bg-white';
-    statusText = isLight ? 'text-slate-700' : 'text-white/80';
+    statusDot = isLight ? 'bg-emerald-500' : 'bg-emerald-400';
+    statusText = isLight ? 'text-emerald-700' : 'text-emerald-300';
+    cardBorder = isLight ? 'border-emerald-200/80' : 'border-emerald-500/25';
+    cardHover = isLight
+      ? 'hover:border-emerald-300 hover:shadow-md hover:shadow-emerald-900/5'
+      : 'hover:border-emerald-400/40';
   } else if (extension.available === false) {
     statusLabel = 'Taken';
-    statusDot = isLight ? 'bg-slate-400' : 'bg-white/35';
-    statusText = isLight ? 'text-slate-500' : 'text-white/45';
+    statusDot = isLight ? 'bg-rose-500' : 'bg-rose-400';
+    statusText = isLight ? 'text-rose-600' : 'text-rose-300';
+    cardBorder = isLight ? 'border-rose-200/70' : 'border-rose-500/20';
+    cardHover = isLight
+      ? 'hover:border-rose-300 hover:shadow-md hover:shadow-rose-900/5'
+      : 'hover:border-rose-400/35';
   }
 
   const canClick = showStatus && !extension.checking && extension.available !== null;
@@ -916,13 +1008,19 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
       type="button"
       onClick={handleClick}
       disabled={!canClick}
-      title={showFullDomain && cleanKeyword ? fullDomain : extension.tld}
+      title={
+        showFullDomain && cleanKeyword
+          ? extension.available === false
+            ? `${fullDomain} · Taken — open search`
+            : extension.available
+              ? `${fullDomain} · Available — register`
+              : fullDomain
+          : extension.tld
+      }
       className={`shine-border group relative isolate flex flex-col p-2 sm:p-3 rounded-xl border text-left transition-all duration-200 ${
         canClick ? 'cursor-pointer' : 'cursor-default'
-      } ${
-        isLight
-          ? 'border-slate-200 shadow-sm shadow-slate-900/[0.03] hover:shadow-md'
-          : 'border-white/10 hover:border-white/16'
+      } ${cardBorder} ${
+        isLight ? `shadow-sm shadow-slate-900/[0.03] ${cardHover}` : cardHover
       }`}
       style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
     >
@@ -948,7 +1046,21 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
           )}
         </div>
         {showStatus && (
-          <span className={`mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full ${statusDot}`} title={statusLabel} />
+          <span
+            className={`mt-0.5 h-2 w-2 shrink-0 rounded-full ring-2 ${statusDot} ${
+              extension.available === true
+                ? isLight
+                  ? 'ring-emerald-100'
+                  : 'ring-emerald-400/20'
+                : extension.available === false
+                  ? isLight
+                    ? 'ring-rose-100'
+                    : 'ring-rose-400/20'
+                  : 'ring-transparent'
+            }`}
+            title={statusLabel}
+            aria-label={statusLabel}
+          />
         )}
       </div>
 
@@ -969,7 +1081,12 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
           {extension.price}
         </span>
         {showStatus && statusLabel && (
-          <span className={`text-[9px] sm:text-[10px] font-semibold ${statusText}`}>{statusLabel}</span>
+          <span
+            className={`inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold ${statusText}`}
+          >
+            <span className={`h-1.5 w-1.5 rounded-full ${statusDot}`} aria-hidden />
+            {statusLabel}
+          </span>
         )}
       </div>
       </div>
