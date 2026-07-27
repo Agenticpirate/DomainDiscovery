@@ -1,6 +1,6 @@
 # Content calendar — DomainDiscovery Learn
 
-**Cadence (SEO-100 batch):** **2 articles every day** until all 100 long-form guides are live (~50 days).  
+**Cadence (SEO-100 batch):** **3 articles every day** until all 100 long-form guides are live (**34 days**, 2026-07-27 → 2026-08-29).  
 **Cadence (pillars):** polish 1–2 product hubs per week as needed.  
 **Depth floor:** ~800+ words, answer-first H2s, internal links to tools + cluster hub.  
 **Avoid:** scaled thin stubs, doorway geo pages, fake stats.
@@ -12,11 +12,11 @@ Hubs: see `LEARN_CLUSTERS` in `src/lib/learnArticles.ts`.
 
 1. Source markdown: `content/seo-articles/article-01.md` … `article-100.md`
 2. Import into Learn JSON: `npm run learn:import-seo`
-3. Assign 2/day dates: `npm run learn:schedule-seo`
+3. Assign 3/day dates: `npm run learn:schedule-seo -- --per-day 3`
 4. Site only exposes articles with `publishedAt <= today (UTC)` (index, sitemap, `/learn/[slug]`)
 5. Check status: `npm run learn:schedule-seo:status`
 
-No manual “publish button” — Vercel ISR revalidates hourly, so each day’s pair unlocks automatically after deploy.
+No manual “publish button” — Vercel ISR revalidates hourly, so each day’s three guides unlock automatically after deploy.
 
 ---
 

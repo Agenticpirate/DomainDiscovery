@@ -29,7 +29,7 @@
     "seo:index-health:prod": "node scripts/seo-index-health.mjs --base https://www.domainsdiscovery.com",
     "learn:expand": "node scripts/expand-learn-phase-d.mjs",
     "learn:import-seo": "node scripts/import-seo-articles.mjs",
-    "learn:schedule-seo": "node scripts/schedule-seo-articles.mjs",
+    "learn:schedule-seo": "node scripts/schedule-seo-articles.mjs --per-day 3",
     "learn:schedule-seo:status": "node scripts/seo-publish-status.mjs",
     "mcp:server": "node scripts/mcp-domaindiscovery.mjs",
     "mcp:stdio": "npx --yes tsx scripts/mcp-domaindiscovery-entry.ts",

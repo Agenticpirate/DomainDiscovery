@@ -7,7 +7,7 @@
     "SEO long-form batch: imported 100 articles from content/seo-articles (article-01…100.md) via scripts/import-seo-articles.mjs — commercial/informational ranking guides with Quick Answer + FAQ structure.",
     "SEO long-form batch: imported 100 articles from content/seo-articles (article-01…100.md) via scripts/import-seo-articles.mjs — commercial/informational ranking guides with Quick Answer + FAQ structure.",
     "SEO long-form batch: imported 100 articles from content/seo-articles (article-01…100.md) via scripts/import-seo-articles.mjs — commercial/informational ranking guides with Quick Answer + FAQ structure.",
-    "SEO-100 drip schedule: 2/day from 2026-07-27 through 2026-09-14 (100 articles). Date-gated via publishedAt in learnArticles.ts."
+    "SEO-100 drip schedule: 3/day from 2026-07-27 through 2026-08-29 (100 articles). Date-gated via publishedAt in learnArticles.ts."
   ],
   "count": 235,
   "categories": [
@@ -14745,7 +14745,7 @@
       ],
       "description": "Porkbun review 2026: Is this quirky registrar really the best cheap domain registrar? We dig into pricing, features, and how it stacks up against Namecheap.",
       "trending": true,
-      "publishedAt": "2026-07-28",
+      "publishedAt": "2026-07-27",
       "sections": [
         {
           "heading": "Overview",
@@ -14883,7 +14883,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-07-28#1"
+      "scheduleSlot": "2026-07-27#3"
     },
     {
       "slug": "godaddy-alternatives-in-2026-8-better-and-cheaper-options",
@@ -15023,7 +15023,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-07-28#2"
+      "scheduleSlot": "2026-07-28#1"
     },
     {
       "slug": "namecheap-review-2026-pros-cons-and-hidden-fees",
@@ -15039,7 +15039,7 @@
       ],
       "description": "Namecheap review 2026: We cover real pricing, renewal fees, hidden costs, pros, cons, and whether Namecheap is still the best value domain registrar.",
       "trending": true,
-      "publishedAt": "2026-07-29",
+      "publishedAt": "2026-07-28",
       "sections": [
         {
           "heading": "Overview",
@@ -15179,7 +15179,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-07-29#1"
+      "scheduleSlot": "2026-07-28#2"
     },
     {
       "slug": "cloudflare-registrar-review-the-cheapest-domain-option",
@@ -15195,7 +15195,7 @@
       ],
       "description": "Cloudflare Registrar review: Is at-cost domain pricing too good to be true? We cover Cloudflare domains pricing, features, limitations, and who it's best for.",
       "trending": true,
-      "publishedAt": "2026-07-29",
+      "publishedAt": "2026-07-28",
       "sections": [
         {
           "heading": "Overview",
@@ -15331,7 +15331,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-07-29#2"
+      "scheduleSlot": "2026-07-28#3"
     },
     {
       "slug": "dynadot-vs-namecheap-which-is-better-for-bulk-domains",
@@ -15348,7 +15348,7 @@
       ],
       "description": "Dynadot vs Namecheap for bulk domain management in 2026: we compare pricing, portfolio tools, TLD selection, and which registrar wins for domain investors.",
       "trending": true,
-      "publishedAt": "2026-07-30",
+      "publishedAt": "2026-07-29",
       "sections": [
         {
           "heading": "Overview",
@@ -15513,7 +15513,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-07-30#1"
+      "scheduleSlot": "2026-07-29#1"
     },
     {
       "slug": "godaddy-review-2026-still-worth-it-or-time-to-switch",
@@ -15528,7 +15528,7 @@
       ],
       "description": "GoDaddy review 2026: Is GoDaddy still worth using? We break down real pricing, renewal fees, hidden costs, and whether it's time to switch registrars.",
       "trending": true,
-      "publishedAt": "2026-07-30",
+      "publishedAt": "2026-07-29",
       "sections": [
         {
           "heading": "Overview",
@@ -15669,7 +15669,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-07-30#2"
+      "scheduleSlot": "2026-07-29#2"
     },
     {
       "slug": "cheapest-com-domain-registrar-in-2026-price-comparison",
@@ -15685,7 +15685,7 @@
       ],
       "description": "Find the cheapest .com domain registrar in 2026 with our full price comparison. We compare registration, renewal, and hidden fees so you know the real cost.",
       "trending": true,
-      "publishedAt": "2026-07-31",
+      "publishedAt": "2026-07-29",
       "sections": [
         {
           "heading": "Overview",
@@ -15804,7 +15804,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-07-31#1"
+      "scheduleSlot": "2026-07-29#3"
     },
     {
       "slug": "best-domain-registrar-for-beginners-in-2026",
@@ -15819,7 +15819,7 @@
       ],
       "description": "New to buying domains? This guide covers the best domain registrar for beginners in 2026 — easy setup, simple DNS, fair pricing, and no confusing upsells.",
       "trending": true,
-      "publishedAt": "2026-07-31",
+      "publishedAt": "2026-07-30",
       "sections": [
         {
           "heading": "Overview",
@@ -15949,7 +15949,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-07-31#2"
+      "scheduleSlot": "2026-07-30#1"
     },
     {
       "slug": "namecheap-vs-google-domains-2026-full-comparison",
@@ -15965,7 +15965,7 @@
       ],
       "description": "Comparing namecheap vs google domains in 2026? See pricing, privacy, features, and renewal costs side by side to find the best registrar for you.",
       "trending": true,
-      "publishedAt": "2026-08-01",
+      "publishedAt": "2026-07-30",
       "sections": [
         {
           "heading": "Overview",
@@ -16144,7 +16144,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-01#1"
+      "scheduleSlot": "2026-07-30#2"
     },
     {
       "slug": "squarespace-domains-vs-namecheap-should-you-register-separately",
@@ -16160,7 +16160,7 @@
       ],
       "description": "Squarespace domains vs Namecheap — which is right for you? Learn about squarespace domain cost, registration convenience, and when to register separately.",
       "trending": true,
-      "publishedAt": "2026-08-01",
+      "publishedAt": "2026-07-30",
       "sections": [
         {
           "heading": "Overview",
@@ -16338,7 +16338,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-01#2"
+      "scheduleSlot": "2026-07-30#3"
     },
     {
       "slug": "best-domain-registrar-for-privacy-protection-in-2026",
@@ -16353,7 +16353,7 @@
       ],
       "description": "Find the best domain registrar privacy protection in 2026. Compare WHOIS privacy, domain privacy guard options, and free vs paid privacy policies.",
       "trending": true,
-      "publishedAt": "2026-08-02",
+      "publishedAt": "2026-07-31",
       "sections": [
         {
           "heading": "Overview",
@@ -16524,7 +16524,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-02#1"
+      "scheduleSlot": "2026-07-31#1"
     },
     {
       "slug": "cheapest-domain-renewal-prices-in-2026-don-t-get-ripped-off",
@@ -16538,7 +16538,7 @@
       ],
       "description": "Find the cheapest domain renewal prices in 2026. Compare renewal costs across registrars, avoid renewal hikes, and stop overpaying for your domain.",
       "trending": true,
-      "publishedAt": "2026-08-02",
+      "publishedAt": "2026-07-31",
       "sections": [
         {
           "heading": "Overview",
@@ -16689,7 +16689,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-02#2"
+      "scheduleSlot": "2026-07-31#2"
     },
     {
       "slug": "ionos-domains-review-2026-cheap-first-year-expensive-after",
@@ -16704,7 +16704,7 @@
       ],
       "description": "Read our honest IONOS domains review for 2026. We cover IONOS domain pricing, renewal costs, features, and whether it's worth the low first-year offer.",
       "trending": true,
-      "publishedAt": "2026-08-03",
+      "publishedAt": "2026-07-31",
       "sections": [
         {
           "heading": "Overview",
@@ -16881,7 +16881,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-03#1"
+      "scheduleSlot": "2026-07-31#3"
     },
     {
       "slug": "how-to-choose-a-domain-name-in-2026-the-complete-guide",
@@ -16895,7 +16895,7 @@
       ],
       "description": "Learn how to choose a domain name in 2026 with this complete guide. Get expert domain name tips for memorability, SEO, branding, and long-term success.",
       "trending": true,
-      "publishedAt": "2026-08-03",
+      "publishedAt": "2026-08-01",
       "sections": [
         {
           "heading": "Overview",
@@ -17087,7 +17087,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-03#2"
+      "scheduleSlot": "2026-08-01#1"
     },
     {
       "slug": "10-domain-name-mistakes-that-will-haunt-your-business",
@@ -17101,7 +17101,7 @@
       ],
       "description": "Avoid these costly domain name mistakes before you register. Learn the most common bad domain name errors and how to avoid them for your business.",
       "trending": false,
-      "publishedAt": "2026-08-04",
+      "publishedAt": "2026-08-01",
       "sections": [
         {
           "heading": "Overview",
@@ -17275,7 +17275,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-04#1"
+      "scheduleSlot": "2026-08-01#2"
     },
     {
       "slug": "should-i-use-com-or-io-for-my-startup-honest-answer",
@@ -17290,7 +17290,7 @@
       ],
       "description": ".com vs .io for startup — which TLD should you choose? Get an honest look at .io domain pros cons, trust signals, SEO, and what successful startups actually use.",
       "trending": false,
-      "publishedAt": "2026-08-04",
+      "publishedAt": "2026-08-01",
       "sections": [
         {
           "heading": "Overview",
@@ -17452,7 +17452,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-04#2"
+      "scheduleSlot": "2026-08-01#3"
     },
     {
       "slug": "how-long-should-a-domain-name-be-data-backed-answer",
@@ -17466,7 +17466,7 @@
       ],
       "description": "How long should a domain name be? Discover what the data says about short domain names, optimal domain name length, and what actually impacts your brand.",
       "trending": false,
-      "publishedAt": "2026-08-05",
+      "publishedAt": "2026-08-02",
       "sections": [
         {
           "heading": "Overview",
@@ -17652,7 +17652,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-05#1"
+      "scheduleSlot": "2026-08-02#1"
     },
     {
       "slug": "does-domain-name-affect-seo-in-2026-the-truth",
@@ -17667,7 +17667,7 @@
       ],
       "description": "Does domain name affect SEO in 2026? Get the truth about domain name SEO impact, exact match domains, keywords in URLs, and what actually moves rankings.",
       "trending": true,
-      "publishedAt": "2026-08-05",
+      "publishedAt": "2026-08-02",
       "sections": [
         {
           "heading": "Overview",
@@ -17840,7 +17840,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-05#2"
+      "scheduleSlot": "2026-08-02#2"
     },
     {
       "slug": "should-your-domain-name-match-your-business-name-exactly",
@@ -17854,7 +17854,7 @@
       ],
       "description": "Should your domain name match your business name exactly? Learn the pros and cons of branded vs keyword domains and how to make the right choice for SEO and branding.",
       "trending": false,
-      "publishedAt": "2026-08-06",
+      "publishedAt": "2026-08-02",
       "sections": [
         {
           "heading": "Overview",
@@ -17986,7 +17986,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-06#1"
+      "scheduleSlot": "2026-08-02#3"
     },
     {
       "slug": "hyphens-in-domain-names-why-you-should-always-avoid-them",
@@ -18000,7 +18000,7 @@
       ],
       "description": "Thinking about using hyphens in your domain name? Learn why hyphenated domains hurt your brand, SEO, and user trust — and what to do instead.",
       "trending": false,
-      "publishedAt": "2026-08-06",
+      "publishedAt": "2026-08-03",
       "sections": [
         {
           "heading": "Overview",
@@ -18121,7 +18121,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-06#2"
+      "scheduleSlot": "2026-08-03#1"
     },
     {
       "slug": "numbers-in-domain-names-good-idea-or-seo-mistake",
@@ -18136,7 +18136,7 @@
       ],
       "description": "Are numbers in domain names a good idea or an SEO mistake? Discover when numeric domains work, when they hurt, and the best practices for choosing your domain.",
       "trending": false,
-      "publishedAt": "2026-08-07",
+      "publishedAt": "2026-08-03",
       "sections": [
         {
           "heading": "Overview",
@@ -18265,7 +18265,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-07#1"
+      "scheduleSlot": "2026-08-03#2"
     },
     {
       "slug": "what-makes-a-good-domain-name-7-rules-from-top-brands",
@@ -18279,7 +18279,7 @@
       ],
       "description": "What makes a good domain name? Learn 7 proven rules from top brands on choosing a memorable, SEO-friendly domain that builds lasting trust and traffic.",
       "trending": false,
-      "publishedAt": "2026-08-07",
+      "publishedAt": "2026-08-03",
       "sections": [
         {
           "heading": "Overview",
@@ -18430,7 +18430,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-07#2"
+      "scheduleSlot": "2026-08-03#3"
     },
     {
       "slug": "net-vs-com-which-should-you-register",
@@ -18445,7 +18445,7 @@
       ],
       "description": "Debating .net vs .com for your website? Learn the pros and cons of each extension, when .net makes sense, and which domain is best for your business.",
       "trending": true,
-      "publishedAt": "2026-08-08",
+      "publishedAt": "2026-08-04",
       "sections": [
         {
           "heading": "Overview",
@@ -18588,7 +18588,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-08#1"
+      "scheduleSlot": "2026-08-04#1"
     },
     {
       "slug": "is-co-a-good-domain-extension-for-a-business",
@@ -18602,7 +18602,7 @@
       ],
       "description": "Is .co a good domain extension for your business? Read our full .co domain review — covering trust, SEO, pros, cons, and how it compares to .com.",
       "trending": false,
-      "publishedAt": "2026-08-08",
+      "publishedAt": "2026-08-04",
       "sections": [
         {
           "heading": "Overview",
@@ -18719,7 +18719,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-08#2"
+      "scheduleSlot": "2026-08-04#2"
     },
     {
       "slug": "what-is-a-premium-domain-and-is-it-worth-the-price",
@@ -18734,7 +18734,7 @@
       ],
       "description": "What is a premium domain and is it worth the high price? Learn how premium domain names are valued, where to find them, and when buying one makes financial sense.",
       "trending": false,
-      "publishedAt": "2026-08-09",
+      "publishedAt": "2026-08-04",
       "sections": [
         {
           "heading": "Overview",
@@ -18843,7 +18843,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-09#1"
+      "scheduleSlot": "2026-08-04#3"
     },
     {
       "slug": "how-to-check-if-a-domain-name-is-trademark-protected",
@@ -18857,7 +18857,7 @@
       ],
       "description": "Learn how to check if a domain name is trademark protected before you register it. Avoid costly legal disputes with this step-by-step trademark domain check guide.",
       "trending": false,
-      "publishedAt": "2026-08-09",
+      "publishedAt": "2026-08-05",
       "sections": [
         {
           "heading": "Overview",
@@ -18974,7 +18974,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-09#2"
+      "scheduleSlot": "2026-08-05#1"
     },
     {
       "slug": "what-happens-if-you-don-t-renew-your-domain-name",
@@ -18988,7 +18988,7 @@
       ],
       "description": "What happens if your domain expires? Learn the full timeline of expired domain consequences — from grace periods to deletion — and how to protect your business.",
       "trending": false,
-      "publishedAt": "2026-08-10",
+      "publishedAt": "2026-08-05",
       "sections": [
         {
           "heading": "Overview",
@@ -19107,7 +19107,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-10#1"
+      "scheduleSlot": "2026-08-05#2"
     },
     {
       "slug": "how-many-domain-names-should-you-register-for-your-brand",
@@ -19121,7 +19121,7 @@
       ],
       "description": "How many domain names should you register for your brand? Learn defensive domain registration strategies to protect your business from typosquatters and competitors.",
       "trending": false,
-      "publishedAt": "2026-08-10",
+      "publishedAt": "2026-08-05",
       "sections": [
         {
           "heading": "Overview",
@@ -19281,7 +19281,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-10#2"
+      "scheduleSlot": "2026-08-05#3"
     },
     {
       "slug": "ai-domain-everything-you-need-to-know-in-2026",
@@ -19295,7 +19295,7 @@
       ],
       "description": "The complete .ai domain guide for 2026: who can register it, what it costs, real brand examples, pros and cons, and whether it's right for your AI startup.",
       "trending": true,
-      "publishedAt": "2026-08-11",
+      "publishedAt": "2026-08-06",
       "sections": [
         {
           "heading": "Overview",
@@ -19426,7 +19426,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-11#1"
+      "scheduleSlot": "2026-08-06#1"
     },
     {
       "slug": "io-domain-name-is-it-still-worth-it-for-tech-startups",
@@ -19440,7 +19440,7 @@
       ],
       "description": "Is the .io domain still worth it for tech startups in 2026? We cover .io domain price, history, SEO performance, pros and cons, and top brands using it.",
       "trending": false,
-      "publishedAt": "2026-08-11",
+      "publishedAt": "2026-08-06",
       "sections": [
         {
           "heading": "Overview",
@@ -19570,7 +19570,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-11#2"
+      "scheduleSlot": "2026-08-06#2"
     },
     {
       "slug": "xyz-domain-cheap-gimmick-or-legitimate-extension",
@@ -19585,7 +19585,7 @@
       ],
       "description": "Is the .xyz domain a cheap gimmick or a legitimate extension? Our .xyz domain review covers pros, cons, costs, real brand examples, and whether it can rank on Google.",
       "trending": false,
-      "publishedAt": "2026-08-12",
+      "publishedAt": "2026-08-06",
       "sections": [
         {
           "heading": "Overview",
@@ -19716,7 +19716,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-12#1"
+      "scheduleSlot": "2026-08-06#3"
     },
     {
       "slug": "app-domain-names-best-practices-for-app-developers",
@@ -19730,7 +19730,7 @@
       ],
       "description": "Complete .app domain guide for developers in 2026: Google's role, HTTPS requirements, pricing, registration tips, pros and cons, and top apps using .app.",
       "trending": true,
-      "publishedAt": "2026-08-12",
+      "publishedAt": "2026-08-07",
       "sections": [
         {
           "heading": "Overview",
@@ -19859,7 +19859,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-12#2"
+      "scheduleSlot": "2026-08-07#1"
     },
     {
       "slug": "dev-domain-why-developers-love-this-tld",
@@ -19873,7 +19873,7 @@
       ],
       "description": "Why do developers love the .dev domain? This .dev domain review covers cost, HTTPS requirements, .dev vs .io comparison, top developer brands, and registration tips.",
       "trending": false,
-      "publishedAt": "2026-08-13",
+      "publishedAt": "2026-08-07",
       "sections": [
         {
           "heading": "Overview",
@@ -20019,7 +20019,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-13#1"
+      "scheduleSlot": "2026-08-07#2"
     },
     {
       "slug": "store-domain-is-it-good-for-ecommerce-businesses",
@@ -20033,7 +20033,7 @@
       ],
       "description": "Is the .store domain good for eCommerce? Our review covers .store domain pricing, pros and cons, real brand examples, SEO performance, and who should use it.",
       "trending": false,
-      "publishedAt": "2026-08-13",
+      "publishedAt": "2026-08-07",
       "sections": [
         {
           "heading": "Overview",
@@ -20167,7 +20167,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-13#2"
+      "scheduleSlot": "2026-08-07#3"
     },
     {
       "slug": "co-uk-domain-complete-guide-for-uk-businesses",
@@ -20181,7 +20181,7 @@
       ],
       "description": "Everything UK businesses need to know about .co.uk domains: how to register, .co.uk vs .uk comparison, pricing, local SEO benefits, and top brands using it.",
       "trending": false,
-      "publishedAt": "2026-08-14",
+      "publishedAt": "2026-08-08",
       "sections": [
         {
           "heading": "Overview",
@@ -20320,7 +20320,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-14#1"
+      "scheduleSlot": "2026-08-08#1"
     },
     {
       "slug": "online-domain-is-it-a-credible-extension-in-2026",
@@ -20334,7 +20334,7 @@
       ],
       "description": "Is the .online domain credible in 2026? Our review covers .online domain pros and cons, pricing, SEO performance, real brand examples, and who should use it.",
       "trending": true,
-      "publishedAt": "2026-08-14",
+      "publishedAt": "2026-08-08",
       "sections": [
         {
           "heading": "Overview",
@@ -20485,7 +20485,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-14#2"
+      "scheduleSlot": "2026-08-08#2"
     },
     {
       "slug": "tech-domain-good-choice-for-technology-companies",
@@ -20499,7 +20499,7 @@
       ],
       "description": "Is .tech a good domain for technology companies? Our .tech domain review covers pricing, SEO, .tech vs .io comparison, top brand examples, and who should register it.",
       "trending": false,
-      "publishedAt": "2026-08-15",
+      "publishedAt": "2026-08-08",
       "sections": [
         {
           "heading": "Overview",
@@ -20652,7 +20652,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-15#1"
+      "scheduleSlot": "2026-08-08#3"
     },
     {
       "slug": "new-gtlds-in-2026-the-best-new-domain-extensions-to-register",
@@ -20666,7 +20666,7 @@
       ],
       "description": "Discover the best new gTLDs launching and growing in 2026. Which new domain extensions are worth registering? Complete guide to the new gTLD expansion landscape.",
       "trending": true,
-      "publishedAt": "2026-08-15",
+      "publishedAt": "2026-08-09",
       "sections": [
         {
           "heading": "Overview",
@@ -20843,7 +20843,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-15#2"
+      "scheduleSlot": "2026-08-09#1"
     },
     {
       "slug": "gg-domain-the-go-to-extension-for-gaming-brands",
@@ -20857,7 +20857,7 @@
       ],
       "description": "Discover the complete .gg domain guide: what it is, how much it costs, and why gaming brands choose the .gg extension to stand out online.",
       "trending": false,
-      "publishedAt": "2026-08-16",
+      "publishedAt": "2026-08-09",
       "sections": [
         {
           "heading": "Overview",
@@ -20987,7 +20987,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-16#1"
+      "scheduleSlot": "2026-08-09#2"
     },
     {
       "slug": "country-code-domains-cctlds-complete-guide-for-global-brands",
@@ -21001,7 +21001,7 @@
       ],
       "description": "The complete ccTLD guide for global brands: understand country code domains, when to use them, and how local domain extensions boost regional SEO and trust.",
       "trending": false,
-      "publishedAt": "2026-08-16",
+      "publishedAt": "2026-08-09",
       "sections": [
         {
           "heading": "Overview",
@@ -21150,7 +21150,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-16#2"
+      "scheduleSlot": "2026-08-09#3"
     },
     {
       "slug": "shop-domain-vs-store-domain-which-is-better-for-retail",
@@ -21164,7 +21164,7 @@
       ],
       "description": "Comparing .shop vs .store domain for retail brands? This ecommerce TLD comparison breaks down pricing, SEO, branding, and which extension wins for your store.",
       "trending": true,
-      "publishedAt": "2026-08-17",
+      "publishedAt": "2026-08-10",
       "sections": [
         {
           "heading": "Overview",
@@ -21321,7 +21321,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-17#1"
+      "scheduleSlot": "2026-08-10#1"
     },
     {
       "slug": "me-domain-best-uses-and-who-should-register-it",
@@ -21335,7 +21335,7 @@
       ],
       "description": "The complete .me domain guide: who should register it, what it costs, how it compares to .com, and why it's become the top choice for personal websites.",
       "trending": true,
-      "publishedAt": "2026-08-17",
+      "publishedAt": "2026-08-10",
       "sections": [
         {
           "heading": "Overview",
@@ -21477,7 +21477,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-17#2"
+      "scheduleSlot": "2026-08-10#2"
     },
     {
       "slug": "org-domain-is-it-still-only-for-nonprofits",
@@ -21491,7 +21491,7 @@
       ],
       "description": "Is .org still only for nonprofits? This .org domain guide covers who can register it, how .org vs .com compares, and whether businesses should use .org.",
       "trending": false,
-      "publishedAt": "2026-08-18",
+      "publishedAt": "2026-08-10",
       "sections": [
         {
           "heading": "Overview",
@@ -21621,7 +21621,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-18#1"
+      "scheduleSlot": "2026-08-10#3"
     },
     {
       "slug": "how-to-find-expired-domains-with-backlinks-step-by-step",
@@ -21635,7 +21635,7 @@
       ],
       "description": "Learn how to find expired domains with backlinks, evaluate their SEO value, and avoid common pitfalls. Step-by-step guide for domain SEO research in 2026.",
       "trending": false,
-      "publishedAt": "2026-08-18",
+      "publishedAt": "2026-08-11",
       "sections": [
         {
           "heading": "Overview",
@@ -21771,7 +21771,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-18#2"
+      "scheduleSlot": "2026-08-11#1"
     },
     {
       "slug": "what-are-dropped-domains-and-how-to-catch-them",
@@ -21785,7 +21785,7 @@
       ],
       "description": "What are dropped domains and how can you catch them? Learn the domain drop catching process, how domain expiry lists work, and how to win valuable lapsed domains.",
       "trending": false,
-      "publishedAt": "2026-08-19",
+      "publishedAt": "2026-08-11",
       "sections": [
         {
           "heading": "Overview",
@@ -21917,7 +21917,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-19#1"
+      "scheduleSlot": "2026-08-11#2"
     },
     {
       "slug": "best-expired-domain-finders-in-2026-free-and-paid",
@@ -21931,7 +21931,7 @@
       ],
       "description": "The best expired domain finders in 2026, including free and paid tools. Compare ExpiredDomains.net alternatives and find the right tool for your SEO strategy.",
       "trending": true,
-      "publishedAt": "2026-08-19",
+      "publishedAt": "2026-08-11",
       "sections": [
         {
           "heading": "Overview",
@@ -22116,7 +22116,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-19#2"
+      "scheduleSlot": "2026-08-11#3"
     },
     {
       "slug": "how-to-buy-an-expired-domain-without-getting-scammed",
@@ -22130,7 +22130,7 @@
       ],
       "description": "Learn how to buy an expired domain safely. Avoid domain auction scams, evaluate purchases properly, and complete your expired domain purchase with confidence.",
       "trending": false,
-      "publishedAt": "2026-08-20",
+      "publishedAt": "2026-08-12",
       "sections": [
         {
           "heading": "Overview",
@@ -22257,7 +22257,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-20#1"
+      "scheduleSlot": "2026-08-12#1"
     },
     {
       "slug": "domain-drop-catching-how-it-works-and-how-to-win",
@@ -22271,7 +22271,7 @@
       ],
       "description": "Learn how domain drop catching works, which drop catch services win the most domains, and strategies to maximize your chances of catching a dropped domain in 2026.",
       "trending": false,
-      "publishedAt": "2026-08-20",
+      "publishedAt": "2026-08-12",
       "sections": [
         {
           "heading": "Overview",
@@ -22417,7 +22417,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-20#2"
+      "scheduleSlot": "2026-08-12#2"
     },
     {
       "slug": "how-to-check-if-an-expired-domain-has-a-google-penalty",
@@ -22431,7 +22431,7 @@
       ],
       "description": "Learn how to check if an expired domain has a Google penalty before you buy. Discover domain penalty checkers, toxic backlinks, and red flags to avoid.",
       "trending": false,
-      "publishedAt": "2026-08-21",
+      "publishedAt": "2026-08-12",
       "sections": [
         {
           "heading": "Overview",
@@ -22560,7 +22560,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-21#1"
+      "scheduleSlot": "2026-08-12#3"
     },
     {
       "slug": "domain-auctions-explained-how-godaddy-auctions-and-sedo-work",
@@ -22575,7 +22575,7 @@
       ],
       "description": "A complete domain auction guide explaining how GoDaddy Auctions and Sedo work, what to bid on, and how to win premium domains without overpaying.",
       "trending": false,
-      "publishedAt": "2026-08-21",
+      "publishedAt": "2026-08-13",
       "sections": [
         {
           "heading": "Overview",
@@ -22704,7 +22704,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-21#2"
+      "scheduleSlot": "2026-08-13#1"
     },
     {
       "slug": "how-to-evaluate-an-expired-domain-before-buying",
@@ -22718,7 +22718,7 @@
       ],
       "description": "Learn how to evaluate an expired domain before buying. Check domain authority, backlinks, traffic history, and expired domain metrics to make smart investments.",
       "trending": false,
-      "publishedAt": "2026-08-22",
+      "publishedAt": "2026-08-13",
       "sections": [
         {
           "heading": "Overview",
@@ -22874,7 +22874,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-22#1"
+      "scheduleSlot": "2026-08-13#2"
     },
     {
       "slug": "domain-parking-vs-developing-what-to-do-with-expired-domains",
@@ -22888,7 +22888,7 @@
       ],
       "description": "Should you park or develop an expired domain? Compare domain parking income vs. building a full site and learn the best strategy to monetize your domain.",
       "trending": false,
-      "publishedAt": "2026-08-22",
+      "publishedAt": "2026-08-13",
       "sections": [
         {
           "heading": "Overview",
@@ -23021,7 +23021,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-22#2"
+      "scheduleSlot": "2026-08-13#3"
     },
     {
       "slug": "pbn-domains-in-2026-are-they-still-worth-the-risk",
@@ -23035,7 +23035,7 @@
       ],
       "description": "Are PBN domains worth the risk in 2026? Explore the current state of private blog network domains, Google's detection methods, and safer SEO alternatives.",
       "trending": true,
-      "publishedAt": "2026-08-23",
+      "publishedAt": "2026-08-14",
       "sections": [
         {
           "heading": "Overview",
@@ -23150,7 +23150,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-23#1"
+      "scheduleSlot": "2026-08-14#1"
     },
     {
       "slug": "100-best-domain-name-ideas-for-restaurants-in-2026",
@@ -23164,7 +23164,7 @@
       ],
       "description": "Discover 100 creative domain name ideas for restaurants in 2026. Find the perfect food business domain to make your restaurant website stand out online.",
       "trending": true,
-      "publishedAt": "2026-08-23",
+      "publishedAt": "2026-08-14",
       "sections": [
         {
           "heading": "Overview",
@@ -23417,7 +23417,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-23#2"
+      "scheduleSlot": "2026-08-14#2"
     },
     {
       "slug": "best-domain-names-for-real-estate-agents-and-agencies",
@@ -23431,7 +23431,7 @@
       ],
       "description": "Find the best domain names for real estate agents and agencies in 2026. Explore creative realtor website domain ideas to build a standout property business online.",
       "trending": true,
-      "publishedAt": "2026-08-24",
+      "publishedAt": "2026-08-14",
       "sections": [
         {
           "heading": "Overview",
@@ -23646,7 +23646,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-24#1"
+      "scheduleSlot": "2026-08-14#3"
     },
     {
       "slug": "creative-domain-name-ideas-for-fitness-and-gym-businesses",
@@ -23660,7 +23660,7 @@
       ],
       "description": "Find creative domain name ideas for fitness and gym businesses in 2026. Discover the perfect gym website name or personal trainer domain to grow your brand online.",
       "trending": false,
-      "publishedAt": "2026-08-24",
+      "publishedAt": "2026-08-15",
       "sections": [
         {
           "heading": "Overview",
@@ -23893,7 +23893,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-24#2"
+      "scheduleSlot": "2026-08-15#1"
     },
     {
       "slug": "domain-name-ideas-for-photography-businesses",
@@ -23907,7 +23907,7 @@
       ],
       "description": "Discover the best domain name ideas for photographers in 2026. Find creative photography website names for portrait, wedding, commercial, and travel photographers.",
       "trending": false,
-      "publishedAt": "2026-08-25",
+      "publishedAt": "2026-08-15",
       "sections": [
         {
           "heading": "Overview",
@@ -24100,7 +24100,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-25#1"
+      "scheduleSlot": "2026-08-15#2"
     },
     {
       "slug": "best-domain-names-for-law-firms-in-2026",
@@ -24114,7 +24114,7 @@
       ],
       "description": "Find the best domain names for law firms in 2026. Explore creative lawyer website domain ideas and legal firm domain strategies to build authority online.",
       "trending": true,
-      "publishedAt": "2026-08-25",
+      "publishedAt": "2026-08-15",
       "sections": [
         {
           "heading": "Overview",
@@ -24338,7 +24338,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-25#2"
+      "scheduleSlot": "2026-08-15#3"
     },
     {
       "slug": "domain-name-ideas-for-e-commerce-and-online-stores-2026-guide",
@@ -24352,7 +24352,7 @@
       ],
       "description": "Discover the best domain names for ecommerce stores in 2026. Find catchy, brandable, and available online store domains across all major niches.",
       "trending": true,
-      "publishedAt": "2026-08-26",
+      "publishedAt": "2026-08-16",
       "sections": [
         {
           "heading": "Overview",
@@ -24509,7 +24509,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-26#1"
+      "scheduleSlot": "2026-08-16#1"
     },
     {
       "slug": "best-domain-names-for-consultants-and-freelancers-2026-guide",
@@ -24523,7 +24523,7 @@
       ],
       "description": "Find the best domain names for consultants and freelancers in 2026. Tips on naming your consulting website, with 25+ real domain examples by niche.",
       "trending": true,
-      "publishedAt": "2026-08-26",
+      "publishedAt": "2026-08-16",
       "sections": [
         {
           "heading": "Overview",
@@ -24699,7 +24699,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-26#2"
+      "scheduleSlot": "2026-08-16#2"
     },
     {
       "slug": "domain-name-ideas-for-tech-startups-with-availability-tips-2026",
@@ -24713,7 +24713,7 @@
       ],
       "description": "Need domain names for tech startups? Discover 25+ SaaS domain ideas, availability tips, and naming strategies to launch your startup on the right foot.",
       "trending": true,
-      "publishedAt": "2026-08-27",
+      "publishedAt": "2026-08-16",
       "sections": [
         {
           "heading": "Overview",
@@ -24877,7 +24877,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-27#1"
+      "scheduleSlot": "2026-08-16#3"
     },
     {
       "slug": "healthcare-and-medical-practice-domain-name-ideas-2026-guide",
@@ -24891,7 +24891,7 @@
       ],
       "description": "Looking for domain names for healthcare practices and medical websites? Explore 25+ clinic domain ideas, naming tips, and HIPAA-friendly domain strategies.",
       "trending": true,
-      "publishedAt": "2026-08-27",
+      "publishedAt": "2026-08-17",
       "sections": [
         {
           "heading": "Overview",
@@ -25066,7 +25066,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-27#2"
+      "scheduleSlot": "2026-08-17#1"
     },
     {
       "slug": "best-domain-names-for-non-profits-and-charities-2026-guide",
@@ -25080,7 +25080,7 @@
       ],
       "description": "Discover the best domain names for nonprofits and charities in 2026. Explore 25+ NGO website name ideas, TLD tips, and naming frameworks for mission-driven orgs.",
       "trending": true,
-      "publishedAt": "2026-08-28",
+      "publishedAt": "2026-08-17",
       "sections": [
         {
           "heading": "Overview",
@@ -25255,7 +25255,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-28#1"
+      "scheduleSlot": "2026-08-17#2"
     },
     {
       "slug": "how-to-use-ai-to-generate-domain-name-ideas-in-2026",
@@ -25269,7 +25269,7 @@
       ],
       "description": "Learn how to use an AI domain name generator in 2026 to find brandable, available business names fast. Step-by-step guide with real examples.",
       "trending": true,
-      "publishedAt": "2026-08-28",
+      "publishedAt": "2026-08-17",
       "sections": [
         {
           "heading": "Overview",
@@ -25395,7 +25395,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-28#2"
+      "scheduleSlot": "2026-08-17#3"
     },
     {
       "slug": "best-ai-domain-name-generators-compared-free-and-paid-2026",
@@ -25409,7 +25409,7 @@
       ],
       "description": "Compare the best AI domain name generators in 2026 — free and paid options reviewed. Find which automatic domain name tools deliver the most available, brandable results.",
       "trending": true,
-      "publishedAt": "2026-08-29",
+      "publishedAt": "2026-08-18",
       "sections": [
         {
           "heading": "Overview",
@@ -25562,7 +25562,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-29#1"
+      "scheduleSlot": "2026-08-18#1"
     },
     {
       "slug": "how-to-find-a-brandable-domain-name-under-15-2026-guide",
@@ -25576,7 +25576,7 @@
       ],
       "description": "Want a brandable domain name under $15? Learn how to find catchy, one-word, and available brandable domains without breaking the bank in 2026.",
       "trending": true,
-      "publishedAt": "2026-08-29",
+      "publishedAt": "2026-08-18",
       "sections": [
         {
           "heading": "Overview",
@@ -25716,7 +25716,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-29#2"
+      "scheduleSlot": "2026-08-18#2"
     },
     {
       "slug": "one-word-domain-names-are-any-still-available-in-2026",
@@ -25730,7 +25730,7 @@
       ],
       "description": "Are one-word domain names still available in 2026? Find out which single-word and short domain names you can still register, and how to search smart.",
       "trending": true,
-      "publishedAt": "2026-08-30",
+      "publishedAt": "2026-08-18",
       "sections": [
         {
           "heading": "Overview",
@@ -25874,7 +25874,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-30#1"
+      "scheduleSlot": "2026-08-18#3"
     },
     {
       "slug": "how-to-come-up-with-a-business-name-and-domain-in-30-minutes-2026",
@@ -25888,7 +25888,7 @@
       ],
       "description": "Learn how to come up with a business name and matching domain in 30 minutes. A step-by-step process for founders, freelancers, and small business owners.",
       "trending": true,
-      "publishedAt": "2026-08-30",
+      "publishedAt": "2026-08-19",
       "sections": [
         {
           "heading": "Overview",
@@ -26033,7 +26033,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-30#2"
+      "scheduleSlot": "2026-08-19#1"
     },
     {
       "slug": "made-up-words-as-domain-names-the-brandable-domain-strategy",
@@ -26047,7 +26047,7 @@
       ],
       "description": "Discover how made-up word domain names like Google, Zapier, and Skype built iconic brands. Learn the brandable domain strategy to craft your own invented word.",
       "trending": false,
-      "publishedAt": "2026-08-31",
+      "publishedAt": "2026-08-19",
       "sections": [
         {
           "heading": "Overview",
@@ -26153,7 +26153,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-31#1"
+      "scheduleSlot": "2026-08-19#2"
     },
     {
       "slug": "domain-hack-examples-creative-domains-using-tld-as-part-of-the-word",
@@ -26167,7 +26167,7 @@
       ],
       "description": "Explore the best domain hack examples where the TLD becomes part of the word. Learn how creative domain names like del.icio.us and bit.ly were born.",
       "trending": false,
-      "publishedAt": "2026-08-31",
+      "publishedAt": "2026-08-19",
       "sections": [
         {
           "heading": "Overview",
@@ -26281,7 +26281,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-08-31#2"
+      "scheduleSlot": "2026-08-19#3"
     },
     {
       "slug": "how-to-find-a-domain-name-when-everything-is-taken",
@@ -26295,7 +26295,7 @@
       ],
       "description": "Can't find an available domain? Learn proven strategies to find a domain name when everything seems taken — including alternatives, hacks, and negotiation tips.",
       "trending": false,
-      "publishedAt": "2026-09-01",
+      "publishedAt": "2026-08-20",
       "sections": [
         {
           "heading": "Overview",
@@ -26448,7 +26448,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-01#1"
+      "scheduleSlot": "2026-08-20#1"
     },
     {
       "slug": "portmanteau-domain-names-how-top-brands-create-sticky-names",
@@ -26462,7 +26462,7 @@
       ],
       "description": "Learn how portmanteau brand names like Instagram, Pinterest, and Netflix create sticky, memorable identities. Discover the strategy for combining words into domain names.",
       "trending": false,
-      "publishedAt": "2026-09-01",
+      "publishedAt": "2026-08-20",
       "sections": [
         {
           "heading": "Overview",
@@ -26583,7 +26583,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-01#2"
+      "scheduleSlot": "2026-08-20#2"
     },
     {
       "slug": "best-startup-name-generators-that-also-check-domain-availability",
@@ -26597,7 +26597,7 @@
       ],
       "description": "Find the best startup name generators that also check domain availability in real time. Compare top tools for naming your business and securing the perfect domain.",
       "trending": true,
-      "publishedAt": "2026-09-02",
+      "publishedAt": "2026-08-20",
       "sections": [
         {
           "heading": "Overview",
@@ -26732,7 +26732,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-02#1"
+      "scheduleSlot": "2026-08-20#3"
     },
     {
       "slug": "how-to-buy-a-domain-name-someone-else-owns",
@@ -26746,7 +26746,7 @@
       ],
       "description": "Want to buy a domain name that someone else owns? Learn step-by-step how to contact domain owners, negotiate prices, and transfer a taken domain to your account.",
       "trending": false,
-      "publishedAt": "2026-09-02",
+      "publishedAt": "2026-08-21",
       "sections": [
         {
           "heading": "Overview",
@@ -26885,7 +26885,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-02#2"
+      "scheduleSlot": "2026-08-21#1"
     },
     {
       "slug": "how-to-sell-a-domain-name-for-maximum-profit",
@@ -26899,7 +26899,7 @@
       ],
       "description": "Learn how to sell a domain name for maximum profit. From setting the right price to listing on Sedo and closing the deal, this guide covers every step.",
       "trending": false,
-      "publishedAt": "2026-09-03",
+      "publishedAt": "2026-08-21",
       "sections": [
         {
           "heading": "Overview",
@@ -27028,7 +27028,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-03#1"
+      "scheduleSlot": "2026-08-21#2"
     },
     {
       "slug": "domain-flipping-in-2026-is-it-still-profitable",
@@ -27042,7 +27042,7 @@
       ],
       "description": "Is domain flipping in 2026 still profitable? Discover the strategies, risks, and real opportunities in buying and selling domains for profit in today's market.",
       "trending": true,
-      "publishedAt": "2026-09-03",
+      "publishedAt": "2026-08-21",
       "sections": [
         {
           "heading": "Overview",
@@ -27180,7 +27180,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-03#2"
+      "scheduleSlot": "2026-08-21#3"
     },
     {
       "slug": "how-much-is-my-domain-name-worth-free-valuation-methods",
@@ -27194,7 +27194,7 @@
       ],
       "description": "Wondering how much your domain name is worth? Discover free domain appraisal methods, valuation tools, and the factors that determine real domain value in 2026.",
       "trending": false,
-      "publishedAt": "2026-09-04",
+      "publishedAt": "2026-08-22",
       "sections": [
         {
           "heading": "Overview",
@@ -27364,7 +27364,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-04#1"
+      "scheduleSlot": "2026-08-22#1"
     },
     {
       "slug": "domain-name-broker-do-you-need-one-to-sell-a-domain",
@@ -27378,7 +27378,7 @@
       ],
       "description": "Should you hire a domain name broker to sell your domain? Learn what domain brokers do, how much they charge, and when it makes financial sense to use one.",
       "trending": false,
-      "publishedAt": "2026-09-04",
+      "publishedAt": "2026-08-22",
       "sections": [
         {
           "heading": "Overview",
@@ -27503,7 +27503,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-04#2"
+      "scheduleSlot": "2026-08-22#2"
     },
     {
       "slug": "afternic-vs-sedo-which-domain-marketplace-gets-you-more",
@@ -27517,7 +27517,7 @@
       ],
       "description": "Afternic vs Sedo: comparing the two biggest domain marketplaces on fees, reach, and seller tools to help you decide the best place to sell your domain.",
       "trending": true,
-      "publishedAt": "2026-09-05",
+      "publishedAt": "2026-08-22",
       "sections": [
         {
           "heading": "Overview",
@@ -27658,7 +27658,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-05#1"
+      "scheduleSlot": "2026-08-22#3"
     },
     {
       "slug": "how-to-price-your-domain-for-sale-without-leaving-money-behind",
@@ -27672,7 +27672,7 @@
       ],
       "description": "Learn how to price a domain for sale the right way. Avoid underpricing and overpricing with proven domain pricing strategies and real market data tips.",
       "trending": false,
-      "publishedAt": "2026-09-05",
+      "publishedAt": "2026-08-23",
       "sections": [
         {
           "heading": "Overview",
@@ -27823,7 +27823,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-05#2"
+      "scheduleSlot": "2026-08-23#1"
     },
     {
       "slug": "domain-investing-for-beginners-how-to-start-with-100",
@@ -27838,7 +27838,7 @@
       ],
       "description": "Domain investing for beginners: learn how to start a domain portfolio with just $100, find undervalued names, and flip domains for profit. Practical guide inside.",
       "trending": false,
-      "publishedAt": "2026-09-06",
+      "publishedAt": "2026-08-23",
       "sections": [
         {
           "heading": "Overview",
@@ -27998,7 +27998,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-06#1"
+      "scheduleSlot": "2026-08-23#2"
     },
     {
       "slug": "best-domains-to-invest-in-for-2026-trending-tlds-and-keywords",
@@ -28012,7 +28012,7 @@
       ],
       "description": "Discover the best domains to invest in for 2026. Explore trending TLDs, profitable keywords, and domain investment strategies driving returns this year.",
       "trending": true,
-      "publishedAt": "2026-09-06",
+      "publishedAt": "2026-08-23",
       "sections": [
         {
           "heading": "Overview",
@@ -28153,7 +28153,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-06#2"
+      "scheduleSlot": "2026-08-23#3"
     },
     {
       "slug": "how-domain-escrow-works-and-why-you-should-always-use-it",
@@ -28167,7 +28167,7 @@
       ],
       "description": "Learn how domain escrow works, why it protects both buyers and sellers, and when to use Escrow.com for safe domain transfers. Complete guide inside.",
       "trending": false,
-      "publishedAt": "2026-09-07",
+      "publishedAt": "2026-08-24",
       "sections": [
         {
           "heading": "Overview",
@@ -28309,7 +28309,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-07#1"
+      "scheduleSlot": "2026-08-24#1"
     },
     {
       "slug": "how-to-transfer-a-domain-name-to-another-registrar-step-by-step",
@@ -28324,7 +28324,7 @@
       ],
       "description": "Learn how to transfer a domain name to another registrar with this step-by-step guide. Avoid common mistakes and move your domain safely and quickly.",
       "trending": false,
-      "publishedAt": "2026-09-07",
+      "publishedAt": "2026-08-24",
       "sections": [
         {
           "heading": "Overview",
@@ -28471,7 +28471,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-07#2"
+      "scheduleSlot": "2026-08-24#2"
     },
     {
       "slug": "what-is-dns-and-how-does-it-work-plain-english-explanation",
@@ -28485,7 +28485,7 @@
       ],
       "description": "What is DNS and how does it work? This plain-English explanation covers DNS servers, records, resolution, and why it matters for your website and domain.",
       "trending": false,
-      "publishedAt": "2026-09-08",
+      "publishedAt": "2026-08-24",
       "sections": [
         {
           "heading": "Overview",
@@ -28622,7 +28622,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-08#1"
+      "scheduleSlot": "2026-08-24#3"
     },
     {
       "slug": "how-to-set-up-a-custom-domain-for-your-website",
@@ -28636,7 +28636,7 @@
       ],
       "description": "Learn how to set up a custom domain for your website step by step. Connect your domain to any website builder, hosting platform, or CMS with this guide.",
       "trending": false,
-      "publishedAt": "2026-09-08",
+      "publishedAt": "2026-08-25",
       "sections": [
         {
           "heading": "Overview",
@@ -28801,7 +28801,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-08#2"
+      "scheduleSlot": "2026-08-25#1"
     },
     {
       "slug": "what-is-whois-and-how-to-use-it-to-research-a-domain",
@@ -28815,7 +28815,7 @@
       ],
       "description": "What is WHOIS and how do you use it? Learn how WHOIS lookup works, what domain ownership information it reveals, and how to research any domain name.",
       "trending": false,
-      "publishedAt": "2026-09-09",
+      "publishedAt": "2026-08-25",
       "sections": [
         {
           "heading": "Overview",
@@ -28982,7 +28982,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-09#1"
+      "scheduleSlot": "2026-08-25#2"
     },
     {
       "slug": "how-to-hide-your-personal-info-from-whois-domain-privacy-guide",
@@ -28997,7 +28997,7 @@
       ],
       "description": "Learn how to hide your personal info from WHOIS with domain privacy protection. Find out how it works, what it costs, and which registrars offer it free.",
       "trending": false,
-      "publishedAt": "2026-09-09",
+      "publishedAt": "2026-08-25",
       "sections": [
         {
           "heading": "Overview",
@@ -29157,7 +29157,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-09#2"
+      "scheduleSlot": "2026-08-25#3"
     },
     {
       "slug": "what-is-domain-propagation-how-long-does-it-really-take",
@@ -29171,7 +29171,7 @@
       ],
       "description": "Learn what domain propagation is, why it takes time, and how long DNS propagation really takes. Tips to speed it up and check propagation status.",
       "trending": false,
-      "publishedAt": "2026-09-10",
+      "publishedAt": "2026-08-26",
       "sections": [
         {
           "heading": "Overview",
@@ -29309,7 +29309,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-10#1"
+      "scheduleSlot": "2026-08-26#1"
     },
     {
       "slug": "how-to-point-a-domain-to-another-website-or-server",
@@ -29323,7 +29323,7 @@
       ],
       "description": "Learn how to point a domain to another website or server using DNS A records, CNAME records, and nameservers. Step-by-step guide for beginners.",
       "trending": false,
-      "publishedAt": "2026-09-10",
+      "publishedAt": "2026-08-26",
       "sections": [
         {
           "heading": "Overview",
@@ -29481,7 +29481,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-10#2"
+      "scheduleSlot": "2026-08-26#2"
     },
     {
       "slug": "subdomain-vs-subdirectory-which-is-better-for-seo",
@@ -29495,7 +29495,7 @@
       ],
       "description": "Subdomain vs subdirectory for SEO — which site structure wins? Learn how Google treats each option and which is better for blogs, shops, and more.",
       "trending": true,
-      "publishedAt": "2026-09-11",
+      "publishedAt": "2026-08-26",
       "sections": [
         {
           "heading": "Overview",
@@ -29651,7 +29651,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-11#1"
+      "scheduleSlot": "2026-08-26#3"
     },
     {
       "slug": "what-is-an-epp-code-and-when-do-you-need-one",
@@ -29665,7 +29665,7 @@
       ],
       "description": "What is an EPP code for domain transfer? Learn when you need an auth code, how to get your EPP code from Namecheap, GoDaddy, and other registrars.",
       "trending": false,
-      "publishedAt": "2026-09-11",
+      "publishedAt": "2026-08-27",
       "sections": [
         {
           "heading": "Overview",
@@ -29830,7 +29830,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-11#2"
+      "scheduleSlot": "2026-08-27#1"
     },
     {
       "slug": "how-to-set-up-email-with-your-custom-domain-step-by-step",
@@ -29844,7 +29844,7 @@
       ],
       "description": "Learn how to set up a custom domain email address step by step. Create a professional email with your own domain using Google Workspace or other providers.",
       "trending": false,
-      "publishedAt": "2026-09-12",
+      "publishedAt": "2026-08-27",
       "sections": [
         {
           "heading": "Overview",
@@ -30038,7 +30038,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-12#1"
+      "scheduleSlot": "2026-08-27#2"
     },
     {
       "slug": "domain-hijacking-how-it-happens-and-how-to-prevent-it",
@@ -30052,7 +30052,7 @@
       ],
       "description": "Domain hijacking is a real and costly threat. Learn how domain theft happens, how to protect your domain, and what to do if your domain is stolen.",
       "trending": false,
-      "publishedAt": "2026-09-12",
+      "publishedAt": "2026-08-27",
       "sections": [
         {
           "heading": "Overview",
@@ -30190,7 +30190,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-12#2"
+      "scheduleSlot": "2026-08-27#3"
     },
     {
       "slug": "what-is-domain-locking-and-should-you-enable-it",
@@ -30204,7 +30204,7 @@
       ],
       "description": "What is domain locking and why does it matter? Learn how registrar lock prevents unauthorized domain transfers and how to enable it on your domain.",
       "trending": false,
-      "publishedAt": "2026-09-13",
+      "publishedAt": "2026-08-28",
       "sections": [
         {
           "heading": "Overview",
@@ -30348,7 +30348,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-13#1"
+      "scheduleSlot": "2026-08-28#1"
     },
     {
       "slug": "dnssec-explained-do-you-need-it-for-your-domain",
@@ -30362,7 +30362,7 @@
       ],
       "description": "DNSSEC explained in plain English. Learn what DNS Security Extensions do, how they protect your domain, and whether you need to enable DNSSEC.",
       "trending": false,
-      "publishedAt": "2026-09-13",
+      "publishedAt": "2026-08-28",
       "sections": [
         {
           "heading": "Overview",
@@ -30512,7 +30512,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-13#2"
+      "scheduleSlot": "2026-08-28#2"
     },
     {
       "slug": "domain-expiry-monitoring-how-to-never-lose-your-domain-again",
@@ -30526,7 +30526,7 @@
       ],
       "description": "Domain expiry monitoring protects your brand from losing critical domains. Learn how to track renewal dates, set reminders, and never lose your domain again.",
       "trending": false,
-      "publishedAt": "2026-09-14",
+      "publishedAt": "2026-08-28",
       "sections": [
         {
           "heading": "Overview",
@@ -30673,7 +30673,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-14#1"
+      "scheduleSlot": "2026-08-28#3"
     },
     {
       "slug": "cybersquatting-what-it-is-and-how-to-protect-your-brand",
@@ -30687,7 +30687,7 @@
       ],
       "description": "What is cybersquatting and how does it harm your brand? Learn how domain squatting works, your legal options including UDRP complaints, and how to protect your brand.",
       "trending": false,
-      "publishedAt": "2026-09-14",
+      "publishedAt": "2026-08-29",
       "sections": [
         {
           "heading": "Overview",
@@ -30823,7 +30823,7 @@
         }
       ],
       "batch": "seo-100",
-      "scheduleSlot": "2026-09-14#2"
+      "scheduleSlot": "2026-08-29#1"
     }
   ]
 }
