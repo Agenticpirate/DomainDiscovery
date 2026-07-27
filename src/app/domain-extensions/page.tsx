@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
@@ -177,14 +178,17 @@ const PAGE_MOBILE_CSS = `
 }
 `;
 
-export default function DomainExtensionsPage() {
+function DomainExtensionsPageContent() {
   const { theme } = useTheme();
+  const searchParams = useSearchParams();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => setMounted(true), []);
   const isLight = mounted ? theme === 'light' : false;
 
   const solid = isLight ? '#ffffff' : '#0a0a0c';
+  // Carry keyword from /search?q=… via Full catalog / TLDs tab
+  const seedQuery = (searchParams.get('q') || '').trim();
 
   return (
     <div
@@ -329,6 +333,7 @@ export default function DomainExtensionsPage() {
             </div>
 
             <DomainExtensionsView
+              searchQuery={seedQuery}
               guideSlot={
                 <div id="how-to-choose" className="scroll-mt-24">
                   <ExtensionsGuideContent />
@@ -347,5 +352,17 @@ export default function DomainExtensionsPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function DomainExtensionsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-main)' }} />
+      }
+    >
+      <DomainExtensionsPageContent />
+    </Suspense>
   );
 }

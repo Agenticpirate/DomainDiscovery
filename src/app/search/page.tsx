@@ -507,7 +507,14 @@ function SearchPageContent() {
                 {(
                   [
                     { href: '/search', label: 'Search', short: 'Search', active: true },
-                    { href: '/domain-extensions', label: 'Extensions', short: 'TLDs', active: false },
+                    {
+                      href: query.trim()
+                        ? `/domain-extensions?q=${encodeURIComponent(query.trim())}`
+                        : '/domain-extensions',
+                      label: 'Extensions',
+                      short: 'TLDs',
+                      active: false,
+                    },
                     { href: '/generator', label: 'Generator', short: 'Gen', active: false },
                     { href: '/premium', label: 'Aftermarket', short: 'Market', active: false },
                     { href: '/tools', label: 'Research', short: 'Tools', active: false },
@@ -785,7 +792,11 @@ function SearchPageContent() {
                     )}
 
                     <Link
-                      href="/domain-extensions"
+                      href={
+                        query.trim()
+                          ? `/domain-extensions?q=${encodeURIComponent(query.trim())}`
+                          : '/domain-extensions'
+                      }
                       className={`group inline-flex items-center gap-1.5 rounded-full px-3.5 py-2.5 text-[12px] font-medium tracking-tight transition-colors duration-200 ${
                         isLight
                           ? 'text-slate-400 hover:text-slate-800'

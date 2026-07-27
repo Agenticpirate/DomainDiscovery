@@ -110,6 +110,15 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const [localSearch, setLocalSearch] = useState(searchQuery);
+
+  // Keep input + live checks in sync when arriving from /search?q=… or Full catalog
+  useEffect(() => {
+    if (searchQuery && searchQuery !== localSearch) {
+      setLocalSearch(searchQuery);
+    }
+    // Only re-seed when the URL/query prop changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
   // Browse starts on Featured so the page isn’t buried under 1,000 cards
   const [selectedCategory, setSelectedCategory] = useState<string>('Featured');
   const [extensions, setExtensions] = useState<Extension[]>(() =>
