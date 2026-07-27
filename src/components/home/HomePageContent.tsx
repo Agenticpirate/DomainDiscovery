@@ -814,15 +814,19 @@ export const HomePageContent: React.FC = () => {
               : 'bg-white/[0.03] border border-white/10'
           }`}
         >
-          <h2 className="text-sm sm:text-xl font-black mb-0.5 sm:mb-1">Ready to Find Your Perfect Domain?</h2>
+          <h2 className="text-sm sm:text-xl font-black mb-0.5 sm:mb-1">
+            <span className="sm:hidden">Ready to search free?</span>
+            <span className="hidden sm:inline">Ready to find your perfect domain?</span>
+          </h2>
           <p className="text-[10px] sm:text-[12px] mb-2 sm:mb-3" style={{ color: 'var(--text-tertiary)' }}>
-            Free · Real-time · Best prices
+            <span className="sm:hidden">Live availability · 1,600+ TLDs · No account</span>
+            <span className="hidden sm:inline">Free domain name search · Live results · No account required</span>
           </p>
           <a
             href="#top"
             className="btn-brand inline-flex items-center gap-1.5 rounded-lg px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-[13px]"
           >
-            Start Searching
+            Start free search
           </a>
         </div>
       </section>
