@@ -4,7 +4,8 @@
 |-----|---------|
 | [PHASE-F-OPS.md](./PHASE-F-OPS.md) | Measurement & ops runbook (GSC, CWV, quarterly audit) |
 | [query-tracking.json](./query-tracking.json) | Brand + tool query segments to track in GSC |
-| [content-calendar.md](./content-calendar.md) | 8-week polish schedule + backlog |
+| [content-calendar.md](./content-calendar.md) | Cadence + pillar polish schedule |
+| [seo-100-drip-calendar.md](./seo-100-drip-calendar.md) | **2/day publish plan for the 100 SEO articles** |
 
 ## Quick commands
 
@@ -17,6 +18,11 @@ npm run seo:index-health:prod
 
 # Re-expand Learn depth (Phase D script)
 npm run learn:expand
+
+# SEO-100 batch: re-import markdown, then drip-schedule 2/day
+npm run learn:import-seo
+npm run learn:schedule-seo
+npm run learn:schedule-seo:status
 ```
 
 ## Code sources of truth

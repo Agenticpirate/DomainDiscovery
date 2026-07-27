@@ -457,7 +457,9 @@ function main() {
       topics: topicsFrom(title, meta.primary_keyword || '', category),
       description: meta.meta_description || title,
       trending: /2026|best |cheapest |vs /.test(title.toLowerCase()),
+      // Placeholder date — run `npm run learn:schedule-seo` after import for 2/day drip
       publishedAt: meta.date_updated || meta.date_published || '2026-07-23',
+      batch: 'seo-100',
       sections,
     };
 
@@ -494,6 +496,7 @@ function main() {
   console.log(`Skipped: ${skipped.length}`, skipped);
   console.log(`Total learn articles: ${merged.length}`);
   console.log(`Wrote ${OUT_FILE}`);
+  console.log('\nNext: npm run learn:schedule-seo   # assign 2/day publish dates');
 }
 
 main();

@@ -14,7 +14,11 @@ export type LearnArticle = {
   topics: string[];
   description: string;
   trending?: boolean;
+  /** ISO date YYYY-MM-DD — article is public when publishedAt <= today (UTC) */
   publishedAt?: string;
+  /** SEO-100 drip batch marker */
+  batch?: string;
+  scheduleSlot?: string;
   sections: LearnSection[];
 };
 
@@ -40,6 +44,23 @@ type LearnFile = {
 };
 
 const data = learnData as LearnFile;
+
+/** Today's date as YYYY-MM-DD in UTC (publish gate source of truth). */
+export function learnTodayUTC(asOf: Date = new Date()): string {
+  return asOf.toISOString().slice(0, 10);
+}
+
+/**
+ * Public when publishedAt is missing (legacy) or on/before asOf (UTC date string).
+ * Future-dated SEO drip articles stay hidden from index/sitemap until their day.
+ */
+export function isLearnArticlePublished(
+  article: Pick<LearnArticle, 'publishedAt'>,
+  asOf: string = learnTodayUTC()
+): boolean {
+  if (!article.publishedAt) return true;
+  return article.publishedAt <= asOf;
+}
 
 /** Phase D topic clusters — product-aligned hubs for internal linking */
 export const LEARN_CLUSTERS: LearnClusterHub[] = [
@@ -181,8 +202,11 @@ function articleWordCount(article: LearnArticle): number {
     .filter(Boolean).length;
 }
 
-export function getLearnArticles(): LearnArticle[] {
-  return data.articles;
+/** Published articles only (default for index, related, sitemap, AEO). */
+export function getLearnArticles(opts?: { includeUnpublished?: boolean }): LearnArticle[] {
+  if (opts?.includeUnpublished) return data.articles;
+  const today = learnTodayUTC();
+  return data.articles.filter((a) => isLearnArticlePublished(a, today));
 }
 
 export function getLearnCategories(): string[] {
@@ -190,30 +214,46 @@ export function getLearnCategories(): string[] {
 }
 
 export function getLearnMeta() {
+  const published = getLearnArticles();
   return {
     generatedAt: data.generatedAt,
-    count: data.count,
+    count: published.length,
+    totalIncludingScheduled: data.articles.length,
     sourceNotes: data.sourceNotes,
   };
 }
 
-export function getLearnArticle(slug: string): LearnArticle | null {
-  return data.articles.find((a) => a.slug === slug) ?? null;
+/** Public article lookup — future-dated drip posts return null (404). */
+export function getLearnArticle(
+  slug: string,
+  opts?: { includeUnpublished?: boolean }
+): LearnArticle | null {
+  const article = data.articles.find((a) => a.slug === slug) ?? null;
+  if (!article) return null;
+  if (opts?.includeUnpublished) return article;
+  return isLearnArticlePublished(article) ? article : null;
 }
 
 export function getTrendingArticles(limit = 12): LearnArticle[] {
-  const trending = data.articles.filter((a) => a.trending);
+  const published = getLearnArticles();
+  const trending = published.filter((a) => a.trending);
   if (trending.length >= limit) return trending.slice(0, limit);
   // Prefer deeper product hubs when trending flags are sparse
   const hubs = LEARN_CLUSTERS.map((c) => c.hubSlug);
-  const hubArticles = data.articles.filter((a) => hubs.includes(a.slug));
-  const rest = data.articles.filter((a) => !hubs.includes(a.slug));
-  return [...trending, ...hubArticles, ...rest].filter(
-    (a, i, arr) => arr.findIndex((x) => x.slug === a.slug) === i
-  ).slice(0, limit);
+  const hubArticles = published.filter((a) => hubs.includes(a.slug));
+  const rest = published.filter((a) => !hubs.includes(a.slug));
+  return [...trending, ...hubArticles, ...rest]
+    .filter((a, i, arr) => arr.findIndex((x) => x.slug === a.slug) === i)
+    .slice(0, limit);
 }
 
+/** Published slugs only — sitemap / public routes. */
 export function getLearnSlugs(): string[] {
+  return getLearnArticles().map((a) => a.slug);
+}
+
+/** All slugs including scheduled — used for generateStaticParams so ISR can unlock later. */
+export function getAllLearnSlugs(): string[] {
   return data.articles.map((a) => a.slug);
 }
 
