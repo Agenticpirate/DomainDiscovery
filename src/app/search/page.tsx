@@ -21,6 +21,11 @@ import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
 import extensionsData from '@/data/extensions.json';
+import {
+  extensionsCatalogHref as buildExtensionsCatalogHref,
+  normalizeCatalogKeyword,
+  writeCatalogSeed,
+} from '@/lib/catalogHandoff';
 
 interface DomainResult {
   domain: string;
@@ -110,6 +115,14 @@ function SearchPageContent() {
   const router = useRouter();
   const initialQuery = searchParams.get('q') || '';
   const [query, setQuery] = useState(initialQuery);
+
+  /** Keyword to hand off to Full catalog / TLDs — prefer live state, fall back to URL */
+  const catalogHandoffQuery = normalizeCatalogKeyword(query || initialQuery || '');
+  const extensionsCatalogHref = buildExtensionsCatalogHref(catalogHandoffQuery);
+
+  const handleCatalogHandoff = useCallback(() => {
+    if (catalogHandoffQuery) writeCatalogSeed(catalogHandoffQuery);
+  }, [catalogHandoffQuery]);
   const [results, setResults] = useState<DomainResult[]>([]);
   const [brandableResults, setBrandableResults] = useState<DomainResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -506,18 +519,17 @@ function SearchPageContent() {
               >
                 {(
                   [
-                    { href: '/search', label: 'Search', short: 'Search', active: true },
+                    { href: '/search', label: 'Search', short: 'Search', active: true, catalog: false },
                     {
-                      href: query.trim()
-                        ? `/domain-extensions?q=${encodeURIComponent(query.trim())}`
-                        : '/domain-extensions',
+                      href: extensionsCatalogHref,
                       label: 'Extensions',
                       short: 'TLDs',
                       active: false,
+                      catalog: true,
                     },
-                    { href: '/generator', label: 'Generator', short: 'Gen', active: false },
-                    { href: '/premium', label: 'Aftermarket', short: 'Market', active: false },
-                    { href: '/tools', label: 'Research', short: 'Tools', active: false },
+                    { href: '/generator', label: 'Generator', short: 'Gen', active: false, catalog: false },
+                    { href: '/premium', label: 'Aftermarket', short: 'Market', active: false, catalog: false },
+                    { href: '/tools', label: 'Research', short: 'Tools', active: false, catalog: false },
                   ] as const
                 ).map((tab) => {
                   const cls = `min-w-0 inline-flex items-center justify-center rounded-xl px-0.5 sm:px-2 py-1.5 sm:py-2 text-[10px] sm:text-[12px] font-semibold tracking-tight transition-all duration-200 text-center leading-tight ${
@@ -535,7 +547,13 @@ function SearchPageContent() {
                       <span className="hidden sm:inline">{tab.label}</span>
                     </span>
                   ) : (
-                    <Link key={tab.label} href={tab.href} className={cls} title={tab.label}>
+                    <Link
+                      key={tab.label}
+                      href={tab.href}
+                      className={cls}
+                      title={tab.label}
+                      onClick={tab.catalog ? handleCatalogHandoff : undefined}
+                    >
                       <span className="sm:hidden">{tab.short}</span>
                       <span className="hidden sm:inline">{tab.label}</span>
                     </Link>
@@ -792,11 +810,8 @@ function SearchPageContent() {
                     )}
 
                     <Link
-                      href={
-                        query.trim()
-                          ? `/domain-extensions?q=${encodeURIComponent(query.trim())}`
-                          : '/domain-extensions'
-                      }
+                      href={extensionsCatalogHref}
+                      onClick={handleCatalogHandoff}
                       className={`group inline-flex items-center gap-1.5 rounded-full px-3.5 py-2.5 text-[12px] font-medium tracking-tight transition-colors duration-200 ${
                         isLight
                           ? 'text-slate-400 hover:text-slate-800'

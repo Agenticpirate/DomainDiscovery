@@ -188,6 +188,7 @@ function DomainExtensionsPageContent() {
 
   const solid = isLight ? '#ffffff' : '#0a0a0c';
   // Carry keyword from /search?q=… via Full catalog / TLDs tab
+  // DomainExtensionsView also reads ?q= and sessionStorage itself (belt + suspenders)
   const seedQuery = (searchParams.get('q') || '').trim();
 
   return (
@@ -333,6 +334,7 @@ function DomainExtensionsPageContent() {
             </div>
 
             <DomainExtensionsView
+              key={seedQuery || 'browse'}
               searchQuery={seedQuery}
               guideSlot={
                 <div id="how-to-choose" className="scroll-mt-24">

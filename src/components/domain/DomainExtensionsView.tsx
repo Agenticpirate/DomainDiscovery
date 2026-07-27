@@ -1,10 +1,16 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useLayoutEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
 import extensionsData from '@/data/extensions.json';
+import {
+  clearCatalogSeed,
+  normalizeCatalogKeyword,
+  readCatalogSeed,
+} from '@/lib/catalogHandoff';
 
 interface Extension {
   tld: string;
@@ -109,16 +115,34 @@ const checkDomainsAvailability = async (
 export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExtensionsViewProps) {
   const { theme } = useTheme();
   const isLight = theme === 'light';
-  const [localSearch, setLocalSearch] = useState(searchQuery);
+  const searchParams = useSearchParams();
 
-  // Keep input + live checks in sync when arriving from /search?q=… or Full catalog
-  useEffect(() => {
-    if (searchQuery && searchQuery !== localSearch) {
-      setLocalSearch(searchQuery);
+  // Prefer live URL ?q=, then prop, then sessionStorage handoff from /search
+  const urlQ = normalizeCatalogKeyword(searchParams.get('q') || '');
+  const propQ = normalizeCatalogKeyword(searchQuery);
+  const seedKeyword = urlQ || propQ;
+
+  const [localSearch, setLocalSearch] = useState(() => seedKeyword || readCatalogSeed());
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const seededOnceRef = useRef(false);
+
+  // Apply seed as soon as URL/prop is known (before paint when possible)
+  useLayoutEffect(() => {
+    const fromStorage = readCatalogSeed();
+    const next = seedKeyword || fromStorage;
+    if (!next) return;
+    setLocalSearch((prev) => (prev === next ? prev : next));
+    if (fromStorage) clearCatalogSeed();
+    if (!seededOnceRef.current && next) {
+      seededOnceRef.current = true;
+      // Bring the prefilled search into view (hero sits above on mobile)
+      requestAnimationFrame(() => {
+        document.getElementById('extensions-search')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        inputRef.current?.focus({ preventScroll: true });
+      });
     }
-    // Only re-seed when the URL/query prop changes
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery]);
+  }, [seedKeyword]);
+
   // Browse starts on Featured so the page isn’t buried under 1,000 cards
   const [selectedCategory, setSelectedCategory] = useState<string>('Featured');
   const [extensions, setExtensions] = useState<Extension[]>(() =>
@@ -540,6 +564,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
               <Icons.Search />
             </div>
             <input
+              ref={inputRef}
               type="text"
               value={localSearch}
               onChange={(e) => setLocalSearch(e.target.value)}
@@ -556,6 +581,8 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
               }`}
               style={{ backgroundColor: plateInset }}
               aria-label="Search keyword across all domain extensions"
+              autoComplete="off"
+              spellCheck={false}
             />
             {localSearch && (
               <button
