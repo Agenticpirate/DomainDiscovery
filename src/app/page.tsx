@@ -76,7 +76,7 @@ export default function Home() {
                   }`}
                 />
               </span>
-              <span className="sm:hidden">Free domain name search</span>
+              <span className="sm:hidden">Free · Live · No account</span>
               <span className="hidden sm:inline">
                 Free domain name search · Live availability · 1,600+ TLDs
               </span>
@@ -91,13 +91,15 @@ export default function Home() {
                     : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.55))',
                 }}
               >
-                Domain name search
+                <span className="sm:hidden">Find your domain</span>
+                <span className="hidden sm:inline">Domain name search</span>
               </span>
               <span
                 className="block text-[0.88rem] sm:text-[1.55rem] md:text-[1.95rem] mt-0.5 sm:mt-1.5 font-bold"
                 style={{ color: 'var(--gradient-subtitle)' }}
               >
-                Check availability in seconds
+                <span className="sm:hidden">Live check across 1,600+ TLDs</span>
+                <span className="hidden sm:inline">Check availability in seconds</span>
               </span>
             </h1>
 
@@ -106,14 +108,14 @@ export default function Home() {
               style={{ color: 'var(--text-tertiary)' }}
             >
               Type a name and see live availability across 1,600+ extensions. Generate brandable ideas with AI,
-              build geo domain lists for local SEO, run bulk checks, look up WHOIS, and compare registrar prices —
-              free, no account required, shortlist saved on your device.
+              build geo lists for local SEO, run bulk checks, look up WHOIS, and compare registrar prices — free,
+              no account required, shortlist saved on your device.
             </p>
             <p
-              className="sm:hidden text-[11.5px] leading-snug max-w-[18rem] mx-auto mb-3"
+              className="sm:hidden text-[11.5px] leading-snug max-w-[20rem] mx-auto mb-3"
               style={{ color: 'var(--text-tertiary)' }}
             >
-              Live availability · 1,600+ TLDs · Free tools
+              Free domain search, AI names &amp; geo tools — no signup
             </p>
 
             {/* Search panel — solid fill so ambient dots never show through */}

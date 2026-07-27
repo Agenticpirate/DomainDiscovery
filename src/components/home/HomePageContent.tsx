@@ -25,7 +25,7 @@ export const HomePageContent: React.FC = () => {
       icon: <Icons.Search />,
       title: 'Domain availability checker',
       description:
-        'See whether a domain is free, registered, or premium as you type — across popular and niche extensions.',
+        'See free, taken, or premium in real time — across .com, .ai, country codes, and 1,600+ TLDs.',
       href: '/search',
       cta: 'Check availability',
       badge: null as string | null,
@@ -34,7 +34,7 @@ export const HomePageContent: React.FC = () => {
       icon: <Icons.Layers />,
       title: '1,600+ domain extensions',
       description:
-        'Browse TLDs from .com and .ai to country codes and new gTLDs. Filter by use case and price signals.',
+        'Browse every major TLD in one catalog. Filter by category, price signals, and live status.',
       href: '/domain-extensions',
       cta: 'Browse extensions',
       badge: '1,600+ TLDs',
@@ -43,7 +43,7 @@ export const HomePageContent: React.FC = () => {
       icon: <Icons.Magic />,
       title: 'AI domain name generator',
       description:
-        'Turn a keyword into brandable, short name ideas with live availability — built for startups and local brands.',
+        'Turn one keyword into short, brandable names with live checks — built for startups and local brands.',
       href: '/generator',
       cta: 'Generate names',
       badge: 'AI-Powered',
@@ -54,7 +54,7 @@ export const HomePageContent: React.FC = () => {
     {
       icon: <Icons.Magic />,
       title: 'AI Domain Assistant',
-      description: 'Describe your business — auto-find and rank brand domains with live checks.',
+      description: 'Describe your business — get a ranked shortlist with live availability.',
       href: '/assistant',
       featured: true,
       badge: 'Auto',
@@ -64,7 +64,7 @@ export const HomePageContent: React.FC = () => {
     {
       icon: <Icons.Sparkles />,
       title: 'AI Domain Generator',
-      description: 'Brandable name ideas from a keyword with live availability.',
+      description: 'Instant brandable ideas from a keyword, checked live as they appear.',
       href: '/generator',
       featured: true,
       badge: 'AI',
@@ -74,7 +74,7 @@ export const HomePageContent: React.FC = () => {
     {
       icon: <Icons.Search />,
       title: 'Instant Domain Search',
-      description: 'Live domain availability as you type across core TLDs.',
+      description: 'Type once — see availability stream across core and long-tail TLDs.',
       href: '/search',
       badge: 'Real-time',
       hideOnMobile: false,
@@ -82,7 +82,7 @@ export const HomePageContent: React.FC = () => {
     {
       icon: <Icons.Layers />,
       title: 'Bulk Domain Search',
-      description: 'Check up to 1,000 domains in one batch for portfolios.',
+      description: 'Paste up to 1,000 names and clear free vs taken in one batch.',
       href: '/bulk-search',
       badge: '1,000 at once',
       hideOnMobile: false,
@@ -90,7 +90,7 @@ export const HomePageContent: React.FC = () => {
     {
       icon: <Icons.Globe />,
       title: 'Domain Extensions',
-      description: 'Explore 1,600+ TLDs and match extensions to your brand.',
+      description: 'Explore 1,600+ endings and match the right TLD to your brand.',
       href: '/domain-extensions',
       badge: '1,600+ TLDs',
       hideOnMobile: false,
@@ -98,14 +98,14 @@ export const HomePageContent: React.FC = () => {
     {
       icon: <Icons.Dollar />,
       title: 'Price Comparison',
-      description: 'Compare regular registrar pricing side by side before you buy.',
+      description: 'Side-by-side registrar prices before you click buy.',
       href: '/tools/compare',
       hideOnMobile: false,
     },
     {
       icon: <Icons.Info />,
       title: 'WHOIS Lookup',
-      description: 'RDAP/WHOIS ownership, dates, and registration history.',
+      description: 'Owner, dates, and registration history via RDAP/WHOIS.',
       href: '/tools/whois',
       // Mobile tools grid: hide WHOIS (still shown on desktop lg+)
       hideOnMobile: true,
@@ -113,14 +113,14 @@ export const HomePageContent: React.FC = () => {
     {
       icon: <Icons.Globe />,
       title: 'Geo Domain Generator',
-      description: 'City and country domain lists for local SEO campaigns.',
+      description: 'City + niche lists built for local SEO and multi-location brands.',
       href: '/tools/geo',
       hideOnMobile: false,
     },
     {
       icon: <Icons.Search />,
       title: 'Keyword Domains',
-      description: 'Expand keywords into brandable names with live checks.',
+      description: 'Expand one keyword into hundreds of brandable options with live checks.',
       href: '/tools/keyword',
       badge: '5K+',
       hideOnMobile: false,
@@ -131,37 +131,37 @@ export const HomePageContent: React.FC = () => {
     {
       icon: <Icons.Magic />,
       title: 'Live results',
-      description: 'Availability streams as you type — no full-page reloads.',
+      description: 'Availability updates as you type — no waiting on full-page reloads.',
       highlight: false,
     },
     {
       icon: <Icons.Sparkles />,
       title: 'AI + geo tools',
-      description: 'Brandable generators and city-level lists in one product.',
+      description: 'Brandable names and city-level lists in one free toolkit.',
       highlight: false,
     },
     {
       icon: <Icons.Dollar />,
       title: 'Price clarity',
-      description: 'Side-by-side registrar prices so you can buy with context.',
+      description: 'Compare registrar prices so you buy with confidence, not guesswork.',
       highlight: false,
     },
     {
       icon: <Icons.Check />,
       title: 'Private shortlists',
-      description: 'Saved domains stay in your browser unless a feature says otherwise.',
+      description: 'Saved domains stay on your device — we don’t harvest your searches.',
       highlight: true,
     },
     {
       icon: <Icons.Globe />,
       title: '1,600+ TLDs',
-      description: 'From .com to niche and country-code extensions in one search.',
+      description: 'From .com to niche and country-code extensions in a single search.',
       highlight: false,
     },
     {
       icon: <Icons.Layers />,
       title: 'Mobile-ready',
-      description: 'The same workflow on desktop, tablet, and phone.',
+      description: 'The same fast search and tools on phone, tablet, and desktop.',
       highlight: false,
     },
   ];
@@ -267,8 +267,8 @@ export const HomePageContent: React.FC = () => {
         <div className="text-center mb-2 sm:mb-4">
           <h2 className="section-title">Free domain name search &amp; tools</h2>
           <p className="section-sub max-w-xl mx-auto">
-            Check domain availability, explore 1,600+ TLDs, and move from idea to shortlist with AI generation, bulk
-            checks, geo lists, WHOIS, and price compare.
+            Check availability live, browse 1,600+ TLDs, and go from idea to shortlist with AI names, bulk checks,
+            geo lists, WHOIS, and price compare — free, no account.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-2.5">
@@ -335,10 +335,15 @@ export const HomePageContent: React.FC = () => {
           <div className="relative z-[1] text-center mb-1.5 sm:mb-3.5">
             <h2 className="section-title">
               <span className="sm:hidden">Free domain name search &amp; tools</span>
-              <span className="hidden sm:inline">Domain tools for search, geo &amp; WHOIS</span>
+              <span className="hidden sm:inline">Everything you need to find a domain</span>
             </h2>
+            <p
+              className="sm:hidden section-sub max-w-[17.5rem] mx-auto mt-0.5 !text-[11px] !leading-snug"
+            >
+              Live search, AI names, bulk checks &amp; more — no signup
+            </p>
             <p className="hidden sm:block section-sub">
-              Instant search, AI names, bulk checks, geo domains, extensions, pricing, and RDAP lookup
+              Instant search, AI generators, bulk checks, geo lists, extensions, prices, and WHOIS — one free toolkit
             </p>
           </div>
 
@@ -425,8 +430,13 @@ export const HomePageContent: React.FC = () => {
       <section className="section-shell order-3 sm:order-2 !mt-2 sm:!mt-0 !mb-5 sm:!mb-8">
         <div className="flex items-end justify-between gap-2 mb-2 sm:mb-3">
           <div>
-            <h2 className="section-title">Popular Extensions</h2>
-            <p className="hidden sm:block section-sub">Choose from 1,600+ extensions. Find the perfect TLD.</p>
+            <h2 className="section-title">
+              <span className="sm:hidden">Popular TLDs</span>
+              <span className="hidden sm:inline">Popular extensions</span>
+            </h2>
+            <p className="hidden sm:block section-sub">
+              Start with the endings brands trust — then explore 1,600+ more.
+            </p>
           </div>
           <Link
             href="/domain-extensions"
@@ -458,9 +468,17 @@ export const HomePageContent: React.FC = () => {
       {/* Why — mobile bento; sits above Popular Extensions on mobile only */}
       <section className="section-shell order-2 sm:order-3 !pt-1 sm:!pt-0 !mb-4 sm:!mb-8">
         <div className="text-center mb-2.5 sm:mb-4">
-          <h2 className="section-title">Why use DomainDiscovery for domain search?</h2>
+          <h2 className="section-title">
+            <span className="sm:hidden">Why DomainDiscovery?</span>
+            <span className="hidden sm:inline">Why use DomainDiscovery for domain search?</span>
+          </h2>
           <p className="section-sub max-w-lg mx-auto px-1">
-            Fast AI domain search that never harvests your data — saves stay local on your device.
+            <span className="sm:hidden">
+              Live checks, AI tools, private shortlists — free forever.
+            </span>
+            <span className="hidden sm:inline">
+              Fast domain name search with AI tools that never harvest your data — shortlists stay on your device.
+            </span>
           </p>
         </div>
 
