@@ -20,6 +20,7 @@ import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
+import { pronounceDomain } from '@/lib/pronounceDomain';
 import extensionsData from '@/data/extensions.json';
 
 interface DomainResult {
@@ -246,11 +247,7 @@ function SearchPageContent() {
   };
 
   const handlePronounce = (domain: string) => {
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(domain.replace('.', ' dot '));
-      utterance.rate = 0.9;
-      speechSynthesis.speak(utterance);
-    }
+    pronounceDomain(domain);
   };
 
   const primary = results.find(r => r.domain.endsWith('.com')) || results[0];
@@ -841,6 +838,7 @@ function SearchPageContent() {
                       result={r}
                       isLight={isLight}
                       onSave={handleSave}
+                      onPronounce={handlePronounce}
                       isSaved={savedDomains.includes(r.domain)}
                       selectedRegistrar={selectedRegistrar}
                       onSelectRegistrar={setSelectedRegistrar}
@@ -974,6 +972,7 @@ function DomainRow({
   result,
   isLight,
   onSave,
+  onPronounce,
   isSaved,
   selectedRegistrar,
   onSelectRegistrar,
@@ -982,6 +981,7 @@ function DomainRow({
   result: DomainResult;
   isLight: boolean;
   onSave: (d: string) => void;
+  onPronounce: (d: string) => void;
   isSaved: boolean;
   selectedRegistrar: RegistrarName;
   onSelectRegistrar: (registrar: RegistrarName) => void;
@@ -1096,6 +1096,30 @@ function DomainRow({
         </span>
       </div>
       <div className="flex items-center gap-0.5 shrink-0 justify-end">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onPronounce(result.domain);
+          }}
+          className={`p-1.5 rounded-md transition-colors ${
+            isLight
+              ? 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
+              : 'text-white/40 hover:text-white/80 hover:bg-white/[0.06]'
+          }`}
+          aria-label={`Pronounce ${result.domain}`}
+          title="Say domain name"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15.536 8.464a5 5 0 010 7.072M12 6v12m0 0l-4-4H5a1 1 0 01-1-1v-2a1 1 0 011-1h3l4-4zM18.364 5.636a9 9 0 010 12.728"
+            />
+          </svg>
+        </button>
         <button
           type="button"
           onClick={() => onSave(result.domain)}
