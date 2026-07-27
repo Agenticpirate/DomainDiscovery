@@ -499,64 +499,66 @@ function SearchPageContent() {
               />
             </div>
 
-            {/* Tool switcher — premium pill track (Search · Extensions · …) */}
-            <div className="mt-2 flex items-stretch gap-1.5 w-full max-w-full min-w-0">
+            {/* Tool switcher — fixed 5-up grid, no horizontal scroll */}
+            <div className="mt-2 w-full max-w-full min-w-0">
               <nav
                 aria-label="Domain tools"
-                className={`allow-x-scroll min-w-0 flex-1 overflow-x-auto overscroll-x-contain scrollbar-hide rounded-2xl border p-1 ${
+                className={`grid w-full max-w-full min-w-0 gap-0.5 rounded-2xl border p-1 ${
+                  query ? 'grid-cols-6' : 'grid-cols-5'
+                } ${
                   isLight
                     ? 'bg-slate-100/90 border-slate-200'
                     : 'bg-white/[0.04] border-white/[0.09]'
                 }`}
               >
-                <div className="flex items-center gap-0.5 sm:gap-1 w-max min-w-full sm:min-w-0 sm:w-full">
-                  {(
-                    [
-                      { href: '/search', label: 'Search', active: true },
-                      { href: '/domain-extensions', label: 'Extensions', active: false },
-                      { href: '/generator', label: 'Generator', active: false },
-                      { href: '/premium', label: 'Aftermarket', active: false },
-                      { href: '/tools', label: 'Research', active: false },
-                    ] as const
-                  ).map((tab) => {
-                    const cls = `shrink-0 inline-flex flex-1 sm:flex-1 items-center justify-center rounded-xl px-2.5 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-[12px] font-semibold tracking-tight transition-all duration-200 whitespace-nowrap ${
-                      tab.active
-                        ? isLight
-                          ? 'bg-white text-slate-900 shadow-sm shadow-slate-900/10 ring-1 ring-slate-200/80'
-                          : 'bg-white text-black shadow-[0_1px_0_rgba(255,255,255,0.12)_inset] ring-1 ring-white/10'
-                        : isLight
-                          ? 'text-slate-500 hover:text-slate-800 hover:bg-white/70'
-                          : 'text-white/45 hover:text-white/85 hover:bg-white/[0.06]'
-                    }`;
-                    return tab.active ? (
-                      <span key={tab.label} className={cls} aria-current="page">
-                        {tab.label}
-                      </span>
-                    ) : (
-                      <Link key={tab.label} href={tab.href} className={cls}>
-                        {tab.label}
-                      </Link>
-                    );
-                  })}
-                </div>
+                {(
+                  [
+                    { href: '/search', label: 'Search', short: 'Search', active: true },
+                    { href: '/domain-extensions', label: 'Extensions', short: 'TLDs', active: false },
+                    { href: '/generator', label: 'Generator', short: 'Gen', active: false },
+                    { href: '/premium', label: 'Aftermarket', short: 'Market', active: false },
+                    { href: '/tools', label: 'Research', short: 'Tools', active: false },
+                  ] as const
+                ).map((tab) => {
+                  const cls = `min-w-0 inline-flex items-center justify-center rounded-xl px-0.5 sm:px-2 py-1.5 sm:py-2 text-[10px] sm:text-[12px] font-semibold tracking-tight transition-all duration-200 text-center leading-tight ${
+                    tab.active
+                      ? isLight
+                        ? 'bg-white text-slate-900 shadow-sm shadow-slate-900/10 ring-1 ring-slate-200/80'
+                        : 'bg-white text-black shadow-[0_1px_0_rgba(255,255,255,0.12)_inset] ring-1 ring-white/10'
+                      : isLight
+                        ? 'text-slate-500 hover:text-slate-800 hover:bg-white/70'
+                        : 'text-white/45 hover:text-white/85 hover:bg-white/[0.06]'
+                  }`;
+                  return tab.active ? (
+                    <span key={tab.label} className={cls} aria-current="page" title={tab.label}>
+                      <span className="sm:hidden">{tab.short}</span>
+                      <span className="hidden sm:inline">{tab.label}</span>
+                    </span>
+                  ) : (
+                    <Link key={tab.label} href={tab.href} className={cls} title={tab.label}>
+                      <span className="sm:hidden">{tab.short}</span>
+                      <span className="hidden sm:inline">{tab.label}</span>
+                    </Link>
+                  );
+                })}
+                {query && (
+                  <button
+                    type="button"
+                    onClick={handleResetSearch}
+                    className={`min-w-0 inline-flex items-center justify-center rounded-xl px-0.5 py-1.5 text-[10px] font-semibold transition-colors ${
+                      isLight
+                        ? 'text-slate-500 hover:bg-white hover:text-slate-800'
+                        : 'text-white/45 hover:bg-white/[0.08] hover:text-white'
+                    }`}
+                    title="Clear search"
+                    aria-label="Clear search"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                )}
               </nav>
-              {query && (
-                <button
-                  type="button"
-                  onClick={handleResetSearch}
-                  className={`shrink-0 inline-flex items-center justify-center gap-1 rounded-2xl border px-3 py-1.5 text-[11px] font-semibold transition-colors ${
-                    isLight
-                      ? 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                      : 'border-white/12 bg-[#121214] text-white/65 hover:text-white hover:border-white/20'
-                  }`}
-                  title="Clear search"
-                >
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                  <span className="hidden xs:inline sm:inline">Clear</span>
-                </button>
-              )}
             </div>
 
             {/* Availability status filters — sticky, compact, high contrast */}
