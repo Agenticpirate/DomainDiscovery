@@ -1,0 +1,107 @@
+# SEO-100 drip: daily automation
+#
+# Publishing is date-gated in the app (publishedAt <= today UTC) — no daily
+# content commits required. This workflow:
+#  1. Confirms at least 2 SEO articles are due for "today" until the batch ends
+#  2. Calls production /api/cron/seo-publish to revalidate Learn + sitemap
+#  3. Warms today's article URLs (HTTP 200) so they are live for crawlers
+#
+# Optional repo secrets:
+#   SEO_CRON_SECRET      — must match Vercel env SEO_CRON_SECRET / REVALIDATE_SECRET
+#   PRODUCTION_BASE_URL  — default https://www.domainsdiscovery.com
+#   VERCEL_DEPLOY_HOOK   — optional Deploy Hook URL for a forced redeploy
+
+name: SEO daily publish
+
+on:
+  schedule:
+    # 05:15 UTC every day (~12:45 / 1:15 AM US depending on DST)
+    - cron: '15 5 * * *'
+  workflow_dispatch:
+    inputs:
+      force_deploy:
+        description: 'Also hit Vercel deploy hook (if secret set)'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  unlock-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Local schedule status
+        run: node scripts/seo-publish-status.mjs
+
+      - name: Assert cadence (at least 2/day until exhausted)
+        run: node scripts/assert-seo-daily-cadence.mjs --min 2
+
+      - name: Resolve production base URL
+        id: base
+        run: |
+          BASE="${{ secrets.PRODUCTION_BASE_URL }}"
+          if [ -z "$BASE" ]; then BASE="https://www.domainsdiscovery.com"; fi
+          BASE="${BASE%/}"
+          echo "url=$BASE" >> "$GITHUB_OUTPUT"
+          echo "Using $BASE"
+
+      - name: Revalidate production Learn cache
+        id: revalidate
+        env:
+          SEO_CRON_SECRET: ${{ secrets.SEO_CRON_SECRET }}
+          BASE: ${{ steps.base.outputs.url }}
+        run: |
+          set -e
+          if [ -z "$SEO_CRON_SECRET" ]; then
+            echo "SEO_CRON_SECRET not set — skipping API revalidate (date-gate still works)."
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          RESP=$(curl -sS -f -X GET \
+            -H "Authorization: Bearer ${SEO_CRON_SECRET}" \
+            "${BASE}/api/cron/seo-publish")
+          echo "$RESP" | tee /tmp/seo-publish.json
+          echo "skipped=false" >> "$GITHUB_OUTPUT"
+
+      - name: Optional Vercel deploy hook
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+          FORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.force_deploy || 'false' }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "VERCEL_DEPLOY_HOOK not set — skip (date-gate + revalidate are enough)."
+            exit 0
+          fi
+          if [ "$FORCE" != "true" ] && [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "Skipping deploy hook (not schedule / force)."
+            exit 0
+          fi
+          curl -sS -X POST "$HOOK" | tee /tmp/deploy-hook.json || true
+          echo "Deploy hook fired"
+          sleep 45
+
+      - name: Warm & verify today's article URLs
+        env:
+          BASE: ${{ steps.base.outputs.url }}
+        run: node scripts/verify-seo-live-urls.mjs --base "$BASE"
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## SEO daily publish" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Date gate publishes automatically (no daily git commit)." >> "$GITHUB_STEP_SUMMARY"
+          echo "- Cadence: ≥2 SEO articles/day until the 100 are live." >> "$GITHUB_STEP_SUMMARY"
+          echo "- Production: ${{ steps.base.outputs.url }}" >> "$GITHUB_STEP_SUMMARY"
+          node scripts/seo-publish-status.mjs >> "$GITHUB_STEP_SUMMARY" || true

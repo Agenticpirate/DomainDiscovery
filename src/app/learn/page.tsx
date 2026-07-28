@@ -24,6 +24,9 @@ export const metadata: Metadata = {
     'Free guides on choosing a domain name, brandable vs keyword domains, geo domains, valuation, DNS, auctions, and registration strategy. Learn then search live availability.',
 };
 
+/** Always evaluate publishedAt against the current clock (SEO drip unlock). */
+export const dynamic = 'force-dynamic';
+
 export default function LearnPage() {
   const articles = getLearnArticles();
   const categories = getLearnCategories();

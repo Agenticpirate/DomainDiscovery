@@ -25,8 +25,11 @@ type PageProps = { params: { slug: string } };
 
 const BASE = getSiteBaseUrl();
 
-/** Revalidate hourly so drip-scheduled articles go live without a redeploy. */
-export const revalidate = 3600;
+/**
+ * Force-dynamic so the date gate (publishedAt ≤ today UTC) unlocks new
+ * SEO drip articles every day without waiting on ISR or a redeploy.
+ */
+export const dynamic = 'force-dynamic';
 
 export function generateStaticParams() {
   // Include scheduled slugs so paths exist; page 404s until publishedAt.
