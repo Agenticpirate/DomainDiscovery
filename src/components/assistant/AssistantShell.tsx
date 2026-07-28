@@ -151,7 +151,17 @@ export function AssistantShell() {
         <PageBreadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Agent Hub' }]} />
         <SectionAmbient intensity="hero" className="w-full" contentClassName="relative z-[1]">
         <section className="page-gutter pb-5 sm:pb-7">
-          <div className="max-w-3xl mx-auto text-center mt-1 sm:mt-2">
+          <div className="max-w-3xl mx-auto text-center mt-1 sm:mt-2 relative isolate">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-0 h-full w-[min(100%,36rem)] -translate-x-1/2 rounded-[2rem]"
+              style={{
+                background: isLight
+                  ? 'radial-gradient(ellipse 90% 80% at 50% 40%, #f8fafc 0%, #f8fafc 50%, rgba(248,250,252,0) 100%)'
+                  : 'radial-gradient(ellipse 90% 80% at 50% 40%, #050505 0%, #050505 50%, rgba(5,5,5,0) 100%)',
+              }}
+            />
+            <div className="relative z-[1]">
             <p
               className={`relative isolate inline-flex items-center gap-1.5 overflow-hidden rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide mb-3 ${
                 isLight ? 'border-slate-200 text-slate-500' : 'border-white/12 text-white/40'
@@ -178,6 +188,7 @@ export function AssistantShell() {
               Agent-ready domain intelligence on DomainDiscovery. Demo auto shortlists with a budget cap, or connect
               via MCP / REST so agents can find and rank brands. Research only — you confirm registration.
             </p>
+            </div>
           </div>
         </section>
 
@@ -206,35 +217,54 @@ export function AssistantShell() {
               {run.status === 'idle' && (
                 <div
                   className={`shine-border relative isolate overflow-hidden rounded-2xl border border-dashed p-6 text-sm ${
-                    isLight
-                      ? 'border-slate-200 text-slate-500 bg-white'
-                      : 'border-white/12 text-white/40 bg-[#0a0a0c]'
+                    isLight ? 'border-slate-200 text-slate-500' : 'border-white/12 text-white/45'
                   }`}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
                 >
-                  Your ranked shortlist will appear here after you run{' '}
-                  <span className="font-semibold">Find domains</span>.
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                    style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+                  />
+                  <p className="relative z-[1]">
+                    Your ranked shortlist will appear here after you run{' '}
+                    <span className="font-semibold">Find domains</span>.
+                  </p>
                 </div>
               )}
               {run.status === 'loading' && (
                 <div
                   className={`shine-border relative isolate overflow-hidden rounded-2xl border p-6 text-sm animate-pulse ${
-                    isLight
-                      ? 'border-slate-200 bg-white text-slate-500'
-                      : 'border-white/10 bg-[#0a0a0c] text-white/45'
+                    isLight ? 'border-slate-200 text-slate-500' : 'border-white/10 text-white/45'
                   }`}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
                 >
-                  Running auto pipeline — generating names
-                  {form.liveCheck ? ', checking availability' : ''}, and ranking brand fit…
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                    style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+                  />
+                  <p className="relative z-[1]">
+                    Running auto pipeline — generating names
+                    {form.liveCheck ? ', checking availability' : ''}, and ranking brand fit…
+                  </p>
                 </div>
               )}
               {run.status === 'error' && (
                 <div
                   className={`shine-border relative isolate overflow-hidden rounded-2xl border p-5 text-sm ${
                     isLight
-                      ? 'border-rose-200 bg-rose-50 text-rose-800'
-                      : 'border-rose-500/30 bg-[#140a0c] text-rose-200'
+                      ? 'border-rose-200 text-rose-800'
+                      : 'border-rose-500/30 text-rose-200'
                   }`}
+                  style={{ backgroundColor: isLight ? '#fff1f2' : '#140a0c' }}
                 >
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                    style={{ backgroundColor: isLight ? '#fff1f2' : '#140a0c' }}
+                  />
+                  <div className="relative z-[1]">
                   <p className="font-bold mb-1">Couldn’t complete the run</p>
                   <p>{run.error}</p>
                   <button
@@ -246,6 +276,7 @@ export function AssistantShell() {
                   >
                     Retry
                   </button>
+                  </div>
                 </div>
               )}
               {run.status === 'success' && run.result && (

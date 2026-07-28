@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { SolidPlate } from '@/components/ui/SolidPlate';
 
 const TOOLS: { name: string; description: string }[] = [
   { name: 'find_brand_domains', description: 'AUTO: brief → generate → check → rank → shortlist (primary)' },
@@ -15,17 +16,21 @@ const TOOLS: { name: string; description: string }[] = [
 ];
 
 export function AgentToolCatalog({ isLight }: { isLight: boolean }) {
+  const fill = isLight ? '#ffffff' : '#0a0a0c';
+  const headFill = isLight ? '#f8fafc' : '#121214';
+
   return (
-    <div
-      className={`shine-border relative isolate overflow-hidden overflow-x-auto rounded-2xl border ${
-        isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-[#0a0a0c]'
+    <SolidPlate
+      fill={fill}
+      className={`shine-border overflow-x-auto rounded-2xl border ${
+        isLight ? 'border-slate-200' : 'border-white/10'
       }`}
     >
       <table className="w-full text-left text-xs sm:text-sm">
         <thead>
-          <tr className={isLight ? 'bg-slate-50 text-slate-500' : 'bg-[#121214] text-white/40'}>
-            <th className="px-3 py-2 font-bold">Tool</th>
-            <th className="px-3 py-2 font-bold">What it does</th>
+          <tr style={{ backgroundColor: headFill }}>
+            <th className={`px-3 py-2 font-bold ${isLight ? 'text-slate-500' : 'text-white/40'}`}>Tool</th>
+            <th className={`px-3 py-2 font-bold ${isLight ? 'text-slate-500' : 'text-white/40'}`}>What it does</th>
           </tr>
         </thead>
         <tbody>
@@ -42,6 +47,6 @@ export function AgentToolCatalog({ isLight }: { isLight: boolean }) {
           ))}
         </tbody>
       </table>
-    </div>
+    </SolidPlate>
   );
 }

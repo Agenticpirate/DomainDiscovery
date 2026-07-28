@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { SolidPlate, TitleScrim } from '@/components/ui/SolidPlate';
 import { AgentToolCatalog } from './AgentToolCatalog';
 import { AgentSecuritySection } from './AgentSecuritySection';
 import { AgentIntegrationSection } from './AgentIntegrationSection';
@@ -16,6 +17,7 @@ function CodeBlock({
   isLight: boolean;
 }) {
   const [copied, setCopied] = React.useState(false);
+  const fill = '#0a0a0c';
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(code);
@@ -26,10 +28,9 @@ function CodeBlock({
     }
   };
   return (
-    <div
-      className={`relative isolate rounded-2xl border overflow-hidden ${
-        isLight ? 'border-slate-200 bg-slate-950' : 'border-white/10 bg-[#0a0a0c]'
-      }`}
+    <SolidPlate
+      fill={fill}
+      className={`rounded-2xl border ${isLight ? 'border-slate-200' : 'border-white/10'}`}
     >
       <div className="flex items-center justify-between px-3 py-2 border-b border-white/10">
         <span className="text-[11px] font-bold text-white/60">{title}</span>
@@ -44,7 +45,7 @@ function CodeBlock({
       <pre className="p-3 text-[11px] sm:text-xs leading-relaxed text-emerald-100/90 overflow-x-auto whitespace-pre-wrap font-mono">
         {code}
       </pre>
-    </div>
+    </SolidPlate>
   );
 }
 
@@ -122,14 +123,14 @@ export function AgentHowTo({ isLight }: { isLight: boolean }) {
 }`;
 
   const sectionTitle = isLight ? 'text-slate-900' : 'text-white';
-  const muted = isLight ? 'text-slate-500' : 'text-white/45';
-  const card = isLight
-    ? 'border-slate-200 bg-white'
-    : 'border-white/10 bg-[#0a0a0c]';
+  const muted = isLight ? 'text-slate-500' : 'text-white/55';
+  const cardFill = isLight ? '#ffffff' : '#0a0a0c';
+  const cardBorder = isLight ? 'border-slate-200' : 'border-white/10';
+  const chipFill = isLight ? '#ffffff' : '#121214';
 
   return (
     <div className="space-y-8">
-      <div>
+      <TitleScrim isLight={isLight}>
         <p className={`text-[10px] font-bold uppercase tracking-[0.16em] mb-1.5 ${muted}`}>
           For AI agents
         </p>
@@ -137,12 +138,12 @@ export function AgentHowTo({ isLight }: { isLight: boolean }) {
           How agents use DomainDiscovery
         </h2>
         <p className={`mt-2 text-sm leading-relaxed max-w-3xl ${muted}`}>
-          This page is the <strong className={isLight ? 'text-slate-800' : 'text-white/80'}>Agent Hub</strong> on
+          This page is the <strong className={isLight ? 'text-slate-800' : 'text-white/85'}>Agent Hub</strong> on
           DomainDiscovery: machine-callable tools for domain research. DomainDiscovery is a research toolkit — not a
           registrar. Agents propose and rank names under a budget; humans confirm registration at a registrar that
           supports their workflow.
         </p>
-      </div>
+      </TitleScrim>
 
       <div className="flex flex-wrap gap-2">
         {[
@@ -154,9 +155,10 @@ export function AgentHowTo({ isLight }: { isLight: boolean }) {
           <a
             key={l.href}
             href={l.href}
-            className={`rounded-full border px-3 py-1 text-[11px] font-bold ${
-              isLight ? 'border-slate-200 text-slate-600 hover:border-slate-300' : 'border-white/12 text-white/55 hover:border-white/25'
+            className={`relative isolate overflow-hidden rounded-full border px-3 py-1 text-[11px] font-bold ${
+              isLight ? 'border-slate-200 text-slate-600 hover:border-slate-300' : 'border-white/12 text-white/60 hover:border-white/25'
             }`}
+            style={{ backgroundColor: chipFill }}
           >
             {l.label}
           </a>
@@ -169,10 +171,10 @@ export function AgentHowTo({ isLight }: { isLight: boolean }) {
           { t: '2. Call tools', d: 'find_brand_domains with brief + maxBudgetUsd' },
           { t: '3. Human confirms', d: 'User registers at registrar — no auto-buy (v1)' },
         ].map((x) => (
-          <div key={x.t} className={`rounded-2xl border p-4 ${card}`}>
+          <SolidPlate key={x.t} fill={cardFill} className={`rounded-2xl border p-4 ${cardBorder}`}>
             <p className={`text-sm font-bold ${sectionTitle}`}>{x.t}</p>
             <p className={`mt-1 text-xs ${muted}`}>{x.d}</p>
-          </div>
+          </SolidPlate>
         ))}
       </div>
 
@@ -204,7 +206,7 @@ export function AgentHowTo({ isLight }: { isLight: boolean }) {
         </div>
       </div>
 
-      <div className={`rounded-2xl border p-4 sm:p-5 space-y-2 text-sm ${card}`}>
+      <SolidPlate fill={cardFill} className={`rounded-2xl border p-4 sm:p-5 space-y-2 text-sm ${cardBorder}`}>
         <h3 className={`font-bold ${sectionTitle}`}>Endpoints</h3>
         <ul className={`space-y-1 text-xs sm:text-sm font-mono ${muted}`}>
           <li>
@@ -238,9 +240,9 @@ export function AgentHowTo({ isLight }: { isLight: boolean }) {
           <code className="font-mono">npm run mcp:server</code>. Full notes:{' '}
           <span className="font-mono">docs/agent/MCP.md</span>.
         </p>
-      </div>
+      </SolidPlate>
 
-      <div className={`rounded-2xl border p-4 sm:p-5 ${card}`}>
+      <SolidPlate fill={cardFill} className={`rounded-2xl border p-4 sm:p-5 ${cardBorder}`}>
         <h3 className={`font-bold mb-2 ${sectionTitle}`}>Budget contract for agents</h3>
         <p className={`text-xs sm:text-sm leading-relaxed ${muted}`}>
           Pass <code className="font-mono">maxBudgetUsd</code> (e.g. <code className="font-mono">20</code>). Results
@@ -249,9 +251,9 @@ export function AgentHowTo({ isLight }: { isLight: boolean }) {
           snapshots when available — many names have unknown create fees until registrar checkout. Agents must not invent
           prices.
         </p>
-      </div>
+      </SolidPlate>
 
-      <div className={`rounded-2xl border p-4 sm:p-5 ${card}`}>
+      <SolidPlate fill={cardFill} className={`rounded-2xl border p-4 sm:p-5 ${cardBorder}`}>
         <h3 className={`font-bold mb-2 ${sectionTitle}`}>Product home</h3>
         <p className={`text-xs sm:text-sm leading-relaxed mb-3 ${muted}`}>
           Consumer app &amp; future chat/skills live at{' '}
@@ -264,33 +266,35 @@ export function AgentHowTo({ isLight }: { isLight: boolean }) {
           </a>
           .
         </p>
-      </div>
+      </SolidPlate>
 
-      <div className={`rounded-2xl border p-4 sm:p-5 ${card}`}>
+      <SolidPlate fill={cardFill} className={`rounded-2xl border p-4 sm:p-5 ${cardBorder}`}>
         <h3 className={`font-bold mb-2 ${sectionTitle}`}>Skills, memory &amp; auto-register (roadmap)</h3>
         <ul className={`text-xs sm:text-sm space-y-1.5 ${muted}`}>
           <li>
-            · <strong className={isLight ? 'text-slate-800' : 'text-white/75'}>Now:</strong> auto shortlist + rank +
+            · <strong className={isLight ? 'text-slate-800' : 'text-white/80'}>Now:</strong> auto shortlist + rank +
             budget flags + MCP tools (research only).
           </li>
           <li>
-            · <strong className={isLight ? 'text-slate-800' : 'text-white/75'}>Next (dedicated Assistant product):</strong>{' '}
+            · <strong className={isLight ? 'text-slate-800' : 'text-white/80'}>Next (dedicated Assistant product):</strong>{' '}
             chat UI, brand <em>skills</em>, session memory (liked/rejected names), always-on budget.
           </li>
           <li>
-            · <strong className={isLight ? 'text-slate-800' : 'text-white/75'}>Later:</strong> registrar API adapters for
+            · <strong className={isLight ? 'text-slate-800' : 'text-white/80'}>Later:</strong> registrar API adapters for
             automated registration + DNS — only after explicit human confirm and hard budget stop, for registrars that
             support full API automation.
           </li>
         </ul>
-      </div>
+      </SolidPlate>
 
       <AgentIntegrationSection isLight={isLight} />
       <AgentSecuritySection isLight={isLight} />
 
-      <div
+      {/* Safety — fully opaque amber (never bg-amber/5 over ambient dots) */}
+      <SolidPlate
+        fill={isLight ? '#fffbeb' : '#1a1408'}
         className={`rounded-2xl border p-4 text-xs sm:text-sm leading-relaxed ${
-          isLight ? 'border-amber-200 bg-amber-50 text-amber-950' : 'border-amber-500/20 bg-amber-500/5 text-amber-100/90'
+          isLight ? 'border-amber-200 text-amber-950' : 'border-amber-500/30 text-amber-50'
         }`}
       >
         <p className="font-bold mb-1">Safety</p>
@@ -299,7 +303,7 @@ export function AgentHowTo({ isLight }: { isLight: boolean }) {
           Registration and DNS management happen at your registrar (or future connected APIs with confirmation). Not
           trademark legal advice.
         </p>
-      </div>
+      </SolidPlate>
     </div>
   );
 }

@@ -52,8 +52,8 @@ export function BriefForm({
   };
 
   const surface = isLight
-    ? 'border-slate-200 bg-white shadow-sm'
-    : 'border-white/10 bg-[#0a0a0c]';
+    ? 'border-slate-200 shadow-sm'
+    : 'border-white/10';
   const field = isLight
     ? 'border-slate-200 bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:border-slate-400'
     : 'border-white/12 bg-[#121214] text-white placeholder:text-white/30 focus:border-white/25';
@@ -63,13 +63,17 @@ export function BriefForm({
   const chipOn = isLight
     ? 'bg-slate-900 text-white border-slate-900'
     : 'bg-white text-black border-white';
+  const plateFill = isLight ? '#ffffff' : '#0a0a0c';
 
   return (
-    <div className={`shine-border relative isolate overflow-hidden rounded-2xl border p-4 sm:p-5 ${surface}`}>
+    <div
+      className={`shine-border relative isolate overflow-hidden rounded-2xl border p-4 sm:p-5 ${surface}`}
+      style={{ backgroundColor: plateFill }}
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-[inherit]"
-        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+        style={{ backgroundColor: plateFill }}
       />
       <div className="relative z-[1]">
       <label className={`block text-xs font-bold uppercase tracking-wide mb-2 ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
