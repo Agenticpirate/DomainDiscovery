@@ -5,6 +5,60 @@ import Link from 'next/link';
 import { Button } from '../ui/Button';
 import { Icons } from '../ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
+
+/** Opaque plate — ambient dots never show through cards / badges / body copy */
+function SolidPlate({
+  isLight,
+  children,
+  className = '',
+  contentClassName = '',
+  fill,
+}: {
+  isLight: boolean;
+  children: React.ReactNode;
+  className?: string;
+  contentClassName?: string;
+  fill?: string;
+}) {
+  const bg = fill ?? (isLight ? '#ffffff' : '#0a0a0c');
+  return (
+    <div className={`relative isolate overflow-hidden ${className}`} style={{ backgroundColor: bg }}>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-[inherit]"
+        style={{ backgroundColor: bg }}
+      />
+      <div className={`relative z-[1] h-full ${contentClassName}`}>{children}</div>
+    </div>
+  );
+}
+
+/** Soft scrim under free-standing section titles so dots clear under type */
+function TitleScrim({
+  isLight,
+  children,
+  className = '',
+}: {
+  isLight: boolean;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`relative isolate ${className}`}>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -mx-4 -my-2 rounded-3xl sm:-mx-8 sm:-my-3"
+        style={{
+          background: isLight
+            ? 'radial-gradient(ellipse 95% 85% at 50% 45%, #f8fafc 0%, #f8fafc 52%, rgba(248,250,252,0) 100%)'
+            : 'radial-gradient(ellipse 95% 85% at 50% 45%, #050505 0%, #050505 52%, rgba(5,5,5,0) 100%)',
+        }}
+      />
+      <div className="relative z-[1]">{children}</div>
+    </div>
+  );
+}
+
 // Feature card with hover animation
 const FeatureCard: React.FC<{ 
   icon: React.ReactNode; 
@@ -31,19 +85,34 @@ const FeatureCard: React.FC<{
   }, [delay]);
 
   return (
-    <div 
+    <div
       ref={ref}
-      className={`group p-4 sm:p-6 rounded-xl sm:rounded-2xl transition-all duration-500 cursor-pointer transform ${
-        isLight ? 'bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md' : 'bg-white/[0.03] border border-white/10 hover:border-white/16 hover:bg-white/[0.05]'
-      } ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
+      className={`relative isolate overflow-hidden group p-4 sm:p-6 rounded-xl sm:rounded-2xl border transition-all duration-500 cursor-pointer transform ${
+        isLight ? 'border-slate-200 hover:border-slate-300 hover:shadow-md' : 'border-white/10 hover:border-white/16'
+      } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
     >
-      <div className={`w-10 sm:w-12 h-10 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4 transition-colors duration-300 [&>svg]:w-5 [&>svg]:h-5 ${isLight ? 'bg-slate-100 text-slate-800 border border-slate-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900' : 'bg-white/[0.06] text-white/80 border border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'}`}>
-        {icon}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-[inherit]"
+        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+      />
+      <div className="relative z-[1]">
+        <div
+          className={`w-10 sm:w-12 h-10 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4 transition-colors duration-300 [&>svg]:w-5 [&>svg]:h-5 ${
+            isLight
+              ? 'bg-slate-100 text-slate-800 border border-slate-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900'
+              : 'bg-[#121214] text-white/80 border border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'
+          }`}
+        >
+          {icon}
+        </div>
+        <h3 className={`font-semibold text-sm sm:text-lg mb-1 sm:mb-2 transition-colors ${isLight ? 'text-slate-900' : 'text-white'}`}>
+          {title}
+        </h3>
+        <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
+          {description}
+        </p>
       </div>
-      <h3 className={`font-semibold text-sm sm:text-lg mb-1 sm:mb-2 transition-colors ${isLight ? 'text-slate-900' : 'text-white'}`}>{title}</h3>
-      <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{description}</p>
     </div>
   );
 };
@@ -1706,6 +1775,7 @@ brandforge`}</code>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-start">
             {/* Intro column */}
             <div className="lg:col-span-4 lg:sticky lg:top-24">
+              <TitleScrim isLight={isLight}>
               <p
                 className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
                 style={{ color: 'var(--text-muted)' }}
@@ -1725,6 +1795,7 @@ brandforge`}</code>
               <p className="text-[12px] leading-relaxed mb-4 sm:mb-5" style={{ color: 'var(--text-muted)' }}>
                 Use bulk search with the generator and export tools for a full naming workflow.
               </p>
+              </TitleScrim>
               <div className="flex flex-wrap gap-2">
                 <button
                   type="button"
@@ -1753,11 +1824,11 @@ brandforge`}</code>
               </div>
             </div>
 
-            {/* Tips grid */}
+            {/* Tips grid — solid plates so ambient dots never show through */}
             <div className="lg:col-span-8">
               <div
                 className={`grid grid-cols-1 sm:grid-cols-2 gap-px rounded-2xl border overflow-hidden ${
-                  isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-white/[0.08]'
+                  isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-[#121214]'
                 }`}
               >
                 {[
@@ -1804,18 +1875,19 @@ brandforge`}</code>
                     tags: ['Filter', 'TLD'],
                   },
                 ].map((tip) => (
-                  <article
+                  <SolidPlate
                     key={tip.step}
-                    className={`group flex flex-col p-4 sm:p-5 transition-colors duration-200 ${
-                      isLight ? 'bg-white hover:bg-slate-50' : 'bg-[#0c0c0e] hover:bg-[#121214]'
-                    }`}
+                    isLight={isLight}
+                    className="group transition-colors duration-200"
+                    contentClassName="flex flex-col p-4 sm:p-5 h-full"
+                    fill={isLight ? '#ffffff' : '#0a0a0c'}
                   >
                     <div className="flex items-center justify-between gap-2 mb-2.5">
                       <span
                         className={`flex h-8 w-8 items-center justify-center rounded-lg border text-[11px] font-black tabular-nums transition-colors duration-200 ${
                           isLight
                             ? 'bg-slate-100 text-slate-700 border-slate-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900'
-                            : 'bg-white/[0.06] text-white/70 border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'
+                            : 'bg-[#121214] text-white/70 border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'
                         }`}
                       >
                         {tip.step}
@@ -1841,14 +1913,14 @@ brandforge`}</code>
                           className={`rounded-md border px-2 py-0.5 text-[10px] font-semibold ${
                             isLight
                               ? 'bg-slate-50 text-slate-600 border-slate-200'
-                              : 'bg-white/[0.04] text-white/50 border-white/[0.08]'
+                              : 'bg-[#121214] text-white/55 border-white/12'
                           }`}
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
-                  </article>
+                  </SolidPlate>
                 ))}
               </div>
             </div>
@@ -1859,7 +1931,7 @@ brandforge`}</code>
       {/* Section: Complete your domain search toolkit */}
       <section className={`py-8 sm:py-14 border-t ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
         <div className="max-w-6xl mx-auto px-3 sm:px-6">
-          <div className="text-center mb-5 sm:mb-8">
+          <TitleScrim isLight={isLight} className="text-center mb-5 sm:mb-8">
             <p
               className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
               style={{ color: 'var(--text-muted)' }}
@@ -1875,11 +1947,11 @@ brandforge`}</code>
             >
               Bulk search pairs with our other free tools — invent names, verify ownership, and compare prices in one place.
             </p>
-          </div>
+          </TitleScrim>
 
           <div
             className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl border overflow-hidden ${
-              isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-white/[0.08]'
+              isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-[#121214]'
             }`}
           >
             {[
@@ -1928,57 +2000,61 @@ brandforge`}</code>
                 ),
               },
             ].map((tool) => (
-              <Link
+              <SolidPlate
                 key={tool.href}
-                href={tool.href}
-                className={`group flex flex-col p-4 sm:p-5 transition-colors duration-200 ${
-                  isLight ? 'bg-white hover:bg-slate-50' : 'bg-[#0c0c0e] hover:bg-[#121214]'
-                }`}
+                isLight={isLight}
+                fill={isLight ? '#ffffff' : '#0a0a0c'}
+                className="group"
               >
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <div
-                    className={`flex h-9 w-9 items-center justify-center rounded-xl border transition-colors duration-200 ${
-                      isLight
-                        ? 'bg-slate-100 text-slate-700 border-slate-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900'
-                        : 'bg-white/[0.06] text-white/75 border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'
-                    }`}
-                  >
-                    {tool.icon}
+                <Link
+                  href={tool.href}
+                  className="flex flex-col p-4 sm:p-5 h-full transition-colors duration-200"
+                >
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <div
+                      className={`flex h-9 w-9 items-center justify-center rounded-xl border transition-colors duration-200 ${
+                        isLight
+                          ? 'bg-slate-100 text-slate-700 border-slate-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900'
+                          : 'bg-[#121214] text-white/75 border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'
+                      }`}
+                    >
+                      {tool.icon}
+                    </div>
+                    <span
+                      className={`text-[11px] font-black tabular-nums ${
+                        isLight ? 'text-slate-300' : 'text-white/20'
+                      }`}
+                    >
+                      {tool.step}
+                    </span>
                   </div>
-                  <span
-                    className={`text-[11px] font-black tabular-nums ${
-                      isLight ? 'text-slate-300' : 'text-white/20'
+                  <h3
+                    className={`text-[13px] sm:text-[14px] font-bold tracking-tight mb-1.5 ${
+                      isLight ? 'text-slate-900' : 'text-white'
                     }`}
                   >
-                    {tool.step}
+                    {tool.title}
+                  </h3>
+                  <p
+                    className="text-[12px] leading-relaxed flex-1 mb-3"
+                    style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}
+                  >
+                    {tool.description}
+                  </p>
+                  <span
+                    className={`inline-flex items-center gap-1 text-[11px] font-semibold transition-colors ${
+                      isLight
+                        ? 'text-slate-500 group-hover:text-slate-900'
+                        : 'text-white/40 group-hover:text-white'
+                    }`}
+                  >
+                    Open tool
+                    <svg className="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </span>
-                </div>
-                <h3
-                  className={`text-[13px] sm:text-[14px] font-bold tracking-tight mb-1.5 ${
-                    isLight ? 'text-slate-900' : 'text-white'
-                  }`}
-                >
-                  {tool.title}
-                </h3>
-                <p
-                  className="text-[12px] leading-relaxed flex-1 mb-3"
-                  style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}
-                >
-                  {tool.description}
-                </p>
-                <span
-                  className={`inline-flex items-center gap-1 text-[11px] font-semibold transition-colors ${
-                    isLight
-                      ? 'text-slate-500 group-hover:text-slate-900'
-                      : 'text-white/40 group-hover:text-white'
-                  }`}
-                >
-                  Open tool
-                  <svg className="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </Link>
+                </Link>
+              </SolidPlate>
             ))}
           </div>
         </div>
