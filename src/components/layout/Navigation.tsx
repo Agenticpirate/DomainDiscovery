@@ -166,7 +166,10 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
       </button>
 
       {openDropdown === menuKey && (
-        <div className="absolute top-full right-0 w-[min(480px,calc(100vw-1.5rem))] z-[200] pt-2">
+        <div
+          className="nav-dropdown-panel absolute top-full right-0 z-[200] pt-2"
+          style={{ width: 480, maxWidth: 'min(480px, calc(100vw - 1.5rem))' }}
+        >
           {/* Solid panel — no animated sheens on hover (avoids icon blink) */}
           <div
             className={`relative rounded-2xl p-2.5 border ${
@@ -174,6 +177,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 ? 'bg-white border-slate-200 shadow-xl shadow-slate-900/[0.08]'
                 : 'bg-[#0c0c0e] border-white/[0.12] shadow-2xl shadow-black/60'
             }`}
+            style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
           >
             <div className="relative grid grid-cols-2 gap-1.5">
               {menu.items.map((item) => {
@@ -183,7 +187,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                     key={item.id}
                     href={item.href}
                     onClick={handleDropdownClose}
-                    className={`nav-dropdown-item flex items-start gap-2.5 p-2.5 rounded-xl text-left border ${
+                    className={`nav-dropdown-item flex items-start gap-2.5 p-2.5 rounded-xl text-left border min-w-0 ${
                       active
                         ? isLight
                           ? 'is-active bg-slate-50 border-slate-200'
@@ -207,9 +211,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                     >
                       {item.icon}
                     </div>
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 overflow-hidden">
                       <div
-                        className={`font-semibold text-[12px] mb-0.5 ${
+                        className={`font-semibold text-[12px] mb-0.5 truncate ${
                           active
                             ? isLight
                               ? 'text-slate-900'
@@ -242,7 +246,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   return (
     <nav className="fixed top-0 left-0 right-0 z-[100] py-1 sm:py-1.5 px-2 sm:px-4">
       <div className="max-w-7xl mx-auto">
-        <div className={`relative backdrop-blur-2xl border rounded-2xl ${
+        <div className={`relative overflow-visible backdrop-blur-2xl border rounded-2xl ${
           isLight
             ? 'bg-white/85 border-indigo-200/70 shadow-lg shadow-indigo-500/[0.08]'
             : 'bg-black/40 border-white/[0.08] shadow-2xl shadow-black/20'

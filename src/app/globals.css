@@ -66,9 +66,21 @@ nav a:has(.logo-icon-wrapper) {
     position: relative;
   }
 
-  .page-x-lock * {
-    /* Nested scroll areas (tabs) may opt in; default is vertical only */
+  /*
+   * Do NOT set max-width:100% on all descendants.
+   * That crushed fixed nav dropdowns to the width of the Search/Tools button
+   * (~80px) → garbled overlapping labels (Domain name search, etc.).
+   * Constrain layout containers only; leave nav chrome unconstrained.
+   */
+  .page-x-lock main,
+  .page-x-lock main > *,
+  .page-x-lock footer {
     max-width: 100%;
+  }
+
+  .page-x-lock nav,
+  .page-x-lock nav * {
+    max-width: none;
   }
 
   .page-x-lock .allow-x-scroll {
@@ -288,6 +300,13 @@ nav a:has(.logo-icon-wrapper) {
   select:focus-visible {
     outline: none !important;
     outline-offset: 0 !important;
+  }
+
+  /* Nav dropdown panel — never crush to button width */
+  .nav-dropdown-panel {
+    width: 480px !important;
+    max-width: min(480px, calc(100vw - 1.5rem)) !important;
+    min-width: min(480px, calc(100vw - 1.5rem)) !important;
   }
 
   /* Nav dropdown tiles — stable icons (no transition on SVG color) */
