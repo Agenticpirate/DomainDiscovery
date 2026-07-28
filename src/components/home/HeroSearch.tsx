@@ -133,12 +133,14 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
 
   return (
     <div className="w-full max-w-full sm:max-w-[46rem] mx-auto">
-      {/* —— Mobile: field alone, then AI + Search below —— */}
-      <div className="sm:hidden w-full space-y-2">
-        <div className={`flex items-center gap-2 rounded-xl p-1.5 transition-all ${fieldShell}`}>
+      {/* —— Mobile: taller field, bigger CTAs (desktop layout untouched below) —— */}
+      <div className="sm:hidden w-full space-y-2.5">
+        <div
+          className={`flex items-center gap-1.5 rounded-2xl px-2 py-1 min-h-[3.25rem] transition-all ${fieldShell}`}
+        >
           <div
-            className={`ml-1.5 shrink-0 flex items-center justify-center w-8 h-8 ${
-              isLight ? 'text-slate-400' : 'text-white/35'
+            className={`ml-1 shrink-0 flex items-center justify-center w-9 h-9 ${
+              isLight ? 'text-slate-400' : 'text-white/40'
             }`}
           >
             <Icons.Search />
@@ -155,31 +157,70 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
             }}
             placeholder={aiMode ? 'Describe a brand idea…' : 'Search domain names...'}
             autoFocus
-            className={`flex-1 min-w-0 bg-transparent border-none outline-none text-[15px] font-medium py-2.5 pr-2 ${
+            enterKeyHint={aiMode ? 'go' : 'search'}
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+            className={`flex-1 min-w-0 bg-transparent border-none outline-none text-[16px] font-medium py-3 pr-2 ${
               isLight
                 ? 'text-slate-900 placeholder:text-slate-400'
-                : 'text-white placeholder:text-white/35'
+                : 'text-white placeholder:text-white/38'
             }`}
             aria-label="Search domain names"
           />
+          {query ? (
+            <button
+              type="button"
+              onClick={() => {
+                setQuery('');
+                lastRoutedRef.current = '';
+                if (debounceRef.current) clearTimeout(debounceRef.current);
+                inputRef.current?.focus();
+              }}
+              className={`mr-1 shrink-0 flex h-8 w-8 items-center justify-center rounded-full ${
+                isLight ? 'text-slate-400 active:bg-slate-200' : 'text-white/45 active:bg-white/10'
+              }`}
+              aria-label="Clear search"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          ) : null}
         </div>
 
-        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] gap-2">
+        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.75fr)] gap-2">
           <button
             type="button"
             onClick={() => setAiMode((v) => !v)}
-            className={`${aiBtnClass} w-full`}
+            className={`${aiBtnClass} w-full min-h-[3rem] rounded-2xl text-[13px] ${
+              aiMode ? 'ring-2 ring-white/20' : ''
+            }`}
             title="Toggle AI generator mode"
             aria-pressed={aiMode}
           >
             {aiIcon}
             <span>AI</span>
           </button>
-          <button type="button" onClick={() => submit()} className={`${searchBtnClass} w-full`}>
+          <button
+            type="button"
+            onClick={() => submit()}
+            className={`${searchBtnClass} w-full min-h-[3rem] rounded-2xl text-[14px] shadow-sm`}
+          >
             <span>{aiMode ? 'Generate' : 'Search'}</span>
             {searchArrow}
           </button>
         </div>
+
+        {aiMode ? (
+          <p
+            className={`text-center text-[11px] font-medium leading-snug ${
+              isLight ? 'text-slate-500' : 'text-white/45'
+            }`}
+          >
+            AI mode — describe a brand, get name ideas
+          </p>
+        ) : null}
       </div>
 
       {/* —— Desktop / tablet: field + AI + Search on one row —— */}
@@ -233,9 +274,9 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
         </button>
       </div>
 
-      <div className="mt-2 sm:mt-2.5 flex flex-nowrap sm:flex-wrap items-center justify-center gap-1.5 overflow-x-auto scrollbar-none">
+      <div className="mt-2.5 sm:mt-2.5 flex flex-nowrap sm:flex-wrap items-center justify-center gap-1.5 sm:gap-1.5 overflow-x-auto scrollbar-none px-0.5">
         <span
-          className={`shrink-0 text-[10px] sm:text-[11px] font-medium ${
+          className={`shrink-0 text-[11px] sm:text-[11px] font-medium ${
             isLight ? 'text-slate-500' : 'text-white/40'
           }`}
         >
@@ -251,10 +292,10 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
               lastRoutedRef.current = term;
               onSearch(term);
             }}
-            className={`shrink-0 rounded-full px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold transition-all ${
+            className={`shrink-0 rounded-full px-2.5 sm:px-2.5 py-1.5 sm:py-1 text-[11px] sm:text-[11px] font-semibold transition-all active:scale-[0.97] ${
               isLight
                 ? 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
-                : 'bg-white/[0.04] border border-white/10 text-white/60 hover:border-white/20 hover:text-white/80'
+                : 'bg-white/[0.05] border border-white/12 text-white/65 hover:border-white/22 hover:text-white/85'
             }`}
           >
             {term}
