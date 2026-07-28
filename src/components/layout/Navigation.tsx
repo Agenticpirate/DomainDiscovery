@@ -166,7 +166,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
       </button>
 
       {openDropdown === menuKey && (
-        <div className="absolute top-full right-0 w-[480px] z-[100] pt-2">
+        <div className="absolute top-full right-0 w-[min(480px,calc(100vw-1.5rem))] z-[200] pt-2">
           {/* Solid panel — no animated sheens on hover (avoids icon blink) */}
           <div
             className={`relative rounded-2xl p-2.5 border ${
@@ -240,7 +240,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   );
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[60] py-1 sm:py-1.5 px-2 sm:px-4">
+    <nav className="fixed top-0 left-0 right-0 z-[100] py-1 sm:py-1.5 px-2 sm:px-4">
       <div className="max-w-7xl mx-auto">
         <div className={`relative backdrop-blur-2xl border rounded-2xl ${
           isLight

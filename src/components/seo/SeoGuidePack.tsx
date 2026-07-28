@@ -34,7 +34,7 @@ export type SeoGuidePackProps = {
 
 /**
  * Crawlable AEO/GEO pack: homepage FAQ design (PremiumFaqGrid) below tools.
- * Used on bulk, search, geo, whois, compare, generator, extensions.
+ * Opaque plates so ambient dots never show through titles, cards, or chips.
  */
 export function SeoGuidePack({
   eyebrow = 'People also ask',
@@ -49,6 +49,7 @@ export function SeoGuidePack({
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
   const isLight = mounted ? theme === 'light' : false;
+  const chipSolid = isLight ? '#ffffff' : '#0a0a0c';
 
   const faqId = `seo-faqs-${title
     .toLowerCase()
@@ -64,13 +65,24 @@ export function SeoGuidePack({
       aria-labelledby="seo-guide-pack-title"
     >
       <div className="mx-auto max-w-4xl">
-        <p
-          className={`text-[10px] font-bold uppercase tracking-[0.16em] mb-2 text-center ${
-            isLight ? 'text-slate-400' : 'text-white/35'
-          }`}
-        >
-          {eyebrow}
-        </p>
+        <div className="relative isolate mb-2 flex justify-center">
+          <span
+            className={`relative overflow-hidden rounded-full px-4 py-1 text-[10px] font-bold uppercase tracking-[0.16em] ${
+              isLight ? 'text-slate-400' : 'text-white/35'
+            }`}
+          >
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 rounded-full"
+              style={{
+                background: isLight
+                  ? 'radial-gradient(ellipse 120% 100% at 50% 50%, #f8fafc 0%, #f8fafc 60%, transparent 100%)'
+                  : 'radial-gradient(ellipse 120% 100% at 50% 50%, #050505 0%, #050505 60%, transparent 100%)',
+              }}
+            />
+            <span className="relative z-[1]">{eyebrow}</span>
+          </span>
+        </div>
 
         <PremiumFaqGrid
           id={faqId}
@@ -87,7 +99,7 @@ export function SeoGuidePack({
             {learnMore && (
               <Link
                 href={learnMore.href}
-                className={`inline-flex items-center rounded-full px-3.5 py-2 text-xs sm:text-sm font-bold transition ${
+                className={`relative isolate overflow-hidden inline-flex items-center rounded-full px-3.5 py-2 text-xs sm:text-sm font-bold transition ${
                   isLight
                     ? 'bg-slate-900 text-white hover:bg-slate-800'
                     : 'bg-white text-black hover:bg-white/90'
@@ -100,11 +112,12 @@ export function SeoGuidePack({
               <Link
                 key={r.href + r.label}
                 href={r.href}
-                className={`inline-flex items-center rounded-full border px-3 py-2 text-xs sm:text-sm font-semibold transition ${
+                className={`relative isolate overflow-hidden inline-flex items-center rounded-full border px-3 py-2 text-xs sm:text-sm font-semibold transition ${
                   isLight
-                    ? 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
+                    ? 'border-slate-200 text-slate-700 hover:border-slate-300'
                     : 'border-white/15 text-white/75 hover:border-white/30'
                 }`}
+                style={{ backgroundColor: chipSolid }}
               >
                 {r.label}
               </Link>

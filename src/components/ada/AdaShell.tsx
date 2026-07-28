@@ -262,7 +262,7 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
       }}
     >
       <header
-        className={`sticky top-0 z-50 border-b backdrop-blur-xl ${hair} ${header} ${surfaceEase}`}
+        className={`sticky top-0 z-[100] border-b backdrop-blur-xl ${hair} ${header} ${surfaceEase}`}
       >
         <div
           ref={menuRef}
@@ -348,7 +348,7 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
           {/* Mobile dropdown panel */}
           <div
             id="ada-mobile-nav"
-            className={`sm:hidden absolute left-3 right-3 top-[calc(100%+0.4rem)] z-[60] origin-top transition-all duration-200 ${
+            className={`sm:hidden absolute left-3 right-3 top-[calc(100%+0.4rem)] z-[200] origin-top transition-all duration-200 ${
               menuOpen
                 ? 'opacity-100 scale-100 pointer-events-auto'
                 : 'opacity-0 scale-95 pointer-events-none'
@@ -494,6 +494,7 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
       */}
       <SectionAmbient
         intensity="hero"
+        spotlight={false}
         className="flex-1 w-full min-h-0 flex flex-col"
         contentClassName="flex-1 w-full min-h-0 flex flex-col"
       >

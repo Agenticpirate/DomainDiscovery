@@ -53,6 +53,7 @@ export default function Home() {
         {/* Hero — dots clear under center copy (intensity=hero), solid search plate */}
         <SectionAmbient
           intensity="hero"
+          spotlight
           contentClassName="px-3.5 sm:px-6 pt-3.5 sm:pt-12 md:pt-14 pb-3 sm:pb-10"
         >
           <div className="relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto text-center">

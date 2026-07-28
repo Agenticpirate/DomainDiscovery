@@ -27,8 +27,8 @@ type SectionAmbientProps = {
   /** Disable all motion layers (SSR-safe placeholder) */
   disabled?: boolean;
   /**
-   * Spotlight defaults on for hero + page.
-   * Never stack multiple spotlight sections on one page.
+   * Mouse spotlight (Evervault). Default OFF — full-page wrappers with spotlight
+   * intercept hover and can break nav menus. Enable only on home hero (`spotlight`).
    */
   spotlight?: boolean;
 };
@@ -53,9 +53,8 @@ export function SectionAmbient({
 
   const isLight = mounted ? theme === 'light' : false;
   const useSolid = solidBase ?? (intensity === 'hero' || intensity === 'page');
-  // hero + page get one monochrome spotlight (skip if nested — outer owns the field)
-  const showSpotlight =
-    !nestedUnderAmbient && (spotlight ?? (intensity === 'hero' || intensity === 'page'));
+  // Spotlight is opt-in only (home hero). Tool/internal pages use dots + mask alone.
+  const showSpotlight = !nestedUnderAmbient && spotlight === true;
   const showDots = !nestedUnderAmbient && !disabled;
   const spotlightRadius = intensity === 'page' ? 96 : 88;
 
@@ -181,7 +180,8 @@ export function SectionAmbient({
 
   return (
     <AmbientActiveContext.Provider value={true}>
-      <div className={cn('relative isolate overflow-hidden', className)} style={baseStyle}>
+      {/* overflow-x-clip only — avoid overflow-hidden clipping sticky/dropdown UI */}
+      <div className={cn('relative isolate overflow-x-clip', className)} style={baseStyle}>
         <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
           {field}
         </div>
