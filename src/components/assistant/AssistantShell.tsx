@@ -285,17 +285,29 @@ export function AssistantShell() {
             </div>
           </div>
         </section>
-
-        <section className="px-4 sm:px-6 mt-12 sm:mt-16 pb-4">
-          <div className="max-w-4xl mx-auto">
-            <AgentHowTo isLight={isLight} />
-          </div>
-        </section>
-
-        <div className="mt-8">
-          <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.assistant} compact />
-        </div>
         </SectionAmbient>
+
+        {/*
+          Docs / Security / Safety / Definition sit OUTSIDE ambient.
+          Solid page band = zero ambient dots behind educational cards (fixes prod bleed).
+        */}
+        <div
+          className="relative z-10 border-t"
+          style={{
+            backgroundColor: isLight ? '#ffffff' : '#050505',
+            borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.06)',
+          }}
+        >
+          <section className="px-4 sm:px-6 pt-12 sm:pt-16 pb-4">
+            <div className="max-w-4xl mx-auto">
+              <AgentHowTo isLight={isLight} />
+            </div>
+          </section>
+
+          <div className="pb-8 sm:pb-10">
+            <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.assistant} compact />
+          </div>
+        </div>
       </main>
 
       <Footer />
