@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: 'Terms of Use',
   description:
     'DomainDiscovery Terms of Use: acceptable use, research-only disclaimers, third-party registrars, DMCA, liability limits, and U.S. governing law.',
+  alternates: { canonical: '/terms' },
   robots: { index: true, follow: true },
 };
 

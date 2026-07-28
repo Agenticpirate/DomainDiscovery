@@ -11,6 +11,7 @@ import {
 export const metadata: Metadata = {
   title: 'Disclaimer',
   description: `Research-only disclaimer for ${ADA_BRAND.name}: no auto-registration, no legal advice, verify at registrar.`,
+  alternates: { canonical: '/disclaimer' },
   robots: { index: true, follow: true },
 };
 

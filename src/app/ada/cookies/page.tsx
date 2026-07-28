@@ -11,6 +11,7 @@ import {
 export const metadata: Metadata = {
   title: 'Cookie Policy',
   description: `Cookie and local storage policy for ${ADA_BRAND.name}.`,
+  alternates: { canonical: '/cookies' },
   robots: { index: true, follow: true },
 };
 

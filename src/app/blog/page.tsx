@@ -13,6 +13,13 @@ export const metadata: Metadata = {
   title: 'Domain Blog & TLD Encyclopedia — Extension Guides',
   description:
     'Domain strategy plus a TLD encyclopedia with registry-level about pages: sponsors, WHOIS/RDAP, and nameserver context from public IANA root zone data.',
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'Domain Blog & TLD Encyclopedia — Extension Guides',
+    description:
+      'Domain strategy plus a TLD encyclopedia with registry-level about pages: sponsors, WHOIS/RDAP, and nameserver context from public IANA root zone data.',
+    url: '/blog',
+  },
 };
 
 export default function BlogPage() {

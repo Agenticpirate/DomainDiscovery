@@ -13,6 +13,13 @@ export const metadata: Metadata = {
   title: 'TLD Encyclopedia — Domain Extensions & Registry Guides',
   description:
     'Browse domain extensions (TLDs) with registry-oriented about pages: gTLDs, ccTLDs, sponsors, and public DNS root context. Then check availability on DomainDiscovery.',
+  alternates: { canonical: '/blog/tlds' },
+  openGraph: {
+    title: 'TLD Encyclopedia — Domain Extensions & Registry Guides',
+    description:
+      'Browse domain extensions (TLDs) with registry-oriented about pages: gTLDs, ccTLDs, sponsors, and public DNS root context. Then check availability on DomainDiscovery.',
+    url: '/blog/tlds',
+  },
 };
 
 export default function BlogTldsPage() {

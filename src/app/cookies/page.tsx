@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: 'Cookie Policy',
   description:
     'How DomainDiscovery uses cookies, localStorage, and similar technologies for preferences, shortlists, security, and optional analytics.',
+  alternates: { canonical: '/cookies' },
   robots: { index: true, follow: true },
 };
 

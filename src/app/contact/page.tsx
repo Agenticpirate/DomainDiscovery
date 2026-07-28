@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   title: 'Contact DomainDiscovery — Support & Partnerships',
   description:
     'Contact DomainDiscovery (Domain Discovery) for product feedback, bug reports, privacy requests, legal notices, and partnership inquiries.',
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    title: 'Contact DomainDiscovery — Support & Partnerships',
+    description:
+      'Contact DomainDiscovery (Domain Discovery) for product feedback, bug reports, privacy requests, legal notices, and partnership inquiries.',
+    url: '/contact',
+  },
 };
 
 export default function ContactPage() {

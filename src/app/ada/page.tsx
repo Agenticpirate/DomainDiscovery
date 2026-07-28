@@ -7,9 +7,12 @@ export const metadata: Metadata = {
     absolute: `${ADA_BRAND.name} — Ranked domains under budget`,
   },
   description: ADA_BRAND.description,
+  alternates: { canonical: '/' },
   openGraph: {
     title: ADA_BRAND.name,
     description: ADA_BRAND.tagline,
+    url: '/',
+    images: [{ url: '/ada/logo-512.png?v=4', width: 512, height: 512, alt: ADA_BRAND.name }],
   },
 };
 

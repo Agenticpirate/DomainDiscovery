@@ -25,6 +25,8 @@ export type PremiumFaqGridProps = {
   /** Show heading block */
   showHeader?: boolean;
   headingId?: string;
+  /** Use h1 only on dedicated FAQ pages (default h2 to avoid multiple H1s) */
+  headingAs?: 'h1' | 'h2';
 };
 
 const DEFAULT_ICONS: React.ReactNode[] = [
@@ -56,7 +58,9 @@ export function PremiumFaqGrid({
   maxWidthClass = 'max-w-4xl',
   showHeader = true,
   headingId = 'faqs-heading',
+  headingAs = 'h2',
 }: PremiumFaqGridProps) {
+  const HeadingTag = headingAs;
   const [openFaq, setOpenFaq] = React.useState<number | null>(null);
   const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
@@ -121,9 +125,9 @@ export function PremiumFaqGrid({
             }}
           />
           <div className="relative z-[1]">
-            <h2 id={headingId} className="section-title">
+            <HeadingTag id={headingId} className="section-title">
               {title}
-            </h2>
+            </HeadingTag>
             {subtitle ? (
               <p className="hidden sm:block section-sub">{subtitle}</p>
             ) : null}

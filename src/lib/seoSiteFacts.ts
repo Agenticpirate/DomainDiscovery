@@ -259,7 +259,14 @@ export function getOrganizationJsonLd() {
     name: SITE_BRAND.name,
     alternateName: [...SITE_BRAND.alternateNames],
     url: base,
-    logo: `${base}/logo.png`,
+    // ImageObject with size helps Knowledge Panel / logo eligibility
+    logo: {
+      '@type': 'ImageObject',
+      url: `${base}/logo.png`,
+      width: 1024,
+      height: 1024,
+    },
+    image: `${base}/logo.png`,
     description: SITE_BRAND.description,
     sameAs: ['https://x.com/domainsdiscovery'],
   };
@@ -288,6 +295,8 @@ export function getWebSiteJsonLd() {
       logo: {
         '@type': 'ImageObject',
         url: `${base}/logo.png`,
+        width: 1024,
+        height: 1024,
       },
     },
   };

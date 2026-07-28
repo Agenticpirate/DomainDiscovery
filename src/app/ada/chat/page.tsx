@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Chat',
   description:
     'Chat with AI Domain Assistant: brand-aligned domain ranking under budget. Agents use the same engine via MCP, REST, and the chat API.',
+  alternates: { canonical: '/chat' },
 };
 
 export default function AdaChatPage() {

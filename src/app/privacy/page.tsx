@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
     'DomainDiscovery Privacy Policy: how we handle browser storage, search data, third-party registrars, U.S. privacy rights (including CCPA/CPRA), and COPPA.',
+  alternates: { canonical: '/privacy' },
   robots: { index: true, follow: true },
 };
 

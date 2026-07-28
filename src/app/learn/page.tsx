@@ -22,6 +22,13 @@ export const metadata: Metadata = {
   title: 'Domain Name Guides — Naming, SEO, Valuation & DNS',
   description:
     'Free guides on choosing a domain name, brandable vs keyword domains, geo domains, valuation, DNS, auctions, and registration strategy. Learn then search live availability.',
+  alternates: { canonical: '/learn' },
+  openGraph: {
+    title: 'Domain Name Guides — Naming, SEO, Valuation & DNS',
+    description:
+      'Free guides on choosing a domain name, brandable vs keyword domains, geo domains, valuation, DNS, auctions, and registration strategy. Learn then search live availability.',
+    url: '/learn',
+  },
 };
 
 /** Always evaluate publishedAt against the current clock (SEO drip unlock). */

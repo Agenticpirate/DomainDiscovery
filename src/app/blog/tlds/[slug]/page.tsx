@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
@@ -15,6 +16,34 @@ type PageProps = {
 
 export function generateStaticParams() {
   return getTldAboutSlugs().map((slug) => ({ slug }));
+}
+
+export function generateMetadata({ params }: PageProps): Metadata {
+  const detail = getTldAboutDetail(params.slug);
+  if (!detail) {
+    return { title: 'TLD not found' };
+  }
+  const tldLabel = detail.tld.startsWith('.') ? detail.tld : `.${detail.tld}`;
+  const title =
+    detail.title?.trim() ||
+    `${tldLabel} Domain Extension — Registry Guide`;
+  const description = (
+    detail.about?.replace(/\s+/g, ' ').trim().slice(0, 155) ||
+    `About the ${tldLabel} domain extension: registry, registration rules, and how to check availability on DomainDiscovery.`
+  ).slice(0, 160);
+  const url = `/blog/tlds/${detail.slug}`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'article',
+    },
+  };
 }
 
 export default function TldAboutPage({ params }: PageProps) {

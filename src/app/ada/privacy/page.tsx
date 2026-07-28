@@ -11,6 +11,7 @@ import {
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: `Privacy Policy for ${ADA_BRAND.name}: chat, MCP tools, local shortlists, U.S. privacy rights, and research-only processing.`,
+  alternates: { canonical: '/privacy' },
   robots: { index: true, follow: true },
 };
 

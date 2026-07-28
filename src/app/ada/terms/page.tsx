@@ -11,6 +11,7 @@ import {
 export const metadata: Metadata = {
   title: 'Terms of Use',
   description: `Terms of Use for ${ADA_BRAND.name}: agent access, research-only use, budget flags, acceptable use, and liability limits.`,
+  alternates: { canonical: '/terms' },
   robots: { index: true, follow: true },
 };
 

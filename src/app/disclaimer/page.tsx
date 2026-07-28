@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: 'Disclaimer',
   description:
     'DomainDiscovery research disclaimer: not a registrar, no guarantee of availability or pricing, not trademark or legal advice.',
+  alternates: { canonical: '/disclaimer' },
   robots: { index: true, follow: true },
 };
 

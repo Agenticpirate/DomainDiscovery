@@ -87,6 +87,7 @@ export function SiteFaqPage() {
             subtitle="Availability, registration, bulk checks, geo domains, WHOIS, pricing, and privacy."
             items={FAQ_ITEMS}
             className="!mb-8"
+            headingAs="h1"
           />
           <div className="max-w-4xl mx-auto text-center page-gutter pb-4">
             <Link

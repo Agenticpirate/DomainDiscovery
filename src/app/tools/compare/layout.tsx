@@ -4,6 +4,13 @@ export const metadata: Metadata = {
   title: 'Domain Price Comparison — Registrar Pricing by TLD',
   description:
     'Compare regular domain registration prices across registrars by TLD. Research .com and other extensions before you buy.',
+  alternates: { canonical: '/tools/compare' },
+  openGraph: {
+    title: 'Domain Price Comparison — Registrar Pricing by TLD',
+    description:
+      'Compare regular domain registration prices across registrars by TLD. Research .com and other extensions before you buy.',
+    url: '/tools/compare',
+  },
 };
 
 export default function CompareLayout({ children }: { children: React.ReactNode }) {

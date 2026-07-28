@@ -57,6 +57,11 @@ export const metadata: Metadata = {
       "Check domain availability across 1,600+ extensions. Free AI generator, bulk search, geo domains, WHOIS, and price compare.",
     creator: "@domainsdiscovery",
   },
+  // Chrome / Android tab + PWA chrome
+  other: {
+    "theme-color": "#0a0a0a",
+    "msapplication-TileColor": "#0a0a0a",
+  },
   robots: {
     index: true,
     follow: true,
@@ -68,13 +73,15 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  // Homepage-only default canonical. Child routes MUST set their own
+  // alternates.canonical — otherwise Google consolidates them to "/".
   alternates: {
-    canonical: getSiteBaseUrl(),
+    canonical: "/",
     types: {
       // Machine-readable product indexes for assistants (not a Google ranking lever)
-      'text/plain': [
-        { url: '/llms.txt', title: 'llms.txt' },
-        { url: '/llms-full.txt', title: 'llms-full.txt' },
+      "text/plain": [
+        { url: "/llms.txt", title: "llms.txt" },
+        { url: "/llms-full.txt", title: "llms-full.txt" },
       ],
     },
   },
@@ -82,16 +89,23 @@ export const metadata: Metadata = {
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
     : undefined,
-  manifest: "/site.webmanifest",
+  manifest: "/site.webmanifest?v=20260728",
+  // Google SERP favicon: needs a crawlable icon that is a multiple of 48px.
+  // Cache-bust (?v=) forces re-fetch after logo updates.
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/icon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/icon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.ico?v=20260728", sizes: "any" },
+      { url: "/favicon.svg?v=20260728", type: "image/svg+xml" },
+      { url: "/icon-48.png?v=20260728", sizes: "48x48", type: "image/png" },
+      { url: "/icon-96.png?v=20260728", sizes: "96x96", type: "image/png" },
+      { url: "/icon-32.png?v=20260728", sizes: "32x32", type: "image/png" },
+      { url: "/icon-16.png?v=20260728", sizes: "16x16", type: "image/png" },
+      { url: "/icon-192.png?v=20260728", sizes: "192x192", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-    other: [{ rel: "mask-icon", url: "/logo-mark.svg" }],
+    apple: [
+      { url: "/apple-touch-icon.png?v=20260728", sizes: "180x180", type: "image/png" },
+    ],
+    other: [{ rel: "mask-icon", url: "/logo-mark.svg?v=20260728", color: "#0a0a0a" }],
   },
 };
 

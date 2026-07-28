@@ -6,10 +6,12 @@ export const metadata: Metadata = {
   title: 'Why Domains Matter for AI Agents',
   description:
     'How AI agents use domains for brand assets and verifiable identity (ANS). Layer A vs Layer B, protocols (MCP, Domain Connect, DNS), and why agentic domain automation matters now.',
+  alternates: { canonical: '/docs/industry' },
   openGraph: {
     title: `Why Domains Matter for AI Agents | ${ADA_BRAND.name}`,
     description:
       'Industry map: agent identity (ANS), brand domain APIs, and how AI Domain Assistant fits.',
+    url: '/docs/industry',
   },
 };
 
