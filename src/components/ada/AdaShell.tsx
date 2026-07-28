@@ -487,15 +487,13 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
       </header>
 
       {/*
-        Ambient bubbles:
-        - ADA home (/ada): intensity=hero — same as DomainDiscovery landing
-          (radial mask clears center under badge / title / CTAs; dots in gutters)
-        - Other ADA routes: intensity=page — full field with solid cards covering dots
+        Ambient bubbles on every ADA route (home, chat, app, docs, agent-card, legal):
+        intensity=hero — same DomainDiscovery landing logic:
+        radial mask clears center under badge / titles / CTAs / copy;
+        dots stay in gutters. Cards/forms use solid plates so nothing shows through.
       */}
       <SectionAmbient
-        intensity={
-          pathname === '/ada' || pathname === '/ada/' ? 'hero' : 'page'
-        }
+        intensity="hero"
         className="flex-1 w-full min-h-0 flex flex-col"
         contentClassName="flex-1 w-full min-h-0 flex flex-col"
       >

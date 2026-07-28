@@ -529,7 +529,6 @@ export function AdaChat() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className={`relative isolate overflow-hidden rounded-2xl sm:rounded-[1.35rem] border p-3 sm:p-5 ${border} ${surface}`}
-            style={{ backgroundColor: isLight ? undefined : '#0a0a0c' }}
           >
             <div
               aria-hidden

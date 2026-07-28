@@ -11,9 +11,11 @@ type AdaPageAmbientProps = {
 };
 
 /**
- * Standard ADA internal-page hero ambient:
- * silver bubble field + soft spotlight behind content.
- * Panels should use solid fills so dots never cover UI.
+ * ADA page ambient (matches DomainDiscovery landing + AdaShell):
+ * silver bubble field with hero radial clear under titles/badges/CTAs.
+ * Prefer solid plates on cards so dots never show through UI.
+ * Note: AdaShell already wraps all /ada routes in intensity="hero" — this is for
+ * standalone use if a route is ever rendered outside the shell.
  */
 export function AdaPageAmbient({
   children,

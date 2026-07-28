@@ -285,7 +285,8 @@ export function LegalDocumentPage({
   );
 
   if (bare) {
-    // ADA shell already provides page-level bubble ambient
+    // ADA shell already provides intensity=hero bubble ambient (center-clear).
+    // All sections below use SolidPlate so dots never show through text/badges.
     return (
       <main className="relative z-10 pt-8 sm:pt-10 pb-12 sm:pb-16">{documentBody}</main>
     );
@@ -297,7 +298,7 @@ export function LegalDocumentPage({
       <Navigation />
       <main className={`${PAGE_MAIN_CLASS} pb-12 sm:pb-16`}>
         <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: title }]} />
-        <SectionAmbient intensity="page" className="w-full min-h-[50vh]" contentClassName="page-gutter">
+        <SectionAmbient intensity="hero" className="w-full min-h-[50vh]" contentClassName="page-gutter">
           <div className="relative z-10">{documentBody}</div>
         </SectionAmbient>
       </main>

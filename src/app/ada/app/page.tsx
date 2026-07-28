@@ -122,27 +122,40 @@ export default function AdaAppPage() {
     }
   };
 
+  const solid = isLight ? '#ffffff' : '#0a0a0c';
+
   return (
-    <div className="px-3 sm:px-6 py-5 sm:py-10">
-      <div className="max-w-5xl mx-auto">
+    <div className="relative px-3 sm:px-6 py-5 sm:py-10">
+      <div className="relative z-[1] max-w-5xl mx-auto">
         <div className="mb-4 sm:mb-6">
-          {/* Soft plate under title so dots don’t comb through type */}
-          <div className="relative">
+          {/* Opaque hero plate — bubbles never show through title / badge line */}
+          <div
+            className={`relative isolate overflow-hidden rounded-2xl sm:rounded-3xl border p-3.5 sm:p-5 ${
+              isLight ? 'border-slate-200' : 'border-white/10'
+            }`}
+          >
             <div
               aria-hidden
-              className="pointer-events-none absolute -inset-x-4 -inset-y-2 rounded-3xl"
-              style={{
-                background: isLight
-                  ? 'radial-gradient(ellipse 90% 80% at 20% 40%, rgba(248,250,252,0.9), transparent 70%)'
-                  : 'radial-gradient(ellipse 90% 80% at 20% 40%, rgba(5,5,5,0.88), transparent 70%)',
-              }}
+              className="pointer-events-none absolute inset-0 rounded-[inherit]"
+              style={{ backgroundColor: solid }}
             />
             <div className="relative z-[1]">
-              <h1 className={`text-xl sm:text-3xl font-black tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
+              <p
+                className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] mb-1 ${
+                  isLight ? 'text-slate-500' : 'text-white/40'
+                }`}
+              >
+                {ADA_BRAND.name} · Structured app
+              </p>
+              <h1
+                className={`text-xl sm:text-3xl font-black tracking-tight ${
+                  isLight ? 'text-slate-900' : 'text-white'
+                }`}
+              >
                 Find domains under budget
               </h1>
               <p className={`mt-1 text-xs sm:text-sm ${isLight ? 'text-slate-600' : 'text-white/50'}`}>
-                {ADA_BRAND.name} · research shortlist · you confirm registration
+                Research shortlist · you confirm registration
               </p>
             </div>
           </div>
@@ -163,32 +176,49 @@ export default function AdaAppPage() {
             {run.status === 'idle' && (
               <div
                 className={`shine-border relative isolate overflow-hidden rounded-2xl border border-dashed p-4 sm:p-6 text-sm ${
-                  isLight
-                    ? 'border-slate-200 bg-white text-slate-500'
-                    : 'border-white/12 bg-[#0a0a0c] text-white/40'
+                  isLight ? 'border-slate-200 text-slate-500' : 'border-white/12 text-white/40'
                 }`}
               >
-                Set a budget (e.g. $20), describe the brand, then run Find domains.
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                  style={{ backgroundColor: solid }}
+                />
+                <p className="relative z-[1]">
+                  Set a budget (e.g. $20), describe the brand, then run Find domains.
+                </p>
               </div>
             )}
             {run.status === 'loading' && (
               <div
                 className={`shine-border relative isolate overflow-hidden rounded-2xl border p-4 sm:p-6 text-sm animate-pulse ${
-                  isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-[#0a0a0c]'
+                  isLight ? 'border-slate-200' : 'border-white/10'
                 }`}
               >
-                Running agent pipeline…
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                  style={{ backgroundColor: solid }}
+                />
+                <p className={`relative z-[1] ${isLight ? 'text-slate-600' : 'text-white/50'}`}>
+                  Running agent pipeline…
+                </p>
               </div>
             )}
             {run.status === 'error' && (
               <div
                 className={`shine-border relative isolate overflow-hidden rounded-2xl border p-4 sm:p-5 text-sm ${
                   isLight
-                    ? 'border-rose-200 bg-rose-50 text-rose-800'
-                    : 'border-rose-500/30 bg-[#140a0c] text-rose-200'
+                    ? 'border-rose-200 text-rose-800'
+                    : 'border-rose-500/30 text-rose-200'
                 }`}
               >
-                {run.error}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                  style={{ backgroundColor: isLight ? '#fff1f2' : '#140a0c' }}
+                />
+                <p className="relative z-[1]">{run.error}</p>
               </div>
             )}
             {run.status === 'success' && run.result && (

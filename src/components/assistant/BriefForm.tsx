@@ -66,6 +66,12 @@ export function BriefForm({
 
   return (
     <div className={`shine-border relative isolate overflow-hidden rounded-2xl border p-4 sm:p-5 ${surface}`}>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-[inherit]"
+        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+      />
+      <div className="relative z-[1]">
       <label className={`block text-xs font-bold uppercase tracking-wide mb-2 ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
         Describe your business
       </label>
@@ -326,6 +332,7 @@ export function BriefForm({
       >
         Reset
       </button>
+      </div>
     </div>
   );
 }
