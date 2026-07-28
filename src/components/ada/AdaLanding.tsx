@@ -160,39 +160,52 @@ export function AdaLanding() {
   const t = useAdaTheme();
   const { isLight, ink, muted, faint, card, pill, band, btnPrimary, btnSecondary, btnGhost } = t;
 
+  const solidPlate = isLight ? '#ffffff' : '#0a0a0c';
+  const solidScrim = isLight ? '#f8fafc' : '#050505';
+
   return (
     <div className="relative overflow-hidden">
       {/*
-        Ambient field comes from AdaShell (page-level).
-        Hero only keeps solid UI + soft scrim so dots never cover badge / CTAs / copy.
+        Bubble ambient: AdaShell uses intensity="hero" on /ada (same as DomainDiscovery
+        home) — radial mask clears the center. Solid plates below ensure badge / text /
+        CTAs never show dots through, even if a few remain at the edges.
       */}
       <section className="relative px-3 sm:px-6 pt-5 sm:pt-16 pb-5 sm:pb-14">
         <div className="relative z-[1] max-w-4xl mx-auto text-center">
+          {/* Center scrim — doubles the hero mask so copy stays crisp */}
           <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-0 h-[70%] w-[min(100%,42rem)] -translate-x-1/2 rounded-[3rem]"
+            className="pointer-events-none absolute left-1/2 top-0 h-[78%] w-[min(100%,44rem)] -translate-x-1/2 rounded-[3rem]"
             style={{
               background: isLight
-                ? 'radial-gradient(ellipse 80% 70% at 50% 35%, rgba(248,250,252,0.92) 0%, rgba(248,250,252,0.55) 45%, transparent 72%)'
-                : 'radial-gradient(ellipse 80% 70% at 50% 35%, rgba(5,5,5,0.92) 0%, rgba(5,5,5,0.55) 45%, transparent 72%)',
+                ? `radial-gradient(ellipse 82% 72% at 50% 32%, ${solidScrim}f0 0%, ${solidScrim}cc 40%, ${solidScrim}66 58%, transparent 74%)`
+                : `radial-gradient(ellipse 82% 72% at 50% 32%, ${solidScrim}f5 0%, ${solidScrim}d0 40%, ${solidScrim}70 58%, transparent 74%)`,
             }}
           />
 
           <div className="relative z-[1] max-w-md sm:max-w-none mx-auto">
             <Reveal className="flex justify-center mb-2.5 sm:mb-5" y={8}>
+              {/* Badge — opaque plate; bubbles never show through */}
               <span
-                className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 sm:px-3 py-0.5 sm:py-1 text-[8.5px] sm:text-[10px] font-bold uppercase tracking-[0.11em] sm:tracking-[0.14em] isolate ${pill} ${
-                  isLight ? 'bg-white' : 'bg-[#0a0a0c]'
-                }`}
+                className={`relative isolate inline-flex items-center gap-1.5 overflow-hidden rounded-full border px-2.5 sm:px-3 py-0.5 sm:py-1 text-[8.5px] sm:text-[10px] font-bold uppercase tracking-[0.11em] sm:tracking-[0.14em] ${pill}`}
               >
-                <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-emerald-500' : 'bg-white/55'}`} />
-                Built for AI agents · Domain industry
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-full"
+                  style={{ backgroundColor: solidPlate }}
+                />
+                <span className="relative z-[1] inline-flex items-center gap-1.5">
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-emerald-500' : 'bg-white/55'}`}
+                  />
+                  Built for AI agents · Domain industry
+                </span>
               </span>
             </Reveal>
 
             <Reveal y={12}>
               <h1
-                className={`text-[1.55rem] sm:text-5xl md:text-[3.35rem] font-black tracking-tight leading-[1.1] mb-2 sm:mb-5 ${ink}`}
+                className={`relative text-[1.55rem] sm:text-5xl md:text-[3.35rem] font-black tracking-tight leading-[1.1] mb-2 sm:mb-5 ${ink}`}
               >
                 The domain layer
                 <br />
@@ -202,10 +215,10 @@ export function AdaLanding() {
 
             <Reveal delay={0.05} y={10}>
               {/* Mobile: short copy. Desktop: full copy. */}
-              <p className={`sm:hidden text-[12px] leading-snug mx-auto mb-3.5 ${muted}`}>
+              <p className={`relative sm:hidden text-[12px] leading-snug mx-auto mb-3.5 ${muted}`}>
                 Budget-aware brand shortlists for AI agents &amp; operators — generate, check, rank, shortlist.
               </p>
-              <p className={`hidden sm:block text-lg leading-relaxed max-w-2xl mx-auto mb-9 ${muted}`}>
+              <p className={`relative hidden sm:block text-lg leading-relaxed max-w-2xl mx-auto mb-9 ${muted}`}>
                 {ADA_BRAND.name} is a purpose-built surface for AI agents and operators who need{' '}
                 <span className={isLight ? 'text-slate-900 font-semibold' : 'text-white/85 font-semibold'}>
                   brandable domain research under a hard budget
@@ -226,15 +239,19 @@ export function AdaLanding() {
               className="sm:hidden mb-5"
             >
               <div
-                className={`rounded-2xl border p-2.5 ${
-                  isLight ? 'border-slate-200 bg-white/90 shadow-sm' : 'border-white/10 bg-[#0a0a0c]'
+                className={`relative isolate overflow-hidden rounded-2xl border p-2.5 ${
+                  isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'
                 }`}
-                style={{ backgroundColor: isLight ? undefined : '#0a0a0c' }}
               >
-                <div className="grid grid-cols-2 gap-1.5">
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-2xl"
+                  style={{ backgroundColor: solidPlate }}
+                />
+                <div className="relative z-[1] grid grid-cols-2 gap-1.5">
                   <Link
                     href="/ada/chat"
-                    className={`cta-mobile-tap cta-mobile-tap-primary relative isolate inline-flex h-10 items-center justify-center gap-1.5 rounded-xl px-2 text-[12px] font-bold ${btnPrimary}`}
+                    className={`cta-mobile-tap cta-mobile-tap-primary relative isolate inline-flex h-10 items-center justify-center gap-1.5 overflow-hidden rounded-xl px-2 text-[12px] font-bold ${btnPrimary}`}
                   >
                     <IconSlot>
                       <ChatIcon />
@@ -243,9 +260,8 @@ export function AdaLanding() {
                   </Link>
                   <Link
                     href="/ada/app"
-                    className={`cta-mobile-tap cta-mobile-tap-ghost relative isolate inline-flex h-10 items-center justify-center gap-1.5 rounded-xl border px-2 text-[12px] font-bold ${btnSecondary} ${
-                      isLight ? 'bg-white' : 'bg-[#121214]'
-                    }`}
+                    className={`cta-mobile-tap cta-mobile-tap-ghost relative isolate inline-flex h-10 items-center justify-center gap-1.5 overflow-hidden rounded-xl border px-2 text-[12px] font-bold ${btnSecondary}`}
+                    style={{ backgroundColor: isLight ? '#ffffff' : '#121214' }}
                   >
                     <IconSlot>
                       <AppIcon />
@@ -253,7 +269,7 @@ export function AdaLanding() {
                     <span>App</span>
                   </Link>
                 </div>
-                <div className="mt-1.5 grid grid-cols-3 gap-1">
+                <div className="relative z-[1] mt-1.5 grid grid-cols-3 gap-1">
                   {[
                     { href: '/ada/docs', label: 'Docs' },
                     { href: '/ada/agent-card', label: 'Card' },
@@ -262,9 +278,8 @@ export function AdaLanding() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className={`cta-mobile-tap cta-mobile-tap-ghost relative isolate inline-flex h-8 items-center justify-center rounded-lg border px-1 text-[10.5px] font-semibold ${btnGhost} ${
-                        isLight ? 'bg-white' : 'bg-[#121214]'
-                      }`}
+                      className={`cta-mobile-tap cta-mobile-tap-ghost relative isolate inline-flex h-8 items-center justify-center overflow-hidden rounded-lg border px-1 text-[10.5px] font-semibold ${btnGhost}`}
+                      style={{ backgroundColor: isLight ? '#ffffff' : '#121214' }}
                     >
                       {item.label}
                     </Link>
@@ -298,21 +313,28 @@ export function AdaLanding() {
                 >
                   <Link
                     href="/ada/chat"
-                    className={`cta-shine cta-shine-primary group/cta relative isolate inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-8 text-[14px] font-semibold tracking-[-0.01em] ${btnPrimary} ${
+                    className={`cta-shine cta-shine-primary group/cta relative isolate inline-flex h-12 items-center justify-center gap-2.5 overflow-hidden rounded-full px-8 text-[14px] font-semibold tracking-[-0.01em] ${btnPrimary} ${
                       isLight
                         ? 'shadow-[0_1px_0_rgba(255,255,255,0.12)_inset,0_1px_2px_rgba(15,23,42,0.08),0_8px_24px_-6px_rgba(15,23,42,0.35)]'
                         : 'shadow-[0_1px_0_rgba(255,255,255,0.55)_inset,0_1px_2px_rgba(0,0,0,0.2),0_10px_28px_-8px_rgba(255,255,255,0.18)]'
                     }`}
                   >
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 rounded-full"
+                      style={{ backgroundColor: isLight ? '#0f172a' : '#ffffff' }}
+                    />
                     <span className="cta-shine-sweep" aria-hidden />
-                    <IconSlot>
-                      <span className="inline-flex transition-transform duration-300 ease-out group-hover/cta:scale-[1.06]">
-                        <ChatIcon />
+                    <span className="relative z-[1] inline-flex items-center gap-2.5">
+                      <IconSlot>
+                        <span className="inline-flex transition-transform duration-300 ease-out group-hover/cta:scale-[1.06]">
+                          <ChatIcon />
+                        </span>
+                      </IconSlot>
+                      <span>Open chat</span>
+                      <span className="inline-flex opacity-70 transition-all duration-300 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:opacity-100">
+                        <ArrowIcon />
                       </span>
-                    </IconSlot>
-                    <span>Open chat</span>
-                    <span className="inline-flex opacity-70 transition-all duration-300 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:opacity-100">
-                      <ArrowIcon />
                     </span>
                   </Link>
                 </motion.div>
@@ -324,21 +346,28 @@ export function AdaLanding() {
                 >
                   <Link
                     href="/ada/app"
-                    className={`cta-shine cta-shine-secondary group/cta relative isolate inline-flex h-12 items-center justify-center gap-2.5 rounded-full border px-8 text-[14px] font-semibold tracking-[-0.01em] ${btnSecondary} ${
+                    className={`cta-shine cta-shine-secondary group/cta relative isolate inline-flex h-12 items-center justify-center gap-2.5 overflow-hidden rounded-full border px-8 text-[14px] font-semibold tracking-[-0.01em] ${btnSecondary} ${
                       isLight
-                        ? 'bg-white/90 shadow-[0_1px_0_rgba(255,255,255,0.8)_inset,0_1px_2px_rgba(15,23,42,0.04),0_6px_16px_-8px_rgba(15,23,42,0.12)]'
-                        : 'bg-[#0c0c0e] shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_1px_2px_rgba(0,0,0,0.4),0_8px_20px_-10px_rgba(0,0,0,0.6)]'
+                        ? 'shadow-[0_1px_0_rgba(255,255,255,0.8)_inset,0_1px_2px_rgba(15,23,42,0.04),0_6px_16px_-8px_rgba(15,23,42,0.12)]'
+                        : 'shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_1px_2px_rgba(0,0,0,0.4),0_8px_20px_-10px_rgba(0,0,0,0.6)]'
                     }`}
                   >
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 rounded-full"
+                      style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                    />
                     <span className="cta-shine-sweep" aria-hidden />
-                    <IconSlot>
-                      <span className="inline-flex transition-transform duration-300 ease-out group-hover/cta:scale-[1.06]">
-                        <AppIcon />
+                    <span className="relative z-[1] inline-flex items-center gap-2.5">
+                      <IconSlot>
+                        <span className="inline-flex transition-transform duration-300 ease-out group-hover/cta:scale-[1.06]">
+                          <AppIcon />
+                        </span>
+                      </IconSlot>
+                      <span>Structured app</span>
+                      <span className="inline-flex opacity-45 transition-all duration-300 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:opacity-90">
+                        <ArrowIcon />
                       </span>
-                    </IconSlot>
-                    <span>Structured app</span>
-                    <span className="inline-flex opacity-45 transition-all duration-300 ease-out group-hover/cta:translate-x-0.5 group-hover/cta:opacity-90">
-                      <ArrowIcon />
                     </span>
                   </Link>
                 </motion.div>

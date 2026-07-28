@@ -486,9 +486,16 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      {/* Full-route bubble ambient (same as home/chat) for every ADA page */}
+      {/*
+        Ambient bubbles:
+        - ADA home (/ada): intensity=hero — same as DomainDiscovery landing
+          (radial mask clears center under badge / title / CTAs; dots in gutters)
+        - Other ADA routes: intensity=page — full field with solid cards covering dots
+      */}
       <SectionAmbient
-        intensity="page"
+        intensity={
+          pathname === '/ada' || pathname === '/ada/' ? 'hero' : 'page'
+        }
         className="flex-1 w-full min-h-0 flex flex-col"
         contentClassName="flex-1 w-full min-h-0 flex flex-col"
       >

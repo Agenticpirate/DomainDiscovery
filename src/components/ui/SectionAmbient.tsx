@@ -134,12 +134,12 @@ export function SectionAmbient({
                     'linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%)',
                 }
               : intensity === 'hero'
-                ? // Landing hero: clear dots under title / subtitle / search column; keep field in gutters
+                ? // Landing hero: clear dots under badge / title / subtitle / CTAs; keep field in gutters
                   {
                     maskImage:
-                      'radial-gradient(ellipse 72% 70% at 50% 38%, transparent 0%, transparent 42%, rgba(0,0,0,0.4) 58%, rgba(0,0,0,0.85) 74%, black 90%)',
+                      'radial-gradient(ellipse 78% 76% at 50% 36%, transparent 0%, transparent 48%, rgba(0,0,0,0.35) 62%, rgba(0,0,0,0.8) 78%, black 92%)',
                     WebkitMaskImage:
-                      'radial-gradient(ellipse 72% 70% at 50% 38%, transparent 0%, transparent 42%, rgba(0,0,0,0.4) 58%, rgba(0,0,0,0.85) 74%, black 90%)',
+                      'radial-gradient(ellipse 78% 76% at 50% 36%, transparent 0%, transparent 48%, rgba(0,0,0,0.35) 62%, rgba(0,0,0,0.8) 78%, black 92%)',
                   }
                 : {
                     maskImage:
