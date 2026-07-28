@@ -6,6 +6,7 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { FEATURE_FLAGS } from '@/lib/featureFlags';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
@@ -148,15 +149,23 @@ export function AssistantShell() {
 
       <main className={`${PAGE_MAIN_CLASS} pb-10 sm:pb-14`}>
         <PageBreadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Agent Hub' }]} />
+        <SectionAmbient intensity="hero" className="w-full" contentClassName="relative z-[1]">
         <section className="page-gutter pb-5 sm:pb-7">
           <div className="max-w-3xl mx-auto text-center mt-1 sm:mt-2">
             <p
-              className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide mb-3 ${
+              className={`relative isolate inline-flex items-center gap-1.5 overflow-hidden rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide mb-3 ${
                 isLight ? 'border-slate-200 text-slate-500' : 'border-white/12 text-white/40'
               }`}
             >
-              <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-500' : 'bg-white/60'}`} />
-              Agent Hub · MCP · Budget-aware research
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 rounded-full"
+                style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+              />
+              <span className="relative z-[1] inline-flex items-center gap-1.5">
+                <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-500' : 'bg-white/60'}`} />
+                Agent Hub · MCP · Budget-aware research
+              </span>
             </p>
             <h1
               className={`text-3xl sm:text-5xl font-black tracking-tight mb-3 ${
@@ -255,6 +264,7 @@ export function AssistantShell() {
         <div className="mt-8">
           <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.assistant} compact />
         </div>
+        </SectionAmbient>
       </main>
 
       <Footer />

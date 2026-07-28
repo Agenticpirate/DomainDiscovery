@@ -40,7 +40,7 @@ export default function LearnPage() {
 
       <main className={PAGE_MAIN_CLASS}>
         <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Learn' }]} />
-        <SectionAmbient intensity="page" contentClassName="page-gutter pb-4 sm:pb-7">
+        <SectionAmbient intensity="hero" contentClassName="page-gutter pb-4 sm:pb-7">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: 'var(--text-muted)' }}>
               {meta.count}+ free guides · naming · SEO · DNS

@@ -6,6 +6,7 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { GeoDomainGenerator } from '@/components/geo/GeoDomainGenerator';
 import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
@@ -54,7 +55,6 @@ export default function GeoPage() {
       className="geo-page min-h-screen overflow-x-clip"
       style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
     >
-      {/* No ambient dots on geo tool */}
       <PageBackground variant="minimal" />
       <Navigation activeTool="geo" />
 
@@ -65,8 +65,9 @@ export default function GeoPage() {
             { label: 'Geo Domain Generator' },
           ]}
         />
+        <SectionAmbient intensity="hero" className="w-full" contentClassName="relative z-[1]">
 
-        {/* —— Compact intro: tool first (solid only) —— */}
+        {/* —— Compact intro: tool first (solid plate + center-clear ambient) —— */}
         <div className="page-gutter pb-3 sm:pb-4">
           <div className="mx-auto max-w-6xl relative z-[1]">
             <motion.header
@@ -235,6 +236,7 @@ export default function GeoPage() {
 
         <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.geo} compact />
         <SeoGuidePack {...TOOL_GUIDE_PACKS.geo} />
+        </SectionAmbient>
       </main>
 
       <Footer />

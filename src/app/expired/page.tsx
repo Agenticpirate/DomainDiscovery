@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -74,10 +75,9 @@ export default function ExpiredPage() {
   return (
     <div className="min-h-screen">
       <PageBackground variant="default" />
-      
+
       <Navigation activeTool="expired" />
 
-      {/* Main Content */}
       <main className={`${PAGE_MAIN_CLASS} pb-14 sm:pb-24`}>
         <PageBreadcrumb
           items={[
@@ -85,6 +85,7 @@ export default function ExpiredPage() {
             { label: 'Expired Domains' },
           ]}
         />
+        <SectionAmbient intensity="hero" className="w-full" contentClassName="relative z-[1]">
         {/* Hero Section */}
         <section className="page-gutter pb-10 sm:pb-16">
           <div className="max-w-4xl mx-auto text-center">
@@ -95,9 +96,9 @@ export default function ExpiredPage() {
               Search expired domains with AI-powered tools. Explore our comprehensive index of expiring and recently expired domain names.
             </p>
 
-            {/* Search Bar */}
+            {/* Search Bar — solid plate */}
             <div className="max-w-2xl mx-auto">
-              <div className={`relative ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-black/40 border-white/[0.12]'} backdrop-blur-2xl border rounded-2xl p-2 shadow-2xl ${isLight ? 'shadow-slate-200/50' : 'shadow-black/40'}`}>
+              <div className={`relative isolate overflow-hidden ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0a0a0c] border-white/[0.12]'} border rounded-2xl p-2 shadow-2xl ${isLight ? 'shadow-slate-200/50' : 'shadow-black/40'}`}>
                 <div className={`flex items-center gap-2.5 px-3 py-3 sm:gap-3 sm:px-5 sm:py-4 ${isLight ? 'bg-slate-50' : 'bg-white/[0.02]'} rounded-xl`}>
                   <Icons.Search className={`w-5 h-5 ${isLight ? 'text-slate-400' : 'text-white/40'} shrink-0`} />
                   <input
@@ -204,6 +205,7 @@ export default function ExpiredPage() {
             </div>
           </div>
         </section>
+        </SectionAmbient>
       </main>
 
       <Footer />

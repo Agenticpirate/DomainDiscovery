@@ -37,7 +37,7 @@ export default function WhoisPage() {
             { label: 'WHOIS Lookup' },
           ]}
         />
-        <SectionAmbient intensity="page" contentClassName="page-gutter pb-5 sm:pb-7">
+        <SectionAmbient intensity="hero" contentClassName="page-gutter pb-5 sm:pb-7">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl sm:text-5xl md:text-[3.9rem] font-black tracking-tight mb-3">
               <span

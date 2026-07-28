@@ -260,7 +260,7 @@ export default function SavedDomainsPage() {
       <main className="relative page-main">
         <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Saved Domains' }]} />
         {/* Hero */}
-        <SectionAmbient intensity="page" contentClassName="page-gutter pb-4 sm:pb-5">
+        <SectionAmbient intensity="hero" contentClassName="page-gutter pb-4 sm:pb-5">
           <div className="max-w-5xl mx-auto text-center">
             <h1
               className={`text-3xl sm:text-5xl md:text-[3.4rem] font-black tracking-tight mb-3 ${

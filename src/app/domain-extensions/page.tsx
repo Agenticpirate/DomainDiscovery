@@ -6,6 +6,7 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { DomainExtensionsView } from '@/components/domain/DomainExtensionsView';
 import { ExtensionsGuideContent } from '@/components/domain/ExtensionsGuideContent';
 import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
@@ -197,7 +198,6 @@ function DomainExtensionsPageContent() {
       style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
     >
       <style dangerouslySetInnerHTML={{ __html: PAGE_MOBILE_CSS }} />
-      {/* No ambient dots on extensions tool */}
       <PageBackground variant="minimal" />
 
       <Navigation activeTool="extensions" />
@@ -209,27 +209,34 @@ function DomainExtensionsPageContent() {
             { label: 'Domain Extensions' },
           ]}
         />
+        <SectionAmbient intensity="hero" className="w-full max-w-full min-w-0" contentClassName="relative z-[1]">
         <div className="page-gutter pb-2 sm:pb-4 max-w-full min-w-0 overflow-x-clip">
           <div className="mx-auto w-full min-w-0 max-w-6xl">
-            {/* Hero — compact on mobile; solid surface only */}
+            {/* Hero — solid badge + center-clear ambient */}
             <div className="relative mt-1 sm:mt-3 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-2.5 sm:gap-6 mb-3 sm:mb-6">
               <div className="relative z-[1] max-w-2xl">
                 <div
-                  className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 sm:px-2.5 sm:py-1 mb-1.5 sm:mb-3.5 text-[9px] sm:text-[11px] font-semibold tracking-wide border ${
+                  className={`relative isolate inline-flex items-center gap-1.5 overflow-hidden rounded-full px-2 py-0.5 sm:px-2.5 sm:py-1 mb-1.5 sm:mb-3.5 text-[9px] sm:text-[11px] font-semibold tracking-wide border ${
                     isLight
-                      ? 'bg-white text-slate-600 border-slate-200 shadow-sm'
+                      ? 'text-slate-600 border-slate-200 shadow-sm'
                       : 'text-white/65 border-white/10'
                   }`}
-                  style={{ backgroundColor: solid }}
                 >
                   <span
-                    className={`h-1.5 w-1.5 rounded-full shrink-0 ${
-                      isLight ? 'bg-slate-500' : 'bg-white/70'
-                    }`}
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 rounded-full"
+                    style={{ backgroundColor: solid }}
                   />
-                  <span className="sm:hidden">1,000+ TLDs · Live</span>
-                  <span className="hidden sm:inline">
-                    Search all 1,000+ TLDs · Live availability
+                  <span className="relative z-[1] inline-flex items-center gap-1.5">
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full shrink-0 ${
+                        isLight ? 'bg-slate-500' : 'bg-white/70'
+                      }`}
+                    />
+                    <span className="sm:hidden">1,000+ TLDs · Live</span>
+                    <span className="hidden sm:inline">
+                      Search all 1,000+ TLDs · Live availability
+                    </span>
                   </span>
                 </div>
 
@@ -350,6 +357,7 @@ function DomainExtensionsPageContent() {
           <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.extensions} compact />
           <SeoGuidePack {...TOOL_GUIDE_PACKS.extensions} />
         </div>
+        </SectionAmbient>
       </main>
 
       <Footer />

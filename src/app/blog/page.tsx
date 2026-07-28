@@ -32,7 +32,7 @@ export default function BlogPage() {
 
       <main className={`${PAGE_MAIN_CLASS} pb-14`}>
         <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Blog' }]} />
-        <SectionAmbient intensity="page" contentClassName="page-gutter">
+        <SectionAmbient intensity="hero" contentClassName="page-gutter">
         <div className="max-w-6xl mx-auto">
           <header className="mt-2 sm:mt-4 max-w-3xl">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>

@@ -470,8 +470,9 @@ function SearchPageContent() {
       */}
       <main className="relative flex min-h-0 w-full max-w-full flex-1 flex-col overflow-hidden pt-[3.05rem] sm:pt-[3.9rem]">
         <SectionAmbient
-          intensity="page"
+          intensity="hero"
           solidBase
+          /* Results list is dense — keep dots off so status rows stay crystal clear */
           disabled
           spotlight={false}
           className="flex min-h-0 w-full max-w-full flex-1 flex-col overflow-hidden"

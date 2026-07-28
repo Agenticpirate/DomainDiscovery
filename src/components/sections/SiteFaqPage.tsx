@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PremiumFaqGrid } from '@/components/sections/PremiumFaqGrid';
 import { Icons } from '@/components/ui/Icons';
@@ -79,21 +80,23 @@ export function SiteFaqPage() {
       <Navigation />
       <main className={`${PAGE_MAIN_CLASS} pb-10`}>
         <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'FAQ' }]} />
-        <PremiumFaqGrid
-          id="site-faq-page"
-          title="Domain search FAQs"
-          subtitle="Availability, registration, bulk checks, geo domains, WHOIS, pricing, and privacy."
-          items={FAQ_ITEMS}
-          className="!mb-8"
-        />
-        <div className="max-w-4xl mx-auto text-center">
-          <Link
-            href="/"
-            className="inline-flex items-center rounded-xl bg-white text-black px-5 py-2.5 text-sm font-bold hover:bg-white/90 transition"
-          >
-            Start domain name search
-          </Link>
-        </div>
+        <SectionAmbient intensity="hero" className="w-full" contentClassName="relative z-[1]">
+          <PremiumFaqGrid
+            id="site-faq-page"
+            title="Domain search FAQs"
+            subtitle="Availability, registration, bulk checks, geo domains, WHOIS, pricing, and privacy."
+            items={FAQ_ITEMS}
+            className="!mb-8"
+          />
+          <div className="max-w-4xl mx-auto text-center page-gutter pb-4">
+            <Link
+              href="/"
+              className="inline-flex items-center rounded-xl bg-white text-black px-5 py-2.5 text-sm font-bold hover:bg-white/90 transition"
+            >
+              Start domain name search
+            </Link>
+          </div>
+        </SectionAmbient>
       </main>
       <Footer />
     </div>

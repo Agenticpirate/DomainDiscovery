@@ -361,7 +361,7 @@ html.light .learn-article-page .learn-article-sticky {
           ]}
         />
         <SectionAmbient
-          intensity="page"
+          intensity="hero"
           contentClassName="page-gutter pb-4 sm:pb-8 max-w-full min-w-0 overflow-x-clip"
         >
           <div className="max-w-3xl lg:max-w-5xl mx-auto w-full min-w-0 relative z-[1]">

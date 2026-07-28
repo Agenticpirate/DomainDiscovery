@@ -4,6 +4,7 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { getTldAboutIndex, getTldAboutMeta } from '@/lib/tldAboutData';
 
 export const dynamic = 'force-dynamic';
@@ -43,7 +44,7 @@ export default function BlogTldsPage() {
             { label: 'TLD encyclopedia' },
           ]}
         />
-        <div className="page-gutter">
+        <SectionAmbient intensity="hero" className="w-full" contentClassName="page-gutter relative z-[1]">
         <div className="max-w-6xl mx-auto">
           <header className="mt-2 sm:mt-4 max-w-3xl">
             <h1 className="text-3xl sm:text-4xl font-black tracking-tight">TLD encyclopedia</h1>
@@ -84,7 +85,7 @@ export default function BlogTldsPage() {
             );
           })}
         </div>
-        </div>
+        </SectionAmbient>
       </main>
 
       <Footer />

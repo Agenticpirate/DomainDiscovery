@@ -48,7 +48,7 @@ export default function ComparePage() {
         <PageBreadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Price Comparison' }]} />
 
         {/* Hero — compact on mobile */}
-        <SectionAmbient intensity="page" contentClassName="page-gutter pt-1 sm:pt-3 pb-3 sm:pb-8">
+        <SectionAmbient intensity="hero" contentClassName="page-gutter pt-1 sm:pt-3 pb-3 sm:pb-8">
         <div className="max-w-4xl mx-auto text-center px-0.5">
           <div className="mb-2 sm:mb-3 flex flex-wrap items-center justify-center gap-1 sm:gap-2">
             {[

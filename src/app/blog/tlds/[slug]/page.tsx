@@ -4,6 +4,7 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { getTldAboutDetail, getTldAboutSlugs } from '@/lib/tldAboutData';
 
 export const dynamic = 'force-dynamic';
@@ -37,12 +38,13 @@ export default function TldAboutPage({ params }: PageProps) {
             { label: detail.tld },
           ]}
         />
-        <div className="page-gutter">
+        <SectionAmbient intensity="hero" className="w-full" contentClassName="page-gutter relative z-[1]">
         <div className="max-w-3xl mx-auto">
           <header className="mt-2 sm:mt-4">
             <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white/55">
-                {detail.type}
+              <span className="relative isolate overflow-hidden rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white/55">
+                <span aria-hidden className="pointer-events-none absolute inset-0 rounded-full bg-[#0a0a0c]" />
+                <span className="relative z-[1]">{detail.type}</span>
               </span>
               {detail.typeLabel && (
                 <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
@@ -223,7 +225,7 @@ export default function TldAboutPage({ params }: PageProps) {
             {detail.scrapedAt ? ` Cataloged ${detail.scrapedAt.slice(0, 10)}.` : ''}
           </p>
         </div>
-        </div>
+        </SectionAmbient>
       </main>
 
       <Footer />

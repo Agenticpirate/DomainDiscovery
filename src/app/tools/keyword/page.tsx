@@ -24,7 +24,7 @@ export default function KeywordPage() {
       <main className={`${PAGE_MAIN_CLASS} pb-10 sm:pb-14`}>
         <PageBreadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Keyword Domains' }]} />
 
-        <SectionAmbient intensity="page" contentClassName="page-gutter pt-2 sm:pt-4 pb-4 sm:pb-6">
+        <SectionAmbient intensity="hero" contentClassName="page-gutter pt-2 sm:pt-4 pb-4 sm:pb-6">
           <div className="max-w-3xl mx-auto text-center">
           <h1
             className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2 ${

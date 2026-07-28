@@ -86,7 +86,9 @@ export async function GET(req: NextRequest) {
       title: a.title,
       path: `/learn/${a.slug}`,
     })),
-    nextDays: [...new Set(upcoming.map((a) => a.publishedAt).filter(Boolean))].slice(0, 5),
+    nextDays: Array.from(
+      new Set(upcoming.map((a) => a.publishedAt).filter((d): d is string => Boolean(d)))
+    ).slice(0, 5),
     revalidated: true,
   });
 }

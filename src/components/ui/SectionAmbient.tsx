@@ -16,10 +16,10 @@ type SectionAmbientProps = {
   className?: string;
   contentClassName?: string;
   /**
-   * hero — spotlight + dots with center soft-clear (landing bands)
-   * page — full-viewport field (all internal pages; dots edge-to-edge, soft vertical fade)
-   * soft — lighter dots only (no spotlight)
-   * dots — lightest dots only (mid sections)
+   * hero — spotlight + dots with center soft-clear (landing + tool heroes)
+   * page — same center-clear as hero (internal pages; gutters only under copy/badges)
+   * soft — lighter dots, mild center clear
+   * dots — lightest dots, mild center clear
    */
   intensity?: SectionAmbientIntensity;
   /** Force solid page-black underlay (dark mode). Default true for hero/page. */
@@ -125,21 +125,21 @@ export function SectionAmbient({
           aria-hidden
           data-ambient-dots="single"
           style={
-            intensity === 'page' || intensity === 'dots'
-              ? // Full page / band: edge-to-edge dots, soft vertical fade only
+            intensity === 'hero' || intensity === 'page'
+              ? // Landing + internal pages: clear under badge / title / copy / CTAs; dots in gutters
                 {
                   maskImage:
-                    'linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%)',
+                    'radial-gradient(ellipse 78% 76% at 50% 36%, transparent 0%, transparent 48%, rgba(0,0,0,0.35) 62%, rgba(0,0,0,0.8) 78%, black 92%)',
                   WebkitMaskImage:
-                    'linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%)',
+                    'radial-gradient(ellipse 78% 76% at 50% 36%, transparent 0%, transparent 48%, rgba(0,0,0,0.35) 62%, rgba(0,0,0,0.8) 78%, black 92%)',
                 }
-              : intensity === 'hero'
-                ? // Landing hero: clear dots under badge / title / subtitle / CTAs; keep field in gutters
+              : intensity === 'dots' || intensity === 'soft'
+                ? // Mild center clear so mid-section copy stays readable
                   {
                     maskImage:
-                      'radial-gradient(ellipse 78% 76% at 50% 36%, transparent 0%, transparent 48%, rgba(0,0,0,0.35) 62%, rgba(0,0,0,0.8) 78%, black 92%)',
+                      'radial-gradient(ellipse 70% 65% at 50% 40%, transparent 0%, transparent 38%, rgba(0,0,0,0.45) 58%, black 85%)',
                     WebkitMaskImage:
-                      'radial-gradient(ellipse 78% 76% at 50% 36%, transparent 0%, transparent 48%, rgba(0,0,0,0.35) 62%, rgba(0,0,0,0.8) 78%, black 92%)',
+                      'radial-gradient(ellipse 70% 65% at 50% 40%, transparent 0%, transparent 38%, rgba(0,0,0,0.45) 58%, black 85%)',
                   }
                 : {
                     maskImage:
