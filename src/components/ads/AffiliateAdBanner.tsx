@@ -3,6 +3,7 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
 import {
   getAdForPlacement,
+  getDefaultVariant,
   type AffiliateAdCreative,
   type AffiliateAdPlacement,
 } from '@/lib/affiliateAds';
@@ -13,34 +14,33 @@ export type AffiliateAdBannerProps = {
   /** Override default creative for this placement */
   creative?: AffiliateAdCreative;
   /**
-   * visual — how the unit is framed (creative size stays official Impact size)
-   * - leaderboard: compact 320×50 centered (default)
-   * - card: enhanced wide card with copy + official banner + CTA
-   * - strip: full-width slim strip (mobile-friendly)
+   * visual frame (creative pixels stay authentic)
+   * - leaderboard: compact 320×50
+   * - card: copy + small banner + CTA
+   * - strip: slim full-width
+   * - billboard: large 1200×630-style creative, full clickable
    */
-  variant?: 'leaderboard' | 'card' | 'strip';
+  variant?: 'leaderboard' | 'card' | 'strip' | 'billboard' | 'auto';
   className?: string;
-  /** Hide on small screens */
   hideOnMobile?: boolean;
-  /** Hide from sm and up */
   hideOnDesktop?: boolean;
 };
 
 /**
  * Tracked Spaceship / Impact display unit.
- * - Click: exact sjv.io tracking URL (rel=sponsored)
- * - View: imp.pxf.io pixel once when unit enters viewport (or on mount if IO unavailable)
- * - Creative: local PNG preferred; CDN fallback on error
+ * Click → sjv.io · View → imp.pxf.io once when visible · rel=sponsored
  */
 export function AffiliateAdBanner({
   placement,
   creative: creativeProp,
-  variant = 'card',
+  variant: variantProp = 'auto',
   className = '',
   hideOnMobile = false,
   hideOnDesktop = false,
 }: AffiliateAdBannerProps) {
   const creative = creativeProp ?? getAdForPlacement(placement);
+  const variant =
+    variantProp === 'auto' ? getDefaultVariant(placement) : variantProp;
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const isLight = mounted ? theme === 'light' : false;
@@ -52,16 +52,21 @@ export function AffiliateAdBanner({
 
   useEffect(() => setMounted(true), []);
 
-  // Fire impression once when visible (or immediately if IntersectionObserver missing)
+  useEffect(() => {
+    setImgSrc(creative.localSrc);
+  }, [creative.localSrc]);
+
+  // Fire impression once when visible
   useEffect(() => {
     if (firedRef.current || typeof window === 'undefined') return;
 
     const fire = () => {
       if (firedRef.current) return;
       firedRef.current = true;
-      // 1×1 pixel via Image constructor (reliable, no layout)
       const img = new window.Image(1, 1);
-      img.src = `${creative.impressionPixel}${creative.impressionPixel.includes('?') ? '&' : '?'}cachebuster=${Date.now()}`;
+      img.src = `${creative.impressionPixel}${
+        creative.impressionPixel.includes('?') ? '&' : '?'
+      }cachebuster=${Date.now()}`;
     };
 
     const el = rootRef.current;
@@ -77,7 +82,7 @@ export function AffiliateAdBanner({
           io.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: '40px' }
+      { threshold: 0.12, rootMargin: '48px' }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -91,8 +96,10 @@ export function AffiliateAdBanner({
     .filter(Boolean)
     .join(' ');
 
+  const isBillboard = creative.format === 'billboard' || variant === 'billboard';
+
   const bannerImg = (
-    // eslint-disable-next-line @next/next/no-img-element -- affiliate creative must stay exact dimensions
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={imgSrc}
       alt={creative.alt}
@@ -100,10 +107,20 @@ export function AffiliateAdBanner({
       height={creative.height}
       loading="lazy"
       decoding="async"
-      className="block max-w-full h-auto rounded-md"
-      style={{ width: creative.width, height: creative.height, maxWidth: '100%' }}
+      className={
+        isBillboard
+          ? 'block w-full h-auto rounded-xl sm:rounded-2xl object-cover'
+          : 'block max-w-full h-auto rounded-md'
+      }
+      style={
+        isBillboard
+          ? { width: '100%', height: 'auto', aspectRatio: `${creative.width} / ${creative.height}` }
+          : { width: creative.width, height: creative.height, maxWidth: '100%' }
+      }
       onError={() => {
-        if (imgSrc !== creative.displayAdCdn) setImgSrc(creative.displayAdCdn);
+        if (creative.displayAdCdn && imgSrc !== creative.displayAdCdn) {
+          setImgSrc(creative.displayAdCdn);
+        }
       }}
     />
   );
@@ -113,7 +130,7 @@ export function AffiliateAdBanner({
 
   const trackedAnchor = (children: React.ReactNode, extraClass = '') => (
     <a
-      id={creative.id}
+      id={`${creative.id}-${placement}`}
       href={creative.clickUrl}
       target="_blank"
       rel="sponsored noopener noreferrer"
@@ -121,6 +138,7 @@ export function AffiliateAdBanner({
       data-ad-id={creative.id}
       data-campaign={creative.campaignId}
       data-placement={placement}
+      data-creative-format={creative.format}
       className={`${trackedLinkClass} ${extraClass}`}
       aria-label={`${creative.alt} (sponsored)`}
     >
@@ -128,7 +146,6 @@ export function AffiliateAdBanner({
     </a>
   );
 
-  // Hidden Impact-style pixel also in DOM for crawlers that expect it
   const noscriptPixel = (
     // eslint-disable-next-line @next/next/no-img-element
     <img
@@ -141,6 +158,74 @@ export function AffiliateAdBanner({
       aria-hidden
     />
   );
+
+  // —— Billboard: large TW/X creative, full surface clickable ——
+  if (variant === 'billboard' || (variant === 'card' && isBillboard)) {
+    return (
+      <div ref={rootRef} className={`relative w-full ${visibility}`}>
+        {trackedAnchor(
+          <span
+            className={`relative block w-full overflow-hidden rounded-2xl transition-all active:scale-[0.997] ${
+              isLight
+                ? 'bg-white border border-slate-200 shadow-[0_12px_40px_-18px_rgba(15,23,42,0.28)] hover:border-slate-300 hover:shadow-lg'
+                : 'bg-[#0a0a0c] border border-white/[0.12] shadow-[0_20px_56px_-28px_rgba(0,0,0,0.9)] hover:border-white/20'
+            }`}
+          >
+            <span className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
+              <span
+                className={`inline-flex items-center rounded-full px-2 py-0.5 text-[8px] font-black uppercase tracking-[0.14em] border backdrop-blur-md ${
+                  isLight
+                    ? 'border-white/40 bg-white/85 text-slate-600'
+                    : 'border-white/15 bg-black/55 text-white/70'
+                }`}
+              >
+                Sponsored
+              </span>
+            </span>
+
+            <span className="block w-full p-1.5 sm:p-2">{bannerImg}</span>
+
+            <span
+              className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-3.5 pb-3.5 pt-1 sm:px-5 sm:pb-4 ${
+                isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+              }`}
+            >
+              <span className="min-w-0">
+                <span
+                  className={`block text-[13px] sm:text-[15px] font-black tracking-tight ${
+                    isLight ? 'text-slate-900' : 'text-white'
+                  }`}
+                >
+                  {creative.title}
+                </span>
+                <span
+                  className={`block text-[11px] sm:text-[12.5px] mt-0.5 ${
+                    isLight ? 'text-slate-500' : 'text-white/50'
+                  }`}
+                >
+                  {creative.subtitle}
+                </span>
+              </span>
+              <span
+                className={`inline-flex w-full sm:w-auto shrink-0 items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-[12px] font-bold transition-colors ${
+                  isLight
+                    ? 'bg-slate-900 text-white group-hover:bg-slate-800'
+                    : 'bg-white text-black group-hover:bg-white/90'
+                }`}
+              >
+                {creative.ctaLabel}
+                <svg className="w-3.5 h-3.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+            </span>
+          </span>,
+          'w-full block'
+        )}
+        {noscriptPixel}
+      </div>
+    );
+  }
 
   if (variant === 'leaderboard') {
     return (
@@ -180,7 +265,7 @@ export function AffiliateAdBanner({
             }`}
           >
             <span
-              className={`hidden xs:inline shrink-0 text-[8px] font-bold uppercase tracking-[0.14em] ${
+              className={`shrink-0 text-[8px] font-bold uppercase tracking-[0.14em] ${
                 isLight ? 'text-slate-400' : 'text-white/35'
               }`}
             >
@@ -203,7 +288,7 @@ export function AffiliateAdBanner({
     );
   }
 
-  // variant === 'card' (enhanced default)
+  // variant === 'card' (leaderboard creative + copy)
   return (
     <div ref={rootRef} className={`relative w-full ${visibility}`}>
       {trackedAnchor(
@@ -214,7 +299,6 @@ export function AffiliateAdBanner({
               : 'bg-[#0a0a0c] border border-white/[0.12] shadow-[0_16px_48px_-24px_rgba(0,0,0,0.85)] hover:border-white/20'
           }`}
         >
-          {/* Accent wash */}
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 opacity-90"
