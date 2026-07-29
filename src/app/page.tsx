@@ -214,9 +214,9 @@ export default function Home() {
           </div>
         </SectionAmbient>
 
-        {/* Hero-adjacent affiliate unit (extra impression + click path) */}
-        <div className="pt-1 pb-2 sm:pt-2 sm:pb-3">
-          <AffiliateAdRail placement="home-hero" variant="strip" />
+        {/* Hero-adjacent leaderboard — full-width creative, site-matched chrome */}
+        <div className="pt-2 pb-3 sm:pt-3 sm:pb-4 page-gutter max-w-5xl mx-auto w-full">
+          <AffiliateAdRail placement="home-hero" variant="strip" contained={false} />
         </div>
 
         <HomePageContent />

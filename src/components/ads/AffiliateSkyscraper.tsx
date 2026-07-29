@@ -120,13 +120,26 @@ export function AffiliateSkyscraper() {
         </button>
 
         <div
-          className={`group/sky relative overflow-hidden rounded-2xl transition-shadow duration-500 ${
+          className={`group/sky relative overflow-hidden rounded-2xl border transition-shadow duration-500 ${
             isLight
-              ? 'shadow-[0_16px_48px_-20px_rgba(15,23,42,0.4)]'
-              : 'shadow-[0_20px_56px_-18px_rgba(0,0,0,0.85)]'
+              ? 'border-slate-200/90 shadow-[0_16px_48px_-20px_rgba(15,23,42,0.4)] bg-white'
+              : 'border-white/12 shadow-[0_20px_56px_-18px_rgba(0,0,0,0.85)] bg-[#0a0a0c]'
           }`}
           style={{ width: railWidth, maxHeight: 'min(600px, 70vh)' }}
         >
+          {/* Sponsored + Ad disclosure on side rail */}
+          <span
+            className={`pointer-events-none absolute left-1.5 top-1.5 z-[2] inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[7px] font-semibold uppercase tracking-[0.12em] backdrop-blur-md ${
+              isLight
+                ? 'bg-white/90 text-slate-600 border border-slate-200/90'
+                : 'bg-black/55 text-white/70 border border-white/12'
+            }`}
+          >
+            <span>Sponsored</span>
+            <span className={isLight ? 'text-slate-300' : 'text-white/30'}>·</span>
+            <span>Ad</span>
+          </span>
+
           <div
             className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
             style={{ transform: `translateX(-${index * 100}%)` }}

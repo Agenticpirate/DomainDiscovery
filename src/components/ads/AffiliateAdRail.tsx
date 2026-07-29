@@ -32,7 +32,10 @@ export function AffiliateAdRail({
 }: Props) {
   const useCarousel = !noCarousel && placementUsesCarousel(placement);
   const creative = getAdForPlacement(placement);
-  const wide = useCarousel || creative.format === 'billboard';
+  const wide =
+    useCarousel ||
+    creative.format === 'billboard' ||
+    creative.format === 'leaderboard';
 
   return (
     <aside className={`w-full ${className}`} aria-label="Sponsored offer">
@@ -42,7 +45,7 @@ export function AffiliateAdRail({
             ? wide
               ? 'max-w-5xl mx-auto px-3.5 sm:px-6'
               : 'max-w-4xl mx-auto px-3.5 sm:px-6'
-            : 'w-full max-w-5xl mx-auto'
+            : 'w-full'
         }
       >
         {useCarousel ? (

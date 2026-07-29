@@ -105,15 +105,17 @@ export function AffiliateAdCarousel({
         }`}
         aria-label={`${active.alt} (sponsored)`}
       >
-        {/* Micro sponsored mark only (disclosure) */}
+        {/* Sponsored · Ad disclosure */}
         <span
-          className={`pointer-events-none absolute left-3 top-3 z-[2] sm:left-4 sm:top-4 inline-flex items-center rounded-full px-2 py-0.5 text-[7.5px] font-semibold uppercase tracking-[0.16em] backdrop-blur-md ${
+          className={`pointer-events-none absolute left-3 top-3 z-[2] sm:left-4 sm:top-4 inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[9px] font-semibold tracking-wide backdrop-blur-md ${
             isLight
-              ? 'bg-white/75 text-slate-500 border border-white/60'
-              : 'bg-black/40 text-white/55 border border-white/10'
+              ? 'bg-white/90 text-slate-600 border border-slate-200/90 shadow-sm'
+              : 'bg-black/55 text-white/75 border border-white/12'
           }`}
         >
-          Ad
+          <span>Sponsored</span>
+          <span className={isLight ? 'text-slate-300' : 'text-white/30'}>·</span>
+          <span className="uppercase tracking-[0.12em] text-[8px] opacity-70">Ad</span>
         </span>
 
         {/* Full-bleed slides only — CTA lives in the creative art (e.g. “Start free”) */}
