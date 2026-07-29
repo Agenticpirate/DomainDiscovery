@@ -9,9 +9,8 @@ import {
 import { useTheme } from '@/contexts/ThemeContext';
 
 /**
- * Desktop-only sticky skyscraper rail (right edge) with slide carousel.
- * Rotates every 15s (pauses on hover / when tab hidden).
- * Each slide keeps its own Impact click + impression tracking.
+ * Desktop sticky skyscraper — premium creative only.
+ * Auto-slides every 15s · no 1/2, dots, or nav chrome.
  */
 export function AffiliateSkyscraper() {
   const ads = SKYSCRAPER_CAROUSEL_ADS;
@@ -27,6 +26,7 @@ export function AffiliateSkyscraper() {
 
   const active = ads[index] ?? ads[0];
   const count = ads.length;
+  const railWidth = 160;
 
   useEffect(() => {
     setMounted(true);
@@ -49,7 +49,6 @@ export function AffiliateSkyscraper() {
     }cachebuster=${Date.now()}`;
   }, []);
 
-  // Impression when slide is active + rail visible
   useEffect(() => {
     if (dismissed || !active || !mounted) return;
     const el = rootRef.current;
@@ -59,9 +58,7 @@ export function AffiliateSkyscraper() {
     }
     const io = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          fireImpression(active);
-        }
+        if (entries.some((e) => e.isIntersecting)) fireImpression(active);
       },
       { threshold: 0.15 }
     );
@@ -69,7 +66,6 @@ export function AffiliateSkyscraper() {
     return () => io.disconnect();
   }, [active, dismissed, fireImpression, mounted, index]);
 
-  // Auto-advance every 15s (pause hover / hidden tab)
   useEffect(() => {
     if (dismissed || count < 2 || paused) return;
     const id = window.setInterval(() => {
@@ -81,77 +77,58 @@ export function AffiliateSkyscraper() {
 
   if (!mounted || dismissed || !active) return null;
 
-  const go = (dir: -1 | 1) => setIndex((i) => (i + dir + count) % count);
-
-  // Display width: fit both 160 and 335 assets in a consistent rail
-  const railWidth = 168;
-
   return (
     <aside
       ref={rootRef}
       className="pointer-events-none fixed z-[80] hidden xl:block"
       style={{
-        top: 'max(5.5rem, calc(50vh - 320px))',
-        right: 'max(0.75rem, calc((100vw - 80rem) / 2 - 12rem))',
+        top: 'max(5.5rem, calc(50vh - 300px))',
+        right: 'max(0.75rem, calc((100vw - 80rem) / 2 - 11.5rem))',
       }}
-      aria-label="Sponsored Spaceship offers"
+      aria-label="Sponsored offer"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div
-        className={`pointer-events-auto relative flex flex-col items-center gap-1.5 rounded-2xl p-2 shadow-2xl ${
-          isLight
-            ? 'bg-white/95 border border-slate-200 shadow-slate-900/15'
-            : 'bg-[#0a0a0c]/95 border border-white/12 shadow-black/50'
-        }`}
-        style={{ width: railWidth + 16 }}
-      >
-        <div className="flex w-full items-center justify-between gap-1 px-0.5">
-          <span
-            className={`text-[7.5px] font-black uppercase tracking-[0.14em] ${
-              isLight ? 'text-slate-400' : 'text-white/35'
-            }`}
-          >
-            Sponsored
-          </span>
-          {count > 1 ? (
-            <span
-              className={`text-[8px] font-bold tabular-nums ${
-                isLight ? 'text-slate-400' : 'text-white/40'
-              }`}
-            >
-              {index + 1}/{count}
-            </span>
-          ) : null}
-          <button
-            type="button"
-            onClick={() => {
-              setDismissed(true);
-              try {
-                sessionStorage.setItem('dd_skyscraper_dismissed_v1', '1');
-              } catch {
-                /* ignore */
-              }
-            }}
-            className={`flex h-5 w-5 items-center justify-center rounded-md text-[11px] leading-none ${
-              isLight
-                ? 'text-slate-400 hover:bg-slate-100 hover:text-slate-700'
-                : 'text-white/40 hover:bg-white/10 hover:text-white/80'
-            }`}
-            aria-label="Hide ad"
-            title="Hide for this session"
-          >
-            ×
-          </button>
-        </div>
+      <div className="pointer-events-auto relative" style={{ width: railWidth }}>
+        {/* Soft dismiss — appears on hover only */}
+        <button
+          type="button"
+          onClick={() => {
+            setDismissed(true);
+            try {
+              sessionStorage.setItem('dd_skyscraper_dismissed_v1', '1');
+            } catch {
+              /* ignore */
+            }
+          }}
+          className={`absolute -right-1.5 -top-1.5 z-[3] flex h-6 w-6 items-center justify-center rounded-full text-[11px] opacity-0 transition-opacity hover:opacity-100 focus:opacity-100 group-hover/sky:opacity-100 ${
+            isLight
+              ? 'bg-white/90 text-slate-500 shadow border border-slate-200/80'
+              : 'bg-black/70 text-white/70 border border-white/10'
+          }`}
+          style={{ opacity: undefined }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.opacity = '1';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.opacity = '0';
+          }}
+          aria-label="Hide ad"
+          title="Hide"
+        >
+          ×
+        </button>
 
-        {/* Slide stage — vertical-friendly height, horizontal slide */}
         <div
-          className="relative overflow-hidden rounded-xl"
+          className={`group/sky relative overflow-hidden rounded-2xl transition-shadow duration-500 ${
+            isLight
+              ? 'shadow-[0_16px_48px_-20px_rgba(15,23,42,0.4)]'
+              : 'shadow-[0_20px_56px_-18px_rgba(0,0,0,0.85)]'
+          }`}
           style={{ width: railWidth, maxHeight: 'min(600px, 70vh)' }}
         >
           <div
-            className="flex transition-transform duration-500 ease-out"
+            className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
             style={{ transform: `translateX(-${index * 100}%)` }}
           >
             {ads.map((ad) => (
@@ -166,7 +143,7 @@ export function AffiliateSkyscraper() {
                 data-campaign={ad.campaignId}
                 data-placement="skyscraper"
                 data-creative-format="skyscraper-carousel"
-                className="relative block shrink-0 grow-0 basis-full overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+                className="relative block shrink-0 grow-0 basis-full overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
                 style={{ width: railWidth }}
                 aria-label={`${ad.alt} (sponsored)`}
                 aria-hidden={ad.id !== active.id}
@@ -180,8 +157,9 @@ export function AffiliateSkyscraper() {
                   height={ad.height}
                   loading={ad.id === active.id ? 'eager' : 'lazy'}
                   decoding="async"
-                  className="block w-full h-auto object-contain object-top"
+                  className="block w-full h-auto object-contain object-top select-none"
                   style={{ maxHeight: 'min(600px, 70vh)' }}
+                  draggable={false}
                   onError={(e) => {
                     if (ad.displayAdCdn) {
                       (e.target as HTMLImageElement).src = ad.displayAdCdn;
@@ -193,55 +171,6 @@ export function AffiliateSkyscraper() {
           </div>
         </div>
 
-        {/* Dots + prev/next */}
-        {count > 1 ? (
-          <div className="flex w-full items-center justify-center gap-1.5 pt-0.5">
-            <button
-              type="button"
-              onClick={() => go(-1)}
-              className={`flex h-6 w-6 items-center justify-center rounded-md text-xs font-bold ${
-                isLight
-                  ? 'text-slate-500 hover:bg-slate-100'
-                  : 'text-white/50 hover:bg-white/10'
-              }`}
-              aria-label="Previous ad"
-            >
-              ‹
-            </button>
-            {ads.map((ad, i) => (
-              <button
-                key={ad.id}
-                type="button"
-                onClick={() => setIndex(i)}
-                aria-label={`Show ad ${i + 1}`}
-                aria-current={i === index}
-                className={`h-1.5 rounded-full transition-all ${
-                  i === index
-                    ? isLight
-                      ? 'w-4 bg-slate-900'
-                      : 'w-4 bg-white'
-                    : isLight
-                      ? 'w-1.5 bg-slate-300'
-                      : 'w-1.5 bg-white/30'
-                }`}
-              />
-            ))}
-            <button
-              type="button"
-              onClick={() => go(1)}
-              className={`flex h-6 w-6 items-center justify-center rounded-md text-xs font-bold ${
-                isLight
-                  ? 'text-slate-500 hover:bg-slate-100'
-                  : 'text-white/50 hover:bg-white/10'
-              }`}
-              aria-label="Next ad"
-            >
-              ›
-            </button>
-          </div>
-        ) : null}
-
-        {/* Hidden impression pixels */}
         {ads.map((ad) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img
