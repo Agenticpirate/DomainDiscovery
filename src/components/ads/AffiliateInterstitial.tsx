@@ -26,11 +26,19 @@ export function AffiliateInterstitial() {
   const [secondsLeft, setSecondsLeft] = useState<number>(INTERSTITIAL_CONFIG.dismissWaitSec);
   const [clickedAd, setClickedAd] = useState(false);
   const [imgSrc, setImgSrc] = useState(creative.localSrc);
+
   const impressionFired = useRef(false);
   const completedRef = useRef(false);
+  /** Tracks open without stale closures in the engaged-time interval */
+  const openRef = useRef(false);
   const reactId = useId();
 
   const canDismiss = secondsLeft <= 0 || clickedAd;
+
+  // Keep openRef in sync
+  useEffect(() => {
+    openRef.current = open;
+  }, [open]);
 
   // —— Accumulate engaged (visible) time sitewide ——
   useEffect(() => {
@@ -57,39 +65,41 @@ export function AffiliateInterstitial() {
     const isActive = () =>
       typeof document !== 'undefined' &&
       document.visibilityState === 'visible' &&
-      // hasFocus is false when another window is frontmost
       (typeof document.hasFocus !== 'function' || document.hasFocus());
 
+    /** Open once — never reset the 60s countdown after open */
     const maybeOpen = (ms: number) => {
-      if (completedRef.current || open) return;
-      if (ms >= INTERSTITIAL_CONFIG.engagedMs) {
-        setOpen(true);
-        setSecondsLeft(INTERSTITIAL_CONFIG.dismissWaitSec);
-      }
+      if (completedRef.current || openRef.current) return;
+      if (ms < INTERSTITIAL_CONFIG.engagedMs) return;
+      openRef.current = true;
+      setSecondsLeft(INTERSTITIAL_CONFIG.dismissWaitSec);
+      setOpen(true);
     };
 
-    // Catch up if they already crossed threshold this session
     maybeOpen(engaged);
 
     const onInterval = () => {
       const now = Date.now();
       if (isActive() && !completedRef.current) {
-        const delta = Math.min(now - lastTick, 2000); // clamp tab-sleep spikes
-        if (delta > 0) {
-          engaged += delta;
-          try {
-            sessionStorage.setItem(INTERSTITIAL_CONFIG.storageEngaged, String(engaged));
-          } catch {
-            /* ignore */
+        // Only accumulate engaged time before the interstitial is shown
+        if (!openRef.current) {
+          const delta = Math.min(now - lastTick, 2000);
+          if (delta > 0) {
+            engaged += delta;
+            try {
+              sessionStorage.setItem(INTERSTITIAL_CONFIG.storageEngaged, String(engaged));
+            } catch {
+              /* ignore */
+            }
+            maybeOpen(engaged);
           }
-          maybeOpen(engaged);
         }
       }
       lastTick = now;
     };
 
     const onVisibilityOrFocus = () => {
-      // Reset baseline so hidden gaps never count
+      // Reset baseline so hidden gaps never count toward engaged time
       lastTick = Date.now();
     };
 
@@ -104,23 +114,24 @@ export function AffiliateInterstitial() {
       window.removeEventListener('focus', onVisibilityOrFocus);
       window.removeEventListener('blur', onVisibilityOrFocus);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- open intentionally not in deps (maybeOpen uses ref + setState)
   }, []);
 
-  // —— 60s dismiss countdown: only ticks while tab/window is visible & focused ——
+  // —— 60s dismiss countdown: one stable interval while open ——
+  // Do NOT depend on secondsLeft (that recreated the timer every tick and fought resets).
   useEffect(() => {
-    if (!open || secondsLeft <= 0) return;
+    if (!open) return;
 
     const id = window.setInterval(() => {
+      if (completedRef.current) return;
       const active =
         document.visibilityState === 'visible' &&
         (typeof document.hasFocus !== 'function' || document.hasFocus());
-      if (!active) return;
-      setSecondsLeft((s) => Math.max(0, s - 1));
+      if (!active) return; // pause when tab/window not focused
+      setSecondsLeft((s) => (s <= 0 ? 0 : s - 1));
     }, 1000);
 
     return () => window.clearInterval(id);
-  }, [open, secondsLeft]);
+  }, [open]);
 
   // —— Impression once when modal opens ——
   useEffect(() => {
@@ -142,21 +153,9 @@ export function AffiliateInterstitial() {
     };
   }, [open]);
 
-  // Escape only works after unlock
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && canDismiss) {
-        complete();
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, canDismiss]);
-
   const complete = useCallback(() => {
     completedRef.current = true;
+    openRef.current = false;
     try {
       sessionStorage.setItem(INTERSTITIAL_CONFIG.storageDone, '1');
     } catch {
@@ -164,6 +163,18 @@ export function AffiliateInterstitial() {
     }
     setOpen(false);
   }, []);
+
+  // Escape only works after unlock
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && (secondsLeft <= 0 || clickedAd)) {
+        complete();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, secondsLeft, clickedAd, complete]);
 
   const onAdClick = () => {
     setClickedAd(true);
@@ -184,11 +195,7 @@ export function AffiliateInterstitial() {
       aria-labelledby="aff-interstitial-title"
       aria-describedby="aff-interstitial-desc"
     >
-      {/* Scrim — not clickable to dismiss */}
-      <div
-        className="absolute inset-0 bg-black/80 backdrop-blur-md"
-        aria-hidden
-      />
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-md" aria-hidden />
 
       <div
         className={`relative z-[1] w-full max-w-[min(26rem,100%)] sm:max-w-[28rem] overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl ${
@@ -197,7 +204,6 @@ export function AffiliateInterstitial() {
             : 'bg-[#0a0a0c] border border-white/12'
         }`}
       >
-        {/* Header */}
         <div className="px-4 pt-4 pb-2 sm:px-5 sm:pt-5 text-center">
           <p
             className={`text-[9px] font-black uppercase tracking-[0.18em] mb-1.5 ${
@@ -224,7 +230,6 @@ export function AffiliateInterstitial() {
           </p>
         </div>
 
-        {/* Tracked creative */}
         <div className="px-3 sm:px-4">
           <a
             id={creative.id}
@@ -259,7 +264,6 @@ export function AffiliateInterstitial() {
           </a>
         </div>
 
-        {/* CTA + timer */}
         <div className="px-4 sm:px-5 pt-3 pb-4 sm:pb-5 space-y-3">
           <a
             href={creative.clickUrl}
@@ -280,7 +284,6 @@ export function AffiliateInterstitial() {
             </svg>
           </a>
 
-          {/* Progress bar for 60s gate */}
           <div>
             <div
               className={`h-1.5 w-full overflow-hidden rounded-full ${
@@ -314,10 +317,7 @@ export function AffiliateInterstitial() {
               ) : (
                 <span>
                   Non-skippable ·{' '}
-                  <span className="tabular-nums font-bold">
-                    {secondsLeft}s
-                  </span>{' '}
-                  remaining
+                  <span className="tabular-nums font-bold">{secondsLeft}s</span> remaining
                   <span className="block sm:inline sm:before:content-['·_'] mt-0.5 sm:mt-0 opacity-80">
                     timer pauses if you leave this tab
                   </span>
@@ -344,7 +344,6 @@ export function AffiliateInterstitial() {
           </button>
         </div>
 
-        {/* Impact impression pixel in DOM */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           id={`imp-${creative.id}-${reactId.replace(/:/g, '')}`}
