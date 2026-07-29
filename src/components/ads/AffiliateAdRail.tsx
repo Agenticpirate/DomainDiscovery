@@ -18,6 +18,8 @@ type Props = {
   className?: string;
   contained?: boolean;
   noCarousel?: boolean;
+  /** compact = shorter height (home page only) */
+  size?: 'default' | 'compact';
 };
 
 /**
@@ -30,6 +32,7 @@ export function AffiliateAdRail({
   className = '',
   contained = true,
   noCarousel = false,
+  size = 'default',
 }: Props) {
   const useBillboardCarousel = !noCarousel && placementUsesCarousel(placement);
   const useStripCarousel = !noCarousel && placementUsesStripCarousel(placement);
@@ -40,15 +43,23 @@ export function AffiliateAdRail({
     creative.format === 'billboard' ||
     creative.format === 'leaderboard';
 
+  // Home compact rails sit inside existing page gutters — slightly narrower max
+  const maxW =
+    size === 'compact'
+      ? 'max-w-3xl sm:max-w-4xl mx-auto'
+      : wide
+        ? 'max-w-5xl mx-auto'
+        : 'max-w-4xl mx-auto';
+
   return (
     <aside className={`w-full ${className}`} aria-label="Sponsored offer">
       <div
         className={
           contained
-            ? wide
-              ? 'max-w-5xl mx-auto px-3.5 sm:px-6'
-              : 'max-w-4xl mx-auto px-3.5 sm:px-6'
-            : 'w-full'
+            ? `${maxW} px-3.5 sm:px-6`
+            : size === 'compact'
+              ? `${maxW} w-full`
+              : 'w-full'
         }
       >
         {useCarousel ? (
@@ -56,6 +67,7 @@ export function AffiliateAdRail({
             placement={placement}
             ads={getCarouselAdsForPlacement(placement)}
             intervalMs={useStripCarousel ? STRIP_CAROUSEL_MS : undefined}
+            size={size}
           />
         ) : (
           <AffiliateAdBanner placement={placement} variant={variant} />

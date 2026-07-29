@@ -16,6 +16,11 @@ type Props = {
   ads?: AffiliateAdCreative[];
   className?: string;
   intervalMs?: number;
+  /**
+   * compact — shorter strip for home page (sync with site density)
+   * default — full natural aspect ratio
+   */
+  size?: 'default' | 'compact';
 };
 
 /**
@@ -26,6 +31,7 @@ export function AffiliateAdCarousel({
   ads: adsProp,
   className = '',
   intervalMs = BILLBOARD_CAROUSEL_MS,
+  size = 'default',
 }: Props) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -103,6 +109,16 @@ export function AffiliateAdCarousel({
 
   if (!active) return null;
 
+  const compact = size === 'compact';
+  // Home-page density: keep banners proportional to search/tools chrome
+  const imgClass = compact
+    ? isMobile
+      ? 'block w-full h-[72px] sm:h-[80px] object-cover object-center select-none'
+      : placement === 'home-hero'
+        ? 'block w-full h-[88px] sm:h-[96px] md:h-[104px] object-cover object-center select-none'
+        : 'block w-full h-[140px] sm:h-[160px] md:h-[180px] object-cover object-center select-none'
+    : 'block w-full h-auto select-none';
+
   return (
     <div
       ref={rootRef}
@@ -120,16 +136,16 @@ export function AffiliateAdCarousel({
         data-campaign={active.campaignId}
         data-placement={placement}
         data-creative-format="billboard-carousel"
-        className={`group relative block w-full overflow-hidden rounded-2xl sm:rounded-3xl transition-[transform,box-shadow] duration-500 ease-out active:scale-[0.995] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 ${
+        className={`group relative block w-full overflow-hidden rounded-xl sm:rounded-2xl transition-[transform,box-shadow] duration-500 ease-out active:scale-[0.995] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 ${
           isLight
-            ? 'shadow-[0_20px_60px_-28px_rgba(15,23,42,0.45)] hover:shadow-[0_28px_70px_-24px_rgba(15,23,42,0.5)] focus-visible:ring-offset-white'
-            : 'shadow-[0_28px_80px_-32px_rgba(0,0,0,0.9)] hover:shadow-[0_32px_90px_-28px_rgba(0,0,0,0.95)] focus-visible:ring-offset-[#050505]'
+            ? 'shadow-[0_12px_36px_-20px_rgba(15,23,42,0.4)] hover:shadow-[0_16px_40px_-18px_rgba(15,23,42,0.45)] focus-visible:ring-offset-white border border-slate-200/80'
+            : 'shadow-[0_16px_44px_-22px_rgba(0,0,0,0.85)] hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] focus-visible:ring-offset-[#050505] border border-white/[0.1]'
         }`}
         aria-label={`${active.alt} (sponsored)`}
       >
         {/* Sponsored · Ad disclosure */}
         <span
-          className={`pointer-events-none absolute left-3 top-3 z-[2] sm:left-4 sm:top-4 inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[9px] font-semibold tracking-wide backdrop-blur-md ${
+          className={`pointer-events-none absolute left-2 top-2 z-[2] sm:left-2.5 sm:top-2.5 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[8px] font-semibold tracking-wide backdrop-blur-md ${
             isLight
               ? 'bg-white/90 text-slate-600 border border-slate-200/90 shadow-sm'
               : 'bg-black/55 text-white/75 border border-white/12'
@@ -137,10 +153,9 @@ export function AffiliateAdCarousel({
         >
           <span>Sponsored</span>
           <span className={isLight ? 'text-slate-300' : 'text-white/30'}>·</span>
-          <span className="uppercase tracking-[0.12em] text-[8px] opacity-70">Ad</span>
+          <span className="uppercase tracking-[0.12em] text-[7px] opacity-70">Ad</span>
         </span>
 
-        {/* Full-bleed slides only — CTA lives in the creative art (e.g. “Start free”) */}
         <div className="relative w-full overflow-hidden">
           <div
             className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
@@ -156,8 +171,12 @@ export function AffiliateAdCarousel({
                   height={ad.height}
                   loading={ad.id === active.id ? 'eager' : 'lazy'}
                   decoding="async"
-                  className="block w-full h-auto select-none"
-                  style={{ aspectRatio: `${ad.width} / ${ad.height}` }}
+                  className={imgClass}
+                  style={
+                    compact
+                      ? undefined
+                      : { aspectRatio: `${ad.width} / ${ad.height}` }
+                  }
                   draggable={false}
                   onError={(e) => {
                     if (ad.displayAdCdn) {

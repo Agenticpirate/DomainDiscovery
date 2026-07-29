@@ -214,9 +214,14 @@ export default function Home() {
           </div>
         </SectionAmbient>
 
-        {/* Hero-adjacent leaderboard — full-width creative, site-matched chrome */}
-        <div className="pt-2 pb-3 sm:pt-3 sm:pb-4 page-gutter max-w-5xl mx-auto w-full">
-          <AffiliateAdRail placement="home-hero" variant="strip" contained={false} />
+        {/* Hero-adjacent strip — compact height so it matches site density */}
+        <div className="pt-2 pb-2.5 sm:pt-2.5 sm:pb-3 page-gutter w-full">
+          <AffiliateAdRail
+            placement="home-hero"
+            variant="strip"
+            contained={false}
+            size="compact"
+          />
         </div>
 
         <HomePageContent />

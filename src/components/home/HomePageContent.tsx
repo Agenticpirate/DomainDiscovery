@@ -806,9 +806,14 @@ export const HomePageContent: React.FC = () => {
         </div>
       </section>
 
-      {/* Mid-page rotating Spacemail / Spaceship billboards */}
-      <section className="section-shell max-w-5xl !mb-5 sm:!mb-8">
-        <AffiliateAdRail placement="home-mid" variant="auto" contained={false} />
+      {/* Mid-page billboards — compact so they stay in sync with page sections */}
+      <section className="section-shell max-w-4xl !mb-4 sm:!mb-6">
+        <AffiliateAdRail
+          placement="home-mid"
+          variant="auto"
+          contained={false}
+          size="compact"
+        />
       </section>
 
       {/* CTA */}
