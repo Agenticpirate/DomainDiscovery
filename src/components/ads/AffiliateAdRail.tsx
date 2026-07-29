@@ -18,7 +18,10 @@ type Props = {
   className?: string;
   contained?: boolean;
   noCarousel?: boolean;
-  /** compact = shorter height (home page only) */
+  /**
+   * compact = smaller *section* width only (home).
+   * Does not crop or shrink the creative art — natural aspect ratio inside a narrower rail.
+   */
   size?: 'default' | 'compact';
 };
 
@@ -43,10 +46,12 @@ export function AffiliateAdRail({
     creative.format === 'billboard' ||
     creative.format === 'leaderboard';
 
-  // Home compact rails sit inside existing page gutters — slightly narrower max
+  // Home: narrow the rail so the *section* is smaller; image stays uncropped (h-auto)
   const maxW =
     size === 'compact'
-      ? 'max-w-3xl sm:max-w-4xl mx-auto'
+      ? placement === 'home-hero'
+        ? 'max-w-xl sm:max-w-2xl mx-auto' // ~leaderboard footprint under search
+        : 'max-w-2xl sm:max-w-3xl mx-auto' // mid-page slightly wider
       : wide
         ? 'max-w-5xl mx-auto'
         : 'max-w-4xl mx-auto';

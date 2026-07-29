@@ -109,15 +109,8 @@ export function AffiliateAdCarousel({
 
   if (!active) return null;
 
+  // compact = smaller *section* (narrower max-width from parent), never crop the art
   const compact = size === 'compact';
-  // Home-page density: keep banners proportional to search/tools chrome
-  const imgClass = compact
-    ? isMobile
-      ? 'block w-full h-[72px] sm:h-[80px] object-cover object-center select-none'
-      : placement === 'home-hero'
-        ? 'block w-full h-[88px] sm:h-[96px] md:h-[104px] object-cover object-center select-none'
-        : 'block w-full h-[140px] sm:h-[160px] md:h-[180px] object-cover object-center select-none'
-    : 'block w-full h-auto select-none';
 
   return (
     <div
@@ -171,12 +164,8 @@ export function AffiliateAdCarousel({
                   height={ad.height}
                   loading={ad.id === active.id ? 'eager' : 'lazy'}
                   decoding="async"
-                  className={imgClass}
-                  style={
-                    compact
-                      ? undefined
-                      : { aspectRatio: `${ad.width} / ${ad.height}` }
-                  }
+                  className="block w-full h-auto select-none"
+                  style={{ aspectRatio: `${ad.width} / ${ad.height}` }}
                   draggable={false}
                   onError={(e) => {
                     if (ad.displayAdCdn) {

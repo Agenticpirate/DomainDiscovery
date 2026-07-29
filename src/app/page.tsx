@@ -214,7 +214,7 @@ export default function Home() {
           </div>
         </SectionAmbient>
 
-        {/* Hero-adjacent strip — compact height so it matches site density */}
+        {/* Hero strip — smaller section width; full banner art (no crop) */}
         <div className="pt-2 pb-2.5 sm:pt-2.5 sm:pb-3 page-gutter w-full">
           <AffiliateAdRail
             placement="home-hero"

@@ -55,7 +55,10 @@ export const INTERSTITIAL_CONFIG = {
   storageShown: 'dd_aff_interstitial_shown_v1',
 } as const;
 
-/** Desktop hero / footer strip — Spacemail (ChatGPT wide) · Impact 3832105 */
+/**
+ * Desktop hero / footer strip — true 320×50 leaderboard (full art, no crop).
+ * Impact ad 3832105
+ */
 export const SPACESHIP_SPACEMAIL_BANNER: AffiliateAdCreative = {
   id: '3832105',
   campaignId: '21274',
@@ -63,32 +66,13 @@ export const SPACESHIP_SPACEMAIL_BANNER: AffiliateAdCreative = {
   clickUrl: 'https://spaceship.sjv.io/c/7521997/3832105/21274',
   impressionPixel: 'https://imp.pxf.io/i/7521997/3832105/21274',
   displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832105',
-  localSrc: '/ads/skyscraper-chatgpt-093430.png',
-  width: 2172,
-  height: 724,
+  localSrc: '/ads/spacemail-banner-320x50.png',
+  width: 320,
+  height: 50,
   alt: 'Spacemail by Spaceship — professional email for your domain',
   title: 'Spacemail by Spaceship',
   subtitle: 'Professional email on your domain',
   ctaLabel: 'Get Spacemail',
-  brand: 'Spaceship',
-  format: 'leaderboard',
-};
-
-/** Desktop strip slide 2 — Spaceship partner wide · Impact 1825517 */
-export const SPACESHIP_PARTNER_STRIP: AffiliateAdCreative = {
-  id: '1825517',
-  campaignId: '21274',
-  accountId: '7521997',
-  clickUrl: 'https://spaceship.sjv.io/c/7521997/1825517/21274',
-  impressionPixel: 'https://imp.pxf.io/i/7521997/1825517/21274',
-  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-1825517',
-  localSrc: '/ads/skyscraper-chatgpt-093020.png',
-  width: 1983,
-  height: 793,
-  alt: 'Spaceship — manage domains easier',
-  title: 'Spaceship',
-  subtitle: 'Domains made simple',
-  ctaLabel: 'Visit Spaceship',
   brand: 'Spaceship',
   format: 'leaderboard',
 };
@@ -114,10 +98,9 @@ export const SPACESHIP_SPACEMAIL_MOBILE: AffiliateAdCreative = {
   format: 'leaderboard',
 };
 
-/** Desktop strip carousel (hero, footer, tools) */
+/** Desktop strip (hero under search, footer, tools) — leaderboard art only */
 export const STRIP_CAROUSEL_ADS: AffiliateAdCreative[] = [
   SPACESHIP_SPACEMAIL_BANNER,
-  SPACESHIP_PARTNER_STRIP,
 ];
 
 /** Spacemail 1200×600 billboard — Impact 3832098 */
