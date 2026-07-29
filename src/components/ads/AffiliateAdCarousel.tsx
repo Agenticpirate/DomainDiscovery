@@ -4,6 +4,8 @@ import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import {
   BILLBOARD_CAROUSEL_MS,
   getCarouselAdsForPlacement,
+  placementUsesStripCarousel,
+  SPACESHIP_SPACEMAIL_MOBILE,
   type AffiliateAdCreative,
   type AffiliateAdPlacement,
 } from '@/lib/affiliateAds';
@@ -17,8 +19,7 @@ type Props = {
 };
 
 /**
- * Premium full-bleed billboard carousel.
- * Creative only + one CTA · auto-slide · no chrome (no 1/2, dots, arrows, title copy).
+ * Premium full-bleed carousel — creative only, Sponsored · Ad, auto-slide.
  */
 export function AffiliateAdCarousel({
   placement,
@@ -26,9 +27,9 @@ export function AffiliateAdCarousel({
   className = '',
   intervalMs = BILLBOARD_CAROUSEL_MS,
 }: Props) {
-  const ads = adsProp ?? getCarouselAdsForPlacement(placement);
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const isLight = mounted ? theme === 'light' : false;
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -36,10 +37,31 @@ export function AffiliateAdCarousel({
   const impressed = useRef<Set<string>>(new Set());
   const reactId = useId();
 
+  useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(max-width: 639px)');
+    const apply = () => setIsMobile(mq.matches);
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
+
+  // Mobile strip placements: dedicated 668×105 Impact 1825519 (single slide)
+  const ads: AffiliateAdCreative[] =
+    adsProp ??
+    (isMobile && placementUsesStripCarousel(placement)
+      ? [SPACESHIP_SPACEMAIL_MOBILE]
+      : getCarouselAdsForPlacement(placement));
+
   const active = ads[index] ?? ads[0];
   const count = ads.length;
 
-  useEffect(() => setMounted(true), []);
+  // Reset slide index when ad set changes (e.g. mobile ↔ desktop)
+  useEffect(() => {
+    setIndex(0);
+  }, [ads.length, ads[0]?.id]);
 
   const fireImpression = useCallback((creative: AffiliateAdCreative) => {
     if (typeof window === 'undefined') return;

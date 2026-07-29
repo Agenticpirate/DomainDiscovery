@@ -8,13 +8,13 @@ import {
 } from '@/lib/affiliateAds';
 import { useTheme } from '@/contexts/ThemeContext';
 
-/** Fixed IAB-style skyscraper frame — both carousel ads fill this exactly */
+/** Same frame for every side ad — full-bleed, no letterbox “bezel” */
 const RAIL_W = 160;
 const RAIL_H = 600;
 
 /**
- * Desktop sticky skyscraper — both ads share an identical 160×600 frame.
- * Auto-slides every 15s · Sponsored · Ad label · no size jump between slides.
+ * Desktop sticky skyscraper — identical 160×600 full-bleed slides.
+ * object-cover fills the frame (like the clean blue creative).
  */
 export function AffiliateSkyscraper() {
   const ads = SKYSCRAPER_CAROUSEL_ADS;
@@ -80,15 +80,6 @@ export function AffiliateSkyscraper() {
 
   if (!mounted || dismissed || !active) return null;
 
-  // Identical frame for every slide (160×600 IAB skyscraper)
-  const frameStyle: React.CSSProperties = {
-    width: RAIL_W,
-    height: RAIL_H,
-    maxHeight: '70vh',
-    // Keep proportion if maxHeight shrinks the box
-    aspectRatio: `${RAIL_W} / ${RAIL_H}`,
-  };
-
   return (
     <aside
       ref={rootRef}
@@ -129,32 +120,28 @@ export function AffiliateSkyscraper() {
           ×
         </button>
 
+        {/* Edge-to-edge creative — rounded clip only, no border/letterbox bezel */}
         <div
-          className={`group/sky relative overflow-hidden rounded-2xl border transition-shadow duration-500 ${
-            isLight
-              ? 'border-slate-200/90 shadow-[0_16px_48px_-20px_rgba(15,23,42,0.4)]'
-              : 'border-white/12 shadow-[0_20px_56px_-18px_rgba(0,0,0,0.85)]'
-          }`}
+          className="relative overflow-hidden rounded-[1.25rem] shadow-[0_20px_50px_-18px_rgba(0,0,0,0.65)]"
           style={{
-            ...frameStyle,
-            // Letterbox fill matches Spacemail purple so contain never looks “empty”
-            background:
-              'linear-gradient(180deg, #5b21b6 0%, #4c1d95 40%, #1e1b4b 100%)',
+            width: RAIL_W,
+            height: RAIL_H,
+            maxHeight: '70vh',
+            aspectRatio: `${RAIL_W} / ${RAIL_H}`,
           }}
         >
           <span
-            className={`pointer-events-none absolute left-1.5 top-1.5 z-[2] inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[7px] font-semibold uppercase tracking-[0.12em] backdrop-blur-md ${
+            className={`pointer-events-none absolute left-2 top-2 z-[2] inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[7px] font-semibold uppercase tracking-[0.12em] backdrop-blur-md ${
               isLight
-                ? 'bg-white/90 text-slate-600 border border-slate-200/90'
-                : 'bg-black/55 text-white/70 border border-white/12'
+                ? 'bg-white/90 text-slate-600 border border-white/50'
+                : 'bg-black/45 text-white/80 border border-white/15'
             }`}
           >
             <span>Sponsored</span>
-            <span className={isLight ? 'text-slate-300' : 'text-white/30'}>·</span>
+            <span className="opacity-40">·</span>
             <span>Ad</span>
           </span>
 
-          {/* Fixed 160×600 frame; object-contain so headline + Start free never crop */}
           <div
             className="flex h-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
             style={{
@@ -188,7 +175,8 @@ export function AffiliateSkyscraper() {
                   height={RAIL_H}
                   loading={ad.id === active.id ? 'eager' : 'lazy'}
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-contain object-center select-none"
+                  /* cover = full bleed like the blue creative; slight crop over letterbox bars */
+                  className="absolute inset-0 h-full w-full object-cover object-center select-none"
                   draggable={false}
                   onError={(e) => {
                     if (ad.displayAdCdn) {

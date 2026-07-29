@@ -2,53 +2,33 @@
  * Impact.com / Spaceship affiliate creatives.
  * Keep click + impression IDs exact so commissions track correctly.
  *
- * Register CTAs (domain deep-links) → registrars.ts (ad 1859616).
- * Spacemail 320×50 display → ad 3832105.
- * Spacemail 1200×600 (TW/X) display → ad 3832098.
- * Spaceship wide partner 2501×1251 → ad 1825517 (carousel with 3832098).
- * Spacemail 160×600 skyscraper → ad 3832106.
- * Spaceship tall partner skyscraper (335×1251) → ad 1825513 (side carousel).
- * Engaged-time interstitial (626×521) → ad 1825514.
+ * Register CTAs → registrars.ts (ad 1859616).
+ * Leaderboard desktop (ChatGPT wide) → 3832105 / 1825517 tracking family as noted.
+ * Leaderboard mobile 668×105 → ad 1825519.
+ * Billboard carousel → 3832098 + 1825517.
+ * Skyscraper carousel → 3832106 + 1825513.
+ * Interstitial → 1825514.
  */
 
 export type AffiliateAdCreative = {
-  /** Impact ad / media ID (also used as link id attribute) */
   id: string;
-  /** Campaign ID (Spaceship = 21274) */
   campaignId: string;
-  /** Impact account SID */
   accountId: string;
-  /** Tracked click URL — never replace with raw spaceship.com */
   clickUrl: string;
-  /** 1×1 view pixel — fire once when the unit is shown */
   impressionPixel: string;
-  /** Impact-hosted creative (fallback / audit) — empty if local-only */
   displayAdCdn: string;
-  /** Local copy under /public for fast LCP + offline reliability */
   localSrc: string;
   width: number;
   height: number;
   alt: string;
-  /** Short label for enhanced frame */
   title: string;
   subtitle: string;
   ctaLabel: string;
   brand: string;
-  /** Layout hint */
   format: 'leaderboard' | 'billboard' | 'interstitial' | 'skyscraper';
 };
 
-/** Impact tracking for Spacemail 160×600 skyscraper — ad 3832106 */
-const IMPACT_SPACEMAIL_160 = {
-  id: '3832106',
-  campaignId: '21274',
-  accountId: '7521997',
-  clickUrl: 'https://spaceship.sjv.io/c/7521997/3832106/21274',
-  impressionPixel: 'https://imp.pxf.io/i/7521997/3832106/21274',
-  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832106',
-} as const;
-
-/** Engaged-time interstitial — Impact ad 1825514 (non-skippable gate) */
+/** Engaged-time interstitial — Impact ad 1825514 */
 export const SPACESHIP_INTERSTITIAL: AffiliateAdCreative = {
   id: '1825514',
   campaignId: '21274',
@@ -67,21 +47,15 @@ export const SPACESHIP_INTERSTITIAL: AffiliateAdCreative = {
   format: 'interstitial',
 };
 
-/** Engaged-time gate thresholds */
 export const INTERSTITIAL_CONFIG = {
-  /** Show after this much visible on-site time */
   engagedMs: 5 * 60 * 1000,
-  /** Non-skippable wait while modal is open + tab visible */
   dismissWaitSec: 60,
-  /** Accumulated visible ms since last interstitial (or session start) */
   storageEngaged: 'dd_aff_engaged_ms_v1',
-  /** User finished this interstitial cycle (Continue) — no more until next browser session */
   storageDone: 'dd_aff_interstitial_done_v1',
-  /** Interstitial was opened this session — engaged clock was reset; must wait full 5m again */
   storageShown: 'dd_aff_interstitial_shown_v1',
 } as const;
 
-/** Spacemail 320×50 leaderboard — Impact ad 3832105 */
+/** Desktop hero / footer strip — Spacemail (ChatGPT wide) · Impact 3832105 */
 export const SPACESHIP_SPACEMAIL_BANNER: AffiliateAdCreative = {
   id: '3832105',
   campaignId: '21274',
@@ -89,20 +63,64 @@ export const SPACESHIP_SPACEMAIL_BANNER: AffiliateAdCreative = {
   clickUrl: 'https://spaceship.sjv.io/c/7521997/3832105/21274',
   impressionPixel: 'https://imp.pxf.io/i/7521997/3832105/21274',
   displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832105',
-  localSrc: '/ads/spacemail-banner-320x50.png',
-  width: 320,
-  height: 50,
+  localSrc: '/ads/skyscraper-chatgpt-093430.png',
+  width: 2172,
+  height: 724,
   alt: 'Spacemail by Spaceship — professional email for your domain',
   title: 'Spacemail by Spaceship',
-  subtitle: 'Professional email on your domain — fast setup, modern inbox',
+  subtitle: 'Professional email on your domain',
   ctaLabel: 'Get Spacemail',
   brand: 'Spaceship',
   format: 'leaderboard',
 };
 
+/** Desktop strip slide 2 — Spaceship partner wide · Impact 1825517 */
+export const SPACESHIP_PARTNER_STRIP: AffiliateAdCreative = {
+  id: '1825517',
+  campaignId: '21274',
+  accountId: '7521997',
+  clickUrl: 'https://spaceship.sjv.io/c/7521997/1825517/21274',
+  impressionPixel: 'https://imp.pxf.io/i/7521997/1825517/21274',
+  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-1825517',
+  localSrc: '/ads/skyscraper-chatgpt-093020.png',
+  width: 1983,
+  height: 793,
+  alt: 'Spaceship — manage domains easier',
+  title: 'Spaceship',
+  subtitle: 'Domains made simple',
+  ctaLabel: 'Visit Spaceship',
+  brand: 'Spaceship',
+  format: 'leaderboard',
+};
+
 /**
- * Spacemail 1200×600 TW/X billboard — Impact ad 3832098
+ * Mobile leaderboard / strip — Impact ad 1825519 (668×105)
  */
+export const SPACESHIP_SPACEMAIL_MOBILE: AffiliateAdCreative = {
+  id: '1825519',
+  campaignId: '21274',
+  accountId: '7521997',
+  clickUrl: 'https://spaceship.sjv.io/c/7521997/1825519/21274',
+  impressionPixel: 'https://imp.pxf.io/i/7521997/1825519/21274',
+  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-1825519',
+  localSrc: '/ads/spacemail-mobile-1825519.png',
+  width: 668,
+  height: 105,
+  alt: 'Spacemail by Spaceship — professional email for your domain',
+  title: 'Spacemail',
+  subtitle: 'Email on your domain',
+  ctaLabel: 'Get Spacemail',
+  brand: 'Spaceship',
+  format: 'leaderboard',
+};
+
+/** Desktop strip carousel (hero, footer, tools) */
+export const STRIP_CAROUSEL_ADS: AffiliateAdCreative[] = [
+  SPACESHIP_SPACEMAIL_BANNER,
+  SPACESHIP_PARTNER_STRIP,
+];
+
+/** Spacemail 1200×600 billboard — Impact 3832098 */
 export const SPACESHIP_SPACEMAIL_BILLBOARD: AffiliateAdCreative = {
   id: '3832098',
   campaignId: '21274',
@@ -115,16 +133,13 @@ export const SPACESHIP_SPACEMAIL_BILLBOARD: AffiliateAdCreative = {
   height: 600,
   alt: 'Spacemail by Spaceship — professional email for your domain',
   title: 'Spacemail by Spaceship',
-  subtitle: 'Branded email for your domain — built by Spaceship',
+  subtitle: 'Branded email for your domain',
   ctaLabel: 'Get Spacemail',
   brand: 'Spaceship',
   format: 'billboard',
 };
 
-/**
- * Spaceship partner wide banner — Impact ad 1825517 (2501×1251)
- * Used in carousel with Spacemail 3832098
- */
+/** Wide partner billboard — Impact 1825517 */
 export const SPACESHIP_PARTNER_WIDE: AffiliateAdCreative = {
   id: '1825517',
   campaignId: '21274',
@@ -137,36 +152,29 @@ export const SPACESHIP_PARTNER_WIDE: AffiliateAdCreative = {
   height: 1251,
   alt: 'Spaceship — premium domains, email & more',
   title: 'Spaceship for domain builders',
-  subtitle: 'Domains, email & tools — partner offer',
+  subtitle: 'Domains, email & tools',
   ctaLabel: 'Explore Spaceship',
   brand: 'Spaceship',
   format: 'billboard',
 };
 
-/** Rotating billboard creatives (mid-page / search / bulk / learn / generator) */
 export const BILLBOARD_CAROUSEL_ADS: AffiliateAdCreative[] = [
   SPACESHIP_SPACEMAIL_BILLBOARD,
   SPACESHIP_PARTNER_WIDE,
 ];
 
-/**
- * Auto-advance for carousels.
- * 15s is a good balance: readable without feeling spammy; meets “at least 15s”.
- */
 export const BILLBOARD_CAROUSEL_MS = 15_000;
 export const SKYSCRAPER_CAROUSEL_MS = 15_000;
+export const STRIP_CAROUSEL_MS = 15_000;
 
-/**
- * Spacemail skyscraper — Impact ad 3832106
- * Source asset is high-res (724×2172); displayed at ~160px wide in the rail.
- */
+/** Spacemail skyscraper — Impact 3832106 (portrait asset) */
 export const SPACESHIP_SPACEMAIL_SKYSCRAPER: AffiliateAdCreative = {
-  id: IMPACT_SPACEMAIL_160.id,
-  campaignId: IMPACT_SPACEMAIL_160.campaignId,
-  accountId: IMPACT_SPACEMAIL_160.accountId,
-  clickUrl: IMPACT_SPACEMAIL_160.clickUrl,
-  impressionPixel: IMPACT_SPACEMAIL_160.impressionPixel,
-  displayAdCdn: IMPACT_SPACEMAIL_160.displayAdCdn,
+  id: '3832106',
+  campaignId: '21274',
+  accountId: '7521997',
+  clickUrl: 'https://spaceship.sjv.io/c/7521997/3832106/21274',
+  impressionPixel: 'https://imp.pxf.io/i/7521997/3832106/21274',
+  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832106',
   localSrc: '/ads/spacemail-banner-160x600.png',
   width: 724,
   height: 2172,
@@ -178,7 +186,7 @@ export const SPACESHIP_SPACEMAIL_SKYSCRAPER: AffiliateAdCreative = {
   format: 'skyscraper',
 };
 
-/** Spaceship partner tall skyscraper — Impact ad 1825513 (335×1251) */
+/** Partner skyscraper — Impact 1825513 */
 export const SPACESHIP_PARTNER_SKYSCRAPER: AffiliateAdCreative = {
   id: '1825513',
   campaignId: '21274',
@@ -197,16 +205,11 @@ export const SPACESHIP_PARTNER_SKYSCRAPER: AffiliateAdCreative = {
   format: 'skyscraper',
 };
 
-/** Side sticky rail rotates these skyscrapers */
 export const SKYSCRAPER_CAROUSEL_ADS: AffiliateAdCreative[] = [
   SPACESHIP_SPACEMAIL_SKYSCRAPER,
   SPACESHIP_PARTNER_SKYSCRAPER,
 ];
 
-/**
- * Placement keys used across the site. Each mount fires its own
- * impression pixel (standard for multi-unit pages).
- */
 export type AffiliateAdPlacement =
   | 'footer'
   | 'home-hero'
@@ -219,10 +222,6 @@ export type AffiliateAdPlacement =
   | 'inline'
   | 'skyscraper';
 
-/**
- * Map placement → creative (single unit).
- * Billboard placements prefer carousel via getCarouselAdsForPlacement.
- */
 export function getAdForPlacement(placement: AffiliateAdPlacement): AffiliateAdCreative {
   switch (placement) {
     case 'skyscraper':
@@ -242,7 +241,6 @@ export function getAdForPlacement(placement: AffiliateAdPlacement): AffiliateAdC
   }
 }
 
-/** Whether this placement should use the multi-ad slide carousel */
 export function placementUsesCarousel(placement: AffiliateAdPlacement): boolean {
   return (
     placement === 'home-mid' ||
@@ -253,14 +251,24 @@ export function placementUsesCarousel(placement: AffiliateAdPlacement): boolean 
   );
 }
 
+/** Strip placements use wide ChatGPT creatives (desktop) / mobile unit via component */
+export function placementUsesStripCarousel(placement: AffiliateAdPlacement): boolean {
+  return (
+    placement === 'home-hero' ||
+    placement === 'footer' ||
+    placement === 'tools' ||
+    placement === 'inline'
+  );
+}
+
 export function getCarouselAdsForPlacement(
   placement: AffiliateAdPlacement
 ): AffiliateAdCreative[] {
   if (placementUsesCarousel(placement)) return BILLBOARD_CAROUSEL_ADS;
+  if (placementUsesStripCarousel(placement)) return STRIP_CAROUSEL_ADS;
   return [getAdForPlacement(placement)];
 }
 
-/** Suggested visual variant for a placement */
 export function getDefaultVariant(
   placement: AffiliateAdPlacement
 ): 'leaderboard' | 'card' | 'strip' | 'billboard' | 'skyscraper' {
