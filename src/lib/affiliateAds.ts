@@ -2,8 +2,9 @@
  * Impact.com / Spaceship affiliate creatives.
  * Keep click + impression IDs exact so commissions track correctly.
  *
- * Register CTAs (domain deep-links) live in registrars.ts (ad 1859616).
- * Display banners use Impact media 3832105 (Spacemail) unless a new ad ID is provided.
+ * Register CTAs (domain deep-links) → registrars.ts (ad 1859616).
+ * Spacemail 320×50 display → ad 3832105.
+ * Spacemail 1200×600 (TW/X) display → ad 3832098.
  */
 
 export type AffiliateAdCreative = {
@@ -33,44 +34,45 @@ export type AffiliateAdCreative = {
   format: 'leaderboard' | 'billboard';
 };
 
-/** Shared Spacemail Impact tracking (ad 3832105) */
-const SPACEMAIL_TRACKING = {
+/** Spacemail 320×50 leaderboard — Impact ad 3832105 */
+export const SPACESHIP_SPACEMAIL_BANNER: AffiliateAdCreative = {
   id: '3832105',
   campaignId: '21274',
   accountId: '7521997',
   clickUrl: 'https://spaceship.sjv.io/c/7521997/3832105/21274',
   impressionPixel: 'https://imp.pxf.io/i/7521997/3832105/21274',
   displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832105',
+  localSrc: '/ads/spacemail-banner-320x50.png',
+  width: 320,
+  height: 50,
+  alt: 'Spacemail by Spaceship — professional email for your domain',
   title: 'Spacemail by Spaceship',
   subtitle: 'Professional email on your domain — fast setup, modern inbox',
   ctaLabel: 'Get Spacemail',
   brand: 'Spaceship',
-  alt: 'Spacemail by Spaceship — professional email for your domain',
-} as const;
-
-/** Spacemail 320×50 leaderboard */
-export const SPACESHIP_SPACEMAIL_BANNER: AffiliateAdCreative = {
-  ...SPACEMAIL_TRACKING,
-  displayAdCdn: SPACEMAIL_TRACKING.displayAdCdn,
-  localSrc: '/ads/spacemail-banner-320x50.png',
-  width: 320,
-  height: 50,
   format: 'leaderboard',
 };
 
 /**
- * Spacemail 1200×630 TW/X creative (file is 1200×600).
- * Same Impact click + impression as 3832105 until a dedicated ad ID is issued.
+ * Spacemail 1200×600 TW/X billboard — Impact ad 3832098
+ * (Impact labels 1200×600; file named 1200×630 TW_X)
  */
 export const SPACESHIP_SPACEMAIL_BILLBOARD: AffiliateAdCreative = {
-  ...SPACEMAIL_TRACKING,
-  // Local creative only — Impact CDN is the 320×50 unit
-  displayAdCdn: '',
+  id: '3832098',
+  campaignId: '21274',
+  accountId: '7521997',
+  clickUrl: 'https://spaceship.sjv.io/c/7521997/3832098/21274',
+  impressionPixel: 'https://imp.pxf.io/i/7521997/3832098/21274',
+  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832098',
   localSrc: '/ads/spacemail-banner-1200x630.png',
   width: 1200,
   height: 600,
-  format: 'billboard',
+  alt: 'Spacemail by Spaceship — professional email for your domain',
+  title: 'Spacemail by Spaceship',
   subtitle: 'Branded email for your domain — built by Spaceship',
+  ctaLabel: 'Get Spacemail',
+  brand: 'Spaceship',
+  format: 'billboard',
 };
 
 /**
@@ -90,7 +92,7 @@ export type AffiliateAdPlacement =
 
 /**
  * Map placement → creative.
- * Billboard (large) on high-attention mid pages; leaderboard/card on chrome.
+ * Billboard (3832098) on high-attention pages; leaderboard (3832105) on chrome.
  */
 export function getAdForPlacement(placement: AffiliateAdPlacement): AffiliateAdCreative {
   switch (placement) {
