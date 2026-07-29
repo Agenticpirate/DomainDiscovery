@@ -5,7 +5,7 @@
  * Register CTAs (domain deep-links) → registrars.ts (ad 1859616).
  * Spacemail 320×50 display → ad 3832105.
  * Spacemail 1200×600 (TW/X) display → ad 3832098.
- * Spacemail 160×600 skyscraper → set IMPACT_SPACEMAIL_160 when Get Ad Code is available.
+ * Spacemail 160×600 skyscraper → ad 3832106.
  * Engaged-time interstitial (626×521) → ad 1825514.
  */
 
@@ -36,20 +36,14 @@ export type AffiliateAdCreative = {
   format: 'leaderboard' | 'billboard' | 'interstitial' | 'skyscraper';
 };
 
-/**
- * Impact tracking for Spacemail 160×600 skyscraper.
- * Paste values from Impact → Get Ad Code for this creative.
- * Until a dedicated media ID is set, we keep the unit live with the
- * Spacemail campaign click path so commissions still attribute to Spaceship.
- */
+/** Impact tracking for Spacemail 160×600 skyscraper — ad 3832106 */
 const IMPACT_SPACEMAIL_160 = {
-  /** Replace with dedicated ad id from Impact when available */
-  id: '3832105',
+  id: '3832106',
   campaignId: '21274',
   accountId: '7521997',
-  clickUrl: 'https://spaceship.sjv.io/c/7521997/3832105/21274',
-  impressionPixel: 'https://imp.pxf.io/i/7521997/3832105/21274',
-  displayAdCdn: '',
+  clickUrl: 'https://spaceship.sjv.io/c/7521997/3832106/21274',
+  impressionPixel: 'https://imp.pxf.io/i/7521997/3832106/21274',
+  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832106',
 } as const;
 
 /** Engaged-time interstitial — Impact ad 1825514 (non-skippable gate) */
