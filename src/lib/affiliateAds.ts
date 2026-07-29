@@ -56,31 +56,11 @@ export const INTERSTITIAL_CONFIG = {
 } as const;
 
 /**
- * Desktop hero / footer strip — true 320×50 leaderboard (full art, no crop).
- * Impact ad 3832105
+ * Hero / footer strip — Impact 1825519 (668×105).
+ * Higher-res than 320×50 so it stays sharp when displayed ~full rail width.
+ * (320×50 stretched to 700–1000px was the blur source.)
  */
 export const SPACESHIP_SPACEMAIL_BANNER: AffiliateAdCreative = {
-  id: '3832105',
-  campaignId: '21274',
-  accountId: '7521997',
-  clickUrl: 'https://spaceship.sjv.io/c/7521997/3832105/21274',
-  impressionPixel: 'https://imp.pxf.io/i/7521997/3832105/21274',
-  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832105',
-  localSrc: '/ads/spacemail-banner-320x50.png',
-  width: 320,
-  height: 50,
-  alt: 'Spacemail by Spaceship — professional email for your domain',
-  title: 'Spacemail by Spaceship',
-  subtitle: 'Professional email on your domain',
-  ctaLabel: 'Get Spacemail',
-  brand: 'Spaceship',
-  format: 'leaderboard',
-};
-
-/**
- * Mobile leaderboard / strip — Impact ad 1825519 (668×105)
- */
-export const SPACESHIP_SPACEMAIL_MOBILE: AffiliateAdCreative = {
   id: '1825519',
   campaignId: '21274',
   accountId: '7521997',
@@ -91,14 +71,17 @@ export const SPACESHIP_SPACEMAIL_MOBILE: AffiliateAdCreative = {
   width: 668,
   height: 105,
   alt: 'Spacemail by Spaceship — professional email for your domain',
-  title: 'Spacemail',
-  subtitle: 'Email on your domain',
+  title: 'Spacemail by Spaceship',
+  subtitle: 'Professional email on your domain',
   ctaLabel: 'Get Spacemail',
   brand: 'Spaceship',
   format: 'leaderboard',
 };
 
-/** Desktop strip (hero under search, footer, tools) — leaderboard art only */
+/** Alias — same sharp 668×105 unit (mobile + desktop strip) */
+export const SPACESHIP_SPACEMAIL_MOBILE: AffiliateAdCreative = SPACESHIP_SPACEMAIL_BANNER;
+
+/** Strip placements (hero, footer, tools) */
 export const STRIP_CAROUSEL_ADS: AffiliateAdCreative[] = [
   SPACESHIP_SPACEMAIL_BANNER,
 ];

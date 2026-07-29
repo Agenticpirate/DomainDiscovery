@@ -4,7 +4,6 @@ import React, { useEffect, useId, useRef, useState } from 'react';
 import {
   getAdForPlacement,
   getDefaultVariant,
-  SPACESHIP_SPACEMAIL_MOBILE,
   type AffiliateAdCreative,
   type AffiliateAdPlacement,
 } from '@/lib/affiliateAds';
@@ -30,25 +29,14 @@ export function AffiliateAdBanner({
   hideOnMobile = false,
   hideOnDesktop = false,
 }: AffiliateAdBannerProps) {
-  const desktopCreative = creativeProp ?? getAdForPlacement(placement);
+  const creative = creativeProp ?? getAdForPlacement(placement);
   const variant =
     variantProp === 'auto' ? getDefaultVariant(placement) : variantProp;
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const isLight = mounted ? theme === 'light' : false;
-  const firedRef = useRef(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
   const reactId = useId();
-
-  // Mobile strip uses dedicated Impact 1825519 creative
-  const creative =
-    mounted &&
-    isMobile &&
-    (variant === 'strip' || variant === 'card' || variant === 'leaderboard') &&
-    desktopCreative.format === 'leaderboard'
-      ? SPACESHIP_SPACEMAIL_MOBILE
-      : desktopCreative;
 
   const [imgSrc, setImgSrc] = useState(creative.localSrc);
   const pixelId = `imp-${creative.id}-${placement}-${reactId.replace(/:/g, '')}`;
@@ -56,22 +44,8 @@ export function AffiliateAdBanner({
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const mq = window.matchMedia('(max-width: 639px)');
-    const apply = () => setIsMobile(mq.matches);
-    apply();
-    mq.addEventListener('change', apply);
-    return () => mq.removeEventListener('change', apply);
-  }, []);
-
-  useEffect(() => {
     setImgSrc(creative.localSrc);
   }, [creative.localSrc]);
-
-  useEffect(() => {
-    if (firedRef.current || typeof window === 'undefined') return;
-    firedRef.current = false; // reset when creative changes
-  }, [creative.id]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -214,11 +188,17 @@ export function AffiliateAdBanner({
     );
   }
 
-  // strip / card / leaderboard — full-bleed wide creative, no empty side panel
+  // strip / card / leaderboard — full art, capped near native width so it stays sharp
+  // 668px native → display up to ~720–800px (slight retina scale only)
+  const maxDisplayPx = Math.round(creative.width * 1.15);
+
   return (
-    <div ref={rootRef} className={`relative w-full ${visibility}`}>
+    <div ref={rootRef} className={`relative w-full flex justify-center ${visibility}`}>
       {trackedAnchor(
-        <span className="relative block w-full overflow-hidden rounded-2xl shadow-[0_14px_44px_-20px_rgba(0,0,0,0.55)] transition-transform active:scale-[0.997]">
+        <span
+          className="relative block w-full overflow-hidden rounded-2xl shadow-[0_14px_44px_-20px_rgba(0,0,0,0.55)] transition-transform active:scale-[0.997]"
+          style={{ maxWidth: maxDisplayPx }}
+        >
           {sponsoredBadge}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -228,14 +208,19 @@ export function AffiliateAdBanner({
             height={creative.height}
             loading="lazy"
             decoding="async"
+            // Full native resolution; no object-cover crop; avoid huge upscale blur
             className="block w-full h-auto select-none"
-            style={{ aspectRatio: `${creative.width} / ${creative.height}` }}
+            style={{
+              aspectRatio: `${creative.width} / ${creative.height}`,
+              imageRendering: 'auto',
+            }}
+            sizes={`${maxDisplayPx}px`}
             onError={() => {
               if (creative.displayAdCdn) setImgSrc(creative.displayAdCdn);
             }}
           />
         </span>,
-        'w-full block'
+        'w-full max-w-full flex justify-center'
       )}
       {noscriptPixel}
     </div>

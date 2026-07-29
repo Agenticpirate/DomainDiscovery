@@ -4,8 +4,6 @@ import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import {
   BILLBOARD_CAROUSEL_MS,
   getCarouselAdsForPlacement,
-  placementUsesStripCarousel,
-  SPACESHIP_SPACEMAIL_MOBILE,
   type AffiliateAdCreative,
   type AffiliateAdPlacement,
 } from '@/lib/affiliateAds';
@@ -17,8 +15,7 @@ type Props = {
   className?: string;
   intervalMs?: number;
   /**
-   * compact — shorter strip for home page (sync with site density)
-   * default — full natural aspect ratio
+   * compact — smaller section width from parent (does not crop art)
    */
   size?: 'default' | 'compact';
 };
@@ -35,7 +32,6 @@ export function AffiliateAdCarousel({
 }: Props) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const isLight = mounted ? theme === 'light' : false;
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -45,26 +41,12 @@ export function AffiliateAdCarousel({
 
   useEffect(() => setMounted(true), []);
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const mq = window.matchMedia('(max-width: 639px)');
-    const apply = () => setIsMobile(mq.matches);
-    apply();
-    mq.addEventListener('change', apply);
-    return () => mq.removeEventListener('change', apply);
-  }, []);
-
-  // Mobile strip placements: dedicated 668×105 Impact 1825519 (single slide)
   const ads: AffiliateAdCreative[] =
-    adsProp ??
-    (isMobile && placementUsesStripCarousel(placement)
-      ? [SPACESHIP_SPACEMAIL_MOBILE]
-      : getCarouselAdsForPlacement(placement));
+    adsProp ?? getCarouselAdsForPlacement(placement);
 
   const active = ads[index] ?? ads[0];
   const count = ads.length;
 
-  // Reset slide index when ad set changes (e.g. mobile ↔ desktop)
   useEffect(() => {
     setIndex(0);
   }, [ads.length, ads[0]?.id]);
@@ -154,27 +136,40 @@ export function AffiliateAdCarousel({
             className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
             style={{ transform: `translateX(-${index * 100}%)` }}
           >
-            {ads.map((ad) => (
-              <div key={ad.id} className="relative w-full shrink-0 grow-0 basis-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={ad.localSrc}
-                  alt={ad.alt}
-                  width={ad.width}
-                  height={ad.height}
-                  loading={ad.id === active.id ? 'eager' : 'lazy'}
-                  decoding="async"
-                  className="block w-full h-auto select-none"
-                  style={{ aspectRatio: `${ad.width} / ${ad.height}` }}
-                  draggable={false}
-                  onError={(e) => {
-                    if (ad.displayAdCdn) {
-                      (e.target as HTMLImageElement).src = ad.displayAdCdn;
-                    }
-                  }}
-                />
-              </div>
-            ))}
+            {ads.map((ad) => {
+              // Cap upscale for small leaderboards so 668px art stays crisp
+              const isLeaderboard = ad.format === 'leaderboard';
+              const maxW = isLeaderboard ? Math.round(ad.width * 1.15) : undefined;
+              return (
+                <div
+                  key={ad.id}
+                  className="relative w-full shrink-0 grow-0 basis-full flex justify-center"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={ad.localSrc}
+                    alt={ad.alt}
+                    width={ad.width}
+                    height={ad.height}
+                    loading={ad.id === active.id ? 'eager' : 'lazy'}
+                    decoding="async"
+                    className="block w-full h-auto select-none"
+                    style={{
+                      aspectRatio: `${ad.width} / ${ad.height}`,
+                      maxWidth: maxW,
+                      imageRendering: 'auto',
+                    }}
+                    sizes={maxW ? `${maxW}px` : '100vw'}
+                    draggable={false}
+                    onError={(e) => {
+                      if (ad.displayAdCdn) {
+                        (e.target as HTMLImageElement).src = ad.displayAdCdn;
+                      }
+                    }}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </a>
