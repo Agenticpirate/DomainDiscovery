@@ -12,6 +12,7 @@ import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function GeneratorPage() {
@@ -95,6 +96,9 @@ export default function GeneratorPage() {
 
         <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.generator} compact />
         <SeoGuidePack {...TOOL_GUIDE_PACKS.generator} />
+        <div className="pt-2 pb-4">
+          <AffiliateAdRail placement="generator" variant="card" />
+        </div>
         </SectionAmbient>
       </main>
 

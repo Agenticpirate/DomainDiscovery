@@ -13,6 +13,7 @@ import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { useTheme } from '@/contexts/ThemeContext';
 
 /**
@@ -356,6 +357,9 @@ function DomainExtensionsPageContent() {
         <div className="hidden sm:block">
           <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.extensions} compact />
           <SeoGuidePack {...TOOL_GUIDE_PACKS.extensions} />
+        </div>
+        <div className="pt-3 pb-2">
+          <AffiliateAdRail placement="inline" variant="card" />
         </div>
         </SectionAmbient>
       </main>

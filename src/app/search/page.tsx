@@ -19,6 +19,7 @@ import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
 import extensionsData from '@/data/extensions.json';
 import {
@@ -854,6 +855,9 @@ function SearchPageContent() {
         <div className="hidden sm:block">
           <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.search} compact />
           <SeoGuidePack {...TOOL_GUIDE_PACKS.search} />
+        </div>
+        <div className="px-0 sm:px-0 pt-3 pb-2">
+          <AffiliateAdRail placement="search" variant="card" />
         </div>
         <div className="pb-6 sm:pb-8">
           <Footer />

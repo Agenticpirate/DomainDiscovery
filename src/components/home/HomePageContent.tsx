@@ -8,6 +8,7 @@ import { DomainTicker } from '@/components/home/DomainTicker';
 import { StatsBar } from '@/components/home/StatsBar';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { PremiumFaqGrid } from '@/components/sections/PremiumFaqGrid';
+import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
 
 export const HomePageContent: React.FC = () => {
@@ -803,6 +804,11 @@ export const HomePageContent: React.FC = () => {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Mid-page Spaceship Spacemail affiliate card */}
+      <section className="section-shell max-w-4xl !mb-4 sm:!mb-7">
+        <AffiliateAdRail placement="home-mid" variant="card" contained={false} />
       </section>
 
       {/* CTA */}

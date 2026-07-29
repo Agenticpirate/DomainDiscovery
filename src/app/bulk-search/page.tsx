@@ -7,6 +7,7 @@ import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { BulkDomainSearch } from '@/components/domain/BulkDomainSearch';
+import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 
 export default function BulkSearchPage() {
   return (
@@ -27,6 +28,9 @@ export default function BulkSearchPage() {
             <BulkDomainSearch />
           </div>
         </SectionAmbient>
+        <div className="pt-4 pb-2">
+          <AffiliateAdRail placement="bulk" variant="card" />
+        </div>
       </main>
       <Footer />
     </div>

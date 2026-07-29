@@ -12,6 +12,7 @@ import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { useTheme } from '@/contexts/ThemeContext';
 
 function WhoisTool() {
@@ -81,6 +82,9 @@ export default function WhoisPage() {
 
         <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.whois} compact />
         <SeoGuidePack {...TOOL_GUIDE_PACKS.whois} />
+        <div className="pt-2 pb-4">
+          <AffiliateAdRail placement="tools" variant="card" />
+        </div>
       </main>
 
       <Footer />

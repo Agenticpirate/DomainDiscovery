@@ -17,6 +17,7 @@ import {
   getTrendingArticles,
 } from '@/lib/learnArticles';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 
 export const metadata: Metadata = {
   title: 'Domain Name Guides — Naming, SEO, Valuation & DNS',
@@ -184,6 +185,9 @@ export default function LearnPage() {
             </div>
           </div>
         </section>
+        <div className="pt-2 pb-6">
+          <AffiliateAdRail placement="learn" variant="card" />
+        </div>
       </main>
 
       <Footer />

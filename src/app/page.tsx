@@ -9,6 +9,7 @@ import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { HomePageContent } from '@/components/home/HomePageContent';
 import { HeroSearch } from '@/components/home/HeroSearch';
+import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function Home() {
@@ -212,6 +213,11 @@ export default function Home() {
             </div>
           </div>
         </SectionAmbient>
+
+        {/* Hero-adjacent affiliate unit (extra impression + click path) */}
+        <div className="pt-1 pb-2 sm:pt-2 sm:pb-3">
+          <AffiliateAdRail placement="home-hero" variant="strip" />
+        </div>
 
         <HomePageContent />
       </main>

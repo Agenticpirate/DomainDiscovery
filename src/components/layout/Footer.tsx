@@ -7,6 +7,7 @@ import { ParticleText } from '../ui/ParticleText';
 import { EvervaultHover } from '../ui/EvervaultHover';
 import { useTheme } from '@/contexts/ThemeContext';
 import { SITE_BRAND } from '@/lib/seoSiteFacts';
+import { AffiliateAdBanner } from '@/components/ads/AffiliateAdBanner';
 
 const BRAND = SITE_BRAND.name;
 
@@ -242,6 +243,12 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className={`relative overflow-hidden border-t ${hairline} ${solidBg}`}>
+      {/* Sitewide Spaceship / Spacemail affiliate unit — Impact ad 3832105 */}
+      <div className={`relative z-[3] border-b ${hairline} ${solidBg}`}>
+        <div className="max-w-4xl mx-auto px-3 sm:px-5 py-3 sm:py-4">
+          <AffiliateAdBanner placement="footer" variant="card" />
+        </div>
+      </div>
       <div className={`relative z-[2] ${solidBg}`}>
         <div className="max-w-6xl mx-auto px-3 sm:px-5 pt-3.5 sm:pt-7 pb-3 sm:pb-5">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-8">
