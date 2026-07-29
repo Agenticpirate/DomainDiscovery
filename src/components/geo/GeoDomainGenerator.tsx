@@ -251,10 +251,11 @@ const sanitizeDomainName = (name: string): string =>
     .replace(/[^a-z0-9]/g, '')
     .substring(0, 63);
 
+/** Fully opaque shells — ambient dots must never bleed through cards/text */
 function shell(isLight: boolean) {
   return isLight
-    ? 'border-slate-200/90 bg-white/90 shadow-[0_1px_0_rgba(15,23,42,0.04),0_12px_40px_-16px_rgba(15,23,42,0.18)] backdrop-blur-sm'
-    : 'border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-white/[0.015] shadow-[0_20px_50px_-24px_rgba(0,0,0,0.65)]';
+    ? 'border-slate-200 bg-white shadow-[0_1px_0_rgba(15,23,42,0.04),0_12px_40px_-16px_rgba(15,23,42,0.18)]'
+    : 'border-white/[0.1] bg-[#0a0a0c] shadow-[0_20px_50px_-24px_rgba(0,0,0,0.65)]';
 }
 
 function chipCls(active: boolean, isLight: boolean) {
@@ -1047,7 +1048,7 @@ export const GeoDomainGenerator: React.FC = () => {
 
   const inputCls = isLight
     ? 'border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-900/10'
-    : 'border-white/10 bg-black/35 text-white placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-white/10';
+    : 'border-white/10 bg-[#121214] text-white placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-white/10';
 
   const canGenerate =
     Boolean(keyword.trim()) && selectedTlds.length > 0 && locations.length > 0 && !isGenerating && !isChecking;

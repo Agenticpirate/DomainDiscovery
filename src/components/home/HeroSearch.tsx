@@ -133,14 +133,14 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
 
   return (
     <div className="w-full max-w-full sm:max-w-[46rem] mx-auto">
-      {/* —— Mobile: taller field, bigger CTAs (desktop layout untouched below) —— */}
-      <div className="sm:hidden w-full space-y-2.5">
+      {/* —— Mobile only (desktop layout untouched below) —— */}
+      <div className="sm:hidden w-full space-y-2">
         <div
-          className={`flex items-center gap-1.5 rounded-2xl px-2 py-1 min-h-[3.25rem] transition-all ${fieldShell}`}
+          className={`flex items-center gap-1.5 rounded-2xl px-2.5 min-h-[3.15rem] transition-all ${fieldShell}`}
         >
           <div
-            className={`ml-1 shrink-0 flex items-center justify-center w-9 h-9 ${
-              isLight ? 'text-slate-400' : 'text-white/40'
+            className={`shrink-0 flex items-center justify-center w-8 h-8 ${
+              isLight ? 'text-slate-400' : 'text-white/45'
             }`}
           >
             <Icons.Search />
@@ -161,10 +161,10 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
             autoCapitalize="none"
             autoCorrect="off"
             spellCheck={false}
-            className={`flex-1 min-w-0 bg-transparent border-none outline-none text-[16px] font-medium py-3 pr-2 ${
+            className={`flex-1 min-w-0 bg-transparent border-none outline-none text-[16px] font-medium py-2.5 pr-1 ${
               isLight
                 ? 'text-slate-900 placeholder:text-slate-400'
-                : 'text-white placeholder:text-white/38'
+                : 'text-white placeholder:text-white/40'
             }`}
             aria-label="Search domain names"
           />
@@ -177,7 +177,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
                 if (debounceRef.current) clearTimeout(debounceRef.current);
                 inputRef.current?.focus();
               }}
-              className={`mr-1 shrink-0 flex h-8 w-8 items-center justify-center rounded-full ${
+              className={`shrink-0 flex h-8 w-8 items-center justify-center rounded-full ${
                 isLight ? 'text-slate-400 active:bg-slate-200' : 'text-white/45 active:bg-white/10'
               }`}
               aria-label="Clear search"
@@ -189,11 +189,11 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
           ) : null}
         </div>
 
-        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.75fr)] gap-2">
+        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.85fr)] gap-2">
           <button
             type="button"
             onClick={() => setAiMode((v) => !v)}
-            className={`${aiBtnClass} w-full min-h-[3rem] rounded-2xl text-[13px] ${
+            className={`${aiBtnClass} w-full min-h-[2.85rem] rounded-2xl text-[13px] font-bold ${
               aiMode ? 'ring-2 ring-white/20' : ''
             }`}
             title="Toggle AI generator mode"
@@ -205,7 +205,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
           <button
             type="button"
             onClick={() => submit()}
-            className={`${searchBtnClass} w-full min-h-[3rem] rounded-2xl text-[14px] shadow-sm`}
+            className={`${searchBtnClass} w-full min-h-[2.85rem] rounded-2xl text-[14px] font-bold`}
           >
             <span>{aiMode ? 'Generate' : 'Search'}</span>
             {searchArrow}
@@ -274,9 +274,9 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
         </button>
       </div>
 
-      <div className="mt-2.5 sm:mt-2.5 flex flex-nowrap sm:flex-wrap items-center justify-center gap-1.5 sm:gap-1.5 overflow-x-auto scrollbar-none px-0.5">
+      <div className="mt-2 sm:mt-2.5 flex flex-nowrap sm:flex-wrap items-center justify-center gap-1.5 overflow-x-auto scrollbar-none px-0.5">
         <span
-          className={`shrink-0 text-[11px] sm:text-[11px] font-medium ${
+          className={`shrink-0 text-[10.5px] sm:text-[11px] font-medium ${
             isLight ? 'text-slate-500' : 'text-white/40'
           }`}
         >
@@ -292,7 +292,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
               lastRoutedRef.current = term;
               onSearch(term);
             }}
-            className={`shrink-0 rounded-full px-2.5 sm:px-2.5 py-1.5 sm:py-1 text-[11px] sm:text-[11px] font-semibold transition-all active:scale-[0.97] ${
+            className={`shrink-0 rounded-full px-2.5 py-1 sm:py-1 text-[11px] font-semibold transition-all active:scale-[0.97] ${
               isLight
                 ? 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
                 : 'bg-white/[0.05] border border-white/12 text-white/65 hover:border-white/22 hover:text-white/85'

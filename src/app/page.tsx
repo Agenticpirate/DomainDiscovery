@@ -51,18 +51,30 @@ export default function Home() {
       <Navigation />
 
       <main className="relative pt-[3.15rem] sm:pt-[4.25rem]">
-        {/* Hero — dots clear under center copy (intensity=hero), solid search plate */}
+        {/* Hero — dots clear under center copy (intensity=hero), solid search plate.
+            Mobile-only visual polish via max-sm: classes; sm+ layout unchanged. */}
         <SectionAmbient
           intensity="hero"
           spotlight
-          contentClassName="px-3.5 sm:px-6 pt-4 sm:pt-12 md:pt-14 pb-4 sm:pb-10"
+          contentClassName="px-3.5 sm:px-6 pt-3.5 max-sm:pt-5 sm:pt-12 md:pt-14 pb-3.5 max-sm:pb-5 sm:pb-10"
         >
           <div className="relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto text-center">
+            {/* Soft mobile-only glow behind title (desktop unchanged) */}
             <div
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 sm:px-3 sm:py-1.5 mb-3 sm:mb-5 text-[10.5px] sm:text-[12px] font-semibold tracking-wide border ${
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-2 z-0 h-40 w-[18rem] -translate-x-1/2 rounded-full blur-3xl sm:hidden"
+              style={{
+                background: isLight
+                  ? 'radial-gradient(ellipse, rgba(148,163,184,0.22) 0%, transparent 70%)'
+                  : 'radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 70%)',
+              }}
+            />
+
+            <div
+              className={`relative z-[1] inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 mb-2.5 max-sm:mb-3.5 sm:mb-5 text-[10px] max-sm:text-[10.5px] sm:text-[12px] font-semibold tracking-wide border ${
                 isLight
-                  ? 'bg-slate-100 text-slate-600 border-slate-200'
-                  : 'text-white/70 border-white/12'
+                  ? 'bg-slate-100 text-slate-600 border-slate-200 shadow-sm'
+                  : 'text-white/70 border-white/12 max-sm:border-white/14'
               }`}
               style={isLight ? undefined : { backgroundColor: '#0c0c0e' }}
             >
@@ -84,7 +96,7 @@ export default function Home() {
               </span>
             </div>
 
-            <h1 className="text-[1.95rem] leading-[1.06] sm:text-[3.65rem] md:text-[4.35rem] font-black tracking-tight mb-2 sm:mb-3.5">
+            <h1 className="relative z-[1] text-[2.15rem] max-sm:text-[2.25rem] leading-[1.05] max-sm:leading-[1.04] sm:text-[3.65rem] md:text-[4.35rem] font-black tracking-tight mb-1.5 max-sm:mb-2.5 sm:mb-3.5">
               <span
                 className="block bg-clip-text text-transparent"
                 style={{
@@ -97,7 +109,7 @@ export default function Home() {
                 <span className="hidden sm:inline">Domain name search</span>
               </span>
               <span
-                className="block text-[0.95rem] sm:text-[1.55rem] md:text-[1.95rem] mt-1 sm:mt-1.5 font-bold tracking-tight"
+                className="block text-[1.02rem] max-sm:text-[1.08rem] sm:text-[1.55rem] md:text-[1.95rem] mt-1 max-sm:mt-1.5 sm:mt-1.5 font-bold tracking-tight"
                 style={{ color: 'var(--gradient-subtitle)' }}
               >
                 <span className="sm:hidden">Live check across 1,600+ TLDs</span>
@@ -114,108 +126,116 @@ export default function Home() {
               no account required, shortlist saved on your device.
             </p>
             <p
-              className="sm:hidden text-[12.5px] leading-snug max-w-[19.5rem] mx-auto mb-3.5"
-              style={{ color: 'var(--text-tertiary)' }}
+              className="sm:hidden relative z-[1] text-[13px] leading-snug max-w-[20.5rem] mx-auto mb-4"
+              style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.52)' }}
             >
               Free domain search, AI names &amp; geo tools — no signup
             </p>
 
-            {/* Search panel — solid fill so ambient dots never show through */}
+            {/*
+              Search panel — solid bg on the shell (blocks ambient dots).
+              IMPORTANT: do NOT put absolute decorative layers as *direct* children of
+              .shine-border — globals force `.shine-border > * { position: relative }`,
+              which turns absolute h-* layers into empty black boxes in flow (mobile bug).
+            */}
             <div
-              className={`shine-border relative z-[2] isolate rounded-[1.25rem] sm:rounded-2xl p-3 sm:p-5 max-w-[40rem] sm:max-w-[50rem] mx-auto overflow-hidden ${
+              className={`shine-border relative z-[2] isolate overflow-hidden rounded-2xl sm:rounded-2xl p-3 max-sm:p-2.5 sm:p-5 max-w-[40rem] sm:max-w-[50rem] mx-auto ${
                 isLight
-                  ? 'bg-white border border-slate-200 shadow-lg shadow-slate-900/[0.06]'
-                  : 'bg-[#0a0a0c] border border-white/[0.14] shadow-[0_12px_40px_rgba(0,0,0,0.45)] sm:shadow-[0_16px_48px_rgba(0,0,0,0.4)]'
+                  ? 'bg-white border border-slate-200 shadow-lg shadow-slate-900/[0.06] max-sm:shadow-xl max-sm:shadow-slate-900/[0.08]'
+                  : 'bg-[#0a0a0c] border border-white/[0.14] max-sm:border-white/[0.16] shadow-[0_12px_40px_rgba(0,0,0,0.45)] max-sm:shadow-[0_16px_44px_-14px_rgba(0,0,0,0.7)] sm:shadow-[0_16px_48px_rgba(0,0,0,0.4)]'
               }`}
             >
-              {/* Opaque underlay blocks hero dots inside the bar */}
-              <div
-                aria-hidden
-                className={`pointer-events-none absolute inset-0 rounded-[inherit] ${
-                  isLight ? 'bg-white' : 'bg-[#0a0a0c]'
-                }`}
-              />
-              <div className="relative z-[1]">
-              <HeroSearch
-                initialQuery={searchQuery}
-                onSearch={handleHeroSearch}
-                popularSearches={['nova', 'pulse', 'studio', 'launch']}
-                embedded
-              />
+              <div className="relative">
+                <HeroSearch
+                  initialQuery={searchQuery}
+                  onSearch={handleHeroSearch}
+                  popularSearches={['nova', 'pulse', 'studio', 'launch']}
+                  embedded
+                />
 
-              {/* Mobile: equal full-width tool chips · Desktop: flex wrap unchanged */}
-              <div className="mt-3 sm:mt-3.5 grid grid-cols-2 gap-2 sm:max-w-none sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-3">
-                <Link
-                  href="/bulk-search"
-                  className={`cta-shine cta-shine-primary group/cta inline-flex items-center justify-center gap-1.5 rounded-2xl sm:rounded-full px-3 py-2.5 sm:px-4 sm:py-2.5 text-[12px] sm:text-[13px] font-semibold min-h-[2.75rem] sm:min-h-0 ${
-                    isLight
-                      ? 'bg-slate-900 text-white hover:bg-slate-800'
-                      : 'bg-white text-black hover:bg-white/90'
-                  }`}
-                >
-                  <span className="cta-shine-sweep" aria-hidden />
-                  <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                  </svg>
-                  <span className="sm:hidden">Bulk check</span>
-                  <span className="hidden sm:inline">Bulk Domain Search</span>
-                  <span
-                    className={`text-[9px] sm:text-[9px] font-bold px-1.5 sm:px-1.5 py-0.5 rounded-full ${
-                      isLight ? 'bg-white/15' : 'bg-black/10'
+                {/* Mobile: equal full-width tool chips · Desktop: flex wrap unchanged */}
+                <div className="mt-2.5 max-sm:mt-2.5 sm:mt-3.5 grid grid-cols-2 gap-2 sm:max-w-none sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-3">
+                  <Link
+                    href="/bulk-search"
+                    className={`cta-shine cta-shine-primary group/cta inline-flex items-center justify-center gap-1.5 rounded-2xl sm:rounded-full px-3 py-2.5 max-sm:py-2.5 sm:px-4 sm:py-2.5 text-[12px] max-sm:text-[12.5px] sm:text-[13px] font-semibold min-h-[2.75rem] max-sm:min-h-[2.85rem] sm:min-h-0 ${
+                      isLight
+                        ? 'bg-slate-900 text-white hover:bg-slate-800'
+                        : 'bg-white text-black hover:bg-white/90'
                     }`}
                   >
-                    1K
-                  </span>
-                </Link>
-                <Link
-                  href="/tools/geo"
-                  className={`cta-shine cta-shine-secondary group/cta inline-flex items-center justify-center gap-1.5 rounded-2xl sm:rounded-full px-3 py-2.5 sm:px-4 sm:py-2.5 text-[12px] sm:text-[13px] font-semibold min-h-[2.75rem] sm:min-h-0 ${
-                    isLight
-                      ? 'bg-slate-100 text-slate-800 border border-slate-200 hover:border-slate-300'
-                      : 'text-white border border-white/15 hover:border-white/30'
-                  }`}
-                  style={isLight ? undefined : { backgroundColor: '#121214' }}
+                    <span className="cta-shine-sweep" aria-hidden />
+                    <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                    <span className="sm:hidden">Bulk check</span>
+                    <span className="hidden sm:inline">Bulk Domain Search</span>
+                    <span
+                      className={`text-[9px] sm:text-[9px] font-bold px-1.5 sm:px-1.5 py-0.5 rounded-full ${
+                        isLight ? 'bg-white/15' : 'bg-black/10'
+                      }`}
+                    >
+                      1K
+                    </span>
+                  </Link>
+                  <Link
+                    href="/tools/geo"
+                    className={`cta-shine cta-shine-secondary group/cta inline-flex items-center justify-center gap-1.5 rounded-2xl sm:rounded-full px-3 py-2.5 max-sm:py-2.5 sm:px-4 sm:py-2.5 text-[12px] max-sm:text-[12.5px] sm:text-[13px] font-semibold min-h-[2.75rem] max-sm:min-h-[2.85rem] sm:min-h-0 ${
+                      isLight
+                        ? 'bg-slate-100 text-slate-800 border border-slate-200 hover:border-slate-300'
+                        : 'text-white border border-white/15 hover:border-white/30 max-sm:border-white/18'
+                    }`}
+                    style={isLight ? undefined : { backgroundColor: '#121214' }}
+                  >
+                    <span className="cta-shine-sweep" aria-hidden />
+                    <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="sm:hidden">Geo domains</span>
+                    <span className="hidden sm:inline">Geo Domains</span>
+                  </Link>
+                </div>
+
+                {/* Mobile trust chips — desktop keeps its longer row */}
+                <div className="sm:hidden mt-2.5 flex flex-wrap items-center justify-center gap-1.5">
+                  {[
+                    { label: 'Live results', live: true },
+                    { label: 'No signup' },
+                    { label: '1,600+ TLDs' },
+                  ].map((item) => (
+                    <span
+                      key={item.label}
+                      className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
+                        isLight
+                          ? 'border-slate-200 bg-slate-50 text-slate-600'
+                          : 'border-white/[0.1] bg-white/[0.04] text-white/55'
+                      }`}
+                    >
+                      {item.live ? (
+                        <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden />
+                      ) : null}
+                      {item.label}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Desktop trust row under CTAs */}
+                <p
+                  className="hidden sm:flex items-center justify-center gap-2 mt-3.5 text-[12px] font-medium"
+                  style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.4)' }}
                 >
-                  <span className="cta-shine-sweep" aria-hidden />
-                  <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="sm:hidden">Geo domains</span>
-                  <span className="hidden sm:inline">Geo Domains</span>
-                </Link>
-              </div>
-
-              {/* Mobile trust strip — desktop keeps its longer row */}
-              <p
-                className="sm:hidden flex items-center justify-center gap-1.5 mt-3 text-[10.5px] font-medium tracking-wide"
-                style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.42)' }}
-              >
-                <span className="inline-flex h-1 w-1 rounded-full bg-emerald-400/90" aria-hidden />
-                <span>Live results</span>
-                <span className="opacity-35">·</span>
-                <span>No signup</span>
-                <span className="opacity-35">·</span>
-                <span>1,600+ TLDs</span>
-              </p>
-
-              {/* Desktop trust row under CTAs */}
-              <p
-                className="hidden sm:flex items-center justify-center gap-2 mt-3.5 text-[12px] font-medium"
-                style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.4)' }}
-              >
-                <span>Live availability</span>
-                <span className="opacity-40">·</span>
-                <span>Price comparison</span>
-                <span className="opacity-40">·</span>
-                <span>No account required</span>
-              </p>
+                  <span>Live availability</span>
+                  <span className="opacity-40">·</span>
+                  <span>Price comparison</span>
+                  <span className="opacity-40">·</span>
+                  <span>No account required</span>
+                </p>
               </div>
             </div>
           </div>
         </SectionAmbient>
 
         {/* Hero strip — smaller section width; full banner art (no crop) */}
-        <div className="pt-2 pb-2.5 sm:pt-2.5 sm:pb-3 page-gutter w-full">
+        <div className="pt-1.5 max-sm:pt-2 pb-2 max-sm:pb-2.5 sm:pt-2.5 sm:pb-3 page-gutter w-full">
           <AffiliateAdRail
             placement="home-hero"
             variant="strip"

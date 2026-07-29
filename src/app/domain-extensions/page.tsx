@@ -13,7 +13,6 @@ import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
-import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { useTheme } from '@/contexts/ThemeContext';
 
 /**
@@ -81,6 +80,13 @@ const PAGE_MOBILE_CSS = `
   }
   html.light .domain-extensions-page #extension-faqs .shine-border {
     background-color: #ffffff !important;
+  }
+
+  /* Guide / FAQ text — keep ambient dots off body copy on mobile */
+  .domain-extensions-page .ext-guide h2,
+  .domain-extensions-page .ext-guide h3,
+  .domain-extensions-page .ext-guide p {
+    text-shadow: none !important;
   }
 
   /* Guide stack — compact + never wider than parent */
@@ -178,6 +184,41 @@ const PAGE_MOBILE_CSS = `
     padding: 0.9rem 0.8rem !important;
   }
 }
+
+/* All breakpoints: solid FAQ / definition plates so ambient dots never bleed through cards or copy */
+.domain-extensions-page #extension-faqs .shine-border,
+.domain-extensions-page [id^="seo-faqs-"] .shine-border,
+.domain-extensions-page [data-aeo-definition] .relative.isolate {
+  background-color: #0a0a0c !important;
+  background-image: none !important;
+}
+html.light .domain-extensions-page #extension-faqs .shine-border,
+html.light .domain-extensions-page [id^="seo-faqs-"] .shine-border,
+html.light .domain-extensions-page [data-aeo-definition] .relative.isolate {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+/* FAQ title / subtitle scrim — fully opaque under type (no dotted glow through headings) */
+.domain-extensions-page #extension-faqs .section-title,
+.domain-extensions-page #extension-faqs .section-sub,
+.domain-extensions-page [id^="seo-faqs-"] .section-title,
+.domain-extensions-page [id^="seo-faqs-"] .section-sub {
+  position: relative;
+  z-index: 1;
+}
+.domain-extensions-page #extension-faqs > div:first-child,
+.domain-extensions-page [id^="seo-faqs-"] > div:first-child {
+  background: #050505 !important;
+  border-radius: 1rem;
+}
+html.light .domain-extensions-page #extension-faqs > div:first-child,
+html.light .domain-extensions-page [id^="seo-faqs-"] > div:first-child {
+  background: #f8fafc !important;
+}
+/* Soften ambient field on this long page (less bubble density behind cards) */
+.domain-extensions-page [data-ambient-dots="single"] {
+  opacity: 0.45 !important;
+}
 `;
 
 function DomainExtensionsPageContent() {
@@ -210,7 +251,7 @@ function DomainExtensionsPageContent() {
             { label: 'Domain Extensions' },
           ]}
         />
-        <SectionAmbient intensity="hero" className="w-full max-w-full min-w-0" contentClassName="relative z-[1]">
+        <SectionAmbient intensity="soft" className="w-full max-w-full min-w-0" contentClassName="relative z-[1]">
         <div className="page-gutter pb-2 sm:pb-4 max-w-full min-w-0 overflow-x-clip">
           <div className="mx-auto w-full min-w-0 max-w-6xl">
             {/* Hero — solid badge + center-clear ambient */}
@@ -353,14 +394,15 @@ function DomainExtensionsPageContent() {
           </div>
         </div>
 
-        {/* Hide long SEO packs on mobile to keep tool compact */}
-        <div className="hidden sm:block">
+        {/* SEO packs — solid strip so ambient dots stay out of definition + FAQ cards/text */}
+        <div
+          className="hidden sm:block relative z-[1]"
+          style={{ backgroundColor: isLight ? '#f8fafc' : '#050505' }}
+        >
           <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.extensions} compact />
           <SeoGuidePack {...TOOL_GUIDE_PACKS.extensions} />
         </div>
-        <div className="pt-3 pb-2">
-          <AffiliateAdRail placement="inline" variant="card" />
-        </div>
+        {/* Footer affiliate banner only — no stacked inline ad above it */}
         </SectionAmbient>
       </main>
 

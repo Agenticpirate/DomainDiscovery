@@ -259,14 +259,14 @@ export function getOrganizationJsonLd() {
     name: SITE_BRAND.name,
     alternateName: [...SITE_BRAND.alternateNames],
     url: base,
-    // ImageObject with size helps Knowledge Panel / logo eligibility
+    // Solid plate PNG (512) matches DomainDiscoverylogo mark for Knowledge Panel / SERP
     logo: {
       '@type': 'ImageObject',
-      url: `${base}/logo.png`,
-      width: 1024,
-      height: 1024,
+      url: `${base}/logo-solid.png`,
+      width: 512,
+      height: 512,
     },
-    image: `${base}/logo.png`,
+    image: `${base}/logo-solid.png`,
     description: SITE_BRAND.description,
     sameAs: ['https://x.com/domainsdiscovery'],
   };
@@ -294,9 +294,9 @@ export function getWebSiteJsonLd() {
       url: base,
       logo: {
         '@type': 'ImageObject',
-        url: `${base}/logo.png`,
-        width: 1024,
-        height: 1024,
+        url: `${base}/logo-solid.png`,
+        width: 512,
+        height: 512,
       },
     },
   };

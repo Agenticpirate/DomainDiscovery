@@ -91,23 +91,27 @@ export const metadata: Metadata = {
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
     : undefined,
-  manifest: "/site.webmanifest?v=20260728",
-  // Google SERP favicon: needs a crawlable icon that is a multiple of 48px.
-  // Cache-bust (?v=) forces re-fetch after logo updates.
+  manifest: "/site.webmanifest?v=20260729serp",
+  // Google SERP favicon: multiples of 48px (48 / 96) as first PNG entries.
+  // Solid #0a0a0a plate so the white D mark matches DomainDiscoverylogo.png
+  // on light SERP backgrounds. Cache-bust forces re-crawl/re-fetch.
   icons: {
     icon: [
-      { url: "/favicon.ico?v=20260728", sizes: "any" },
-      { url: "/favicon.svg?v=20260728", type: "image/svg+xml" },
-      { url: "/icon-48.png?v=20260728", sizes: "48x48", type: "image/png" },
-      { url: "/icon-96.png?v=20260728", sizes: "96x96", type: "image/png" },
-      { url: "/icon-32.png?v=20260728", sizes: "32x32", type: "image/png" },
-      { url: "/icon-16.png?v=20260728", sizes: "16x16", type: "image/png" },
-      { url: "/icon-192.png?v=20260728", sizes: "192x192", type: "image/png" },
+      // Google / Chromium prefer these for SERP + tab when present
+      { url: "/icon-48.png?v=20260729serp", sizes: "48x48", type: "image/png" },
+      { url: "/icon-96.png?v=20260729serp", sizes: "96x96", type: "image/png" },
+      { url: "/favicon-48.png?v=20260729serp", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-96.png?v=20260729serp", sizes: "96x96", type: "image/png" },
+      { url: "/icon-192.png?v=20260729serp", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png?v=20260729serp", sizes: "512x512", type: "image/png" },
+      { url: "/icon-32.png?v=20260729serp", sizes: "32x32", type: "image/png" },
+      { url: "/icon-16.png?v=20260729serp", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.ico?v=20260729serp", sizes: "any" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png?v=20260728", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png?v=20260729serp", sizes: "180x180", type: "image/png" },
     ],
-    other: [{ rel: "mask-icon", url: "/logo-mark.svg?v=20260728", color: "#0a0a0a" }],
+    shortcut: [{ url: "/icon-96.png?v=20260729serp", type: "image/png" }],
   },
 };
 

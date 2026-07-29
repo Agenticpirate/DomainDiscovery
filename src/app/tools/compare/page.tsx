@@ -12,7 +12,6 @@ import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
-import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { useTheme } from '@/contexts/ThemeContext';
 import {
   getAllTldPriceDetails,
@@ -432,9 +431,7 @@ export default function ComparePage() {
           <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.compare} compact />
           <SeoGuidePack {...TOOL_GUIDE_PACKS.compare} />
         </div>
-        <div className="pt-2 pb-4">
-          <AffiliateAdRail placement="tools" variant="card" />
-        </div>
+        {/* Footer affiliate banner only — no stacked inline ad above it */}
       </main>
 
       <Footer />

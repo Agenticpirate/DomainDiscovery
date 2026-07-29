@@ -114,15 +114,15 @@ export function PremiumFaqGrid({
       aria-labelledby={showHeader ? headingId : undefined}
     >
       {showHeader && (
-        <div className="relative isolate mx-auto mb-1.5 sm:mb-4 max-w-3xl overflow-hidden rounded-2xl px-3 py-3 sm:px-5 sm:py-4 text-center">
+        <div
+          className="relative isolate mx-auto mb-1.5 sm:mb-4 max-w-3xl overflow-hidden rounded-2xl px-3 py-3 sm:px-5 sm:py-4 text-center"
+          style={{ backgroundColor: plateFill }}
+        >
+          {/* Fully opaque plate — ambient dots never bleed through titles/subtitles */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 rounded-[inherit]"
-            style={{
-              background: isLight
-                ? 'radial-gradient(ellipse 90% 80% at 50% 40%, #f8fafc 0%, #f8fafc 55%, rgba(248,250,252,0) 100%)'
-                : 'radial-gradient(ellipse 90% 80% at 50% 40%, #050505 0%, #050505 55%, rgba(5,5,5,0) 100%)',
-            }}
+            style={{ backgroundColor: plateFill }}
           />
           <div className="relative z-[1]">
             <HeadingTag id={headingId} className="section-title">

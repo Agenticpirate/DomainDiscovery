@@ -14,7 +14,7 @@ const RAIL_H = 600;
 
 /**
  * Desktop sticky skyscraper — identical 160×600 full-bleed slides.
- * object-cover fills the frame (like the clean blue creative).
+ * Local assets first (eager); CDN only on error so the rail never sits empty.
  */
 export function AffiliateSkyscraper() {
   const ads = SKYSCRAPER_CAROUSEL_ADS;
@@ -24,6 +24,14 @@ export function AffiliateSkyscraper() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  /** Per-creative resolved src (local → CDN on error) */
+  const [srcById, setSrcById] = useState<Record<string, string>>(() => {
+    const init: Record<string, string> = {};
+    for (const ad of SKYSCRAPER_CAROUSEL_ADS) {
+      init[ad.id] = ad.localSrc;
+    }
+    return init;
+  });
   const rootRef = useRef<HTMLDivElement | null>(null);
   const impressed = useRef<Set<string>>(new Set());
   const reactId = useId();
@@ -39,6 +47,23 @@ export function AffiliateSkyscraper() {
       }
     } catch {
       /* ignore */
+    }
+
+    // Preload both creatives so the first paint is never a blank rail
+    for (const ad of SKYSCRAPER_CAROUSEL_ADS) {
+      const img = new window.Image();
+      img.decoding = 'async';
+      img.src = ad.localSrc;
+      img.onerror = () => {
+        if (!ad.displayAdCdn) return;
+        const fallback = new window.Image();
+        fallback.src = ad.displayAdCdn;
+        fallback.onload = () => {
+          setSrcById((prev) =>
+            prev[ad.id] === ad.localSrc ? { ...prev, [ad.id]: ad.displayAdCdn } : prev
+          );
+        };
+      };
     }
   }, []);
 
@@ -120,25 +145,26 @@ export function AffiliateSkyscraper() {
           ×
         </button>
 
-        {/* Edge-to-edge creative — rounded clip only, no border/letterbox bezel */}
+        {/* Solid frame so the rail is never an empty black hole while assets load */}
         <div
           className="relative overflow-hidden rounded-[1.25rem] shadow-[0_20px_50px_-18px_rgba(0,0,0,0.65)]"
           style={{
             width: RAIL_W,
             height: RAIL_H,
-            maxHeight: '70vh',
-            aspectRatio: `${RAIL_W} / ${RAIL_H}`,
+            maxHeight: 'min(600px, 70vh)',
+            background:
+              'linear-gradient(165deg, #4c1d95 0%, #5b21b6 38%, #1e1b4b 100%)',
           }}
         >
           <span
-            className={`pointer-events-none absolute left-2 top-2 z-[2] inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[7px] font-semibold uppercase tracking-[0.12em] backdrop-blur-md ${
+            className={`pointer-events-none absolute left-1.5 top-1.5 z-[2] inline-flex items-center gap-0.5 rounded-md px-1.5 py-px text-[6px] font-semibold uppercase tracking-[0.12em] opacity-70 backdrop-blur-md sm:left-2 sm:top-2 sm:gap-1 sm:rounded-full sm:px-2 sm:py-0.5 sm:text-[7px] sm:opacity-100 ${
               isLight
-                ? 'bg-white/90 text-slate-600 border border-white/50'
-                : 'bg-black/45 text-white/80 border border-white/15'
+                ? 'bg-black/30 text-white/80 border border-white/10 sm:bg-white/90 sm:text-slate-600 sm:border-white/50'
+                : 'bg-black/30 text-white/70 border border-white/[0.08] sm:bg-black/45 sm:text-white/80 sm:border-white/15'
             }`}
           >
-            <span>Sponsored</span>
-            <span className="opacity-40">·</span>
+            <span className="max-sm:hidden normal-case tracking-wide">Sponsored</span>
+            <span className="opacity-40 max-sm:hidden">·</span>
             <span>Ad</span>
           </span>
 
@@ -169,18 +195,20 @@ export function AffiliateSkyscraper() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={ad.localSrc}
+                  src={srcById[ad.id] ?? ad.localSrc}
                   alt={ad.alt}
                   width={RAIL_W}
                   height={RAIL_H}
-                  loading={ad.id === active.id ? 'eager' : 'lazy'}
+                  loading="eager"
+                  fetchPriority={ad.id === active.id ? 'high' : 'low'}
                   decoding="async"
-                  /* cover = full bleed like the blue creative; slight crop over letterbox bars */
                   className="absolute inset-0 h-full w-full object-cover object-center select-none"
                   draggable={false}
                   onError={(e) => {
-                    if (ad.displayAdCdn) {
-                      (e.target as HTMLImageElement).src = ad.displayAdCdn;
+                    const el = e.target as HTMLImageElement;
+                    if (ad.displayAdCdn && el.src !== ad.displayAdCdn) {
+                      el.src = ad.displayAdCdn;
+                      setSrcById((prev) => ({ ...prev, [ad.id]: ad.displayAdCdn }));
                     }
                   }}
                 />

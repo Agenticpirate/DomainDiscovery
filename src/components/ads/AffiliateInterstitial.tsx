@@ -24,14 +24,14 @@ function ssSet(key: string, value: string) {
 }
 
 /**
- * Non-skippable Spaceship interstitial after 5+ minutes of *visible* site time.
+ * Non-skippable Spaceship interstitial after ~4 minutes of *visible* site time.
  *
  * Rules:
- *  - Wait 5 minutes engaged (tab visible + focused) before first show
- *  - When shown, engaged clock resets — reload/return will NOT auto-pop again
- *    until another full 5 minutes of engagement
+ *  - Wait engagedMs while the tab is visible (does not require window focus —
+ *    focus checks blocked the timer whenever DevTools / another pane had focus)
+ *  - When shown, engaged clock resets so reload won't re-pop until another full wait
  *  - After Continue, never show again this browser session
- *  - 60s gate (pauses when tab hidden); or unlock by clicking the ad
+ *  - 60s gate (pauses when tab hidden); or unlock immediately by clicking the ad
  */
 export function AffiliateInterstitial() {
   const creative = SPACESHIP_INTERSTITIAL;
@@ -68,14 +68,9 @@ export function AffiliateInterstitial() {
     let lastTick = Date.now();
     let engaged = Number(ssGet(INTERSTITIAL_CONFIG.storageEngaged) || 0) || 0;
 
-    const isActive = () =>
-      document.visibilityState === 'visible' &&
-      (typeof document.hasFocus !== 'function' || document.hasFocus());
+    /** Tab is in the foreground — enough to count as "on site" */
+    const isTabVisible = () => document.visibilityState === 'visible';
 
-    /**
-     * Open interstitial once for this engagement cycle.
-     * Resets engaged → 0 so a reload / return visit cannot re-open instantly.
-     */
     const openInterstitial = () => {
       if (completedRef.current || openRef.current) return;
       if (ssGet(INTERSTITIAL_CONFIG.storageDone) === '1') {
@@ -99,51 +94,47 @@ export function AffiliateInterstitial() {
       openInterstitial();
     };
 
-    // Only auto-open on mount if they already earned 5m AND have not finished a cycle
-    // After a prior show, engaged was reset to 0 — so this will not fire until 5m more.
+    // Resume mid-session: if they already banked enough visible time, open now
     maybeOpen(engaged);
 
     const onInterval = () => {
       const now = Date.now();
-      if (isActive() && !completedRef.current && !openRef.current) {
-        const delta = Math.min(now - lastTick, 2000);
-        if (delta > 0) {
-          engaged += delta;
-          ssSet(INTERSTITIAL_CONFIG.storageEngaged, String(engaged));
-          maybeOpen(engaged);
-        }
-      }
+      // Cap delta so a long background pause never dumps as one chunk
+      const delta = Math.min(Math.max(0, now - lastTick), 2000);
       lastTick = now;
+
+      if (!isTabVisible() || completedRef.current || openRef.current) return;
+      if (delta <= 0) return;
+
+      engaged += delta;
+      ssSet(INTERSTITIAL_CONFIG.storageEngaged, String(engaged));
+      maybeOpen(engaged);
     };
 
-    const onVisibilityOrFocus = () => {
-      // Drop the gap while away so "return to tab" does not dump a huge delta
+    const onVisibility = () => {
+      // Reset tick so we don't credit the hidden gap
       lastTick = Date.now();
     };
 
     const id = window.setInterval(onInterval, 1000);
-    document.addEventListener('visibilitychange', onVisibilityOrFocus);
-    window.addEventListener('focus', onVisibilityOrFocus);
-    window.addEventListener('blur', onVisibilityOrFocus);
+    document.addEventListener('visibilitychange', onVisibility);
+    // Also tick once soon after mount (don't wait a full second)
+    const boot = window.setTimeout(onInterval, 250);
 
     return () => {
       window.clearInterval(id);
-      document.removeEventListener('visibilitychange', onVisibilityOrFocus);
-      window.removeEventListener('focus', onVisibilityOrFocus);
-      window.removeEventListener('blur', onVisibilityOrFocus);
+      window.clearTimeout(boot);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
 
-  // —— Stable 60s countdown while open (pauses when not focused) ——
+  // —— Stable 60s countdown while open (pauses when tab hidden) ——
   useEffect(() => {
     if (!open) return;
 
     const id = window.setInterval(() => {
       if (completedRef.current) return;
-      const active =
-        document.visibilityState === 'visible' &&
-        (typeof document.hasFocus !== 'function' || document.hasFocus());
-      if (!active) return;
+      if (document.visibilityState !== 'visible') return;
       setSecondsLeft((s) => (s <= 0 ? 0 : s - 1));
     }, 1000);
 
@@ -171,7 +162,6 @@ export function AffiliateInterstitial() {
   const complete = useCallback(() => {
     completedRef.current = true;
     openRef.current = false;
-    // Session complete — will not show again until a new browser session
     ssSet(INTERSTITIAL_CONFIG.storageDone, '1');
     ssSet(INTERSTITIAL_CONFIG.storageEngaged, '0');
     setOpen(false);

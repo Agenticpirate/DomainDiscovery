@@ -48,11 +48,14 @@ export const SPACESHIP_INTERSTITIAL: AffiliateAdCreative = {
 };
 
 export const INTERSTITIAL_CONFIG = {
-  engagedMs: 5 * 60 * 1000,
+  /** Visible-tab engaged time before first interstitial (3–5 min range → 4 min) */
+  engagedMs: 4 * 60 * 1000,
+  /** Non-skippable gate once open (or unlock by clicking the ad) */
   dismissWaitSec: 60,
-  storageEngaged: 'dd_aff_engaged_ms_v1',
-  storageDone: 'dd_aff_interstitial_done_v1',
-  storageShown: 'dd_aff_interstitial_shown_v1',
+  // v2 keys: clears stuck v1 "done" flags that blocked the modal after testing
+  storageEngaged: 'dd_aff_engaged_ms_v2',
+  storageDone: 'dd_aff_interstitial_done_v2',
+  storageShown: 'dd_aff_interstitial_shown_v2',
 } as const;
 
 /**
@@ -133,7 +136,7 @@ export const BILLBOARD_CAROUSEL_MS = 15_000;
 export const SKYSCRAPER_CAROUSEL_MS = 15_000;
 export const STRIP_CAROUSEL_MS = 15_000;
 
-/** Spacemail skyscraper — Impact 3832106 (portrait asset) */
+/** Spacemail skyscraper — Impact 3832106 (true 160×600 local asset) */
 export const SPACESHIP_SPACEMAIL_SKYSCRAPER: AffiliateAdCreative = {
   id: '3832106',
   campaignId: '21274',
@@ -142,8 +145,8 @@ export const SPACESHIP_SPACEMAIL_SKYSCRAPER: AffiliateAdCreative = {
   impressionPixel: 'https://imp.pxf.io/i/7521997/3832106/21274',
   displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832106',
   localSrc: '/ads/spacemail-banner-160x600.png',
-  width: 724,
-  height: 2172,
+  width: 160,
+  height: 600,
   alt: 'Spacemail by Spaceship — professional email for your domain',
   title: 'Spacemail',
   subtitle: 'Email on your domain',
@@ -171,9 +174,10 @@ export const SPACESHIP_PARTNER_SKYSCRAPER: AffiliateAdCreative = {
   format: 'skyscraper',
 };
 
+/** Side rail order: sky-blue Spaceship first, Spacemail second */
 export const SKYSCRAPER_CAROUSEL_ADS: AffiliateAdCreative[] = [
-  SPACESHIP_SPACEMAIL_SKYSCRAPER,
   SPACESHIP_PARTNER_SKYSCRAPER,
+  SPACESHIP_SPACEMAIL_SKYSCRAPER,
 ];
 
 export type AffiliateAdPlacement =

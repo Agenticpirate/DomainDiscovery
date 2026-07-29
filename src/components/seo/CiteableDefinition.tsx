@@ -33,6 +33,7 @@ export function CiteableDefinition({ definition, className = '', compact = false
         className={`relative isolate overflow-hidden mx-auto max-w-3xl rounded-2xl border p-4 sm:p-5 ${
           isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'
         }`}
+        style={{ backgroundColor: solid }}
       >
         <div
           aria-hidden
