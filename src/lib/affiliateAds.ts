@@ -5,6 +5,7 @@
  * Register CTAs (domain deep-links) → registrars.ts (ad 1859616).
  * Spacemail 320×50 display → ad 3832105.
  * Spacemail 1200×600 (TW/X) display → ad 3832098.
+ * Engaged-time interstitial (626×521) → ad 1825514.
  */
 
 export type AffiliateAdCreative = {
@@ -30,9 +31,38 @@ export type AffiliateAdCreative = {
   subtitle: string;
   ctaLabel: string;
   brand: string;
-  /** Layout hint: leaderboard (320×50) vs billboard (wide social) */
-  format: 'leaderboard' | 'billboard';
+  /** Layout hint */
+  format: 'leaderboard' | 'billboard' | 'interstitial';
 };
+
+/** Engaged-time interstitial — Impact ad 1825514 (non-skippable gate) */
+export const SPACESHIP_INTERSTITIAL: AffiliateAdCreative = {
+  id: '1825514',
+  campaignId: '21274',
+  accountId: '7521997',
+  clickUrl: 'https://spaceship.sjv.io/c/7521997/1825514/21274',
+  impressionPixel: 'https://imp.pxf.io/i/7521997/1825514/21274',
+  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-1825514',
+  localSrc: '/ads/spaceship-interstitial-1825514.png',
+  width: 626,
+  height: 521,
+  alt: 'Spaceship — domains, hosting & email affiliate offer',
+  title: 'Power your domains with Spaceship',
+  subtitle: 'Register, transfer, and grow — exclusive partner offer',
+  ctaLabel: 'Visit Spaceship',
+  brand: 'Spaceship',
+  format: 'interstitial',
+};
+
+/** Engaged-time gate thresholds */
+export const INTERSTITIAL_CONFIG = {
+  /** Show after this much visible on-site time */
+  engagedMs: 5 * 60 * 1000,
+  /** Non-skippable wait while modal is open + tab visible */
+  dismissWaitSec: 60,
+  storageEngaged: 'dd_aff_engaged_ms_v1',
+  storageDone: 'dd_aff_interstitial_done_v1',
+} as const;
 
 /** Spacemail 320×50 leaderboard — Impact ad 3832105 */
 export const SPACESHIP_SPACEMAIL_BANNER: AffiliateAdCreative = {

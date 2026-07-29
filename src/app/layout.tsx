@@ -3,6 +3,7 @@ import "./globals.css";
 import { ToastProvider } from "@/components/ui/Toast";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
+import { AffiliateInterstitial } from "@/components/ads/AffiliateInterstitial";
 import {
   getOrganizationJsonLd,
   getSiteBaseUrl,
@@ -148,6 +149,8 @@ export default function RootLayout({
           <ToastProvider>
             <ScrollToTop />
             {children}
+            {/* Engaged-time Spaceship interstitial (5 min visible → non-skippable 60s / click) */}
+            <AffiliateInterstitial />
           </ToastProvider>
         </ThemeProvider>
       </body>
