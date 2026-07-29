@@ -152,7 +152,10 @@ export const BILLBOARD_CAROUSEL_ADS: AffiliateAdCreative[] = [
 export const BILLBOARD_CAROUSEL_MS = 15_000;
 export const SKYSCRAPER_CAROUSEL_MS = 15_000;
 
-/** Spacemail 160×600 skyscraper — Impact ad 3832106 */
+/**
+ * Spacemail skyscraper — Impact ad 3832106
+ * Source asset is high-res (724×2172); displayed at ~160px wide in the rail.
+ */
 export const SPACESHIP_SPACEMAIL_SKYSCRAPER: AffiliateAdCreative = {
   id: IMPACT_SPACEMAIL_160.id,
   campaignId: IMPACT_SPACEMAIL_160.campaignId,
@@ -161,8 +164,8 @@ export const SPACESHIP_SPACEMAIL_SKYSCRAPER: AffiliateAdCreative = {
   impressionPixel: IMPACT_SPACEMAIL_160.impressionPixel,
   displayAdCdn: IMPACT_SPACEMAIL_160.displayAdCdn,
   localSrc: '/ads/spacemail-banner-160x600.png',
-  width: 160,
-  height: 600,
+  width: 724,
+  height: 2172,
   alt: 'Spacemail by Spaceship — professional email for your domain',
   title: 'Spacemail',
   subtitle: 'Email on your domain',
