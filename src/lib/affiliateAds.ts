@@ -73,8 +73,12 @@ export const INTERSTITIAL_CONFIG = {
   engagedMs: 5 * 60 * 1000,
   /** Non-skippable wait while modal is open + tab visible */
   dismissWaitSec: 60,
+  /** Accumulated visible ms since last interstitial (or session start) */
   storageEngaged: 'dd_aff_engaged_ms_v1',
+  /** User finished this interstitial cycle (Continue) — no more until next browser session */
   storageDone: 'dd_aff_interstitial_done_v1',
+  /** Interstitial was opened this session — engaged clock was reset; must wait full 5m again */
+  storageShown: 'dd_aff_interstitial_shown_v1',
 } as const;
 
 /** Spacemail 320×50 leaderboard — Impact ad 3832105 */

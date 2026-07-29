@@ -7,14 +7,31 @@ import {
 } from '@/lib/affiliateAds';
 import { useTheme } from '@/contexts/ThemeContext';
 
+function ssGet(key: string): string | null {
+  try {
+    return sessionStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function ssSet(key: string, value: string) {
+  try {
+    sessionStorage.setItem(key, value);
+  } catch {
+    /* private mode / quota */
+  }
+}
+
 /**
  * Non-skippable Spaceship interstitial after 5+ minutes of *visible* site time.
  *
- * Dismiss paths:
- *  1. Wait 60s while this page/tab stays visible (timer pauses when hidden / blurred)
- *  2. Click the sponsored ad (then Continue unlocks)
- *
- * Once completed in a browser session, does not show again (sessionStorage).
+ * Rules:
+ *  - Wait 5 minutes engaged (tab visible + focused) before first show
+ *  - When shown, engaged clock resets — reload/return will NOT auto-pop again
+ *    until another full 5 minutes of engagement
+ *  - After Continue, never show again this browser session
+ *  - 60s gate (pauses when tab hidden); or unlock by clicking the ad
  */
 export function AffiliateInterstitial() {
   const creative = SPACESHIP_INTERSTITIAL;
@@ -29,77 +46,78 @@ export function AffiliateInterstitial() {
 
   const impressionFired = useRef(false);
   const completedRef = useRef(false);
-  /** Tracks open without stale closures in the engaged-time interval */
   const openRef = useRef(false);
   const reactId = useId();
 
   const canDismiss = secondsLeft <= 0 || clickedAd;
 
-  // Keep openRef in sync
   useEffect(() => {
     openRef.current = open;
   }, [open]);
 
-  // —— Accumulate engaged (visible) time sitewide ——
+  // —— Engage timer + open gate ——
   useEffect(() => {
     setMounted(true);
     if (typeof window === 'undefined') return;
 
-    try {
-      if (sessionStorage.getItem(INTERSTITIAL_CONFIG.storageDone) === '1') {
-        completedRef.current = true;
-        return;
-      }
-    } catch {
-      /* private mode */
+    if (ssGet(INTERSTITIAL_CONFIG.storageDone) === '1') {
+      completedRef.current = true;
+      return;
     }
 
     let lastTick = Date.now();
-    let engaged = 0;
-    try {
-      engaged = Number(sessionStorage.getItem(INTERSTITIAL_CONFIG.storageEngaged) || 0) || 0;
-    } catch {
-      engaged = 0;
-    }
+    let engaged = Number(ssGet(INTERSTITIAL_CONFIG.storageEngaged) || 0) || 0;
 
     const isActive = () =>
-      typeof document !== 'undefined' &&
       document.visibilityState === 'visible' &&
       (typeof document.hasFocus !== 'function' || document.hasFocus());
 
-    /** Open once — never reset the 60s countdown after open */
-    const maybeOpen = (ms: number) => {
+    /**
+     * Open interstitial once for this engagement cycle.
+     * Resets engaged → 0 so a reload / return visit cannot re-open instantly.
+     */
+    const openInterstitial = () => {
       if (completedRef.current || openRef.current) return;
-      if (ms < INTERSTITIAL_CONFIG.engagedMs) return;
+      if (ssGet(INTERSTITIAL_CONFIG.storageDone) === '1') {
+        completedRef.current = true;
+        return;
+      }
+
       openRef.current = true;
+      engaged = 0;
+      ssSet(INTERSTITIAL_CONFIG.storageEngaged, '0');
+      ssSet(INTERSTITIAL_CONFIG.storageShown, '1');
+
+      setClickedAd(false);
       setSecondsLeft(INTERSTITIAL_CONFIG.dismissWaitSec);
       setOpen(true);
     };
 
+    const maybeOpen = (ms: number) => {
+      if (completedRef.current || openRef.current) return;
+      if (ms < INTERSTITIAL_CONFIG.engagedMs) return;
+      openInterstitial();
+    };
+
+    // Only auto-open on mount if they already earned 5m AND have not finished a cycle
+    // After a prior show, engaged was reset to 0 — so this will not fire until 5m more.
     maybeOpen(engaged);
 
     const onInterval = () => {
       const now = Date.now();
-      if (isActive() && !completedRef.current) {
-        // Only accumulate engaged time before the interstitial is shown
-        if (!openRef.current) {
-          const delta = Math.min(now - lastTick, 2000);
-          if (delta > 0) {
-            engaged += delta;
-            try {
-              sessionStorage.setItem(INTERSTITIAL_CONFIG.storageEngaged, String(engaged));
-            } catch {
-              /* ignore */
-            }
-            maybeOpen(engaged);
-          }
+      if (isActive() && !completedRef.current && !openRef.current) {
+        const delta = Math.min(now - lastTick, 2000);
+        if (delta > 0) {
+          engaged += delta;
+          ssSet(INTERSTITIAL_CONFIG.storageEngaged, String(engaged));
+          maybeOpen(engaged);
         }
       }
       lastTick = now;
     };
 
     const onVisibilityOrFocus = () => {
-      // Reset baseline so hidden gaps never count toward engaged time
+      // Drop the gap while away so "return to tab" does not dump a huge delta
       lastTick = Date.now();
     };
 
@@ -116,8 +134,7 @@ export function AffiliateInterstitial() {
     };
   }, []);
 
-  // —— 60s dismiss countdown: one stable interval while open ——
-  // Do NOT depend on secondsLeft (that recreated the timer every tick and fought resets).
+  // —— Stable 60s countdown while open (pauses when not focused) ——
   useEffect(() => {
     if (!open) return;
 
@@ -126,14 +143,13 @@ export function AffiliateInterstitial() {
       const active =
         document.visibilityState === 'visible' &&
         (typeof document.hasFocus !== 'function' || document.hasFocus());
-      if (!active) return; // pause when tab/window not focused
+      if (!active) return;
       setSecondsLeft((s) => (s <= 0 ? 0 : s - 1));
     }, 1000);
 
     return () => window.clearInterval(id);
   }, [open]);
 
-  // —— Impression once when modal opens ——
   useEffect(() => {
     if (!open || impressionFired.current || typeof window === 'undefined') return;
     impressionFired.current = true;
@@ -143,7 +159,6 @@ export function AffiliateInterstitial() {
     }cachebuster=${Date.now()}`;
   }, [open, creative.impressionPixel]);
 
-  // —— Lock body scroll while open ——
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -156,15 +171,12 @@ export function AffiliateInterstitial() {
   const complete = useCallback(() => {
     completedRef.current = true;
     openRef.current = false;
-    try {
-      sessionStorage.setItem(INTERSTITIAL_CONFIG.storageDone, '1');
-    } catch {
-      /* ignore */
-    }
+    // Session complete — will not show again until a new browser session
+    ssSet(INTERSTITIAL_CONFIG.storageDone, '1');
+    ssSet(INTERSTITIAL_CONFIG.storageEngaged, '0');
     setOpen(false);
   }, []);
 
-  // Escape only works after unlock
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
