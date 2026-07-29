@@ -196,12 +196,21 @@ export function AffiliateAdBanner({
   if (variant === 'billboard' || (variant === 'card' && isBillboard)) {
     return (
       <div ref={rootRef} className={`relative w-full ${visibility}`}>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-[2px] rounded-[1.35rem] opacity-80"
+          style={{
+            background: isLight
+              ? 'linear-gradient(135deg, rgba(56,189,248,0.4), rgba(167,139,250,0.35))'
+              : 'linear-gradient(135deg, rgba(56,189,248,0.3), rgba(139,92,246,0.35))',
+          }}
+        />
         {trackedAnchor(
           <span
-            className={`relative block w-full overflow-hidden rounded-2xl transition-all active:scale-[0.997] ${
+            className={`relative block w-full overflow-hidden rounded-2xl transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.997] ${
               isLight
-                ? 'bg-white border border-slate-200 shadow-[0_12px_40px_-18px_rgba(15,23,42,0.28)] hover:border-slate-300 hover:shadow-lg'
-                : 'bg-[#0a0a0c] border border-white/[0.12] shadow-[0_20px_56px_-28px_rgba(0,0,0,0.9)] hover:border-white/20'
+                ? 'bg-white border border-slate-200 shadow-[0_16px_48px_-18px_rgba(15,23,42,0.35)] hover:shadow-xl'
+                : 'bg-[#0a0a0c] border border-white/15 shadow-[0_24px_64px_-24px_rgba(0,0,0,0.95)] hover:border-white/25'
             }`}
           >
             <span className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
@@ -216,23 +225,20 @@ export function AffiliateAdBanner({
               </span>
             </span>
 
-            <span className="block w-full p-1.5 sm:p-2">{bannerImg}</span>
+            {/* Full-bleed image — no tiny thumbnail */}
+            <span className="block w-full">{bannerImg}</span>
 
-            <span
-              className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-3.5 pb-3.5 pt-1 sm:px-5 sm:pb-4 ${
-                isLight ? 'bg-white' : 'bg-[#0a0a0c]'
-              }`}
-            >
+            <span className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 px-3.5 py-3.5 sm:px-5 sm:py-4 bg-gradient-to-r from-transparent via-transparent to-transparent">
               <span className="min-w-0">
                 <span
-                  className={`block text-[13px] sm:text-[15px] font-black tracking-tight ${
+                  className={`block text-[14px] sm:text-[16px] font-black tracking-tight ${
                     isLight ? 'text-slate-900' : 'text-white'
                   }`}
                 >
                   {creative.title}
                 </span>
                 <span
-                  className={`block text-[11px] sm:text-[12.5px] mt-0.5 ${
+                  className={`block text-[12px] sm:text-[13px] mt-0.5 ${
                     isLight ? 'text-slate-500' : 'text-white/50'
                   }`}
                 >
@@ -240,20 +246,20 @@ export function AffiliateAdBanner({
                 </span>
               </span>
               <span
-                className={`inline-flex w-full sm:w-auto shrink-0 items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-[12px] font-bold transition-colors ${
+                className={`inline-flex w-full sm:w-auto shrink-0 items-center justify-center gap-1.5 rounded-full px-5 py-3 text-[13px] font-bold shadow-lg transition-transform group-hover:scale-[1.04] ${
                   isLight
                     ? 'bg-slate-900 text-white group-hover:bg-slate-800'
-                    : 'bg-white text-black group-hover:bg-white/90'
+                    : 'bg-white text-black group-hover:bg-white/95'
                 }`}
               >
                 {creative.ctaLabel}
-                <svg className="w-3.5 h-3.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <svg className="w-4 h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </span>
             </span>
           </span>,
-          'w-full block'
+          'w-full block group'
         )}
         {noscriptPixel}
       </div>
@@ -263,12 +269,21 @@ export function AffiliateAdBanner({
   if (variant === 'leaderboard') {
     return (
       <div ref={rootRef} className={`relative flex justify-center ${visibility}`}>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-1 rounded-2xl opacity-70 blur-[1px]"
+          style={{
+            background: isLight
+              ? 'linear-gradient(90deg, rgba(56,189,248,0.35), rgba(167,139,250,0.3))'
+              : 'linear-gradient(90deg, rgba(56,189,248,0.25), rgba(139,92,246,0.3))',
+          }}
+        />
         {trackedAnchor(
           <span
-            className={`inline-flex flex-col items-center gap-1 rounded-xl p-2 transition-transform active:scale-[0.99] ${
+            className={`relative inline-flex flex-col items-center gap-1.5 rounded-2xl p-3 sm:p-3.5 transition-transform active:scale-[0.99] group-hover:scale-[1.02] ${
               isLight
-                ? 'bg-white/90 border border-slate-200 shadow-sm'
-                : 'bg-[#0c0c0e]/90 border border-white/10 shadow-[0_8px_24px_rgba(0,0,0,0.35)]'
+                ? 'bg-white border border-slate-200 shadow-lg'
+                : 'bg-[#0c0c0e] border border-white/15 shadow-[0_12px_36px_rgba(0,0,0,0.45)]'
             }`}
           >
             <span
@@ -278,8 +293,32 @@ export function AffiliateAdBanner({
             >
               Sponsored
             </span>
-            {bannerImg}
-          </span>
+            {/* Scale 320×50 up so it reads as a real unit */}
+            <span className="block w-full min-w-[min(100%,20rem)] sm:min-w-[22rem]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={imgSrc}
+                alt={creative.alt}
+                width={creative.width}
+                height={creative.height}
+                loading="lazy"
+                className="block w-full h-auto rounded-lg"
+                onError={() => {
+                  if (creative.displayAdCdn && imgSrc !== creative.displayAdCdn) {
+                    setImgSrc(creative.displayAdCdn);
+                  }
+                }}
+              />
+            </span>
+            <span
+              className={`inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[11px] font-bold ${
+                isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
+              }`}
+            >
+              {creative.ctaLabel} →
+            </span>
+          </span>,
+          'group'
         )}
         {noscriptPixel}
       </div>
@@ -289,24 +328,53 @@ export function AffiliateAdBanner({
   if (variant === 'strip') {
     return (
       <div ref={rootRef} className={`relative w-full ${visibility}`}>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-[1.5px] rounded-[1.15rem] opacity-75"
+          style={{
+            background: isLight
+              ? 'linear-gradient(90deg, rgba(56,189,248,0.45), rgba(167,139,250,0.4), rgba(244,114,182,0.3))'
+              : 'linear-gradient(90deg, rgba(56,189,248,0.3), rgba(139,92,246,0.35), rgba(236,72,153,0.25))',
+          }}
+        />
         {trackedAnchor(
           <span
-            className={`flex w-full items-center justify-center gap-3 rounded-2xl px-3 py-2.5 transition-colors ${
+            className={`relative flex w-full flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl px-3.5 py-3 sm:px-5 sm:py-3.5 transition-all group-hover:scale-[1.01] ${
               isLight
-                ? 'bg-gradient-to-r from-slate-50 via-white to-sky-50 border border-slate-200 hover:border-slate-300'
-                : 'bg-gradient-to-r from-[#0a0a0c] via-[#0c0c0e] to-[#0a1218] border border-white/10 hover:border-white/18'
+                ? 'bg-white border border-slate-200 shadow-md hover:shadow-lg'
+                : 'bg-gradient-to-r from-[#0a0a0c] via-[#0c0c12] to-[#0a1218] border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.4)] hover:border-white/25'
             }`}
           >
-            <span
-              className={`shrink-0 text-[8px] font-bold uppercase tracking-[0.14em] ${
-                isLight ? 'text-slate-400' : 'text-white/35'
-              }`}
-            >
-              Ad
+            <span className="flex w-full sm:w-auto items-center gap-3 min-w-0 flex-1">
+              <span
+                className={`shrink-0 text-[8px] font-black uppercase tracking-[0.14em] px-1.5 py-0.5 rounded-full border ${
+                  isLight
+                    ? 'text-slate-500 border-slate-200 bg-slate-50'
+                    : 'text-white/45 border-white/12 bg-white/[0.04]'
+                }`}
+              >
+                Ad
+              </span>
+              {/* Larger strip creative: full available width on mobile */}
+              <span className="min-w-0 flex-1 flex justify-center sm:justify-start">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={imgSrc}
+                  alt={creative.alt}
+                  width={creative.width}
+                  height={creative.height}
+                  loading="lazy"
+                  className="block w-full max-w-[min(100%,28rem)] h-auto rounded-lg shadow-sm"
+                  onError={() => {
+                    if (creative.displayAdCdn && imgSrc !== creative.displayAdCdn) {
+                      setImgSrc(creative.displayAdCdn);
+                    }
+                  }}
+                />
+              </span>
             </span>
-            {bannerImg}
             <span
-              className={`hidden sm:inline-flex shrink-0 items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold ${
+              className={`inline-flex w-full sm:w-auto shrink-0 items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-[12.5px] font-bold transition-transform group-hover:scale-[1.04] ${
                 isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
               }`}
             >
@@ -314,38 +382,37 @@ export function AffiliateAdBanner({
               <span aria-hidden>→</span>
             </span>
           </span>,
-          'w-full'
+          'w-full group'
         )}
         {noscriptPixel}
       </div>
     );
   }
 
-  // variant === 'card' (leaderboard creative + copy)
+  // variant === 'card' — leaderboard creative promoted to large highlighted unit
   return (
     <div ref={rootRef} className={`relative w-full ${visibility}`}>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-[2px] rounded-[1.35rem] opacity-80"
+        style={{
+          background: isLight
+            ? 'linear-gradient(135deg, rgba(56,189,248,0.4), rgba(167,139,250,0.35), rgba(244,114,182,0.25))'
+            : 'linear-gradient(135deg, rgba(56,189,248,0.28), rgba(139,92,246,0.32), rgba(236,72,153,0.22))',
+        }}
+      />
       {trackedAnchor(
         <span
-          className={`relative flex w-full flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 overflow-hidden rounded-2xl px-3.5 py-3.5 sm:px-5 sm:py-4 text-left transition-all active:scale-[0.995] ${
+          className={`relative flex w-full flex-col overflow-hidden rounded-2xl text-left transition-all duration-300 group-hover:scale-[1.01] active:scale-[0.995] ${
             isLight
-              ? 'bg-white border border-slate-200 shadow-[0_10px_36px_-18px_rgba(15,23,42,0.25)] hover:border-slate-300 hover:shadow-md'
-              : 'bg-[#0a0a0c] border border-white/[0.12] shadow-[0_16px_48px_-24px_rgba(0,0,0,0.85)] hover:border-white/20'
+              ? 'bg-white border border-slate-200 shadow-[0_14px_44px_-16px_rgba(15,23,42,0.3)] hover:shadow-xl'
+              : 'bg-[#0a0a0c] border border-white/15 shadow-[0_20px_56px_-20px_rgba(0,0,0,0.9)] hover:border-white/25'
           }`}
         >
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-90"
-            style={{
-              background: isLight
-                ? 'radial-gradient(ellipse 70% 120% at 0% 50%, rgba(14,165,233,0.08), transparent 55%)'
-                : 'radial-gradient(ellipse 70% 120% at 0% 50%, rgba(56,189,248,0.08), transparent 55%)',
-            }}
-          />
-
-          <span className="relative z-[1] flex min-w-0 flex-1 flex-col gap-1.5 sm:gap-2">
+          <span className="flex items-center justify-between gap-2 px-3.5 pt-3 sm:px-4 sm:pt-3.5">
             <span className="flex items-center gap-2">
               <span
-                className={`inline-flex items-center rounded-full px-1.5 py-0.5 text-[8px] font-black uppercase tracking-[0.14em] border ${
+                className={`inline-flex items-center rounded-full px-2 py-0.5 text-[8px] font-black uppercase tracking-[0.14em] border ${
                   isLight
                     ? 'border-slate-200 bg-slate-50 text-slate-500'
                     : 'border-white/10 bg-white/[0.04] text-white/45'
@@ -360,44 +427,77 @@ export function AffiliateAdBanner({
               </span>
             </span>
             <span
-              className={`text-[13px] sm:text-[15px] font-black tracking-tight leading-snug ${
-                isLight ? 'text-slate-900' : 'text-white'
+              className={`hidden sm:inline text-[10px] font-medium ${
+                isLight ? 'text-sky-600' : 'text-sky-300/80'
               }`}
             >
-              {creative.title}
-            </span>
-            <span
-              className={`text-[11px] sm:text-[12.5px] leading-snug ${
-                isLight ? 'text-slate-500' : 'text-white/50'
-              }`}
-            >
-              {creative.subtitle}
+              Tap to open →
             </span>
           </span>
 
-          <span className="relative z-[1] flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 shrink-0">
+          {/* Large banner area — fill width so 320×50 doesn't look like a postage stamp */}
+          <span className="relative z-[1] px-3 sm:px-4 py-3 sm:py-3.5">
             <span
-              className={`rounded-lg p-1 ${
-                isLight ? 'bg-slate-50 border border-slate-100' : 'bg-black/40 border border-white/8'
+              className={`flex items-center justify-center rounded-xl p-3 sm:p-4 ${
+                isLight
+                  ? 'bg-gradient-to-b from-slate-50 to-white border border-slate-100'
+                  : 'bg-gradient-to-b from-white/[0.06] to-transparent border border-white/8'
               }`}
             >
-              {bannerImg}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={imgSrc}
+                alt={creative.alt}
+                width={creative.width}
+                height={creative.height}
+                loading="lazy"
+                className="block w-full max-w-[28rem] sm:max-w-[32rem] h-auto rounded-md shadow-sm"
+                style={{ imageRendering: 'auto' }}
+                onError={() => {
+                  if (creative.displayAdCdn && imgSrc !== creative.displayAdCdn) {
+                    setImgSrc(creative.displayAdCdn);
+                  }
+                }}
+              />
+            </span>
+          </span>
+
+          <span
+            className={`relative z-[1] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 px-3.5 pb-3.5 sm:px-4 sm:pb-4 ${
+              isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+            }`}
+          >
+            <span className="min-w-0">
+              <span
+                className={`block text-[14px] sm:text-[15px] font-black tracking-tight leading-snug ${
+                  isLight ? 'text-slate-900' : 'text-white'
+                }`}
+              >
+                {creative.title}
+              </span>
+              <span
+                className={`block text-[12px] leading-snug mt-0.5 ${
+                  isLight ? 'text-slate-500' : 'text-white/50'
+                }`}
+              >
+                {creative.subtitle}
+              </span>
             </span>
             <span
-              className={`inline-flex w-full sm:w-auto items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-[12px] font-bold transition-colors ${
+              className={`inline-flex w-full sm:w-auto items-center justify-center gap-1.5 rounded-full px-5 py-3 text-[13px] font-bold shadow-md transition-transform group-hover:scale-[1.04] ${
                 isLight
                   ? 'bg-slate-900 text-white group-hover:bg-slate-800'
-                  : 'bg-white text-black group-hover:bg-white/90'
+                  : 'bg-white text-black group-hover:bg-white/95'
               }`}
             >
               {creative.ctaLabel}
-              <svg className="w-3.5 h-3.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <svg className="w-4 h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </span>
           </span>
         </span>,
-        'w-full block'
+        'w-full block group'
       )}
       {noscriptPixel}
     </div>

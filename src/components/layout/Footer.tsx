@@ -245,7 +245,7 @@ export const Footer: React.FC = () => {
     <footer className={`relative overflow-hidden border-t ${hairline} ${solidBg}`}>
       {/* Sitewide Spaceship / Spacemail affiliate unit — Impact ad 3832105 */}
       <div className={`relative z-[3] border-b ${hairline} ${solidBg}`}>
-        <div className="max-w-4xl mx-auto px-3 sm:px-5 py-3 sm:py-4">
+        <div className="max-w-5xl mx-auto px-3 sm:px-5 py-4 sm:py-5">
           <AffiliateAdBanner placement="footer" variant="card" />
         </div>
       </div>

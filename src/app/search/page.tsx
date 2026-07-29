@@ -857,7 +857,7 @@ function SearchPageContent() {
           <SeoGuidePack {...TOOL_GUIDE_PACKS.search} />
         </div>
         <div className="px-0 sm:px-0 pt-3 pb-2">
-          <AffiliateAdRail placement="search" variant="card" />
+          <AffiliateAdRail placement="search" variant="auto" />
         </div>
         <div className="pb-6 sm:pb-8">
           <Footer />

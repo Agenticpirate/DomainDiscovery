@@ -186,7 +186,7 @@ export default function LearnPage() {
           </div>
         </section>
         <div className="pt-2 pb-6">
-          <AffiliateAdRail placement="learn" variant="card" />
+          <AffiliateAdRail placement="learn" variant="auto" />
         </div>
       </main>
 

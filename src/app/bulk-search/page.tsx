@@ -29,7 +29,7 @@ export default function BulkSearchPage() {
           </div>
         </SectionAmbient>
         <div className="pt-4 pb-2">
-          <AffiliateAdRail placement="bulk" variant="card" />
+          <AffiliateAdRail placement="bulk" variant="auto" />
         </div>
       </main>
       <Footer />

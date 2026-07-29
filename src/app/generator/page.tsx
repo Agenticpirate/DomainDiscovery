@@ -97,7 +97,7 @@ export default function GeneratorPage() {
         <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.generator} compact />
         <SeoGuidePack {...TOOL_GUIDE_PACKS.generator} />
         <div className="pt-2 pb-4">
-          <AffiliateAdRail placement="generator" variant="card" />
+          <AffiliateAdRail placement="generator" variant="auto" />
         </div>
         </SectionAmbient>
       </main>

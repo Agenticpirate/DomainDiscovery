@@ -5,6 +5,7 @@
  * Register CTAs (domain deep-links) → registrars.ts (ad 1859616).
  * Spacemail 320×50 display → ad 3832105.
  * Spacemail 1200×600 (TW/X) display → ad 3832098.
+ * Spaceship wide partner 2501×1251 → ad 1825517 (carousel with 3832098).
  * Spacemail 160×600 skyscraper → ad 3832106.
  * Engaged-time interstitial (626×521) → ad 1825514.
  */
@@ -96,7 +97,6 @@ export const SPACESHIP_SPACEMAIL_BANNER: AffiliateAdCreative = {
 
 /**
  * Spacemail 1200×600 TW/X billboard — Impact ad 3832098
- * (Impact labels 1200×600; file named 1200×630 TW_X)
  */
 export const SPACESHIP_SPACEMAIL_BILLBOARD: AffiliateAdCreative = {
   id: '3832098',
@@ -115,6 +115,37 @@ export const SPACESHIP_SPACEMAIL_BILLBOARD: AffiliateAdCreative = {
   brand: 'Spaceship',
   format: 'billboard',
 };
+
+/**
+ * Spaceship partner wide banner — Impact ad 1825517 (2501×1251)
+ * Used in carousel with Spacemail 3832098
+ */
+export const SPACESHIP_PARTNER_WIDE: AffiliateAdCreative = {
+  id: '1825517',
+  campaignId: '21274',
+  accountId: '7521997',
+  clickUrl: 'https://spaceship.sjv.io/c/7521997/1825517/21274',
+  impressionPixel: 'https://imp.pxf.io/i/7521997/1825517/21274',
+  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-1825517',
+  localSrc: '/ads/spaceship-banner-1825517.png',
+  width: 2501,
+  height: 1251,
+  alt: 'Spaceship — premium domains, email & more',
+  title: 'Spaceship for domain builders',
+  subtitle: 'Domains, email & tools — partner offer',
+  ctaLabel: 'Explore Spaceship',
+  brand: 'Spaceship',
+  format: 'billboard',
+};
+
+/** Rotating billboard creatives (mid-page / search / bulk / learn / generator) */
+export const BILLBOARD_CAROUSEL_ADS: AffiliateAdCreative[] = [
+  SPACESHIP_SPACEMAIL_BILLBOARD,
+  SPACESHIP_PARTNER_WIDE,
+];
+
+/** Auto-advance interval for billboard carousel (ms) */
+export const BILLBOARD_CAROUSEL_MS = 6500;
 
 /** Spacemail 160×600 skyscraper — desktop sticky rail */
 export const SPACESHIP_SPACEMAIL_SKYSCRAPER: AffiliateAdCreative = {
@@ -152,9 +183,8 @@ export type AffiliateAdPlacement =
   | 'skyscraper';
 
 /**
- * Map placement → creative.
- * Billboard (3832098) on high-attention pages; leaderboard (3832105) on chrome;
- * skyscraper (160×600) for sticky desktop rail.
+ * Map placement → creative (single unit).
+ * Billboard placements prefer carousel via getCarouselAdsForPlacement.
  */
 export function getAdForPlacement(placement: AffiliateAdPlacement): AffiliateAdCreative {
   switch (placement) {
@@ -173,6 +203,24 @@ export function getAdForPlacement(placement: AffiliateAdPlacement): AffiliateAdC
     default:
       return SPACESHIP_SPACEMAIL_BANNER;
   }
+}
+
+/** Whether this placement should use the multi-ad slide carousel */
+export function placementUsesCarousel(placement: AffiliateAdPlacement): boolean {
+  return (
+    placement === 'home-mid' ||
+    placement === 'search' ||
+    placement === 'bulk' ||
+    placement === 'generator' ||
+    placement === 'learn'
+  );
+}
+
+export function getCarouselAdsForPlacement(
+  placement: AffiliateAdPlacement
+): AffiliateAdCreative[] {
+  if (placementUsesCarousel(placement)) return BILLBOARD_CAROUSEL_ADS;
+  return [getAdForPlacement(placement)];
 }
 
 /** Suggested visual variant for a placement */
