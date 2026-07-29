@@ -8,9 +8,13 @@ import {
 } from '@/lib/affiliateAds';
 import { useTheme } from '@/contexts/ThemeContext';
 
+/** Fixed IAB-style skyscraper frame — both carousel ads fill this exactly */
+const RAIL_W = 160;
+const RAIL_H = 600;
+
 /**
- * Desktop sticky skyscraper — premium creative only.
- * Auto-slides every 15s · no 1/2, dots, or nav chrome.
+ * Desktop sticky skyscraper — both ads share an identical 160×600 frame.
+ * Auto-slides every 15s · Sponsored · Ad label · no size jump between slides.
  */
 export function AffiliateSkyscraper() {
   const ads = SKYSCRAPER_CAROUSEL_ADS;
@@ -26,7 +30,6 @@ export function AffiliateSkyscraper() {
 
   const active = ads[index] ?? ads[0];
   const count = ads.length;
-  const railWidth = 160;
 
   useEffect(() => {
     setMounted(true);
@@ -77,6 +80,15 @@ export function AffiliateSkyscraper() {
 
   if (!mounted || dismissed || !active) return null;
 
+  // Identical frame for every slide (160×600 IAB skyscraper)
+  const frameStyle: React.CSSProperties = {
+    width: RAIL_W,
+    height: RAIL_H,
+    maxHeight: '70vh',
+    // Keep proportion if maxHeight shrinks the box
+    aspectRatio: `${RAIL_W} / ${RAIL_H}`,
+  };
+
   return (
     <aside
       ref={rootRef}
@@ -89,8 +101,7 @@ export function AffiliateSkyscraper() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="pointer-events-auto relative" style={{ width: railWidth }}>
-        {/* Soft dismiss — appears on hover only */}
+      <div className="pointer-events-auto relative" style={{ width: RAIL_W }}>
         <button
           type="button"
           onClick={() => {
@@ -101,12 +112,11 @@ export function AffiliateSkyscraper() {
               /* ignore */
             }
           }}
-          className={`absolute -right-1.5 -top-1.5 z-[3] flex h-6 w-6 items-center justify-center rounded-full text-[11px] opacity-0 transition-opacity hover:opacity-100 focus:opacity-100 group-hover/sky:opacity-100 ${
+          className={`absolute -right-1.5 -top-1.5 z-[3] flex h-6 w-6 items-center justify-center rounded-full text-[11px] opacity-0 transition-opacity hover:opacity-100 focus:opacity-100 ${
             isLight
               ? 'bg-white/90 text-slate-500 shadow border border-slate-200/80'
               : 'bg-black/70 text-white/70 border border-white/10'
           }`}
-          style={{ opacity: undefined }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLButtonElement).style.opacity = '1';
           }}
@@ -125,9 +135,8 @@ export function AffiliateSkyscraper() {
               ? 'border-slate-200/90 shadow-[0_16px_48px_-20px_rgba(15,23,42,0.4)] bg-white'
               : 'border-white/12 shadow-[0_20px_56px_-18px_rgba(0,0,0,0.85)] bg-[#0a0a0c]'
           }`}
-          style={{ width: railWidth, maxHeight: 'min(600px, 70vh)' }}
+          style={frameStyle}
         >
-          {/* Sponsored + Ad disclosure on side rail */}
           <span
             className={`pointer-events-none absolute left-1.5 top-1.5 z-[2] inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[7px] font-semibold uppercase tracking-[0.12em] backdrop-blur-md ${
               isLight
@@ -140,9 +149,13 @@ export function AffiliateSkyscraper() {
             <span>Ad</span>
           </span>
 
+          {/* Fixed-size slide track — every slide is exactly RAIL_W × RAIL_H */}
           <div
-            className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-            style={{ transform: `translateX(-${index * 100}%)` }}
+            className="flex h-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            style={{
+              width: `${count * 100}%`,
+              transform: `translateX(-${(index * 100) / count}%)`,
+            }}
           >
             {ads.map((ad) => (
               <a
@@ -156,8 +169,8 @@ export function AffiliateSkyscraper() {
                 data-campaign={ad.campaignId}
                 data-placement="skyscraper"
                 data-creative-format="skyscraper-carousel"
-                className="relative block shrink-0 grow-0 basis-full overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
-                style={{ width: railWidth }}
+                className="relative h-full shrink-0 overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                style={{ width: `${100 / count}%` }}
                 aria-label={`${ad.alt} (sponsored)`}
                 aria-hidden={ad.id !== active.id}
                 tabIndex={ad.id === active.id ? 0 : -1}
@@ -166,12 +179,11 @@ export function AffiliateSkyscraper() {
                 <img
                   src={ad.localSrc}
                   alt={ad.alt}
-                  width={ad.width}
-                  height={ad.height}
+                  width={RAIL_W}
+                  height={RAIL_H}
                   loading={ad.id === active.id ? 'eager' : 'lazy'}
                   decoding="async"
-                  className="block w-full h-auto object-contain object-top select-none"
-                  style={{ maxHeight: 'min(600px, 70vh)' }}
+                  className="absolute inset-0 h-full w-full object-cover object-center select-none"
                   draggable={false}
                   onError={(e) => {
                     if (ad.displayAdCdn) {
