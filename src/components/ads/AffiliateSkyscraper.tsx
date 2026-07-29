@@ -132,10 +132,15 @@ export function AffiliateSkyscraper() {
         <div
           className={`group/sky relative overflow-hidden rounded-2xl border transition-shadow duration-500 ${
             isLight
-              ? 'border-slate-200/90 shadow-[0_16px_48px_-20px_rgba(15,23,42,0.4)] bg-white'
-              : 'border-white/12 shadow-[0_20px_56px_-18px_rgba(0,0,0,0.85)] bg-[#0a0a0c]'
+              ? 'border-slate-200/90 shadow-[0_16px_48px_-20px_rgba(15,23,42,0.4)]'
+              : 'border-white/12 shadow-[0_20px_56px_-18px_rgba(0,0,0,0.85)]'
           }`}
-          style={frameStyle}
+          style={{
+            ...frameStyle,
+            // Letterbox fill matches Spacemail purple so contain never looks “empty”
+            background:
+              'linear-gradient(180deg, #5b21b6 0%, #4c1d95 40%, #1e1b4b 100%)',
+          }}
         >
           <span
             className={`pointer-events-none absolute left-1.5 top-1.5 z-[2] inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[7px] font-semibold uppercase tracking-[0.12em] backdrop-blur-md ${
@@ -149,7 +154,7 @@ export function AffiliateSkyscraper() {
             <span>Ad</span>
           </span>
 
-          {/* Fixed-size slide track — every slide is exactly RAIL_W × RAIL_H */}
+          {/* Fixed 160×600 frame; object-contain so headline + Start free never crop */}
           <div
             className="flex h-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
             style={{
@@ -183,7 +188,7 @@ export function AffiliateSkyscraper() {
                   height={RAIL_H}
                   loading={ad.id === active.id ? 'eager' : 'lazy'}
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover object-center select-none"
+                  className="absolute inset-0 h-full w-full object-contain object-center select-none"
                   draggable={false}
                   onError={(e) => {
                     if (ad.displayAdCdn) {
