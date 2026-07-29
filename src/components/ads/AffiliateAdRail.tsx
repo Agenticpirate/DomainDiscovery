@@ -6,7 +6,7 @@ import { getAdForPlacement, type AffiliateAdPlacement } from '@/lib/affiliateAds
 
 type Props = {
   placement: AffiliateAdPlacement;
-  variant?: 'leaderboard' | 'card' | 'strip' | 'billboard' | 'auto';
+  variant?: 'leaderboard' | 'card' | 'strip' | 'billboard' | 'skyscraper' | 'auto';
   className?: string;
   /** Max width container; billboards get a wider shell */
   contained?: boolean;

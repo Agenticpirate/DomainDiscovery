@@ -5,6 +5,7 @@
  * Register CTAs (domain deep-links) → registrars.ts (ad 1859616).
  * Spacemail 320×50 display → ad 3832105.
  * Spacemail 1200×600 (TW/X) display → ad 3832098.
+ * Spacemail 160×600 skyscraper → set IMPACT_SPACEMAIL_160 when Get Ad Code is available.
  * Engaged-time interstitial (626×521) → ad 1825514.
  */
 
@@ -32,8 +33,24 @@ export type AffiliateAdCreative = {
   ctaLabel: string;
   brand: string;
   /** Layout hint */
-  format: 'leaderboard' | 'billboard' | 'interstitial';
+  format: 'leaderboard' | 'billboard' | 'interstitial' | 'skyscraper';
 };
+
+/**
+ * Impact tracking for Spacemail 160×600 skyscraper.
+ * Paste values from Impact → Get Ad Code for this creative.
+ * Until a dedicated media ID is set, we keep the unit live with the
+ * Spacemail campaign click path so commissions still attribute to Spaceship.
+ */
+const IMPACT_SPACEMAIL_160 = {
+  /** Replace with dedicated ad id from Impact when available */
+  id: '3832105',
+  campaignId: '21274',
+  accountId: '7521997',
+  clickUrl: 'https://spaceship.sjv.io/c/7521997/3832105/21274',
+  impressionPixel: 'https://imp.pxf.io/i/7521997/3832105/21274',
+  displayAdCdn: '',
+} as const;
 
 /** Engaged-time interstitial — Impact ad 1825514 (non-skippable gate) */
 export const SPACESHIP_INTERSTITIAL: AffiliateAdCreative = {
@@ -105,6 +122,25 @@ export const SPACESHIP_SPACEMAIL_BILLBOARD: AffiliateAdCreative = {
   format: 'billboard',
 };
 
+/** Spacemail 160×600 skyscraper — desktop sticky rail */
+export const SPACESHIP_SPACEMAIL_SKYSCRAPER: AffiliateAdCreative = {
+  id: IMPACT_SPACEMAIL_160.id,
+  campaignId: IMPACT_SPACEMAIL_160.campaignId,
+  accountId: IMPACT_SPACEMAIL_160.accountId,
+  clickUrl: IMPACT_SPACEMAIL_160.clickUrl,
+  impressionPixel: IMPACT_SPACEMAIL_160.impressionPixel,
+  displayAdCdn: IMPACT_SPACEMAIL_160.displayAdCdn,
+  localSrc: '/ads/spacemail-banner-160x600.png',
+  width: 160,
+  height: 600,
+  alt: 'Spacemail by Spaceship — professional email for your domain',
+  title: 'Spacemail',
+  subtitle: 'Email on your domain',
+  ctaLabel: 'Get Spacemail',
+  brand: 'Spaceship',
+  format: 'skyscraper',
+};
+
 /**
  * Placement keys used across the site. Each mount fires its own
  * impression pixel (standard for multi-unit pages).
@@ -118,14 +154,18 @@ export type AffiliateAdPlacement =
   | 'generator'
   | 'tools'
   | 'learn'
-  | 'inline';
+  | 'inline'
+  | 'skyscraper';
 
 /**
  * Map placement → creative.
- * Billboard (3832098) on high-attention pages; leaderboard (3832105) on chrome.
+ * Billboard (3832098) on high-attention pages; leaderboard (3832105) on chrome;
+ * skyscraper (160×600) for sticky desktop rail.
  */
 export function getAdForPlacement(placement: AffiliateAdPlacement): AffiliateAdCreative {
   switch (placement) {
+    case 'skyscraper':
+      return SPACESHIP_SPACEMAIL_SKYSCRAPER;
     case 'home-mid':
     case 'learn':
     case 'generator':
@@ -144,9 +184,10 @@ export function getAdForPlacement(placement: AffiliateAdPlacement): AffiliateAdC
 /** Suggested visual variant for a placement */
 export function getDefaultVariant(
   placement: AffiliateAdPlacement
-): 'leaderboard' | 'card' | 'strip' | 'billboard' {
+): 'leaderboard' | 'card' | 'strip' | 'billboard' | 'skyscraper' {
   const ad = getAdForPlacement(placement);
   if (ad.format === 'billboard') return 'billboard';
+  if (ad.format === 'skyscraper') return 'skyscraper';
   if (placement === 'home-hero') return 'strip';
   if (placement === 'footer') return 'card';
   return 'card';

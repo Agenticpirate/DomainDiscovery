@@ -19,8 +19,9 @@ export type AffiliateAdBannerProps = {
    * - card: copy + small banner + CTA
    * - strip: slim full-width
    * - billboard: large 1200×630-style creative, full clickable
+   * - skyscraper: 160×600 tall unit
    */
-  variant?: 'leaderboard' | 'card' | 'strip' | 'billboard' | 'auto';
+  variant?: 'leaderboard' | 'card' | 'strip' | 'billboard' | 'skyscraper' | 'auto';
   className?: string;
   hideOnMobile?: boolean;
   hideOnDesktop?: boolean;
@@ -97,6 +98,7 @@ export function AffiliateAdBanner({
     .join(' ');
 
   const isBillboard = creative.format === 'billboard' || variant === 'billboard';
+  const isSkyscraper = creative.format === 'skyscraper' || variant === 'skyscraper';
 
   const bannerImg = (
     // eslint-disable-next-line @next/next/no-img-element
@@ -110,12 +112,16 @@ export function AffiliateAdBanner({
       className={
         isBillboard
           ? 'block w-full h-auto rounded-xl sm:rounded-2xl object-cover'
-          : 'block max-w-full h-auto rounded-md'
+          : isSkyscraper
+            ? 'block h-auto w-[160px] max-h-[min(600px,70vh)] object-contain rounded-lg'
+            : 'block max-w-full h-auto rounded-md'
       }
       style={
         isBillboard
           ? { width: '100%', height: 'auto', aspectRatio: `${creative.width} / ${creative.height}` }
-          : { width: creative.width, height: creative.height, maxWidth: '100%' }
+          : isSkyscraper
+            ? { width: 160, height: 'auto', maxWidth: '100%' }
+            : { width: creative.width, height: creative.height, maxWidth: '100%' }
       }
       onError={() => {
         if (creative.displayAdCdn && imgSrc !== creative.displayAdCdn) {
@@ -158,6 +164,33 @@ export function AffiliateAdBanner({
       aria-hidden
     />
   );
+
+  // —— Skyscraper: tall 160×600 ——
+  if (variant === 'skyscraper' || isSkyscraper) {
+    return (
+      <div ref={rootRef} className={`relative flex justify-center ${visibility}`}>
+        {trackedAnchor(
+          <span
+            className={`inline-flex flex-col items-center gap-1.5 rounded-2xl p-2 transition-transform active:scale-[0.99] ${
+              isLight
+                ? 'bg-white border border-slate-200 shadow-md'
+                : 'bg-[#0a0a0c] border border-white/12 shadow-[0_12px_32px_rgba(0,0,0,0.45)]'
+            }`}
+          >
+            <span
+              className={`text-[8px] font-bold uppercase tracking-[0.16em] ${
+                isLight ? 'text-slate-400' : 'text-white/35'
+              }`}
+            >
+              Sponsored
+            </span>
+            {bannerImg}
+          </span>
+        )}
+        {noscriptPixel}
+      </div>
+    );
+  }
 
   // —— Billboard: large TW/X creative, full surface clickable ——
   if (variant === 'billboard' || (variant === 'card' && isBillboard)) {

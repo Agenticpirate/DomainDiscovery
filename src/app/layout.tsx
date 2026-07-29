@@ -4,6 +4,7 @@ import { ToastProvider } from "@/components/ui/Toast";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { AffiliateInterstitial } from "@/components/ads/AffiliateInterstitial";
+import { AffiliateSkyscraper } from "@/components/ads/AffiliateSkyscraper";
 import {
   getOrganizationJsonLd,
   getSiteBaseUrl,
@@ -149,6 +150,8 @@ export default function RootLayout({
           <ToastProvider>
             <ScrollToTop />
             {children}
+            {/* Desktop sticky Spacemail 160×600 skyscraper */}
+            <AffiliateSkyscraper />
             {/* Engaged-time Spaceship interstitial (5 min visible → non-skippable 60s / click) */}
             <AffiliateInterstitial />
           </ToastProvider>
