@@ -7,6 +7,7 @@
  * Spacemail 1200×600 (TW/X) display → ad 3832098.
  * Spaceship wide partner 2501×1251 → ad 1825517 (carousel with 3832098).
  * Spacemail 160×600 skyscraper → ad 3832106.
+ * Spaceship tall partner skyscraper (335×1251) → ad 1825513 (side carousel).
  * Engaged-time interstitial (626×521) → ad 1825514.
  */
 
@@ -144,10 +145,14 @@ export const BILLBOARD_CAROUSEL_ADS: AffiliateAdCreative[] = [
   SPACESHIP_PARTNER_WIDE,
 ];
 
-/** Auto-advance interval for billboard carousel (ms) */
-export const BILLBOARD_CAROUSEL_MS = 6500;
+/**
+ * Auto-advance for carousels.
+ * 15s is a good balance: readable without feeling spammy; meets “at least 15s”.
+ */
+export const BILLBOARD_CAROUSEL_MS = 15_000;
+export const SKYSCRAPER_CAROUSEL_MS = 15_000;
 
-/** Spacemail 160×600 skyscraper — desktop sticky rail */
+/** Spacemail 160×600 skyscraper — Impact ad 3832106 */
 export const SPACESHIP_SPACEMAIL_SKYSCRAPER: AffiliateAdCreative = {
   id: IMPACT_SPACEMAIL_160.id,
   campaignId: IMPACT_SPACEMAIL_160.campaignId,
@@ -165,6 +170,31 @@ export const SPACESHIP_SPACEMAIL_SKYSCRAPER: AffiliateAdCreative = {
   brand: 'Spaceship',
   format: 'skyscraper',
 };
+
+/** Spaceship partner tall skyscraper — Impact ad 1825513 (335×1251) */
+export const SPACESHIP_PARTNER_SKYSCRAPER: AffiliateAdCreative = {
+  id: '1825513',
+  campaignId: '21274',
+  accountId: '7521997',
+  clickUrl: 'https://spaceship.sjv.io/c/7521997/1825513/21274',
+  impressionPixel: 'https://imp.pxf.io/i/7521997/1825513/21274',
+  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-1825513',
+  localSrc: '/ads/spaceship-skyscraper-1825513.png',
+  width: 335,
+  height: 1251,
+  alt: 'Spaceship — domains, email & affiliate programs',
+  title: 'Spaceship',
+  subtitle: 'Partner offer',
+  ctaLabel: 'Visit Spaceship',
+  brand: 'Spaceship',
+  format: 'skyscraper',
+};
+
+/** Side sticky rail rotates these skyscrapers */
+export const SKYSCRAPER_CAROUSEL_ADS: AffiliateAdCreative[] = [
+  SPACESHIP_SPACEMAIL_SKYSCRAPER,
+  SPACESHIP_PARTNER_SKYSCRAPER,
+];
 
 /**
  * Placement keys used across the site. Each mount fires its own

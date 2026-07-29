@@ -1,24 +1,32 @@
 'use client';
 
-import React, { useEffect, useId, useRef, useState } from 'react';
-import { SPACESHIP_SPACEMAIL_SKYSCRAPER } from '@/lib/affiliateAds';
+import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
+import {
+  SKYSCRAPER_CAROUSEL_ADS,
+  SKYSCRAPER_CAROUSEL_MS,
+  type AffiliateAdCreative,
+} from '@/lib/affiliateAds';
 import { useTheme } from '@/contexts/ThemeContext';
 
 /**
- * Desktop-only sticky Spacemail 160×600 skyscraper (right edge).
- * Hidden below xl so mobile/tablet stay clean.
- * Click + impression use Impact tracking on the creative.
+ * Desktop-only sticky skyscraper rail (right edge) with slide carousel.
+ * Rotates every 15s (pauses on hover / when tab hidden).
+ * Each slide keeps its own Impact click + impression tracking.
  */
 export function AffiliateSkyscraper() {
-  const creative = SPACESHIP_SPACEMAIL_SKYSCRAPER;
+  const ads = SKYSCRAPER_CAROUSEL_ADS;
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const isLight = mounted ? theme === 'light' : false;
-  const firedRef = useRef(false);
-  const rootRef = useRef<HTMLDivElement | null>(null);
-  const [imgSrc, setImgSrc] = useState(creative.localSrc);
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const impressed = useRef<Set<string>>(new Set());
   const reactId = useId();
+
+  const active = ads[index] ?? ads[0];
+  const count = ads.length;
 
   useEffect(() => {
     setMounted(true);
@@ -31,56 +39,72 @@ export function AffiliateSkyscraper() {
     }
   }, []);
 
-  // Impression once when visible
+  const fireImpression = useCallback((creative: AffiliateAdCreative) => {
+    if (typeof window === 'undefined') return;
+    if (impressed.current.has(creative.id)) return;
+    impressed.current.add(creative.id);
+    const img = new window.Image(1, 1);
+    img.src = `${creative.impressionPixel}${
+      creative.impressionPixel.includes('?') ? '&' : '?'
+    }cachebuster=${Date.now()}`;
+  }, []);
+
+  // Impression when slide is active + rail visible
   useEffect(() => {
-    if (dismissed || firedRef.current || typeof window === 'undefined') return;
-
-    const fire = () => {
-      if (firedRef.current) return;
-      firedRef.current = true;
-      const img = new window.Image(1, 1);
-      img.src = `${creative.impressionPixel}${
-        creative.impressionPixel.includes('?') ? '&' : '?'
-      }cachebuster=${Date.now()}`;
-    };
-
+    if (dismissed || !active || !mounted) return;
     const el = rootRef.current;
     if (!el || typeof IntersectionObserver === 'undefined') {
-      fire();
+      fireImpression(active);
       return;
     }
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
-          fire();
-          io.disconnect();
+          fireImpression(active);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [dismissed, creative.impressionPixel]);
+  }, [active, dismissed, fireImpression, mounted, index]);
 
-  if (!mounted || dismissed) return null;
+  // Auto-advance every 15s (pause hover / hidden tab)
+  useEffect(() => {
+    if (dismissed || count < 2 || paused) return;
+    const id = window.setInterval(() => {
+      if (document.visibilityState !== 'visible') return;
+      setIndex((i) => (i + 1) % count);
+    }, SKYSCRAPER_CAROUSEL_MS);
+    return () => window.clearInterval(id);
+  }, [count, dismissed, paused]);
+
+  if (!mounted || dismissed || !active) return null;
+
+  const go = (dir: -1 | 1) => setIndex((i) => (i + dir + count) % count);
+
+  // Display width: fit both 160 and 335 assets in a consistent rail
+  const railWidth = 168;
 
   return (
     <aside
       ref={rootRef}
       className="pointer-events-none fixed z-[80] hidden xl:block"
       style={{
-        // Clear fixed nav (~3.5–4rem) and sit mid-right
-        top: 'max(5.5rem, calc(50vh - 300px))',
-        right: 'max(0.75rem, calc((100vw - 80rem) / 2 - 11rem))',
+        top: 'max(5.5rem, calc(50vh - 320px))',
+        right: 'max(0.75rem, calc((100vw - 80rem) / 2 - 12rem))',
       }}
-      aria-label="Sponsored Spacemail offer"
+      aria-label="Sponsored Spaceship offers"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
     >
       <div
-        className={`pointer-events-auto relative flex flex-col items-center gap-1.5 rounded-2xl p-2 shadow-2xl transition-transform hover:-translate-y-0.5 ${
+        className={`pointer-events-auto relative flex flex-col items-center gap-1.5 rounded-2xl p-2 shadow-2xl ${
           isLight
             ? 'bg-white/95 border border-slate-200 shadow-slate-900/15'
             : 'bg-[#0a0a0c]/95 border border-white/12 shadow-black/50'
         }`}
+        style={{ width: railWidth + 16 }}
       >
         <div className="flex w-full items-center justify-between gap-1 px-0.5">
           <span
@@ -90,6 +114,15 @@ export function AffiliateSkyscraper() {
           >
             Sponsored
           </span>
+          {count > 1 ? (
+            <span
+              className={`text-[8px] font-bold tabular-nums ${
+                isLight ? 'text-slate-400' : 'text-white/40'
+              }`}
+            >
+              {index + 1}/{count}
+            </span>
+          ) : null}
           <button
             type="button"
             onClick={() => {
@@ -112,46 +145,115 @@ export function AffiliateSkyscraper() {
           </button>
         </div>
 
-        <a
-          id={`${creative.id}-skyscraper`}
-          href={creative.clickUrl}
-          target="_blank"
-          rel="sponsored noopener noreferrer"
-          data-affiliate="spaceship"
-          data-ad-id={creative.id}
-          data-campaign={creative.campaignId}
-          data-placement="skyscraper"
-          data-creative-format="skyscraper"
-          className="block overflow-hidden rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
-          aria-label={`${creative.alt} (sponsored)`}
+        {/* Slide stage — vertical-friendly height, horizontal slide */}
+        <div
+          className="relative overflow-hidden rounded-xl"
+          style={{ width: railWidth, maxHeight: 'min(600px, 70vh)' }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imgSrc}
-            alt={creative.alt}
-            width={creative.width}
-            height={creative.height}
-            loading="lazy"
-            decoding="async"
-            className="block h-auto w-[160px] max-h-[min(600px,70vh)] object-contain"
-            onError={() => {
-              if (creative.displayAdCdn && imgSrc !== creative.displayAdCdn) {
-                setImgSrc(creative.displayAdCdn);
-              }
-            }}
-          />
-        </a>
+          <div
+            className="flex transition-transform duration-500 ease-out"
+            style={{ transform: `translateX(-${index * 100}%)` }}
+          >
+            {ads.map((ad) => (
+              <a
+                key={ad.id}
+                id={`${ad.id}-skyscraper`}
+                href={ad.clickUrl}
+                target="_blank"
+                rel="sponsored noopener noreferrer"
+                data-affiliate="spaceship"
+                data-ad-id={ad.id}
+                data-campaign={ad.campaignId}
+                data-placement="skyscraper"
+                data-creative-format="skyscraper-carousel"
+                className="relative block shrink-0 grow-0 basis-full overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+                style={{ width: railWidth }}
+                aria-label={`${ad.alt} (sponsored)`}
+                aria-hidden={ad.id !== active.id}
+                tabIndex={ad.id === active.id ? 0 : -1}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={ad.localSrc}
+                  alt={ad.alt}
+                  width={ad.width}
+                  height={ad.height}
+                  loading={ad.id === active.id ? 'eager' : 'lazy'}
+                  decoding="async"
+                  className="block w-full h-auto object-contain object-top"
+                  style={{ maxHeight: 'min(600px, 70vh)' }}
+                  onError={(e) => {
+                    if (ad.displayAdCdn) {
+                      (e.target as HTMLImageElement).src = ad.displayAdCdn;
+                    }
+                  }}
+                />
+              </a>
+            ))}
+          </div>
+        </div>
 
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          id={`imp-sky-${reactId.replace(/:/g, '')}`}
-          height={0}
-          width={0}
-          alt=""
-          src={creative.impressionPixel}
-          style={{ position: 'absolute', visibility: 'hidden', width: 0, height: 0, border: 0 }}
-          aria-hidden
-        />
+        {/* Dots + prev/next */}
+        {count > 1 ? (
+          <div className="flex w-full items-center justify-center gap-1.5 pt-0.5">
+            <button
+              type="button"
+              onClick={() => go(-1)}
+              className={`flex h-6 w-6 items-center justify-center rounded-md text-xs font-bold ${
+                isLight
+                  ? 'text-slate-500 hover:bg-slate-100'
+                  : 'text-white/50 hover:bg-white/10'
+              }`}
+              aria-label="Previous ad"
+            >
+              ‹
+            </button>
+            {ads.map((ad, i) => (
+              <button
+                key={ad.id}
+                type="button"
+                onClick={() => setIndex(i)}
+                aria-label={`Show ad ${i + 1}`}
+                aria-current={i === index}
+                className={`h-1.5 rounded-full transition-all ${
+                  i === index
+                    ? isLight
+                      ? 'w-4 bg-slate-900'
+                      : 'w-4 bg-white'
+                    : isLight
+                      ? 'w-1.5 bg-slate-300'
+                      : 'w-1.5 bg-white/30'
+                }`}
+              />
+            ))}
+            <button
+              type="button"
+              onClick={() => go(1)}
+              className={`flex h-6 w-6 items-center justify-center rounded-md text-xs font-bold ${
+                isLight
+                  ? 'text-slate-500 hover:bg-slate-100'
+                  : 'text-white/50 hover:bg-white/10'
+              }`}
+              aria-label="Next ad"
+            >
+              ›
+            </button>
+          </div>
+        ) : null}
+
+        {/* Hidden impression pixels */}
+        {ads.map((ad) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            key={`imp-${ad.id}-${reactId}`}
+            height={0}
+            width={0}
+            alt=""
+            src={ad.impressionPixel}
+            style={{ position: 'absolute', visibility: 'hidden', width: 0, height: 0, border: 0 }}
+            aria-hidden
+          />
+        ))}
       </div>
     </aside>
   );
