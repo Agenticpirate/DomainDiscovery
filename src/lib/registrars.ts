@@ -22,6 +22,39 @@ export interface RegistrarDefinition {
 }
 
 /**
+ * Spaceship Impact.com affiliate (Text Link 1859616).
+ * All Spaceship “register / buy” CTAs must route through this click URL
+ * so commissions track. Deep-link via Impact `u=` keeps the domain prefilled.
+ *
+ * Tracking link: https://spaceship.sjv.io/c/7521997/1859616/21274
+ * Impression pixel: https://imp.pxf.io/i/7521997/1859616/21274
+ */
+export const SPACESHIP_AFFILIATE = {
+  /** Impact click tracking base (Account / Ad / Campaign) */
+  clickBase: 'https://spaceship.sjv.io/c/7521997/1859616/21274',
+  /** 1×1 view pixel — optional on promotional placements */
+  impressionPixel: 'https://imp.pxf.io/i/7521997/1859616/21274',
+  /** On-site destination for domain search (prefilled) */
+  domainSearchDestination: (domain: string) =>
+    `https://www.spaceship.com/domain-search/?query=${encodeURIComponent(domain.trim())}`,
+} as const;
+
+/**
+ * Build a Spaceship affiliate URL.
+ * - With domain: deep-links to Spaceship search with that name (tracked).
+ * - Without domain: bare tracking link (homepage / offer landing).
+ */
+export function getSpaceshipAffiliateUrl(domain?: string | null): string {
+  const cleaned = (domain || '').trim();
+  if (!cleaned) {
+    return SPACESHIP_AFFILIATE.clickBase;
+  }
+  const destination = SPACESHIP_AFFILIATE.domainSearchDestination(cleaned);
+  // Impact deep link: `u` = final destination after tracking hop
+  return `${SPACESHIP_AFFILIATE.clickBase}?u=${encodeURIComponent(destination)}`;
+}
+
+/**
  * Options for domains available for registration.
  * Order matches product priority.
  */
@@ -37,8 +70,8 @@ export const REGISTRARS: RegistrarDefinition[] = [
     name: 'Spaceship',
     host: 'Spaceship.com',
     logo: '/registrars/spaceship.png',
-    getUrl: (domain) =>
-      `https://www.spaceship.com/domain-search/?query=${encodeURIComponent(domain)}`,
+    // Always Impact affiliate — never raw spaceship.com for registration CTAs
+    getUrl: (domain) => getSpaceshipAffiliateUrl(domain),
   },
   {
     name: 'Unstoppable Domains',
@@ -94,6 +127,10 @@ export function getRegistrar(name?: string | null): RegistrarDefinition {
   return REGISTRARS.find((registrar) => registrar.name === name) ?? REGISTRARS[0];
 }
 
+/**
+ * Registration / buy URL for the chosen registrar.
+ * Spaceship always returns the Impact affiliate deep link.
+ */
 export function getRegistrarUrl(domain: string, registrarName?: string | null): string {
   return getRegistrar(registrarName).getUrl(domain);
 }
