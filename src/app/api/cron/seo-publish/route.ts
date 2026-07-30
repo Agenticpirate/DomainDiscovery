@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import learnData from '@/data/learn-articles.json';
 import { isLearnArticlePublished, learnTodayUTC } from '@/lib/learnArticles';
+import { submitIndexNow } from '@/lib/indexnowConfig';
+import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -56,8 +58,10 @@ export async function GET(req: NextRequest) {
   try {
     revalidatePath('/learn');
     revalidatePath('/sitemap.xml');
+    revalidatePath('/feed.xml');
     for (const a of dueToday) {
       revalidatePath(`/learn/${a.slug}`);
+      revalidatePath(`/learn/md/${a.slug}`);
     }
     // Also revalidate recently live (last 7 days of batch) in case of lag
     for (const a of live.slice(-21)) {
@@ -65,6 +69,23 @@ export async function GET(req: NextRequest) {
     }
   } catch (e) {
     console.error('seo-publish revalidatePath error', e);
+  }
+
+  // Ping IndexNow (Bing / Yandex / etc.) so new Learn pages enter non-Google indexes fast
+  const base = getSiteBaseUrl();
+  let indexNow: Awaited<ReturnType<typeof submitIndexNow>> | null = null;
+  try {
+    const pingUrls = [
+      `${base}/`,
+      `${base}/learn`,
+      `${base}/sitemap.xml`,
+      `${base}/feed.xml`,
+      ...dueToday.flatMap((a) => [`${base}/learn/${a.slug}`, `${base}/learn/md/${a.slug}`]),
+      ...live.slice(-10).map((a) => `${base}/learn/${a.slug}`),
+    ];
+    indexNow = await submitIndexNow(Array.from(new Set(pingUrls)));
+  } catch (e) {
+    console.error('seo-publish IndexNow error', e);
   }
 
   const remaining = upcoming.length;
@@ -90,6 +111,7 @@ export async function GET(req: NextRequest) {
       new Set(upcoming.map((a) => a.publishedAt).filter((d): d is string => Boolean(d)))
     ).slice(0, 5),
     revalidated: true,
+    indexNow,
   });
 }
 

@@ -2,29 +2,40 @@ import { MetadataRoute } from 'next';
 import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
 
 /**
- * robots.txt for search + AI crawlers.
- * LLM product index: /llms.txt and /llms-full.txt (linked from those files; not a ranking lever).
+ * robots.txt for major search engines + AI crawlers.
+ * Sitemap + host declared for Google, Bing, Yandex, DuckDuckGo, etc.
  */
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = getSiteBaseUrl();
+  const disallow = ['/api/', '/share/'];
 
-  const disallow = ['/api/', '/share/']; // ephemeral OG share cards
-
-  // Explicit allow for common AI + search crawlers (same rules as *)
-  const aiAgents = [
+  // Explicit rules help engines that look for named user-agents
+  const searchAndAiAgents = [
+    // Search
+    'Googlebot',
+    'Googlebot-Image',
+    'Googlebot-News',
+    'Googlebot-Video',
+    'GoogleOther',
+    'Bingbot',
+    'Slurp', // Yahoo
+    'DuckDuckBot',
+    'Baiduspider',
+    'YandexBot',
+    'YandexImages',
+    'Sogou',
+    'Exabot',
+    'facebot',
+    'ia_archiver',
+    'Applebot',
+    // AI / LLM
     'GPTBot',
     'ChatGPT-User',
     'OAI-SearchBot',
     'Google-Extended',
-    'GoogleOther',
-    'Googlebot',
-    'Googlebot-Image',
-    'Bingbot',
-    'DuckDuckBot',
     'PerplexityBot',
     'ClaudeBot',
     'anthropic-ai',
-    'Applebot',
     'Applebot-Extended',
     'Bytespider',
     'cohere-ai',
@@ -43,13 +54,13 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow,
       },
-      ...aiAgents.map((userAgent) => ({
+      ...searchAndAiAgents.map((userAgent) => ({
         userAgent,
         allow: '/',
         disallow,
       })),
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/feed.xml`],
     host: baseUrl,
   };
 }

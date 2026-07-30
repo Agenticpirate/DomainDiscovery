@@ -396,6 +396,72 @@ export function getLlmDatasetJsonLd() {
   };
 }
 
+/** Primary tools ItemList — helps search engines understand site architecture. */
+export function getSiteToolsItemListJsonLd() {
+  const base = getSiteBaseUrl();
+  const tools = [
+    { name: 'Domain name search', path: '/search', desc: 'Instant domain availability checker' },
+    { name: 'AI domain generator', path: '/generator', desc: 'Brandable names with live checks' },
+    { name: 'Geo domain generator', path: '/tools/geo', desc: 'City and country domain lists' },
+    { name: 'Bulk domain search', path: '/bulk-search', desc: 'Check up to 1,000 names' },
+    { name: 'WHOIS lookup', path: '/tools/whois', desc: 'RDAP registration data' },
+    { name: 'Price comparison', path: '/tools/compare', desc: 'Registrar pricing by TLD' },
+    { name: 'Domain extensions', path: '/domain-extensions', desc: 'Browse 1,600+ TLDs' },
+    { name: 'Keyword domain finder', path: '/tools/keyword', desc: 'Keyword-based domain ideas' },
+    { name: 'Learn guides', path: '/learn', desc: 'Domain name how-to library' },
+    { name: 'FAQ', path: '/faq', desc: 'Domain search questions and answers' },
+  ];
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${SITE_BRAND.name} domain tools`,
+    description: 'Free domain research tools on DomainDiscovery',
+    numberOfItems: tools.length,
+    itemListElement: tools.map((t, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: t.name,
+      description: t.desc,
+      url: `${base}${t.path}`,
+      item: {
+        '@type': 'WebApplication',
+        name: t.name,
+        url: `${base}${t.path}`,
+        description: t.desc,
+        applicationCategory: 'BusinessApplication',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      },
+    })),
+  };
+}
+
+/**
+ * Multi-engine site verification meta (Google, Bing/Yahoo, Yandex, Pinterest, Facebook).
+ * Set only in production env — never hardcode secrets in git.
+ */
+export function getSearchEngineVerification(): import('next').Metadata['verification'] {
+  const google = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+  const yandex = process.env.NEXT_PUBLIC_YANDEX_VERIFICATION?.trim();
+  const yahoo = process.env.NEXT_PUBLIC_YAHOO_SITE_VERIFICATION?.trim();
+  const bing = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION?.trim();
+  const pinterest = process.env.NEXT_PUBLIC_PINTEREST_SITE_VERIFICATION?.trim();
+  const facebook = process.env.NEXT_PUBLIC_FACEBOOK_DOMAIN_VERIFICATION?.trim();
+  const other: Record<string, string> = {};
+  if (bing) other['msvalidate.01'] = bing;
+  if (pinterest) other['p:domain_verify'] = pinterest;
+  if (facebook) other['facebook-domain-verification'] = facebook;
+
+  if (!google && !yandex && !yahoo && Object.keys(other).length === 0) {
+    return undefined;
+  }
+  return {
+    ...(google ? { google } : {}),
+    ...(yandex ? { yandex } : {}),
+    ...(yahoo ? { yahoo } : {}),
+    ...(Object.keys(other).length ? { other } : {}),
+  };
+}
+
 export type BreadcrumbItem = {
   name: string;
   /** Path from site root, e.g. /search — omit on the current leaf if only name is known */

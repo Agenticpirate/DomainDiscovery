@@ -8,7 +8,9 @@ import { AffiliateSkyscraper } from "@/components/ads/AffiliateSkyscraper";
 import {
   getLlmDatasetJsonLd,
   getOrganizationJsonLd,
+  getSearchEngineVerification,
   getSiteBaseUrl,
+  getSiteToolsItemListJsonLd,
   getSoftwareApplicationJsonLd,
   getWebSiteJsonLd,
   ICON_CACHE_BUST,
@@ -16,6 +18,7 @@ import {
 } from "@/lib/seoSiteFacts";
 
 const V = ICON_CACHE_BUST;
+const baseUrl = getSiteBaseUrl();
 
 export const metadata: Metadata = {
   title: {
@@ -48,7 +51,7 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_BRAND.name }],
   creator: SITE_BRAND.name,
   publisher: SITE_BRAND.name,
-  metadataBase: new URL(getSiteBaseUrl()),
+  metadataBase: new URL(baseUrl),
   formatDetection: {
     email: false,
     address: false,
@@ -63,6 +66,14 @@ export const metadata: Metadata = {
     title: "Domain Name Search — Free Instant Availability | DomainDiscovery",
     description:
       "Check domain availability across 1,600+ extensions. Free AI generator, bulk search, geo domains, WHOIS, and price compare.",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "DomainDiscovery — free domain name search",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -70,12 +81,14 @@ export const metadata: Metadata = {
     description:
       "Check domain availability across 1,600+ extensions. Free AI generator, bulk search, geo domains, WHOIS, and price compare.",
     creator: "@domainsdiscovery",
+    images: ["/twitter-image"],
   },
-  // Chrome / Android tab + PWA chrome
+  // Chrome / Android / Bing tile chrome
   other: {
     "theme-color": "#0a0a0a",
     "msapplication-TileColor": "#0a0a0a",
     "msapplication-TileImage": `/icon-192.png?v=${V}`,
+    "msapplication-config": "/browserconfig.xml",
   },
   robots: {
     index: true,
@@ -93,6 +106,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     types: {
+      "application/rss+xml": [{ url: "/feed.xml", title: `${SITE_BRAND.name} Learn feed` }],
+      "application/opensearchdescription+xml": [
+        { url: "/opensearch.xml", title: SITE_BRAND.name },
+      ],
       // Machine-readable product indexes for assistants (not a Google ranking lever)
       "text/plain": [
         { url: "/llms.txt", title: "llms.txt" },
@@ -100,10 +117,8 @@ export const metadata: Metadata = {
       ],
     },
   },
-  // Google Search Console meta verification (Phase F). Set in production env only.
-  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
-    : undefined,
+  // Multi-engine webmaster verification (env-only; see getSearchEngineVerification)
+  verification: getSearchEngineVerification(),
   manifest: `/site.webmanifest?v=${V}`,
   // Google SERP favicon: multiples of 48px (48 / 96) as first PNG entries.
   // Solid #0a0a0a plate so the white D mark matches logo on light SERP backgrounds.
@@ -170,6 +185,19 @@ export default function RootLayout({
             __html: JSON.stringify(getLlmDatasetJsonLd()),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getSiteToolsItemListJsonLd()),
+          }}
+        />
+        <link
+          rel="search"
+          type="application/opensearchdescription+xml"
+          href="/opensearch.xml"
+          title={SITE_BRAND.name}
+        />
+        <link rel="alternate" type="application/rss+xml" title={`${SITE_BRAND.name} Learn`} href="/feed.xml" />
         <ThemeProvider>
           <ToastProvider>
             <ScrollToTop />

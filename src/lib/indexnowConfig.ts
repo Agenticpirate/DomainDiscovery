@@ -39,6 +39,12 @@ export function getIndexNowDefaultUrls(): string[] {
     '/about.md',
     '/faq',
     '/learn',
+    '/feed.xml',
+    '/opensearch.xml',
+    '/blog',
+    '/blog/tlds',
+    '/domain-extensions',
+    '/tools/compare',
   ];
   const primary = SITE_CORE_PATHS.filter((p) => p.priority === 'primary').map((p) =>
     p.path === '/' ? base : `${base}${p.path}`

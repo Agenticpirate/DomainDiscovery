@@ -450,6 +450,7 @@ export const Footer: React.FC = () => {
               { label: 'For AI', href: '/for-ai' },
               { label: 'llms.txt', href: '/llms.txt' },
               { label: 'llms-full', href: '/llms-full.txt' },
+              { label: 'RSS', href: '/feed.xml' },
             ].map((item) => (
               <Link
                 key={item.href}

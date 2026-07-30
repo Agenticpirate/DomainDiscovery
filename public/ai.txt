@@ -17,7 +17,9 @@
 #   /learn/md/{slug}
 #
 # Sitemap: /sitemap.xml
-# Robots:  /robots.txt  (allows GPTBot, ClaudeBot, PerplexityBot, Google-Extended, GoogleOther, …)
+# RSS Learn feed: /feed.xml
+# OpenSearch: /opensearch.xml
+# Robots:  /robots.txt  (Google, Bing, Yahoo/Slurp, Yandex, DuckDuckGo, Baidu + AI bots)
 # IndexNow key: /.well-known/indexnow.txt
 # IndexNow API: POST /api/indexnow
 # humans.txt: /humans.txt

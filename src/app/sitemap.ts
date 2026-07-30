@@ -55,6 +55,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/about.md', priority: 0.6, changeFrequency: 'monthly' as const },
     { path: '/for-ai', priority: 0.75, changeFrequency: 'weekly' as const },
     { path: '/ai.txt', priority: 0.5, changeFrequency: 'monthly' as const },
+    { path: '/feed.xml', priority: 0.55, changeFrequency: 'daily' as const },
+    { path: '/opensearch.xml', priority: 0.4, changeFrequency: 'monthly' as const },
   ].map(({ path, priority, changeFrequency }) => ({
     url: `${baseUrl}${path}`,
     lastModified,
