@@ -140,10 +140,12 @@ export function buildLlmsTxt(): string {
     ``,
     `## Optional`,
     ``,
+    `- [For AI systems (HTML hub)](${base}/for-ai): Human + crawler landing page for all LLM indexes.`,
     `- [About ${SITE_BRAND.name}](${base}/about.md): What the product is and is not.`,
     `- [AI Domain Assistant / Agent Hub](${base}/assistant): MCP + REST tools for agents (research-only).`,
     `- [Contact](${base}/contact) · [Privacy](${base}/privacy) · [Terms](${base}/terms)`,
     `- [Sitemap](${base}/sitemap.xml) · [robots.txt](${base}/robots.txt)`,
+    `- [Well-known llms.txt](${base}/.well-known/llms.txt) · [IndexNow key](${base}/.well-known/indexnow.txt)`,
     ``,
     `## Features (summary)`,
     ``,
@@ -239,6 +241,31 @@ function pricingSection(data: PriceFile | null): string[] {
   }
   lines.push(``);
 
+  return lines;
+}
+
+function tldCatalogSection(data: PriceFile | null): string[] {
+  const exts = data?.extensions || [];
+  if (!exts.length) return [];
+  // Top by registrar coverage then alpha — cap for token budget
+  const sorted = [...exts]
+    .filter((e) => e.tld && e.tld.startsWith('.'))
+    .sort((a, b) => (b.registrarCount || 0) - (a.registrarCount || 0));
+  const top = sorted.slice(0, 120);
+  const lines: string[] = [
+    `## TLD catalog snapshot (top ${top.length} by registrar coverage in dataset)`,
+    ``,
+    `*Full interactive browser: domain-extensions page. Count in file: ${data?.extensionCount ?? exts.length}.*`,
+    ``,
+    `| TLD | Registrars | Cheapest reg | Cheapest renew |`,
+    `| :--- | ---: | :--- | :--- |`,
+  ];
+  for (const e of top) {
+    lines.push(
+      `| ${e.tld} | ${e.registrarCount ?? '—'} | ${e.cheapestRegistration?.price ?? '—'} | ${e.cheapestRenewal?.price ?? '—'} |`
+    );
+  }
+  lines.push(``);
   return lines;
 }
 
@@ -349,6 +376,7 @@ export function buildLlmsFullTxt(): string {
   lines.push(...faqSection(base));
   lines.push(...pricingSection(data));
   lines.push(...tldProfilesSection());
+  lines.push(...tldCatalogSection(data));
 
   lines.push(
     `## Markdown tool mirrors (noise-free)`,
@@ -365,7 +393,10 @@ export function buildLlmsFullTxt(): string {
     ``,
     `## Pillar Learn guides`,
     ``,
-    ...SITE_PILLAR_LEARN.map((p) => `- ${base}${p.path} — ${p.title}`),
+    ...SITE_PILLAR_LEARN.map(
+      (p) =>
+        `- HTML: ${base}${p.path} — ${p.title}\n  Markdown: ${base}/learn/md/${p.path.replace('/learn/', '')}`
+    ),
     ``,
     `## Agent / MCP (research-only)`,
     ``,

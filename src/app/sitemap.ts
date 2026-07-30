@@ -53,6 +53,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/pricing.md', priority: 0.65, changeFrequency: 'weekly' as const },
     { path: '/extensions.md', priority: 0.65, changeFrequency: 'weekly' as const },
     { path: '/about.md', priority: 0.6, changeFrequency: 'monthly' as const },
+    { path: '/for-ai', priority: 0.75, changeFrequency: 'weekly' as const },
+    { path: '/ai.txt', priority: 0.5, changeFrequency: 'monthly' as const },
   ].map(({ path, priority, changeFrequency }) => ({
     url: `${baseUrl}${path}`,
     lastModified,
@@ -60,12 +62,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority,
   }));
 
-  const learnRoutes = getLearnSlugs().map((slug) => ({
-    url: `${baseUrl}/learn/${slug}`,
-    lastModified,
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }));
+  const learnRoutes = getLearnSlugs().flatMap((slug) => [
+    {
+      url: `${baseUrl}/learn/${slug}`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/learn/md/${slug}`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.55,
+    },
+  ]);
 
   const tldAboutRoutes = getTldAboutSlugs().map((slug) => ({
     url: `${baseUrl}/blog/tlds/${slug}`,

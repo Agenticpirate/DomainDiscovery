@@ -1,17 +1,26 @@
 # AI / LLM discovery pointer for DomainDiscovery
 # (Domain Discovery / Domains Discovery)
 #
+# Start here (HTML hub for humans + crawlers):
+#   /for-ai
+#
 # Generative Engine Optimization (GEO) indexes — Markdown for assistants:
-#   /llms.txt          — lean product map (H1 + blockquote + tool links)
-#   /llms-full.txt     — full definitions, FAQ, pricing tables, TLD notes
+#   /llms.txt              — lean product map (H1 + blockquote + tool links)
+#   /llms-full.txt         — full definitions, FAQ, pricing tables, TLD catalog
+#   /.well-known/llms.txt  — same map (well-known probe)
 #
 # Noise-free tool mirrors (text/plain Markdown):
 #   /search.md  /generator.md  /geo.md  /whois.md  /bulk-search.md
 #   /pricing.md  /extensions.md  /keyword.md  /about.md
 #
+# Learn article Markdown mirrors:
+#   /learn/md/{slug}
+#
 # Sitemap: /sitemap.xml
-# Robots:  /robots.txt
-# IndexNow (Bing/Yandex): POST /api/indexnow (requires INDEXNOW_KEY)
+# Robots:  /robots.txt  (allows GPTBot, ClaudeBot, PerplexityBot, Google-Extended, GoogleOther, …)
+# IndexNow key: /.well-known/indexnow.txt
+# IndexNow API: POST /api/indexnow
+# humans.txt: /humans.txt
 #
 # Brand: DomainDiscovery
 # Product: Free domain name search + domain toolkit
@@ -19,4 +28,4 @@
 # No invented review scores or traffic claims
 #
 # Note: Google Search ignores llms.txt as a ranking lever; these files help
-# ChatGPT, Claude, Perplexity, and other assistants retrieve clean facts.
+# ChatGPT, Claude, Perplexity, Gemini, and other assistants retrieve clean facts.

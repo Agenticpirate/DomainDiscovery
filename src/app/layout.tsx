@@ -6,6 +6,7 @@ import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { AffiliateInterstitial } from "@/components/ads/AffiliateInterstitial";
 import { AffiliateSkyscraper } from "@/components/ads/AffiliateSkyscraper";
 import {
+  getLlmDatasetJsonLd,
   getOrganizationJsonLd,
   getSiteBaseUrl,
   getSoftwareApplicationJsonLd,
@@ -161,6 +162,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(getSoftwareApplicationJsonLd()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getLlmDatasetJsonLd()),
           }}
         />
         <ThemeProvider>

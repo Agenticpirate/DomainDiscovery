@@ -163,6 +163,7 @@ const FOOTER_SECTIONS: FooterSection[] = [
       { label: 'All guides', href: '/learn', Icon: Fi.book },
       { label: 'FAQ', href: '/faq', Icon: Fi.help },
       { label: 'What is DD?', href: '/learn/what-is-domaindiscovery', Icon: Fi.badge },
+      { label: 'For AI / LLMs', href: '/for-ai', Icon: Fi.bolt },
     ],
   },
   {
@@ -446,7 +447,9 @@ export const Footer: React.FC = () => {
               { label: 'Disclaimer', href: '/disclaimer' },
               { label: 'Contact', href: '/contact' },
               { label: 'Sitemap', href: '/sitemap.xml' },
+              { label: 'For AI', href: '/for-ai' },
               { label: 'llms.txt', href: '/llms.txt' },
+              { label: 'llms-full', href: '/llms-full.txt' },
             ].map((item) => (
               <Link
                 key={item.href}

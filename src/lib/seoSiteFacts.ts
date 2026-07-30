@@ -67,6 +67,7 @@ export const SITE_CORE_PATHS = [
   { path: '/blog', title: 'Domain blog & TLD encyclopedia', priority: 'secondary' },
   { path: '/blog/tlds', title: 'TLD about pages index', priority: 'secondary' },
   { path: '/faq', title: 'Domain search FAQ', priority: 'primary' },
+  { path: '/for-ai', title: 'For AI systems — LLM / GEO index hub', priority: 'primary' },
   { path: '/premium', title: 'Premium domains (coming soon)', priority: 'secondary' },
   { path: '/expired', title: 'Expired domains research', priority: 'secondary' },
   { path: '/contact', title: 'Contact', priority: 'secondary' },
@@ -351,6 +352,47 @@ export function getSoftwareApplicationJsonLd() {
     description: SITE_BRAND.description,
     featureList: [...SITE_FEATURES],
     // Explicitly no AggregateRating — do not invent reviews
+  };
+}
+
+/** Dataset pointing at the LLM-oriented Markdown index (Google Dataset Search / AI discovery). */
+export function getLlmDatasetJsonLd() {
+  const base = getSiteBaseUrl();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: `${SITE_BRAND.name} product facts and domain research index`,
+    description:
+      'Machine-readable product facts, tool definitions, FAQ answers, and registrar pricing research signals for DomainDiscovery — published as Markdown for AI assistants and crawlers.',
+    url: `${base}/llms-full.txt`,
+    license: `${base}/terms`,
+    creator: {
+      '@type': 'Organization',
+      name: SITE_BRAND.name,
+      url: base,
+    },
+    distribution: [
+      {
+        '@type': 'DataDownload',
+        encodingFormat: 'text/plain',
+        contentUrl: `${base}/llms.txt`,
+        name: 'llms.txt (product map)',
+      },
+      {
+        '@type': 'DataDownload',
+        encodingFormat: 'text/plain',
+        contentUrl: `${base}/llms-full.txt`,
+        name: 'llms-full.txt (full dataset)',
+      },
+    ],
+    keywords: [
+      'domain name search',
+      'domain availability',
+      'TLD pricing',
+      'WHOIS',
+      'geo domains',
+      SITE_BRAND.name,
+    ],
   };
 }
 
