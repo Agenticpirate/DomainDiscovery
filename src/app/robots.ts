@@ -16,6 +16,7 @@ export default function robots(): MetadataRoute.Robots {
     'ChatGPT-User',
     'OAI-SearchBot',
     'Google-Extended',
+    'GoogleOther',
     'Googlebot',
     'Googlebot-Image',
     'Bingbot',

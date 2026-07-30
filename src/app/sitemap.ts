@@ -42,6 +42,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/saved-domains', priority: 0.5, changeFrequency: 'monthly' as const },
     { path: '/premium', priority: 0.55, changeFrequency: 'weekly' as const },
     { path: '/expired', priority: 0.55, changeFrequency: 'weekly' as const },
+    // GEO / LLM Markdown surfaces (AI crawler indexes)
+    { path: '/llms.txt', priority: 0.7, changeFrequency: 'weekly' as const },
+    { path: '/llms-full.txt', priority: 0.7, changeFrequency: 'weekly' as const },
+    { path: '/search.md', priority: 0.65, changeFrequency: 'weekly' as const },
+    { path: '/generator.md', priority: 0.65, changeFrequency: 'weekly' as const },
+    { path: '/geo.md', priority: 0.65, changeFrequency: 'weekly' as const },
+    { path: '/whois.md', priority: 0.65, changeFrequency: 'weekly' as const },
+    { path: '/bulk-search.md', priority: 0.65, changeFrequency: 'weekly' as const },
+    { path: '/pricing.md', priority: 0.65, changeFrequency: 'weekly' as const },
+    { path: '/extensions.md', priority: 0.65, changeFrequency: 'weekly' as const },
+    { path: '/about.md', priority: 0.6, changeFrequency: 'monthly' as const },
   ].map(({ path, priority, changeFrequency }) => ({
     url: `${baseUrl}${path}`,
     lastModified,
