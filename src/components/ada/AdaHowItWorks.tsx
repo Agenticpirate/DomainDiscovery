@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ScrollReveal } from '@/components/ui/motion/ScrollReveal';
 import { Reveal } from '@/components/ui/motion/Reveal';
+import { adaPath } from '@/lib/adaConfig';
 
 function IconBrief({ className }: { className?: string }) {
   return (
@@ -228,7 +229,7 @@ export function AdaHowItWorks({ isLight }: { isLight: boolean }) {
 
         <Reveal className="mt-4 sm:mt-12 flex flex-wrap items-center justify-center gap-2 sm:gap-3" delay={0.08} y={8}>
           <Link
-            href="/ada/app"
+            href={adaPath("/app")}
             className={`rounded-lg sm:rounded-2xl px-4 sm:px-6 py-2 sm:py-2.5 text-[12px] sm:text-sm font-bold transition ${
               isLight
                 ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-lg shadow-slate-900/10'
@@ -238,7 +239,7 @@ export function AdaHowItWorks({ isLight }: { isLight: boolean }) {
             Run the pipeline
           </Link>
           <Link
-            href="/ada/docs#integration"
+            href={adaPath("/docs#integration")}
             className={`rounded-lg sm:rounded-2xl border px-4 sm:px-6 py-2 sm:py-2.5 text-[12px] sm:text-sm font-bold transition ${
               isLight
                 ? 'border-slate-200 text-slate-700 hover:border-slate-300 bg-white/80'

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import type { AgentCard } from '@/lib/agentCard';
+import { adaPath } from '@/lib/adaConfig';
 
 /**
  * Opaque plate — inline fill so ambient dots never show through cards/text.
@@ -133,7 +134,7 @@ export function AdaAgentCardView() {
             </p>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               <a
-                href="/ada/.well-known/agent-card.json"
+                href={adaPath("/.well-known/agent-card.json")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`relative isolate cta-mobile-tap rounded-lg sm:rounded-xl px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold ${
@@ -151,7 +152,7 @@ export function AdaAgentCardView() {
                 {copied ? 'Copied' : 'Copy JSON'}
               </button>
               <Link
-                href="/ada/docs#integration"
+                href={adaPath("/docs#integration")}
                 className={`relative isolate cta-mobile-tap rounded-lg sm:rounded-xl border px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold ${btnGhost}`}
                 style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
               >

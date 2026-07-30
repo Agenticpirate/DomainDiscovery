@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { AdaLanding } from '@/components/ada/AdaLanding';
-import { ADA_BRAND } from '@/lib/adaConfig';
+import {ADA_BRAND, adaPath} from '@/lib/adaConfig';
 
 export const metadata: Metadata = {
   title: {

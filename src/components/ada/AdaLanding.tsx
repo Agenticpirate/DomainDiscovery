@@ -2,11 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ADA_BRAND } from '@/lib/adaConfig';
+import { ADA_BRAND, adaPath } from '@/lib/adaConfig';
 import { AdaStatsStrip } from '@/components/ada/AdaStatsStrip';
 import { AdaHowItWorks } from '@/components/ada/AdaHowItWorks';
 import { AdaCapabilities } from '@/components/ada/AdaCapabilities';
 import { AdaConnectCta } from '@/components/ada/AdaConnectCta';
+import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { motion } from 'framer-motion';
 import { useAdaTheme } from '@/hooks/useAdaTheme';
 import { Reveal } from '@/components/ui/motion/Reveal';
@@ -250,7 +251,7 @@ export function AdaLanding() {
                 />
                 <div className="relative z-[1] grid grid-cols-2 gap-1.5">
                   <Link
-                    href="/ada/chat"
+                    href={adaPath("/chat")}
                     className={`cta-mobile-tap cta-mobile-tap-primary relative isolate inline-flex h-10 items-center justify-center gap-1.5 overflow-hidden rounded-xl px-2 text-[12px] font-bold ${btnPrimary}`}
                   >
                     <IconSlot>
@@ -259,7 +260,7 @@ export function AdaLanding() {
                     <span>Open chat</span>
                   </Link>
                   <Link
-                    href="/ada/app"
+                    href={adaPath("/app")}
                     className={`cta-mobile-tap cta-mobile-tap-ghost relative isolate inline-flex h-10 items-center justify-center gap-1.5 overflow-hidden rounded-xl border px-2 text-[12px] font-bold ${btnSecondary}`}
                     style={{ backgroundColor: isLight ? '#ffffff' : '#121214' }}
                   >
@@ -271,9 +272,9 @@ export function AdaLanding() {
                 </div>
                 <div className="relative z-[1] mt-1.5 grid grid-cols-3 gap-1">
                   {[
-                    { href: '/ada/docs', label: 'Docs' },
-                    { href: '/ada/agent-card', label: 'Card' },
-                    { href: '/ada/docs/industry', label: 'Industry' },
+                    { href: adaPath('/docs'), label: 'Docs' },
+                    { href: adaPath('/agent-card'), label: 'Card' },
+                    { href: adaPath('/docs/industry'), label: 'Industry' },
                   ].map((item) => (
                     <Link
                       key={item.href}
@@ -312,7 +313,7 @@ export function AdaLanding() {
                   className="relative group/cta-wrap"
                 >
                   <Link
-                    href="/ada/chat"
+                    href={adaPath("/chat")}
                     className={`cta-shine cta-shine-primary group/cta relative isolate inline-flex h-12 items-center justify-center gap-2.5 overflow-hidden rounded-full px-8 text-[14px] font-semibold tracking-[-0.01em] ${btnPrimary} ${
                       isLight
                         ? 'shadow-[0_1px_0_rgba(255,255,255,0.12)_inset,0_1px_2px_rgba(15,23,42,0.08),0_8px_24px_-6px_rgba(15,23,42,0.35)]'
@@ -345,7 +346,7 @@ export function AdaLanding() {
                   transition={{ duration: 0.45, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <Link
-                    href="/ada/app"
+                    href={adaPath("/app")}
                     className={`cta-shine cta-shine-secondary group/cta relative isolate inline-flex h-12 items-center justify-center gap-2.5 overflow-hidden rounded-full border px-8 text-[14px] font-semibold tracking-[-0.01em] ${btnSecondary} ${
                       isLight
                         ? 'shadow-[0_1px_0_rgba(255,255,255,0.8)_inset,0_1px_2px_rgba(15,23,42,0.04),0_6px_16px_-8px_rgba(15,23,42,0.12)]'
@@ -383,9 +384,9 @@ export function AdaLanding() {
               >
                 {(
                   [
-                    { href: '/ada/docs', label: 'Agent docs & MCP', Icon: DocsIcon },
-                    { href: '/ada/agent-card', label: 'Agent Card', Icon: CardIcon },
-                    { href: '/ada/docs/industry', label: 'Industry & registrars', Icon: IndustryIcon },
+                    { href: adaPath('/docs'), label: 'Agent docs & MCP', Icon: DocsIcon },
+                    { href: adaPath('/agent-card'), label: 'Agent Card', Icon: CardIcon },
+                    { href: adaPath('/docs/industry'), label: 'Industry & registrars', Icon: IndustryIcon },
                   ] as const
                 ).map((item, i) => (
                   <React.Fragment key={item.href}>
@@ -432,6 +433,11 @@ export function AdaLanding() {
         </div>
       </section>
 
+      {/* Affiliate strip — same Spaceship network as DomainDiscovery */}
+      <div className="relative z-[1] page-gutter w-full max-w-3xl mx-auto pt-1 pb-4 sm:pb-6">
+        <AffiliateAdRail placement="ada-hero" variant="strip" contained={false} size="compact" />
+      </div>
+
       {/* Positioning band — clean (no ambient dots) */}
       <section className={`relative border-y ${band}`}>
         <Reveal className="max-w-4xl mx-auto px-3 sm:px-6 py-5 sm:py-10">
@@ -470,6 +476,10 @@ export function AdaLanding() {
           </div>
         </div>
       </section>
+
+      <div className="relative z-[1] page-gutter w-full max-w-4xl mx-auto py-4 sm:py-6">
+        <AffiliateAdRail placement="ada-mid" variant="auto" contained={false} size="compact" />
+      </div>
 
       <AdaConnectCta isLight={isLight} />
     </div>

@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ScrollReveal } from '@/components/ui/motion/ScrollReveal';
+import { adaPath } from '@/lib/adaConfig';
 
 function IconShortlist({ className }: { className?: string }) {
   return (
@@ -68,7 +69,7 @@ const ITEMS = [
     body: 'Turn a business brief into ranked domain candidates with explainable scores.',
     points: ['Length & radio-test fit', 'Keyword + industry alignment', 'Risk flags, not black-box picks'],
     tag: 'Core',
-    href: '/ada/chat',
+    href: adaPath('/chat'),
     cta: 'Try in chat',
     Icon: IconShortlist,
   },
@@ -78,7 +79,7 @@ const ITEMS = [
     body: 'Agents pass maxBudgetUsd. Results stay honest about price confidence.',
     points: ['within · over · unknown flags', 'Never invent create fees', 'Prefer available under cap'],
     tag: 'Policy',
-    href: '/ada/docs#budget',
+    href: adaPath('/docs#budget'),
     cta: 'Budget contract',
     Icon: IconBudget,
   },
@@ -88,7 +89,7 @@ const ITEMS = [
     body: 'Instant Domain–style checks when enabled. Snapshots — re-verify at checkout.',
     points: ['Live free availability path', 'RDAP fallback if needed', 'Registrar re-check required'],
     tag: 'Live',
-    href: '/ada/app',
+    href: adaPath('/app'),
     cta: 'Run a shortlist',
     Icon: IconLive,
   },
@@ -98,7 +99,7 @@ const ITEMS = [
     body: 'Primary tool find_brand_domains plus WHOIS, geo, prices, and ranking.',
     points: ['HTTP JSON-RPC + stdio', 'Cursor / Claude friendly', 'Copy-paste curl samples'],
     tag: 'MCP',
-    href: '/ada/docs#integration',
+    href: adaPath('/docs#integration'),
     cta: 'Integration guide',
     Icon: IconMcp,
   },
@@ -108,7 +109,7 @@ const ITEMS = [
     body: 'Machine-readable Agent Card for capabilities, endpoints, and constraints.',
     points: ['/.well-known/agent-card.json', 'ANS-style discovery', 'Clear v1 boundaries'],
     tag: 'Discovery',
-    href: '/ada/agent-card',
+    href: adaPath('/agent-card'),
     cta: 'Open Agent Card',
     Icon: IconCard,
   },
@@ -118,7 +119,7 @@ const ITEMS = [
     body: 'Research by default. Optional registrar BYOK still requires explicit confirm.',
     points: ['No silent auto-buy', 'DNS only with confirm + flag', 'Human owns checkout'],
     tag: 'Trust',
-    href: '/ada/disclaimer',
+    href: adaPath('/disclaimer'),
     cta: 'Read disclaimer',
     Icon: IconShield,
   },
@@ -173,7 +174,7 @@ export function AdaCapabilities({ isLight }: { isLight: boolean }) {
             </div>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               <Link
-                href="/ada/docs#integration"
+                href={adaPath("/docs#integration")}
                 className={`rounded-lg sm:rounded-full border px-2.5 sm:px-4 py-1 sm:py-2 text-[10.5px] sm:text-[11px] font-bold transition ${
                   isLight
                     ? 'border-slate-200 bg-white text-slate-700 shadow-sm hover:border-slate-300 hover:bg-slate-50'
@@ -183,7 +184,7 @@ export function AdaCapabilities({ isLight }: { isLight: boolean }) {
                 Integration
               </Link>
               <Link
-                href="/ada/agent-card"
+                href={adaPath("/agent-card")}
                 className={`rounded-lg sm:rounded-full border px-2.5 sm:px-4 py-1 sm:py-2 text-[10.5px] sm:text-[11px] font-bold transition ${
                   isLight
                     ? 'border-slate-200 bg-white text-slate-700 shadow-sm hover:border-slate-300 hover:bg-slate-50'
@@ -193,7 +194,7 @@ export function AdaCapabilities({ isLight }: { isLight: boolean }) {
                 Agent Card
               </Link>
               <Link
-                href="/ada/app"
+                href={adaPath("/app")}
                 className={`rounded-lg sm:rounded-full px-2.5 sm:px-4 py-1 sm:py-2 text-[10.5px] sm:text-[11px] font-bold transition ${
                   isLight ? 'bg-slate-900 text-white hover:bg-slate-800' : 'bg-white text-black hover:bg-white/90'
                 }`}
@@ -355,7 +356,7 @@ export function AdaCapabilities({ isLight }: { isLight: boolean }) {
         >
           Full tools &amp; curl on{' '}
           <Link
-            href="/ada/docs"
+            href={adaPath("/docs")}
             className={`font-bold underline underline-offset-2 ${
               isLight ? 'text-slate-900 hover:text-slate-700' : 'text-white hover:text-white/80'
             }`}

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ADA_BRAND } from '@/lib/adaConfig';
+import {ADA_BRAND, adaPath} from '@/lib/adaConfig';
 
 /** Warm organic accents — sand / amber (no greens) */
 const ORGANIC = {
@@ -233,7 +233,7 @@ export function AdaChatFab() {
       </AnimatePresence>
 
       <Link
-        href="/ada/chat"
+        href={adaPath("/chat")}
         className="pointer-events-auto relative block"
         aria-label="Open AI Domain Assistant chat"
         onMouseEnter={() => setHovered(true)}

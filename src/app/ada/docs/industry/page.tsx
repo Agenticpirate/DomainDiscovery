@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ADA_BRAND } from '@/lib/adaConfig';
+import {ADA_BRAND, adaPath} from '@/lib/adaConfig';
 import {
   LAYERS,
   WHY_NOW,
@@ -110,14 +110,14 @@ export default function AdaIndustryPage() {
           <SolidPlate isLight={isLight} tone="hero" className="rounded-3xl p-5 sm:p-8 mb-8">
             <div className="flex flex-wrap items-center gap-2 mb-3">
               <Link
-                href="/ada/docs"
+                href={adaPath("/docs")}
                 className={`text-[11px] font-bold uppercase tracking-[0.14em] ${faint} hover:underline`}
               >
                 ← Agent docs
               </Link>
               <span className={faint}>·</span>
               <Link
-                href="/ada/docs/registrars"
+                href={adaPath("/docs/registrars")}
                 className={`text-[11px] font-bold uppercase tracking-[0.14em] ${muted} hover:underline`}
               >
                 Registrars →
@@ -339,7 +339,7 @@ export default function AdaIndustryPage() {
               infrastructure, separate integrations.
             </p>
             <Link
-              href="/ada/docs/registrars"
+              href={adaPath("/docs/registrars")}
               className={`inline-flex text-sm font-bold underline underline-offset-2 ${ink}`}
             >
               Full registrar matrix →
@@ -377,7 +377,7 @@ export default function AdaIndustryPage() {
         {/* CTAs */}
         <div className="flex flex-wrap gap-3">
           <Link
-            href="/ada/docs/registrars"
+            href={adaPath("/docs/registrars")}
             className={`relative isolate rounded-2xl px-5 py-2.5 text-sm font-bold transition ${
               isLight
                 ? 'bg-slate-900 text-white hover:bg-slate-800'
@@ -387,7 +387,7 @@ export default function AdaIndustryPage() {
             Registrar matrix
           </Link>
           <Link
-            href="/ada/docs"
+            href={adaPath("/docs")}
             className={`relative isolate rounded-2xl border px-5 py-2.5 text-sm font-bold ${ink}`}
             style={{
               backgroundColor: plateFill,
@@ -397,7 +397,7 @@ export default function AdaIndustryPage() {
             Agent docs &amp; MCP
           </Link>
           <Link
-            href="/ada/app"
+            href={adaPath("/app")}
             className={`relative isolate rounded-2xl border px-5 py-2.5 text-sm font-bold ${muted}`}
             style={{
               backgroundColor: plateFill,

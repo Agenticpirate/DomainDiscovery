@@ -190,19 +190,23 @@ export type AffiliateAdPlacement =
   | 'tools'
   | 'learn'
   | 'inline'
-  | 'skyscraper';
+  | 'skyscraper'
+  | 'ada-hero'
+  | 'ada-mid';
 
 export function getAdForPlacement(placement: AffiliateAdPlacement): AffiliateAdCreative {
   switch (placement) {
     case 'skyscraper':
       return SPACESHIP_SPACEMAIL_SKYSCRAPER;
     case 'home-mid':
+    case 'ada-mid':
     case 'learn':
     case 'generator':
     case 'search':
     case 'bulk':
       return SPACESHIP_SPACEMAIL_BILLBOARD;
     case 'home-hero':
+    case 'ada-hero':
     case 'footer':
     case 'tools':
     case 'inline':
@@ -214,6 +218,7 @@ export function getAdForPlacement(placement: AffiliateAdPlacement): AffiliateAdC
 export function placementUsesCarousel(placement: AffiliateAdPlacement): boolean {
   return (
     placement === 'home-mid' ||
+    placement === 'ada-mid' ||
     placement === 'search' ||
     placement === 'bulk' ||
     placement === 'generator' ||
@@ -225,6 +230,7 @@ export function placementUsesCarousel(placement: AffiliateAdPlacement): boolean 
 export function placementUsesStripCarousel(placement: AffiliateAdPlacement): boolean {
   return (
     placement === 'home-hero' ||
+    placement === 'ada-hero' ||
     placement === 'footer' ||
     placement === 'tools' ||
     placement === 'inline'

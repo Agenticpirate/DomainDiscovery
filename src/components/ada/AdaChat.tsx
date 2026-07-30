@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ADA_BRAND } from '@/lib/adaConfig';
+import {ADA_BRAND, adaPath} from '@/lib/adaConfig';
 import type { RankedDomain } from '@/lib/agent/types';
 import { DomainRankCard } from '@/components/assistant/DomainRankCard';
 import { DOMAIN_STRATEGIES } from '@/lib/agent/domainStrategies';
@@ -559,7 +559,7 @@ export function AdaChat() {
               </div>
               <div className="flex lg:hidden items-center gap-1.5 shrink-0">
                 <Link
-                  href="/ada/app"
+                  href={adaPath("/app")}
                   className={`rounded-lg border px-2 py-1 text-[10px] font-bold ${border} ${muted}`}
                   style={{ backgroundColor: isLight ? '#ffffff' : '#121214' }}
                 >
@@ -816,7 +816,7 @@ export function AdaChat() {
 
           <div className="hidden lg:flex flex-wrap gap-2">
             <Link
-              href="/ada/app"
+              href={adaPath("/app")}
               className={`rounded-xl border px-3 py-2 text-[11px] font-bold transition ${border} ${muted} ${
                 isLight ? 'bg-white' : 'bg-[#0a0a0c]'
               }`}
@@ -824,7 +824,7 @@ export function AdaChat() {
               Structured app
             </Link>
             <Link
-              href="/ada/docs"
+              href={adaPath("/docs")}
               className={`rounded-xl border px-3 py-2 text-[11px] font-bold transition ${border} ${muted} ${
                 isLight ? 'bg-white' : 'bg-[#0a0a0c]'
               }`}
@@ -914,7 +914,7 @@ export function AdaChat() {
                 Live
               </span>
               <Link
-                href="/ada/docs"
+                href={adaPath("/docs")}
                 className={`hidden sm:inline-flex rounded-lg border px-2 py-1 text-[10px] font-bold ${border} ${muted}`}
                 style={{ backgroundColor: isLight ? '#ffffff' : '#121214' }}
               >

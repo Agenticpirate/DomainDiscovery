@@ -48,6 +48,46 @@ export function getAdaPublicUrl(): string {
   return `https://${ADA_BRAND.wwwHost}`;
 }
 
+/**
+ * Normalize an ADA path for Link hrefs.
+ * - Production / ADA host: clean URLs (`/chat`, `/docs`) — middleware rewrites to /ada/*
+ * - Local monorepo: keep `/ada` prefix so localhost:5001/ada/* works
+ */
+export function adaPath(path: string = '/'): string {
+  let p = path.trim() || '/';
+  if (p.startsWith('/ada/') || p === '/ada') {
+    p = p === '/ada' ? '/' : p.slice(4) || '/';
+  }
+  if (!p.startsWith('/')) p = `/${p}`;
+
+  if (process.env.NODE_ENV !== 'production') {
+    return p === '/' ? '/ada' : `/ada${p}`;
+  }
+  return p;
+}
+
+/** Strip /ada prefix for active-route matching (works on both hosts). */
+export function normalizeAdaPathname(pathname: string | null | undefined): string {
+  if (!pathname) return '/';
+  if (pathname === '/ada' || pathname === '/ada/') return '/';
+  if (pathname.startsWith('/ada/')) return pathname.slice(4) || '/';
+  return pathname;
+}
+
+/** Absolute public ADA URL (for sitemaps, redirects, external CTAs). */
+export function adaPublicHref(path: string = '/'): string {
+  const base = getAdaPublicUrl().replace(/\/ada$/, '');
+  let p = path.trim() || '/';
+  if (p.startsWith('/ada/') || p === '/ada') {
+    p = p === '/ada' ? '/' : p.slice(4) || '/';
+  }
+  if (!p.startsWith('/')) p = `/${p}`;
+  if (process.env.NODE_ENV !== 'production' && !process.env.NEXT_PUBLIC_ADA_URL) {
+    return p === '/' ? 'http://localhost:5001/ada' : `http://localhost:5001/ada${p}`;
+  }
+  return p === '/' ? base : `${base}${p}`;
+}
+
 /** DomainDiscovery API base (agent/MCP). Same origin in local monorepo. */
 export function getDdApiBase(): string {
   if (process.env.NEXT_PUBLIC_DD_API_BASE) {

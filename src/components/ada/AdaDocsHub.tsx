@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ADA_BRAND } from '@/lib/adaConfig';
+import {ADA_BRAND, adaPath} from '@/lib/adaConfig';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -42,8 +42,8 @@ const INTEGRATION_STEPS = [
     t: 'Discover Agent Card',
     d: 'Fetch the public Agent Card for endpoints, tools, and hard constraints.',
     links: [
-      { href: '/ada/.well-known/agent-card.json', label: 'ADA card JSON' },
-      { href: '/ada/agent-card', label: 'Card UI' },
+      { href: adaPath('/.well-known/agent-card.json'), label: 'ADA card JSON' },
+      { href: adaPath('/agent-card'), label: 'Card UI' },
     ],
   },
   {
@@ -71,7 +71,7 @@ const INTEGRATION_STEPS = [
     n: '05',
     t: 'Human confirms',
     d: 'Default path is research-only. Optional registrar BYOK requires explicit confirm + feature flag.',
-    links: [{ href: '/ada/docs/registrars', label: 'Registrar matrix' }],
+    links: [{ href: adaPath('/docs/registrars'), label: 'Registrar matrix' }],
   },
 ];
 
@@ -444,14 +444,14 @@ export function AdaDocsHub() {
                   Start with integration
                 </a>
                 <Link
-                  href="/ada/chat"
+                  href={adaPath("/chat")}
                   className={`relative isolate rounded-lg sm:rounded-2xl border px-3 sm:px-5 py-2 sm:py-2.5 text-[12px] sm:text-sm font-bold transition ${btnGhost}`}
                   style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
                 >
                   Open chat
                 </Link>
                 <Link
-                  href="/ada/agent-card"
+                  href={adaPath("/agent-card")}
                   className={`relative isolate rounded-lg sm:rounded-2xl border px-3 sm:px-5 py-2 sm:py-2.5 text-[12px] sm:text-sm font-bold transition ${btnGhost}`}
                   style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
                 >
@@ -547,9 +547,9 @@ export function AdaDocsHub() {
                 </p>
                 <div className="mt-2 space-y-1">
                   {[
-                    { href: '/ada/docs/industry', label: 'Industry research' },
-                    { href: '/ada/docs/registrars', label: 'Registrar matrix' },
-                    { href: '/ada/app', label: 'Structured app' },
+                    { href: adaPath('/docs/industry'), label: 'Industry research' },
+                    { href: adaPath('/docs/registrars'), label: 'Registrar matrix' },
+                    { href: adaPath('/app'), label: 'Structured app' },
                   ].map((l) => (
                     <Link
                       key={l.href}
@@ -708,7 +708,7 @@ export function AdaDocsHub() {
                   {
                     t: 'Agent Card',
                     d: 'ANS-style discovery: capabilities, endpoints, constraints.',
-                    href: '/ada/.well-known/agent-card.json',
+                    href: adaPath('/.well-known/agent-card.json'),
                     meta: 'JSON',
                   },
                   {
@@ -996,7 +996,7 @@ export function AdaDocsHub() {
                 <p className={`text-[11px] sm:text-sm leading-snug sm:leading-relaxed ${muted}`}>
                   GoDaddy Agent Name Service (ANS) aims for DNS + certificate + Agent Card discovery. We
                   publish an Agent Card now; full ANS registration remains optional later. See{' '}
-                  <Link href="/ada/docs/industry" className="font-semibold underline underline-offset-2">
+                  <Link href={adaPath("/docs/industry")} className="font-semibold underline underline-offset-2">
                     industry research
                   </Link>
                   .
@@ -1128,7 +1128,7 @@ export function AdaDocsHub() {
                 </p>
                 <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2.5">
                   <Link
-                    href="/ada/agent-card"
+                    href={adaPath("/agent-card")}
                     className={`relative isolate rounded-lg sm:rounded-2xl px-3 sm:px-5 py-2 sm:py-2.5 text-[12px] sm:text-sm font-bold transition ${
                       isLight
                         ? 'bg-slate-900 text-white hover:bg-slate-800'
@@ -1138,7 +1138,7 @@ export function AdaDocsHub() {
                     View Agent Card
                   </Link>
                   <Link
-                    href="/ada/chat"
+                    href={adaPath("/chat")}
                     className={`relative isolate rounded-lg sm:rounded-2xl border px-3 sm:px-5 py-2 sm:py-2.5 text-[12px] sm:text-sm font-bold transition ${btnGhost}`}
                   >
                     Try chat

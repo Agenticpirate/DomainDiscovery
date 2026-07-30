@@ -3,6 +3,7 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { adaPath } from '@/lib/adaConfig';
 
 /**
  * Smooth crossfade + slight rise when switching ADA menu routes.

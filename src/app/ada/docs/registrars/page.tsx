@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ADA_BRAND } from '@/lib/adaConfig';
+import {ADA_BRAND, adaPath} from '@/lib/adaConfig';
 import {
   REGISTRARS,
   DOMAIN_CONNECT_PROVIDERS,
@@ -111,14 +111,14 @@ export default function AdaRegistrarsPage() {
           >
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
               <Link
-                href="/ada/docs"
+                href={adaPath("/docs")}
                 className={`text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] ${faint} hover:underline`}
               >
                 ← Agent docs
               </Link>
               <span className={faint}>·</span>
               <Link
-                href="/ada/docs/industry"
+                href={adaPath("/docs/industry")}
                 className={`text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] ${muted} hover:underline`}
               >
                 Industry →
@@ -508,7 +508,7 @@ export default function AdaRegistrarsPage() {
         {/* CTAs */}
         <div className="flex flex-wrap gap-1.5 sm:gap-3">
           <Link
-            href="/ada/docs/industry"
+            href={adaPath("/docs/industry")}
             className={`relative isolate cta-mobile-tap rounded-lg sm:rounded-2xl px-3.5 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-sm font-bold transition ${
               isLight
                 ? 'bg-slate-900 text-white hover:bg-slate-800'
@@ -518,7 +518,7 @@ export default function AdaRegistrarsPage() {
             Industry explainer
           </Link>
           <Link
-            href="/ada/docs"
+            href={adaPath("/docs")}
             className={`relative isolate cta-mobile-tap rounded-lg sm:rounded-2xl border px-3.5 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-sm font-bold ${ink}`}
             style={{
               backgroundColor: plateFill,
@@ -528,7 +528,7 @@ export default function AdaRegistrarsPage() {
             Agent docs &amp; MCP
           </Link>
           <Link
-            href="/ada/app"
+            href={adaPath("/app")}
             className={`relative isolate cta-mobile-tap rounded-lg sm:rounded-2xl border px-3.5 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-sm font-bold ${muted}`}
             style={{
               backgroundColor: plateFill,

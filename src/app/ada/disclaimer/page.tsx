@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { LegalDocumentPage } from '@/components/layout/LegalDocumentPage';
-import { ADA_BRAND } from '@/lib/adaConfig';
+import {ADA_BRAND, adaPath} from '@/lib/adaConfig';
 import {
   ADA_CONTACT,
   LEGAL_EFFECTIVE,
@@ -27,11 +27,11 @@ export default function AdaDisclaimerPage() {
       contactEmail={ADA_CONTACT.support}
       sections={adaDisclaimerSections}
       relatedLinks={[
-        { label: 'Terms of Use', href: '/ada/terms' },
-        { label: 'Privacy Policy', href: '/ada/privacy' },
-        { label: 'Cookie Policy', href: '/ada/cookies' },
+        { label: 'Terms of Use', href: adaPath('/terms') },
+        { label: 'Privacy Policy', href: adaPath('/privacy') },
+        { label: 'Cookie Policy', href: adaPath('/cookies') },
       ]}
-      cta={{ href: '/ada/terms', label: 'Read full Terms' }}
+      cta={{ href: adaPath('/terms'), label: 'Read full Terms' }}
     />
   );
 }

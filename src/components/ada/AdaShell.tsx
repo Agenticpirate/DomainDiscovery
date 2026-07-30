@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, LayoutGroup, useReducedMotion } from 'framer-motion';
-import { ADA_BRAND } from '@/lib/adaConfig';
+import { ADA_BRAND, adaPath, normalizeAdaPathname } from '@/lib/adaConfig';
 import { ParticleText } from '@/components/ui/ParticleText';
 import { EvervaultHover } from '@/components/ui/EvervaultHover';
 import { AdaChatFab } from '@/components/ada/AdaChatFab';
@@ -13,6 +13,8 @@ import { AdaPageTransition } from '@/components/ada/AdaPageTransition';
 import { AdaThemeToggle } from '@/components/ada/AdaThemeToggle';
 import { useAdaTheme } from '@/hooks/useAdaTheme';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
+import { AffiliateAdBanner } from '@/components/ads/AffiliateAdBanner';
+import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 
 type NavIconId = 'home' | 'chat' | 'app' | 'docs' | 'card' | 'industry' | 'registrars';
 
@@ -24,76 +26,76 @@ const NAV: {
   match: (p: string) => boolean;
 }[] = [
   {
-    href: '/ada',
+    href: adaPath('/'),
     label: 'Home',
     short: 'Home',
     icon: 'home',
-    match: (p: string) => p === '/ada' || p === '/ada/',
+    match: (p: string) => normalizeAdaPathname(p) === '/',
   },
   {
-    href: '/ada/chat',
+    href: adaPath('/chat'),
     label: 'Chat',
     short: 'Chat',
     icon: 'chat',
-    match: (p: string) => p.startsWith('/ada/chat'),
+    match: (p: string) => normalizeAdaPathname(p).startsWith('/chat'),
   },
   {
-    href: '/ada/app',
+    href: adaPath('/app'),
     label: 'App',
     short: 'App',
     icon: 'app',
-    match: (p: string) => p.startsWith('/ada/app'),
+    match: (p: string) => normalizeAdaPathname(p).startsWith('/app'),
   },
   {
-    href: '/ada/docs',
+    href: adaPath('/docs'),
     label: 'Agent docs',
     short: 'Docs',
     icon: 'docs',
-    match: (p: string) =>
-      p.startsWith('/ada/docs') &&
-      !p.startsWith('/ada/docs/industry') &&
-      !p.startsWith('/ada/docs/registrars'),
+    match: (p: string) => {
+      const n = normalizeAdaPathname(p);
+      return n.startsWith('/docs') && !n.startsWith('/docs/industry') && !n.startsWith('/docs/registrars');
+    },
   },
   {
-    href: '/ada/agent-card',
+    href: adaPath('/agent-card'),
     label: 'Agent Card',
     short: 'Card',
     icon: 'card',
-    match: (p: string) => p.startsWith('/ada/agent-card'),
+    match: (p: string) => normalizeAdaPathname(p).startsWith('/agent-card'),
   },
 ];
 
 const MOBILE_EXTRA: { href: string; label: string; icon: NavIconId; match: (p: string) => boolean }[] = [
   {
-    href: '/ada/docs/industry',
+    href: adaPath('/docs/industry'),
     label: 'Industry research',
     icon: 'industry',
-    match: (p) => p.startsWith('/ada/docs/industry'),
+    match: (p) => normalizeAdaPathname(p).startsWith('/docs/industry'),
   },
   {
-    href: '/ada/docs/registrars',
+    href: adaPath('/docs/registrars'),
     label: 'Registrar matrix',
     icon: 'registrars',
-    match: (p) => p.startsWith('/ada/docs/registrars'),
+    match: (p) => normalizeAdaPathname(p).startsWith('/docs/registrars'),
   },
 ];
 
 const FOOTER_LINKS: Record<string, { label: string; href: string; external?: boolean }[]> = {
   Product: [
-    { label: 'Chat', href: '/ada/chat' },
-    { label: 'Structured app', href: '/ada/app' },
-    { label: 'Agent Card', href: '/ada/agent-card' },
+    { label: 'Chat', href: adaPath('/chat') },
+    { label: 'Structured app', href: adaPath('/app') },
+    { label: 'Agent Card', href: adaPath('/agent-card') },
   ],
   Docs: [
-    { label: 'Agent docs', href: '/ada/docs' },
-    { label: 'Industry', href: '/ada/docs/industry' },
-    { label: 'Registrars', href: '/ada/docs/registrars' },
+    { label: 'Agent docs', href: adaPath('/docs') },
+    { label: 'Industry', href: adaPath('/docs/industry') },
+    { label: 'Registrars', href: adaPath('/docs/registrars') },
   ],
   Legal: [
-    { label: 'Privacy', href: '/ada/privacy' },
-    { label: 'Terms', href: '/ada/terms' },
-    { label: 'Cookies', href: '/ada/cookies' },
-    { label: 'Disclaimer', href: '/ada/disclaimer' },
+    { label: 'Privacy', href: adaPath('/privacy') },
+    { label: 'Terms', href: adaPath('/terms') },
+    { label: 'Cookies', href: adaPath('/cookies') },
+    { label: 'Disclaimer', href: adaPath('/disclaimer') },
   ],
   Network: [
     {
@@ -268,7 +270,7 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
           ref={menuRef}
           className="relative max-w-5xl mx-auto px-3 sm:px-6 h-14 sm:h-[4.25rem] flex items-center justify-between gap-2 sm:gap-3"
         >
-          <Link href="/ada" className="flex items-center min-w-0 shrink" onClick={() => setMenuOpen(false)}>
+          <Link href={adaPath('/')} className="flex items-center min-w-0 shrink" onClick={() => setMenuOpen(false)}>
             <AdaLogo size="lg" showText priority />
           </Link>
 
@@ -504,11 +506,17 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
       <AdaChatFab />
 
       <footer className={`relative overflow-hidden border-t ${hair} ${surfaceEase}`} style={{ backgroundColor: pageBg }}>
+        {/* Spaceship / Spacemail strip — same network as DomainDiscovery */}
+        <div className={`relative z-[3] border-b ${hair}`} style={{ backgroundColor: pageBg }}>
+          <div className="max-w-2xl mx-auto px-3 sm:px-5 py-3 sm:py-4 flex justify-center">
+            <AffiliateAdBanner placement="footer" variant="card" />
+          </div>
+        </div>
         <div className={`relative z-[2] ${surfaceEase}`} style={{ backgroundColor: pageBg }}>
           <div className="max-w-6xl mx-auto px-3 sm:px-5 pt-5 sm:pt-8 pb-4 sm:pb-5">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-8">
               <div className="max-w-[17rem]">
-                <Link href="/ada" className="inline-flex items-center mb-2">
+                <Link href={adaPath('/')} className="inline-flex items-center mb-2">
                   <AdaLogo size="md" showText />
                 </Link>
                 <p className={`text-[11px] sm:text-[12px] leading-snug mb-1.5 sm:mb-2 ${muted}`}>{ADA_BRAND.tagline}</p>
@@ -608,11 +616,11 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
               {[
-                { label: 'Terms', href: '/ada/terms' },
-                { label: 'Privacy', href: '/ada/privacy' },
-                { label: 'Cookies', href: '/ada/cookies' },
-                { label: 'Disclaimer', href: '/ada/disclaimer' },
-                { label: 'Chat', href: '/ada/chat' },
+                { label: 'Terms', href: adaPath('/terms') },
+                { label: 'Privacy', href: adaPath('/privacy') },
+                { label: 'Cookies', href: adaPath('/cookies') },
+                { label: 'Disclaimer', href: adaPath('/disclaimer') },
+                { label: 'Chat', href: adaPath('/chat') },
               ].map((item) => (
                 <Link
                   key={item.href}

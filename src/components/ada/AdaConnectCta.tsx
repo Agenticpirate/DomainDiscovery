@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ADA_BRAND } from '@/lib/adaConfig';
+import {ADA_BRAND, adaPath} from '@/lib/adaConfig';
 
 function IconCard({ className }: { className?: string }) {
   return (
@@ -180,7 +180,7 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
 
             <div className="relative z-[1] mt-3 sm:mt-7 flex flex-wrap gap-1.5 sm:gap-2">
               <Link
-                href="/ada/docs#integration"
+                href={adaPath("/docs#integration")}
                 className={`rounded-lg sm:rounded-xl px-3 sm:px-4 py-1.5 sm:py-2.5 text-[11px] sm:text-xs font-bold transition ${
                   isLight ? 'bg-slate-900 text-white hover:bg-slate-800' : 'bg-white text-black hover:bg-white/90'
                 }`}
@@ -188,7 +188,7 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
                 Integration
               </Link>
               <Link
-                href="/ada/docs#security"
+                href={adaPath("/docs#security")}
                 className={`rounded-lg sm:rounded-xl border px-3 sm:px-4 py-1.5 sm:py-2.5 text-[11px] sm:text-xs font-bold transition ${line} ${
                   isLight
                     ? 'text-slate-700 hover:border-slate-300 bg-white'
@@ -198,7 +198,7 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
                 Security
               </Link>
               <Link
-                href="/ada/agent-card"
+                href={adaPath("/agent-card")}
                 className={`rounded-lg sm:rounded-xl border px-3 sm:px-4 py-1.5 sm:py-2.5 text-[11px] sm:text-xs font-bold transition ${line} ${
                   isLight
                     ? 'text-slate-700 hover:border-slate-300 bg-white'
@@ -348,7 +348,7 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
             </p>
             <div className="flex flex-wrap justify-center gap-1.5 sm:gap-3">
               <Link
-                href="/ada/chat"
+                href={adaPath("/chat")}
                 className={`group relative overflow-hidden rounded-lg sm:rounded-2xl px-3.5 sm:px-6 py-2 sm:py-3 text-[12px] sm:text-sm font-bold transition shadow-lg sm:shadow-xl ${
                   isLight
                     ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-slate-900/20'
@@ -358,7 +358,7 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
                 <span className="relative">Open chat</span>
               </Link>
               <Link
-                href="/ada/app"
+                href={adaPath("/app")}
                 className={`rounded-lg sm:rounded-2xl border px-3.5 sm:px-6 py-2 sm:py-3 text-[12px] sm:text-sm font-bold transition ${line} ${
                   isLight
                     ? 'bg-white text-slate-800 hover:border-slate-300'
@@ -368,7 +368,7 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
                 Start with a brief
               </Link>
               <Link
-                href="/ada/docs"
+                href={adaPath("/docs")}
                 className={`rounded-lg sm:rounded-2xl border px-3.5 sm:px-6 py-2 sm:py-3 text-[12px] sm:text-sm font-bold transition ${line} ${
                   isLight
                     ? 'text-slate-600 hover:border-slate-300'
