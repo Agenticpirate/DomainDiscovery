@@ -118,20 +118,12 @@ export function AffiliateAdCarousel({
         }`}
         aria-label={`${active.alt} (sponsored)`}
       >
-        {/* Sponsored · Ad disclosure — minimal on mobile, full on sm+ */}
+        {/* Minimal frosted Ad chip — transparent, not black/grey solid */}
         <span
-          className={`pointer-events-none absolute z-[2] inline-flex items-center font-semibold tracking-wide backdrop-blur-md
-            left-1.5 top-1.5 gap-0.5 rounded-md px-1.5 py-px text-[6.5px] opacity-70
-            sm:left-2.5 sm:top-2.5 sm:gap-1 sm:rounded-full sm:px-2 sm:py-0.5 sm:text-[8px] sm:opacity-100
-            ${
-              isLight
-                ? 'bg-black/30 text-white/80 border border-white/10 sm:bg-white/90 sm:text-slate-600 sm:border-slate-200/90 sm:shadow-sm'
-                : 'bg-black/30 text-white/70 border border-white/[0.08] sm:bg-black/55 sm:text-white/75 sm:border-white/12'
-            }`}
+          className="pointer-events-none absolute z-[2] left-1 top-1 sm:left-2 sm:top-2 inline-flex items-center rounded-full border border-white/25 bg-white/15 px-1.5 py-px text-[6px] sm:text-[6.5px] font-semibold uppercase tracking-[0.1em] text-white/85 backdrop-blur-[3px]"
+          style={{ backgroundColor: 'rgba(255,255,255,0.14)' }}
         >
-          <span className="max-sm:hidden">Sponsored</span>
-          <span className={`max-sm:hidden ${isLight ? 'sm:text-slate-300' : 'sm:text-white/30'}`}>·</span>
-          <span className="uppercase tracking-[0.12em] text-[6px] sm:text-[7px] opacity-60 sm:opacity-70">Ad</span>
+          Ad
         </span>
 
         <div className="relative w-full overflow-hidden">

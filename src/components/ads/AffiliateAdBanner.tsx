@@ -119,22 +119,14 @@ export function AffiliateAdBanner({
     />
   );
 
+  /** Clear frosted pill — small, transparent, never heavy black/grey */
   const sponsoredBadge = (
     <span
-      className={`pointer-events-none absolute z-[2] inline-flex items-center font-semibold tracking-wide backdrop-blur-md
-        left-1.5 top-1.5 gap-0.5 rounded-md px-1.5 py-px text-[6.5px] opacity-70
-        sm:left-3 sm:top-2.5 sm:gap-1 sm:rounded-full sm:px-2 sm:py-0.5 sm:text-[8.5px] sm:opacity-100
-        ${
-          isLight
-            ? 'bg-black/30 text-white/80 border border-white/10 sm:bg-black/45 sm:text-white/90 sm:border-white/15'
-            : 'bg-black/30 text-white/70 border border-white/[0.08] sm:bg-black/50 sm:text-white/85 sm:border-white/12'
-        }`}
+      className="pointer-events-none absolute z-[2] left-1 top-1 sm:left-2 sm:top-2 inline-flex items-center gap-0.5 rounded-full border border-white/25 bg-white/15 px-1.5 py-px text-[6px] sm:text-[6.5px] font-semibold uppercase tracking-[0.1em] text-white/85 backdrop-blur-[3px] shadow-none"
+      style={{ backgroundColor: 'rgba(255,255,255,0.14)' }}
     >
-      <span className="max-sm:hidden">Sponsored</span>
-      <span className="text-white/35 max-sm:hidden">·</span>
-      <span className="uppercase tracking-[0.12em] text-[6px] sm:text-[7.5px] text-white/55 sm:text-white/60">
-        Ad
-      </span>
+      <span className="hidden sm:inline normal-case tracking-wide font-medium opacity-90">Ad</span>
+      <span className="sm:hidden">Ad</span>
     </span>
   );
 

@@ -142,7 +142,9 @@ export default function LearnArticlePage({ params }: PageProps) {
       url: BASE,
       logo: {
         '@type': 'ImageObject',
-        url: `${BASE}/logo.png`,
+        url: `${BASE}/logo-solid.png?v=20260730logo`,
+        width: 512,
+        height: 512,
       },
     },
     about: article.topics.map((t) => ({

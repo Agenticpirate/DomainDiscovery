@@ -5,9 +5,10 @@ import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
 import {
   REGISTRARS,
-  getRegistrarUrl,
+  resolveRegisterUrl,
   type RegistrarName,
 } from '@/lib/registrars';
+import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import generatorKeywords from '@/data/generator-keywords.json';
 
 interface GeneratedDomain {
@@ -23,7 +24,10 @@ interface DomainGeneratorProps {
   onSelect?: (domain: string) => void;
 }
 
-type FilterType = 'all' | 'starts' | 'ends' | 'available' | 'taken' | 'premium';
+/** Position of keyword in the generated name */
+type PositionFilter = 'all' | 'starts' | 'ends';
+/** Availability status — controlled via quick buttons, not buried in a select */
+type StatusFilter = 'all' | 'available' | 'premium' | 'taken';
 type SortType = 'popularity' | 'alphabetical' | 'length';
 type ViewType = 'grid' | 'list';
 type SeedCategory = keyof typeof generatorKeywords.seeds | 'all';
@@ -60,10 +64,13 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
   const [checkProgress, setCheckProgress] = useState({ done: 0, total: 0 });
   const [suggestions, setSuggestions] = useState<GeneratedDomain[]>([]);
   const [filteredSuggestions, setFilteredSuggestions] = useState<GeneratedDomain[]>([]);
-  const [filter, setFilter] = useState<FilterType>('all');
+  const [positionFilter, setPositionFilter] = useState<PositionFilter>('all');
+  /** Status toggled via big buttons (Available / Premium / Taken / All) */
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
   const [sortBy, setSortBy] = useState<SortType>('popularity');
   const [viewType, setViewType] = useState<ViewType>('grid');
-  const [selectedRegistrar, setSelectedRegistrar] = useState<RegistrarName>('GoDaddy');
+  /** Default Spaceship; user pick persists and drives Continue / buy URLs */
+  const { selectedRegistrar, setSelectedRegistrar } = usePreferredRegistrar();
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
   const [showDomainPopup, setShowDomainPopup] = useState(false);
   const [seedCategory, setSeedCategory] = useState<SeedCategory>('trending');
@@ -137,13 +144,18 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       return len >= minLen && len <= maxLen;
     });
 
-    switch (filter) {
+    switch (positionFilter) {
       case 'starts':
         filtered = filtered.filter((d) => d.name.startsWith(cleanKeyword));
         break;
       case 'ends':
         filtered = filtered.filter((d) => d.name.endsWith(cleanKeyword));
         break;
+      default:
+        break;
+    }
+
+    switch (statusFilter) {
       case 'available':
         filtered = filtered.filter((d) => d.available && !d.premium);
         break;
@@ -172,11 +184,11 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     }
 
     setFilteredSuggestions(filtered);
-  }, [suggestions, filter, sortBy, keyword, minLen, maxLen]);
+  }, [suggestions, positionFilter, statusFilter, sortBy, keyword, minLen, maxLen]);
 
   useEffect(() => {
     setVisibleCount(DISPLAY_PAGE);
-  }, [keyword, filter, sortBy, minLen, maxLen]);
+  }, [keyword, positionFilter, statusFilter, sortBy, minLen, maxLen]);
 
   const handleSearch = async (searchKeyword: string) => {
     if (!searchKeyword.trim()) return;
@@ -395,15 +407,10 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     setShowDomainPopup(true);
   };
 
-  const handleBuyDomain = (domainName: string, registrar: RegistrarName) => {
+  const registerHref = (domainName: string, registrar: RegistrarName = selectedRegistrar) => {
     const fullDomain = domainName.includes('.') ? domainName : `${domainName}.com`;
-    window.open(getRegistrarUrl(fullDomain, registrar), '_blank', 'noopener,noreferrer');
-    setShowDomainPopup(false);
-  };
-
-  const handleComClick = (domainName: string) => {
-    const fullDomain = domainName.includes('.') ? domainName : `${domainName}.com`;
-    window.open(getRegistrarUrl(fullDomain, selectedRegistrar), '_blank', 'noopener,noreferrer');
+    // Spaceship → Impact sjv.io affiliate with domain deep-link; others → their search URL
+    return resolveRegisterUrl(fullDomain, registrar);
   };
 
   const availableCount = suggestions.filter(isAvailableSuggestion).length;
@@ -416,25 +423,31 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
 
   const chipClass = isLight
     ? 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
-    : 'bg-white/[0.04] border border-white/10 text-white/60 hover:border-white/20 hover:text-white/80';
+    : 'bg-[#121214] border border-white/10 text-white/60 hover:border-white/20 hover:text-white/80';
 
   return (
     <div className="space-y-3 sm:space-y-4">
-      {/* Unified search panel — single border, no nested input box */}
+      {/* Unified search panel — fully opaque so ambient dots never show through */}
       <div
-        className={`shine-border rounded-2xl border p-3 sm:p-4 ${
+        className={`shine-border relative isolate overflow-hidden rounded-2xl border p-3 sm:p-4 ${
           isLight
             ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.04]'
-            : 'bg-white/[0.03] border-white/10'
+            : 'bg-[#0a0a0c] border-white/10'
         }`}
+        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
       >
-        <div className="max-w-3xl mx-auto">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 rounded-[inherit]"
+          style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+        />
+        <div className="relative z-[1] max-w-3xl mx-auto">
           {/* One continuous control — input has NO inner border/box */}
           <div
             className={`flex items-center gap-1.5 sm:gap-2 rounded-xl sm:rounded-2xl p-1 sm:p-1.5 transition-all ${
               isLight
                 ? 'bg-slate-50 border border-slate-200 focus-within:border-slate-300 focus-within:bg-white focus-within:shadow-sm'
-                : 'bg-black/30 border border-white/10 focus-within:border-white/22'
+                : 'bg-[#121214] border border-white/10 focus-within:border-white/22'
             }`}
           >
             <div
@@ -571,32 +584,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
 
           {/* Live stats + check progress */}
           {keyword && totalCount > 0 && (
-            <div className="mt-3 space-y-1.5">
-              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[11px] sm:text-[12px]">
-                <span className="tabular-nums" style={{ color: 'var(--text-muted)' }}>
-                  <span className="font-bold" style={{ color: 'var(--text-primary)' }}>
-                    {totalCount.toLocaleString()}
-                  </span>{' '}
-                  ideas
-                </span>
-                {availableCount > 0 && (
-                  <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-500">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    {availableCount.toLocaleString()} available
-                  </span>
-                )}
-                {premiumCount > 0 && (
-                  <span className="inline-flex items-center gap-1.5 font-semibold text-amber-500">
-                    <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-                    {premiumCount.toLocaleString()} premium
-                  </span>
-                )}
-                {takenCount > 0 && (
-                  <span className="tabular-nums" style={{ color: 'var(--text-muted)' }}>
-                    {takenCount.toLocaleString()} taken
-                  </span>
-                )}
-              </div>
+            <div className="mt-3 space-y-2">
               {checkProgress.total > 0 && checkProgress.done < checkProgress.total && (
                 <div className="max-w-md mx-auto">
                   <div
@@ -619,6 +607,88 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   </p>
                 </div>
               )}
+
+              {/* Status quick-filters — primary way to browse free / premium / taken */}
+              <div
+                className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2"
+                role="tablist"
+                aria-label="Filter by availability"
+              >
+                {(
+                  [
+                    {
+                      id: 'available' as const,
+                      label: 'Available',
+                      count: availableCount,
+                      activeCls: isLight
+                        ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
+                        : 'bg-emerald-500 text-black border-emerald-500',
+                      idleCls: isLight
+                        ? 'bg-white text-emerald-700 border-emerald-200 hover:border-emerald-300'
+                        : 'bg-[#121214] text-emerald-400 border-emerald-500/25 hover:border-emerald-500/40',
+                      dot: 'bg-emerald-400',
+                    },
+                    {
+                      id: 'premium' as const,
+                      label: 'Premium',
+                      count: premiumCount,
+                      activeCls: isLight
+                        ? 'bg-amber-500 text-white border-amber-500 shadow-sm'
+                        : 'bg-amber-400 text-black border-amber-400',
+                      idleCls: isLight
+                        ? 'bg-white text-amber-700 border-amber-200 hover:border-amber-300'
+                        : 'bg-[#121214] text-amber-400 border-amber-400/25 hover:border-amber-400/40',
+                      dot: 'bg-amber-400',
+                    },
+                    {
+                      id: 'taken' as const,
+                      label: 'Taken',
+                      count: takenCount,
+                      activeCls: isLight
+                        ? 'bg-slate-800 text-white border-slate-800 shadow-sm'
+                        : 'bg-white text-black border-white',
+                      idleCls: isLight
+                        ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                        : 'bg-[#121214] text-white/70 border-white/12 hover:border-white/22',
+                      dot: isLight ? 'bg-rose-400' : 'bg-rose-400/90',
+                    },
+                    {
+                      id: 'all' as const,
+                      label: 'All ideas',
+                      count: totalCount,
+                      activeCls: isLight
+                        ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                        : 'bg-white/15 text-white border-white/25',
+                      idleCls: isLight
+                        ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                        : 'bg-[#121214] text-white/60 border-white/10 hover:border-white/20',
+                      dot: isLight ? 'bg-slate-400' : 'bg-white/40',
+                    },
+                  ] as const
+                ).map((tab) => {
+                  const active = statusFilter === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={active}
+                      onClick={() => setStatusFilter(tab.id)}
+                      className={`flex flex-col items-start gap-0.5 rounded-xl border px-2.5 py-2 sm:px-3 sm:py-2.5 text-left transition-all active:scale-[0.98] ${
+                        active ? tab.activeCls : tab.idleCls
+                      }`}
+                    >
+                      <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide opacity-90">
+                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${tab.dot}`} aria-hidden />
+                        {tab.label}
+                      </span>
+                      <span className="text-[1.05rem] sm:text-lg font-black tabular-nums leading-none">
+                        {tab.count.toLocaleString()}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>
@@ -627,28 +697,39 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       {/* Controls + results */}
       {keyword && totalCount > 0 && (
         <div
-          className={`shine-border rounded-2xl border overflow-hidden ${
+          className={`shine-border relative isolate overflow-hidden rounded-2xl border ${
             isLight
               ? 'bg-white border-slate-200 shadow-sm'
-              : 'bg-white/[0.025] border-white/10'
+              : 'bg-[#0a0a0c] border-white/10'
           }`}
+          style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
         >
           <div
             className={`flex flex-col gap-2 px-3 sm:px-4 py-2.5 border-b ${
               isLight ? 'border-slate-100' : 'border-white/[0.06]'
             }`}
           >
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+            {/*
+              Mobile: compact 2-col + full-width register (no stacked label bloat).
+              Desktop (sm+): labeled 3-col grid with helper under registrar.
+            */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 sm:gap-2.5">
+              <label className="col-span-2 sm:col-span-1 flex flex-col gap-0.5 sm:gap-1 min-w-0">
+                <span
+                  className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em]"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  Register at
+                </span>
                 <select
                   value={selectedRegistrar}
                   onChange={(e) => setSelectedRegistrar(e.target.value as RegistrarName)}
-                  className={`rounded-lg border px-2 py-1.5 text-[11px] sm:text-[12px] font-semibold outline-none ${
+                  className={`w-full rounded-lg sm:rounded-xl border px-2.5 py-1.5 sm:px-3 sm:py-2.5 text-[11px] sm:text-[13px] font-semibold outline-none ${
                     isLight
-                      ? 'bg-slate-50 border-slate-200 text-slate-800'
-                      : 'bg-white/[0.04] border-white/10 text-white/80'
+                      ? 'bg-slate-50 border-slate-200 text-slate-900'
+                      : 'bg-[#121214] border-white/12 text-white'
                   }`}
-                  aria-label="Registrar"
+                  aria-label="Where to register available domains"
                 >
                   {REGISTRARS.map((reg) => (
                     <option key={reg.name} value={reg.name}>
@@ -656,118 +737,143 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                     </option>
                   ))}
                 </select>
+                <span
+                  className="hidden sm:block text-[9.5px] leading-snug"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  “Continue” opens {selectedRegistrar}
+                </span>
+              </label>
 
-                {/* Sort — popularity / length / alphabetical */}
+              <label className="flex flex-col gap-0.5 sm:gap-1 min-w-0">
+                <span
+                  className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em]"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  Sort
+                </span>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as SortType)}
-                  className={`rounded-lg border px-2 py-1.5 text-[11px] sm:text-[12px] font-semibold outline-none ${
+                  className={`w-full rounded-lg sm:rounded-xl border px-2 py-1.5 sm:px-3 sm:py-2.5 text-[11px] sm:text-[13px] font-semibold outline-none ${
                     isLight
-                      ? 'bg-slate-50 border-slate-200 text-slate-800'
-                      : 'bg-white/[0.04] border-white/10 text-white/80'
+                      ? 'bg-slate-50 border-slate-200 text-slate-900'
+                      : 'bg-[#121214] border-white/12 text-white'
                   }`}
-                  aria-label="Sort results"
+                  aria-label="Sort domain ideas"
                 >
-                  <option value="popularity">Sort: Popularity</option>
-                  <option value="length">Sort: Length</option>
-                  <option value="alphabetical">Sort: Alphabetical</option>
+                  <option value="popularity">Most popular</option>
+                  <option value="length">Shortest</option>
+                  <option value="alphabetical">A → Z</option>
                 </select>
+              </label>
 
-                {/* Term position filter */}
+              <label className="flex flex-col gap-0.5 sm:gap-1 min-w-0">
+                <span
+                  className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em]"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  Keyword
+                </span>
                 <select
-                  value={filter}
-                  onChange={(e) => setFilter(e.target.value as FilterType)}
-                  className={`rounded-lg border px-2 py-1.5 text-[11px] sm:text-[12px] font-semibold outline-none ${
+                  value={positionFilter}
+                  onChange={(e) => setPositionFilter(e.target.value as PositionFilter)}
+                  className={`w-full rounded-lg sm:rounded-xl border px-2 py-1.5 sm:px-3 sm:py-2.5 text-[11px] sm:text-[13px] font-semibold outline-none ${
                     isLight
-                      ? 'bg-slate-50 border-slate-200 text-slate-800'
-                      : 'bg-white/[0.04] border-white/10 text-white/80'
+                      ? 'bg-slate-50 border-slate-200 text-slate-900'
+                      : 'bg-[#121214] border-white/12 text-white'
                   }`}
-                  aria-label="Filter results"
+                  aria-label="Where the keyword appears in the name"
                 >
-                  <option value="all">Filter: All</option>
-                  <option value="starts">Starts with term</option>
-                  <option value="ends">Ends with term</option>
-                  <option value="available">Available only</option>
-                  <option value="taken">Taken only</option>
-                  <option value="premium">Premium only</option>
+                  <option value="all">Anywhere</option>
+                  <option value="starts">Starts with</option>
+                  <option value="ends">Ends with</option>
                 </select>
-              </div>
+              </label>
+            </div>
 
-              <div className="flex items-center gap-0.5">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-3">
+              <div
+                className={`inline-flex items-center gap-0.5 rounded-lg sm:rounded-xl border p-0.5 ${
+                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-[#121214]'
+                }`}
+              >
                 <button
                   type="button"
                   onClick={() => setViewType('grid')}
-                  className={`p-1.5 rounded-lg transition-colors ${
+                  className={`inline-flex items-center gap-0.5 sm:gap-1 rounded-md sm:rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-bold transition-colors ${
                     viewType === 'grid'
                       ? isLight
-                        ? 'bg-slate-900 text-white'
+                        ? 'bg-white text-slate-900 shadow-sm'
                         : 'bg-white text-black'
                       : isLight
-                        ? 'text-slate-400 hover:text-slate-700'
-                        : 'text-white/35 hover:text-white/70'
+                        ? 'text-slate-500'
+                        : 'text-white/45'
                   }`}
-                  title="Grid"
+                  title="Grid view"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                   </svg>
+                  <span className="hidden xs:inline sm:inline">Grid</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setViewType('list')}
-                  className={`p-1.5 rounded-lg transition-colors ${
+                  className={`inline-flex items-center gap-0.5 sm:gap-1 rounded-md sm:rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-[11px] font-bold transition-colors ${
                     viewType === 'list'
                       ? isLight
-                        ? 'bg-slate-900 text-white'
+                        ? 'bg-white text-slate-900 shadow-sm'
                         : 'bg-white text-black'
                       : isLight
-                        ? 'text-slate-400 hover:text-slate-700'
-                        : 'text-white/35 hover:text-white/70'
+                        ? 'text-slate-500'
+                        : 'text-white/45'
                   }`}
-                  title="List"
+                  title="List view"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
+                  <span className="hidden sm:inline">List</span>
                 </button>
               </div>
-            </div>
 
-            {/* Extra customization */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[10px] sm:text-[11px]">
-              <label className="inline-flex items-center gap-1.5 font-medium" style={{ color: 'var(--text-muted)' }}>
-                Min
+              <label
+                className="inline-flex items-center gap-1 font-medium text-[10px] sm:text-[11px]"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                <span className="hidden sm:inline">Length</span>
                 <input
                   type="number"
                   min={2}
                   max={maxLen}
                   value={minLen}
                   onChange={(e) => setMinLen(Math.max(2, Math.min(Number(e.target.value) || 2, maxLen)))}
-                  className={`w-12 rounded-md border px-1.5 py-1 tabular-nums outline-none ${
+                  className={`w-9 sm:w-11 rounded-md border px-1 py-0.5 sm:px-1.5 sm:py-1 tabular-nums outline-none ${
                     isLight
                       ? 'bg-slate-50 border-slate-200 text-slate-800'
-                      : 'bg-white/[0.04] border-white/10 text-white/80'
+                      : 'bg-[#121214] border-white/10 text-white/80'
                   }`}
+                  aria-label="Minimum name length"
                 />
-              </label>
-              <label className="inline-flex items-center gap-1.5 font-medium" style={{ color: 'var(--text-muted)' }}>
-                Max
+                <span>–</span>
                 <input
                   type="number"
                   min={minLen}
                   max={32}
                   value={maxLen}
                   onChange={(e) => setMaxLen(Math.min(32, Math.max(Number(e.target.value) || 20, minLen)))}
-                  className={`w-12 rounded-md border px-1.5 py-1 tabular-nums outline-none ${
+                  className={`w-9 sm:w-11 rounded-md border px-1 py-0.5 sm:px-1.5 sm:py-1 tabular-nums outline-none ${
                     isLight
                       ? 'bg-slate-50 border-slate-200 text-slate-800'
-                      : 'bg-white/[0.04] border-white/10 text-white/80'
+                      : 'bg-[#121214] border-white/10 text-white/80'
                   }`}
+                  aria-label="Maximum name length"
                 />
-                chars
               </label>
+
               <label
-                className={`inline-flex items-center gap-1.5 cursor-pointer select-none font-medium ${
+                className={`inline-flex items-center gap-1 cursor-pointer select-none text-[10px] sm:text-[11px] font-medium ${
                   isLight ? 'text-slate-600' : 'text-white/55'
                 }`}
               >
@@ -775,12 +881,17 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   type="checkbox"
                   checked={includeCompounds}
                   onChange={(e) => setIncludeCompounds(e.target.checked)}
-                  className="rounded border-slate-400"
+                  className="rounded border-slate-400 scale-90 sm:scale-100"
                 />
-                Compounds (prefix+keyword+suffix)
+                <span className="sm:hidden">Compounds</span>
+                <span className="hidden sm:inline">Include compounds</span>
               </label>
-              <span className="tabular-nums ml-auto" style={{ color: 'var(--text-muted)' }}>
-                Showing {Math.min(visibleCount, filteredSuggestions.length).toLocaleString()} of{' '}
+
+              <span
+                className="tabular-nums text-[9.5px] sm:text-[11px] ml-auto font-medium"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                {Math.min(visibleCount, filteredSuggestions.length).toLocaleString()}/
                 {filteredSuggestions.length.toLocaleString()}
               </span>
             </div>
@@ -828,9 +939,13 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                       </span>
                     </button>
                     {isAvailableSuggestion(suggestion) ? (
-                      <button
-                        type="button"
-                        onClick={() => handleComClick(suggestion.name)}
+                      <a
+                        href={registerHref(suggestion.name)}
+                        target="_blank"
+                        rel="sponsored noopener noreferrer"
+                        data-affiliate={selectedRegistrar === 'Spaceship' ? 'spaceship' : undefined}
+                        data-registrar={selectedRegistrar}
+                        data-placement="generator-continue"
                         className={`shrink-0 rounded-md px-2 py-1 text-[10px] font-bold transition-colors ${
                           isLight
                             ? 'bg-emerald-600 text-white hover:bg-emerald-500'
@@ -838,7 +953,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         }`}
                       >
                         Continue
-                      </button>
+                      </a>
                     ) : isPremiumSuggestion(suggestion) ? (
                       <button
                         type="button"
@@ -899,9 +1014,13 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                       </span>
                     </button>
                     {isAvailableSuggestion(suggestion) ? (
-                      <button
-                        type="button"
-                        onClick={() => handleComClick(suggestion.name)}
+                      <a
+                        href={registerHref(suggestion.name)}
+                        target="_blank"
+                        rel="sponsored noopener noreferrer"
+                        data-affiliate={selectedRegistrar === 'Spaceship' ? 'spaceship' : undefined}
+                        data-registrar={selectedRegistrar}
+                        data-placement="generator-continue"
                         className={`shrink-0 rounded-md px-2.5 py-1 text-[10px] font-bold ${
                           isLight
                             ? 'bg-emerald-600 text-white'
@@ -909,7 +1028,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         }`}
                       >
                         Continue
-                      </button>
+                      </a>
                     ) : isPremiumSuggestion(suggestion) ? (
                       <button
                         type="button"
@@ -935,11 +1054,49 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               </div>
             )
           ) : (
-            <div className="text-center py-12 px-4">
-              <p className="text-sm font-semibold mb-1">No matches for this filter</p>
-              <p className="text-[12px]" style={{ color: 'var(--text-muted)' }}>
-                “{keyword}” has {suggestions.length.toLocaleString()} total results — try Filter → All
+            <div className="text-center py-10 px-4">
+              <p className="text-sm font-semibold mb-1">
+                {statusFilter === 'available'
+                  ? 'No free .com domains in this set yet'
+                  : statusFilter === 'premium'
+                    ? 'No premium listings in this set'
+                    : statusFilter === 'taken'
+                      ? 'No taken domains match'
+                      : 'No matches for this filter'}
               </p>
+              <p className="text-[12px] mb-3" style={{ color: 'var(--text-muted)' }}>
+                “{keyword}” has {suggestions.length.toLocaleString()} total ideas
+                {checkProgress.done < checkProgress.total
+                  ? ' — still checking availability…'
+                  : ' — try another status'}
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-1.5">
+                {(
+                  [
+                    { id: 'available' as const, label: 'Available' },
+                    { id: 'premium' as const, label: 'Premium' },
+                    { id: 'taken' as const, label: 'Taken' },
+                    { id: 'all' as const, label: 'All ideas' },
+                  ] as const
+                ).map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setStatusFilter(tab.id)}
+                    className={`rounded-full border px-3 py-1.5 text-[11px] font-bold ${
+                      statusFilter === tab.id
+                        ? isLight
+                          ? 'bg-slate-900 text-white border-slate-900'
+                          : 'bg-white text-black border-white'
+                        : isLight
+                          ? 'bg-white text-slate-600 border-slate-200'
+                          : 'bg-[#121214] text-white/70 border-white/12'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
 
@@ -1016,11 +1173,20 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
             
             <div className="space-y-2">
               {REGISTRARS.map((registrar) => (
-                <button
+                <a
                   key={registrar.name}
-                  type="button"
-                  onClick={() => selectedDomain && handleBuyDomain(selectedDomain, registrar.name)}
-                  className={`w-full text-left px-4 py-3 border rounded-lg transition-colors group ${
+                  href={selectedDomain ? registerHref(selectedDomain, registrar.name) : undefined}
+                  target="_blank"
+                  rel={
+                    registrar.name === 'Spaceship'
+                      ? 'sponsored noopener noreferrer'
+                      : 'noopener noreferrer'
+                  }
+                  data-affiliate={registrar.name === 'Spaceship' ? 'spaceship' : undefined}
+                  data-registrar={registrar.name}
+                  data-placement="generator-popup"
+                  onClick={() => setShowDomainPopup(false)}
+                  className={`w-full block text-left px-4 py-3 border rounded-lg transition-colors group ${
                     isLight
                       ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-900'
                       : 'bg-white/5 hover:bg-white/10 border-white/10 text-white'
@@ -1040,12 +1206,21 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         loading="lazy"
                       />
                       <span className="font-semibold truncate">{registrar.host}</span>
+                      {registrar.name === 'Spaceship' ? (
+                        <span
+                          className={`shrink-0 text-[9px] font-bold uppercase tracking-wide ${
+                            isLight ? 'text-emerald-700' : 'text-emerald-400'
+                          }`}
+                        >
+                          Partner
+                        </span>
+                      ) : null}
                     </span>
                     <svg className={`w-4 h-4 shrink-0 ${isLight ? 'text-slate-400 group-hover:text-slate-900' : 'text-white/40 group-hover:text-white'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
-                </button>
+                </a>
               ))}
             </div>
           </div>

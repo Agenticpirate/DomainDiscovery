@@ -157,15 +157,10 @@ export function AffiliateSkyscraper() {
           }}
         >
           <span
-            className={`pointer-events-none absolute left-1.5 top-1.5 z-[2] inline-flex items-center gap-0.5 rounded-md px-1.5 py-px text-[6px] font-semibold uppercase tracking-[0.12em] opacity-70 backdrop-blur-md sm:left-2 sm:top-2 sm:gap-1 sm:rounded-full sm:px-2 sm:py-0.5 sm:text-[7px] sm:opacity-100 ${
-              isLight
-                ? 'bg-black/30 text-white/80 border border-white/10 sm:bg-white/90 sm:text-slate-600 sm:border-white/50'
-                : 'bg-black/30 text-white/70 border border-white/[0.08] sm:bg-black/45 sm:text-white/80 sm:border-white/15'
-            }`}
+            className="pointer-events-none absolute left-1 top-1 z-[2] inline-flex items-center rounded-full border border-white/25 bg-white/15 px-1.5 py-px text-[6px] font-semibold uppercase tracking-[0.1em] text-white/85 backdrop-blur-[3px]"
+            style={{ backgroundColor: 'rgba(255,255,255,0.14)' }}
           >
-            <span className="max-sm:hidden normal-case tracking-wide">Sponsored</span>
-            <span className="opacity-40 max-sm:hidden">·</span>
-            <span>Ad</span>
+            Ad
           </span>
 
           <div

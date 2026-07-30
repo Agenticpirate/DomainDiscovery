@@ -1,16 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
-  <!-- Solid plate + D monogram matching DomainDiscoverylogo.png (for any SVG clients) -->
-  <rect width="48" height="48" rx="10" fill="#0a0a0a"/>
-  <defs>
-    <linearGradient id="dd" x1="10" y1="8" x2="40" y2="42">
-      <stop stop-color="#ffffff"/>
-      <stop offset="0.45" stop-color="#f1f5f9"/>
-      <stop offset="1" stop-color="#c0c7d1"/>
-    </linearGradient>
-  </defs>
-  <!-- Outer D -->
-  <path fill="url(#dd)" d="M12 9h12.5c8.6 0 15.5 6.9 15.5 15.5S33.1 40 24.5 40H12V9zm4.2 4.2v22.6h8.3c6.3 0 11.3-5 11.3-11.3s-5-11.3-11.3-11.3h-8.3z"/>
-  <!-- Domain orbit -->
-  <path fill="url(#dd)" d="M18.2 25.2c0-4.5 2.7-7.7 6.4-8.7 1.5 1.9 2.3 4.3 2.3 7 0 3.7-1.6 6.9-4.1 9-.3-2.2-2.2-3.9-4.6-3.9v-3.4z"/>
-  <circle cx="19.3" cy="30.6" r="2.5" fill="url(#dd)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="DomainDiscovery">
+  <!-- Raster plate+mark generated from public/logo.png (same asset as UI logo) -->
+  <image href="data:image/png;base64,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" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
 </svg>

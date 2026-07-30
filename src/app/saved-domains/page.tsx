@@ -12,7 +12,7 @@ import { Icons } from '@/components/ui/Icons';
 import { useToast } from '@/components/ui/Toast';
 import { useTheme } from '@/contexts/ThemeContext';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
-import { getRegistrarUrl } from '@/lib/registrars';
+import { resolveRegisterUrl } from '@/lib/registrars';
 import {
   type SavedDomainRecord,
   type SavedFolder,
@@ -191,7 +191,9 @@ export default function SavedDomainsPage() {
   };
 
   const handleBuyDomain = (domain: string) => {
-    window.open(getRegistrarUrl(domain, selectedRegistrar), '_blank', 'noopener,noreferrer');
+    // Spaceship (default) → Impact affiliate; other registrars use their search URL
+    const href = resolveRegisterUrl(domain, selectedRegistrar);
+    window.open(href, '_blank', 'noopener,noreferrer');
   };
 
   const handleCreateFolder = (e?: React.FormEvent) => {

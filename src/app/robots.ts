@@ -8,62 +8,45 @@ import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = getSiteBaseUrl();
 
+  const disallow = ['/api/', '/share/']; // ephemeral OG share cards
+
+  // Explicit allow for common AI + search crawlers (same rules as *)
+  const aiAgents = [
+    'GPTBot',
+    'ChatGPT-User',
+    'OAI-SearchBot',
+    'Google-Extended',
+    'Googlebot',
+    'Googlebot-Image',
+    'Bingbot',
+    'DuckDuckBot',
+    'PerplexityBot',
+    'ClaudeBot',
+    'anthropic-ai',
+    'Applebot',
+    'Applebot-Extended',
+    'Bytespider',
+    'cohere-ai',
+    'meta-externalagent',
+    'FacebookBot',
+    'Amazonbot',
+    'YouBot',
+    'Diffbot',
+    'CCBot',
+  ];
+
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: [
-          '/api/',
-          '/share/', // ephemeral OG share cards
-        ],
+        disallow,
       },
-      // Explicit allow for common AI crawlers (same rules as *)
-      {
-        userAgent: 'GPTBot',
+      ...aiAgents.map((userAgent) => ({
+        userAgent,
         allow: '/',
-        disallow: ['/api/', '/share/'],
-      },
-      {
-        userAgent: 'ChatGPT-User',
-        allow: '/',
-        disallow: ['/api/', '/share/'],
-      },
-      {
-        userAgent: 'Google-Extended',
-        allow: '/',
-        disallow: ['/api/', '/share/'],
-      },
-      {
-        userAgent: 'PerplexityBot',
-        allow: '/',
-        disallow: ['/api/', '/share/'],
-      },
-      {
-        userAgent: 'ClaudeBot',
-        allow: '/',
-        disallow: ['/api/', '/share/'],
-      },
-      {
-        userAgent: 'Applebot-Extended',
-        allow: '/',
-        disallow: ['/api/', '/share/'],
-      },
-      {
-        userAgent: 'OAI-SearchBot',
-        allow: '/',
-        disallow: ['/api/', '/share/'],
-      },
-      {
-        userAgent: 'anthropic-ai',
-        allow: '/',
-        disallow: ['/api/', '/share/'],
-      },
-      {
-        userAgent: 'Bytespider',
-        allow: '/',
-        disallow: ['/api/', '/share/'],
-      },
+        disallow,
+      })),
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,

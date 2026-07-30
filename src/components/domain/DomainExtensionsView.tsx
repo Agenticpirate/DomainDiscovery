@@ -11,6 +11,7 @@ import {
   normalizeCatalogKeyword,
   readCatalogSeed,
 } from '@/lib/catalogHandoff';
+import { resolveRegisterUrl } from '@/lib/registrars';
 
 interface Extension {
   tld: string;
@@ -961,8 +962,9 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
     if (!searchQuery.trim()) return;
 
     if (extension.available) {
+      // Default partner: Spaceship Impact affiliate (never raw merchant register URL)
       window.open(
-        `https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(fullDomain)}`,
+        resolveRegisterUrl(fullDomain, 'Spaceship'),
         '_blank',
         'noopener,noreferrer'
       );

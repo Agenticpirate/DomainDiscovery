@@ -5,7 +5,7 @@
 import { checkDomainAvailabilityViaMCP } from '@/lib/instantDomainMCP';
 import { checkDomainsFreeRdap } from '@/lib/ada/freeDomainCheck';
 import { useInstantDomainMcp } from '@/lib/ada/freeMode';
-import { getRegistrarUrl } from '@/lib/registrars';
+import { resolveRegisterUrl } from '@/lib/registrars';
 import { parseBusinessBrief } from './brief';
 import { generateCandidateDomains } from './generateCandidates';
 import { rankDomains } from './ranker';
@@ -114,7 +114,9 @@ async function checkBatch(
 function attachBuyUrls(ranked: RankedDomain[]): RankedDomain[] {
   return ranked.map((r) => ({
     ...r,
-    buyUrl: r.buyUrl || (r.available ? getRegistrarUrl(r.domain, 'GoDaddy') : r.buyUrl),
+    buyUrl:
+      r.buyUrl ||
+      (r.available ? resolveRegisterUrl(r.domain, 'Spaceship') : r.buyUrl),
   }));
 }
 

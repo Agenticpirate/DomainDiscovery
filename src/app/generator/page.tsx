@@ -12,13 +12,16 @@ import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
-import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function GeneratorPage() {
   const [selectedDomain, setSelectedDomain] = useState<string>('');
   const { theme } = useTheme();
-  const isLight = theme === 'light';
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
+  const isLight = mounted ? theme === 'light' : false;
+  const solid = isLight ? '#ffffff' : '#0a0a0c';
+  const pageSolid = isLight ? '#f8fafc' : '#050505';
 
   return (
     <div
@@ -36,70 +39,84 @@ export default function GeneratorPage() {
             { label: 'Domain Generator' },
           ]}
         />
-        <SectionAmbient intensity="hero" className="w-full" contentClassName="relative z-[1]">
-        {/* Hero — solid badge + center-clear ambient */}
-        <div className="page-gutter pb-2 sm:pb-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="mt-1 sm:mt-3 text-center max-w-2xl mx-auto">
-              <div
-                className={`relative isolate inline-flex items-center gap-1.5 overflow-hidden rounded-full px-2.5 py-1 mb-2.5 sm:mb-3.5 text-[10px] sm:text-[11px] font-semibold tracking-wide border ${
-                  isLight
-                    ? 'text-slate-600 border-slate-200 shadow-sm'
-                    : 'text-white/60 border-white/10'
-                }`}
-              >
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-full"
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
-                />
-                <span className="relative z-[1] inline-flex items-center gap-1.5">
-                  <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-500' : 'bg-white/70'}`} />
-                  3,000+ prefixes & suffixes · Up to 5,000 ideas · Live .com checks
-                </span>
-              </div>
 
-              <h1 className="text-[1.65rem] sm:text-4xl md:text-[2.85rem] font-black tracking-tight leading-[1.08] mb-2 sm:mb-3">
-                <span
-                  className="bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage: isLight
-                      ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
-                      : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.55))',
-                  }}
+        {/* Hero only — soft ambient; solid badge so dots never paint through */}
+        <SectionAmbient intensity="soft" className="w-full" contentClassName="relative z-[1]">
+          <div className="page-gutter pb-2 sm:pb-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="mt-1 sm:mt-3 text-center max-w-2xl mx-auto">
+                <div
+                  className={`relative isolate inline-flex items-center gap-1.5 overflow-hidden rounded-full px-2.5 py-1 mb-2.5 sm:mb-3.5 text-[10px] sm:text-[11px] font-semibold tracking-wide border ${
+                    isLight
+                      ? 'text-slate-600 border-slate-200 shadow-sm'
+                      : 'text-white/65 border-white/12'
+                  }`}
+                  style={{ backgroundColor: solid }}
                 >
-                  Domain name generator
-                </span>
-              </h1>
-              <p
-                className="text-[13px] sm:text-[15px] leading-relaxed max-w-xl mx-auto"
-                style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.55)' }}
-              >
-                Type a keyword like “agentic” or “buddy” — we pair it with thousands of top domain prefixes and
-                suffixes (Lean Domain Search style), then check .com availability as results stream in.
-              </p>
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 rounded-full"
+                    style={{ backgroundColor: solid }}
+                  />
+                  <span className="relative z-[1] inline-flex items-center gap-1.5">
+                    <span
+                      className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                        isLight ? 'bg-slate-500' : 'bg-white/70'
+                      }`}
+                    />
+                    <span className="sm:hidden">3,000+ affixes · Live .com</span>
+                    <span className="hidden sm:inline">
+                      3,000+ prefixes &amp; suffixes · Up to 5,000 ideas · Live .com checks
+                    </span>
+                  </span>
+                </div>
+
+                <h1 className="text-[1.65rem] sm:text-4xl md:text-[2.85rem] font-black tracking-tight leading-[1.08] mb-2 sm:mb-3">
+                  <span
+                    className="block bg-clip-text text-transparent"
+                    style={{
+                      backgroundImage: isLight
+                        ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
+                        : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.55))',
+                    }}
+                  >
+                    Domain name generator
+                  </span>
+                </h1>
+                <p
+                  className="text-[13px] sm:text-[15px] leading-relaxed max-w-xl mx-auto"
+                  style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.55)' }}
+                >
+                  <span className="sm:hidden">
+                    Type a keyword — get brandable ideas with live .com checks.
+                  </span>
+                  <span className="hidden sm:inline">
+                    Type a keyword like “agentic” or “buddy” — we pair it with thousands of top domain
+                    prefixes and suffixes (Lean Domain Search style), then check .com availability as
+                    results stream in.
+                  </span>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* Generator tool */}
-        <section className="px-3.5 sm:px-6 pb-8 sm:pb-12" id="top">
-          <div className="max-w-6xl mx-auto">
-            <DomainGenerator onSelect={setSelectedDomain} />
-          </div>
-        </section>
-
-        {/* Guides + FAQs */}
-        <section className={`border-t ${isLight ? 'border-slate-200' : 'border-white/[0.06]'}`}>
-          <GeneratorContent />
-        </section>
-
-        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.generator} compact />
-        <SeoGuidePack {...TOOL_GUIDE_PACKS.generator} />
-        <div className="pt-2 pb-4">
-          <AffiliateAdRail placement="generator" variant="auto" />
-        </div>
         </SectionAmbient>
+
+        {/* Tool + guides — solid page plate, no ambient bubbles (homepage pattern) */}
+        <div className="relative z-[1] w-full" style={{ backgroundColor: pageSolid }}>
+          <section className="px-3.5 sm:px-6 pb-8 sm:pb-12" id="top">
+            <div className="max-w-6xl mx-auto">
+              <DomainGenerator onSelect={setSelectedDomain} />
+            </div>
+          </section>
+
+          <section className={`border-t ${isLight ? 'border-slate-200' : 'border-white/[0.06]'}`}>
+            <GeneratorContent />
+          </section>
+
+          <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.generator} compact />
+          <SeoGuidePack {...TOOL_GUIDE_PACKS.generator} />
+          {/* Footer affiliate banner only — no stacked inline ad */}
+        </div>
       </main>
 
       <Footer />

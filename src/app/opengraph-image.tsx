@@ -1,7 +1,8 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'DomainDiscovery — Find Your Perfect Domain in Seconds';
+export const alt =
+  'DomainDiscovery — free domain name search, AI generator, and domain toolkit';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 

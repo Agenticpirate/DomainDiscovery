@@ -13,7 +13,7 @@ import { SearchInterface } from '@/components/domain/SearchInterface';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
-import { getRegistrarUrl, type RegistrarName } from '@/lib/registrars';
+import { resolveRegisterUrl, type RegistrarName } from '@/lib/registrars';
 import { searchDomains, checkDomainAvailability } from '@/services/instantDomainService';
 import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
@@ -906,10 +906,10 @@ function DomainRow({
       ? `$${price!.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
       : 'Lookup';
 
-  // Available + premium: open preferred registrar search for this exact domain
+  // Available + premium: affiliate-safe registrar URL (Spaceship → Impact sjv.io)
   const domainHref =
     isAvailable || isPremium
-      ? getRegistrarUrl(result.domain, selectedRegistrar)
+      ? resolveRegisterUrl(result.domain, selectedRegistrar, result.buyUrl)
       : result.buyUrl
         ? result.buyUrl
         : `https://who.is/whois/${encodeURIComponent(result.domain)}`;
@@ -965,7 +965,19 @@ function DomainRow({
           <a
             href={domainHref}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={
+              isAvailable || isPremium
+                ? selectedRegistrar === 'Spaceship'
+                  ? 'sponsored noopener noreferrer'
+                  : 'noopener noreferrer'
+                : 'noopener noreferrer'
+            }
+            data-affiliate={
+              (isAvailable || isPremium) && selectedRegistrar === 'Spaceship'
+                ? 'spaceship'
+                : undefined
+            }
+            data-placement="search-domain-link"
             title={domainTitle}
             onCopy={onBlockCopy}
             className={`block font-mono text-[12.5px] sm:text-[13px] leading-snug select-none transition-colors truncate ${

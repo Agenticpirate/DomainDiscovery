@@ -49,6 +49,27 @@ const nextConfig = {
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
       },
+      {
+        // Brand icons / favicons — long cache; SERP refetch uses ?v= cache-bust in HTML
+        source: '/:file(favicon.ico|favicon.svg|favicon-48.png|favicon-96.png|icon-16.png|icon-32.png|icon-48.png|icon-96.png|icon-192.png|icon-512.png|icon.png|apple-touch-icon.png|app-icon.png|logo-solid.png|logo.png|site.webmanifest)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, stale-while-revalidate=86400',
+          },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+        ],
+      },
+      {
+        // Crawlable LLM indexes
+        source: '/:file(llms.txt|llms-full.txt|robots.txt|sitemap.xml)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, s-maxage=3600',
+          },
+        ],
+      },
     ];
   },
   // Optimize images

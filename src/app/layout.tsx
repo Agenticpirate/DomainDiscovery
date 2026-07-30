@@ -10,8 +10,11 @@ import {
   getSiteBaseUrl,
   getSoftwareApplicationJsonLd,
   getWebSiteJsonLd,
+  ICON_CACHE_BUST,
   SITE_BRAND,
 } from "@/lib/seoSiteFacts";
+
+const V = ICON_CACHE_BUST;
 
 export const metadata: Metadata = {
   title: {
@@ -20,6 +23,8 @@ export const metadata: Metadata = {
   },
   description:
     "Free domain name search with live availability across 1,600+ TLDs. AI domain generator, bulk checker, geo domains, WHOIS lookup, and registrar price comparison — no account required.",
+  applicationName: SITE_BRAND.name,
+  category: "technology",
   keywords: [
     "domain name search",
     "domain availability checker",
@@ -41,7 +46,13 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: SITE_BRAND.name }],
   creator: SITE_BRAND.name,
+  publisher: SITE_BRAND.name,
   metadataBase: new URL(getSiteBaseUrl()),
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
 
   openGraph: {
     type: "website",
@@ -63,6 +74,7 @@ export const metadata: Metadata = {
   other: {
     "theme-color": "#0a0a0a",
     "msapplication-TileColor": "#0a0a0a",
+    "msapplication-TileImage": `/icon-192.png?v=${V}`,
   },
   robots: {
     index: true,
@@ -91,27 +103,28 @@ export const metadata: Metadata = {
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
     : undefined,
-  manifest: "/site.webmanifest?v=20260729serp",
+  manifest: `/site.webmanifest?v=${V}`,
   // Google SERP favicon: multiples of 48px (48 / 96) as first PNG entries.
-  // Solid #0a0a0a plate so the white D mark matches DomainDiscoverylogo.png
-  // on light SERP backgrounds. Cache-bust forces re-crawl/re-fetch.
+  // Solid #0a0a0a plate so the white D mark matches logo on light SERP backgrounds.
+  // Cache-bust (?v=) forces Google / Bing / Yandex to re-fetch after brand updates.
   icons: {
     icon: [
       // Google / Chromium prefer these for SERP + tab when present
-      { url: "/icon-48.png?v=20260729serp", sizes: "48x48", type: "image/png" },
-      { url: "/icon-96.png?v=20260729serp", sizes: "96x96", type: "image/png" },
-      { url: "/favicon-48.png?v=20260729serp", sizes: "48x48", type: "image/png" },
-      { url: "/favicon-96.png?v=20260729serp", sizes: "96x96", type: "image/png" },
-      { url: "/icon-192.png?v=20260729serp", sizes: "192x192", type: "image/png" },
-      { url: "/icon-512.png?v=20260729serp", sizes: "512x512", type: "image/png" },
-      { url: "/icon-32.png?v=20260729serp", sizes: "32x32", type: "image/png" },
-      { url: "/icon-16.png?v=20260729serp", sizes: "16x16", type: "image/png" },
-      { url: "/favicon.ico?v=20260729serp", sizes: "any" },
+      { url: `/icon-48.png?v=${V}`, sizes: "48x48", type: "image/png" },
+      { url: `/icon-96.png?v=${V}`, sizes: "96x96", type: "image/png" },
+      { url: `/favicon-48.png?v=${V}`, sizes: "48x48", type: "image/png" },
+      { url: `/favicon-96.png?v=${V}`, sizes: "96x96", type: "image/png" },
+      { url: `/icon-192.png?v=${V}`, sizes: "192x192", type: "image/png" },
+      { url: `/icon-512.png?v=${V}`, sizes: "512x512", type: "image/png" },
+      { url: `/icon-32.png?v=${V}`, sizes: "32x32", type: "image/png" },
+      { url: `/icon-16.png?v=${V}`, sizes: "16x16", type: "image/png" },
+      { url: `/favicon.ico?v=${V}`, sizes: "any" },
+      { url: `/favicon.svg?v=${V}`, type: "image/svg+xml" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png?v=20260729serp", sizes: "180x180", type: "image/png" },
+      { url: `/apple-touch-icon.png?v=${V}`, sizes: "180x180", type: "image/png" },
     ],
-    shortcut: [{ url: "/icon-96.png?v=20260729serp", type: "image/png" }],
+    shortcut: [{ url: `/icon-96.png?v=${V}`, type: "image/png" }],
   },
 };
 

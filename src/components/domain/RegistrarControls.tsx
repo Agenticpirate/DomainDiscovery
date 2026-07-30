@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
-import { REGISTRARS, getRegistrarUrl, type RegistrarName } from '@/lib/registrars';
+import { REGISTRARS, resolveRegisterUrl, type RegistrarName } from '@/lib/registrars';
 
 const MENU_WIDTH = 220;
 const MENU_GAP = 8;
@@ -154,19 +154,18 @@ export function RegistrarActionMenu({
     }
   }, [open]);
 
-  const openRegistrar = (registrar: RegistrarName) => {
-    onSelectRegistrar(registrar);
-    // Always open the registrar's search page for this exact domain name
-    window.open(getRegistrarUrl(domain, registrar), '_blank', 'noopener,noreferrer');
-    setOpen(false);
-  };
+  /** Always affiliate-safe; Spaceship never opens as raw spaceship.com */
+  const hrefFor = (registrar: RegistrarName) =>
+    resolveRegisterUrl(domain, registrar, premiumUrl);
 
   const handleFallbackClick = () => {
-    // Prefer registrar search so users can still find/buy premium or aftermarket names
     const nextUrl =
-      premiumUrl || getRegistrarUrl(domain, selectedRegistrar) || `https://who.is/whois/${encodeURIComponent(domain)}`;
+      resolveRegisterUrl(domain, selectedRegistrar, premiumUrl) ||
+      `https://who.is/whois/${encodeURIComponent(domain)}`;
     window.open(nextUrl, '_blank', 'noopener,noreferrer');
   };
+
+  const primaryHref = hrefFor(selectedRegistrar);
 
   const menu = open
     ? createPortal(
@@ -198,10 +197,22 @@ export function RegistrarActionMenu({
             {REGISTRARS.map((registrar) => {
               const selected = registrar.name === selectedRegistrar;
               return (
-                <button
+                <a
                   key={registrar.name}
-                  type="button"
-                  onClick={() => openRegistrar(registrar.name)}
+                  href={hrefFor(registrar.name)}
+                  target="_blank"
+                  rel={
+                    registrar.name === 'Spaceship'
+                      ? 'sponsored noopener noreferrer'
+                      : 'noopener noreferrer'
+                  }
+                  data-affiliate={registrar.name === 'Spaceship' ? 'spaceship' : undefined}
+                  data-registrar={registrar.name}
+                  data-placement="register-menu"
+                  onClick={() => {
+                    onSelectRegistrar(registrar.name);
+                    setOpen(false);
+                  }}
                   className={cn(
                     'flex w-full items-center justify-between gap-2 rounded-xl px-2.5 py-2.5 text-left text-[13px] font-medium transition-colors',
                     selected
@@ -239,7 +250,7 @@ export function RegistrarActionMenu({
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   )}
-                </button>
+                </a>
               );
             })}
           </div>
@@ -258,9 +269,18 @@ export function RegistrarActionMenu({
     <div className="relative z-10 shrink-0 max-w-full" ref={containerRef}>
       {canRegister ? (
         <div className={joinedShell}>
-          <button
-            type="button"
-            onClick={() => openRegistrar(selectedRegistrar)}
+          <a
+            href={primaryHref}
+            target="_blank"
+            rel={
+              selectedRegistrar === 'Spaceship'
+                ? 'sponsored noopener noreferrer'
+                : 'noopener noreferrer'
+            }
+            data-affiliate={selectedRegistrar === 'Spaceship' ? 'spaceship' : undefined}
+            data-registrar={selectedRegistrar}
+            data-placement="register-go"
+            onClick={() => onSelectRegistrar(selectedRegistrar)}
             className={cn(
               'inline-flex items-center justify-center gap-1 pl-3 pr-2 py-1.5 text-[11px] sm:text-[12px] font-bold transition-colors',
               primaryButtonClassName
@@ -268,7 +288,7 @@ export function RegistrarActionMenu({
             title={`Register on ${selectedRegistrar}`}
           >
             {primaryLabel}
-          </button>
+          </a>
           <button
             ref={triggerRef}
             type="button"

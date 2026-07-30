@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
-import { getRegistrarUrl } from '@/lib/registrars';
+import { resolveRegisterUrl } from '@/lib/registrars';
 import countriesData from '@/data/countries.json';
 import citiesData from '@/data/cities-expanded.json';
 import usStatesData from '@/data/us-states.json';
@@ -1001,7 +1001,8 @@ export const GeoDomainGenerator: React.FC = () => {
     flash(`Copied ${list.length} free domains`);
   };
 
-  const registerUrl = (domain: string) => getRegistrarUrl(domain, selectedRegistrar);
+  const registerUrl = (domain: string, buyUrl?: string | null) =>
+    resolveRegisterUrl(domain, selectedRegistrar, buyUrl);
   const whoisUrl = (domain: string) => `/tools/whois?domain=${encodeURIComponent(domain)}`;
 
   const locationGroups = useMemo(() => {
@@ -2229,9 +2230,17 @@ export const GeoDomainGenerator: React.FC = () => {
                     >
                       <td className="py-3 px-3">
                         <a
-                          href={registerUrl(domain.domain)}
+                          href={registerUrl(domain.domain, domain.buyUrl)}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel={
+                            selectedRegistrar === 'Spaceship'
+                              ? 'sponsored noopener noreferrer'
+                              : 'noopener noreferrer'
+                          }
+                          data-affiliate={
+                            selectedRegistrar === 'Spaceship' ? 'spaceship' : undefined
+                          }
+                          data-placement="geo-domain-link"
                           className={`font-mono text-[13px] font-semibold tracking-tight ${
                             isLight ? 'text-slate-900 hover:text-slate-600' : 'text-white hover:text-white/70'
                           }`}
@@ -2287,9 +2296,21 @@ export const GeoDomainGenerator: React.FC = () => {
                       <td className="py-2.5 px-3">
                         <div className="flex items-center justify-center gap-1.5">
                           <a
-                            href={domain.buyUrl || registerUrl(domain.domain)}
+                            href={resolveRegisterUrl(
+                              domain.domain,
+                              selectedRegistrar,
+                              domain.buyUrl
+                            )}
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel={
+                              selectedRegistrar === 'Spaceship'
+                                ? 'sponsored noopener noreferrer'
+                                : 'noopener noreferrer'
+                            }
+                            data-affiliate={
+                              selectedRegistrar === 'Spaceship' ? 'spaceship' : undefined
+                            }
+                            data-placement="geo-register"
                             className={`inline-flex rounded-lg px-2.5 py-1.5 text-[11px] font-bold transition ${
                               domain.premium
                                 ? isLight

@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server';
 import { getSearchRateLimiter, getBulkRateLimiter, getClientIP, rateLimitResponse } from '@/lib/rateLimiter';
 import { errorResponse, jsonResponse, corsPreflightResponse } from '@/lib/apiHelpers';
 import { checkDomainAvailabilityViaMCP } from '@/lib/instantDomainMCP';
+import { ensureSpaceshipAffiliate } from '@/lib/registrars';
 
 // LRU cache with max size to prevent OOM
 const MAX_CACHE = 10_000;
@@ -45,6 +46,15 @@ function cacheSet(key: string, value: Omit<CachedResult, 'timestamp'>) {
     if (firstKey) cache.delete(firstKey);
   }
   cache.set(key, { ...value, timestamp: Date.now() });
+}
+
+/** Never return untracked Spaceship merchant links from the API */
+function sanitizeResult(r: InstantCheckResult): InstantCheckResult {
+  if (!r.buyUrl) return r;
+  return {
+    ...r,
+    buyUrl: ensureSpaceshipAffiliate(r.buyUrl, r.domain),
+  };
 }
 
 export async function OPTIONS(request: NextRequest) {
@@ -117,8 +127,14 @@ export async function POST(request: NextRequest) {
       results.push(...batchResults);
     }
 
-    const ordered = domainsToCheck.map(d =>
-      results.find(r => r.domain === d) || { domain: d, available: false, premium: false }
+    const ordered = domainsToCheck.map((d) =>
+      sanitizeResult(
+        results.find((r) => r.domain === d) || {
+          domain: d,
+          available: false,
+          premium: false,
+        }
+      )
     );
 
     const resp = jsonResponse(domain ? ordered[0] : ordered, request, 15);
@@ -146,14 +162,14 @@ export async function GET(request: NextRequest) {
 
   const [mcpResult] = await checkDomainAvailabilityViaMCP({ domains: [normalized] });
   if (mcpResult) {
-    const result = {
+    const result = sanitizeResult({
       domain: normalized,
       available: !!mcpResult.available,
       premium: !!mcpResult.premium,
       price: mcpResult.price,
       buyUrl: mcpResult.buyUrl,
       purchaseInfo: mcpResult.purchaseInfo,
-    };
+    });
     cacheSet(normalized, {
       available: result.available,
       premium: result.premium,

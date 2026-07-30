@@ -8,6 +8,10 @@ import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { BulkDomainSearch } from '@/components/domain/BulkDomainSearch';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
+import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
+import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
+import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
+import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
 
 export default function BulkSearchPage() {
   return (
@@ -31,6 +35,8 @@ export default function BulkSearchPage() {
         <div className="pt-4 pb-2">
           <AffiliateAdRail placement="bulk" variant="auto" />
         </div>
+        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.bulk} compact />
+        <SeoGuidePack {...TOOL_GUIDE_PACKS.bulk} />
       </main>
       <Footer />
     </div>

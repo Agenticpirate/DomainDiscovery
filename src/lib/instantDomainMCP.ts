@@ -10,6 +10,8 @@
  * - check_domain_availability: Verify any list of domains
  */
 
+import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
+
 interface MCPMessage {
   jsonrpc: '2.0';
   id?: number;
@@ -107,9 +109,14 @@ function getPremiumListingUrl(domain: string, markets: Array<Record<string, unkn
   }
 
   if (typeof fallbackBuyUrl === 'string' && fallbackBuyUrl.trim()) {
-    return /instantdomainsearch\.com\/get\//i.test(fallbackBuyUrl)
-      ? getGoDaddyListingUrl(domain)
-      : fallbackBuyUrl;
+    if (/instantdomainsearch\.com\/get\//i.test(fallbackBuyUrl)) {
+      return getGoDaddyListingUrl(domain);
+    }
+    // Never surface untracked Spaceship merchant links from MCP
+    if (/spaceship\.com/i.test(fallbackBuyUrl) && !/sjv\.io/i.test(fallbackBuyUrl)) {
+      return getSpaceshipAffiliateUrl(domain);
+    }
+    return fallbackBuyUrl;
   }
 
   return undefined;

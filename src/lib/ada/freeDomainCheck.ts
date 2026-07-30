@@ -4,7 +4,7 @@
  */
 
 import { lookupWhois } from '@/lib/rdapClient';
-import { getRegistrarUrl } from '@/lib/registrars';
+import { resolveRegisterUrl } from '@/lib/registrars';
 
 export type FreeCheckResult = {
   domain: string;
@@ -42,7 +42,7 @@ export async function checkDomainsFreeRdap(domains: string[]): Promise<FreeCheck
               domain,
               available: false,
               premium: false,
-              buyUrl: getRegistrarUrl(domain, 'GoDaddy'),
+              buyUrl: resolveRegisterUrl(domain, 'Spaceship'),
               source: 'rdap' as const,
               note: 'Registered per public RDAP',
             };
@@ -52,7 +52,7 @@ export async function checkDomainsFreeRdap(domains: string[]): Promise<FreeCheck
               domain,
               available: true,
               premium: false,
-              buyUrl: getRegistrarUrl(domain, 'GoDaddy'),
+              buyUrl: resolveRegisterUrl(domain, 'Spaceship'),
               source: 'rdap' as const,
               note: 'Not found in RDAP — likely available (confirm at registrar)',
             };
@@ -62,7 +62,7 @@ export async function checkDomainsFreeRdap(domains: string[]): Promise<FreeCheck
             domain,
             available: true,
             premium: false,
-            buyUrl: getRegistrarUrl(domain, 'GoDaddy'),
+            buyUrl: resolveRegisterUrl(domain, 'Spaceship'),
             source: 'rdap' as const,
             note: result.error || 'RDAP inconclusive — treat as candidate; re-check at registrar',
           };
@@ -71,7 +71,7 @@ export async function checkDomainsFreeRdap(domains: string[]): Promise<FreeCheck
             domain,
             available: true,
             premium: false,
-            buyUrl: getRegistrarUrl(domain, 'GoDaddy'),
+            buyUrl: resolveRegisterUrl(domain, 'Spaceship'),
             source: 'rdap' as const,
             note: 'Check failed — candidate only; re-check at registrar',
           };

@@ -8,7 +8,7 @@ import { PreferredRegistrarSelect, RegistrarActionMenu } from './RegistrarContro
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
-import { getRegistrarUrl, type RegistrarName } from '@/lib/registrars';
+import { resolveRegisterUrl, type RegistrarName } from '@/lib/registrars';
 
 interface DomainTag {
   domain: string;
@@ -560,7 +560,7 @@ const ResultsView: React.FC<{
               {results.map((d) => {
                 const domainHref =
                   d.status === 'available' || d.status === 'premium'
-                    ? getRegistrarUrl(d.domain, selectedRegistrar)
+                    ? resolveRegisterUrl(d.domain, selectedRegistrar, d.buyUrl)
                     : d.buyUrl
                       ? d.buyUrl
                       : `https://who.is/whois/${encodeURIComponent(d.domain)}`;

@@ -4,6 +4,21 @@
  */
 
 /**
+ * Cache-bust for favicons / logos referenced in HTML + JSON-LD.
+ * Bump when brand marks change so Google SERP, Bing, and browser caches refetch.
+ * Google prefers 48×48 (and multiples) PNG favicons for Search results.
+ */
+export const ICON_CACHE_BUST = '20260730logo';
+
+/** Absolute URL helper for versioned static assets */
+export function assetUrl(path: string): string {
+  const base = getSiteBaseUrl();
+  const clean = path.startsWith('/') ? path : `/${path}`;
+  const sep = clean.includes('?') ? '&' : '?';
+  return `${base}${clean}${sep}v=${ICON_CACHE_BUST}`;
+}
+
+/**
  * Canonical public origin. Production apex redirects to www — prefer www in env.
  * Set NEXT_PUBLIC_BASE_URL in production (e.g. https://www.domainsdiscovery.com).
  */
@@ -252,6 +267,7 @@ export const SITE_PAGE_DEFINITIONS: Record<string, PageDefinition> = {
 /** JSON-LD building blocks shared by root layout */
 export function getOrganizationJsonLd() {
   const base = getSiteBaseUrl();
+  const logoUrl = assetUrl('/logo-solid.png');
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -259,14 +275,14 @@ export function getOrganizationJsonLd() {
     name: SITE_BRAND.name,
     alternateName: [...SITE_BRAND.alternateNames],
     url: base,
-    // Solid plate PNG (512) matches DomainDiscoverylogo mark for Knowledge Panel / SERP
+    // Solid plate PNG (512) matches DomainDiscovery mark for Knowledge Panel / SERP
     logo: {
       '@type': 'ImageObject',
-      url: `${base}/logo-solid.png`,
+      url: logoUrl,
       width: 512,
       height: 512,
     },
-    image: `${base}/logo-solid.png`,
+    image: logoUrl,
     description: SITE_BRAND.description,
     sameAs: ['https://x.com/domainsdiscovery'],
   };
@@ -274,16 +290,22 @@ export function getOrganizationJsonLd() {
 
 export function getWebSiteJsonLd() {
   const base = getSiteBaseUrl();
+  const logoUrl = assetUrl('/logo-solid.png');
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${base}/#website`,
     name: SITE_BRAND.name,
     alternateName: [...SITE_BRAND.alternateNames],
     url: base,
     description: SITE_BRAND.description,
+    inLanguage: 'en-US',
     potentialAction: {
       '@type': 'SearchAction',
-      target: `${base}/search?q={search_term_string}`,
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${base}/search?q={search_term_string}`,
+      },
       'query-input': 'required name=search_term_string',
     },
     publisher: {
@@ -294,7 +316,7 @@ export function getWebSiteJsonLd() {
       url: base,
       logo: {
         '@type': 'ImageObject',
-        url: `${base}/logo-solid.png`,
+        url: logoUrl,
         width: 512,
         height: 512,
       },
@@ -306,11 +328,13 @@ export function getSoftwareApplicationJsonLd() {
   const base = getSiteBaseUrl();
   return {
     '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
+    '@type': ['SoftwareApplication', 'WebApplication'],
     name: SITE_BRAND.name,
     alternateName: [...SITE_BRAND.alternateNames],
     applicationCategory: 'BusinessApplication',
+    applicationSubCategory: 'Domain name search',
     operatingSystem: 'Web',
+    browserRequirements: 'Requires JavaScript. Works in modern browsers.',
     url: base,
     offers: {
       '@type': 'Offer',
@@ -320,5 +344,108 @@ export function getSoftwareApplicationJsonLd() {
     description: SITE_BRAND.description,
     featureList: [...SITE_FEATURES],
     // Explicitly no AggregateRating — do not invent reviews
+  };
+}
+
+export type BreadcrumbItem = {
+  name: string;
+  /** Path from site root, e.g. /search — omit on the current leaf if only name is known */
+  path?: string;
+};
+
+/** BreadcrumbList for tool / content pages (Google supported) */
+export function getBreadcrumbListJsonLd(items: BreadcrumbItem[]) {
+  const base = getSiteBaseUrl();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      ...(item.path
+        ? {
+            item:
+              item.path === '/'
+                ? base
+                : `${base}${item.path.startsWith('/') ? item.path : `/${item.path}`}`,
+          }
+        : {}),
+    })),
+  };
+}
+
+/** WebPage schema with speakable cssSelector for AEO surfaces */
+export function getWebPageJsonLd(opts: {
+  path: string;
+  name: string;
+  description: string;
+}) {
+  const base = getSiteBaseUrl();
+  const path = opts.path === '/' ? '' : opts.path.startsWith('/') ? opts.path : `/${opts.path}`;
+  const url = `${base}${path}`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${url}#webpage`,
+    url,
+    name: opts.name,
+    description: opts.description,
+    inLanguage: 'en-US',
+    isPartOf: { '@id': `${base}/#website` },
+    about: { '@id': `${base}/#organization` },
+    primaryImageOfPage: {
+      '@type': 'ImageObject',
+      url: assetUrl('/logo-solid.png'),
+      width: 512,
+      height: 512,
+    },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['[data-aeo-definition]', 'h1'],
+    },
+  };
+}
+
+/**
+ * Shared Next.js Metadata for tool layouts (canonical + OG + Twitter + robots).
+ */
+export function buildToolMetadata(opts: {
+  title: string;
+  description: string;
+  path: string;
+  keywords?: string[];
+}): import('next').Metadata {
+  const path = opts.path.startsWith('/') ? opts.path : `/${opts.path}`;
+  return {
+    title: opts.title,
+    description: opts.description,
+    ...(opts.keywords?.length ? { keywords: opts.keywords } : {}),
+    alternates: { canonical: path },
+    openGraph: {
+      type: 'website',
+      locale: 'en_US',
+      siteName: SITE_BRAND.name,
+      title: opts.title,
+      description: opts.description,
+      url: path,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: opts.title,
+      description: opts.description,
+      creator: '@domainsdiscovery',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+        'max-video-preview': -1,
+      },
+    },
   };
 }

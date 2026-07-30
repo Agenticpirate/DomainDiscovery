@@ -23,49 +23,63 @@ export interface RegistrarDefinition {
 
 /**
  * Spaceship Impact.com affiliate (Text Link 1859616).
- * All Spaceship “register / buy” CTAs must route through this click URL
- * so commissions track. Deep-link via Impact `u=` keeps the domain prefilled.
+ * ALL Spaceship register/buy CTAs must open the sjv.io tracking hop first.
+ * Never link raw www.spaceship.com for registration — that skips commission.
  *
- * Tracking link: https://spaceship.sjv.io/c/7521997/1859616/21274
- * Impression pixel: https://imp.pxf.io/i/7521997/1859616/21274
+ * Tracking: https://spaceship.sjv.io/c/7521997/1859616/21274
+ * Impression: https://imp.pxf.io/i/7521997/1859616/21274
+ * Deep-link: append Impact `u=` with encoded Spaceship domain-search URL.
  */
 export const SPACESHIP_AFFILIATE = {
   /** Impact click tracking base (Account / Ad / Campaign) */
   clickBase: 'https://spaceship.sjv.io/c/7521997/1859616/21274',
   /** 1×1 view pixel — optional on promotional placements */
   impressionPixel: 'https://imp.pxf.io/i/7521997/1859616/21274',
-  /** On-site destination for domain search (prefilled) */
-  domainSearchDestination: (domain: string) =>
-    `https://www.spaceship.com/domain-search/?query=${encodeURIComponent(domain.trim())}`,
+  /** Final merchant URL after the Impact hop (domain prefilled) */
+  domainSearchDestination: (domain: string) => {
+    const q = domain.trim().toLowerCase();
+    return `https://www.spaceship.com/domain-search/?query=${encodeURIComponent(q)}`;
+  },
 } as const;
 
+/** True if URL is our Impact click tracker (not a raw merchant link). */
+export function isSpaceshipAffiliateUrl(url: string): boolean {
+  try {
+    const host = new URL(url).hostname.toLowerCase();
+    return host === 'spaceship.sjv.io' || host.endsWith('.sjv.io') || host === 'imp.pxf.io';
+  } catch {
+    return false;
+  }
+}
+
 /**
- * Build a Spaceship affiliate URL.
- * - With domain: deep-links to Spaceship search with that name (tracked).
- * - Without domain: bare tracking link (homepage / offer landing).
+ * Build a Spaceship affiliate URL (always sjv.io first).
+ * - With domain: Impact hop → Spaceship domain search with that name
+ * - Without domain: bare Impact tracking link
  */
 export function getSpaceshipAffiliateUrl(domain?: string | null): string {
-  const cleaned = (domain || '').trim();
+  const cleaned = (domain || '').trim().toLowerCase();
   if (!cleaned) {
     return SPACESHIP_AFFILIATE.clickBase;
   }
-  const destination = SPACESHIP_AFFILIATE.domainSearchDestination(cleaned);
-  // Impact deep link: `u` = final destination after tracking hop
-  return `${SPACESHIP_AFFILIATE.clickBase}?u=${encodeURIComponent(destination)}`;
+  // Ensure TLD so Spaceship search is useful
+  const withTld = cleaned.includes('.') ? cleaned : `${cleaned}.com`;
+  const destination = SPACESHIP_AFFILIATE.domainSearchDestination(withTld);
+
+  // Use URL API so encoding is correct and params are stable
+  const tracked = new URL(SPACESHIP_AFFILIATE.clickBase);
+  tracked.searchParams.set('u', destination);
+  // Sub-IDs help reconcile generator/search traffic in Impact reports
+  tracked.searchParams.set('subId1', 'domaindiscovery');
+  tracked.searchParams.set('subId2', 'register');
+  return tracked.toString();
 }
 
 /**
  * Options for domains available for registration.
- * Order matches product priority.
+ * Spaceship first — default affiliate partner for “register” CTAs.
  */
 export const REGISTRARS: RegistrarDefinition[] = [
-  {
-    name: 'GoDaddy',
-    host: 'GoDaddy.com',
-    logo: '/registrars/godaddy.png',
-    getUrl: (domain) =>
-      `https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(domain)}`,
-  },
   {
     name: 'Spaceship',
     host: 'Spaceship.com',
@@ -74,11 +88,11 @@ export const REGISTRARS: RegistrarDefinition[] = [
     getUrl: (domain) => getSpaceshipAffiliateUrl(domain),
   },
   {
-    name: 'Unstoppable Domains',
-    host: 'UnstoppableDomains.com',
-    logo: '/registrars/unstoppable.png',
+    name: 'GoDaddy',
+    host: 'GoDaddy.com',
+    logo: '/registrars/godaddy.png',
     getUrl: (domain) =>
-      `https://unstoppabledomains.com/search?searchTerm=${encodeURIComponent(domain)}`,
+      `https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(domain)}`,
   },
   {
     name: 'Namecheap',
@@ -86,6 +100,13 @@ export const REGISTRARS: RegistrarDefinition[] = [
     logo: '/registrars/namecheap.png',
     getUrl: (domain) =>
       `https://www.namecheap.com/domains/registration/results/?domain=${encodeURIComponent(domain)}`,
+  },
+  {
+    name: 'Porkbun',
+    host: 'Porkbun.com',
+    logo: '/registrars/porkbun.png',
+    getUrl: (domain) =>
+      `https://porkbun.com/checkout/search?q=${encodeURIComponent(domain)}`,
   },
   {
     name: 'Dynadot',
@@ -102,11 +123,11 @@ export const REGISTRARS: RegistrarDefinition[] = [
       `https://www.sav.com/domain/search?domain=${encodeURIComponent(domain)}`,
   },
   {
-    name: 'Porkbun',
-    host: 'Porkbun.com',
-    logo: '/registrars/porkbun.png',
+    name: 'Unstoppable Domains',
+    host: 'UnstoppableDomains.com',
+    logo: '/registrars/unstoppable.png',
     getUrl: (domain) =>
-      `https://porkbun.com/checkout/search?q=${encodeURIComponent(domain)}`,
+      `https://unstoppabledomains.com/search?searchTerm=${encodeURIComponent(domain)}`,
   },
   {
     name: 'Atom',
@@ -117,7 +138,8 @@ export const REGISTRARS: RegistrarDefinition[] = [
   },
 ];
 
-export const DEFAULT_REGISTRAR: RegistrarName = 'GoDaddy';
+/** Default “register at” partner — Spaceship Impact affiliate */
+export const DEFAULT_REGISTRAR: RegistrarName = 'Spaceship';
 
 export function isRegistrarName(value: string): value is RegistrarName {
   return REGISTRARS.some((registrar) => registrar.name === value);
@@ -129,10 +151,90 @@ export function getRegistrar(name?: string | null): RegistrarDefinition {
 
 /**
  * Registration / buy URL for the chosen registrar.
- * Spaceship always returns the Impact affiliate deep link.
+ * Spaceship is always forced through Impact sjv.io (never raw spaceship.com).
  */
 export function getRegistrarUrl(domain: string, registrarName?: string | null): string {
-  return getRegistrar(registrarName).getUrl(domain);
+  const reg = getRegistrar(registrarName);
+  const cleaned = (domain || '').trim();
+  if (reg.name === 'Spaceship') {
+    return getSpaceshipAffiliateUrl(cleaned);
+  }
+  const url = reg.getUrl(cleaned);
+  // Belt-and-suspenders: if anything ever emitted raw Spaceship, rewrite it
+  if (/spaceship\.com/i.test(url) && !isSpaceshipAffiliateUrl(url)) {
+    return getSpaceshipAffiliateUrl(cleaned);
+  }
+  return url;
+}
+
+/**
+ * If a URL would open Spaceship untracked, rewrite it to our Impact hop.
+ * Safe no-op for non-Spaceship URLs.
+ */
+export function ensureSpaceshipAffiliate(url: string, domainHint?: string | null): string {
+  const raw = (url || '').trim();
+  if (!raw) return getSpaceshipAffiliateUrl(domainHint);
+  if (isSpaceshipAffiliateUrl(raw)) return raw;
+  if (!/spaceship\.com/i.test(raw)) return raw;
+
+  // Prefer explicit domain hint; else try to pull query/domain from the merchant URL
+  let domain = (domainHint || '').trim();
+  if (!domain) {
+    try {
+      const u = new URL(raw);
+      domain =
+        u.searchParams.get('query') ||
+        u.searchParams.get('domain') ||
+        u.searchParams.get('domainToCheck') ||
+        u.searchParams.get('search') ||
+        '';
+    } catch {
+      /* ignore */
+    }
+  }
+  return getSpaceshipAffiliateUrl(domain || null);
+}
+
+/**
+ * Resolve the URL for a Register / Go / Continue CTA on any domain tool
+ * (search, bulk, generator, geo, keywords, extensions, saved, assistant).
+ *
+ * Rules (in order):
+ * 1. Spaceship (default or selected) → always Impact sjv.io + domain deep-link
+ * 2. Explicit non-Spaceship registrar → that registrar’s search URL
+ * 3. Marketplace buyUrl only when no registrar path applies → sanitize Spaceship
+ * 4. Fallback → Spaceship affiliate
+ *
+ * Never return raw www.spaceship.com for a register CTA.
+ */
+export function resolveRegisterUrl(
+  domain: string,
+  registrarName?: string | null,
+  marketplaceBuyUrl?: string | null
+): string {
+  const cleaned = (domain || '').trim();
+  const explicit =
+    registrarName && isRegistrarName(registrarName) ? registrarName : null;
+  const reg = getRegistrar(explicit ?? DEFAULT_REGISTRAR);
+  const buy = (marketplaceBuyUrl || '').trim();
+
+  // 1) Spaceship always = Impact affiliate hop with this domain
+  if (reg.name === 'Spaceship') {
+    return getSpaceshipAffiliateUrl(cleaned);
+  }
+
+  // 2) User picked another registrar — honor it (GoDaddy, Namecheap, …)
+  if (explicit && explicit !== 'Spaceship') {
+    return getRegistrarUrl(cleaned, explicit);
+  }
+
+  // 3) Marketplace / premium listing (no registrar preference)
+  if (buy) {
+    return ensureSpaceshipAffiliate(buy, cleaned);
+  }
+
+  // 4) Default partner
+  return getSpaceshipAffiliateUrl(cleaned);
 }
 
 export function getRegistrarHost(name?: string | null): string {

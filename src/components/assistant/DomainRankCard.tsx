@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { RankedDomain } from '@/lib/agent/types';
-import { getRegistrarUrl } from '@/lib/registrars';
+import { resolveRegisterUrl } from '@/lib/registrars';
 import { AdaRegisterPanel } from '@/components/ada/AdaRegisterPanel';
 import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
 
@@ -51,7 +51,8 @@ export function DomainRankCard({
   isSaved: boolean;
 }) {
   const st = statusMeta(item, isLight);
-  const buyHref = item.buyUrl || getRegistrarUrl(item.domain);
+  // Spaceship (default) always via Impact affiliate; marketplace buyUrls sanitized
+  const buyHref = resolveRegisterUrl(item.domain, 'Spaceship', item.buyUrl);
   // Absolute DD host so WHOIS works from aidomainassistant.com (ADA middleware rewrites relative /tools/*)
   const whoisHref = `${getSiteBaseUrl()}/tools/whois?domain=${encodeURIComponent(item.domain)}`;
   const budgetPill =
@@ -129,7 +130,9 @@ export function DomainRankCard({
         <a
           href={buyHref}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="sponsored noopener noreferrer"
+          data-affiliate="spaceship"
+          data-placement="assistant-continue"
           className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
             isLight
               ? 'bg-slate-900 text-white hover:bg-slate-800'
