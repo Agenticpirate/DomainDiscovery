@@ -94,13 +94,44 @@ export function AffiliateSkyscraper() {
     return () => io.disconnect();
   }, [active, dismissed, fireImpression, mounted, index]);
 
+  // Rotate only while the rail is on-screen — avoids main-thread timers for Lighthouse
   useEffect(() => {
     if (dismissed || count < 2 || paused) return;
-    const id = window.setInterval(() => {
-      if (document.visibilityState !== 'visible') return;
-      setIndex((i) => (i + 1) % count);
-    }, SKYSCRAPER_CAROUSEL_MS);
-    return () => window.clearInterval(id);
+    const el = rootRef.current;
+    let id = 0;
+    let inView = false;
+
+    const start = () => {
+      if (id || !inView || paused) return;
+      id = window.setInterval(() => {
+        if (document.visibilityState !== 'visible') return;
+        setIndex((i) => (i + 1) % count);
+      }, SKYSCRAPER_CAROUSEL_MS);
+    };
+    const stop = () => {
+      if (id) window.clearInterval(id);
+      id = 0;
+    };
+
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      inView = true;
+      start();
+      return () => stop();
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        inView = entries.some((e) => e.isIntersecting);
+        if (inView) start();
+        else stop();
+      },
+      { threshold: 0.05 }
+    );
+    io.observe(el);
+    return () => {
+      stop();
+      io.disconnect();
+    };
   }, [count, dismissed, paused]);
 
   if (!mounted || dismissed || !active) return null;

@@ -46,17 +46,62 @@ export const DomainTicker: React.FC<DomainTickerProps> = ({
 
   useEffect(() => {
     if (items.length < 2) return;
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
     let timeoutId: number | undefined;
-    const id = window.setInterval(() => {
+    let id = 0;
+    let inView = true;
+
+    const tick = () => {
+      if (document.visibilityState !== 'visible' || !inView) return;
       setPhase('out');
       timeoutId = window.setTimeout(() => {
         setIndex((i) => (i + 1) % items.length);
         setPhase('in');
       }, 200);
-    }, intervalMs);
-    return () => {
-      window.clearInterval(id);
+    };
+
+    const start = () => {
+      if (id) return;
+      id = window.setInterval(tick, intervalMs);
+    };
+    const stop = () => {
+      if (id) window.clearInterval(id);
+      id = 0;
       if (timeoutId) window.clearTimeout(timeoutId);
+    };
+
+    const onVis = () => {
+      if (document.visibilityState === 'visible' && inView) start();
+      else stop();
+    };
+    document.addEventListener('visibilitychange', onVis);
+
+    const root =
+      typeof document !== 'undefined'
+        ? document.querySelector('[data-domain-ticker]')
+        : null;
+    let io: IntersectionObserver | null = null;
+    if (root && typeof IntersectionObserver !== 'undefined') {
+      io = new IntersectionObserver(
+        (entries) => {
+          inView = entries.some((e) => e.isIntersecting);
+          if (inView && document.visibilityState === 'visible') start();
+          else stop();
+        },
+        { threshold: 0.15 }
+      );
+      io.observe(root);
+    } else {
+      start();
+    }
+
+    return () => {
+      stop();
+      document.removeEventListener('visibilitychange', onVis);
+      io?.disconnect();
     };
   }, [items.length, intervalMs]);
 
@@ -70,7 +115,7 @@ export const DomainTicker: React.FC<DomainTickerProps> = ({
   if (!current) return null;
 
   return (
-    <div className={`flex justify-center w-full px-0 ${className}`}>
+    <div data-domain-ticker className={`flex justify-center w-full px-0 ${className}`}>
       {/* Mobile: full-width strip. Desktop: compact centered pill (not stretched) */}
       <div
         className={`group/ticker shine-border inline-flex items-center gap-2 sm:gap-2.5 rounded-xl sm:rounded-full pl-1.5 pr-2.5 sm:pl-3 sm:pr-4 py-1 sm:py-2 text-[10px] sm:text-[13px] w-full sm:w-auto sm:max-w-[min(100%,34rem)] ${

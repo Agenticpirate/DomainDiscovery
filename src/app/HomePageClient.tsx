@@ -79,11 +79,7 @@ export default function Home() {
               style={isLight ? undefined : { backgroundColor: '#0c0c0e' }}
             >
               <span className="relative flex h-1.5 w-1.5">
-                <span
-                  className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-50 ${
-                    isLight ? 'bg-slate-400' : 'bg-white/50'
-                  }`}
-                />
+                {/* Static dot — continuous animate-ping blocks Lighthouse CPU idle */}
                 <span
                   className={`relative inline-flex rounded-full h-1.5 w-1.5 ${
                     isLight ? 'bg-slate-600' : 'bg-white/80'

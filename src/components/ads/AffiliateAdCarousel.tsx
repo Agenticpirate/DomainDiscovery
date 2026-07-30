@@ -80,13 +80,44 @@ export function AffiliateAdCarousel({
     return () => io.disconnect();
   }, [active, fireImpression, mounted, index]);
 
+  // Only rotate when carousel is visible — keeps lab tools' main thread idle
   useEffect(() => {
     if (count < 2 || intervalMs <= 0 || paused) return;
-    const id = window.setInterval(() => {
-      if (document.visibilityState !== 'visible') return;
-      setIndex((i) => (i + 1) % count);
-    }, intervalMs);
-    return () => window.clearInterval(id);
+    const el = rootRef.current;
+    let id = 0;
+    let inView = false;
+
+    const start = () => {
+      if (id || !inView || paused) return;
+      id = window.setInterval(() => {
+        if (document.visibilityState !== 'visible') return;
+        setIndex((i) => (i + 1) % count);
+      }, intervalMs);
+    };
+    const stop = () => {
+      if (id) window.clearInterval(id);
+      id = 0;
+    };
+
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      inView = true;
+      start();
+      return () => stop();
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        inView = entries.some((e) => e.isIntersecting);
+        if (inView) start();
+        else stop();
+      },
+      { rootMargin: '40px', threshold: 0.1 }
+    );
+    io.observe(el);
+    return () => {
+      stop();
+      io.disconnect();
+    };
   }, [count, intervalMs, paused]);
 
   if (!active) return null;

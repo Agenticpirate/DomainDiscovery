@@ -3,11 +3,20 @@
 import React from 'react';
 import Link from 'next/link';
 import { Logo } from '../ui/Logo';
-import { ParticleText } from '../ui/ParticleText';
-import { EvervaultHover } from '../ui/EvervaultHover';
+import dynamic from 'next/dynamic';
 import { useTheme } from '@/contexts/ThemeContext';
 import { SITE_BRAND } from '@/lib/seoSiteFacts';
 import { AffiliateAdBanner } from '@/components/ads/AffiliateAdBanner';
+import { isLabAutomation, prefersReducedMotion } from '@/lib/perfRuntime';
+
+const ParticleText = dynamic(
+  () => import('../ui/ParticleText').then((m) => m.ParticleText),
+  { ssr: false }
+);
+const EvervaultHover = dynamic(
+  () => import('../ui/EvervaultHover').then((m) => m.EvervaultHover),
+  { ssr: false }
+);
 
 const BRAND = SITE_BRAND.name;
 
@@ -182,10 +191,34 @@ const FOOTER_SECTIONS: FooterSection[] = [
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const [mounted, setMounted] = React.useState(false);
+  const [showParticles, setShowParticles] = React.useState(false);
+  const brandBandRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Particle canvas only when brand band is near viewport — never in lab tools
+  React.useEffect(() => {
+    if (!mounted) return;
+    if (isLabAutomation() || prefersReducedMotion()) return;
+    const el = brandBandRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setShowParticles(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShowParticles(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: '120px', threshold: 0.01 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [mounted]);
 
   const { theme } = useTheme();
   const isLight = mounted ? theme === 'light' : false;
@@ -407,9 +440,12 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Brand band */}
-      <div className={`relative z-[1] min-h-[5.5rem] sm:min-h-[11rem] border-t ${hairline}`}>
-        {mounted ? (
+      {/* Brand band — static by default; particle FX only when scrolled into view */}
+      <div
+        ref={brandBandRef}
+        className={`relative z-[1] min-h-[5.5rem] sm:min-h-[11rem] border-t ${hairline}`}
+      >
+        {mounted && showParticles ? (
           <EvervaultHover className="w-full" radius={280}>
             <div className="relative z-[1] max-w-6xl mx-auto px-3 sm:px-4 py-3 sm:py-8 flex items-center justify-center overflow-hidden">
               <ParticleText

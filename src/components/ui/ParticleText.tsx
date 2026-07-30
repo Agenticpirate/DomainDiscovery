@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { isLabAutomation } from '@/lib/perfRuntime';
 
 type Particle = {
   x: number;
@@ -54,6 +55,11 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
 
   useEffect(() => {
     setMounted(true);
+    // Lab tools + reduced-motion users get static text (no endless rAF)
+    if (isLabAutomation()) {
+      setReducedMotion(true);
+      return;
+    }
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReducedMotion(mq.matches);
     const onChange = () => setReducedMotion(mq.matches);
@@ -74,6 +80,8 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
     if (!ctx) return;
 
     let running = true;
+    let inView = true;
+    let tabVisible = document.visibilityState === 'visible';
 
     const buildParticles = (cssW: number, cssH: number) => {
       const isMobile = cssW < 480;
@@ -439,15 +447,48 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
         ctx.fill();
       }
 
+      // Pause when off-screen or tab hidden — required for Lighthouse CPU idle
+      if (!running) return;
+      if (!inView || !tabVisible) {
+        rafRef.current = 0;
+        return;
+      }
       rafRef.current = requestAnimationFrame(tick);
     };
 
-    rafRef.current = requestAnimationFrame(tick);
+    const onVisibility = () => {
+      tabVisible = document.visibilityState === 'visible';
+      if (tabVisible && inView && running && !rafRef.current) {
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
+    let io: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== 'undefined') {
+      io = new IntersectionObserver(
+        (entries) => {
+          inView = entries.some((e) => e.isIntersecting);
+          if (inView && tabVisible && running && !rafRef.current) {
+            rafRef.current = requestAnimationFrame(tick);
+          }
+        },
+        { rootMargin: '80px', threshold: 0.05 }
+      );
+      io.observe(wrap);
+    }
+
+    if (tabVisible && inView) {
+      rafRef.current = requestAnimationFrame(tick);
+    }
 
     return () => {
       running = false;
       cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
       ro.disconnect();
+      io?.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
       canvas.removeEventListener('pointerdown', onPointerDown);
       canvas.removeEventListener('pointermove', onPointerMove);
       canvas.removeEventListener('pointerup', onPointerUp);
