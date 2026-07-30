@@ -40,6 +40,7 @@ export function AffiliateAdBanner({
 
   const [imgSrc, setImgSrc] = useState(creative.localSrc);
   const pixelId = `imp-${creative.id}-${placement}-${reactId.replace(/:/g, '')}`;
+  const pngFallback = creative.localSrc.replace(/\.webp$/i, '.png');
 
   useEffect(() => setMounted(true), []);
 
@@ -142,9 +143,12 @@ export function AffiliateAdBanner({
               alt={creative.alt}
               width={160}
               height={600}
+              loading="lazy"
+              decoding="async"
               className="block h-[600px] w-[160px] max-h-[70vh] object-cover object-center"
               onError={() => {
-                if (creative.displayAdCdn) setImgSrc(creative.displayAdCdn);
+                if (imgSrc.endsWith('.webp')) setImgSrc(pngFallback);
+                else if (creative.displayAdCdn) setImgSrc(creative.displayAdCdn);
               }}
             />
           </span>
@@ -171,10 +175,13 @@ export function AffiliateAdBanner({
               width={creative.width}
               height={creative.height}
               loading="lazy"
+              decoding="async"
+              fetchPriority="low"
               className="block w-full h-auto select-none"
               style={{ aspectRatio: `${creative.width} / ${creative.height}` }}
               onError={() => {
-                if (creative.displayAdCdn) setImgSrc(creative.displayAdCdn);
+                if (imgSrc.endsWith('.webp')) setImgSrc(pngFallback);
+                else if (creative.displayAdCdn) setImgSrc(creative.displayAdCdn);
               }}
             />
           </span>,
@@ -205,7 +212,7 @@ export function AffiliateAdBanner({
             height={creative.height}
             loading="lazy"
             decoding="async"
-            // Full native resolution; no object-cover crop; avoid huge upscale blur
+            fetchPriority="low"
             className="block w-full h-auto select-none"
             style={{
               aspectRatio: `${creative.width} / ${creative.height}`,
@@ -213,7 +220,8 @@ export function AffiliateAdBanner({
             }}
             sizes={`${maxDisplayPx}px`}
             onError={() => {
-              if (creative.displayAdCdn) setImgSrc(creative.displayAdCdn);
+              if (imgSrc.endsWith('.webp')) setImgSrc(pngFallback);
+              else if (creative.displayAdCdn) setImgSrc(creative.displayAdCdn);
             }}
           />
         </span>,

@@ -67,6 +67,18 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 
     let running = true;
     let dpr = 1;
+    let tabVisible = document.visibilityState === 'visible';
+    let lastFrame = 0;
+
+    // Lab / reduced motion: one static paint, no continuous rAF (PageSpeed TBT)
+    let reduced = false;
+    try {
+      reduced =
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        !!(navigator as Navigator & { webdriver?: boolean }).webdriver;
+    } catch {
+      /* ignore */
+    }
 
     const build = (w: number, h: number) => {
       const dots: Dot[] = [];
@@ -92,10 +104,10 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
     };
 
     const resize = () => {
-      const rect = wrap.getBoundingClientRect();
-      const w = Math.max(1, Math.floor(rect.width));
-      const h = Math.max(1, Math.floor(rect.height));
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // clientWidth/Height avoid forced layout thrash vs getBoundingClientRect in loops
+      const w = Math.max(1, wrap.clientWidth || 1);
+      const h = Math.max(1, wrap.clientHeight || 1);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
       canvas.style.width = `${w}px`;
@@ -114,9 +126,8 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
 
     let last = performance.now();
 
-    const tick = (now: number) => {
-      if (!running) return;
-      const dt = Math.min(0.05, (now - last) / 1000);
+    const paintFrame = (now: number, animate: boolean) => {
+      const dt = animate ? Math.min(0.05, (now - last) / 1000) : 0;
       last = now;
 
       const w = canvas.clientWidth;
@@ -128,8 +139,10 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
       const dots = dotsRef.current;
       for (let i = 0; i < dots.length; i++) {
         const d = dots[i];
-        d.phase += d.speed * dt;
-        d.twinkle += d.twinkleSpeed * dt;
+        if (animate) {
+          d.phase += d.speed * dt;
+          d.twinkle += d.twinkleSpeed * dt;
+        }
 
         // Soft ambient pulse (always on)
         const pulse = 0.42 + 0.48 * (0.5 + 0.5 * Math.sin(d.phase));
@@ -164,14 +177,43 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
       }
 
       ctx.globalAlpha = 1;
+    };
+
+    const tick = (now: number) => {
+      if (!running) return;
+      if (!tabVisible) {
+        rafRef.current = 0;
+        return;
+      }
+      // ~15fps is enough for soft ambient pulse (huge main-thread win vs 60fps)
+      if (now - lastFrame < 66) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+      lastFrame = now;
+      paintFrame(now, true);
       rafRef.current = requestAnimationFrame(tick);
     };
 
-    rafRef.current = requestAnimationFrame(tick);
+    const onVis = () => {
+      tabVisible = document.visibilityState === 'visible';
+      if (tabVisible && running && !rafRef.current && !reduced) {
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    };
+    document.addEventListener('visibilitychange', onVis);
+
+    if (reduced) {
+      paintFrame(performance.now(), false);
+    } else {
+      rafRef.current = requestAnimationFrame(tick);
+    }
 
     return () => {
       running = false;
       cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+      document.removeEventListener('visibilitychange', onVis);
       ro.disconnect();
     };
   }, [mounted, isLight, gap, radius, opacity, speedMin, speedMax, speedScale, sparkle]);

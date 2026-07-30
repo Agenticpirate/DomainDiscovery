@@ -265,7 +265,9 @@ export function AffiliateInterstitial() {
               height={creative.height}
               className="block w-full h-auto max-h-[min(52vh,420px)] object-contain"
               onError={() => {
-                if (creative.displayAdCdn && imgSrc !== creative.displayAdCdn) {
+                if (imgSrc.endsWith('.webp')) {
+                  setImgSrc(creative.localSrc.replace(/\.webp$/i, '.png'));
+                } else if (creative.displayAdCdn && imgSrc !== creative.displayAdCdn) {
                   setImgSrc(creative.displayAdCdn);
                 }
               }}

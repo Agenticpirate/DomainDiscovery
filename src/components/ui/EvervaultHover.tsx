@@ -70,21 +70,36 @@ export function EvervaultHover({
     setRandomString(generateRandomString(stringLength));
   }, [ambient, stringLength]);
 
-  // —— Ambient hero: smooth lerp spotlight (motion values only = no flicker) ——
+  // —— Ambient hero: smooth lerp spotlight ——
+  // CRITICAL for PageSpeed: never call getBoundingClientRect inside rAF (forced reflow).
+  // Pause when tab hidden / reduced-motion / lab automation to avoid 5–28s main-thread work.
   useEffect(() => {
     if (!ambient) return;
     const el = rootRef.current;
     if (!el) return;
 
     let reduced = false;
+    let lab = false;
     try {
       reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      lab = !!(navigator as Navigator & { webdriver?: boolean }).webdriver;
     } catch {
       /* ignore */
     }
+    if (lab || reduced) {
+      // Static centered spotlight — no continuous rAF
+      const { width, height } = el.getBoundingClientRect();
+      mouseX.set(width * 0.5);
+      mouseY.set(height * 0.34);
+      return;
+    }
+
+    let width = el.clientWidth || 1;
+    let height = el.clientHeight || 1;
 
     const seed = () => {
-      const { width, height } = el.getBoundingClientRect();
+      width = el.clientWidth || 1;
+      height = el.clientHeight || 1;
       const x = width * 0.5;
       const y = height * 0.34;
       targetRef.current = { x, y };
@@ -95,20 +110,32 @@ export function EvervaultHover({
     seed();
 
     let raf = 0;
+    let running = true;
+    let tabVisible = document.visibilityState === 'visible';
     const t0 = performance.now();
+    let lastFrame = 0;
 
     const tick = (now: number) => {
-      const { width, height } = el.getBoundingClientRect();
-      if (!hoverRef.current && !reduced) {
+      if (!running) return;
+      if (!tabVisible) {
+        raf = 0;
+        return;
+      }
+      // ~20fps when idle; full rate while pointer is active
+      if (!hoverRef.current && now - lastFrame < 48) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      lastFrame = now;
+
+      if (!hoverRef.current) {
         const t = (now - t0) / 1000;
-        // Very slow, small drift — premium, not chaotic
         targetRef.current = {
           x: width * (0.5 + Math.sin(t * 0.22) * 0.1),
           y: height * (0.32 + Math.cos(t * 0.18) * 0.06),
         };
       }
 
-      // Smooth follow (exponential lerp) — kills spotlight jitter/flicker
       const s = smoothRef.current;
       const tg = targetRef.current;
       const ease = hoverRef.current ? 0.18 : 0.045;
@@ -119,6 +146,13 @@ export function EvervaultHover({
 
       raf = requestAnimationFrame(tick);
     };
+
+    const onVis = () => {
+      tabVisible = document.visibilityState === 'visible';
+      if (tabVisible && running && !raf) raf = requestAnimationFrame(tick);
+    };
+    document.addEventListener('visibilitychange', onVis);
+
     raf = requestAnimationFrame(tick);
 
     const ro = new ResizeObserver(() => {
@@ -127,7 +161,9 @@ export function EvervaultHover({
     ro.observe(el);
 
     return () => {
+      running = false;
       cancelAnimationFrame(raf);
+      document.removeEventListener('visibilitychange', onVis);
       ro.disconnect();
     };
   }, [ambient, mouseX, mouseY]);

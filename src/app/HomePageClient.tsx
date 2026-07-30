@@ -2,19 +2,30 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/layout/Navigation';
-import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
-import { HomePageContent } from '@/components/home/HomePageContent';
 import { HeroSearch } from '@/components/home/HeroSearch';
-import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { useTheme } from '@/contexts/ThemeContext';
+
+const HomePageContent = dynamic(
+  () => import('@/components/home/HomePageContent').then((m) => m.HomePageContent),
+  { ssr: true }
+);
+const Footer = dynamic(() => import('@/components/layout/Footer').then((m) => m.Footer), {
+  ssr: true,
+});
+const AffiliateAdRail = dynamic(
+  () => import('@/components/ads/AffiliateAdRail').then((m) => m.AffiliateAdRail),
+  { ssr: false }
+);
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showHeroAd, setShowHeroAd] = useState(false);
   const { theme } = useTheme();
   const isLight = mounted ? theme === 'light' : false;
   const router = useRouter();
@@ -32,6 +43,20 @@ export default function Home() {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [router]);
+
+  // Defer hero ad until after first paint (LCP is the headline text)
+  useEffect(() => {
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    if (typeof w.requestIdleCallback === 'function') {
+      const id = w.requestIdleCallback(() => setShowHeroAd(true), { timeout: 2200 });
+      return () => w.cancelIdleCallback?.(id);
+    }
+    const id = window.setTimeout(() => setShowHeroAd(true), 1000);
+    return () => window.clearTimeout(id);
+  }, []);
 
   const handleHeroSearch = (query: string) => {
     const normalized = query.trim();
@@ -231,14 +256,16 @@ export default function Home() {
         </SectionAmbient>
 
         {/* Hero strip — smaller section width; full banner art (no crop) */}
-        <div className="pt-1.5 max-sm:pt-2 pb-2 max-sm:pb-2.5 sm:pt-2.5 sm:pb-3 page-gutter w-full">
-          <AffiliateAdRail
-            placement="home-hero"
-            variant="strip"
-            contained={false}
-            size="compact"
-          />
-        </div>
+        {showHeroAd && (
+          <div className="pt-1.5 max-sm:pt-2 pb-2 max-sm:pb-2.5 sm:pt-2.5 sm:pb-3 page-gutter w-full">
+            <AffiliateAdRail
+              placement="home-hero"
+              variant="strip"
+              contained={false}
+              size="compact"
+            />
+          </div>
+        )}
 
         <HomePageContent />
       </main>

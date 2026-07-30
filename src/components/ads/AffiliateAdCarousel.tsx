@@ -188,8 +188,11 @@ export function AffiliateAdCarousel({
                     sizes={maxW ? `${maxW}px` : '100vw'}
                     draggable={false}
                     onError={(e) => {
-                      if (ad.displayAdCdn) {
-                        (e.target as HTMLImageElement).src = ad.displayAdCdn;
+                      const el = e.target as HTMLImageElement;
+                      if (el.src.endsWith('.webp')) {
+                        el.src = ad.localSrc.replace(/\.webp$/i, '.png');
+                      } else if (ad.displayAdCdn) {
+                        el.src = ad.displayAdCdn;
                       }
                     }}
                   />

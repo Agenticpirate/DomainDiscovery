@@ -149,8 +149,9 @@ export const DomainTicker: React.FC<DomainTickerProps> = ({
                     : 'ring-[#0a0a0a] bg-white/10 hover:ring-white/50 focus-visible:ring-white/40'
                 }`}
               style={{ zIndex: HERO_AVATARS.length - h }}
-              loading="eager"
+              loading="lazy"
               decoding="async"
+              fetchPriority="low"
             />
           ))}
         </div>

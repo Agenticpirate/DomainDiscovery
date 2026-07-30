@@ -55,6 +55,17 @@ export function AffiliateSkyscraper() {
       img.decoding = 'async';
       img.src = ad.localSrc;
       img.onerror = () => {
+        const png = ad.localSrc.replace(/\.webp$/i, '.png');
+        if (ad.localSrc.endsWith('.webp') && png !== ad.localSrc) {
+          const fb = new window.Image();
+          fb.src = png;
+          fb.onload = () => {
+            setSrcById((prev) =>
+              prev[ad.id] === ad.localSrc ? { ...prev, [ad.id]: png } : prev
+            );
+          };
+          return;
+        }
         if (!ad.displayAdCdn) return;
         const fallback = new window.Image();
         fallback.src = ad.displayAdCdn;
