@@ -68,6 +68,7 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
     let running = true;
     let dpr = 1;
     let tabVisible = document.visibilityState === 'visible';
+    let inView = true;
     let lastFrame = 0;
 
     // Lab / reduced motion: one static paint, no continuous rAF (PageSpeed TBT)
@@ -179,9 +180,11 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
       ctx.globalAlpha = 1;
     };
 
+    const shouldAnimate = () => tabVisible && inView && !reduced;
+
     const tick = (now: number) => {
       if (!running) return;
-      if (!tabVisible) {
+      if (!shouldAnimate()) {
         rafRef.current = 0;
         return;
       }
@@ -195,13 +198,34 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
       rafRef.current = requestAnimationFrame(tick);
     };
 
-    const onVis = () => {
-      tabVisible = document.visibilityState === 'visible';
-      if (tabVisible && running && !rafRef.current && !reduced) {
+    const ensureLoop = () => {
+      if (shouldAnimate() && running && !rafRef.current) {
         rafRef.current = requestAnimationFrame(tick);
       }
     };
+
+    const onVis = () => {
+      tabVisible = document.visibilityState === 'visible';
+      ensureLoop();
+    };
     document.addEventListener('visibilitychange', onVis);
+
+    let io: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== 'undefined') {
+      io = new IntersectionObserver(
+        (entries) => {
+          inView = entries.some((e) => e.isIntersecting);
+          if (!inView) {
+            cancelAnimationFrame(rafRef.current);
+            rafRef.current = 0;
+          } else {
+            ensureLoop();
+          }
+        },
+        { rootMargin: '40px', threshold: 0.01 }
+      );
+      io.observe(wrap);
+    }
 
     if (reduced) {
       paintFrame(performance.now(), false);
@@ -214,6 +238,7 @@ export const DottedGlowBackground: React.FC<DottedGlowBackgroundProps> = ({
       cancelAnimationFrame(rafRef.current);
       rafRef.current = 0;
       document.removeEventListener('visibilitychange', onVis);
+      io?.disconnect();
       ro.disconnect();
     };
   }, [mounted, isLight, gap, radius, opacity, speedMin, speedMax, speedScale, sparkle]);

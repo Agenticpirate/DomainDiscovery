@@ -21,9 +21,10 @@ export const DEFAULT_TESTIMONIALS: Testimonial[] = [
 
 /** Real human headshots — greyscale by default, full color / lift on hover */
 const HERO_AVATARS = [
-  { src: '/avatars/person-1.jpg', alt: 'Privacy-conscious founder' },
-  { src: '/avatars/person-2.jpg', alt: 'Independent builder' },
-  { src: '/avatars/person-3.jpg', alt: 'Startup developer' },
+  // WebP preferred (smaller); same photos, no visual redesign
+  { src: '/avatars/person-1.webp', alt: 'Privacy-conscious founder' },
+  { src: '/avatars/person-2.webp', alt: 'Independent builder' },
+  { src: '/avatars/person-3.webp', alt: 'Startup developer' },
 ] as const;
 
 interface DomainTickerProps {
@@ -152,6 +153,12 @@ export const DomainTicker: React.FC<DomainTickerProps> = ({
               loading="lazy"
               decoding="async"
               fetchPriority="low"
+              onError={(e) => {
+                const el = e.currentTarget;
+                if (el.src.endsWith('.webp')) {
+                  el.src = el.src.replace(/\.webp$/i, '.jpg');
+                }
+              }}
             />
           ))}
         </div>
