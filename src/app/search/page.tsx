@@ -586,26 +586,29 @@ function SearchPageContent() {
             {/* Availability status filters — sticky, compact, high contrast */}
             {checkedCount > 0 && (
               <div className="mt-2.5 w-full max-w-full min-w-0">
-                <div className="flex items-center gap-2 mb-1.5 min-w-0 px-0.5">
-                  <div
-                    className={`h-1 flex-1 min-w-0 rounded-full overflow-hidden ${
-                      isLight ? 'bg-slate-200' : 'bg-white/10'
-                    }`}
-                  >
+                {/* Progress only while checking — hide when complete (full bar looked like a white border) */}
+                {isLoading && (
+                  <div className="flex items-center gap-2 mb-1.5 min-w-0 px-0.5">
                     <div
-                      className={`h-full rounded-full transition-all duration-500 ${
-                        isLight ? 'bg-slate-900' : 'bg-white'
+                      className={`h-1 flex-1 min-w-0 rounded-full overflow-hidden ${
+                        isLight ? 'bg-slate-200' : 'bg-white/10'
                       }`}
-                      style={{ width: `${progressPct}%` }}
-                    />
+                    >
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${
+                          isLight ? 'bg-slate-900' : 'bg-white/50'
+                        }`}
+                        style={{ width: `${progressPct}%` }}
+                      />
+                    </div>
+                    <span
+                      className="text-[10px] font-medium tabular-nums shrink-0"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
+                      Checking {checkedCount}…
+                    </span>
                   </div>
-                  <span
-                    className="text-[10px] font-medium tabular-nums shrink-0"
-                    style={{ color: 'var(--text-muted)' }}
-                  >
-                    {isLoading ? `Checking ${checkedCount}…` : `${checkedCount} extensions`}
-                  </span>
-                </div>
+                )}
 
                 <div
                   role="tablist"
