@@ -414,6 +414,53 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           />
         </div>
 
+        {/* Keyword position — always visible (required choice for search shape) */}
+        <div className="mb-3">
+          <label
+            className={`block text-[10px] font-bold uppercase tracking-widest mb-1.5 ${
+              isLight ? 'text-slate-500' : 'text-white/40'
+            }`}
+          >
+            Keyword position
+          </label>
+          <div className="flex flex-wrap gap-1.5">
+            {(
+              [
+                {
+                  id: 'all' as const,
+                  label: 'All matches',
+                  hint: 'Prefixes, suffixes & combos around your keyword',
+                },
+                {
+                  id: 'starts' as const,
+                  label: 'Starts with',
+                  hint: 'Names that begin with your keyword (e.g. jobs…)',
+                },
+                {
+                  id: 'ends' as const,
+                  label: 'Ends with',
+                  hint: 'Names that end with your keyword (e.g. …jobs)',
+                },
+              ] as const
+            ).map((opt) => (
+              <button
+                key={opt.id}
+                type="button"
+                title={opt.hint}
+                onClick={() => setFilterMode(opt.id)}
+                className={pill(filterMode === opt.id)}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+          <p className="mt-1.5 text-[10px] sm:text-[11px]" style={{ color: 'var(--text-muted)' }}>
+            {filterMode === 'starts' && 'Only domains that start with your keyword.'}
+            {filterMode === 'ends' && 'Only domains that end with your keyword.'}
+            {filterMode === 'all' && 'All prefix, suffix, and combo patterns.'}
+          </p>
+        </div>
+
         {/* 2) Extensions — type any TLD, pick presets, chips for selected */}
         <div className="mb-3 space-y-2">
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -624,62 +671,31 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               isLight ? 'border-slate-100' : 'border-white/[0.06]'
             }`}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <div>
-                <label
-                  className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
-                    isLight ? 'text-slate-500' : 'text-white/40'
-                  }`}
-                >
-                  Keyword position
-                </label>
-                <div className="flex flex-wrap gap-1.5">
-                  {(
-                    [
-                      { id: 'all' as const, label: 'All matches', hint: 'Prefixes, suffixes & combos' },
-                      { id: 'starts' as const, label: 'Starts with', hint: 'keyword…' },
-                      { id: 'ends' as const, label: 'Ends with', hint: '…keyword' },
-                    ] as const
-                  ).map((opt) => (
-                    <button
-                      key={opt.id}
-                      type="button"
-                      title={opt.hint}
-                      onClick={() => setFilterMode(opt.id)}
-                      className={pill(filterMode === opt.id)}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label
-                  className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
-                    isLight ? 'text-slate-500' : 'text-white/40'
-                  }`}
-                >
-                  Sort by
-                </label>
-                <div className="flex flex-wrap gap-1.5">
-                  {(
-                    [
-                      { id: 'popularity' as const, label: 'Popularity' },
-                      { id: 'alpha' as const, label: 'Alphabetical' },
-                      { id: 'length' as const, label: 'Length' },
-                    ] as const
-                  ).map((opt) => (
-                    <button
-                      key={opt.id}
-                      type="button"
-                      onClick={() => setSortMode(opt.id)}
-                      className={pill(sortMode === opt.id)}
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
+            <div>
+              <label
+                className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
+                  isLight ? 'text-slate-500' : 'text-white/40'
+                }`}
+              >
+                Sort by
+              </label>
+              <div className="flex flex-wrap gap-1.5">
+                {(
+                  [
+                    { id: 'popularity' as const, label: 'Popularity' },
+                    { id: 'alpha' as const, label: 'Alphabetical' },
+                    { id: 'length' as const, label: 'Length' },
+                  ] as const
+                ).map((opt) => (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() => setSortMode(opt.id)}
+                    className={pill(sortMode === opt.id)}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
               </div>
             </div>
 
