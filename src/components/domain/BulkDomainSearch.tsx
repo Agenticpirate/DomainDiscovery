@@ -714,14 +714,14 @@ const ResultsView: React.FC<{
         </div>
       </div>
 
-      {/* Multi-column grid — max 3 cols so names fit on one line */}
+      {/* Multi-column grid — max 3 cols; spaced cards so incomplete rows never leave grey voids */}
       <div
-        className={`rounded-2xl border overflow-hidden ${
+        className={`rounded-2xl border ${
           isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
         }`}
       >
         <div
-          className="max-h-[min(72vh,calc(100vh-11.5rem))] sm:max-h-[min(78vh,calc(100vh-12rem))] overflow-y-auto overscroll-contain select-none"
+          className="max-h-[min(72vh,calc(100vh-11.5rem))] sm:max-h-[min(78vh,calc(100vh-12rem))] overflow-y-auto overscroll-contain select-none p-1.5 sm:p-2"
           onContextMenu={(e) => e.preventDefault()}
           onCopy={(e) => e.preventDefault()}
         >
@@ -731,10 +731,7 @@ const ResultsView: React.FC<{
               <p className="text-[12px]">Switch to All or clear filters</p>
             </div>
           ) : (
-            <div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
-              style={{ backgroundColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)' }}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5 w-full auto-rows-auto">
               {results.map((d) => {
                 const domainHref =
                   d.status === 'available' || d.status === 'premium'
@@ -753,10 +750,10 @@ const ResultsView: React.FC<{
                 return (
                   <div
                     key={d.domain}
-                    className={`group flex items-center gap-2 px-2.5 py-2 sm:px-3 sm:py-2.5 min-w-0 transition-colors ${
+                    className={`group flex items-center gap-2 px-2.5 py-2.5 sm:px-3 sm:py-2.5 min-w-0 rounded-xl border transition-colors ${
                       isLight
-                        ? 'bg-white hover:bg-slate-50'
-                        : 'bg-[#0c0c0e] hover:bg-[#121214]'
+                        ? 'bg-white hover:bg-slate-50 border-slate-200'
+                        : 'bg-[#121214] hover:bg-[#161618] border-white/[0.08]'
                     }`}
                   >
                     <StatusIcon status={d.status} isLight={isLight} />

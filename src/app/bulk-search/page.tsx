@@ -36,11 +36,12 @@ export default function BulkSearchPage() {
             <BulkDomainSearch />
           </div>
         </SectionAmbient>
-        <div className="pt-4 pb-2">
-          <AffiliateAdRail placement="bulk" variant="auto" />
-        </div>
         <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.bulk} compact />
         <SeoGuidePack {...TOOL_GUIDE_PACKS.bulk} />
+        {/* Big ad banner sits below FAQ / guide content */}
+        <div className="pt-6 sm:pt-8 pb-4 sm:pb-6">
+          <AffiliateAdRail placement="bulk" variant="billboard" />
+        </div>
       </main>
       <Footer />
     </div>
