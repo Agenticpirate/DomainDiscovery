@@ -812,13 +812,13 @@ const SearchInputSection: React.FC<{
                 {domains.length > 0 ? (
                   <span className="font-medium">
                     <span className={isLight ? 'text-slate-800' : 'text-white/80'}>{domains.length}</span> domains
-                    {(counts.available > 0 || (counts.premium ?? 0) > 0) && (
+                    {(counts.available > 0 || (counts.premium ?? 0) > 0 || counts.taken > 0) && (
                       <span className="ml-2">
-                        · <span className="text-emerald-500">{counts.available} free</span>
+                        · <span className="text-emerald-400">{counts.available} free</span>
                         {(counts.premium ?? 0) > 0 && (
-                          <span className="text-amber-500"> · {counts.premium} premium</span>
+                          <span className="text-amber-400"> · {counts.premium} premium</span>
                         )}
-                        · {counts.taken} taken
+                        · <span className="text-rose-400">{counts.taken} taken</span>
                       </span>
                     )}
                     {counts.checking > 0 && (
