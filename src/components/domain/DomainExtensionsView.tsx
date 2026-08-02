@@ -156,8 +156,6 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
 
   // Browse starts on Featured so the page isn’t buried under 1,000 cards
   const [selectedCategory, setSelectedCategory] = useState<string>('Featured');
-  /** Expand secondary category chips (industry / region) */
-  const [categoriesOpen, setCategoriesOpen] = useState(false);
   /** Availability filter during live name search */
   const [statusFilter, setStatusFilter] = useState<'all' | 'available' | 'taken'>('all');
   const [extensions, setExtensions] = useState<Extension[]>(() =>
@@ -260,19 +258,22 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
     return ['All', ...ordered, ...extras];
   }, []);
 
-  const { primaryCategories, moreCategories } = useMemo(() => {
+  const { primaryCategories, moreCategories, industryCategories, regionCategories } = useMemo(() => {
     const primarySet = new Set<string>(PRIMARY_CATEGORIES);
     const primary = PRIMARY_CATEGORIES.filter((c) => categories.includes(c));
     const more = categories.filter((c) => !primarySet.has(c));
-    return { primaryCategories: primary, moreCategories: more };
+    const regionSet = new Set(['Asia-Pacific', 'Europe', 'Americas', 'International']);
+    const industry = more.filter((c) => !regionSet.has(c));
+    const regions = more.filter((c) => regionSet.has(c));
+    return {
+      primaryCategories: primary,
+      moreCategories: more,
+      industryCategories: industry,
+      regionCategories: regions,
+    };
   }, [categories]);
 
-  // Keep “More” open if the active filter lives there
-  useEffect(() => {
-    if (moreCategories.includes(selectedCategory)) {
-      setCategoriesOpen(true);
-    }
-  }, [selectedCategory, moreCategories]);
+  const isMoreCategory = moreCategories.includes(selectedCategory);
 
   const activeQuery = (localSearch || searchQuery).trim();
   const isNameSearch = Boolean(activeQuery) && !activeQuery.startsWith('.');
@@ -594,12 +595,31 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
     </div>
   );
 
+  /** Count badge for a category chip / option */
+  const countForCategory = useCallback(
+    (cat: string) => {
+      const baseCount =
+        cat === 'All'
+          ? isNameSearch
+            ? totalTlds
+            : catalogCount
+          : isNameSearch
+            ? UNIQUE_CATEGORY_SIZE.get(cat) || CATEGORY_SIZE.get(cat) || 0
+            : CATEGORY_SIZE.get(cat) || 0;
+      const liveAvail =
+        hasLiveResults && isNameSearch ? availableByCategory.get(cat) : undefined;
+      const countNum = liveAvail !== undefined ? liveAvail : baseCount;
+      return countNum >= 1000 ? countNum.toLocaleString() : String(countNum);
+    },
+    [isNameSearch, totalTlds, catalogCount, hasLiveResults, availableByCategory]
+  );
+
   return (
     <div className="w-full min-w-0 max-w-full">
-      {/* Control panel — solid plate (dots cannot paint through) */}
+      {/* Control panel — single cohesive surface (no chip walls) */}
       <div
         id="extensions-search"
-        className={`shine-border relative isolate overflow-hidden rounded-xl sm:rounded-2xl border p-2.5 sm:p-4 mb-3 sm:mb-6 scroll-mt-20 sm:scroll-mt-24 w-full min-w-0 max-w-full ${
+        className={`shine-border relative isolate overflow-hidden rounded-xl sm:rounded-2xl border p-3 sm:p-4 mb-3 sm:mb-6 scroll-mt-20 sm:scroll-mt-24 w-full min-w-0 max-w-full ${
           isLight
             ? 'border-slate-200 shadow-sm shadow-slate-900/[0.04]'
             : 'border-white/10'
@@ -611,15 +631,18 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
           className="pointer-events-none absolute inset-0 rounded-[inherit] z-0"
           style={{ backgroundColor: plate }}
         />
-        <div className="relative z-[1] space-y-3 sm:space-y-3.5">
-          {/* Header */}
-          <div className="flex items-start justify-between gap-3">
+        <div className="relative z-[1] space-y-2.5 sm:space-y-3">
+          {/* Header — title + meta in one row */}
+          <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
               <p className="text-[13px] sm:text-[15px] font-black tracking-tight leading-tight">
                 Search all {totalTlds.toLocaleString()} extensions
               </p>
-              <p className="mt-0.5 text-[11px] sm:text-[12px] leading-snug" style={{ color: 'var(--text-tertiary)' }}>
-                Check a brand across every TLD — then refine by category
+              <p
+                className="mt-0.5 text-[11px] sm:text-[12px] leading-snug truncate"
+                style={{ color: 'var(--text-tertiary)' }}
+              >
+                Type a brand · filter by category anytime
               </p>
             </div>
             <span
@@ -630,14 +653,16 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
               }`}
               style={isLight ? undefined : { backgroundColor: plateInset }}
             >
-              <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-emerald-500' : 'bg-emerald-400'}`} />
+              <span
+                className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-emerald-500' : 'bg-emerald-400'}`}
+              />
               {catalogCount.toLocaleString()} listings
             </span>
           </div>
 
-          {/* Unified search control */}
+          {/* Search + CTA */}
           <div
-            className={`flex flex-col sm:flex-row sm:items-stretch gap-2 rounded-2xl border p-1.5 sm:p-1.5 ${
+            className={`flex flex-col sm:flex-row sm:items-stretch gap-2 rounded-2xl border p-1.5 ${
               isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10'
             }`}
             style={isLight ? undefined : { backgroundColor: plateInset }}
@@ -660,7 +685,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                     window.location.href = `/search?q=${encodeURIComponent(cleanKeyword)}`;
                   }
                 }}
-                placeholder={`Type a brand name · checks ${totalTlds.toLocaleString()} TLDs`}
+                placeholder={`Brand name · checks ${totalTlds.toLocaleString()} TLDs`}
                 className={`w-full rounded-xl border-0 bg-transparent pl-9 sm:pl-10 pr-9 py-2.5 sm:py-3 text-[13px] sm:text-[15px] font-medium outline-none focus:ring-0 ${
                   isLight
                     ? 'text-slate-900 placeholder:text-slate-400'
@@ -680,7 +705,12 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                   aria-label="Clear search"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               )}
@@ -701,256 +731,39 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
               </svg>
             </Link>
           </div>
 
-          {/* Live status — only when checking / results exist */}
-          {(isChecking || (isNameSearch && hasLiveResults)) && (
-            <div className="flex items-center gap-2 flex-wrap">
-              {isChecking && (
-                <span
-                  className={`inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold px-2.5 py-1.5 rounded-full border ${
-                    isLight
-                      ? 'bg-slate-50 text-slate-600 border-slate-200'
-                      : 'text-white/60 border-white/10'
-                  }`}
-                  style={isLight ? undefined : { backgroundColor: plateInset }}
-                >
-                  <span
-                    className={`h-1.5 w-1.5 rounded-full animate-pulse ${
-                      isLight ? 'bg-slate-500' : 'bg-white/70'
-                    }`}
-                  />
-                  Checking{selectedCategory !== 'All' ? ` ${selectedCategory}` : ' all TLDs'}…
-                </span>
-              )}
-              {isNameSearch && hasLiveResults && (
-                <div
-                  className={`inline-flex items-center gap-0.5 rounded-full border p-0.5 ${
-                    isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10'
-                  }`}
-                  style={isLight ? undefined : { backgroundColor: plateInset }}
-                  role="group"
-                  aria-label="Filter by availability status"
-                >
-                  {(
-                    [
-                      {
-                        id: 'all' as const,
-                        label: 'All',
-                        n: categoryFilteredExtensions.length,
-                        dot: isLight ? 'bg-slate-400' : 'bg-white/45',
-                      },
-                      {
-                        id: 'available' as const,
-                        label: 'Available',
-                        n: availableCount,
-                        dot: isLight ? 'bg-emerald-500' : 'bg-emerald-400',
-                      },
-                      {
-                        id: 'taken' as const,
-                        label: 'Taken',
-                        n: takenCount,
-                        dot: isLight ? 'bg-rose-500' : 'bg-rose-400',
-                      },
-                    ] as const
-                  ).map((chip) => {
-                    const active = statusFilter === chip.id;
-                    return (
-                      <button
-                        key={chip.id}
-                        type="button"
-                        onClick={() => setStatusFilter(chip.id)}
-                        aria-pressed={active}
-                        className={`inline-flex items-center gap-1 sm:gap-1.5 rounded-full px-2.5 py-1.5 text-[10px] sm:text-[11px] font-semibold transition-all ${
-                          active
-                            ? chip.id === 'available'
-                              ? isLight
-                                ? 'bg-emerald-600 text-white shadow-sm'
-                                : 'bg-emerald-500 text-black shadow-sm'
-                              : chip.id === 'taken'
-                                ? isLight
-                                  ? 'bg-rose-600 text-white shadow-sm'
-                                  : 'bg-rose-500 text-black shadow-sm'
-                                : isLight
-                                  ? 'bg-slate-900 text-white shadow-sm'
-                                  : 'bg-white text-black shadow-sm'
-                            : isLight
-                              ? 'text-slate-600 hover:bg-white hover:text-slate-900'
-                              : 'text-white/55 hover:bg-white/[0.06] hover:text-white/85'
-                        }`}
-                      >
-                        <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${chip.dot}`} aria-hidden />
-                        <span>
-                          {chip.label}
-                          <span className="ml-0.5 tabular-nums opacity-80">{chip.n}</span>
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Categories — primary row + optional more */}
+          {/* Filters toolbar — one row: primary segments + more select + status */}
           <div
-            className={`rounded-2xl border p-2.5 sm:p-3 ${
-              isLight ? 'border-slate-200/90 bg-white/70' : 'border-white/[0.08] bg-white/[0.02]'
+            className={`flex flex-col gap-2 rounded-2xl border p-1.5 sm:p-2 ${
+              isLight ? 'border-slate-200/90 bg-white/60' : 'border-white/[0.08] bg-white/[0.02]'
             }`}
           >
-            <div className="flex items-center justify-between gap-2 mb-2">
-              <div className="flex items-center gap-2 min-w-0">
-                <span
-                  className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.12em]"
-                  style={{ color: 'var(--text-tertiary)' }}
-                >
-                  Filter by category
-                </span>
-                {selectedCategory !== 'All' && (
-                  <span
-                    className={`inline-flex items-center truncate max-w-[10rem] rounded-full px-2 py-0.5 text-[10px] font-bold border ${
-                      isLight
-                        ? 'bg-slate-900 text-white border-slate-900'
-                        : 'bg-white text-black border-white'
-                    }`}
-                  >
-                    {selectedCategory}
-                  </span>
-                )}
-              </div>
-              {selectedCategory !== 'All' && (
-                <button
-                  type="button"
-                  onClick={() => pickCategory('All')}
-                  className={`shrink-0 text-[11px] font-semibold ${
-                    isLight ? 'text-slate-600 hover:text-slate-900' : 'text-white/50 hover:text-white/80'
-                  }`}
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-
-            {/* Primary chips */}
-            <div
-              className="flex flex-wrap gap-1.5"
-              role="listbox"
-              aria-label="Primary extension categories"
-            >
-              {primaryCategories.map((cat) => {
-                const active = selectedCategory === cat;
-                const baseCount =
-                  cat === 'All'
-                    ? isNameSearch
-                      ? totalTlds
-                      : catalogCount
-                    : isNameSearch
-                      ? UNIQUE_CATEGORY_SIZE.get(cat) || CATEGORY_SIZE.get(cat) || 0
-                      : CATEGORY_SIZE.get(cat) || 0;
-                const liveAvail =
-                  hasLiveResults && isNameSearch ? availableByCategory.get(cat) : undefined;
-                const countNum = liveAvail !== undefined ? liveAvail : baseCount;
-                const countLabel =
-                  countNum >= 1000 ? countNum.toLocaleString() : String(countNum);
-
-                return (
-                  <button
-                    key={cat}
-                    type="button"
-                    role="option"
-                    aria-selected={active}
-                    onClick={() => pickCategory(cat)}
-                    aria-pressed={active}
-                    className={`inline-flex items-center gap-1.5 rounded-full whitespace-nowrap transition-all border px-2.5 py-1.5 text-[11px] font-semibold ${
-                      active
-                        ? isLight
-                          ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                          : 'bg-white text-black border-white shadow-[0_2px_10px_rgba(0,0,0,0.35)]'
-                        : isLight
-                          ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                          : 'text-white/65 border-white/10 hover:border-white/20 hover:text-white/90'
-                    }`}
-                    style={active || isLight ? undefined : { backgroundColor: plateInset }}
-                  >
-                    <span className="leading-none">{cat}</span>
-                    <span
-                      className={`inline-flex items-center justify-center min-w-[1.15rem] rounded-full px-1 py-px text-[9px] font-bold tabular-nums leading-none ${
-                        active
-                          ? isLight
-                            ? 'bg-white/15 text-white/75'
-                            : 'bg-black/10 text-black/55'
-                          : isLight
-                            ? 'bg-slate-100 text-slate-500'
-                            : 'bg-white/[0.06] text-white/40'
-                      }`}
-                    >
-                      {countLabel}
-                    </span>
-                  </button>
-                );
-              })}
-
-              {moreCategories.length > 0 && (
-                <button
-                  type="button"
-                  onClick={() => setCategoriesOpen((v) => !v)}
-                  aria-expanded={categoriesOpen}
-                  className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1.5 text-[11px] font-semibold transition-all ${
-                    categoriesOpen
-                      ? isLight
-                        ? 'bg-indigo-50 text-indigo-700 border-indigo-200'
-                        : 'bg-white/10 text-white border-white/20'
-                      : isLight
-                        ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-                        : 'text-white/65 border-white/10 hover:border-white/20'
-                  }`}
-                  style={!categoriesOpen && !isLight ? { backgroundColor: plateInset } : undefined}
-                >
-                  {categoriesOpen ? 'Less' : `More · ${moreCategories.length}`}
-                  <svg
-                    className={`w-3.5 h-3.5 transition-transform ${categoriesOpen ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-              )}
-            </div>
-
-            {/* Secondary chips — industry & region, collapsed by default */}
-            {categoriesOpen && moreCategories.length > 0 && (
+            <div className="flex items-center gap-2 min-w-0">
+              {/* Primary categories — single horizontal track, no wrap scatter */}
               <div
-                className={`mt-2.5 pt-2.5 border-t ${
-                  isLight ? 'border-slate-100' : 'border-white/[0.06]'
-                }`}
+                className="flex-1 min-w-0 overflow-x-auto scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                role="listbox"
+                aria-label="Extension categories"
               >
-                <p
-                  className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.12em]"
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  Industry & regions
-                </p>
-                <div
-                  className="flex flex-wrap gap-1.5"
-                  role="listbox"
-                  aria-label="More extension categories"
-                >
-                  {moreCategories.map((cat) => {
+                <div className="inline-flex items-center gap-1 min-w-min pr-1">
+                  {primaryCategories.map((cat) => {
                     const active = selectedCategory === cat;
-                    const baseCount = isNameSearch
-                      ? UNIQUE_CATEGORY_SIZE.get(cat) || CATEGORY_SIZE.get(cat) || 0
-                      : CATEGORY_SIZE.get(cat) || 0;
-                    const liveAvail =
-                      hasLiveResults && isNameSearch ? availableByCategory.get(cat) : undefined;
-                    const countNum = liveAvail !== undefined ? liveAvail : baseCount;
-                    const countLabel =
-                      countNum >= 1000 ? countNum.toLocaleString() : String(countNum);
+                    const countLabel = countForCategory(cat);
+                    const shortLabel =
+                      cat === 'Business & Commerce'
+                        ? 'Business'
+                        : cat === 'Technology'
+                          ? 'Tech'
+                          : cat;
 
                     return (
                       <button
@@ -960,6 +773,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                         aria-selected={active}
                         onClick={() => pickCategory(cat)}
                         aria-pressed={active}
+                        title={cat === shortLabel ? undefined : cat}
                         className={`inline-flex items-center gap-1.5 rounded-full whitespace-nowrap transition-all border px-2.5 py-1.5 text-[11px] font-semibold ${
                           active
                             ? isLight
@@ -967,11 +781,11 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                               : 'bg-white text-black border-white shadow-[0_2px_10px_rgba(0,0,0,0.35)]'
                             : isLight
                               ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                              : 'text-white/60 border-white/10 hover:border-white/20 hover:text-white/85'
+                              : 'text-white/65 border-white/10 hover:border-white/20 hover:text-white/90'
                         }`}
                         style={active || isLight ? undefined : { backgroundColor: plateInset }}
                       >
-                        <span className="leading-none">{cat}</span>
+                        <span className="leading-none">{shortLabel}</span>
                         <span
                           className={`inline-flex items-center justify-center min-w-[1.15rem] rounded-full px-1 py-px text-[9px] font-bold tabular-nums leading-none ${
                             active
@@ -989,6 +803,188 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                     );
                   })}
                 </div>
+              </div>
+
+              {/* Secondary categories — compact select (no chip wall) */}
+              {moreCategories.length > 0 && (
+                <div className="relative shrink-0">
+                  <label htmlFor="ext-more-category" className="sr-only">
+                    Industry and region categories
+                  </label>
+                  <select
+                    id="ext-more-category"
+                    value={isMoreCategory ? selectedCategory : ''}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      pickCategory(v || 'All');
+                    }}
+                    className={`appearance-none cursor-pointer rounded-full border pl-2.5 pr-7 py-1.5 text-[11px] font-semibold outline-none transition-colors max-w-[9.5rem] sm:max-w-[12rem] truncate ${
+                      isMoreCategory
+                        ? isLight
+                          ? 'bg-slate-900 text-white border-slate-900'
+                          : 'bg-white text-black border-white'
+                        : isLight
+                          ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
+                          : 'text-white/70 border-white/10 hover:border-white/20'
+                    }`}
+                    style={
+                      isMoreCategory || isLight ? undefined : { backgroundColor: plateInset }
+                    }
+                    aria-label="More categories: industry and regions"
+                  >
+                    <option value="">
+                      {isMoreCategory ? 'Clear more…' : `More · ${moreCategories.length}`}
+                    </option>
+                    {industryCategories.length > 0 && (
+                      <optgroup label="Industry">
+                        {industryCategories.map((cat) => (
+                          <option key={cat} value={cat}>
+                            {cat} ({countForCategory(cat)})
+                          </option>
+                        ))}
+                      </optgroup>
+                    )}
+                    {regionCategories.length > 0 && (
+                      <optgroup label="Regions">
+                        {regionCategories.map((cat) => (
+                          <option key={cat} value={cat}>
+                            {cat} ({countForCategory(cat)})
+                          </option>
+                        ))}
+                      </optgroup>
+                    )}
+                  </select>
+                  <svg
+                    className={`pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 ${
+                      isMoreCategory
+                        ? isLight
+                          ? 'text-white/70'
+                          : 'text-black/50'
+                        : isLight
+                          ? 'text-slate-400'
+                          : 'text-white/40'
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2.4}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              )}
+
+              {selectedCategory !== 'All' && selectedCategory !== 'Featured' && (
+                <button
+                  type="button"
+                  onClick={() => pickCategory('All')}
+                  className={`shrink-0 text-[11px] font-semibold px-1 ${
+                    isLight ? 'text-slate-500 hover:text-slate-900' : 'text-white/45 hover:text-white/80'
+                  }`}
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {/* Live availability — only when checking or results exist */}
+            {(isChecking || (isNameSearch && hasLiveResults)) && (
+              <div
+                className={`flex items-center gap-2 flex-wrap pt-1.5 border-t ${
+                  isLight ? 'border-slate-100' : 'border-white/[0.06]'
+                }`}
+              >
+                {isChecking && (
+                  <span
+                    className={`inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-full border ${
+                      isLight
+                        ? 'bg-slate-50 text-slate-600 border-slate-200'
+                        : 'text-white/60 border-white/10'
+                    }`}
+                    style={isLight ? undefined : { backgroundColor: plateInset }}
+                  >
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full animate-pulse ${
+                        isLight ? 'bg-slate-500' : 'bg-white/70'
+                      }`}
+                    />
+                    Checking{selectedCategory !== 'All' ? ` ${selectedCategory}` : ' all TLDs'}…
+                  </span>
+                )}
+                {isNameSearch && hasLiveResults && (
+                  <div
+                    className={`inline-flex items-center gap-0.5 rounded-full border p-0.5 ${
+                      isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10'
+                    }`}
+                    style={isLight ? undefined : { backgroundColor: plateInset }}
+                    role="group"
+                    aria-label="Filter by availability status"
+                  >
+                    {(
+                      [
+                        {
+                          id: 'all' as const,
+                          label: 'All',
+                          n: categoryFilteredExtensions.length,
+                          dot: isLight ? 'bg-slate-400' : 'bg-white/45',
+                        },
+                        {
+                          id: 'available' as const,
+                          label: 'Available',
+                          n: availableCount,
+                          dot: isLight ? 'bg-emerald-500' : 'bg-emerald-400',
+                        },
+                        {
+                          id: 'taken' as const,
+                          label: 'Taken',
+                          n: takenCount,
+                          dot: isLight ? 'bg-rose-500' : 'bg-rose-400',
+                        },
+                      ] as const
+                    ).map((chip) => {
+                      const active = statusFilter === chip.id;
+                      return (
+                        <button
+                          key={chip.id}
+                          type="button"
+                          onClick={() => setStatusFilter(chip.id)}
+                          aria-pressed={active}
+                          className={`inline-flex items-center gap-1 sm:gap-1.5 rounded-full px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold transition-all ${
+                            active
+                              ? chip.id === 'available'
+                                ? isLight
+                                  ? 'bg-emerald-600 text-white shadow-sm'
+                                  : 'bg-emerald-500 text-black shadow-sm'
+                                : chip.id === 'taken'
+                                  ? isLight
+                                    ? 'bg-rose-600 text-white shadow-sm'
+                                    : 'bg-rose-500 text-black shadow-sm'
+                                  : isLight
+                                    ? 'bg-slate-900 text-white shadow-sm'
+                                    : 'bg-white text-black shadow-sm'
+                              : isLight
+                                ? 'text-slate-600 hover:bg-white hover:text-slate-900'
+                                : 'text-white/55 hover:bg-white/[0.06] hover:text-white/85'
+                          }`}
+                        >
+                          <span
+                            className={`h-1.5 w-1.5 rounded-full shrink-0 ${chip.dot}`}
+                            aria-hidden
+                          />
+                          <span>
+                            {chip.label}
+                            <span className="ml-0.5 tabular-nums opacity-80">{chip.n}</span>
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             )}
           </div>
