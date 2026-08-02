@@ -259,8 +259,7 @@ export const BULK_SAMPLE_DOMAINS = [
 const BULK_PLACEHOLDER_EXAMPLES = [
   'example.com',
   'example.org',
-  'mystartup.com',
-  'mybrand.io',
+  'ystartups.com',
 ].join('\n');
 
 export const BULK_SAMPLE_TEXT = BULK_SAMPLE_DOMAINS.join('\n');
@@ -808,7 +807,7 @@ const SearchInputSection: React.FC<{
             >
               Example:&nbsp;
               <span className={isLight ? 'text-slate-700' : 'text-white/60'}>
-                example.com, example.org, mystartup.com, mybrand.io
+                example.com, example.org, ystartups.com
               </span>
             </p>
           </div>
@@ -981,8 +980,8 @@ export const BulkDomainSearchLanding: React.FC<{
 
   return (
     <div className="w-full">
-      {/* Hero — aligned with home page (no solid blank scrim plate) */}
-      <section className="relative text-center pb-6 sm:pb-12 pt-2 sm:pt-6">
+      {/* Hero — compact so the paste/search box sits higher */}
+      <section className="relative text-center pb-3 sm:pb-5 pt-1 sm:pt-3">
         <div
           className={`relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto transition-all duration-1000 ${
             mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -990,7 +989,7 @@ export const BulkDomainSearchLanding: React.FC<{
         >
           {/* Badge — same language as home hero */}
           <div
-            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 mb-2.5 sm:mb-5 text-[10px] sm:text-[12px] font-semibold tracking-wide ${
+            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 mb-2 sm:mb-3 text-[10px] sm:text-[12px] font-semibold tracking-wide ${
               isLight
                 ? 'bg-slate-100 text-slate-600 border border-slate-200'
                 : 'bg-white/[0.04] text-white/65 border border-white/10'
@@ -1014,7 +1013,7 @@ export const BulkDomainSearchLanding: React.FC<{
             </span>
           </div>
 
-          <h1 className="text-[1.7rem] leading-[1.08] sm:text-[3.65rem] md:text-[4.35rem] font-black tracking-tight mb-1.5 sm:mb-3.5">
+          <h1 className="text-[1.55rem] leading-[1.08] sm:text-[3rem] md:text-[3.5rem] font-black tracking-tight mb-1 sm:mb-2">
             <span
               className="block bg-clip-text text-transparent"
               style={{
@@ -1026,7 +1025,7 @@ export const BulkDomainSearchLanding: React.FC<{
               Bulk domain search
             </span>
             <span
-              className="block text-[0.88rem] sm:text-[1.55rem] md:text-[1.95rem] mt-0.5 sm:mt-1.5 font-bold"
+              className="block text-[0.82rem] sm:text-[1.35rem] md:text-[1.65rem] mt-0.5 sm:mt-1 font-bold"
               style={{ color: 'var(--gradient-subtitle)' }}
             >
               Check thousands of names at once
@@ -1034,7 +1033,7 @@ export const BulkDomainSearchLanding: React.FC<{
           </h1>
 
           <p
-            className={`text-[13px] sm:text-lg max-w-2xl mx-auto mb-4 sm:mb-7 leading-relaxed px-1 ${
+            className={`text-[12px] sm:text-base max-w-2xl mx-auto mb-2.5 sm:mb-4 leading-relaxed px-1 ${
               isLight ? 'text-slate-500' : 'text-white/50'
             }`}
           >
@@ -1042,7 +1041,7 @@ export const BulkDomainSearchLanding: React.FC<{
           </p>
 
           {/* Feature chips — freestanding like home (no outer blank dock) */}
-          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-5 sm:mb-8 px-1">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-3 sm:mb-5 px-1">
             {(
               [
                 {
@@ -1102,7 +1101,7 @@ export const BulkDomainSearchLanding: React.FC<{
           </div>
 
           {/* Search Input Section */}
-          <div ref={searchRef} className="relative z-[1] mb-4 sm:mb-8 text-left">
+          <div ref={searchRef} className="relative z-[1] mb-3 sm:mb-5 text-left">
             <SearchInputSection
               input={input}
               setInput={setInput}
@@ -1352,9 +1351,9 @@ export const BulkDomainSearchLanding: React.FC<{
                 {[
                   { domain: 'example.com', status: 'taken' as const },
                   { domain: 'example.org', status: 'available' as const, price: '$12.99' },
-                  { domain: 'mystartup.com', status: 'premium' as const, price: 'Premium' },
-                  { domain: 'mybrand.io', status: 'available' as const, price: '$49.99' },
+                  { domain: 'ystartups.com', status: 'premium' as const, price: 'Premium' },
                   { domain: 'foundersprime.com', status: 'available' as const, price: '$12.99' },
+                  { domain: 'cultbuddy.com', status: 'available' as const, price: '$12.99' },
                 ].map((d, i) => (
                   <div
                     key={d.domain}
@@ -1732,8 +1731,8 @@ export const BulkDomainSearchLanding: React.FC<{
             <pre className="p-3.5 sm:p-5 text-[11px] sm:text-[13px] font-mono text-white/65 overflow-x-auto leading-relaxed">
               <code>{`# Paste prominent names in any format
 example.com
-example.org, mystartup.com
-mybrand.io foundersprime.com
+example.org, ystartups.com
+foundersprime.com cultbuddy.com
 
 # Mixed with URLs — we clean them
 https://example.com/about → example.com
