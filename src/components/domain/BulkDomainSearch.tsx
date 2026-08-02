@@ -109,10 +109,10 @@ function StatusIcon({
   if (status === 'available') {
     return (
       <span
-        className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
+        className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
           isLight
-            ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
-            : 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+            ? 'bg-emerald-50 text-emerald-600 border border-emerald-200/80 shadow-[0_0_6px_rgba(16,185,129,0.28)]'
+            : 'bg-emerald-500/12 text-emerald-400 border border-emerald-500/25 shadow-[0_0_8px_rgba(52,211,153,0.32)]'
         }`}
         title="Available"
         aria-label="Available"
@@ -466,14 +466,23 @@ const ResultsView: React.FC<{
                       l: 'Available',
                       c: counts.available,
                       icon: (
-                        <svg
-                          className={`w-3 h-3 ${isLight ? 'text-slate-700' : 'text-white/70'}`}
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
+                        <span
+                          className={`inline-flex h-3.5 w-3.5 items-center justify-center rounded-full ${
+                            isLight
+                              ? 'bg-emerald-500/15 text-emerald-600 shadow-[0_0_6px_rgba(16,185,129,0.35)]'
+                              : 'bg-emerald-400/15 text-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.4)]'
+                          }`}
+                          aria-hidden
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                        </svg>
+                          <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2.8}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                        </span>
                       ),
                     },
                     {
