@@ -594,7 +594,7 @@ function SearchPageContent() {
                   >
                     <div
                       className={`h-full rounded-full transition-all duration-500 ${
-                        isLight ? 'bg-emerald-500' : 'bg-emerald-400'
+                        isLight ? 'bg-slate-900' : 'bg-white'
                       }`}
                       style={{ width: `${progressPct}%` }}
                     />
@@ -920,27 +920,34 @@ function DomainRow({
         ? result.purchaseInfo || 'View listing'
         : 'View WHOIS';
 
+  // Status: soft color on dot + label only (not on the CTA)
   const statusDot = isAvailable
     ? isLight
-      ? 'bg-emerald-500'
-      : 'bg-emerald-400'
+      ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)]'
+      : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.45)]'
     : isPremium
-      ? 'bg-amber-400'
+      ? isLight
+        ? 'bg-amber-500 shadow-[0_0_5px_rgba(245,158,11,0.35)]'
+        : 'bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.4)]'
       : isLight
         ? 'bg-rose-500'
         : 'bg-rose-400';
 
+  // Brand CTAs — monochrome white/black, not mint green walls
   const ctaFill = isAvailable
     ? isLight
-      ? 'bg-emerald-600 text-white hover:bg-emerald-500'
-      : 'bg-emerald-500 text-black hover:bg-emerald-400'
+      ? 'bg-slate-900 text-white hover:bg-slate-800'
+      : 'bg-white text-black hover:bg-white/90'
     : showPremiumPrice
       ? isLight
-        ? 'bg-amber-500 text-black hover:bg-amber-400'
-        : 'bg-amber-400 text-black hover:bg-amber-300'
+        ? 'bg-slate-900 text-white hover:bg-slate-800'
+        : 'bg-white text-black hover:bg-white/90'
       : isLight
-        ? 'bg-slate-200 text-slate-700 hover:bg-slate-300'
-        : 'bg-white/12 text-white/80 hover:bg-white/18';
+        ? 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+        : 'bg-white/[0.08] text-white/75 hover:bg-white/[0.12]';
+
+  const ctaSize =
+    'pl-2.5 pr-2 py-1 text-[10px] sm:text-[11px] font-semibold !shadow-none';
 
   const desktopCta = isAvailable
     ? ctaText
@@ -953,7 +960,7 @@ function DomainRow({
 
   return (
     <div
-      className={`shine-border no-lift group flex items-center gap-2 w-full max-w-full min-w-0 rounded-xl py-2.5 px-2.5 sm:px-3 transition-colors box-border overflow-hidden ${
+      className={`shine-border no-lift group flex items-center gap-2 w-full max-w-full min-w-0 rounded-xl py-2 px-2.5 sm:px-3 transition-colors box-border overflow-hidden ${
         isLight
           ? 'bg-white hover:bg-slate-50 border border-slate-100'
           : 'bg-[#0a0a0c] hover:bg-[#101014] border border-white/[0.06]'
@@ -993,18 +1000,18 @@ function DomainRow({
             {result.domain}
           </a>
           <span
-            className={`mt-0.5 inline-flex rounded-md px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
+            className={`mt-0.5 inline-flex text-[9px] font-bold uppercase tracking-[0.08em] ${
               isAvailable
                 ? isLight
-                  ? 'bg-emerald-50 text-emerald-700'
-                  : 'bg-emerald-400/15 text-emerald-300'
+                  ? 'text-emerald-600'
+                  : 'text-emerald-400'
                 : isPremium
                   ? isLight
-                    ? 'bg-amber-50 text-amber-700'
-                    : 'bg-amber-400/15 text-amber-300'
+                    ? 'text-amber-600'
+                    : 'text-amber-400'
                   : isLight
-                    ? 'bg-rose-50 text-rose-600'
-                    : 'bg-rose-400/15 text-rose-300'
+                    ? 'text-rose-600'
+                    : 'text-rose-400'
             }`}
           >
             {isAvailable ? 'Available' : isPremium ? 'Premium' : 'Taken'}
@@ -1016,7 +1023,7 @@ function DomainRow({
         <button
           type="button"
           onClick={() => onSave(result.domain)}
-          className={`h-8 w-8 inline-flex items-center justify-center rounded-full border transition-colors ${
+          className={`h-7 w-7 inline-flex items-center justify-center rounded-full border transition-colors ${
             isSaved
               ? isLight
                 ? 'text-slate-900 border-slate-900 bg-slate-100'
@@ -1055,9 +1062,9 @@ function DomainRow({
           }
           premiumUrl={result.premium ? result.buyUrl : undefined}
           premiumLabel={result.purchaseInfo}
-          primaryButtonClassName={ctaFill}
-          chevronButtonClassName={ctaFill}
-          fallbackButtonClassName={ctaFill}
+          primaryButtonClassName={`${ctaFill} ${ctaSize}`}
+          chevronButtonClassName={`${ctaFill} px-1.5 py-1`}
+          fallbackButtonClassName={`${ctaFill} ${ctaSize} rounded-full`}
         />
       </div>
     </div>
