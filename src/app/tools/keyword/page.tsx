@@ -17,36 +17,41 @@ export default function KeywordPage() {
   const isLight = theme === 'light';
 
   return (
-    <div className="min-h-screen">
-      <PageBackground variant="default" />
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-main)' }}>
+      <PageBackground variant="minimal" />
       <Navigation activeTool="keyword" />
 
       <main className={`${PAGE_MAIN_CLASS} pb-10 sm:pb-14`}>
         <PageBreadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Keyword Domains' }]} />
 
-        <SectionAmbient intensity="hero" contentClassName="page-gutter pt-2 sm:pt-4 pb-4 sm:pb-6">
-          <div className="max-w-3xl mx-auto text-center">
-          <h1
-            className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2 ${
-              isLight ? 'text-slate-900' : 'text-white'
-            }`}
-          >
-            Keyword domains
-          </h1>
-          <p className={`text-sm sm:text-[15px] leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-            Expand a keyword with thousands of prefixes & suffixes. Pick your registrar, then register available names.
-          </p>
-          {selectedDomain && (
-            <p className={`mt-2 text-[12px] font-mono font-semibold ${isLight ? 'text-emerald-600' : 'text-emerald-500'}`}>
-              Selected: {selectedDomain}
+        {/* Soft ambient — no heavy hero bubble field behind the form */}
+        <SectionAmbient intensity="soft" contentClassName="page-gutter pt-1 sm:pt-2 pb-3 sm:pb-4">
+          <div className="max-w-3xl mx-auto text-center mb-3 sm:mb-4">
+            <h1
+              className={`text-2xl sm:text-3xl md:text-4xl font-black tracking-tight mb-1 sm:mb-1.5 ${
+                isLight ? 'text-slate-900' : 'text-white'
+              }`}
+            >
+              Keyword domains
+            </h1>
+            <p className={`text-[13px] sm:text-[14px] leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
+              Expand a keyword with thousands of prefixes &amp; suffixes — then check availability live.
             </p>
-          )}
+            {selectedDomain && (
+              <p
+                className={`mt-1.5 text-[12px] font-mono font-semibold ${
+                  isLight ? 'text-emerald-600' : 'text-emerald-400'
+                }`}
+              >
+                Selected: {selectedDomain}
+              </p>
+            )}
           </div>
-        </SectionAmbient>
 
-        <section className="max-w-6xl mx-auto">
-          <KeywordDomainFinder onSelect={setSelectedDomain} />
-        </section>
+          <section className="max-w-6xl mx-auto relative z-[1]">
+            <KeywordDomainFinder onSelect={setSelectedDomain} />
+          </section>
+        </SectionAmbient>
 
         <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.keyword} compact />
       </main>

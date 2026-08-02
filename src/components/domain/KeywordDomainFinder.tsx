@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useState, useMemo, useCallback, useRef } from 'react';
+import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
 import { Input } from '@/components/ui/Input';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useToast } from '@/components/ui/Toast';
 import { checkDomainAvailability } from '@/services/instantDomainService';
 import { PreferredRegistrarSelect, RegistrarActionMenu } from '@/components/domain/RegistrarControls';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
+import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
 import keywordTool from '@/data/keyword-tool.json';
 
 const PREFIXES = keywordTool.prefixes as string[];
@@ -76,6 +78,9 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
   const [generated, setGenerated] = useState<GeneratedDomain[]>([]);
   const [checkedCount, setCheckedCount] = useState(0);
   const [visibleCount, setVisibleCount] = useState(160);
+  /** Filters / popular chips stay collapsed until the user opens them */
+  const [showOptions, setShowOptions] = useState(false);
+  const [showPopular, setShowPopular] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
   const { theme } = useTheme();
   const isLight = theme === 'light';
@@ -94,12 +99,25 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     '.tech',
     '.me',
     '.shop',
+    '.info',
+    '.biz',
+    '.online',
+    '.site',
+    '.store',
+    '.blog',
+    '.cloud',
+    '.design',
   ];
 
   const toggleTld = (tld: string) => {
     setSelectedTlds((prev) =>
       prev.includes(tld) ? (prev.length > 1 ? prev.filter((t) => t !== tld) : prev) : [...prev, tld]
     );
+  };
+
+  const addTldFromSelect = (tld: string) => {
+    if (!tld) return;
+    setSelectedTlds((prev) => (prev.includes(tld) ? prev : [...prev, tld]));
   };
 
   const checkAvailabilityInBatches = useCallback(async (domains: GeneratedDomain[]) => {
@@ -311,13 +329,13 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
   return (
     <div className="space-y-3 sm:space-y-4 animate-fade-in">
-      {/* Main card — restored structure, cleaner */}
+      {/* Main card — search first, options on demand */}
       <div
         className={`rounded-2xl border p-3.5 sm:p-5 ${
           isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
         }`}
       >
-        <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+        <div className="flex flex-wrap items-start justify-between gap-3 mb-3 sm:mb-4">
           <div className="flex items-center gap-2.5">
             <div
               className={`p-2 rounded-xl border ${
@@ -341,29 +359,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           />
         </div>
 
-        {/* Compact popular suggestions — not the full word list */}
-        <div className="mb-4">
-          <p className="text-[10px] font-bold uppercase tracking-wider mb-1.5" style={{ color: 'var(--text-muted)' }}>
-            Popular
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            {POPULAR_CHIPS.map((item) => (
-              <button
-                key={item.word}
-                type="button"
-                onClick={() => void handleSearch(item.word)}
-                className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold transition-colors ${
-                  isLight
-                    ? 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-900 hover:text-white hover:border-slate-900'
-                    : 'bg-white/[0.04] text-white/70 border-white/10 hover:bg-white hover:text-black hover:border-white'
-                }`}
-              >
-                {item.word}
-              </button>
-            ))}
-          </div>
-        </div>
-
+        {/* 1) Search fields first */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
           <Input
             label="Primary keyword"
@@ -396,159 +392,62 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           />
         </div>
 
-        {/* Filters shown before search */}
-        <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <div>
+        {/* 2) Extensions dropdown + CTA */}
+        <div className="mb-3 flex flex-col sm:flex-row sm:items-end gap-2.5 sm:gap-3">
+          <div className="flex-1 min-w-0">
             <label
-              className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
+              className={`block text-[10px] font-bold uppercase tracking-widest mb-1.5 ${
                 isLight ? 'text-slate-500' : 'text-white/40'
               }`}
             >
-              Keyword position
+              Extensions
             </label>
-            <div className="flex flex-wrap gap-1.5">
-              {(
-                [
-                  { id: 'all' as const, label: 'All matches', hint: 'Prefixes, suffixes & combos' },
-                  { id: 'starts' as const, label: 'Starts with', hint: 'keyword… (e.g. agenticlab.com)' },
-                  { id: 'ends' as const, label: 'Ends with', hint: '…keyword (e.g. getagentic.com)' },
-                ] as const
-              ).map((opt) => (
+            <div className="flex flex-wrap items-center gap-1.5">
+              <select
+                value=""
+                onChange={(e) => {
+                  addTldFromSelect(e.target.value);
+                  e.target.value = '';
+                }}
+                className={`rounded-xl border px-3 py-2 text-[12px] font-semibold outline-none min-w-[9rem] ${
+                  isLight
+                    ? 'bg-slate-50 border-slate-200 text-slate-800'
+                    : 'bg-[#121214] border-white/10 text-white'
+                }`}
+                aria-label="Add extension"
+              >
+                <option value="">Add extension…</option>
+                {availableTlds.map((tld) => (
+                  <option key={tld} value={tld} disabled={selectedTlds.includes(tld)}>
+                    {tld}
+                    {selectedTlds.includes(tld) ? ' ✓' : ''}
+                  </option>
+                ))}
+              </select>
+              {selectedTlds.map((tld) => (
                 <button
-                  key={opt.id}
+                  key={tld}
                   type="button"
-                  title={opt.hint}
-                  onClick={() => setFilterMode(opt.id)}
-                  className={`px-3 py-1.5 text-[11px] sm:text-[12px] font-semibold rounded-lg border transition-colors ${
-                    filterMode === opt.id
-                      ? isLight
-                        ? 'bg-slate-900 text-white border-slate-900'
-                        : 'bg-white text-black border-white'
-                      : isLight
-                        ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-                        : 'bg-white/[0.03] text-white/65 border-white/10 hover:border-white/20'
-                  }`}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <label
-              className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
-                isLight ? 'text-slate-500' : 'text-white/40'
-              }`}
-            >
-              Sort by
-            </label>
-            <div className="flex flex-wrap gap-1.5">
-              {(
-                [
-                  { id: 'popularity' as const, label: 'Popularity' },
-                  { id: 'alpha' as const, label: 'Alphabetical' },
-                  { id: 'length' as const, label: 'Length' },
-                ] as const
-              ).map((opt) => (
-                <button
-                  key={opt.id}
-                  type="button"
-                  onClick={() => setSortMode(opt.id)}
-                  className={`px-3 py-1.5 text-[11px] sm:text-[12px] font-semibold rounded-lg border transition-colors ${
-                    sortMode === opt.id
-                      ? isLight
-                        ? 'bg-slate-900 text-white border-slate-900'
-                        : 'bg-white text-black border-white'
-                      : isLight
-                        ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-                        : 'bg-white/[0.03] text-white/65 border-white/10 hover:border-white/20'
-                  }`}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-        <p className="mb-4 -mt-2 text-[10px] sm:text-[11px]" style={{ color: 'var(--text-muted)' }}>
-          {filterMode === 'starts' && 'Position: names that begin with your keyword. '}
-          {filterMode === 'ends' && 'Position: names that end with your keyword. '}
-          {filterMode === 'all' && 'Position: all combinations. '}
-          {sortMode === 'popularity' && 'Sort: most popular patterns first.'}
-          {sortMode === 'alpha' && 'Sort: A–Z by domain name.'}
-          {sortMode === 'length' && 'Sort: shortest names first.'}
-        </p>
-
-        <div className="mb-4">
-          <label
-            className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
-              isLight ? 'text-slate-500' : 'text-white/40'
-            }`}
-          >
-            Extensions
-          </label>
-          <div className="flex flex-wrap gap-1.5">
-            {availableTlds.map((tld) => (
-              <button
-                key={tld}
-                type="button"
-                onClick={() => toggleTld(tld)}
-                className={`px-2.5 py-1 text-[11px] sm:text-xs font-mono font-semibold rounded-lg border transition-colors ${
-                  selectedTlds.includes(tld)
-                    ? isLight
+                  onClick={() => toggleTld(tld)}
+                  title={selectedTlds.length === 1 ? 'At least one extension required' : `Remove ${tld}`}
+                  className={`inline-flex items-center gap-1 rounded-lg border px-2 py-1 text-[11px] font-mono font-semibold ${
+                    isLight
                       ? 'bg-slate-900 text-white border-slate-900'
                       : 'bg-white text-black border-white'
-                    : isLight
-                      ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-                      : 'bg-white/[0.03] text-white/60 border-white/10 hover:border-white/20'
-                }`}
-              >
-                {tld}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-3">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={includeHyphens}
-                onChange={(e) => setIncludeHyphens(e.target.checked)}
-                className="w-3.5 h-3.5 rounded"
-              />
-              <span className={`text-[12px] ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
-                Include hyphens
-              </span>
-            </label>
-            {(primaryKeyword || secondaryKeyword) && (
-              <button
-                type="button"
-                onClick={() => {
-                  abortRef.current?.abort();
-                  setPrimaryKeyword('');
-                  setSecondaryKeyword('');
-                  setGenerated([]);
-                  setIsChecking(false);
-                  setCheckedCount(0);
-                }}
-                className={`text-[12px] font-semibold ${
-                  isLight ? 'text-slate-400 hover:text-slate-700' : 'text-white/35 hover:text-white/70'
-                }`}
-              >
-                Clear
-              </button>
-            )}
+                  }`}
+                >
+                  {tld}
+                  {selectedTlds.length > 1 && <span className="opacity-60">×</span>}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Always visible CTA — enabled when primary OR secondary has text */}
           <button
             type="button"
             onClick={() => void handleSearch()}
             disabled={!canSearch || isGenerating}
-            className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-2.5 text-[13px] font-bold transition-opacity duration-150 w-full sm:w-auto ${
+            className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-2.5 text-[13px] font-bold transition-opacity duration-150 w-full sm:w-auto shrink-0 ${
               !canSearch || isGenerating
                 ? isLight
                   ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
@@ -571,8 +470,146 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             )}
           </button>
         </div>
+
+        {/* 3) Optional toggles */}
+        <div className="flex flex-wrap items-center gap-2 mb-1">
+          <button type="button" onClick={() => setShowOptions((v) => !v)} className={pill(showOptions)}>
+            {showOptions ? 'Hide options' : 'More options'}
+            <svg
+              className={`w-3 h-3 transition-transform ${showOptions ? 'rotate-180' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <button type="button" onClick={() => setShowPopular((v) => !v)} className={pill(showPopular)}>
+            {showPopular ? 'Hide popular' : 'Popular seeds'}
+          </button>
+          {(primaryKeyword || secondaryKeyword) && (
+            <button
+              type="button"
+              onClick={() => {
+                abortRef.current?.abort();
+                setPrimaryKeyword('');
+                setSecondaryKeyword('');
+                setGenerated([]);
+                setIsChecking(false);
+                setCheckedCount(0);
+              }}
+              className={`text-[12px] font-semibold px-1 ${
+                isLight ? 'text-slate-400 hover:text-slate-700' : 'text-white/35 hover:text-white/70'
+              }`}
+            >
+              Clear
+            </button>
+          )}
+        </div>
+
+        {showPopular && (
+          <div className="mt-2.5 mb-1">
+            <div className="flex flex-wrap gap-1.5">
+              {POPULAR_CHIPS.map((item) => (
+                <button
+                  key={item.word}
+                  type="button"
+                  onClick={() => void handleSearch(item.word)}
+                  className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold transition-colors ${
+                    isLight
+                      ? 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-900 hover:text-white hover:border-slate-900'
+                      : 'bg-white/[0.04] text-white/70 border-white/10 hover:bg-white hover:text-black hover:border-white'
+                  }`}
+                >
+                  {item.word}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {showOptions && (
+          <div
+            className={`mt-3 pt-3 border-t space-y-3 ${
+              isLight ? 'border-slate-100' : 'border-white/[0.06]'
+            }`}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div>
+                <label
+                  className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
+                    isLight ? 'text-slate-500' : 'text-white/40'
+                  }`}
+                >
+                  Keyword position
+                </label>
+                <div className="flex flex-wrap gap-1.5">
+                  {(
+                    [
+                      { id: 'all' as const, label: 'All matches', hint: 'Prefixes, suffixes & combos' },
+                      { id: 'starts' as const, label: 'Starts with', hint: 'keyword…' },
+                      { id: 'ends' as const, label: 'Ends with', hint: '…keyword' },
+                    ] as const
+                  ).map((opt) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      title={opt.hint}
+                      onClick={() => setFilterMode(opt.id)}
+                      className={pill(filterMode === opt.id)}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label
+                  className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
+                    isLight ? 'text-slate-500' : 'text-white/40'
+                  }`}
+                >
+                  Sort by
+                </label>
+                <div className="flex flex-wrap gap-1.5">
+                  {(
+                    [
+                      { id: 'popularity' as const, label: 'Popularity' },
+                      { id: 'alpha' as const, label: 'Alphabetical' },
+                      { id: 'length' as const, label: 'Length' },
+                    ] as const
+                  ).map((opt) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => setSortMode(opt.id)}
+                      className={pill(sortMode === opt.id)}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={includeHyphens}
+                onChange={(e) => setIncludeHyphens(e.target.checked)}
+                className="w-3.5 h-3.5 rounded"
+              />
+              <span className={`text-[12px] ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
+                Include hyphens
+              </span>
+            </label>
+          </div>
+        )}
+
         {!canSearch && (
-          <p className="mt-2 text-[11px] text-center sm:text-right" style={{ color: 'var(--text-muted)' }}>
+          <p className="mt-2 text-[11px]" style={{ color: 'var(--text-muted)' }}>
             Type a primary or secondary keyword, then click Find domains
           </p>
         )}
@@ -731,11 +768,8 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             </div>
           </div>
 
-          <div className="max-h-[min(68vh,calc(100vh-16rem))] overflow-y-auto overscroll-contain">
-            <div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px"
-              style={{ backgroundColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)' }}
-            >
+          <div className="max-h-[min(68vh,calc(100vh-16rem))] overflow-y-auto overscroll-contain p-1.5 sm:p-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5 auto-rows-auto">
               {visible.map((item) => (
                 <DomainRow
                   key={item.domain}
@@ -803,15 +837,27 @@ function DomainRow({
   onSelectRegistrar: (r: import('@/lib/registrars').RegistrarName) => void;
   onSelect?: (domain: string) => void;
 }) {
+  const { showToast } = useToast();
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    const sync = () => setIsSaved(getSavedDomainNames().includes(item.domain.toLowerCase()));
+    sync();
+    window.addEventListener('savedDomainsUpdated', sync);
+    return () => window.removeEventListener('savedDomainsUpdated', sync);
+  }, [item.domain]);
+
   const isAvailable = item.available === true;
   const isTaken = item.available === false;
   const isUnchecked = item.available === null;
-  const canRegister = isAvailable; // taken → WHOIS fallback; available → registrar menu
+  const canRegister = isAvailable;
 
   return (
     <div
-      className={`flex items-center gap-1.5 px-2 sm:px-2.5 py-1.5 sm:py-2 min-w-0 transition-colors ${
-        isLight ? 'bg-white hover:bg-slate-50' : 'bg-[#0c0c0e] hover:bg-[#121214]'
+      className={`flex items-center gap-1.5 px-2.5 py-2 sm:px-3 sm:py-2.5 min-w-0 rounded-xl border transition-colors ${
+        isLight
+          ? 'bg-white hover:bg-slate-50 border-slate-200'
+          : 'bg-[#121214] hover:bg-[#161618] border-white/[0.08]'
       }`}
     >
       <button
@@ -826,12 +872,14 @@ function DomainRow({
                 ? 'bg-slate-300'
                 : 'bg-white/20'
               : isAvailable
-                ? 'bg-emerald-500 shadow-[0_0_6px_rgba(52,211,153,0.45)]'
+                ? isLight
+                  ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.35)]'
+                  : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.4)]'
                 : 'bg-red-400/85'
           }`}
         />
         <span
-          className={`font-mono text-[11px] sm:text-[12px] truncate ${
+          className={`font-mono text-[12px] sm:text-[13px] truncate ${
             isAvailable
               ? isLight
                 ? 'text-slate-900 font-semibold'
@@ -849,6 +897,40 @@ function DomainRow({
         </span>
       </button>
 
+      <button
+        type="button"
+        onClick={() => {
+          const { saved } = toggleSavedDomain(item.domain);
+          setIsSaved(saved);
+          showToast(saved ? `Saved ${item.domain}` : `Removed ${item.domain}`, 'success', 1500);
+        }}
+        className={`h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-full border transition-colors ${
+          isSaved
+            ? isLight
+              ? 'text-slate-900 border-slate-900 bg-slate-100'
+              : 'text-white border-white/30 bg-white/10'
+            : isLight
+              ? 'text-slate-400 border-slate-200 hover:text-slate-700'
+              : 'text-white/40 border-white/10 hover:text-white/80'
+        }`}
+        aria-label={isSaved ? `Remove ${item.domain}` : `Save ${item.domain}`}
+        title={isSaved ? 'Saved' : 'Save domain'}
+      >
+        <svg
+          className="w-3.5 h-3.5"
+          fill={isSaved ? 'currentColor' : 'none'}
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+          />
+        </svg>
+      </button>
+
       {!isUnchecked && (
         <div className="shrink-0" onClick={(e) => e.stopPropagation()}>
           <RegistrarActionMenu
@@ -857,17 +939,17 @@ function DomainRow({
             onSelectRegistrar={onSelectRegistrar}
             canRegister={canRegister}
             primaryLabel="Go"
-            primaryButtonClassName={`text-[10px] px-1.5 py-0.5 rounded-md font-bold transition-colors ${
+            primaryButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${
               isLight
                 ? 'bg-slate-900 text-white hover:bg-slate-800'
                 : 'bg-white text-black hover:bg-white/90'
             }`}
-            chevronButtonClassName={`rounded-md p-1 transition-colors ${
+            chevronButtonClassName={`rounded-full p-1 transition-colors ${
               isLight
-                ? 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
-                : 'text-white/40 hover:text-white/80 hover:bg-white/[0.08]'
+                ? 'bg-slate-900 text-white hover:bg-slate-800'
+                : 'bg-white text-black hover:bg-white/90'
             }`}
-            fallbackButtonClassName={`text-[10px] px-1.5 py-0.5 rounded-md font-semibold transition-colors ${
+            fallbackButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${
               isLight
                 ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                 : 'bg-white/[0.06] text-white/60 hover:bg-white/10'
