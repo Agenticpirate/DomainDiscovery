@@ -571,24 +571,11 @@ const ResultsView: React.FC<{
                       ? d.purchaseInfo || 'View listing'
                       : 'View WHOIS';
                 const canAct = d.status === 'available' || d.status === 'premium';
-                const score = d.score ?? computeDomainScore(d.domain, d.status, d.price);
-                const scoreTone =
-                  score >= 75
-                    ? isLight
-                      ? 'text-emerald-700 bg-emerald-50 border-emerald-200'
-                      : 'text-emerald-300 bg-emerald-500/10 border-emerald-500/25'
-                    : score >= 55
-                      ? isLight
-                        ? 'text-slate-700 bg-slate-100 border-slate-200'
-                        : 'text-white/75 bg-white/[0.06] border-white/12'
-                      : isLight
-                        ? 'text-slate-500 bg-slate-50 border-slate-200'
-                        : 'text-white/45 bg-white/[0.03] border-white/[0.08]';
 
                 return (
                   <div
                     key={d.domain}
-                    className={`group flex items-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-2 min-w-0 transition-colors ${
+                    className={`group flex items-center gap-2 px-2.5 py-2 sm:px-3 sm:py-2.5 min-w-0 transition-colors ${
                       isLight
                         ? 'bg-white hover:bg-slate-50'
                         : 'bg-[#0c0c0e] hover:bg-[#121214]'
@@ -606,24 +593,18 @@ const ResultsView: React.FC<{
                       target="_blank"
                       rel="noopener noreferrer"
                       title={domainTitle}
-                      className={`min-w-0 flex-1 font-mono text-[11px] sm:text-[12px] truncate transition-colors ${
+                      className={`min-w-0 flex-1 font-mono text-[13px] sm:text-[15px] font-semibold tracking-tight truncate transition-colors ${
                         isLight
-                          ? 'text-slate-800 hover:text-slate-950'
-                          : 'text-white/88 hover:text-white'
+                          ? 'text-slate-900 hover:text-slate-950'
+                          : 'text-white hover:text-white'
                       }`}
                     >
                       {d.domain}
                     </a>
-                    <span
-                      className={`shrink-0 inline-flex items-center rounded border px-1 py-0.5 text-[9px] font-bold tabular-nums leading-none ${scoreTone}`}
-                      title={`Brand score ${score}/100 — based on length, cleanliness, TLD, and availability`}
-                    >
-                      {score}
-                    </span>
                     {d.price && d.status !== 'taken' && d.status !== 'checking' && (
                       <span
-                        className={`shrink-0 text-[9px] sm:text-[10px] font-medium tabular-nums max-w-[4.5rem] truncate hidden md:inline ${
-                          isLight ? 'text-slate-400' : 'text-white/35'
+                        className={`shrink-0 text-[11px] sm:text-[12px] font-medium tabular-nums max-w-[5rem] truncate hidden md:inline ${
+                          isLight ? 'text-slate-500' : 'text-white/45'
                         }`}
                         title={d.price}
                       >
