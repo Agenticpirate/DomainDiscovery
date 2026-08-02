@@ -27,7 +27,11 @@ export default function BulkSearchPage() {
             { label: 'Bulk Domain Search' },
           ]}
         />
-        <SectionAmbient intensity="hero" className="w-full" contentClassName="page-gutter relative z-[1]">
+        <SectionAmbient
+          intensity="soft"
+          className="w-full"
+          contentClassName="page-gutter relative z-[1]"
+        >
           <div className="max-w-7xl mx-auto">
             <BulkDomainSearch />
           </div>

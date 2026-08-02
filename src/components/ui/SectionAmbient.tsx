@@ -77,12 +77,12 @@ export function SectionAmbient({
       speedScale: 0.5,
     },
     soft: {
-      gap: 18,
-      radius: 1.1,
-      opacity: isLight ? 0.14 : 0.22,
-      speedMin: 0.2,
-      speedMax: 0.5,
-      speedScale: 0.45,
+      gap: 20,
+      radius: 0.95,
+      opacity: isLight ? 0.12 : 0.16,
+      speedMin: 0.18,
+      speedMax: 0.42,
+      speedScale: 0.4,
     },
     dots: {
       gap: 17,

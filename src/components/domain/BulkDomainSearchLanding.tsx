@@ -1192,9 +1192,7 @@ export const BulkDomainSearchLanding: React.FC<{
 
           {/* Stat strip */}
           <div
-            className={`grid grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl border overflow-hidden mb-3 sm:mb-4 ${
-              isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-white/[0.08]'
-            }`}
+            className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 mb-3 sm:mb-4"
           >
             {[
               { value: '1,000', label: 'Domains / run' },
@@ -1204,7 +1202,7 @@ export const BulkDomainSearchLanding: React.FC<{
             ].map((s) => (
               <div
                 key={s.label}
-                className={`px-3 py-3.5 sm:py-4 text-center ${isLight ? 'bg-white' : 'bg-[#0c0c0e]'}`}
+                className={`px-3 py-3.5 sm:py-4 text-center rounded-2xl border ${isLight ? 'bg-white border-slate-200' : 'bg-[#0c0c0e] border-white/[0.09]'}`}
               >
                 <div className="text-base sm:text-xl font-black tracking-tight tabular-nums">{s.value}</div>
                 <div className="text-[9px] sm:text-[10px] font-medium mt-0.5" style={{ color: 'var(--text-muted)' }}>
@@ -1216,9 +1214,7 @@ export const BulkDomainSearchLanding: React.FC<{
 
           {/* Feature grid — solid panel, no sheen lines */}
           <div
-            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl border overflow-hidden mb-4 sm:mb-6 ${
-              isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-white/[0.08]'
-            }`}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 mb-4 sm:mb-6"
           >
             {[
               {
@@ -1264,8 +1260,8 @@ export const BulkDomainSearchLanding: React.FC<{
             ].map((item) => (
               <div
                 key={item.step}
-                className={`group flex flex-col p-4 sm:p-5 transition-colors duration-200 ${
-                  isLight ? 'bg-white hover:bg-slate-50' : 'bg-[#0c0c0e] hover:bg-[#121214]'
+                className={`group flex flex-col p-4 sm:p-5 rounded-2xl border transition-colors duration-200 ${
+                  isLight ? 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.09] hover:bg-[#121214]'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-3">
@@ -1298,11 +1294,9 @@ export const BulkDomainSearchLanding: React.FC<{
 
           {/* Live preview + free premium value */}
           <div
-            className={`grid grid-cols-1 lg:grid-cols-2 gap-px rounded-2xl border overflow-hidden ${
-              isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-white/[0.08]'
-            }`}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-2.5 sm:gap-3"
           >
-            <div className={`p-4 sm:p-6 ${isLight ? 'bg-white' : 'bg-[#0c0c0e]'}`}>
+            <div className={`p-4 sm:p-6 rounded-2xl border ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.09]'}`}>
               <div className="flex items-center justify-between gap-3 mb-3 sm:mb-4">
                 <div>
                   <div className={`text-[12px] sm:text-[13px] font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
@@ -1408,7 +1402,7 @@ export const BulkDomainSearchLanding: React.FC<{
               </div>
             </div>
 
-            <div className={`p-4 sm:p-6 flex flex-col justify-center ${isLight ? 'bg-white' : 'bg-[#0c0c0e]'}`}>
+            <div className={`p-4 sm:p-6 flex flex-col justify-center rounded-2xl border ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.09]'}`}>
               <p
                 className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
                 style={{ color: 'var(--text-muted)' }}
@@ -1509,9 +1503,7 @@ export const BulkDomainSearchLanding: React.FC<{
           </div>
 
           <div
-            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px rounded-2xl border overflow-hidden ${
-              isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-white/[0.08]'
-            }`}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3"
           >
             {[
               {
@@ -1577,8 +1569,8 @@ export const BulkDomainSearchLanding: React.FC<{
             ].map((f) => (
               <article
                 key={f.step}
-                className={`group flex flex-col p-4 sm:p-5 transition-colors duration-200 ${
-                  isLight ? 'bg-white hover:bg-slate-50' : 'bg-[#0c0c0e] hover:bg-[#121214]'
+                className={`group flex flex-col p-4 sm:p-5 rounded-2xl border transition-colors duration-200 ${
+                  isLight ? 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.09] hover:bg-[#121214]'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-3">
@@ -1659,9 +1651,7 @@ export const BulkDomainSearchLanding: React.FC<{
           </div>
 
           <div
-            className={`grid grid-cols-1 md:grid-cols-3 gap-px rounded-2xl border overflow-hidden mb-3 sm:mb-4 ${
-              isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-white/[0.08]'
-            }`}
+            className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3 mb-3 sm:mb-4"
           >
             {[
               {
@@ -1685,7 +1675,7 @@ export const BulkDomainSearchLanding: React.FC<{
             ].map((item) => (
               <div
                 key={item.step}
-                className={`p-4 sm:p-5 ${isLight ? 'bg-white' : 'bg-[#0c0c0e]'}`}
+                className={`p-4 sm:p-5 rounded-2xl border ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.09]'}`}
               >
                 <div
                   className={`text-[11px] font-black tabular-nums mb-2 ${
@@ -1755,9 +1745,7 @@ brandforge`}</code>
           </div>
 
           <div
-            className={`grid grid-cols-1 sm:grid-cols-2 gap-px rounded-2xl border overflow-hidden ${
-              isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-white/[0.08]'
-            }`}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3"
           >
             {[
               {
@@ -1788,7 +1776,9 @@ brandforge`}</code>
               <div
                 key={card.title}
                 className={`p-4 sm:p-5 transition-colors ${
-                  isLight ? 'bg-white hover:bg-slate-50' : 'bg-[#0c0c0e] hover:bg-[#121214]'
+                  isLight
+                    ? 'bg-white border border-slate-200 hover:bg-slate-50 shadow-sm rounded-2xl'
+                    : 'bg-[#0c0c0e] border border-white/[0.09] hover:bg-[#121214] rounded-2xl'
                 }`}
               >
                 <h3 className={`text-[14px] sm:text-[15px] font-bold tracking-tight mb-1.5 ${isLight ? 'text-slate-900' : 'text-white'}`}>
@@ -1872,13 +1862,9 @@ brandforge`}</code>
               </div>
             </div>
 
-            {/* Tips grid — solid plates so ambient dots never show through */}
+            {/* Tips — individual rounded cards (no black gap-px seams) */}
             <div className="lg:col-span-8">
-              <div
-                className={`grid grid-cols-1 sm:grid-cols-2 gap-px rounded-2xl border overflow-hidden ${
-                  isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-[#121214]'
-                }`}
-              >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 {[
                   {
                     step: '01',
@@ -1926,31 +1912,33 @@ brandforge`}</code>
                   <SolidPlate
                     key={tip.step}
                     isLight={isLight}
-                    className="group transition-colors duration-200"
+                    className={`group rounded-2xl border transition-colors duration-200 ${
+                      isLight ? 'border-slate-200 shadow-sm' : 'border-white/[0.09]'
+                    }`}
                     contentClassName="flex flex-col p-4 sm:p-5 h-full"
-                    fill={isLight ? '#ffffff' : '#0a0a0c'}
+                    fill={isLight ? '#ffffff' : '#0c0c0e'}
                   >
                     <div className="flex items-center justify-between gap-2 mb-2.5">
                       <span
                         className={`flex h-8 w-8 items-center justify-center rounded-lg border text-[11px] font-black tabular-nums transition-colors duration-200 ${
                           isLight
                             ? 'bg-slate-100 text-slate-700 border-slate-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900'
-                            : 'bg-[#121214] text-white/70 border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'
+                            : 'bg-white/[0.06] text-white/75 border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'
                         }`}
                       >
                         {tip.step}
                       </span>
                     </div>
                     <h3
-                      className={`text-[13px] sm:text-[14px] font-bold tracking-tight mb-1.5 ${
+                      className={`text-[13px] sm:text-[15px] font-bold tracking-tight mb-1.5 ${
                         isLight ? 'text-slate-900' : 'text-white'
                       }`}
                     >
                       {tip.title}
                     </h3>
                     <p
-                      className="text-[12px] leading-relaxed flex-1 mb-3"
-                      style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}
+                      className="text-[12px] sm:text-[13px] leading-relaxed flex-1 mb-3"
+                      style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.52)' }}
                     >
                       {tip.description}
                     </p>
@@ -1961,7 +1949,7 @@ brandforge`}</code>
                           className={`rounded-md border px-2 py-0.5 text-[10px] font-semibold ${
                             isLight
                               ? 'bg-slate-50 text-slate-600 border-slate-200'
-                              : 'bg-[#121214] text-white/55 border-white/12'
+                              : 'bg-white/[0.04] text-white/50 border-white/[0.1]'
                           }`}
                         >
                           {tag}
@@ -1997,11 +1985,7 @@ brandforge`}</code>
             </p>
           </TitleScrim>
 
-          <div
-            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl border overflow-hidden ${
-              isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-[#121214]'
-            }`}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
             {[
               {
                 href: '/',
@@ -2051,8 +2035,10 @@ brandforge`}</code>
               <SolidPlate
                 key={tool.href}
                 isLight={isLight}
-                fill={isLight ? '#ffffff' : '#0a0a0c'}
-                className="group"
+                fill={isLight ? '#ffffff' : '#0c0c0e'}
+                className={`group rounded-2xl border transition-colors duration-200 ${
+                  isLight ? 'border-slate-200 shadow-sm' : 'border-white/[0.09]'
+                }`}
               >
                 <Link
                   href={tool.href}
@@ -2063,29 +2049,29 @@ brandforge`}</code>
                       className={`flex h-9 w-9 items-center justify-center rounded-xl border transition-colors duration-200 ${
                         isLight
                           ? 'bg-slate-100 text-slate-700 border-slate-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900'
-                          : 'bg-[#121214] text-white/75 border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'
+                          : 'bg-white/[0.06] text-white/75 border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'
                       }`}
                     >
                       {tool.icon}
                     </div>
                     <span
                       className={`text-[11px] font-black tabular-nums ${
-                        isLight ? 'text-slate-300' : 'text-white/20'
+                        isLight ? 'text-slate-300' : 'text-white/25'
                       }`}
                     >
                       {tool.step}
                     </span>
                   </div>
                   <h3
-                    className={`text-[13px] sm:text-[14px] font-bold tracking-tight mb-1.5 ${
+                    className={`text-[13px] sm:text-[15px] font-bold tracking-tight mb-1.5 ${
                       isLight ? 'text-slate-900' : 'text-white'
                     }`}
                   >
                     {tool.title}
                   </h3>
                   <p
-                    className="text-[12px] leading-relaxed flex-1 mb-3"
-                    style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}
+                    className="text-[12px] sm:text-[13px] leading-relaxed flex-1 mb-3"
+                    style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.52)' }}
                   >
                     {tool.description}
                   </p>
@@ -2093,7 +2079,7 @@ brandforge`}</code>
                     className={`inline-flex items-center gap-1 text-[11px] font-semibold transition-colors ${
                       isLight
                         ? 'text-slate-500 group-hover:text-slate-900'
-                        : 'text-white/40 group-hover:text-white'
+                        : 'text-white/45 group-hover:text-white'
                     }`}
                   >
                     Open tool
