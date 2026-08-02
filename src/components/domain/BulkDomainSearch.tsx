@@ -109,20 +109,16 @@ function StatusIcon({
   if (status === 'available') {
     return (
       <span
-        className={`relative inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${
+        className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
           isLight
-            ? 'bg-emerald-500 text-white shadow-[0_0_0_3px_rgba(16,185,129,0.28),0_0_16px_rgba(16,185,129,0.65)]'
-            : 'bg-emerald-400 text-black shadow-[0_0_0_3px_rgba(52,211,153,0.35),0_0_20px_rgba(52,211,153,0.85)]'
+            ? 'bg-slate-100 text-slate-800 border border-slate-200'
+            : 'bg-white/[0.08] text-white border border-white/12'
         }`}
-        style={{
-          // Soft breathing glow — one animation, no per-row ping storms
-          animation: 'bulk-avail-glow 2.4s ease-in-out infinite',
-        }}
-        title="Available — ready to register"
+        title="Available"
         aria-label="Available"
       >
-        <svg className="relative w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.8} d="M5 13l4 4L19 7" />
+        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
         </svg>
       </span>
     );
@@ -470,7 +466,12 @@ const ResultsView: React.FC<{
                       l: 'Available',
                       c: counts.available,
                       icon: (
-                        <svg className="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg
+                          className={`w-3 h-3 ${isLight ? 'text-slate-700' : 'text-white/70'}`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                         </svg>
                       ),
@@ -704,7 +705,7 @@ const ResultsView: React.FC<{
         </div>
       </div>
 
-      {/* Multi-column grid — at least 2 columns so results form multiple rows */}
+      {/* Multi-column grid — max 3 cols so names fit on one line */}
       <div
         className={`rounded-2xl border overflow-hidden ${
           isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
@@ -722,7 +723,7 @@ const ResultsView: React.FC<{
             </div>
           ) : (
             <div
-              className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
               style={{ backgroundColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)' }}
             >
               {results.map((d) => {
@@ -739,25 +740,14 @@ const ResultsView: React.FC<{
                       ? d.purchaseInfo || 'View listing'
                       : 'View WHOIS';
                 const canAct = d.status === 'available' || d.status === 'premium';
-                const isAvail = d.status === 'available';
 
                 return (
                   <div
                     key={d.domain}
-                    className={`group flex items-center gap-2 px-2 py-2 sm:px-2.5 sm:py-2.5 min-w-0 transition-colors ${
+                    className={`group flex items-center gap-2 px-2.5 py-2 sm:px-3 sm:py-2.5 min-w-0 transition-colors ${
                       isLight
-                        ? isAvail
-                          ? 'bg-emerald-50/50 hover:bg-emerald-50'
-                          : 'bg-white hover:bg-slate-50'
-                        : isAvail
-                          ? 'bg-emerald-500/[0.05] hover:bg-emerald-500/[0.08]'
-                          : 'bg-[#0c0c0e] hover:bg-[#121214]'
-                    } ${
-                      d.status === 'premium'
-                        ? isLight
-                          ? 'ring-1 ring-inset ring-amber-200/80'
-                          : 'ring-1 ring-inset ring-amber-500/15'
-                        : ''
+                        ? 'bg-white hover:bg-slate-50'
+                        : 'bg-[#0c0c0e] hover:bg-[#121214]'
                     }`}
                   >
                     <StatusIcon status={d.status} isLight={isLight} />
@@ -766,18 +756,18 @@ const ResultsView: React.FC<{
                       target="_blank"
                       rel="noopener noreferrer"
                       title={`${d.domain} — ${domainTitle}`}
-                      className={`min-w-0 flex-1 font-mono text-[12px] sm:text-[14px] font-semibold tracking-tight break-all leading-snug line-clamp-2 transition-colors ${
+                      className={`min-w-0 flex-1 font-mono text-[13px] sm:text-[14px] font-medium tracking-tight truncate transition-colors ${
                         isLight
                           ? 'text-slate-900 hover:text-slate-950'
-                          : 'text-white hover:text-white'
+                          : 'text-white/90 hover:text-white'
                       }`}
                     >
                       {d.domain}
                     </a>
                     {d.price && d.status !== 'taken' && d.status !== 'checking' && (
                       <span
-                        className={`shrink-0 text-[10px] sm:text-[11px] font-medium tabular-nums max-w-[4.5rem] truncate hidden md:inline ${
-                          isLight ? 'text-slate-500' : 'text-white/45'
+                        className={`shrink-0 text-[11px] sm:text-[12px] font-medium tabular-nums max-w-[5rem] truncate ${
+                          isLight ? 'text-slate-500' : 'text-white/40'
                         }`}
                         title={d.price}
                       >
