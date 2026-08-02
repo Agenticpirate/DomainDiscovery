@@ -487,7 +487,8 @@ function SearchPageContent() {
             isLight ? 'bg-white border-slate-200' : 'bg-[#050505] border-white/[0.07]'
           }`}
         >
-          <div className="w-full max-w-full sm:max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-1.5 sm:py-2 box-border">
+          <div className="w-full max-w-full sm:max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 box-border space-y-2">
+            {/* Row 1 — search + registrar */}
             <div className="flex items-center gap-2 min-w-0 w-full max-w-full">
               <div className="min-w-0 flex-1 overflow-hidden">
                 <SearchInterface
@@ -505,20 +506,22 @@ function SearchPageContent() {
                 selectedRegistrar={selectedRegistrar}
                 onSelectRegistrar={setSelectedRegistrar}
                 label=""
-                className="hidden md:flex shrink-0 [&>span]:hidden [&>select]:min-w-[7rem] [&>select]:py-1.5 [&>select]:px-2 [&>select]:text-[11px]"
+                className="hidden md:flex shrink-0 [&>span]:hidden [&>select]:min-w-[7.5rem] [&>select]:rounded-full [&>select]:py-2 [&>select]:px-3 [&>select]:text-[11px] [&>select]:font-semibold"
               />
             </div>
 
-            {/* Tool switcher — fixed 5-up grid, no horizontal scroll */}
-            <div className="mt-2 w-full max-w-full min-w-0">
+            {/* Row 2 — tools + clear as one segmented bar */}
+            <div
+              className={`flex items-center gap-1 w-full min-w-0 rounded-2xl border p-1 ${
+                isLight
+                  ? 'bg-slate-100/80 border-slate-200/90'
+                  : 'bg-white/[0.035] border-white/[0.08]'
+              }`}
+            >
               <nav
                 aria-label="Domain tools"
-                className={`grid w-full max-w-full min-w-0 gap-0.5 rounded-2xl border p-1 ${
-                  query ? 'grid-cols-6' : 'grid-cols-5'
-                } ${
-                  isLight
-                    ? 'bg-slate-100/90 border-slate-200'
-                    : 'bg-white/[0.04] border-white/[0.09]'
+                className={`grid min-w-0 flex-1 gap-0.5 ${
+                  query ? 'grid-cols-5' : 'grid-cols-5'
                 }`}
               >
                 {(
@@ -536,14 +539,14 @@ function SearchPageContent() {
                     { href: '/tools', label: 'Research', short: 'Tools', active: false, catalog: false },
                   ] as const
                 ).map((tab) => {
-                  const cls = `min-w-0 inline-flex items-center justify-center rounded-xl px-0.5 sm:px-2 py-1.5 sm:py-2 text-[10px] sm:text-[12px] font-semibold tracking-tight transition-all duration-200 text-center leading-tight ${
+                  const cls = `min-w-0 inline-flex items-center justify-center rounded-xl px-1 sm:px-2.5 py-1.5 sm:py-2 text-[10px] sm:text-[12px] font-semibold tracking-tight transition-colors duration-150 text-center leading-tight ${
                     tab.active
                       ? isLight
-                        ? 'bg-white text-slate-900 shadow-sm shadow-slate-900/10 ring-1 ring-slate-200/80'
-                        : 'bg-white text-black shadow-[0_1px_0_rgba(255,255,255,0.12)_inset] ring-1 ring-white/10'
+                        ? 'bg-white text-slate-900 shadow-sm ring-1 ring-black/[0.04]'
+                        : 'bg-white text-black shadow-[0_1px_0_rgba(255,255,255,0.1)_inset]'
                       : isLight
-                        ? 'text-slate-500 hover:text-slate-800 hover:bg-white/70'
-                        : 'text-white/45 hover:text-white/85 hover:bg-white/[0.06]'
+                        ? 'text-slate-500 hover:text-slate-800'
+                        : 'text-white/40 hover:text-white/80'
                   }`;
                   return tab.active ? (
                     <span key={tab.label} className={cls} aria-current="page" title={tab.label}>
@@ -563,30 +566,29 @@ function SearchPageContent() {
                     </Link>
                   );
                 })}
-                {query && (
-                  <button
-                    type="button"
-                    onClick={handleResetSearch}
-                    className={`min-w-0 inline-flex items-center justify-center rounded-xl px-0.5 py-1.5 text-[10px] font-semibold transition-colors ${
-                      isLight
-                        ? 'text-slate-500 hover:bg-white hover:text-slate-800'
-                        : 'text-white/45 hover:bg-white/[0.08] hover:text-white'
-                    }`}
-                    title="Clear search"
-                    aria-label="Clear search"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                )}
               </nav>
+              {query && (
+                <button
+                  type="button"
+                  onClick={handleResetSearch}
+                  className={`shrink-0 inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl transition-colors ${
+                    isLight
+                      ? 'text-slate-400 hover:text-slate-800 hover:bg-white'
+                      : 'text-white/35 hover:text-white hover:bg-white/[0.06]'
+                  }`}
+                  title="Clear search"
+                  aria-label="Clear search"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              )}
             </div>
 
-            {/* Availability status filters — sticky, compact, high contrast */}
+            {/* Row 3 — availability segment control */}
             {checkedCount > 0 && (
-              <div className="mt-2.5 w-full max-w-full min-w-0">
-                {/* Progress only while checking — hide when complete (full bar looked like a white border) */}
+              <div className="w-full max-w-full min-w-0">
                 {isLoading && (
                   <div className="flex items-center gap-2 mb-1.5 min-w-0 px-0.5">
                     <div
@@ -596,7 +598,7 @@ function SearchPageContent() {
                     >
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${
-                          isLight ? 'bg-slate-900' : 'bg-white/50'
+                          isLight ? 'bg-slate-900' : 'bg-white/45'
                         }`}
                         style={{ width: `${progressPct}%` }}
                       />
@@ -613,9 +615,9 @@ function SearchPageContent() {
                 <div
                   role="tablist"
                   aria-label="Filter by availability status"
-                  className={`grid grid-cols-4 gap-1 w-full rounded-2xl border p-1 ${
+                  className={`grid grid-cols-4 gap-0.5 w-full rounded-2xl border p-1 ${
                     isLight
-                      ? 'bg-slate-50 border-slate-200'
+                      ? 'bg-slate-100/70 border-slate-200/90'
                       : 'bg-white/[0.03] border-white/[0.08]'
                   }`}
                 >
@@ -626,28 +628,33 @@ function SearchPageContent() {
                         label: 'Available',
                         n: availableExts.length,
                         dot: isLight ? 'bg-emerald-500' : 'bg-emerald-400',
+                        activeDot: isLight ? 'bg-emerald-600' : 'bg-emerald-500',
                       },
                       {
                         id: 'premium' as const,
                         label: 'Premium',
                         n: premiumOnly.length,
                         dot: 'bg-amber-400',
+                        activeDot: isLight ? 'bg-amber-500' : 'bg-amber-400',
                       },
                       {
                         id: 'taken' as const,
                         label: 'Taken',
                         n: taken.length,
                         dot: isLight ? 'bg-rose-500' : 'bg-rose-400',
+                        activeDot: isLight ? 'bg-rose-600' : 'bg-rose-400',
                       },
                       {
                         id: 'all' as const,
                         label: 'All',
                         n: checkedCount,
-                        dot: isLight ? 'bg-slate-400' : 'bg-white/50',
+                        dot: isLight ? 'bg-slate-400' : 'bg-white/45',
+                        activeDot: isLight ? 'bg-slate-700' : 'bg-black/50',
                       },
                     ] as const
                   ).map((f) => {
                     const active = extFilter === f.id;
+                    const empty = f.n === 0;
                     return (
                       <button
                         key={f.id}
@@ -655,34 +662,50 @@ function SearchPageContent() {
                         role="tab"
                         aria-selected={active}
                         onClick={() => setExtFilter(f.id)}
-                        className={`flex flex-col items-center justify-center gap-0.5 min-h-[42px] w-full min-w-0 rounded-xl px-1 py-1.5 transition-all duration-200 ${
+                        className={`group/seg relative flex flex-col items-center justify-center gap-0.5 min-h-[2.75rem] sm:min-h-[3rem] w-full min-w-0 rounded-[0.85rem] px-1 py-1.5 transition-all duration-150 outline-none focus-visible:ring-2 focus-visible:ring-white/20 ${
                           active
                             ? isLight
-                              ? 'bg-white text-slate-900 shadow-sm ring-1 ring-slate-200/90'
-                              : 'bg-white text-black shadow-sm'
+                              ? 'bg-white text-slate-900 shadow-sm ring-1 ring-black/[0.05]'
+                              : 'bg-white text-black shadow-[0_1px_0_rgba(255,255,255,0.12)_inset]'
                             : isLight
-                              ? 'text-slate-600 hover:bg-white/80'
-                              : 'text-white/70 hover:bg-white/[0.05]'
-                        }`}
+                              ? 'bg-transparent text-slate-600 hover:text-slate-900'
+                              : 'bg-transparent text-white/55 hover:text-white/90'
+                        } ${empty && !active ? 'opacity-55' : ''}`}
                       >
-                        <span className="flex items-center justify-center gap-1 max-w-full">
-                          <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${f.dot}`} />
-                          <span className="text-[10px] sm:text-[11px] font-bold leading-tight text-center truncate">
+                        <span className="flex items-center justify-center gap-1.5 max-w-full">
+                          <span
+                            className={`h-1.5 w-1.5 rounded-full shrink-0 ${
+                              active ? f.activeDot : f.dot
+                            } ${
+                              active && f.id === 'available'
+                                ? 'shadow-[0_0_6px_rgba(16,185,129,0.45)]'
+                                : ''
+                            }`}
+                          />
+                          <span
+                            className={`text-[10px] sm:text-[11px] font-semibold leading-none tracking-tight truncate ${
+                              active
+                                ? isLight
+                                  ? 'text-slate-800'
+                                  : 'text-black/80'
+                                : ''
+                            }`}
+                          >
                             {f.label}
                           </span>
                         </span>
                         <span
-                          className={`text-[13px] sm:text-[14px] font-black tabular-nums leading-none ${
+                          className={`text-[15px] sm:text-[16px] font-black tabular-nums leading-none tracking-tight ${
                             active
                               ? isLight
-                                ? 'text-slate-900'
+                                ? 'text-slate-950'
                                 : 'text-black'
                               : isLight
                                 ? 'text-slate-800'
-                                : 'text-white'
+                                : 'text-white/90'
                           }`}
                         >
-                          {f.n}
+                          {f.n.toLocaleString()}
                         </span>
                       </button>
                     );
