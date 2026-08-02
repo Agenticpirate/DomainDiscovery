@@ -933,21 +933,13 @@ function DomainRow({
         ? 'bg-rose-500'
         : 'bg-rose-400';
 
-  // Brand CTAs — monochrome white/black, not mint green walls
-  const ctaFill = isAvailable
-    ? isLight
-      ? 'bg-slate-900 text-white hover:bg-slate-800'
-      : 'bg-white text-black hover:bg-white/90'
-    : showPremiumPrice
-      ? isLight
-        ? 'bg-slate-900 text-white hover:bg-slate-800'
-        : 'bg-white text-black hover:bg-white/90'
-      : isLight
-        ? 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-        : 'bg-white/[0.08] text-white/75 hover:bg-white/[0.12]';
+  // Quiet ghost CTAs — domain name + status stay primary (no solid white pills)
+  const ctaFill = isLight
+    ? 'bg-transparent text-slate-500 hover:bg-slate-100 hover:text-slate-800 font-medium'
+    : 'bg-transparent text-white/45 hover:bg-white/[0.06] hover:text-white/85 font-medium';
 
   const ctaSize =
-    'pl-2.5 pr-2 py-1 text-[10px] sm:text-[11px] font-semibold !shadow-none';
+    'pl-2 pr-1.5 py-0.5 text-[10px] sm:text-[11px] !font-medium !shadow-none';
 
   const desktopCta = isAvailable
     ? ctaText
@@ -1062,9 +1054,18 @@ function DomainRow({
           }
           premiumUrl={result.premium ? result.buyUrl : undefined}
           premiumLabel={result.purchaseInfo}
+          shellClassName={
+            isLight
+              ? 'shadow-none ring-slate-200/80'
+              : 'shadow-none ring-white/[0.08]'
+          }
           primaryButtonClassName={`${ctaFill} ${ctaSize}`}
-          chevronButtonClassName={`${ctaFill} px-1.5 py-1`}
-          fallbackButtonClassName={`${ctaFill} ${ctaSize} rounded-full`}
+          chevronButtonClassName={`${ctaFill} px-1.5 py-0.5 ${
+            isLight ? 'border-slate-200' : 'border-white/10'
+          }`}
+          fallbackButtonClassName={`${ctaFill} ${ctaSize} rounded-full ring-1 ${
+            isLight ? 'ring-slate-200' : 'ring-white/10'
+          }`}
         />
       </div>
     </div>

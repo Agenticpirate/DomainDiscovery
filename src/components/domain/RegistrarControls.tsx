@@ -56,6 +56,7 @@ export function RegistrarActionMenu({
   primaryButtonClassName,
   chevronButtonClassName,
   fallbackButtonClassName,
+  shellClassName,
   premiumUrl,
   premiumLabel,
 }: {
@@ -67,6 +68,8 @@ export function RegistrarActionMenu({
   primaryButtonClassName?: string;
   chevronButtonClassName?: string;
   fallbackButtonClassName?: string;
+  /** Extra classes on the joined pill shell (e.g. quieter border for dense grids) */
+  shellClassName?: string;
   premiumUrl?: string;
   premiumLabel?: string;
 }) {
@@ -261,8 +264,9 @@ export function RegistrarActionMenu({
 
   // Unified pill: primary action + chevron share one rounded control (no messy split blobs)
   const joinedShell = cn(
-    'inline-flex items-stretch overflow-hidden rounded-full shadow-sm',
-    isLight ? 'ring-1 ring-black/5' : 'ring-1 ring-white/10'
+    'inline-flex items-stretch overflow-hidden rounded-full',
+    isLight ? 'ring-1 ring-black/5' : 'ring-1 ring-white/10',
+    shellClassName
   );
 
   return (
