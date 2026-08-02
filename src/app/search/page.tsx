@@ -751,7 +751,7 @@ function SearchPageContent() {
           {/* Domain grid — full list (no separate primary strip that clipped under sticky chrome) */}
           {checkedCount > 0 && (
             <div
-              className={`rounded-xl border p-1 sm:p-1.5 w-full max-w-full min-w-0 overflow-x-clip box-border ${
+              className={`rounded-2xl border p-1.5 sm:p-2 w-full max-w-full min-w-0 overflow-x-clip box-border ${
                 isLight ? 'bg-white border-slate-200' : 'bg-[#0a0a0c] border-white/[0.08]'
               }`}
             >
@@ -760,7 +760,7 @@ function SearchPageContent() {
                   Nothing in this filter
                 </p>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-x-1 gap-y-0.5 w-full max-w-full min-w-0">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-full min-w-0">
                   {visibleExtensions.map((r) => (
                     <DomainRow
                       key={r.domain}
@@ -978,13 +978,13 @@ function DomainRow({
 
   return (
     <div
-      className={`shine-border no-lift group flex items-center gap-2 w-full max-w-full min-w-0 rounded-xl py-2 px-2.5 sm:px-3 transition-colors box-border overflow-hidden ${
+      className={`shine-border no-lift group flex items-center gap-2.5 w-full max-w-full min-w-0 rounded-xl py-2.5 px-3 sm:py-3 sm:px-3.5 transition-colors box-border overflow-hidden ${
         isLight
           ? 'bg-white hover:bg-slate-50 border border-slate-100'
-          : 'bg-[#0a0a0c] hover:bg-[#101014] border border-white/[0.06]'
+          : 'bg-[#0c0c0e] hover:bg-[#121214] border border-white/[0.06]'
       }`}
     >
-      <div className="flex items-center gap-2 min-w-0 flex-1 overflow-hidden">
+      <div className="flex items-center gap-2.5 min-w-0 flex-1 overflow-hidden">
         <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot}`} aria-hidden />
         <div className="min-w-0 flex-1 overflow-hidden">
           <a
@@ -1005,7 +1005,7 @@ function DomainRow({
             data-placement="search-domain-link"
             title={domainTitle}
             onCopy={onBlockCopy}
-            className={`block font-mono text-[12.5px] sm:text-[13px] leading-snug select-none transition-colors truncate ${
+            className={`block font-mono text-[13px] sm:text-[14px] font-medium leading-snug select-none transition-colors truncate ${
               isAvailable
                 ? isLight
                   ? 'text-slate-900 hover:text-slate-950'
@@ -1018,7 +1018,7 @@ function DomainRow({
             {result.domain}
           </a>
           <span
-            className={`mt-0.5 inline-flex text-[9px] font-bold uppercase tracking-[0.08em] ${
+            className={`mt-0.5 inline-flex text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.1em] ${
               isAvailable
                 ? isLight
                   ? 'text-emerald-600'
