@@ -580,16 +580,15 @@ const SearchInputSection: React.FC<{
                   isLight ? 'bg-slate-50 border-slate-200' : 'bg-black/30 border-white/[0.06]'
                 }`}
               >
-                {domains.map((d, i) => (
+                {domains.map((d) => (
                   <span
                     key={d.domain}
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] sm:text-[12px] font-medium select-none animate-fade-in ${
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] sm:text-[12px] font-medium select-none ${
                       isLight
                         ? 'bg-white text-slate-700 border border-slate-200'
                         : 'text-white/85 border border-white/10'
                     }`}
                     style={{
-                      animationDelay: `${Math.min(i, 20) * 20}ms`,
                       userSelect: 'none',
                       backgroundColor: isLight ? undefined : '#121214',
                     }}
@@ -597,13 +596,22 @@ const SearchInputSection: React.FC<{
                     <span
                       className={`w-1.5 h-1.5 rounded-full shrink-0 ${
                         d.status === 'available'
-                          ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.55)]'
+                          ? isLight
+                            ? 'bg-slate-900'
+                            : 'bg-white'
                           : d.status === 'taken'
-                            ? 'bg-red-400/90'
+                            ? isLight
+                              ? 'bg-slate-400'
+                              : 'bg-white/35'
                             : d.status === 'premium'
-                              ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.5)]'
-                              : 'bg-white/40 animate-pulse'
+                              ? isLight
+                                ? 'bg-slate-700'
+                                : 'bg-white/70'
+                              : isLight
+                                ? 'bg-slate-300'
+                                : 'bg-white/25'
                       }`}
+                      title={d.status}
                     />
                     <span className="font-mono">{d.domain}</span>
                     <button
@@ -664,7 +672,9 @@ const SearchInputSection: React.FC<{
             >
               <div className="flex justify-between text-[12px] sm:text-[13px] mb-2">
                 <span className={`flex items-center gap-2 font-medium ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-slate-900' : 'bg-white'}`}
+                  />
                   Checking availability…
                 </span>
                 <span className={`font-mono tabular-nums ${isLight ? 'text-slate-500' : 'text-white/50'}`}>

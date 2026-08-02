@@ -53,68 +53,119 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     switch (type) {
       case 'success':
         return (
-          <div className="text-emerald-400">
+          <div
+            className={`flex h-7 w-7 items-center justify-center rounded-full ${
+              isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
+            }`}
+          >
             <Icons.Check />
           </div>
         );
       case 'error':
         return (
-          <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <div
+            className={`flex h-7 w-7 items-center justify-center rounded-full ${
+              isLight ? 'bg-slate-200 text-slate-800' : 'bg-white/10 text-white'
+            }`}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
         );
       case 'warning':
         return (
-          <svg className="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
+          <div
+            className={`flex h-7 w-7 items-center justify-center rounded-full ${
+              isLight ? 'bg-slate-200 text-slate-700' : 'bg-white/10 text-white/80'
+            }`}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+          </div>
         );
       case 'info':
       default:
         return (
-          <div className="text-blue-400">
+          <div
+            className={`flex h-7 w-7 items-center justify-center rounded-full ${
+              isLight ? 'bg-slate-100 text-slate-700 border border-slate-200' : 'bg-white/[0.08] text-white/80 border border-white/10'
+            }`}
+          >
             <Icons.Info />
           </div>
         );
     }
   };
 
+  /** Brand-aligned surfaces — monochrome + subtle Vercel blue, not emerald green */
   const getToastStyles = (type: ToastType) => {
+    if (isLight) {
+      switch (type) {
+        case 'success':
+          return 'border-slate-200 bg-white shadow-vercel';
+        case 'error':
+          return 'border-slate-300 bg-slate-50';
+        case 'warning':
+          return 'border-slate-200 bg-white';
+        case 'info':
+        default:
+          return 'border-slate-200 bg-white';
+      }
+    }
     switch (type) {
       case 'success':
-        return 'border-emerald-500/20 bg-emerald-500/10';
+        return 'border-white/15 bg-[#121214] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.75)]';
       case 'error':
-        return 'border-red-500/20 bg-red-500/10';
+        return 'border-white/12 bg-[#141416]';
       case 'warning':
-        return 'border-yellow-500/20 bg-yellow-500/10';
+        return 'border-white/12 bg-[#121214]';
       case 'info':
       default:
-        return 'border-blue-500/20 bg-blue-500/10';
+        return 'border-white/10 bg-[#0c0c0e]';
     }
   };
 
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      
+
       {/* Toast Container */}
-      <div className="fixed bottom-6 right-6 z-[9999] flex flex-col gap-3 max-w-md">
+      <div className="fixed bottom-6 right-6 z-[9999] flex flex-col gap-3 max-w-md w-[min(100vw-2rem,24rem)]">
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`flex items-start gap-3 p-4 rounded-2xl border backdrop-blur-xl shadow-2xl shadow-black/40 animate-slide-up ${getToastStyles(toast.type)}`}
+            role="status"
+            className={`flex items-start gap-3 p-3.5 sm:p-4 rounded-2xl border animate-slide-up ${getToastStyles(toast.type)}`}
           >
-            <div className="shrink-0 mt-0.5">
-              {getToastIcon(toast.type)}
-            </div>
-            <p className={`flex-1 text-sm leading-relaxed ${isLight ? 'text-slate-800' : 'text-white/90'}`}>
+            <div className="shrink-0 mt-0.5">{getToastIcon(toast.type)}</div>
+            <p
+              className={`flex-1 text-[13px] sm:text-sm font-medium leading-relaxed ${
+                isLight ? 'text-slate-800' : 'text-white/90'
+              }`}
+            >
               {toast.message}
             </p>
             <button
+              type="button"
               onClick={() => removeToast(toast.id)}
-              className="shrink-0 p-1 hover:bg-white/[0.06] rounded-lg transition-colors"
+              className={`shrink-0 p-1 rounded-lg transition-colors ${
+                isLight ? 'hover:bg-slate-100' : 'hover:bg-white/[0.06]'
+              }`}
+              aria-label="Dismiss notification"
             >
-              <svg className={`w-4 h-4 ${isLight ? 'text-slate-400' : 'text-white/40'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className={`w-4 h-4 ${isLight ? 'text-slate-400' : 'text-white/40'}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
