@@ -240,8 +240,11 @@ export type BulkAddOptions = {
   maxDomains?: number;
 };
 
-/** Prominent brandable domains used for sample load + UI examples */
+/** Sample domains for load sample + UI placeholders (include classic .com examples) */
 export const BULK_SAMPLE_DOMAINS = [
+  'example.com',
+  'example.org',
+  'example.net',
   'ystartups.com',
   'cultbuddy.com',
   'foundersprime.com',
@@ -251,9 +254,14 @@ export const BULK_SAMPLE_DOMAINS = [
   'brandforge.com',
   'northstar.ai',
   'launchpad.io',
-  'getacme.com',
-  'trybuddy.com',
 ] as const;
+
+const BULK_PLACEHOLDER_EXAMPLES = [
+  'example.com',
+  'example.org',
+  'mystartup.com',
+  'mybrand.io',
+].join('\n');
 
 export const BULK_SAMPLE_TEXT = BULK_SAMPLE_DOMAINS.join('\n');
 
@@ -277,7 +285,8 @@ const SearchInputSection: React.FC<{
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const [showAdvanced, setShowAdvanced] = useState(false);
-  const [showHowTo, setShowHowTo] = useState(true);
+  /** Collapsed by default so the paste/search box is first above the fold */
+  const [showHowTo, setShowHowTo] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [defaultTld, setDefaultTld] = useState('com');
   const [autoAppendTld, setAutoAppendTld] = useState(true);
@@ -361,18 +370,18 @@ const SearchInputSection: React.FC<{
           className="pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
         />
-        {/* Header */}
+        {/* Header — compact; help stays optional so search is first */}
         <div
-          className={`relative z-[1] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-4 sm:px-5 pt-4 sm:pt-5 pb-3 border-b ${
-            isLight ? 'border-slate-100' : 'border-white/[0.06]'
+          className={`relative z-[1] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-4 sm:px-5 pt-4 sm:pt-5 pb-3 ${
+            isLight ? 'border-b border-slate-100' : 'border-b border-white/[0.06]'
           }`}
         >
           <div className="text-left">
-            <div className={`text-[13px] sm:text-[14px] font-bold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
+            <div className={`text-[13px] sm:text-[15px] font-bold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
               Bulk domain list
             </div>
             <p className="text-[11px] sm:text-[12px] mt-0.5" style={{ color: 'var(--text-muted)' }}>
-              Paste, type, or import up to {maxDomains.toLocaleString()} domains · live .com checks
+              Paste up to {maxDomains.toLocaleString()} domains · live availability
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
@@ -391,148 +400,8 @@ const SearchInputSection: React.FC<{
           </div>
         </div>
 
-        {/* Instructions */}
-        {showHowTo && (
-          <div
-            className={`relative z-[1] px-4 sm:px-5 py-3 border-b animate-fade-in ${
-              isLight ? 'border-slate-100' : 'border-white/[0.06]'
-            }`}
-            style={{ backgroundColor: isLight ? '#f8fafc' : '#0c0c0e' }}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 text-left">
-              {[
-                {
-                  step: '01',
-                  title: 'Copy & paste',
-                  text: 'Paste a list from Excel, Notes, or email. New lines, commas, or spaces all work.',
-                },
-                {
-                  step: '02',
-                  title: 'Or type / import',
-                  text: 'Type names one by one, or import CSV, TXT, TSV, or JSON files. Drag & drop supported.',
-                },
-                {
-                  step: '03',
-                  title: 'Search all',
-                  text: 'We strip http:// and www, append .com when missing, then check availability live.',
-                },
-              ].map((item) => (
-                <div key={item.step} className="flex gap-2.5">
-                  <span
-                    className={`text-[10px] font-black tabular-nums shrink-0 mt-0.5 ${
-                      isLight ? 'text-slate-300' : 'text-white/25'
-                    }`}
-                  >
-                    {item.step}
-                  </span>
-                  <div>
-                    <div className={`text-[12px] font-bold ${isLight ? 'text-slate-800' : 'text-white/90'}`}>
-                      {item.title}
-                    </div>
-                    <p className="text-[11px] leading-relaxed mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                      {item.text}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p
-              className={`mt-2.5 text-[10px] sm:text-[11px] font-mono leading-relaxed ${
-                isLight ? 'text-slate-500' : 'text-white/40'
-              }`}
-            >
-              Example:&nbsp;
-              <span className={isLight ? 'text-slate-700' : 'text-white/60'}>
-                ystartups.com, cultbuddy.com, foundersprime.com
-              </span>
-            </p>
-          </div>
-        )}
-
-        {/* Advanced options */}
-        {showAdvanced && (
-          <div
-            className={`relative z-[1] px-4 sm:px-5 py-3 border-b animate-fade-in ${
-              isLight ? 'border-slate-100' : 'border-white/[0.06]'
-            }`}
-            style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-left">
-              <label className="block">
-                <span className={`text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                  Default TLD
-                </span>
-                <select
-                  value={defaultTld}
-                  onChange={(e) => setDefaultTld(e.target.value)}
-                  className={`mt-1 w-full rounded-lg border px-2.5 py-2 text-[12px] font-semibold outline-none ${
-                    isLight
-                      ? 'bg-slate-50 border-slate-200 text-slate-900'
-                      : 'bg-[#121214] border-white/10 text-white'
-                  }`}
-                >
-                  {['com', 'net', 'org', 'io', 'ai', 'co', 'app', 'dev', 'xyz'].map((t) => (
-                    <option key={t} value={t}>
-                      .{t}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="block">
-                <span className={`text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                  Max domains
-                </span>
-                <select
-                  value={maxDomains}
-                  onChange={(e) => setMaxDomains(Number(e.target.value))}
-                  className={`mt-1 w-full rounded-lg border px-2.5 py-2 text-[12px] font-semibold outline-none ${
-                    isLight
-                      ? 'bg-slate-50 border-slate-200 text-slate-900'
-                      : 'bg-[#121214] border-white/10 text-white'
-                  }`}
-                >
-                  {[100, 250, 500, 1000].map((n) => (
-                    <option key={n} value={n}>
-                      {n.toLocaleString()}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label
-                className={`flex items-center gap-2.5 rounded-lg border px-3 py-2.5 cursor-pointer mt-auto ${
-                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-white/[0.03]'
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={autoAppendTld}
-                  onChange={(e) => setAutoAppendTld(e.target.checked)}
-                  className="rounded border-white/20"
-                />
-                <span className={`text-[12px] font-medium ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
-                  Auto-append .{defaultTld}
-                </span>
-              </label>
-              <label
-                className={`flex items-center gap-2.5 rounded-lg border px-3 py-2.5 cursor-pointer mt-auto ${
-                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-white/[0.03]'
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={stripWww}
-                  onChange={(e) => setStripWww(e.target.checked)}
-                  className="rounded border-white/20"
-                />
-                <span className={`text-[12px] font-medium ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
-                  Strip www / http
-                </span>
-              </label>
-            </div>
-          </div>
-        )}
-
-        <div className="relative z-[1] p-4 sm:p-5">
+        {/* Search / paste — first content users see */}
+        <div className="relative z-[1] p-4 sm:p-5 pb-3 sm:pb-4">
           {domains.length === 0 ? (
             <div className="relative text-left">
               <textarea
@@ -555,8 +424,8 @@ const SearchInputSection: React.FC<{
                     commitInput();
                   }
                 }}
-                placeholder={`Paste or type domains here…\n\nystartups.com\ncultbuddy.com\nfoundersprime.com\nfoundersblog.com`}
-                className={`w-full rounded-xl px-3.5 sm:px-4 py-3 sm:py-3.5 focus:outline-none focus:ring-2 min-h-[140px] sm:min-h-[168px] resize-y transition-all text-[13px] sm:text-[14px] font-mono leading-relaxed ${
+                placeholder={`Paste or type domains here…\n\n${BULK_PLACEHOLDER_EXAMPLES}`}
+                className={`w-full rounded-xl px-3.5 sm:px-4 py-3 sm:py-3.5 focus:outline-none focus:ring-2 min-h-[148px] sm:min-h-[176px] resize-y transition-all text-[13px] sm:text-[14px] font-mono leading-relaxed ${
                   isLight
                     ? 'bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:ring-slate-400/15'
                     : 'bg-black/40 border border-white/10 text-white placeholder:text-white/25 focus:border-white/25 focus:ring-white/10'
@@ -879,6 +748,160 @@ const SearchInputSection: React.FC<{
             </div>
           </div>
         </div>
+
+        {/* Help + advanced — below search so the box is first above the fold */}
+        {showHowTo && (
+          <div
+            className={`relative z-[1] px-4 sm:px-5 py-3.5 sm:py-4 border-t animate-fade-in ${
+              isLight ? 'border-slate-100' : 'border-white/[0.06]'
+            }`}
+            style={{ backgroundColor: isLight ? '#f8fafc' : '#0a0a0c' }}
+          >
+            <p
+              className={`text-[10px] font-bold uppercase tracking-[0.12em] mb-2.5 ${
+                isLight ? 'text-slate-400' : 'text-white/35'
+              }`}
+            >
+              How to add domains
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 text-left">
+              {[
+                {
+                  step: '01',
+                  title: 'Copy & paste',
+                  text: 'Paste a list from Excel, Notes, or email. New lines, commas, or spaces all work.',
+                },
+                {
+                  step: '02',
+                  title: 'Or type / import',
+                  text: 'Type names one by one, or import CSV, TXT, TSV, or JSON files. Drag & drop supported.',
+                },
+                {
+                  step: '03',
+                  title: 'Search all',
+                  text: 'We strip http:// and www, append .com when missing, then check availability live.',
+                },
+              ].map((item) => (
+                <div key={item.step} className="flex gap-2.5">
+                  <span
+                    className={`text-[10px] font-black tabular-nums shrink-0 mt-0.5 ${
+                      isLight ? 'text-slate-300' : 'text-white/25'
+                    }`}
+                  >
+                    {item.step}
+                  </span>
+                  <div>
+                    <div className={`text-[12px] font-bold ${isLight ? 'text-slate-800' : 'text-white/90'}`}>
+                      {item.title}
+                    </div>
+                    <p className="text-[11px] leading-relaxed mt-0.5" style={{ color: 'var(--text-muted)' }}>
+                      {item.text}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p
+              className={`mt-3 text-[10px] sm:text-[11px] font-mono leading-relaxed ${
+                isLight ? 'text-slate-500' : 'text-white/40'
+              }`}
+            >
+              Example:&nbsp;
+              <span className={isLight ? 'text-slate-700' : 'text-white/60'}>
+                example.com, example.org, mystartup.com, mybrand.io
+              </span>
+            </p>
+          </div>
+        )}
+
+        {showAdvanced && (
+          <div
+            className={`relative z-[1] px-4 sm:px-5 py-3.5 sm:py-4 border-t animate-fade-in ${
+              isLight ? 'border-slate-100' : 'border-white/[0.06]'
+            }`}
+            style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+          >
+            <p
+              className={`text-[10px] font-bold uppercase tracking-[0.12em] mb-2.5 ${
+                isLight ? 'text-slate-400' : 'text-white/35'
+              }`}
+            >
+              Advanced options
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-left">
+              <label className="block">
+                <span className={`text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
+                  Default TLD
+                </span>
+                <select
+                  value={defaultTld}
+                  onChange={(e) => setDefaultTld(e.target.value)}
+                  className={`mt-1 w-full rounded-lg border px-2.5 py-2 text-[12px] font-semibold outline-none ${
+                    isLight
+                      ? 'bg-slate-50 border-slate-200 text-slate-900'
+                      : 'bg-[#121214] border-white/10 text-white'
+                  }`}
+                >
+                  {['com', 'net', 'org', 'io', 'ai', 'co', 'app', 'dev', 'xyz'].map((t) => (
+                    <option key={t} value={t}>
+                      .{t}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="block">
+                <span className={`text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
+                  Max domains
+                </span>
+                <select
+                  value={maxDomains}
+                  onChange={(e) => setMaxDomains(Number(e.target.value))}
+                  className={`mt-1 w-full rounded-lg border px-2.5 py-2 text-[12px] font-semibold outline-none ${
+                    isLight
+                      ? 'bg-slate-50 border-slate-200 text-slate-900'
+                      : 'bg-[#121214] border-white/10 text-white'
+                  }`}
+                >
+                  {[100, 250, 500, 1000].map((n) => (
+                    <option key={n} value={n}>
+                      {n.toLocaleString()}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label
+                className={`flex items-center gap-2.5 rounded-lg border px-3 py-2.5 cursor-pointer mt-auto ${
+                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-white/[0.03]'
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  checked={autoAppendTld}
+                  onChange={(e) => setAutoAppendTld(e.target.checked)}
+                  className="rounded border-white/20"
+                />
+                <span className={`text-[12px] font-medium ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
+                  Auto-append .{defaultTld}
+                </span>
+              </label>
+              <label
+                className={`flex items-center gap-2.5 rounded-lg border px-3 py-2.5 cursor-pointer mt-auto ${
+                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-white/[0.03]'
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  checked={stripWww}
+                  onChange={(e) => setStripWww(e.target.checked)}
+                  className="rounded border-white/20"
+                />
+                <span className={`text-[12px] font-medium ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
+                  Strip www / http
+                </span>
+              </label>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -1327,11 +1350,11 @@ export const BulkDomainSearchLanding: React.FC<{
               </div>
               <div className="space-y-1.5 sm:space-y-2">
                 {[
-                  { domain: 'ystartups.com', status: 'taken' as const },
-                  { domain: 'cultbuddy.com', status: 'available' as const, price: '$12.99' },
-                  { domain: 'foundersprime.com', status: 'premium' as const, price: 'Premium' },
-                  { domain: 'foundersblog.com', status: 'available' as const, price: '$12.99' },
-                  { domain: 'startuphub.io', status: 'available' as const, price: '$49.99' },
+                  { domain: 'example.com', status: 'taken' as const },
+                  { domain: 'example.org', status: 'available' as const, price: '$12.99' },
+                  { domain: 'mystartup.com', status: 'premium' as const, price: 'Premium' },
+                  { domain: 'mybrand.io', status: 'available' as const, price: '$49.99' },
+                  { domain: 'foundersprime.com', status: 'available' as const, price: '$12.99' },
                 ].map((d, i) => (
                   <div
                     key={d.domain}
@@ -1708,12 +1731,12 @@ export const BulkDomainSearchLanding: React.FC<{
             </div>
             <pre className="p-3.5 sm:p-5 text-[11px] sm:text-[13px] font-mono text-white/65 overflow-x-auto leading-relaxed">
               <code>{`# Paste prominent names in any format
-ystartups.com
-cultbuddy.com, foundersprime.com
-foundersblog.com startuphub.io
+example.com
+example.org, mystartup.com
+mybrand.io foundersprime.com
 
 # Mixed with URLs — we clean them
-https://startuphub.io/about → startuphub.io
+https://example.com/about → example.com
 
 # Bare names get .com when auto-append is on
 venturelist
