@@ -89,146 +89,164 @@ nav a:has(.logo-icon-wrapper) {
   }
 
   :root {
-    --font-sans: "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --font-mono: "SFMono-Regular", "JetBrains Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --bg-main: #0a0a0a;
-    --bg-card: #111111;
-    --bg-elevated: #1a1a1a;
+    /*
+     * Vercel brand + Apple Silicon product polish
+     * Black / white / gray + optional blue accent (#0070f3)
+     * Typography: SF Pro system stack (Apple Silicon devices)
+     */
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+      "Segoe UI", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+    --font-mono: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+    --ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-vercel: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
+    --duration-fast: 0.16s;
+    --duration-med: 0.32s;
+    --duration-slow: 0.55s;
+    /* Vercel dark canvas */
+    --bg-main: #000000;
+    --bg-card: #0a0a0a;
+    --bg-elevated: #111111;
     --accent-primary: #FFFFFF;
     --accent-dim: #888888;
     --border-color: rgba(255, 255, 255, 0.08);
-    --text-primary: #FFFFFF;
-    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-primary: #FAFAFA;
+    --text-secondary: rgba(255, 255, 255, 0.72);
     --text-tertiary: rgba(255, 255, 255, 0.5);
     --text-muted: rgba(255, 255, 255, 0.4);
-    --glass-bg: rgba(17, 17, 17, 0.8);
-    --card-bg: rgba(255, 255, 255, 0.02);
-    --card-bg-hover: rgba(255, 255, 255, 0.04);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --card-border-hover: rgba(255, 255, 255, 0.2);
+    --glass-bg: rgba(10, 10, 10, 0.72);
+    --card-bg: rgba(255, 255, 255, 0.025);
+    --card-bg-hover: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.09);
+    --card-border-hover: rgba(255, 255, 255, 0.18);
     --icon-bg: rgba(255, 255, 255, 0.05);
     --icon-bg-hover: rgba(255, 255, 255, 0.1);
     --icon-color: rgba(255, 255, 255, 0.7);
-    --input-bg: rgba(255, 255, 255, 0.05);
+    --input-bg: rgba(255, 255, 255, 0.04);
     --input-border: rgba(255, 255, 255, 0.1);
-    --input-border-focus: rgba(255, 255, 255, 0.2);
-    --input-ring: rgba(255, 255, 255, 0.1);
-    --input-placeholder: rgba(255, 255, 255, 0.3);
-    --nav-bg: rgba(0, 0, 0, 0.4);
-    --nav-item-active-bg: linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0.08));
+    --input-border-focus: rgba(255, 255, 255, 0.28);
+    --input-ring: rgba(0, 112, 243, 0.28);
+    --input-placeholder: rgba(255, 255, 255, 0.32);
+    --nav-bg: rgba(0, 0, 0, 0.55);
+    --nav-item-active-bg: linear-gradient(to bottom, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
     --nav-item-border: rgba(255, 255, 255, 0.08);
     --nav-item-text: rgba(255, 255, 255, 0.7);
-    --dropdown-bg: #0c0c0e;
+    --dropdown-bg: #0a0a0a;
     --dropdown-border: rgba(255, 255, 255, 0.12);
-    --footer-bg: rgba(0, 0, 0, 0.4);
+    --footer-bg: rgba(0, 0, 0, 0.5);
     --btn-primary-bg: #FFFFFF;
     --btn-primary-text: #000000;
-    --btn-primary-hover: #f0f0f0;
+    --btn-primary-hover: #eaeaea;
     --btn-secondary-bg: rgba(255, 255, 255, 0.05);
     --btn-secondary-text: #FFFFFF;
     --btn-secondary-border: rgba(255, 255, 255, 0.1);
     --btn-secondary-hover-bg: rgba(255, 255, 255, 0.1);
     --gradient-hero-from: rgba(255, 255, 255, 1);
-    --gradient-hero-to: rgba(255, 255, 255, 0.6);
+    --gradient-hero-to: rgba(255, 255, 255, 0.55);
     --gradient-subtitle: rgba(255, 255, 255, 0.5);
-    --shadow-color: rgba(0, 0, 0, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.45);
     --cta-bg-from: rgba(255, 255, 255, 0.08);
     --cta-bg-to: rgba(255, 255, 255, 0.02);
     --kbd-bg: rgba(255, 255, 255, 0.05);
     --kbd-border: rgba(255, 255, 255, 0.1);
     --kbd-text: rgba(255, 255, 255, 0.3);
-    --recent-bg: #171717;
-    --badge-bg: rgba(16, 185, 129, 0.1);
-    --badge-text: #34d399;
-    --badge-border: rgba(16, 185, 129, 0.2);
-    /* Brand = silver / white (minimal accent, matches logo metal) */
-    --brand: #e2e8f0;
+    --recent-bg: #111111;
+    --badge-bg: rgba(0, 112, 243, 0.12);
+    --badge-text: #3291ff;
+    --badge-border: rgba(0, 112, 243, 0.28);
+    /* Brand = Vercel white + blue accent */
+    --brand: #fafafa;
     --brand-hover: #ffffff;
     --brand-soft: rgba(255, 255, 255, 0.06);
     --brand-border: rgba(255, 255, 255, 0.14);
-    --brand-glow: rgba(255, 255, 255, 0.08);
-    --surface-1: #0c0c0e;
-    --surface-2: #111114;
-    --surface-3: #16161a;
+    --brand-glow: rgba(0, 112, 243, 0.18);
+    --vercel-blue: #0070f3;
+    --vercel-blue-light: #3291ff;
+    --surface-1: #000000;
+    --surface-2: #0a0a0a;
+    --surface-3: #111111;
   }
 
   /*
-   * Light mode — colorful but professional (indigo / sky / violet accents).
-   * Dark mode tokens above stay monochrome silver — do not mirror these into :root.
+   * Light mode — Vercel clean (white / black / gray), subtle blue accents.
+   * Apple-like airy surfaces, not rainbow indigo.
    */
   html.light {
-    --bg-main: #f0f4ff;
+    --bg-main: #fafafa;
     --bg-card: #ffffff;
     --bg-elevated: #ffffff;
-    --accent-primary: #4338ca;
-    --accent-dim: #6366f1;
-    --border-color: rgba(99, 102, 241, 0.14);
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-tertiary: #64748b;
-    --text-muted: #94a3b8;
-    --glass-bg: rgba(255, 255, 255, 0.92);
+    --accent-primary: #000000;
+    --accent-dim: #666666;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --text-primary: #000000;
+    --text-secondary: #444444;
+    --text-tertiary: #666666;
+    --text-muted: #888888;
+    --glass-bg: rgba(255, 255, 255, 0.78);
     --card-bg: #ffffff;
-    --card-bg-hover: #f8faff;
-    --card-border: #e0e7ff;
-    --card-border-hover: #c7d2fe;
-    --icon-bg: #eef2ff;
-    --icon-bg-hover: #e0e7ff;
-    --icon-color: #4f46e5;
+    --card-bg-hover: #fafafa;
+    --card-border: #eaeaea;
+    --card-border-hover: #999999;
+    --icon-bg: #fafafa;
+    --icon-bg-hover: #eaeaea;
+    --icon-color: #444444;
     --input-bg: #ffffff;
-    --input-border: #c7d2fe;
-    --input-border-focus: #818cf8;
-    --input-ring: rgba(99, 102, 241, 0.22);
-    --input-placeholder: #94a3b8;
-    --nav-bg: rgba(255, 255, 255, 0.9);
-    --nav-item-active-bg: linear-gradient(to bottom, rgba(99, 102, 241, 0.12), rgba(14, 165, 233, 0.06));
-    --nav-item-border: #e0e7ff;
-    --nav-item-text: #475569;
+    --input-border: #eaeaea;
+    --input-border-focus: #000000;
+    --input-ring: rgba(0, 112, 243, 0.18);
+    --input-placeholder: #999999;
+    --nav-bg: rgba(255, 255, 255, 0.78);
+    --nav-item-active-bg: linear-gradient(to bottom, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.03));
+    --nav-item-border: #eaeaea;
+    --nav-item-text: #444444;
     --dropdown-bg: #ffffff;
-    --dropdown-border: #e0e7ff;
-    --footer-bg: #eef2ff;
-    --btn-primary-bg: #4f46e5;
+    --dropdown-border: #eaeaea;
+    --footer-bg: #fafafa;
+    --btn-primary-bg: #000000;
     --btn-primary-text: #ffffff;
-    --btn-primary-hover: #4338ca;
-    --btn-secondary-bg: #eef2ff;
-    --btn-secondary-text: #312e81;
-    --btn-secondary-border: #c7d2fe;
-    --btn-secondary-hover-bg: #e0e7ff;
-    --gradient-hero-from: #312e81;
-    --gradient-hero-to: #0ea5e9;
-    --gradient-subtitle: #6366f1;
-    --shadow-color: rgba(79, 70, 229, 0.1);
-    --cta-bg-from: #eef2ff;
-    --cta-bg-to: #e0f2fe;
-    --kbd-bg: #eef2ff;
-    --kbd-border: #c7d2fe;
-    --kbd-text: #6366f1;
+    --btn-primary-hover: #111111;
+    --btn-secondary-bg: #fafafa;
+    --btn-secondary-text: #000000;
+    --btn-secondary-border: #eaeaea;
+    --btn-secondary-hover-bg: #eaeaea;
+    --gradient-hero-from: #000000;
+    --gradient-hero-to: #666666;
+    --gradient-subtitle: #666666;
+    --shadow-color: rgba(0, 0, 0, 0.06);
+    --cta-bg-from: #fafafa;
+    --cta-bg-to: #ffffff;
+    --kbd-bg: #fafafa;
+    --kbd-border: #eaeaea;
+    --kbd-text: #666666;
     --recent-bg: #ffffff;
-    --badge-bg: rgba(99, 102, 241, 0.1);
-    --badge-text: #4338ca;
-    --badge-border: rgba(99, 102, 241, 0.22);
+    --badge-bg: rgba(0, 112, 243, 0.08);
+    --badge-text: #0070f3;
+    --badge-border: rgba(0, 112, 243, 0.2);
     --stats-bg: #ffffff;
-    --section-divider: #e0e7ff;
-    --brand: #4f46e5;
-    --brand-hover: #4338ca;
-    --brand-soft: rgba(99, 102, 241, 0.1);
-    --brand-border: rgba(99, 102, 241, 0.22);
-    --brand-glow: rgba(99, 102, 241, 0.18);
+    --section-divider: #eaeaea;
+    --brand: #000000;
+    --brand-hover: #111111;
+    --brand-soft: rgba(0, 0, 0, 0.04);
+    --brand-border: rgba(0, 0, 0, 0.1);
+    --brand-glow: rgba(0, 112, 243, 0.12);
+    --vercel-blue: #0070f3;
+    --vercel-blue-light: #3291ff;
     --surface-1: #ffffff;
-    --surface-2: #f8faff;
-    --surface-3: #eef2ff;
-    /* Extra light-only accent tokens */
-    --accent-indigo: #4f46e5;
-    --accent-violet: #7c3aed;
-    --accent-sky: #0ea5e9;
-    --accent-emerald: #059669;
-    --accent-amber: #d97706;
-    --accent-rose: #e11d48;
-    --light-chip-a: #eef2ff;
-    --light-chip-b: #ecfeff;
-    --light-chip-c: #f5f3ff;
-    --light-chip-d: #ecfdf5;
-    --light-chip-e: #fffbeb;
+    --surface-2: #fafafa;
+    --surface-3: #eaeaea;
+    /* Light accents — Vercel blue + neutrals */
+    --accent-indigo: #0070f3;
+    --accent-violet: #000000;
+    --accent-sky: #3291ff;
+    --accent-emerald: #0070f3;
+    --accent-amber: #666666;
+    --accent-rose: #000000;
+    --light-chip-a: #fafafa;
+    --light-chip-b: #f0f7ff;
+    --light-chip-c: #eaeaea;
+    --light-chip-d: #fafafa;
+    --light-chip-e: #f5f5f5;
   }
 
   * {
@@ -243,11 +261,42 @@ nav a:has(.logo-icon-wrapper) {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Apple-like optical sizing on supporting browsers */
+    font-optical-sizing: auto;
+    letter-spacing: -0.011em;
   }
 
   html {
     @apply scroll-smooth antialiased;
     overflow-x: hidden;
+    /* Smooth scroll with native momentum (Apple trackpads) */
+    scroll-behavior: smooth;
+  }
+
+  /* Dark ambient — subtle Vercel radial depth */
+  body::before {
+    content: "";
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 90% 55% at 50% -20%, rgba(255, 255, 255, 0.07), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, rgba(0, 112, 243, 0.08), transparent 50%),
+      radial-gradient(ellipse 45% 35% at 0% 10%, rgba(255, 255, 255, 0.03), transparent 45%);
+    animation: ambient-drift 18s var(--ease-apple) infinite;
+  }
+
+  html.light body::before {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -15%, rgba(0, 0, 0, 0.03), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, rgba(0, 112, 243, 0.05), transparent 50%);
+  }
+
+  body > * {
+    position: relative;
+    z-index: 1;
   }
 
   ::-webkit-scrollbar {
@@ -282,13 +331,18 @@ nav a:has(.logo-icon-wrapper) {
   }
 
   html.light *:focus-visible {
-    outline: 1px solid rgba(99, 102, 241, 0.45);
+    outline: 1px solid rgba(0, 112, 243, 0.45);
     outline-offset: 2px;
   }
 
   html.light ::selection {
-    background: rgba(99, 102, 241, 0.22);
-    color: #1e1b4b;
+    background: rgba(0, 112, 243, 0.16);
+    color: #000000;
+  }
+
+  ::selection {
+    background: rgba(0, 112, 243, 0.35);
+    color: #fff;
   }
 
   /* Text fields: no double outline / ring flash on focus */
@@ -333,8 +387,19 @@ nav a:has(.logo-icon-wrapper) {
   }
 
   html.light .nav-dropdown-item:not(.is-active):hover .nav-dropdown-icon {
-    background-color: #e0e7ff;
-    color: #4f46e5;
+    background-color: #eaeaea;
+    color: #000000;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body::before {
+      animation: none !important;
+    }
+    .animate-premium-in,
+    .animate-premium-scale,
+    .animate-ambient-drift {
+      animation: none !important;
+    }
   }
 
   /* Footer brand reduced-motion fallback — shine loop every 2s */
@@ -386,18 +451,18 @@ nav a:has(.logo-icon-wrapper) {
 
   .glass-card {
     background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(24px) saturate(1.35);
+    -webkit-backdrop-filter: blur(24px) saturate(1.35);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     /* Homepage hover system (shine + lift) — site-wide */
     position: relative;
     isolation: isolate;
     transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease,
-      background-color 0.3s ease,
-      border-color 0.3s ease;
+      transform var(--duration-med) var(--ease-apple),
+      box-shadow var(--duration-med) var(--ease-apple),
+      background-color var(--duration-med) var(--ease-vercel),
+      border-color var(--duration-med) var(--ease-vercel);
   }
 
   .theme-card {
@@ -407,10 +472,10 @@ nav a:has(.logo-icon-wrapper) {
     position: relative;
     isolation: isolate;
     transition:
-      background-color 0.3s ease,
-      border-color 0.3s ease,
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
+      background-color var(--duration-med) var(--ease-vercel),
+      border-color var(--duration-med) var(--ease-vercel),
+      transform var(--duration-med) var(--ease-apple),
+      box-shadow var(--duration-med) var(--ease-apple);
   }
 
   .theme-card:hover {
@@ -552,21 +617,38 @@ nav a:has(.logo-icon-wrapper) {
     border-color: var(--card-border-hover);
   }
 
-  /* Primary CTA — white / slate (matches original system) */
+  /* Primary CTA — Vercel black/white with Apple spring lift */
   .btn-brand {
     background: var(--btn-primary-bg);
     color: var(--btn-primary-text);
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     border-radius: 0.75rem;
     border: 1px solid transparent;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset, 0 8px 24px rgba(0, 0, 0, 0.28);
+    transition:
+      transform var(--duration-fast) var(--ease-apple),
+      background var(--duration-fast) var(--ease-vercel),
+      box-shadow var(--duration-med) var(--ease-apple);
   }
 
   .btn-brand:hover {
     background: var(--btn-primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1.5px) scale(1.01);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.16) inset, 0 12px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  .btn-brand:active {
+    transform: translateY(0) scale(0.985);
+    transition-duration: 0.08s;
+  }
+
+  html.light .btn-brand {
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  html.light .btn-brand:hover {
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 10px 28px rgba(0, 0, 0, 0.16);
   }
 
   .premium-card {
@@ -578,20 +660,20 @@ nav a:has(.logo-icon-wrapper) {
 
   html.light .premium-card {
     background: #ffffff;
-    border-color: #e0e7ff;
-    box-shadow: 0 1px 3px rgba(79, 70, 229, 0.06), 0 4px 16px rgba(14, 165, 233, 0.04);
+    border-color: #eaeaea;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
   }
 
   .premium-card:hover {
     border-color: var(--card-border-hover);
     background: var(--card-bg-hover);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
   }
 
   html.light .premium-card:hover {
-    border-color: #c7d2fe;
+    border-color: #999999;
     background: #ffffff;
-    box-shadow: 0 8px 28px rgba(79, 70, 229, 0.12), 0 2px 8px rgba(14, 165, 233, 0.06);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
   }
 
   .text-brand {
@@ -606,43 +688,42 @@ nav a:has(.logo-icon-wrapper) {
     color: transparent;
   }
 
-  /* Light: indigo → violet → sky gradient titles */
+  /* Light: Vercel monochrome gradient titles + blue tip */
   html.light .brand-gradient-text {
-    background: linear-gradient(115deg, #312e81 0%, #4f46e5 42%, #7c3aed 68%, #0ea5e9 100%);
+    background: linear-gradient(115deg, #000000 0%, #333333 55%, #0070f3 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* —— Light-mode only colorful polish (dark mode untouched) —— */
+  /* —— Light-mode Vercel polish —— */
   html.light body {
     background-image:
-      radial-gradient(ellipse 80% 50% at 10% -10%, rgba(99, 102, 241, 0.12), transparent 55%),
-      radial-gradient(ellipse 70% 45% at 90% 0%, rgba(14, 165, 233, 0.1), transparent 50%),
-      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(124, 58, 237, 0.06), transparent 55%);
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 0, 0, 0.03), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(0, 112, 243, 0.04), transparent 50%);
     background-attachment: fixed;
   }
 
   html.light .page-breadcrumb {
-    color: #64748b;
+    color: #666666;
   }
 
   html.light .page-breadcrumb [aria-current='page'],
   html.light .page-breadcrumb-current {
-    color: #4f46e5;
+    color: #000000;
   }
 
   html.light .page-breadcrumb a:hover {
-    color: #4f46e5;
+    color: #0070f3;
   }
 
-  /* Primary CTAs that use solid slate often — soft indigo lift in light only via utility hooks */
+  /* Primary CTAs — solid Vercel black (light) */
   html.light .btn-primary-light,
   html.light button.cta-shine-primary {
-    background: linear-gradient(135deg, #4f46e5, #6366f1 50%, #0ea5e9) !important;
+    background: #000000 !important;
     color: #fff !important;
     border-color: transparent !important;
-    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
 
   html.light .badge-success,
@@ -653,35 +734,35 @@ nav a:has(.logo-icon-wrapper) {
   /* Cards / panels with generic white borders pick up a cooler tint when using CSS vars */
   html.light .theme-card,
   html.light .glass-card {
-    border-color: #e0e7ff;
-    box-shadow: 0 1px 2px rgba(79, 70, 229, 0.05);
+    border-color: #eaeaea;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
   }
 
   html.light .shine-border {
-    box-shadow: 0 1px 2px rgba(79, 70, 229, 0.04);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
   }
 
   html.light .shine-border:hover,
   html.light .shine-border:focus-within {
-    box-shadow: 0 10px 28px rgba(79, 70, 229, 0.1), 0 2px 8px rgba(14, 165, 233, 0.06);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 112, 243, 0.05);
   }
 
   /* Links using brand color */
   html.light a.text-brand,
   html.light .link-accent {
-    color: #4f46e5;
+    color: #0070f3;
   }
 
   html.light a.text-brand:hover,
   html.light .link-accent:hover {
-    color: #4338ca;
+    color: #3291ff;
   }
 
-  /* Footer light wash */
+  /* Footer light wash — Vercel gray */
   html.light footer,
   html.light .site-footer {
-    background: linear-gradient(180deg, #eef2ff 0%, #f0f9ff 100%);
-    border-top-color: #e0e7ff;
+    background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+    border-top-color: #eaeaea;
   }
 
   /* Colorful chip utilities (opt-in classes) */
@@ -835,6 +916,55 @@ nav a:has(.logo-icon-wrapper) {
     animation: shimmer 2.4s linear infinite;
   }
 
+  @keyframes ambient-drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translate3d(1.5%, -1%, 0) scale(1.04);
+      opacity: 0.92;
+    }
+  }
+
+  @keyframes premium-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes premium-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-premium-in {
+    animation: premium-fade-up 0.7s var(--ease-apple) both;
+  }
+
+  .animate-premium-scale {
+    animation: premium-scale-in 0.55s var(--ease-apple) both;
+  }
+
+  /* Stagger helpers for static markup */
+  .stagger-1 { animation-delay: 0.05s; }
+  .stagger-2 { animation-delay: 0.1s; }
+  .stagger-3 { animation-delay: 0.16s; }
+  .stagger-4 { animation-delay: 0.22s; }
+  .stagger-5 { animation-delay: 0.28s; }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -872,6 +1002,23 @@ nav a:has(.logo-icon-wrapper) {
     50% {
       opacity: 1;
       transform: scale(1.04);
+    }
+  }
+
+  /* Bulk search — available domain checkmark glow (easy to scan) */
+  @keyframes bulk-avail-glow {
+    0%,
+    100% {
+      filter: brightness(1);
+      box-shadow:
+        0 0 0 3px rgba(16, 185, 129, 0.28),
+        0 0 12px rgba(16, 185, 129, 0.45);
+    }
+    50% {
+      filter: brightness(1.12);
+      box-shadow:
+        0 0 0 4px rgba(52, 211, 153, 0.4),
+        0 0 22px rgba(52, 211, 153, 0.85);
     }
   }
 

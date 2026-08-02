@@ -19,8 +19,25 @@ interface DomainTag {
   /** 0–100 brand / opportunity score (local heuristic) */
   score?: number;
 }
-type FilterType = 'all' | 'available' | 'taken' | 'premium';
-type SortMode = 'az' | 'score' | 'length';
+type FilterType = 'all' | 'available' | 'taken' | 'premium' | 'aftermarket';
+type SortMode = 'az' | 'score' | 'length-asc' | 'length-desc';
+
+/** Premium marketplace or taken-with-listing ≈ aftermarket inventory */
+function isAftermarket(d: DomainTag): boolean {
+  if (d.status === 'premium') return true;
+  return d.status === 'taken' && Boolean(d.buyUrl);
+}
+
+function parsePriceValue(price?: string): number | null {
+  if (!price) return null;
+  const n = parseFloat(price.replace(/[^0-9.]/g, ''));
+  return Number.isFinite(n) ? n : null;
+}
+
+function formatPriceCompact(n: number): string {
+  if (n >= 1000) return `$${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}K`;
+  return `$${Math.round(n)}`;
+}
 
 /** Brand / opportunity score for bulk results (no API score from instant-check). */
 function computeDomainScore(
@@ -92,13 +109,20 @@ function StatusIcon({
   if (status === 'available') {
     return (
       <span
-        className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
-          isLight ? 'bg-emerald-100 text-emerald-600' : 'bg-emerald-500/15 text-emerald-400'
+        className={`relative inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${
+          isLight
+            ? 'bg-emerald-500 text-white shadow-[0_0_0_3px_rgba(16,185,129,0.28),0_0_16px_rgba(16,185,129,0.65)]'
+            : 'bg-emerald-400 text-black shadow-[0_0_0_3px_rgba(52,211,153,0.35),0_0_20px_rgba(52,211,153,0.85)]'
         }`}
-        title="Available"
+        style={{
+          // Soft breathing glow — one animation, no per-row ping storms
+          animation: 'bulk-avail-glow 2.4s ease-in-out infinite',
+        }}
+        title="Available — ready to register"
+        aria-label="Available"
       >
-        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+        <svg className="relative w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.8} d="M5 13l4 4L19 7" />
         </svg>
       </span>
     );
@@ -146,6 +170,7 @@ function getDomainCounts(domains: DomainTag[]) {
     available: domains.filter((d) => d.status === 'available').length,
     taken: domains.filter((d) => d.status === 'taken').length,
     premium: domains.filter((d) => d.status === 'premium').length,
+    aftermarket: domains.filter((d) => isAftermarket(d)).length,
     checking: domains.filter((d) => d.status === 'checking').length,
   };
 }
@@ -282,8 +307,11 @@ const ResultsView: React.FC<{
   setSortMode: (v: SortMode) => void;
   tldFilter: string[];
   setTldFilter: (v: string[]) => void;
-  showTlds: boolean;
-  setShowTlds: (v: boolean) => void;
+  priceMin: number;
+  priceMax: number;
+  setPriceMin: (v: number) => void;
+  setPriceMax: (v: number) => void;
+  priceBounds: { min: number; max: number };
   progress: { done: number; total: number };
   reset: () => void;
   exportCSV: () => void;
@@ -301,8 +329,11 @@ const ResultsView: React.FC<{
   setSortMode,
   tldFilter,
   setTldFilter,
-  showTlds,
-  setShowTlds,
+  priceMin,
+  priceMax,
+  setPriceMin,
+  setPriceMax,
+  priceBounds,
   progress,
   reset,
   exportCSV,
@@ -315,27 +346,43 @@ const ResultsView: React.FC<{
 }) => {
   const { theme } = useTheme();
   const isLight = theme === 'light';
-  const tlds = Array.from(new Set(domains.map(d => d.domain.split('.').pop() || ''))).sort();
-  
+  const tlds = Array.from(new Set(domains.map((d) => d.domain.split('.').pop() || ''))).sort();
+  const priceFilterActive =
+    priceMin > priceBounds.min || priceMax < priceBounds.max;
+
   const filtered = useCallback(() => {
     let list = [...domains];
-    if (filter === 'available') list = list.filter(d => d.status === 'available');
-    else if (filter === 'taken') list = list.filter(d => d.status === 'taken');
-    else if (filter === 'premium') list = list.filter(d => d.status === 'premium');
-    if (tldFilter.length) list = list.filter(d => tldFilter.includes(d.domain.split('.').pop() || ''));
+    if (filter === 'available') list = list.filter((d) => d.status === 'available');
+    else if (filter === 'taken') list = list.filter((d) => d.status === 'taken');
+    else if (filter === 'premium') list = list.filter((d) => d.status === 'premium');
+    else if (filter === 'aftermarket') list = list.filter((d) => isAftermarket(d));
+    if (tldFilter.length) {
+      list = list.filter((d) => tldFilter.includes(d.domain.split('.').pop() || ''));
+    }
+    if (priceFilterActive) {
+      list = list.filter((d) => {
+        const p = parsePriceValue(d.price);
+        // Unpriced rows (often taken) stay visible; only priced rows are range-filtered
+        if (p === null) return true;
+        return p >= priceMin && p <= priceMax;
+      });
+    }
     list.sort((a, b) => {
       if (sortMode === 'score') {
         const sa = a.score ?? computeDomainScore(a.domain, a.status, a.price);
         const sb = b.score ?? computeDomainScore(b.domain, b.status, b.price);
         return sb - sa || a.domain.localeCompare(b.domain);
       }
-      if (sortMode === 'length') {
+      if (sortMode === 'length-asc') {
         return a.domain.length - b.domain.length || a.domain.localeCompare(b.domain);
+      }
+      if (sortMode === 'length-desc') {
+        return b.domain.length - a.domain.length || a.domain.localeCompare(b.domain);
       }
       return a.domain.localeCompare(b.domain);
     });
     return list;
-  }, [domains, filter, tldFilter, sortMode]);
+  }, [domains, filter, tldFilter, sortMode, priceMin, priceMax, priceFilterActive]);
 
   const results = filtered();
   const counts = getDomainCounts(domains);
@@ -361,23 +408,51 @@ const ResultsView: React.FC<{
           : 'bg-white/[0.04] text-white/65 border-white/10 hover:bg-white/[0.08] hover:text-white'
     }`;
 
-  const cycleSort = () => {
-    setSortMode(sortMode === 'az' ? 'score' : sortMode === 'score' ? 'length' : 'az');
+  const sideBtn = (active: boolean) =>
+    `w-full flex items-center justify-between gap-2 rounded-xl border px-2.5 py-2 text-[12px] font-semibold transition-colors ${
+      active
+        ? isLight
+          ? 'bg-slate-900 text-white border-slate-900'
+          : 'bg-white text-black border-white'
+        : isLight
+          ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+          : 'bg-white/[0.03] text-white/70 border-white/10 hover:bg-white/[0.07] hover:text-white'
+    }`;
+
+  const clearFilters = () => {
+    setFilter('all');
+    setTldFilter([]);
+    setPriceMin(priceBounds.min);
+    setPriceMax(priceBounds.max);
+    setSortMode('score');
   };
-  const sortLabel = sortMode === 'az' ? 'A–Z' : sortMode === 'score' ? 'Score' : 'Length';
+
+  const hasExtraFilters =
+    filter !== 'all' || tldFilter.length > 0 || priceFilterActive || sortMode !== 'score';
+
+  const availabilityFilters: Array<{
+    k: FilterType;
+    l: string;
+    c: number;
+    dot: string;
+  }> = [
+    { k: 'available', l: 'Available', c: counts.available, dot: 'bg-emerald-400' },
+    { k: 'taken', l: 'Taken', c: counts.taken, dot: 'bg-rose-400' },
+    { k: 'premium', l: 'Premium', c: counts.premium, dot: 'bg-amber-400' },
+    { k: 'aftermarket', l: 'Aftermarket', c: counts.aftermarket, dot: 'bg-sky-400' },
+  ];
 
   return (
     <div className="w-full max-w-7xl mx-auto px-0 sm:px-0 pb-6 sm:pb-10 animate-fade-in">
-      {/* Compact premium toolbar — full width */}
+      {/* Top toolbar */}
       <div
         className={`rounded-2xl border mb-2.5 sm:mb-3 ${
           isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
         }`}
       >
-        <div className="flex flex-col gap-2.5 sm:gap-3 p-3 sm:p-3.5">
+        <div className="flex flex-col gap-2.5 p-3 sm:p-3.5">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap items-center gap-2 min-w-0">
-              {/* Highlighted New search */}
               <button
                 type="button"
                 onClick={reset}
@@ -393,43 +468,20 @@ const ResultsView: React.FC<{
                 New search
               </button>
               <div className={`h-4 w-px hidden sm:block ${isLight ? 'bg-slate-200' : 'bg-white/10'}`} />
-              <div className="flex flex-wrap items-center gap-1.5">
-                {[
-                  { k: 'all' as FilterType, l: 'All', c: counts.all, icon: null as React.ReactNode },
-                  {
-                    k: 'available' as FilterType,
-                    l: 'Available',
-                    c: counts.available,
-                    icon: (
-                      <svg className="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                      </svg>
-                    ),
-                  },
-                  {
-                    k: 'premium' as FilterType,
-                    l: 'Premium',
-                    c: counts.premium,
-                    icon: <CrownIcon className="w-3 h-3 text-amber-400" />,
-                  },
-                  {
-                    k: 'taken' as FilterType,
-                    l: 'Taken',
-                    c: counts.taken,
-                    icon: (
-                      <svg className="w-3 h-3 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    ),
-                  },
-                ].map((x) => (
-                  <button key={x.k} type="button" onClick={() => setFilter(x.k)} className={chip(filter === x.k)}>
-                    {x.icon}
-                    {x.l}
-                    <span className={`tabular-nums ${filter === x.k ? 'opacity-80' : 'opacity-50'}`}>{x.c}</span>
-                  </button>
-                ))}
-              </div>
+              <button type="button" onClick={() => setFilter('all')} className={chip(filter === 'all')}>
+                All <span className="tabular-nums opacity-70">{counts.all}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setFilter('available')}
+                className={chip(filter === 'available')}
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                Available <span className="tabular-nums opacity-70">{counts.available}</span>
+              </button>
             </div>
 
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
@@ -439,12 +491,6 @@ const ResultsView: React.FC<{
                 label="Registrar"
                 className="justify-start"
               />
-              <button type="button" onClick={cycleSort} className={chip(sortMode !== 'az')} title="Cycle sort: A–Z → Score → Length">
-                Sort: {sortLabel}
-              </button>
-              <button type="button" onClick={() => setShowTlds(!showTlds)} className={chip(showTlds || tldFilter.length > 0)}>
-                TLD{tldFilter.length > 0 ? ` (${tldFilter.length})` : ''}
-              </button>
               <button type="button" onClick={exportCSV} className={chip(false)}>
                 <Icons.Download />
                 CSV
@@ -456,35 +502,6 @@ const ResultsView: React.FC<{
             </div>
           </div>
 
-          {showTlds && tlds.length > 0 && (
-            <div
-              className={`flex flex-wrap gap-1.5 pt-2 border-t animate-fade-in ${
-                isLight ? 'border-slate-100' : 'border-white/[0.06]'
-              }`}
-            >
-              {tlds.map((t) => {
-                const on = tldFilter.includes(t);
-                return (
-                  <button
-                    key={t}
-                    type="button"
-                    onClick={() =>
-                      setTldFilter(on ? tldFilter.filter((x) => x !== t) : [...tldFilter, t])
-                    }
-                    className={chip(on)}
-                  >
-                    .{t}
-                  </button>
-                );
-              })}
-              {tldFilter.length > 0 && (
-                <button type="button" onClick={() => setTldFilter([])} className={chip(false)}>
-                  Clear TLDs
-                </button>
-              )}
-            </div>
-          )}
-
           <div
             className={`flex flex-wrap items-center justify-between gap-2 pt-2 border-t ${
               isLight ? 'border-slate-100' : 'border-white/[0.06]'
@@ -495,8 +512,7 @@ const ResultsView: React.FC<{
               <span className={`tabular-nums font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
                 {results.length.toLocaleString()}
               </span>{' '}
-              of{' '}
-              <span className="tabular-nums">{counts.all.toLocaleString()}</span> domains
+              of <span className="tabular-nums">{counts.all.toLocaleString()}</span> domains
               {results.length > 0 && (
                 <span className={`ml-1.5 ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
                   · avg score{' '}
@@ -505,10 +521,6 @@ const ResultsView: React.FC<{
                   </span>
                 </span>
               )}
-              <span className={`hidden sm:inline ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
-                {' '}
-                · scroll for full list (max 1k)
-              </span>
             </p>
             {counts.checking > 0 ? (
               <div className="flex items-center gap-2 min-w-[140px] sm:min-w-[200px]">
@@ -536,127 +548,356 @@ const ResultsView: React.FC<{
         </div>
       </div>
 
-      {/* Dense 4-col results — scroll full list (max 1k) */}
-      <div
-        className={`rounded-2xl border overflow-hidden ${
-          isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
-        }`}
-      >
-        <div
-          className="max-h-[min(72vh,calc(100vh-11.5rem))] sm:max-h-[min(78vh,calc(100vh-12rem))] overflow-y-auto overscroll-contain select-none"
-          onContextMenu={(e) => e.preventDefault()}
-          onCopy={(e) => e.preventDefault()}
+      {/* Filters sidebar + results list (reference-style) */}
+      <div className="grid grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)] gap-2.5 sm:gap-3 items-start">
+        <aside
+          className={`rounded-2xl border p-3 sm:p-3.5 lg:sticky lg:top-20 ${
+            isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
+          }`}
         >
-          {results.length === 0 ? (
-            <div className={`text-center py-16 px-4 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
-              <p className="text-sm font-semibold mb-1">No domains match this filter</p>
-              <p className="text-[12px]">Switch to All or clear TLD filters</p>
-            </div>
-          ) : (
-            <div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px"
-              style={{ backgroundColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)' }}
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <p
+              className="text-[11px] font-bold uppercase tracking-[0.12em]"
+              style={{ color: 'var(--text-tertiary)' }}
             >
-              {results.map((d) => {
-                const domainHref =
-                  d.status === 'available' || d.status === 'premium'
-                    ? resolveRegisterUrl(d.domain, selectedRegistrar, d.buyUrl)
-                    : d.buyUrl
-                      ? d.buyUrl
-                      : `https://who.is/whois/${encodeURIComponent(d.domain)}`;
-                const domainTitle =
-                  d.status === 'available' || d.status === 'premium'
-                    ? `Search ${d.domain} on ${selectedRegistrar}`
-                    : d.buyUrl
-                      ? d.purchaseInfo || 'View listing'
-                      : 'View WHOIS';
-                const canAct = d.status === 'available' || d.status === 'premium';
+              Filters
+            </p>
+            {hasExtraFilters && (
+              <button
+                type="button"
+                onClick={clearFilters}
+                className={`text-[11px] font-semibold ${
+                  isLight ? 'text-slate-500 hover:text-slate-900' : 'text-white/45 hover:text-white/80'
+                }`}
+              >
+                Reset
+              </button>
+            )}
+          </div>
 
-                return (
-                  <div
-                    key={d.domain}
-                    className={`group flex items-center gap-2 px-2.5 py-2 sm:px-3 sm:py-2.5 min-w-0 transition-colors ${
-                      isLight
-                        ? 'bg-white hover:bg-slate-50'
-                        : 'bg-[#0c0c0e] hover:bg-[#121214]'
-                    } ${
-                      d.status === 'premium'
-                        ? isLight
-                          ? 'ring-1 ring-inset ring-amber-200/80'
-                          : 'ring-1 ring-inset ring-amber-500/15'
-                        : ''
+          {/* Availability */}
+          <div className="mb-4">
+            <p
+              className="text-[10px] font-bold uppercase tracking-[0.12em] mb-1.5"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Availability
+            </p>
+            <div className="space-y-1.5">
+              {availabilityFilters.map((x) => (
+                <button
+                  key={x.k}
+                  type="button"
+                  onClick={() => setFilter(filter === x.k ? 'all' : x.k)}
+                  className={sideBtn(filter === x.k)}
+                >
+                  <span className="inline-flex items-center gap-2 min-w-0">
+                    <span className={`h-2 w-2 rounded-full shrink-0 ${x.dot}`} />
+                    <span className="truncate">{x.l}</span>
+                  </span>
+                  <span className="tabular-nums opacity-70">{x.c}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* TLDs */}
+          {tlds.length > 0 && (
+            <div className="mb-4">
+              <p
+                className="text-[10px] font-bold uppercase tracking-[0.12em] mb-1.5"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                TLDs
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {tlds.map((t) => {
+                  const on = tldFilter.includes(t);
+                  return (
+                    <button
+                      key={t}
+                      type="button"
+                      onClick={() =>
+                        setTldFilter(on ? tldFilter.filter((x) => x !== t) : [...tldFilter, t])
+                      }
+                      className={chip(on)}
+                    >
+                      .{t}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Sort by length */}
+          <div className="mb-4">
+            <p
+              className="text-[10px] font-bold uppercase tracking-[0.12em] mb-1.5"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Sort by length
+            </p>
+            <div className="grid grid-cols-2 gap-1.5">
+              <button
+                type="button"
+                onClick={() => setSortMode('length-asc')}
+                className={chip(sortMode === 'length-asc')}
+              >
+                Shortest
+              </button>
+              <button
+                type="button"
+                onClick={() => setSortMode('length-desc')}
+                className={chip(sortMode === 'length-desc')}
+              >
+                Longest
+              </button>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5 mt-1.5">
+              <button
+                type="button"
+                onClick={() => setSortMode('score')}
+                className={chip(sortMode === 'score')}
+              >
+                Score
+              </button>
+              <button type="button" onClick={() => setSortMode('az')} className={chip(sortMode === 'az')}>
+                A–Z
+              </button>
+            </div>
+          </div>
+
+          {/* Price range */}
+          {priceBounds.max > priceBounds.min && (
+            <div>
+              <p
+                className="text-[10px] font-bold uppercase tracking-[0.12em] mb-1.5"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                Price range
+              </p>
+              <div className="space-y-2">
+                <div
+                  className={`flex items-center justify-between text-[11px] font-semibold tabular-nums ${
+                    isLight ? 'text-slate-600' : 'text-white/60'
+                  }`}
+                >
+                  <span>{formatPriceCompact(priceMin)}</span>
+                  <span>{formatPriceCompact(priceMax)}</span>
+                </div>
+                <label className="block">
+                  <span className="sr-only">Minimum price</span>
+                  <input
+                    type="range"
+                    min={priceBounds.min}
+                    max={priceBounds.max}
+                    step={Math.max(1, Math.round((priceBounds.max - priceBounds.min) / 100))}
+                    value={priceMin}
+                    onChange={(e) => {
+                      const v = Number(e.target.value);
+                      setPriceMin(Math.min(v, priceMax));
+                    }}
+                    className="w-full accent-emerald-500"
+                  />
+                </label>
+                <label className="block">
+                  <span className="sr-only">Maximum price</span>
+                  <input
+                    type="range"
+                    min={priceBounds.min}
+                    max={priceBounds.max}
+                    step={Math.max(1, Math.round((priceBounds.max - priceBounds.min) / 100))}
+                    value={priceMax}
+                    onChange={(e) => {
+                      const v = Number(e.target.value);
+                      setPriceMax(Math.max(v, priceMin));
+                    }}
+                    className="w-full accent-emerald-500"
+                  />
+                </label>
+                {priceFilterActive && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setPriceMin(priceBounds.min);
+                      setPriceMax(priceBounds.max);
+                    }}
+                    className={`text-[11px] font-semibold ${
+                      isLight ? 'text-slate-500 hover:text-slate-900' : 'text-white/45 hover:text-white/80'
                     }`}
                   >
-                    <StatusIcon status={d.status} isLight={isLight} />
-                    <a
-                      href={domainHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title={domainTitle}
-                      className={`min-w-0 flex-1 font-mono text-[13px] sm:text-[15px] font-semibold tracking-tight truncate transition-colors ${
-                        isLight
-                          ? 'text-slate-900 hover:text-slate-950'
-                          : 'text-white hover:text-white'
+                    Clear price filter
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+        </aside>
+
+        {/* Full-width domain list — no truncation grid */}
+        <div
+          className={`rounded-2xl border overflow-hidden min-w-0 ${
+            isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
+          }`}
+        >
+          <div
+            className={`hidden sm:grid grid-cols-[minmax(0,1fr)_auto_auto] gap-3 px-3 sm:px-4 py-2 border-b text-[10px] font-bold uppercase tracking-[0.12em] ${
+              isLight
+                ? 'border-slate-100 text-slate-400 bg-slate-50/80'
+                : 'border-white/[0.06] text-white/35 bg-black/20'
+            }`}
+          >
+            <span>Domain</span>
+            <span className="text-right w-20">Price</span>
+            <span className="text-right w-[5.5rem]">Action</span>
+          </div>
+
+          <div
+            className="max-h-[min(72vh,calc(100vh-11.5rem))] sm:max-h-[min(78vh,calc(100vh-12rem))] overflow-y-auto overscroll-contain"
+            onContextMenu={(e) => e.preventDefault()}
+          >
+            {results.length === 0 ? (
+              <div className={`text-center py-16 px-4 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
+                <p className="text-sm font-semibold mb-1">No domains match this filter</p>
+                <p className="text-[12px]">Adjust availability, TLD, or price filters</p>
+              </div>
+            ) : (
+              <ul className={isLight ? 'divide-y divide-slate-100' : 'divide-y divide-white/[0.06]'}>
+                {results.map((d) => {
+                  const domainHref =
+                    d.status === 'available' || d.status === 'premium'
+                      ? resolveRegisterUrl(d.domain, selectedRegistrar, d.buyUrl)
+                      : d.buyUrl
+                        ? d.buyUrl
+                        : `https://who.is/whois/${encodeURIComponent(d.domain)}`;
+                  const domainTitle =
+                    d.status === 'available' || d.status === 'premium'
+                      ? `Search ${d.domain} on ${selectedRegistrar}`
+                      : d.buyUrl
+                        ? d.purchaseInfo || 'View listing'
+                        : 'View WHOIS';
+                  const canAct = d.status === 'available' || d.status === 'premium';
+                  const isAvail = d.status === 'available';
+
+                  return (
+                    <li
+                      key={d.domain}
+                      className={`group grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto_auto] gap-2 sm:gap-3 items-center px-3 sm:px-4 py-2.5 sm:py-3 transition-colors ${
+                        isLight ? 'hover:bg-slate-50' : 'hover:bg-[#121214]'
+                      } ${
+                        isAvail
+                          ? isLight
+                            ? 'bg-emerald-50/40'
+                            : 'bg-emerald-500/[0.04]'
+                          : d.status === 'premium'
+                            ? isLight
+                              ? 'bg-amber-50/30'
+                              : 'bg-amber-500/[0.03]'
+                            : ''
                       }`}
                     >
-                      {d.domain}
-                    </a>
-                    {d.price && d.status !== 'taken' && d.status !== 'checking' && (
-                      <span
-                        className={`shrink-0 text-[11px] sm:text-[12px] font-medium tabular-nums max-w-[5rem] truncate hidden md:inline ${
+                      <div className="flex items-start gap-2.5 min-w-0">
+                        <div className="mt-0.5">
+                          <StatusIcon status={d.status} isLight={isLight} />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <a
+                            href={domainHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title={`${d.domain} — ${domainTitle}`}
+                            className={`block font-mono text-[14px] sm:text-[15px] font-semibold tracking-tight break-all leading-snug transition-colors ${
+                              isAvail
+                                ? isLight
+                                  ? 'text-emerald-800 hover:text-emerald-950'
+                                  : 'text-emerald-200 hover:text-emerald-100'
+                                : isLight
+                                  ? 'text-slate-900 hover:text-slate-950'
+                                  : 'text-white hover:text-white'
+                            }`}
+                          >
+                            {d.domain}
+                          </a>
+                          {d.status === 'premium' && d.purchaseInfo && (
+                            <p
+                              className={`mt-0.5 text-[10px] sm:text-[11px] truncate ${
+                                isLight ? 'text-amber-700/80' : 'text-amber-300/70'
+                              }`}
+                            >
+                              {d.purchaseInfo}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div
+                        className={`sm:w-20 sm:text-right text-[12px] sm:text-[13px] font-medium tabular-nums ${
                           isLight ? 'text-slate-500' : 'text-white/45'
                         }`}
-                        title={d.price}
                       >
-                        {d.price}
-                      </span>
-                    )}
-                    <div className="relative shrink-0 opacity-90 group-hover:opacity-100">
-                      <RegistrarActionMenu
-                        domain={d.domain}
-                        selectedRegistrar={selectedRegistrar}
-                        onSelectRegistrar={setSelectedRegistrar}
-                        canRegister={canAct}
-                        primaryLabel={d.status === 'premium' ? 'Go' : d.status === 'available' ? 'Go' : 'Info'}
-                        premiumUrl={d.status === 'premium' ? d.buyUrl : undefined}
-                        premiumLabel={d.purchaseInfo}
-                        primaryButtonClassName={
-                          isLight
-                            ? 'bg-slate-900 text-white hover:bg-slate-800'
-                            : 'bg-white text-black hover:bg-white/90'
-                        }
-                        chevronButtonClassName={
-                          isLight
-                            ? 'bg-slate-900 text-white hover:bg-slate-800'
-                            : 'bg-white text-black hover:bg-white/90'
-                        }
-                        fallbackButtonClassName={
-                          isLight
-                            ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                            : 'bg-white/[0.08] text-white/70 hover:bg-white/12'
-                        }
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+                        {d.price && d.status !== 'taken' && d.status !== 'checking' ? d.price : '—'}
+                      </div>
+
+                      <div className="sm:w-[5.5rem] flex sm:justify-end">
+                        <RegistrarActionMenu
+                          domain={d.domain}
+                          selectedRegistrar={selectedRegistrar}
+                          onSelectRegistrar={setSelectedRegistrar}
+                          canRegister={canAct}
+                          primaryLabel={
+                            d.status === 'premium' ? 'Go' : d.status === 'available' ? 'Go' : 'WHOIS'
+                          }
+                          premiumUrl={d.status === 'premium' ? d.buyUrl : undefined}
+                          premiumLabel={d.purchaseInfo}
+                          primaryButtonClassName={
+                            isAvail
+                              ? isLight
+                                ? 'bg-emerald-600 text-white hover:bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.35)]'
+                                : 'bg-emerald-500 text-black hover:bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.45)]'
+                              : isLight
+                                ? 'bg-slate-900 text-white hover:bg-slate-800'
+                                : 'bg-white text-black hover:bg-white/90'
+                          }
+                          chevronButtonClassName={
+                            isAvail
+                              ? isLight
+                                ? 'bg-emerald-700 text-white hover:bg-emerald-600'
+                                : 'bg-emerald-400 text-black hover:bg-emerald-300'
+                              : isLight
+                                ? 'bg-slate-900 text-white hover:bg-slate-800'
+                                : 'bg-white text-black hover:bg-white/90'
+                          }
+                          fallbackButtonClassName={
+                            isLight
+                              ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                              : 'bg-white/[0.08] text-white/70 hover:bg-white/12'
+                          }
+                        />
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+
+          {results.length > 0 && (
+            <div
+              className={`flex flex-wrap items-center justify-between gap-2 px-3 py-2 border-t text-[10px] sm:text-[11px] ${
+                isLight
+                  ? 'border-slate-100 text-slate-400 bg-slate-50/80'
+                  : 'border-white/[0.06] text-white/30 bg-black/20'
+              }`}
+            >
+              <span>
+                Showing {results.length.toLocaleString()} of {counts.all.toLocaleString()} domains
+                {filter !== 'all' ? ` · ${filter}` : ''}
+              </span>
+              <span className="font-medium">Full names shown · max 1,000</span>
             </div>
           )}
         </div>
-
-        {results.length > 0 && (
-          <div
-            className={`flex flex-wrap items-center justify-between gap-2 px-3 py-2 border-t text-[10px] sm:text-[11px] ${
-              isLight ? 'border-slate-100 text-slate-400 bg-slate-50/80' : 'border-white/[0.06] text-white/30 bg-black/20'
-            }`}
-          >
-            <span>
-              {results.length.toLocaleString()} row{results.length === 1 ? '' : 's'} in view
-              {filter !== 'all' ? ` · filter: ${filter}` : ''}
-            </span>
-            <span className="font-medium">Scroll for full list · max 1,000 domains</span>
-          </div>
-        )}
       </div>
 
       {recentSearches.length > 0 && (
@@ -713,7 +954,8 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
   const [filter, setFilter] = useState<FilterType>('all');
   const [sortMode, setSortMode] = useState<SortMode>('score');
   const [tldFilter, setTldFilter] = useState<string[]>([]);
-  const [showTlds, setShowTlds] = useState(false);
+  const [priceMin, setPriceMin] = useState(0);
+  const [priceMax, setPriceMax] = useState(100000);
   const [showResults, setShowResults] = useState(false);
   const [checking, setChecking] = useState(false);
   const [progress, setProgress] = useState({ done: 0, total: 0 });
@@ -944,7 +1186,8 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
     setFilter('all');
     setSortMode('score');
     setTldFilter([]);
-    setShowTlds(false);
+    setPriceMin(0);
+    setPriceMax(100000);
     setProgress({ done: 0, total: 0 });
     checkRef.current = false;
     setChecking(false);
@@ -1038,6 +1281,22 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
 
   const counts = getDomainCounts(domains);
 
+  const priceBounds = React.useMemo(() => {
+    const prices = domains
+      .map((d) => parsePriceValue(d.price))
+      .filter((n): n is number => n !== null && n > 0);
+    if (!prices.length) return { min: 0, max: 100 };
+    const min = Math.floor(Math.min(...prices));
+    const max = Math.ceil(Math.max(...prices));
+    return { min, max: Math.max(min + 1, max) };
+  }, [domains]);
+
+  // Keep range sliders aligned when a new result set loads
+  useEffect(() => {
+    setPriceMin(priceBounds.min);
+    setPriceMax(priceBounds.max);
+  }, [priceBounds.min, priceBounds.max]);
+
   const loadPreviousSearch = useCallback((snapshot: BulkSearchSnapshot) => {
     const withScores = snapshot.domains.map((d) => ({
       ...d,
@@ -1049,7 +1308,6 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
     setFilter('all');
     setSortMode('score');
     setTldFilter([]);
-    setShowTlds(false);
     setProgress({ done: withScores.length, total: withScores.length });
     showToast(`Loaded ${withScores.length} domains from a recent bulk search`, 'success');
   }, [showToast]);
@@ -1072,8 +1330,11 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
         setSortMode={setSortMode}
         tldFilter={tldFilter}
         setTldFilter={setTldFilter}
-        showTlds={showTlds}
-        setShowTlds={setShowTlds}
+        priceMin={priceMin}
+        priceMax={priceMax}
+        setPriceMin={setPriceMin}
+        setPriceMax={setPriceMax}
+        priceBounds={priceBounds}
         progress={progress}
         reset={reset}
         exportCSV={exportCSV}
