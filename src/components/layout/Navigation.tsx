@@ -288,17 +288,37 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
 
                 <Link
                   href="/saved-domains"
-                  className={`group relative ${navBtnBase} ${navBtnInactive}`}
+                  className={`group ${navBtnBase} ${navBtnInactive}`}
+                  aria-label={
+                    savedDomainsCount > 0
+                      ? `Saved domains, ${savedDomainsCount} saved`
+                      : 'Saved domains'
+                  }
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                  <svg
+                    className="w-4 h-4"
+                    fill={savedDomainsCount > 0 ? 'currentColor' : 'none'}
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                    />
                   </svg>
                   <span>Saved</span>
                   {savedDomainsCount > 0 && (
-                    <span className={`absolute -top-1 -right-1 min-w-[20px] rounded-full px-1.5 py-0.5 text-xs font-bold text-center ${
-                      isLight ? 'bg-slate-900 text-white' : 'bg-white text-slate-900'
-                    }`}>
-                      {savedDomainsCount}
+                    <span
+                      className={`inline-flex h-[1.125rem] min-w-[1.125rem] items-center justify-center rounded-md px-1 text-[10px] font-semibold tabular-nums leading-none ${
+                        isLight
+                          ? 'bg-slate-900/6 text-slate-600 ring-1 ring-inset ring-slate-900/10'
+                          : 'bg-white/[0.06] text-white/55 ring-1 ring-inset ring-white/10'
+                      }`}
+                    >
+                      {savedDomainsCount > 99 ? '99+' : savedDomainsCount}
                     </span>
                   )}
                 </Link>
@@ -339,16 +359,35 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 <Link
                   href="/saved-domains"
                   className={`relative p-1.5 rounded-xl transition-all duration-200 border border-transparent ${isLight ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-50' : 'text-white/60 hover:text-white hover:bg-white/[0.06]'}`}
-                  aria-label="Saved domains"
+                  aria-label={
+                    savedDomainsCount > 0
+                      ? `Saved domains, ${savedDomainsCount} saved`
+                      : 'Saved domains'
+                  }
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                  <svg
+                    className="w-4 h-4"
+                    fill={savedDomainsCount > 0 ? 'currentColor' : 'none'}
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                    />
                   </svg>
                   {savedDomainsCount > 0 && (
-                    <span className={`absolute -top-0.5 -right-0.5 min-w-[16px] h-4 rounded-full px-1 text-[10px] font-bold flex items-center justify-center ${
-                      isLight ? 'bg-slate-900 text-white' : 'bg-white text-slate-900'
-                    }`}>
-                      {savedDomainsCount}
+                    <span
+                      className={`absolute -top-0.5 -right-0.5 inline-flex h-3.5 min-w-[0.875rem] items-center justify-center rounded px-1 text-[9px] font-semibold tabular-nums leading-none ${
+                        isLight
+                          ? 'bg-slate-100 text-slate-600 ring-1 ring-slate-200'
+                          : 'bg-[#121214] text-white/65 ring-1 ring-white/12'
+                      }`}
+                    >
+                      {savedDomainsCount > 99 ? '99+' : savedDomainsCount}
                     </span>
                   )}
                 </Link>
@@ -424,9 +463,37 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
               {/* Bottom bar */}
               <div className={`flex items-center justify-between px-4 py-2 border-t ${isLight ? 'border-slate-100' : 'border-white/[0.05]'}`}>
                 <Link href="/learn" onClick={handleDropdownClose} className={`text-[11px] font-semibold ${isLight ? 'text-slate-500' : 'text-white/40'}`}>Learn</Link>
-                <Link href="/saved-domains" onClick={handleDropdownClose} className={`flex items-center gap-1 text-[11px] font-semibold ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
-                  Saved{savedDomainsCount > 0 && ` (${savedDomainsCount})`}
+                <Link
+                  href="/saved-domains"
+                  onClick={handleDropdownClose}
+                  className={`flex items-center gap-1.5 text-[11px] font-semibold ${isLight ? 'text-slate-500' : 'text-white/40'}`}
+                >
+                  <svg
+                    className="w-3.5 h-3.5"
+                    fill={savedDomainsCount > 0 ? 'currentColor' : 'none'}
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                    />
+                  </svg>
+                  Saved
+                  {savedDomainsCount > 0 && (
+                    <span
+                      className={`inline-flex h-4 min-w-[1rem] items-center justify-center rounded px-1 text-[9px] font-semibold tabular-nums ${
+                        isLight
+                          ? 'bg-slate-100 text-slate-600 ring-1 ring-slate-200'
+                          : 'bg-white/[0.06] text-white/55 ring-1 ring-white/10'
+                      }`}
+                    >
+                      {savedDomainsCount > 99 ? '99+' : savedDomainsCount}
+                    </span>
+                  )}
                 </Link>
                 <button onClick={toggleTheme} className={`flex items-center gap-1 text-[11px] font-semibold ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
                   {theme === 'dark' ? <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
