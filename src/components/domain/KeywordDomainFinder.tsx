@@ -72,19 +72,24 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
   const [availFilter, setAvailFilter] = useState<AvailFilter>('all');
   const [typeFilter, setTypeFilter] = useState<TypeFilter>('all');
   const [minLen, setMinLen] = useState(2);
-  const [maxLen, setMaxLen] = useState(24);
+  /** Allow longer prefix+keyword+suffix combos so filters don't wipe results */
+  const [maxLen, setMaxLen] = useState(40);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [generated, setGenerated] = useState<GeneratedDomain[]>([]);
   const [checkedCount, setCheckedCount] = useState(0);
   const [visibleCount, setVisibleCount] = useState(160);
+  /** Keyword used for the last successful generate — filters must use this, not live typing */
+  const [searchPrimary, setSearchPrimary] = useState('');
   /** Filters / popular chips stay collapsed until the user opens them */
   const [showOptions, setShowOptions] = useState(false);
   const [showPopular, setShowPopular] = useState(false);
   const [customTldInput, setCustomTldInput] = useState('');
   const abortRef = useRef<AbortController | null>(null);
+  const searchGenRef = useRef(0);
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const { showToast } = useToast();
   const { selectedRegistrar, setSelectedRegistrar } = usePreferredRegistrar();
 
   const availableTlds = [
@@ -142,7 +147,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     }
   };
 
-  const checkAvailabilityInBatches = useCallback(async (domains: GeneratedDomain[]) => {
+  const checkAvailabilityInBatches = useCallback(async (domains: GeneratedDomain[], gen: number) => {
     const controller = new AbortController();
     abortRef.current = controller;
     setIsChecking(true);
@@ -150,37 +155,62 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     const domainNames = domains.map((d) => d.domain);
     let checked = 0;
 
-    for (let i = 0; i < domainNames.length; i += BATCH_SIZE * CHECK_CONCURRENCY) {
-      if (controller.signal.aborted) break;
-      const batchPromises: Promise<void>[] = [];
-      for (let j = 0; j < CHECK_CONCURRENCY; j++) {
-        const start = i + j * BATCH_SIZE;
-        const batch = domainNames.slice(start, start + BATCH_SIZE);
-        if (batch.length === 0) continue;
-        batchPromises.push(
-          checkDomainAvailability(batch).then((results) => {
-            if (controller.signal.aborted) return;
-            const availMap = new Map(results.map((r) => [r.domain.toLowerCase(), r.available]));
-            setGenerated((prev) =>
-              prev.map((d) => {
-                const avail = availMap.get(d.domain.toLowerCase());
-                return avail !== undefined ? { ...d, available: avail } : d;
+    try {
+      for (let i = 0; i < domainNames.length; i += BATCH_SIZE * CHECK_CONCURRENCY) {
+        if (controller.signal.aborted || gen !== searchGenRef.current) break;
+        const batchPromises: Promise<void>[] = [];
+        for (let j = 0; j < CHECK_CONCURRENCY; j++) {
+          const start = i + j * BATCH_SIZE;
+          const batch = domainNames.slice(start, start + BATCH_SIZE);
+          if (batch.length === 0) continue;
+          batchPromises.push(
+            checkDomainAvailability(batch)
+              .then((results) => {
+                if (controller.signal.aborted || gen !== searchGenRef.current) return;
+                const availMap = new Map(
+                  (results || []).map((r) => [r.domain.toLowerCase(), r.available])
+                );
+                setGenerated((prev) => {
+                  if (gen !== searchGenRef.current) return prev;
+                  return prev.map((d) => {
+                    const avail = availMap.get(d.domain.toLowerCase());
+                    return avail !== undefined ? { ...d, available: avail } : d;
+                  });
+                });
+                checked += batch.length;
+                if (gen === searchGenRef.current) {
+                  setCheckedCount(checked);
+                }
               })
-            );
-            checked += batch.length;
-            setCheckedCount(checked);
-          })
-        );
+              .catch(() => {
+                // Keep domains visible as pending if a batch fails
+                if (gen === searchGenRef.current) {
+                  checked += batch.length;
+                  setCheckedCount(checked);
+                }
+              })
+          );
+        }
+        await Promise.all(batchPromises);
       }
-      await Promise.all(batchPromises);
+    } finally {
+      if (gen === searchGenRef.current) {
+        setIsChecking(false);
+      }
     }
-    setIsChecking(false);
   }, []);
 
   const buildDomainsForPrimary = useCallback(
-    (primaryRaw: string, secondaryRaw?: string) => {
+    (primaryRaw: string, secondaryRaw?: string, tldsOverride?: string[]) => {
       const primary = primaryRaw.toLowerCase().replace(/[^a-z0-9]/g, '');
       if (!primary) return [] as GeneratedDomain[];
+
+      const tlds =
+        tldsOverride && tldsOverride.length > 0
+          ? tldsOverride
+          : selectedTlds.length > 0
+            ? selectedTlds
+            : ['.com'];
 
       const secondary = (secondaryRaw ?? secondaryKeyword)
         .split(',')
@@ -204,30 +234,31 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         });
       };
 
-      for (const tld of selectedTlds) {
-        add(`${primary}${tld}`, 'exact', [primary]);
+      for (const tld of tlds) {
+        const ext = tld.startsWith('.') ? tld : `.${tld}`;
+        add(`${primary}${ext}`, 'exact', [primary]);
         for (const prefix of PREFIXES) {
           if (prefix === primary) continue;
-          add(`${prefix}${primary}${tld}`, 'prefix', [prefix, primary]);
-          if (includeHyphens) add(`${prefix}-${primary}${tld}`, 'hyphen', [prefix, primary]);
+          add(`${prefix}${primary}${ext}`, 'prefix', [prefix, primary]);
+          if (includeHyphens) add(`${prefix}-${primary}${ext}`, 'hyphen', [prefix, primary]);
         }
         for (const suffix of SUFFIXES) {
           if (suffix === primary) continue;
-          add(`${primary}${suffix}${tld}`, 'suffix', [primary, suffix]);
-          if (includeHyphens) add(`${primary}-${suffix}${tld}`, 'hyphen', [primary, suffix]);
+          add(`${primary}${suffix}${ext}`, 'suffix', [primary, suffix]);
+          if (includeHyphens) add(`${primary}-${suffix}${ext}`, 'hyphen', [primary, suffix]);
         }
         for (const sec of secondary) {
-          add(`${primary}${sec}${tld}`, 'combo', [primary, sec]);
-          add(`${sec}${primary}${tld}`, 'combo', [sec, primary]);
+          add(`${primary}${sec}${ext}`, 'combo', [primary, sec]);
+          add(`${sec}${primary}${ext}`, 'combo', [sec, primary]);
           if (includeHyphens) {
-            add(`${primary}-${sec}${tld}`, 'hyphen', [primary, sec]);
-            add(`${sec}-${primary}${tld}`, 'hyphen', [sec, primary]);
+            add(`${primary}-${sec}${ext}`, 'hyphen', [primary, sec]);
+            add(`${sec}-${primary}${ext}`, 'hyphen', [sec, primary]);
           }
           for (const prefix of PREFIXES.slice(0, 40)) {
-            add(`${prefix}${primary}${sec}${tld}`, 'combo', [prefix, primary, sec]);
+            add(`${prefix}${primary}${sec}${ext}`, 'combo', [prefix, primary, sec]);
           }
           for (const suffix of SUFFIXES.slice(0, 40)) {
-            add(`${primary}${sec}${suffix}${tld}`, 'combo', [primary, sec, suffix]);
+            add(`${primary}${sec}${suffix}${ext}`, 'combo', [primary, sec, suffix]);
           }
         }
       }
@@ -253,13 +284,10 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
       .filter(Boolean);
 
     if (seed) {
-      setPrimaryKeyword(seed);
       primary = seed;
     } else if (!primary && secondaryParts.length > 0) {
       primary = secondaryParts[0];
       secondaryParts = secondaryParts.slice(1);
-      setPrimaryKeyword(primary);
-      setSecondaryKeyword(secondaryParts.join(', '));
     }
 
     // Normalize; support multi-word primary → first token + rest as secondary
@@ -268,27 +296,62 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     if (primaryTokens.length > 1) {
       primary = primaryTokens[0];
       secondaryParts = Array.from(new Set([...primaryTokens.slice(1), ...secondaryParts]));
-      setPrimaryKeyword(primary);
-      setSecondaryKeyword(secondaryParts.join(', '));
     } else {
       primary = primaryTokens[0] || primary.replace(/[^a-z0-9]/g, '');
     }
 
-    if (!primary) return;
+    if (!primary) {
+      showToast('Enter a keyword with letters or numbers to search', 'info', 2200);
+      return;
+    }
 
+    // Always keep input + filter keyword in sync with what we generate
+    setPrimaryKeyword(primary);
+    setSecondaryKeyword(secondaryParts.join(', '));
+    setSearchPrimary(primary);
+
+    // Ensure at least one TLD; pass explicitly so we never build against empty state
+    const tlds = selectedTlds.length > 0 ? selectedTlds : ['.com'];
+    if (!selectedTlds.length) setSelectedTlds(['.com']);
+
+    const gen = ++searchGenRef.current;
     abortRef.current?.abort();
     setIsGenerating(true);
     setVisibleCount(160);
+    // Reset result filters so a prior "Available only" / type / length cut never hides a fresh search
     setAvailFilter('all');
+    setTypeFilter('all');
+    setMinLen(2);
+    setMaxLen(40);
 
-    const domains = buildDomainsForPrimary(primary, secondaryParts.join(', '));
-    if (!domains.length) {
-      setIsGenerating(false);
-      return;
+    try {
+      let list = buildDomainsForPrimary(primary, secondaryParts.join(', '), tlds);
+
+      // Safety net: if build returned nothing, force .com exact/prefix/suffix
+      if (!list.length) {
+        list = buildDomainsForPrimary(primary, secondaryParts.join(', '), ['.com']);
+      }
+
+      if (gen !== searchGenRef.current) return;
+
+      if (!list.length) {
+        setGenerated([]);
+        showToast('No domains generated — try another keyword or extension', 'info', 2500);
+        return;
+      }
+
+      setGenerated(list);
+      void checkAvailabilityInBatches(list, gen);
+    } catch (err) {
+      console.error('Keyword search failed:', err);
+      if (gen === searchGenRef.current) {
+        showToast('Search failed — please try again', 'error', 2500);
+      }
+    } finally {
+      if (gen === searchGenRef.current) {
+        setIsGenerating(false);
+      }
     }
-    setGenerated(domains);
-    setIsGenerating(false);
-    void checkAvailabilityInBatches(domains);
   };
 
   const handleStop = () => {
@@ -298,11 +361,17 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
   const filtered = useMemo(() => {
     let list = [...generated];
-    const primary = primaryKeyword.toLowerCase().replace(/[^a-z0-9]/g, '');
+    // Must use searchPrimary (last successful generate), NOT live input — typing after search was wiping results
+    const primary = searchPrimary.toLowerCase().replace(/[^a-z0-9]/g, '');
     list = list.filter((d) => d.length >= minLen && d.length <= maxLen);
 
-    if (filterMode === 'starts') list = list.filter((d) => d.domain.split('.')[0].startsWith(primary));
-    else if (filterMode === 'ends') list = list.filter((d) => d.domain.split('.')[0].endsWith(primary));
+    if (primary) {
+      if (filterMode === 'starts') {
+        list = list.filter((d) => (d.domain.split('.')[0] || '').startsWith(primary));
+      } else if (filterMode === 'ends') {
+        list = list.filter((d) => (d.domain.split('.')[0] || '').endsWith(primary));
+      }
+    }
 
     if (typeFilter !== 'all') list = list.filter((d) => d.type === typeFilter);
     if (availFilter === 'available') list = list.filter((d) => d.available === true);
@@ -314,22 +383,22 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     else list.sort((a, b) => b.popularity - a.popularity || a.length - b.length);
 
     return list;
-  }, [generated, filterMode, availFilter, sortMode, primaryKeyword, typeFilter, minLen, maxLen]);
+  }, [generated, filterMode, availFilter, sortMode, searchPrimary, typeFilter, minLen, maxLen]);
 
   const visible = filtered.slice(0, visibleCount);
 
   // Counts respect keyword position + length (same base as result list)
   const positionPool = useMemo(() => {
-    const primary = primaryKeyword.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const primary = searchPrimary.toLowerCase().replace(/[^a-z0-9]/g, '');
     return generated.filter((d) => {
       if (d.length < minLen || d.length > maxLen) return false;
       if (typeFilter !== 'all' && d.type !== typeFilter) return false;
       const name = d.domain.split('.')[0] || '';
-      if (filterMode === 'starts') return !!primary && name.startsWith(primary);
-      if (filterMode === 'ends') return !!primary && name.endsWith(primary);
+      if (filterMode === 'starts') return !primary || name.startsWith(primary);
+      if (filterMode === 'ends') return !primary || name.endsWith(primary);
       return true;
     });
-  }, [generated, primaryKeyword, filterMode, minLen, maxLen, typeFilter]);
+  }, [generated, searchPrimary, filterMode, minLen, maxLen, typeFilter]);
 
   const availableCount = positionPool.filter((d) => d.available === true).length;
   const takenCount = positionPool.filter((d) => d.available === false).length;
@@ -887,9 +956,25 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               ))}
             </div>
             {visible.length === 0 && (
-              <p className="text-center py-12 text-[12px]" style={{ color: 'var(--text-muted)' }}>
-                No domains match these filters
-              </p>
+              <div className="text-center py-12 space-y-3">
+                <p className="text-[12px]" style={{ color: 'var(--text-muted)' }}>
+                  No domains match these filters
+                  {searchPrimary ? ` for “${searchPrimary}”` : ''}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFilterMode('all');
+                    setAvailFilter('all');
+                    setTypeFilter('all');
+                    setMinLen(2);
+                    setMaxLen(40);
+                  }}
+                  className={pill(false)}
+                >
+                  Reset filters
+                </button>
+              </div>
             )}
           </div>
 
