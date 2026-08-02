@@ -9,6 +9,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import { resolveRegisterUrl, type RegistrarName } from '@/lib/registrars';
+import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
 
 interface DomainTag {
   domain: string;
@@ -350,6 +351,25 @@ const ResultsView: React.FC<{
 }) => {
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const { showToast } = useToast();
+  const [savedDomains, setSavedDomains] = useState<string[]>([]);
+
+  useEffect(() => {
+    setSavedDomains(getSavedDomainNames());
+    const sync = () => setSavedDomains(getSavedDomainNames());
+    window.addEventListener('savedDomainsUpdated', sync);
+    return () => window.removeEventListener('savedDomainsUpdated', sync);
+  }, []);
+
+  const handleSave = useCallback(
+    (domain: string) => {
+      const { saved } = toggleSavedDomain(domain);
+      setSavedDomains(getSavedDomainNames());
+      showToast(saved ? `Saved ${domain}` : `Removed ${domain}`, 'success', 1500);
+    },
+    [showToast]
+  );
+
   const tlds = Array.from(new Set(domains.map((d) => d.domain.split('.').pop() || ''))).sort();
   const priceFilterActive = priceMin > priceBounds.min || priceMax < priceBounds.max;
 
@@ -746,6 +766,7 @@ const ResultsView: React.FC<{
                       ? d.purchaseInfo || 'View listing'
                       : 'View WHOIS';
                 const canAct = d.status === 'available' || d.status === 'premium';
+                const isSaved = savedDomains.includes(d.domain.toLowerCase());
 
                 return (
                   <div
@@ -780,6 +801,35 @@ const ResultsView: React.FC<{
                         {d.price}
                       </span>
                     )}
+                    <button
+                      type="button"
+                      onClick={() => handleSave(d.domain)}
+                      className={`h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-full border transition-colors ${
+                        isSaved
+                          ? isLight
+                            ? 'text-slate-900 border-slate-900 bg-slate-100'
+                            : 'text-white border-white/30 bg-white/10'
+                          : isLight
+                            ? 'text-slate-400 border-slate-200 hover:text-slate-700 hover:border-slate-300'
+                            : 'text-white/40 border-white/10 hover:text-white/80 hover:border-white/20'
+                      }`}
+                      aria-label={isSaved ? `Remove ${d.domain} from saved` : `Save ${d.domain}`}
+                      title={isSaved ? 'Saved — click to remove' : 'Save domain'}
+                    >
+                      <svg
+                        className="w-3.5 h-3.5"
+                        fill={isSaved ? 'currentColor' : 'none'}
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                        />
+                      </svg>
+                    </button>
                     <div className="relative shrink-0 opacity-90 group-hover:opacity-100">
                       <RegistrarActionMenu
                         domain={d.domain}
