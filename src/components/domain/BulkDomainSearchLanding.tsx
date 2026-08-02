@@ -653,7 +653,24 @@ const SearchInputSection: React.FC<{
                 </button>
               )}
               {domains.length > 0 && (
-                <button type="button" onClick={onReset} className={chipClass()}>
+                <button
+                  type="button"
+                  onClick={onReset}
+                  className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] sm:text-[12px] font-bold transition-colors duration-150 ${
+                    isLight
+                      ? 'bg-slate-900 text-white border-slate-900 shadow-sm shadow-slate-900/20 hover:bg-slate-800'
+                      : 'bg-white text-black border-white shadow-sm shadow-black/30 hover:bg-white/90'
+                  }`}
+                  title="Remove every domain from this list"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    />
+                  </svg>
                   Clear all
                 </button>
               )}
