@@ -130,13 +130,16 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
         octx.textAlign = 'center';
         octx.textBaseline = 'middle';
 
-        // Fit full brand name — larger on mobile, still never crop left/right
-        const sidePad = isMobile ? 10 : 20;
+        // Fit full brand name — scale with canvas height for premium footer bands
+        const sidePad = isMobile ? 8 : 16;
         const maxTextW = Math.max(80, cssW - sidePad * 2);
-        const maxByH = cssH * (isMobile ? 0.58 : 0.62);
-        const maxByCap = isMobile ? 56 : 96;
-        let fontSize = Math.min(maxByH, maxByCap, cssW / Math.max(6, text.length * 0.32));
-        fontSize = Math.max(isMobile ? 28 : 28, fontSize);
+        const maxByH = cssH * (isMobile ? 0.68 : 0.72);
+        // Allow larger caps when parent passes a tall height (footer premium band)
+        const maxByCap = isMobile
+          ? Math.min(72, Math.max(40, cssH * 0.42))
+          : Math.min(128, Math.max(72, cssH * 0.55));
+        let fontSize = Math.min(maxByH, maxByCap, cssW / Math.max(5.2, text.length * 0.28));
+        fontSize = Math.max(isMobile ? 30 : 32, fontSize);
 
         const applyFont = (size: number) => {
           octx.font = `800 ${size}px "Inter", "SF Pro Display", "Segoe UI", system-ui, -apple-system, sans-serif`;

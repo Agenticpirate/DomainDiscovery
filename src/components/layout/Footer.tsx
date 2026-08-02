@@ -440,30 +440,69 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Brand band — static by default; particle FX only when scrolled into view */}
+      {/* Brand band — larger premium wordmark; particle FX when in view */}
       <div
         ref={brandBandRef}
-        className={`relative z-[1] min-h-[5.5rem] sm:min-h-[11rem] border-t ${hairline}`}
+        className={`relative z-[1] min-h-[10.5rem] sm:min-h-[15rem] md:min-h-[17rem] border-t overflow-hidden ${hairline}`}
       >
+        {/* Ambient depth — soft vignette + brand glow for premium feel */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          aria-hidden
+          style={{
+            background: isLight
+              ? 'radial-gradient(ellipse 85% 70% at 50% 45%, rgba(99,102,241,0.14) 0%, rgba(14,165,233,0.08) 38%, transparent 72%)'
+              : 'radial-gradient(ellipse 90% 75% at 50% 42%, rgba(255,255,255,0.07) 0%, rgba(148,163,184,0.04) 36%, transparent 70%)',
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-60"
+          aria-hidden
+          style={{
+            background: isLight
+              ? 'linear-gradient(90deg, transparent, rgba(99,102,241,0.45), transparent)'
+              : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent)',
+          }}
+        />
+
         {mounted && showParticles ? (
-          <EvervaultHover className="w-full" radius={280}>
-            <div className="relative z-[1] max-w-6xl mx-auto px-3 sm:px-4 py-3 sm:py-8 flex items-center justify-center overflow-hidden">
+          <EvervaultHover className="w-full" radius={360}>
+            <div className="relative z-[1] max-w-7xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10 pb-5 sm:pb-8 flex flex-col items-center justify-center overflow-hidden">
               <ParticleText
                 key={`footer-particle-${isLight ? 'l' : 'd'}`}
                 text={BRAND}
-                height={140}
+                height={212}
                 className="w-full max-w-full"
               />
+              <p
+                className={`mt-1 sm:mt-2 max-w-xl px-4 text-center text-[10px] sm:text-[12px] font-semibold tracking-[0.18em] sm:tracking-[0.22em] uppercase ${
+                  isLight ? 'text-indigo-500/70' : 'text-white/35'
+                }`}
+              >
+                Domain research · Built for builders
+              </p>
             </div>
           </EvervaultHover>
         ) : (
-          <div className="flex min-h-[5.5rem] sm:min-h-[11rem] items-center justify-center px-4">
+          <div className="relative z-[1] flex min-h-[10.5rem] sm:min-h-[15rem] md:min-h-[17rem] flex-col items-center justify-center gap-2 sm:gap-3 px-4 py-8 sm:py-10">
             <p
-              className={`text-lg sm:text-5xl font-black tracking-tight text-center ${
-                isLight ? 'text-slate-300' : 'text-white/20'
+              className={`text-center text-4xl sm:text-6xl md:text-7xl font-black tracking-[-0.03em] leading-none select-none ${
+                isLight
+                  ? 'bg-gradient-to-b from-slate-700 via-indigo-600 to-slate-400 bg-clip-text text-transparent'
+                  : 'bg-gradient-to-b from-white via-white/85 to-white/25 bg-clip-text text-transparent'
               }`}
+              style={{
+                textShadow: isLight ? undefined : '0 0 80px rgba(255,255,255,0.12)',
+              }}
             >
               {BRAND}
+            </p>
+            <p
+              className={`text-center text-[10px] sm:text-[12px] font-semibold tracking-[0.18em] sm:tracking-[0.22em] uppercase ${
+                isLight ? 'text-indigo-500/70' : 'text-white/35'
+              }`}
+            >
+              Domain research · Built for builders
             </p>
           </div>
         )}
