@@ -81,6 +81,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
   /** Filters / popular chips stay collapsed until the user opens them */
   const [showOptions, setShowOptions] = useState(false);
   const [showPopular, setShowPopular] = useState(false);
+  const [customTldInput, setCustomTldInput] = useState('');
   const abortRef = useRef<AbortController | null>(null);
   const { theme } = useTheme();
   const isLight = theme === 'light';
@@ -115,9 +116,30 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     );
   };
 
-  const addTldFromSelect = (tld: string) => {
-    if (!tld) return;
+  /** Accept .com, com, COM, or co.uk-style labels → normalize to .tld */
+  const normalizeTld = (raw: string): string | null => {
+    let t = raw.trim().toLowerCase();
+    if (!t) return null;
+    t = t.replace(/^\.+/, '');
+    // allow multi-label like co.uk → .co.uk
+    t = t.replace(/[^a-z0-9.]/g, '');
+    t = t.replace(/\.+/g, '.').replace(/^\./, '').replace(/\.$/, '');
+    if (!t || t.length < 2 || t.length > 32) return null;
+    if (!/^[a-z0-9]+(\.[a-z0-9]+)*$/.test(t)) return null;
+    return `.${t}`;
+  };
+
+  const addTld = (raw: string) => {
+    const tld = normalizeTld(raw);
+    if (!tld) return false;
     setSelectedTlds((prev) => (prev.includes(tld) ? prev : [...prev, tld]));
+    return true;
+  };
+
+  const commitCustomTld = () => {
+    if (addTld(customTldInput)) {
+      setCustomTldInput('');
+    }
   };
 
   const checkAvailabilityInBatches = useCallback(async (domains: GeneratedDomain[]) => {
@@ -392,31 +414,85 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           />
         </div>
 
-        {/* 2) Extensions dropdown + CTA */}
-        <div className="mb-3 flex flex-col sm:flex-row sm:items-end gap-2.5 sm:gap-3">
-          <div className="flex-1 min-w-0">
+        {/* 2) Extensions — type any TLD, pick presets, chips for selected */}
+        <div className="mb-3 space-y-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <label
-              className={`block text-[10px] font-bold uppercase tracking-widest mb-1.5 ${
+              className={`text-[10px] font-bold uppercase tracking-widest ${
                 isLight ? 'text-slate-500' : 'text-white/40'
               }`}
             >
               Extensions
             </label>
-            <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-[10px]" style={{ color: 'var(--text-muted)' }}>
+              Type any TLD (e.g. shop, .io, co.uk) or pick a preset
+            </span>
+          </div>
+
+          <div
+            className={`flex flex-col sm:flex-row sm:items-center gap-2 rounded-2xl border p-2 sm:p-2.5 ${
+              isLight ? 'bg-slate-50/80 border-slate-200' : 'bg-white/[0.02] border-white/[0.08]'
+            }`}
+          >
+            <div className="flex flex-1 min-w-0 flex-wrap items-center gap-1.5">
+              <div className="relative flex-1 min-w-[8.5rem] max-w-full sm:max-w-[14rem]">
+                <span
+                  className={`pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] font-mono ${
+                    isLight ? 'text-slate-400' : 'text-white/30'
+                  }`}
+                >
+                  .
+                </span>
+                <input
+                  type="text"
+                  value={customTldInput.replace(/^\.+/, '')}
+                  onChange={(e) => setCustomTldInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ',' || e.key === ' ') {
+                      e.preventDefault();
+                      commitCustomTld();
+                    }
+                  }}
+                  onBlur={() => {
+                    if (customTldInput.trim()) commitCustomTld();
+                  }}
+                  placeholder="type tld…"
+                  autoComplete="off"
+                  spellCheck={false}
+                  className={`w-full rounded-xl border pl-6 pr-3 py-2 text-[12px] font-mono font-semibold outline-none transition-colors ${
+                    isLight
+                      ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-slate-400'
+                      : 'bg-[#121214] border-white/10 text-white placeholder:text-white/25 focus:border-white/25'
+                  }`}
+                  aria-label="Type a preferred extension"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={commitCustomTld}
+                disabled={!normalizeTld(customTldInput)}
+                className={`shrink-0 rounded-xl border px-3 py-2 text-[11px] font-bold transition-colors disabled:opacity-40 ${
+                  isLight
+                    ? 'border-slate-200 bg-white text-slate-700 hover:bg-slate-100'
+                    : 'border-white/10 bg-white/[0.06] text-white/80 hover:bg-white/10'
+                }`}
+              >
+                Add
+              </button>
               <select
                 value=""
                 onChange={(e) => {
-                  addTldFromSelect(e.target.value);
+                  addTld(e.target.value);
                   e.target.value = '';
                 }}
-                className={`rounded-xl border px-3 py-2 text-[12px] font-semibold outline-none min-w-[9rem] ${
+                className={`rounded-xl border px-2.5 py-2 text-[12px] font-semibold outline-none min-w-[7.5rem] ${
                   isLight
-                    ? 'bg-slate-50 border-slate-200 text-slate-800'
+                    ? 'bg-white border-slate-200 text-slate-800'
                     : 'bg-[#121214] border-white/10 text-white'
                 }`}
-                aria-label="Add extension"
+                aria-label="Choose preset extension"
               >
-                <option value="">Add extension…</option>
+                <option value="">Presets…</option>
                 {availableTlds.map((tld) => (
                   <option key={tld} value={tld} disabled={selectedTlds.includes(tld)}>
                     {tld}
@@ -424,51 +500,64 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => void handleSearch()}
+              disabled={!canSearch || isGenerating}
+              className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-[13px] font-bold transition-opacity duration-150 w-full sm:w-auto shrink-0 ${
+                !canSearch || isGenerating
+                  ? isLight
+                    ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                    : 'bg-white/15 text-white/35 cursor-not-allowed'
+                  : isLight
+                    ? 'bg-slate-900 text-white hover:bg-slate-800'
+                    : 'bg-white text-black hover:bg-white/90'
+              }`}
+            >
+              {isGenerating ? (
+                <>
+                  <span className="h-3.5 w-3.5 rounded-full border-2 border-current border-t-transparent animate-spin" />
+                  Building…
+                </>
+              ) : (
+                <>
+                  <Icons.Search className="w-4 h-4" />
+                  Find domains
+                </>
+              )}
+            </button>
+          </div>
+
+          {selectedTlds.length > 0 && (
+            <div className="flex flex-wrap items-center gap-1.5">
               {selectedTlds.map((tld) => (
                 <button
                   key={tld}
                   type="button"
                   onClick={() => toggleTld(tld)}
-                  title={selectedTlds.length === 1 ? 'At least one extension required' : `Remove ${tld}`}
-                  className={`inline-flex items-center gap-1 rounded-lg border px-2 py-1 text-[11px] font-mono font-semibold ${
+                  title={
+                    selectedTlds.length === 1
+                      ? 'At least one extension required'
+                      : `Remove ${tld}`
+                  }
+                  className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-mono font-semibold transition-colors ${
                     isLight
-                      ? 'bg-slate-900 text-white border-slate-900'
-                      : 'bg-white text-black border-white'
+                      ? 'bg-slate-900 text-white border-slate-900 hover:bg-slate-800'
+                      : 'bg-white text-black border-white hover:bg-white/90'
                   }`}
                 >
                   {tld}
-                  {selectedTlds.length > 1 && <span className="opacity-60">×</span>}
+                  {selectedTlds.length > 1 && (
+                    <span className="opacity-55 text-[12px] leading-none" aria-hidden>
+                      ×
+                    </span>
+                  )}
                 </button>
               ))}
             </div>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => void handleSearch()}
-            disabled={!canSearch || isGenerating}
-            className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-2.5 text-[13px] font-bold transition-opacity duration-150 w-full sm:w-auto shrink-0 ${
-              !canSearch || isGenerating
-                ? isLight
-                  ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
-                  : 'bg-white/15 text-white/35 cursor-not-allowed'
-                : isLight
-                  ? 'bg-slate-900 text-white hover:bg-slate-800'
-                  : 'bg-white text-black hover:bg-white/90'
-            }`}
-          >
-            {isGenerating ? (
-              <>
-                <span className="h-3.5 w-3.5 rounded-full border-2 border-current border-t-transparent animate-spin" />
-                Building…
-              </>
-            ) : (
-              <>
-                <Icons.Search className="w-4 h-4" />
-                Find domains
-              </>
-            )}
-          </button>
+          )}
         </div>
 
         {/* 3) Optional toggles */}
