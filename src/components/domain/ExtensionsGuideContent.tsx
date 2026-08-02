@@ -924,8 +924,8 @@ export const ExtensionsGuideContent: React.FC = () => {
         </p>
       </section>
 
-      {/* Homepage FAQ design system — full width mobile accordion; desktop grid unchanged */}
-      <div className="scroll-mt-24 w-full min-w-0 max-w-full overflow-x-hidden">
+      {/* FAQ — same width as registrar/catalog blocks above (no nested max-w-4xl offset) */}
+      <div className="scroll-mt-24 w-full min-w-0 max-w-full">
         <PremiumFaqGrid
           id="extension-faqs"
           title="Domain extension FAQs"
@@ -935,8 +935,8 @@ export const ExtensionsGuideContent: React.FC = () => {
             answer: f.a,
             icon: FAQ_ICONS[f.icon],
           }))}
-          maxWidthClass="max-w-none sm:max-w-4xl"
-          className="!mb-0 !px-0 !mx-0 w-full max-w-full"
+          maxWidthClass="max-w-none"
+          className="!mb-0 !px-0 !mx-0 !max-w-none w-full max-w-full"
         />
       </div>
 

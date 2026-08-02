@@ -185,20 +185,42 @@ const PAGE_MOBILE_CSS = `
   }
 }
 
-/* All breakpoints: solid FAQ / definition plates so ambient dots never bleed through cards or copy */
+/* FAQ / definition — solid plates, no sheen shade, aligned to page content width */
+.domain-extensions-page #extension-faqs.section-shell {
+  max-width: none !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 .domain-extensions-page #extension-faqs .shine-border,
 .domain-extensions-page [id^="seo-faqs-"] .shine-border,
 .domain-extensions-page [data-aeo-definition] .relative.isolate {
   background-color: #0a0a0c !important;
   background-image: none !important;
+  box-shadow: none !important;
+}
+.domain-extensions-page #extension-faqs .shine-border::before,
+.domain-extensions-page #extension-faqs .shine-border::after,
+.domain-extensions-page [id^="seo-faqs-"] .shine-border::before,
+.domain-extensions-page [id^="seo-faqs-"] .shine-border::after {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+}
+.domain-extensions-page #extension-faqs .shine-border:hover,
+.domain-extensions-page #extension-faqs .shine-border:focus-within {
+  transform: none !important;
 }
 html.light .domain-extensions-page #extension-faqs .shine-border,
 html.light .domain-extensions-page [id^="seo-faqs-"] .shine-border,
 html.light .domain-extensions-page [data-aeo-definition] .relative.isolate {
   background-color: #ffffff !important;
   background-image: none !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
 }
-/* FAQ title / subtitle scrim — fully opaque under type (no dotted glow through headings) */
+/* Title block matches card plate (no darker #050505 shade) */
 .domain-extensions-page #extension-faqs .section-title,
 .domain-extensions-page #extension-faqs .section-sub,
 .domain-extensions-page [id^="seo-faqs-"] .section-title,
@@ -208,12 +230,17 @@ html.light .domain-extensions-page [data-aeo-definition] .relative.isolate {
 }
 .domain-extensions-page #extension-faqs > div:first-child,
 .domain-extensions-page [id^="seo-faqs-"] > div:first-child {
-  background: #050505 !important;
+  background: #0a0a0c !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 html.light .domain-extensions-page #extension-faqs > div:first-child,
 html.light .domain-extensions-page [id^="seo-faqs-"] > div:first-child {
-  background: #f8fafc !important;
+  background: #ffffff !important;
+  border-color: #e2e8f0;
 }
 /* Soften ambient field on this long page (less bubble density behind cards) */
 .domain-extensions-page [data-ambient-dots="single"] {

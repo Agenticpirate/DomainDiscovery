@@ -115,7 +115,9 @@ export function PremiumFaqGrid({
     >
       {showHeader && (
         <div
-          className="relative isolate mx-auto mb-1.5 sm:mb-4 max-w-3xl overflow-hidden rounded-2xl px-3 py-3 sm:px-5 sm:py-4 text-center"
+          className={`relative isolate mb-2 sm:mb-4 w-full overflow-hidden rounded-2xl border px-3 py-3 sm:px-5 sm:py-4 text-center ${
+            isLight ? 'border-slate-200' : 'border-white/10'
+          }`}
           style={{ backgroundColor: plateFill }}
         >
           {/* Fully opaque plate — ambient dots never bleed through titles/subtitles */}
