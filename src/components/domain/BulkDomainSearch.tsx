@@ -111,8 +111,8 @@ function StatusIcon({
       <span
         className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
           isLight
-            ? 'bg-slate-100 text-slate-800 border border-slate-200'
-            : 'bg-white/[0.08] text-white border border-white/12'
+            ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+            : 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
         }`}
         title="Available"
         aria-label="Available"
