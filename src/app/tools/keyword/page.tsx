@@ -17,7 +17,8 @@ export default function KeywordPage() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const isLight = mounted ? theme === 'light' : false;
-  const solid = isLight ? '#ffffff' : '#0a0a0c';
+  // Dark plate on light mode matches product dark surfaces (#0a0a0c)
+  const badgeBg = '#0a0a0c';
 
   return (
     <div
@@ -32,26 +33,22 @@ export default function KeywordPage() {
 
         <SectionAmbient intensity="soft" contentClassName="page-gutter pt-1 sm:pt-2 pb-3 sm:pb-5">
           <div className="max-w-3xl mx-auto text-center mb-4 sm:mb-5">
-            {/* Solid badge plate so ambient dots never show through */}
+            {/* Dark badge (same DNA as dark mode) — solid so ambient dots never show through */}
             <div
-              className={`relative isolate inline-flex items-center gap-1.5 overflow-hidden rounded-full px-2.5 py-1 mb-2.5 sm:mb-3.5 text-[10px] sm:text-[11px] font-semibold tracking-wide border ${
+              className={`relative isolate inline-flex items-center gap-1.5 overflow-hidden rounded-full px-2.5 py-1 mb-2.5 sm:mb-3.5 text-[10px] sm:text-[11px] font-semibold tracking-wide border shadow-lg ${
                 isLight
-                  ? 'text-slate-600 border-slate-200/90 shadow-sm shadow-slate-900/[0.04]'
-                  : 'text-white/65 border-white/12'
+                  ? 'text-white/85 border-white/10 shadow-slate-900/15'
+                  : 'text-white/65 border-white/12 shadow-black/40'
               }`}
-              style={{ backgroundColor: solid }}
+              style={{ backgroundColor: badgeBg }}
             >
               <span
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-full"
-                style={{ backgroundColor: solid }}
+                style={{ backgroundColor: badgeBg }}
               />
               <span className="relative z-[1] inline-flex items-center gap-1.5">
-                <span
-                  className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                    isLight ? 'bg-emerald-500' : 'bg-emerald-400/90'
-                  }`}
-                />
+                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
                 <span className="sm:hidden">Prefixes · suffixes · live checks</span>
                 <span className="hidden sm:inline">
                   Thousands of prefixes &amp; suffixes · Live availability

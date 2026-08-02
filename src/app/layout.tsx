@@ -4,6 +4,7 @@ import { ToastProvider } from "@/components/ui/Toast";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { DeferredSiteAds } from "@/components/ads/DeferredSiteAds";
+import { RouteProgress } from "@/components/ui/motion/RouteProgress";
 import {
   getLlmDatasetJsonLd,
   getOrganizationJsonLd,
@@ -199,6 +200,7 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" title={`${SITE_BRAND.name} Learn`} href="/feed.xml" />
         <ThemeProvider>
           <ToastProvider>
+            <RouteProgress />
             <ScrollToTop />
             {children}
             {/* Ads deferred until idle — avoids GTmetrix/PSI "No CPU idle period" */}

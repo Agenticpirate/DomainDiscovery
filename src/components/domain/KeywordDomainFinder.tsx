@@ -419,21 +419,28 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     }`;
 
   return (
-    <div className="space-y-3 sm:space-y-4 animate-fade-in">
+    <div className="space-y-3 sm:space-y-4">
       {/* Main card — search first, options on demand */}
       <div
-        className={`rounded-2xl border p-4 sm:p-6 ${
+        className={`rounded-2xl border overflow-hidden ${
           isLight
-            ? 'bg-white border-slate-200/90 shadow-xl shadow-slate-900/[0.06] ring-1 ring-slate-900/[0.03]'
+            ? 'bg-white border-slate-200/90 shadow-xl shadow-slate-900/[0.07] ring-1 ring-slate-900/[0.04]'
             : 'bg-[#0c0c0e] border-white/[0.1]'
         }`}
       >
-        <div className="flex flex-wrap items-start justify-between gap-3 mb-4 sm:mb-5">
+        {/* Header — dark surface on light mode (product chrome from dark mode) */}
+        <div
+          className={`flex flex-wrap items-start justify-between gap-3 px-4 sm:px-6 py-3.5 sm:py-4 ${
+            isLight
+              ? 'bg-[#0c0c0e] text-white border-b border-white/[0.06]'
+              : 'px-4 sm:px-6 pt-4 sm:pt-5 pb-0'
+          }`}
+        >
           <div className="flex items-center gap-2.5 sm:gap-3">
             <div
               className={`p-2 sm:p-2.5 rounded-xl border shrink-0 ${
                 isLight
-                  ? 'bg-gradient-to-br from-slate-800 to-slate-950 text-white border-slate-800 shadow-md shadow-slate-900/20'
+                  ? 'bg-white text-black border-white shadow-sm'
                   : 'bg-white text-black border-white'
               }`}
             >
@@ -442,14 +449,14 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             <div>
               <h3
                 className={`text-base sm:text-lg font-black tracking-tight ${
-                  isLight ? 'text-slate-900' : ''
+                  isLight ? 'text-white' : ''
                 }`}
               >
                 Keyword domain finder
               </h3>
               <p
                 className={`text-[11px] sm:text-xs mt-0.5 ${
-                  isLight ? 'text-slate-500' : ''
+                  isLight ? 'text-white/45' : ''
                 }`}
                 style={isLight ? undefined : { color: 'var(--text-muted)' }}
               >
@@ -464,6 +471,8 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             label="Registrar"
           />
         </div>
+
+        <div className="p-4 sm:p-6 pt-4 sm:pt-5">
 
         {/* 1) Search fields first */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
@@ -648,10 +657,10 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-[13px] font-bold transition-all duration-150 w-full sm:w-auto shrink-0 ${
                 !canSearch || isGenerating
                   ? isLight
-                    ? 'bg-slate-200/90 text-slate-400 cursor-not-allowed border border-slate-200'
+                    ? 'bg-[#0a0a0c]/35 text-white/50 cursor-not-allowed'
                     : 'bg-white/15 text-white/35 cursor-not-allowed'
                   : isLight
-                    ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/20 hover:shadow-lg hover:shadow-slate-900/25'
+                    ? 'bg-[#0a0a0c] text-white hover:bg-black shadow-md shadow-slate-900/25 hover:shadow-lg hover:shadow-slate-900/30'
                     : 'bg-white text-black hover:bg-white/90'
               }`}
             >
@@ -826,6 +835,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             Type a primary or secondary keyword, then click Find domains
           </p>
         )}
+        </div>
       </div>
 
       {/* Results */}
@@ -833,22 +843,23 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         <div
           className={`rounded-2xl border overflow-hidden ${
             isLight
-              ? 'bg-white border-slate-200/90 shadow-xl shadow-slate-900/[0.06] ring-1 ring-slate-900/[0.03]'
+              ? 'bg-white border-slate-200/90 shadow-xl shadow-slate-900/[0.07] ring-1 ring-slate-900/[0.04]'
               : 'bg-[#0c0c0e] border-white/[0.1]'
           }`}
         >
+          {/* Dark stats chrome (light mode) — same surfaces as dark product UI */}
           <div
-            className={`px-3 sm:px-4 py-3 border-b space-y-2.5 ${
+            className={`px-3 sm:px-4 py-2.5 sm:py-3 border-b ${
               isLight
-                ? 'border-slate-100 bg-gradient-to-b from-slate-50/90 to-white'
+                ? 'bg-[#0c0c0e] border-white/[0.06] text-white'
                 : 'border-white/[0.06]'
             }`}
           >
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px]">
-                <span className={`font-bold tabular-nums ${isLight ? 'text-slate-900' : 'text-white'}`}>
+                <span className="font-bold tabular-nums text-white">
                   {filtered.length.toLocaleString()}
-                  <span className={`font-medium ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
+                  <span className="font-medium text-white/40">
                     {' '}
                     / {positionTotal.toLocaleString()}
                     <span className="hidden sm:inline">
@@ -858,13 +869,13 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   </span>
                 </span>
                 {availableCount > 0 && (
-                  <span className="text-emerald-500 font-semibold">{availableCount} available</span>
+                  <span className="text-emerald-400 font-semibold">{availableCount} available</span>
                 )}
                 {takenCount > 0 && (
-                  <span className={isLight ? 'text-slate-400' : 'text-white/30'}>{takenCount} taken</span>
+                  <span className="text-white/35">{takenCount} taken</span>
                 )}
                 {uncheckedCount > 0 && isChecking && (
-                  <span className={isLight ? 'text-slate-500' : 'text-white/45'}>
+                  <span className="text-white/50">
                     checking {checkedCount.toLocaleString()}…
                   </span>
                 )}
@@ -885,14 +896,20 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             </div>
 
             {isChecking && (
-              <div className={`h-1 rounded-full overflow-hidden ${isLight ? 'bg-slate-100' : 'bg-white/10'}`}>
+              <div className="mt-2 h-1 rounded-full overflow-hidden bg-white/10">
                 <div
-                  className="h-full rounded-full bg-emerald-500 transition-all duration-300"
+                  className="h-full rounded-full bg-emerald-400 transition-all duration-300"
                   style={{ width: `${Math.min(100, progressPct)}%` }}
                 />
               </div>
             )}
+          </div>
 
+          <div
+            className={`px-3 sm:px-4 py-3 border-b space-y-2.5 ${
+              isLight ? 'border-slate-100 bg-slate-50/50' : 'border-white/[0.06]'
+            }`}
+          >
             {/* Position + sort also editable after results (same state as form) */}
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="text-[9px] font-bold uppercase tracking-wide mr-0.5" style={{ color: 'var(--text-muted)' }}>

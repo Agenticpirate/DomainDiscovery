@@ -39,6 +39,12 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     setMounted(true);
   }, []);
 
+  // Close menus on route change so next page opens clean (no stale dropdown flash)
+  useEffect(() => {
+    setOpenDropdown(null);
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
