@@ -1,14 +1,17 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useToast } from '@/components/ui/Toast';
 import {
   REGISTRARS,
   resolveRegisterUrl,
   type RegistrarName,
 } from '@/lib/registrars';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
+import { RegistrarActionMenu } from '@/components/domain/RegistrarControls';
+import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
 import generatorKeywords from '@/data/generator-keywords.json';
 
 interface GeneratedDomain {
@@ -71,6 +74,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
   const [viewType, setViewType] = useState<ViewType>('grid');
   /** Default Spaceship; user pick persists and drives Continue / buy URLs */
   const { selectedRegistrar, setSelectedRegistrar } = usePreferredRegistrar();
+  const { showToast } = useToast();
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
   const [showDomainPopup, setShowDomainPopup] = useState(false);
   const [seedCategory, setSeedCategory] = useState<SeedCategory>('trending');
@@ -78,7 +82,25 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
   const [minLen, setMinLen] = useState(3);
   const [maxLen, setMaxLen] = useState(20);
   const [includeCompounds, setIncludeCompounds] = useState(true);
+  const [savedDomains, setSavedDomains] = useState<string[]>([]);
   const searchGenRef = React.useRef(0);
+
+  useEffect(() => {
+    setSavedDomains(getSavedDomainNames());
+    const sync = () => setSavedDomains(getSavedDomainNames());
+    window.addEventListener('savedDomainsUpdated', sync);
+    return () => window.removeEventListener('savedDomainsUpdated', sync);
+  }, []);
+
+  const handleSave = useCallback(
+    (domain: string) => {
+      const full = domain.includes('.') ? domain : `${domain}.com`;
+      const { saved } = toggleSavedDomain(full);
+      setSavedDomains(getSavedDomainNames());
+      showToast(saved ? `Saved ${full}` : `Removed ${full}`, 'success', 1500);
+    },
+    [showToast]
+  );
 
   const seedWords = useMemo(() => {
     if (seedCategory === 'all') {
@@ -741,7 +763,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   className="hidden sm:block text-[9.5px] leading-snug"
                   style={{ color: 'var(--text-muted)' }}
                 >
-                  “Continue” opens {selectedRegistrar}
+                  “Go” opens {selectedRegistrar}
                 </span>
               </label>
 
@@ -899,158 +921,202 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
 
           {filteredSuggestions.length > 0 ? (
             viewType === 'grid' ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1.5 sm:gap-2 p-2 sm:p-3">
-                {filteredSuggestions.slice(0, visibleCount).map((suggestion, i) => (
-                  <div
-                    key={`${suggestion.name}-${i}`}
-                    className={`shine-border no-lift group flex items-center justify-between gap-2 rounded-xl border px-2.5 py-2.5 transition-all ${
-                      isAvailableSuggestion(suggestion)
-                        ? isLight
-                          ? 'bg-white border-slate-200 hover:border-emerald-300 hover:shadow-sm'
-                          : 'bg-white/[0.02] border-white/10 hover:border-emerald-500/30'
-                        : isPremiumSuggestion(suggestion)
-                          ? isLight
-                            ? 'bg-amber-50/50 border-amber-200'
-                            : 'bg-amber-500/[0.05] border-amber-400/20'
-                          : isLight
-                            ? 'bg-slate-50/80 border-slate-100 opacity-80'
-                            : 'bg-white/[0.015] border-white/[0.06] opacity-75'
-                    }`}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => handleDomainClick(suggestion.name)}
-                      className="flex items-center gap-1.5 min-w-0 flex-1 text-left"
+              /* 3-col cards only — no gap-px grey voids on incomplete rows */
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5 p-2 sm:p-3 auto-rows-auto">
+                {filteredSuggestions.slice(0, visibleCount).map((suggestion, i) => {
+                  const fullDomain = `${suggestion.name}.com`;
+                  const isSaved = savedDomains.includes(fullDomain.toLowerCase());
+                  const canRegister =
+                    isAvailableSuggestion(suggestion) || isPremiumSuggestion(suggestion);
+                  return (
+                    <div
+                      key={`${suggestion.name}-${i}`}
+                      className={`group flex items-center gap-2 rounded-xl border px-2.5 py-2.5 min-w-0 transition-colors ${
+                        isLight
+                          ? 'bg-white border-slate-200 hover:bg-slate-50'
+                          : 'bg-[#121214] border-white/[0.08] hover:bg-[#161618]'
+                      }`}
                     >
-                      <span
-                        className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                      <button
+                        type="button"
+                        onClick={() => handleDomainClick(suggestion.name)}
+                        className="flex items-center gap-1.5 min-w-0 flex-1 text-left"
+                      >
+                        <span
+                          className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                            isAvailableSuggestion(suggestion)
+                              ? isLight
+                                ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.35)]'
+                                : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.4)]'
+                              : isPremiumSuggestion(suggestion)
+                                ? 'bg-amber-400'
+                                : isLight
+                                  ? 'bg-rose-400'
+                                  : 'bg-rose-400/80'
+                          }`}
+                        />
+                        <span className="font-mono text-[12px] sm:text-[13px] font-semibold truncate">
+                          {suggestion.name}
+                          <span className={isLight ? 'text-slate-400' : 'text-white/35'}>.com</span>
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleSave(fullDomain)}
+                        className={`h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-full border transition-colors ${
+                          isSaved
+                            ? isLight
+                              ? 'text-slate-900 border-slate-900 bg-slate-100'
+                              : 'text-white border-white/30 bg-white/10'
+                            : isLight
+                              ? 'text-slate-400 border-slate-200 hover:text-slate-700'
+                              : 'text-white/40 border-white/10 hover:text-white/80'
+                        }`}
+                        aria-label={isSaved ? `Remove ${fullDomain}` : `Save ${fullDomain}`}
+                        title={isSaved ? 'Saved' : 'Save domain'}
+                      >
+                        <svg
+                          className="w-3.5 h-3.5"
+                          fill={isSaved ? 'currentColor' : 'none'}
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                          />
+                        </svg>
+                      </button>
+                      <RegistrarActionMenu
+                        domain={fullDomain}
+                        selectedRegistrar={selectedRegistrar}
+                        onSelectRegistrar={setSelectedRegistrar}
+                        canRegister={canRegister}
+                        primaryLabel={
                           isAvailableSuggestion(suggestion)
-                            ? 'bg-emerald-500'
+                            ? 'Go'
                             : isPremiumSuggestion(suggestion)
-                              ? 'bg-amber-400'
-                              : isLight
-                                ? 'bg-rose-400'
-                                : 'bg-rose-400/80'
-                        }`}
+                              ? suggestion.price || 'Go'
+                              : 'Info'
+                        }
+                        primaryButtonClassName={
+                          isLight
+                            ? 'bg-slate-900 text-white hover:bg-slate-800 text-[10px] sm:text-[11px] font-semibold pl-2.5 pr-2 py-1'
+                            : 'bg-white text-black hover:bg-white/90 text-[10px] sm:text-[11px] font-semibold pl-2.5 pr-2 py-1'
+                        }
+                        chevronButtonClassName={
+                          isLight
+                            ? 'bg-slate-900 text-white hover:bg-slate-800 px-1.5 py-1'
+                            : 'bg-white text-black hover:bg-white/90 px-1.5 py-1'
+                        }
+                        fallbackButtonClassName={
+                          isLight
+                            ? 'bg-slate-100 text-slate-600 hover:bg-slate-200 text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-full'
+                            : 'bg-white/[0.08] text-white/70 hover:bg-white/12 text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-full'
+                        }
                       />
-                      <span className="font-mono text-[12px] sm:text-[13px] font-bold truncate">
-                        {suggestion.name}
-                        <span className={isLight ? 'text-slate-400' : 'text-white/35'}>.com</span>
-                      </span>
-                    </button>
-                    {isAvailableSuggestion(suggestion) ? (
-                      <a
-                        href={registerHref(suggestion.name)}
-                        target="_blank"
-                        rel="sponsored noopener noreferrer"
-                        data-affiliate={selectedRegistrar === 'Spaceship' ? 'spaceship' : undefined}
-                        data-registrar={selectedRegistrar}
-                        data-placement="generator-continue"
-                        className={`shrink-0 rounded-md px-2 py-1 text-[10px] font-bold transition-colors ${
-                          isLight
-                            ? 'bg-emerald-600 text-white hover:bg-emerald-500'
-                            : 'bg-emerald-500 text-black hover:bg-emerald-400'
-                        }`}
-                      >
-                        Continue
-                      </a>
-                    ) : isPremiumSuggestion(suggestion) ? (
-                      <button
-                        type="button"
-                        onClick={() => handleDomainClick(suggestion.name)}
-                        title="Search this premium domain at registrars"
-                        className={`shrink-0 rounded-md px-2 py-1 text-[10px] font-bold transition-colors ${
-                          isLight
-                            ? 'bg-amber-100 text-amber-800 hover:bg-amber-200'
-                            : 'bg-amber-500/20 text-amber-200 hover:bg-amber-500/30'
-                        }`}
-                      >
-                        {suggestion.price || 'Premium'}
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => handleDomainClick(suggestion.name)}
-                        title="Search this domain at registrars"
-                        className={`shrink-0 rounded-md px-2 py-1 text-[10px] font-medium transition-colors ${
-                          isLight
-                            ? 'text-slate-500 hover:bg-slate-100'
-                            : 'text-white/40 hover:bg-white/[0.06] hover:text-white/70'
-                        }`}
-                      >
-                        Taken
-                      </button>
-                    )}
-                  </div>
-                ))}
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div className={`divide-y ${isLight ? 'divide-slate-100' : 'divide-white/[0.05]'}`}>
-                {filteredSuggestions.slice(0, visibleCount).map((suggestion, i) => (
-                  <div
-                    key={`${suggestion.name}-${i}`}
-                    className={`flex items-center justify-between gap-3 px-3 sm:px-4 py-2 ${
-                      isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.03]'
-                    }`}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => handleDomainClick(suggestion.name)}
-                      className="flex items-center gap-2 min-w-0 flex-1 text-left"
+                {filteredSuggestions.slice(0, visibleCount).map((suggestion, i) => {
+                  const fullDomain = `${suggestion.name}.com`;
+                  const isSaved = savedDomains.includes(fullDomain.toLowerCase());
+                  const canRegister =
+                    isAvailableSuggestion(suggestion) || isPremiumSuggestion(suggestion);
+                  return (
+                    <div
+                      key={`${suggestion.name}-${i}`}
+                      className={`flex items-center justify-between gap-2 px-3 sm:px-4 py-2 ${
+                        isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.03]'
+                      }`}
                     >
-                      <span
-                        className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                      <button
+                        type="button"
+                        onClick={() => handleDomainClick(suggestion.name)}
+                        className="flex items-center gap-2 min-w-0 flex-1 text-left"
+                      >
+                        <span
+                          className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                            isAvailableSuggestion(suggestion)
+                              ? isLight
+                                ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.35)]'
+                                : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.4)]'
+                              : isPremiumSuggestion(suggestion)
+                                ? 'bg-amber-400'
+                                : isLight
+                                  ? 'bg-rose-400'
+                                  : 'bg-rose-400/80'
+                          }`}
+                        />
+                        <span className="font-mono text-[12px] sm:text-[13px] font-semibold truncate">
+                          {fullDomain}
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleSave(fullDomain)}
+                        className={`h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-full border transition-colors ${
+                          isSaved
+                            ? isLight
+                              ? 'text-slate-900 border-slate-900 bg-slate-100'
+                              : 'text-white border-white/30 bg-white/10'
+                            : isLight
+                              ? 'text-slate-400 border-slate-200 hover:text-slate-700'
+                              : 'text-white/40 border-white/10 hover:text-white/80'
+                        }`}
+                        aria-label={isSaved ? `Remove ${fullDomain}` : `Save ${fullDomain}`}
+                        title={isSaved ? 'Saved' : 'Save domain'}
+                      >
+                        <svg
+                          className="w-3.5 h-3.5"
+                          fill={isSaved ? 'currentColor' : 'none'}
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                          />
+                        </svg>
+                      </button>
+                      <RegistrarActionMenu
+                        domain={fullDomain}
+                        selectedRegistrar={selectedRegistrar}
+                        onSelectRegistrar={setSelectedRegistrar}
+                        canRegister={canRegister}
+                        primaryLabel={
                           isAvailableSuggestion(suggestion)
-                            ? 'bg-emerald-500'
+                            ? 'Go'
                             : isPremiumSuggestion(suggestion)
-                              ? 'bg-amber-400'
-                              : isLight
-                                ? 'bg-rose-400'
-                                : 'bg-rose-400/80'
-                        }`}
-                      />
-                      <span className="font-mono text-[12px] sm:text-[13px] font-semibold truncate">
-                        {suggestion.name}.com
-                      </span>
-                    </button>
-                    {isAvailableSuggestion(suggestion) ? (
-                      <a
-                        href={registerHref(suggestion.name)}
-                        target="_blank"
-                        rel="sponsored noopener noreferrer"
-                        data-affiliate={selectedRegistrar === 'Spaceship' ? 'spaceship' : undefined}
-                        data-registrar={selectedRegistrar}
-                        data-placement="generator-continue"
-                        className={`shrink-0 rounded-md px-2.5 py-1 text-[10px] font-bold ${
+                              ? suggestion.price || 'Go'
+                              : 'Info'
+                        }
+                        primaryButtonClassName={
                           isLight
-                            ? 'bg-emerald-600 text-white'
-                            : 'bg-emerald-500 text-black'
-                        }`}
-                      >
-                        Continue
-                      </a>
-                    ) : isPremiumSuggestion(suggestion) ? (
-                      <button
-                        type="button"
-                        onClick={() => handleDomainClick(suggestion.name)}
-                        title="Search this premium domain at registrars"
-                        className="shrink-0 rounded-md px-2.5 py-1 text-[10px] font-bold text-amber-500 hover:bg-amber-500/10 transition-colors"
-                      >
-                        {suggestion.price || 'Premium'}
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => handleDomainClick(suggestion.name)}
-                        title="Search this domain at registrars"
-                        className="shrink-0 rounded-md px-2.5 py-1 text-[10px] transition-colors hover:opacity-80"
-                        style={{ color: 'var(--text-muted)' }}
-                      >
-                        Taken
-                      </button>
-                    )}
-                  </div>
-                ))}
+                            ? 'bg-slate-900 text-white hover:bg-slate-800 text-[10px] sm:text-[11px] font-semibold pl-2.5 pr-2 py-1'
+                            : 'bg-white text-black hover:bg-white/90 text-[10px] sm:text-[11px] font-semibold pl-2.5 pr-2 py-1'
+                        }
+                        chevronButtonClassName={
+                          isLight
+                            ? 'bg-slate-900 text-white hover:bg-slate-800 px-1.5 py-1'
+                            : 'bg-white text-black hover:bg-white/90 px-1.5 py-1'
+                        }
+                        fallbackButtonClassName={
+                          isLight
+                            ? 'bg-slate-100 text-slate-600 hover:bg-slate-200 text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-full'
+                            : 'bg-white/[0.08] text-white/70 hover:bg-white/12 text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-full'
+                        }
+                      />
+                    </div>
+                  );
+                })}
               </div>
             )
           ) : (
