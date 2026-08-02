@@ -580,50 +580,88 @@ const SearchInputSection: React.FC<{
                   isLight ? 'bg-slate-50 border-slate-200' : 'bg-black/30 border-white/[0.06]'
                 }`}
               >
-                {domains.map((d) => (
-                  <span
-                    key={d.domain}
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] sm:text-[12px] font-medium select-none ${
-                      isLight
-                        ? 'bg-white text-slate-700 border border-slate-200'
-                        : 'text-white/85 border border-white/10'
-                    }`}
-                    style={{
-                      userSelect: 'none',
-                      backgroundColor: isLight ? undefined : '#121214',
-                    }}
-                  >
-                    <span
-                      className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                        d.status === 'available'
+                {domains.map((d) => {
+                  const chipTone =
+                    d.status === 'available'
+                      ? isLight
+                        ? 'bg-emerald-50/90 text-emerald-900 border-emerald-200/80'
+                        : 'bg-emerald-500/[0.08] text-emerald-100/95 border-emerald-500/25'
+                      : d.status === 'premium'
+                        ? isLight
+                          ? 'bg-amber-50/90 text-amber-950 border-amber-200/80'
+                          : 'bg-amber-500/[0.08] text-amber-50/95 border-amber-500/25'
+                        : d.status === 'taken' || d.status === 'error'
                           ? isLight
-                            ? 'bg-slate-900'
-                            : 'bg-white'
-                          : d.status === 'taken'
-                            ? isLight
-                              ? 'bg-slate-400'
-                              : 'bg-white/35'
-                            : d.status === 'premium'
-                              ? isLight
-                                ? 'bg-slate-700'
-                                : 'bg-white/70'
-                              : isLight
-                                ? 'bg-slate-300'
-                                : 'bg-white/25'
-                      }`}
-                      title={d.status}
-                    />
-                    <span className="font-mono">{d.domain}</span>
-                    <button
-                      type="button"
-                      onClick={() => setDomains((p) => p.filter((x) => x.domain !== d.domain))}
-                      className={`ml-0.5 rounded px-0.5 ${isLight ? 'hover:bg-slate-100 text-slate-400' : 'hover:bg-white/10 text-white/40'}`}
-                      aria-label={`Remove ${d.domain}`}
+                            ? 'bg-rose-50/80 text-rose-900 border-rose-200/70'
+                            : 'bg-rose-500/[0.08] text-rose-50/90 border-rose-500/20'
+                          : isLight
+                            ? 'bg-white text-slate-700 border-slate-200'
+                            : 'bg-[#121214] text-white/85 border-white/10';
+
+                  const dotTone =
+                    d.status === 'available'
+                      ? isLight
+                        ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.45)]'
+                        : 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]'
+                      : d.status === 'premium'
+                        ? isLight
+                          ? 'bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.4)]'
+                          : 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.45)]'
+                        : d.status === 'taken' || d.status === 'error'
+                          ? isLight
+                            ? 'bg-rose-500'
+                            : 'bg-rose-400'
+                          : isLight
+                            ? 'bg-slate-300'
+                            : 'bg-white/30';
+
+                  const removeTone =
+                    d.status === 'available'
+                      ? isLight
+                        ? 'text-emerald-600/50 hover:bg-emerald-100 hover:text-emerald-800'
+                        : 'text-emerald-200/40 hover:bg-emerald-500/15 hover:text-emerald-100'
+                      : d.status === 'premium'
+                        ? isLight
+                          ? 'text-amber-700/50 hover:bg-amber-100 hover:text-amber-900'
+                          : 'text-amber-200/40 hover:bg-amber-500/15 hover:text-amber-100'
+                        : d.status === 'taken' || d.status === 'error'
+                          ? isLight
+                            ? 'text-rose-500/50 hover:bg-rose-100 hover:text-rose-800'
+                            : 'text-rose-200/40 hover:bg-rose-500/15 hover:text-rose-100'
+                          : isLight
+                            ? 'text-slate-400 hover:bg-slate-100'
+                            : 'text-white/40 hover:bg-white/10';
+
+                  return (
+                    <span
+                      key={d.domain}
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] sm:text-[12px] font-medium select-none border ${chipTone}`}
+                      style={{ userSelect: 'none' }}
+                      title={
+                        d.status === 'available'
+                          ? 'Available'
+                          : d.status === 'premium'
+                            ? 'Premium'
+                            : d.status === 'taken'
+                              ? 'Taken / registered'
+                              : d.status === 'checking'
+                                ? 'Checking…'
+                                : d.status
+                      }
                     >
-                      ×
-                    </button>
-                  </span>
-                ))}
+                      <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotTone}`} aria-hidden />
+                      <span className="font-mono">{d.domain}</span>
+                      <button
+                        type="button"
+                        onClick={() => setDomains((p) => p.filter((x) => x.domain !== d.domain))}
+                        className={`ml-0.5 rounded px-0.5 transition-colors ${removeTone}`}
+                        aria-label={`Remove ${d.domain}`}
+                      >
+                        ×
+                      </button>
+                    </span>
+                  );
+                })}
               </div>
               <div className="flex gap-2">
                 <textarea
