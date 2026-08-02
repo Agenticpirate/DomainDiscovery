@@ -411,10 +411,10 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     `inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold rounded-lg border transition-colors ${
       active
         ? isLight
-          ? 'bg-slate-900 text-white border-slate-900'
+          ? 'bg-slate-900 text-white border-slate-900 shadow-sm shadow-slate-900/15'
           : 'bg-white text-black border-white'
         : isLight
-          ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+          ? 'bg-slate-50/90 text-slate-600 border-slate-200/90 hover:border-slate-300 hover:bg-white hover:text-slate-800'
           : 'bg-white/[0.04] text-white/65 border-white/10 hover:bg-white/[0.08] hover:text-white'
     }`;
 
@@ -422,22 +422,37 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     <div className="space-y-3 sm:space-y-4 animate-fade-in">
       {/* Main card — search first, options on demand */}
       <div
-        className={`rounded-2xl border p-3.5 sm:p-5 ${
-          isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
+        className={`rounded-2xl border p-4 sm:p-6 ${
+          isLight
+            ? 'bg-white border-slate-200/90 shadow-xl shadow-slate-900/[0.06] ring-1 ring-slate-900/[0.03]'
+            : 'bg-[#0c0c0e] border-white/[0.1]'
         }`}
       >
-        <div className="flex flex-wrap items-start justify-between gap-3 mb-3 sm:mb-4">
-          <div className="flex items-center gap-2.5">
+        <div className="flex flex-wrap items-start justify-between gap-3 mb-4 sm:mb-5">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <div
-              className={`p-2 rounded-xl border ${
-                isLight ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-black border-white'
+              className={`p-2 sm:p-2.5 rounded-xl border shrink-0 ${
+                isLight
+                  ? 'bg-gradient-to-br from-slate-800 to-slate-950 text-white border-slate-800 shadow-md shadow-slate-900/20'
+                  : 'bg-white text-black border-white'
               }`}
             >
               <Icons.Search />
             </div>
             <div>
-              <h3 className="text-base sm:text-lg font-black tracking-tight">Keyword domain finder</h3>
-              <p className="text-[11px] sm:text-xs" style={{ color: 'var(--text-muted)' }}>
+              <h3
+                className={`text-base sm:text-lg font-black tracking-tight ${
+                  isLight ? 'text-slate-900' : ''
+                }`}
+              >
+                Keyword domain finder
+              </h3>
+              <p
+                className={`text-[11px] sm:text-xs mt-0.5 ${
+                  isLight ? 'text-slate-500' : ''
+                }`}
+                style={isLight ? undefined : { color: 'var(--text-muted)' }}
+              >
                 {PREFIXES.length.toLocaleString()}+ prefixes · {SUFFIXES.length.toLocaleString()}+ suffixes ·{' '}
                 {POPULAR.length.toLocaleString()}+ seeds
               </p>
@@ -484,7 +499,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         </div>
 
         {/* Keyword position — always visible (required choice for search shape) */}
-        <div className="mb-3">
+        <div className="mb-4">
           <label
             className={`block text-[10px] font-bold uppercase tracking-widest mb-1.5 ${
               isLight ? 'text-slate-500' : 'text-white/40'
@@ -523,7 +538,10 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               </button>
             ))}
           </div>
-          <p className="mt-1.5 text-[10px] sm:text-[11px]" style={{ color: 'var(--text-muted)' }}>
+          <p
+            className={`mt-1.5 text-[10px] sm:text-[11px] ${isLight ? 'text-slate-500' : ''}`}
+            style={isLight ? undefined : { color: 'var(--text-muted)' }}
+          >
             {filterMode === 'starts' && 'Only domains that start with your keyword.'}
             {filterMode === 'ends' && 'Only domains that end with your keyword.'}
             {filterMode === 'all' && 'All prefix, suffix, and combo patterns.'}
@@ -531,7 +549,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         </div>
 
         {/* 2) Extensions — type any TLD, pick presets, chips for selected */}
-        <div className="mb-3 space-y-2">
+        <div className="mb-4 space-y-2.5">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <label
               className={`text-[10px] font-bold uppercase tracking-widest ${
@@ -540,14 +558,19 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             >
               Extensions
             </label>
-            <span className="text-[10px]" style={{ color: 'var(--text-muted)' }}>
+            <span
+              className={`text-[10px] ${isLight ? 'text-slate-400' : ''}`}
+              style={isLight ? undefined : { color: 'var(--text-muted)' }}
+            >
               Type any TLD (e.g. shop, .io, co.uk) or pick a preset
             </span>
           </div>
 
           <div
             className={`flex flex-col sm:flex-row sm:items-center gap-2 rounded-2xl border p-2 sm:p-2.5 ${
-              isLight ? 'bg-slate-50/80 border-slate-200' : 'bg-white/[0.02] border-white/[0.08]'
+              isLight
+                ? 'bg-gradient-to-b from-slate-50 to-slate-50/60 border-slate-200/90 shadow-inner shadow-slate-900/[0.02]'
+                : 'bg-white/[0.02] border-white/[0.08]'
             }`}
           >
             <div className="flex flex-1 min-w-0 flex-wrap items-center gap-1.5">
@@ -577,7 +600,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   spellCheck={false}
                   className={`w-full rounded-xl border pl-6 pr-3 py-2 text-[12px] font-mono font-semibold outline-none transition-colors ${
                     isLight
-                      ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-slate-400'
+                      ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 shadow-sm focus:border-slate-400 focus:shadow-md'
                       : 'bg-[#121214] border-white/10 text-white placeholder:text-white/25 focus:border-white/25'
                   }`}
                   aria-label="Type a preferred extension"
@@ -589,7 +612,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 disabled={!normalizeTld(customTldInput)}
                 className={`shrink-0 rounded-xl border px-3 py-2 text-[11px] font-bold transition-colors disabled:opacity-40 ${
                   isLight
-                    ? 'border-slate-200 bg-white text-slate-700 hover:bg-slate-100'
+                    ? 'border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 hover:border-slate-300'
                     : 'border-white/10 bg-white/[0.06] text-white/80 hover:bg-white/10'
                 }`}
               >
@@ -603,7 +626,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 }}
                 className={`rounded-xl border px-2.5 py-2 text-[12px] font-semibold outline-none min-w-[7.5rem] ${
                   isLight
-                    ? 'bg-white border-slate-200 text-slate-800'
+                    ? 'bg-white border-slate-200 text-slate-800 shadow-sm'
                     : 'bg-[#121214] border-white/10 text-white'
                 }`}
                 aria-label="Choose preset extension"
@@ -622,13 +645,13 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               type="button"
               onClick={() => void handleSearch()}
               disabled={!canSearch || isGenerating}
-              className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-[13px] font-bold transition-opacity duration-150 w-full sm:w-auto shrink-0 ${
+              className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-[13px] font-bold transition-all duration-150 w-full sm:w-auto shrink-0 ${
                 !canSearch || isGenerating
                   ? isLight
-                    ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                    ? 'bg-slate-200/90 text-slate-400 cursor-not-allowed border border-slate-200'
                     : 'bg-white/15 text-white/35 cursor-not-allowed'
                   : isLight
-                    ? 'bg-slate-900 text-white hover:bg-slate-800'
+                    ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/20 hover:shadow-lg hover:shadow-slate-900/25'
                     : 'bg-white text-black hover:bg-white/90'
               }`}
             >
@@ -660,7 +683,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   }
                   className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-mono font-semibold transition-colors ${
                     isLight
-                      ? 'bg-slate-900 text-white border-slate-900 hover:bg-slate-800'
+                      ? 'bg-slate-900 text-white border-slate-900 shadow-sm shadow-slate-900/15 hover:bg-slate-800'
                       : 'bg-white text-black border-white hover:bg-white/90'
                   }`}
                 >
@@ -714,7 +737,20 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         </div>
 
         {showPopular && (
-          <div className="mt-2.5 mb-1">
+          <div
+            className={`mt-3 mb-1 rounded-xl border p-2.5 sm:p-3 ${
+              isLight
+                ? 'bg-slate-50/70 border-slate-200/80'
+                : 'bg-white/[0.02] border-white/[0.06]'
+            }`}
+          >
+            <p
+              className={`text-[10px] font-bold uppercase tracking-widest mb-2 ${
+                isLight ? 'text-slate-500' : 'text-white/40'
+              }`}
+            >
+              Popular seeds
+            </p>
             <div className="flex flex-wrap gap-1.5">
               {POPULAR_CHIPS.map((item) => (
                 <button
@@ -723,7 +759,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   onClick={() => void handleSearch(item.word)}
                   className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold transition-colors ${
                     isLight
-                      ? 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-900 hover:text-white hover:border-slate-900'
+                      ? 'bg-white text-slate-700 border-slate-200 shadow-sm hover:bg-slate-900 hover:text-white hover:border-slate-900 hover:shadow-md'
                       : 'bg-white/[0.04] text-white/70 border-white/10 hover:bg-white hover:text-black hover:border-white'
                   }`}
                 >
@@ -783,7 +819,10 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         )}
 
         {!canSearch && (
-          <p className="mt-2 text-[11px]" style={{ color: 'var(--text-muted)' }}>
+          <p
+            className={`mt-2 text-[11px] ${isLight ? 'text-slate-500' : ''}`}
+            style={isLight ? undefined : { color: 'var(--text-muted)' }}
+          >
             Type a primary or secondary keyword, then click Find domains
           </p>
         )}
@@ -793,12 +832,16 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
       {generated.length > 0 && (
         <div
           className={`rounded-2xl border overflow-hidden ${
-            isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
+            isLight
+              ? 'bg-white border-slate-200/90 shadow-xl shadow-slate-900/[0.06] ring-1 ring-slate-900/[0.03]'
+              : 'bg-[#0c0c0e] border-white/[0.1]'
           }`}
         >
           <div
             className={`px-3 sm:px-4 py-3 border-b space-y-2.5 ${
-              isLight ? 'border-slate-100' : 'border-white/[0.06]'
+              isLight
+                ? 'border-slate-100 bg-gradient-to-b from-slate-50/90 to-white'
+                : 'border-white/[0.06]'
             }`}
           >
             <div className="flex flex-wrap items-center justify-between gap-2">
@@ -903,7 +946,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   onChange={(e) => setTypeFilter(e.target.value as TypeFilter)}
                   className={`rounded-lg border px-2 py-1 text-[11px] font-semibold outline-none ${
                     isLight
-                      ? 'bg-white border-slate-200 text-slate-700'
+                      ? 'bg-white border-slate-200 text-slate-700 shadow-sm'
                       : 'bg-white/[0.04] border-white/10 text-white/70'
                   }`}
                 >
@@ -914,7 +957,12 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   <option value="combo">Combo</option>
                   <option value="hyphen">Hyphen</option>
                 </select>
-                <label className="inline-flex items-center gap-1 text-[10px]" style={{ color: 'var(--text-muted)' }}>
+                <label
+                  className={`inline-flex items-center gap-1 text-[10px] ${
+                    isLight ? 'text-slate-500' : ''
+                  }`}
+                  style={isLight ? undefined : { color: 'var(--text-muted)' }}
+                >
                   Len
                   <input
                     type="number"
@@ -923,7 +971,9 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                     value={minLen}
                     onChange={(e) => setMinLen(Math.max(2, Math.min(Number(e.target.value) || 2, maxLen)))}
                     className={`w-10 rounded-md border px-1 py-1 tabular-nums outline-none ${
-                      isLight ? 'bg-white border-slate-200' : 'bg-white/[0.04] border-white/10'
+                      isLight
+                        ? 'bg-white border-slate-200 shadow-sm'
+                        : 'bg-white/[0.04] border-white/10'
                     }`}
                   />
                   –
@@ -934,7 +984,9 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                     value={maxLen}
                     onChange={(e) => setMaxLen(Math.min(40, Math.max(Number(e.target.value) || 24, minLen)))}
                     className={`w-10 rounded-md border px-1 py-1 tabular-nums outline-none ${
-                      isLight ? 'bg-white border-slate-200' : 'bg-white/[0.04] border-white/10'
+                      isLight
+                        ? 'bg-white border-slate-200 shadow-sm'
+                        : 'bg-white/[0.04] border-white/10'
                     }`}
                   />
                 </label>
@@ -942,7 +994,11 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             </div>
           </div>
 
-          <div className="max-h-[min(68vh,calc(100vh-16rem))] overflow-y-auto overscroll-contain p-1.5 sm:p-2">
+          <div
+            className={`max-h-[min(68vh,calc(100vh-16rem))] overflow-y-auto overscroll-contain p-2 sm:p-2.5 ${
+              isLight ? 'bg-slate-50/40' : ''
+            }`}
+          >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5 auto-rows-auto">
               {visible.map((item) => (
                 <DomainRow
@@ -957,7 +1013,10 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             </div>
             {visible.length === 0 && (
               <div className="text-center py-12 space-y-3">
-                <p className="text-[12px]" style={{ color: 'var(--text-muted)' }}>
+                <p
+                  className={`text-[12px] ${isLight ? 'text-slate-500' : ''}`}
+                  style={isLight ? undefined : { color: 'var(--text-muted)' }}
+                >
                   No domains match these filters
                   {searchPrimary ? ` for “${searchPrimary}”` : ''}
                 </p>
@@ -981,7 +1040,9 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           {visibleCount < filtered.length && (
             <div
               className={`flex items-center justify-center gap-4 py-2.5 border-t ${
-                isLight ? 'border-slate-100 bg-slate-50/50' : 'border-white/[0.06] bg-black/20'
+                isLight
+                  ? 'border-slate-100 bg-slate-50/80'
+                  : 'border-white/[0.06] bg-black/20'
               }`}
             >
               <button
@@ -1006,9 +1067,23 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
       )}
 
       {generated.length === 0 && !isGenerating && (
-        <p className="text-center text-[12px]" style={{ color: 'var(--text-muted)' }}>
-          Type any keyword (or use Popular), pick a registrar, then Find domains — prefixes, suffixes & live checks included.
-        </p>
+        <div
+          className={`text-center rounded-2xl border px-4 py-6 sm:py-8 ${
+            isLight
+              ? 'bg-white/70 border-slate-200/80 shadow-sm text-slate-500'
+              : 'border-transparent'
+          }`}
+        >
+          <p
+            className={`text-[12px] sm:text-[13px] leading-relaxed max-w-md mx-auto ${
+              isLight ? 'text-slate-500' : ''
+            }`}
+            style={isLight ? undefined : { color: 'var(--text-muted)' }}
+          >
+            Type any keyword (or use Popular), pick a registrar, then Find domains — prefixes,
+            suffixes &amp; live checks included.
+          </p>
+        </div>
       )}
     </div>
   );
@@ -1044,9 +1119,9 @@ function DomainRow({
 
   return (
     <div
-      className={`flex items-center gap-1.5 px-2.5 py-2 sm:px-3 sm:py-2.5 min-w-0 rounded-xl border transition-colors ${
+      className={`flex items-center gap-1.5 px-2.5 py-2 sm:px-3 sm:py-2.5 min-w-0 rounded-xl border transition-all duration-150 ${
         isLight
-          ? 'bg-white hover:bg-slate-50 border-slate-200'
+          ? 'bg-white hover:bg-white border-slate-200/90 shadow-sm shadow-slate-900/[0.03] hover:border-slate-300 hover:shadow-md hover:shadow-slate-900/[0.06]'
           : 'bg-[#121214] hover:bg-[#161618] border-white/[0.08]'
       }`}
     >
@@ -1065,7 +1140,9 @@ function DomainRow({
                 ? isLight
                   ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.35)]'
                   : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.4)]'
-                : 'bg-red-400/85'
+                : isLight
+                  ? 'bg-rose-400'
+                  : 'bg-red-400/85'
           }`}
         />
         <span
@@ -1076,7 +1153,7 @@ function DomainRow({
                 : 'text-white font-semibold'
               : isTaken
                 ? isLight
-                  ? 'text-slate-400'
+                  ? 'text-slate-400 line-through decoration-slate-300'
                   : 'text-white/30'
                 : isLight
                   ? 'text-slate-600'
@@ -1097,10 +1174,10 @@ function DomainRow({
         className={`h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-full border transition-colors ${
           isSaved
             ? isLight
-              ? 'text-slate-900 border-slate-900 bg-slate-100'
+              ? 'text-slate-900 border-slate-900 bg-slate-100 shadow-sm'
               : 'text-white border-white/30 bg-white/10'
             : isLight
-              ? 'text-slate-400 border-slate-200 hover:text-slate-700'
+              ? 'text-slate-400 border-slate-200 bg-white hover:text-slate-700 hover:border-slate-300'
               : 'text-white/40 border-white/10 hover:text-white/80'
         }`}
         aria-label={isSaved ? `Remove ${item.domain}` : `Save ${item.domain}`}
@@ -1131,17 +1208,17 @@ function DomainRow({
             primaryLabel="Go"
             primaryButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${
               isLight
-                ? 'bg-slate-900 text-white hover:bg-slate-800'
+                ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-sm shadow-slate-900/15'
                 : 'bg-white text-black hover:bg-white/90'
             }`}
             chevronButtonClassName={`rounded-full p-1 transition-colors ${
               isLight
-                ? 'bg-slate-900 text-white hover:bg-slate-800'
+                ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-sm shadow-slate-900/15'
                 : 'bg-white text-black hover:bg-white/90'
             }`}
             fallbackButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${
               isLight
-                ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                ? 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200/80'
                 : 'bg-white/[0.06] text-white/60 hover:bg-white/10'
             }`}
           />
