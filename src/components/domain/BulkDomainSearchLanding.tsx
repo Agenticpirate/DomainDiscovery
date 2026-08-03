@@ -699,11 +699,20 @@ const SearchInputSection: React.FC<{
                     <span className={isLight ? 'text-slate-800' : 'text-white/80'}>{domains.length}</span> domains
                     {(counts.available > 0 || (counts.premium ?? 0) > 0 || counts.taken > 0) && (
                       <span className="ml-2">
-                        · <span className="text-emerald-400">{counts.available} free</span>
+                        ·{' '}
+                        <span className={isLight ? 'text-emerald-700 font-semibold' : 'text-emerald-400'}>
+                          {counts.available} free
+                        </span>
                         {(counts.premium ?? 0) > 0 && (
-                          <span className="text-amber-400"> · {counts.premium} premium</span>
+                          <span className={isLight ? 'text-amber-700 font-semibold' : 'text-amber-400'}>
+                            {' '}
+                            · {counts.premium} premium
+                          </span>
                         )}
-                        · <span className="text-rose-400">{counts.taken} taken</span>
+                        ·{' '}
+                        <span className={isLight ? 'text-rose-600 font-semibold' : 'text-rose-400'}>
+                          {counts.taken} taken
+                        </span>
                       </span>
                     )}
                     {counts.checking > 0 && (
@@ -737,14 +746,15 @@ const SearchInputSection: React.FC<{
                     }}
                     disabled={!canSearch || (checking && counts.checking === domains.length && domains.length > 0)}
                     aria-disabled={!canSearch}
+                    title={!canSearch ? 'Add domains first' : undefined}
                     className={`inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl px-5 py-2.5 sm:py-3 text-[12px] sm:text-[13px] font-bold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       canSearch
                         ? isLight
                           ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/20 focus-visible:ring-slate-400 focus-visible:ring-offset-white'
                           : 'bg-white text-black hover:bg-white/95 shadow-[0_8px_24px_rgba(0,0,0,0.45)] ring-1 ring-white/20 focus-visible:ring-white focus-visible:ring-offset-[#0c0c0e]'
                         : isLight
-                          ? 'bg-slate-900 text-white shadow-md shadow-slate-900/15 cursor-not-allowed'
-                          : 'bg-white text-black shadow-lg shadow-black/30 ring-1 ring-white/15 cursor-not-allowed'
+                          ? 'bg-slate-200 text-slate-400 border border-slate-200 cursor-not-allowed shadow-none'
+                          : 'bg-white/10 text-white/35 border border-white/10 cursor-not-allowed shadow-none'
                     } disabled:cursor-not-allowed`}
                   >
                     {checking && domains.length > 0 && counts.checking === domains.length ? (

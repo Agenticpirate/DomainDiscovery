@@ -16,7 +16,8 @@ import generatorKeywords from '@/data/generator-keywords.json';
 
 interface GeneratedDomain {
   name: string;
-  available: boolean;
+  /** null = not checked yet (pending) — must not look “taken” */
+  available: boolean | null;
   premium?: boolean;
   price?: string;
   popularity: number;
@@ -179,10 +180,10 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
 
     switch (statusFilter) {
       case 'available':
-        filtered = filtered.filter((d) => d.available && !d.premium);
+        filtered = filtered.filter((d) => d.available === true && !d.premium);
         break;
       case 'taken':
-        filtered = filtered.filter((d) => !d.available && !d.premium);
+        filtered = filtered.filter((d) => d.available === false && !d.premium);
         break;
       case 'premium':
         filtered = filtered.filter((d) => !!d.premium);
@@ -261,7 +262,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
           if (!result) return variation;
           return {
             ...variation,
-            available: !!result.available && !result.premium,
+            available: result.available,
             premium: !!result.premium,
             price: result.price,
           };
@@ -309,9 +310,58 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     }
   };
 
-  const isAvailableSuggestion = (suggestion: GeneratedDomain) => suggestion.available && !suggestion.premium;
-  const isPremiumSuggestion = (suggestion: GeneratedDomain) => !suggestion.available && !!suggestion.premium;
-  const isTakenSuggestion = (suggestion: GeneratedDomain) => !suggestion.available && !suggestion.premium;
+  const isAvailableSuggestion = (suggestion: GeneratedDomain) =>
+    suggestion.available === true && !suggestion.premium;
+  const isPremiumSuggestion = (suggestion: GeneratedDomain) => !!suggestion.premium;
+  const isTakenSuggestion = (suggestion: GeneratedDomain) =>
+    suggestion.available === false && !suggestion.premium;
+  const isPendingSuggestion = (suggestion: GeneratedDomain) => suggestion.available === null;
+
+  /** Status surfaces — match keyword/bulk light-mode readability */
+  const statusCardClass = (s: GeneratedDomain) => {
+    if (isPendingSuggestion(s)) {
+      return isLight
+        ? 'bg-white border-slate-200 hover:bg-slate-50'
+        : 'bg-[#121214] border-white/[0.08] hover:bg-[#161618]';
+    }
+    if (isAvailableSuggestion(s)) {
+      return isLight
+        ? 'bg-emerald-50 border-emerald-200/90 hover:border-emerald-300'
+        : 'bg-emerald-500/[0.08] border-emerald-500/25 hover:bg-emerald-500/[0.12]';
+    }
+    if (isPremiumSuggestion(s)) {
+      return isLight
+        ? 'bg-amber-50 border-amber-200/90 hover:border-amber-300'
+        : 'bg-amber-500/[0.08] border-amber-500/25 hover:bg-amber-500/[0.12]';
+    }
+    return isLight
+      ? 'bg-rose-50/90 border-rose-200/80 hover:border-rose-300'
+      : 'bg-rose-500/[0.07] border-rose-500/20 hover:bg-rose-500/[0.1]';
+  };
+
+  const statusDotClass = (s: GeneratedDomain) => {
+    if (isPendingSuggestion(s)) return isLight ? 'bg-slate-300' : 'bg-white/20';
+    if (isAvailableSuggestion(s)) {
+      return isLight
+        ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)]'
+        : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.4)]';
+    }
+    if (isPremiumSuggestion(s)) {
+      return isLight
+        ? 'bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.4)]'
+        : 'bg-amber-400 shadow-[0_0_7px_rgba(251,191,36,0.45)]';
+    }
+    return isLight ? 'bg-rose-500' : 'bg-rose-400/85';
+  };
+
+  const statusNameClass = (s: GeneratedDomain) => {
+    if (isPendingSuggestion(s)) return isLight ? 'text-slate-600' : 'text-white/60';
+    if (isAvailableSuggestion(s)) return isLight ? 'text-emerald-950 font-semibold' : 'text-emerald-50 font-semibold';
+    if (isPremiumSuggestion(s)) return isLight ? 'text-amber-950 font-semibold' : 'text-amber-50 font-semibold';
+    return isLight
+      ? 'text-rose-800/75 line-through decoration-rose-300'
+      : 'text-white/30 line-through decoration-white/15';
+  };
 
   /**
    * Lean Domain Search–style expansion:
@@ -331,7 +381,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       if (/^\d+$/.test(clean)) return;
       if (clean === keyword && category !== 'exact') return;
       seen.add(clean);
-      variations.push({ name: clean, available: false, popularity, category });
+      variations.push({ name: clean, available: null, popularity, category });
     };
 
     const prefixes = GENERATOR_PREFIXES;
@@ -931,33 +981,31 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   return (
                     <div
                       key={`${suggestion.name}-${i}`}
-                      className={`group flex items-center gap-2 rounded-xl border px-2.5 py-2.5 min-w-0 transition-colors ${
-                        isLight
-                          ? 'bg-white border-slate-200 hover:bg-slate-50'
-                          : 'bg-[#121214] border-white/[0.08] hover:bg-[#161618]'
-                      }`}
+                      className={`group flex items-center gap-2 rounded-xl border px-2.5 py-2.5 min-w-0 transition-colors ${statusCardClass(suggestion)}`}
                     >
                       <button
                         type="button"
                         onClick={() => handleDomainClick(suggestion.name)}
                         className="flex items-center gap-1.5 min-w-0 flex-1 text-left"
                       >
+                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${statusDotClass(suggestion)}`} />
                         <span
-                          className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                            isAvailableSuggestion(suggestion)
-                              ? isLight
-                                ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.35)]'
-                                : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.4)]'
-                              : isPremiumSuggestion(suggestion)
-                                ? 'bg-amber-400'
-                                : isLight
-                                  ? 'bg-rose-400'
-                                  : 'bg-rose-400/80'
-                          }`}
-                        />
-                        <span className="font-mono text-[12px] sm:text-[13px] font-semibold truncate">
+                          className={`font-mono text-[12px] sm:text-[13px] truncate ${statusNameClass(suggestion)}`}
+                        >
                           {suggestion.name}
-                          <span className={isLight ? 'text-slate-400' : 'text-white/35'}>.com</span>
+                          <span
+                            className={
+                              isAvailableSuggestion(suggestion) || isPremiumSuggestion(suggestion)
+                                ? isLight
+                                  ? 'text-inherit opacity-60'
+                                  : 'text-inherit opacity-50'
+                                : isLight
+                                  ? 'text-slate-400'
+                                  : 'text-white/35'
+                            }
+                          >
+                            .com
+                          </span>
                         </span>
                       </button>
                       <button
@@ -1031,8 +1079,22 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   return (
                     <div
                       key={`${suggestion.name}-${i}`}
-                      className={`flex items-center justify-between gap-2 px-3 sm:px-4 py-2 ${
-                        isLight ? 'hover:bg-slate-50' : 'hover:bg-white/[0.03]'
+                      className={`flex items-center justify-between gap-2 px-3 sm:px-4 py-2 border-l-2 ${
+                        isPendingSuggestion(suggestion)
+                          ? isLight
+                            ? 'border-transparent hover:bg-slate-50'
+                            : 'border-transparent hover:bg-white/[0.03]'
+                          : isAvailableSuggestion(suggestion)
+                            ? isLight
+                              ? 'border-emerald-400 bg-emerald-50/50 hover:bg-emerald-50'
+                              : 'border-emerald-500/50 bg-emerald-500/[0.05]'
+                            : isPremiumSuggestion(suggestion)
+                              ? isLight
+                                ? 'border-amber-400 bg-amber-50/50 hover:bg-amber-50'
+                                : 'border-amber-500/50 bg-amber-500/[0.05]'
+                              : isLight
+                                ? 'border-rose-300 bg-rose-50/40 hover:bg-rose-50/70'
+                                : 'border-rose-500/40 bg-rose-500/[0.04]'
                       }`}
                     >
                       <button
@@ -1040,20 +1102,10 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         onClick={() => handleDomainClick(suggestion.name)}
                         className="flex items-center gap-2 min-w-0 flex-1 text-left"
                       >
+                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${statusDotClass(suggestion)}`} />
                         <span
-                          className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                            isAvailableSuggestion(suggestion)
-                              ? isLight
-                                ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.35)]'
-                                : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.4)]'
-                              : isPremiumSuggestion(suggestion)
-                                ? 'bg-amber-400'
-                                : isLight
-                                  ? 'bg-rose-400'
-                                  : 'bg-rose-400/80'
-                          }`}
-                        />
-                        <span className="font-mono text-[12px] sm:text-[13px] font-semibold truncate">
+                          className={`font-mono text-[12px] sm:text-[13px] truncate ${statusNameClass(suggestion)}`}
+                        >
                           {fullDomain}
                         </span>
                       </button>

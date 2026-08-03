@@ -524,14 +524,14 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           />
         </div>
 
-        {/* Keyword position — always visible (required choice for search shape) */}
+        {/* Keyword position — filters result list after generate (not generation shape) */}
         <div className="mb-4">
           <label
             className={`block text-[10px] font-bold uppercase tracking-widest mb-1.5 ${
               isLight ? 'text-slate-500' : 'text-white/40'
             }`}
           >
-            Keyword position
+            Filter by position
           </label>
           <div className="flex flex-wrap gap-1.5">
             {(
@@ -674,7 +674,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-[13px] font-bold transition-all duration-150 w-full sm:w-auto shrink-0 ${
                 !canSearch || isGenerating
                   ? isLight
-                    ? 'bg-[#0a0a0c]/35 text-white/50 cursor-not-allowed'
+                    ? 'bg-slate-200 text-slate-400 border border-slate-200 cursor-not-allowed'
                     : 'bg-white/15 text-white/35 cursor-not-allowed'
                   : isLight
                     ? 'bg-[#0a0a0c] text-white hover:bg-black shadow-md shadow-slate-900/25 hover:shadow-lg hover:shadow-slate-900/30'
@@ -742,16 +742,25 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           <button type="button" onClick={() => setShowPopular((v) => !v)} className={pill(showPopular)}>
             {showPopular ? 'Hide popular' : 'Popular seeds'}
           </button>
-          {(primaryKeyword || secondaryKeyword) && (
+          {(primaryKeyword || secondaryKeyword || generated.length > 0) && (
             <button
               type="button"
               onClick={() => {
                 abortRef.current?.abort();
+                searchGenRef.current += 1;
                 setPrimaryKeyword('');
                 setSecondaryKeyword('');
+                setSearchPrimary('');
                 setGenerated([]);
                 setIsChecking(false);
+                setIsGenerating(false);
                 setCheckedCount(0);
+                setVisibleCount(160);
+                setAvailFilter('all');
+                setTypeFilter('all');
+                setFilterMode('all');
+                setMinLen(2);
+                setMaxLen(40);
               }}
               className={`text-[12px] font-semibold px-1 ${
                 isLight ? 'text-slate-400 hover:text-slate-700' : 'text-white/35 hover:text-white/70'

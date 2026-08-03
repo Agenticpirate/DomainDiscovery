@@ -287,7 +287,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 {renderDropdown(toolsMenu, 'tools')}
                 <Link
                   href="/learn"
-                  className={`${navBtnBase} ${navBtnInactive}`}
+                  className={`${navBtnBase} ${
+                    pathname.startsWith('/learn') ? navBtnActive : navBtnInactive
+                  }`}
                 >
                   Learn
                 </Link>

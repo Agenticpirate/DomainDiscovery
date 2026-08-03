@@ -104,31 +104,31 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   };
 
-  /** Brand-aligned surfaces — monochrome + subtle Vercel blue, not emerald green */
+  /** Brand-aligned surfaces + left accent so success/error/warning read clearly */
   const getToastStyles = (type: ToastType) => {
     if (isLight) {
       switch (type) {
         case 'success':
-          return 'border-slate-200 bg-white shadow-vercel';
+          return 'border-emerald-200/80 bg-white shadow-vercel border-l-[3px] border-l-emerald-500';
         case 'error':
-          return 'border-slate-300 bg-slate-50';
+          return 'border-rose-200/90 bg-rose-50/80 border-l-[3px] border-l-rose-500';
         case 'warning':
-          return 'border-slate-200 bg-white';
+          return 'border-amber-200/90 bg-amber-50/70 border-l-[3px] border-l-amber-500';
         case 'info':
         default:
-          return 'border-slate-200 bg-white';
+          return 'border-slate-200 bg-white border-l-[3px] border-l-slate-400';
       }
     }
     switch (type) {
       case 'success':
-        return 'border-white/15 bg-[#121214] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.75)]';
+        return 'border-white/12 bg-[#121214] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.75)] border-l-[3px] border-l-emerald-400';
       case 'error':
-        return 'border-white/12 bg-[#141416]';
+        return 'border-white/12 bg-[#141416] border-l-[3px] border-l-rose-400';
       case 'warning':
-        return 'border-white/12 bg-[#121214]';
+        return 'border-white/12 bg-[#121214] border-l-[3px] border-l-amber-400';
       case 'info':
       default:
-        return 'border-white/10 bg-[#0c0c0e]';
+        return 'border-white/10 bg-[#0c0c0e] border-l-[3px] border-l-white/35';
     }
   };
 
@@ -141,7 +141,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            role="status"
+            role={toast.type === 'error' ? 'alert' : 'status'}
             className={`flex items-start gap-3 p-3.5 sm:p-4 rounded-2xl border animate-slide-up ${getToastStyles(toast.type)}`}
           >
             <div className="shrink-0 mt-0.5">{getToastIcon(toast.type)}</div>

@@ -39,15 +39,37 @@ export function DomainResultCard({
   const isLoading = availability === 'loading';
   const showMarketPrice = !!pricing && (isAvailable || premium);
 
+  const statusSurface = (() => {
+    if (isHighlighted) {
+      return isLight
+        ? 'bg-slate-100 border-slate-300 shadow-lg'
+        : 'bg-[#141418] border-white/30 shadow-lg';
+    }
+    if (isLoading || availability === 'unknown') {
+      return isLight
+        ? 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+        : 'bg-[#0c0c0e] border-white/10 hover:border-white/20 hover:bg-[#101014]';
+    }
+    if (premium) {
+      return isLight
+        ? 'bg-amber-50 border-amber-200/90 hover:border-amber-300'
+        : 'bg-amber-500/[0.08] border-amber-500/25 hover:bg-amber-500/[0.12]';
+    }
+    if (isAvailable) {
+      return isLight
+        ? 'bg-emerald-50 border-emerald-200/90 hover:border-emerald-300 hover:shadow-emerald-500/10'
+        : 'bg-emerald-500/[0.08] border-emerald-500/25 hover:bg-emerald-500/[0.12]';
+    }
+    return isLight
+      ? 'bg-rose-50/90 border-rose-200/80 hover:border-rose-300'
+      : 'bg-rose-500/[0.07] border-rose-500/20 hover:bg-rose-500/[0.1]';
+  })();
+
   return (
     <div
       className={`
         shine-border group relative isolate overflow-hidden p-2.5 sm:p-4 rounded-lg sm:rounded-xl border transition-all duration-200
-        ${isHighlighted 
-          ? `${isLight ? 'bg-slate-100' : 'bg-[#141418]'} ${isLight ? 'border-slate-300' : 'border-white/30'} shadow-lg` 
-          : `${isLight ? 'bg-white' : 'bg-[#0c0c0e]'} ${isLight ? 'border-slate-200' : 'border-white/10'} ${isLight ? 'hover:border-slate-300' : 'hover:border-white/20'} ${isLight ? 'hover:bg-slate-50' : 'hover:bg-[#101014]'}`
-        }
-        ${isAvailable ? 'hover:shadow-emerald-500/10' : ''}
+        ${statusSurface}
       `}
     >
       {/* Header */}

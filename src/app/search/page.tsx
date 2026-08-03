@@ -536,7 +536,7 @@ function SearchPageContent() {
                     },
                     { href: '/generator', label: 'Generator', short: 'Gen', active: false, catalog: false },
                     { href: '/premium', label: 'Aftermarket', short: 'Market', active: false, catalog: false },
-                    { href: '/tools', label: 'Research', short: 'Tools', active: false, catalog: false },
+                    { href: '/tools/keyword', label: 'Research', short: 'Tools', active: false, catalog: false },
                   ] as const
                 ).map((tab) => {
                   const cls = `min-w-0 inline-flex items-center justify-center rounded-xl px-1 sm:px-2.5 py-1.5 sm:py-2 text-[10px] sm:text-[12px] font-semibold tracking-tight transition-colors duration-150 text-center leading-tight ${
@@ -745,6 +745,38 @@ function SearchPageContent() {
               <p className="text-[12px]" style={{ color: 'var(--text-muted)' }}>
                 Live availability across {ALL_TLDS.length}+ extensions
               </p>
+            </div>
+          )}
+
+          {!isLoading && results.length === 0 && !!query && (
+            <div className="text-center py-16 px-4 max-w-md mx-auto space-y-3">
+              <p className="text-[15px] font-bold">No results for “{query}”</p>
+              <p className="text-[12px] leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                Try another spelling, fewer special characters, or explore ideas in Generator or
+                Keyword tools.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+                <Link
+                  href="/generator"
+                  className={`rounded-xl border px-3 py-1.5 text-[12px] font-semibold transition-colors ${
+                    isLight
+                      ? 'bg-white border-slate-200 text-slate-800 hover:bg-slate-50'
+                      : 'bg-white/[0.04] border-white/10 text-white/80 hover:bg-white/10'
+                  }`}
+                >
+                  Domain generator
+                </Link>
+                <Link
+                  href="/tools/keyword"
+                  className={`rounded-xl border px-3 py-1.5 text-[12px] font-semibold transition-colors ${
+                    isLight
+                      ? 'bg-white border-slate-200 text-slate-800 hover:bg-slate-50'
+                      : 'bg-white/[0.04] border-white/10 text-white/80 hover:bg-white/10'
+                  }`}
+                >
+                  Keyword finder
+                </Link>
+              </div>
             </div>
           )}
 
