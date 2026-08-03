@@ -142,11 +142,10 @@ export function PageBreadcrumb({
 }
 
 /**
- * Standard main top offset under fixed nav.
- * CSS .page-main + Tailwind pt fallback — trail must never sit under the pill.
+ * Standard main top offset under fixed nav (see --nav-clearance in globals.css).
+ * Do not stack extra pt-* here — that created a large empty gap under the header.
  */
-export const PAGE_MAIN_CLASS =
-  'relative page-main pt-[var(--nav-clearance,6.5rem)]';
+export const PAGE_MAIN_CLASS = 'relative page-main';
 
 /** Standard horizontal padding for content bands */
 export const PAGE_GUTTER_CLASS = 'page-gutter';

@@ -1074,34 +1074,32 @@ nav a:has(.logo-icon-wrapper) {
   }
 
   /*
-   * Fixed-nav clearance — floating pill nav (outer py + rounded bar + logo row).
-   * Was 3.5/4.5rem and breadcrumb/heroes sat under the bar on many tools pages.
+   * Fixed-nav clearance — match floating pill height only (no large empty gap).
+   * Nav ≈ outer py (6–8px) + bar (~44–48px) ≈ 56–64px.
    */
   :root {
-    /* Floating pill nav is taller than a flat bar — keep generous clearance */
-    --nav-clearance: 5.75rem; /* ~92px mobile */
+    --nav-clearance: 4rem; /* 64px mobile */
   }
 
   @media (min-width: 640px) {
     :root {
-      --nav-clearance: 6.5rem; /* ~104px */
+      --nav-clearance: 4.5rem; /* 72px */
     }
   }
 
   @media (min-width: 1024px) {
     :root {
-      --nav-clearance: 6.75rem; /* ~108px desktop menu row */
+      --nav-clearance: 4.75rem; /* 76px desktop menu */
     }
   }
 
   html {
-    scroll-padding-top: calc(var(--nav-clearance) + 0.75rem);
+    scroll-padding-top: calc(var(--nav-clearance) + 0.5rem);
   }
 
   .page-main {
     position: relative;
-    /* !important: beat any utility/reset so breadcrumbs never sit under fixed nav */
-    padding-top: calc(var(--nav-clearance) + env(safe-area-inset-top, 0px)) !important;
+    padding-top: calc(var(--nav-clearance) + env(safe-area-inset-top, 0px));
   }
 
   /* Horizontal gutters — same on every page */
@@ -1117,49 +1115,54 @@ nav a:has(.logo-icon-wrapper) {
     }
   }
 
-  /* Full-width rail — first content under nav; never nest inside narrower max-w */
+  /* Full-width breadcrumb rail — original left alignment under nav */
   .page-breadcrumb-bar {
     width: 100%;
     box-sizing: border-box;
-    padding-top: 0.25rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.35rem;
     position: relative;
-    z-index: 20; /* above ambient, below fixed nav (z-100) */
+    z-index: 10;
   }
 
   .page-breadcrumb-inner {
-    max-width: 80rem; /* max-w-7xl — single alignment column for all pages */
+    max-width: 80rem; /* max-w-7xl */
     margin-left: auto;
     margin-right: auto;
     width: 100%;
   }
 
-  /* Readable plate so trail never “vanishes” into the hero mesh */
+  /* Flat trail (not a floating relocated pill) */
   .page-breadcrumb-plate {
-    display: inline-flex;
+    display: block;
     max-width: 100%;
-    align-items: center;
-    border-radius: 9999px;
-    border: 1px solid var(--ds-hairline, rgba(255, 255, 255, 0.1));
-    background: var(--ds-canvas, #0a0a0c);
-    box-shadow: var(--shadow-card);
-    padding: 0.4rem 0.75rem 0.4rem 0.65rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
   }
 
   html.light .page-breadcrumb-plate {
-    background: rgba(255, 255, 255, 0.92);
-    border-color: var(--ds-hairline, #ebebeb);
-    backdrop-filter: blur(8px);
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
   }
 
-  /* Trail itself: left-aligned, no extra margin (plate handles spacing) */
   .page-breadcrumb {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-top: 0.15rem;
+    margin-bottom: 0.5rem;
     justify-content: flex-start !important;
     text-align: left;
     position: relative;
     z-index: 1;
+  }
+
+  @media (min-width: 640px) {
+    .page-breadcrumb {
+      margin-top: 0.35rem;
+      margin-bottom: 0.65rem;
+    }
   }
 
   /* Compact homepage shell — denser on mobile */
