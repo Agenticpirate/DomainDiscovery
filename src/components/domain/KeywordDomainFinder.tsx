@@ -23,13 +23,15 @@ const SEED_POP = new Map(POPULAR.map((p) => [p.word.toLowerCase(), p.popularity]
 
 type SortMode = 'popularity' | 'length' | 'alpha';
 type FilterMode = 'all' | 'starts' | 'ends';
-type AvailFilter = 'all' | 'available' | 'taken' | 'unchecked';
+type AvailFilter = 'all' | 'available' | 'taken' | 'premium' | 'unchecked';
 type TypeFilter = 'all' | 'exact' | 'prefix' | 'suffix' | 'combo' | 'hyphen';
 
 interface GeneratedDomain {
   domain: string;
   type: 'exact' | 'prefix' | 'suffix' | 'combo' | 'hyphen';
   available: boolean | null;
+  /** Premium aftermarket / registry premium when known */
+  premium?: boolean;
   words: string[];
   popularity: number;
   length: number;
@@ -167,14 +169,22 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             checkDomainAvailability(batch)
               .then((results) => {
                 if (controller.signal.aborted || gen !== searchGenRef.current) return;
-                const availMap = new Map(
-                  (results || []).map((r) => [r.domain.toLowerCase(), r.available])
+                const resultMap = new Map(
+                  (results || []).map((r) => [
+                    r.domain.toLowerCase(),
+                    { available: r.available, premium: Boolean(r.premium) },
+                  ])
                 );
                 setGenerated((prev) => {
                   if (gen !== searchGenRef.current) return prev;
                   return prev.map((d) => {
-                    const avail = availMap.get(d.domain.toLowerCase());
-                    return avail !== undefined ? { ...d, available: avail } : d;
+                    const hit = resultMap.get(d.domain.toLowerCase());
+                    if (!hit) return d;
+                    return {
+                      ...d,
+                      available: hit.available,
+                      premium: hit.premium,
+                    };
                   });
                 });
                 checked += batch.length;
@@ -374,9 +384,15 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     }
 
     if (typeFilter !== 'all') list = list.filter((d) => d.type === typeFilter);
-    if (availFilter === 'available') list = list.filter((d) => d.available === true);
-    else if (availFilter === 'taken') list = list.filter((d) => d.available === false);
-    else if (availFilter === 'unchecked') list = list.filter((d) => d.available === null);
+    if (availFilter === 'available') {
+      list = list.filter((d) => d.available === true && !d.premium);
+    } else if (availFilter === 'premium') {
+      list = list.filter((d) => d.premium === true);
+    } else if (availFilter === 'taken') {
+      list = list.filter((d) => d.available === false && !d.premium);
+    } else if (availFilter === 'unchecked') {
+      list = list.filter((d) => d.available === null);
+    }
 
     if (sortMode === 'length') list.sort((a, b) => a.length - b.length || a.domain.localeCompare(b.domain));
     else if (sortMode === 'alpha') list.sort((a, b) => a.domain.localeCompare(b.domain));
@@ -400,8 +416,9 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     });
   }, [generated, searchPrimary, filterMode, minLen, maxLen, typeFilter]);
 
-  const availableCount = positionPool.filter((d) => d.available === true).length;
-  const takenCount = positionPool.filter((d) => d.available === false).length;
+  const availableCount = positionPool.filter((d) => d.available === true && !d.premium).length;
+  const premiumCount = positionPool.filter((d) => d.premium === true).length;
+  const takenCount = positionPool.filter((d) => d.available === false && !d.premium).length;
   const uncheckedCount = positionPool.filter((d) => d.available === null).length;
   const positionTotal = positionPool.length;
   const progressPct =
@@ -869,10 +886,13 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   </span>
                 </span>
                 {availableCount > 0 && (
-                  <span className="text-emerald-400 font-semibold">{availableCount} available</span>
+                  <span className="text-emerald-400 font-semibold">{availableCount} free</span>
+                )}
+                {premiumCount > 0 && (
+                  <span className="text-amber-400 font-semibold">{premiumCount} premium</span>
                 )}
                 {takenCount > 0 && (
-                  <span className="text-white/35">{takenCount} taken</span>
+                  <span className="text-rose-300/90">{takenCount} taken</span>
                 )}
                 {uncheckedCount > 0 && isChecking && (
                   <span className="text-white/50">
@@ -947,7 +967,8 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 {(
                   [
                     { id: 'all' as const, label: `All (${positionTotal})` },
-                    { id: 'available' as const, label: `Available (${availableCount})` },
+                    { id: 'available' as const, label: `Free (${availableCount})` },
+                    { id: 'premium' as const, label: `Premium (${premiumCount})` },
                     { id: 'taken' as const, label: `Taken (${takenCount})` },
                     { id: 'unchecked' as const, label: `Pending (${uncheckedCount})` },
                   ] as const
@@ -1129,56 +1150,124 @@ function DomainRow({
     return () => window.removeEventListener('savedDomainsUpdated', sync);
   }, [item.domain]);
 
-  const isAvailable = item.available === true;
-  const isTaken = item.available === false;
+  const isPremium = Boolean(item.premium);
+  const isAvailable = item.available === true && !isPremium;
+  const isTaken = item.available === false && !isPremium;
   const isUnchecked = item.available === null;
-  const canRegister = isAvailable;
+  const canRegister = isAvailable || isPremium;
+
+  // Card surfaces: light mode needs strong tinted plates (same language as bulk search)
+  const cardClass = isUnchecked
+    ? isLight
+      ? 'bg-white border-slate-200/90 shadow-sm shadow-slate-900/[0.03] hover:border-slate-300 hover:shadow-md'
+      : 'bg-[#121214] border-white/[0.08] hover:bg-[#161618]'
+    : isAvailable
+      ? isLight
+        ? 'bg-emerald-50 border-emerald-200/90 shadow-sm shadow-emerald-900/[0.04] hover:border-emerald-300 hover:bg-emerald-50/95'
+        : 'bg-emerald-500/[0.08] border-emerald-500/25 hover:bg-emerald-500/[0.12]'
+      : isPremium
+        ? isLight
+          ? 'bg-amber-50 border-amber-200/90 shadow-sm shadow-amber-900/[0.05] hover:border-amber-300 hover:bg-amber-50/95'
+          : 'bg-amber-500/[0.08] border-amber-500/25 hover:bg-amber-500/[0.12]'
+        : isLight
+          ? 'bg-rose-50/90 border-rose-200/80 shadow-sm shadow-rose-900/[0.03] hover:border-rose-300'
+          : 'bg-rose-500/[0.07] border-rose-500/20 hover:bg-rose-500/[0.1]';
+
+  const dotClass = isUnchecked
+    ? isLight
+      ? 'bg-slate-300'
+      : 'bg-white/20'
+    : isAvailable
+      ? isLight
+        ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.45)]'
+        : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.45)]'
+      : isPremium
+        ? isLight
+          ? 'bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.45)]'
+          : 'bg-amber-400 shadow-[0_0_7px_rgba(251,191,36,0.45)]'
+        : isLight
+          ? 'bg-rose-500'
+          : 'bg-rose-400/90';
+
+  const nameClass = isUnchecked
+    ? isLight
+      ? 'text-slate-600'
+      : 'text-white/55'
+    : isAvailable
+      ? isLight
+        ? 'text-emerald-950 font-semibold'
+        : 'text-emerald-50 font-semibold'
+      : isPremium
+        ? isLight
+          ? 'text-amber-950 font-semibold'
+          : 'text-amber-50 font-semibold'
+        : isLight
+          ? 'text-rose-800/80 line-through decoration-rose-300'
+          : 'text-white/30 line-through decoration-white/15';
+
+  const saveClass = isSaved
+    ? isLight
+      ? isAvailable
+        ? 'text-emerald-800 border-emerald-600 bg-emerald-100'
+        : isPremium
+          ? 'text-amber-900 border-amber-600 bg-amber-100'
+          : isTaken
+            ? 'text-rose-800 border-rose-500 bg-rose-100'
+            : 'text-slate-900 border-slate-900 bg-slate-100'
+      : 'text-white border-white/30 bg-white/10'
+    : isLight
+      ? isAvailable
+        ? 'text-emerald-600/50 border-emerald-200 hover:text-emerald-800 hover:bg-emerald-100'
+        : isPremium
+          ? 'text-amber-700/50 border-amber-200 hover:text-amber-900 hover:bg-amber-100'
+          : isTaken
+            ? 'text-rose-500/50 border-rose-200 hover:text-rose-800 hover:bg-rose-100'
+            : 'text-slate-400 border-slate-200 bg-white hover:text-slate-700 hover:border-slate-300'
+      : 'text-white/40 border-white/10 hover:text-white/80';
+
+  const goPrimary = isLight
+    ? isAvailable
+      ? 'bg-emerald-700 text-white hover:bg-emerald-800 shadow-sm shadow-emerald-900/15'
+      : isPremium
+        ? 'bg-amber-600 text-white hover:bg-amber-700 shadow-sm shadow-amber-900/15'
+        : 'bg-slate-900 text-white hover:bg-slate-800 shadow-sm shadow-slate-900/15'
+    : 'bg-white text-black hover:bg-white/90';
 
   return (
     <div
-      className={`flex items-center gap-1.5 px-2.5 py-2 sm:px-3 sm:py-2.5 min-w-0 rounded-xl border transition-all duration-150 ${
-        isLight
-          ? 'bg-white hover:bg-white border-slate-200/90 shadow-sm shadow-slate-900/[0.03] hover:border-slate-300 hover:shadow-md hover:shadow-slate-900/[0.06]'
-          : 'bg-[#121214] hover:bg-[#161618] border-white/[0.08]'
-      }`}
+      className={`flex items-center gap-1.5 px-2.5 py-2 sm:px-3 sm:py-2.5 min-w-0 rounded-xl border transition-all duration-150 ${cardClass}`}
     >
       <button
         type="button"
         className="flex items-center gap-1.5 min-w-0 flex-1 text-left"
         onClick={() => onSelect?.(item.domain)}
       >
-        <span
-          className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-            isUnchecked
-              ? isLight
-                ? 'bg-slate-300'
-                : 'bg-white/20'
-              : isAvailable
-                ? isLight
-                  ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.35)]'
-                  : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.4)]'
-                : isLight
-                  ? 'bg-rose-400'
-                  : 'bg-red-400/85'
-          }`}
-        />
-        <span
-          className={`font-mono text-[12px] sm:text-[13px] truncate ${
-            isAvailable
-              ? isLight
-                ? 'text-slate-900 font-semibold'
-                : 'text-white font-semibold'
-              : isTaken
-                ? isLight
-                  ? 'text-slate-400 line-through decoration-slate-300'
-                  : 'text-white/30'
-                : isLight
-                  ? 'text-slate-600'
-                  : 'text-white/55'
-          }`}
-        >
+        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotClass}`} />
+        <span className={`font-mono text-[12px] sm:text-[13px] truncate ${nameClass}`}>
           {item.domain}
         </span>
+        {isPremium && (
+          <span
+            className={`shrink-0 rounded-md border px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
+              isLight
+                ? 'bg-amber-100 text-amber-800 border-amber-200'
+                : 'bg-amber-400/15 text-amber-200 border-amber-400/25'
+            }`}
+          >
+            Premium
+          </span>
+        )}
+        {isAvailable && (
+          <span
+            className={`shrink-0 rounded-md border px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
+              isLight
+                ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                : 'bg-emerald-400/15 text-emerald-200 border-emerald-400/25'
+            }`}
+          >
+            Free
+          </span>
+        )}
       </button>
 
       <button
@@ -1188,15 +1277,7 @@ function DomainRow({
           setIsSaved(saved);
           showToast(saved ? `Saved ${item.domain}` : `Removed ${item.domain}`, 'success', 1500);
         }}
-        className={`h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-full border transition-colors ${
-          isSaved
-            ? isLight
-              ? 'text-slate-900 border-slate-900 bg-slate-100 shadow-sm'
-              : 'text-white border-white/30 bg-white/10'
-            : isLight
-              ? 'text-slate-400 border-slate-200 bg-white hover:text-slate-700 hover:border-slate-300'
-              : 'text-white/40 border-white/10 hover:text-white/80'
-        }`}
+        className={`h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-full border transition-colors ${saveClass}`}
         aria-label={isSaved ? `Remove ${item.domain}` : `Save ${item.domain}`}
         title={isSaved ? 'Saved' : 'Save domain'}
       >
@@ -1223,19 +1304,11 @@ function DomainRow({
             onSelectRegistrar={onSelectRegistrar}
             canRegister={canRegister}
             primaryLabel="Go"
-            primaryButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${
-              isLight
-                ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-sm shadow-slate-900/15'
-                : 'bg-white text-black hover:bg-white/90'
-            }`}
-            chevronButtonClassName={`rounded-full p-1 transition-colors ${
-              isLight
-                ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-sm shadow-slate-900/15'
-                : 'bg-white text-black hover:bg-white/90'
-            }`}
+            primaryButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${goPrimary}`}
+            chevronButtonClassName={`rounded-full p-1 transition-colors ${goPrimary}`}
             fallbackButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${
               isLight
-                ? 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200/80'
+                ? 'bg-white/80 text-slate-600 hover:bg-white border border-slate-200/80'
                 : 'bg-white/[0.06] text-white/60 hover:bg-white/10'
             }`}
           />
