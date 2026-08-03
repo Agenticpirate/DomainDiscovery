@@ -121,7 +121,7 @@ export const DomainTicker: React.FC<DomainTickerProps> = ({
       <div
         className={`group/ticker shine-border inline-flex items-center gap-2 sm:gap-2.5 rounded-xl sm:rounded-full pl-1.5 pr-2.5 sm:pl-3 sm:pr-4 py-1 sm:py-2 text-[10px] sm:text-[13px] w-full sm:w-auto sm:max-w-[min(100%,34rem)] ${
           isLight
-            ? 'bg-white border border-slate-200 text-slate-600 shadow-sm shadow-slate-900/[0.04] sm:border-slate-300/80 sm:shadow-md sm:shadow-slate-900/[0.05]'
+            ? 'bg-white border border-[#cfcfcf] text-ds-body shadow-sm shadow-slate-900/[0.05] sm:border-[#c0c0c0] sm:shadow-md sm:shadow-slate-900/[0.06]'
             : 'bg-white/[0.04] border border-white/10 text-white/60 sm:border-white/16 sm:bg-white/[0.05] sm:shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_8px_24px_rgba(0,0,0,0.25)]'
         }`}
       >
@@ -167,7 +167,7 @@ export const DomainTicker: React.FC<DomainTickerProps> = ({
         <span
           className={`hidden sm:inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide border ${
             isLight
-              ? 'bg-slate-100 text-slate-700 border-slate-200'
+              ? 'bg-ds-soft text-ds-ink border-[#cfcfcf]'
               : 'bg-white/[0.06] text-white/75 border-white/15'
           }`}
         >

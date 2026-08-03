@@ -95,24 +95,24 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
 
   const fieldShell = embedded
     ? isLight
-      ? 'bg-slate-50 border border-slate-200 focus-within:border-slate-300'
-      : 'bg-black/30 border border-white/10 focus-within:border-white/25'
+      ? 'bg-ds-soft border border-[#c8c8c8] focus-within:border-[#171717] focus-within:shadow-[0_0_0_3px_rgba(0,112,243,0.14)] transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]'
+      : 'bg-black/40 border border-white/10 focus-within:border-white/30 focus-within:shadow-[0_0_0_3px_rgba(0,112,243,0.2)] transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]'
     : isLight
-      ? 'bg-white border border-slate-200 shadow-sm focus-within:border-slate-300 focus-within:shadow-md'
-      : 'bg-white/[0.04] border border-white/10 backdrop-blur-xl focus-within:border-white/20';
+      ? 'bg-white border border-[#c8c8c8] shadow-[0_1px_2px_rgba(0,0,0,0.05),0_8px_24px_rgba(0,0,0,0.05)] focus-within:border-[#171717] focus-within:shadow-[0_0_0_3px_rgba(0,112,243,0.14),0_12px_40px_rgba(0,0,0,0.08)] transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]'
+      : 'bg-white/[0.03] border border-white/10 backdrop-blur-2xl focus-within:border-white/28 focus-within:shadow-[0_0_0_3px_rgba(0,112,243,0.18),0_20px_50px_-20px_rgba(0,0,0,0.7)] transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]';
 
-  const aiBtnClass = `inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-[12px] sm:text-[12px] font-bold transition-all ${
+  const aiBtnClass = `inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-[12px] sm:text-[12px] font-semibold tracking-tight transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.97] ${
     aiMode
       ? isLight
-        ? 'bg-slate-900 text-white'
-        : 'bg-white text-black'
+        ? 'bg-[#171717] text-white shadow-sm'
+        : 'bg-white text-black shadow-[0_0_0_1px_rgba(255,255,255,0.1)]'
       : isLight
-        ? 'bg-slate-100 text-slate-600 border border-slate-200 hover:bg-slate-200'
-        : 'bg-white/[0.06] text-white/65 border border-white/10 hover:bg-white/10'
+        ? 'bg-ds-soft text-ds-body border border-[#c8c8c8] hover:border-[#9a9a9a] hover:bg-[#f0f0f0] hover:text-ds-ink'
+        : 'bg-white/[0.06] text-white/65 border border-white/10 hover:bg-white/10 hover:text-white'
   }`;
 
   const searchBtnClass =
-    'btn-brand inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-[12px] sm:text-[13px] font-bold';
+    'btn-brand inline-flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-[12px] sm:text-[13px] font-semibold tracking-tight';
 
   const aiIcon = (
     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
@@ -294,7 +294,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
             }}
             className={`shrink-0 rounded-full px-2.5 py-1 sm:py-1 text-[11px] font-semibold transition-all active:scale-[0.97] ${
               isLight
-                ? 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
+                ? 'bg-white border border-[#cfcfcf] text-ds-body hover:border-[#9a9a9a] hover:bg-ds-soft hover:text-ds-ink'
                 : 'bg-white/[0.05] border border-white/12 text-white/65 hover:border-white/22 hover:text-white/85'
             }`}
           >

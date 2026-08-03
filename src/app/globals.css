@@ -209,9 +209,10 @@ nav a:has(.logo-icon-wrapper) {
     --ds-canvas-soft-2: #f5f5f5;
     --ds-ink: #171717;
     --ds-body: #4d4d4d;
-    --ds-mute: #888888;
-    --ds-hairline: #ebebeb;
-    --ds-hairline-strong: #a1a1a1;
+    --ds-mute: #737373;
+    /* Stronger borders — #ebebeb was too dull on white/soft canvas */
+    --ds-hairline: #d0d0d0;
+    --ds-hairline-strong: #9a9a9a;
     --ds-link: #0070f3;
     --ds-link-deep: #0761d1;
     --ds-link-bg-soft: #d3e5ff;
@@ -233,34 +234,34 @@ nav a:has(.logo-icon-wrapper) {
     --border-color: var(--ds-hairline);
     --text-primary: var(--ds-ink);
     --text-secondary: var(--ds-body);
-    --text-tertiary: #666666;
+    --text-tertiary: #525252;
     --text-muted: var(--ds-mute);
-    --glass-bg: rgba(255, 255, 255, 0.82);
+    --glass-bg: rgba(255, 255, 255, 0.9);
     --card-bg: var(--ds-canvas);
     --card-bg-hover: var(--ds-canvas-soft);
-    --card-border: var(--ds-hairline);
+    --card-border: #cfcfcf;
     --card-border-hover: var(--ds-hairline-strong);
     --icon-bg: var(--ds-canvas-soft);
     --icon-bg-hover: var(--ds-canvas-soft-2);
     --icon-color: var(--ds-body);
     --input-bg: var(--ds-canvas);
-    --input-border: var(--ds-hairline);
+    --input-border: #c8c8c8;
     --input-border-focus: var(--ds-ink);
-    --input-ring: rgba(0, 112, 243, 0.16);
-    --input-placeholder: var(--ds-mute);
-    --nav-bg: rgba(255, 255, 255, 0.86);
+    --input-ring: rgba(0, 112, 243, 0.18);
+    --input-placeholder: #8a8a8a;
+    --nav-bg: rgba(255, 255, 255, 0.92);
     --nav-item-active-bg: linear-gradient(to bottom, rgba(23, 23, 23, 0.06), rgba(23, 23, 23, 0.02));
-    --nav-item-border: var(--ds-hairline);
+    --nav-item-border: #d0d0d0;
     --nav-item-text: var(--ds-body);
     --dropdown-bg: var(--ds-canvas);
-    --dropdown-border: var(--ds-hairline);
+    --dropdown-border: #d0d0d0;
     --footer-bg: var(--ds-canvas-soft);
     --btn-primary-bg: var(--ds-ink);
     --btn-primary-text: #ffffff;
     --btn-primary-hover: #000000;
     --btn-secondary-bg: var(--ds-canvas);
     --btn-secondary-text: var(--ds-ink);
-    --btn-secondary-border: var(--ds-hairline);
+    --btn-secondary-border: #c8c8c8;
     --btn-secondary-hover-bg: var(--ds-canvas-soft-2);
     --gradient-hero-from: var(--ds-ink);
     --gradient-hero-to: var(--ds-body);
@@ -278,18 +279,18 @@ nav a:has(.logo-icon-wrapper) {
     --cta-bg-from: var(--ds-canvas-soft);
     --cta-bg-to: var(--ds-canvas);
     --kbd-bg: var(--ds-canvas-soft);
-    --kbd-border: var(--ds-hairline);
+    --kbd-border: #c8c8c8;
     --kbd-text: var(--ds-body);
     --recent-bg: var(--ds-canvas);
     --badge-bg: var(--ds-link-bg-soft);
     --badge-text: var(--ds-link);
-    --badge-border: rgba(0, 112, 243, 0.22);
+    --badge-border: rgba(0, 112, 243, 0.28);
     --stats-bg: var(--ds-canvas);
-    --section-divider: var(--ds-hairline);
+    --section-divider: #d0d0d0;
     --brand: var(--ds-ink);
     --brand-hover: #000000;
     --brand-soft: rgba(23, 23, 23, 0.04);
-    --brand-border: var(--ds-hairline);
+    --brand-border: #d0d0d0;
     --brand-glow: rgba(0, 112, 243, 0.1);
     --vercel-blue: var(--ds-link);
     --vercel-blue-light: #3291ff;
@@ -826,20 +827,68 @@ nav a:has(.logo-icon-wrapper) {
   html.light .theme-card,
   html.light .glass-card {
     background: var(--ds-canvas, #ffffff);
-    border-color: var(--ds-hairline, #ebebeb);
+    border-color: var(--card-border, #cfcfcf);
     border-radius: var(--radius-lg, 12px);
     box-shadow: var(--shadow-card);
   }
 
   html.light .shine-border {
-    border-color: var(--ds-hairline, #ebebeb);
+    border-color: var(--card-border, #cfcfcf);
     box-shadow: var(--shadow-card);
   }
 
   html.light .shine-border:hover,
   html.light .shine-border:focus-within {
-    border-color: var(--ds-hairline-strong, #a1a1a1);
+    border-color: var(--ds-hairline-strong, #9a9a9a);
     box-shadow: var(--shadow-card-hover);
+  }
+
+  /*
+   * Global light-mode border lift — many components hardcode slate-100/200 / #eaeaea.
+   * Nudge common dull borders without rewriting every file.
+   */
+  html.light .border-slate-100 {
+    border-color: #e0e0e0;
+  }
+  html.light .border-slate-200,
+  html.light .border-slate-200\/80,
+  html.light .border-slate-200\/90 {
+    border-color: #cfcfcf;
+  }
+  html.light .border-slate-300 {
+    border-color: #b0b0b0;
+  }
+  html.light .divide-slate-100 > :not([hidden]) ~ :not([hidden]) {
+    border-color: #e0e0e0;
+  }
+  html.light .divide-slate-200 > :not([hidden]) ~ :not([hidden]) {
+    border-color: #cfcfcf;
+  }
+
+  /* Inputs / selects / textareas using CSS vars */
+  html.light input:not([type='checkbox']):not([type='radio']):not([type='range']),
+  html.light textarea,
+  html.light select {
+    border-color: var(--input-border, #c8c8c8);
+  }
+  html.light input:not([type='checkbox']):not([type='radio']):not([type='range']):focus,
+  html.light textarea:focus,
+  html.light select:focus {
+    border-color: var(--input-border-focus, #171717);
+  }
+
+  html.light .ds-card,
+  html.light .ds-inset,
+  html.light .ds-pill,
+  html.light .ds-btn-secondary,
+  html.light .ds-input,
+  html.light .page-breadcrumb-plate {
+    border-color: var(--ds-hairline, #d0d0d0);
+  }
+
+  /* Premium / elevated cards */
+  html.light .premium-card {
+    border-color: var(--card-border, #cfcfcf);
   }
 
   /* Inline links — Vercel blue */

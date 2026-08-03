@@ -74,7 +74,7 @@ export const StatsBar: React.FC = () => {
       ref={ref}
       className={`shine-border grid grid-cols-4 gap-0 rounded-xl sm:rounded-2xl overflow-hidden relative ${
         isLight
-          ? 'bg-white border border-slate-200 shadow-sm shadow-slate-900/[0.04]'
+          ? 'bg-white border border-[#cfcfcf] shadow-sm shadow-slate-900/[0.05]'
           : 'bg-gradient-to-b from-white/[0.05] to-white/[0.015] border border-white/10'
       }`}
     >
@@ -82,7 +82,7 @@ export const StatsBar: React.FC = () => {
         <div
           key={stat.label}
           className={`shine-stat-cell group relative text-center px-0.5 py-1.5 sm:py-4 sm:px-2 transition-colors duration-300 ${
-            i > 0 ? (isLight ? 'border-l border-slate-100' : 'border-l border-white/[0.06]') : ''
+            i > 0 ? (isLight ? 'border-l border-[#e0e0e0]' : 'border-l border-white/[0.06]') : ''
           } ${isLight ? 'hover:bg-slate-50/80' : 'hover:bg-white/[0.03]'}`}
           style={{
             animation: visible ? `statPop 0.5s ease-out ${i * 0.08}s both` : undefined,
