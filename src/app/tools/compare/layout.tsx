@@ -28,8 +28,8 @@ export default function CompareLayout({ children }: { children: React.ReactNode 
         description={description}
         breadcrumbs={[
           { name: 'Home', path: '/' },
-          { name: 'Tools', path: '/search' },
-          { name: 'Price comparison', path },
+          { name: 'Tools', path: '/tools/keyword' },
+          { name: 'Price Comparison', path },
         ]}
       />
       {children}

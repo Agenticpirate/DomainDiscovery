@@ -25,7 +25,12 @@ export default function KeywordPage() {
       <Navigation activeTool="keyword" />
 
       <main className={`${PAGE_MAIN_CLASS} pb-10 sm:pb-14`}>
-        <PageBreadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Keyword Domains' }]} />
+        <PageBreadcrumb
+          items={[
+            { label: 'Tools', href: '/tools/keyword' },
+            { label: 'Keyword Domains' },
+          ]}
+        />
 
         <SectionAmbient intensity="soft" contentClassName="page-gutter pt-1 sm:pt-2 pb-3 sm:pb-5">
           <div className="max-w-3xl mx-auto text-center mb-4 sm:mb-5">

@@ -20,7 +20,12 @@ export default function PremiumPage() {
       <Navigation activeTool="premium" />
 
       <main className={`${PAGE_MAIN_CLASS} pb-10`}>
-        <PageBreadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Premium Domains' }]} />
+        <PageBreadcrumb
+          items={[
+            { label: 'Tools', href: '/tools/keyword' },
+            { label: 'Premium Domains' },
+          ]}
+        />
         <SectionAmbient intensity="hero" className="w-full" contentClassName="relative z-[1]">
           <section className="page-gutter pb-5 sm:pb-7">
             <div

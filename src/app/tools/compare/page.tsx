@@ -35,7 +35,12 @@ export default function ComparePage() {
       <Navigation activeTool="compare" />
 
       <main className={`${PAGE_MAIN_CLASS} pb-10 sm:pb-14`}>
-        <PageBreadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Price Comparison' }]} />
+        <PageBreadcrumb
+          items={[
+            { label: 'Tools', href: '/tools/keyword' },
+            { label: 'Price Comparison' },
+          ]}
+        />
 
         <ComparePageClientChrome
           extensionCount={meta.extensionCount}
