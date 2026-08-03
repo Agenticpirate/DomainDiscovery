@@ -94,10 +94,12 @@ nav a:has(.logo-icon-wrapper) {
      * Black / white / gray + optional blue accent (#0070f3)
      * Typography: SF Pro system stack (Apple Silicon devices)
      */
-    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-      "Segoe UI", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
-    --font-mono: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas,
-      "Liberation Mono", "Courier New", monospace;
+    /* DESIGN.md (Vercel) — Geist first, system stack fallback */
+    --font-sans: var(--font-geist-sans), "Inter", -apple-system, BlinkMacSystemFont,
+      "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Helvetica, Arial,
+      system-ui, sans-serif;
+    --font-mono: var(--font-geist-mono), "SF Mono", ui-monospace, "SFMono-Regular",
+      Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-vercel: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
@@ -169,84 +171,118 @@ nav a:has(.logo-icon-wrapper) {
   }
 
   /*
-   * Light mode — Vercel clean (white / black / gray), subtle blue accents.
-   * Apple-like airy surfaces, not rainbow indigo.
+   * Light mode — DESIGN.md Vercel light system
+   * https://getdesign.md/vercel/design-md  (project root DESIGN.md)
+   * canvas-soft page · ink #171717 · hairline · Geist · subtle stacked shadows
    */
   html.light {
-    --bg-main: #fafafa;
-    --bg-card: #ffffff;
-    --bg-elevated: #ffffff;
-    --accent-primary: #000000;
-    --accent-dim: #666666;
-    --border-color: rgba(0, 0, 0, 0.08);
-    --text-primary: #000000;
-    --text-secondary: #444444;
+    /* Surfaces */
+    --ds-canvas: #ffffff;
+    --ds-canvas-soft: #fafafa;
+    --ds-canvas-soft-2: #f5f5f5;
+    --ds-ink: #171717;
+    --ds-body: #4d4d4d;
+    --ds-mute: #888888;
+    --ds-hairline: #ebebeb;
+    --ds-hairline-strong: #a1a1a1;
+    --ds-link: #0070f3;
+    --ds-link-deep: #0761d1;
+    --ds-link-bg-soft: #d3e5ff;
+    --ds-error: #ee0000;
+    --ds-error-soft: #f7d4d6;
+    --ds-warning: #f5a623;
+    --ds-warning-soft: #ffefcf;
+    --ds-cyan: #50e3c2;
+    --ds-violet: #7928ca;
+    --ds-highlight-pink: #ff0080;
+
+    --bg-main: var(--ds-canvas-soft);
+    --bg-card: var(--ds-canvas);
+    --bg-elevated: var(--ds-canvas);
+    --accent-primary: var(--ds-ink);
+    --accent-dim: var(--ds-mute);
+    --border-color: var(--ds-hairline);
+    --text-primary: var(--ds-ink);
+    --text-secondary: var(--ds-body);
     --text-tertiary: #666666;
-    --text-muted: #888888;
-    --glass-bg: rgba(255, 255, 255, 0.78);
-    --card-bg: #ffffff;
-    --card-bg-hover: #fafafa;
-    --card-border: #eaeaea;
-    --card-border-hover: #999999;
-    --icon-bg: #fafafa;
-    --icon-bg-hover: #eaeaea;
-    --icon-color: #444444;
-    --input-bg: #ffffff;
-    --input-border: #eaeaea;
-    --input-border-focus: #000000;
-    --input-ring: rgba(0, 112, 243, 0.18);
-    --input-placeholder: #999999;
-    --nav-bg: rgba(255, 255, 255, 0.78);
-    --nav-item-active-bg: linear-gradient(to bottom, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.03));
-    --nav-item-border: #eaeaea;
-    --nav-item-text: #444444;
-    --dropdown-bg: #ffffff;
-    --dropdown-border: #eaeaea;
-    --footer-bg: #fafafa;
-    --btn-primary-bg: #000000;
+    --text-muted: var(--ds-mute);
+    --glass-bg: rgba(255, 255, 255, 0.82);
+    --card-bg: var(--ds-canvas);
+    --card-bg-hover: var(--ds-canvas-soft);
+    --card-border: var(--ds-hairline);
+    --card-border-hover: var(--ds-hairline-strong);
+    --icon-bg: var(--ds-canvas-soft);
+    --icon-bg-hover: var(--ds-canvas-soft-2);
+    --icon-color: var(--ds-body);
+    --input-bg: var(--ds-canvas);
+    --input-border: var(--ds-hairline);
+    --input-border-focus: var(--ds-ink);
+    --input-ring: rgba(0, 112, 243, 0.16);
+    --input-placeholder: var(--ds-mute);
+    --nav-bg: rgba(255, 255, 255, 0.86);
+    --nav-item-active-bg: linear-gradient(to bottom, rgba(23, 23, 23, 0.06), rgba(23, 23, 23, 0.02));
+    --nav-item-border: var(--ds-hairline);
+    --nav-item-text: var(--ds-body);
+    --dropdown-bg: var(--ds-canvas);
+    --dropdown-border: var(--ds-hairline);
+    --footer-bg: var(--ds-canvas-soft);
+    --btn-primary-bg: var(--ds-ink);
     --btn-primary-text: #ffffff;
-    --btn-primary-hover: #111111;
-    --btn-secondary-bg: #fafafa;
-    --btn-secondary-text: #000000;
-    --btn-secondary-border: #eaeaea;
-    --btn-secondary-hover-bg: #eaeaea;
-    --gradient-hero-from: #000000;
-    --gradient-hero-to: #666666;
-    --gradient-subtitle: #666666;
+    --btn-primary-hover: #000000;
+    --btn-secondary-bg: var(--ds-canvas);
+    --btn-secondary-text: var(--ds-ink);
+    --btn-secondary-border: var(--ds-hairline);
+    --btn-secondary-hover-bg: var(--ds-canvas-soft-2);
+    --gradient-hero-from: var(--ds-ink);
+    --gradient-hero-to: var(--ds-body);
+    --gradient-subtitle: var(--ds-body);
     --shadow-color: rgba(0, 0, 0, 0.06);
-    --cta-bg-from: #fafafa;
-    --cta-bg-to: #ffffff;
-    --kbd-bg: #fafafa;
-    --kbd-border: #eaeaea;
-    --kbd-text: #666666;
-    --recent-bg: #ffffff;
-    --badge-bg: rgba(0, 112, 243, 0.08);
-    --badge-text: #0070f3;
-    --badge-border: rgba(0, 112, 243, 0.2);
-    --stats-bg: #ffffff;
-    --section-divider: #eaeaea;
-    --brand: #000000;
-    --brand-hover: #111111;
-    --brand-soft: rgba(0, 0, 0, 0.04);
-    --brand-border: rgba(0, 0, 0, 0.1);
-    --brand-glow: rgba(0, 112, 243, 0.12);
-    --vercel-blue: #0070f3;
+    /* DESIGN.md stacked card elevation */
+    --shadow-card:
+      0 1px 1px rgba(0, 0, 0, 0.02),
+      0 2px 2px rgba(0, 0, 0, 0.04),
+      0 4px 8px rgba(0, 0, 0, 0.03);
+    --shadow-card-hover:
+      0 1px 1px rgba(0, 0, 0, 0.03),
+      0 4px 8px rgba(0, 0, 0, 0.05),
+      0 12px 28px rgba(0, 0, 0, 0.06);
+    --cta-bg-from: var(--ds-canvas-soft);
+    --cta-bg-to: var(--ds-canvas);
+    --kbd-bg: var(--ds-canvas-soft);
+    --kbd-border: var(--ds-hairline);
+    --kbd-text: var(--ds-body);
+    --recent-bg: var(--ds-canvas);
+    --badge-bg: var(--ds-link-bg-soft);
+    --badge-text: var(--ds-link);
+    --badge-border: rgba(0, 112, 243, 0.22);
+    --stats-bg: var(--ds-canvas);
+    --section-divider: var(--ds-hairline);
+    --brand: var(--ds-ink);
+    --brand-hover: #000000;
+    --brand-soft: rgba(23, 23, 23, 0.04);
+    --brand-border: var(--ds-hairline);
+    --brand-glow: rgba(0, 112, 243, 0.1);
+    --vercel-blue: var(--ds-link);
     --vercel-blue-light: #3291ff;
-    --surface-1: #ffffff;
-    --surface-2: #fafafa;
-    --surface-3: #eaeaea;
-    /* Light accents — Vercel blue + neutrals */
-    --accent-indigo: #0070f3;
-    --accent-violet: #000000;
+    --surface-1: var(--ds-canvas);
+    --surface-2: var(--ds-canvas-soft);
+    --surface-3: var(--ds-canvas-soft-2);
+    /* Accents — keep domain-status greens/ambers separate from brand mono */
+    --accent-indigo: var(--ds-link);
+    --accent-violet: var(--ds-violet);
     --accent-sky: #3291ff;
-    --accent-emerald: #0070f3;
-    --accent-amber: #666666;
-    --accent-rose: #000000;
-    --light-chip-a: #fafafa;
-    --light-chip-b: #f0f7ff;
-    --light-chip-c: #eaeaea;
-    --light-chip-d: #fafafa;
-    --light-chip-e: #f5f5f5;
+    --accent-emerald: #047857;
+    --accent-amber: var(--ds-warning);
+    --accent-rose: var(--ds-error);
+    --light-chip-a: var(--ds-canvas-soft);
+    --light-chip-b: var(--ds-link-bg-soft);
+    --light-chip-c: var(--ds-canvas-soft-2);
+    --light-chip-d: var(--ds-canvas-soft);
+    --light-chip-e: var(--ds-canvas-soft-2);
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
   }
 
   * {
@@ -288,10 +324,13 @@ nav a:has(.logo-icon-wrapper) {
     animation: ambient-drift 18s var(--ease-apple) infinite;
   }
 
+  /* DESIGN.md light mesh — soft develop/preview atmosphere (hero-scale only, not chrome) */
   html.light body::before {
     background:
-      radial-gradient(ellipse 80% 50% at 50% -15%, rgba(0, 0, 0, 0.03), transparent 55%),
-      radial-gradient(ellipse 50% 40% at 100% 0%, rgba(0, 112, 243, 0.05), transparent 50%);
+      radial-gradient(ellipse 90% 55% at 50% -18%, rgba(0, 124, 240, 0.07), transparent 58%),
+      radial-gradient(ellipse 45% 40% at 100% 0%, rgba(121, 40, 202, 0.05), transparent 52%),
+      radial-gradient(ellipse 40% 35% at 0% 8%, rgba(0, 223, 216, 0.04), transparent 48%),
+      radial-gradient(ellipse 50% 30% at 80% 100%, rgba(255, 0, 128, 0.025), transparent 55%);
   }
 
   body > * {
@@ -314,7 +353,7 @@ nav a:has(.logo-icon-wrapper) {
   }
 
   html.light ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(23, 23, 23, 0.12);
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -336,8 +375,8 @@ nav a:has(.logo-icon-wrapper) {
   }
 
   html.light ::selection {
-    background: rgba(0, 112, 243, 0.16);
-    color: #000000;
+    background: #171717;
+    color: #f2f2f2;
   }
 
   ::selection {
@@ -659,21 +698,32 @@ nav a:has(.logo-icon-wrapper) {
   }
 
   html.light .premium-card {
-    background: #ffffff;
-    border-color: #eaeaea;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+    background: var(--ds-canvas, #ffffff);
+    border-color: var(--ds-hairline, #ebebeb);
+    border-radius: var(--radius-lg, 12px);
+    box-shadow: var(
+      --shadow-card,
+      0 1px 1px rgba(0, 0, 0, 0.02),
+      0 2px 2px rgba(0, 0, 0, 0.04),
+      0 4px 8px rgba(0, 0, 0, 0.03)
+    );
   }
 
   .premium-card:hover {
     border-color: var(--card-border-hover);
     background: var(--card-bg-hover);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 
   html.light .premium-card:hover {
-    border-color: #999999;
-    background: #ffffff;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    border-color: var(--ds-hairline-strong, #a1a1a1);
+    background: var(--ds-canvas, #ffffff);
+    box-shadow: var(
+      --shadow-card-hover,
+      0 1px 1px rgba(0, 0, 0, 0.03),
+      0 4px 8px rgba(0, 0, 0, 0.05),
+      0 12px 28px rgba(0, 0, 0, 0.06)
+    );
   }
 
   .text-brand {
@@ -688,42 +738,55 @@ nav a:has(.logo-icon-wrapper) {
     color: transparent;
   }
 
-  /* Light: Vercel monochrome gradient titles + blue tip */
+  /* Light: ink gradient titles — DESIGN.md display voice (no rainbow) */
   html.light .brand-gradient-text {
-    background: linear-gradient(115deg, #000000 0%, #333333 55%, #0070f3 100%);
+    background: linear-gradient(115deg, #171717 0%, #4d4d4d 72%, #0070f3 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* —— Light-mode Vercel polish —— */
+  /* —— Light-mode DESIGN.md polish —— */
   html.light body {
-    background-image:
-      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 0, 0, 0.03), transparent 55%),
-      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(0, 112, 243, 0.04), transparent 50%);
-    background-attachment: fixed;
+    background-color: var(--ds-canvas-soft, #fafafa);
+    letter-spacing: -0.011em;
+  }
+
+  html.light h1,
+  html.light h2,
+  html.light h3,
+  html.light .display-title {
+    color: var(--ds-ink, #171717);
+    letter-spacing: -0.04em;
+    font-weight: 600;
   }
 
   html.light .page-breadcrumb {
-    color: #666666;
+    color: var(--ds-mute, #888888);
   }
 
   html.light .page-breadcrumb [aria-current='page'],
   html.light .page-breadcrumb-current {
-    color: #000000;
+    color: var(--ds-ink, #171717);
   }
 
   html.light .page-breadcrumb a:hover {
-    color: #0070f3;
+    color: var(--ds-link, #0070f3);
   }
 
-  /* Primary CTAs — solid Vercel black (light) */
+  /* Primary CTAs — ink #171717 (DESIGN.md primary) */
   html.light .btn-primary-light,
   html.light button.cta-shine-primary {
-    background: #000000 !important;
+    background: var(--ds-ink, #171717) !important;
     color: #fff !important;
     border-color: transparent !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-radius: 9999px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  html.light .btn-primary-light:hover,
+  html.light button.cta-shine-primary:hover {
+    background: #000000 !important;
   }
 
   html.light .badge-success,
@@ -731,38 +794,68 @@ nav a:has(.logo-icon-wrapper) {
     color: #047857;
   }
 
-  /* Cards / panels with generic white borders pick up a cooler tint when using CSS vars */
   html.light .theme-card,
   html.light .glass-card {
-    border-color: #eaeaea;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+    background: var(--ds-canvas, #ffffff);
+    border-color: var(--ds-hairline, #ebebeb);
+    border-radius: var(--radius-lg, 12px);
+    box-shadow: var(--shadow-card);
   }
 
   html.light .shine-border {
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    border-color: var(--ds-hairline, #ebebeb);
+    box-shadow: var(--shadow-card);
   }
 
   html.light .shine-border:hover,
   html.light .shine-border:focus-within {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 112, 243, 0.05);
+    border-color: var(--ds-hairline-strong, #a1a1a1);
+    box-shadow: var(--shadow-card-hover);
   }
 
-  /* Links using brand color */
+  /* Inline links — Vercel blue */
   html.light a.text-brand,
   html.light .link-accent {
-    color: #0070f3;
+    color: var(--ds-link, #0070f3);
   }
 
   html.light a.text-brand:hover,
   html.light .link-accent:hover {
-    color: #3291ff;
+    color: var(--ds-link-deep, #0761d1);
   }
 
-  /* Footer light wash — Vercel gray */
+  /* Inputs — hairline + ink focus */
+  html.light input:not([type='checkbox']):not([type='radio']),
+  html.light textarea,
+  html.light select {
+    border-radius: var(--radius-sm, 6px);
+  }
+
   html.light footer,
   html.light .site-footer {
-    background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
-    border-top-color: #eaeaea;
+    background: linear-gradient(180deg, var(--ds-canvas-soft, #fafafa) 0%, var(--ds-canvas, #ffffff) 100%);
+    border-top-color: var(--ds-hairline, #ebebeb);
+    color: var(--ds-body, #4d4d4d);
+  }
+
+  /* Utility: soft canvas band (showcase sections) */
+  html.light .surface-soft {
+    background: var(--ds-canvas-soft, #fafafa);
+  }
+  html.light .surface-canvas {
+    background: var(--ds-canvas, #ffffff);
+  }
+  html.light .border-hairline {
+    border-color: var(--ds-hairline, #ebebeb);
+  }
+
+  /* Mono captions — technical labels */
+  html.light .caption-mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0;
+    color: var(--ds-mute, #888888);
   }
 
   /* Colorful chip utilities (opt-in classes) */

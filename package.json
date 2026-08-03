@@ -46,6 +46,7 @@
     "@octokit/rest": "^22.0.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.29.2",
+    "geist": "^1.7.2",
     "gsap": "^3.15.0",
     "ioredis": "^5.11.1",
     "jspdf": "^4.0.0",

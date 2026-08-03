@@ -1,0 +1,23 @@
+---
+description: Use DESIGN.md (Vercel light system) for UI work
+globs: **/*.{tsx,ts,css}
+alwaysApply: false
+---
+
+# Design system reference
+
+Before writing or changing UI:
+
+1. Read project root `DESIGN.md` (installed from https://getdesign.md/vercel/design-md).
+2. Prefer CSS variables under `html.light` in `src/app/globals.css` (`--ds-ink`, `--ds-canvas`, `--ds-hairline`, `--ds-link`, etc.).
+3. Light mode principles:
+   - Page body: `#fafafa` (`--ds-canvas-soft`)
+   - Cards: `#ffffff` + hairline `#ebebeb` + stacked soft shadow (not heavy drop shadows)
+   - Ink text: `#171717` (not pure black for body chrome)
+   - Secondary text: `#4d4d4d` · mute: `#888888`
+   - Primary CTA: ink `#171717` on white; secondary is white + hairline
+   - Links: `#0070f3`
+   - Font: Geist Sans / Geist Mono (loaded in `layout.tsx`)
+   - No indigo/sky wash on nav or chrome — monochrome + optional soft mesh ambient only
+4. Domain status (product exception): free emerald / premium amber / taken rose — keep for scanability.
+5. Dark mode: do not regress; only enhance light unless asked.

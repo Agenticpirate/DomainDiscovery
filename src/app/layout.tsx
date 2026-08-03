@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { ToastProvider } from "@/components/ui/Toast";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -150,7 +152,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+    >
       <head>
         {/* Temporary Impact.com site verification — remove after verified */}
         <meta
@@ -160,7 +165,9 @@ export default function RootLayout({
           {...{ value: "94371be8-1bcb-4f36-b961-098e0c4eee46" }}
         />
       </head>
-      <body className="min-h-screen w-full max-w-full font-sans antialiased overflow-x-hidden">
+      <body
+        className={`${GeistSans.className} min-h-screen w-full max-w-full font-sans antialiased overflow-x-hidden`}
+      >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

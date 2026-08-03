@@ -142,12 +142,13 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     setMobileMenuOpen(false);
   };
 
-  const navBtnBase = `group flex items-center gap-1.5 px-2 py-1.5 text-[12px] sm:text-[13px] font-medium rounded-xl transition-all duration-200 min-h-[34px]`;
+  const navBtnBase = `group flex items-center gap-1.5 px-2 py-1.5 text-[12px] sm:text-[13px] font-medium rounded-lg transition-all duration-200 min-h-[34px]`;
+  /* Light: DESIGN.md monochrome ink (no indigo wash) */
   const navBtnActive = isLight
-    ? 'text-indigo-900 bg-gradient-to-b from-indigo-50 to-sky-50 border border-indigo-200 shadow-sm shadow-indigo-500/10 backdrop-blur-xl'
+    ? 'text-[#171717] bg-[#f5f5f5] border border-[#ebebeb] shadow-sm'
     : 'text-white bg-gradient-to-b from-white/[0.12] to-white/[0.08] border border-white/20 shadow-lg shadow-black/20 backdrop-blur-xl';
   const navBtnInactive = isLight
-    ? 'text-slate-600 hover:text-indigo-800 hover:bg-indigo-50/80 border border-transparent hover:border-indigo-100'
+    ? 'text-[#4d4d4d] hover:text-[#171717] hover:bg-[#fafafa] border border-transparent hover:border-[#ebebeb]'
     : 'text-white/70 hover:text-white hover:bg-gradient-to-b hover:from-white/[0.08] hover:to-white/[0.04] border border-transparent hover:border-white/[0.15]';
 
   const renderDropdown = (menu: DropdownMenu, menuKey: string) => (
@@ -180,7 +181,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
           <div
             className={`relative rounded-2xl p-2.5 border ${
               isLight
-                ? 'bg-white border-slate-200 shadow-xl shadow-slate-900/[0.08]'
+                ? 'bg-white border-[#ebebeb] shadow-[0_1px_1px_rgba(0,0,0,0.02),0_4px_16px_rgba(0,0,0,0.06)]'
                 : 'bg-[#0c0c0e] border-white/[0.12] shadow-2xl shadow-black/60'
             }`}
             style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
@@ -196,10 +197,10 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                     className={`nav-dropdown-item flex items-start gap-2.5 p-2.5 rounded-xl text-left border min-w-0 ${
                       active
                         ? isLight
-                          ? 'is-active bg-slate-50 border-slate-200'
+                          ? 'is-active bg-[#f5f5f5] border-[#ebebeb]'
                           : 'is-active bg-white/[0.1] border-white/20'
                         : isLight
-                          ? 'border-transparent hover:bg-slate-50 hover:border-slate-200'
+                          ? 'border-transparent hover:bg-[#fafafa] hover:border-[#ebebeb]'
                           : 'border-transparent hover:bg-white/[0.06] hover:border-white/[0.12]'
                     }`}
                   >
@@ -254,12 +255,12 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
       <div className="max-w-7xl mx-auto">
         <div className={`relative overflow-visible backdrop-blur-2xl border rounded-2xl ${
           isLight
-            ? 'bg-white/85 border-indigo-200/70 shadow-lg shadow-indigo-500/[0.08]'
+            ? 'bg-white/90 border-[#ebebeb] shadow-[0_1px_1px_rgba(0,0,0,0.02),0_2px_4px_rgba(0,0,0,0.04)]'
             : 'bg-black/40 border-white/[0.08] shadow-2xl shadow-black/20'
         }`}>
           <div className={`absolute inset-0 bg-gradient-to-r rounded-2xl pointer-events-none ${
             isLight
-              ? 'from-indigo-400/[0.06] via-transparent to-sky-400/[0.07]'
+              ? 'from-[#007cf0]/[0.03] via-transparent to-[#7928ca]/[0.025]'
               : 'from-white/[0.03] via-transparent to-slate-400/[0.03]'
           }`} />
           
