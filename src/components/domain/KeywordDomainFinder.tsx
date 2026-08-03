@@ -11,6 +11,7 @@ import { PreferredRegistrarSelect, RegistrarActionMenu } from '@/components/doma
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
 import keywordTool from '@/data/keyword-tool.json';
+import { ds } from '@/lib/ds';
 
 const PREFIXES = keywordTool.prefixes as string[];
 const SUFFIXES = keywordTool.suffixes as string[];
@@ -424,58 +425,36 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
   const progressPct =
     generated.length > 0 ? Math.round((checkedCount / Math.max(generated.length, 1)) * 100) : 0;
 
-  const pill = (active: boolean) =>
-    `inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold rounded-lg border transition-colors ${
-      active
-        ? isLight
-          ? 'bg-slate-900 text-white border-slate-900 shadow-sm shadow-slate-900/15'
-          : 'bg-white text-black border-white'
-        : isLight
-          ? 'bg-slate-50/90 text-slate-600 border-slate-200/90 hover:border-slate-300 hover:bg-white hover:text-slate-800'
-          : 'bg-white/[0.04] text-white/65 border-white/10 hover:bg-white/[0.08] hover:text-white'
-    }`;
+  const pill = (active: boolean) => ds.pill(active);
 
   return (
     <div className="space-y-3 sm:space-y-4">
-      {/* Main card — search first, options on demand */}
-      <div
-        className={`rounded-2xl border overflow-hidden ${
-          isLight
-            ? 'bg-white border-slate-200/90 shadow-xl shadow-slate-900/[0.07] ring-1 ring-slate-900/[0.04]'
-            : 'bg-[#0c0c0e] border-white/[0.1]'
-        }`}
-      >
-        {/* Header — dark surface on light mode (product chrome from dark mode) */}
+      {/* Main card — DESIGN.md canvas + hairline */}
+      <div className={`${ds.card} overflow-hidden rounded-2xl`}>
+        {/* Header — polarity ink band (DESIGN.md showcase-band-dark) */}
         <div
-          className={`flex flex-wrap items-start justify-between gap-3 px-4 sm:px-6 py-3.5 sm:py-4 ${
+          className={`flex flex-wrap items-start justify-between gap-3 px-4 sm:px-6 py-3.5 sm:py-4 border-b ${
             isLight
-              ? 'bg-[#0c0c0e] text-white border-b border-white/[0.06]'
-              : 'px-4 sm:px-6 pt-4 sm:pt-5 pb-0'
+              ? 'bg-[#171717] text-white border-white/[0.08]'
+              : 'border-ds-hairline pt-4 sm:pt-5 pb-0'
           }`}
         >
           <div className="flex items-center gap-2.5 sm:gap-3">
-            <div
-              className={`p-2 sm:p-2.5 rounded-xl border shrink-0 ${
-                isLight
-                  ? 'bg-white text-black border-white shadow-sm'
-                  : 'bg-white text-black border-white'
-              }`}
-            >
+            <div className="p-2 sm:p-2.5 rounded-xl border shrink-0 bg-white text-black border-white shadow-sm">
               <Icons.Search />
             </div>
             <div>
               <h3
-                className={`text-base sm:text-lg font-black tracking-tight ${
-                  isLight ? 'text-white' : ''
+                className={`text-base sm:text-lg font-semibold tracking-tight ${
+                  isLight ? 'text-white' : 'text-ds-ink'
                 }`}
               >
                 Keyword domain finder
               </h3>
               <p
                 className={`text-[11px] sm:text-xs mt-0.5 ${
-                  isLight ? 'text-white/45' : ''
+                  isLight ? 'text-white/45' : 'text-ds-mute'
                 }`}
-                style={isLight ? undefined : { color: 'var(--text-muted)' }}
               >
                 {PREFIXES.length.toLocaleString()}+ prefixes · {SUFFIXES.length.toLocaleString()}+ suffixes ·{' '}
                 {POPULAR.length.toLocaleString()}+ seeds
@@ -526,13 +505,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
         {/* Keyword position — filters result list after generate (not generation shape) */}
         <div className="mb-4">
-          <label
-            className={`block text-[10px] font-bold uppercase tracking-widest mb-1.5 ${
-              isLight ? 'text-slate-500' : 'text-white/40'
-            }`}
-          >
-            Filter by position
-          </label>
+          <label className={`${ds.label} block mb-1.5`}>Filter by position</label>
           <div className="flex flex-wrap gap-1.5">
             {(
               [
@@ -564,10 +537,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               </button>
             ))}
           </div>
-          <p
-            className={`mt-1.5 text-[10px] sm:text-[11px] ${isLight ? 'text-slate-500' : ''}`}
-            style={isLight ? undefined : { color: 'var(--text-muted)' }}
-          >
+          <p className={`mt-1.5 text-[10px] sm:text-[11px] ${ds.mute}`}>
             {filterMode === 'starts' && 'Only domains that start with your keyword.'}
             {filterMode === 'ends' && 'Only domains that end with your keyword.'}
             {filterMode === 'all' && 'All prefix, suffix, and combo patterns.'}
@@ -577,34 +547,17 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         {/* 2) Extensions — type any TLD, pick presets, chips for selected */}
         <div className="mb-4 space-y-2.5">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <label
-              className={`text-[10px] font-bold uppercase tracking-widest ${
-                isLight ? 'text-slate-500' : 'text-white/40'
-              }`}
-            >
-              Extensions
-            </label>
-            <span
-              className={`text-[10px] ${isLight ? 'text-slate-400' : ''}`}
-              style={isLight ? undefined : { color: 'var(--text-muted)' }}
-            >
+            <label className={ds.label}>Extensions</label>
+            <span className={`text-[10px] ${ds.mute}`}>
               Type any TLD (e.g. shop, .io, co.uk) or pick a preset
             </span>
           </div>
 
-          <div
-            className={`flex flex-col sm:flex-row sm:items-center gap-2 rounded-2xl border p-2 sm:p-2.5 ${
-              isLight
-                ? 'bg-gradient-to-b from-slate-50 to-slate-50/60 border-slate-200/90 shadow-inner shadow-slate-900/[0.02]'
-                : 'bg-white/[0.02] border-white/[0.08]'
-            }`}
-          >
+          <div className={`flex flex-col sm:flex-row sm:items-center gap-2 p-2 sm:p-2.5 ${ds.inset} rounded-2xl`}>
             <div className="flex flex-1 min-w-0 flex-wrap items-center gap-1.5">
               <div className="relative flex-1 min-w-[8.5rem] max-w-full sm:max-w-[14rem]">
                 <span
-                  className={`pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] font-mono ${
-                    isLight ? 'text-slate-400' : 'text-white/30'
-                  }`}
+                  className={`pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[12px] font-mono ${ds.mute}`}
                 >
                   .
                 </span>
@@ -624,11 +577,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   placeholder="type tld…"
                   autoComplete="off"
                   spellCheck={false}
-                  className={`w-full rounded-xl border pl-6 pr-3 py-2 text-[12px] font-mono font-semibold outline-none transition-colors ${
-                    isLight
-                      ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 shadow-sm focus:border-slate-400 focus:shadow-md'
-                      : 'bg-[#121214] border-white/10 text-white placeholder:text-white/25 focus:border-white/25'
-                  }`}
+                  className={`w-full rounded-ds-md border pl-6 pr-3 py-2 text-[12px] font-mono font-semibold outline-none transition-colors ${ds.input}`}
                   aria-label="Type a preferred extension"
                 />
               </div>
@@ -636,11 +585,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 type="button"
                 onClick={commitCustomTld}
                 disabled={!normalizeTld(customTldInput)}
-                className={`shrink-0 rounded-xl border px-3 py-2 text-[11px] font-bold transition-colors disabled:opacity-40 ${
-                  isLight
-                    ? 'border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 hover:border-slate-300'
-                    : 'border-white/10 bg-white/[0.06] text-white/80 hover:bg-white/10'
-                }`}
+                className={`shrink-0 rounded-ds-md border px-3 py-2 text-[11px] font-bold transition-colors disabled:opacity-40 ${ds.btnSecondary} !rounded-ds-md`}
               >
                 Add
               </button>
@@ -650,11 +595,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   addTld(e.target.value);
                   e.target.value = '';
                 }}
-                className={`rounded-xl border px-2.5 py-2 text-[12px] font-semibold outline-none min-w-[7.5rem] ${
-                  isLight
-                    ? 'bg-white border-slate-200 text-slate-800 shadow-sm'
-                    : 'bg-[#121214] border-white/10 text-white'
-                }`}
+                className={`rounded-ds-md border px-2.5 py-2 text-[12px] font-semibold outline-none min-w-[7.5rem] ${ds.input}`}
                 aria-label="Choose preset extension"
               >
                 <option value="">Presets…</option>
@@ -672,14 +613,8 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               onClick={() => void handleSearch()}
               disabled={!canSearch || isGenerating}
               className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-[13px] font-bold transition-all duration-150 w-full sm:w-auto shrink-0 ${
-                !canSearch || isGenerating
-                  ? isLight
-                    ? 'bg-slate-200 text-slate-400 border border-slate-200 cursor-not-allowed'
-                    : 'bg-white/15 text-white/35 cursor-not-allowed'
-                  : isLight
-                    ? 'bg-[#0a0a0c] text-white hover:bg-black shadow-md shadow-slate-900/25 hover:shadow-lg hover:shadow-slate-900/30'
-                    : 'bg-white text-black hover:bg-white/90'
-              }`}
+                !canSearch || isGenerating ? ds.btnDisabled : ds.btnPrimary
+              } !rounded-xl`}
             >
               {isGenerating ? (
                 <>
@@ -707,11 +642,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                       ? 'At least one extension required'
                       : `Remove ${tld}`
                   }
-                  className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-mono font-semibold transition-colors ${
-                    isLight
-                      ? 'bg-slate-900 text-white border-slate-900 shadow-sm shadow-slate-900/15 hover:bg-slate-800'
-                      : 'bg-white text-black border-white hover:bg-white/90'
-                  }`}
+                  className="inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-mono font-semibold transition-colors bg-ds-ink text-white border-ds-ink hover:brightness-110"
                 >
                   {tld}
                   {selectedTlds.length > 1 && (
@@ -762,9 +693,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 setMinLen(2);
                 setMaxLen(40);
               }}
-              className={`text-[12px] font-semibold px-1 ${
-                isLight ? 'text-slate-400 hover:text-slate-700' : 'text-white/35 hover:text-white/70'
-              }`}
+              className={`text-[12px] font-semibold px-1 ${ds.mute} hover:text-ds-ink transition-colors`}
             >
               Clear
             </button>
@@ -772,31 +701,15 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         </div>
 
         {showPopular && (
-          <div
-            className={`mt-3 mb-1 rounded-xl border p-2.5 sm:p-3 ${
-              isLight
-                ? 'bg-slate-50/70 border-slate-200/80'
-                : 'bg-white/[0.02] border-white/[0.06]'
-            }`}
-          >
-            <p
-              className={`text-[10px] font-bold uppercase tracking-widest mb-2 ${
-                isLight ? 'text-slate-500' : 'text-white/40'
-              }`}
-            >
-              Popular seeds
-            </p>
+          <div className={`mt-3 mb-1 p-2.5 sm:p-3 ${ds.inset}`}>
+            <p className={`${ds.label} mb-2`}>Popular seeds</p>
             <div className="flex flex-wrap gap-1.5">
               {POPULAR_CHIPS.map((item) => (
                 <button
                   key={item.word}
                   type="button"
                   onClick={() => void handleSearch(item.word)}
-                  className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold transition-colors ${
-                    isLight
-                      ? 'bg-white text-slate-700 border-slate-200 shadow-sm hover:bg-slate-900 hover:text-white hover:border-slate-900 hover:shadow-md'
-                      : 'bg-white/[0.04] text-white/70 border-white/10 hover:bg-white hover:text-black hover:border-white'
-                  }`}
+                  className={`${ds.pill(false)} !rounded-full hover:!bg-ds-ink hover:!text-white hover:!border-ds-ink`}
                 >
                   {item.word}
                 </button>
@@ -806,19 +719,9 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         )}
 
         {showOptions && (
-          <div
-            className={`mt-3 pt-3 border-t space-y-3 ${
-              isLight ? 'border-slate-100' : 'border-white/[0.06]'
-            }`}
-          >
+          <div className={`mt-3 pt-3 border-t space-y-3 border-ds-hairline`}>
             <div>
-              <label
-                className={`block text-[10px] font-bold uppercase tracking-widest mb-2 ${
-                  isLight ? 'text-slate-500' : 'text-white/40'
-                }`}
-              >
-                Sort by
-              </label>
+              <label className={`${ds.label} block mb-2`}>Sort by</label>
               <div className="flex flex-wrap gap-1.5">
                 {(
                   [
@@ -846,18 +749,13 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 onChange={(e) => setIncludeHyphens(e.target.checked)}
                 className="w-3.5 h-3.5 rounded"
               />
-              <span className={`text-[12px] ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
-                Include hyphens
-              </span>
+              <span className={`text-[12px] ${ds.body}`}>Include hyphens</span>
             </label>
           </div>
         )}
 
         {!canSearch && (
-          <p
-            className={`mt-2 text-[11px] ${isLight ? 'text-slate-500' : ''}`}
-            style={isLight ? undefined : { color: 'var(--text-muted)' }}
-          >
+          <p className={`mt-2 text-[11px] ${ds.mute}`}>
             Type a primary or secondary keyword, then click Find domains
           </p>
         )}
@@ -866,13 +764,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
       {/* Results */}
       {generated.length > 0 && (
-        <div
-          className={`rounded-2xl border overflow-hidden ${
-            isLight
-              ? 'bg-white border-slate-200/90 shadow-xl shadow-slate-900/[0.07] ring-1 ring-slate-900/[0.04]'
-              : 'bg-[#0c0c0e] border-white/[0.1]'
-          }`}
-        >
+        <div className={`${ds.card} overflow-hidden rounded-2xl`}>
           {/* Dark stats chrome (light mode) — same surfaces as dark product UI */}
           <div
             className={`px-3 sm:px-4 py-2.5 sm:py-3 border-b ${
@@ -934,11 +826,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             )}
           </div>
 
-          <div
-            className={`px-3 sm:px-4 py-3 border-b space-y-2.5 ${
-              isLight ? 'border-slate-100 bg-slate-50/50' : 'border-white/[0.06]'
-            }`}
-          >
+          <div className="px-3 sm:px-4 py-3 border-b space-y-2.5 border-ds-hairline bg-ds-soft">
             {/* Position + sort also editable after results (same state as form) */}
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="text-[9px] font-bold uppercase tracking-wide mr-0.5" style={{ color: 'var(--text-muted)' }}>
@@ -991,11 +879,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 <select
                   value={typeFilter}
                   onChange={(e) => setTypeFilter(e.target.value as TypeFilter)}
-                  className={`rounded-lg border px-2 py-1 text-[11px] font-semibold outline-none ${
-                    isLight
-                      ? 'bg-white border-slate-200 text-slate-700 shadow-sm'
-                      : 'bg-white/[0.04] border-white/10 text-white/70'
-                  }`}
+                  className={`rounded-lg border px-2 py-1 text-[11px] font-semibold outline-none ${ds.input}`}
                 >
                   <option value="all">Type: All</option>
                   <option value="exact">Exact</option>
@@ -1004,12 +888,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   <option value="combo">Combo</option>
                   <option value="hyphen">Hyphen</option>
                 </select>
-                <label
-                  className={`inline-flex items-center gap-1 text-[10px] ${
-                    isLight ? 'text-slate-500' : ''
-                  }`}
-                  style={isLight ? undefined : { color: 'var(--text-muted)' }}
-                >
+                <label className={`inline-flex items-center gap-1 text-[10px] ${ds.mute}`}>
                   Len
                   <input
                     type="number"
@@ -1017,11 +896,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                     max={maxLen}
                     value={minLen}
                     onChange={(e) => setMinLen(Math.max(2, Math.min(Number(e.target.value) || 2, maxLen)))}
-                    className={`w-10 rounded-md border px-1 py-1 tabular-nums outline-none ${
-                      isLight
-                        ? 'bg-white border-slate-200 shadow-sm'
-                        : 'bg-white/[0.04] border-white/10'
-                    }`}
+                    className={`w-10 rounded-md border px-1 py-1 tabular-nums outline-none ${ds.input}`}
                   />
                   –
                   <input
@@ -1030,22 +905,14 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                     max={40}
                     value={maxLen}
                     onChange={(e) => setMaxLen(Math.min(40, Math.max(Number(e.target.value) || 24, minLen)))}
-                    className={`w-10 rounded-md border px-1 py-1 tabular-nums outline-none ${
-                      isLight
-                        ? 'bg-white border-slate-200 shadow-sm'
-                        : 'bg-white/[0.04] border-white/10'
-                    }`}
+                    className={`w-10 rounded-md border px-1 py-1 tabular-nums outline-none ${ds.input}`}
                   />
                 </label>
               </div>
             </div>
           </div>
 
-          <div
-            className={`max-h-[min(68vh,calc(100vh-16rem))] overflow-y-auto overscroll-contain p-2 sm:p-2.5 ${
-              isLight ? 'bg-slate-50/40' : ''
-            }`}
-          >
+          <div className="max-h-[min(68vh,calc(100vh-16rem))] overflow-y-auto overscroll-contain p-2 sm:p-2.5 bg-ds-soft/40">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5 auto-rows-auto">
               {visible.map((item) => (
                 <DomainRow
@@ -1060,10 +927,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             </div>
             {visible.length === 0 && (
               <div className="text-center py-12 space-y-3">
-                <p
-                  className={`text-[12px] ${isLight ? 'text-slate-500' : ''}`}
-                  style={isLight ? undefined : { color: 'var(--text-muted)' }}
-                >
+                <p className={`text-[12px] ${ds.mute}`}>
                   No domains match these filters
                   {searchPrimary ? ` for “${searchPrimary}”` : ''}
                 </p>
@@ -1085,13 +949,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           </div>
 
           {visibleCount < filtered.length && (
-            <div
-              className={`flex items-center justify-center gap-4 py-2.5 border-t ${
-                isLight
-                  ? 'border-slate-100 bg-slate-50/80'
-                  : 'border-white/[0.06] bg-black/20'
-              }`}
-            >
+            <div className="flex items-center justify-center gap-4 py-2.5 border-t border-ds-hairline bg-ds-soft">
               <button
                 type="button"
                 onClick={() => setVisibleCount((n) => n + 200)}
@@ -1114,19 +972,8 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
       )}
 
       {generated.length === 0 && !isGenerating && (
-        <div
-          className={`text-center rounded-2xl border px-4 py-6 sm:py-8 ${
-            isLight
-              ? 'bg-white/70 border-slate-200/80 shadow-sm text-slate-500'
-              : 'border-transparent'
-          }`}
-        >
-          <p
-            className={`text-[12px] sm:text-[13px] leading-relaxed max-w-md mx-auto ${
-              isLight ? 'text-slate-500' : ''
-            }`}
-            style={isLight ? undefined : { color: 'var(--text-muted)' }}
-          >
+        <div className={`text-center rounded-2xl border px-4 py-6 sm:py-8 ${ds.card} ${ds.mute}`}>
+          <p className={`text-[12px] sm:text-[13px] leading-relaxed max-w-md mx-auto ${ds.mute}`}>
             Type any keyword (or use Popular), pick a registrar, then Find domains — prefixes,
             suffixes &amp; live checks included.
           </p>

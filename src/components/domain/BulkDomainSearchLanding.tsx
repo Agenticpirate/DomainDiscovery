@@ -20,13 +20,13 @@ function SolidPlate({
   contentClassName?: string;
   fill?: string;
 }) {
-  const bg = fill ?? (isLight ? '#ffffff' : '#0a0a0c');
+  const bg = fill ?? 'var(--ds-canvas)';
   return (
-    <div className={`relative isolate overflow-hidden ${className}`} style={{ backgroundColor: bg }}>
+    <div className={`relative isolate overflow-hidden bg-ds-canvas ${className}`} style={fill ? { backgroundColor: bg } : undefined}>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[inherit]"
-        style={{ backgroundColor: bg }}
+        className="pointer-events-none absolute inset-0 rounded-[inherit] bg-ds-canvas"
+        style={fill ? { backgroundColor: bg } : undefined}
       />
       <div className={`relative z-[1] h-full ${contentClassName}`}>{children}</div>
     </div>
@@ -327,35 +327,18 @@ const SearchInputSection: React.FC<{
   };
 
   const chipClass = (active?: boolean) =>
-    `inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] sm:text-[12px] font-semibold transition-colors duration-150 ${
-      active
-        ? isLight
-          ? 'bg-slate-900 text-white border-slate-900'
-          : 'bg-white text-black border-white'
-        : isLight
-          ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-          : 'bg-[#121214] text-white/70 border-white/10 hover:bg-[#16161a] hover:text-white'
-    }`;
+    active
+      ? 'ds-pill ds-pill-active !rounded-lg !px-2.5 !py-1.5 !text-[11px] sm:!text-[12px]'
+      : 'ds-pill !rounded-lg !px-2.5 !py-1.5 !text-[11px] sm:!text-[12px]';
 
   return (
     <div className="max-w-4xl mx-auto px-2 sm:px-0 animate-fade-in">
       <div
         className={`relative isolate overflow-hidden rounded-2xl border transition-colors duration-200 ${
           isDragging
-            ? isLight
-              ? 'border-slate-400 bg-slate-50 ring-2 ring-slate-300/50'
-              : 'border-white/30 ring-2 ring-white/15'
-            : isLight
-              ? 'bg-white border-slate-200 shadow-xl shadow-slate-900/[0.05]'
-              : 'border-white/[0.12]'
+            ? 'border-ds-strong bg-ds-soft ring-2 ring-ds-link/20'
+            : 'bg-ds-canvas border-ds-hairline shadow-ds-card'
         }`}
-        style={{
-          backgroundColor: isLight
-            ? undefined
-            : isDragging
-              ? '#121214'
-              : '#0c0c0e',
-        }}
         onDragOver={(e) => {
           e.preventDefault();
           setIsDragging(true);
@@ -366,20 +349,15 @@ const SearchInputSection: React.FC<{
         {/* Opaque plate — ambient dots never show through the search card */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
-          style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+          className="pointer-events-none absolute inset-0 rounded-[inherit] bg-ds-canvas"
         />
         {/* Header — compact; help stays optional so search is first */}
-        <div
-          className={`relative z-[1] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-4 sm:px-5 pt-4 sm:pt-5 pb-3 ${
-            isLight ? 'border-b border-slate-100' : 'border-b border-white/[0.06]'
-          }`}
-        >
+        <div className="relative z-[1] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-4 sm:px-5 pt-4 sm:pt-5 pb-3 border-b border-ds-hairline">
           <div className="text-left">
-            <div className={`text-[13px] sm:text-[15px] font-bold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
+            <div className="text-[13px] sm:text-[15px] font-semibold tracking-tight text-ds-ink">
               Bulk domain list
             </div>
-            <p className="text-[11px] sm:text-[12px] mt-0.5" style={{ color: 'var(--text-muted)' }}>
+            <p className="text-[11px] sm:text-[12px] mt-0.5 text-ds-mute">
               Paste up to {maxDomains.toLocaleString()} domains · live availability
             </p>
           </div>
@@ -603,9 +581,7 @@ const SearchInputSection: React.FC<{
 
           {/* Import options */}
           <div
-            className={`mt-4 pt-4 border-t flex flex-col gap-3 ${
-              isLight ? 'border-slate-100' : 'border-white/[0.06]'
-            }`}
+            className="mt-4 pt-4 border-t flex flex-col gap-3 border-ds-hairline"
           >
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               <input
@@ -676,16 +652,12 @@ const SearchInputSection: React.FC<{
               )}
             </div>
             <div
-              className={`flex flex-wrap gap-1.5 text-[10px] font-medium ${
-                isLight ? 'text-slate-400' : 'text-white/30'
-              }`}
+              className="flex flex-wrap gap-1.5 text-[10px] font-medium text-ds-mute"
             >
               {['CSV', 'TXT', 'TSV', 'JSON', 'Drag & drop', 'Copy-paste'].map((f) => (
                 <span
                   key={f}
-                  className={`rounded-md border px-1.5 py-0.5 ${
-                    isLight ? 'border-slate-200 bg-slate-50' : 'border-white/[0.08] bg-white/[0.03]'
-                  }`}
+                  className="rounded-md border px-1.5 py-0.5 border-ds-hairline bg-ds-soft text-ds-mute"
                 >
                   {f}
                 </span>
@@ -693,10 +665,10 @@ const SearchInputSection: React.FC<{
             </div>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-3 pt-1">
-              <div className={`text-[11px] sm:text-[12px] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+              <div className="text-[11px] sm:text-[12px] text-ds-mute">
                 {domains.length > 0 ? (
                   <span className="font-medium">
-                    <span className={isLight ? 'text-slate-800' : 'text-white/80'}>{domains.length}</span> domains
+                    <span className="text-ds-ink">{domains.length}</span> domains
                     {(counts.available > 0 || (counts.premium ?? 0) > 0 || counts.taken > 0) && (
                       <span className="ml-2">
                         ·{' '}
@@ -747,14 +719,10 @@ const SearchInputSection: React.FC<{
                     disabled={!canSearch || (checking && counts.checking === domains.length && domains.length > 0)}
                     aria-disabled={!canSearch}
                     title={!canSearch ? 'Add domains first' : undefined}
-                    className={`inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl px-5 py-2.5 sm:py-3 text-[12px] sm:text-[13px] font-bold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                    className={`inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl px-5 py-2.5 sm:py-3 text-[12px] sm:text-[13px] font-bold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-ds-link/40 focus-visible:ring-offset-2 focus-visible:ring-offset-ds-canvas ${
                       canSearch
-                        ? isLight
-                          ? 'bg-slate-900 text-white hover:bg-slate-800 shadow-md shadow-slate-900/20 focus-visible:ring-slate-400 focus-visible:ring-offset-white'
-                          : 'bg-white text-black hover:bg-white/95 shadow-[0_8px_24px_rgba(0,0,0,0.45)] ring-1 ring-white/20 focus-visible:ring-white focus-visible:ring-offset-[#0c0c0e]'
-                        : isLight
-                          ? 'bg-slate-200 text-slate-400 border border-slate-200 cursor-not-allowed shadow-none'
-                          : 'bg-white/10 text-white/35 border border-white/10 cursor-not-allowed shadow-none'
+                        ? 'bg-ds-ink text-ds-soft hover:brightness-110 shadow-ds-card'
+                        : 'bg-ds-inset text-ds-mute border border-ds-hairline cursor-not-allowed shadow-none'
                     } disabled:cursor-not-allowed`}
                   >
                     {checking && domains.length > 0 && counts.checking === domains.length ? (
