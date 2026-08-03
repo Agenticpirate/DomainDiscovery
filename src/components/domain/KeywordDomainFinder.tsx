@@ -42,10 +42,10 @@ interface KeywordDomainFinderProps {
 const BATCH_SIZE = 80;
 const CHECK_CONCURRENCY = 3;
 
-/** Compact popular row only — not the full 5k library on screen */
+/** Compact popular row — hot + high-score seeds (includes 2026 trending) */
 const POPULAR_CHIPS = POPULAR.filter((p) => p.hot || p.popularity >= 94)
   .sort((a, b) => b.popularity - a.popularity)
-  .slice(0, 20);
+  .slice(0, 28);
 
 function scorePopularity(type: GeneratedDomain['type'], words: string[]): number {
   const seedBoost = Math.max(0, ...words.map((w) => (SEED_POP.get(w) ?? 0) - 40));
