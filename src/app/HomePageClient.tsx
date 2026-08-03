@@ -76,7 +76,7 @@ export default function Home() {
 
       <Navigation />
 
-      <main className="relative pt-[3.15rem] sm:pt-[4.25rem]">
+      <main className="relative page-main">
         {/* Hero — dots clear under center copy (intensity=hero), solid search plate.
             Mobile-only visual polish via max-sm: classes; sm+ layout unchanged. */}
         <SectionAmbient

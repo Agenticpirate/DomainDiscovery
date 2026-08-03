@@ -251,7 +251,11 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   );
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[100] py-1 sm:py-1.5 px-2 sm:px-4">
+    <nav
+      className="fixed top-0 left-0 right-0 z-[100] py-1 sm:py-1.5 px-2 sm:px-4 pt-[max(0.25rem,env(safe-area-inset-top))]"
+      data-site-nav
+      aria-label="Primary"
+    >
       <div className="max-w-7xl mx-auto">
         <div className={`relative overflow-visible backdrop-blur-2xl border rounded-2xl ${
           isLight

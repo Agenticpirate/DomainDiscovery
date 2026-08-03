@@ -1025,18 +1025,33 @@ nav a:has(.logo-icon-wrapper) {
   }
 
   /*
-   * Fixed-nav content shell — breadcrumbs share one position on every page.
-   * Nav is `fixed top-0`; main clears it; PageBreadcrumb uses max-w-7xl left edge.
+   * Fixed-nav clearance — floating pill nav (outer py + rounded bar + logo row).
+   * Was 3.5/4.5rem and breadcrumb/heroes sat under the bar on many tools pages.
    */
-  .page-main {
-    position: relative;
-    padding-top: 3.5rem; /* 56px — under fixed nav */
+  :root {
+    --nav-clearance: 4.75rem; /* ~76px mobile */
   }
 
   @media (min-width: 640px) {
-    .page-main {
-      padding-top: 4.5rem; /* 72px */
+    :root {
+      --nav-clearance: 5.5rem; /* ~88px */
     }
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --nav-clearance: 5.75rem; /* full desktop nav row */
+    }
+  }
+
+  html {
+    scroll-padding-top: calc(var(--nav-clearance) + 0.75rem);
+  }
+
+  .page-main {
+    position: relative;
+    /* Clear fixed floating nav + notch safe area */
+    padding-top: calc(var(--nav-clearance) + env(safe-area-inset-top, 0px));
   }
 
   /* Horizontal gutters — same on every page */
@@ -1056,6 +1071,9 @@ nav a:has(.logo-icon-wrapper) {
   .page-breadcrumb-bar {
     width: 100%;
     box-sizing: border-box;
+    /* Extra air under the floating nav pill (clearance already on .page-main) */
+    padding-top: 0.35rem;
+    padding-bottom: 0.15rem;
   }
 
   .page-breadcrumb-inner {
@@ -1067,10 +1085,12 @@ nav a:has(.logo-icon-wrapper) {
 
   /* Trail itself: fixed vertical rhythm, left-aligned */
   .page-breadcrumb {
-    margin-top: 0.75rem;
-    margin-bottom: 0.75rem;
+    margin-top: 0.35rem;
+    margin-bottom: 0.65rem;
     justify-content: flex-start !important;
     text-align: left;
+    position: relative;
+    z-index: 1;
   }
 
   @media (min-width: 640px) {

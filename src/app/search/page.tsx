@@ -469,7 +469,7 @@ function SearchPageContent() {
         Split layout: chrome is flex-none (never overlaps results).
         Only the results pane scrolls — fixes first row clipped under sticky filters.
       */}
-      <main className="relative flex min-h-0 w-full max-w-full flex-1 flex-col overflow-hidden pt-[3.05rem] sm:pt-[3.9rem]">
+      <main className="page-main relative flex min-h-0 w-full max-w-full flex-1 flex-col overflow-hidden">
         {/* Compact tool UI — visible title would fight the search chrome; keep H1 for SEO/a11y */}
         <h1 className="sr-only">Domain availability checker — instant domain search</h1>
         <SectionAmbient
