@@ -15,7 +15,8 @@ export function ensureGsap(): typeof gsap {
     gsap.registerPlugin(ScrollTrigger);
     gsap.defaults({
       force3D: true,
-      ease: 'power3.out',
+      /* Premium product ease — closer to Apple / Vercel marketing */
+      ease: 'expo.out',
       overwrite: 'auto',
     });
     // Respect reduced motion globally — effectively skip animated timelines

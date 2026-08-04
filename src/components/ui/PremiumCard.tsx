@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { SPRING_SOFT } from '@/lib/motion/premium';
 
 type PremiumCardProps = {
   children: React.ReactNode;
@@ -16,8 +17,7 @@ type PremiumCardProps = {
 };
 
 /**
- * Shared premium card shell — silver border sheen + optional motion lift.
- * Works on light and dark via existing .shine-border tokens.
+ * Premium card — Vercel monochrome shell + Apple spring lift + shine.
  */
 export function PremiumCard({
   children,
@@ -36,10 +36,12 @@ export function PremiumCard({
       whileHover={
         reduce || !lift
           ? undefined
-          : { y: -3, transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] } }
+          : { y: -4, scale: 1.01, transition: SPRING_SOFT }
       }
+      whileTap={reduce || !lift ? undefined : { scale: 0.99, transition: SPRING_SOFT }}
       className={cn(
-        'relative overflow-hidden rounded-2xl border',
+        'relative overflow-hidden rounded-2xl border gpu-layer',
+        'transition-[border-color,box-shadow,background-color] duration-300 ease-out',
         shine && 'shine-border',
         className
       )}

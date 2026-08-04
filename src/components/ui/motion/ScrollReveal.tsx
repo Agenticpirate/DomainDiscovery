@@ -54,9 +54,10 @@ export function ScrollReveal({
           gsap.to(batch, {
             y: 0,
             opacity: 1,
-            duration: isMobile ? 0.38 : 0.55,
+            duration: isMobile ? 0.42 : 0.65,
             stagger: isMobile ? Math.min(stagger, 0.05) : stagger,
-            ease: isMobile ? 'power2.out' : 'power3.out',
+            /* Apple-like ease out (soft landing) */
+            ease: isMobile ? 'power2.out' : 'expo.out',
             force3D: true,
             overwrite: 'auto',
           });

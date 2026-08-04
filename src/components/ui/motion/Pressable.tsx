@@ -3,24 +3,23 @@
 import React from 'react';
 import { motion, useReducedMotion, type HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
-
-const EASE = [0.22, 1, 0.36, 1] as const;
+import { SPRING_PRESS, SPRING_SOFT } from '@/lib/motion/premium';
 
 type PressableProps = HTMLMotionProps<'div'> & {
-  /** Scale on press (default 0.985) */
+  /** Scale on press (default 0.975) */
   pressScale?: number;
   /** Subtle hover lift */
   lift?: boolean;
 };
 
 /**
- * Micro-interaction wrapper — press scale + optional hover lift.
- * UI/UX Pro style timings; disabled under reduced-motion.
+ * Micro-interaction — Apple-like spring press + Vercel hover lift.
+ * Disabled under reduced-motion.
  */
 export function Pressable({
   children,
   className = '',
-  pressScale = 0.985,
+  pressScale = 0.975,
   lift = true,
   ...rest
 }: PressableProps) {
@@ -32,10 +31,14 @@ export function Pressable({
 
   return (
     <motion.div
-      className={cn('gpu-layer', className)}
-      whileHover={lift ? { y: -2, transition: { duration: 0.22, ease: EASE } } : undefined}
-      whileTap={{ scale: pressScale, transition: { duration: 0.12 } }}
-      transition={{ duration: 0.22, ease: EASE }}
+      className={cn('gpu-layer will-change-transform', className)}
+      whileHover={
+        lift
+          ? { y: -3, transition: SPRING_SOFT }
+          : undefined
+      }
+      whileTap={{ scale: pressScale, transition: SPRING_PRESS }}
+      transition={SPRING_SOFT}
       {...rest}
     >
       {children}

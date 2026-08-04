@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { motion, useReducedMotion, type HTMLMotionProps } from 'framer-motion';
-
-const EASE = [0.22, 1, 0.36, 1] as const;
+import { APPLE_EASE, SPRING_SOFT, VERCEL_EASE } from '@/lib/motion/premium';
 
 type RevealProps = HTMLMotionProps<'div'> & {
   delay?: number;
@@ -11,18 +10,21 @@ type RevealProps = HTMLMotionProps<'div'> & {
   once?: boolean;
   /** Tighter mobile motion */
   compact?: boolean;
+  /** Use spring physics (Apple product feel) */
+  spring?: boolean;
 };
 
 /**
- * Viewport reveal — Framer Motion (works great with React/Next).
- * Uses UI/UX pro motion timings; skips when reduced-motion is on.
+ * Viewport reveal — Vercel-clean fade + Apple-like spring option.
+ * Skips when reduced-motion is on.
  */
 export function Reveal({
   children,
   delay = 0,
-  y = 14,
+  y = 16,
   once = true,
   compact = true,
+  spring = true,
   className = '',
   ...rest
 }: RevealProps) {
@@ -35,11 +37,15 @@ export function Reveal({
 
   return (
     <motion.div
-      className={className}
+      className={`gpu-layer ${className}`}
       initial={{ opacity: 0, y: dy }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: '-8% 0px -6% 0px', amount: 0.15 }}
-      transition={{ duration: 0.42, delay, ease: EASE }}
+      viewport={{ once, margin: '-8% 0px -6% 0px', amount: 0.12 }}
+      transition={
+        spring
+          ? { ...SPRING_SOFT, delay }
+          : { duration: 0.55, delay, ease: APPLE_EASE }
+      }
       {...rest}
     >
       {children}
@@ -54,8 +60,8 @@ type StaggerProps = {
   stagger?: number;
 };
 
-/** Stagger children that are direct motion.div or use data-stagger */
-export function Stagger({ children, className = '', delay = 0, stagger = 0.05 }: StaggerProps) {
+/** Stagger children — premium product grid entrance */
+export function Stagger({ children, className = '', delay = 0, stagger = 0.055 }: StaggerProps) {
   const reduce = useReducedMotion();
 
   if (reduce) {
@@ -79,12 +85,14 @@ export function Stagger({ children, className = '', delay = 0, stagger = 0.05 }:
         if (!React.isValidElement(child)) return child;
         return (
           <motion.div
+            className="gpu-layer"
             variants={{
-              hidden: { opacity: 0, y: 12 },
+              hidden: { opacity: 0, y: 14, scale: 0.985 },
               show: {
                 opacity: 1,
                 y: 0,
-                transition: { duration: 0.4, ease: EASE },
+                scale: 1,
+                transition: { ...SPRING_SOFT },
               },
             }}
           >
@@ -92,6 +100,30 @@ export function Stagger({ children, className = '', delay = 0, stagger = 0.05 }:
           </motion.div>
         );
       })}
+    </motion.div>
+  );
+}
+
+/** Instant mount fade (hero / critical above-fold) */
+export function FadeIn({
+  children,
+  className = '',
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const reduce = useReducedMotion();
+  if (reduce) return <div className={className}>{children}</div>;
+  return (
+    <motion.div
+      className={`gpu-layer ${className}`}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay, ease: VERCEL_EASE }}
+    >
+      {children}
     </motion.div>
   );
 }
