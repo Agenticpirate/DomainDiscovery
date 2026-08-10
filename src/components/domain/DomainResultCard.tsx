@@ -87,7 +87,7 @@ export function DomainResultCard({
                 {domain}
               </h3>
               {premium && (
-                <Badge variant="warning" size="sm">Premium</Badge>
+                <Badge variant="warning" size="sm">Premium · GoDaddy</Badge>
               )}
             </div>
             <div className="flex items-center gap-1.5 mt-0.5">
@@ -95,7 +95,13 @@ export function DomainResultCard({
                 variant={premium ? 'warning' : isAvailable ? 'success' : 'neutral'}
                 size="sm"
               >
-                {isLoading ? 'Checking...' : premium ? 'Premium' : isAvailable ? 'Available' : 'Taken'}
+                {isLoading
+                  ? 'Checking...'
+                  : premium
+                    ? 'Premium · GoDaddy'
+                    : isAvailable
+                      ? 'Available'
+                      : 'Taken'}
               </Badge>
               {showMarketPrice && (
                 <span className={`text-xs ${isLight ? 'text-slate-500' : 'text-white/50'}`}>

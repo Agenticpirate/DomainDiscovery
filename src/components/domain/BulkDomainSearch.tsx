@@ -755,7 +755,9 @@ const ResultsView: React.FC<{
               {results.map((d) => {
                 const domainHref =
                   d.status === 'available' || d.status === 'premium'
-                    ? resolveRegisterUrl(d.domain, selectedRegistrar, d.buyUrl)
+                    ? resolveRegisterUrl(d.domain, selectedRegistrar, d.buyUrl, {
+                        premium: d.status === 'premium',
+                      })
                     : d.buyUrl
                       ? d.buyUrl
                       : `https://who.is/whois/${encodeURIComponent(d.domain)}`;
@@ -836,9 +838,19 @@ const ResultsView: React.FC<{
                         selectedRegistrar={selectedRegistrar}
                         onSelectRegistrar={setSelectedRegistrar}
                         canRegister={canAct}
-                        primaryLabel={d.status === 'premium' ? 'Go' : d.status === 'available' ? 'Go' : 'Info'}
+                        isPremium={d.status === 'premium'}
+                        primaryLabel={
+                          d.status === 'premium'
+                            ? 'Go · GoDaddy'
+                            : d.status === 'available'
+                              ? 'Go'
+                              : 'Info'
+                        }
                         premiumUrl={d.status === 'premium' ? d.buyUrl : undefined}
-                        premiumLabel={d.purchaseInfo}
+                        premiumLabel={
+                          d.purchaseInfo ||
+                          (d.status === 'premium' ? 'Premium pricing from GoDaddy' : undefined)
+                        }
                         primaryButtonClassName={
                           isLight
                             ? 'bg-slate-900 text-white hover:bg-slate-800'

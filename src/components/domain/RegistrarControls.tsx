@@ -4,7 +4,12 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
-import { REGISTRARS, resolveRegisterUrl, type RegistrarName } from '@/lib/registrars';
+import {
+  REGISTRARS,
+  getEffectiveRegisterRegistrar,
+  resolveRegisterUrl,
+  type RegistrarName,
+} from '@/lib/registrars';
 
 const MENU_WIDTH = 220;
 const MENU_GAP = 8;
@@ -59,6 +64,7 @@ export function RegistrarActionMenu({
   shellClassName,
   premiumUrl,
   premiumLabel,
+  isPremium = false,
 }: {
   domain: string;
   selectedRegistrar: RegistrarName;
@@ -72,6 +78,8 @@ export function RegistrarActionMenu({
   shellClassName?: string;
   premiumUrl?: string;
   premiumLabel?: string;
+  /** Premium / aftermarket — primary Go routes to GoDaddy (listing source) */
+  isPremium?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [menuStyle, setMenuStyle] = useState<{ top: number; left: number; width: number; visibility: 'hidden' | 'visible' }>({
@@ -157,18 +165,24 @@ export function RegistrarActionMenu({
     }
   }, [open]);
 
-  /** Always affiliate-safe; Spaceship never opens as raw spaceship.com */
+  /** Always affiliate-safe; Spaceship never opens as raw spaceship.com.
+   *  Premium → GoDaddy by default (listing source). */
   const hrefFor = (registrar: RegistrarName) =>
-    resolveRegisterUrl(domain, registrar, premiumUrl);
+    resolveRegisterUrl(domain, registrar, premiumUrl, { premium: isPremium });
+
+  const effectivePrimaryRegistrar = getEffectiveRegisterRegistrar(
+    selectedRegistrar,
+    isPremium
+  );
 
   const handleFallbackClick = () => {
     const nextUrl =
-      resolveRegisterUrl(domain, selectedRegistrar, premiumUrl) ||
+      resolveRegisterUrl(domain, selectedRegistrar, premiumUrl, { premium: isPremium }) ||
       `https://who.is/whois/${encodeURIComponent(domain)}`;
     window.open(nextUrl, '_blank', 'noopener,noreferrer');
   };
 
-  const primaryHref = hrefFor(selectedRegistrar);
+  const primaryHref = hrefFor(effectivePrimaryRegistrar);
 
   const menu = open
     ? createPortal(
@@ -194,11 +208,22 @@ export function RegistrarActionMenu({
               isLight ? 'text-slate-400' : 'text-white/40'
             )}
           >
-            Open at registrar
+            {isPremium ? 'Premium · GoDaddy listing' : 'Open at registrar'}
           </div>
+          {isPremium && (
+            <p
+              className={cn(
+                'px-2.5 pb-2 text-[10px] leading-snug',
+                isLight ? 'text-amber-700/90' : 'text-amber-400/85'
+              )}
+            >
+              Premium pricing &amp; inventory from GoDaddy. Default Go opens GoDaddy;
+              pick another registrar below if you prefer.
+            </p>
+          )}
           <div className="space-y-0.5">
             {REGISTRARS.map((registrar) => {
-              const selected = registrar.name === selectedRegistrar;
+              const selected = registrar.name === effectivePrimaryRegistrar;
               return (
                 <a
                   key={registrar.name}
@@ -212,6 +237,7 @@ export function RegistrarActionMenu({
                   data-affiliate={registrar.name === 'Spaceship' ? 'spaceship' : undefined}
                   data-registrar={registrar.name}
                   data-placement="register-menu"
+                  data-premium={isPremium ? 'true' : undefined}
                   onClick={() => {
                     onSelectRegistrar(registrar.name);
                     setOpen(false);
@@ -277,19 +303,29 @@ export function RegistrarActionMenu({
             href={primaryHref}
             target="_blank"
             rel={
-              selectedRegistrar === 'Spaceship'
+              effectivePrimaryRegistrar === 'Spaceship'
                 ? 'sponsored noopener noreferrer'
                 : 'noopener noreferrer'
             }
-            data-affiliate={selectedRegistrar === 'Spaceship' ? 'spaceship' : undefined}
-            data-registrar={selectedRegistrar}
+            data-affiliate={
+              effectivePrimaryRegistrar === 'Spaceship' ? 'spaceship' : undefined
+            }
+            data-registrar={effectivePrimaryRegistrar}
+            data-premium={isPremium ? 'true' : undefined}
             data-placement="register-go"
-            onClick={() => onSelectRegistrar(selectedRegistrar)}
+            onClick={() => {
+              // Persist menu choice for free domains; premium default stays GoDaddy until user picks
+              if (!isPremium) onSelectRegistrar(selectedRegistrar);
+            }}
             className={cn(
               'inline-flex items-center justify-center gap-1 pl-3 pr-2 py-1.5 text-[11px] sm:text-[12px] font-bold transition-colors',
               primaryButtonClassName
             )}
-            title={`Register on ${selectedRegistrar}`}
+            title={
+              isPremium
+                ? `Premium listing · open on ${effectivePrimaryRegistrar} (data from GoDaddy)`
+                : `Register on ${effectivePrimaryRegistrar}`
+            }
           >
             {primaryLabel}
           </a>

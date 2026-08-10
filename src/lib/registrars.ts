@@ -195,46 +195,87 @@ export function ensureSpaceshipAffiliate(url: string, domainHint?: string | null
   return getSpaceshipAffiliateUrl(domain || null);
 }
 
+/** GoDaddy domain search (premium aftermarket data source) */
+export function getGoDaddyRegisterUrl(domain: string): string {
+  const cleaned = (domain || '').trim().toLowerCase();
+  const withTld = cleaned.includes('.') ? cleaned : `${cleaned}.com`;
+  return `https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(withTld)}`;
+}
+
+export type ResolveRegisterOptions = {
+  /**
+   * Premium / aftermarket listing — availability & pricing come from GoDaddy.
+   * Primary CTA defaults to GoDaddy (not Spaceship).
+   */
+  premium?: boolean;
+};
+
 /**
  * Resolve the URL for a Register / Go / Continue CTA on any domain tool
  * (search, bulk, generator, geo, keywords, extensions, saved, assistant).
  *
  * Rules (in order):
- * 1. Spaceship (default or selected) → always Impact sjv.io + domain deep-link
- * 2. Explicit non-Spaceship registrar → that registrar’s search URL
- * 3. Marketplace buyUrl only when no registrar path applies → sanitize Spaceship
- * 4. Fallback → Spaceship affiliate
+ * 1. Premium listing → GoDaddy by default (data source); menu may still pick others
+ * 2. Spaceship (default free register) → always Impact sjv.io + domain deep-link
+ * 3. Explicit non-Spaceship registrar → that registrar’s search URL
+ * 4. Marketplace buyUrl only when no registrar path applies → sanitize Spaceship
+ * 5. Fallback → Spaceship affiliate
  *
  * Never return raw www.spaceship.com for a register CTA.
  */
 export function resolveRegisterUrl(
   domain: string,
   registrarName?: string | null,
-  marketplaceBuyUrl?: string | null
+  marketplaceBuyUrl?: string | null,
+  options?: ResolveRegisterOptions
 ): string {
   const cleaned = (domain || '').trim();
+  const isPremium = Boolean(options?.premium);
   const explicit =
     registrarName && isRegistrarName(registrarName) ? registrarName : null;
-  const reg = getRegistrar(explicit ?? DEFAULT_REGISTRAR);
   const buy = (marketplaceBuyUrl || '').trim();
 
-  // 1) Spaceship always = Impact affiliate hop with this domain
-  if (reg.name === 'Spaceship') {
+  // —— Premium / aftermarket: GoDaddy is the listing source ——
+  // Default Go → GoDaddy. If user explicitly opens Spaceship from the menu,
+  // still use Impact affiliate. Other registrars honored when selected.
+  if (isPremium) {
+    if (explicit === 'Spaceship') {
+      return getSpaceshipAffiliateUrl(cleaned);
+    }
+    if (explicit && explicit !== 'GoDaddy') {
+      return getRegistrarUrl(cleaned, explicit);
+    }
+    // Prefer a GoDaddy marketplace deep-link when API provided one
+    if (buy && /godaddy\.com/i.test(buy)) {
+      return buy;
+    }
+    // Do not send premium default traffic to Spaceship
+    return getGoDaddyRegisterUrl(cleaned);
+  }
+
+  // —— Free / available register CTAs ——
+  // Spaceship (default or selected) → always Impact sjv.io affiliate
+  if (!explicit || explicit === 'Spaceship') {
     return getSpaceshipAffiliateUrl(cleaned);
   }
 
-  // 2) User picked another registrar — honor it (GoDaddy, Namecheap, …)
-  if (explicit && explicit !== 'Spaceship') {
-    return getRegistrarUrl(cleaned, explicit);
-  }
+  // Explicit non-Spaceship registrar (GoDaddy, Namecheap, …)
+  return getRegistrarUrl(cleaned, explicit);
+}
 
-  // 3) Marketplace / premium listing (no registrar preference)
-  if (buy) {
-    return ensureSpaceshipAffiliate(buy, cleaned);
-  }
-
-  // 4) Default partner
-  return getSpaceshipAffiliateUrl(cleaned);
+/**
+ * Effective registrar for the primary Go CTA.
+ * Premium listings always default to GoDaddy (inventory source).
+ * Free domains use preferred / Spaceship affiliate.
+ */
+export function getEffectiveRegisterRegistrar(
+  selectedRegistrar: RegistrarName | string | null | undefined,
+  isPremium?: boolean
+): RegistrarName {
+  if (isPremium) return 'GoDaddy';
+  return selectedRegistrar && isRegistrarName(selectedRegistrar)
+    ? selectedRegistrar
+    : DEFAULT_REGISTRAR;
 }
 
 export function getRegistrarHost(name?: string | null): string {

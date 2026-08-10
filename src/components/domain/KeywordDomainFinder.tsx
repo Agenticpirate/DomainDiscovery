@@ -1109,8 +1109,9 @@ function DomainRow({
                 ? 'bg-amber-100 text-amber-800 border-amber-200'
                 : 'bg-amber-400/15 text-amber-200 border-amber-400/25'
             }`}
+            title="Premium pricing from GoDaddy"
           >
-            Premium
+            Premium · GoDaddy
           </span>
         )}
         {isAvailable && (
@@ -1159,7 +1160,9 @@ function DomainRow({
             selectedRegistrar={selectedRegistrar}
             onSelectRegistrar={onSelectRegistrar}
             canRegister={canRegister}
-            primaryLabel="Go"
+            isPremium={isPremium}
+            primaryLabel={isPremium ? 'Go · GoDaddy' : 'Go'}
+            premiumLabel={isPremium ? 'Premium pricing from GoDaddy' : undefined}
             primaryButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${goPrimary}`}
             chevronButtonClassName={`rounded-full p-1 transition-colors ${goPrimary}`}
             fallbackButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${

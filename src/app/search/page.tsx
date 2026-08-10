@@ -1064,7 +1064,7 @@ function DomainRow({
                     : 'text-rose-400'
             }`}
           >
-            {isAvailable ? 'Available' : isPremium ? 'Premium' : 'Taken'}
+            {isAvailable ? 'Available' : isPremium ? 'Premium · GoDaddy' : 'Taken'}
           </span>
         </div>
       </div>
@@ -1104,14 +1104,20 @@ function DomainRow({
           selectedRegistrar={selectedRegistrar}
           onSelectRegistrar={onSelectRegistrar}
           canRegister={isAvailable || isPremium}
+          isPremium={isPremium}
           primaryLabel={
             <>
-              <span className="sm:hidden">{ctaLabel}</span>
-              <span className="hidden sm:inline">{desktopCta}</span>
+              <span className="sm:hidden">{isPremium ? 'GoDaddy' : ctaLabel}</span>
+              <span className="hidden sm:inline">
+                {isPremium ? 'Go · GoDaddy' : desktopCta}
+              </span>
             </>
           }
-          premiumUrl={result.premium ? result.buyUrl : undefined}
-          premiumLabel={result.purchaseInfo}
+          premiumUrl={isPremium ? result.buyUrl : undefined}
+          premiumLabel={
+            result.purchaseInfo ||
+            (isPremium ? 'Premium pricing from GoDaddy' : undefined)
+          }
           shellClassName={
             isLight
               ? 'shadow-none ring-slate-200/80'

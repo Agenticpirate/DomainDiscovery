@@ -1042,12 +1042,18 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         selectedRegistrar={selectedRegistrar}
                         onSelectRegistrar={setSelectedRegistrar}
                         canRegister={canRegister}
+                        isPremium={isPremiumSuggestion(suggestion)}
                         primaryLabel={
                           isAvailableSuggestion(suggestion)
                             ? 'Go'
                             : isPremiumSuggestion(suggestion)
-                              ? suggestion.price || 'Go'
+                              ? 'Go · GoDaddy'
                               : 'Info'
+                        }
+                        premiumLabel={
+                          isPremiumSuggestion(suggestion)
+                            ? 'Premium pricing from GoDaddy'
+                            : undefined
                         }
                         primaryButtonClassName={
                           isLight
@@ -1143,12 +1149,18 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         selectedRegistrar={selectedRegistrar}
                         onSelectRegistrar={setSelectedRegistrar}
                         canRegister={canRegister}
+                        isPremium={isPremiumSuggestion(suggestion)}
                         primaryLabel={
                           isAvailableSuggestion(suggestion)
                             ? 'Go'
                             : isPremiumSuggestion(suggestion)
-                              ? suggestion.price || 'Go'
+                              ? 'Go · GoDaddy'
                               : 'Info'
+                        }
+                        premiumLabel={
+                          isPremiumSuggestion(suggestion)
+                            ? 'Premium pricing from GoDaddy'
+                            : undefined
                         }
                         primaryButtonClassName={
                           isLight

@@ -48,9 +48,17 @@ function cacheSet(key: string, value: Omit<CachedResult, 'timestamp'>) {
   cache.set(key, { ...value, timestamp: Date.now() });
 }
 
-/** Never return untracked Spaceship merchant links from the API */
+/**
+ * Sanitize outbound buy URLs:
+ * - Spaceship merchant links → Impact affiliate hop
+ * - GoDaddy / other marketplace links left intact (premium listings)
+ */
 function sanitizeResult(r: InstantCheckResult): InstantCheckResult {
   if (!r.buyUrl) return r;
+  // Premium GoDaddy inventory must not be rewritten to Spaceship
+  if (r.premium || /godaddy\.com/i.test(r.buyUrl)) {
+    return r;
+  }
   return {
     ...r,
     buyUrl: ensureSpaceshipAffiliate(r.buyUrl, r.domain),
