@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { RankedDomain } from '@/lib/agent/types';
-import { resolveRegisterUrl } from '@/lib/registrars';
+import { getPrimaryRegisterAffiliateUrl } from '@/lib/registrars';
 import { AdaRegisterPanel } from '@/components/ada/AdaRegisterPanel';
 import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
 
@@ -51,10 +51,8 @@ export function DomainRankCard({
   isSaved: boolean;
 }) {
   const st = statusMeta(item, isLight);
-  // Always Spaceship Impact affiliate for primary buy (even when premium data is from GoDaddy)
-  const buyHref = resolveRegisterUrl(item.domain, 'Spaceship', item.buyUrl, {
-    premium: Boolean(item.premium),
-  });
+  // Full Spaceship Impact affiliate URL (required for commissions)
+  const buyHref = getPrimaryRegisterAffiliateUrl(item.domain);
   // Absolute DD host so WHOIS works from aidomainassistant.com (ADA middleware rewrites relative /tools/*)
   const whoisHref = `${getSiteBaseUrl()}/tools/whois?domain=${encodeURIComponent(item.domain)}`;
   const budgetPill =

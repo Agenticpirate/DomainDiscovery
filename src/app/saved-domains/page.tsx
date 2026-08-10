@@ -12,7 +12,7 @@ import { Icons } from '@/components/ui/Icons';
 import { useToast } from '@/components/ui/Toast';
 import { useTheme } from '@/contexts/ThemeContext';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
-import { resolveRegisterUrl } from '@/lib/registrars';
+import { getPrimaryRegisterAffiliateUrl, resolveRegisterUrl } from '@/lib/registrars';
 import {
   type SavedDomainRecord,
   type SavedFolder,
@@ -191,8 +191,11 @@ export default function SavedDomainsPage() {
   };
 
   const handleBuyDomain = (domain: string) => {
-    // Spaceship (default) → Impact affiliate; other registrars use their search URL
-    const href = resolveRegisterUrl(domain, selectedRegistrar);
+    // Full Spaceship Impact affiliate URL (required for commissions)
+    const href =
+      selectedRegistrar === 'Spaceship' || !selectedRegistrar
+        ? getPrimaryRegisterAffiliateUrl(domain)
+        : resolveRegisterUrl(domain, selectedRegistrar);
     window.open(href, '_blank', 'noopener,noreferrer');
   };
 

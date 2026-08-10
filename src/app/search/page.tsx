@@ -13,7 +13,11 @@ import { SearchInterface } from '@/components/domain/SearchInterface';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
-import { resolveRegisterUrl, type RegistrarName } from '@/lib/registrars';
+import {
+  getPrimaryRegisterAffiliateUrl,
+  resolveRegisterUrl,
+  type RegistrarName,
+} from '@/lib/registrars';
 import { searchDomains, checkDomainAvailability } from '@/services/instantDomainService';
 import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
@@ -964,16 +968,16 @@ function DomainRow({
       ? `$${price!.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
       : 'Lookup';
 
-  // Available + premium: affiliate-safe registrar URL (Spaceship → Impact sjv.io)
+  // Available + premium: full Spaceship Impact affiliate URL (commissions)
   const domainHref =
     isAvailable || isPremium
-      ? resolveRegisterUrl(result.domain, selectedRegistrar, result.buyUrl)
+      ? getPrimaryRegisterAffiliateUrl(result.domain)
       : result.buyUrl
         ? result.buyUrl
         : `https://who.is/whois/${encodeURIComponent(result.domain)}`;
   const domainTitle =
     isAvailable || isPremium
-      ? `Search ${result.domain} on ${selectedRegistrar}`
+      ? `Register ${result.domain} via Spaceship affiliate`
       : result.buyUrl
         ? result.purchaseInfo || 'View listing'
         : 'View WHOIS';

@@ -23,56 +23,71 @@ export interface RegistrarDefinition {
 
 /**
  * Spaceship Impact.com affiliate (Text Link 1859616).
- * ALL Spaceship register/buy CTAs must open the sjv.io tracking hop first.
- * Never link raw www.spaceship.com for registration — that skips commission.
  *
- * Tracking: https://spaceship.sjv.io/c/7521997/1859616/21274
- * Impression: https://imp.pxf.io/i/7521997/1859616/21274
- * Deep-link: append Impact `u=` with encoded Spaceship domain-search URL.
+ * CRITICAL: Commissions only track when the browser opens the FULL Impact hop URL:
+ *   https://spaceship.sjv.io/c/7521997/1859616/21274?u=<encoded Spaceship destination>
+ *
+ * Never open raw https://www.spaceship.com/... for register/Go CTAs — that skips commission.
+ *
+ * Impression pixel: https://imp.pxf.io/i/7521997/1859616/21274
  */
 export const SPACESHIP_AFFILIATE = {
-  /** Impact click tracking base (Account / Ad / Campaign) */
+  /** Full Impact click base (must be the complete path — do not shorten) */
   clickBase: 'https://spaceship.sjv.io/c/7521997/1859616/21274',
-  /** 1×1 view pixel — optional on promotional placements */
+  /** 1×1 view pixel */
   impressionPixel: 'https://imp.pxf.io/i/7521997/1859616/21274',
-  /** Final merchant URL after the Impact hop (domain prefilled) */
+  /** Merchant landing page after the Impact hop (domain prefilled) */
   domainSearchDestination: (domain: string) => {
     const q = domain.trim().toLowerCase();
-    return `https://www.spaceship.com/domain-search/?query=${encodeURIComponent(q)}`;
+    const withTld = q.includes('.') ? q : `${q}.com`;
+    return `https://www.spaceship.com/domain-search/?query=${encodeURIComponent(withTld)}`;
   },
 } as const;
 
-/** True if URL is our Impact click tracker (not a raw merchant link). */
+/** True if URL is our Impact click tracker (full sjv.io hop). */
 export function isSpaceshipAffiliateUrl(url: string): boolean {
   try {
-    const host = new URL(url).hostname.toLowerCase();
-    return host === 'spaceship.sjv.io' || host.endsWith('.sjv.io') || host === 'imp.pxf.io';
+    const u = new URL(url);
+    const host = u.hostname.toLowerCase();
+    if (host === 'imp.pxf.io') return true;
+    // Must be the full tracking path, not a random sjv.io URL
+    return (
+      host === 'spaceship.sjv.io' &&
+      u.pathname.startsWith('/c/7521997/1859616/21274')
+    );
   } catch {
     return false;
   }
 }
 
 /**
- * Build a Spaceship affiliate URL (always sjv.io first).
- * - With domain: Impact hop → Spaceship domain search with that name
- * - Without domain: bare Impact tracking link
+ * Full Spaceship Impact affiliate URL (required for tracking + commissions).
+ *
+ * Example:
+ * https://spaceship.sjv.io/c/7521997/1859616/21274?u=https%3A%2F%2Fwww.spaceship.com%2Fdomain-search%2F%3Fquery%3Dexample.com
+ *
+ * - Always starts with the full clickBase above
+ * - `u` is a single encodeURIComponent of the merchant URL (Impact deep-link)
+ * - No extra params that could break attribution
  */
 export function getSpaceshipAffiliateUrl(domain?: string | null): string {
+  const base = SPACESHIP_AFFILIATE.clickBase;
   const cleaned = (domain || '').trim().toLowerCase();
   if (!cleaned) {
-    return SPACESHIP_AFFILIATE.clickBase;
+    // Bare tracking link (still full affiliate URL)
+    return base;
   }
-  // Ensure TLD so Spaceship search is useful
-  const withTld = cleaned.includes('.') ? cleaned : `${cleaned}.com`;
-  const destination = SPACESHIP_AFFILIATE.domainSearchDestination(withTld);
+  const destination = SPACESHIP_AFFILIATE.domainSearchDestination(cleaned);
+  // Build the complete tracked URL manually so encoding is exactly once
+  return `${base}?u=${encodeURIComponent(destination)}`;
+}
 
-  // Use URL API so encoding is correct and params are stable
-  const tracked = new URL(SPACESHIP_AFFILIATE.clickBase);
-  tracked.searchParams.set('u', destination);
-  // Sub-IDs help reconcile generator/search traffic in Impact reports
-  tracked.searchParams.set('subId1', 'domaindiscovery');
-  tracked.searchParams.set('subId2', 'register');
-  return tracked.toString();
+/**
+ * Primary Go / Register CTA — always the full Spaceship Impact affiliate URL.
+ * Use this for every default register button so commissions track.
+ */
+export function getPrimaryRegisterAffiliateUrl(domain: string): string {
+  return getSpaceshipAffiliateUrl(domain);
 }
 
 /**
@@ -255,16 +270,14 @@ export function resolveRegisterUrl(
 
 /**
  * Effective registrar for the primary Go CTA.
- * Always Spaceship (Impact affiliate) unless user picked another registrar.
- * Premium data may still be labeled “from GoDaddy” in the UI.
+ * Always Spaceship so the full Impact affiliate URL is used for commissions.
+ * Users can still open other registrars from the dropdown menu.
  */
 export function getEffectiveRegisterRegistrar(
-  selectedRegistrar: RegistrarName | string | null | undefined,
+  _selectedRegistrar?: RegistrarName | string | null,
   _isPremium?: boolean
 ): RegistrarName {
-  return selectedRegistrar && isRegistrarName(selectedRegistrar)
-    ? selectedRegistrar
-    : DEFAULT_REGISTRAR;
+  return 'Spaceship';
 }
 
 export function getRegistrarHost(name?: string | null): string {

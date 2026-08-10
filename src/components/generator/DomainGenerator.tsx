@@ -483,7 +483,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     const fullDomain = domainName.includes('.') ? domainName : `${domainName}.com`;
     const suggestion = suggestions.find((s) => s.name === domainName || `${s.name}.com` === fullDomain);
     const premium = suggestion ? isPremiumSuggestion(suggestion) : false;
-    // Free → Spaceship Impact affiliate; premium → GoDaddy by default
+    // Spaceship → full Impact affiliate URL; other registrars as selected in popup
     return resolveRegisterUrl(fullDomain, registrar, null, { premium });
   };
 

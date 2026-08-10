@@ -6,7 +6,9 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
 import {
   REGISTRARS,
-  getEffectiveRegisterRegistrar,
+  getPrimaryRegisterAffiliateUrl,
+  getSpaceshipAffiliateUrl,
+  isSpaceshipAffiliateUrl,
   resolveRegisterUrl,
   type RegistrarName,
 } from '@/lib/registrars';
@@ -166,27 +168,33 @@ export function RegistrarActionMenu({
   }, [open]);
 
   /**
-   * Primary register partner is Spaceship Impact affiliate by default.
-   * Premium pricing may be from GoDaddy (label only) — Go still uses affiliate
-   * unless the user picks GoDaddy/other in the menu.
+   * Menu links: honor chosen registrar (Spaceship always full Impact URL).
+   * Primary Go: ALWAYS full Spaceship affiliate URL for tracking/commissions.
    */
-  const hrefFor = (registrar: RegistrarName) =>
-    resolveRegisterUrl(domain, registrar, premiumUrl, { premium: isPremium });
+  const hrefFor = (registrar: RegistrarName) => {
+    if (registrar === 'Spaceship') {
+      return getSpaceshipAffiliateUrl(domain);
+    }
+    return resolveRegisterUrl(domain, registrar, premiumUrl, { premium: isPremium });
+  };
 
-  // Prefer Spaceship for primary Go (affiliate) even when domain is premium
-  const effectivePrimaryRegistrar = getEffectiveRegisterRegistrar(
-    selectedRegistrar,
-    isPremium
-  );
+  // Full Impact affiliate URL — never raw spaceship.com, never partial path
+  const primaryHref = getPrimaryRegisterAffiliateUrl(domain);
+  const effectivePrimaryRegistrar: RegistrarName = 'Spaceship';
 
   const handleFallbackClick = () => {
     const nextUrl =
-      resolveRegisterUrl(domain, selectedRegistrar, premiumUrl, { premium: isPremium }) ||
+      (isPremium && premiumUrl && !/spaceship\.com/i.test(premiumUrl)
+        ? premiumUrl
+        : getPrimaryRegisterAffiliateUrl(domain)) ||
       `https://who.is/whois/${encodeURIComponent(domain)}`;
     window.open(nextUrl, '_blank', 'noopener,noreferrer');
   };
 
-  const primaryHref = hrefFor(effectivePrimaryRegistrar);
+  // Guard: if anything ever produced a non-affiliate Spaceship link, force full hop
+  const safePrimaryHref = isSpaceshipAffiliateUrl(primaryHref)
+    ? primaryHref
+    : getSpaceshipAffiliateUrl(domain);
 
   const menu = open
     ? createPortal(
@@ -304,22 +312,18 @@ export function RegistrarActionMenu({
       {canRegister ? (
         <div className={joinedShell}>
           <a
-            href={primaryHref}
+            href={safePrimaryHref}
             target="_blank"
-            rel={
-              effectivePrimaryRegistrar === 'Spaceship'
-                ? 'sponsored noopener noreferrer'
-                : 'noopener noreferrer'
-            }
-            data-affiliate={
-              effectivePrimaryRegistrar === 'Spaceship' ? 'spaceship' : undefined
-            }
+            rel="sponsored noopener noreferrer"
+            data-affiliate="spaceship"
+            data-affiliate-network="impact"
+            data-affiliate-url={safePrimaryHref}
             data-registrar={effectivePrimaryRegistrar}
             data-premium={isPremium ? 'true' : undefined}
             data-placement="register-go"
             onClick={() => {
-              // Persist menu choice for free domains; premium default stays GoDaddy until user picks
-              if (!isPremium) onSelectRegistrar(selectedRegistrar);
+              // Keep Spaceship as preferred so future Go clicks stay on affiliate
+              onSelectRegistrar('Spaceship');
             }}
             className={cn(
               'inline-flex items-center justify-center gap-1 pl-3 pr-2 py-1.5 text-[11px] sm:text-[12px] font-bold transition-colors',
@@ -327,8 +331,8 @@ export function RegistrarActionMenu({
             )}
             title={
               isPremium
-                ? `Premium (GoDaddy data) · register via ${effectivePrimaryRegistrar}`
-                : `Register on ${effectivePrimaryRegistrar}`
+                ? 'Premium (GoDaddy pricing data) · open Spaceship via affiliate link'
+                : 'Register on Spaceship via affiliate link'
             }
           >
             {primaryLabel}
