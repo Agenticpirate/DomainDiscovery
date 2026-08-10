@@ -481,8 +481,10 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
 
   const registerHref = (domainName: string, registrar: RegistrarName = selectedRegistrar) => {
     const fullDomain = domainName.includes('.') ? domainName : `${domainName}.com`;
-    // Spaceship → Impact sjv.io affiliate with domain deep-link; others → their search URL
-    return resolveRegisterUrl(fullDomain, registrar);
+    const suggestion = suggestions.find((s) => s.name === domainName || `${s.name}.com` === fullDomain);
+    const premium = suggestion ? isPremiumSuggestion(suggestion) : false;
+    // Free → Spaceship Impact affiliate; premium → GoDaddy by default
+    return resolveRegisterUrl(fullDomain, registrar, null, { premium });
   };
 
   const availableCount = suggestions.filter(isAvailableSuggestion).length;
@@ -1291,8 +1293,9 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
             )}
             {selectedSuggestion && isPremiumSuggestion(selectedSuggestion) && (
               <p className={`text-sm ${isLight ? 'text-amber-700' : 'text-amber-300'} mb-6`}>
-                This domain is listed as premium{selectedSuggestion.price ? ` from ${selectedSuggestion.price}` : ''}.
-                Open a registrar below to search the exact name and see live pricing or aftermarket options.
+                Premium listing — inventory &amp; pricing from GoDaddy
+                {selectedSuggestion.price ? ` (${selectedSuggestion.price})` : ''}.
+                Default register opens GoDaddy; free names use Spaceship affiliate.
               </p>
             )}
             {selectedSuggestion && isTakenSuggestion(selectedSuggestion) && (

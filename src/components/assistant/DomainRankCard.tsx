@@ -17,7 +17,7 @@ function statusMeta(r: RankedDomain, isLight: boolean) {
   }
   if (r.premium) {
     return {
-      label: 'Premium',
+      label: 'Premium · GoDaddy',
       className: isLight
         ? 'bg-amber-100 text-amber-900'
         : 'bg-amber-950 text-amber-200 border border-amber-500/30',
@@ -51,8 +51,13 @@ export function DomainRankCard({
   isSaved: boolean;
 }) {
   const st = statusMeta(item, isLight);
-  // Spaceship (default) always via Impact affiliate; marketplace buyUrls sanitized
-  const buyHref = resolveRegisterUrl(item.domain, 'Spaceship', item.buyUrl);
+  // Free → Spaceship Impact affiliate; premium aftermarket → GoDaddy (listing source)
+  const buyHref = resolveRegisterUrl(
+    item.domain,
+    item.premium ? 'GoDaddy' : 'Spaceship',
+    item.buyUrl,
+    { premium: Boolean(item.premium) }
+  );
   // Absolute DD host so WHOIS works from aidomainassistant.com (ADA middleware rewrites relative /tools/*)
   const whoisHref = `${getSiteBaseUrl()}/tools/whois?domain=${encodeURIComponent(item.domain)}`;
   const budgetPill =
