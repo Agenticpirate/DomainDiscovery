@@ -1046,13 +1046,15 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         canRegister={canRegister}
                         isPremium={isPremiumSuggestion(suggestion)}
                         primaryLabel={
-                          isAvailableSuggestion(suggestion) || isPremiumSuggestion(suggestion)
+                          isAvailableSuggestion(suggestion)
                             ? 'Go'
-                            : 'Info'
+                            : isPremiumSuggestion(suggestion)
+                              ? 'Go · GoDaddy'
+                              : 'Info'
                         }
                         premiumLabel={
                           isPremiumSuggestion(suggestion)
-                            ? 'Premium pricing data from GoDaddy'
+                            ? 'Premium listing from GoDaddy'
                             : undefined
                         }
                         primaryButtonClassName={
@@ -1151,13 +1153,15 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         canRegister={canRegister}
                         isPremium={isPremiumSuggestion(suggestion)}
                         primaryLabel={
-                          isAvailableSuggestion(suggestion) || isPremiumSuggestion(suggestion)
+                          isAvailableSuggestion(suggestion)
                             ? 'Go'
-                            : 'Info'
+                            : isPremiumSuggestion(suggestion)
+                              ? 'Go · GoDaddy'
+                              : 'Info'
                         }
                         premiumLabel={
                           isPremiumSuggestion(suggestion)
-                            ? 'Premium pricing data from GoDaddy'
+                            ? 'Premium listing from GoDaddy'
                             : undefined
                         }
                         primaryButtonClassName={
@@ -1289,9 +1293,9 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
             )}
             {selectedSuggestion && isPremiumSuggestion(selectedSuggestion) && (
               <p className={`text-sm ${isLight ? 'text-amber-700' : 'text-amber-300'} mb-6`}>
-                Premium listing — pricing data from GoDaddy
+                Premium listing from GoDaddy
                 {selectedSuggestion.price ? ` (${selectedSuggestion.price})` : ''}.
-                Default Go opens our Spaceship affiliate; pick GoDaddy below for the listing.
+                Default Go opens GoDaddy; free names use our Spaceship affiliate.
               </p>
             )}
             {selectedSuggestion && isTakenSuggestion(selectedSuggestion) && (

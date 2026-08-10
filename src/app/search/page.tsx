@@ -14,8 +14,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import {
-  getPrimaryRegisterAffiliateUrl,
-  resolveRegisterUrl,
+  getPrimaryGoUrl,
   type RegistrarName,
 } from '@/lib/registrars';
 import { searchDomains, checkDomainAvailability } from '@/services/instantDomainService';
@@ -968,16 +967,21 @@ function DomainRow({
       ? `$${price!.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
       : 'Lookup';
 
-  // Available + premium: full Spaceship Impact affiliate URL (commissions)
+  // Free → Spaceship affiliate · Premium → GoDaddy
   const domainHref =
     isAvailable || isPremium
-      ? getPrimaryRegisterAffiliateUrl(result.domain)
+      ? getPrimaryGoUrl(result.domain, {
+          premium: isPremium,
+          marketplaceBuyUrl: result.buyUrl,
+        })
       : result.buyUrl
         ? result.buyUrl
         : `https://who.is/whois/${encodeURIComponent(result.domain)}`;
   const domainTitle =
-    isAvailable || isPremium
+    isAvailable
       ? `Register ${result.domain} via Spaceship affiliate`
+      : isPremium
+        ? `Premium listing · open ${result.domain} on GoDaddy`
       : result.buyUrl
         ? result.purchaseInfo || 'View listing'
         : 'View WHOIS';
@@ -1071,7 +1075,7 @@ function DomainRow({
             {isAvailable
               ? 'Available'
               : isPremium
-                ? 'Premium (GoDaddy data)'
+                ? 'Premium · GoDaddy'
                 : 'Taken'}
           </span>
         </div>
@@ -1115,14 +1119,16 @@ function DomainRow({
           isPremium={isPremium}
           primaryLabel={
             <>
-              <span className="sm:hidden">{ctaLabel}</span>
-              <span className="hidden sm:inline">{desktopCta}</span>
+              <span className="sm:hidden">{isPremium ? 'GoDaddy' : ctaLabel}</span>
+              <span className="hidden sm:inline">
+                {isPremium ? 'Go · GoDaddy' : desktopCta}
+              </span>
             </>
           }
           premiumUrl={isPremium ? result.buyUrl : undefined}
           premiumLabel={
             result.purchaseInfo ||
-            (isPremium ? 'Premium pricing data from GoDaddy' : undefined)
+            (isPremium ? 'Premium listing from GoDaddy' : undefined)
           }
           shellClassName={
             isLight

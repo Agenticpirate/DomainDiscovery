@@ -6,7 +6,8 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
 import {
   REGISTRARS,
-  getPrimaryRegisterAffiliateUrl,
+  getGoDaddyRegisterUrl,
+  getPrimaryGoUrl,
   getSpaceshipAffiliateUrl,
   isSpaceshipAffiliateUrl,
   resolveRegisterUrl,
@@ -169,32 +170,37 @@ export function RegistrarActionMenu({
 
   /**
    * Menu links: honor chosen registrar (Spaceship always full Impact URL).
-   * Primary Go: ALWAYS full Spaceship affiliate URL for tracking/commissions.
+   * Primary Go: free → Spaceship affiliate · premium → GoDaddy
    */
   const hrefFor = (registrar: RegistrarName) => {
     if (registrar === 'Spaceship') {
       return getSpaceshipAffiliateUrl(domain);
     }
+    if (registrar === 'GoDaddy') {
+      return isPremium && premiumUrl && /godaddy\.com/i.test(premiumUrl)
+        ? premiumUrl
+        : getGoDaddyRegisterUrl(domain);
+    }
     return resolveRegisterUrl(domain, registrar, premiumUrl, { premium: isPremium });
   };
 
-  // Full Impact affiliate URL — never raw spaceship.com, never partial path
-  const primaryHref = getPrimaryRegisterAffiliateUrl(domain);
-  const effectivePrimaryRegistrar: RegistrarName = 'Spaceship';
+  const effectivePrimaryRegistrar: RegistrarName = isPremium ? 'GoDaddy' : 'Spaceship';
+  const primaryHref = getPrimaryGoUrl(domain, {
+    premium: isPremium,
+    marketplaceBuyUrl: premiumUrl,
+  });
 
   const handleFallbackClick = () => {
     const nextUrl =
-      (isPremium && premiumUrl && !/spaceship\.com/i.test(premiumUrl)
-        ? premiumUrl
-        : getPrimaryRegisterAffiliateUrl(domain)) ||
-      `https://who.is/whois/${encodeURIComponent(domain)}`;
+      primaryHref || `https://who.is/whois/${encodeURIComponent(domain)}`;
     window.open(nextUrl, '_blank', 'noopener,noreferrer');
   };
 
-  // Guard: if anything ever produced a non-affiliate Spaceship link, force full hop
-  const safePrimaryHref = isSpaceshipAffiliateUrl(primaryHref)
-    ? primaryHref
-    : getSpaceshipAffiliateUrl(domain);
+  // Free: force full Spaceship affiliate hop. Premium: GoDaddy URL as-is.
+  const safePrimaryHref =
+    !isPremium && !isSpaceshipAffiliateUrl(primaryHref)
+      ? getSpaceshipAffiliateUrl(domain)
+      : primaryHref;
 
   const menu = open
     ? createPortal(
@@ -220,7 +226,7 @@ export function RegistrarActionMenu({
               isLight ? 'text-slate-400' : 'text-white/40'
             )}
           >
-            {isPremium ? 'Premium · open at registrar' : 'Open at registrar'}
+            {isPremium ? 'Premium · GoDaddy listing' : 'Open at registrar'}
           </div>
           {isPremium && (
             <p
@@ -229,8 +235,8 @@ export function RegistrarActionMenu({
                 isLight ? 'text-amber-700/90' : 'text-amber-400/85'
               )}
             >
-              Premium pricing data from GoDaddy. Default Go uses our Spaceship
-              affiliate link — choose GoDaddy below to open the GoDaddy listing.
+              Premium inventory &amp; pricing from GoDaddy. Default Go opens
+              GoDaddy — pick Spaceship below to use our affiliate link instead.
             </p>
           )}
           <div className="space-y-0.5">
@@ -314,16 +320,26 @@ export function RegistrarActionMenu({
           <a
             href={safePrimaryHref}
             target="_blank"
-            rel="sponsored noopener noreferrer"
-            data-affiliate="spaceship"
-            data-affiliate-network="impact"
-            data-affiliate-url={safePrimaryHref}
+            rel={
+              effectivePrimaryRegistrar === 'Spaceship'
+                ? 'sponsored noopener noreferrer'
+                : 'noopener noreferrer'
+            }
+            data-affiliate={
+              effectivePrimaryRegistrar === 'Spaceship' ? 'spaceship' : undefined
+            }
+            data-affiliate-network={
+              effectivePrimaryRegistrar === 'Spaceship' ? 'impact' : undefined
+            }
+            data-affiliate-url={
+              effectivePrimaryRegistrar === 'Spaceship' ? safePrimaryHref : undefined
+            }
             data-registrar={effectivePrimaryRegistrar}
             data-premium={isPremium ? 'true' : undefined}
             data-placement="register-go"
             onClick={() => {
-              // Keep Spaceship as preferred so future Go clicks stay on affiliate
-              onSelectRegistrar('Spaceship');
+              // Persist effective primary so UI stays consistent
+              onSelectRegistrar(effectivePrimaryRegistrar);
             }}
             className={cn(
               'inline-flex items-center justify-center gap-1 pl-3 pr-2 py-1.5 text-[11px] sm:text-[12px] font-bold transition-colors',
@@ -331,7 +347,7 @@ export function RegistrarActionMenu({
             )}
             title={
               isPremium
-                ? 'Premium (GoDaddy pricing data) · open Spaceship via affiliate link'
+                ? 'Premium listing · open on GoDaddy'
                 : 'Register on Spaceship via affiliate link'
             }
           >

@@ -9,8 +9,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import {
-  getPrimaryRegisterAffiliateUrl,
-  resolveRegisterUrl,
+  getPrimaryGoUrl,
   type RegistrarName,
 } from '@/lib/registrars';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
@@ -759,13 +758,18 @@ const ResultsView: React.FC<{
               {results.map((d) => {
                 const domainHref =
                   d.status === 'available' || d.status === 'premium'
-                    ? getPrimaryRegisterAffiliateUrl(d.domain)
+                    ? getPrimaryGoUrl(d.domain, {
+                        premium: d.status === 'premium',
+                        marketplaceBuyUrl: d.buyUrl,
+                      })
                     : d.buyUrl
                       ? d.buyUrl
                       : `https://who.is/whois/${encodeURIComponent(d.domain)}`;
                 const domainTitle =
-                  d.status === 'available' || d.status === 'premium'
+                  d.status === 'available'
                     ? `Register ${d.domain} via Spaceship affiliate`
+                    : d.status === 'premium'
+                      ? `Premium listing · open ${d.domain} on GoDaddy`
                     : d.buyUrl
                       ? d.purchaseInfo || 'View listing'
                       : 'View WHOIS';
@@ -842,12 +846,16 @@ const ResultsView: React.FC<{
                         canRegister={canAct}
                         isPremium={d.status === 'premium'}
                         primaryLabel={
-                          d.status === 'premium' || d.status === 'available' ? 'Go' : 'Info'
+                          d.status === 'premium'
+                            ? 'Go · GoDaddy'
+                            : d.status === 'available'
+                              ? 'Go'
+                              : 'Info'
                         }
                         premiumUrl={d.status === 'premium' ? d.buyUrl : undefined}
                         premiumLabel={
                           d.purchaseInfo ||
-                          (d.status === 'premium' ? 'Premium pricing data from GoDaddy' : undefined)
+                          (d.status === 'premium' ? 'Premium listing from GoDaddy' : undefined)
                         }
                         primaryButtonClassName={
                           isLight

@@ -83,11 +83,40 @@ export function getSpaceshipAffiliateUrl(domain?: string | null): string {
 }
 
 /**
- * Primary Go / Register CTA — always the full Spaceship Impact affiliate URL.
- * Use this for every default register button so commissions track.
+ * Primary Go for free/available domains — full Spaceship Impact affiliate URL.
  */
 export function getPrimaryRegisterAffiliateUrl(domain: string): string {
   return getSpaceshipAffiliateUrl(domain);
+}
+
+/**
+ * Primary Go for premium / aftermarket domains — GoDaddy (listing source).
+ * Prefer API buyUrl when it already points at GoDaddy.
+ */
+export function getPremiumRegisterUrl(
+  domain: string,
+  marketplaceBuyUrl?: string | null
+): string {
+  const buy = (marketplaceBuyUrl || '').trim();
+  if (buy && /godaddy\.com/i.test(buy)) {
+    return buy;
+  }
+  return getGoDaddyRegisterUrl(domain);
+}
+
+/**
+ * Primary Go CTA by domain type:
+ * - free/available → Spaceship full affiliate URL
+ * - premium → GoDaddy
+ */
+export function getPrimaryGoUrl(
+  domain: string,
+  options?: { premium?: boolean; marketplaceBuyUrl?: string | null }
+): string {
+  if (options?.premium) {
+    return getPremiumRegisterUrl(domain, options.marketplaceBuyUrl);
+  }
+  return getPrimaryRegisterAffiliateUrl(domain);
 }
 
 /**
@@ -229,15 +258,12 @@ export type ResolveRegisterOptions = {
  * Resolve the URL for a Register / Go / Continue CTA on any domain tool
  * (search, bulk, generator, geo, keywords, extensions, saved, assistant).
  *
- * Monetization rule:
- * - Default / Spaceship CTAs ALWAYS open Impact affiliate:
- *   https://spaceship.sjv.io/c/7521997/1859616/21274 (+ domain deep-link)
- * - Never open raw www.spaceship.com for a register CTA.
- *
- * Premium note:
- * - Premium *pricing data* may come from GoDaddy (shown in UI labels).
- * - Primary Go still uses Spaceship affiliate unless the user explicitly
- *   picks another registrar in the menu (or chooses GoDaddy to view the listing).
+ * Rules:
+ * - Free / available + Spaceship (default) → full Impact affiliate URL
+ *   https://spaceship.sjv.io/c/7521997/1859616/21274?u=...
+ * - Premium (default) → GoDaddy (premium inventory/pricing source)
+ * - Explicit menu registrar → that registrar (Spaceship still full affiliate)
+ * - Never open raw www.spaceship.com for a Spaceship register CTA
  */
 export function resolveRegisterUrl(
   domain: string,
@@ -251,33 +277,49 @@ export function resolveRegisterUrl(
     registrarName && isRegistrarName(registrarName) ? registrarName : null;
   const buy = (marketplaceBuyUrl || '').trim();
 
-  // Explicit non-Spaceship registrar from the menu (GoDaddy, Namecheap, …)
-  if (explicit && explicit !== 'Spaceship') {
-    // Premium + GoDaddy: prefer marketplace deep-link when API provided one
-    if (isPremium && explicit === 'GoDaddy' && buy && /godaddy\.com/i.test(buy)) {
-      return buy;
+  // Premium default (no explicit menu pick, or GoDaddy) → GoDaddy listing
+  if (isPremium && (!explicit || explicit === 'GoDaddy')) {
+    return getPremiumRegisterUrl(cleaned, buy);
+  }
+
+  // Explicit Spaceship (menu or default free path)
+  if (!explicit || explicit === 'Spaceship') {
+    // Premium + user explicitly chose Spaceship from menu → still affiliate
+    if (isPremium && explicit === 'Spaceship') {
+      return getSpaceshipAffiliateUrl(cleaned);
     }
+    // Free default → Spaceship affiliate
+    if (!isPremium) {
+      return getSpaceshipAffiliateUrl(cleaned);
+    }
+  }
+
+  // Explicit non-Spaceship registrar from the menu
+  if (explicit && explicit !== 'Spaceship') {
     if (explicit === 'GoDaddy') {
-      return getGoDaddyRegisterUrl(cleaned);
+      return getPremiumRegisterUrl(cleaned, buy);
     }
     return getRegistrarUrl(cleaned, explicit);
   }
 
-  // Default partner + Spaceship selection → always Impact affiliate hop
-  // (covers free available domains AND premium when Spaceship is preferred)
-  return getSpaceshipAffiliateUrl(cleaned);
+  // Fallback
+  return isPremium
+    ? getPremiumRegisterUrl(cleaned, buy)
+    : getSpaceshipAffiliateUrl(cleaned);
 }
 
 /**
  * Effective registrar for the primary Go CTA.
- * Always Spaceship so the full Impact affiliate URL is used for commissions.
- * Users can still open other registrars from the dropdown menu.
+ * Premium → GoDaddy · Free → Spaceship (Impact affiliate)
  */
 export function getEffectiveRegisterRegistrar(
-  _selectedRegistrar?: RegistrarName | string | null,
-  _isPremium?: boolean
+  selectedRegistrar?: RegistrarName | string | null,
+  isPremium?: boolean
 ): RegistrarName {
-  return 'Spaceship';
+  if (isPremium) return 'GoDaddy';
+  return selectedRegistrar && isRegistrarName(selectedRegistrar)
+    ? selectedRegistrar
+    : DEFAULT_REGISTRAR;
 }
 
 export function getRegistrarHost(name?: string | null): string {
