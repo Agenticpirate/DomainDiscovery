@@ -10,7 +10,7 @@
  * - check_domain_availability: Verify any list of domains
  */
 
-import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
+import { getGoDaddyRegisterUrl, getSpaceshipAffiliateUrl } from '@/lib/registrars';
 
 interface MCPMessage {
   jsonrpc: '2.0';
@@ -28,10 +28,6 @@ interface DomainCheckResult {
   price?: string;
   buyUrl?: string;
   purchaseInfo?: string;
-}
-
-function getGoDaddyListingUrl(domain: string): string {
-  return `https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(domain)}`;
 }
 
 function normalizeDomainFromItem(item: Record<string, unknown>, fallbackLabel?: string): string | null {
@@ -67,8 +63,13 @@ function hasSaleKeyword(value: unknown): boolean {
   );
 }
 
+/** True when MCP market rows look like a real aftermarket / premium listing. */
 function inferPremiumFromMarkets(markets: Array<Record<string, unknown>>): boolean {
-  return markets.some((market) => {
+  if (markets.length === 0) return false;
+
+  // Any non-empty markets array from Instant Domain Search is a listing signal.
+  // Still prefer stronger signals when present (price / flags / sale keywords).
+  const strong = markets.some((market) => {
     const rawPrice = market.price ?? market.min_price;
     if (typeof rawPrice === 'number' && rawPrice > 0) {
       return true;
@@ -95,6 +96,8 @@ function inferPremiumFromMarkets(markets: Array<Record<string, unknown>>): boole
       hasSaleKeyword(market[key])
     );
   });
+
+  return strong || markets.length > 0;
 }
 
 function formatMarketPrice(markets: Array<Record<string, unknown>>): string | undefined {
@@ -103,37 +106,59 @@ function formatMarketPrice(markets: Array<Record<string, unknown>>): string | un
   return typeof rawPrice === 'number' && rawPrice > 0 ? `$${(rawPrice / 100).toFixed(2)}` : undefined;
 }
 
-function getPremiumListingUrl(domain: string, markets: Array<Record<string, unknown>>, fallbackBuyUrl?: string): string | undefined {
-  if (markets.length > 0) {
-    return getGoDaddyListingUrl(domain);
-  }
-
-  if (typeof fallbackBuyUrl === 'string' && fallbackBuyUrl.trim()) {
-    if (/instantdomainsearch\.com\/get\//i.test(fallbackBuyUrl)) {
-      return getGoDaddyListingUrl(domain);
-    }
-    // Never surface untracked Spaceship merchant links from MCP
-    if (/spaceship\.com/i.test(fallbackBuyUrl) && !/sjv\.io/i.test(fallbackBuyUrl)) {
-      return getSpaceshipAffiliateUrl(domain);
-    }
-    return fallbackBuyUrl;
-  }
-
-  return undefined;
+function hasAftermarketBuySignal(buyUrl?: string, purchaseInfo?: string): boolean {
+  const blob = `${buyUrl || ''} ${purchaseInfo || ''}`;
+  return /afternic|sedo|dan\.com|atom\.com|godaddy\.com\/(domain-auctions|domainauction|offers|buy-domain)|aftermarket|for sale|forsale|broker/i.test(
+    blob
+  );
 }
 
-function getPurchaseInfo(markets: Array<Record<string, unknown>>, fallbackPurchaseInfo?: string): string | undefined {
-  if (markets.length > 0) {
-    return 'View listing on GoDaddy';
+/**
+ * Build buy URL + purchase copy by domain class:
+ * - free / available → Spaceship Impact affiliate (never GoDaddy)
+ * - premium / aftermarket → GoDaddy listing (inventory source)
+ * - taken (no listing) → GoDaddy search (aftermarket browse), not Spaceship
+ */
+function resolveBuyFields(
+  domain: string,
+  available: boolean,
+  premium: boolean,
+  markets: Array<Record<string, unknown>>,
+  rawBuyUrl?: string,
+  rawPurchaseInfo?: string
+): { buyUrl?: string; purchaseInfo?: string } {
+  if (premium) {
+    // Prefer an explicit GoDaddy URL when MCP already gave one
+    if (rawBuyUrl && /godaddy\.com/i.test(rawBuyUrl) && !/instantdomainsearch\.com/i.test(rawBuyUrl)) {
+      return { buyUrl: rawBuyUrl, purchaseInfo: 'View listing on GoDaddy' };
+    }
+    return {
+      buyUrl: getGoDaddyRegisterUrl(domain),
+      purchaseInfo: 'Premium listing from GoDaddy',
+    };
   }
 
-  if (typeof fallbackPurchaseInfo === 'string' && fallbackPurchaseInfo.trim()) {
-    return /instantdomainsearch\.com\/get\//i.test(fallbackPurchaseInfo)
-      ? 'View listing on GoDaddy'
-      : fallbackPurchaseInfo;
+  if (available) {
+    return {
+      buyUrl: getSpaceshipAffiliateUrl(domain),
+      purchaseInfo: 'Register via Spaceship affiliate',
+    };
   }
 
-  return undefined;
+  // Taken, not flagged premium — still open GoDaddy for aftermarket discovery
+  if (rawBuyUrl && /godaddy\.com/i.test(rawBuyUrl) && !/instantdomainsearch\.com/i.test(rawBuyUrl)) {
+    return { buyUrl: rawBuyUrl, purchaseInfo: rawPurchaseInfo };
+  }
+  if (markets.length > 0 || hasAftermarketBuySignal(rawBuyUrl, rawPurchaseInfo)) {
+    return {
+      buyUrl: getGoDaddyRegisterUrl(domain),
+      purchaseInfo: 'View listing on GoDaddy',
+    };
+  }
+  return {
+    buyUrl: getGoDaddyRegisterUrl(domain),
+    purchaseInfo: undefined,
+  };
 }
 
 function parseDomainItem(
@@ -147,7 +172,10 @@ function parseDomainItem(
 
   const markets = Array.isArray(item.markets) ? (item.markets as Array<Record<string, unknown>>) : [];
   const explicitPremium = getBooleanValue(item, ['premium', 'isPremium', 'forSale', 'isForSale']);
-  const premium = explicitPremium === true || inferPremiumFromMarkets(markets);
+  const registryStatus =
+    typeof item.registryStatus === 'string' ? item.registryStatus.toLowerCase() : '';
+  const rawBuyUrl = typeof item.buy_url === 'string' ? item.buy_url : undefined;
+  const rawPurchaseInfo = typeof item.purchase_info === 'string' ? item.purchase_info : undefined;
 
   const explicitAvailable = getBooleanValue(item, ['available', 'isAvailable']);
   const explicitRegistered = getBooleanValue(item, ['isRegistered', 'registered']);
@@ -157,7 +185,41 @@ function parseDomainItem(
     available = explicitAvailable;
   } else if (typeof explicitRegistered === 'boolean') {
     available = !explicitRegistered;
-  } else if (premium) {
+  } else if (registryStatus === 'available') {
+    available = true;
+  } else if (registryStatus === 'unavailable' || registryStatus === 'premium') {
+    available = false;
+  }
+
+  // Premium / aftermarket: explicit flags, market rows, registry premium, or sale keywords
+  let premium =
+    explicitPremium === true ||
+    registryStatus === 'premium' ||
+    inferPremiumFromMarkets(markets) ||
+    hasSaleKeyword(rawPurchaseInfo) ||
+    hasAftermarketBuySignal(rawBuyUrl, rawPurchaseInfo);
+
+  // MCP often returns empty markets + generic IDS get links for registered names.
+  // Heuristic: short dictionary-like registered .com/.ai/.io with high rank → treat as premium listing candidate
+  // so primary CTAs open GoDaddy (listing source) instead of Spaceship affiliate.
+  if (!premium && available === false) {
+    const label = domain.split('.')[0] || '';
+    const tld = domain.split('.').slice(1).join('.');
+    const rank = typeof item.rank === 'number' ? item.rank : undefined;
+    const valuableTld = tld === 'com' || tld === 'ai' || tld === 'io' || tld === 'co';
+    if (valuableTld && label.length > 0 && label.length <= 12 && (rank === undefined || rank >= 0.5)) {
+      // Only when purchase copy implies purchase options (not free registration)
+      if (
+        rawPurchaseInfo &&
+        /purchase options|for sale|aftermarket|buy now/i.test(rawPurchaseInfo) &&
+        !/available for registration/i.test(rawPurchaseInfo)
+      ) {
+        premium = true;
+      }
+    }
+  }
+
+  if (premium && available === undefined) {
     available = false;
   }
 
@@ -165,13 +227,28 @@ function parseDomainItem(
     return null;
   }
 
+  // Free registration wins over a soft premium heuristic when MCP says available
+  if (available && !explicitPremium && !inferPremiumFromMarkets(markets) && registryStatus !== 'premium') {
+    // Keep registry-premium only when explicit; available free names use Spaceship
+    premium = false;
+  }
+
+  const { buyUrl, purchaseInfo } = resolveBuyFields(
+    domain,
+    available && !premium,
+    premium,
+    markets,
+    rawBuyUrl,
+    rawPurchaseInfo
+  );
+
   return {
     domain,
     available: available && !premium,
     premium,
     price: formatMarketPrice(markets),
-    buyUrl: getPremiumListingUrl(domain, markets, typeof item.buy_url === 'string' ? item.buy_url : undefined),
-    purchaseInfo: getPurchaseInfo(markets, typeof item.purchase_info === 'string' ? item.purchase_info : undefined),
+    buyUrl,
+    purchaseInfo,
   };
 }
 

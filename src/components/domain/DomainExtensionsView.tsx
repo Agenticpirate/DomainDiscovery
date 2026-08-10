@@ -18,6 +18,8 @@ interface Extension {
   name: string;
   price: string;
   available: boolean | null;
+  /** Premium / aftermarket when known from availability check */
+  premium?: boolean;
   category: string;
   checking?: boolean;
 }
@@ -214,6 +216,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
             return {
               ...ext,
               available: result.available,
+              premium: Boolean(result.premium),
               checking: false,
             };
           }
@@ -1016,10 +1019,17 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
   const handleClick = () => {
     if (!searchQuery.trim()) return;
 
-    if (extension.available) {
-      // Default partner: Spaceship Impact affiliate (never raw merchant register URL)
+    if (extension.available && !extension.premium) {
+      // Free registration → Spaceship Impact affiliate
       window.open(
-        resolveRegisterUrl(fullDomain, 'Spaceship'),
+        resolveRegisterUrl(fullDomain, 'Spaceship', null, { available: true }),
+        '_blank',
+        'noopener,noreferrer'
+      );
+    } else if (extension.premium) {
+      // Premium / aftermarket → GoDaddy listing source
+      window.open(
+        resolveRegisterUrl(fullDomain, 'GoDaddy', null, { premium: true }),
         '_blank',
         'noopener,noreferrer'
       );

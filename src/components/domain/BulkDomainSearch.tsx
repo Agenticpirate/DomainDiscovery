@@ -1107,14 +1107,30 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
       setDomains((prev) =>
         prev.map((x) => {
           if (x.domain.toLowerCase() !== key) return x;
-          const status: DomainTag['status'] = a ? 'available' : p ? 'premium' : 'taken';
-          const nextPrice = a ? price || getPrice(x.domain.split('.').pop() || 'com') : p ? price : undefined;
+          // Treat GoDaddy listing signals as premium even if API forgot premium:true
+          const listingPremium =
+            Boolean(p) ||
+            (!a &&
+              !!buyUrl &&
+              /godaddy\.com/i.test(buyUrl) &&
+              /listing|premium|purchase/i.test(purchaseInfo || 'listing'));
+          const status: DomainTag['status'] = a
+            ? 'available'
+            : listingPremium
+              ? 'premium'
+              : 'taken';
+          const nextPrice = a
+            ? price || getPrice(x.domain.split('.').pop() || 'com')
+            : listingPremium
+              ? price
+              : undefined;
           return {
             ...x,
             status,
             price: nextPrice,
-            buyUrl: p ? buyUrl : undefined,
-            purchaseInfo: p ? purchaseInfo : undefined,
+            // Keep listing URLs for premium + free (Spaceship affiliate); taken may still browse GoDaddy
+            buyUrl: buyUrl || x.buyUrl,
+            purchaseInfo: purchaseInfo || x.purchaseInfo,
             score: computeDomainScore(x.domain, status, nextPrice),
           };
         })

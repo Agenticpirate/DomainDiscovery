@@ -956,10 +956,16 @@ function DomainRow({
   onSelectRegistrar: (registrar: RegistrarName) => void;
   onBlockCopy: (e: React.ClipboardEvent | React.MouseEvent) => void;
 }) {
-  const isAvailable = result.available;
+  const isAvailable = result.available && !result.premium;
   const price = result.price ? parseFloat(result.price.replace(/[^0-9.]/g, '')) : null;
   const showPremiumPrice = (!!result.premium || !!price) && !isAvailable && !!price && price > 50;
-  const isPremium = !!result.premium || showPremiumPrice;
+  const isPremium =
+    !!result.premium ||
+    showPremiumPrice ||
+    (!isAvailable &&
+      !!result.buyUrl &&
+      /godaddy\.com/i.test(result.buyUrl) &&
+      /listing|premium|purchase/i.test(result.purchaseInfo || 'listing'));
 
   const ctaText = isAvailable
     ? 'Continue'
@@ -967,12 +973,14 @@ function DomainRow({
       ? `$${price!.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
       : 'Lookup';
 
-  // Free → Spaceship affiliate · Premium → GoDaddy
+  // Free → Spaceship affiliate · Premium → GoDaddy (never Spaceship for premium)
   const domainHref =
     isAvailable || isPremium
       ? getPrimaryGoUrl(result.domain, {
           premium: isPremium,
           marketplaceBuyUrl: result.buyUrl,
+          purchaseInfo: result.purchaseInfo,
+          available: isAvailable,
         })
       : result.buyUrl
         ? result.buyUrl
@@ -1031,17 +1039,13 @@ function DomainRow({
             href={domainHref}
             target="_blank"
             rel={
-              isAvailable || isPremium
-                ? selectedRegistrar === 'Spaceship'
-                  ? 'sponsored noopener noreferrer'
-                  : 'noopener noreferrer'
+              isAvailable
+                ? 'sponsored noopener noreferrer'
                 : 'noopener noreferrer'
             }
-            data-affiliate={
-              (isAvailable || isPremium) && selectedRegistrar === 'Spaceship'
-                ? 'spaceship'
-                : undefined
-            }
+            data-affiliate={isAvailable ? 'spaceship' : undefined}
+            data-registrar={isPremium ? 'GoDaddy' : isAvailable ? 'Spaceship' : undefined}
+            data-premium={isPremium ? 'true' : undefined}
             data-placement="search-domain-link"
             title={domainTitle}
             onCopy={onBlockCopy}

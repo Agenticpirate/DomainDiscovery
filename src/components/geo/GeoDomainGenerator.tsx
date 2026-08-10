@@ -1001,8 +1001,15 @@ export const GeoDomainGenerator: React.FC = () => {
     flash(`Copied ${list.length} free domains`);
   };
 
-  const registerUrl = (domain: string, buyUrl?: string | null) =>
-    resolveRegisterUrl(domain, selectedRegistrar, buyUrl);
+  const registerUrl = (
+    domain: string,
+    buyUrl?: string | null,
+    premium?: boolean
+  ) =>
+    resolveRegisterUrl(domain, selectedRegistrar, buyUrl, {
+      premium: Boolean(premium),
+      available: premium ? false : undefined,
+    });
   const whoisUrl = (domain: string) => `/tools/whois?domain=${encodeURIComponent(domain)}`;
 
   const locationGroups = useMemo(() => {
@@ -2230,16 +2237,25 @@ export const GeoDomainGenerator: React.FC = () => {
                     >
                       <td className="py-3 px-3">
                         <a
-                          href={registerUrl(domain.domain, domain.buyUrl)}
+                          href={registerUrl(
+                            domain.domain,
+                            domain.buyUrl,
+                            domain.premium
+                          )}
                           target="_blank"
                           rel={
-                            selectedRegistrar === 'Spaceship'
-                              ? 'sponsored noopener noreferrer'
-                              : 'noopener noreferrer'
+                            domain.premium
+                              ? 'noopener noreferrer'
+                              : selectedRegistrar === 'Spaceship'
+                                ? 'sponsored noopener noreferrer'
+                                : 'noopener noreferrer'
                           }
                           data-affiliate={
-                            selectedRegistrar === 'Spaceship' ? 'spaceship' : undefined
+                            !domain.premium && selectedRegistrar === 'Spaceship'
+                              ? 'spaceship'
+                              : undefined
                           }
+                          data-premium={domain.premium ? 'true' : undefined}
                           data-placement="geo-domain-link"
                           className={`font-mono text-[13px] font-semibold tracking-tight ${
                             isLight ? 'text-slate-900 hover:text-slate-600' : 'text-white hover:text-white/70'
@@ -2296,20 +2312,25 @@ export const GeoDomainGenerator: React.FC = () => {
                       <td className="py-2.5 px-3">
                         <div className="flex items-center justify-center gap-1.5">
                           <a
-                            href={resolveRegisterUrl(
+                            href={registerUrl(
                               domain.domain,
-                              selectedRegistrar,
-                              domain.buyUrl
+                              domain.buyUrl,
+                              domain.premium
                             )}
                             target="_blank"
                             rel={
-                              selectedRegistrar === 'Spaceship'
-                                ? 'sponsored noopener noreferrer'
-                                : 'noopener noreferrer'
+                              domain.premium
+                                ? 'noopener noreferrer'
+                                : selectedRegistrar === 'Spaceship'
+                                  ? 'sponsored noopener noreferrer'
+                                  : 'noopener noreferrer'
                             }
                             data-affiliate={
-                              selectedRegistrar === 'Spaceship' ? 'spaceship' : undefined
+                              !domain.premium && selectedRegistrar === 'Spaceship'
+                                ? 'spaceship'
+                                : undefined
                             }
+                            data-premium={domain.premium ? 'true' : undefined}
                             data-placement="geo-register"
                             className={`inline-flex rounded-lg px-2.5 py-1.5 text-[11px] font-bold transition ${
                               domain.premium

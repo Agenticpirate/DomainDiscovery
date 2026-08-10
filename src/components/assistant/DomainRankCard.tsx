@@ -51,10 +51,12 @@ export function DomainRankCard({
   isSaved: boolean;
 }) {
   const st = statusMeta(item, isLight);
-  // Free → Spaceship affiliate · Premium → GoDaddy
+  const isPremium = Boolean(item.premium);
+  // Free → Spaceship affiliate · Premium → GoDaddy (never Spaceship for premium)
   const buyHref = getPrimaryGoUrl(item.domain, {
-    premium: Boolean(item.premium),
+    premium: isPremium,
     marketplaceBuyUrl: item.buyUrl,
+    available: item.available === true && !isPremium,
   });
   // Absolute DD host so WHOIS works from aidomainassistant.com (ADA middleware rewrites relative /tools/*)
   const whoisHref = `${getSiteBaseUrl()}/tools/whois?domain=${encodeURIComponent(item.domain)}`;
@@ -133,8 +135,14 @@ export function DomainRankCard({
         <a
           href={buyHref}
           target="_blank"
-          rel="sponsored noopener noreferrer"
-          data-affiliate="spaceship"
+          rel={
+            isPremium
+              ? 'noopener noreferrer'
+              : 'sponsored noopener noreferrer'
+          }
+          data-affiliate={isPremium ? undefined : 'spaceship'}
+          data-registrar={isPremium ? 'GoDaddy' : 'Spaceship'}
+          data-premium={isPremium ? 'true' : undefined}
           data-placement="assistant-continue"
           className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
             isLight
@@ -142,7 +150,7 @@ export function DomainRankCard({
               : 'bg-white text-black hover:bg-white/90'
           }`}
         >
-          Continue
+          {isPremium ? 'Go · GoDaddy' : 'Continue'}
         </a>
         <a
           href={whoisHref}

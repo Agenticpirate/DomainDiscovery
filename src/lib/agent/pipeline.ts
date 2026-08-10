@@ -116,7 +116,10 @@ function attachBuyUrls(ranked: RankedDomain[]): RankedDomain[] {
     ...r,
     buyUrl:
       r.buyUrl ||
-      (r.available ? resolveRegisterUrl(r.domain, 'Spaceship') : r.buyUrl),
+      resolveRegisterUrl(r.domain, r.premium ? 'GoDaddy' : 'Spaceship', null, {
+        premium: Boolean(r.premium),
+        available: r.available === true && !r.premium,
+      }),
   }));
 }
 

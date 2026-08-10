@@ -92,29 +92,66 @@ export function getPrimaryRegisterAffiliateUrl(domain: string): string {
 /**
  * Primary Go for premium / aftermarket domains — GoDaddy (listing source).
  * Prefer API buyUrl when it already points at GoDaddy.
+ * Never returns Spaceship / Impact — premium inventory is GoDaddy only.
  */
 export function getPremiumRegisterUrl(
   domain: string,
   marketplaceBuyUrl?: string | null
 ): string {
   const buy = (marketplaceBuyUrl || '').trim();
-  if (buy && /godaddy\.com/i.test(buy)) {
+  // Accept only real GoDaddy listing URLs — never sjv.io / spaceship / IDS hops
+  if (
+    buy &&
+    /godaddy\.com/i.test(buy) &&
+    !/spaceship|sjv\.io|instantdomainsearch/i.test(buy)
+  ) {
     return buy;
   }
   return getGoDaddyRegisterUrl(domain);
 }
 
 /**
+ * Detect premium / aftermarket intent from flags + buy URL signals.
+ * Used so CTAs still open GoDaddy when API forgets premium:true but attaches a listing URL.
+ */
+export function isPremiumListingSignal(options?: {
+  premium?: boolean | null;
+  marketplaceBuyUrl?: string | null;
+  purchaseInfo?: string | null;
+  available?: boolean | null;
+}): boolean {
+  if (options?.premium) return true;
+  // Free/available registrations are never treated as premium listings
+  if (options?.available === true) return false;
+  const buy = (options?.marketplaceBuyUrl || '').trim();
+  const info = (options?.purchaseInfo || '').trim();
+  if (buy && /godaddy\.com/i.test(buy) && !/spaceship|sjv\.io/i.test(buy)) {
+    // GoDaddy buy URL on a non-available name → aftermarket / premium path
+    if (options?.available === false || /listing|premium|aftermarket|purchase/i.test(info)) {
+      return true;
+    }
+  }
+  if (/premium listing|listing on godaddy|aftermarket/i.test(info)) return true;
+  return false;
+}
+
+/**
  * Primary Go CTA by domain type:
  * - free/available → Spaceship full affiliate URL
- * - premium → GoDaddy
+ * - premium / aftermarket → GoDaddy (never Spaceship)
  */
 export function getPrimaryGoUrl(
   domain: string,
-  options?: { premium?: boolean; marketplaceBuyUrl?: string | null }
+  options?: {
+    premium?: boolean;
+    marketplaceBuyUrl?: string | null;
+    purchaseInfo?: string | null;
+    available?: boolean | null;
+  }
 ): string {
-  if (options?.premium) {
-    return getPremiumRegisterUrl(domain, options.marketplaceBuyUrl);
+  const premium = isPremiumListingSignal(options);
+  if (premium) {
+    return getPremiumRegisterUrl(domain, options?.marketplaceBuyUrl);
   }
   return getPrimaryRegisterAffiliateUrl(domain);
 }
@@ -252,6 +289,10 @@ export type ResolveRegisterOptions = {
    * Primary CTA defaults to GoDaddy (not Spaceship).
    */
   premium?: boolean;
+  /** Optional purchase copy from availability APIs (listing signals) */
+  purchaseInfo?: string | null;
+  /** When true, never treat as premium listing (free registration) */
+  available?: boolean | null;
 };
 
 /**
@@ -272,40 +313,37 @@ export function resolveRegisterUrl(
   options?: ResolveRegisterOptions
 ): string {
   const cleaned = (domain || '').trim();
-  const isPremium = Boolean(options?.premium);
+  const buy = (marketplaceBuyUrl || '').trim();
+  const isPremium = isPremiumListingSignal({
+    premium: options?.premium,
+    marketplaceBuyUrl: buy,
+    purchaseInfo: options?.purchaseInfo,
+    available: options?.available,
+  });
   const explicit =
     registrarName && isRegistrarName(registrarName) ? registrarName : null;
-  const buy = (marketplaceBuyUrl || '').trim();
 
-  // Premium default (no explicit menu pick, or GoDaddy) → GoDaddy listing
-  if (isPremium && (!explicit || explicit === 'GoDaddy')) {
+  /**
+   * Premium / aftermarket:
+   * Always open GoDaddy for the primary path — including when preferred registrar
+   * is Spaceship. Menu items that intentionally offer Spaceship call
+   * getSpaceshipAffiliateUrl() directly (see RegistrarControls).
+   */
+  if (isPremium) {
+    if (explicit && explicit !== 'Spaceship' && explicit !== 'GoDaddy') {
+      return getRegistrarUrl(cleaned, explicit);
+    }
     return getPremiumRegisterUrl(cleaned, buy);
   }
 
-  // Explicit Spaceship (menu or default free path)
+  // Free / available
   if (!explicit || explicit === 'Spaceship') {
-    // Premium + user explicitly chose Spaceship from menu → still affiliate
-    if (isPremium && explicit === 'Spaceship') {
-      return getSpaceshipAffiliateUrl(cleaned);
-    }
-    // Free default → Spaceship affiliate
-    if (!isPremium) {
-      return getSpaceshipAffiliateUrl(cleaned);
-    }
+    return getSpaceshipAffiliateUrl(cleaned);
   }
-
-  // Explicit non-Spaceship registrar from the menu
-  if (explicit && explicit !== 'Spaceship') {
-    if (explicit === 'GoDaddy') {
-      return getPremiumRegisterUrl(cleaned, buy);
-    }
-    return getRegistrarUrl(cleaned, explicit);
+  if (explicit === 'GoDaddy') {
+    return getGoDaddyRegisterUrl(cleaned);
   }
-
-  // Fallback
-  return isPremium
-    ? getPremiumRegisterUrl(cleaned, buy)
-    : getSpaceshipAffiliateUrl(cleaned);
+  return getRegistrarUrl(cleaned, explicit);
 }
 
 /**

@@ -33,6 +33,8 @@ interface GeneratedDomain {
   available: boolean | null;
   /** Premium aftermarket / registry premium when known */
   premium?: boolean;
+  /** Marketplace / registrar buy URL from availability check */
+  buyUrl?: string;
   words: string[];
   popularity: number;
   length: number;
@@ -173,7 +175,11 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 const resultMap = new Map(
                   (results || []).map((r) => [
                     r.domain.toLowerCase(),
-                    { available: r.available, premium: Boolean(r.premium) },
+                    {
+                      available: r.available,
+                      premium: Boolean(r.premium),
+                      buyUrl: r.buyUrl,
+                    },
                   ])
                 );
                 setGenerated((prev) => {
@@ -185,6 +191,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                       ...d,
                       available: hit.available,
                       premium: hit.premium,
+                      buyUrl: hit.buyUrl || d.buyUrl,
                     };
                   });
                 });
@@ -1161,6 +1168,7 @@ function DomainRow({
             onSelectRegistrar={onSelectRegistrar}
             canRegister={canRegister}
             isPremium={isPremium}
+            premiumUrl={isPremium ? item.buyUrl : undefined}
             primaryLabel={isPremium ? 'Go · GoDaddy' : 'Go'}
             premiumLabel={isPremium ? 'Premium listing from GoDaddy' : undefined}
             primaryButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${goPrimary}`}
