@@ -840,16 +840,12 @@ const ResultsView: React.FC<{
                         canRegister={canAct}
                         isPremium={d.status === 'premium'}
                         primaryLabel={
-                          d.status === 'premium'
-                            ? 'Go · GoDaddy'
-                            : d.status === 'available'
-                              ? 'Go'
-                              : 'Info'
+                          d.status === 'premium' || d.status === 'available' ? 'Go' : 'Info'
                         }
                         premiumUrl={d.status === 'premium' ? d.buyUrl : undefined}
                         premiumLabel={
                           d.purchaseInfo ||
-                          (d.status === 'premium' ? 'Premium pricing from GoDaddy' : undefined)
+                          (d.status === 'premium' ? 'Premium pricing data from GoDaddy' : undefined)
                         }
                         primaryButtonClassName={
                           isLight

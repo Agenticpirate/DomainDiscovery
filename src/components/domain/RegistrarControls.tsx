@@ -165,11 +165,15 @@ export function RegistrarActionMenu({
     }
   }, [open]);
 
-  /** Always affiliate-safe; Spaceship never opens as raw spaceship.com.
-   *  Premium → GoDaddy by default (listing source). */
+  /**
+   * Primary register partner is Spaceship Impact affiliate by default.
+   * Premium pricing may be from GoDaddy (label only) — Go still uses affiliate
+   * unless the user picks GoDaddy/other in the menu.
+   */
   const hrefFor = (registrar: RegistrarName) =>
     resolveRegisterUrl(domain, registrar, premiumUrl, { premium: isPremium });
 
+  // Prefer Spaceship for primary Go (affiliate) even when domain is premium
   const effectivePrimaryRegistrar = getEffectiveRegisterRegistrar(
     selectedRegistrar,
     isPremium
@@ -208,7 +212,7 @@ export function RegistrarActionMenu({
               isLight ? 'text-slate-400' : 'text-white/40'
             )}
           >
-            {isPremium ? 'Premium · GoDaddy listing' : 'Open at registrar'}
+            {isPremium ? 'Premium · open at registrar' : 'Open at registrar'}
           </div>
           {isPremium && (
             <p
@@ -217,8 +221,8 @@ export function RegistrarActionMenu({
                 isLight ? 'text-amber-700/90' : 'text-amber-400/85'
               )}
             >
-              Premium pricing &amp; inventory from GoDaddy. Default Go opens GoDaddy;
-              pick another registrar below if you prefer.
+              Premium pricing data from GoDaddy. Default Go uses our Spaceship
+              affiliate link — choose GoDaddy below to open the GoDaddy listing.
             </p>
           )}
           <div className="space-y-0.5">
@@ -323,7 +327,7 @@ export function RegistrarActionMenu({
             )}
             title={
               isPremium
-                ? `Premium listing · open on ${effectivePrimaryRegistrar} (data from GoDaddy)`
+                ? `Premium (GoDaddy data) · register via ${effectivePrimaryRegistrar}`
                 : `Register on ${effectivePrimaryRegistrar}`
             }
           >

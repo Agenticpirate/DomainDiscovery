@@ -1064,7 +1064,11 @@ function DomainRow({
                     : 'text-rose-400'
             }`}
           >
-            {isAvailable ? 'Available' : isPremium ? 'Premium · GoDaddy' : 'Taken'}
+            {isAvailable
+              ? 'Available'
+              : isPremium
+                ? 'Premium (GoDaddy data)'
+                : 'Taken'}
           </span>
         </div>
       </div>
@@ -1107,16 +1111,14 @@ function DomainRow({
           isPremium={isPremium}
           primaryLabel={
             <>
-              <span className="sm:hidden">{isPremium ? 'GoDaddy' : ctaLabel}</span>
-              <span className="hidden sm:inline">
-                {isPremium ? 'Go · GoDaddy' : desktopCta}
-              </span>
+              <span className="sm:hidden">{ctaLabel}</span>
+              <span className="hidden sm:inline">{desktopCta}</span>
             </>
           }
           premiumUrl={isPremium ? result.buyUrl : undefined}
           premiumLabel={
             result.purchaseInfo ||
-            (isPremium ? 'Premium pricing from GoDaddy' : undefined)
+            (isPremium ? 'Premium pricing data from GoDaddy' : undefined)
           }
           shellClassName={
             isLight

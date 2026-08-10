@@ -214,14 +214,15 @@ export type ResolveRegisterOptions = {
  * Resolve the URL for a Register / Go / Continue CTA on any domain tool
  * (search, bulk, generator, geo, keywords, extensions, saved, assistant).
  *
- * Rules (in order):
- * 1. Premium listing → GoDaddy by default (data source); menu may still pick others
- * 2. Spaceship (default free register) → always Impact sjv.io + domain deep-link
- * 3. Explicit non-Spaceship registrar → that registrar’s search URL
- * 4. Marketplace buyUrl only when no registrar path applies → sanitize Spaceship
- * 5. Fallback → Spaceship affiliate
+ * Monetization rule:
+ * - Default / Spaceship CTAs ALWAYS open Impact affiliate:
+ *   https://spaceship.sjv.io/c/7521997/1859616/21274 (+ domain deep-link)
+ * - Never open raw www.spaceship.com for a register CTA.
  *
- * Never return raw www.spaceship.com for a register CTA.
+ * Premium note:
+ * - Premium *pricing data* may come from GoDaddy (shown in UI labels).
+ * - Primary Go still uses Spaceship affiliate unless the user explicitly
+ *   picks another registrar in the menu (or chooses GoDaddy to view the listing).
  */
 export function resolveRegisterUrl(
   domain: string,
@@ -235,44 +236,32 @@ export function resolveRegisterUrl(
     registrarName && isRegistrarName(registrarName) ? registrarName : null;
   const buy = (marketplaceBuyUrl || '').trim();
 
-  // —— Premium / aftermarket: GoDaddy is the listing source ——
-  // Default Go → GoDaddy. If user explicitly opens Spaceship from the menu,
-  // still use Impact affiliate. Other registrars honored when selected.
-  if (isPremium) {
-    if (explicit === 'Spaceship') {
-      return getSpaceshipAffiliateUrl(cleaned);
-    }
-    if (explicit && explicit !== 'GoDaddy') {
-      return getRegistrarUrl(cleaned, explicit);
-    }
-    // Prefer a GoDaddy marketplace deep-link when API provided one
-    if (buy && /godaddy\.com/i.test(buy)) {
+  // Explicit non-Spaceship registrar from the menu (GoDaddy, Namecheap, …)
+  if (explicit && explicit !== 'Spaceship') {
+    // Premium + GoDaddy: prefer marketplace deep-link when API provided one
+    if (isPremium && explicit === 'GoDaddy' && buy && /godaddy\.com/i.test(buy)) {
       return buy;
     }
-    // Do not send premium default traffic to Spaceship
-    return getGoDaddyRegisterUrl(cleaned);
+    if (explicit === 'GoDaddy') {
+      return getGoDaddyRegisterUrl(cleaned);
+    }
+    return getRegistrarUrl(cleaned, explicit);
   }
 
-  // —— Free / available register CTAs ——
-  // Spaceship (default or selected) → always Impact sjv.io affiliate
-  if (!explicit || explicit === 'Spaceship') {
-    return getSpaceshipAffiliateUrl(cleaned);
-  }
-
-  // Explicit non-Spaceship registrar (GoDaddy, Namecheap, …)
-  return getRegistrarUrl(cleaned, explicit);
+  // Default partner + Spaceship selection → always Impact affiliate hop
+  // (covers free available domains AND premium when Spaceship is preferred)
+  return getSpaceshipAffiliateUrl(cleaned);
 }
 
 /**
  * Effective registrar for the primary Go CTA.
- * Premium listings always default to GoDaddy (inventory source).
- * Free domains use preferred / Spaceship affiliate.
+ * Always Spaceship (Impact affiliate) unless user picked another registrar.
+ * Premium data may still be labeled “from GoDaddy” in the UI.
  */
 export function getEffectiveRegisterRegistrar(
   selectedRegistrar: RegistrarName | string | null | undefined,
-  isPremium?: boolean
+  _isPremium?: boolean
 ): RegistrarName {
-  if (isPremium) return 'GoDaddy';
   return selectedRegistrar && isRegistrarName(selectedRegistrar)
     ? selectedRegistrar
     : DEFAULT_REGISTRAR;
