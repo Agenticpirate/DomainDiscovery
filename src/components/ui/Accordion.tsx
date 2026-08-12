@@ -38,13 +38,16 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ title, content, isOpen, o
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
+      {/* grid-rows animation tracks true content height — max-h caps clipped long answers */}
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+          isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
         }`}
       >
-        <div className={`px-6 pb-4 pt-2 leading-relaxed ${isLight ? 'text-slate-600' : 'text-white/70'}`}>
-          {content}
+        <div className="min-h-0 overflow-hidden">
+          <div className={`px-6 pb-4 pt-2 leading-relaxed ${isLight ? 'text-slate-600' : 'text-white/70'}`}>
+            {content}
+          </div>
         </div>
       </div>
     </div>
