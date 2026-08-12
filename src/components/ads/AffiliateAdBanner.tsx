@@ -138,14 +138,23 @@ export function AffiliateAdBanner({
           <span className="relative block overflow-hidden rounded-2xl shadow-lg">
             {sponsoredBadge}
             {/* eslint-disable-next-line @next/next/no-img-element */}
+            {/*
+              Height caps at 70vh on short viewports. Width must follow via the
+              creative's own aspect ratio — a fixed width with a capped height
+              made object-cover crop the headline and logo off the creative.
+            */}
             <img
               src={imgSrc}
               alt={creative.alt}
-              width={160}
-              height={600}
+              width={creative.width}
+              height={creative.height}
               loading="lazy"
               decoding="async"
-              className="block h-[600px] w-[160px] max-h-[70vh] object-cover object-center"
+              className="block w-auto max-w-full object-contain object-center"
+              style={{
+                height: `min(${creative.height}px, 70vh)`,
+                aspectRatio: `${creative.width} / ${creative.height}`,
+              }}
               onError={() => {
                 if (imgSrc.endsWith('.webp')) setImgSrc(pngFallback);
                 else if (creative.displayAdCdn) setImgSrc(creative.displayAdCdn);

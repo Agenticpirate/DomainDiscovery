@@ -240,7 +240,9 @@ export function AffiliateSkyscraper() {
                   loading="eager"
                   fetchPriority={ad.id === active.id ? 'high' : 'low'}
                   decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover object-center select-none"
+                  /* contain, not cover: creatives vary slightly (160x597 vs 160x600),
+                     and the gradient frame behind absorbs the sub-pixel letterbox */
+                  className="absolute inset-0 h-full w-full object-contain object-center select-none"
                   draggable={false}
                   onError={(e) => {
                     const el = e.target as HTMLImageElement;
