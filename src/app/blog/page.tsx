@@ -2,7 +2,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
-import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
+import { PageBreadcrumb } from '@/components/ui/Breadcrumb';
+import { PAGE_MAIN_CLASS } from '@/components/ui/pageChrome';
+import { ScrollReveal } from '@/components/ui/motion/ScrollReveal';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { getTldAboutIndex, getTldAboutMeta } from '@/lib/tldAboutData';
@@ -41,7 +43,7 @@ export default function BlogPage() {
         <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Blog' }]} />
         <SectionAmbient intensity="hero" contentClassName="page-gutter">
         <div className="max-w-6xl mx-auto">
-          <header className="mt-2 sm:mt-4 max-w-3xl">
+          <header className="animate-premium-in mt-2 sm:mt-4 max-w-3xl">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>
               TLD encyclopedia · domain strategy
             </p>
@@ -100,12 +102,12 @@ export default function BlogPage() {
                 pages.
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+              <ScrollReveal className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3" y={18} stagger={0.05}>
                 {featured.map((item) => (
                   <Link
                     key={item.slug}
                     href={`/blog/tlds/${item.slug}`}
-                    className="group rounded-xl border border-white/10 bg-[#0c0c0e] px-3.5 py-3 hover:border-white/25 hover:bg-[#121214] transition-colors"
+                    className="scroll-reveal-item hover-raise group rounded-xl border border-white/10 bg-[#0c0c0e] px-3.5 py-3 hover:border-white/25 hover:bg-[#121214] transition-colors"
                   >
                     <div className="text-base font-black tracking-tight group-hover:text-white">{item.tld}</div>
                     <div className="mt-1 text-[11px] uppercase tracking-wide" style={{ color: 'var(--text-muted)' }}>
@@ -118,7 +120,7 @@ export default function BlogPage() {
                     )}
                   </Link>
                 ))}
-              </div>
+              </ScrollReveal>
             )}
           </section>
 

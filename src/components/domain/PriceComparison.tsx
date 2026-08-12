@@ -85,6 +85,7 @@ function RegistrarMark({ name, isLight, size = 'sm' }: { name: string; isLight: 
           alt={name}
           className="h-full w-full object-contain p-[2px]"
           loading="lazy"
+          decoding="async"
           width={32}
           height={32}
         />
@@ -1112,8 +1113,10 @@ export function PriceComparison({
           )}
         </div>
 
-        <div className="grid xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)]">
-          <div className={`p-2 sm:p-4 xl:border-r ${isLight ? 'xl:border-slate-200' : 'xl:border-white/10'}`}>
+        {/* grid-cols-1 (minmax(0,1fr)) + min-w-0 children: without them the table's
+            min-w forces the auto track to ~900px on phones and clips the detail panel */}
+        <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)]">
+          <div className={`min-w-0 p-2 sm:p-4 xl:border-r ${isLight ? 'xl:border-slate-200' : 'xl:border-white/10'}`}>
             {canScrollTable && (
               <div
                 className={`mb-2 sm:mb-3 flex items-center justify-between gap-2 sm:gap-3 rounded-lg sm:rounded-xl border px-2 py-1.5 sm:px-3 sm:py-2 ${
@@ -1394,7 +1397,7 @@ export function PriceComparison({
             </p>
           </div>
 
-          <div ref={detailRef} className="p-2 sm:p-4 space-y-2 sm:space-y-3 border-t xl:border-t-0 border-white/10">
+          <div ref={detailRef} className="min-w-0 p-2 sm:p-4 space-y-2 sm:space-y-3 border-t xl:border-t-0 border-white/10">
             <div
               className={`rounded-lg sm:rounded-xl border p-2 sm:p-4 ${
                 isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#0a0a0c] border-white/10'

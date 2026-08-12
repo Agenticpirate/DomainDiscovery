@@ -19,7 +19,7 @@ export function ComparePageClientChrome({ extensionCount, generatedAt }: Props) 
   return (
     <>
       <SectionAmbient intensity="hero" contentClassName="page-gutter pt-2 sm:pt-4 pb-3 sm:pb-8">
-        <div className="max-w-4xl mx-auto text-center px-0.5">
+        <div className="animate-premium-in max-w-4xl mx-auto text-center px-0.5">
           <div className="mb-2 sm:mb-3 flex flex-wrap items-center justify-center gap-1 sm:gap-2">
             {['Regular prices', '10 registrars', `${extensionCount.toLocaleString()}+ TLDs`].map(
               (label) => (

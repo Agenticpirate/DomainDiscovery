@@ -687,6 +687,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                       <img
                         src={previewUrl}
                         alt={`WHOIS card preview for ${data.domain}`}
+                        decoding="async"
                         className="block w-full h-auto"
                       />
                     ) : (

@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
-import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
+import { PageBreadcrumb } from '@/components/ui/Breadcrumb';
+import { PAGE_MAIN_CLASS } from '@/components/ui/pageChrome';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
+import { ScrollReveal } from '@/components/ui/motion/ScrollReveal';
 import { PriceComparison } from '@/components/domain/PriceComparison';
 import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
@@ -139,11 +141,15 @@ function CompareHowItWorks() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+        <ScrollReveal
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3"
+          y={20}
+          stagger={0.06}
+        >
           {steps.map((item) => (
             <div
               key={item.step}
-              className="rounded-xl border border-white/10 bg-[var(--bg-elevated,#0c0c0e)] p-3 sm:p-5"
+              className="scroll-reveal-item hover-raise rounded-xl border border-white/10 bg-[var(--bg-elevated,#0c0c0e)] p-3 sm:p-5"
             >
               <div className="text-[10px] font-black tabular-nums opacity-40 mb-1">{item.step}</div>
               <h3 className="text-sm sm:text-base font-bold mb-1">{item.title}</h3>
@@ -153,7 +159,7 @@ function CompareHowItWorks() {
               </p>
             </div>
           ))}
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

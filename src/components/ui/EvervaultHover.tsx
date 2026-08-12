@@ -235,16 +235,16 @@ export function EvervaultHover({
           />
         ) : (
           <>
-            {/* Footer interactive: matrix + color spotlight */}
+            {/* Footer interactive: quiet matrix + silver spotlight (premium restraint) */}
             <div
               className={cn(
                 'absolute inset-0 transition-opacity duration-700',
-                idleOn ? 'opacity-100' : 'opacity-30'
+                idleOn ? 'opacity-90' : 'opacity-25'
               )}
             >
               <div
                 className={cn(
-                  'absolute inset-0 opacity-[0.07]',
+                  'absolute inset-0 opacity-[0.045]',
                   isLight ? 'text-slate-700' : 'text-white'
                 )}
               >
@@ -269,8 +269,8 @@ export function EvervaultHover({
                 'absolute inset-0 transition-opacity duration-500',
                 idleOn ? 'opacity-100' : 'opacity-0',
                 isLight
-                  ? 'bg-gradient-to-r from-emerald-400/55 via-cyan-400/40 to-blue-500/50'
-                  : 'bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-700'
+                  ? 'bg-gradient-to-r from-slate-400/30 via-sky-400/25 to-indigo-400/25'
+                  : 'bg-gradient-to-r from-slate-100/50 via-sky-200/35 to-indigo-300/30'
               )}
               style={maskStyle}
             />
@@ -280,8 +280,8 @@ export function EvervaultHover({
                 'absolute inset-0 transition-opacity duration-500',
                 idleOn ? 'opacity-90' : 'opacity-0',
                 isLight
-                  ? 'bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.35),transparent_70%)]'
-                  : 'bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.35),rgba(29,78,216,0.25)_45%,transparent_70%)]'
+                  ? 'bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.14),transparent_70%)]'
+                  : 'bg-[radial-gradient(circle_at_center,rgba(191,219,254,0.20),rgba(59,130,246,0.10)_45%,transparent_70%)]'
               )}
               style={maskStyle}
             />
@@ -289,7 +289,7 @@ export function EvervaultHover({
             <motion.div
               className={cn(
                 'absolute inset-0 mix-blend-overlay transition-opacity duration-500',
-                idleOn ? 'opacity-100' : 'opacity-0'
+                idleOn ? 'opacity-60' : 'opacity-0'
               )}
               style={maskStyle}
             >
@@ -323,10 +323,10 @@ export function EvervaultHover({
             <motion.div
               className={cn(
                 'absolute inset-0 blur-2xl transition-opacity duration-700',
-                idleOn ? 'opacity-40' : 'opacity-0',
+                idleOn ? 'opacity-35' : 'opacity-0',
                 isLight
-                  ? 'bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.25),transparent_50%)]'
-                  : 'bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.2),transparent_50%)]'
+                  ? 'bg-[radial-gradient(circle_at_center,rgba(148,163,184,0.22),transparent_50%)]'
+                  : 'bg-[radial-gradient(circle_at_center,rgba(191,219,254,0.16),transparent_50%)]'
               )}
               style={maskStyle}
             />

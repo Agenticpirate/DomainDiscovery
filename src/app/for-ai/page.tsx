@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
-import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
+import { PageBreadcrumb } from '@/components/ui/Breadcrumb';
+import { PAGE_MAIN_CLASS } from '@/components/ui/pageChrome';
 import { ToolPageJsonLd } from '@/components/seo/JsonLd';
 import {
   buildToolMetadata,

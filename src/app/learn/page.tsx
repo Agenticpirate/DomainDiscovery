@@ -5,8 +5,10 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
-import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
+import { PageBreadcrumb } from '@/components/ui/Breadcrumb';
+import { PAGE_MAIN_CLASS } from '@/components/ui/pageChrome';
 import { LearnCatalog } from '@/components/learn/LearnCatalog';
+import { ScrollReveal } from '@/components/ui/motion/ScrollReveal';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import {
   LEARN_CLUSTERS,
@@ -49,7 +51,7 @@ export default function LearnPage() {
       <main className={PAGE_MAIN_CLASS}>
         <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Learn' }]} />
         <SectionAmbient intensity="hero" contentClassName="page-gutter pb-4 sm:pb-7">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="animate-premium-in max-w-4xl mx-auto text-center">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: 'var(--text-muted)' }}>
               {meta.count}+ free guides · naming · SEO · DNS
             </p>
@@ -87,7 +89,7 @@ export default function LearnPage() {
                 <Link
                   key={a.slug}
                   href={`/learn/${a.slug}`}
-                  className="shrink-0 rounded-xl border border-white/10 bg-[#0c0c0e] px-3 py-2.5 hover:border-white/25 transition-colors max-w-[220px]"
+                  className="hover-raise shrink-0 rounded-xl border border-white/10 bg-[#0c0c0e] px-3 py-2.5 hover:border-white/25 transition-colors max-w-[220px]"
                 >
                   <div className="text-[10px] font-bold uppercase tracking-wide text-white/35">{a.category}</div>
                   <div className="mt-0.5 text-[13px] font-semibold leading-snug line-clamp-2">{a.title}</div>
@@ -110,13 +112,13 @@ export default function LearnPage() {
                 </p>
               </div>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
+            <ScrollReveal className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3" y={20} stagger={0.06}>
               {LEARN_CLUSTERS.map((cluster) => {
                 const hub = getLearnArticle(cluster.hubSlug);
                 return (
                   <div
                     key={cluster.id}
-                    className="rounded-xl border border-white/10 bg-[#0c0c0e] p-3.5 sm:p-4 flex flex-col"
+                    className="scroll-reveal-item hover-raise rounded-xl border border-white/10 bg-[#0c0c0e] p-3.5 sm:p-4 flex flex-col"
                   >
                     <h3 className="text-[13px] sm:text-sm font-bold leading-snug">{cluster.title}</h3>
                     <p className="mt-1 text-[11px] sm:text-xs leading-relaxed flex-1" style={{ color: 'var(--text-secondary)' }}>
@@ -139,7 +141,7 @@ export default function LearnPage() {
                   </div>
                 );
               })}
-            </div>
+            </ScrollReveal>
           </div>
         </section>
 

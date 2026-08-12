@@ -142,10 +142,9 @@ export function PageBreadcrumb({
 }
 
 /**
- * Standard main top offset under fixed nav (see --nav-clearance in globals.css).
- * Do not stack extra pt-* here — that created a large empty gap under the header.
+ * Layout constants re-exported for existing client-component imports.
+ * Server Components MUST import these from '@/components/ui/pageChrome'
+ * instead — importing them through this 'use client' module turns the
+ * strings into client-reference objects ("[object Object]" classNames).
  */
-export const PAGE_MAIN_CLASS = 'relative page-main';
-
-/** Standard horizontal padding for content bands */
-export const PAGE_GUTTER_CLASS = 'page-gutter';
+export { PAGE_MAIN_CLASS, PAGE_GUTTER_CLASS } from './pageChrome';

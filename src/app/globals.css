@@ -1374,6 +1374,41 @@ nav a:has(.logo-icon-wrapper) {
     animation: toolCardIn 0.45s ease-out both;
   }
 
+  /* Search results — each row lands softly as live checks stream in */
+  @keyframes resultRowIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .result-row-in {
+    animation: resultRowIn 0.32s var(--ease-apple) both;
+  }
+
+  /* Sleek raise for content cards — pointer devices only (no sticky hover on touch) */
+  .hover-raise {
+    transition:
+      transform 0.28s var(--ease-apple),
+      box-shadow 0.28s var(--ease-apple),
+      border-color 0.28s var(--ease-apple);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hover-raise:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    html.light .hover-raise:hover {
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
+    }
+  }
+
   /* FAQ answer stage — fixed layout; content animates in place */
   @keyframes faqAnswerIn {
     from {
@@ -2124,6 +2159,7 @@ nav a:has(.logo-icon-wrapper) {
     .animate-pulse,
     .animate-spin,
     .tool-card-enter,
+    .result-row-in,
     .faq-answer-panel,
     .footer-brand-track,
     .footer-brand-word,
@@ -2131,8 +2167,13 @@ nav a:has(.logo-icon-wrapper) {
       animation: none !important;
     }
 
-    .domain-swap {
+    .domain-swap,
+    .hover-raise {
       transition: none !important;
+    }
+
+    .hover-raise:hover {
+      transform: none !important;
     }
   }
 }

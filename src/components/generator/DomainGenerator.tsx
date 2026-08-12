@@ -1337,6 +1337,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                           isLight ? 'bg-white ring-1 ring-slate-200' : 'bg-white/95 ring-1 ring-white/10'
                         }`}
                         loading="lazy"
+                        decoding="async"
                       />
                       <span className="font-semibold truncate">{registrar.host}</span>
                       {registrar.name === 'Spaceship' ? (

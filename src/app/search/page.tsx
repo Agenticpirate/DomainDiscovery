@@ -1026,7 +1026,7 @@ function DomainRow({
 
   return (
     <div
-      className={`shine-border no-lift group flex items-center gap-2.5 w-full max-w-full min-w-0 rounded-xl py-2.5 px-3 sm:py-3 sm:px-3.5 transition-colors box-border overflow-hidden ${
+      className={`shine-border no-lift result-row-in group flex items-center gap-2.5 w-full max-w-full min-w-0 rounded-xl py-2.5 px-3 sm:py-3 sm:px-3.5 transition-colors box-border overflow-hidden ${
         isLight
           ? 'bg-white hover:bg-slate-50 border border-slate-100'
           : 'bg-[#0c0c0e] hover:bg-[#121214] border border-white/[0.06]'
