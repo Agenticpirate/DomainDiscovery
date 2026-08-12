@@ -451,7 +451,7 @@ export const Footer: React.FC = () => {
           aria-hidden
           style={{
             background: isLight
-              ? 'radial-gradient(ellipse 85% 70% at 50% 45%, rgba(99,102,241,0.14) 0%, rgba(14,165,233,0.08) 38%, transparent 72%)'
+              ? 'radial-gradient(ellipse 85% 70% at 50% 45%, rgba(148,163,184,0.16) 0%, rgba(14,165,233,0.05) 38%, transparent 72%)'
               : 'radial-gradient(ellipse 90% 75% at 50% 42%, rgba(255,255,255,0.07) 0%, rgba(148,163,184,0.04) 36%, transparent 70%)',
           }}
         />
@@ -460,7 +460,7 @@ export const Footer: React.FC = () => {
           aria-hidden
           style={{
             background: isLight
-              ? 'linear-gradient(90deg, transparent, rgba(99,102,241,0.45), transparent)'
+              ? 'linear-gradient(90deg, transparent, rgba(100,116,139,0.4), transparent)'
               : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent)',
           }}
         />
@@ -474,13 +474,23 @@ export const Footer: React.FC = () => {
                 height={212}
                 className="w-full max-w-full"
               />
-              <p
-                className={`mt-1 sm:mt-2 max-w-xl px-4 text-center text-[10px] sm:text-[12px] font-semibold tracking-[0.18em] sm:tracking-[0.22em] uppercase ${
-                  isLight ? 'text-indigo-500/70' : 'text-white/35'
-                }`}
-              >
-                Domain research · Built for builders
-              </p>
+              <div className="mt-1.5 sm:mt-3 flex w-full max-w-lg items-center justify-center gap-3 sm:gap-4 px-6">
+                <span
+                  aria-hidden
+                  className={`h-px flex-1 bg-gradient-to-r from-transparent ${isLight ? 'to-slate-300' : 'to-white/20'}`}
+                />
+                <p
+                  className={`shrink-0 text-center text-[10px] sm:text-[12px] font-semibold tracking-[0.18em] sm:tracking-[0.22em] uppercase ${
+                    isLight ? 'text-slate-500/80' : 'text-white/40'
+                  }`}
+                >
+                  Domain research · Built for builders
+                </p>
+                <span
+                  aria-hidden
+                  className={`h-px flex-1 bg-gradient-to-l from-transparent ${isLight ? 'to-slate-300' : 'to-white/20'}`}
+                />
+              </div>
             </div>
           </EvervaultHover>
         ) : (
@@ -497,13 +507,23 @@ export const Footer: React.FC = () => {
             >
               {BRAND}
             </p>
-            <p
-              className={`text-center text-[10px] sm:text-[12px] font-semibold tracking-[0.18em] sm:tracking-[0.22em] uppercase ${
-                isLight ? 'text-indigo-500/70' : 'text-white/35'
-              }`}
-            >
-              Domain research · Built for builders
-            </p>
+            <div className="flex w-full max-w-lg items-center justify-center gap-3 sm:gap-4 px-6">
+              <span
+                aria-hidden
+                className={`h-px flex-1 bg-gradient-to-r from-transparent ${isLight ? 'to-slate-300' : 'to-white/20'}`}
+              />
+              <p
+                className={`shrink-0 text-center text-[10px] sm:text-[12px] font-semibold tracking-[0.18em] sm:tracking-[0.22em] uppercase ${
+                  isLight ? 'text-slate-500/80' : 'text-white/40'
+                }`}
+              >
+                Domain research · Built for builders
+              </p>
+              <span
+                aria-hidden
+                className={`h-px flex-1 bg-gradient-to-l from-transparent ${isLight ? 'to-slate-300' : 'to-white/20'}`}
+              />
+            </div>
           </div>
         )}
       </div>
