@@ -263,6 +263,7 @@ export function AffiliateInterstitial() {
               alt={creative.alt}
               width={creative.width}
               height={creative.height}
+              decoding="async"
               className="block w-full h-auto max-h-[min(52vh,420px)] object-contain"
               onError={() => {
                 if (imgSrc.endsWith('.webp')) {
