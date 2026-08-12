@@ -159,7 +159,7 @@ export function AffiliateSkyscraper() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="pointer-events-auto relative" style={{ width: RAIL_W }}>
+      <div className="pointer-events-auto relative" style={{ width: 'fit-content', marginLeft: 'auto' }}>
         <button
           type="button"
           onClick={() => {
@@ -187,13 +187,14 @@ export function AffiliateSkyscraper() {
           ×
         </button>
 
-        {/* Solid frame so the rail is never an empty black hole while assets load */}
+        {/* Solid frame so the rail is never an empty black hole while assets load.
+            Height caps at 70vh — keep the creative's exact aspect ratio so short
+            viewports scale the whole ad down instead of object-cover cropping it. */}
         <div
           className="relative overflow-hidden rounded-[1.25rem] shadow-[0_20px_50px_-18px_rgba(0,0,0,0.65)]"
           style={{
-            width: RAIL_W,
-            height: RAIL_H,
-            maxHeight: 'min(600px, 70vh)',
+            height: `min(${RAIL_H}px, 70vh)`,
+            aspectRatio: `${RAIL_W} / ${RAIL_H}`,
             background:
               'linear-gradient(165deg, #4c1d95 0%, #5b21b6 38%, #1e1b4b 100%)',
           }}
