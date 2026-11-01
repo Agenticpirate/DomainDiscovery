@@ -30,14 +30,14 @@ function SolidPlate({
     tone === 'hero'
       ? isLight
         ? '#ffffff'
-        : '#050505'
+        : '#000000'
       : tone === 'inset'
         ? isLight
-          ? '#f8fafc'
-          : '#121214'
+          ? '#f4f5f5'
+          : '#111111'
         : isLight
           ? '#ffffff'
-          : '#0c0c0e';
+          : '#0a0a0a';
   const border = isLight ? 'border-slate-200' : 'border-white/10';
 
   return (
@@ -71,8 +71,8 @@ function SectionHead({
         className="pointer-events-none absolute -inset-x-3 -inset-y-2 rounded-2xl"
         style={{
           background: isLight
-            ? 'radial-gradient(ellipse 100% 100% at 20% 40%, #f8fafc 0%, #f8fafc 58%, rgba(248,250,252,0) 100%)'
-            : 'radial-gradient(ellipse 100% 100% at 20% 40%, #050505 0%, #050505 58%, rgba(5,5,5,0) 100%)',
+            ? 'radial-gradient(ellipse 100% 100% at 20% 40%, #f4f5f5 0%, #f4f5f5 58%, rgba(248,250,252,0) 100%)'
+            : 'radial-gradient(ellipse 100% 100% at 20% 40%, #000000 0%, #000000 58%, rgba(0,0,0,0) 100%)',
         }}
       />
       <div className="relative z-[1]">{children}</div>
@@ -89,10 +89,10 @@ export default function AdaRegistrarsPage() {
   const ink = isLight ? 'text-slate-900' : 'text-white';
   const muted = isLight ? 'text-slate-600' : 'text-white/55';
   const faint = isLight ? 'text-slate-500' : 'text-white/40';
-  const plateFill = isLight ? '#ffffff' : '#0c0c0e';
-  const insetFill = isLight ? '#f8fafc' : '#121214';
+  const plateFill = isLight ? '#ffffff' : '#0a0a0a';
+  const insetFill = isLight ? '#f4f5f5' : '#111111';
   const thStyle = {
-    backgroundColor: isLight ? '#f8fafc' : '#121214',
+    backgroundColor: isLight ? '#f4f5f5' : '#111111',
   } as const;
 
   return (
@@ -270,7 +270,7 @@ export default function AdaRegistrarsPage() {
                         borderColor: isLight
                           ? 'rgba(226,232,240,1)'
                           : 'rgba(255,255,255,0.12)',
-                        color: isLight ? '#334155' : 'rgba(255,255,255,0.8)',
+                        color: isLight ? '#434a4d' : 'rgba(255,255,255,0.8)',
                       }}
                     >
                       {r.grade}

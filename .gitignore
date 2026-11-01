@@ -14,3 +14,10 @@ next-env.d.ts
 /data/price-verify-logs/
 /data/firecrawl-raw/
 /data/unstoppable-dns-prices.json
+/dist/
+.vinext/
+.cloudflare/
+.next-prod/
+.wrangler/
+scratch/
+.agents/

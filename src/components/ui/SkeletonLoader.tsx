@@ -15,26 +15,26 @@ export const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
     switch (variant) {
       case 'domain':
         return (
-          <div className={`bg-black/40 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-4 animate-pulse ${className}`}>
+          <div className={`surface-premium border border-white/[0.08] rounded-2xl p-4 animate-pulse ${className}`}>
             <div className="flex items-center justify-between mb-3">
               <div className="h-6 bg-white/[0.06] rounded-lg w-48"></div>
               <div className="h-8 bg-white/[0.06] rounded-lg w-20"></div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="h-4 bg-white/[0.04] rounded w-24"></div>
-              <div className="h-4 bg-white/[0.04] rounded w-32"></div>
+              <div className="h-4 bg-[#111111] rounded w-24"></div>
+              <div className="h-4 bg-[#111111] rounded w-32"></div>
             </div>
           </div>
         );
       
       case 'card':
         return (
-          <div className={`bg-black/40 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 animate-pulse ${className}`}>
+          <div className={`surface-premium border border-white/[0.08] rounded-2xl p-6 animate-pulse ${className}`}>
             <div className="flex items-start gap-4 mb-4">
               <div className="w-12 h-12 bg-white/[0.06] rounded-xl"></div>
               <div className="flex-1">
                 <div className="h-5 bg-white/[0.06] rounded w-3/4 mb-2"></div>
-                <div className="h-4 bg-white/[0.04] rounded w-full"></div>
+                <div className="h-4 bg-[#111111] rounded w-full"></div>
               </div>
             </div>
           </div>

@@ -43,18 +43,18 @@ export default async function Image() {
             width: '72px',
             height: '72px',
             borderRadius: '16px',
-            background: 'linear-gradient(135deg, #e2e8f0, #f1f5f9, #cbd5e1)',
+            background: 'linear-gradient(135deg, #d7dbdc, #e7e9ea, #bfc4c5)',
             marginBottom: '28px',
           }}
         >
           <svg width="42" height="42" viewBox="0 0 96 96" fill="none">
             <path
-              fill="#334155"
+              fill="#434a4d"
               d="M18 12h26c22.091 0 40 17.909 40 40s-17.909 40-40 40H18V12zm14 12v56h12c15.464 0 28-12.536 28-28S59.464 24 44 24H32z"
             />
-            <circle cx="46" cy="48" r="12" stroke="#334155" strokeWidth="6.5" fill="none"/>
+            <circle cx="46" cy="48" r="12" stroke="#434a4d" strokeWidth="6.5" fill="none"/>
             <path
-              fill="#334155"
+              fill="#434a4d"
               d="M55.2 58.8a3.5 3.5 0 0 1 4.95 0l10.6 10.6a3.5 3.5 0 1 1-4.95 4.95L55.2 63.74a3.5 3.5 0 0 1 0-4.95z"
             />
           </svg>

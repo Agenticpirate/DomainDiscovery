@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { ToolPageJsonLd } from '@/components/seo/JsonLd';
+import { ForAiIntro } from '@/components/i18n/LocalizedSectionIntros';
 import {
   buildToolMetadata,
   SITE_BRAND,
@@ -71,23 +72,10 @@ export default function ForAiPage() {
           <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'For AI' }]} />
 
           <article className="max-w-3xl mx-auto px-4 sm:px-6">
-            <p className="text-[10px] font-bold uppercase tracking-[0.16em] opacity-50 mb-2">
-              Generative Engine Optimization · LLM discovery
-            </p>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight mb-3">
-              For AI systems &amp; assistants
-            </h1>
-            <p className="text-sm sm:text-base leading-relaxed opacity-80 mb-6" data-aeo-definition="for-ai-lead">
-              {SITE_BRAND.name} publishes noise-free Markdown indexes so ChatGPT, Claude, Perplexity,
-              Gemini, and other assistants can cite accurate product facts without scraping ad-heavy HTML.
-            </p>
+            <ForAiIntro />
 
             <section
-              className="mb-8 rounded-2xl border p-5 sm:p-6"
-              style={{
-                borderColor: 'var(--border-subtle, rgba(148,163,184,0.25))',
-                backgroundColor: 'var(--bg-elevated, var(--bg-main))',
-              }}
+              className="surface-premium mb-8 rounded-2xl border border-white/[0.08] [.light_&]:border-[#d7dbdc] p-5 sm:p-6"
             >
               <h2 className="text-lg font-bold mb-2" id="what-is">
                 {brand.question}

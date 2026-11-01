@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 import type { LearnArticle } from '@/lib/learnArticles';
 
 const CATEGORY_ORDER = [
@@ -38,6 +39,7 @@ export function LearnCatalog({
   categories: string[];
 }) {
   const { theme } = useTheme();
+  const { href } = useLocale();
   const isLight = theme === 'light';
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<string>('All');
@@ -69,7 +71,7 @@ export function LearnCatalog({
         : 'bg-white text-black border-white'
       : isLight
         ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-        : 'bg-white/[0.03] text-white/60 border-white/10 hover:border-white/20';
+        : 'bg-[#0a0a0a] text-white/60 border-white/10 hover:border-white/20';
 
   return (
     <div>
@@ -81,12 +83,12 @@ export function LearnCatalog({
           className={`flex-1 h-11 rounded-xl border px-3.5 text-sm outline-none focus:ring-2 ${
             isLight
               ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:ring-slate-300'
-              : 'bg-white/[0.04] border-white/10 text-white placeholder:text-white/30 focus:ring-white/15'
+              : 'bg-[#111111] border-white/10 text-white placeholder:text-white/30 focus:ring-white/15'
           }`}
         />
         <div
           className={`h-11 inline-flex items-center rounded-xl border px-3 text-xs font-semibold tabular-nums ${
-            isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-white/[0.03] text-white/55'
+            isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-[#0a0a0a] text-white/55'
           }`}
         >
           {filtered.length} articles
@@ -113,11 +115,11 @@ export function LearnCatalog({
         {filtered.map((guide) => (
           <Link
             key={guide.slug}
-            href={`/learn/${guide.slug}`}
+            href={href(`/learn/${guide.slug}`)}
             className={`group relative block p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all ${
               isLight
                 ? 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-md shadow-sm'
-                : 'bg-[#0c0c0e] border-white/10 hover:border-white/20 hover:bg-[#121214]'
+                : 'bg-[#0a0a0a] border-white/10 hover:border-white/20 hover:bg-[#111111]'
             }`}
           >
             <div className="flex items-center justify-between mb-2 gap-2">
@@ -163,7 +165,7 @@ export function LearnCatalog({
       </div>
 
       {filtered.length === 0 && (
-        <div className={`rounded-2xl border p-6 text-sm ${isLight ? 'border-slate-200 bg-white text-slate-500' : 'border-white/10 bg-[#0c0c0e] text-white/50'}`}>
+        <div className={`rounded-2xl border p-6 text-sm ${isLight ? 'border-slate-200 bg-white text-slate-500' : 'border-white/10 bg-[#0a0a0a] text-white/50'}`}>
           No articles match that filter. Try another category or keyword.
         </div>
       )}

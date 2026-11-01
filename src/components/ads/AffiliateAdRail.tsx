@@ -46,17 +46,12 @@ export function AffiliateAdRail({
     creative.format === 'billboard' ||
     creative.format === 'leaderboard';
 
-  // Home / strip: keep section tight so 668px leaderboard isn’t blown up (blur)
   const maxW =
     size === 'compact'
-      ? placement === 'home-hero'
-        ? 'max-w-[720px] mx-auto'
-        : 'max-w-2xl sm:max-w-3xl mx-auto'
-      : placementUsesStripCarousel(placement)
-        ? 'max-w-[720px] mx-auto'
-        : wide
-          ? 'max-w-5xl mx-auto'
-          : 'max-w-4xl mx-auto';
+      ? 'max-w-4xl mx-auto'
+      : placementUsesStripCarousel(placement) || wide
+        ? 'max-w-5xl mx-auto'
+        : 'max-w-4xl mx-auto';
 
   return (
     <aside className={`w-full ${className}`} aria-label="Sponsored offer">

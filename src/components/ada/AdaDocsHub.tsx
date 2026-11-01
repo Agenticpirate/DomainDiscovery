@@ -99,8 +99,8 @@ function CodeBlock({
     <div
       className={`group relative isolate overflow-hidden rounded-xl sm:rounded-2xl border ${
         isLight
-          ? 'border-slate-200/90 bg-[#0b0c0f] shadow-[0_20px_50px_-32px_rgba(15,23,42,0.45)]'
-          : 'border-white/[0.1] bg-[#0a0a0c] shadow-[0_24px_60px_-36px_rgba(0,0,0,0.9)]'
+          ? 'border-slate-200/90 bg-[#0a0a0a] shadow-[0_20px_50px_-32px_rgba(15,23,42,0.45)]'
+          : 'border-white/[0.1] bg-[#0a0a0a] shadow-[0_24px_60px_-36px_rgba(0,0,0,0.9)]'
       }`}
     >
       <div
@@ -122,7 +122,7 @@ function CodeBlock({
           className={`shrink-0 rounded-md sm:rounded-lg px-2 sm:px-2.5 py-0.5 sm:py-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-wide transition ${
             copied
               ? 'bg-white text-black'
-              : 'bg-[#121214] text-white/55 hover:bg-[#1a1a1e] hover:text-white/90'
+              : 'bg-[#111111] text-white/55 hover:bg-[#171717] hover:text-white/90'
           }`}
         >
           {copied ? 'Copied' : 'Copy'}
@@ -174,8 +174,8 @@ function SectionHead({
         style={{
           // Near-opaque core, soft fade only at far edges
           background: isLight
-            ? 'radial-gradient(ellipse 100% 100% at 20% 40%, #f8fafc 0%, #f8fafc 55%, rgba(248,250,252,0) 100%)'
-            : 'radial-gradient(ellipse 100% 100% at 20% 40%, #050505 0%, #050505 58%, rgba(5,5,5,0) 100%)',
+            ? 'radial-gradient(ellipse 100% 100% at 20% 40%, #f4f5f5 0%, #f4f5f5 55%, rgba(248,250,252,0) 100%)'
+            : 'radial-gradient(ellipse 100% 100% at 20% 40%, #000000 0%, #000000 58%, rgba(0,0,0,0) 100%)',
         }}
       />
       <div className="relative z-[1]">{children}</div>
@@ -204,14 +204,14 @@ function SolidPlate({
     tone === 'safety'
       ? isLight
         ? '#fffbeb'
-        : '#0c0c0e'
+        : '#0a0a0a'
       : tone === 'inset'
         ? isLight
-          ? '#f8fafc'
-          : '#121214'
+          ? '#f4f5f5'
+          : '#111111'
         : isLight
           ? '#ffffff'
-          : '#0c0c0e';
+          : '#0a0a0a';
   const border =
     tone === 'safety'
       ? isLight
@@ -253,21 +253,21 @@ export function AdaDocsHub() {
   const faint = isLight ? 'text-slate-500' : 'text-white/40';
   const hair = isLight ? 'border-slate-200' : 'border-white/[0.09]';
   // Opaque fills — always pair with style={{ backgroundColor: plateFill }} where possible
-  const plateFill = isLight ? '#ffffff' : '#0c0c0e';
-  const insetFill = isLight ? '#f8fafc' : '#121214';
+  const plateFill = isLight ? '#ffffff' : '#0a0a0a';
+  const insetFill = isLight ? '#f4f5f5' : '#111111';
   const surface = isLight
     ? 'border-slate-200 shadow-[0_8px_28px_-14px_rgba(15,23,42,0.12)]'
     : 'border-white/10 shadow-[0_24px_56px_-36px_rgba(0,0,0,0.9)]';
   const inset = isLight ? 'border-slate-200' : 'border-white/10';
   const chip = isLight
     ? 'border-slate-200 bg-white text-slate-600'
-    : 'border-white/12 bg-[#0a0a0c] text-white/55';
+    : 'border-white/12 bg-[#0a0a0a] text-white/55';
   const chipSolid = isLight
     ? 'border-slate-200 bg-white text-slate-700'
-    : 'border-white/12 bg-[#121214] text-white/70';
+    : 'border-white/12 bg-[#111111] text-white/70';
   const btnGhost = isLight
     ? 'border-slate-200 bg-white text-slate-800 hover:border-slate-300'
-    : 'border-white/12 bg-[#0a0a0c] text-white/85 hover:border-white/25';
+    : 'border-white/12 bg-[#0a0a0a] text-white/85 hover:border-white/25';
 
   const curlList = `curl -s -X POST ${base}/api/mcp \\
   -H 'Content-Type: application/json' \\
@@ -389,7 +389,7 @@ export function AdaDocsHub() {
             transition={{ duration: 0.5, ease }}
             className="relative max-w-3xl isolate overflow-hidden rounded-2xl sm:rounded-3xl border p-3.5 sm:p-8"
             style={{
-              backgroundColor: isLight ? '#ffffff' : '#050505',
+              backgroundColor: isLight ? '#ffffff' : '#000000',
               borderColor: isLight ? 'rgba(226,232,240,0.9)' : 'rgba(255,255,255,0.08)',
             }}
           >
@@ -397,20 +397,20 @@ export function AdaDocsHub() {
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 rounded-[inherit]"
-              style={{ backgroundColor: isLight ? '#ffffff' : '#050505' }}
+              style={{ backgroundColor: isLight ? '#ffffff' : '#000000' }}
             />
             <div className="relative z-[1]">
               <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-2.5 sm:mb-4">
                 <span
                   className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] isolate ${chip}`}
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                 >
                   <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-500' : 'bg-white/50'}`} />
                   Agent docs · MCP · REST
                 </span>
                 <span
                   className={`inline-flex rounded-full border px-2.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] isolate ${chip}`}
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                 >
                   {ADA_BRAND.shortName}
                 </span>
@@ -446,14 +446,14 @@ export function AdaDocsHub() {
                 <Link
                   href={adaPath("/chat")}
                   className={`relative isolate rounded-lg sm:rounded-2xl border px-3 sm:px-5 py-2 sm:py-2.5 text-[12px] sm:text-sm font-bold transition ${btnGhost}`}
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                 >
                   Open chat
                 </Link>
                 <Link
                   href={adaPath("/agent-card")}
                   className={`relative isolate rounded-lg sm:rounded-2xl border px-3 sm:px-5 py-2 sm:py-2.5 text-[12px] sm:text-sm font-bold transition ${btnGhost}`}
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                 >
                   Agent Card
                 </Link>
@@ -467,7 +467,7 @@ export function AdaDocsHub() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.08, ease }}
             className={`relative isolate mt-4 sm:mt-10 grid grid-cols-2 lg:grid-cols-4 gap-px overflow-hidden rounded-xl sm:rounded-[1.35rem] border ${hair} ${
-              isLight ? 'bg-slate-200' : 'bg-[#1a1a1e]'
+              isLight ? 'bg-slate-200' : 'bg-[#171717]'
             }`}
           >
             {[
@@ -498,14 +498,14 @@ export function AdaDocsHub() {
             <div
               className="sticky top-24 relative isolate overflow-hidden rounded-2xl border p-3 sm:p-3.5 space-y-4"
               style={{
-                backgroundColor: isLight ? '#ffffff' : '#050505',
+                backgroundColor: isLight ? '#ffffff' : '#000000',
                 borderColor: isLight ? 'rgba(226,232,240,0.95)' : 'rgba(255,255,255,0.1)',
               }}
             >
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                style={{ backgroundColor: isLight ? '#ffffff' : '#050505' }}
+                style={{ backgroundColor: isLight ? '#ffffff' : '#000000' }}
               />
               <div className="relative z-[1]">
                 <p className={`text-[10px] font-bold uppercase tracking-[0.16em] px-1 mb-2 ${faint}`}>
@@ -525,7 +525,7 @@ export function AdaDocsHub() {
                               : 'bg-white text-black'
                             : isLight
                               ? 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
-                              : 'text-white/45 hover:text-white/90 hover:bg-[#121214]'
+                              : 'text-white/45 hover:text-white/90 hover:bg-[#111111]'
                         }`}
                       >
                         {t.label}
@@ -538,7 +538,7 @@ export function AdaDocsHub() {
               <div
                 className="relative z-[1] rounded-xl border p-3"
                 style={{
-                  backgroundColor: isLight ? '#f8fafc' : '#0c0c0e',
+                  backgroundColor: isLight ? '#f4f5f5' : '#0a0a0a',
                   borderColor: isLight ? 'rgba(226,232,240,1)' : 'rgba(255,255,255,0.1)',
                 }}
               >
@@ -557,7 +557,7 @@ export function AdaDocsHub() {
                       className={`group/ex flex items-center justify-between gap-2 rounded-lg px-1.5 py-1 text-[11px] font-semibold transition ${
                         isLight
                           ? 'text-slate-600 hover:bg-white hover:text-slate-900'
-                          : 'text-white/50 hover:bg-[#121214] hover:text-white/90'
+                          : 'text-white/50 hover:bg-[#111111] hover:text-white/90'
                       }`}
                     >
                       <span>{l.label}</span>
@@ -579,7 +579,7 @@ export function AdaDocsHub() {
                   key={t.id}
                   href={`#${t.id}`}
                   className={`relative isolate rounded-lg border px-2 py-1 text-[10px] font-bold ${chip}`}
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                 >
                   {t.label}
                 </a>
@@ -640,7 +640,7 @@ export function AdaDocsHub() {
                             className={`relative z-[1] flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg sm:rounded-xl border text-[10px] sm:text-[11px] font-black tabular-nums transition-all duration-300 ${
                               isLight
                                 ? 'border-slate-200 bg-slate-50 text-slate-700 group-hover/step:border-slate-900 group-hover/step:bg-slate-900 group-hover/step:text-white'
-                                : 'border-white/10 bg-[#121214] text-white/80 group-hover/step:border-white/30 group-hover/step:bg-white group-hover/step:text-black group-hover/step:shadow-[0_0_24px_-6px_rgba(255,255,255,0.4)]'
+                                : 'border-white/10 bg-[#111111] text-white/80 group-hover/step:border-white/30 group-hover/step:bg-white group-hover/step:text-black group-hover/step:shadow-[0_0_24px_-6px_rgba(255,255,255,0.4)]'
                             }`}
                           >
                             {step.n}
@@ -803,7 +803,7 @@ export function AdaDocsHub() {
                   className={`grid grid-cols-[minmax(0,1.1fr)_minmax(0,1.6fr)] gap-0 border-b px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
                     isLight
                       ? 'border-slate-100 bg-slate-50 text-slate-400'
-                      : 'border-white/[0.08] bg-[#121214] text-white/35'
+                      : 'border-white/[0.08] bg-[#111111] text-white/35'
                   }`}
                 >
                   <span>Tool</span>
@@ -1053,7 +1053,7 @@ export function AdaDocsHub() {
                 </ul>
                 <div
                   className={`px-3 sm:px-6 py-2.5 sm:py-4 text-[10.5px] sm:text-xs leading-snug sm:leading-relaxed ${
-                    isLight ? 'bg-slate-50 text-slate-600' : 'bg-[#121214] text-white/45'
+                    isLight ? 'bg-slate-50 text-slate-600' : 'bg-[#111111] text-white/45'
                   }`}
                 >
                   Optional auth: set <code className="font-mono">AGENT_API_KEY</code> and send{' '}

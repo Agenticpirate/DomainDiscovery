@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
 import { ToolPageJsonLd } from '@/components/seo/JsonLd';
-import { buildToolMetadata } from '@/lib/seoSiteFacts';
+import { buildLocalizedToolMetadata } from '@/lib/i18n/metadata';
 
 const title = 'Domain Extensions (TLDs) — Browse 1,600+ Options';
 const description =
   'Browse 1,600+ domain extensions and TLDs — from .com and .ai to country codes. Find the right extension, then check availability.';
 const path = '/domain-extensions';
 
-export const metadata: Metadata = buildToolMetadata({
+export function generateMetadata() {
+  return buildLocalizedToolMetadata({
   title,
   description,
   path,
@@ -19,6 +19,7 @@ export const metadata: Metadata = buildToolMetadata({
     'new gTLDs',
   ],
 });
+}
 
 export default function DomainExtensionsLayout({ children }: { children: React.ReactNode }) {
   return (

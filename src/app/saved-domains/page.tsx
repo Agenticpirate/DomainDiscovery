@@ -11,25 +11,33 @@ import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
 import { useToast } from '@/components/ui/Toast';
 import { useTheme } from '@/contexts/ThemeContext';
-import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
-import { resolveRegisterUrl } from '@/lib/registrars';
+import { useLocale } from '@/components/i18n/LocaleProvider';
+import { pageShell } from '@/lib/i18n/pageShells';
+import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
 import {
   type SavedDomainRecord,
   type SavedFolder,
-  type FolderColorId,
+  type SavedTag,
   type FolderFilter,
-  FOLDER_COLORS,
+  type TagFilter,
   loadSavedDomains,
   loadFolders,
+  loadTags,
   removeSavedDomain,
   clearAllSavedDomains,
   moveDomainToFolder,
   createFolder,
   renameFolder,
-  setFolderColor,
   deleteFolder,
+  createTag,
+  renameTag,
+  deleteTag,
+  toggleDomainTag,
   filterDomains,
+  filterByTag,
   countInFolder,
+  countWithTag,
+  MAX_TAGS_PER_DOMAIN,
 } from '@/lib/savedDomainsStore';
 import {
   type ExportFormat,
@@ -59,13 +67,19 @@ function formatDate(timestamp: number): string {
 export default function SavedDomainsPage() {
   const [domains, setDomains] = useState<SavedDomainRecord[]>([]);
   const [folders, setFolders] = useState<SavedFolder[]>([]);
+  const [tags, setTags] = useState<SavedTag[]>([]);
   const [filter, setFilter] = useState<FolderFilter>('all');
+  const [tagFilter, setTagFilter] = useState<TagFilter>('all');
   const [mounted, setMounted] = useState(false);
   const [newFolderName, setNewFolderName] = useState('');
-  const [newFolderColor, setNewFolderColor] = useState<FolderColorId>('sand');
   const [creatingFolder, setCreatingFolder] = useState(false);
   const [editingFolderId, setEditingFolderId] = useState<string | null>(null);
   const [editFolderName, setEditFolderName] = useState('');
+  const [newTagName, setNewTagName] = useState('');
+  const [editingTagId, setEditingTagId] = useState<string | null>(null);
+  const [editTagName, setEditTagName] = useState('');
+  const [tagMenuDomain, setTagMenuDomain] = useState<string | null>(null);
+  const [rowTagName, setRowTagName] = useState('');
   const [query, setQuery] = useState('');
   const [exportFormat, setExportFormat] = useState<ExportFormat>('csv');
   const [copyFormat, setCopyFormat] = useState<CopyFormat>('plain');
@@ -75,12 +89,13 @@ export default function SavedDomainsPage() {
 
   const { showToast } = useToast();
   const { theme } = useTheme();
+  const { href, locale } = useLocale();
+  const copy = pageShell(locale);
   const isLight = theme === 'light';
-  const { selectedRegistrar } = usePreferredRegistrar();
-
   const refresh = useCallback(() => {
     setDomains(loadSavedDomains());
     setFolders(loadFolders());
+    setTags(loadTags());
   }, []);
 
   useEffect(() => {
@@ -101,12 +116,18 @@ export default function SavedDomainsPage() {
     return m;
   }, [folders]);
 
+  const tagById = useMemo(() => {
+    const m = new Map<string, SavedTag>();
+    tags.forEach((t) => m.set(t.id, t));
+    return m;
+  }, [tags]);
+
   const visible = useMemo(() => {
-    let list = filterDomains(domains, filter);
+    let list = filterByTag(filterDomains(domains, filter), tagFilter);
     const q = query.trim().toLowerCase();
     if (q) list = list.filter((d) => d.domain.includes(q));
     return list;
-  }, [domains, filter, query]);
+  }, [domains, filter, tagFilter, query]);
 
   const handleRemoveDomain = (domain: string) => {
     setDomains(removeSavedDomain(domain));
@@ -155,7 +176,7 @@ export default function SavedDomainsPage() {
     }
     setBusyExport(true);
     try {
-      await exportDomains(format, list, folders, { scope: scopeLabel(scope) });
+      await exportDomains(format, list, folders, { scope: scopeLabel(scope), tags });
       const fmt = EXPORT_FORMAT_OPTIONS.find((f) => f.id === format)?.label || format.toUpperCase();
       showToast(
         `Downloaded ${list.length} domain${list.length === 1 ? '' : 's'} as ${fmt} (DomainDiscovery branded)`,
@@ -174,7 +195,7 @@ export default function SavedDomainsPage() {
       showToast('Nothing to copy', 'error');
       return;
     }
-    const text = buildForCopy(format, list, folders);
+    const text = buildForCopy(format, list, folders, tags);
     const ok = await copyText(text);
     if (ok) {
       const label = COPY_FORMAT_OPTIONS.find((f) => f.id === format)?.label || format;
@@ -191,21 +212,12 @@ export default function SavedDomainsPage() {
   };
 
   const handleBuyDomain = (domain: string) => {
-    // Free default: Spaceship Impact affiliate. Prefer selected registrar when not Spaceship.
-    const href = resolveRegisterUrl(
-      domain,
-      selectedRegistrar === 'Spaceship' || !selectedRegistrar
-        ? 'Spaceship'
-        : selectedRegistrar,
-      null,
-      { available: true }
-    );
-    window.open(href, '_blank', 'noopener,noreferrer');
+    window.open(getSpaceshipAffiliateUrl(domain), '_blank', 'noopener,noreferrer');
   };
 
   const handleCreateFolder = (e?: React.FormEvent) => {
     e?.preventDefault();
-    const folder = createFolder(newFolderName, newFolderColor);
+    const folder = createFolder(newFolderName);
     if (!folder) {
       showToast('Enter a folder name (max 40 folders)', 'error');
       return;
@@ -242,6 +254,83 @@ export default function SavedDomainsPage() {
     showToast(`Folder “${name}” deleted`, 'success');
   };
 
+  const handleCreateTag = (e?: React.FormEvent, assignTo?: string) => {
+    e?.preventDefault();
+    const name = (assignTo ? rowTagName : newTagName).trim();
+    if (!name) {
+      showToast('Enter a category name', 'error');
+      return;
+    }
+    const existing = tags.find((t) => t.name.toLowerCase() === name.toLowerCase());
+    if (existing) {
+      if (assignTo) {
+        const current = domains.find((d) => d.domain === assignTo);
+        const has = current?.tagIds?.includes(existing.id);
+        if (!has && (current?.tagIds?.length || 0) >= MAX_TAGS_PER_DOMAIN) {
+          showToast(`A domain can hold ${MAX_TAGS_PER_DOMAIN} categories`, 'error');
+          return;
+        }
+        if (!has) setDomains(toggleDomainTag(assignTo, existing.id));
+      }
+      setNewTagName('');
+      setRowTagName('');
+      showToast(`Using “${existing.name}”`, 'success');
+      return;
+    }
+    const tag = createTag(name);
+    if (!tag) {
+      showToast('Could not add that category (60 max)', 'error');
+      return;
+    }
+    setTags(loadTags());
+    if (assignTo) {
+      setDomains(toggleDomainTag(assignTo, tag.id));
+      setRowTagName('');
+    } else {
+      setNewTagName('');
+    }
+    showToast(`Category “${tag.name}” added`, 'success');
+  };
+
+  const handleRenameTag = (id: string) => {
+    const trimmed = editTagName.trim();
+    if (!trimmed) {
+      setEditingTagId(null);
+      return;
+    }
+    const clash = tags.some(
+      (t) => t.id !== id && t.name.toLowerCase() === trimmed.toLowerCase()
+    );
+    if (clash) {
+      showToast('A category with that name already exists', 'error');
+      return;
+    }
+    setTags(renameTag(id, trimmed));
+    setEditingTagId(null);
+    showToast('Category renamed', 'success');
+  };
+
+  const handleDeleteTag = (id: string, name: string) => {
+    if (!confirm(`Remove category “${name}”? Saved domains stay. The label comes off each one.`)) {
+      return;
+    }
+    const { tags: nextTags, domains: nextDomains } = deleteTag(id);
+    setTags(nextTags);
+    setDomains(nextDomains);
+    if (tagFilter === id) setTagFilter('all');
+    showToast(`Category “${name}” removed`, 'success');
+  };
+
+  const handleToggleTag = (domain: string, tagId: string) => {
+    const current = domains.find((d) => d.domain === domain);
+    const has = current?.tagIds?.includes(tagId);
+    if (!has && (current?.tagIds?.length || 0) >= MAX_TAGS_PER_DOMAIN) {
+      showToast(`A domain can hold ${MAX_TAGS_PER_DOMAIN} categories`, 'error');
+      return;
+    }
+    setDomains(toggleDomainTag(domain, tagId));
+  };
+
   const handleMove = (domain: string, folderId: string | null) => {
     setDomains(moveDomainToFolder(domain, folderId));
     const label =
@@ -253,13 +342,13 @@ export default function SavedDomainsPage() {
 
   const shell = isLight
     ? 'bg-white border-slate-200 shadow-sm'
-    : 'bg-white/[0.02] border-white/10';
+    : 'bg-[#0a0a0a] border-white/10';
   const muted = isLight ? 'text-slate-500' : 'text-white/50';
   const ink = isLight ? 'text-slate-900' : 'text-white';
   const faint = isLight ? 'text-slate-400' : 'text-white/35';
   const inputCls = isLight
     ? 'border-slate-200 bg-white text-slate-900 placeholder:text-slate-400'
-    : 'border-white/12 bg-white/[0.04] text-white placeholder:text-white/30';
+    : 'border-white/12 bg-[#111111] text-white placeholder:text-white/30';
 
   return (
     <div className="min-h-screen">
@@ -269,31 +358,29 @@ export default function SavedDomainsPage() {
       <main className="relative page-main">
         <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Saved Domains' }]} />
         {/* Hero */}
-        <SectionAmbient intensity="hero" contentClassName="page-gutter pb-4 sm:pb-5">
-          <div className="max-w-5xl mx-auto text-center">
-            <h1
-              className={`text-3xl sm:text-5xl md:text-[3.4rem] font-black tracking-tight mb-3 ${
-                mounted ? 'animate-slide-up' : 'opacity-0'
-              }`}
-            >
-              <span
-                className={`bg-gradient-to-r ${
-                  isLight
-                    ? 'from-indigo-900 via-indigo-600 to-sky-500'
-                    : 'from-white via-white to-white/60'
-                } bg-clip-text text-transparent`}
-              >
-                Saved Domains
-              </span>
+        <SectionAmbient intensity="hero" contentClassName="page-gutter pb-6 sm:pb-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="mb-4 flex justify-center">
+              <div className="hero-badge inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[12px] font-medium tracking-wide text-ds-body">
+                <span className="text-ds-ink">On this device</span>
+                <span aria-hidden>·</span>
+                <span>{mounted ? domains.length : '—'} saved</span>
+              </div>
+            </div>
+            <h1 className="hero-ink mb-3 text-3xl font-semibold tracking-[-0.045em] sm:text-5xl md:text-[3.4rem]">
+              Saved Domains
             </h1>
-            <p
-              className={`text-sm sm:text-base ${muted} max-w-2xl mx-auto mb-4 ${
-                mounted ? 'animate-fade-in' : 'opacity-0'
-              }`}
-            >
-              Organize shortlists into folders (e.g. AI brands, client projects). Everything stays
-              on this device only — we never store your list on our servers.
+            <p className="mx-auto mb-5 max-w-xl text-sm text-ds-body sm:text-base">
+              Group names by project. A folder holds one shortlist. Category tags let the same
+              domain sit in several, like AI brands and a client.
             </p>
+            <ul className="mx-auto flex max-w-lg flex-wrap justify-center gap-2 text-[12px] font-medium text-ds-body sm:text-[13px]">
+              {['Folders', 'Category tags', 'Local only', 'Export'].map((label) => (
+                <li key={label} className="hero-badge rounded-full px-3 py-1">
+                  {label}
+                </li>
+              ))}
+            </ul>
           </div>
         </SectionAmbient>
 
@@ -303,16 +390,16 @@ export default function SavedDomainsPage() {
             <div
               className={`relative overflow-hidden rounded-2xl border p-4 sm:p-5 ${
                 isLight
-                  ? 'border-amber-200/90 bg-gradient-to-br from-amber-50 via-white to-stone-50'
-                  : 'border-white/12 bg-gradient-to-br from-white/[0.06] via-white/[0.02] to-transparent'
+                  ? 'border-[#d7dbdc] bg-white'
+                  : 'border-white/[0.08] bg-[#111111]'
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-start gap-4">
                 <div
                   className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${
                     isLight
-                      ? 'border-amber-200 bg-amber-100/80 text-amber-900'
-                      : 'border-white/10 bg-white/[0.06] text-[#e8d4a8]'
+                      ? 'border-[#d7dbdc] bg-[#f4f5f5] text-slate-800'
+                      : 'border-white/10 bg-[#0a0a0a] text-white/80'
                   }`}
                 >
                   <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -325,11 +412,7 @@ export default function SavedDomainsPage() {
                   </svg>
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p
-                    className={`text-[10px] font-bold uppercase tracking-[0.16em] mb-1 ${
-                      isLight ? 'text-amber-800/70' : 'text-[#c4a574]'
-                    }`}
-                  >
+                  <p className={`text-[10px] font-bold uppercase tracking-[0.16em] mb-1 ${faint}`}>
                     Local only · download recommended
                   </p>
                   <h2 className={`text-base sm:text-lg font-black tracking-tight mb-1.5 ${ink}`}>
@@ -386,9 +469,162 @@ export default function SavedDomainsPage() {
         {/* Main content */}
         <section className="px-3 sm:px-6 pb-10 sm:pb-14">
           <div className="max-w-5xl mx-auto">
-            <div className="grid lg:grid-cols-[240px_1fr] gap-4 sm:gap-5">
-              {/* Folder sidebar */}
+            <div className="grid lg:grid-cols-[260px_1fr] gap-4 sm:gap-5">
+              {/* Organize sidebar */}
               <aside className={`rounded-2xl border p-3 sm:p-3.5 h-fit lg:sticky lg:top-24 ${shell}`}>
+                <div className="mb-3 px-1">
+                  <p className={`text-[10px] font-bold uppercase tracking-[0.14em] ${faint}`}>
+                    Categories
+                  </p>
+                  <p className={`mt-1 text-[11px] leading-relaxed ${muted}`}>
+                    Tags for more than one project. The same domain can wear several.
+                  </p>
+                </div>
+                <form onSubmit={(e) => handleCreateTag(e)} className="mb-3 flex gap-1.5">
+                  <input
+                    value={newTagName}
+                    onChange={(e) => setNewTagName(e.target.value)}
+                    placeholder="e.g. AI brands"
+                    maxLength={32}
+                    aria-label="New category name"
+                    className={`min-w-0 flex-1 rounded-lg border px-2.5 py-2 text-sm outline-none ${inputCls}`}
+                  />
+                  <button
+                    type="submit"
+                    className={`shrink-0 rounded-lg px-2.5 py-2 text-[11px] font-bold ${
+                      isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
+                    }`}
+                  >
+                    Add
+                  </button>
+                </form>
+
+                <nav className="space-y-0.5" aria-label="Categories">
+                  {(
+                    [
+                      { id: 'all' as const, label: 'All categories', count: domains.length },
+                      {
+                        id: 'untagged' as const,
+                        label: 'No category',
+                        count: domains.filter((d) => !d.tagIds?.length).length,
+                      },
+                    ] as const
+                  ).map((item) => {
+                    const active = tagFilter === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setTagFilter(item.id)}
+                        className={`w-full flex items-center justify-between gap-2 rounded-xl px-2.5 py-2 text-left text-sm font-semibold transition ${
+                          active
+                            ? isLight
+                              ? 'bg-slate-900 text-white'
+                              : 'bg-white text-black'
+                            : isLight
+                              ? 'text-slate-600 hover:bg-slate-100'
+                              : 'text-white/65 hover:bg-white/8'
+                        }`}
+                      >
+                        <span className="truncate">{item.label}</span>
+                        <span className={`text-[11px] tabular-nums ${active ? (isLight ? 'text-white/70' : 'text-black/50') : faint}`}>
+                          {item.count}
+                        </span>
+                      </button>
+                    );
+                  })}
+
+                  {tags.map((tag) => {
+                    const active = tagFilter === tag.id;
+                    const count = countWithTag(domains, tag.id);
+                    const isEditing = editingTagId === tag.id;
+                    return (
+                      <div key={tag.id} className="group">
+                        {isEditing ? (
+                          <div className="px-1 py-1 space-y-1.5">
+                            <input
+                              autoFocus
+                              value={editTagName}
+                              onChange={(e) => setEditTagName(e.target.value)}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') handleRenameTag(tag.id);
+                                if (e.key === 'Escape') setEditingTagId(null);
+                              }}
+                              className={`w-full rounded-lg border px-2 py-1.5 text-sm outline-none ${inputCls}`}
+                            />
+                            <div className="flex gap-1">
+                              <button
+                                type="button"
+                                onClick={() => handleRenameTag(tag.id)}
+                                className={`flex-1 rounded-lg px-2 py-1 text-[11px] font-bold ${
+                                  isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
+                                }`}
+                              >
+                                Save
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setEditingTagId(null)}
+                                className={`rounded-lg px-2 py-1 text-[11px] font-bold ${muted}`}
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          </div>
+                        ) : (
+                          <div
+                            className={`flex items-center gap-0.5 rounded-xl ${
+                              active ? (isLight ? 'bg-slate-900 text-white' : 'bg-white text-black') : ''
+                            }`}
+                          >
+                            <button
+                              type="button"
+                              onClick={() => setTagFilter(tag.id)}
+                              className={`min-w-0 flex-1 flex items-center gap-2 rounded-xl px-2.5 py-2 text-left text-sm font-semibold transition ${
+                                active
+                                  ? ''
+                                  : isLight
+                                    ? 'text-slate-600 hover:bg-slate-100'
+                                    : 'text-white/65 hover:bg-white/8'
+                              }`}
+                            >
+                              <span className="truncate">{tag.name}</span>
+                              <span className={`ml-auto text-[11px] tabular-nums ${active ? (isLight ? 'text-white/70' : 'text-black/50') : faint}`}>
+                                {count}
+                              </span>
+                            </button>
+                            <div className={`pr-1 flex gap-0.5 ${active ? '' : 'sm:opacity-0 sm:group-hover:opacity-100'}`}>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setEditingTagId(tag.id);
+                                  setEditTagName(tag.name);
+                                }}
+                                className={`rounded-md px-1.5 py-1 text-[10px] font-bold ${
+                                  active ? (isLight ? 'text-white/70' : 'text-black/50') : muted
+                                }`}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => handleDeleteTag(tag.id, tag.name)}
+                                className={`rounded-md px-1.5 py-1 text-[10px] font-bold ${
+                                  active ? (isLight ? 'text-white/70' : 'text-black/50') : muted
+                                }`}
+                              >
+                                Del
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </nav>
+
+                <div className={`my-3 border-t ${isLight ? 'border-slate-100' : 'border-white/[0.06]'}`} />
+
                 <div className="flex items-center justify-between mb-2.5 px-1">
                   <p className={`text-[10px] font-bold uppercase tracking-[0.14em] ${faint}`}>
                     Folders
@@ -410,37 +646,17 @@ export default function SavedDomainsPage() {
                   <form
                     onSubmit={handleCreateFolder}
                     className={`mb-3 rounded-xl border p-2.5 space-y-2 ${
-                      isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-white/[0.03]'
+                      isLight ? 'border-[#d7dbdc] bg-[#f4f5f5]' : 'border-white/10 bg-[#0a0a0a]'
                     }`}
                   >
                     <input
                       autoFocus
                       value={newFolderName}
                       onChange={(e) => setNewFolderName(e.target.value)}
-                      placeholder="e.g. AI brands"
+                      placeholder="e.g. Client — North"
                       maxLength={40}
-                      className={`w-full rounded-lg border px-2.5 py-2 text-sm outline-none focus:ring-2 focus:ring-offset-0 ${inputCls} ${
-                        isLight ? 'focus:ring-slate-300' : 'focus:ring-white/20'
-                      }`}
+                      className={`w-full rounded-lg border px-2.5 py-2 text-sm outline-none ${inputCls}`}
                     />
-                    <div className="flex flex-wrap gap-1.5">
-                      {(Object.keys(FOLDER_COLORS) as FolderColorId[]).map((id) => (
-                        <button
-                          key={id}
-                          type="button"
-                          title={FOLDER_COLORS[id].label}
-                          onClick={() => setNewFolderColor(id)}
-                          className={`h-6 w-6 rounded-full border-2 transition ${
-                            newFolderColor === id
-                              ? isLight
-                                ? 'border-slate-900 scale-110'
-                                : 'border-white scale-110'
-                              : 'border-transparent opacity-80 hover:opacity-100'
-                          }`}
-                          style={{ backgroundColor: FOLDER_COLORS[id].swatch }}
-                        />
-                      ))}
-                    </div>
                     <Button type="submit" size="sm" variant="primary" className="w-full">
                       Create folder
                     </Button>
@@ -497,7 +713,6 @@ export default function SavedDomainsPage() {
                   {folders.map((folder) => {
                     const active = filter === folder.id;
                     const count = countInFolder(domains, folder.id);
-                    const color = FOLDER_COLORS[folder.color] || FOLDER_COLORS.sand;
                     const isEditing = editingFolderId === folder.id;
 
                     return (
@@ -514,23 +729,6 @@ export default function SavedDomainsPage() {
                               }}
                               className={`w-full rounded-lg border px-2 py-1.5 text-sm outline-none ${inputCls}`}
                             />
-                            <div className="flex flex-wrap gap-1">
-                              {(Object.keys(FOLDER_COLORS) as FolderColorId[]).map((id) => (
-                                <button
-                                  key={id}
-                                  type="button"
-                                  onClick={() => setFolders(setFolderColor(folder.id, id))}
-                                  className={`h-5 w-5 rounded-full border ${
-                                    folder.color === id
-                                      ? isLight
-                                        ? 'border-slate-900'
-                                        : 'border-white'
-                                      : 'border-transparent'
-                                  }`}
-                                  style={{ backgroundColor: FOLDER_COLORS[id].swatch }}
-                                />
-                              ))}
-                            </div>
                             <div className="flex gap-1">
                               <button
                                 type="button"
@@ -571,10 +769,6 @@ export default function SavedDomainsPage() {
                                     : 'text-white/65 hover:bg-white/8'
                               }`}
                             >
-                              <span
-                                className="h-2.5 w-2.5 shrink-0 rounded-full"
-                                style={{ backgroundColor: color.swatch }}
-                              />
                               <span className="truncate">{folder.name}</span>
                               <span
                                 className={`ml-auto text-[11px] tabular-nums ${
@@ -595,7 +789,7 @@ export default function SavedDomainsPage() {
                             >
                               <button
                                 type="button"
-                                title="Rename / color"
+                                title="Rename folder"
                                 onClick={() => {
                                   setEditingFolderId(folder.id);
                                   setEditFolderName(folder.name);
@@ -616,8 +810,10 @@ export default function SavedDomainsPage() {
                                 onClick={() => handleDeleteFolder(folder.id, folder.name)}
                                 className={`rounded-md p-1 text-[10px] font-bold ${
                                   active
-                                    ? 'text-red-300 hover:bg-white/10'
-                                    : 'text-red-400/80 hover:text-red-400'
+                                    ? isLight
+                                      ? 'text-white/70 hover:bg-white/10'
+                                      : 'text-black/50 hover:bg-black/5'
+                                    : muted
                                 }`}
                               >
                                 Del
@@ -631,7 +827,7 @@ export default function SavedDomainsPage() {
                 </nav>
 
                 <p className={`mt-3 px-1 text-[10px] leading-relaxed ${faint}`}>
-                  Example: create “AI brands” and move every AI-related name into that folder.
+                  A folder is one home. Categories stack, so a name can be both “AI brands” and “Client — North”.
                 </p>
               </aside>
 
@@ -670,7 +866,7 @@ export default function SavedDomainsPage() {
                           onClick={handleClearAll}
                           variant="ghost"
                           size="sm"
-                          className="text-red-400 hover:text-red-300"
+                          className="gap-2"
                         >
                           Clear all
                         </Button>
@@ -683,7 +879,7 @@ export default function SavedDomainsPage() {
                         className={`mb-4 rounded-2xl border p-3.5 sm:p-4 space-y-4 ${
                           isLight
                             ? 'border-slate-200 bg-gradient-to-br from-white via-slate-50/80 to-white'
-                            : 'border-white/10 bg-white/[0.03]'
+                            : 'border-white/10 bg-[#0a0a0a]'
                         }`}
                       >
                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
@@ -702,7 +898,7 @@ export default function SavedDomainsPage() {
                           </div>
                           <div
                             className={`inline-flex rounded-xl border p-0.5 self-start ${
-                              isLight ? 'border-slate-200 bg-white' : 'border-white/12 bg-black/20'
+                              isLight ? 'border-slate-200 bg-white' : 'border-white/12 bg-black'
                             }`}
                           >
                             {(
@@ -737,7 +933,7 @@ export default function SavedDomainsPage() {
                         {/* Copy row */}
                         <div
                           className={`rounded-xl border p-3 ${
-                            isLight ? 'border-slate-200 bg-white' : 'border-white/[0.08] bg-white/[0.02]'
+                            isLight ? 'border-slate-200 bg-white' : 'border-white/[0.08] bg-[#0a0a0a]'
                           }`}
                         >
                           <p className={`text-[10px] font-bold uppercase tracking-[0.12em] mb-2 ${faint}`}>
@@ -787,7 +983,7 @@ export default function SavedDomainsPage() {
                         {/* Download row */}
                         <div
                           className={`rounded-xl border p-3 ${
-                            isLight ? 'border-slate-200 bg-white' : 'border-white/[0.08] bg-white/[0.02]'
+                            isLight ? 'border-slate-200 bg-white' : 'border-white/[0.08] bg-[#0a0a0a]'
                           }`}
                         >
                           <p className={`text-[10px] font-bold uppercase tracking-[0.12em] mb-2 ${faint}`}>
@@ -855,64 +1051,58 @@ export default function SavedDomainsPage() {
                         <p className={`text-sm ${muted}`}>
                           {query
                             ? 'Try a different search.'
-                            : 'Save domains from search, or move some into this folder.'}
+                            : 'Nothing in this folder and category together. Clear a filter, or tag a saved name.'}
                         </p>
                       </div>
                     ) : (
                       <div className="space-y-2.5">
                         {visible.map((item) => {
-                          const folder = item.folderId
-                            ? folderById.get(item.folderId)
-                            : null;
-                          const color = folder
-                            ? FOLDER_COLORS[folder.color] || FOLDER_COLORS.sand
-                            : null;
+                          const folder = item.folderId ? folderById.get(item.folderId) : null;
+                          const itemTags = (item.tagIds || [])
+                            .map((id) => tagById.get(id))
+                            .filter((tag): tag is SavedTag => Boolean(tag));
+                          const menuOpen = tagMenuDomain === item.domain;
+                          const chip = isLight
+                            ? 'border-[#d7dbdc] bg-[#f4f5f5] text-slate-700'
+                            : 'border-white/12 bg-white/[0.04] text-white/75';
 
                           return (
                             <div
                               key={item.domain}
                               className={`group p-3.5 sm:p-4 border rounded-xl transition-all ${
                                 isLight
-                                  ? 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-md'
-                                  : 'bg-white/[0.02] border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
+                                  ? 'bg-white border-[#d7dbdc] hover:border-slate-400'
+                                  : 'bg-[#111111] border-white/10 hover:border-white/20'
                               }`}
                             >
                               <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                                 <div className="flex-1 min-w-0">
                                   <div
-                                    className={`font-mono text-sm sm:text-lg font-semibold ${ink} mb-1 break-all sm:truncate`}
+                                    className={`font-mono text-sm sm:text-lg font-semibold ${ink} mb-1.5 break-all sm:truncate`}
                                   >
                                     {item.domain}
                                   </div>
-                                  <div className={`flex flex-wrap items-center gap-2 text-xs ${faint}`}>
-                                    <span>Saved {formatDate(item.savedAt)}</span>
-                                    {folder && color && (
-                                      <span
-                                        className="inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 font-semibold"
-                                        style={{
-                                          borderColor: color.soft,
-                                          backgroundColor: color.soft,
-                                          color: isLight ? '#44403c' : '#e7e5e4',
-                                        }}
-                                      >
-                                        <span
-                                          className="h-1.5 w-1.5 rounded-full"
-                                          style={{ backgroundColor: color.swatch }}
-                                        />
+                                  <div className="flex flex-wrap items-center gap-1.5 text-xs">
+                                    <span className={faint}>Saved {formatDate(item.savedAt)}</span>
+                                    {folder ? (
+                                      <span className={`rounded-full border px-2 py-0.5 font-semibold ${chip}`}>
                                         {folder.name}
                                       </span>
-                                    )}
-                                    {!folder && (
-                                      <span
-                                        className={`rounded-full border px-2 py-0.5 font-medium ${
-                                          isLight
-                                            ? 'border-slate-200 text-slate-500'
-                                            : 'border-white/10 text-white/40'
-                                        }`}
+                                    ) : null}
+                                    {itemTags.map((tag) => (
+                                      <button
+                                        key={tag.id}
+                                        type="button"
+                                        onClick={() => handleToggleTag(item.domain, tag.id)}
+                                        title={`Remove ${tag.name}`}
+                                        className={`rounded-full border px-2 py-0.5 font-semibold ${chip}`}
                                       >
-                                        Unfiled
-                                      </span>
-                                    )}
+                                        {tag.name}
+                                        <span className="ml-1 opacity-60" aria-hidden>
+                                          ×
+                                        </span>
+                                      </button>
+                                    ))}
                                   </div>
                                 </div>
 
@@ -972,8 +1162,8 @@ export default function SavedDomainsPage() {
                                     onClick={() => handleRemoveDomain(item.domain)}
                                     className={`p-2 rounded-lg transition-all ${
                                       isLight
-                                        ? 'text-slate-400 hover:text-red-500 hover:bg-red-50'
-                                        : 'text-white/40 hover:text-red-400 hover:bg-red-400/10'
+                                        ? 'text-slate-400 hover:text-slate-800 hover:bg-slate-100'
+                                        : 'text-white/40 hover:text-white hover:bg-white/10'
                                     }`}
                                     title="Remove from saved"
                                   >
@@ -993,6 +1183,66 @@ export default function SavedDomainsPage() {
                                   </button>
                                 </div>
                               </div>
+                              <div className={`mt-3 border-t border-dashed pt-3 ${isLight ? 'border-[#d7dbdc]' : 'border-white/10'}`}>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setTagMenuDomain(menuOpen ? null : item.domain);
+                                    setRowTagName('');
+                                  }}
+                                  className={`text-[11px] font-bold ${isLight ? 'text-slate-700' : 'text-white/70'}`}
+                                >
+                                  {menuOpen ? 'Close' : itemTags.length ? 'Edit categories' : 'Add category'}
+                                </button>
+                                {menuOpen && (
+                                  <div className="mt-2 space-y-2">
+                                    {tags.length > 0 && (
+                                      <div className="flex flex-wrap gap-1.5">
+                                        {tags.map((tag) => {
+                                          const on = item.tagIds?.includes(tag.id);
+                                          return (
+                                            <button
+                                              key={tag.id}
+                                              type="button"
+                                              onClick={() => handleToggleTag(item.domain, tag.id)}
+                                              className={`rounded-full border px-2.5 py-1 text-[11px] font-bold ${
+                                                on
+                                                  ? isLight
+                                                    ? 'border-slate-900 bg-slate-900 text-white'
+                                                    : 'border-white bg-white text-black'
+                                                  : chip
+                                              }`}
+                                            >
+                                              {tag.name}
+                                            </button>
+                                          );
+                                        })}
+                                      </div>
+                                    )}
+                                    <form
+                                      onSubmit={(e) => handleCreateTag(e, item.domain)}
+                                      className="flex gap-1.5"
+                                    >
+                                      <input
+                                        value={rowTagName}
+                                        onChange={(e) => setRowTagName(e.target.value)}
+                                        placeholder="New category for this domain"
+                                        maxLength={32}
+                                        aria-label={`New category for ${item.domain}`}
+                                        className={`min-w-0 flex-1 rounded-lg border px-2.5 py-1.5 text-xs outline-none ${inputCls}`}
+                                      />
+                                      <button
+                                        type="submit"
+                                        className={`shrink-0 rounded-lg px-2.5 py-1.5 text-[11px] font-bold ${
+                                          isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
+                                        }`}
+                                      >
+                                        Add
+                                      </button>
+                                    </form>
+                                  </div>
+                                )}
+                              </div>
                             </div>
                           );
                         })}
@@ -1004,12 +1254,12 @@ export default function SavedDomainsPage() {
                       className={`mt-6 p-3.5 sm:p-4 rounded-xl border ${
                         isLight
                           ? 'bg-slate-50 border-slate-200'
-                          : 'bg-white/[0.02] border-white/10'
+                          : 'bg-[#0a0a0a] border-white/10'
                       }`}
                     >
                       <p className={`text-sm leading-relaxed ${muted}`}>
                         <span className={`font-bold ${ink}`}>Privacy: </span>
-                        Saved domains and folders never leave this browser unless you copy, download,
+                        Saved domains, folders, and categories never leave this browser unless you copy, download,
                         or register them yourself. Clearing cache removes them — keep a branded
                         TXT/CSV/JSON/MD/PDF backup from Export.
                       </p>
@@ -1039,38 +1289,30 @@ export default function SavedDomainsPage() {
                       </svg>
                     </div>
                     <h3 className={`text-lg sm:text-xl font-semibold mb-2 ${ink}`}>
-                      No saved domains yet
+                      {copy?.savedEmptyTitle ?? 'No saved domains yet'}
                     </h3>
                     <p className={`${muted} text-sm sm:text-base mb-3 max-w-md mx-auto`}>
-                      Save names from search or the assistant. Create folders like “AI brands” to
-                      keep shortlists organized.
+                      {copy?.savedEmptyBody ?? 'Save names from search or the assistant. Add categories like “AI brands” and “Client work” so one domain can belong to more than one project.'}
                     </p>
                     <p className={`text-xs ${faint} mb-6 sm:mb-8 max-w-sm mx-auto`}>
-                      Remember: lists are local only. Download a CSV if you need them after clearing
-                      browser data.
+                      {copy?.savedEmptyNote ?? 'Remember: lists are local only. Download a CSV if you need them after clearing browser data.'}
                     </p>
                     <div className="flex flex-wrap justify-center gap-2">
-                      <Link href="/search">
+                      <Link href={href('/search')}>
                         <Button variant="primary" size="lg" className="gap-2">
                           <Icons.Search />
-                          Search domains
+                          {copy?.savedSearch ?? 'Search domains'}
                         </Button>
                       </Link>
-                      <Link href="/assistant">
+                      <Link href={href('/assistant')}>
                         <Button variant="secondary" size="lg" className="gap-2">
-                          AI Assistant
+                          {copy?.savedAssistant ?? 'AI Assistant'}
                         </Button>
                       </Link>
                     </div>
-                    {!creatingFolder && (
-                      <button
-                        type="button"
-                        onClick={() => setCreatingFolder(true)}
-                        className={`mt-5 text-sm font-semibold underline underline-offset-4 ${muted}`}
-                      >
-                        Or create your first folder
-                      </button>
-                    )}
+                    <p className={`mt-5 text-xs ${faint} max-w-sm mx-auto`}>
+                      Categories and folders are on the left. They stay on this device with the list.
+                    </p>
                   </div>
                 )}
               </div>

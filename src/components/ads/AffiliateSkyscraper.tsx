@@ -1,12 +1,15 @@
 'use client';
 
 import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
+  adSrcSet,
   SKYSCRAPER_CAROUSEL_ADS,
   SKYSCRAPER_CAROUSEL_MS,
   type AffiliateAdCreative,
 } from '@/lib/affiliateAds';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useRightSkyscraperBox } from '@/components/ads/useSideRailFit';
 
 /** Same frame for every side ad — full-bleed, no letterbox “bezel” */
 const RAIL_W = 160;
@@ -32,6 +35,7 @@ export function AffiliateSkyscraper() {
     }
     return init;
   });
+  const railBox = useRightSkyscraperBox();
   const rootRef = useRef<HTMLDivElement | null>(null);
   const impressed = useRef<Set<string>>(new Set());
   const reactId = useId();
@@ -49,10 +53,18 @@ export function AffiliateSkyscraper() {
       /* ignore */
     }
 
+    // Rail is xl-only; skip the downloads entirely on smaller screens
+    if (!window.matchMedia('(min-width: 1280px)').matches) return;
+
     // Preload both creatives so the first paint is never a blank rail
     for (const ad of SKYSCRAPER_CAROUSEL_ADS) {
       const img = new window.Image();
       img.decoding = 'async';
+      const srcSet = adSrcSet(ad.localSrc);
+      if (srcSet) {
+        img.sizes = `${RAIL_W}px`;
+        img.srcset = srcSet;
+      }
       img.src = ad.localSrc;
       img.onerror = () => {
         const png = ad.localSrc.replace(/\.webp$/i, '.png');
@@ -145,21 +157,19 @@ export function AffiliateSkyscraper() {
     };
   }, [count, dismissed, paused]);
 
-  if (!mounted || dismissed || !active) return null;
+  if (!mounted || dismissed || !active || !railBox || typeof document === 'undefined') return null;
 
-  return (
+  return createPortal(
     <aside
       ref={rootRef}
-      className="pointer-events-none fixed z-[80] hidden xl:block"
-      style={{
-        top: 'max(5.5rem, calc(50vh - 300px))',
-        right: 'max(0.75rem, calc((100vw - 80rem) / 2 - 11.5rem))',
-      }}
+      data-dd-rail="right"
+      className="pointer-events-none fixed z-[90]"
+      style={{ top: railBox.top, left: railBox.left, width: railBox.width, height: railBox.height }}
       aria-label="Sponsored offer"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="pointer-events-auto relative" style={{ width: RAIL_W }}>
+      <div className="pointer-events-auto relative h-full" style={{ width: RAIL_W }}>
         <button
           type="button"
           onClick={() => {
@@ -189,11 +199,9 @@ export function AffiliateSkyscraper() {
 
         {/* Solid frame so the rail is never an empty black hole while assets load */}
         <div
-          className="relative overflow-hidden rounded-[1.25rem] shadow-[0_20px_50px_-18px_rgba(0,0,0,0.65)]"
+          className="relative h-full overflow-hidden rounded-[1.25rem] shadow-[0_20px_50px_-18px_rgba(0,0,0,0.65)]"
           style={{
             width: RAIL_W,
-            height: RAIL_H,
-            maxHeight: 'min(600px, 70vh)',
             background:
               'linear-gradient(165deg, #4c1d95 0%, #5b21b6 38%, #1e1b4b 100%)',
           }}
@@ -236,7 +244,9 @@ export function AffiliateSkyscraper() {
                   alt={ad.alt}
                   width={RAIL_W}
                   height={RAIL_H}
-                  loading="eager"
+                  srcSet={(srcById[ad.id] ?? ad.localSrc) === ad.localSrc ? adSrcSet(ad.localSrc) : undefined}
+                  sizes={`${RAIL_W}px`}
+                  loading="lazy"
                   fetchPriority={ad.id === active.id ? 'high' : 'low'}
                   decoding="async"
                   className="absolute inset-0 h-full w-full object-cover object-center select-none"
@@ -262,11 +272,13 @@ export function AffiliateSkyscraper() {
             width={0}
             alt=""
             src={ad.impressionPixel}
+            fetchPriority="low"
             style={{ position: 'absolute', visibility: 'hidden', width: 0, height: 0, border: 0 }}
             aria-hidden
           />
         ))}
       </div>
-    </aside>
+    </aside>,
+    document.documentElement
   );
 }

@@ -8,6 +8,8 @@ import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLocale } from '@/components/i18n/LocaleProvider';
+import { pageShell } from '@/lib/i18n/pageShells';
 
 export default function ExpiredPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,6 +20,8 @@ export default function ExpiredPage() {
     premium: false,
   });
   const { theme } = useTheme();
+  const { locale } = useLocale();
+  const shell = pageShell(locale);
   const isLight = theme === 'light';
 
   const lifecycleStages = [
@@ -81,8 +85,8 @@ export default function ExpiredPage() {
       <main className={`${PAGE_MAIN_CLASS} pb-14 sm:pb-24`}>
         <PageBreadcrumb
           items={[
-            { label: 'Tools', href: '/' },
-            { label: 'Expired Domains' },
+            { label: shell?.tools ?? 'Tools', href: '/' },
+            { label: shell?.expiredTitle ?? 'Expired Domains' },
           ]}
         />
         <SectionAmbient intensity="hero" className="w-full" contentClassName="relative z-[1]">
@@ -90,20 +94,20 @@ export default function ExpiredPage() {
         <section className="page-gutter pb-10 sm:pb-16">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl sm:text-6xl md:text-7xl font-black tracking-tight mb-4 sm:mb-6 leading-[1.1]">
-              Expired Domains
+              {shell?.expiredTitle ?? 'Expired Domains'}
             </h1>
             <p className={`text-sm sm:text-xl ${isLight ? 'text-slate-500' : 'text-white/50'} max-w-2xl mx-auto mb-6 sm:mb-12 leading-relaxed`}>
-              Search expired domains with AI-powered tools. Explore our comprehensive index of expiring and recently expired domain names.
+              {shell?.expiredLead ?? 'Search expired domains with AI-powered tools. Explore our comprehensive index of expiring and recently expired domain names.'}
             </p>
 
             {/* Search Bar — solid plate */}
             <div className="max-w-2xl mx-auto">
-              <div className={`relative isolate overflow-hidden ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0a0a0c] border-white/[0.12]'} border rounded-2xl p-2 shadow-2xl ${isLight ? 'shadow-slate-200/50' : 'shadow-black/40'}`}>
-                <div className={`flex items-center gap-2.5 px-3 py-3 sm:gap-3 sm:px-5 sm:py-4 ${isLight ? 'bg-slate-50' : 'bg-white/[0.02]'} rounded-xl`}>
+              <div className={`relative isolate overflow-hidden ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0a0a0a] border-white/[0.12]'} border rounded-2xl p-2 shadow-2xl ${isLight ? 'shadow-slate-200/50' : 'shadow-black/40'}`}>
+                <div className={`flex items-center gap-2.5 px-3 py-3 sm:gap-3 sm:px-5 sm:py-4 ${isLight ? 'bg-slate-50' : 'bg-[#0a0a0a]'} rounded-xl`}>
                   <Icons.Search className={`w-5 h-5 ${isLight ? 'text-slate-400' : 'text-white/40'} shrink-0`} />
                   <input
                     type="text"
-                    placeholder="Start typing here..."
+                    placeholder={shell?.expiredPlaceholder ?? 'Start typing here...'}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className={`flex-1 bg-transparent ${isLight ? 'text-slate-900 placeholder:text-slate-400' : 'text-white placeholder:text-white/40'} outline-none text-base`}
@@ -156,7 +160,7 @@ export default function ExpiredPage() {
             <div className="space-y-3 sm:space-y-4">
               {lifecycleStages.map((stage, index) => (
                 <div key={index} className="group">
-                  <div className={`relative ${isLight ? 'bg-white border-slate-200 shadow-sm hover:border-slate-300' : 'bg-black/40 border-white/[0.08] hover:border-white/[0.12]'} backdrop-blur-xl border rounded-2xl p-4 sm:p-6 transition-all duration-300`}>
+                  <div className={`relative ${isLight ? 'bg-white border-slate-200 shadow-sm hover:border-slate-300' : 'surface-premium border-white/[0.08] hover:border-white/[0.16]'} border rounded-2xl p-4 sm:p-6 transition-all duration-300`}>
                     <div className="flex items-start gap-4 sm:gap-6">
                       {/* Number */}
                       <div className="shrink-0">
@@ -192,7 +196,7 @@ export default function ExpiredPage() {
               {infoCards.map((card, index) => (
                 <div
                   key={index}
-                  className={`${isLight ? 'bg-white border-slate-200 shadow-sm hover:border-slate-300' : 'bg-black/40 border-white/[0.08] hover:border-white/[0.12]'} backdrop-blur-xl border rounded-2xl p-4 sm:p-6 transition-all duration-300 group`}
+                  className={`${isLight ? 'bg-white border-slate-200 shadow-sm hover:border-slate-300' : 'surface-premium border-white/[0.08] hover:border-white/[0.16]'} border rounded-2xl p-4 sm:p-6 transition-all duration-300 group`}
                 >
                   <h3 className={`text-lg font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'} transition-colors`}>
                     {card.title}

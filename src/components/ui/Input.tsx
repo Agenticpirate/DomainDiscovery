@@ -35,7 +35,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     // Smooth border-only focus — avoid transition-all (it flashes ring/shadow)
     const baseStyles =
-      'w-full rounded-xl px-3 py-2.5 text-sm sm:px-3.5 sm:py-2.5 border bg-[var(--input-bg)] text-[var(--text-primary)] placeholder:text-[var(--input-placeholder)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 shadow-none transition-[border-color,background-color] duration-200 ease-out disabled:opacity-50 disabled:cursor-not-allowed';
+      'w-full min-h-12 sm:min-h-0 rounded-xl px-3 py-2.5 text-base sm:px-3.5 sm:py-2.5 sm:text-sm border bg-[var(--input-bg)] text-[var(--text-primary)] placeholder:text-[var(--input-placeholder)] outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 shadow-none transition-[border-color,background-color] duration-200 ease-out disabled:opacity-50 disabled:cursor-not-allowed';
 
     const stateStyles = hasError
       ? 'border-red-500/50 focus:border-red-400/80'

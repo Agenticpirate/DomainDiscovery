@@ -76,7 +76,7 @@ export default function EnhancedHome() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
       {/* Animated background grid */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] pointer-events-none" />
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] pointer-events-none" />
 
       <Navigation activeTool={activeTool} onToolSelect={(tool) => setActiveTool(tool as ToolType)} />
 
@@ -299,7 +299,7 @@ export default function EnhancedHome() {
             ].map((tip, i) => (
               <div
                 key={i}
-                className="p-6 bg-white/[0.02] rounded-xl hover:bg-white/[0.04] transition-all duration-300"
+                className="p-6 bg-[#0a0a0a] rounded-xl hover:bg-white/[0.04] transition-all duration-300"
               >
                 <h3 className="text-lg font-bold mb-2">{tip.title}</h3>
                 <p className="text-sm text-white/50 leading-relaxed">{tip.desc}</p>

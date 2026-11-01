@@ -77,7 +77,7 @@ export default function BlogTldsPage() {
                     <Link
                       key={item.slug}
                       href={`/blog/tlds/${item.slug}`}
-                      className="rounded-lg border border-white/10 bg-[#0c0c0e] px-3 py-2.5 hover:border-white/25 transition-colors"
+                      className="rounded-lg border border-white/10 bg-[#0a0a0a] px-3 py-2.5 hover:border-white/25 transition-colors"
                     >
                       <div className="font-black tracking-tight">{item.tld}</div>
                       {item.sponsor && (

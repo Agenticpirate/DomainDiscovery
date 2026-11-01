@@ -14,11 +14,11 @@ function htmlPage(title: string, body: string) {
   <title>${title}</title>
   <style>
     body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
-      font-family:Inter,system-ui,sans-serif;background:#f8fafc;color:#0f172a}
-    .card{max-width:440px;margin:24px;padding:28px;border-radius:18px;border:1px solid #e2e8f0;background:#fff}
+      font-family:Inter,system-ui,sans-serif;background:#f4f5f5;color:#141517}
+    .card{max-width:440px;margin:24px;padding:28px;border-radius:18px;border:1px solid #d7dbdc;background:#fff}
     h1{font-size:1.35rem;margin:0 0 10px}
-    p{color:#64748b;line-height:1.55;margin:0 0 18px;font-size:14px}
-    a.btn{display:inline-block;padding:10px 16px;border-radius:10px;background:#0f172a;color:#fff;text-decoration:none;font-weight:600;font-size:13px}
+    p{color:#6e7679;line-height:1.55;margin:0 0 18px;font-size:14px}
+    a.btn{display:inline-block;padding:10px 16px;border-radius:10px;background:#141517;color:#fff;text-decoration:none;font-weight:600;font-size:13px}
   </style>
 </head>
 <body><div class="card">${body}</div></body>

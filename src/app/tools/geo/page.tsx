@@ -1,17 +1,16 @@
 'use client';
 
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
-import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { GeoDomainGenerator } from '@/components/geo/GeoDomainGenerator';
-import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
-import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
-import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
-import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
+import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
+import { useLocale } from '@/components/i18n/LocaleProvider';
+import { pageHeading } from '@/lib/i18n/locales';
+import { pageShell } from '@/lib/i18n/pageShells';
 import { useTheme } from '@/contexts/ThemeContext';
 
 const FEATURES = [
@@ -29,144 +28,97 @@ const STEPS = [
   { n: '04', title: 'Generate & live-check', body: 'Available vs registered inventory' },
 ];
 
-const easeOut = [0.22, 1, 0.36, 1] as const;
-
 export default function GeoPage() {
   const { theme } = useTheme();
+  const { locale, messages, href } = useLocale();
+  const localized = locale !== 'en';
+  const shell = pageShell(locale);
   const isLight = theme === 'light';
-  const reduceMotion = useReducedMotion();
 
-  const solid = isLight ? '#ffffff' : '#0a0a0c';
-  const solidInset = isLight ? '#f8fafc' : '#121214';
   const muted = isLight ? 'text-slate-500' : 'text-white/45';
   const secondary = isLight ? 'text-slate-600' : 'text-white/55';
-
-  const fadeUp = (delay = 0) =>
-    reduceMotion
-      ? { initial: false as const, animate: { opacity: 1, y: 0 } }
-      : {
-          initial: { opacity: 0, y: 12 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.45, delay, ease: easeOut },
-        };
 
   return (
     <div
       className="geo-page min-h-screen overflow-x-clip"
       style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
     >
-      <PageBackground variant="minimal" />
+      <PageBackground variant="hero" />
       <Navigation activeTool="geo" />
 
       <main className={PAGE_MAIN_CLASS}>
         <PageBreadcrumb
           items={[
-            { label: 'Tools', href: '/' },
-            { label: 'Geo Domain Generator' },
+            { label: messages.nav.tools, href: href('/') },
+            { label: messages.crumbs.geo },
           ]}
         />
-        {/* Hero only — ambient dots clear under center (same pattern as homepage) */}
-        <SectionAmbient intensity="soft" className="w-full" contentClassName="relative z-[1]">
-          {/* —— Compact intro: solid plate so dots never hit title/badges —— */}
-          <div className="page-gutter pb-3 sm:pb-4">
-            <div className="mx-auto max-w-6xl relative z-[1]">
-              <motion.header
-                {...fadeUp(0.04)}
-                className="geo-solid-plate relative isolate overflow-hidden rounded-xl sm:rounded-2xl border px-3 py-2.5 sm:px-5 sm:py-3.5"
-                style={{
-                  backgroundColor: solid,
-                  borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)',
-                }}
-              >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                  style={{ backgroundColor: solid }}
-                />
-                <div className="relative z-[1] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 min-w-0">
-                  <div className="min-w-0">
-                    <p
-                      className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] mb-0.5 ${muted}`}
-                    >
-                      Local SEO · City & country domains
-                    </p>
-                    <h1
-                      className={`text-[1.2rem] sm:text-2xl md:text-[1.75rem] font-black tracking-tight leading-tight ${
-                        isLight ? 'text-slate-900' : 'text-white'
-                      }`}
-                    >
-                      Geo domain generator for local SEO
-                    </h1>
-                    <p className={`mt-0.5 text-[11px] sm:text-[13px] leading-snug ${secondary}`}>
-                      <span className="sm:hidden">City &amp; country lists · live check · CSV export</span>
-                      <span className="hidden sm:inline">
-                        Build city- and country-level domain lists, live-check availability, export CSV.
-                      </span>
-                    </p>
-                  </div>
-                  <div className="hidden sm:flex shrink-0 flex-wrap gap-1.5 justify-end">
-                    {['Cities', 'Countries', 'Live check', 'CSV'].map((t) => (
-                      <span
-                        key={t}
-                        className={`relative isolate overflow-hidden rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
-                          isLight ? 'border-slate-200 text-slate-600' : 'border-white/10 text-white/55'
-                        }`}
-                        style={{ backgroundColor: solidInset }}
-                      >
-                        <span
-                          aria-hidden
-                          className="pointer-events-none absolute inset-0 rounded-full"
-                          style={{ backgroundColor: solidInset }}
-                        />
-                        <span className="relative z-[1]">{t}</span>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.header>
+        <header className="page-gutter pt-1.5 pb-4 sm:pt-5 sm:pb-7 text-center">
+          <div className="mx-auto max-w-3xl">
+            {!localized && (
+            <div className="hero-badge inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-4 sm:mb-5 text-[12px] font-medium tracking-wide text-ds-body">
+              <span className="relative flex h-1.5 w-1.5" aria-hidden>
+                <span className="home-live-dot absolute inset-0 rounded-full bg-emerald-400" />
+              </span>
+              <span>
+                <span className="text-ds-ink">Local SEO</span> · Cities &amp; countries
+              </span>
+            </div>
+            )}
+
+            <h1 className="text-[2.1rem] leading-[1.04] sm:text-[3.25rem] md:text-[3.85rem] font-semibold tracking-[-0.05em] mb-2.5 sm:mb-3">
+              <span className="hero-ink block pb-[0.06em]">
+                {localized ? pageHeading(messages.pages.geo.title) : 'Geo domain generator'}
+              </span>
+              {!localized && (
+              <span className="block text-[1rem] sm:text-[1.4rem] md:text-[1.65rem] mt-1.5 sm:mt-2 font-medium tracking-[-0.025em] text-ds-body">
+                A domain for every city you serve
+              </span>
+              )}
+            </h1>
+
+            <p className="text-[14px] sm:text-[16px] max-w-xl mx-auto mb-4 leading-relaxed text-ds-mute">
+              {localized
+                ? messages.pages.geo.description
+                : 'One keyword, any list of cities. Live-checked and ready to export.'}
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+              {(shell?.geoChips ?? ['Cities', 'Countries', 'Live check', 'CSV export']).map((t) => (
+                <span
+                  key={t}
+                  className="hero-badge inline-flex items-center rounded-full px-3 py-1.5 text-[11px] sm:text-[12px] font-medium text-ds-body"
+                >
+                  {t}
+                </span>
+              ))}
             </div>
           </div>
-        </SectionAmbient>
+        </header>
 
-        {/*
-          Below-hero content — solid page plate only (no ambient bubbles),
-          matching homepage tools / FAQ sections.
-        */}
-        <div className="relative z-[1] w-full" style={{ backgroundColor: 'var(--bg-main)' }}>
-          {/* —— Actual tool — primary surface —— */}
-          <motion.section
-            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: reduceMotion ? 0 : 0.08, ease: easeOut }}
-            className="page-gutter pb-6 sm:pb-10 relative z-[1]"
-          >
+        <div className="relative z-[1] w-full">
+          <section className="page-gutter pb-6 sm:pb-10 relative z-[1]">
             <div className="mx-auto max-w-6xl">
               <GeoDomainGenerator />
             </div>
-          </motion.section>
+          </section>
 
-          {/* —— Education after the tool —— */}
-          <section className="page-gutter pb-10 sm:pb-16 relative z-[1]">
-            <div className="mx-auto max-w-6xl space-y-4 sm:space-y-6">
+          {locale === 'en' && (
+          <section className="page-gutter pb-8 sm:pb-12 relative z-[1]">
+            <div className="mx-auto max-w-6xl space-y-3 sm:space-y-4">
               {/* About + features */}
               <div
-                className="geo-solid-plate relative isolate overflow-hidden rounded-xl sm:rounded-2xl border p-3.5 sm:p-6"
+                className="geo-solid-plate surface-premium relative isolate overflow-hidden rounded-xl sm:rounded-2xl border p-3.5 sm:p-6"
                 style={{
-                  backgroundColor: solid,
-                  borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)',
+                  borderColor: isLight ? '#d7dbdc' : 'rgba(255,255,255,0.1)',
                 }}
               >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                  style={{ backgroundColor: solid }}
-                />
                 <div className="relative z-[1]">
                   <p className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] mb-1.5 ${muted}`}>
                     About this tool
                   </p>
                   <h2
-                    className={`text-[0.95rem] sm:text-xl font-black tracking-tight mb-1.5 sm:mb-2 ${
+                    className={`text-[0.95rem] sm:text-xl font-semibold tracking-[-0.02em] mb-1.5 sm:mb-2 ${
                       isLight ? 'text-slate-900' : 'text-white'
                     }`}
                   >
@@ -178,36 +130,28 @@ export default function GeoPage() {
                     Live-check free, premium, and registered names — then export CSV for your local SEO inventory.
                   </p>
 
-                  <div className="mt-3 sm:mt-4 flex flex-wrap gap-1.5 sm:gap-2">
+                  <div className="mt-3 flex flex-wrap gap-1.5">
                     {FEATURES.map((f) => (
                       <div
                         key={f.label}
-                        className={`relative isolate overflow-hidden inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-[11px] font-semibold ${
+                        className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold ${
                           isLight
-                            ? 'border-slate-200 text-slate-700'
-                            : 'border-white/12 text-white/80'
+                            ? 'border-slate-200 bg-white text-slate-700'
+                            : 'border-white/10 bg-[#111111] text-white/80'
                         }`}
-                        style={{ backgroundColor: solidInset }}
                       >
                         <span
-                          aria-hidden
-                          className="pointer-events-none absolute inset-0 rounded-full"
-                          style={{ backgroundColor: solidInset }}
+                          className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                            isLight ? 'bg-emerald-500' : 'bg-emerald-400'
+                          }`}
                         />
-                        <span className="relative z-[1] inline-flex items-center gap-1.5">
-                          <span
-                            className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                              isLight ? 'bg-emerald-500' : 'bg-emerald-400'
-                            }`}
-                          />
-                          <span className="leading-none">{f.label}</span>
-                          <span
-                            className={`font-medium leading-none ${
-                              isLight ? 'text-slate-400' : 'text-white/40'
-                            }`}
-                          >
-                            {f.hint}
-                          </span>
+                        <span className="leading-none">{f.label}</span>
+                        <span
+                          className={`font-medium leading-none ${
+                            isLight ? 'text-slate-400' : 'text-white/40'
+                          }`}
+                        >
+                          {f.hint}
                         </span>
                       </div>
                     ))}
@@ -217,17 +161,11 @@ export default function GeoPage() {
 
               {/* How it works */}
               <div
-                className="geo-solid-plate relative isolate overflow-hidden rounded-xl sm:rounded-2xl border p-3.5 sm:p-6"
+                className="geo-solid-plate surface-premium relative isolate overflow-hidden rounded-xl sm:rounded-2xl border p-3.5 sm:p-6"
                 style={{
-                  backgroundColor: solid,
-                  borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)',
+                  borderColor: isLight ? '#d7dbdc' : 'rgba(255,255,255,0.1)',
                 }}
               >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                  style={{ backgroundColor: solid }}
-                />
                 <div className="relative z-[1]">
                   <p className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] mb-2 sm:mb-3 ${muted}`}>
                     How it works
@@ -236,27 +174,20 @@ export default function GeoPage() {
                     {STEPS.map((s) => (
                       <li
                         key={s.n}
-                        className="relative isolate overflow-hidden flex sm:flex-col items-start gap-2.5 sm:gap-2 rounded-lg sm:rounded-xl border p-2.5 sm:p-3 min-w-0"
-                        style={{
-                          backgroundColor: solidInset,
-                          borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)',
-                        }}
+                        className={`flex sm:flex-col items-start gap-2.5 sm:gap-2 rounded-lg sm:rounded-xl border p-2.5 sm:p-3 min-w-0 ${
+                          isLight ? 'border-[#d7dbdc] bg-white' : 'border-white/[0.08] bg-[#111111]'
+                        }`}
                       >
                         <span
-                          aria-hidden
-                          className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                          style={{ backgroundColor: solidInset }}
-                        />
-                        <span
-                          className={`relative z-[1] flex h-6 w-6 shrink-0 items-center justify-center rounded-md border font-mono text-[10px] font-bold tabular-nums ${
+                          className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border font-mono text-[10px] font-bold tabular-nums ${
                             isLight
-                              ? 'border-slate-200 bg-white text-slate-600'
-                              : 'border-white/10 bg-[#0a0a0c] text-white/50'
+                              ? 'border-slate-200 bg-[#f4f5f5] text-slate-600'
+                              : 'border-white/10 bg-[#0a0a0a] text-white/55'
                           }`}
                         >
                           {s.n}
                         </span>
-                        <div className="relative z-[1] min-w-0">
+                        <div className="min-w-0">
                           <div
                             className={`text-[12px] sm:text-[13px] font-bold leading-snug ${
                               isLight ? 'text-slate-800' : 'text-white'
@@ -275,9 +206,10 @@ export default function GeoPage() {
               </div>
             </div>
           </section>
+          )}
 
-          <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.geo} compact />
-          <SeoGuidePack {...TOOL_GUIDE_PACKS.geo} />
+          <LocalizedDefinition id="geo" compact />
+          <LocalizedGuidePack pack="geo" />
         </div>
       </main>
 

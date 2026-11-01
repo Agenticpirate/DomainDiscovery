@@ -15,11 +15,13 @@ import {
   getClusterForSlug,
   getAllLearnSlugs,
   getLearnArticle,
+  localizeLearnArticle,
   getRelatedArticles,
   getTrendingArticles,
   isFaqSection,
 } from '@/lib/learnArticles';
 import { getSiteBaseUrl, SITE_BRAND } from '@/lib/seoSiteFacts';
+import { getRequestLocale } from '@/lib/i18n/request';
 
 type PageProps = { params: { slug: string } };
 
@@ -36,8 +38,9 @@ export function generateStaticParams() {
   return getAllLearnSlugs().map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const article = getLearnArticle(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const article = localizeLearnArticle(getLearnArticle(params.slug), locale);
   if (!article) {
     return { title: 'Guide not found' };
   }
@@ -92,16 +95,18 @@ export function generateMetadata({ params }: PageProps): Metadata {
   };
 }
 
-export default function LearnArticlePage({ params }: PageProps) {
-  const article = getLearnArticle(params.slug);
+export default async function LearnArticlePage({ params }: PageProps) {
+  const locale = await getRequestLocale();
+  const article = localizeLearnArticle(getLearnArticle(params.slug), locale);
   if (!article) notFound();
 
-  const related = getRelatedArticles(article, 4);
+  const related = getRelatedArticles(article, 4).map((item) => localizeLearnArticle(item, locale)!);
   const cluster = getClusterForSlug(article.slug);
 
   const moreTrending = getTrendingArticles(6)
     .filter((a) => a.slug !== article.slug && !related.some((r) => r.slug === a.slug))
-    .slice(0, 3);
+    .slice(0, 3)
+    .map((item) => localizeLearnArticle(item, locale)!);
 
   const pageUrl = `${BASE}/learn/${article.slug}`;
   const datePublished = article.publishedAt || '2026-07-22';
@@ -256,7 +261,7 @@ export default function LearnArticlePage({ params }: PageProps) {
 
 /* Opaque reading shell + cards */
 .learn-article-page .learn-article-shell {
-  background-color: #0a0a0c !important;
+  background-color: #0a0a0a !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
   isolation: isolate;
   position: relative;
@@ -264,24 +269,24 @@ export default function LearnArticlePage({ params }: PageProps) {
 }
 html.light .learn-article-page .learn-article-shell {
   background-color: #ffffff !important;
-  border-color: #e2e8f0 !important;
+  border-color: #d7dbdc !important;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
 }
 .learn-article-page .learn-article-shell .learn-plate {
-  background-color: #121214 !important;
+  background-color: #111111 !important;
 }
 html.light .learn-article-page .learn-article-shell .learn-plate {
-  background-color: #f8fafc !important;
+  background-color: #f4f5f5 !important;
 }
 .learn-article-page .learn-article-shell .learn-plate-deep {
-  background-color: #0a0a0c !important;
+  background-color: #0a0a0a !important;
 }
 html.light .learn-article-page .learn-article-shell .learn-plate-deep {
   background-color: #ffffff !important;
 }
 /* Sticky chrome stays opaque */
 .learn-article-page .learn-article-sticky {
-  background-color: #0a0a0c !important;
+  background-color: #0a0a0a !important;
 }
 html.light .learn-article-page .learn-article-sticky {
   background-color: #ffffff !important;

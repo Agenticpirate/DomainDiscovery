@@ -11,6 +11,7 @@
 interface DomainSearchResult {
   domain: string;
   available: boolean;
+  checked?: boolean;
   tld: string;
   price?: string;
   registrar?: string;
@@ -123,6 +124,7 @@ export async function checkDomainAvailability(
   {
     domain: string;
     available: boolean;
+    checked?: boolean;
     premium?: boolean;
     price?: string;
     buyUrl?: string;

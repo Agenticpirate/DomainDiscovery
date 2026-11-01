@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { stripLocalePrefix } from '@/lib/i18n/locales';
 
 /**
  * Always land at the top when changing routes (unless the URL has a #hash).
@@ -9,9 +10,14 @@ import { usePathname } from 'next/navigation';
  */
 export function ScrollToTop() {
   const pathname = usePathname();
+  const barePath = stripLocalePrefix(pathname || '/');
+  const bare = useRef<string | null>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    const previousBare = bare.current;
+    bare.current = barePath;
+    if (previousBare === barePath) return;
 
     // Prefer manual control — browser restore often leaves you mid-page
     try {
@@ -55,7 +61,7 @@ export function ScrollToTop() {
       window.clearTimeout(t2);
       window.clearTimeout(t3);
     };
-  }, [pathname]);
+  }, [pathname, barePath]);
 
   return null;
 }

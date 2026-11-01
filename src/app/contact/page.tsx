@@ -1,48 +1,39 @@
-import type { Metadata } from 'next';
 import { SimpleContentPage } from '@/components/layout/SimpleContentPage';
+import { buildLocalizedToolMetadata } from '@/lib/i18n/metadata';
+import { getMessages } from '@/lib/i18n';
+import { localeHref } from '@/lib/i18n/locales';
+import { getRequestLocale } from '@/lib/i18n/request';
 import { DD_CONTACT } from '@/lib/legal/legalMeta';
 
-export const metadata: Metadata = {
-  title: 'Contact DomainDiscovery — Support & Partnerships',
-  description:
-    'Contact DomainDiscovery (Domain Discovery) for product feedback, bug reports, privacy requests, legal notices, and partnership inquiries.',
-  alternates: { canonical: '/contact' },
-  openGraph: {
-    title: 'Contact DomainDiscovery — Support & Partnerships',
-    description:
-      'Contact DomainDiscovery (Domain Discovery) for product feedback, bug reports, privacy requests, legal notices, and partnership inquiries.',
-    url: '/contact',
-  },
-};
+const title = 'Contact DomainDiscovery — Support & Partnerships';
+const description =
+  'Contact DomainDiscovery (Domain Discovery) for product feedback, bug reports, privacy requests, legal notices, and partnership inquiries.';
 
-export default function ContactPage() {
+export function generateMetadata() {
+  return buildLocalizedToolMetadata({
+    title,
+    description,
+    path: '/contact',
+    keywords: ['contact DomainDiscovery', 'domain search support', 'partnership inquiries'],
+  });
+}
+
+export default async function ContactPage() {
+  const locale = await getRequestLocale();
+  const copy = getMessages(locale).contactPage;
+  const email = DD_CONTACT.support;
+  const fill = (value: string) => value.replaceAll('{email}', email);
+
   return (
     <SimpleContentPage
-      title="Contact"
-      description="Get in touch about product feedback, partnerships, bug reports, privacy requests, or legal notices for DomainDiscovery domain name search tools."
+      title={copy.title}
+      description={copy.description}
       sections={[
-        {
-          heading: 'Support',
-          body: [
-            `For all inquiries — product questions, bug reports, privacy requests, DMCA / legal notices, and partnerships — email ${DD_CONTACT.support}.`,
-            'If you are reporting a bug, include the page, device, browser, and the exact steps needed to reproduce it.',
-            'For privacy requests, put “Privacy Request” in the subject line. For copyright / DMCA notices, put “DMCA Notice” in the subject line.',
-          ],
-        },
-        {
-          heading: 'Policies',
-          body: [
-            'Also see our Privacy Policy, Terms of Use, Cookie Policy, and Disclaimer linked in the site footer.',
-          ],
-        },
-        {
-          heading: 'Partnerships',
-          body: [
-            `If you are a registrar, aftermarket platform, or data provider and want to discuss integrations, email ${DD_CONTACT.support} and include the integration scope and technical contact details.`,
-          ],
-        },
+        { heading: copy.supportTitle, body: copy.support.map(fill) },
+        { heading: copy.policiesTitle, body: [copy.policies] },
+        { heading: copy.partnersTitle, body: [fill(copy.partners)] },
       ]}
-      cta={{ href: '/', label: 'Back to Search' }}
+      cta={{ href: localeHref(locale, '/'), label: copy.cta }}
     />
   );
 }

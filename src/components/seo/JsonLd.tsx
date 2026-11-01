@@ -3,6 +3,9 @@ import {
   getWebPageJsonLd,
   type BreadcrumbItem,
 } from '@/lib/seoSiteFacts';
+import { getMessages } from '@/lib/i18n';
+import { getLocaleMeta, localeHref, stripLocalePrefix } from '@/lib/i18n/locales';
+import { getRequestLocale } from '@/lib/i18n/request';
 
 /**
  * Server-rendered JSON-LD. Prefer this over client injection so Googlebot
@@ -19,8 +22,25 @@ export function JsonLd({ data }: { data: Record<string, unknown> | Record<string
   );
 }
 
+function localizedCrumbName(path: string | undefined, fallback: string, locale: Awaited<ReturnType<typeof getRequestLocale>>) {
+  if (!path) return fallback;
+  const bare = stripLocalePrefix(path);
+  const messages = getMessages(locale);
+  if (bare === '/') return messages.nav.home;
+  if (bare === '/search') return messages.crumbs.search;
+  if (bare === '/generator') return messages.crumbs.generator;
+  if (bare === '/bulk-search') return messages.crumbs.bulk;
+  if (bare === '/domain-extensions') return messages.crumbs.extensions;
+  if (bare === '/tools/whois') return messages.crumbs.whois;
+  if (bare === '/tools/compare') return messages.crumbs.compare;
+  if (bare === '/tools/geo') return messages.crumbs.geo;
+  if (bare === '/faq') return messages.crumbs.faq;
+  if (bare === '/contact') return messages.crumbs.contact;
+  return fallback;
+}
+
 /** Convenience: WebPage + BreadcrumbList for a tool surface */
-export function ToolPageJsonLd({
+export async function ToolPageJsonLd({
   path,
   name,
   description,
@@ -31,10 +51,39 @@ export function ToolPageJsonLd({
   description: string;
   breadcrumbs: BreadcrumbItem[];
 }) {
+  const locale = await getRequestLocale();
+  const meta = getLocaleMeta(locale);
+  const messages = getMessages(locale);
+  const pageKey =
+    path === '/' ? 'home'
+    : path === '/search' ? 'search'
+    : path === '/generator' ? 'generator'
+    : path === '/bulk-search' ? 'bulk'
+    : path === '/domain-extensions' ? 'extensions'
+    : path === '/tools/whois' ? 'whois'
+    : path === '/tools/compare' ? 'compare'
+    : path === '/tools/geo' ? 'geo'
+    : path === '/faq' ? 'faq'
+    : path === '/contact' ? 'contact'
+    : null;
+  const copy = locale === 'en' || !pageKey ? null : messages.pages[pageKey];
+  const publicPath = localeHref(locale, path);
+  const crumbs = breadcrumbs.map((item) => ({
+    name: locale === 'en' ? item.name : localizedCrumbName(item.path, item.name, locale),
+    path: item.path ? localeHref(locale, item.path) : undefined,
+  }));
+
   return (
     <>
-      <JsonLd data={getWebPageJsonLd({ path, name, description })} />
-      <JsonLd data={getBreadcrumbListJsonLd(breadcrumbs)} />
+      <JsonLd
+        data={getWebPageJsonLd({
+          path: publicPath,
+          name: copy?.title ?? name,
+          description: copy?.description ?? description,
+          inLanguage: locale === 'en' ? 'en-US' : meta.htmlLang,
+        })}
+      />
+      <JsonLd data={getBreadcrumbListJsonLd(crumbs)} />
     </>
   );
 }

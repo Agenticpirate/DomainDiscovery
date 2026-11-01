@@ -47,7 +47,7 @@ export function adaTokens(isLight: boolean): AdaThemeTokens {
     return {
       isLight: true,
       mounted: true,
-      pageBg: '#f8fafc',
+      pageBg: '#f4f5f5',
       ink: 'text-slate-900',
       muted: 'text-slate-600',
       faint: 'text-slate-500',
@@ -77,24 +77,24 @@ export function adaTokens(isLight: boolean): AdaThemeTokens {
   return {
     isLight: false,
     mounted: true,
-    pageBg: '#050505',
+    pageBg: '#000000',
     ink: 'text-white',
     muted: 'text-white/55',
     faint: 'text-white/40',
     hair: 'border-white/[0.09]',
     // Solid fills so ambient dots stay behind cards / badges / forms
-    card: 'border-white/[0.09] bg-[#0a0a0c]',
-    cardRaised: 'border-white/[0.1] bg-[#0c0c0e] shadow-[0_24px_60px_-36px_rgba(0,0,0,0.9)]',
-    band: 'bg-[#0a0a0c] border-white/[0.07]',
-    pill: 'border-white/12 bg-[#121214] text-white/60',
+    card: 'border-white/[0.09] bg-[#0a0a0a]',
+    cardRaised: 'border-white/[0.1] bg-[#0a0a0a] shadow-[0_24px_60px_-36px_rgba(0,0,0,0.9)]',
+    band: 'bg-[#0a0a0a] border-white/[0.07]',
+    pill: 'border-white/12 bg-[#111111] text-white/60',
     btnPrimary: 'bg-white text-black hover:bg-white/95 shadow-lg shadow-white/10',
     btnSecondary:
-      'border-white/15 bg-[#0a0a0c] text-white/90 hover:border-white/30 hover:bg-[#121214]',
-    btnGhost: 'border-white/12 bg-[#0a0a0c] text-white/55 hover:border-white/25 hover:text-white/85',
-    header: 'bg-[#0a0a0c]/95 border-white/[0.08]',
+      'border-white/15 bg-[#0a0a0a] text-white/90 hover:border-white/30 hover:bg-[#111111]',
+    btnGhost: 'border-white/12 bg-[#0a0a0a] text-white/55 hover:border-white/25 hover:text-white/85',
+    header: 'bg-[#0a0a0a]/95 border-white/[0.08]',
     input:
-      'border-white/12 bg-[#121214] text-white placeholder:text-white/30 focus:border-white/25',
-    iconWell: 'border-white/10 bg-[#121214] text-white/90',
+      'border-white/12 bg-[#111111] text-white placeholder:text-white/30 focus:border-white/25',
+    iconWell: 'border-white/10 bg-[#111111] text-white/90',
     ambientHero:
       'radial-gradient(ellipse 80% 55% at 50% -15%, rgba(255,255,255,0.07), transparent 55%)',
     ambientBand: 'linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%)',

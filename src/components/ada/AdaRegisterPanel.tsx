@@ -83,7 +83,7 @@ export function AdaRegisterPanel({
   const muted = isLight ? 'text-slate-600' : 'text-white/55';
   const border = isLight ? 'border-slate-200' : 'border-white/12';
   const inputCls = `w-full rounded-lg border px-2.5 py-1.5 text-xs outline-none ${border} ${
-    isLight ? 'bg-white text-slate-900' : 'bg-[#121214] text-white'
+    isLight ? 'bg-white text-slate-900' : 'bg-[#111111] text-white'
   }`;
 
   React.useEffect(() => {
@@ -185,7 +185,7 @@ export function AdaRegisterPanel({
         className={`rounded-lg border px-3 py-1.5 text-xs font-bold transition ${border} ${
           isLight
             ? 'bg-white text-slate-800 hover:border-slate-300'
-            : 'bg-[#121214] text-white/80 hover:border-white/25'
+            : 'bg-[#111111] text-white/80 hover:border-white/25'
         }`}
       >
         Register (BYOK)
@@ -196,7 +196,7 @@ export function AdaRegisterPanel({
   return (
     <div
       className={`mt-3 w-full rounded-xl border p-3 space-y-2 ${border}`}
-      style={{ backgroundColor: isLight ? '#f8fafc' : '#121214' }}
+      style={{ backgroundColor: isLight ? '#f4f5f5' : '#111111' }}
     >
       <div className="flex items-center justify-between gap-2">
         <p className={`text-[11px] font-black ${ink}`}>Register {domain}</p>

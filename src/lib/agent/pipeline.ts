@@ -114,12 +114,12 @@ async function checkBatch(
 function attachBuyUrls(ranked: RankedDomain[]): RankedDomain[] {
   return ranked.map((r) => ({
     ...r,
-    buyUrl:
-      r.buyUrl ||
-      resolveRegisterUrl(r.domain, r.premium ? 'GoDaddy' : 'Spaceship', null, {
-        premium: Boolean(r.premium),
-        available: r.available === true && !r.premium,
-      }),
+    buyUrl: r.buyUrl && /sjv\.io/i.test(r.buyUrl)
+      ? r.buyUrl
+      : resolveRegisterUrl(r.domain, 'Spaceship', null, {
+          premium: Boolean(r.premium),
+          available: r.available === true && !r.premium,
+        }),
   }));
 }
 

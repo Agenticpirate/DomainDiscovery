@@ -1,4 +1,16 @@
 import learnData from '@/data/learn-articles.json';
+import zhLearn from '@/data/learn-locales/zh.json';
+import deLearn from '@/data/learn-locales/de.json';
+import esLearn from '@/data/learn-locales/es.json';
+import jaLearn from '@/data/learn-locales/ja.json';
+import frLearn from '@/data/learn-locales/fr.json';
+import ptLearn from '@/data/learn-locales/pt.json';
+import hiLearn from '@/data/learn-locales/hi.json';
+import arLearn from '@/data/learn-locales/ar.json';
+import ruLearn from '@/data/learn-locales/ru.json';
+import bnLearn from '@/data/learn-locales/bn.json';
+import urLearn from '@/data/learn-locales/ur.json';
+import type { LocaleId } from '@/lib/i18n/locales';
 
 export type LearnSection = {
   heading: string;
@@ -44,6 +56,50 @@ type LearnFile = {
 };
 
 const data = learnData as LearnFile;
+
+export type LearnTranslation = {
+  title: string;
+  description: string;
+  category?: string;
+  topics?: string[];
+  readTime?: string;
+  sections: LearnSection[];
+};
+
+type LearnLocaleFile = { articles: Record<string, LearnTranslation> };
+
+const LEARN_LOCALES: Record<Exclude<LocaleId, 'en'>, LearnLocaleFile> = {
+  zh: zhLearn as LearnLocaleFile,
+  de: deLearn as LearnLocaleFile,
+  es: esLearn as LearnLocaleFile,
+  ja: jaLearn as LearnLocaleFile,
+  fr: frLearn as LearnLocaleFile,
+  pt: ptLearn as LearnLocaleFile,
+  hi: hiLearn as LearnLocaleFile,
+  ar: arLearn as LearnLocaleFile,
+  ru: ruLearn as LearnLocaleFile,
+  bn: bnLearn as LearnLocaleFile,
+  ur: urLearn as LearnLocaleFile,
+};
+
+/** English article plus the matching language file, when that slug has been published there. */
+export function localizeLearnArticle(
+  article: LearnArticle | null,
+  locale: LocaleId
+): LearnArticle | null {
+  if (!article || locale === 'en') return article;
+  const translated = LEARN_LOCALES[locale]?.articles?.[article.slug];
+  if (!translated?.title || !translated.sections?.length) return article;
+  return {
+    ...article,
+    title: translated.title,
+    description: translated.description || article.description,
+    category: translated.category || article.category,
+    topics: translated.topics?.length ? translated.topics : article.topics,
+    readTime: translated.readTime || article.readTime,
+    sections: translated.sections,
+  };
+}
 
 /** Today's date as YYYY-MM-DD in UTC (publish gate source of truth). */
 export function learnTodayUTC(asOf: Date = new Date()): string {

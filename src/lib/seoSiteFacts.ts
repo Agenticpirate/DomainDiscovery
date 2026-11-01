@@ -296,9 +296,10 @@ export function getOrganizationJsonLd() {
   };
 }
 
-export function getWebSiteJsonLd() {
+export function getWebSiteJsonLd(opts?: { searchPath?: string; inLanguage?: string | string[] }) {
   const base = getSiteBaseUrl();
   const logoUrl = assetUrl('/logo-solid.png');
+  const searchPath = opts?.searchPath || '/search?q={search_term_string}';
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -307,12 +308,12 @@ export function getWebSiteJsonLd() {
     alternateName: [...SITE_BRAND.alternateNames],
     url: base,
     description: SITE_BRAND.description,
-    inLanguage: 'en-US',
+    inLanguage: opts?.inLanguage || 'en-US',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${base}/search?q={search_term_string}`,
+        urlTemplate: `${base}${searchPath}`,
       },
       'query-input': 'required name=search_term_string',
     },
@@ -495,6 +496,7 @@ export function getWebPageJsonLd(opts: {
   path: string;
   name: string;
   description: string;
+  inLanguage?: string;
 }) {
   const base = getSiteBaseUrl();
   const path = opts.path === '/' ? '' : opts.path.startsWith('/') ? opts.path : `/${opts.path}`;
@@ -506,7 +508,7 @@ export function getWebPageJsonLd(opts: {
     url,
     name: opts.name,
     description: opts.description,
-    inLanguage: 'en-US',
+    inLanguage: opts.inLanguage || 'en-US',
     isPartOf: { '@id': `${base}/#website` },
     about: { '@id': `${base}/#organization` },
     primaryImageOfPage: {

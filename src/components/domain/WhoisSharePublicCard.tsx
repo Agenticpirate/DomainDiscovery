@@ -45,7 +45,7 @@ export function WhoisSharePublicCard({ data }: { data: PublicWhoisCardData }) {
 
   return (
     <div
-      className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-black/40 px-5 py-8"
+      className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl border border-white/10 bg-black px-5 py-8"
       style={{ perspective: 900 }}
     >
       <motion.div
@@ -75,7 +75,7 @@ export function WhoisSharePublicCard({ data }: { data: PublicWhoisCardData }) {
           transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
         />
 
-        <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-br from-[#121216] via-[#0c0c0e] to-[#16161c] shadow-2xl">
+        <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-br from-[#111111] via-[#0a0a0a] to-[#171717] shadow-2xl">
           <motion.div
             aria-hidden
             className="pointer-events-none absolute inset-0 opacity-90"

@@ -15,9 +15,12 @@ import {
   getLearnCategories,
   getLearnMeta,
   getTrendingArticles,
+  localizeLearnArticle,
 } from '@/lib/learnArticles';
+import { getRequestLocale } from '@/lib/i18n/request';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
+import { LearnIntro, LearnTrendingLabel } from '@/components/i18n/LocalizedSectionIntros';
 
 export const metadata: Metadata = {
   title: 'Domain Name Guides — Naming, SEO, Valuation & DNS',
@@ -35,11 +38,12 @@ export const metadata: Metadata = {
 /** Always evaluate publishedAt against the current clock (SEO drip unlock). */
 export const dynamic = 'force-dynamic';
 
-export default function LearnPage() {
-  const articles = getLearnArticles();
+export default async function LearnPage() {
+  const locale = await getRequestLocale();
+  const articles = getLearnArticles().map((article) => localizeLearnArticle(article, locale)!);
   const categories = getLearnCategories();
   const meta = getLearnMeta();
-  const trending = getTrendingArticles(8);
+  const trending = getTrendingArticles(8).map((article) => localizeLearnArticle(article, locale)!);
 
   return (
     <div className="min-h-screen">
@@ -50,24 +54,7 @@ export default function LearnPage() {
         <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Learn' }]} />
         <SectionAmbient intensity="hero" contentClassName="page-gutter pb-4 sm:pb-7">
           <div className="max-w-4xl mx-auto text-center">
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: 'var(--text-muted)' }}>
-              {meta.count}+ free guides · naming · SEO · DNS
-            </p>
-            <h1 className="text-2xl sm:text-5xl md:text-[3.9rem] font-black tracking-tight mb-2 sm:mb-4">
-              <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage:
-                    'linear-gradient(to right, var(--gradient-hero-from), var(--gradient-hero-from), var(--gradient-hero-to))',
-                }}
-              >
-                Domain name guides that help you choose &amp; rank
-              </span>
-            </h1>
-            <p className="text-xs sm:text-base max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              Practical education on brandable names, keyword domains, geo domains for local SEO, valuation, auctions,
-              DNS, and legal basics — then apply what you learn with free domain name search, WHOIS, and price compare.
-            </p>
+            <LearnIntro count={meta.count} />
           </div>
         </SectionAmbient>
 
@@ -77,7 +64,7 @@ export default function LearnPage() {
         <section className="px-3 sm:px-6 pb-5">
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm sm:text-base font-bold">Trending now</h2>
+              <h2 className="text-sm sm:text-base font-bold"><LearnTrendingLabel /></h2>
               <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
                 Updated {meta.generatedAt}
               </span>
@@ -87,7 +74,7 @@ export default function LearnPage() {
                 <Link
                   key={a.slug}
                   href={`/learn/${a.slug}`}
-                  className="shrink-0 rounded-xl border border-white/10 bg-[#0c0c0e] px-3 py-2.5 hover:border-white/25 transition-colors max-w-[220px]"
+                  className="shrink-0 rounded-xl border border-white/10 bg-[#0a0a0a] px-3 py-2.5 hover:border-white/25 transition-colors max-w-[220px]"
                 >
                   <div className="text-[10px] font-bold uppercase tracking-wide text-white/35">{a.category}</div>
                   <div className="mt-0.5 text-[13px] font-semibold leading-snug line-clamp-2">{a.title}</div>
@@ -116,7 +103,7 @@ export default function LearnPage() {
                 return (
                   <div
                     key={cluster.id}
-                    className="rounded-xl border border-white/10 bg-[#0c0c0e] p-3.5 sm:p-4 flex flex-col"
+                    className="rounded-xl border border-white/10 bg-[#0a0a0a] p-3.5 sm:p-4 flex flex-col"
                   >
                     <h3 className="text-[13px] sm:text-sm font-bold leading-snug">{cluster.title}</h3>
                     <p className="mt-1 text-[11px] sm:text-xs leading-relaxed flex-1" style={{ color: 'var(--text-secondary)' }}>
@@ -151,7 +138,7 @@ export default function LearnPage() {
 
         <section className="px-3 sm:px-6 pb-8 sm:pb-14">
           <div className="max-w-5xl mx-auto">
-            <div className="p-3.5 sm:p-6 border border-white/10 bg-[#0c0c0e] rounded-xl sm:rounded-2xl">
+            <div className="p-3.5 sm:p-6 border border-white/10 bg-[#0a0a0a] rounded-xl sm:rounded-2xl">
               <h2 className="text-base sm:text-2xl font-bold mb-1.5 sm:mb-3">Ready to apply what you learned?</h2>
               <p className="text-xs sm:text-base mb-3 sm:mb-5" style={{ color: 'var(--text-secondary)' }}>
                 Search availability, compare regular registrar prices, or look up live RDAP data.

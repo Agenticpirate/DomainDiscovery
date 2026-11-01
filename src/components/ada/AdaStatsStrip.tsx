@@ -42,14 +42,14 @@ export function AdaStatsStrip({ isLight }: { isLight: boolean }) {
       className={`shine-border relative isolate max-w-3xl mx-auto rounded-2xl sm:rounded-[1.35rem] border overflow-hidden ${line} ${
         isLight
           ? 'bg-white shadow-[0_8px_30px_-12px_rgba(15,23,42,0.12)]'
-          : 'bg-[#0a0a0c] shadow-[0_24px_60px_-30px_rgba(0,0,0,0.85)]'
+          : 'bg-[#0a0a0a] shadow-[0_24px_60px_-30px_rgba(0,0,0,0.85)]'
       }`}
     >
       {/* Solid underlay — no ambient pattern bleed */}
       <div
         aria-hidden
         className={`pointer-events-none absolute inset-0 ${
-          isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+          isLight ? 'bg-white' : 'bg-[#0a0a0a]'
         }`}
       />
 

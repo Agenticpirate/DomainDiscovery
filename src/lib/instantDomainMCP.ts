@@ -10,7 +10,7 @@
  * - check_domain_availability: Verify any list of domains
  */
 
-import { getGoDaddyRegisterUrl, getSpaceshipAffiliateUrl } from '@/lib/registrars';
+import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
 
 interface MCPMessage {
   jsonrpc: '2.0';
@@ -114,51 +114,25 @@ function hasAftermarketBuySignal(buyUrl?: string, purchaseInfo?: string): boolea
 }
 
 /**
- * Build buy URL + purchase copy by domain class:
- * - free / available → Spaceship Impact affiliate (never GoDaddy)
- * - premium / aftermarket → GoDaddy listing (inventory source)
- * - taken (no listing) → GoDaddy search (aftermarket browse), not Spaceship
+ * Every check result opens through https://spaceship.sjv.io/NGPWKb.
+ * Status copy can still say premium or taken; the URL does not.
  */
 function resolveBuyFields(
   domain: string,
   available: boolean,
   premium: boolean,
-  markets: Array<Record<string, unknown>>,
-  rawBuyUrl?: string,
+  _markets: Array<Record<string, unknown>>,
+  _rawBuyUrl?: string,
   rawPurchaseInfo?: string
 ): { buyUrl?: string; purchaseInfo?: string } {
+  const buyUrl = getSpaceshipAffiliateUrl(domain);
   if (premium) {
-    // Prefer an explicit GoDaddy URL when MCP already gave one
-    if (rawBuyUrl && /godaddy\.com/i.test(rawBuyUrl) && !/instantdomainsearch\.com/i.test(rawBuyUrl)) {
-      return { buyUrl: rawBuyUrl, purchaseInfo: 'View listing on GoDaddy' };
-    }
-    return {
-      buyUrl: getGoDaddyRegisterUrl(domain),
-      purchaseInfo: 'Premium listing from GoDaddy',
-    };
+    return { buyUrl, purchaseInfo: rawPurchaseInfo || 'Premium listing' };
   }
-
   if (available) {
-    return {
-      buyUrl: getSpaceshipAffiliateUrl(domain),
-      purchaseInfo: 'Register via Spaceship affiliate',
-    };
+    return { buyUrl, purchaseInfo: 'Register via Spaceship affiliate' };
   }
-
-  // Taken, not flagged premium — still open GoDaddy for aftermarket discovery
-  if (rawBuyUrl && /godaddy\.com/i.test(rawBuyUrl) && !/instantdomainsearch\.com/i.test(rawBuyUrl)) {
-    return { buyUrl: rawBuyUrl, purchaseInfo: rawPurchaseInfo };
-  }
-  if (markets.length > 0 || hasAftermarketBuySignal(rawBuyUrl, rawPurchaseInfo)) {
-    return {
-      buyUrl: getGoDaddyRegisterUrl(domain),
-      purchaseInfo: 'View listing on GoDaddy',
-    };
-  }
-  return {
-    buyUrl: getGoDaddyRegisterUrl(domain),
-    purchaseInfo: undefined,
-  };
+  return { buyUrl, purchaseInfo: rawPurchaseInfo };
 }
 
 function parseDomainItem(

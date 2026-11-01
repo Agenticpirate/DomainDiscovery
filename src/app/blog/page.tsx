@@ -6,6 +6,7 @@ import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { getTldAboutIndex, getTldAboutMeta } from '@/lib/tldAboutData';
+import { BlogIntro, BlogStatLabel } from '@/components/i18n/LocalizedSectionIntros';
 
 export const dynamic = 'force-dynamic';
 
@@ -41,18 +42,7 @@ export default function BlogPage() {
         <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Blog' }]} />
         <SectionAmbient intensity="hero" contentClassName="page-gutter">
         <div className="max-w-6xl mx-auto">
-          <header className="mt-2 sm:mt-4 max-w-3xl">
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>
-              TLD encyclopedia · domain strategy
-            </p>
-            <h1 className="mt-2 text-3xl sm:text-5xl font-black tracking-tight">
-              Domain blog &amp; TLD encyclopedia
-            </h1>
-            <p className="mt-3 text-sm sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              Research domain extensions before you register: registry sponsors, WHOIS/RDAP endpoints, and nameserver
-              context drawn from the public IANA Root Zone Database — plus strategy notes for buyers and local SEO teams.
-            </p>
-          </header>
+          <BlogIntro />
         </div>
         </SectionAmbient>
 
@@ -61,15 +51,15 @@ export default function BlogPage() {
           {/* Stats */}
           <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-px rounded-2xl border overflow-hidden border-white/10 bg-white/[0.08]">
             {[
-              { value: String(meta.count), label: 'TLD about pages' },
-              { value: String(byType.gTLD), label: 'gTLDs' },
-              { value: String(byType.ccTLD), label: 'ccTLDs' },
-              { value: meta.generatedAt || '—', label: 'Catalog date' },
+              { value: String(meta.count), label: 'pages' as const },
+              { value: String(byType.gTLD), label: 'gtld' as const },
+              { value: String(byType.ccTLD), label: 'cctld' as const },
+              { value: meta.generatedAt || '—', label: 'date' as const },
             ].map((s) => (
-              <div key={s.label} className="bg-[#0c0c0e] px-3 py-4 text-center">
+              <div key={s.label} className="bg-[#0a0a0a] px-3 py-4 text-center">
                 <div className="text-lg sm:text-xl font-black tabular-nums">{s.value}</div>
                 <div className="text-[10px] mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                  {s.label}
+                  <BlogStatLabel kind={s.label} />
                 </div>
               </div>
             ))}
@@ -94,7 +84,7 @@ export default function BlogPage() {
             </div>
 
             {featured.length === 0 ? (
-              <div className="rounded-2xl border border-white/10 bg-[#0c0c0e] p-6 text-sm" style={{ color: 'var(--text-tertiary)' }}>
+              <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] p-6 text-sm" style={{ color: 'var(--text-tertiary)' }}>
                 TLD about catalog is still building. Run{' '}
                 <code className="text-white/70">python3 scripts/scrape_tld_about.py --priority-only</code> to seed
                 pages.
@@ -105,7 +95,7 @@ export default function BlogPage() {
                   <Link
                     key={item.slug}
                     href={`/blog/tlds/${item.slug}`}
-                    className="group rounded-xl border border-white/10 bg-[#0c0c0e] px-3.5 py-3 hover:border-white/25 hover:bg-[#121214] transition-colors"
+                    className="group rounded-xl border border-white/10 bg-[#0a0a0a] px-3.5 py-3 hover:border-white/25 hover:bg-[#111111] transition-colors"
                   >
                     <div className="text-base font-black tracking-tight group-hover:text-white">{item.tld}</div>
                     <div className="mt-1 text-[11px] uppercase tracking-wide" style={{ color: 'var(--text-muted)' }}>
@@ -155,7 +145,7 @@ export default function BlogPage() {
                 <Link
                   key={card.href}
                   href={card.href}
-                  className="rounded-xl border border-white/10 bg-[#0c0c0e] p-4 hover:border-white/20 transition-colors"
+                  className="rounded-xl border border-white/10 bg-[#0a0a0a] p-4 hover:border-white/20 transition-colors"
                 >
                   <div className="font-bold">{card.title}</div>
                   <p className="mt-1 text-[13px]" style={{ color: 'var(--text-tertiary)' }}>

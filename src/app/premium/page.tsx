@@ -7,11 +7,15 @@ import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLocale } from '@/components/i18n/LocaleProvider';
+import { pageShell } from '@/lib/i18n/pageShells';
 
 export default function PremiumPage() {
   const { theme } = useTheme();
+  const { locale } = useLocale();
+  const shell = pageShell(locale);
   const isLight = theme === 'light';
-  const solid = isLight ? '#ffffff' : '#0a0a0c';
+  const solid = isLight ? '#ffffff' : '#0a0a0a';
 
   return (
     <div className="min-h-screen">
@@ -22,8 +26,8 @@ export default function PremiumPage() {
       <main className={`${PAGE_MAIN_CLASS} pb-10`}>
         <PageBreadcrumb
           items={[
-            { label: 'Tools', href: '/tools/keyword' },
-            { label: 'Premium Domains' },
+            { label: shell?.tools ?? 'Tools', href: '/tools/keyword' },
+            { label: shell?.premiumTitle ?? 'Premium Domains' },
           ]}
         />
         <SectionAmbient intensity="hero" className="w-full" contentClassName="relative z-[1]">
@@ -41,7 +45,7 @@ export default function PremiumPage() {
               <div className="relative z-[1]">
                 <h1 className="text-3xl sm:text-5xl md:text-[3.9rem] font-black tracking-tight mb-3">
                   <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent">
-                    Premium Domains
+                    {shell?.premiumTitle ?? 'Premium Domains'}
                   </span>
                 </h1>
                 <p
@@ -49,7 +53,7 @@ export default function PremiumPage() {
                     isLight ? 'text-slate-500' : 'text-white/50'
                   } max-w-2xl mx-auto`}
                 >
-                  Discover premium domains available for sale or aftermarket auction.
+                  {shell?.premiumLead ?? 'Discover premium domains available for sale or aftermarket auction.'}
                 </p>
               </div>
             </div>
@@ -74,11 +78,10 @@ export default function PremiumPage() {
                       isLight ? 'text-slate-900' : 'text-white'
                     }`}
                   >
-                    Coming Soon
+                    {shell?.premiumSoon ?? 'Coming Soon'}
                   </h2>
                   <p className={`${isLight ? 'text-slate-500' : 'text-white/50'}`}>
-                    We&apos;re curating a collection of premium domains from top marketplaces. Check
-                    back soon to discover high-value domains for your business.
+                    {shell?.premiumBody ?? "We're curating a collection of premium domains from top marketplaces. Check back soon to discover high-value domains for your business."}
                   </p>
                 </div>
               </div>

@@ -20,7 +20,7 @@ export function AdaThemeToggle({ isLight }: { isLight: boolean }) {
       className={`relative ml-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
         isLight
           ? 'border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 hover:border-slate-300'
-          : 'border-white/12 bg-[#0a0a0c] text-white/75 hover:bg-[#121214] hover:text-white'
+          : 'border-white/12 bg-[#0a0a0a] text-white/75 hover:bg-[#111111] hover:text-white'
       }`}
     >
       <span className="relative flex h-[18px] w-[18px] items-center justify-center overflow-hidden">

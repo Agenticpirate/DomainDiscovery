@@ -35,7 +35,7 @@ function statusMeta(r: RankedDomain, isLight: boolean) {
     label: 'Unchecked',
     className: isLight
       ? 'bg-slate-100 text-slate-600'
-      : 'bg-[#121214] text-white/50 border border-white/10',
+      : 'bg-[#111111] text-white/50 border border-white/10',
   };
 }
 
@@ -52,7 +52,7 @@ export function DomainRankCard({
 }) {
   const st = statusMeta(item, isLight);
   const isPremium = Boolean(item.premium);
-  // Free → Spaceship affiliate · Premium → GoDaddy (never Spaceship for premium)
+  // Free and premium → Spaceship affiliate
   const buyHref = getPrimaryGoUrl(item.domain, {
     premium: isPremium,
     marketplaceBuyUrl: item.buyUrl,
@@ -80,14 +80,14 @@ export function DomainRankCard({
               label: 'Price ?',
               className: isLight
                 ? 'bg-slate-100 text-slate-600 border border-slate-200'
-                : 'bg-[#121214] text-white/45 border border-white/10',
+                : 'bg-[#111111] text-white/45 border border-white/10',
             }
           : null;
 
   return (
     <article
       className={`shine-border relative isolate overflow-hidden rounded-2xl border p-3.5 sm:p-4 ${
-        isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-[#0a0a0c]'
+        isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-[#0a0a0a]'
       }`}
     >
       <div className="flex items-start justify-between gap-3">
@@ -135,13 +135,9 @@ export function DomainRankCard({
         <a
           href={buyHref}
           target="_blank"
-          rel={
-            isPremium
-              ? 'noopener noreferrer'
-              : 'sponsored noopener noreferrer'
-          }
-          data-affiliate={isPremium ? undefined : 'spaceship'}
-          data-registrar={isPremium ? 'GoDaddy' : 'Spaceship'}
+          rel="sponsored noopener noreferrer"
+          data-affiliate="spaceship"
+          data-registrar="Spaceship"
           data-premium={isPremium ? 'true' : undefined}
           data-placement="assistant-continue"
           className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
@@ -150,7 +146,7 @@ export function DomainRankCard({
               : 'bg-white text-black hover:bg-white/90'
           }`}
         >
-          {isPremium ? 'Go · GoDaddy' : 'Continue'}
+          {isPremium ? 'Go' : 'Continue'}
         </a>
         <a
           href={whoisHref}
@@ -159,7 +155,7 @@ export function DomainRankCard({
           className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
             isLight
               ? 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
-              : 'border-white/15 bg-[#121214] text-white/75 hover:border-white/30'
+              : 'border-white/15 bg-[#111111] text-white/75 hover:border-white/30'
           }`}
         >
           WHOIS
@@ -174,7 +170,7 @@ export function DomainRankCard({
                 : 'border-emerald-500/40 bg-emerald-950 text-emerald-200'
               : isLight
                 ? 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
-                : 'border-white/15 bg-[#121214] text-white/75 hover:border-white/30'
+                : 'border-white/15 bg-[#111111] text-white/75 hover:border-white/30'
           }`}
         >
           {isSaved ? 'Saved' : 'Save'}

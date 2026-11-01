@@ -4,9 +4,15 @@ import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { isLabAutomation, scheduleIdle } from '@/lib/perfRuntime';
+import { stripLocalePrefix } from '@/lib/i18n/locales';
+
+const AffiliateGutterSpots = dynamic(
+  () => import('@/components/ads/AffiliateGutterSpots').then((m) => m.AffiliateGutterSpots),
+  { ssr: false }
+);
 
 const AffiliateSkyscraper = dynamic(
-  () => import('@/components/ads/AffiliateSkyscraper').then((m) => m.AffiliateSkyscraper),
+  () => import('@/components/ads/RightSkyscraperAd').then((m) => m.RightSkyscraperAd),
   { ssr: false }
 );
 const AffiliateInterstitial = dynamic(
@@ -14,34 +20,48 @@ const AffiliateInterstitial = dynamic(
   { ssr: false }
 );
 
-/** Side skyscraper only on the marketing home page — tool pages need full result width. */
-function isHomePath(pathname: string | null): boolean {
-  if (!pathname) return false;
-  return pathname === '/' || pathname === '';
-}
-
 /**
  * Mount sitewide ads after idle so Lighthouse/GTmetrix can finish first paint
  * without continuous timers blocking CPU idle.
  *
- * Skyscraper: home only (avoids covering bulk search / tools results).
+ * Side rails render on every page, and only while their gutter is empty
+ * so they never cover or crop the page.
  * Interstitial: sitewide after engaged time.
  */
 export function DeferredSiteAds() {
-  const pathname = usePathname();
   const [ready, setReady] = useState(false);
-  const showSkyscraper = isHomePath(pathname);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const apply = () => {
+      const bare = stripLocalePrefix(pathname || '/');
+      const show = window.innerWidth >= 1200 && bare !== '/search';
+      document.documentElement.toggleAttribute('data-side-rails', show);
+    };
+    apply();
+    window.addEventListener('resize', apply);
+    return () => {
+      window.removeEventListener('resize', apply);
+      document.documentElement.removeAttribute('data-side-rails');
+    };
+  }, [pathname]);
 
   useEffect(() => {
     if (isLabAutomation()) return; // skip entirely in PSI / GTmetrix / Lighthouse
-    return scheduleIdle(() => setReady(true), 3500);
+    const stop = scheduleIdle(() => setReady(true), 400);
+    const backup = window.setTimeout(() => setReady(true), 500);
+    return () => {
+      stop();
+      window.clearTimeout(backup);
+    };
   }, []);
 
   if (!ready) return null;
 
   return (
     <>
-      {showSkyscraper ? <AffiliateSkyscraper /> : null}
+      <AffiliateGutterSpots />
+      <AffiliateSkyscraper />
       <AffiliateInterstitial />
     </>
   );

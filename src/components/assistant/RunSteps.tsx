@@ -16,14 +16,14 @@ export function RunSteps({ steps, isLight }: { steps: AgentJobStep[]; isLight: b
             : s.status === 'running'
               ? isLight
                 ? 'border-slate-300 bg-white text-slate-800'
-                : 'border-white/20 bg-[#0a0a0c] text-white'
+                : 'border-white/20 bg-[#0a0a0a] text-white'
               : s.status === 'error'
                 ? isLight
                   ? 'border-rose-200 bg-rose-50 text-rose-700'
                   : 'border-rose-500/30 bg-[#140a0c] text-rose-200'
                 : isLight
                   ? 'border-slate-200 bg-slate-50 text-slate-500'
-                  : 'border-white/10 bg-[#0a0a0c] text-white/40';
+                  : 'border-white/10 bg-[#0a0a0a] text-white/40';
         return (
           <li
             key={`${s.id}-${s.status}-${s.at}`}

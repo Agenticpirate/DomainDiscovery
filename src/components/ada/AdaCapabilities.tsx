@@ -132,7 +132,7 @@ export function AdaCapabilities({ isLight }: { isLight: boolean }) {
   const line = isLight ? 'border-slate-200' : 'border-white/[0.09]';
   const surface = isLight
     ? 'bg-white shadow-[0_8px_28px_-14px_rgba(15,23,42,0.12)]'
-    : 'bg-[#0b0b0d] shadow-[0_24px_56px_-34px_rgba(0,0,0,0.9)]';
+    : 'bg-[#0a0a0a] shadow-[0_24px_56px_-34px_rgba(0,0,0,0.9)]';
   const iconWrap = isLight
     ? 'border-slate-200 bg-gradient-to-b from-white to-slate-50 text-slate-800 shadow-sm'
     : 'border-white/[0.1] bg-gradient-to-b from-white/[0.07] to-white/[0.02] text-white/90';
@@ -141,7 +141,7 @@ export function AdaCapabilities({ isLight }: { isLight: boolean }) {
     ? 'text-slate-900 hover:text-slate-700'
     : 'text-white hover:text-white/80';
 
-  const plate = isLight ? '#ffffff' : '#0c0c0e';
+  const plate = isLight ? '#ffffff' : '#0a0a0a';
 
   return (
     <section className="relative overflow-hidden px-3 sm:px-6 py-5 sm:py-16">
@@ -178,7 +178,7 @@ export function AdaCapabilities({ isLight }: { isLight: boolean }) {
                 className={`rounded-lg sm:rounded-full border px-2.5 sm:px-4 py-1 sm:py-2 text-[10.5px] sm:text-[11px] font-bold transition ${
                   isLight
                     ? 'border-slate-200 bg-white text-slate-700 shadow-sm hover:border-slate-300 hover:bg-slate-50'
-                    : 'border-white/12 bg-[#0a0a0c] text-white/65 hover:border-white/25 hover:text-white/90'
+                    : 'border-white/12 bg-[#0a0a0a] text-white/65 hover:border-white/25 hover:text-white/90'
                 }`}
               >
                 Integration
@@ -188,7 +188,7 @@ export function AdaCapabilities({ isLight }: { isLight: boolean }) {
                 className={`rounded-lg sm:rounded-full border px-2.5 sm:px-4 py-1 sm:py-2 text-[10.5px] sm:text-[11px] font-bold transition ${
                   isLight
                     ? 'border-slate-200 bg-white text-slate-700 shadow-sm hover:border-slate-300 hover:bg-slate-50'
-                    : 'border-white/12 bg-[#0a0a0c] text-white/65 hover:border-white/25 hover:text-white/90'
+                    : 'border-white/12 bg-[#0a0a0a] text-white/65 hover:border-white/25 hover:text-white/90'
                 }`}
               >
                 Agent Card
@@ -270,9 +270,9 @@ export function AdaCapabilities({ isLight }: { isLight: boolean }) {
                 className={`scroll-reveal-item shine-border group relative flex flex-col overflow-hidden rounded-2xl border p-5 transition-all duration-300 ${line} ${surface} ${
                   isLight
                     ? 'hover:border-slate-300 hover:shadow-[0_12px_36px_-16px_rgba(15,23,42,0.18)]'
-                    : 'hover:border-white/18 hover:bg-[#0e0e12] hover:shadow-[0_16px_40px_-20px_rgba(0,0,0,0.85)]'
+                    : 'hover:border-white/18 hover:bg-[#111111] hover:shadow-[0_16px_40px_-20px_rgba(0,0,0,0.85)]'
                 }`}
-                style={{ backgroundColor: isLight ? undefined : '#0c0c0e' }}
+                style={{ backgroundColor: isLight ? undefined : '#0a0a0a' }}
               >
                 <div className="relative flex items-start justify-between gap-3 mb-3">
                   <div
@@ -289,7 +289,7 @@ export function AdaCapabilities({ isLight }: { isLight: boolean }) {
                       className={`rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.12em] transition-colors duration-300 ${
                         isLight
                           ? 'border-slate-200 text-slate-600 bg-slate-50 group-hover:border-slate-300 group-hover:text-slate-800'
-                          : 'border-white/10 text-white/45 bg-[#121214] group-hover:border-white/20 group-hover:text-white/70'
+                          : 'border-white/10 text-white/45 bg-[#111111] group-hover:border-white/20 group-hover:text-white/70'
                       }`}
                     >
                       {item.tag}

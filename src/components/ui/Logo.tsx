@@ -23,8 +23,8 @@ const textSizeClasses = {
 } as const;
 
 /** Cache-bust — white mark (dark UI) + black mark (light UI). */
-const LOGO_WHITE = '/logo.png?v=20260729light';
-const LOGO_BLACK = '/logo-black.png?v=20260729light';
+const LOGO_WHITE = '/logo-mark-160.webp';
+const LOGO_BLACK = '/logo-black-mark-160.webp';
 
 /**
  * DomainDiscovery monogram + wordmark.
@@ -65,22 +65,10 @@ export const Logo: React.FC<LogoProps> = ({ size = 'md', showText = true, classN
       </div>
       {showText && (
         <div className="flex min-w-0 flex-col text-left leading-none">
-          <div className={`${textSizeClasses[size]} font-black tracking-tight`}>
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: isLight
-                  ? 'linear-gradient(to right, #0f172a, #1e293b, #334155)'
-                  : 'linear-gradient(to right, #ffffff, #f1f5f9, #94a3b8)',
-              }}
-            >
-              DomainDiscovery
-            </span>
+          <div className={`${textSizeClasses[size]} font-semibold tracking-tight text-ds-ink`}>
+            DomainDiscovery
           </div>
-          <span
-            className="mt-0.5 text-[7px] sm:text-[8px] font-semibold uppercase tracking-[0.14em]"
-            style={{ color: isLight ? '#475569' : '#94a3b8' }}
-          >
+          <span className="mt-1 hidden text-[11px] font-medium uppercase tracking-[0.08em] text-ds-mute sm:block sm:text-[10px]">
             AI-Powered
           </span>
         </div>

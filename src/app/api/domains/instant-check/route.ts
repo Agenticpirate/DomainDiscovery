@@ -1,14 +1,18 @@
 import { NextRequest } from 'next/server';
-import { getSearchRateLimiter, getBulkRateLimiter, getClientIP, rateLimitResponse } from '@/lib/rateLimiter';
+import { getInstantCheckRateLimiter, getClientIP, rateLimitResponse } from '@/lib/rateLimiter';
 import { errorResponse, jsonResponse, corsPreflightResponse } from '@/lib/apiHelpers';
 import { checkDomainAvailabilityViaMCP } from '@/lib/instantDomainMCP';
-import { ensureSpaceshipAffiliate } from '@/lib/registrars';
+import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
+import { checkDnsAvailability } from '@/lib/dnsAvailability';
 
 // LRU cache with max size to prevent OOM
 const MAX_CACHE = 10_000;
 const CACHE_TTL = 5 * 60 * 1000;
 const MAX_DOMAINS = 1_000;
 const MCP_BATCH_SIZE = 20;
+const DNS_CONCURRENCY = 25;
+const ENABLE_MCP_SEARCH = process.env.ENABLE_MCP_SEARCH === 'true';
+
 type CachedResult = {
   available: boolean;
   premium?: boolean;
@@ -17,20 +21,26 @@ type CachedResult = {
   purchaseInfo?: string;
   timestamp: number;
 };
+
 type InstantCheckResult = {
   domain: string;
   available: boolean;
+  checked?: boolean;
   premium?: boolean;
   price?: string;
   buyUrl?: string;
   purchaseInfo?: string;
 };
+
 const cache = new Map<string, CachedResult>();
 
 function cacheGet(key: string): Omit<CachedResult, 'timestamp'> | undefined {
   const entry = cache.get(key);
   if (!entry) return undefined;
-  if (Date.now() - entry.timestamp > CACHE_TTL) { cache.delete(key); return undefined; }
+  if (Date.now() - entry.timestamp > CACHE_TTL) {
+    cache.delete(key);
+    return undefined;
+  }
   return {
     available: entry.available,
     premium: entry.premium,
@@ -48,21 +58,32 @@ function cacheSet(key: string, value: Omit<CachedResult, 'timestamp'>) {
   cache.set(key, { ...value, timestamp: Date.now() });
 }
 
-/**
- * Sanitize outbound buy URLs:
- * - Spaceship merchant links → Impact affiliate hop
- * - GoDaddy / other marketplace links left intact (premium listings)
- */
+/** Outbound buy URL is always the domain affiliate hop. */
 function sanitizeResult(r: InstantCheckResult): InstantCheckResult {
-  if (!r.buyUrl) return r;
-  // Premium GoDaddy inventory must not be rewritten to Spaceship
-  if (r.premium || /godaddy\.com/i.test(r.buyUrl)) {
-    return r;
-  }
   return {
     ...r,
-    buyUrl: ensureSpaceshipAffiliate(r.buyUrl, r.domain),
+    buyUrl: getSpaceshipAffiliateUrl(r.domain),
   };
+}
+
+async function mapWithConcurrency<T, R>(
+  items: T[],
+  concurrency: number,
+  mapper: (item: T) => Promise<R>
+): Promise<R[]> {
+  if (items.length === 0) return [];
+  const results: R[] = new Array(items.length);
+  let cursor = 0;
+  const worker = async () => {
+    while (true) {
+      const index = cursor++;
+      if (index >= items.length) return;
+      results[index] = await mapper(items[index]);
+    }
+  };
+  const workers = Array.from({ length: Math.min(concurrency, items.length) }, () => worker());
+  await Promise.all(workers);
+  return results;
 }
 
 export async function OPTIONS(request: NextRequest) {
@@ -85,7 +106,7 @@ export async function POST(request: NextRequest) {
 
     if (domainsToCheck.length === 0) return errorResponse('Domain(s) required', 400);
 
-    const limiter = domainsToCheck.length > 1 ? getBulkRateLimiter() : getSearchRateLimiter();
+    const limiter = getInstantCheckRateLimiter();
     const rl = limiter.check(ip);
     if (!rl.allowed) return rateLimitResponse(rl);
 
@@ -98,38 +119,47 @@ export async function POST(request: NextRequest) {
       else uncached.push(d);
     }
 
-    // Check uncached first via MCP for premium-aware status, then DNS as fallback.
-    for (let i = 0; i < uncached.length; i += MCP_BATCH_SIZE) {
-      const batch = uncached.slice(i, i + MCP_BATCH_SIZE);
-      const mcpResults = await checkDomainAvailabilityViaMCP({ domains: batch });
-      const mcpByDomain = new Map(
-        mcpResults.map((item) => [
-          item.domain.toLowerCase().trim(),
-          {
-            domain: item.domain.toLowerCase().trim(),
-            available: !!item.available,
-            premium: !!item.premium,
-            price: item.price,
-            buyUrl: item.buyUrl,
-            purchaseInfo: item.purchaseInfo,
-          },
-        ])
-      );
+    if (uncached.length > 0) {
+      const mcpByDomain = new Map<string, InstantCheckResult>();
 
-      const unresolved = batch.filter((d) => !mcpByDomain.has(d));
-      const dnsResults = await Promise.all(
-        unresolved.map(async (d) => {
-          const available = await checkViaDNS(d);
-          return { domain: d, available, premium: false, price: undefined, buyUrl: undefined, purchaseInfo: undefined } satisfies InstantCheckResult;
-        })
-      );
+      if (ENABLE_MCP_SEARCH) {
+        for (let i = 0; i < uncached.length; i += MCP_BATCH_SIZE) {
+          const batch = uncached.slice(i, i + MCP_BATCH_SIZE);
+          const mcpResults = await checkDomainAvailabilityViaMCP({ domains: batch });
+          mcpResults.forEach((item) => {
+            mcpByDomain.set(item.domain.toLowerCase().trim(), {
+              domain: item.domain.toLowerCase().trim(),
+              available: !!item.available,
+              premium: !!item.premium,
+              price: item.price,
+              buyUrl: item.buyUrl,
+              purchaseInfo: item.purchaseInfo,
+            });
+          });
+        }
+      }
+
+      const unresolved = uncached.filter((d) => !mcpByDomain.has(d));
+      const dnsResults = await mapWithConcurrency(unresolved, DNS_CONCURRENCY, async (d) => {
+        const state = await checkDnsAvailability(d);
+        return {
+          domain: d,
+          available: state === 'available',
+          checked: state !== 'unknown',
+          premium: false,
+          price: undefined,
+          buyUrl: undefined,
+          purchaseInfo: undefined,
+        } satisfies InstantCheckResult;
+      });
 
       const batchResults = [
         ...Array.from(mcpByDomain.values()),
         ...dnsResults,
       ];
 
-      batchResults.forEach(({ domain, available, premium, price, buyUrl, purchaseInfo }) => {
+      batchResults.forEach(({ domain, available, checked, premium, price, buyUrl, purchaseInfo }) => {
+        if (checked === false) return;
         cacheSet(domain, { available, premium, price, buyUrl, purchaseInfo });
       });
       results.push(...batchResults);
@@ -159,7 +189,7 @@ export async function GET(request: NextRequest) {
   if (!d) return errorResponse('Domain required', 400);
 
   const ip = getClientIP(request);
-  const rl = getSearchRateLimiter().check(ip);
+  const rl = getInstantCheckRateLimiter().check(ip);
   if (!rl.allowed) return rateLimitResponse(rl);
 
   const normalized = d.toLowerCase().trim();
@@ -168,44 +198,37 @@ export async function GET(request: NextRequest) {
     return jsonResponse({ domain: normalized, ...cached }, request, 15);
   }
 
-  const [mcpResult] = await checkDomainAvailabilityViaMCP({ domains: [normalized] });
-  if (mcpResult) {
-    const result = sanitizeResult({
-      domain: normalized,
-      available: !!mcpResult.available,
-      premium: !!mcpResult.premium,
-      price: mcpResult.price,
-      buyUrl: mcpResult.buyUrl,
-      purchaseInfo: mcpResult.purchaseInfo,
-    });
-    cacheSet(normalized, {
-      available: result.available,
-      premium: result.premium,
-      price: result.price,
-      buyUrl: result.buyUrl,
-      purchaseInfo: result.purchaseInfo,
-    });
-    return jsonResponse(result, request, 15);
+  if (ENABLE_MCP_SEARCH) {
+    const [mcpResult] = await checkDomainAvailabilityViaMCP({ domains: [normalized] });
+    if (mcpResult) {
+      const result = sanitizeResult({
+        domain: normalized,
+        available: !!mcpResult.available,
+        premium: !!mcpResult.premium,
+        price: mcpResult.price,
+        buyUrl: mcpResult.buyUrl,
+        purchaseInfo: mcpResult.purchaseInfo,
+      });
+      cacheSet(normalized, {
+        available: result.available,
+        premium: result.premium,
+        price: result.price,
+        buyUrl: result.buyUrl,
+        purchaseInfo: result.purchaseInfo,
+      });
+      return jsonResponse(result, request, 15);
+    }
   }
 
-  const available = await checkViaDNS(normalized);
-  cacheSet(normalized, { available, premium: false });
-  return jsonResponse({ domain: normalized, available, premium: false }, request, 15);
-}
-
-async function checkViaDNS(domain: string): Promise<boolean> {
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 900);
-    const response = await fetch(
-      `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=A`,
-      { signal: controller.signal, headers: { Accept: 'application/dns-json' } }
-    );
-    clearTimeout(timeout);
-    if (response.ok) {
-      const data = await response.json();
-      return data.Status === 3;
-    }
-  } catch { /* safe default */ }
-  return false;
+  const state = await checkDnsAvailability(normalized);
+  const result = sanitizeResult({
+    domain: normalized,
+    available: state === 'available',
+    checked: state !== 'unknown',
+    premium: false,
+  });
+  if (result.checked !== false) {
+    cacheSet(normalized, { available: result.available, premium: false });
+  }
+  return jsonResponse(result, request, 15);
 }

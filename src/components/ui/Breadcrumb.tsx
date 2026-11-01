@@ -3,6 +3,7 @@
 import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 
 export interface BreadcrumbItem {
   label: string;
@@ -21,14 +22,27 @@ interface BreadcrumbProps {
  */
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = '' }) => {
   const { theme } = useTheme();
+  const { href: localize, messages } = useLocale();
   const isLight = theme === 'light';
+  const homeLabel = messages.nav.home;
 
   const trail = useMemo(() => {
-    if (!items.length) return [{ label: 'Home', href: '/' }] as BreadcrumbItem[];
     const first = items[0];
-    if (first.label.toLowerCase() === 'home') return items;
-    return [{ label: 'Home', href: '/' }, ...items];
-  }, [items]);
+    const firstHref = first?.href?.split('?')[0]?.split('#')[0] || '';
+    const alreadyHome =
+      !!first &&
+      (firstHref === '/' ||
+        first.label === homeLabel ||
+        first.label.toLowerCase() === 'home');
+    const withHome = !items.length
+      ? ([{ label: homeLabel, href: '/' }] as BreadcrumbItem[])
+      : alreadyHome
+        ? items
+        : ([{ label: homeLabel, href: '/' }, ...items] as BreadcrumbItem[]);
+    return withHome.map((item) =>
+      item.href ? { ...item, href: localize(item.href) } : item
+    );
+  }, [items, localize, homeLabel]);
 
   const linkCls = isLight
     ? 'text-ds-body hover:text-ds-ink transition-colors'
@@ -45,13 +59,14 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = '' })
     >
       {trail.map((item, index) => {
         const isLast = index === trail.length - 1;
-        const isHome = index === 0 && item.label.toLowerCase() === 'home';
 
         return (
           <React.Fragment key={`${item.label}-${index}`}>
             {index > 0 && (
               <svg
                 className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 ${chevronCls}`}
+                width="14"
+                height="14"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -70,22 +85,6 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = '' })
                 href={item.href}
                 className={`inline-flex items-center gap-1 truncate max-w-[11rem] sm:max-w-none font-medium ${linkCls}`}
               >
-                {isHome && (
-                  <svg
-                    className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                    />
-                  </svg>
-                )}
                 {item.label}
               </Link>
             ) : (
@@ -93,22 +92,6 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = '' })
                 className={`page-breadcrumb-current inline-flex items-center gap-1 truncate max-w-[16rem] sm:max-w-none ${currentCls}`}
                 aria-current={isLast ? 'page' : undefined}
               >
-                {isHome && isLast && (
-                  <svg
-                    className="w-3.5 h-3.5 shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                    />
-                  </svg>
-                )}
                 {item.label}
               </span>
             )}

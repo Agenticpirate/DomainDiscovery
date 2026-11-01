@@ -153,6 +153,7 @@ let globalLimiter: RateLimiter | null = null;
 let searchLimiter: RateLimiter | null = null;
 let bulkLimiter: RateLimiter | null = null;
 let generateLimiter: RateLimiter | null = null;
+let instantCheckLimiter: RateLimiter | null = null;
 
 export function createRateLimiter(config: RateLimiterConfig): RateLimiter {
   return new RateLimiter(config);
@@ -171,6 +172,8 @@ export function getGlobalRateLimiter(config?: RateLimiterConfig): RateLimiter {
 export function resetGlobalRateLimiter() {
   globalLimiter?.destroy();
   globalLimiter = null;
+  instantCheckLimiter?.destroy();
+  instantCheckLimiter = null;
 }
 
 /** Standard search: 30 req/min */
@@ -180,6 +183,15 @@ export function getSearchRateLimiter(): RateLimiter {
     searchLimiter = createRateLimiter({ requestsPerMinute: limit, windowMs: DEFAULT_WINDOW_MS });
   }
   return searchLimiter;
+}
+
+/** Instant check: 60 req/min (high-frequency streaming for generator/extensions/geo) */
+export function getInstantCheckRateLimiter(): RateLimiter {
+  if (!instantCheckLimiter) {
+    const limit = parseInt(process.env.RATE_LIMIT_INSTANT_CHECK_REQUESTS_PER_MINUTE || '60', 10);
+    instantCheckLimiter = createRateLimiter({ requestsPerMinute: limit, windowMs: DEFAULT_WINDOW_MS });
+  }
+  return instantCheckLimiter;
 }
 
 /** Bulk operations: 5 req/min */

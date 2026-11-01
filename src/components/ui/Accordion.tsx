@@ -18,12 +18,12 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ title, content, isOpen, o
     <div className={`relative isolate border rounded-xl overflow-hidden transition-all ${
       isLight
         ? 'border-slate-200 bg-white hover:border-slate-300 shadow-sm'
-        : 'border-white/10 bg-[#0c0c0e] hover:border-white/20'
+        : 'border-white/[0.08] bg-[#0a0a0a] hover:border-white/[0.16]'
     }`}>
       <button
         onClick={onToggle}
         className={`w-full px-6 py-4 flex items-center justify-between text-left transition-colors ${
-          isLight ? 'hover:bg-slate-50' : 'hover:bg-[#121214]'
+          isLight ? 'hover:bg-slate-50' : 'hover:bg-[#111111]'
         }`}
       >
         <span className={`text-lg font-semibold pr-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>{title}</span>

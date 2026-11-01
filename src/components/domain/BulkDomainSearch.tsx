@@ -4,15 +4,16 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Button } from '../ui/Button';
 import { Icons } from '../ui/Icons';
 import { BulkDomainSearchLanding, BULK_SAMPLE_TEXT, type BulkAddOptions } from './BulkDomainSearchLanding';
-import { PreferredRegistrarSelect, RegistrarActionMenu } from './RegistrarControls';
+import { RegistrarActionMenu } from './RegistrarControls';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import {
-  getPrimaryGoUrl,
+  getSpaceshipAffiliateUrl,
   type RegistrarName,
 } from '@/lib/registrars';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
+import { recordDomainsChecked } from '@/lib/searchCounter';
 
 interface DomainTag {
   domain: string;
@@ -430,7 +431,7 @@ const ResultsView: React.FC<{
           : 'bg-white text-black border-white'
         : isLight
           ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-          : 'bg-white/[0.04] text-white/65 border-white/10 hover:bg-white/[0.08] hover:text-white'
+          : 'bg-[#111111] text-white/65 border-white/10 hover:bg-white/[0.08] hover:text-white'
     }`;
 
   const sortLabel =
@@ -459,7 +460,7 @@ const ResultsView: React.FC<{
       {/* Compact toolbar — same shell as before */}
       <div
         className={`rounded-2xl border mb-2.5 sm:mb-3 ${
-          isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
+          isLight ? 'bg-white border-slate-200 shadow-sm' : 'surface-premium border-white/[0.1]'
         }`}
       >
         <div className="flex flex-col gap-2.5 sm:gap-3 p-3 sm:p-3.5">
@@ -544,12 +545,6 @@ const ResultsView: React.FC<{
             </div>
 
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-              <PreferredRegistrarSelect
-                selectedRegistrar={selectedRegistrar}
-                onSelectRegistrar={setSelectedRegistrar}
-                label="Registrar"
-                className="justify-start"
-              />
               <button
                 type="button"
                 onClick={cycleSort}
@@ -719,7 +714,7 @@ const ResultsView: React.FC<{
                     style={{
                       width: `${checkingPct}%`,
                       background: isLight
-                        ? 'linear-gradient(90deg,#0f172a,#334155)'
+                        ? 'linear-gradient(90deg,#141517,#434a4d)'
                         : 'linear-gradient(90deg,rgba(255,255,255,0.45),#fff)',
                     }}
                   />
@@ -740,7 +735,7 @@ const ResultsView: React.FC<{
       {/* Multi-column grid — max 3 cols; spaced cards so incomplete rows never leave grey voids */}
       <div
         className={`rounded-2xl border ${
-          isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.1]'
+          isLight ? 'bg-white border-slate-200 shadow-sm' : 'surface-premium border-white/[0.1]'
         }`}
       >
         <div
@@ -756,24 +751,14 @@ const ResultsView: React.FC<{
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5 w-full auto-rows-auto">
               {results.map((d) => {
-                const domainHref =
-                  d.status === 'available' || d.status === 'premium'
-                    ? getPrimaryGoUrl(d.domain, {
-                        premium: d.status === 'premium',
-                        marketplaceBuyUrl: d.buyUrl,
-                      })
-                    : d.buyUrl
-                      ? d.buyUrl
-                      : `https://who.is/whois/${encodeURIComponent(d.domain)}`;
+                const domainHref = getSpaceshipAffiliateUrl(d.domain);
                 const domainTitle =
                   d.status === 'available'
                     ? `Register ${d.domain} via Spaceship affiliate`
                     : d.status === 'premium'
-                      ? `Premium listing · open ${d.domain} on GoDaddy`
-                    : d.buyUrl
-                      ? d.purchaseInfo || 'View listing'
-                      : 'View WHOIS';
-                const canAct = d.status === 'available' || d.status === 'premium';
+                      ? `Premium name · open ${d.domain} on Spaceship`
+                      : `Open ${d.domain} on Spaceship`;
+                const canAct = d.status === 'available' || d.status === 'premium' || d.status === 'taken';
                 const isSaved = savedDomains.includes(d.domain.toLowerCase());
 
                 return (
@@ -782,14 +767,15 @@ const ResultsView: React.FC<{
                     className={`group flex items-center gap-2 px-2.5 py-2.5 sm:px-3 sm:py-2.5 min-w-0 rounded-xl border transition-colors ${
                       isLight
                         ? 'bg-white hover:bg-slate-50 border-slate-200'
-                        : 'bg-[#121214] hover:bg-[#161618] border-white/[0.08]'
+                        : 'bg-[#111111] hover:bg-white/[0.06] border-white/[0.08]'
                     }`}
                   >
                     <StatusIcon status={d.status} isLight={isLight} />
                     <a
                       href={domainHref}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="sponsored noopener noreferrer"
+                      data-affiliate="spaceship"
                       title={`${d.domain} — ${domainTitle}`}
                       className={`min-w-0 flex-1 font-mono text-[13px] sm:text-[14px] font-medium tracking-tight truncate transition-colors ${
                         isLight
@@ -847,7 +833,7 @@ const ResultsView: React.FC<{
                         isPremium={d.status === 'premium'}
                         primaryLabel={
                           d.status === 'premium'
-                            ? 'Go · GoDaddy'
+                            ? 'Go'
                             : d.status === 'available'
                               ? 'Go'
                               : 'Info'
@@ -855,7 +841,7 @@ const ResultsView: React.FC<{
                         premiumUrl={d.status === 'premium' ? d.buyUrl : undefined}
                         premiumLabel={
                           d.purchaseInfo ||
-                          (d.status === 'premium' ? 'Premium listing from GoDaddy' : undefined)
+                          (d.status === 'premium' ? 'Premium listing' : undefined)
                         }
                         primaryButtonClassName={
                           isLight
@@ -884,7 +870,7 @@ const ResultsView: React.FC<{
         {results.length > 0 && (
           <div
             className={`flex flex-wrap items-center justify-between gap-2 px-3 py-2 border-t text-[10px] sm:text-[11px] ${
-              isLight ? 'border-slate-100 text-slate-400 bg-slate-50/80' : 'border-white/[0.06] text-white/30 bg-black/20'
+              isLight ? 'border-slate-100 text-slate-400 bg-slate-50/80' : 'border-white/[0.06] text-white/30 bg-black'
             }`}
           >
             <span>
@@ -913,7 +899,7 @@ const ResultsView: React.FC<{
                 <div
                   key={snapshot.id}
                   className={`shrink-0 rounded-xl border px-3 py-2 min-w-[150px] ${
-                    isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-[#0c0c0e]'
+                    isLight ? 'border-slate-200 bg-white' : 'border-white/10 surface-premium'
                   }`}
                 >
                   <button type="button" onClick={() => onLoadSearch(snapshot)} className="w-full text-left">
@@ -1099,6 +1085,7 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
     checkRef.current = true;
     setChecking(true);
     setProgress({ done: 0, total: list.length });
+    recordDomainsChecked(list.length, `bulk:${list[0] || 'list'}:${list.length}:${list[list.length - 1] || ''}`);
     let done = 0;
     await checkDomainsInstant(list, (d, a, p, price, buyUrl, purchaseInfo) => {
       done++;

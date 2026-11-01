@@ -91,16 +91,13 @@ export function PremiumFaqGrid({
 
   const iconFor = (item: PremiumFaqItem, index: number) =>
     item.icon ?? DEFAULT_ICONS[index % DEFAULT_ICONS.length];
-
-  // Fully opaque plates — ambient dots must never show through FAQ cards/titles
-  const plateFill = isLight ? '#ffffff' : '#0a0a0c';
   const solidClosed = isLight
-    ? 'border border-slate-200 hover:border-slate-300 hover:shadow-sm'
-    : 'border border-white/10 hover:border-white/18';
+    ? 'border border-[#d7dbdc] hover:border-[#a1a4a5]'
+    : 'border border-white/[0.08] hover:border-white/[0.16]';
 
   const solidOpen = isLight
-    ? 'border border-slate-300 shadow-md sm:scale-[1.01]'
-    : 'border border-white/22 shadow-[0_8px_28px_rgba(0,0,0,0.28)] sm:scale-[1.01]';
+    ? 'border border-[#a1a4a5]'
+    : 'border border-white/[0.16]';
 
   const toggle = (index: number) => {
     setOpenFaq((prev) => (prev === index ? null : index));
@@ -115,17 +112,10 @@ export function PremiumFaqGrid({
     >
       {showHeader && (
         <div
-          className={`relative isolate mb-2 sm:mb-4 w-full overflow-hidden rounded-2xl border px-3 py-3 sm:px-5 sm:py-4 text-center ${
-            isLight ? 'border-slate-200' : 'border-white/10'
+          className={`surface-premium relative isolate mb-2 sm:mb-4 w-full overflow-hidden rounded-2xl border px-3 py-3 sm:px-5 sm:py-4 text-center ${
+            isLight ? 'border-[#d7dbdc]' : 'border-white/[0.08]'
           }`}
-          style={{ backgroundColor: plateFill }}
         >
-          {/* Fully opaque plate — ambient dots never bleed through titles/subtitles */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 rounded-[inherit]"
-            style={{ backgroundColor: plateFill }}
-          />
           <div className="relative z-[1]">
             <HeadingTag id={headingId} className="section-title">
               {title}
@@ -145,23 +135,17 @@ export function PremiumFaqGrid({
           return (
             <div
               key={faq.question}
-              className={`shine-border relative isolate rounded-xl border overflow-hidden min-w-0 w-full box-border ${
+              className={`surface-premium relative isolate rounded-2xl border overflow-hidden min-w-0 w-full box-border ${
                 open ? solidOpen : solidClosed
               }`}
-              style={{ backgroundColor: plateFill }}
             >
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                style={{ backgroundColor: plateFill }}
-              />
               <div className="relative z-[1]">
               <button
                 type="button"
                 onClick={() => toggle(index)}
                 aria-expanded={open}
                 aria-controls={answerId}
-                className="flex w-full min-w-0 items-center gap-2 px-2.5 py-2 text-left"
+                className="flex w-full min-w-0 items-center gap-3 px-3 py-3 text-left min-h-[3.25rem]"
               >
                 <div
                   className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border [&>svg]:w-3.5 [&>svg]:h-3.5 ${
@@ -171,13 +155,13 @@ export function PremiumFaqGrid({
                         : 'bg-white text-black border-white'
                       : isLight
                         ? 'bg-slate-100 text-slate-600 border-slate-200'
-                        : 'bg-white/[0.08] text-white/70 border-white/10'
+                        : 'bg-[#111111] text-[#f0f0f0] border-white/[0.08]'
                   }`}
                 >
                   {iconFor(faq, index)}
                 </div>
                 <div className="min-w-0 flex-1 overflow-hidden">
-                  <h3 className="text-[12px] font-bold leading-snug break-words">
+                  <h3 className="text-[15px] font-semibold leading-snug break-words">
                     {faq.question}
                   </h3>
                 </div>
@@ -205,7 +189,7 @@ export function PremiumFaqGrid({
                   }`}
                 >
                   <p
-                    className="pt-2 text-[11.5px] leading-relaxed"
+                    className="pt-2 text-[14px] leading-relaxed"
                     style={{ color: 'var(--text-secondary)' }}
                   >
                     {faq.answer}
@@ -237,16 +221,11 @@ export function PremiumFaqGrid({
               onClick={() => toggle(index)}
               aria-expanded={open}
               aria-controls={`${id}-answer-stage`}
-              className={`shine-border tool-card-enter group relative isolate overflow-hidden flex items-center gap-2.5 w-full min-w-0 min-h-[3.35rem] px-3.5 py-3 text-left rounded-xl transition-[border-color,box-shadow,background-color,transform] duration-300 ease-out ${
+              className={`surface-premium shine-border tool-card-enter group relative isolate overflow-hidden flex items-center gap-2.5 w-full min-w-0 min-h-[3.35rem] px-3.5 py-3 text-left rounded-xl transition-[border-color,box-shadow,background-color,transform] duration-300 ease-out ${
                 open ? solidOpen : solidClosed
               }`}
-              style={{ animationDelay: `${index * 0.035}s`, backgroundColor: plateFill }}
+              style={{ animationDelay: `${index * 0.035}s` }}
             >
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                style={{ backgroundColor: plateFill }}
-              />
               <div className="relative z-[1] flex w-full min-w-0 items-center gap-2.5">
               <div
                 className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-all duration-300 ease-out [&>svg]:w-4 [&>svg]:h-4 ${
@@ -255,8 +234,8 @@ export function PremiumFaqGrid({
                       ? 'bg-slate-900 text-white border-slate-900'
                       : 'bg-white text-black border-white'
                     : isLight
-                      ? 'bg-slate-100 text-slate-600 border-slate-200 group-hover:bg-slate-200'
-                      : 'bg-white/[0.06] text-white/70 border-white/10 group-hover:bg-white/10'
+                      ? 'bg-[#f4f5f5] text-[#434a4d] border-[#d7dbdc] group-hover:bg-[#0a0a0a] group-hover:text-white group-hover:border-[#0a0a0a]'
+                      : 'bg-[#111111] text-[#f0f0f0] border-white/[0.08] group-hover:bg-[#f0f0f0] group-hover:text-black group-hover:border-[#f0f0f0]'
                 }`}
               >
                 {iconFor(faq, index)}
@@ -297,18 +276,12 @@ export function PremiumFaqGrid({
         {openFaq !== null && items[openFaq] && (
           <div
             key={openFaq}
-            className={`faq-answer-panel shine-border relative isolate overflow-hidden rounded-xl border px-4 py-3.5 ${
+            className={`faq-answer-panel surface-premium shine-border relative isolate overflow-hidden rounded-xl border px-4 py-3.5 ${
               isLight
                 ? 'border-slate-200 shadow-sm shadow-slate-900/[0.04]'
-                : 'border-white/12 shadow-[0_12px_32px_rgba(0,0,0,0.28)]'
+                : 'border-white/[0.16] shadow-[0_12px_32px_rgba(0,0,0,0.28)]'
             }`}
-            style={{ backgroundColor: plateFill }}
           >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-[inherit]"
-              style={{ backgroundColor: plateFill }}
-            />
             <div className="relative z-[1]">
             <div className="flex items-start gap-2.5">
               <div

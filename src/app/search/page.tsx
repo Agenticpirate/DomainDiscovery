@@ -8,20 +8,20 @@ import { Footer } from '@/components/layout/Footer';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { Icons } from '@/components/ui/Icons';
-import { PreferredRegistrarSelect, RegistrarActionMenu } from '@/components/domain/RegistrarControls';
+import { RegistrarActionMenu } from '@/components/domain/RegistrarControls';
 import { SearchInterface } from '@/components/domain/SearchInterface';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import {
-  getPrimaryGoUrl,
+  getSpaceshipAffiliateUrl,
   type RegistrarName,
 } from '@/lib/registrars';
 import { searchDomains, checkDomainAvailability } from '@/services/instantDomainService';
-import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
-import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
-import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
-import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { recordDomainsChecked } from '@/lib/searchCounter';
+import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
+import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
 import extensionsData from '@/data/extensions.json';
@@ -34,6 +34,8 @@ import {
 interface DomainResult {
   domain: string;
   available: boolean;
+  /** False when DNS could not confirm registration. Missing means confirmed. */
+  checked?: boolean;
   tld: string;
   price?: string;
   premium?: boolean;
@@ -115,6 +117,7 @@ function generateBrandableDomains(query: string): string[] {
 }
 
 function SearchPageContent() {
+  const { locale, messages, href } = useLocale();
   const searchParams = useSearchParams();
   const router = useRouter();
   const initialQuery = searchParams.get('q') || '';
@@ -122,7 +125,7 @@ function SearchPageContent() {
 
   /** Keyword to hand off to Full catalog / TLDs — prefer live state, fall back to URL */
   const catalogHandoffQuery = normalizeCatalogKeyword(query || initialQuery || '');
-  const extensionsCatalogHref = buildExtensionsCatalogHref(catalogHandoffQuery);
+  const extensionsCatalogHref = href(buildExtensionsCatalogHref(catalogHandoffQuery));
 
   const handleCatalogHandoff = useCallback(() => {
     if (catalogHandoffQuery) writeCatalogSeed(catalogHandoffQuery);
@@ -166,6 +169,7 @@ function SearchPageContent() {
     setIsBrandableLoading(true);
     const cleanQuery = q.toLowerCase().replace(/\s+/g, '');
     const quickTlds = ALL_TLDS.slice(0, QUICK_TLDS_COUNT);
+    recordDomainsChecked(quickTlds.length, `search:${cleanQuery}:quick`);
     const longTailTlds = ALL_TLDS.slice(QUICK_TLDS_COUNT);
 
     const mergeResults = (existing: DomainResult[], incoming: DomainResult[]) => {
@@ -187,6 +191,7 @@ function SearchPageContent() {
     if (longTailTlds.length > 0) {
       for (let i = 0; i < longTailTlds.length; i += LONG_TAIL_BATCH_SIZE) {
         const batch = longTailTlds.slice(i, i + LONG_TAIL_BATCH_SIZE);
+        recordDomainsChecked(batch.length, `search:${cleanQuery}:tail:${i}`);
         try {
           const batchResults = await searchDomains(cleanQuery, batch);
           if (requestId !== searchRequestIdRef.current) return;
@@ -203,11 +208,13 @@ function SearchPageContent() {
 
     try {
       const brandableDomains = generateBrandableDomains(cleanQuery).slice(0, 24);
+      recordDomainsChecked(brandableDomains.length, `search:${cleanQuery}:ideas`);
       const checked = await checkDomainAvailability(brandableDomains);
       if (requestId !== searchRequestIdRef.current) return;
       const brandable: DomainResult[] = checked.map((d) => ({
         domain: d.domain,
         available: d.available,
+        checked: d.checked,
         tld: 'com',
         price: d.price || (d.available ? '$12.99' : undefined),
         premium: !!d.premium,
@@ -227,15 +234,15 @@ function SearchPageContent() {
     setPremiumEnrichmentMap({});
     premiumFetchKeyRef.current = '';
     premiumFetchInFlightRef.current = false;
-    router.replace('/search', { scroll: false });
+    router.replace(href('/search'), { scroll: false });
   };
 
   const handleLiveSearch = useCallback((nextQuery: string) => {
     const clean = nextQuery.trim();
     setQuery(clean);
-    router.replace(clean ? `/search?q=${encodeURIComponent(clean)}` : '/search', { scroll: false });
+    router.replace(href(clean ? `/search?q=${encodeURIComponent(clean)}` : '/search'), { scroll: false });
     void doSearch(clean);
-  }, [doSearch, router]);
+  }, [doSearch, router, href]);
 
   useEffect(() => {
     setQuery(initialQuery);
@@ -257,7 +264,7 @@ function SearchPageContent() {
     e.preventDefault();
   };
 
-  const brandableTaken = brandableResults.filter(r => !r.available);
+  const brandableTaken = brandableResults.filter(r => r.checked !== false && !r.available);
 
   const premiumCandidates = useMemo(() => {
     const seen = new Set<string>();
@@ -269,7 +276,7 @@ function SearchPageContent() {
       domains.push(key);
     };
 
-    results.filter(r => !r.available && (r.domain.endsWith('.com') || r.premium)).slice(0, 18).forEach(r => push(r.domain));
+    results.filter(r => r.checked !== false && !r.available && (r.domain.endsWith('.com') || r.premium)).slice(0, 18).forEach(r => push(r.domain));
     brandableTaken.slice(0, 6).forEach(r => push(r.domain));
     return domains.slice(0, 20);
   }, [results, brandableTaken]);
@@ -393,7 +400,10 @@ function SearchPageContent() {
     [allGridResults, premiumDomainSet]
   );
   const taken = useMemo(
-    () => allGridResults.filter((r) => !r.available && !premiumDomainSet.has(r.domain.toLowerCase())),
+    () =>
+      allGridResults.filter(
+        (r) => r.checked !== false && !r.available && !premiumDomainSet.has(r.domain.toLowerCase())
+      ),
     [allGridResults, premiumDomainSet]
   );
   const premiumOnly = useMemo(
@@ -412,6 +422,7 @@ function SearchPageContent() {
       // Available first, then premium, then taken — fills the grid like the reference
       list = [...list].sort((a, b) => {
         const score = (r: DomainResult) => {
+          if (r.checked === false) return 3;
           if (r.available) return 0;
           if (r.premium || premiumDomainSet.has(r.domain.toLowerCase())) return 1;
           return 2;
@@ -446,7 +457,7 @@ function SearchPageContent() {
   const btnClass = `inline-flex items-center gap-1 px-2 py-1 text-[10px] sm:text-[11px] font-semibold rounded-full border transition-colors ${
     isLight
       ? 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50'
-      : 'border-white/12 bg-white/[0.04] text-white/65 hover:border-white/20 hover:bg-white/[0.07]'
+      : 'border-white/12 bg-[#111111] text-white/65 hover:border-white/20 hover:bg-white/[0.07]'
   }`;
 
   const checkedCount = allGridResults.length;
@@ -474,7 +485,7 @@ function SearchPageContent() {
       */}
       <main className="page-main relative flex min-h-0 w-full max-w-full flex-1 flex-col overflow-hidden">
         {/* Compact tool UI — visible title would fight the search chrome; keep H1 for SEO/a11y */}
-        <h1 className="sr-only">Domain availability checker — instant domain search</h1>
+        <h1 className="sr-only">{locale === 'en' ? 'Domain availability checker — instant domain search' : messages.pages.search.title}</h1>
         <SectionAmbient
           intensity="hero"
           solidBase
@@ -487,7 +498,7 @@ function SearchPageContent() {
         {/* Search chrome — fixed height, not sticky over the list */}
         <div
           className={`relative z-40 w-full max-w-full shrink-0 border-b ${
-            isLight ? 'bg-white border-slate-200' : 'bg-[#050505] border-white/[0.07]'
+            isLight ? 'bg-white border-slate-200' : 'bg-[#000000] border-white/[0.07]'
           }`}
         >
           <div className="w-full max-w-full sm:max-w-[100rem] mx-auto px-3 sm:px-4 lg:px-5 py-2 sm:py-2.5 box-border space-y-2">
@@ -505,12 +516,6 @@ function SearchPageContent() {
                   isLoading={isLoading}
                 />
               </div>
-              <PreferredRegistrarSelect
-                selectedRegistrar={selectedRegistrar}
-                onSelectRegistrar={setSelectedRegistrar}
-                label=""
-                className="hidden md:flex shrink-0 [&>span]:hidden [&>select]:min-w-[7.5rem] [&>select]:rounded-full [&>select]:py-2 [&>select]:px-3 [&>select]:text-[11px] [&>select]:font-semibold"
-              />
             </div>
 
             {/* Row 2 — tools + clear as one segmented bar */}
@@ -523,9 +528,7 @@ function SearchPageContent() {
             >
               <nav
                 aria-label="Domain tools"
-                className={`grid min-w-0 flex-1 gap-0.5 ${
-                  query ? 'grid-cols-5' : 'grid-cols-5'
-                }`}
+                className="flex min-w-0 flex-1 flex-wrap gap-1 sm:flex-nowrap sm:overflow-x-auto scrollbar-none"
               >
                 {(
                   [
@@ -537,22 +540,22 @@ function SearchPageContent() {
                       active: false,
                       catalog: true,
                     },
-                    { href: '/generator', label: 'Generator', short: 'Gen', active: false, catalog: false },
-                    { href: '/premium', label: 'Aftermarket', short: 'Market', active: false, catalog: false },
-                    { href: '/tools/keyword', label: 'Research', short: 'Tools', active: false, catalog: false },
+                    { href: href('/generator'), label: 'Generator', short: 'Ideas', active: false, catalog: false },
+                    { href: href('/premium'), label: 'Aftermarket', short: 'Market', active: false, catalog: false },
+                    { href: href('/tools/keyword'), label: 'Research', short: 'Research', active: false, catalog: false },
                   ] as const
                 ).map((tab) => {
-                  const cls = `min-w-0 inline-flex items-center justify-center rounded-xl px-1 sm:px-2.5 py-1.5 sm:py-2 text-[10px] sm:text-[12px] font-semibold tracking-tight transition-colors duration-150 text-center leading-tight ${
+                  const cls = `shrink-0 inline-flex min-h-9 sm:min-h-10 items-center justify-center rounded-xl px-2.5 sm:px-3 py-1.5 text-[12px] sm:text-[13px] font-semibold tracking-tight transition-colors duration-150 ${
                     tab.active
                       ? isLight
-                        ? 'bg-white text-slate-900 shadow-sm ring-1 ring-black/[0.04]'
-                        : 'bg-white text-black shadow-[0_1px_0_rgba(255,255,255,0.1)_inset]'
+                        ? 'bg-white text-[#0a0a0a] shadow-sm ring-1 ring-black/[0.04]'
+                        : 'bg-white text-black'
                       : isLight
-                        ? 'text-slate-500 hover:text-slate-800'
-                        : 'text-white/40 hover:text-white/80'
+                        ? 'text-[#52595b]'
+                        : 'text-[#a1a4a5]'
                   }`;
                   return tab.active ? (
-                    <span key={tab.label} className={cls} aria-current="page" title={tab.label}>
+                    <span key={tab.label} className={cls} aria-current="page">
                       <span className="sm:hidden">{tab.short}</span>
                       <span className="hidden sm:inline">{tab.label}</span>
                     </span>
@@ -561,7 +564,6 @@ function SearchPageContent() {
                       key={tab.label}
                       href={tab.href}
                       className={cls}
-                      title={tab.label}
                       onClick={tab.catalog ? handleCatalogHandoff : undefined}
                     >
                       <span className="sm:hidden">{tab.short}</span>
@@ -574,7 +576,7 @@ function SearchPageContent() {
                 <button
                   type="button"
                   onClick={handleResetSearch}
-                  className={`shrink-0 inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl transition-colors ${
+                  className={`shrink-0 inline-flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-colors ${
                     isLight
                       ? 'text-slate-400 hover:text-slate-800 hover:bg-white'
                       : 'text-white/35 hover:text-white hover:bg-white/[0.06]'
@@ -621,7 +623,7 @@ function SearchPageContent() {
                   className={`grid grid-cols-4 gap-0.5 w-full rounded-2xl border p-1 ${
                     isLight
                       ? 'bg-slate-100/70 border-slate-200/90'
-                      : 'bg-white/[0.03] border-white/[0.08]'
+                      : 'bg-[#0a0a0a] border-white/[0.08]'
                   }`}
                 >
                   {(
@@ -686,13 +688,7 @@ function SearchPageContent() {
                             }`}
                           />
                           <span
-                            className={`text-[10px] sm:text-[11px] font-semibold leading-none tracking-tight truncate ${
-                              active
-                                ? isLight
-                                  ? 'text-slate-800'
-                                  : 'text-black/80'
-                                : ''
-                            }`}
+                            className="text-[12px] font-semibold leading-none tracking-tight truncate"
                           >
                             {f.label}
                           </span>
@@ -722,7 +718,7 @@ function SearchPageContent() {
         {/* Results pane — only this region scrolls; chrome stays clear above */}
         <div
           className="min-h-0 w-full max-w-full flex-1 overflow-x-hidden overflow-y-auto overscroll-y-contain"
-          style={{ backgroundColor: isLight ? '#ffffff' : '#050505' }}
+          style={{ backgroundColor: isLight ? '#f4f5f5' : '#000000' }}
         >
         <div className="mx-auto w-full max-w-full min-w-0 sm:max-w-[100rem] box-border px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3">
           {isLoading && results.length === 0 && (
@@ -731,8 +727,8 @@ function SearchPageContent() {
                 <div
                   className="w-3.5 h-3.5 border-2 rounded-full animate-spin"
                   style={{
-                    borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)',
-                    borderTopColor: isLight ? '#0f172a' : '#fff',
+                    borderColor: isLight ? '#d7dbdc' : 'rgba(255,255,255,0.1)',
+                    borderTopColor: isLight ? '#141517' : '#fff',
                   }}
                 />
                 <span className="text-[13px] font-medium" style={{ color: 'var(--text-muted)' }}>
@@ -760,21 +756,21 @@ function SearchPageContent() {
               </p>
               <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
                 <Link
-                  href="/generator"
+                  href={href('/generator')}
                   className={`rounded-xl border px-3 py-1.5 text-[12px] font-semibold transition-colors ${
                     isLight
                       ? 'bg-white border-slate-200 text-slate-800 hover:bg-slate-50'
-                      : 'bg-white/[0.04] border-white/10 text-white/80 hover:bg-white/10'
+                      : 'bg-[#111111] border-white/10 text-white/80 hover:bg-white/10'
                   }`}
                 >
                   Domain generator
                 </Link>
                 <Link
-                  href="/tools/keyword"
+                  href={href('/tools/keyword')}
                   className={`rounded-xl border px-3 py-1.5 text-[12px] font-semibold transition-colors ${
                     isLight
                       ? 'bg-white border-slate-200 text-slate-800 hover:bg-slate-50'
-                      : 'bg-white/[0.04] border-white/10 text-white/80 hover:bg-white/10'
+                      : 'bg-[#111111] border-white/10 text-white/80 hover:bg-white/10'
                   }`}
                 >
                   Keyword finder
@@ -787,7 +783,7 @@ function SearchPageContent() {
           {checkedCount > 0 && (
             <div
               className={`rounded-2xl border p-1.5 sm:p-2 w-full max-w-full min-w-0 overflow-x-clip box-border ${
-                isLight ? 'bg-white border-slate-200' : 'bg-[#0a0a0c] border-white/[0.08]'
+                isLight ? 'bg-white border-slate-200' : 'bg-[#0a0a0a] border-white/[0.08]'
               }`}
             >
               {visibleExtensions.length === 0 ? (
@@ -795,7 +791,7 @@ function SearchPageContent() {
                   Nothing in this filter
                 </p>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 sm:gap-2 w-full max-w-full min-w-0">
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 sm:gap-1.5 w-full max-w-full min-w-0">
                   {visibleExtensions.map((r) => (
                     <DomainRow
                       key={r.domain}
@@ -827,7 +823,7 @@ function SearchPageContent() {
                         className={`group inline-flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-[13px] font-semibold tracking-[-0.01em] transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                           isLight
                             ? 'border-slate-900/10 bg-white text-slate-900 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.12)] hover:border-slate-900/20 hover:shadow-[0_2px_4px_rgba(15,23,42,0.05),0_12px_28px_-12px_rgba(15,23,42,0.16)] focus-visible:ring-slate-300 focus-visible:ring-offset-white'
-                            : 'border-white/[0.1] bg-white/[0.06] text-white shadow-[0_1px_0_rgba(255,255,255,0.06)_inset] backdrop-blur-sm hover:border-white/18 hover:bg-white/[0.09] focus-visible:ring-white/25 focus-visible:ring-offset-[#050505]'
+                            : 'border-white/[0.1] bg-white/[0.06] text-white shadow-[0_1px_0_rgba(255,255,255,0.06)_inset] backdrop-blur-sm hover:border-white/18 hover:bg-white/[0.09] focus-visible:ring-white/25 focus-visible:ring-offset-[#000000]'
                         }`}
                       >
                         <span className="tracking-tight">
@@ -902,11 +898,11 @@ function SearchPageContent() {
               <div
                 className="w-2.5 h-2.5 border-2 rounded-full animate-spin"
                 style={{
-                  borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)',
-                  borderTopColor: isLight ? '#0f172a' : '#fff',
+                  borderColor: isLight ? '#d7dbdc' : 'rgba(255,255,255,0.1)',
+                  borderTopColor: isLight ? '#141517' : '#fff',
                 }}
               />
-              <span className="text-[10px] font-medium" style={{ color: 'var(--text-muted)' }}>
+              <span className="text-[13px] font-medium" style={{ color: 'var(--text-muted)' }}>
                 Checking more extensions…
               </span>
             </div>
@@ -914,8 +910,8 @@ function SearchPageContent() {
         </div>
 
         <div className="hidden sm:block">
-          <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.search} compact />
-          <SeoGuidePack {...TOOL_GUIDE_PACKS.search} />
+          <LocalizedDefinition id="search" compact />
+          <LocalizedGuidePack pack="search" />
         </div>
         <div className="px-0 sm:px-0 pt-3 pb-2">
           <AffiliateAdRail placement="search" variant="auto" />
@@ -956,43 +952,18 @@ function DomainRow({
   onSelectRegistrar: (registrar: RegistrarName) => void;
   onBlockCopy: (e: React.ClipboardEvent | React.MouseEvent) => void;
 }) {
-  const isAvailable = result.available && !result.premium;
-  const price = result.price ? parseFloat(result.price.replace(/[^0-9.]/g, '')) : null;
-  const showPremiumPrice = (!!result.premium || !!price) && !isAvailable && !!price && price > 50;
-  const isPremium =
-    !!result.premium ||
-    showPremiumPrice ||
-    (!isAvailable &&
-      !!result.buyUrl &&
-      /godaddy\.com/i.test(result.buyUrl) &&
-      /listing|premium|purchase/i.test(result.purchaseInfo || 'listing'));
+  const isUnknown = result.checked === false;
+  const isPremium = !isUnknown && !!result.premium && !result.available;
+  const isAvailable = result.available && !result.premium && !isUnknown;
 
-  const ctaText = isAvailable
-    ? 'Continue'
-    : showPremiumPrice
-      ? `$${price!.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
-      : 'Lookup';
-
-  // Free → Spaceship affiliate · Premium → GoDaddy (never Spaceship for premium)
-  const domainHref =
-    isAvailable || isPremium
-      ? getPrimaryGoUrl(result.domain, {
-          premium: isPremium,
-          marketplaceBuyUrl: result.buyUrl,
-          purchaseInfo: result.purchaseInfo,
-          available: isAvailable,
-        })
-      : result.buyUrl
-        ? result.buyUrl
-        : `https://who.is/whois/${encodeURIComponent(result.domain)}`;
-  const domainTitle =
-    isAvailable
-      ? `Register ${result.domain} via Spaceship affiliate`
-      : isPremium
-        ? `Premium listing · open ${result.domain} on GoDaddy`
-      : result.buyUrl
-        ? result.purchaseInfo || 'View listing'
-        : 'View WHOIS';
+  const domainHref = getSpaceshipAffiliateUrl(result.domain);
+  const domainTitle = isAvailable
+    ? `Register ${result.domain} via Spaceship affiliate`
+    : isPremium
+      ? `Premium name · open ${result.domain} on Spaceship`
+      : isUnknown
+        ? `Availability unconfirmed · open ${result.domain} on Spaceship`
+        : `Open ${result.domain} on Spaceship`;
 
   // Status: soft color on dot + label only (not on the CTA)
   const statusDot = isAvailable
@@ -1003,151 +974,118 @@ function DomainRow({
       ? isLight
         ? 'bg-amber-500 shadow-[0_0_5px_rgba(245,158,11,0.35)]'
         : 'bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.4)]'
-      : isLight
-        ? 'bg-rose-500'
-        : 'bg-rose-400';
+      : isUnknown
+        ? isLight
+          ? 'bg-slate-400'
+          : 'bg-white/35'
+        : isLight
+          ? 'bg-rose-500'
+          : 'bg-rose-400';
 
-  // Quiet ghost CTAs — domain name + status stay primary (no solid white pills)
-  const ctaFill = isLight
-    ? 'bg-transparent text-slate-500 hover:bg-slate-100 hover:text-slate-800 font-medium'
-    : 'bg-transparent text-white/45 hover:bg-white/[0.06] hover:text-white/85 font-medium';
-
-  const ctaSize =
-    'pl-2 pr-1.5 py-0.5 text-[10px] sm:text-[11px] !font-medium !shadow-none';
-
-  const desktopCta = isAvailable
-    ? ctaText
+  const actionTitle = isAvailable
+    ? `Available · register ${result.domain}`
     : isPremium
-      ? showPremiumPrice
-        ? ctaText
-        : 'Search'
-      : ctaText;
-  const ctaLabel = isAvailable ? 'Go' : showPremiumPrice ? ctaText : isPremium ? 'Buy' : 'WHOIS';
+      ? `Premium · open ${result.domain}`
+      : isUnknown
+        ? `Unconfirmed · check ${result.domain}`
+        : `Taken · look up ${result.domain}`;
+
+  // Status stays on the dot. The arrow is the brand control on every row.
+  const actionTone = isLight
+    ? 'bg-[#141517] text-white shadow-none'
+    : 'bg-[#f0f0f0] text-black shadow-none';
+
+  const actionIcon = (
+    <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.4} d="M7 17 17 7M9 7h8v8" />
+    </svg>
+  );
 
   return (
     <div
-      className={`shine-border no-lift group flex items-center gap-2.5 w-full max-w-full min-w-0 rounded-xl py-2.5 px-3 sm:py-3 sm:px-3.5 transition-colors box-border overflow-hidden ${
+      className={`group flex items-center gap-1 sm:gap-2 w-full max-w-full min-w-0 rounded-xl py-1 pl-1.5 pr-1 sm:py-1.5 sm:pl-3 sm:pr-1.5 transition-colors box-border overflow-hidden ${
         isLight
-          ? 'bg-white hover:bg-slate-50 border border-slate-100'
-          : 'bg-[#0c0c0e] hover:bg-[#121214] border border-white/[0.06]'
+          ? 'bg-white border border-[#d7dbdc]'
+          : 'bg-[#0a0a0a] border border-white/[0.08]'
       }`}
     >
-      <div className="flex items-center gap-2.5 min-w-0 flex-1 overflow-hidden">
-        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDot}`} aria-hidden />
-        <div className="min-w-0 flex-1 overflow-hidden">
-          <a
-            href={domainHref}
-            target="_blank"
-            rel={
-              isAvailable
-                ? 'sponsored noopener noreferrer'
-                : 'noopener noreferrer'
-            }
-            data-affiliate={isAvailable ? 'spaceship' : undefined}
-            data-registrar={isPremium ? 'GoDaddy' : isAvailable ? 'Spaceship' : undefined}
-            data-premium={isPremium ? 'true' : undefined}
-            data-placement="search-domain-link"
-            title={domainTitle}
-            onCopy={onBlockCopy}
-            className={`block font-mono text-[13px] sm:text-[14px] font-medium leading-snug select-none transition-colors truncate ${
-              isAvailable
-                ? isLight
-                  ? 'text-slate-900 hover:text-slate-950'
-                  : 'text-white hover:text-white'
-                : isLight
-                  ? 'text-slate-600 hover:text-slate-800'
-                  : 'text-white/75 hover:text-white/90'
-            }`}
-          >
-            {result.domain}
-          </a>
-          <span
-            className={`mt-0.5 inline-flex text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.1em] ${
-              isAvailable
-                ? isLight
-                  ? 'text-emerald-600'
-                  : 'text-emerald-400'
-                : isPremium
-                  ? isLight
-                    ? 'text-amber-600'
-                    : 'text-amber-400'
-                  : isLight
-                    ? 'text-rose-600'
-                    : 'text-rose-400'
-            }`}
-          >
-            {isAvailable
-              ? 'Available'
-              : isPremium
-                ? 'Premium · GoDaddy'
-                : 'Taken'}
-          </span>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-1.5 shrink-0">
-        <button
-          type="button"
-          onClick={() => onSave(result.domain)}
-          className={`h-7 w-7 inline-flex items-center justify-center rounded-full border transition-colors ${
-            isSaved
-              ? isLight
-                ? 'text-slate-900 border-slate-900 bg-slate-100'
-                : 'text-white border-white/30 bg-white/10'
-              : isLight
-                ? 'text-slate-400 border-slate-200 hover:text-slate-700'
-                : 'text-white/40 border-white/10 hover:text-white/75'
-          }`}
-          aria-label={isSaved ? 'Remove save' : 'Save domain'}
-          title={isSaved ? 'Saved' : 'Save'}
+      <span className={`h-2 w-2 rounded-full shrink-0 ${statusDot}`} title={actionTitle} aria-hidden />
+      <a
+        href={domainHref}
+        target="_blank"
+        rel="sponsored noopener noreferrer"
+        data-affiliate="spaceship"
+        data-registrar="Spaceship"
+        data-premium={isPremium ? 'true' : undefined}
+        data-placement="search-domain-link"
+        title={domainTitle}
+        onCopy={onBlockCopy}
+        className={`min-w-0 flex-1 truncate font-mono text-[11px] sm:text-[13.5px] font-medium leading-none select-none transition-colors ${
+          isAvailable
+            ? isLight
+              ? 'text-slate-900 hover:text-slate-950'
+              : 'text-white hover:text-white'
+            : isLight
+              ? 'text-slate-600 hover:text-slate-800'
+              : 'text-white/75 hover:text-white/90'
+        }`}
+      >
+        {result.domain}
+      </a>
+      <button
+        type="button"
+        onClick={() => onSave(result.domain)}
+        className={`h-6 w-6 sm:h-8 sm:w-8 inline-flex shrink-0 items-center justify-center rounded-full border transition-colors ${
+          isSaved
+            ? isLight
+              ? 'text-slate-900 border-slate-900 bg-slate-100'
+              : 'text-white border-white/30 bg-white/10'
+            : isLight
+              ? 'text-slate-400 border-slate-200 hover:text-slate-700'
+              : 'text-white/35 border-white/10 hover:text-white/75'
+        }`}
+        aria-label={isSaved ? 'Remove save' : 'Save domain'}
+        title={isSaved ? 'Saved' : 'Save'}
+      >
+        <svg
+          className="w-3.5 h-3.5"
+          fill={isSaved ? 'currentColor' : 'none'}
+          stroke="currentColor"
+          viewBox="0 0 24 24"
         >
-          <svg
-            className="w-3.5 h-3.5"
-            fill={isSaved ? 'currentColor' : 'none'}
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-            />
-          </svg>
-        </button>
-        <RegistrarActionMenu
-          domain={result.domain}
-          selectedRegistrar={selectedRegistrar}
-          onSelectRegistrar={onSelectRegistrar}
-          canRegister={isAvailable || isPremium}
-          isPremium={isPremium}
-          primaryLabel={
-            <>
-              <span className="sm:hidden">{isPremium ? 'GoDaddy' : ctaLabel}</span>
-              <span className="hidden sm:inline">
-                {isPremium ? 'Go · GoDaddy' : desktopCta}
-              </span>
-            </>
-          }
-          premiumUrl={isPremium ? result.buyUrl : undefined}
-          premiumLabel={
-            result.purchaseInfo ||
-            (isPremium ? 'Premium listing from GoDaddy' : undefined)
-          }
-          shellClassName={
-            isLight
-              ? 'shadow-none ring-slate-200/80'
-              : 'shadow-none ring-white/[0.08]'
-          }
-          primaryButtonClassName={`${ctaFill} ${ctaSize}`}
-          chevronButtonClassName={`${ctaFill} px-1.5 py-0.5 ${
-            isLight ? 'border-slate-200' : 'border-white/10'
-          }`}
-          fallbackButtonClassName={`${ctaFill} ${ctaSize} rounded-full ring-1 ${
-            isLight ? 'ring-slate-200' : 'ring-white/10'
-          }`}
-        />
-      </div>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+          />
+        </svg>
+      </button>
+      <RegistrarActionMenu
+        domain={result.domain}
+        selectedRegistrar={selectedRegistrar}
+        onSelectRegistrar={onSelectRegistrar}
+        canRegister
+        isPremium={isPremium}
+        primaryLabel={
+          <>
+            {actionIcon}
+            <span className="sr-only">{actionTitle}</span>
+          </>
+        }
+        premiumUrl={isPremium ? result.buyUrl : undefined}
+        premiumLabel={result.purchaseInfo || (isPremium ? 'Premium listing' : undefined)}
+        shellClassName="shadow-none ring-0"
+        primaryButtonClassName={`${actionTone} !h-6 !w-6 sm:!h-7 sm:!w-7 !p-0`}
+        chevronButtonClassName={`${actionTone} !px-1.5 !py-0 border-l ${
+          isAvailable || isPremium
+            ? 'border-black/15'
+            : isLight
+              ? 'border-slate-200'
+              : 'border-white/10'
+        }`}
+        fallbackButtonClassName={`${actionTone} !h-6 !w-6 sm:!h-7 sm:!w-7 !p-0 rounded-full`}
+      />
     </div>
   );
 }

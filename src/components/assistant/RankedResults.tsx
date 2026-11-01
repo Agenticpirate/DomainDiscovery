@@ -90,7 +90,7 @@ export function RankedResults({
           className={`relative isolate overflow-hidden rounded-2xl border p-4 text-xs sm:text-sm ${
             isLight
               ? 'border-slate-200 bg-slate-50 text-slate-600'
-              : 'border-white/10 bg-[#0a0a0c] text-white/50'
+              : 'border-white/10 bg-[#0a0a0a] text-white/50'
           }`}
         >
           <p className="font-bold mb-1.5">Next steps</p>

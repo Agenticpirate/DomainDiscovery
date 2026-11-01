@@ -49,7 +49,7 @@ export function SeoGuidePack({
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
   const isLight = mounted ? theme === 'light' : false;
-  const chipSolid = isLight ? '#ffffff' : '#0a0a0c';
+  const chipSolid = isLight ? '#ffffff' : '#0a0a0a';
 
   const faqId = `seo-faqs-${title
     .toLowerCase()
@@ -76,8 +76,8 @@ export function SeoGuidePack({
               className="pointer-events-none absolute inset-0 rounded-full"
               style={{
                 background: isLight
-                  ? 'radial-gradient(ellipse 120% 100% at 50% 50%, #f8fafc 0%, #f8fafc 60%, transparent 100%)'
-                  : 'radial-gradient(ellipse 120% 100% at 50% 50%, #050505 0%, #050505 60%, transparent 100%)',
+                  ? 'radial-gradient(ellipse 120% 100% at 50% 50%, #f4f5f5 0%, #f4f5f5 60%, transparent 100%)'
+                  : 'radial-gradient(ellipse 120% 100% at 50% 50%, #000000 0%, #000000 60%, transparent 100%)',
               }}
             />
             <span className="relative z-[1]">{eyebrow}</span>

@@ -14,13 +14,13 @@ function htmlPage(title: string, body: string, isLight = true) {
   <title>${title}</title>
   <style>
     body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
-      font-family:Inter,system-ui,sans-serif;background:${isLight ? '#f8fafc' : '#050505'};color:${isLight ? '#0f172a' : '#fff'};}
+      font-family:Inter,system-ui,sans-serif;background:${isLight ? '#f4f5f5' : '#000000'};color:${isLight ? '#141517' : '#fff'};}
     .card{max-width:440px;margin:24px;padding:28px;border-radius:18px;
-      border:1px solid ${isLight ? '#e2e8f0' : 'rgba(255,255,255,.1)'};
-      background:${isLight ? '#fff' : '#0c0c0e'};box-shadow:0 10px 40px rgba(0,0,0,.08)}
+      border:1px solid ${isLight ? '#d7dbdc' : 'rgba(255,255,255,.1)'};
+      background:${isLight ? '#fff' : '#0a0a0a'};box-shadow:0 10px 40px rgba(0,0,0,.08)}
     h1{font-size:1.35rem;margin:0 0 10px}
-    p{color:${isLight ? '#64748b' : 'rgba(255,255,255,.55)'};line-height:1.55;margin:0 0 18px;font-size:14px}
-    a.btn{display:inline-block;padding:10px 16px;border-radius:10px;background:${isLight ? '#0f172a' : '#fff'};
+    p{color:${isLight ? '#6e7679' : 'rgba(255,255,255,.55)'};line-height:1.55;margin:0 0 18px;font-size:14px}
+    a.btn{display:inline-block;padding:10px 16px;border-radius:10px;background:${isLight ? '#141517' : '#fff'};
       color:${isLight ? '#fff' : '#000'};text-decoration:none;font-weight:600;font-size:13px}
   </style>
 </head>

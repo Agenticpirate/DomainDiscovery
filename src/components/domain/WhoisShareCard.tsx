@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { pngFileName, renderWhoisSharePng } from '@/lib/whoisShareImage';
 import {
@@ -52,9 +51,6 @@ const SOCIAL: Record<
     label: string;
     /** Short label under icon — empty for X so logo isn’t doubled */
     chip: string;
-    bg: string;
-    fg: string;
-    hover: string;
     /**
      * Build network share URL.
      * caption = text without link; shareUrl = public page whose OG image is the card.
@@ -66,36 +62,24 @@ const SOCIAL: Record<
   x: {
     label: 'X',
     chip: 'Post',
-    bg: '#000000',
-    fg: '#ffffff',
-    hover: '#1a1a1a',
     intent: (caption, shareUrl) =>
       `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}&url=${encodeURIComponent(shareUrl)}`,
   },
   linkedin: {
     label: 'LinkedIn',
     chip: 'Share',
-    bg: '#0A66C2',
-    fg: '#ffffff',
-    hover: '#004182',
     intent: (_c, shareUrl) =>
       `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
   },
   facebook: {
     label: 'Facebook',
     chip: 'Share',
-    bg: '#1877F2',
-    fg: '#ffffff',
-    hover: '#0d65d9',
     intent: (_c, shareUrl) =>
       `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
   },
   whatsapp: {
     label: 'WhatsApp',
     chip: 'Send',
-    bg: '#25D366',
-    fg: '#ffffff',
-    hover: '#1ebe57',
     // WhatsApp has no separate url param — put caption + link in body
     intent: (caption, shareUrl) =>
       `https://wa.me/?text=${encodeURIComponent(`${caption}\n\n${shareUrl}`)}`,
@@ -103,18 +87,12 @@ const SOCIAL: Record<
   telegram: {
     label: 'Telegram',
     chip: 'Send',
-    bg: '#26A5E4',
-    fg: '#ffffff',
-    hover: '#1b8ec4',
     intent: (caption, shareUrl) =>
       `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(caption)}`,
   },
   email: {
     label: 'Email',
     chip: 'Mail',
-    bg: '#64748b',
-    fg: '#ffffff',
-    hover: '#475569',
     intent: (caption, shareUrl, title) =>
       `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`${caption}\n\n${shareUrl}`)}`,
   },
@@ -209,7 +187,6 @@ interface WhoisShareCardProps {
 export function WhoisShareCard({ data }: WhoisShareCardProps) {
   const { theme } = useTheme();
   const isLight = theme === 'light';
-  const cardRef = useRef<HTMLDivElement>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -223,33 +200,6 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
   /** Caption + link for clipboard / preview */
   const postText = useMemo(() => buildSocialPostText(data.domain, pageUrl), [data.domain, pageUrl]);
   const shareTitle = `WHOIS · ${data.domain}`;
-
-  // Contained 3D tilt (smaller range so it doesn't spill)
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const springX = useSpring(mx, { stiffness: 220, damping: 22, mass: 0.35 });
-  const springY = useSpring(my, { stiffness: 220, damping: 22, mass: 0.35 });
-  const rotateX = useTransform(springY, [-0.5, 0.5], [8, -8]);
-  const rotateY = useTransform(springX, [-0.5, 0.5], [-10, 10]);
-  const glareX = useTransform(springX, [-0.5, 0.5], [15, 85]);
-  const glareY = useTransform(springY, [-0.5, 0.5], [15, 85]);
-  const glareBg = useMotionTemplate`radial-gradient(280px circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.2), transparent 55%)`;
-
-  const onPointerMove = useCallback(
-    (e: React.PointerEvent<HTMLDivElement>) => {
-      const el = cardRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      mx.set((e.clientX - rect.left) / rect.width - 0.5);
-      my.set((e.clientY - rect.top) / rect.height - 0.5);
-    },
-    [mx, my]
-  );
-
-  const onPointerLeave = useCallback(() => {
-    mx.set(0);
-    my.set(0);
-  }, [mx, my]);
 
   const flash = useCallback((msg: string) => {
     setFeedback(msg);
@@ -442,7 +392,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
   return (
     <div
       className={`relative rounded-2xl border overflow-hidden ${
-        isLight ? 'border-slate-200 bg-slate-50/90' : 'border-white/10 bg-white/[0.02]'
+        isLight ? 'border-slate-200 bg-slate-50/90' : 'border-white/10 bg-[#0a0a0a]'
       }`}
     >
       <div className="flex flex-wrap items-start justify-between gap-2 px-3.5 pt-3.5 sm:px-4 sm:pt-4">
@@ -452,23 +402,21 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
               isLight ? 'text-slate-500' : 'text-white/40'
             }`}
           >
-            Share WHOIS card
+            Share
           </div>
-          <p className={`mt-0.5 text-sm font-semibold ${isLight ? 'text-slate-800' : 'text-white/85'}`}>
-            One-click social · link + card preview
+          <p className={`mt-0.5 text-sm font-semibold ${isLight ? 'text-slate-800' : 'text-white/90'}`}>
+            Send this record
           </p>
-          <p className={`mt-1 text-[11px] leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-            Social apps cannot insert 3D into the compose box. We open the network with a short caption + share link;
-            after the link is public HTTPS, X/LinkedIn show the WHOIS <span className="font-semibold">image card</span>{' '}
-            under the post. Live 3D plays when someone opens the link.
+          <p className={`mt-1 text-[12px] leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
+            Download the card, or open it in the app you already use. The image appears under the post once the link is public.
           </p>
         </div>
         {feedback && (
           <span
             className={`rounded-full border px-2.5 py-1 text-[11px] font-bold ${
               isLight
-                ? 'border-emerald-200 bg-emerald-50 text-emerald-800'
-                : 'border-emerald-500/25 bg-emerald-500/10 text-emerald-200'
+                ? 'border-[#d7dbdc] bg-white text-slate-800'
+                : 'border-white/15 bg-[#111111] text-white/80'
             }`}
           >
             {feedback}
@@ -481,21 +429,17 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
         <div
           className={`mx-3.5 mt-3 rounded-xl border px-3 py-2.5 text-[12px] leading-relaxed sm:mx-4 ${
             isLight
-              ? 'border-amber-200 bg-amber-50 text-amber-950'
-              : 'border-amber-500/25 bg-amber-500/10 text-amber-100'
+              ? 'border-[#d7dbdc] bg-white text-slate-700'
+              : 'border-white/10 bg-[#111111] text-white/70'
           }`}
         >
-          <strong className="font-bold">Localhost detected.</strong> X and other networks cannot load card images from{' '}
-          <span className="font-mono">localhost</span>. Set{' '}
-          <code className="rounded bg-black/10 px-1 font-mono text-[11px]">NEXT_PUBLIC_BASE_URL=https://your-domain.com</code>{' '}
-          (or deploy) so share links are public. Compose will still open with text + link — the image preview only works
-          on a crawlable HTTPS URL.
+          Image previews need a public link. On localhost, share still opens with the caption and URL. The card image appears after you deploy.
         </div>
       )}
       {!localShare && crawlable && (
         <div
           className={`mx-3.5 mt-3 rounded-xl border px-3 py-2 text-[11px] sm:mx-4 ${
-            isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-white/[0.03] text-white/50'
+            isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-[#0a0a0a] text-white/50'
           }`}
         >
           Share links use <span className="font-mono text-[10px]">{shareOrigin}</span> so networks can fetch the card image.
@@ -503,141 +447,81 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
       )}
 
       <div className="grid gap-4 p-3.5 sm:p-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-        {/* LEFT: contained 3D stage + PNG */}
+        {/* LEFT: flat share card on the same dot field as the homepage hero */}
         <div className="min-w-0 space-y-3 overflow-hidden">
-          {/* 3D stage — clipped so rings never spill */}
           <div
             className={`relative overflow-hidden rounded-2xl border ${
-              isLight ? 'border-slate-200 bg-slate-100/80' : 'border-white/8 bg-black/30'
+              isLight ? 'border-[#d7dbdc] bg-white' : 'border-white/10 bg-black'
             }`}
-            style={{ perspective: 900 }}
           >
-            <div className="relative mx-auto max-w-sm px-4 py-6 sm:py-8 overflow-hidden">
-              {/* Ambient glow clipped inside */}
-              <motion.div
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
-                animate={{
-                  opacity: [0.35, 0.55, 0.35],
-                  scale: [1, 1.12, 1],
-                }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                style={{
-                  background: isLight
-                    ? 'radial-gradient(circle, rgba(148,163,184,0.45), transparent 70%)'
-                    : 'radial-gradient(circle, rgba(226,232,240,0.2), transparent 70%)',
-                }}
-              />
-
-              <motion.div
-                ref={cardRef}
-                onPointerMove={onPointerMove}
-                onPointerLeave={onPointerLeave}
-                style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-                animate={{ y: [0, -5, 0] }}
-                transition={{ y: { duration: 3.6, repeat: Infinity, ease: 'easeInOut' } }}
-                className="relative z-10 w-full cursor-grab active:cursor-grabbing select-none"
+            <div className="ambient-edge-fade pointer-events-none absolute inset-0" aria-hidden>
+              <div className="absolute inset-0 ambient-dots ambient-breathe" />
+              <div className="absolute inset-0 ambient-sweep">
+                <div className="ambient-sweep-band">
+                  <div className="ambient-dots ambient-sweep-dots" />
+                </div>
+              </div>
+            </div>
+            <div className="relative z-[1] mx-auto max-w-sm px-4 py-6 sm:py-8">
+              <div
+                className={`relative overflow-hidden rounded-2xl border ${
+                  isLight
+                    ? 'border-[#d7dbdc] bg-white shadow-[0_16px_40px_-24px_rgba(15,23,42,0.35)]'
+                    : 'border-white/10 bg-[#111111] shadow-[0_20px_50px_-24px_rgba(0,0,0,0.85)]'
+                }`}
               >
-                {/* Tight orbit ring — stays near card */}
-                <motion.div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-[-6px] rounded-[22px] border border-white/15"
-                  style={{ transform: 'translateZ(-16px)' }}
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
-                />
-
-                <div
-                  className={`relative overflow-hidden rounded-2xl border shadow-2xl ${
-                    isLight
-                      ? 'border-slate-200/90 bg-gradient-to-br from-white via-slate-50 to-slate-100'
-                      : 'border-white/15 bg-gradient-to-br from-[#121216] via-[#0c0c0e] to-[#16161c]'
-                  }`}
-                >
-                  <motion.div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 opacity-90"
-                    style={{ background: glareBg }}
-                  />
-                  {/* Shine sweep — clipped by card overflow */}
-                  <motion.div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-y-0 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                    animate={{ left: ['-40%', '120%'] }}
-                    transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.4 }}
-                  />
-                  {/* Pulse edge */}
-                  <motion.div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset"
-                    animate={{
-                      boxShadow: [
-                        'inset 0 0 0 0 rgba(255,255,255,0)',
-                        'inset 0 0 24px 0 rgba(255,255,255,0.08)',
-                        'inset 0 0 0 0 rgba(255,255,255,0)',
-                      ],
-                    }}
-                    transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-                  />
-
-                  <div className="relative p-4" style={{ transform: 'translateZ(24px)' }}>
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0">
-                        <div
-                          className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
-                            isLight ? 'text-slate-500' : 'text-white/45'
-                          }`}
-                        >
-                          DomainDiscovery · WHOIS
-                        </div>
-                        <h4
-                          className={`mt-1.5 text-xl font-black tracking-tight break-all ${statusTone}`}
-                        >
-                          {data.domain}
-                        </h4>
-                      </div>
-                      <motion.span
-                        className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
-                          isLight
-                            ? 'border-slate-200 bg-white text-slate-600'
-                            : 'border-white/15 bg-white/[0.06] text-white/60'
+                <div className="relative p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <div
+                        className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
+                          isLight ? 'text-slate-500' : 'text-white/45'
                         }`}
-                        animate={{ opacity: [0.7, 1, 0.7] }}
-                        transition={{ duration: 2.4, repeat: Infinity }}
                       >
-                        RDAP
-                      </motion.span>
+                        DomainDiscovery · WHOIS
+                      </div>
+                      <h4 className={`mt-1.5 text-xl font-semibold tracking-tight break-all ${statusTone}`}>
+                        {data.domain}
+                      </h4>
                     </div>
-
-                    <div
-                      className={`mt-3.5 grid grid-cols-2 gap-2 rounded-xl border p-2.5 ${
-                        isLight ? 'border-slate-200/80 bg-white/70' : 'border-white/10 bg-black/35'
-                      }`}
-                      style={{ transform: 'translateZ(12px)' }}
-                    >
-                      <Field label="Status" value={data.status || '—'} isLight={isLight} />
-                      <Field label="Registrar" value={data.registrar || '—'} isLight={isLight} />
-                      <Field label="Registered" value={data.registrationDate || '—'} isLight={isLight} />
-                      <Field label="Expires" value={data.expirationDate || '—'} isLight={isLight} />
-                      {typeof data.dnssec === 'boolean' && (
-                        <Field label="DNSSEC" value={data.dnssec ? 'Signed' : 'Unsigned'} isLight={isLight} />
-                      )}
-                      {data.nameServers[0] && (
-                        <Field label="Name server" value={data.nameServers[0]} isLight={isLight} mono />
-                      )}
-                    </div>
-
-                    <div
-                      className={`mt-2.5 flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.12em] ${
-                        isLight ? 'text-slate-400' : 'text-white/30'
+                    <span
+                      className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
+                        isLight
+                          ? 'border-[#d7dbdc] bg-white text-slate-600'
+                          : 'border-white/15 bg-white/[0.06] text-white/60'
                       }`}
                     >
-                      <span>Live 3D</span>
-                      <span>export → PNG</span>
-                    </div>
+                      RDAP
+                    </span>
+                  </div>
+
+                  <div
+                    className={`mt-3.5 grid grid-cols-2 gap-2 rounded-xl border p-2.5 ${
+                      isLight ? 'border-[#d7dbdc] bg-[#f7f8f8]' : 'border-white/10 bg-black/40'
+                    }`}
+                  >
+                    <Field label="Status" value={data.status || '—'} isLight={isLight} />
+                    <Field label="Registrar" value={data.registrar || '—'} isLight={isLight} />
+                    <Field label="Registered" value={data.registrationDate || '—'} isLight={isLight} />
+                    <Field label="Expires" value={data.expirationDate || '—'} isLight={isLight} />
+                    {typeof data.dnssec === 'boolean' && (
+                      <Field label="DNSSEC" value={data.dnssec ? 'Signed' : 'Unsigned'} isLight={isLight} />
+                    )}
+                    {data.nameServers[0] && (
+                      <Field label="Name server" value={data.nameServers[0]} isLight={isLight} mono />
+                    )}
+                  </div>
+
+                  <div
+                    className={`mt-2.5 flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.12em] ${
+                      isLight ? 'text-slate-400' : 'text-white/30'
+                    }`}
+                  >
+                    <span>Share card</span>
+                    <span>export → PNG</span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
 
@@ -648,11 +532,11 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                 isLight ? 'text-slate-500' : 'text-white/40'
               }`}
             >
-              How it appears on X (after the link is public)
+              Post preview
             </div>
             <div
               className={`overflow-hidden rounded-2xl border ${
-                isLight ? 'border-slate-200 bg-white' : 'border-white/12 bg-[#15202b]'
+                isLight ? 'border-[#d7dbdc] bg-white' : 'border-white/10 bg-[#111111]'
               }`}
             >
               <div className="flex gap-3 p-3">
@@ -673,7 +557,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                     {caption}
                   </pre>
                   <div
-                    className={`mt-1 text-[13px] ${isLight ? 'text-sky-600' : 'text-sky-400'}`}
+                    className={`mt-1 text-[13px] underline underline-offset-2 ${isLight ? 'text-slate-800' : 'text-white/80'}`}
                   >
                     {pageUrl.replace(/^https?:\/\//, '')}
                   </div>
@@ -694,7 +578,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                     )}
                     <div
                       className={`border-t px-3 py-2 ${
-                        isLight ? 'border-slate-100 bg-slate-50' : 'border-white/10 bg-black/30'
+                        isLight ? 'border-slate-100 bg-slate-50' : 'border-white/10 bg-black'
                       }`}
                     >
                       <div
@@ -709,12 +593,6 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                       </div>
                     </div>
                   </div>
-                  {localShare && (
-                    <p className={`mt-2 text-[11px] ${isLight ? 'text-amber-700' : 'text-amber-200/90'}`}>
-                      On localhost the compose window only shows text + link. The image block above is what X shows
-                      after deploy when it can fetch your Open Graph image.
-                    </p>
-                  )}
                 </div>
               </div>
             </div>
@@ -729,7 +607,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                 isLight ? 'text-slate-500' : 'text-white/40'
               }`}
             >
-              Share the card image
+              Card
             </div>
             <button
               type="button"
@@ -752,7 +630,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                 className={`inline-flex items-center justify-center gap-1.5 rounded-xl border px-2 py-2.5 text-[11px] font-bold transition disabled:opacity-50 ${
                   isLight
                     ? 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
-                    : 'border-white/10 bg-white/[0.04] text-white/80 hover:border-white/20'
+                    : 'border-white/10 bg-[#111111] text-white/80 hover:border-white/20'
                 }`}
               >
                 <SocialIcon id="download" className="h-3.5 w-3.5" />
@@ -765,7 +643,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                 className={`inline-flex items-center justify-center gap-1.5 rounded-xl border px-2 py-2.5 text-[11px] font-bold transition disabled:opacity-50 ${
                   isLight
                     ? 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
-                    : 'border-white/10 bg-white/[0.04] text-white/80 hover:border-white/20'
+                    : 'border-white/10 bg-[#111111] text-white/80 hover:border-white/20'
                 }`}
               >
                 <SocialIcon id="copy" className="h-3.5 w-3.5" />
@@ -780,7 +658,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                 isLight ? 'text-slate-500' : 'text-white/40'
               }`}
             >
-              Open social (no DomainDiscovery login)
+              Post it
             </div>
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
               {socialIds.map((id) => {
@@ -797,17 +675,11 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                         ? `Opens ${conf.label} with caption + localhost link (no image card until public HTTPS)`
                         : `Opens ${conf.label} with caption + share link (card image via Open Graph)`
                     }
-                    className="inline-flex flex-col items-center justify-center gap-1 rounded-xl px-2 py-2.5 text-[10px] font-bold transition disabled:opacity-50 shadow-sm min-h-[52px]"
-                    style={{
-                      backgroundColor: conf.bg,
-                      color: conf.fg,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = conf.hover;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = conf.bg;
-                    }}
+                    className={`inline-flex min-h-[52px] flex-col items-center justify-center gap-1 rounded-xl border px-2 py-2.5 text-[10px] font-bold transition disabled:opacity-50 ${
+                      isLight
+                        ? 'border-[#d7dbdc] bg-white text-slate-800 hover:bg-[#f4f5f5]'
+                        : 'border-white/10 bg-[#111111] text-white/85 hover:bg-white/[0.06]'
+                    }`}
                   >
                     <SocialIcon id={id} className="h-4 w-4" />
                     <span className="leading-none">{conf.chip}</span>
@@ -815,13 +687,8 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                 );
               })}
             </div>
-            <p className={`mt-2 text-[11px] leading-relaxed ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
-              Buttons only open the network compose UI (you stay logged into X/etc. in that browser — we never need
-              your social password). Image is <strong className="font-semibold">not</strong> pasted into the text box;
-              it appears as a link preview when the URL is public.
-            </p>
-            <p className={`mt-1 text-[10px] break-all font-mono ${isLight ? 'text-slate-400' : 'text-white/25'}`}>
-              {pageUrl}
+            <p className={`mt-2 text-[12px] leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+              Opens the compose window you already use. We never ask for a social password.
             </p>
           </div>
 
@@ -833,7 +700,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
               className={`rounded-xl border px-2 py-2 text-[11px] font-bold transition disabled:opacity-50 ${
                 isLight
                   ? 'border-slate-200 bg-white text-slate-600'
-                  : 'border-white/10 bg-white/[0.03] text-white/65'
+                  : 'border-white/10 bg-[#0a0a0a] text-white/65'
               }`}
             >
               Copy text
@@ -845,7 +712,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
               className={`rounded-xl border px-2 py-2 text-[11px] font-bold transition disabled:opacity-50 ${
                 isLight
                   ? 'border-slate-200 bg-white text-slate-600'
-                  : 'border-white/10 bg-white/[0.03] text-white/65'
+                  : 'border-white/10 bg-[#0a0a0a] text-white/65'
               }`}
             >
               Copy link
@@ -854,7 +721,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
 
           <pre
             className={`max-h-[120px] overflow-auto rounded-xl border p-3 text-[11px] leading-relaxed whitespace-pre-wrap break-words font-mono ${
-              isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-black/40 text-white/55'
+              isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-black text-white/55'
             }`}
           >
             {postText}

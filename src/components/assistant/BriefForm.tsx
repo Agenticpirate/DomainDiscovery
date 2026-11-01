@@ -56,14 +56,14 @@ export function BriefForm({
     : 'border-white/10';
   const field = isLight
     ? 'border-slate-200 bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:border-slate-400'
-    : 'border-white/12 bg-[#121214] text-white placeholder:text-white/30 focus:border-white/25';
+    : 'border-white/12 bg-[#111111] text-white placeholder:text-white/30 focus:border-white/25';
   const chipOff = isLight
     ? 'border-slate-200 bg-white text-slate-600'
-    : 'border-white/12 bg-[#121214] text-white/55';
+    : 'border-white/12 bg-[#111111] text-white/55';
   const chipOn = isLight
     ? 'bg-slate-900 text-white border-slate-900'
     : 'bg-white text-black border-white';
-  const plateFill = isLight ? '#ffffff' : '#0a0a0c';
+  const plateFill = isLight ? '#ffffff' : '#0a0a0a';
 
   return (
     <div
@@ -104,7 +104,7 @@ export function BriefForm({
             className={`rounded-lg border px-2 py-1.5 text-xs font-semibold outline-none ${
               isLight
                 ? 'border-slate-200 bg-slate-50 text-slate-800'
-                : 'border-white/12 bg-[#121214] text-white'
+                : 'border-white/12 bg-[#111111] text-white'
             }`}
           >
             {BUDGET_CURRENCIES.map((c) => (
@@ -128,7 +128,7 @@ export function BriefForm({
               className={`w-20 rounded-lg border px-2 py-1.5 font-mono ${
                 isLight
                   ? 'border-slate-200 bg-slate-50 text-slate-900'
-                  : 'border-white/12 bg-[#121214] text-white'
+                  : 'border-white/12 bg-[#111111] text-white'
               }`}
             />
           </span>
@@ -147,7 +147,7 @@ export function BriefForm({
       </button>
 
       {advanced && (
-        <div className="mt-3 space-y-3 border-t pt-3" style={{ borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)' }}>
+        <div className="mt-3 space-y-3 border-t pt-3" style={{ borderColor: isLight ? '#d7dbdc' : 'rgba(255,255,255,0.08)' }}>
           <div>
             <p className={`text-[11px] font-bold mb-1.5 ${isLight ? 'text-slate-500' : 'text-white/40'}`}>Style</p>
             <div className="flex flex-wrap gap-1.5">
@@ -251,7 +251,7 @@ export function BriefForm({
                 value={value.count}
                 onChange={(e) => set('count', Math.min(15, Math.max(5, Number(e.target.value) || 10)))}
                 className={`w-16 rounded-lg border px-2 py-1 ${
-                  isLight ? 'border-slate-200 bg-white' : 'border-white/12 bg-[#121214] text-white'
+                  isLight ? 'border-slate-200 bg-white' : 'border-white/12 bg-[#111111] text-white'
                 }`}
               />
             </label>
@@ -271,7 +271,7 @@ export function BriefForm({
                 className={`rounded-lg border px-2 py-1 text-xs ${
                   isLight
                     ? 'border-slate-200 bg-white text-slate-800'
-                    : 'border-white/12 bg-[#121214] text-white'
+                    : 'border-white/12 bg-[#111111] text-white'
                 }`}
               >
                 {BUDGET_CURRENCIES.map((c) => (
@@ -289,7 +289,7 @@ export function BriefForm({
                   set('maxBudgetUsd', Math.min(100000, Math.max(1, Number(e.target.value) || 20)))
                 }
                 className={`w-20 rounded-lg border px-2 py-1 ${
-                  isLight ? 'border-slate-200 bg-white' : 'border-white/12 bg-[#121214] text-white'
+                  isLight ? 'border-slate-200 bg-white' : 'border-white/12 bg-[#111111] text-white'
                 }`}
               />
               <span className="opacity-60">/ reg year</span>

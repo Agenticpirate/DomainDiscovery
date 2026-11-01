@@ -31,6 +31,20 @@ const config: Config = {
       },
       colors: {
         border: "var(--border-color)",
+        /* Resend neutral gray scale; Tailwind's default slate is blue-tinted and off-brand */
+        slate: {
+          50: "#f4f5f5",
+          100: "#e7e9ea",
+          200: "#d7dbdc",
+          300: "#bfc4c5",
+          400: "#a1a4a5",
+          500: "#6e7679",
+          600: "#52595b",
+          700: "#434a4d",
+          800: "#2a2f31",
+          900: "#141517",
+          950: "#0a0a0a",
+        },
         /* DESIGN.md dual-theme tokens (flip with html.light) */
         ds: {
           canvas: "var(--ds-canvas)",

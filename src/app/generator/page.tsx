@@ -8,20 +8,22 @@ import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { DomainGenerator } from '@/components/generator/DomainGenerator';
 import { GeneratorContent } from '@/components/generator/GeneratorContent';
-import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
-import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
-import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
-import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
+import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
+import { useLocale } from '@/components/i18n/LocaleProvider';
+import { pageHeading } from '@/lib/i18n/locales';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function GeneratorPage() {
   const [selectedDomain, setSelectedDomain] = useState<string>('');
+  const { locale, messages, href } = useLocale();
+  const localized = locale !== 'en';
   const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
   const isLight = mounted ? theme === 'light' : false;
-  const solid = isLight ? '#ffffff' : '#0a0a0c';
-  const pageSolid = isLight ? '#f8fafc' : '#050505';
+  const solid = isLight ? '#ffffff' : '#0a0a0a';
+  const pageSolid = isLight ? '#f4f5f5' : '#000000';
 
   return (
     <div
@@ -35,8 +37,8 @@ export default function GeneratorPage() {
       <main className={PAGE_MAIN_CLASS}>
         <PageBreadcrumb
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Domain Generator' },
+            { label: messages.nav.home, href: href('/') },
+            { label: messages.crumbs.generator },
           ]}
         />
 
@@ -64,9 +66,9 @@ export default function GeneratorPage() {
                         isLight ? 'bg-slate-500' : 'bg-white/70'
                       }`}
                     />
-                    <span className="sm:hidden">3,000+ affixes · Live .com</span>
+                    <span className="sm:hidden">5,500+ words · Ideas appear instantly</span>
                     <span className="hidden sm:inline">
-                      3,000+ prefixes &amp; suffixes · Up to 5,000 ideas · Live .com checks
+                      5,500+ ranked words · Ideas appear instantly · Live checks on the names in view
                     </span>
                   </span>
                 </div>
@@ -76,25 +78,30 @@ export default function GeneratorPage() {
                     className="block bg-clip-text text-transparent"
                     style={{
                       backgroundImage: isLight
-                        ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
+                        ? 'linear-gradient(to right, #141517, #2a2f31, #52595b)'
                         : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.55))',
                     }}
                   >
-                    Domain name generator
+                    {localized ? pageHeading(messages.pages.generator.title) : 'Domain name generator'}
                   </span>
                 </h1>
                 <p
                   className="text-[13px] sm:text-[15px] leading-relaxed max-w-xl mx-auto"
-                  style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.55)' }}
+                  style={{ color: isLight ? '#52595b' : 'rgba(255,255,255,0.55)' }}
                 >
-                  <span className="sm:hidden">
-                    Type a keyword — get brandable ideas with live .com checks.
-                  </span>
-                  <span className="hidden sm:inline">
-                    Type a keyword like “agentic” or “buddy” — we pair it with thousands of top domain
-                    prefixes and suffixes (Lean Domain Search style), then check .com availability as
-                    results stream in.
-                  </span>
+                  {localized ? (
+                    messages.pages.generator.description
+                  ) : (
+                    <>
+                      <span className="sm:hidden">
+                        Type a keyword — names from 5,500+ words show up immediately.
+                      </span>
+                      <span className="hidden sm:inline">
+                        Type a keyword like “buddy” — we join it with 5,500+ ranked words on either side
+                        and show the names immediately. Availability updates for the rows you’re looking at.
+                      </span>
+                    </>
+                  )}
                 </p>
               </div>
             </div>
@@ -109,12 +116,14 @@ export default function GeneratorPage() {
             </div>
           </section>
 
-          <section className={`border-t ${isLight ? 'border-slate-200' : 'border-white/[0.06]'}`}>
-            <GeneratorContent />
-          </section>
+          {locale === 'en' && (
+            <section className={`border-t ${isLight ? 'border-slate-200' : 'border-white/[0.06]'}`}>
+              <GeneratorContent />
+            </section>
+          )}
 
-          <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.generator} compact />
-          <SeoGuidePack {...TOOL_GUIDE_PACKS.generator} />
+          <LocalizedDefinition id="generator" compact />
+          <LocalizedGuidePack pack="generator" />
           {/* Footer affiliate banner only — no stacked inline ad */}
         </div>
       </main>

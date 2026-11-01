@@ -10,6 +10,7 @@ import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PremiumFaqGrid } from '@/components/sections/PremiumFaqGrid';
 import { Icons } from '@/components/ui/Icons';
 import { SITE_PAGE_DEFINITIONS, SITE_PRODUCT_FACTS } from '@/lib/seoSiteFacts';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 
 const FAQ_ITEMS = [
   {
@@ -73,28 +74,49 @@ const FAQ_ITEMS = [
   },
 ];
 
+const FAQ_ICONS = [
+  <Icons.Globe key="g" />,
+  <Icons.Check key="c" />,
+  <Icons.Dollar key="d" />,
+  <Icons.Layers key="l" />,
+  <Icons.Magic key="m" />,
+  <Icons.Globe key="g2" />,
+  <Icons.Star key="s" />,
+  <Icons.Search key="q" />,
+  <Icons.Shield key="h" />,
+];
+
 export function SiteFaqPage() {
+  const { locale, messages, href } = useLocale();
+  const items =
+    locale === 'en'
+      ? FAQ_ITEMS
+      : messages.faqPage.items.map((item, index) => ({
+          ...item,
+          icon: FAQ_ICONS[index] ?? FAQ_ICONS[0],
+        }));
+
   return (
     <div className="min-h-screen">
       <PageBackground variant="hero" />
       <Navigation />
       <main className={`${PAGE_MAIN_CLASS} pb-10`}>
-        <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: 'FAQ' }]} />
+        <PageBreadcrumb items={[{ label: messages.nav.home, href: href('/') }, { label: messages.crumbs.faq }]} />
         <SectionAmbient intensity="hero" className="w-full" contentClassName="relative z-[1]">
           <PremiumFaqGrid
             id="site-faq-page"
-            title="Domain search FAQs"
-            subtitle="Availability, registration, bulk checks, geo domains, WHOIS, pricing, and privacy."
-            items={FAQ_ITEMS}
+            title={messages.faqPage.title}
+            subtitle={messages.faqPage.subtitle}
+            items={items}
             className="!mb-8"
             headingAs="h1"
           />
           <div className="max-w-4xl mx-auto text-center page-gutter pb-4">
             <Link
-              href="/"
+              href={href('/')}
               className="inline-flex items-center rounded-xl bg-white text-black px-5 py-2.5 text-sm font-bold hover:bg-white/90 transition"
             >
-              Start domain name search
+              {messages.faqPage.cta}
             </Link>
           </div>
         </SectionAmbient>

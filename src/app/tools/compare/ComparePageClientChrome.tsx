@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
+import { useLocale } from '@/components/i18n/LocaleProvider';
+import { pageHeading } from '@/lib/i18n/locales';
 import { useTheme } from '@/contexts/ThemeContext';
 
 type Props = {
@@ -12,23 +14,28 @@ type Props = {
 /** Theme-aware hero + stats for the server-rendered compare page. */
 export function ComparePageClientChrome({ extensionCount, generatedAt }: Props) {
   const { theme } = useTheme();
+  const { locale, messages } = useLocale();
+  const localized = locale !== 'en';
   const isLight = theme === 'light';
   const panelGrid = isLight ? 'border-slate-200 bg-slate-200' : 'border-white/[0.1] bg-white/[0.08]';
-  const panelCell = isLight ? 'bg-white' : 'bg-[#0c0c0e]';
+  const panelCell = isLight ? 'bg-white' : 'bg-[#0a0a0a]';
 
   return (
     <>
       <SectionAmbient intensity="hero" contentClassName="page-gutter pt-2 sm:pt-4 pb-3 sm:pb-8">
         <div className="max-w-4xl mx-auto text-center px-0.5">
           <div className="mb-2 sm:mb-3 flex flex-wrap items-center justify-center gap-1 sm:gap-2">
-            {['Regular prices', '10 registrars', `${extensionCount.toLocaleString()}+ TLDs`].map(
+            {(localized
+              ? []
+              : ['Regular prices', '10 registrars', `${extensionCount.toLocaleString()}+ TLDs`]
+            ).map(
               (label) => (
                 <span
                   key={label}
                   className={`rounded-full border px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[11px] font-semibold ${
                     isLight
                       ? 'border-slate-200 bg-white text-slate-600'
-                      : 'border-white/10 bg-[#0a0a0c] text-white/55'
+                      : 'border-white/10 bg-[#0a0a0a] text-white/55'
                   }`}
                 >
                   {label}
@@ -49,7 +56,7 @@ export function ComparePageClientChrome({ extensionCount, generatedAt }: Props) 
                   'linear-gradient(to right, var(--gradient-hero-from), var(--gradient-hero-from), var(--gradient-hero-to))',
               }}
             >
-              Domain price comparison
+              {localized ? pageHeading(messages.pages.compare.title) : 'Domain price comparison'}
             </span>
           </h1>
           <p
@@ -57,11 +64,17 @@ export function ComparePageClientChrome({ extensionCount, generatedAt }: Props) 
               isLight ? 'text-slate-500' : 'text-white/45'
             }`}
           >
-            <span className="sm:hidden">Reg · renew · transfer across top registrars. No promo codes.</span>
-            <span className="hidden sm:inline">
-              Compare regular registration, renewal, and transfer prices for popular extensions across the
-              registrars people actually use — no first-year promo codes.
-            </span>
+            {localized ? (
+              messages.pages.compare.description
+            ) : (
+              <>
+                <span className="sm:hidden">Reg · renew · transfer across top registrars. No promo codes.</span>
+                <span className="hidden sm:inline">
+                  Compare regular registration, renewal, and transfer prices for popular extensions across the
+                  registrars people actually use — no first-year promo codes.
+                </span>
+              </>
+            )}
           </p>
         </div>
       </SectionAmbient>

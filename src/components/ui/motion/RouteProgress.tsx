@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useReducedMotion } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
+import { stripLocalePrefix } from '@/lib/i18n/locales';
 
 /**
  * Thin top progress line on route change — masks hard cuts and feels premium
@@ -11,6 +12,7 @@ import { useTheme } from '@/contexts/ThemeContext';
  */
 export function RouteProgress() {
   const pathname = usePathname();
+  const barePath = stripLocalePrefix(pathname || '/');
   const reduce = useReducedMotion();
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -18,16 +20,21 @@ export function RouteProgress() {
   const [width, setWidth] = useState(0);
   const first = useRef(true);
   const timers = useRef<number[]>([]);
+  const bare = useRef(barePath);
 
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!mounted) return;
-    // Skip first paint so home load isn’t a fake progress bar
+    const previousBare = bare.current;
+    bare.current = barePath;
+    // Skip first paint so home load isn’t a fake progress bar.
+    // A language change keeps the same page, so it should not look like a load.
     if (first.current) {
       first.current = false;
       return;
     }
+    if (previousBare === barePath) return;
     if (reduce) return;
 
     timers.current.forEach((id) => window.clearTimeout(id));
@@ -49,7 +56,7 @@ export function RouteProgress() {
       timers.current.forEach((id) => window.clearTimeout(id));
       timers.current = [];
     };
-  }, [pathname, mounted, reduce]);
+  }, [pathname, barePath, mounted, reduce]);
 
   if (!mounted || reduce || !visible) return null;
 
@@ -65,7 +72,7 @@ export function RouteProgress() {
         style={{
           width: `${width}%`,
           background: isLight
-            ? 'linear-gradient(90deg, #0a0a0c 0%, #334155 55%, #0a0a0c 100%)'
+            ? 'linear-gradient(90deg, #0a0a0a 0%, #434a4d 55%, #0a0a0a 100%)'
             : 'linear-gradient(90deg, rgba(255,255,255,0.25) 0%, #fff 50%, rgba(255,255,255,0.35) 100%)',
           boxShadow: isLight
             ? '0 0 12px rgba(15,23,42,0.35)'

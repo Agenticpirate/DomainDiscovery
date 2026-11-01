@@ -4,11 +4,8 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
-import {
-  REGISTRARS,
-  resolveRegisterUrl,
-  type RegistrarName,
-} from '@/lib/registrars';
+import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
+import { recordDomainsChecked } from '@/lib/searchCounter';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import { RegistrarActionMenu } from '@/components/domain/RegistrarControls';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
@@ -36,6 +33,36 @@ type SortType = 'popularity' | 'alphabetical' | 'length';
 type ViewType = 'grid' | 'list';
 type SeedCategory = keyof typeof generatorKeywords.seeds | 'all';
 
+function StatusGlyph({ id }: { id: StatusFilter }) {
+  const cls = 'h-[18px] w-[18px]';
+  if (id === 'available') {
+    return (
+      <svg className={cls} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    );
+  }
+  if (id === 'premium') {
+    return (
+      <svg className={cls} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+      </svg>
+    );
+  }
+  if (id === 'taken') {
+    return (
+      <svg className={cls} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+      </svg>
+    );
+  }
+  return (
+    <svg className={cls} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+    </svg>
+  );
+}
+
 const SEED_CATEGORY_LABELS: Record<string, string> = {
   all: 'All',
   trending: 'Trending',
@@ -56,9 +83,16 @@ const GENERATOR_SUFFIXES = generatorKeywords.suffixes as string[];
 const GENERATOR_SEMANTIC = generatorKeywords.semantic as Record<string, string[]>;
 const GENERATOR_SEEDS = generatorKeywords.seeds as Record<string, string[]>;
 const DISPLAY_PAGE = 120;
-const CHECK_BATCH = 80;
-/** Cap full generation near LDS scale while keeping the UI usable */
-const MAX_GENERATED = 5000;
+/** Responsive batching: streams results smoothly in small chunks (<250ms per batch). */
+const CHECK_BATCH = 40;
+/** Live-check the rows on screen plus a buffer ahead. */
+const CHECK_AHEAD = 40;
+const CHECK_CAP = 480;
+/**
+ * Full affix pass: every ranked word on both sides of the keyword.
+ * 5,532 words × 2 positions, plus morphs and a few compounds.
+ */
+const MAX_GENERATED = 14000;
 
 export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
   const { theme } = useTheme();
@@ -73,11 +107,8 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
   const [sortBy, setSortBy] = useState<SortType>('popularity');
   const [viewType, setViewType] = useState<ViewType>('grid');
-  /** Default Spaceship; user pick persists and drives Continue / buy URLs */
   const { selectedRegistrar, setSelectedRegistrar } = usePreferredRegistrar();
   const { showToast } = useToast();
-  const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
-  const [showDomainPopup, setShowDomainPopup] = useState(false);
   const [seedCategory, setSeedCategory] = useState<SeedCategory>('trending');
   const [visibleCount, setVisibleCount] = useState(DISPLAY_PAGE);
   const [minLen, setMinLen] = useState(3);
@@ -85,6 +116,11 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
   const [includeCompounds, setIncludeCompounds] = useState(true);
   const [savedDomains, setSavedDomains] = useState<string[]>([]);
   const searchGenRef = React.useRef(0);
+  /** Stems already sent for a live check, so scrolling does not re-query them. */
+  const queuedCheckRef = React.useRef<Set<string>>(new Set());
+  /** Keyword the current suggestion list was built for. Checks wait until these match. */
+  const suggestionKeywordRef = React.useRef('');
+  const checkCooldownRef = React.useRef(0);
 
   useEffect(() => {
     setSavedDomains(getSavedDomainNames());
@@ -151,7 +187,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
 
     const timer = setTimeout(() => {
       void handleSearch(keyword);
-    }, 180);
+    }, 420);
 
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -209,6 +245,44 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     setFilteredSuggestions(filtered);
   }, [suggestions, positionFilter, statusFilter, sortBy, keyword, minLen, maxLen]);
 
+  // Check the visible window only. The rest of the word list is already on screen.
+  useEffect(() => {
+    if (!suggestions.length) return;
+    const cleanKeyword = keyword.toLowerCase().replace(/\s+/g, '');
+    if (suggestionKeywordRef.current !== cleanKeyword) return;
+    if (Date.now() < checkCooldownRef.current) return;
+    const gen = searchGenRef.current;
+
+    const pool = suggestions.filter((d) => {
+      const len = d.name.length;
+      if (len < minLen || len > maxLen) return false;
+      if (positionFilter === 'starts' && !d.name.startsWith(cleanKeyword)) return false;
+      if (positionFilter === 'ends' && !d.name.endsWith(cleanKeyword)) return false;
+      return true;
+    });
+
+    if (sortBy === 'alphabetical') {
+      pool.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortBy === 'length') {
+      pool.sort((a, b) => a.name.length - b.name.length || a.name.localeCompare(b.name));
+    } else {
+      pool.sort((a, b) => b.popularity - a.popularity || a.name.localeCompare(b.name));
+    }
+
+    const windowSize = Math.min(pool.length, Math.min(visibleCount, CHECK_CAP) + CHECK_AHEAD);
+    const pending: GeneratedDomain[] = [];
+    for (let i = 0; i < windowSize; i++) {
+      const row = pool[i];
+      if (row.available !== null || queuedCheckRef.current.has(row.name)) continue;
+      queuedCheckRef.current.add(row.name);
+      pending.push(row);
+    }
+    if (!pending.length) return;
+    void checkDomainsAvailabilityProgressive(pending, gen);
+    // The checker is recreated each render; the queue ref stops duplicate lookups.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [suggestions, visibleCount, positionFilter, sortBy, minLen, maxLen, keyword]);
+
   useEffect(() => {
     setVisibleCount(DISPLAY_PAGE);
   }, [keyword, positionFilter, statusFilter, sortBy, minLen, maxLen]);
@@ -230,11 +304,13 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
 
       if (gen !== searchGenRef.current) return;
 
+      // Names are a local join of the word list. Paint them immediately.
+      // Availability is checked only for the rows in view.
+      suggestionKeywordRef.current = cleanKeyword;
+      queuedCheckRef.current = new Set();
+      checkCooldownRef.current = 0;
       setSuggestions(variations.map((v) => ({ ...v })));
-      setCheckProgress({ done: 0, total: variations.length });
-
-      // Progressive availability: first batches update UI as they complete
-      await checkDomainsAvailabilityProgressive(variations, gen);
+      setCheckProgress({ done: 0, total: 0 });
     } catch (error) {
       console.error('Domain generation error:', error);
     } finally {
@@ -260,41 +336,70 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
           const fullDomain = `${variation.name}.com`.toLowerCase();
           const result = resultByDomain.get(fullDomain);
           if (!result) return variation;
+          const priceNum = result.price ? parseFloat(result.price.replace(/[^0-9.]/g, '')) : NaN;
+          // A token aftermarket price is a parked name, not a premium listing.
+          const premium = !!result.premium && (!Number.isFinite(priceNum) || priceNum >= 100);
           return {
             ...variation,
             available: result.available,
-            premium: !!result.premium,
-            price: result.price,
+            premium,
+            price: premium ? result.price : undefined,
           };
         })
       );
+    };
+
+    const release = (names: string[]) => {
+      names.forEach((name) => queuedCheckRef.current.delete(name));
     };
 
     try {
       for (let i = 0; i < variations.length; i += CHECK_BATCH) {
         if (gen !== searchGenRef.current) return;
 
-        const batch = variations.slice(i, i + CHECK_BATCH).map((v) => `${v.name}.com`);
-        try {
+        const slice = variations.slice(i, i + CHECK_BATCH);
+        const batch = slice.map((v) => `${v.name}.com`);
+        const names = slice.map((v) => v.name);
+        recordDomainsChecked(batch.length, `gen:${gen}:${batch[0] || i}`);
+
+        const requestBatch = async () => {
           const response = await fetch('/api/domains/instant-check', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ domains: batch }),
           });
-          if (response.ok) {
-            const batchResults = await response.json();
-            if (Array.isArray(batchResults)) {
-              batchResults.forEach(
-                (r: { domain: string; available: boolean; premium?: boolean; price?: string }) => {
-                  if (r?.domain) {
-                    resultByDomain.set(r.domain.toLowerCase(), r);
-                  }
+          return response;
+        };
+
+        try {
+          let response = await requestBatch();
+          if (response.status === 429 && gen === searchGenRef.current) {
+            await new Promise((resolve) => setTimeout(resolve, 1600));
+            if (gen !== searchGenRef.current) return;
+            response = await requestBatch();
+          }
+          if (!response.ok) {
+            release(names);
+            checkCooldownRef.current = Date.now() + 8000;
+            break;
+          }
+          const batchResults = await response.json();
+          if (Array.isArray(batchResults)) {
+            batchResults.forEach(
+              (r: { domain: string; available: boolean; premium?: boolean; price?: string; checked?: boolean }) => {
+                if (!r?.domain) return;
+                if (r.checked === false) {
+                  const stem = r.domain.toLowerCase().replace(/\.com$/, '');
+                  queuedCheckRef.current.delete(stem);
+                  return;
                 }
-              );
-            }
+                resultByDomain.set(r.domain.toLowerCase(), r);
+              }
+            );
           }
         } catch {
-          /* continue batches */
+          release(names);
+          break;
         }
 
         applyMap();
@@ -317,50 +422,68 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     suggestion.available === false && !suggestion.premium;
   const isPendingSuggestion = (suggestion: GeneratedDomain) => suggestion.available === null;
 
-  /** Status surfaces — match keyword/bulk light-mode readability */
-  const statusCardClass = (s: GeneratedDomain) => {
-    if (isPendingSuggestion(s)) {
-      return isLight
-        ? 'bg-white border-slate-200 hover:bg-slate-50'
-        : 'bg-[#121214] border-white/[0.08] hover:bg-[#161618]';
-    }
-    if (isAvailableSuggestion(s)) {
-      return isLight
-        ? 'bg-emerald-50 border-emerald-200/90 hover:border-emerald-300'
-        : 'bg-emerald-500/[0.08] border-emerald-500/25 hover:bg-emerald-500/[0.12]';
-    }
-    if (isPremiumSuggestion(s)) {
-      return isLight
-        ? 'bg-amber-50 border-amber-200/90 hover:border-amber-300'
-        : 'bg-amber-500/[0.08] border-amber-500/25 hover:bg-amber-500/[0.12]';
-    }
-    return isLight
-      ? 'bg-rose-50/90 border-rose-200/80 hover:border-rose-300'
-      : 'bg-rose-500/[0.07] border-rose-500/20 hover:bg-rose-500/[0.1]';
-  };
+  /** Same neutral card as bulk search — color lives on the status icon only. */
+  const rowCardClass = isLight
+    ? 'bg-white hover:bg-slate-50 border-slate-200'
+    : 'bg-[#111111] hover:bg-white/[0.06] border-white/[0.08]';
+  const rowNameClass = isLight ? 'text-slate-900' : 'text-white/90';
 
-  const statusDotClass = (s: GeneratedDomain) => {
-    if (isPendingSuggestion(s)) return isLight ? 'bg-slate-300' : 'bg-white/20';
-    if (isAvailableSuggestion(s)) {
-      return isLight
-        ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)]'
-        : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.4)]';
+  const StatusMark = ({ suggestion }: { suggestion: GeneratedDomain }) => {
+    if (isPendingSuggestion(suggestion)) {
+      return (
+        <span
+          className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
+            isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/[0.06] text-white/35'
+          }`}
+          title="Not checked yet"
+        >
+          <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-300' : 'bg-white/30'}`} />
+        </span>
+      );
     }
-    if (isPremiumSuggestion(s)) {
-      return isLight
-        ? 'bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.4)]'
-        : 'bg-amber-400 shadow-[0_0_7px_rgba(251,191,36,0.45)]';
+    if (isPremiumSuggestion(suggestion)) {
+      return (
+        <span
+          className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
+            isLight ? 'bg-amber-100 text-amber-600' : 'bg-amber-500/15 text-amber-400'
+          }`}
+          title="Premium"
+        >
+          <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+            <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 2h14v2H5v-2z" />
+          </svg>
+        </span>
+      );
     }
-    return isLight ? 'bg-rose-500' : 'bg-rose-400/85';
-  };
-
-  const statusNameClass = (s: GeneratedDomain) => {
-    if (isPendingSuggestion(s)) return isLight ? 'text-slate-600' : 'text-white/60';
-    if (isAvailableSuggestion(s)) return isLight ? 'text-emerald-950 font-semibold' : 'text-emerald-50 font-semibold';
-    if (isPremiumSuggestion(s)) return isLight ? 'text-amber-950 font-semibold' : 'text-amber-50 font-semibold';
-    return isLight
-      ? 'text-rose-800/75 line-through decoration-rose-300'
-      : 'text-white/30 line-through decoration-white/15';
+    if (isAvailableSuggestion(suggestion)) {
+      return (
+        <span
+          className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+            isLight
+              ? 'bg-emerald-50 text-emerald-600 border border-emerald-200/80 shadow-[0_0_6px_rgba(16,185,129,0.28)]'
+              : 'bg-emerald-500/12 text-emerald-400 border border-emerald-500/25 shadow-[0_0_8px_rgba(52,211,153,0.32)]'
+          }`}
+          title="Available"
+          aria-label="Available"
+        >
+          <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+          </svg>
+        </span>
+      );
+    }
+    return (
+      <span
+        className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
+          isLight ? 'bg-rose-50 text-rose-500' : 'bg-rose-500/10 text-rose-400/90'
+        }`}
+        title="Taken"
+      >
+        <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </span>
+    );
   };
 
   /**
@@ -388,28 +511,28 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     const suffixes = GENERATOR_SUFFIXES;
     const semanticAlternatives = GENERATOR_SEMANTIC[keyword.toLowerCase()] || [];
 
-    // Exact match first
-    push(keyword, 100, 'exact');
+    // Exact match first, then the ranked word list.
+    // Ends-with = word+keyword. Starts-with = keyword+word.
+    // Score follows list order so popular modifiers stay first.
+    push(keyword, 500000, 'exact');
 
-    // Semantic alternatives
-    semanticAlternatives.forEach((alt, index) => {
-      push(alt, 98 - index, 'alternative');
-      if (withCompounds) {
-        push(`${keyword}${alt}`, 96 - index, 'compound');
-        push(`${alt}${keyword}`, 95 - index, 'compound');
-      }
-    });
-
-    // Full prefix library (LDS core)
     prefixes.forEach((prefix, index) => {
       if (prefix === keyword) return;
-      push(`${prefix}${keyword}`, Math.max(50, 95 - Math.floor(index / 40)), 'prefix');
+      push(`${prefix}${keyword}`, 200000 - index * 2, 'prefix');
     });
 
-    // Full suffix library (LDS core)
     suffixes.forEach((suffix, index) => {
       if (suffix === keyword) return;
-      push(`${keyword}${suffix}`, Math.max(48, 93 - Math.floor(index / 40)), 'suffix');
+      push(`${keyword}${suffix}`, 200000 - index * 2 - 1, 'suffix');
+    });
+
+    // Extra semantic joins only when that word is not already in the ranked list.
+    semanticAlternatives.forEach((alt, index) => {
+      push(alt, 5000 - index, 'alternative');
+      if (withCompounds) {
+        push(`${keyword}${alt}`, 4000 - index, 'compound');
+        push(`${alt}${keyword}`, 3900 - index, 'compound');
+      }
     });
 
     // Optional high-value compounds (top prefixes × top suffixes)
@@ -474,30 +597,23 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
     return variations;
   };
 
-  const handleDomainClick = (domainName: string) => {
-    setSelectedDomain(domainName);
-    setShowDomainPopup(true);
-  };
-
-  const registerHref = (domainName: string, registrar: RegistrarName = selectedRegistrar) => {
-    const fullDomain = domainName.includes('.') ? domainName : `${domainName}.com`;
-    const suggestion = suggestions.find((s) => s.name === domainName || `${s.name}.com` === fullDomain);
-    const premium = suggestion ? isPremiumSuggestion(suggestion) : false;
-    // Spaceship → full Impact affiliate URL; other registrars as selected in popup
-    return resolveRegisterUrl(fullDomain, registrar, null, { premium });
-  };
-
-  const availableCount = suggestions.filter(isAvailableSuggestion).length;
-  const premiumCount = suggestions.filter(isPremiumSuggestion).length;
-  const takenCount = suggestions.filter(isTakenSuggestion).length;
+  const cleanKeywordNow = keyword.toLowerCase().replace(/\s+/g, '');
+  const matchedSuggestions = suggestions.filter((d) => {
+    const len = d.name.length;
+    if (len < minLen || len > maxLen) return false;
+    if (positionFilter === 'starts' && !d.name.startsWith(cleanKeywordNow)) return false;
+    if (positionFilter === 'ends' && !d.name.endsWith(cleanKeywordNow)) return false;
+    return true;
+  });
+  const availableCount = matchedSuggestions.filter(isAvailableSuggestion).length;
+  const premiumCount = matchedSuggestions.filter(isPremiumSuggestion).length;
+  const takenCount = matchedSuggestions.filter(isTakenSuggestion).length;
   const totalCount = suggestions.length;
-  const selectedSuggestion = selectedDomain
-    ? suggestions.find((suggestion) => suggestion.name === selectedDomain) ?? null
-    : null;
+  const listedCount = matchedSuggestions.length;
 
   const chipClass = isLight
-    ? 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
-    : 'bg-[#121214] border border-white/10 text-white/60 hover:border-white/20 hover:text-white/80';
+    ? 'bg-white border-[var(--ds-hairline)] text-slate-600 hover:border-[var(--ds-hairline-strong)]'
+    : 'bg-[#111111] border-white/[0.08] text-white/55 hover:border-white/16 hover:text-white/80';
 
   return (
     <div className="space-y-3 sm:space-y-4">
@@ -506,14 +622,14 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
         className={`shine-border relative isolate overflow-hidden rounded-2xl border p-3 sm:p-4 ${
           isLight
             ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.04]'
-            : 'bg-[#0a0a0c] border-white/10'
+            : 'bg-[#0a0a0a] border-white/10'
         }`}
-        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
       >
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 rounded-[inherit]"
-          style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+          style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
         />
         <div className="relative z-[1] max-w-3xl mx-auto">
           {/* One continuous control — input has NO inner border/box */}
@@ -521,7 +637,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
             className={`flex items-center gap-1.5 sm:gap-2 rounded-xl sm:rounded-2xl p-1 sm:p-1.5 transition-all ${
               isLight
                 ? 'bg-slate-50 border border-slate-200 focus-within:border-slate-300 focus-within:bg-white focus-within:shadow-sm'
-                : 'bg-[#121214] border border-white/10 focus-within:border-white/22'
+                : 'bg-[#111111] border border-white/10 focus-within:border-white/22'
             }`}
           >
             <div
@@ -616,14 +732,14 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                     key={cat}
                     type="button"
                     onClick={() => setSeedCategory(cat)}
-                    className={`shrink-0 rounded-full px-2 py-0.5 text-[9px] sm:text-[10px] font-bold border transition-all ${
+                    className={`shrink-0 rounded-full px-2 py-0.5 text-[9px] sm:text-[10px] font-bold border transition-colors ${
                       active
                         ? isLight
-                          ? 'bg-slate-900 text-white border-slate-900'
-                          : 'bg-white text-black border-white'
+                          ? 'bg-white text-slate-900 border-[var(--ds-hairline-strong)]'
+                          : 'bg-[#111111] text-white border-white/20'
                         : isLight
-                          ? 'bg-transparent text-slate-500 border-transparent hover:bg-slate-50'
-                          : 'bg-transparent text-white/40 border-transparent hover:bg-white/[0.04]'
+                          ? 'bg-transparent text-slate-500 border-transparent hover:text-slate-800'
+                          : 'bg-transparent text-white/40 border-transparent hover:text-white/70'
                     }`}
                   >
                     {SEED_CATEGORY_LABELS[cat] || cat}
@@ -637,11 +753,11 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   key={example}
                   type="button"
                   onClick={() => setKeyword(example)}
-                  className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold transition-all ${
+                  className={`shrink-0 rounded-full border px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold transition-colors ${
                     keyword === example
                       ? isLight
-                        ? 'bg-slate-900 text-white border border-slate-900'
-                        : 'bg-white text-black border border-white'
+                        ? 'bg-white text-slate-900 border-[var(--ds-hairline-strong)]'
+                        : 'bg-[#111111] text-white border-white/20'
                       : chipClass
                   }`}
                 >
@@ -668,7 +784,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   >
                     <div
                       className={`h-full rounded-full transition-all ${
-                        isLight ? 'bg-emerald-500' : 'bg-emerald-400'
+                        isLight ? 'bg-slate-900' : 'bg-white/70'
                       }`}
                       style={{
                         width: `${Math.round((checkProgress.done / checkProgress.total) * 100)}%`,
@@ -684,7 +800,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
 
               {/* Status quick-filters — primary way to browse free / premium / taken */}
               <div
-                className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2"
+                className="grid grid-cols-2 gap-1.5 sm:grid-cols-[repeat(4,minmax(0,1fr))] sm:gap-2"
                 role="tablist"
                 aria-label="Filter by availability"
               >
@@ -693,50 +809,38 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                     {
                       id: 'available' as const,
                       label: 'Available',
+                      hint: 'Free to register',
                       count: availableCount,
-                      activeCls: isLight
-                        ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
-                        : 'bg-emerald-500 text-black border-emerald-500',
-                      idleCls: isLight
-                        ? 'bg-white text-emerald-700 border-emerald-200 hover:border-emerald-300'
-                        : 'bg-[#121214] text-emerald-400 border-emerald-500/25 hover:border-emerald-500/40',
-                      dot: 'bg-emerald-400',
+                      icon: isLight
+                        ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+                        : 'border-emerald-400/25 bg-emerald-400/10 text-emerald-300',
                     },
                     {
                       id: 'premium' as const,
                       label: 'Premium',
+                      hint: 'Listed for sale',
                       count: premiumCount,
-                      activeCls: isLight
-                        ? 'bg-amber-500 text-white border-amber-500 shadow-sm'
-                        : 'bg-amber-400 text-black border-amber-400',
-                      idleCls: isLight
-                        ? 'bg-white text-amber-700 border-amber-200 hover:border-amber-300'
-                        : 'bg-[#121214] text-amber-400 border-amber-400/25 hover:border-amber-400/40',
-                      dot: 'bg-amber-400',
+                      icon: isLight
+                        ? 'border-amber-200 bg-amber-50 text-amber-700'
+                        : 'border-amber-400/25 bg-amber-400/10 text-amber-300',
                     },
                     {
                       id: 'taken' as const,
                       label: 'Taken',
+                      hint: 'Already registered',
                       count: takenCount,
-                      activeCls: isLight
-                        ? 'bg-slate-800 text-white border-slate-800 shadow-sm'
-                        : 'bg-white text-black border-white',
-                      idleCls: isLight
-                        ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-                        : 'bg-[#121214] text-white/70 border-white/12 hover:border-white/22',
-                      dot: isLight ? 'bg-rose-400' : 'bg-rose-400/90',
+                      icon: isLight
+                        ? 'border-rose-200 bg-rose-50 text-rose-700'
+                        : 'border-rose-400/25 bg-rose-400/10 text-rose-300',
                     },
                     {
                       id: 'all' as const,
                       label: 'All ideas',
-                      count: totalCount,
-                      activeCls: isLight
-                        ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
-                        : 'bg-white/15 text-white border-white/25',
-                      idleCls: isLight
-                        ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-                        : 'bg-[#121214] text-white/60 border-white/10 hover:border-white/20',
-                      dot: isLight ? 'bg-slate-400' : 'bg-white/40',
+                      hint: 'Every generated name',
+                      count: listedCount,
+                      icon: isLight
+                        ? 'border-[#d7dbdc] bg-[#f4f5f5] text-slate-700'
+                        : 'border-white/12 bg-white/[0.04] text-white/75',
                     },
                   ] as const
                 ).map((tab) => {
@@ -748,16 +852,41 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                       role="tab"
                       aria-selected={active}
                       onClick={() => setStatusFilter(tab.id)}
-                      className={`flex flex-col items-start gap-0.5 rounded-xl border px-2.5 py-2 sm:px-3 sm:py-2.5 text-left transition-all active:scale-[0.98] ${
-                        active ? tab.activeCls : tab.idleCls
+                      className={`flex w-full min-w-0 flex-col gap-1.5 rounded-xl border px-2.5 py-2.5 sm:px-3 sm:py-3 text-left transition-colors ${
+                        isLight ? 'bg-white text-slate-900' : 'bg-[#111111] text-white'
+                      } ${
+                        active
+                          ? isLight
+                            ? 'border-[var(--ds-hairline-strong)]'
+                            : 'border-white/25'
+                          : isLight
+                            ? 'border-[var(--ds-hairline)] hover:border-[var(--ds-hairline-strong)]'
+                            : 'border-white/[0.08] hover:border-white/16'
                       }`}
                     >
-                      <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wide opacity-90">
-                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${tab.dot}`} aria-hidden />
-                        {tab.label}
+                      <span className="flex min-w-0 items-center gap-2">
+                        <span
+                          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border ${tab.icon}`}
+                        >
+                          <StatusGlyph id={tab.id} />
+                        </span>
+                        <span
+                          className={`min-w-0 flex-1 truncate text-[10px] font-bold uppercase tracking-wide sm:text-[11px] ${
+                            isLight ? 'text-slate-500' : 'text-white/45'
+                          }`}
+                        >
+                          {tab.label}
+                        </span>
+                        <span className="shrink-0 text-base font-black tabular-nums leading-none sm:text-lg">
+                          {tab.count.toLocaleString()}
+                        </span>
                       </span>
-                      <span className="text-[1.05rem] sm:text-lg font-black tabular-nums leading-none">
-                        {tab.count.toLocaleString()}
+                      <span
+                        className={`block truncate pl-11 text-[11px] font-medium leading-snug sm:text-[12px] ${
+                          isLight ? 'text-slate-600' : 'text-white/55'
+                        }`}
+                      >
+                        {tab.hint}
                       </span>
                     </button>
                   );
@@ -774,51 +903,16 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
           className={`shine-border relative isolate overflow-hidden rounded-2xl border ${
             isLight
               ? 'bg-white border-slate-200 shadow-sm'
-              : 'bg-[#0a0a0c] border-white/10'
+              : 'bg-[#0a0a0a] border-white/10'
           }`}
-          style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+          style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
         >
           <div
             className={`flex flex-col gap-2 px-3 sm:px-4 py-2.5 border-b ${
               isLight ? 'border-slate-100' : 'border-white/[0.06]'
             }`}
           >
-            {/*
-              Mobile: compact 2-col + full-width register (no stacked label bloat).
-              Desktop (sm+): labeled 3-col grid with helper under registrar.
-            */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 sm:gap-2.5">
-              <label className="col-span-2 sm:col-span-1 flex flex-col gap-0.5 sm:gap-1 min-w-0">
-                <span
-                  className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em]"
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  Register at
-                </span>
-                <select
-                  value={selectedRegistrar}
-                  onChange={(e) => setSelectedRegistrar(e.target.value as RegistrarName)}
-                  className={`w-full rounded-lg sm:rounded-xl border px-2.5 py-1.5 sm:px-3 sm:py-2.5 text-[11px] sm:text-[13px] font-semibold outline-none ${
-                    isLight
-                      ? 'bg-slate-50 border-slate-200 text-slate-900'
-                      : 'bg-[#121214] border-white/12 text-white'
-                  }`}
-                  aria-label="Where to register available domains"
-                >
-                  {REGISTRARS.map((reg) => (
-                    <option key={reg.name} value={reg.name}>
-                      {reg.host}
-                    </option>
-                  ))}
-                </select>
-                <span
-                  className="hidden sm:block text-[9.5px] leading-snug"
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  “Go” opens {selectedRegistrar}
-                </span>
-              </label>
-
+            <div className="grid grid-cols-2 gap-1.5 sm:gap-2.5">
               <label className="flex flex-col gap-0.5 sm:gap-1 min-w-0">
                 <span
                   className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em]"
@@ -832,7 +926,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   className={`w-full rounded-lg sm:rounded-xl border px-2 py-1.5 sm:px-3 sm:py-2.5 text-[11px] sm:text-[13px] font-semibold outline-none ${
                     isLight
                       ? 'bg-slate-50 border-slate-200 text-slate-900'
-                      : 'bg-[#121214] border-white/12 text-white'
+                      : 'bg-[#111111] border-white/12 text-white'
                   }`}
                   aria-label="Sort domain ideas"
                 >
@@ -855,7 +949,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   className={`w-full rounded-lg sm:rounded-xl border px-2 py-1.5 sm:px-3 sm:py-2.5 text-[11px] sm:text-[13px] font-semibold outline-none ${
                     isLight
                       ? 'bg-slate-50 border-slate-200 text-slate-900'
-                      : 'bg-[#121214] border-white/12 text-white'
+                      : 'bg-[#111111] border-white/12 text-white'
                   }`}
                   aria-label="Where the keyword appears in the name"
                 >
@@ -869,7 +963,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-3">
               <div
                 className={`inline-flex items-center gap-0.5 rounded-lg sm:rounded-xl border p-0.5 ${
-                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-[#121214]'
+                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-[#111111]'
                 }`}
               >
                 <button
@@ -926,7 +1020,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   className={`w-9 sm:w-11 rounded-md border px-1 py-0.5 sm:px-1.5 sm:py-1 tabular-nums outline-none ${
                     isLight
                       ? 'bg-slate-50 border-slate-200 text-slate-800'
-                      : 'bg-[#121214] border-white/10 text-white/80'
+                      : 'bg-[#111111] border-white/10 text-white/80'
                   }`}
                   aria-label="Minimum name length"
                 />
@@ -940,7 +1034,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   className={`w-9 sm:w-11 rounded-md border px-1 py-0.5 sm:px-1.5 sm:py-1 tabular-nums outline-none ${
                     isLight
                       ? 'bg-slate-50 border-slate-200 text-slate-800'
-                      : 'bg-[#121214] border-white/10 text-white/80'
+                      : 'bg-[#111111] border-white/10 text-white/80'
                   }`}
                   aria-label="Maximum name length"
                 />
@@ -983,33 +1077,23 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   return (
                     <div
                       key={`${suggestion.name}-${i}`}
-                      className={`group flex items-center gap-2 rounded-xl border px-2.5 py-2.5 min-w-0 transition-colors ${statusCardClass(suggestion)}`}
+                      className={`group flex items-center gap-2 rounded-xl border px-2.5 py-2.5 min-w-0 transition-colors ${rowCardClass}`}
                     >
-                      <button
-                        type="button"
-                        onClick={() => handleDomainClick(suggestion.name)}
-                        className="flex items-center gap-1.5 min-w-0 flex-1 text-left"
+                      <a
+                        href={getSpaceshipAffiliateUrl(fullDomain)}
+                        target="_blank"
+                        rel="sponsored noopener noreferrer"
+                        data-affiliate="spaceship"
+                        data-placement="generator-domain"
+                        title={`Register ${fullDomain} on Spaceship`}
+                        className="flex items-center gap-2 min-w-0 flex-1 text-left"
                       >
-                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${statusDotClass(suggestion)}`} />
-                        <span
-                          className={`font-mono text-[12px] sm:text-[13px] truncate ${statusNameClass(suggestion)}`}
-                        >
+                        <StatusMark suggestion={suggestion} />
+                        <span className={`font-mono text-[12px] sm:text-[13px] font-medium truncate ${rowNameClass}`}>
                           {suggestion.name}
-                          <span
-                            className={
-                              isAvailableSuggestion(suggestion) || isPremiumSuggestion(suggestion)
-                                ? isLight
-                                  ? 'text-inherit opacity-60'
-                                  : 'text-inherit opacity-50'
-                                : isLight
-                                  ? 'text-slate-400'
-                                  : 'text-white/35'
-                            }
-                          >
-                            .com
-                          </span>
+                          <span className={isLight ? 'text-slate-400' : 'text-white/35'}>.com</span>
                         </span>
-                      </button>
+                      </a>
                       <button
                         type="button"
                         onClick={() => handleSave(fullDomain)}
@@ -1045,17 +1129,9 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         onSelectRegistrar={setSelectedRegistrar}
                         canRegister={canRegister}
                         isPremium={isPremiumSuggestion(suggestion)}
-                        primaryLabel={
-                          isAvailableSuggestion(suggestion)
-                            ? 'Go'
-                            : isPremiumSuggestion(suggestion)
-                              ? 'Go · GoDaddy'
-                              : 'Info'
-                        }
+                        primaryLabel="Go"
                         premiumLabel={
-                          isPremiumSuggestion(suggestion)
-                            ? 'Premium listing from GoDaddy'
-                            : undefined
+                          isPremiumSuggestion(suggestion) ? 'Premium listing' : undefined
                         }
                         primaryButtonClassName={
                           isLight
@@ -1087,36 +1163,24 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   return (
                     <div
                       key={`${suggestion.name}-${i}`}
-                      className={`flex items-center justify-between gap-2 px-3 sm:px-4 py-2 border-l-2 ${
-                        isPendingSuggestion(suggestion)
-                          ? isLight
-                            ? 'border-transparent hover:bg-slate-50'
-                            : 'border-transparent hover:bg-white/[0.03]'
-                          : isAvailableSuggestion(suggestion)
-                            ? isLight
-                              ? 'border-emerald-400 bg-emerald-50/50 hover:bg-emerald-50'
-                              : 'border-emerald-500/50 bg-emerald-500/[0.05]'
-                            : isPremiumSuggestion(suggestion)
-                              ? isLight
-                                ? 'border-amber-400 bg-amber-50/50 hover:bg-amber-50'
-                                : 'border-amber-500/50 bg-amber-500/[0.05]'
-                              : isLight
-                                ? 'border-rose-300 bg-rose-50/40 hover:bg-rose-50/70'
-                                : 'border-rose-500/40 bg-rose-500/[0.04]'
+                      className={`flex items-center justify-between gap-2 px-3 sm:px-4 py-2 border-b last:border-b-0 ${
+                        isLight ? 'border-slate-100 hover:bg-slate-50' : 'border-white/[0.05] hover:bg-white/[0.03]'
                       }`}
                     >
-                      <button
-                        type="button"
-                        onClick={() => handleDomainClick(suggestion.name)}
+                      <a
+                        href={getSpaceshipAffiliateUrl(fullDomain)}
+                        target="_blank"
+                        rel="sponsored noopener noreferrer"
+                        data-affiliate="spaceship"
+                        data-placement="generator-domain"
+                        title={`Register ${fullDomain} on Spaceship`}
                         className="flex items-center gap-2 min-w-0 flex-1 text-left"
                       >
-                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${statusDotClass(suggestion)}`} />
-                        <span
-                          className={`font-mono text-[12px] sm:text-[13px] truncate ${statusNameClass(suggestion)}`}
-                        >
+                        <StatusMark suggestion={suggestion} />
+                        <span className={`font-mono text-[12px] sm:text-[13px] font-medium truncate ${rowNameClass}`}>
                           {fullDomain}
                         </span>
-                      </button>
+                      </a>
                       <button
                         type="button"
                         onClick={() => handleSave(fullDomain)}
@@ -1152,17 +1216,9 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         onSelectRegistrar={setSelectedRegistrar}
                         canRegister={canRegister}
                         isPremium={isPremiumSuggestion(suggestion)}
-                        primaryLabel={
-                          isAvailableSuggestion(suggestion)
-                            ? 'Go'
-                            : isPremiumSuggestion(suggestion)
-                              ? 'Go · GoDaddy'
-                              : 'Info'
-                        }
+                        primaryLabel="Go"
                         premiumLabel={
-                          isPremiumSuggestion(suggestion)
-                            ? 'Premium listing from GoDaddy'
-                            : undefined
+                          isPremiumSuggestion(suggestion) ? 'Premium listing' : undefined
                         }
                         primaryButtonClassName={
                           isLight
@@ -1222,7 +1278,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                           : 'bg-white text-black border-white'
                         : isLight
                           ? 'bg-white text-slate-600 border-slate-200'
-                          : 'bg-[#121214] text-white/70 border-white/12'
+                          : 'bg-[#111111] text-white/70 border-white/12'
                     }`}
                   >
                     {tab.label}
@@ -1268,96 +1324,8 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
           className="text-center text-[11px] sm:text-[12px] py-1"
           style={{ color: 'var(--text-muted)' }}
         >
-          Pick a keyword chip or type above — results appear here with live .com availability.
+          Pick a keyword chip or type above — names from the word list show up here immediately.
         </p>
-      )}
-
-      {/* Domain Popup */}
-      {showDomainPopup && selectedDomain && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowDomainPopup(false)}>
-          <div className={`${isLight ? 'bg-white' : 'bg-[#1a1a1a]'} border ${isLight ? 'border-slate-200' : 'border-white/10'} rounded-xl p-3.5 sm:p-4 max-w-md w-full`} onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg sm:text-xl font-bold">{selectedDomain}.com</h3>
-              <button
-                onClick={() => setShowDomainPopup(false)}
-                className={`${isLight ? 'text-slate-500 hover:text-slate-900' : 'text-white/50 hover:text-white'} transition-colors`}
-              >
-                <Icons.Close />
-              </button>
-            </div>
-            
-            {selectedSuggestion && isAvailableSuggestion(selectedSuggestion) && (
-              <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} mb-6`}>
-                Choose a registrar to search and register this domain:
-              </p>
-            )}
-            {selectedSuggestion && isPremiumSuggestion(selectedSuggestion) && (
-              <p className={`text-sm ${isLight ? 'text-amber-700' : 'text-amber-300'} mb-6`}>
-                Premium listing from GoDaddy
-                {selectedSuggestion.price ? ` (${selectedSuggestion.price})` : ''}.
-                Default Go opens GoDaddy; free names use our Spaceship affiliate.
-              </p>
-            )}
-            {selectedSuggestion && isTakenSuggestion(selectedSuggestion) && (
-              <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'} mb-6`}>
-                This domain appears taken. You can still open a registrar to search the name or check aftermarket listings.
-              </p>
-            )}
-            
-            <div className="space-y-2">
-              {REGISTRARS.map((registrar) => (
-                <a
-                  key={registrar.name}
-                  href={selectedDomain ? registerHref(selectedDomain, registrar.name) : undefined}
-                  target="_blank"
-                  rel={
-                    registrar.name === 'Spaceship'
-                      ? 'sponsored noopener noreferrer'
-                      : 'noopener noreferrer'
-                  }
-                  data-affiliate={registrar.name === 'Spaceship' ? 'spaceship' : undefined}
-                  data-registrar={registrar.name}
-                  data-placement="generator-popup"
-                  onClick={() => setShowDomainPopup(false)}
-                  className={`w-full block text-left px-4 py-3 border rounded-lg transition-colors group ${
-                    isLight
-                      ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-900'
-                      : 'bg-white/5 hover:bg-white/10 border-white/10 text-white'
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="flex items-center gap-2.5 min-w-0">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={registrar.logo}
-                        alt=""
-                        width={20}
-                        height={20}
-                        className={`h-5 w-5 shrink-0 rounded-md object-contain ${
-                          isLight ? 'bg-white ring-1 ring-slate-200' : 'bg-white/95 ring-1 ring-white/10'
-                        }`}
-                        loading="lazy"
-                      />
-                      <span className="font-semibold truncate">{registrar.host}</span>
-                      {registrar.name === 'Spaceship' ? (
-                        <span
-                          className={`shrink-0 text-[9px] font-bold uppercase tracking-wide ${
-                            isLight ? 'text-emerald-700' : 'text-emerald-400'
-                          }`}
-                        >
-                          Partner
-                        </span>
-                      ) : null}
-                    </span>
-                    <svg className={`w-4 h-4 shrink-0 ${isLight ? 'text-slate-400 group-hover:text-slate-900' : 'text-white/40 group-hover:text-white'} transition-colors`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
       )}
     </div>
   );

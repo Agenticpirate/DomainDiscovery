@@ -121,14 +121,14 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
     switch (type) {
       case 'success':
-        return 'border-white/12 bg-[#121214] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.75)] border-l-[3px] border-l-emerald-400';
+        return 'border-white/12 bg-[#111111] shadow-[0_16px_48px_-12px_rgba(0,0,0,0.75)] border-l-[3px] border-l-emerald-400';
       case 'error':
-        return 'border-white/12 bg-[#141416] border-l-[3px] border-l-rose-400';
+        return 'border-white/12 bg-[#111111] border-l-[3px] border-l-rose-400';
       case 'warning':
-        return 'border-white/12 bg-[#121214] border-l-[3px] border-l-amber-400';
+        return 'border-white/12 bg-[#111111] border-l-[3px] border-l-amber-400';
       case 'info':
       default:
-        return 'border-white/10 bg-[#0c0c0e] border-l-[3px] border-l-white/35';
+        return 'border-white/10 bg-[#0a0a0a] border-l-[3px] border-l-white/35';
     }
   };
 
@@ -136,13 +136,19 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     <ToastContext.Provider value={{ showToast }}>
       {children}
 
-      {/* Toast Container */}
-      <div className="fixed bottom-6 right-6 z-[9999] flex flex-col gap-3 max-w-md w-[min(100vw-2rem,24rem)]">
+      {/* Toast Container — Apple Safe Area & Touch Ergonomics */}
+      <div
+        className="fixed z-[9999] flex flex-col gap-3 max-w-md w-[min(100vw-2rem,24rem)] pointer-events-none"
+        style={{
+          bottom: 'max(1.25rem, calc(0.75rem + env(safe-area-inset-bottom, 0px)))',
+          right: 'max(1rem, env(safe-area-inset-right, 0px))',
+        }}
+      >
         {toasts.map((toast) => (
           <div
             key={toast.id}
             role={toast.type === 'error' ? 'alert' : 'status'}
-            className={`flex items-start gap-3 p-3.5 sm:p-4 rounded-2xl border animate-slide-up ${getToastStyles(toast.type)}`}
+            className={`pointer-events-auto flex items-start gap-3 p-3.5 sm:p-4 rounded-2xl border animate-slide-up ${getToastStyles(toast.type)}`}
           >
             <div className="shrink-0 mt-0.5">{getToastIcon(toast.type)}</div>
             <p
@@ -155,13 +161,13 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             <button
               type="button"
               onClick={() => removeToast(toast.id)}
-              className={`shrink-0 p-1 rounded-lg transition-colors ${
-                isLight ? 'hover:bg-slate-100' : 'hover:bg-white/[0.06]'
+              className={`shrink-0 min-h-[32px] min-w-[32px] flex items-center justify-center p-1 rounded-lg transition-colors ${
+                isLight ? 'hover:bg-slate-100 text-slate-400 hover:text-slate-700' : 'hover:bg-white/[0.06] text-white/40 hover:text-white'
               }`}
               aria-label="Dismiss notification"
             >
               <svg
-                className={`w-4 h-4 ${isLight ? 'text-slate-400' : 'text-white/40'}`}
+                className="w-4 h-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

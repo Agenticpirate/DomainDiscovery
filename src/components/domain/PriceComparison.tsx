@@ -42,7 +42,7 @@ function formatDate(value: string) {
 }
 
 function panelTone(isLight: boolean) {
-  return isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-[#0c0c0e]';
+  return isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-[#0a0a0a]';
 }
 
 function formatMoney(value: number | null | undefined): string {
@@ -133,10 +133,10 @@ function MetricCard({
         emphasize
           ? isLight
             ? 'border-slate-900 bg-slate-900 text-white'
-            : 'border-white/25 bg-[#121214] text-white ring-1 ring-white/20'
+            : 'border-white/25 bg-[#111111] text-white ring-1 ring-white/20'
           : isLight
             ? 'bg-white border-slate-200'
-            : 'bg-[#121214] border-white/10'
+            : 'bg-[#111111] border-white/10'
       }`}
     >
       <div
@@ -203,10 +203,10 @@ function RegistrarCard({
         isCheapestReg
           ? isLight
             ? 'border-slate-900/30 bg-slate-50'
-            : 'border-white/20 bg-[#121214]'
+            : 'border-white/20 bg-[#111111]'
           : isLight
             ? 'border-slate-200 bg-white hover:border-slate-300'
-            : 'border-white/10 bg-[#0a0a0c] hover:border-white/15'
+            : 'border-white/10 bg-[#0a0a0a] hover:border-white/15'
       } ${isUnsupported ? 'opacity-60' : ''}`}
     >
       {/* Header — single compact row on mobile */}
@@ -220,7 +220,7 @@ function RegistrarCard({
                   : 'bg-white text-black'
                 : isLight
                   ? 'bg-slate-100 text-slate-500'
-                  : 'bg-[#121214] text-white/40 border border-white/10'
+                  : 'bg-[#111111] text-white/40 border border-white/10'
             }`}
           >
             {rank}
@@ -312,7 +312,7 @@ function RegistrarCard({
             <span
               key={feature}
               className={`rounded px-1 py-px sm:rounded-md sm:px-1.5 sm:py-0.5 text-[8px] sm:text-[10px] leading-tight ${
-                isLight ? 'bg-slate-100 text-slate-600' : 'bg-[#121214] text-white/50 border border-white/8'
+                isLight ? 'bg-slate-100 text-slate-600' : 'bg-[#111111] text-white/50 border border-white/8'
               }`}
             >
               {feature}
@@ -321,7 +321,7 @@ function RegistrarCard({
           {offer.features.length > 2 && (
             <span
               className={`hidden sm:inline rounded-md px-1.5 py-0.5 text-[10px] ${
-                isLight ? 'bg-slate-100 text-slate-500' : 'bg-[#121214] text-white/40 border border-white/8'
+                isLight ? 'bg-slate-100 text-slate-500' : 'bg-[#111111] text-white/40 border border-white/8'
               }`}
             >
               +{offer.features.length - 2}
@@ -353,7 +353,7 @@ function PricePill({
             : 'border-white/30 bg-white text-black'
           : isLight
             ? 'border-slate-100 bg-slate-50'
-            : 'border-white/10 bg-[#121214]'
+            : 'border-white/10 bg-[#111111]'
       }`}
     >
       <div
@@ -769,7 +769,7 @@ export function PriceComparison({
       <div className={`rounded-2xl border p-4 sm:p-5 ${panelTone(isLight)}`}>
         <div
           className={`rounded-xl border px-4 py-3 text-sm ${
-            isLight ? 'border-slate-200 bg-slate-50 text-slate-700' : 'border-white/10 bg-white/[0.03] text-white/70'
+            isLight ? 'border-slate-200 bg-slate-50 text-slate-700' : 'border-white/10 bg-[#0a0a0a] text-white/70'
           }`}
         >
           Loading registrar pricing…
@@ -840,7 +840,7 @@ export function PriceComparison({
       <div className={`rounded-xl sm:rounded-2xl border overflow-hidden ${panelTone(isLight)}`}>
         <div
           className={`border-b px-2.5 py-2.5 sm:px-4 sm:py-3.5 ${
-            isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-[#0a0a0c]'
+            isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-[#0a0a0a]'
           }`}
         >
           <div className="flex flex-col gap-2 sm:gap-3 lg:flex-row lg:items-center lg:justify-between">
@@ -851,7 +851,7 @@ export function PriceComparison({
                 </h3>
                 <span
                   className={`rounded-full border px-1.5 py-0.5 sm:px-2 text-[9px] sm:text-[10px] font-semibold ${
-                    isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-[#121214] text-white/55'
+                    isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-[#111111] text-white/55'
                   }`}
                 >
                   {filteredRows.length.toLocaleString()}
@@ -870,7 +870,7 @@ export function PriceComparison({
 
             <div
               className={`inline-flex rounded-lg sm:rounded-xl border p-0.5 ${
-                isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-[#121214]'
+                isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-[#111111]'
               }`}
               role="group"
               aria-label="Price type"
@@ -907,7 +907,7 @@ export function PriceComparison({
 
           <div
             className={`mt-2 sm:mt-3 grid gap-2 sm:gap-2.5 rounded-xl border p-2 sm:p-3 lg:grid-cols-[1.15fr_1fr_auto] ${
-              isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-[#0a0a0c]'
+              isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-[#0a0a0a]'
             }`}
           >
             <label className="block min-w-0">
@@ -962,7 +962,7 @@ export function PriceComparison({
                 className={`h-9 sm:h-10 w-full rounded-lg sm:rounded-xl border px-2.5 sm:px-3 text-[13px] sm:text-sm font-medium outline-none ${
                   isLight
                     ? 'border-slate-200 bg-slate-50 text-slate-900'
-                    : 'border-white/10 bg-[#121214] text-white'
+                    : 'border-white/10 bg-[#111111] text-white'
                 }`}
               >
                 <option value="all">All registrars</option>
@@ -990,7 +990,7 @@ export function PriceComparison({
                 className={`h-9 sm:h-10 w-full rounded-lg sm:rounded-xl border px-2.5 text-[13px] sm:text-sm font-medium outline-none ${
                   isLight
                     ? 'border-slate-200 bg-slate-50 text-slate-900'
-                    : 'border-white/10 bg-[#121214] text-white'
+                    : 'border-white/10 bg-[#111111] text-white'
                 }`}
               >
                 <option value="recommended">Most popular</option>
@@ -1022,7 +1022,7 @@ export function PriceComparison({
                     : 'border-white bg-white text-black'
                   : isLight
                     ? 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
-                    : 'border-white/10 bg-[#121214] text-white/60 hover:border-white/20'
+                    : 'border-white/10 bg-[#111111] text-white/60 hover:border-white/20'
               }`}
             >
               All
@@ -1043,7 +1043,7 @@ export function PriceComparison({
                         : 'border-white bg-white text-black'
                       : isLight
                         ? 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
-                        : 'border-white/10 bg-[#121214] text-white/70 hover:border-white/20 hover:text-white'
+                        : 'border-white/10 bg-[#111111] text-white/70 hover:border-white/20 hover:text-white'
                   }`}
                 >
                   <RegistrarMark name={name} isLight={!active && isLight} />
@@ -1079,7 +1079,7 @@ export function PriceComparison({
                           : 'border-white bg-white text-black'
                         : isLight
                           ? 'border-slate-200 bg-white text-slate-700 hover:border-slate-300'
-                          : 'border-white/10 bg-[#121214] text-white/70 hover:border-white/20 hover:text-white'
+                          : 'border-white/10 bg-[#111111] text-white/70 hover:border-white/20 hover:text-white'
                     }`}
                   >
                     {tld}
@@ -1092,7 +1092,7 @@ export function PriceComparison({
           {hasActiveFilters && (
             <div
               className={`mt-2.5 flex flex-wrap items-center gap-2 rounded-lg border px-2.5 py-1.5 text-[12px] ${
-                isLight ? 'border-slate-200 bg-slate-50 text-slate-600' : 'border-white/10 bg-white/[0.03] text-white/60'
+                isLight ? 'border-slate-200 bg-slate-50 text-slate-600' : 'border-white/10 bg-[#0a0a0a] text-white/60'
               }`}
             >
               <span className="font-semibold">
@@ -1117,7 +1117,7 @@ export function PriceComparison({
             {canScrollTable && (
               <div
                 className={`mb-2 sm:mb-3 flex items-center justify-between gap-2 sm:gap-3 rounded-lg sm:rounded-xl border px-2 py-1.5 sm:px-3 sm:py-2 ${
-                  isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-[#121214]'
+                  isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/10 bg-[#111111]'
                 }`}
               >
                 <div className={`text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
@@ -1132,7 +1132,7 @@ export function PriceComparison({
                     className={`rounded-lg border px-2.5 py-1 text-[11px] font-semibold transition ${
                       isLight
                         ? 'border-slate-200 bg-white text-slate-700 disabled:text-slate-300'
-                        : 'border-white/10 bg-white/[0.04] text-white/80 disabled:text-white/25'
+                        : 'border-white/10 bg-[#111111] text-white/80 disabled:text-white/25'
                     }`}
                   >
                     ←
@@ -1144,7 +1144,7 @@ export function PriceComparison({
                     className={`rounded-lg border px-2.5 py-1 text-[11px] font-semibold transition ${
                       isLight
                         ? 'border-slate-200 bg-white text-slate-700 disabled:text-slate-300'
-                        : 'border-white/10 bg-white/[0.04] text-white/80 disabled:text-white/25'
+                        : 'border-white/10 bg-[#111111] text-white/80 disabled:text-white/25'
                     }`}
                   >
                     →
@@ -1159,7 +1159,7 @@ export function PriceComparison({
                   className={`pointer-events-none absolute inset-y-0 left-0 z-20 w-4 sm:w-6 ${
                     isLight
                       ? 'bg-gradient-to-r from-white to-transparent'
-                      : 'bg-gradient-to-r from-[#0c0c0e] to-transparent'
+                      : 'bg-gradient-to-r from-[#0a0a0a] to-transparent'
                   }`}
                 />
               )}
@@ -1168,7 +1168,7 @@ export function PriceComparison({
                   className={`pointer-events-none absolute inset-y-0 right-0 z-20 w-4 sm:w-6 ${
                     isLight
                       ? 'bg-gradient-to-l from-white to-transparent'
-                      : 'bg-gradient-to-l from-[#0c0c0e] to-transparent'
+                      : 'bg-gradient-to-l from-[#0a0a0a] to-transparent'
                   }`}
                 />
               )}
@@ -1296,7 +1296,7 @@ export function PriceComparison({
                               isLight
                                 ? 'border-slate-100 hover:bg-slate-50/80 focus-visible:ring-slate-400'
                                 : 'border-white/[0.06] hover:bg-white/[0.03] focus-visible:ring-white/30'
-                            } ${active ? (isLight ? 'bg-slate-50' : 'bg-white/[0.04]') : ''}`}
+                            } ${active ? (isLight ? 'bg-slate-50' : 'bg-[#111111]') : ''}`}
                           >
                             <th
                               scope="row"
@@ -1306,8 +1306,8 @@ export function PriceComparison({
                                     ? 'bg-slate-50 text-slate-900'
                                     : 'bg-white text-slate-900'
                                   : active
-                                    ? 'bg-[#121214] text-white'
-                                    : 'bg-[#0c0c0e] text-white'
+                                    ? 'bg-[#111111] text-white'
+                                    : 'bg-[#0a0a0a] text-white'
                               }`}
                             >
                               <span className="text-[11px] sm:text-sm">{summary.tld}</span>
@@ -1349,7 +1349,7 @@ export function PriceComparison({
                                             : 'inline-flex rounded-md bg-white px-1.5 py-0.5 text-[10px] sm:text-[12px] font-bold tabular-nums text-black'
                                           : isLight
                                             ? 'inline-flex rounded-md border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-[10px] sm:text-[12px] font-semibold tabular-nums text-slate-800 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-[13px]'
-                                            : 'inline-flex rounded-md border border-white/10 bg-[#121214] px-1.5 py-0.5 text-[10px] sm:text-[12px] font-semibold tabular-nums text-white/85 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-[13px]'
+                                            : 'inline-flex rounded-md border border-white/10 bg-[#111111] px-1.5 py-0.5 text-[10px] sm:text-[12px] font-semibold tabular-nums text-white/85 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-[13px]'
                                       }
                                     >
                                       {price.display}
@@ -1397,7 +1397,7 @@ export function PriceComparison({
           <div ref={detailRef} className="p-2 sm:p-4 space-y-2 sm:space-y-3 border-t xl:border-t-0 border-white/10">
             <div
               className={`rounded-lg sm:rounded-xl border p-2 sm:p-4 ${
-                isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#0a0a0c] border-white/10'
+                isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#0a0a0a] border-white/10'
               }`}
             >
               <div className="flex items-center sm:items-start justify-between gap-2 sm:gap-3">
@@ -1447,7 +1447,7 @@ export function PriceComparison({
                   className={`h-6 sm:h-8 rounded-md sm:rounded-lg border px-1.5 sm:px-2 text-[9px] sm:text-[11px] font-medium outline-none ${
                     isLight
                       ? 'border-slate-200 bg-white text-slate-800'
-                      : 'border-white/10 bg-[#121214] text-white'
+                      : 'border-white/10 bg-[#111111] text-white'
                   }`}
                 >
                   <option value="registration">Reg price</option>

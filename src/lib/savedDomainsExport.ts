@@ -4,7 +4,7 @@
  * Every file includes DomainDiscovery brand + public URL.
  */
 
-import type { SavedDomainRecord, SavedFolder } from '@/lib/savedDomainsStore';
+import type { SavedDomainRecord, SavedFolder, SavedTag } from '@/lib/savedDomainsStore';
 import { SITE_BRAND, getSiteBaseUrl } from '@/lib/seoSiteFacts';
 
 export type ExportFormat = 'txt' | 'csv' | 'json' | 'md' | 'pdf';
@@ -24,6 +24,17 @@ function folderName(
 ): string {
   if (!domain.folderId) return 'Unfiled';
   return folders.find((f) => f.id === domain.folderId)?.name || 'Unfiled';
+}
+
+function tagNames(domain: SavedDomainRecord, tags: SavedTag[] = []): string[] {
+  const ids = domain.tagIds || [];
+  return ids
+    .map((id) => tags.find((t) => t.id === id)?.name)
+    .filter((name): name is string => Boolean(name));
+}
+
+function tagLabel(domain: SavedDomainRecord, tags: SavedTag[] = []): string {
+  return tagNames(domain, tags).join('; ');
 }
 
 function stamp(): string {
@@ -61,7 +72,7 @@ export function brandTextHeader(meta: {
 export function buildTxt(
   domains: SavedDomainRecord[],
   folders: SavedFolder[],
-  opts?: { includeFolders?: boolean; scope?: string }
+  opts?: { includeFolders?: boolean; scope?: string; tags?: SavedTag[] }
 ): string {
   const includeFolders = opts?.includeFolders !== false;
   const header = brandTextHeader({ count: domains.length, scope: opts?.scope });
@@ -69,7 +80,9 @@ export function buildTxt(
     .map((d) => {
       if (!includeFolders) return d.domain;
       const f = folderName(d, folders);
-      return f === 'Unfiled' ? d.domain : `${d.domain}\t# ${f}`;
+      const tags = tagLabel(d, opts?.tags);
+      const note = [f === 'Unfiled' ? '' : f, tags].filter(Boolean).join(' · ');
+      return note ? `${d.domain}\t# ${note}` : d.domain;
     })
     .join('\n');
   const footer = [
@@ -85,7 +98,7 @@ export function buildTxt(
 export function buildCsv(
   domains: SavedDomainRecord[],
   folders: SavedFolder[],
-  opts?: { scope?: string }
+  opts?: { scope?: string; tags?: SavedTag[] }
 ): string {
   const url = BRAND.url();
   // Comment rows (Excel/Sheets ignore lines starting with # when opening as text;
@@ -99,13 +112,14 @@ export function buildCsv(
     `# Note: Local shortlist backup. DomainDiscovery does not host your list.`,
     `# Always re-verify availability at registrar checkout.`,
   ];
-  const header = 'domain,folder,saved_at,source_brand,source_url';
+  const header = 'domain,folder,categories,saved_at,source_brand,source_url';
   const rows = domains.map((d) => {
     const folder = folderName(d, folders);
     const date = new Date(d.savedAt).toISOString();
     return [
       escapeCsv(d.domain),
       escapeCsv(folder),
+      escapeCsv(tagLabel(d, opts?.tags)),
       escapeCsv(date),
       escapeCsv(BRAND.name),
       escapeCsv(url),
@@ -117,7 +131,7 @@ export function buildCsv(
 export function buildJson(
   domains: SavedDomainRecord[],
   folders: SavedFolder[],
-  opts?: { scope?: string }
+  opts?: { scope?: string; tags?: SavedTag[] }
 ): string {
   const url = BRAND.url();
   const nameById = new Map(folders.map((f) => [f.id, f.name]));
@@ -141,10 +155,16 @@ export function buildJson(
       name: f.name,
       color: f.color,
     })),
+    categories: (opts?.tags || []).map((t) => ({
+      id: t.id,
+      name: t.name,
+    })),
     domains: domains.map((d) => ({
       domain: d.domain,
       folder: d.folderId ? nameById.get(d.folderId) || null : null,
       folderId: d.folderId,
+      categories: tagNames(d, opts?.tags),
+      tagIds: d.tagIds || [],
       savedAt: new Date(d.savedAt).toISOString(),
       notes: d.notes || null,
     })),
@@ -155,7 +175,7 @@ export function buildJson(
 export function buildMarkdown(
   domains: SavedDomainRecord[],
   folders: SavedFolder[],
-  opts?: { scope?: string }
+  opts?: { scope?: string; tags?: SavedTag[] }
 ): string {
   const url = BRAND.url();
   const lines: string[] = [
@@ -175,13 +195,14 @@ export function buildMarkdown(
     '',
     '## Domains',
     '',
-    '| # | Domain | Folder | Saved |',
-    '| ---: | --- | --- | --- |',
+    '| # | Domain | Folder | Categories | Saved |',
+    '| ---: | --- | --- | --- | --- |',
   ];
 
   domains.forEach((d, i) => {
+    const categories = tagLabel(d, opts?.tags) || '—';
     lines.push(
-      `| ${i + 1} | \`${d.domain}\` | ${folderName(d, folders)} | ${new Date(d.savedAt).toISOString().slice(0, 10)} |`
+      `| ${i + 1} | \`${d.domain}\` | ${folderName(d, folders)} | ${categories} | ${new Date(d.savedAt).toISOString().slice(0, 10)} |`
     );
   });
 
@@ -293,7 +314,7 @@ export function buildForFormat(
   format: Exclude<ExportFormat, 'pdf'>,
   domains: SavedDomainRecord[],
   folders: SavedFolder[],
-  opts?: { scope?: string }
+  opts?: { scope?: string; tags?: SavedTag[] }
 ): string {
   switch (format) {
     case 'csv':
@@ -311,13 +332,14 @@ export function buildForFormat(
 export function buildForCopy(
   format: CopyFormat,
   domains: SavedDomainRecord[],
-  folders: SavedFolder[]
+  folders: SavedFolder[],
+  tags: SavedTag[] = []
 ): string {
   switch (format) {
     case 'csv':
-      return buildCsv(domains, folders, { scope: 'clipboard' });
+      return buildCsv(domains, folders, { scope: 'clipboard', tags });
     case 'md':
-      return buildMarkdown(domains, folders, { scope: 'clipboard' });
+      return buildMarkdown(domains, folders, { scope: 'clipboard', tags });
     case 'plain':
     default:
       return buildPlainList(domains, { branded: true });
@@ -331,7 +353,7 @@ export function buildForCopy(
 export async function downloadPdf(
   domains: SavedDomainRecord[],
   folders: SavedFolder[],
-  opts?: { scope?: string }
+  opts?: { scope?: string; tags?: SavedTag[] }
 ): Promise<void> {
   const { jsPDF } = await import('jspdf');
   const url = BRAND.url();
@@ -405,8 +427,8 @@ export async function downloadPdf(
   doc.setTextColor(15, 23, 42);
   doc.text('#', margin, y);
   doc.text('Domain', margin + 28, y);
-  doc.text('Folder', margin + 280, y);
-  doc.text('Saved', margin + 400, y);
+  doc.text('Folder · categories', margin + 250, y);
+  doc.text('Saved', margin + 430, y);
   y += 8;
   doc.setDrawColor(203, 213, 225);
   doc.line(margin, y, pageW - margin, y);
@@ -417,15 +439,17 @@ export async function downloadPdf(
   domains.forEach((d, i) => {
     ensureSpace(16);
     const folder = folderName(d, folders);
+    const categories = tagLabel(d, opts?.tags);
+    const place = categories ? `${folder} · ${categories}` : folder;
     const date = new Date(d.savedAt).toISOString().slice(0, 10);
     doc.setTextColor(100, 116, 139);
     doc.text(String(i + 1), margin, y);
     doc.setTextColor(15, 23, 42);
-    const domainLines = doc.splitTextToSize(d.domain, 240);
+    const domainLines = doc.splitTextToSize(d.domain, 210);
     doc.text(domainLines[0], margin + 28, y);
     doc.setTextColor(71, 85, 105);
-    doc.text(doc.splitTextToSize(folder, 100)[0], margin + 280, y);
-    doc.text(date, margin + 400, y);
+    doc.text(doc.splitTextToSize(place, 160)[0], margin + 250, y);
+    doc.text(date, margin + 430, y);
     y += Math.max(14, domainLines.length * 12);
   });
 
@@ -461,7 +485,7 @@ export async function exportDomains(
   format: ExportFormat,
   domains: SavedDomainRecord[],
   folders: SavedFolder[],
-  opts?: { scope?: string }
+  opts?: { scope?: string; tags?: SavedTag[] }
 ): Promise<void> {
   if (domains.length === 0) {
     throw new Error('Nothing to export');

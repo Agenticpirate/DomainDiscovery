@@ -4,7 +4,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Button } from '../ui/Button';
 import { Icons } from '../ui/Icons';
+import { useLocale } from '@/components/i18n/LocaleProvider';
+import { pageHeading } from '@/lib/i18n/locales';
+import { pageShell } from '@/lib/i18n/pageShells';
 import { useTheme } from '@/contexts/ThemeContext';
+import { SectionAmbient } from '@/components/ui/SectionAmbient';
 
 /** Opaque plate — ambient dots never show through cards / badges / body copy */
 function SolidPlate({
@@ -33,9 +37,7 @@ function SolidPlate({
   );
 }
 
-/** Soft scrim under free-standing section titles so dots clear under type */
 function TitleScrim({
-  isLight,
   children,
   className = '',
 }: {
@@ -43,20 +45,7 @@ function TitleScrim({
   children: React.ReactNode;
   className?: string;
 }) {
-  return (
-    <div className={`relative isolate ${className}`}>
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -mx-4 -my-2 rounded-3xl sm:-mx-8 sm:-my-3"
-        style={{
-          background: isLight
-            ? 'radial-gradient(ellipse 95% 85% at 50% 45%, #f8fafc 0%, #f8fafc 52%, rgba(248,250,252,0) 100%)'
-            : 'radial-gradient(ellipse 95% 85% at 50% 45%, #050505 0%, #050505 52%, rgba(5,5,5,0) 100%)',
-        }}
-      />
-      <div className="relative z-[1]">{children}</div>
-    </div>
-  );
+  return <div className={`relative ${className}`}>{children}</div>;
 }
 
 // Feature card with hover animation
@@ -94,14 +83,14 @@ const FeatureCard: React.FC<{
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-[inherit]"
-        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
       />
       <div className="relative z-[1]">
         <div
           className={`w-10 sm:w-12 h-10 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4 transition-colors duration-300 [&>svg]:w-5 [&>svg]:h-5 ${
             isLight
               ? 'bg-slate-100 text-slate-800 border border-slate-200 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900'
-              : 'bg-[#121214] text-white/80 border border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'
+              : 'bg-[#111111] text-white/80 border border-white/10 group-hover:bg-white group-hover:text-black group-hover:border-white'
           }`}
         >
           {icon}
@@ -128,7 +117,7 @@ const StepCard: React.FC<{
   const isLight = theme === 'light';
 
   return (
-    <div className={`shine-border relative group rounded-2xl border p-4 sm:p-5 ${isLight ? 'border-slate-200 bg-white/80 shadow-sm' : 'border-white/10 bg-white/[0.02]'}`}>
+    <div className={`shine-border relative group rounded-2xl border p-4 sm:p-5 ${isLight ? 'border-slate-200 bg-white/80 shadow-sm' : 'border-white/10 bg-[#0a0a0a]'}`}>
       <div className={`absolute right-3 top-2 text-5xl sm:text-6xl font-black transition-colors duration-500 ${isLight ? 'text-slate-100 group-hover:text-blue-100' : 'text-white/[0.03] group-hover:text-slate-400/10'}`}>
         {number}
       </div>
@@ -157,7 +146,7 @@ const IndustryCard: React.FC<{
   const isLight = theme === 'light';
 
   return (
-    <div className={`group p-4 sm:p-5 rounded-xl sm:rounded-2xl transition-all duration-300 ${isLight ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md' : 'bg-white/[0.02] border border-white/10 hover:border-slate-400/20 hover:bg-white/[0.04]'}`}>
+    <div className={`group p-4 sm:p-5 rounded-xl sm:rounded-2xl transition-all duration-300 ${isLight ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md' : 'bg-[#0a0a0a] border border-white/10 hover:border-slate-400/20 hover:bg-white/[0.04]'}`}>
       <div className="flex items-start justify-between mb-2.5 sm:mb-3">
         <div>
           <span className="text-[22px] sm:text-[28px] mb-2 sm:mb-2.5 block">{icon}</span>
@@ -189,7 +178,7 @@ const TipCard: React.FC<{
   const isLight = theme === 'light';
 
   return (
-    <div className={`group flex gap-4 p-6 rounded-xl transition-all duration-300 ${isLight ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-slate-400/20 hover:bg-white/[0.04]'}`}>
+    <div className={`group flex gap-4 p-6 rounded-xl transition-all duration-300 ${isLight ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/[0.06]' : 'bg-[#0a0a0a] border border-white/10 hover:border-slate-400/20 hover:bg-white/[0.04]'}`}>
       <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${isLight ? 'bg-blue-50 group-hover:bg-blue-100' : 'bg-slate-400/10 group-hover:bg-slate-400/20'}`}>
         <span className={`text-sm font-bold ${isLight ? 'text-blue-500' : 'text-slate-300'}`}>{number}</span>
       </div>
@@ -212,7 +201,7 @@ const ToolCard: React.FC<{
   const isLight = theme === 'light';
 
   return (
-    <Link href={href} className={`group block p-4 sm:p-6 rounded-lg sm:rounded-xl transition-all duration-300 ${isLight ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/[0.06]' : 'bg-white/[0.02] border border-white/10 hover:border-slate-400/30 hover:bg-white/[0.04]'}`}>
+    <Link href={href} className={`group block p-4 sm:p-6 rounded-lg sm:rounded-xl transition-all duration-300 ${isLight ? 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/[0.06]' : 'bg-[#0a0a0a] border border-white/10 hover:border-slate-400/30 hover:bg-white/[0.04]'}`}>
       <div className="text-2xl sm:text-3xl mb-2 sm:mb-4 group-hover:scale-110 transition-transform duration-300">{icon}</div>
       <h3 className={`font-semibold text-sm sm:text-base mb-1 sm:mb-2 transition-colors ${isLight ? 'group-hover:text-blue-600' : 'group-hover:text-slate-300'}`}>{title}</h3>
       <p className={`text-[10px] sm:text-xs ${isLight ? 'text-slate-500' : 'text-white/50'}`}>{description}</p>
@@ -346,10 +335,9 @@ const SearchInputSection: React.FC<{
         onDragLeave={() => setIsDragging(false)}
         onDrop={handleDrop}
       >
-        {/* Opaque plate — ambient dots never show through the search card */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 rounded-[inherit] bg-ds-canvas"
+          className="surface-premium pointer-events-none absolute inset-0 rounded-[inherit]"
         />
         {/* Header — compact; help stays optional so search is first */}
         <div className="relative z-[1] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-4 sm:px-5 pt-4 sm:pt-5 pb-3 border-b border-ds-hairline">
@@ -405,7 +393,7 @@ const SearchInputSection: React.FC<{
                 className={`w-full rounded-xl px-3.5 sm:px-4 py-3 sm:py-3.5 focus:outline-none focus:ring-2 min-h-[148px] sm:min-h-[176px] resize-y transition-all text-[13px] sm:text-[14px] font-mono leading-relaxed ${
                   isLight
                     ? 'bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:ring-slate-400/15'
-                    : 'bg-black/40 border border-white/10 text-white placeholder:text-white/25 focus:border-white/25 focus:ring-white/10'
+                    : 'bg-black border border-white/10 text-white placeholder:text-white/25 focus:border-white/25 focus:ring-white/10'
                 }`}
                 autoFocus
               />
@@ -423,7 +411,7 @@ const SearchInputSection: React.FC<{
             <div className="text-left space-y-3">
               <div
                 className={`flex flex-wrap gap-1.5 max-h-52 sm:max-h-64 overflow-y-auto p-3 rounded-xl border ${
-                  isLight ? 'bg-slate-50 border-slate-200' : 'bg-black/30 border-white/[0.06]'
+                  isLight ? 'bg-slate-50 border-slate-200' : 'bg-black border-white/[0.06]'
                 }`}
               >
                 {domains.map((d) => {
@@ -442,7 +430,7 @@ const SearchInputSection: React.FC<{
                             : 'bg-rose-500/[0.08] text-rose-50/90 border-rose-500/20'
                           : isLight
                             ? 'bg-white text-slate-700 border-slate-200'
-                            : 'bg-[#121214] text-white/85 border-white/10';
+                            : 'bg-[#111111] text-white/85 border-white/10';
 
                   const dotTone =
                     d.status === 'available'
@@ -529,7 +517,7 @@ const SearchInputSection: React.FC<{
                   className={`flex-1 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 resize-none text-[12px] sm:text-[13px] font-mono ${
                     isLight
                       ? 'bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:ring-slate-400/15'
-                      : 'bg-black/30 border border-white/10 text-white placeholder:text-white/25 focus:border-white/25 focus:ring-white/10'
+                      : 'bg-black border border-white/10 text-white placeholder:text-white/25 focus:border-white/25 focus:ring-white/10'
                   }`}
                 />
                 <button
@@ -551,7 +539,7 @@ const SearchInputSection: React.FC<{
           {checking && (
             <div
               className={`mt-4 p-3 rounded-xl border animate-fade-in ${
-                isLight ? 'bg-slate-50 border-slate-200' : 'bg-white/[0.03] border-white/10'
+                isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#0a0a0a] border-white/10'
               }`}
             >
               <div className="flex justify-between text-[12px] sm:text-[13px] mb-2">
@@ -571,7 +559,7 @@ const SearchInputSection: React.FC<{
                   style={{
                     width: `${(progress.done / Math.max(progress.total, 1)) * 100}%`,
                     background: isLight
-                      ? 'linear-gradient(90deg, #0f172a, #334155)'
+                      ? 'linear-gradient(90deg, #141517, #434a4d)'
                       : 'linear-gradient(90deg, rgba(255,255,255,0.5), #fff)',
                   }}
                 />
@@ -749,7 +737,7 @@ const SearchInputSection: React.FC<{
             className={`relative z-[1] px-4 sm:px-5 py-3.5 sm:py-4 border-t animate-fade-in ${
               isLight ? 'border-slate-100' : 'border-white/[0.06]'
             }`}
-            style={{ backgroundColor: isLight ? '#f8fafc' : '#0a0a0c' }}
+            style={{ backgroundColor: isLight ? '#f4f5f5' : '#0a0a0a' }}
           >
             <p
               className={`text-[10px] font-bold uppercase tracking-[0.12em] mb-2.5 ${
@@ -813,7 +801,7 @@ const SearchInputSection: React.FC<{
             className={`relative z-[1] px-4 sm:px-5 py-3.5 sm:py-4 border-t animate-fade-in ${
               isLight ? 'border-slate-100' : 'border-white/[0.06]'
             }`}
-            style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+            style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
           >
             <p
               className={`text-[10px] font-bold uppercase tracking-[0.12em] mb-2.5 ${
@@ -833,7 +821,7 @@ const SearchInputSection: React.FC<{
                   className={`mt-1 w-full rounded-lg border px-2.5 py-2 text-[12px] font-semibold outline-none ${
                     isLight
                       ? 'bg-slate-50 border-slate-200 text-slate-900'
-                      : 'bg-[#121214] border-white/10 text-white'
+                      : 'bg-[#111111] border-white/10 text-white'
                   }`}
                 >
                   {['com', 'net', 'org', 'io', 'ai', 'co', 'app', 'dev', 'xyz'].map((t) => (
@@ -853,7 +841,7 @@ const SearchInputSection: React.FC<{
                   className={`mt-1 w-full rounded-lg border px-2.5 py-2 text-[12px] font-semibold outline-none ${
                     isLight
                       ? 'bg-slate-50 border-slate-200 text-slate-900'
-                      : 'bg-[#121214] border-white/10 text-white'
+                      : 'bg-[#111111] border-white/10 text-white'
                   }`}
                 >
                   {[100, 250, 500, 1000].map((n) => (
@@ -865,7 +853,7 @@ const SearchInputSection: React.FC<{
               </label>
               <label
                 className={`flex items-center gap-2.5 rounded-lg border px-3 py-2.5 cursor-pointer mt-auto ${
-                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-white/[0.03]'
+                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-[#0a0a0a]'
                 }`}
               >
                 <input
@@ -880,7 +868,7 @@ const SearchInputSection: React.FC<{
               </label>
               <label
                 className={`flex items-center gap-2.5 rounded-lg border px-3 py-2.5 cursor-pointer mt-auto ${
-                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-white/[0.03]'
+                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-[#0a0a0a]'
                 }`}
               >
                 <input
@@ -942,6 +930,9 @@ export const BulkDomainSearchLanding: React.FC<{
   const [mounted, setMounted] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
+  const { locale, messages } = useLocale();
+  const localized = locale !== 'en';
+  const shell = pageShell(locale);
   const isLight = theme === 'light';
 
   useEffect(() => {
@@ -976,63 +967,38 @@ export const BulkDomainSearchLanding: React.FC<{
   return (
     <div className="w-full">
       {/* Hero — compact so the paste/search box sits higher */}
-      <section className="relative text-center pb-3 sm:pb-5 pt-1 sm:pt-3">
-        <div
-          className={`relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto transition-all duration-1000 ${
-            mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          {/* Badge — same language as home hero */}
-          <div
-            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 mb-2 sm:mb-3 text-[10px] sm:text-[12px] font-semibold tracking-wide ${
-              isLight
-                ? 'bg-slate-100 text-slate-600 border border-slate-200'
-                : 'bg-white/[0.04] text-white/65 border border-white/10'
-            }`}
-          >
-            <span className="relative flex h-1.5 w-1.5">
-              <span
-                className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-50 ${
-                  isLight ? 'bg-slate-400' : 'bg-white/50'
-                }`}
-              />
-              <span
-                className={`relative inline-flex rounded-full h-1.5 w-1.5 ${
-                  isLight ? 'bg-slate-600' : 'bg-white/80'
-                }`}
-              />
+      <SectionAmbient
+        intensity="hero"
+        solidBase={false}
+        className="mx-[calc(50%-50vw)]"
+        contentClassName="page-gutter"
+      >
+      <section className="relative mx-auto max-w-7xl text-center pb-6 sm:pb-10 pt-1 sm:pt-3">
+        <div className="relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto">
+          <div className="hero-badge inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-4 sm:mb-5 text-[12px] font-medium tracking-wide text-ds-body">
+            <span className="relative flex h-1.5 w-1.5" aria-hidden>
+              <span className="home-live-dot absolute inset-0 rounded-full bg-emerald-400" />
             </span>
-            <span className="sm:hidden">Multi-domain availability</span>
-            <span className="hidden sm:inline">
-              Multi-domain availability · Up to 1,000 names · Live checks
+            <span>
+              {shell?.bulkBadge ?? (<><span className="text-ds-ink">Live</span> · Up to 1,000 names</>)}
             </span>
           </div>
 
-          <h1 className="text-[1.55rem] leading-[1.08] sm:text-[3rem] md:text-[3.5rem] font-black tracking-tight mb-1 sm:mb-2">
-            <span
-              className="block bg-clip-text text-transparent"
-              style={{
-                backgroundImage: isLight
-                  ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
-                  : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.55))',
-              }}
-            >
-              Bulk domain search
+          <h1 className="text-[2.1rem] leading-[1.04] sm:text-[3.25rem] md:text-[3.85rem] font-semibold tracking-[-0.05em] mb-3 sm:mb-4">
+            <span className="hero-ink block pb-[0.06em]">
+              {localized ? pageHeading(messages.pages.bulk.title) : 'Bulk domain search'}
             </span>
-            <span
-              className="block text-[0.82rem] sm:text-[1.35rem] md:text-[1.65rem] mt-0.5 sm:mt-1 font-bold"
-              style={{ color: 'var(--gradient-subtitle)' }}
-            >
-              Check thousands of names at once
+            {!localized && (
+            <span className="block text-[1rem] sm:text-[1.4rem] md:text-[1.65rem] mt-1.5 sm:mt-2 font-medium tracking-[-0.025em] text-ds-body">
+              Check a thousand names at once
             </span>
+            )}
           </h1>
 
-          <p
-            className={`text-[12px] sm:text-base max-w-2xl mx-auto mb-2.5 sm:mb-4 leading-relaxed px-1 ${
-              isLight ? 'text-slate-500' : 'text-white/50'
-            }`}
-          >
-            Paste a list, import a file, or type names — live availability, premium flags, and registrar links.
+          <p className="text-[14px] sm:text-[16px] max-w-xl mx-auto mb-5 sm:mb-6 leading-relaxed px-1 text-ds-mute">
+            {localized
+              ? messages.pages.bulk.description
+              : 'Paste a list or drop a file. See what’s free, premium, or taken.'}
           </p>
 
           {/* Feature chips — freestanding like home (no outer blank dock) */}
@@ -1040,7 +1006,7 @@ export const BulkDomainSearchLanding: React.FC<{
             {(
               [
                 {
-                  label: 'Copy & paste',
+                  label: shell?.bulkChips[0] ?? 'Copy & paste',
                   icon: (
                     <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8 5H6.5A1.5 1.5 0 0 0 5 6.5v12A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 17.5 5H16M9 5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v1H9V5Z" />
@@ -1048,7 +1014,7 @@ export const BulkDomainSearchLanding: React.FC<{
                   ),
                 },
                 {
-                  label: 'CSV · TXT · JSON',
+                  label: shell?.bulkChips[1] ?? 'CSV · TXT · JSON',
                   icon: (
                     <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 16V4m0 12-3.5-3.5M12 16l3.5-3.5M5 18.5h14" />
@@ -1056,7 +1022,7 @@ export const BulkDomainSearchLanding: React.FC<{
                   ),
                 },
                 {
-                  label: 'Live checks',
+                  label: shell?.bulkChips[2] ?? 'Live checks',
                   icon: (
                     <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
                       <circle cx="12" cy="12" r="3" />
@@ -1065,7 +1031,7 @@ export const BulkDomainSearchLanding: React.FC<{
                   ),
                 },
                 {
-                  label: 'Export results',
+                  label: shell?.bulkChips[3] ?? 'Export results',
                   icon: (
                     <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0-12 3.5 3.5M12 4 8.5 7.5M5 18.5h14" />
@@ -1076,18 +1042,9 @@ export const BulkDomainSearchLanding: React.FC<{
             ).map((item) => (
               <span
                 key={item.label}
-                className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 sm:px-3.5 sm:py-2 text-[10px] sm:text-[12px] font-semibold transition-colors ${
-                  isLight
-                    ? 'border-slate-200 bg-white text-slate-600 shadow-sm'
-                    : 'border-white/10 bg-[#0c0c0e] text-white/70'
-                }`}
-                style={{ backgroundColor: isLight ? undefined : '#0c0c0e' }}
+                className="hero-badge inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 sm:px-3.5 sm:py-2 text-[11px] sm:text-[12px] font-medium text-ds-body"
               >
-                <span
-                  className={`inline-flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full ${
-                    isLight ? 'bg-slate-100 text-slate-600' : 'bg-white/[0.08] text-white/80'
-                  }`}
-                >
+                <span className="inline-flex items-center justify-center text-ds-ink">
                   {item.icon}
                 </span>
                 {item.label}
@@ -1119,12 +1076,12 @@ export const BulkDomainSearchLanding: React.FC<{
                 className={`shine-border relative isolate overflow-hidden rounded-2xl border p-3 sm:p-4 text-left ${
                   isLight ? 'border-slate-200 shadow-sm' : 'border-white/10'
                 }`}
-                style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
               >
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                 />
                 <div className="relative z-[1]">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
@@ -1150,7 +1107,7 @@ export const BulkDomainSearchLanding: React.FC<{
                       <div
                         key={snapshot.id}
                         className={`rounded-xl border p-3 ${isLight ? 'border-slate-200' : 'border-white/10'}`}
-                        style={{ backgroundColor: isLight ? '#f8fafc' : '#121214' }}
+                        style={{ backgroundColor: isLight ? '#f4f5f5' : '#111111' }}
                       >
                         <button type="button" onClick={() => onLoadPreviousSearch(snapshot)} className="w-full text-left">
                           <div className={`text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white/90'}`}>
@@ -1185,6 +1142,7 @@ export const BulkDomainSearchLanding: React.FC<{
           )}
         </div>
       </section>
+      </SectionAmbient>
 
       {/* Section: The most advanced bulk domain search tool */}
       <section className={`py-8 sm:py-14 border-t relative ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
@@ -1201,7 +1159,7 @@ export const BulkDomainSearchLanding: React.FC<{
             </h2>
             <p
               className="max-w-xl mx-auto text-[13px] sm:text-[15px] leading-relaxed"
-              style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+              style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
             >
               Paste thousands of names, stream live availability, and register winners — without the spreadsheet grind.
             </p>
@@ -1219,7 +1177,7 @@ export const BulkDomainSearchLanding: React.FC<{
             ].map((s) => (
               <div
                 key={s.label}
-                className={`px-3 py-3.5 sm:py-4 text-center rounded-2xl border ${isLight ? 'bg-white border-slate-200' : 'bg-[#0c0c0e] border-white/[0.09]'}`}
+                className={`px-3 py-3.5 sm:py-4 text-center rounded-2xl border ${isLight ? 'bg-white border-slate-200' : 'surface-premium border-white/[0.08]'}`}
               >
                 <div className="text-base sm:text-xl font-black tracking-tight tabular-nums">{s.value}</div>
                 <div className="text-[9px] sm:text-[10px] font-medium mt-0.5" style={{ color: 'var(--text-muted)' }}>
@@ -1267,7 +1225,7 @@ export const BulkDomainSearchLanding: React.FC<{
               {
                 step: '04',
                 title: 'Registrar ready',
-                description: 'Open available and premium names on GoDaddy, Namecheap, Porkbun, and more.',
+                description: 'Go on an available or premium name opens Spaceship so you can register it.',
                 icon: (
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
@@ -1278,7 +1236,7 @@ export const BulkDomainSearchLanding: React.FC<{
               <div
                 key={item.step}
                 className={`group flex flex-col p-4 sm:p-5 rounded-2xl border transition-colors duration-200 ${
-                  isLight ? 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.09] hover:bg-[#121214]'
+                  isLight ? 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm' : 'surface-premium border-white/[0.08] hover:border-white/[0.16]'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-3">
@@ -1302,7 +1260,7 @@ export const BulkDomainSearchLanding: React.FC<{
                 <h3 className={`text-[13px] sm:text-[14px] font-bold tracking-tight mb-1.5 ${isLight ? 'text-slate-900' : 'text-white'}`}>
                   {item.title}
                 </h3>
-                <p className="text-[12px] leading-relaxed" style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}>
+                <p className="text-[12px] leading-relaxed" style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.48)' }}>
                   {item.description}
                 </p>
               </div>
@@ -1313,7 +1271,7 @@ export const BulkDomainSearchLanding: React.FC<{
           <div
             className="grid grid-cols-1 lg:grid-cols-2 gap-2.5 sm:gap-3"
           >
-            <div className={`p-4 sm:p-6 rounded-2xl border ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.09]'}`}>
+            <div className={`p-4 sm:p-6 rounded-2xl border ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'surface-premium border-white/[0.08]'}`}>
               <div className="flex items-center justify-between gap-3 mb-3 sm:mb-4">
                 <div>
                   <div className={`text-[12px] sm:text-[13px] font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
@@ -1335,7 +1293,7 @@ export const BulkDomainSearchLanding: React.FC<{
                   </span>
                   <span
                     className={`rounded-md border px-2 py-0.5 text-[10px] font-semibold ${
-                      isLight ? 'border-slate-200 text-slate-500 bg-slate-50' : 'border-white/10 text-white/40 bg-white/[0.04]'
+                      isLight ? 'border-slate-200 text-slate-500 bg-slate-50' : 'border-white/10 text-white/40 bg-[#111111]'
                     }`}
                   >
                     Demo
@@ -1355,7 +1313,7 @@ export const BulkDomainSearchLanding: React.FC<{
                     className={`group flex items-center justify-between gap-2 rounded-xl border px-3 py-2.5 transition-colors duration-200 animate-fade-in ${
                       isLight
                         ? 'bg-slate-50 border-slate-200 hover:border-slate-300 hover:bg-white'
-                        : 'bg-white/[0.03] border-white/[0.08] hover:border-white/14 hover:bg-white/[0.05]'
+                        : 'bg-[#0a0a0a] border-white/[0.08] hover:border-white/14 hover:bg-white/[0.05]'
                     }`}
                     style={{ animationDelay: `${i * 80}ms` }}
                   >
@@ -1409,7 +1367,7 @@ export const BulkDomainSearchLanding: React.FC<{
                   <span
                     key={l.label}
                     className={`inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 ${
-                      isLight ? 'border-slate-200 bg-slate-50' : 'border-white/[0.08] bg-white/[0.03]'
+                      isLight ? 'border-slate-200 bg-slate-50' : 'border-white/[0.08] bg-[#0a0a0a]'
                     }`}
                   >
                     <span className={`h-1.5 w-1.5 rounded-full ${l.color}`} />
@@ -1419,7 +1377,7 @@ export const BulkDomainSearchLanding: React.FC<{
               </div>
             </div>
 
-            <div className={`p-4 sm:p-6 flex flex-col justify-center rounded-2xl border ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.09]'}`}>
+            <div className={`p-4 sm:p-6 flex flex-col justify-center rounded-2xl border ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'surface-premium border-white/[0.08]'}`}>
               <p
                 className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
                 style={{ color: 'var(--text-muted)' }}
@@ -1431,7 +1389,7 @@ export const BulkDomainSearchLanding: React.FC<{
               </h3>
               <p
                 className="text-[13px] sm:text-[14px] leading-relaxed mb-4 sm:mb-5"
-                style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+                style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
               >
                 Every name is checked live — free registrations, premium listings, and taken domains are labeled so you only chase what you can buy. No account, no paywall.
               </p>
@@ -1440,7 +1398,7 @@ export const BulkDomainSearchLanding: React.FC<{
                   'Instant status with color indicators',
                   'Premium detection with listing context',
                   'Multi-TLD support across major extensions',
-                  'One-click open on preferred registrars',
+                  'Go opens Spaceship for available and premium names',
                 ].map((item) => (
                   <li
                     key={item}
@@ -1513,7 +1471,7 @@ export const BulkDomainSearchLanding: React.FC<{
             </h2>
             <p
               className="max-w-xl mx-auto text-[13px] sm:text-[15px] leading-relaxed"
-              style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+              style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
             >
               Everything you need to find and register multiple domains — premium workflow, zero cost to use.
             </p>
@@ -1576,7 +1534,7 @@ export const BulkDomainSearchLanding: React.FC<{
               {
                 step: '06',
                 title: 'One-click register',
-                desc: 'Open available or premium names on GoDaddy, Namecheap, Porkbun, and more in one click.',
+                desc: 'Go on an available or premium name opens Spaceship in one click.',
                 icon: (
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
@@ -1587,7 +1545,7 @@ export const BulkDomainSearchLanding: React.FC<{
               <article
                 key={f.step}
                 className={`group flex flex-col p-4 sm:p-5 rounded-2xl border transition-colors duration-200 ${
-                  isLight ? 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.09] hover:bg-[#121214]'
+                  isLight ? 'bg-white border-slate-200 hover:bg-slate-50 shadow-sm' : 'surface-premium border-white/[0.08] hover:border-white/[0.16]'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-3">
@@ -1611,7 +1569,7 @@ export const BulkDomainSearchLanding: React.FC<{
                 <h3 className={`text-[13px] sm:text-[14px] font-bold tracking-tight mb-1.5 ${isLight ? 'text-slate-900' : 'text-white'}`}>
                   {f.title}
                 </h3>
-                <p className="text-[12px] leading-relaxed flex-1" style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}>
+                <p className="text-[12px] leading-relaxed flex-1" style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.48)' }}>
                   {f.desc}
                 </p>
               </article>
@@ -1620,7 +1578,7 @@ export const BulkDomainSearchLanding: React.FC<{
 
           <div
             className={`mt-3 sm:mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl border px-4 py-3.5 sm:px-5 sm:py-4 ${
-              isLight ? 'border-slate-200 bg-white' : 'border-white/[0.1] bg-[#0c0c0e]'
+              isLight ? 'border-slate-200 bg-white' : 'border-white/[0.1] surface-premium'
             }`}
           >
             <div className="text-center sm:text-left">
@@ -1646,6 +1604,8 @@ export const BulkDomainSearchLanding: React.FC<{
         </div>
       </section>
 
+      {locale === 'en' && (
+      <>
       {/* Section: Bulk domain search made simple */}
       <section className={`py-8 sm:py-12 border-t ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
         <div className="max-w-6xl mx-auto px-3 sm:px-6">
@@ -1661,7 +1621,7 @@ export const BulkDomainSearchLanding: React.FC<{
             </h2>
             <p
               className="max-w-lg mx-auto text-[13px] sm:text-[14px] leading-relaxed"
-              style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+              style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
             >
               Paste a list, stream live status, register winners — free and fast.
             </p>
@@ -1692,7 +1652,7 @@ export const BulkDomainSearchLanding: React.FC<{
             ].map((item) => (
               <div
                 key={item.step}
-                className={`p-4 sm:p-5 rounded-2xl border ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border-white/[0.09]'}`}
+                className={`p-4 sm:p-5 rounded-2xl border ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'surface-premium border-white/[0.08]'}`}
               >
                 <div
                   className={`text-[11px] font-black tabular-nums mb-2 ${
@@ -1704,7 +1664,7 @@ export const BulkDomainSearchLanding: React.FC<{
                 <h3 className={`text-[14px] sm:text-[15px] font-bold tracking-tight mb-1.5 ${isLight ? 'text-slate-900' : 'text-white'}`}>
                   {item.title}
                 </h3>
-                <p className="text-[12px] leading-relaxed" style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}>
+                <p className="text-[12px] leading-relaxed" style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.48)' }}>
                   {item.description}
                 </p>
               </div>
@@ -1713,7 +1673,7 @@ export const BulkDomainSearchLanding: React.FC<{
 
           <div
             className={`rounded-2xl border overflow-hidden ${
-              isLight ? 'border-slate-200 bg-slate-900' : 'border-white/[0.1] bg-[#0a0a0c]'
+              isLight ? 'border-slate-200 bg-slate-900' : 'border-white/[0.1] surface-premium'
             }`}
           >
             <div className="flex items-center gap-2 px-3.5 sm:px-4 py-2.5 border-b border-white/10">
@@ -1755,7 +1715,7 @@ brandforge`}</code>
             </h2>
             <p
               className="max-w-lg mx-auto text-[13px] sm:text-[14px] leading-relaxed"
-              style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+              style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
             >
               Same free premium workflow whether you&apos;re investing, protecting a brand, or launching a product.
             </p>
@@ -1795,13 +1755,13 @@ brandforge`}</code>
                 className={`p-4 sm:p-5 transition-colors ${
                   isLight
                     ? 'bg-white border border-slate-200 hover:bg-slate-50 shadow-sm rounded-2xl'
-                    : 'bg-[#0c0c0e] border border-white/[0.09] hover:bg-[#121214] rounded-2xl'
+                    : 'surface-premium border border-white/[0.08] hover:border-white/[0.16] rounded-2xl'
                 }`}
               >
                 <h3 className={`text-[14px] sm:text-[15px] font-bold tracking-tight mb-1.5 ${isLight ? 'text-slate-900' : 'text-white'}`}>
                   {card.title}
                 </h3>
-                <p className="text-[12px] sm:text-[13px] leading-relaxed mb-3" style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}>
+                <p className="text-[12px] sm:text-[13px] leading-relaxed mb-3" style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.48)' }}>
                   {card.description}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
@@ -1811,7 +1771,7 @@ brandforge`}</code>
                       className={`rounded-md border px-2 py-0.5 text-[10px] font-semibold ${
                         isLight
                           ? 'bg-slate-50 text-slate-600 border-slate-200'
-                          : 'bg-white/[0.04] text-white/50 border-white/[0.08]'
+                          : 'bg-[#111111] text-white/50 border-white/[0.08]'
                       }`}
                     >
                       {tag}
@@ -1842,7 +1802,7 @@ brandforge`}</code>
               </h2>
               <p
                 className="text-[13px] sm:text-[14px] leading-relaxed mb-1"
-                style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+                style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
               >
                 <span className={`font-semibold ${isLight ? 'text-slate-700' : 'text-white/75'}`}>Expert tips</span>
                 {' '}to move faster from a raw list to names you can actually register — free on DomainDiscovery.
@@ -1908,7 +1868,7 @@ brandforge`}</code>
                     step: '04',
                     title: 'Act fast on good finds',
                     description:
-                      'Available names can disappear in minutes. When status turns green, open your preferred registrar immediately.',
+                      'Available names can disappear in minutes. When status turns green, use Go to register it on Spaceship.',
                     tags: ['Register', 'Live'],
                   },
                   {
@@ -1933,7 +1893,7 @@ brandforge`}</code>
                       isLight ? 'border-slate-200 shadow-sm' : 'border-white/[0.09]'
                     }`}
                     contentClassName="flex flex-col p-4 sm:p-5 h-full"
-                    fill={isLight ? '#ffffff' : '#0c0c0e'}
+                    fill={isLight ? '#ffffff' : '#0a0a0a'}
                   >
                     <div className="flex items-center justify-between gap-2 mb-2.5">
                       <span
@@ -1955,7 +1915,7 @@ brandforge`}</code>
                     </h3>
                     <p
                       className="text-[12px] sm:text-[13px] leading-relaxed flex-1 mb-3"
-                      style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.52)' }}
+                      style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.52)' }}
                     >
                       {tip.description}
                     </p>
@@ -1966,7 +1926,7 @@ brandforge`}</code>
                           className={`rounded-md border px-2 py-0.5 text-[10px] font-semibold ${
                             isLight
                               ? 'bg-slate-50 text-slate-600 border-slate-200'
-                              : 'bg-white/[0.04] text-white/50 border-white/[0.1]'
+                              : 'bg-[#111111] text-white/50 border-white/[0.1]'
                           }`}
                         >
                           {tag}
@@ -1996,7 +1956,7 @@ brandforge`}</code>
             </h2>
             <p
               className="max-w-lg mx-auto text-[13px] sm:text-[15px] leading-relaxed"
-              style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+              style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
             >
               Bulk search pairs with our other free tools — invent names, verify ownership, and compare prices in one place.
             </p>
@@ -2052,7 +2012,7 @@ brandforge`}</code>
               <SolidPlate
                 key={tool.href}
                 isLight={isLight}
-                fill={isLight ? '#ffffff' : '#0c0c0e'}
+                fill={isLight ? '#ffffff' : '#0a0a0a'}
                 className={`group rounded-2xl border transition-colors duration-200 ${
                   isLight ? 'border-slate-200 shadow-sm' : 'border-white/[0.09]'
                 }`}
@@ -2088,7 +2048,7 @@ brandforge`}</code>
                   </h3>
                   <p
                     className="text-[12px] sm:text-[13px] leading-relaxed flex-1 mb-3"
-                    style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.52)' }}
+                    style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.52)' }}
                   >
                     {tool.description}
                   </p>
@@ -2110,6 +2070,8 @@ brandforge`}</code>
           </div>
         </div>
       </section>
+      </>
+      )}
 
     </div>
   );

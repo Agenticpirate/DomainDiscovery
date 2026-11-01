@@ -25,19 +25,19 @@ function SolidPlate({
   const fill =
     tone === 'code'
       ? isLight
-        ? '#020617'
-        : '#0a0a0c'
+        ? '#0a0a0a'
+        : '#0a0a0a'
       : tone === 'inset'
         ? isLight
-          ? '#f8fafc'
-          : '#121214'
+          ? '#f4f5f5'
+          : '#111111'
         : tone === 'hero'
           ? isLight
             ? '#ffffff'
-            : '#050505'
+            : '#000000'
           : isLight
             ? '#ffffff'
-            : '#0c0c0e';
+            : '#0a0a0a';
   const border =
     tone === 'code'
       ? isLight
@@ -85,8 +85,8 @@ export function AdaAgentCardView() {
   const ink = isLight ? 'text-slate-900' : 'text-white';
   const muted = isLight ? 'text-slate-600' : 'text-white/55';
   const faint = isLight ? 'text-slate-500' : 'text-white/40';
-  const plateFill = isLight ? '#ffffff' : '#0c0c0e';
-  const chipFill = isLight ? '#f8fafc' : '#121214';
+  const plateFill = isLight ? '#ffffff' : '#0a0a0a';
+  const chipFill = isLight ? '#f4f5f5' : '#111111';
   const btnGhost = isLight
     ? 'border-slate-200 text-slate-700'
     : 'border-white/15 text-white/80';
@@ -147,14 +147,14 @@ export function AdaAgentCardView() {
                 type="button"
                 onClick={copyJson}
                 className={`relative isolate cta-mobile-tap rounded-lg sm:rounded-xl border px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold ${btnGhost}`}
-                style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
               >
                 {copied ? 'Copied' : 'Copy JSON'}
               </button>
               <Link
                 href={adaPath("/docs#integration")}
                 className={`relative isolate cta-mobile-tap rounded-lg sm:rounded-xl border px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold ${btnGhost}`}
-                style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
               >
                 Integration
               </Link>
@@ -180,9 +180,9 @@ export function AdaAgentCardView() {
             isLight={isLight}
             className="shine-border rounded-xl sm:rounded-2xl p-4 sm:p-8 animate-pulse"
           >
-            <div className={`h-3.5 sm:h-4 w-32 sm:w-40 rounded mb-3 sm:mb-4 ${isLight ? 'bg-slate-100' : 'bg-[#121214]'}`} />
-            <div className={`h-2.5 sm:h-3 w-full rounded mb-2 ${isLight ? 'bg-slate-100' : 'bg-[#121214]'}`} />
-            <div className={`h-2.5 sm:h-3 w-5/6 rounded ${isLight ? 'bg-slate-100' : 'bg-[#121214]'}`} />
+            <div className={`h-3.5 sm:h-4 w-32 sm:w-40 rounded mb-3 sm:mb-4 ${isLight ? 'bg-slate-100' : 'bg-[#111111]'}`} />
+            <div className={`h-2.5 sm:h-3 w-full rounded mb-2 ${isLight ? 'bg-slate-100' : 'bg-[#111111]'}`} />
+            <div className={`h-2.5 sm:h-3 w-5/6 rounded ${isLight ? 'bg-slate-100' : 'bg-[#111111]'}`} />
           </SolidPlate>
         )}
 
@@ -351,7 +351,7 @@ export function AdaAgentCardView() {
                   className={`px-3 sm:px-5 py-2 sm:py-3 border-b ${
                     isLight ? 'border-slate-200' : 'border-white/10'
                   }`}
-                  style={{ backgroundColor: isLight ? '#f8fafc' : '#121214' }}
+                  style={{ backgroundColor: isLight ? '#f4f5f5' : '#111111' }}
                 >
                   <h3 className={`text-xs sm:text-sm font-bold ${ink}`}>
                     Tools ({card.tools.length})

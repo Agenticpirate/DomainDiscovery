@@ -8,6 +8,7 @@ import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 
 interface SimpleContentPageProps {
   activeTool?: string;
@@ -34,8 +35,9 @@ export function SimpleContentPage({
   breadcrumbLabel,
 }: SimpleContentPageProps) {
   const { theme } = useTheme();
+  const { href } = useLocale();
   const isLight = theme === 'light';
-  const solid = isLight ? '#ffffff' : '#0a0a0c';
+  const solid = isLight ? '#ffffff' : '#0a0a0a';
 
   return (
     <div className="min-h-screen">
@@ -122,7 +124,7 @@ export function SimpleContentPage({
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                    style={{ backgroundColor: isLight ? '#f8fafc' : '#0a0a0c' }}
+                    style={{ backgroundColor: isLight ? '#f4f5f5' : '#0a0a0a' }}
                   />
                   <div className="relative z-[1]">
                     <div
@@ -137,7 +139,7 @@ export function SimpleContentPage({
                     </p>
                   </div>
                   <Link
-                    href={cta.href}
+                    href={href(cta.href)}
                     className={`relative z-[1] inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors ${
                       isLight
                         ? 'bg-slate-900 text-white hover:bg-slate-800'

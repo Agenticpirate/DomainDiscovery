@@ -1,8 +1,11 @@
+import { SPACESHIP_VANITY_CLICK } from '@/lib/registrars';
+
 /**
  * Impact.com / Spaceship affiliate creatives.
- * Keep click + impression IDs exact so commissions track correctly.
+ * Every click uses the vanity link https://spaceship.sjv.io/NGPWKb.
+ * Impression pixels stay on the creative id.
  *
- * Register CTAs → registrars.ts (ad 1859616).
+ * Register CTAs → registrars.ts (same vanity link, with ?u= for the domain).
  * Leaderboard desktop (ChatGPT wide) → 3832105 / 1825517 tracking family as noted.
  * Leaderboard mobile 668×105 → ad 1825519.
  * Billboard carousel → 3832098 + 1825517.
@@ -33,10 +36,10 @@ export const SPACESHIP_INTERSTITIAL: AffiliateAdCreative = {
   id: '1825514',
   campaignId: '21274',
   accountId: '7521997',
-  clickUrl: 'https://spaceship.sjv.io/c/7521997/1825514/21274',
+  clickUrl: SPACESHIP_VANITY_CLICK,
   impressionPixel: 'https://imp.pxf.io/i/7521997/1825514/21274',
   displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-1825514',
-  localSrc: '/ads/spaceship-interstitial-1825514.webp',
+  localSrc: '/ads/spaceship-interstitial-1825514-hd.webp',
   width: 626,
   height: 521,
   alt: 'Spaceship — domains, hosting & email affiliate offer',
@@ -67,16 +70,16 @@ export const SPACESHIP_SPACEMAIL_BANNER: AffiliateAdCreative = {
   id: '1825519',
   campaignId: '21274',
   accountId: '7521997',
-  clickUrl: 'https://spaceship.sjv.io/c/7521997/1825519/21274',
+  clickUrl: SPACESHIP_VANITY_CLICK,
   impressionPixel: 'https://imp.pxf.io/i/7521997/1825519/21274',
   displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-1825519',
-  localSrc: '/ads/spacemail-mobile-1825519.webp',
+  localSrc: '/ads/spacemail-mobile-1825519-hd.webp',
   width: 668,
   height: 105,
-  alt: 'Spacemail by Spaceship — professional email for your domain',
-  title: 'Spacemail by Spaceship',
-  subtitle: 'Professional email on your domain',
-  ctaLabel: 'Get Spacemail',
+  alt: 'Spaceship — manage your domains easier and cheaper',
+  title: 'Spaceship',
+  subtitle: 'Manage your domains easier and cheaper',
+  ctaLabel: 'Register now',
   brand: 'Spaceship',
   format: 'leaderboard',
 };
@@ -84,9 +87,29 @@ export const SPACESHIP_SPACEMAIL_BANNER: AffiliateAdCreative = {
 /** Alias — same sharp 668×105 unit (mobile + desktop strip) */
 export const SPACESHIP_SPACEMAIL_MOBILE: AffiliateAdCreative = SPACESHIP_SPACEMAIL_BANNER;
 
+/** Spacemail strip — Impact 3832105. Previous site artwork, not the redraw. */
+export const SPACESHIP_SPACEMAIL_STRIP: AffiliateAdCreative = {
+  id: '3832105',
+  campaignId: '21274',
+  accountId: '7521997',
+  clickUrl: SPACESHIP_VANITY_CLICK,
+  impressionPixel: 'https://imp.pxf.io/i/7521997/3832105/21274',
+  displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832105',
+  localSrc: '/ads/spacemail-strip-3832105-4k.webp',
+  width: 4008,
+  height: 624,
+  alt: 'Spacemail by Spaceship — premium email for your domains',
+  title: 'Spacemail by Spaceship',
+  subtitle: 'Premium email for your domains',
+  ctaLabel: 'Start free',
+  brand: 'Spaceship',
+  format: 'leaderboard',
+};
+
 /** Strip placements (hero, footer, tools) */
 export const STRIP_CAROUSEL_ADS: AffiliateAdCreative[] = [
   SPACESHIP_SPACEMAIL_BANNER,
+  SPACESHIP_SPACEMAIL_STRIP,
 ];
 
 /** Spacemail 1200×600 billboard — Impact 3832098 */
@@ -94,10 +117,10 @@ export const SPACESHIP_SPACEMAIL_BILLBOARD: AffiliateAdCreative = {
   id: '3832098',
   campaignId: '21274',
   accountId: '7521997',
-  clickUrl: 'https://spaceship.sjv.io/c/7521997/3832098/21274',
+  clickUrl: SPACESHIP_VANITY_CLICK,
   impressionPixel: 'https://imp.pxf.io/i/7521997/3832098/21274',
   displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832098',
-  localSrc: '/ads/spacemail-banner-1200x630.webp',
+  localSrc: '/ads/spacemail-banner-1200x630-hd.webp',
   width: 1200,
   height: 600,
   alt: 'Spacemail by Spaceship — professional email for your domain',
@@ -113,10 +136,10 @@ export const SPACESHIP_PARTNER_WIDE: AffiliateAdCreative = {
   id: '1825517',
   campaignId: '21274',
   accountId: '7521997',
-  clickUrl: 'https://spaceship.sjv.io/c/7521997/1825517/21274',
+  clickUrl: SPACESHIP_VANITY_CLICK,
   impressionPixel: 'https://imp.pxf.io/i/7521997/1825517/21274',
   displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-1825517',
-  localSrc: '/ads/spaceship-banner-1825517.webp',
+  localSrc: '/ads/spaceship-banner-1825517-hd.webp',
   width: 2501,
   height: 1251,
   alt: 'Spaceship — premium domains, email & more',
@@ -141,10 +164,10 @@ export const SPACESHIP_SPACEMAIL_SKYSCRAPER: AffiliateAdCreative = {
   id: '3832106',
   campaignId: '21274',
   accountId: '7521997',
-  clickUrl: 'https://spaceship.sjv.io/c/7521997/3832106/21274',
+  clickUrl: SPACESHIP_VANITY_CLICK,
   impressionPixel: 'https://imp.pxf.io/i/7521997/3832106/21274',
   displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-3832106',
-  localSrc: '/ads/spacemail-banner-160x600.webp',
+  localSrc: '/ads/spacemail-banner-160x600-hd.webp',
   width: 160,
   height: 600,
   alt: 'Spacemail by Spaceship — professional email for your domain',
@@ -160,10 +183,10 @@ export const SPACESHIP_PARTNER_SKYSCRAPER: AffiliateAdCreative = {
   id: '1825513',
   campaignId: '21274',
   accountId: '7521997',
-  clickUrl: 'https://spaceship.sjv.io/c/7521997/1825513/21274',
+  clickUrl: SPACESHIP_VANITY_CLICK,
   impressionPixel: 'https://imp.pxf.io/i/7521997/1825513/21274',
   displayAdCdn: 'https://a.impactradius-go.com/display-ad/21274-1825513',
-  localSrc: '/ads/spaceship-skyscraper-1825513.webp',
+  localSrc: '/ads/spaceship-skyscraper-1825513-hd.webp',
   width: 335,
   height: 1251,
   alt: 'Spaceship — domains, email & affiliate programs',
@@ -178,6 +201,13 @@ export const SPACESHIP_PARTNER_SKYSCRAPER: AffiliateAdCreative = {
 export const SKYSCRAPER_CAROUSEL_ADS: AffiliateAdCreative[] = [
   SPACESHIP_PARTNER_SKYSCRAPER,
   SPACESHIP_SPACEMAIL_SKYSCRAPER,
+];
+
+/** Left gutter: three small spots stacked to fill the column. */
+export const LEFT_GUTTER_ADS: AffiliateAdCreative[] = [
+  SPACESHIP_PARTNER_SKYSCRAPER,
+  SPACESHIP_SPACEMAIL_SKYSCRAPER,
+  SPACESHIP_INTERSTITIAL,
 ];
 
 export type AffiliateAdPlacement =
@@ -254,4 +284,21 @@ export function getDefaultVariant(
   if (placement === 'home-hero') return 'strip';
   if (placement === 'footer') return 'card';
   return 'card';
+}
+
+/** Downscaled `-w{N}.webp` copies in /public/ads, plus the full-size file's width. */
+const AD_SRC_VARIANTS: Record<string, { widths: number[]; full: number }> = {
+  '/ads/spacemail-mobile-1825519-hd.webp': { widths: [640, 960, 1536], full: 2672 },
+  '/ads/spaceship-banner-1825517-hd.webp': { widths: [640, 1024, 1536], full: 2501 },
+  '/ads/spacemail-banner-1200x630-hd.webp': { widths: [640], full: 1200 },
+  '/ads/spacemail-banner-160x600-hd.webp': { widths: [320, 480], full: 640 },
+  '/ads/spacemail-strip-3832105-4k.webp': { widths: [960, 1536, 2400], full: 4008 },
+};
+
+/** `srcSet` for a webp creative; undefined once the src has fallen back to png/CDN. */
+export function adSrcSet(src: string): string | undefined {
+  const v = AD_SRC_VARIANTS[src];
+  if (!v) return undefined;
+  const base = src.replace(/\.webp$/i, '');
+  return [...v.widths.map((w) => `${base}-w${w}.webp ${w}w`), `${src} ${v.full}w`].join(', ');
 }

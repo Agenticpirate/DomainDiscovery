@@ -2,7 +2,6 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/Button';
-import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
 import { DomainWatchPanel } from '@/components/domain/DomainWatchPanel';
 import { WhoisShareCard } from '@/components/domain/WhoisShareCard';
@@ -193,7 +192,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
 
   const fieldShell = isLight
     ? 'bg-white border-slate-200 hover:border-slate-300'
-    : 'bg-[#0c0c0e] border-white/10 hover:border-white/20';
+    : 'bg-[#0a0a0a] border-white/10 hover:border-white/20';
 
   const labelClass = `text-[10px] font-bold uppercase tracking-widest ${
     isLight ? 'text-slate-500' : 'text-white/40'
@@ -202,25 +201,16 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
   return (
     <div
       className={`rounded-2xl border p-3.5 sm:p-5 ${
-        isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-[#0c0c0e]'
+        isLight ? 'border-slate-200 bg-white shadow-sm' : 'border-white/10 bg-[#0a0a0a]'
       }`}
     >
-      <div className="mb-5">
-        <div className="flex items-center gap-3 mb-2">
-          <div
-            className={`p-2 rounded-lg border ${
-              isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border-white/10'
-            }`}
-          >
-            <Icons.Info />
-          </div>
-          <div>
-            <h3 className="text-lg font-bold">WHOIS Lookup</h3>
-            <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-              Instant RDAP from registry servers · free · no API key
-            </p>
-          </div>
+      <div className="mb-3">
+        <div className={`text-[11px] font-semibold uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+          Look up a domain
         </div>
+        <p className={`mt-1 text-sm ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
+          Free public RDAP. No account.
+        </p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 mb-3">
@@ -236,7 +226,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
           className={`flex-1 border rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-2 transition-all ${
             isLight
               ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:ring-slate-400/20'
-              : 'bg-[#121214] border-white/10 text-white placeholder:text-white/30 focus:border-white/30 focus:ring-white/10'
+              : 'bg-[#111111] border-white/10 text-white placeholder:text-white/30 focus:border-white/30 focus:ring-white/10'
           }`}
         />
         <Button onClick={() => handleLookup()} isLoading={isLoading} className="w-full sm:w-auto">
@@ -256,7 +246,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
             className={`rounded-lg border px-2 py-1 text-[11px] font-semibold transition ${
               isLight
                 ? 'border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100'
-                : 'border-white/10 bg-white/[0.03] text-white/55 hover:text-white hover:border-white/20'
+                : 'border-white/10 bg-[#0a0a0a] text-white/55 hover:text-white hover:border-white/20'
             }`}
           >
             {sample}
@@ -267,7 +257,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
       {isLoading && (
         <div
           className={`mb-4 rounded-xl border px-3.5 py-3 text-sm flex items-center gap-2 ${
-            isLight ? 'border-slate-200 bg-slate-50 text-slate-600' : 'border-white/10 bg-white/[0.03] text-white/55'
+            isLight ? 'border-slate-200 bg-slate-50 text-slate-600' : 'border-white/10 bg-[#0a0a0a] text-white/55'
           }`}
         >
           <span className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent" />
@@ -296,13 +286,9 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
             {typeof data.latencyMs === 'number' && (
               <span
                 className={`rounded-full border px-2 py-0.5 text-[10px] font-bold tabular-nums ${
-                  data.latencyMs < 400
-                    ? isLight
-                      ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
-                      : 'border-emerald-500/20 bg-emerald-500/10 text-emerald-200'
-                    : isLight
-                      ? 'border-slate-200 bg-slate-50 text-slate-600'
-                      : 'border-white/10 bg-white/[0.04] text-white/50'
+                  isLight
+                    ? 'border-[#d7dbdc] bg-white text-slate-600'
+                    : 'border-white/10 bg-[#111111] text-white/55'
                 }`}
               >
                 {data.latencyMs === 0 ? 'cached' : `${data.latencyMs} ms`}
@@ -313,7 +299,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
                 className={`rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
                   isLight
                     ? 'border-slate-200 bg-slate-50 text-slate-600'
-                    : 'border-white/10 bg-white/[0.04] text-white/50'
+                    : 'border-white/10 bg-[#111111] text-white/50'
                 }`}
               >
                 RDAP
@@ -322,13 +308,9 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
             {typeof data.dnssec === 'boolean' && (
               <span
                 className={`rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
-                  data.dnssec
-                    ? isLight
-                      ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
-                      : 'border-emerald-500/20 bg-emerald-500/10 text-emerald-200'
-                    : isLight
-                      ? 'border-slate-200 bg-slate-50 text-slate-500'
-                      : 'border-white/10 bg-white/[0.03] text-white/40'
+                  isLight
+                    ? 'border-[#d7dbdc] bg-white text-slate-600'
+                    : 'border-white/10 bg-[#111111] text-white/55'
                 }`}
               >
                 DNSSEC {data.dnssec ? 'signed' : 'unsigned'}

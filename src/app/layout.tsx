@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
@@ -18,11 +18,27 @@ import {
   ICON_CACHE_BUST,
   SITE_BRAND,
 } from "@/lib/seoSiteFacts";
+import { LocaleProvider } from "@/components/i18n/LocaleProvider";
+import { getMessages, getPageCopy } from "@/lib/i18n";
+import { languageAlternates } from "@/lib/i18n/metadata";
+import { getLocaleMeta, localeHref, LOCALES } from "@/lib/i18n/locales";
+import { getRequestLocale, getRequestPath } from "@/lib/i18n/request";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+  ],
+};
 
 const V = ICON_CACHE_BUST;
 const baseUrl = getSiteBaseUrl();
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: {
     default: "Domain Name Search — Free Instant Availability | DomainDiscovery",
     template: "%s | DomainDiscovery",
@@ -103,22 +119,8 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  // Homepage-only default canonical. Child routes MUST set their own
-  // alternates.canonical — otherwise Google consolidates them to "/".
-  alternates: {
-    canonical: "/",
-    types: {
-      "application/rss+xml": [{ url: "/feed.xml", title: `${SITE_BRAND.name} Learn feed` }],
-      "application/opensearchdescription+xml": [
-        { url: "/opensearch.xml", title: SITE_BRAND.name },
-      ],
-      // Machine-readable product indexes for assistants (not a Google ranking lever)
-      "text/plain": [
-        { url: "/llms.txt", title: "llms.txt" },
-        { url: "/llms-full.txt", title: "llms-full.txt" },
-      ],
-    },
-  },
+  // Canonical and hreflang are set in generateMetadata, and only on the homepage.
+  // Child routes set their own canonical so this layout cannot consolidate them to "/".
   // Multi-engine webmaster verification (env-only; see getSearchEngineVerification)
   verification: getSearchEngineVerification(),
   manifest: `/site.webmanifest?v=${V}`,
@@ -146,14 +148,56 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const path = await getRequestPath();
+  const meta = getLocaleMeta(locale);
+  if (path !== "/") return baseMetadata;
+  const home = getPageCopy(locale, "/");
+  const title = home?.title;
+  const description = home?.description;
+  return {
+    ...baseMetadata,
+    title: title ? { default: title, template: "%s | DomainDiscovery" } : baseMetadata.title,
+    description,
+    keywords: home?.keywords,
+    alternates: {
+      canonical: localeHref(locale, "/"),
+      languages: languageAlternates("/"),
+    },
+    openGraph: {
+      ...baseMetadata.openGraph,
+      locale: meta.og,
+      alternateLocale: LOCALES.filter((item) => item.id !== locale).map((item) => item.og),
+      url: localeHref(locale, "/"),
+      title,
+      description,
+    },
+    twitter: {
+      ...baseMetadata.twitter,
+      title,
+      description,
+    },
+  };
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getRequestLocale();
+  const meta = getLocaleMeta(locale);
+  const messages = getMessages(locale);
+  const siteJsonLd = getWebSiteJsonLd({
+    searchPath: `${localeHref(locale, "/search")}?q={search_term_string}`,
+    inLanguage: LOCALES.map((item) => (item.id === "en" ? "en-US" : item.htmlLang)),
+  });
+
   return (
     <html
-      lang="en"
+      lang={meta.htmlLang}
+      dir={meta.dir}
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <head>
@@ -164,6 +208,10 @@ export default function RootLayout({
           // Impact's snippet uses `value`; include both so crawlers that expect either pass
           {...{ value: "94371be8-1bcb-4f36-b961-098e0c4eee46" }}
         />
+        {/* Machine-readable product indexes for assistants (not a Google ranking lever).
+            Kept out of metadata.alternates.types: vinext only accepts string URLs there. */}
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="llms-full.txt" />
       </head>
       <body
         className={`${GeistSans.className} min-h-screen w-full max-w-full font-sans antialiased overflow-x-hidden`}
@@ -171,7 +219,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getWebSiteJsonLd()),
+            __html: JSON.stringify(siteJsonLd),
           }}
         />
         <script
@@ -205,15 +253,17 @@ export default function RootLayout({
           title={SITE_BRAND.name}
         />
         <link rel="alternate" type="application/rss+xml" title={`${SITE_BRAND.name} Learn`} href="/feed.xml" />
-        <ThemeProvider>
-          <ToastProvider>
-            <RouteProgress />
-            <ScrollToTop />
-            {children}
-            {/* Ads deferred until idle — avoids GTmetrix/PSI "No CPU idle period" */}
-            <DeferredSiteAds />
-          </ToastProvider>
-        </ThemeProvider>
+        <LocaleProvider locale={locale} messages={messages}>
+          <ThemeProvider>
+            <ToastProvider>
+              <RouteProgress />
+              <ScrollToTop />
+              {children}
+              {/* Ads deferred until idle — avoids GTmetrix/PSI "No CPU idle period" */}
+              <DeferredSiteAds />
+            </ToastProvider>
+          </ThemeProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

@@ -5,13 +5,16 @@ import Link from 'next/link';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
 import { DomainTicker } from '@/components/home/DomainTicker';
+import { HomeProductRows } from '@/components/home/HomeProductRows';
 import { StatsBar } from '@/components/home/StatsBar';
-import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { PremiumFaqGrid } from '@/components/sections/PremiumFaqGrid';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
-import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 
 export const HomePageContent: React.FC = () => {
+  const { messages, href } = useLocale();
+  const home = messages.home;
   const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
@@ -20,36 +23,6 @@ export const HomePageContent: React.FC = () => {
   }, []);
 
   const isLight = mounted ? theme === 'light' : false;
-
-  const features = [
-    {
-      icon: <Icons.Search />,
-      title: 'Domain availability checker',
-      description:
-        'See free, taken, or premium in real time — across .com, .ai, country codes, and 1,600+ TLDs.',
-      href: '/search',
-      cta: 'Check availability',
-      badge: null as string | null,
-    },
-    {
-      icon: <Icons.Layers />,
-      title: '1,600+ domain extensions',
-      description:
-        'Browse every major TLD in one catalog. Filter by category, price signals, and live status.',
-      href: '/domain-extensions',
-      cta: 'Browse extensions',
-      badge: '1,600+ TLDs',
-    },
-    {
-      icon: <Icons.Magic />,
-      title: 'AI domain name generator',
-      description:
-        'Turn one keyword into short, brandable names with live checks — built for startups and local brands.',
-      href: '/generator',
-      cta: 'Generate names',
-      badge: 'AI-Powered',
-    },
-  ];
 
   const tools = [
     {
@@ -238,89 +211,51 @@ export const HomePageContent: React.FC = () => {
     { title: 'Check trademarks', desc: 'Avoid legal conflicts early' },
   ];
 
+  tools.forEach((tool, index) => {
+    const copy = home.tools[index];
+    tool.title = copy.title;
+    tool.description = copy.description;
+    if (copy.badge) tool.badge = copy.badge;
+    tool.href = href(tool.href);
+  });
+  benefits.forEach((benefit, index) => {
+    benefit.title = home.benefits[index].title;
+    benefit.description = home.benefits[index].description;
+  });
+  extensions.forEach((item, index) => {
+    item.desc = home.extLabels[index];
+  });
+  faqs.forEach((item, index) => {
+    item.question = home.faqs[index].question;
+    item.answer = home.faqs[index].answer;
+  });
+  chooseTips.forEach((tip, index) => {
+    tip.title = home.tips[index].title;
+    tip.desc = home.tips[index].description;
+  });
+
   const card = isLight
-    ? 'shine-border bg-white border border-slate-200 shadow-sm shadow-slate-900/[0.03] hover:shadow-md hover:shadow-slate-900/[0.05]'
-    : 'shine-border bg-white/[0.02] border border-white/[0.08] hover:bg-white/[0.04]';
+    ? 'bg-white border border-[#d7dbdc] shadow-sm'
+    : 'surface-premium border border-white/[0.08] hover:border-white/[0.14]';
 
-  const iconBox = isLight
-    ? 'bg-slate-50 border-slate-200 text-slate-700'
-    : 'bg-white/[0.04] border-white/10 text-white/80';
-
-  /** Solid fills so ambient dots stay behind cards, not inside them */
+  /** Opaque fills so ambient dots stay behind cards, not inside them */
   const toolCard = isLight
-    ? 'shine-border isolate bg-white border border-slate-200 shadow-sm shadow-slate-900/[0.03] hover:shadow-md hover:shadow-slate-900/[0.05] hover:-translate-y-0.5'
-    : 'shine-border isolate bg-[#0c0c0e] border border-white/[0.1] hover:bg-[#101014] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)] hover:border-white/[0.14]';
+    ? 'isolate bg-white border border-[#d7dbdc] shadow-sm hover:border-[#a1a4a5]'
+    : 'isolate surface-premium border border-white/[0.08] hover:border-white/[0.14]';
 
   const toolIcon = isLight
-    ? 'bg-slate-100 border-slate-200 text-slate-700 group-hover:bg-slate-900 group-hover:text-white group-hover:border-slate-900'
-    : 'bg-white/[0.08] border-white/12 text-white/90 group-hover:bg-white group-hover:text-black group-hover:border-white';
+    ? 'bg-[#f4f5f5] border-[#d7dbdc] text-[#434a4d] group-hover:bg-[#0a0a0a] group-hover:text-white group-hover:border-[#0a0a0a]'
+    : 'bg-[#111111] border-white/[0.08] text-[#f0f0f0] group-hover:bg-[#f0f0f0] group-hover:text-black group-hover:border-[#f0f0f0]';
 
   return (
     <div className="pb-1 sm:pb-2">
       {/* Social proof + stats — mobile full-width; desktop centered compact ticker */}
-      <section className="section-shell space-y-2 sm:space-y-3 !mb-4 sm:!mb-8 !mt-0 sm:!max-w-[50rem]">
+      <section className="section-shell space-y-2 sm:space-y-3 !mb-6 sm:!mb-10 !mt-0 sm:!max-w-[50rem]">
         <DomainTicker />
         <StatsBar />
       </section>
 
-      {/* Features — desktop only (avoids duplicating tools list on mobile) */}
-      <section className="hidden sm:block section-shell">
-        <div className="text-center mb-2 sm:mb-4">
-          <h2 className="section-title">Free domain name search &amp; tools</h2>
-          <p className="section-sub max-w-xl mx-auto">
-            Check availability live, browse 1,600+ TLDs, and go from idea to shortlist with AI names, bulk checks,
-            geo lists, WHOIS, and price compare — free, no account.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 sm:gap-2.5">
-          {features.map((feature) => (
-            <Link
-              key={feature.title}
-              href={feature.href}
-              className={`group rounded-lg sm:rounded-xl p-2 sm:p-3.5 transition-all duration-200 block ${card}`}
-            >
-              <div className="flex items-center gap-2.5 sm:block">
-                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border ${iconBox}`}>
-                  {feature.icon}
-                </div>
-                <div className="min-w-0 flex-1 sm:mt-2">
-                  <div className="flex items-center gap-1.5 mb-0 sm:mb-1">
-                    <h3 className="text-[12px] sm:text-[14px] font-bold leading-snug truncate sm:whitespace-normal">
-                      {feature.title}
-                    </h3>
-                    {feature.badge && (
-                      <span
-                        className={`hidden sm:inline px-1.5 py-0.5 text-[9px] font-bold rounded-full border shrink-0 ${
-                          isLight
-                            ? 'border-slate-200 bg-slate-50 text-slate-600'
-                            : 'border-white/10 bg-white/[0.04] text-white/60'
-                        }`}
-                      >
-                        {feature.badge}
-                      </span>
-                    )}
-                  </div>
-                  <p
-                    className="hidden sm:block text-[12px] leading-relaxed mb-2"
-                    style={{ color: 'var(--text-tertiary)' }}
-                  >
-                    {feature.description}
-                  </p>
-                  <span
-                    className="hidden sm:inline-flex items-center gap-1 text-[12px] font-semibold"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
-                    {feature.cta}
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <HomeProductRows />
 
       {/*
         Mobile order: Tools → Why → Popular Extensions (keeps hero zone uncluttered)
@@ -329,31 +264,23 @@ export const HomePageContent: React.FC = () => {
       <div className="flex flex-col">
       {/* Tools — solid background only (no ambient bubbles/dots) */}
       <section
-        className="order-1 w-full !mb-5 sm:!mb-8 py-6 sm:py-10"
+        className="order-1 w-full !mb-4 sm:!mb-8 py-3 sm:py-10"
         style={{ backgroundColor: 'var(--bg-main)' }}
       >
         <div className="section-shell !mb-0">
           <div className="relative z-[1] text-center mb-1.5 sm:mb-3.5">
-            <h2 className="section-title">
-              <span className="sm:hidden">Free domain name search &amp; tools</span>
-              <span className="hidden sm:inline">Everything you need to find a domain</span>
-            </h2>
-            <p
-              className="sm:hidden section-sub max-w-[17.5rem] mx-auto mt-0.5 !text-[11px] !leading-snug"
-            >
-              Live search, AI names, bulk checks &amp; more — no signup
-            </p>
-            <p className="hidden sm:block section-sub">
-              Instant search, AI generators, bulk checks, geo lists, extensions, prices, and WHOIS — one free toolkit
+            <h2 className="section-title">{home.toolkitTitle}</h2>
+            <p className="section-sub mx-auto hidden max-w-md sm:block">
+              {home.toolkitSub}
             </p>
           </div>
 
-          <div className="relative z-[1] grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 sm:gap-2.5">
+          <div className="relative z-[1] grid grid-cols-1 gap-1.5 sm:grid-cols-2 sm:gap-2.5 lg:grid-cols-3">
             {tools.map((tool, i) => (
               <Link
                 key={tool.title}
                 href={tool.href}
-                className={`tool-card-enter group relative rounded-lg sm:rounded-xl px-2 py-2 sm:p-3.5 transition-all duration-300 items-center gap-1.5 sm:gap-2.5 min-h-0 sm:min-h-[4.75rem] overflow-hidden ${
+                className={`tool-card-enter group relative items-center gap-2 overflow-hidden rounded-xl px-2.5 py-1.5 sm:min-h-[4.75rem] sm:gap-3 sm:rounded-2xl sm:p-3.5 ${
                   tool.hideOnMobile ? 'hidden lg:flex' : 'flex'
                 } ${toolCard}`}
                 style={{ animationDelay: `${i * 0.04}s` }}
@@ -361,7 +288,7 @@ export const HomePageContent: React.FC = () => {
                 <div
                   aria-hidden
                   className={`pointer-events-none absolute inset-0 rounded-[inherit] ${
-                    isLight ? 'bg-white' : 'bg-[#0c0c0e]'
+                    isLight ? 'bg-white' : 'bg-transparent'
                   }`}
                 />
                 <div
@@ -373,21 +300,15 @@ export const HomePageContent: React.FC = () => {
                 />
 
                 <div
-                  className={`relative z-[2] flex h-7 w-7 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl border transition-all duration-300 ${toolIcon}`}
+                  className={`relative z-[2] flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border max-sm:[&_svg]:h-3.5 max-sm:[&_svg]:w-3.5 sm:h-10 sm:w-10 sm:rounded-xl ${toolIcon}`}
                 >
                   {tool.icon}
                 </div>
 
                 <div className="relative z-[2] min-w-0 flex-1">
                   <div className="flex items-center gap-1">
-                    <h3 className="text-[10px] sm:text-[13px] font-bold leading-tight line-clamp-2 sm:truncate">
-                      <span className="sm:hidden">
-                        {tool.title
-                          .replace(/^Domain /, '')
-                          .replace(/ Domains?/g, '')
-                          .replace(' Finder', '')}
-                      </span>
-                      <span className="hidden sm:inline">{tool.title}</span>
+                    <h3 className="text-[13px] font-semibold leading-tight">
+                      {tool.title}
                     </h3>
                     {tool.badge && (
                       <span
@@ -401,10 +322,7 @@ export const HomePageContent: React.FC = () => {
                       </span>
                     )}
                   </div>
-                  <p
-                    className="hidden sm:block text-[11px] leading-snug mt-0.5 line-clamp-2"
-                    style={{ color: 'var(--text-tertiary)' }}
-                  >
+                  <p className="mt-px line-clamp-1 text-[11px] leading-snug text-ds-mute sm:mt-0.5 sm:line-clamp-2">
                     {tool.description}
                   </p>
                 </div>
@@ -428,23 +346,23 @@ export const HomePageContent: React.FC = () => {
       </section>
 
       {/* Popular Extensions — last on mobile (after Why); mid-page on desktop */}
-      <section className="section-shell order-3 sm:order-2 !mt-2 sm:!mt-0 !mb-5 sm:!mb-8">
+      <section className="defer-section section-shell order-3 sm:order-2 !mt-2 sm:!mt-0 !mb-5 sm:!mb-8">
         <div className="flex items-end justify-between gap-2 mb-2 sm:mb-3">
           <div>
             <h2 className="section-title">
-              <span className="sm:hidden">Popular TLDs</span>
-              <span className="hidden sm:inline">Popular extensions</span>
+              <span className="sm:hidden">{home.popularMobile}</span>
+              <span className="hidden sm:inline">{home.popularDesktop}</span>
             </h2>
             <p className="hidden sm:block section-sub">
-              Start with the endings brands trust — then explore 1,600+ more.
+              {home.popularSub}
             </p>
           </div>
           <Link
-            href="/domain-extensions"
-            className="inline-flex items-center gap-1 text-[11px] sm:text-[12px] font-semibold shrink-0"
+            href={href('/domain-extensions')}
+            className="inline-flex min-h-11 items-center gap-1 text-[13px] sm:min-h-0 sm:text-[12px] font-semibold shrink-0"
             style={{ color: 'var(--text-secondary)' }}
           >
-            View all
+            {home.viewAll}
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
@@ -454,11 +372,11 @@ export const HomePageContent: React.FC = () => {
           {extensions.map((item) => (
             <Link
               key={item.ext}
-              href={`/search?q=example${item.ext}`}
-              className={`rounded-xl px-1 py-2.5 sm:py-2.5 text-center transition-all ${card}`}
+              href={href(`/search?q=example${item.ext}`)}
+              className={`flex min-h-[4.25rem] flex-col items-center justify-center rounded-2xl px-1 py-3 text-center sm:min-h-0 sm:py-2.5 ${card}`}
             >
-              <div className="text-[13px] sm:text-sm font-black tracking-tight">{item.ext}</div>
-              <div className="text-[9px] sm:text-[10px] mt-0.5" style={{ color: 'var(--text-tertiary)' }}>
+              <div className="text-[16px] sm:text-sm font-semibold tracking-tight">{item.ext}</div>
+              <div className="mt-1 text-[12px] sm:text-[10px] text-ds-mute">
                 {item.desc}
               </div>
             </Link>
@@ -467,19 +385,11 @@ export const HomePageContent: React.FC = () => {
       </section>
 
       {/* Why — mobile bento; sits above Popular Extensions on mobile only */}
-      <section className="section-shell order-2 sm:order-3 !pt-1 sm:!pt-0 !mb-4 sm:!mb-8">
+      <section className="defer-section section-shell order-2 sm:order-3 !pt-1 sm:!pt-0 !mb-4 sm:!mb-8">
         <div className="text-center mb-2.5 sm:mb-4">
-          <h2 className="section-title">
-            <span className="sm:hidden">Why DomainDiscovery?</span>
-            <span className="hidden sm:inline">Why use DomainDiscovery for domain search?</span>
-          </h2>
+          <h2 className="section-title">{home.privacyTitle}</h2>
           <p className="section-sub max-w-lg mx-auto px-1">
-            <span className="sm:hidden">
-              Live checks, AI tools, private shortlists — free forever.
-            </span>
-            <span className="hidden sm:inline">
-              Fast domain name search with AI tools that never harvest your data — shortlists stay on your device.
-            </span>
+            {home.privacySub}
           </p>
         </div>
 
@@ -490,36 +400,32 @@ export const HomePageContent: React.FC = () => {
             const privacy = benefits.find((b) => b.highlight) ?? benefits[3];
             return (
               <div
-                className={`shine-border col-span-2 relative overflow-hidden rounded-2xl p-3.5 border ${
+                className={`group col-span-2 relative overflow-hidden rounded-2xl p-4 border ${
                   isLight
-                    ? 'bg-slate-50 border-slate-300 shadow-sm'
-                    : 'bg-gradient-to-br from-white/[0.08] via-white/[0.03] to-transparent border-white/15'
+                    ? 'bg-white border-[#d7dbdc]'
+                    : 'surface-premium border-white/[0.08]'
                 }`}
               >
                 <div className="flex items-start gap-3">
                   <div
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${
-                      isLight
-                        ? 'bg-slate-900 text-white border-slate-900'
-                        : 'bg-white text-black border-white'
-                    }`}
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-all duration-300 ${toolIcon}`}
                   >
                     {privacy.icon}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5 flex-wrap mb-1">
-                      <h3 className="text-[13px] font-bold leading-snug">{privacy.title}</h3>
+                      <h3 className="text-[16px] font-semibold leading-snug">{privacy.title}</h3>
                       <span
-                        className={`text-[8px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full border ${
+                        className={`text-[11px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full border ${
                           isLight
-                            ? 'bg-slate-200 text-slate-700 border-slate-300'
-                            : 'bg-white/[0.08] text-white/70 border-white/15'
+                            ? 'bg-[#f4f5f5] text-[#434a4d] border-[#d7dbdc]'
+                            : 'bg-[#111111] text-[#a1a4a5] border-white/[0.1]'
                         }`}
                       >
-                        Local
+                        {home.local}
                       </span>
                     </div>
-                    <p className="text-[11px] leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
+                    <p className="text-[14px] leading-relaxed text-ds-body">
                       {privacy.description}
                     </p>
                   </div>
@@ -535,10 +441,10 @@ export const HomePageContent: React.FC = () => {
             .map((benefit, i) => (
               <div
                 key={benefit.title}
-                className={`shine-border relative flex flex-col min-h-[7.25rem] rounded-2xl p-3 border ${
+                className={`relative flex flex-col rounded-2xl p-3.5 border ${
                   isLight
-                    ? 'bg-white border-slate-200 shadow-sm'
-                    : 'bg-white/[0.03] border-white/10'
+                    ? 'bg-white border-[#d7dbdc]'
+                    : 'surface-premium border-white/[0.08]'
                 }`}
                 style={{ animationDelay: `${i * 0.04}s` }}
               >
@@ -551,8 +457,8 @@ export const HomePageContent: React.FC = () => {
                 >
                   {benefit.icon}
                 </div>
-                <h3 className="text-[12px] font-bold leading-snug mb-1">{benefit.title}</h3>
-                <p className="text-[10px] leading-snug mt-auto" style={{ color: 'var(--text-tertiary)' }}>
+                <h3 className="text-[14px] font-semibold leading-snug mb-1">{benefit.title}</h3>
+                <p className="text-[13px] leading-snug text-ds-body">
                   {benefit.description}
                 </p>
               </div>
@@ -565,10 +471,10 @@ export const HomePageContent: React.FC = () => {
             if (!last || rest.length < 5) return null;
             return (
               <div
-                className={`col-span-2 relative overflow-hidden rounded-2xl p-3 border flex items-center gap-3 ${
+                className={`col-span-2 relative overflow-hidden rounded-2xl p-3.5 border flex items-center gap-3 ${
                   isLight
-                    ? 'bg-white border-slate-200 shadow-sm'
-                    : 'bg-white/[0.03] border-white/10'
+                    ? 'bg-white border-[#d7dbdc]'
+                    : 'surface-premium border-white/[0.08]'
                 }`}
               >
                 <div
@@ -581,8 +487,8 @@ export const HomePageContent: React.FC = () => {
                   {last.icon}
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-[12px] font-bold leading-snug mb-0.5">{last.title}</h3>
-                  <p className="text-[10px] leading-snug" style={{ color: 'var(--text-tertiary)' }}>
+                  <h3 className="text-[14px] font-semibold leading-snug mb-0.5">{last.title}</h3>
+                  <p className="text-[13px] leading-snug text-ds-body">
                     {last.description}
                   </p>
                 </div>
@@ -596,13 +502,7 @@ export const HomePageContent: React.FC = () => {
           {benefits.map((benefit, i) => (
             <div
               key={benefit.title}
-              className={`shine-border tool-card-enter group relative rounded-xl p-3.5 transition-all duration-300 overflow-hidden ${
-                benefit.highlight
-                  ? isLight
-                    ? 'bg-slate-50 border border-slate-300 shadow-sm hover:shadow-md hover:-translate-y-0.5'
-                    : 'bg-gradient-to-b from-white/[0.07] to-white/[0.025] border border-white/15 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(0,0,0,0.3)]'
-                  : toolCard
-              }`}
+              className={`shine-border tool-card-enter group relative rounded-xl p-3.5 transition-all duration-300 overflow-hidden ${toolCard}`}
               style={{ animationDelay: `${i * 0.05}s` }}
             >
               <div
@@ -615,13 +515,7 @@ export const HomePageContent: React.FC = () => {
 
               <div className="relative">
                 <div
-                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-all duration-300 mb-2.5 ${
-                    benefit.highlight
-                      ? isLight
-                        ? 'bg-slate-900 text-white border-slate-900'
-                        : 'bg-white text-black border-white'
-                      : toolIcon
-                  }`}
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-all duration-300 mb-2.5 ${toolIcon}`}
                 >
                   {benefit.icon}
                 </div>
@@ -636,7 +530,7 @@ export const HomePageContent: React.FC = () => {
                             : 'bg-white/[0.08] text-white/70 border-white/15'
                         }`}
                       >
-                        Local
+                        {home.local}
                       </span>
                     )}
                   </div>
@@ -652,12 +546,12 @@ export const HomePageContent: React.FC = () => {
       </div>
 
       {/* SEO / guide — designed cards, not a wall of text */}
-      <section className="hidden sm:block section-shell max-w-4xl">
+      <section className="defer-section hidden sm:block section-shell max-w-4xl">
         <div
           className={`rounded-2xl p-5 sm:p-6 mb-3 ${
             isLight
               ? 'bg-white border border-slate-200 shadow-sm shadow-slate-900/[0.04]'
-              : 'bg-gradient-to-b from-white/[0.05] to-white/[0.015] border border-white/10'
+              : 'surface-premium border border-white/[0.08]'
           }`}
         >
           <div className="flex items-start gap-3 mb-3">
@@ -670,36 +564,31 @@ export const HomePageContent: React.FC = () => {
             </div>
             <div>
               <h2 className="text-lg sm:text-xl font-black tracking-tight mb-1.5">
-                How domain name search works on DomainDiscovery
+                {home.howTitle}
               </h2>
               <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Domain name search answers one question first: is this name free to register? Type a brand, keyword, or
-                city-niche combo and get live availability across 1,600+ TLDs. Then refine with AI name ideas,{' '}
-                <Link href="/tools/geo" className="underline underline-offset-2 font-semibold">
-                  geo domain lists
+                {home.howLead}{' '}
+                <Link href={href('/tools/geo')} className="underline underline-offset-2 font-semibold">
+                  {home.howGeo}
                 </Link>
-                , bulk checks,{' '}
-                <Link href="/tools/whois" className="underline underline-offset-2 font-semibold">
-                  WHOIS
+                {home.howMid}{' '}
+                <Link href={href('/tools/whois')} className="underline underline-offset-2 font-semibold">
+                  {home.howWhois}
                 </Link>
-                , and{' '}
-                <Link href="/tools/compare" className="underline underline-offset-2 font-semibold">
-                  registrar prices
-                </Link>{' '}
-                — before you leave the site.
+                {home.howAnd}{' '}
+                <Link href={href('/tools/compare')} className="underline underline-offset-2 font-semibold">
+                  {home.howPrices}
+                </Link>
+                {home.howTail}
               </p>
             </div>
           </div>
           <div className="grid grid-cols-3 gap-2 mt-4">
-            {[
-              { label: '1,600+ TLDs', sub: 'Live availability' },
-              { label: 'AI + geo tools', sub: 'Brand & local SEO' },
-              { label: 'Private shortlists', sub: 'Saved on device' },
-            ].map((item) => (
+            {home.chips.map((item) => (
               <div
                 key={item.label}
                 className={`rounded-xl px-3 py-2.5 text-center ${
-                  isLight ? 'bg-slate-50 border border-slate-100' : 'bg-white/[0.03] border border-white/[0.06]'
+                  isLight ? 'bg-[#f4f5f5] border border-[#d7dbdc]' : 'surface-premium border border-white/[0.08]'
                 }`}
               >
                 <div className="text-[12px] font-bold">{item.label}</div>
@@ -712,7 +601,7 @@ export const HomePageContent: React.FC = () => {
         </div>
 
         <div className="mb-3">
-          <h3 className="text-[15px] font-bold mb-2.5 tracking-tight">How to choose a domain name that ranks and sticks</h3>
+          <h3 className="text-[15px] font-bold mb-2.5 tracking-tight">{home.chooseHeading}</h3>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             {chooseTips.map((tip, i) => (
               <div
@@ -743,8 +632,8 @@ export const HomePageContent: React.FC = () => {
         <div
           className={`rounded-2xl p-4 sm:p-5 ${
             isLight
-              ? 'bg-slate-50 border border-slate-200'
-              : 'bg-white/[0.03] border border-white/10'
+              ? 'bg-white border border-[#d7dbdc]'
+              : 'surface-premium border border-white/[0.08]'
           }`}
         >
           <div className="flex items-start gap-3">
@@ -752,53 +641,51 @@ export const HomePageContent: React.FC = () => {
               <Icons.Globe />
             </div>
             <div className="min-w-0">
-              <h3 className="text-[14px] font-bold mb-1">Domain extensions (TLDs): which should you choose?</h3>
+              <h3 className="text-[14px] font-bold mb-1">{home.tldTitle}</h3>
               <p className="text-[12px] sm:text-[13px] leading-relaxed mb-3" style={{ color: 'var(--text-secondary)' }}>
-                .com remains the most recognized extension for global brands. Industry TLDs like .ai, .io, .app, and
-                .dev can signal category fit; country codes support local presence. Browse the full catalog, then verify
-                availability with domain name search before you register. New here? Read guides on{' '}
-                <Link href="/learn/domain-name-search-guide" className="underline underline-offset-2 font-semibold">
-                  domain name search
+                {home.tldLead}{' '}
+                <Link href={href('/learn/domain-name-search-guide')} className="underline underline-offset-2 font-semibold">
+                  {home.tldSearch}
                 </Link>
                 ,{' '}
-                <Link href="/learn/how-to-register-a-domain" className="underline underline-offset-2 font-semibold">
-                  registration
+                <Link href={href('/learn/how-to-register-a-domain')} className="underline underline-offset-2 font-semibold">
+                  {home.tldReg}
                 </Link>
                 ,{' '}
-                <Link href="/learn/geo-domains-local-seo" className="underline underline-offset-2 font-semibold">
-                  geo domains
+                <Link href={href('/learn/geo-domains-local-seo')} className="underline underline-offset-2 font-semibold">
+                  {home.tldGeo}
                 </Link>
                 ,{' '}
-                <Link href="/learn/what-is-a-tld-domain-extension" className="underline underline-offset-2 font-semibold">
-                  TLDs
+                <Link href={href('/learn/what-is-a-tld-domain-extension')} className="underline underline-offset-2 font-semibold">
+                  {home.tldExt}
                 </Link>
-                , and{' '}
-                <Link href="/learn/what-is-domaindiscovery" className="underline underline-offset-2 font-semibold">
-                  what DomainDiscovery is
+                ,{' '}
+                <Link href={href('/learn/what-is-domaindiscovery')} className="underline underline-offset-2 font-semibold">
+                  {home.tldAbout}
                 </Link>
-                .
+                {home.tldTail}
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {['.com', '.ai', '.io', '.app', '.dev', '.co'].map((tld) => (
                   <Link
                     key={tld}
-                    href="/domain-extensions"
+                    href={href('/domain-extensions')}
                     className={`rounded-full px-2.5 py-1 text-[11px] font-bold border transition-colors ${
                       isLight
                         ? 'bg-white border-slate-200 text-slate-700 hover:border-slate-400'
-                        : 'bg-white/[0.04] border-white/10 text-white/80 hover:border-white/25'
+                        : 'bg-[#111111] border-white/10 text-white/80 hover:border-white/25'
                     }`}
                   >
                     {tld}
                   </Link>
                 ))}
                 <Link
-                  href="/domain-extensions"
+                  href={href('/domain-extensions')}
                   className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${
                     isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/50 hover:text-white/80'
                   }`}
                 >
-                  View all →
+                  {home.viewAllArrow}
                 </Link>
               </div>
             </div>
@@ -807,7 +694,7 @@ export const HomePageContent: React.FC = () => {
       </section>
 
       {/* Mid-page billboards — compact so they stay in sync with page sections */}
-      <section className="section-shell max-w-4xl !mb-4 sm:!mb-6">
+      <section className="defer-section section-shell max-w-4xl !mb-4 sm:!mb-6">
         <AffiliateAdRail
           placement="home-mid"
           variant="auto"
@@ -817,41 +704,39 @@ export const HomePageContent: React.FC = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-shell max-w-3xl !mb-3 sm:!mb-6">
+      <section className="defer-section section-shell max-w-3xl !mb-3 sm:!mb-6">
         <div
           className={`rounded-lg sm:rounded-2xl p-3 sm:p-5 text-center ${
             isLight
-              ? 'bg-white border border-slate-200 shadow-sm shadow-slate-900/[0.04]'
-              : 'bg-white/[0.03] border border-white/10'
+              ? 'bg-white border border-[#d7dbdc]'
+              : 'surface-premium border border-white/[0.08]'
           }`}
         >
-          <h2 className="text-sm sm:text-xl font-black mb-0.5 sm:mb-1">
-            <span className="sm:hidden">Ready to search free?</span>
-            <span className="hidden sm:inline">Ready to find your perfect domain?</span>
+          <h2 className="text-sm sm:text-xl font-semibold tracking-tight mb-0.5 sm:mb-1">
+            {home.ctaTitle}
           </h2>
-          <p className="text-[10px] sm:text-[12px] mb-2 sm:mb-3" style={{ color: 'var(--text-tertiary)' }}>
-            <span className="sm:hidden">Live availability · 1,600+ TLDs · No account</span>
-            <span className="hidden sm:inline">Free domain name search · Live results · No account required</span>
+          <p className="text-[12px] sm:text-[13px] mb-2 sm:mb-3" style={{ color: 'var(--text-tertiary)' }}>
+            {home.ctaSub}
           </p>
           <a
             href="#top"
             className="btn-brand inline-flex items-center gap-1.5 rounded-lg px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-[13px]"
           >
-            Start free search
+            {home.ctaButton}
           </a>
         </div>
       </section>
 
       {/* Extractable definition for AEO/GEO (AI Overviews / assistants) */}
       <div className="section-shell max-w-3xl !mb-2 sm:!mb-4 !px-0">
-        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.home} compact />
+        <LocalizedDefinition id="home" compact />
       </div>
 
       {/* Homepage FAQ design system — shared PremiumFaqGrid */}
       <PremiumFaqGrid
         id="faqs"
-        title="FAQs"
-        subtitle="Everything you need to know about finding and registering domains"
+        title={home.faqTitle}
+        subtitle={home.faqSub}
         items={faqs}
         className="!mb-2 sm:!mb-6"
       />

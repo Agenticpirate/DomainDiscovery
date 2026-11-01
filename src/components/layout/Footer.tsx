@@ -6,15 +6,13 @@ import { Logo } from '../ui/Logo';
 import dynamic from 'next/dynamic';
 import { useTheme } from '@/contexts/ThemeContext';
 import { SITE_BRAND } from '@/lib/seoSiteFacts';
-import { AffiliateAdBanner } from '@/components/ads/AffiliateAdBanner';
+import { AffiliateSupportNote } from '@/components/ads/AffiliateSupportNote';
 import { isLabAutomation, prefersReducedMotion } from '@/lib/perfRuntime';
+import { useLocale } from '@/components/i18n/LocaleProvider';
+import type { Messages } from '@/lib/i18n/types';
 
-const ParticleText = dynamic(
-  () => import('../ui/ParticleText').then((m) => m.ParticleText),
-  { ssr: false }
-);
-const EvervaultHover = dynamic(
-  () => import('../ui/EvervaultHover').then((m) => m.EvervaultHover),
+const HalftoneWordmark = dynamic(
+  () => import('../ui/HalftoneWordmark').then((m) => m.HalftoneWordmark),
   { ssr: false }
 );
 
@@ -140,17 +138,19 @@ type FooterSection = {
   links: FooterLink[];
 };
 
-const FOOTER_SECTIONS: FooterSection[] = [
+function footerSections(f: Messages['footer'], href: (path: string) => string): FooterSection[] {
+  return [
   {
-    category: 'Product',
+    category: f.product,
     links: [
-      { label: 'Domain Search', href: '/search', Icon: Fi.search },
-      { label: 'AI Assistant', href: '/assistant', Icon: Fi.bolt },
-      { label: 'AI Generator', href: '/generator', Icon: Fi.spark },
-      { label: 'Bulk Search', href: '/bulk-search', Icon: Fi.layers },
-      { label: 'Extensions', href: '/domain-extensions', Icon: Fi.globe },
+      { label: f.search, href: href('/search'), Icon: Fi.search },
+      { label: f.assistant, href: href('/assistant'), Icon: Fi.bolt },
+      { label: f.generator, href: href('/generator'), Icon: Fi.spark },
+      { label: f.bulk, href: href('/bulk-search'), Icon: Fi.layers },
+      { label: f.extensions, href: href('/domain-extensions'), Icon: Fi.globe },
+      { label: 'Domain Leads', href: href('/tools/leads'), Icon: Fi.spark },
       {
-        label: 'ADA site',
+        label: f.ada,
         href: 'https://www.aidomainassistant.com',
         external: true,
         Icon: Fi.external,
@@ -158,37 +158,41 @@ const FOOTER_SECTIONS: FooterSection[] = [
     ],
   },
   {
-    category: 'Tools',
+    category: f.tools,
     links: [
-      { label: 'WHOIS', href: '/tools/whois', Icon: Fi.info },
-      { label: 'Geo Domains', href: '/tools/geo', Icon: Fi.globe },
-      { label: 'Price Compare', href: '/tools/compare', Icon: Fi.dollar },
-      { label: 'Keyword Domains', href: '/tools/keyword', Icon: Fi.keyword },
+      { label: f.whois, href: href('/tools/whois'), Icon: Fi.info },
+      { label: f.geo, href: href('/tools/geo'), Icon: Fi.globe },
+      { label: f.compare, href: href('/tools/compare'), Icon: Fi.dollar },
+      { label: f.keyword, href: href('/tools/keyword'), Icon: Fi.keyword },
     ],
   },
   {
-    category: 'Learn',
+    category: f.learn,
     links: [
-      { label: 'All guides', href: '/learn', Icon: Fi.book },
-      { label: 'FAQ', href: '/faq', Icon: Fi.help },
-      { label: 'What is DD?', href: '/learn/what-is-domaindiscovery', Icon: Fi.badge },
-      { label: 'For AI / LLMs', href: '/for-ai', Icon: Fi.bolt },
+      { label: f.guides, href: href('/learn'), Icon: Fi.book },
+      { label: f.faq, href: href('/faq'), Icon: Fi.help },
+      { label: f.what, href: href('/learn/what-is-domaindiscovery'), Icon: Fi.badge },
+      { label: f.forAi, href: href('/for-ai'), Icon: Fi.bolt },
     ],
   },
   {
-    category: 'Company',
+    category: f.company,
     links: [
-      { label: 'Blog', href: '/blog', Icon: Fi.pen },
-      { label: 'Contact', href: '/contact', Icon: Fi.mail },
-      { label: 'Privacy', href: '/privacy', Icon: Fi.shield },
-      { label: 'Terms', href: '/terms', Icon: Fi.file },
-      { label: 'Cookies', href: '/cookies', Icon: Fi.cookie },
-      { label: 'Disclaimer', href: '/disclaimer', Icon: Fi.alert },
+      { label: f.blog, href: href('/blog'), Icon: Fi.pen },
+      { label: f.contact, href: href('/contact'), Icon: Fi.mail },
+      { label: f.privacy, href: href('/privacy'), Icon: Fi.shield },
+      { label: f.terms, href: href('/terms'), Icon: Fi.file },
+      { label: f.cookies, href: href('/cookies'), Icon: Fi.cookie },
+      { label: f.disclaimer, href: href('/disclaimer'), Icon: Fi.alert },
     ],
   },
-];
+  ];
+}
 
 export const Footer: React.FC = () => {
+  const { messages, href } = useLocale();
+  const foot = messages.footer;
+  const sections = footerSections(foot, href);
   const currentYear = new Date().getFullYear();
   const [mounted, setMounted] = React.useState(false);
   const [showParticles, setShowParticles] = React.useState(false);
@@ -223,21 +227,21 @@ export const Footer: React.FC = () => {
   const { theme } = useTheme();
   const isLight = mounted ? theme === 'light' : false;
 
-  const solidBg = isLight ? 'bg-gradient-to-b from-indigo-50 via-sky-50/80 to-violet-50/50' : 'bg-[#050505]';
-  const hairline = isLight ? 'border-indigo-200/70' : 'border-white/[0.06]';
-  const muted = isLight ? '#64748b' : 'rgba(255,255,255,0.45)';
-  const faint = isLight ? '#818cf8' : 'rgba(255,255,255,0.35)';
+  const solidBg = isLight ? 'bg-[#f4f5f5]' : 'bg-black';
+  const hairline = isLight ? 'border-[#d7dbdc]' : 'border-white/[0.08]';
+  const muted = isLight ? '#52595b' : '#a1a4a5';
+  const faint = isLight ? '#6e7679' : '#6e7679';
   const link = isLight
     ? 'text-slate-600 hover:text-slate-900'
     : 'text-white/60 hover:text-white';
 
   const mobilePanel = isLight
-    ? 'border-slate-200/90 bg-white shadow-[0_12px_36px_-20px_rgba(15,23,42,0.22)]'
-    : 'border-white/[0.09] bg-[#0a0a0c] shadow-[0_20px_48px_-28px_rgba(0,0,0,0.95)]';
-  const mobileCellBorder = isLight ? 'border-slate-100' : 'border-white/[0.06]';
+    ? 'border-[#d7dbdc] bg-white'
+    : 'border-white/[0.08] bg-[#0a0a0a]';
+  const mobileCellBorder = isLight ? 'border-[#e7e9ea]' : 'border-white/[0.08]';
   const iconWell = isLight
     ? 'border-slate-200/90 bg-slate-50 text-slate-600'
-    : 'border-white/[0.08] bg-[#121214] text-white/70';
+    : 'border-white/[0.08] bg-[#111111] text-white/70';
   const mobileLabel = isLight ? 'text-slate-800' : 'text-white/88';
   const mobileMutedLabel = isLight ? 'text-slate-400' : 'text-white/32';
 
@@ -246,11 +250,11 @@ export const Footer: React.FC = () => {
       return (
         <>
           <span
-            className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border ${iconWell}`}
+            className={`inline-flex h-4 w-4 shrink-0 items-center justify-center rounded border ${iconWell}`}
           >
-            <item.Icon className="h-3 w-3" />
+            <item.Icon className="h-2.5 w-2.5" />
           </span>
-          <span className={`min-w-0 flex-1 truncate text-[10.5px] font-semibold leading-tight ${mobileLabel}`}>
+          <span className={`min-w-0 flex-1 truncate text-[12px] font-medium leading-none ${mobileLabel}`}>
             {item.label}
           </span>
         </>
@@ -277,37 +281,28 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className={`relative overflow-hidden border-t ${hairline} ${solidBg}`}>
-      {/* Sitewide Spacemail strip — sharp 668×105 (1825519), not stretched 320×50 */}
-      <div className={`relative z-[3] border-b ${hairline} ${solidBg}`}>
-        <div className="max-w-2xl mx-auto px-3 sm:px-5 py-3 sm:py-4 flex justify-center">
-          <AffiliateAdBanner placement="footer" variant="card" />
-        </div>
-      </div>
       <div className={`relative z-[2] ${solidBg}`}>
         <div className="max-w-6xl mx-auto px-3 sm:px-5 pt-3.5 sm:pt-7 pb-3 sm:pb-5">
+          <AffiliateSupportNote className="mb-4 sm:mb-5" />
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-8">
             {/* Brand */}
             <div className="sm:max-w-[15rem] shrink-0">
-              <Link href="/" className="inline-flex items-center mb-1 sm:mb-2">
+              <Link href={href('/')} className="inline-flex items-center mb-1 sm:mb-2">
                 <Logo size="md" showText />
               </Link>
               <p
-                className="text-[10.5px] sm:text-[12px] leading-snug mb-1.5 sm:mb-2 max-w-[17rem]"
+                className="text-[13px] sm:text-[14px] leading-snug mb-2 max-w-[20rem] text-ds-body"
                 style={{ color: muted }}
               >
-                Free domain search &amp; tools. Local shortlists. Not a registrar.
+                {foot.blurb}
               </p>
               <div
-                className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[8.5px] sm:text-[9px] font-bold uppercase tracking-[0.12em] sm:tracking-wide border ${
-                  isLight
-                    ? 'bg-white text-slate-600 border-slate-200 shadow-sm'
-                    : 'bg-[#121214] text-white/65 border-white/12'
-                }`}
+                className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.08em] border border-ds-hairline text-ds-body"
               >
                 <span
                   className={`h-1 w-1 rounded-full ${isLight ? 'bg-slate-500' : 'bg-white/55'}`}
                 />
-                Local · Private · Free
+                {foot.badge}
               </div>
             </div>
 
@@ -334,27 +329,27 @@ export const Footer: React.FC = () => {
               />
 
               <div className="relative z-[1] grid grid-cols-2">
-                {FOOTER_SECTIONS.map((section, idx) => {
+                {sections.map((section, idx) => {
                   const isRight = idx % 2 === 1;
                   const isBottom = idx >= 2;
                   return (
                     <div
                       key={section.category}
-                      className={`min-w-0 px-2 pt-2.5 pb-2 ${
+                      className={`min-w-0 px-1.5 pt-1.5 pb-1 ${
                         isRight ? '' : `border-r ${mobileCellBorder}`
                       } ${isBottom ? '' : `border-b ${mobileCellBorder}`}`}
                     >
                       <p
-                        className={`mb-1.5 px-0.5 text-[8px] font-black uppercase tracking-[0.18em] ${mobileMutedLabel}`}
+                        className={`mb-0.5 px-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] ${mobileMutedLabel}`}
                       >
                         {section.category}
                       </p>
-                      <ul className="space-y-0.5">
+                      <ul className="space-y-0">
                         {section.links.map((item) => (
                           <li key={`${section.category}-${item.href}-${item.label}`}>
                             {renderLink(
                               item,
-                              'group flex items-center gap-1.5 rounded-lg px-0.5 py-[3px] transition-colors active:opacity-80',
+                              'group flex min-h-6 items-center gap-1.5 rounded-md px-0.5 py-0.5 active:opacity-80',
                               true
                             )}
                           </li>
@@ -367,13 +362,13 @@ export const Footer: React.FC = () => {
 
               {/* Bottom CTA strip */}
               <div
-                className={`relative z-[1] flex items-center justify-between gap-2 border-t px-2.5 py-2 ${
+                className={`relative z-[1] flex items-center justify-between gap-2 border-t px-2 py-1.5 ${
                   isLight
                     ? 'border-slate-100 bg-gradient-to-r from-slate-50 to-white'
-                    : 'border-white/[0.06] bg-gradient-to-r from-[#0c0c0e] to-[#0a0a0c]'
+                    : 'border-white/[0.06] bg-gradient-to-r from-[#0a0a0a] to-[#0a0a0a]'
                 }`}
               >
-                <span className={`flex items-center gap-1.5 text-[8px] font-bold uppercase tracking-[0.14em] ${mobileMutedLabel}`}>
+                <span className={`flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.08em] ${mobileMutedLabel}`}>
                   <span
                     className={`inline-flex h-4 w-4 items-center justify-center rounded-md border ${iconWell}`}
                   >
@@ -382,15 +377,11 @@ export const Footer: React.FC = () => {
                   Free · No account
                 </span>
                 <Link
-                  href="/search"
-                  className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[10px] font-bold transition ${
-                    isLight
-                      ? 'border-slate-200 bg-white text-slate-900 shadow-sm'
-                      : 'border-white/12 bg-white text-black shadow-[0_4px_12px_-4px_rgba(255,255,255,0.15)]'
-                  }`}
+                  href={href('/search')}
+                  className="btn-resend inline-flex min-h-8 items-center gap-1 rounded-xl px-2.5 text-[12px] font-semibold"
                 >
                   <Fi.search className="h-3 w-3" />
-                  Search
+                  {messages.nav.search}
                   <span aria-hidden className="text-[11px] font-light opacity-50">
                     ›
                   </span>
@@ -400,7 +391,7 @@ export const Footer: React.FC = () => {
 
             {/* ── Desktop: 4 columns + subtle icons ── */}
             <div className="hidden sm:grid grid-cols-4 gap-6 flex-1 sm:max-w-3xl">
-              {FOOTER_SECTIONS.map((section) => (
+              {sections.map((section) => (
                 <div key={section.category} className="min-w-0">
                   <h3
                     className="text-[11px] font-bold mb-2 tracking-wide uppercase"
@@ -443,86 +434,81 @@ export const Footer: React.FC = () => {
       {/* Brand band — larger premium wordmark; particle FX when in view */}
       <div
         ref={brandBandRef}
-        className={`relative z-[1] min-h-[10.5rem] sm:min-h-[15rem] md:min-h-[17rem] border-t overflow-hidden ${hairline}`}
+        data-footer-brand
+        className={`relative z-[1] h-[5.75rem] w-full overflow-hidden sm:h-[20rem] md:h-[22rem] ${hairline} border-t`}
       >
-        {/* Ambient depth — soft vignette + brand glow for premium feel */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          aria-hidden
-          style={{
-            background: isLight
-              ? 'radial-gradient(ellipse 85% 70% at 50% 45%, rgba(99,102,241,0.14) 0%, rgba(14,165,233,0.08) 38%, transparent 72%)'
-              : 'radial-gradient(ellipse 90% 75% at 50% 42%, rgba(255,255,255,0.07) 0%, rgba(148,163,184,0.04) 36%, transparent 70%)',
-          }}
-        />
-        <div
-          className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-60"
-          aria-hidden
-          style={{
-            background: isLight
-              ? 'linear-gradient(90deg, transparent, rgba(99,102,241,0.45), transparent)'
-              : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent)',
-          }}
-        />
-
         {mounted && showParticles ? (
-          <EvervaultHover className="w-full" radius={360}>
-            <div className="relative z-[1] max-w-7xl mx-auto px-3 sm:px-6 pt-6 sm:pt-10 pb-5 sm:pb-8 flex flex-col items-center justify-center overflow-hidden">
-              <ParticleText
-                key={`footer-particle-${isLight ? 'l' : 'd'}`}
-                text={BRAND}
-                height={212}
-                className="w-full max-w-full"
-              />
-              <p
-                className={`mt-1 sm:mt-2 max-w-xl px-4 text-center text-[10px] sm:text-[12px] font-semibold tracking-[0.18em] sm:tracking-[0.22em] uppercase ${
-                  isLight ? 'text-indigo-500/70' : 'text-white/35'
-                }`}
-              >
-                Domain research · Built for builders
-              </p>
-            </div>
-          </EvervaultHover>
-        ) : (
-          <div className="relative z-[1] flex min-h-[10.5rem] sm:min-h-[15rem] md:min-h-[17rem] flex-col items-center justify-center gap-2 sm:gap-3 px-4 py-8 sm:py-10">
+          <>
+            <HalftoneWordmark key={isLight ? 'light' : 'dark'} text={BRAND} />
             <p
-              className={`text-center text-4xl sm:text-6xl md:text-7xl font-black tracking-[-0.03em] leading-none select-none ${
-                isLight
-                  ? 'bg-gradient-to-b from-slate-700 via-indigo-600 to-slate-400 bg-clip-text text-transparent'
-                  : 'bg-gradient-to-b from-white via-white/85 to-white/25 bg-clip-text text-transparent'
+              className={`pointer-events-none absolute inset-x-0 top-2 z-[1] px-4 text-center text-[11px] font-semibold uppercase tracking-[0.18em] sm:top-6 sm:text-[12px] ${
+                isLight ? 'text-[#6e7679]' : 'text-white/45'
               }`}
-              style={{
-                textShadow: isLight ? undefined : '0 0 80px rgba(255,255,255,0.12)',
-              }}
             >
-              {BRAND}
+              {foot.tagline}
             </p>
+          </>
+        ) : (
+          <div className="relative z-[1] flex h-full flex-col items-center justify-center gap-1 px-4 py-3">
+            <p className="footer-brand-word footer-brand-wordmark select-none text-center leading-none" aria-hidden>
+              {BRAND.split('').map((ch, i) => (
+                <span
+                  key={`${ch}-${i}`}
+                  className="footer-brand-letter"
+                  style={{ animationDelay: `${i * 0.08}s` }}
+                >
+                  {ch}
+                </span>
+              ))}
+            </p>
+            <p className="sr-only">{BRAND}</p>
             <p
-              className={`text-center text-[10px] sm:text-[12px] font-semibold tracking-[0.18em] sm:tracking-[0.22em] uppercase ${
-                isLight ? 'text-indigo-500/70' : 'text-white/35'
+              className={`text-center text-[12px] font-semibold tracking-[0.12em] sm:tracking-[0.16em] uppercase ${
+                isLight ? 'text-[#52595b]' : 'text-white/55'
               }`}
             >
-              Domain research · Built for builders
+              {foot.tagline}
             </p>
           </div>
         )}
       </div>
 
-      {/* Legal bar */}
-      <div className={`relative z-[2] border-t ${hairline} ${solidBg}`}>
+      {/* Legal bar — with safe-area padding for mobile home indicators */}
+      <div
+        className={`relative z-[2] border-t ${hairline} ${solidBg}`}
+        style={{ paddingBottom: 'max(0.75rem, calc(0.5rem + env(safe-area-inset-bottom, 0px)))' }}
+      >
         <div className="max-w-6xl mx-auto px-3 sm:px-5 py-1.5 sm:py-3 flex flex-col sm:flex-row justify-between items-center gap-1 sm:gap-2">
-          <p className="text-[9px] sm:text-[10px] text-center sm:text-left" style={{ color: faint }}>
+          <p className="shrink-0 whitespace-nowrap text-[12px] sm:text-[11px] text-center sm:text-left" style={{ color: faint }}>
             &copy; {currentYear} {SITE_BRAND.name}
+            <span className="mx-1.5 opacity-40" aria-hidden>
+              ·
+            </span>
+            {foot.builtBy}{' '}
+            <a
+              href="https://x.com/Agenticpirate"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center gap-1 font-medium underline-offset-4 transition-colors hover:underline ${
+                isLight ? 'text-slate-700 hover:text-slate-950' : 'text-white/60 hover:text-white'
+              }`}
+            >
+              Ravi Teja
+              <svg className="h-2.5 w-2.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.727-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+              <span className="sr-only"> {foot.onX}</span>
+            </a>
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-0.5 sm:gap-x-4 sm:gap-y-1">
             {[
-              { label: 'Terms', href: '/terms' },
-              { label: 'Privacy', href: '/privacy' },
-              { label: 'Cookies', href: '/cookies' },
-              { label: 'Disclaimer', href: '/disclaimer' },
-              { label: 'Contact', href: '/contact' },
+              { label: foot.terms, href: href('/terms') },
+              { label: foot.privacy, href: href('/privacy') },
+              { label: foot.cookies, href: href('/cookies') },
+              { label: foot.disclaimer, href: href('/disclaimer') },
+              { label: foot.contact, href: href('/contact') },
               { label: 'Sitemap', href: '/sitemap.xml' },
-              { label: 'For AI', href: '/for-ai' },
+              { label: 'For AI', href: href('/for-ai') },
               { label: 'llms.txt', href: '/llms.txt' },
               { label: 'llms-full', href: '/llms-full.txt' },
               { label: 'RSS', href: '/feed.xml' },
@@ -530,7 +516,7 @@ export const Footer: React.FC = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-[9px] sm:text-[10px] transition-colors hover:underline underline-offset-4 ${
+                className={`inline-flex min-h-8 items-center text-[12px] sm:min-h-0 sm:text-[11px] transition-colors hover:underline underline-offset-4 ${
                   isLight ? 'text-slate-500 hover:text-slate-800' : 'text-white/35 hover:text-white/65'
                 }`}
               >

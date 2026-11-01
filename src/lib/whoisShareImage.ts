@@ -1,6 +1,6 @@
 /**
- * Renders a shareable WHOIS template card as a high-res PNG (canvas).
- * Social channels can't play live 3D CSS — this image is the portable visual.
+ * Renders a shareable WHOIS card as a PNG.
+ * Flat card on a quiet dot field — the same idea as the site hero.
  */
 
 export type WhoisShareImageData = {
@@ -66,9 +66,7 @@ function drawField(
   ctx.fillText(truncate(ctx, value || '—', w), x, y + 28);
 }
 
-/**
- * Paint a sleek dark/silver WHOIS card onto a canvas (with soft 3D shadow).
- */
+/** Paint a flat WHOIS card on a dot field. */
 export function paintWhoisShareCard(
   canvas: HTMLCanvasElement,
   data: WhoisShareImageData
@@ -83,109 +81,39 @@ export function paintWhoisShareCard(
   if (!ctx) return;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  // Background atmosphere
-  const bg = ctx.createLinearGradient(0, 0, W, H);
-  bg.addColorStop(0, '#07070a');
-  bg.addColorStop(0.45, '#0c0c10');
-  bg.addColorStop(1, '#111118');
-  ctx.fillStyle = bg;
+  ctx.fillStyle = '#000000';
   ctx.fillRect(0, 0, W, H);
 
-  // Soft ambient orbs
-  const orb1 = ctx.createRadialGradient(220, 140, 20, 220, 140, 280);
-  orb1.addColorStop(0, 'rgba(203,213,225,0.16)');
-  orb1.addColorStop(1, 'transparent');
-  ctx.fillStyle = orb1;
-  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(255,255,255,0.34)';
+  for (let y = 12; y < H; y += 18) {
+    for (let x = 12; x < W; x += 18) {
+      ctx.fillRect(x, y, 1.15, 1.15);
+    }
+  }
 
-  const orb2 = ctx.createRadialGradient(980, 520, 10, 980, 520, 320);
-  orb2.addColorStop(0, 'rgba(148,163,184,0.14)');
-  orb2.addColorStop(1, 'transparent');
-  ctx.fillStyle = orb2;
-  ctx.fillRect(0, 0, W, H);
-
-  // Card drop shadow (3D lift)
-  ctx.save();
-  ctx.shadowColor = 'rgba(0,0,0,0.55)';
-  ctx.shadowBlur = 48;
-  ctx.shadowOffsetY = 28;
-  roundRect(ctx, 72, 58, W - 144, H - 116, 28);
-  ctx.fillStyle = '#0e0e12';
-  ctx.fill();
-  ctx.restore();
-
-  // Card body with subtle perspective skew via gradient
   const cardX = 72;
   const cardY = 58;
   const cardW = W - 144;
   const cardH = H - 116;
 
-  // Outer silver rim
-  const rim = ctx.createLinearGradient(cardX, cardY, cardX + cardW, cardY + cardH);
-  rim.addColorStop(0, 'rgba(255,255,255,0.35)');
-  rim.addColorStop(0.35, 'rgba(148,163,184,0.2)');
-  rim.addColorStop(0.7, 'rgba(255,255,255,0.12)');
-  rim.addColorStop(1, 'rgba(100,116,139,0.35)');
+  ctx.save();
+  ctx.shadowColor = 'rgba(0,0,0,0.45)';
+  ctx.shadowBlur = 28;
+  ctx.shadowOffsetY = 16;
   roundRect(ctx, cardX, cardY, cardW, cardH, 28);
-  ctx.fillStyle = rim;
+  ctx.fillStyle = '#111111';
   ctx.fill();
-
-  // Inner panel
-  roundRect(ctx, cardX + 2, cardY + 2, cardW - 4, cardH - 4, 26);
-  const panel = ctx.createLinearGradient(cardX, cardY, cardX + cardW * 0.2, cardY + cardH);
-  panel.addColorStop(0, '#16161c');
-  panel.addColorStop(0.5, '#0f0f14');
-  panel.addColorStop(1, '#14141a');
-  ctx.fillStyle = panel;
-  ctx.fill();
-
-  // Diagonal gloss + dual shine bands (reads as “motion” in a still PNG)
-  ctx.save();
-  roundRect(ctx, cardX + 2, cardY + 2, cardW - 4, cardH - 4, 26);
-  ctx.clip();
-  const gloss = ctx.createLinearGradient(cardX, cardY, cardX + cardW * 0.7, cardY + cardH * 0.55);
-  gloss.addColorStop(0, 'rgba(255,255,255,0.12)');
-  gloss.addColorStop(0.4, 'rgba(255,255,255,0.03)');
-  gloss.addColorStop(1, 'transparent');
-  ctx.fillStyle = gloss;
-  ctx.fillRect(cardX, cardY, cardW, cardH);
-
-  // Primary shine band
-  ctx.save();
-  ctx.translate(cardX + cardW * 0.28, cardY);
-  ctx.rotate((-18 * Math.PI) / 180);
-  const band = ctx.createLinearGradient(0, 0, 130, 0);
-  band.addColorStop(0, 'transparent');
-  band.addColorStop(0.45, 'rgba(255,255,255,0.14)');
-  band.addColorStop(1, 'transparent');
-  ctx.fillStyle = band;
-  ctx.fillRect(-40, -40, 150, cardH + 120);
   ctx.restore();
 
-  // Secondary soft band
-  ctx.save();
-  ctx.translate(cardX + cardW * 0.62, cardY + 20);
-  ctx.rotate((-18 * Math.PI) / 180);
-  const band2 = ctx.createLinearGradient(0, 0, 90, 0);
-  band2.addColorStop(0, 'transparent');
-  band2.addColorStop(0.5, 'rgba(203,213,225,0.08)');
-  band2.addColorStop(1, 'transparent');
-  ctx.fillStyle = band2;
-  ctx.fillRect(-20, -40, 100, cardH + 120);
-  ctx.restore();
-
-  // Top edge highlight (3D lip)
-  const lip = ctx.createLinearGradient(cardX, cardY, cardX, cardY + 40);
-  lip.addColorStop(0, 'rgba(255,255,255,0.14)');
-  lip.addColorStop(1, 'transparent');
-  ctx.fillStyle = lip;
-  ctx.fillRect(cardX + 2, cardY + 2, cardW - 4, 40);
-  ctx.restore();
+  roundRect(ctx, cardX, cardY, cardW, cardH, 28);
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
 
   // Brand header
   ctx.fillStyle = 'rgba(255,255,255,0.42)';
   ctx.font = '700 14px ui-sans-serif, system-ui, -apple-system, sans-serif';
-  ctx.fillText('DOMAINDISCOVERY  ·  WHOIS TEMPLATE', cardX + 40, cardY + 48);
+  ctx.fillText('DOMAINDISCOVERY  ·  WHOIS', cardX + 40, cardY + 48);
 
   // Domain
   ctx.fillStyle = '#ffffff';
@@ -246,7 +174,7 @@ export function paintWhoisShareCard(
   // Footer
   ctx.fillStyle = 'rgba(255,255,255,0.32)';
   ctx.font = '600 13px ui-sans-serif, system-ui, sans-serif';
-  ctx.fillText('Free public RDAP  ·  Share-ready card', cardX + 40, cardY + cardH - 36);
+  ctx.fillText('Share card  ·  Free public RDAP', cardX + 40, cardY + cardH - 36);
 
   ctx.fillStyle = 'rgba(255,255,255,0.22)';
   ctx.font = '600 12px ui-sans-serif, system-ui, sans-serif';

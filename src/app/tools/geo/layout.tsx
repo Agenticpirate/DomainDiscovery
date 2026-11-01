@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
 import { ToolPageJsonLd } from '@/components/seo/JsonLd';
-import { buildToolMetadata } from '@/lib/seoSiteFacts';
+import { buildLocalizedToolMetadata } from '@/lib/i18n/metadata';
 
 const title = 'Geo Domain Generator — City & Country Domains for Local SEO';
 const description =
   'Free geo domain generator: combine any niche with cities and countries, live-check availability, and export CSV. Built for local SEO and multi-market domain lists.';
 const path = '/tools/geo';
 
-export const metadata: Metadata = buildToolMetadata({
+export function generateMetadata() {
+  return buildLocalizedToolMetadata({
   title,
   description,
   path,
@@ -18,6 +18,7 @@ export const metadata: Metadata = buildToolMetadata({
     'geo domains',
   ],
 });
+}
 
 export default function GeoLayout({ children }: { children: React.ReactNode }) {
   return (

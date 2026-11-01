@@ -3,11 +3,13 @@
 import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import {
   BILLBOARD_CAROUSEL_MS,
+  adSrcSet,
   getCarouselAdsForPlacement,
   type AffiliateAdCreative,
   type AffiliateAdPlacement,
 } from '@/lib/affiliateAds';
 import { useTheme } from '@/contexts/ThemeContext';
+import { CrispAffiliateStrip, isCrispStrip } from '@/components/ads/CrispAffiliateStrip';
 
 type Props = {
   placement: AffiliateAdPlacement;
@@ -122,8 +124,11 @@ export function AffiliateAdCarousel({
 
   if (!active) return null;
 
+  const aboveFold = placement === 'home-hero' || placement === 'ada-hero';
+
   // compact = smaller *section* (narrower max-width from parent), never crop the art
   const compact = size === 'compact';
+  const tinyMobile = ads.length > 0 && ads.every((ad) => isCrispStrip(ad));
 
   return (
     <div
@@ -143,15 +148,19 @@ export function AffiliateAdCarousel({
         data-placement={placement}
         data-creative-format="billboard-carousel"
         className={`group relative block w-full overflow-hidden rounded-xl sm:rounded-2xl transition-[transform,box-shadow] duration-500 ease-out active:scale-[0.995] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 ${
+          tinyMobile ? 'max-sm:rounded-full' : ''
+        } ${
           isLight
             ? 'shadow-[0_12px_36px_-20px_rgba(15,23,42,0.4)] hover:shadow-[0_16px_40px_-18px_rgba(15,23,42,0.45)] focus-visible:ring-offset-white border border-slate-200/80'
-            : 'shadow-[0_16px_44px_-22px_rgba(0,0,0,0.85)] hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] focus-visible:ring-offset-[#050505] border border-white/[0.1]'
+            : 'shadow-[0_16px_44px_-22px_rgba(0,0,0,0.85)] hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] focus-visible:ring-offset-[#000000] border border-white/[0.1]'
         }`}
         aria-label={`${active.alt} (sponsored)`}
       >
         {/* Minimal frosted Ad chip — transparent, not black/grey solid */}
         <span
-          className="pointer-events-none absolute z-[2] left-1 top-1 sm:left-2 sm:top-2 inline-flex items-center rounded-full border border-white/25 bg-white/15 px-1.5 py-px text-[6px] sm:text-[6.5px] font-semibold uppercase tracking-[0.1em] text-white/85 backdrop-blur-[3px]"
+          className={`pointer-events-none absolute z-[2] items-center rounded-full border border-white/30 bg-white/10 font-semibold uppercase text-white/90 right-1.5 top-1.5 px-1 py-px text-[7px] tracking-[0.06em] sm:left-2 sm:right-auto sm:top-2 sm:px-2 sm:py-0.5 sm:text-[9px] sm:tracking-[0.12em] ${
+            tinyMobile ? 'hidden sm:inline-flex' : 'inline-flex'
+          }`}
           style={{ backgroundColor: 'rgba(255,255,255,0.14)' }}
         >
           Ad
@@ -163,39 +172,41 @@ export function AffiliateAdCarousel({
             style={{ transform: `translateX(-${index * 100}%)` }}
           >
             {ads.map((ad) => {
-              // Cap upscale for small leaderboards so 668px art stays crisp
-              const isLeaderboard = ad.format === 'leaderboard';
-              const maxW = isLeaderboard ? Math.round(ad.width * 1.15) : undefined;
+              const crisp = isCrispStrip(ad);
               return (
                 <div
                   key={ad.id}
-                  className="relative w-full shrink-0 grow-0 basis-full flex justify-center"
+                  className="relative flex w-full shrink-0 grow-0 basis-full items-stretch"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={ad.localSrc}
-                    alt={ad.alt}
-                    width={ad.width}
-                    height={ad.height}
-                    loading={ad.id === active.id ? 'eager' : 'lazy'}
-                    decoding="async"
-                    className="block w-full h-auto select-none"
-                    style={{
-                      aspectRatio: `${ad.width} / ${ad.height}`,
-                      maxWidth: maxW,
-                      imageRendering: 'auto',
-                    }}
-                    sizes={maxW ? `${maxW}px` : '100vw'}
-                    draggable={false}
-                    onError={(e) => {
-                      const el = e.target as HTMLImageElement;
-                      if (el.src.endsWith('.webp')) {
-                        el.src = ad.localSrc.replace(/\.webp$/i, '.png');
-                      } else if (ad.displayAdCdn) {
-                        el.src = ad.displayAdCdn;
-                      }
-                    }}
-                  />
+                  {crisp ? (
+                    <CrispAffiliateStrip creative={ad} />
+                  ) : (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={ad.localSrc}
+                      alt={ad.alt}
+                      width={ad.width}
+                      height={ad.height}
+                      loading={aboveFold && ad.id === active.id ? 'eager' : 'lazy'}
+                      decoding="async"
+                      className="block h-auto w-full select-none"
+                      style={{
+                        aspectRatio: `${ad.width} / ${ad.height}`,
+                      }}
+                      srcSet={adSrcSet(ad.localSrc)}
+                      sizes="100vw"
+                      draggable={false}
+                      onError={(e) => {
+                        const el = e.target as HTMLImageElement;
+                        el.removeAttribute('srcset');
+                        if (el.currentSrc.endsWith('.webp') || el.src.endsWith('.webp')) {
+                          el.src = ad.localSrc.replace(/\.webp$/i, '.png');
+                        } else if (ad.displayAdCdn) {
+                          el.src = ad.displayAdCdn;
+                        }
+                      }}
+                    />
+                  )}
                 </div>
               );
             })}
@@ -211,6 +222,7 @@ export function AffiliateAdCarousel({
           width={0}
           alt=""
           src={ad.impressionPixel}
+          fetchPriority="low"
           style={{ position: 'absolute', visibility: 'hidden', width: 0, height: 0, border: 0 }}
           aria-hidden
         />

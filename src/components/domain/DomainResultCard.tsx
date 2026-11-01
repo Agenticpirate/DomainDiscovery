@@ -43,12 +43,12 @@ export function DomainResultCard({
     if (isHighlighted) {
       return isLight
         ? 'bg-slate-100 border-slate-300 shadow-lg'
-        : 'bg-[#141418] border-white/30 shadow-lg';
+        : 'bg-[#111111] border-white/30 shadow-lg';
     }
     if (isLoading || availability === 'unknown') {
       return isLight
         ? 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-        : 'bg-[#0c0c0e] border-white/10 hover:border-white/20 hover:bg-[#101014]';
+        : 'bg-[#0a0a0a] border-white/10 hover:border-white/20 hover:bg-[#111111]';
     }
     if (premium) {
       return isLight
@@ -87,9 +87,9 @@ export function DomainResultCard({
                 {domain}
               </h3>
               {premium && (
-                <span title="Premium listing from GoDaddy">
+                <span title="Premium listing">
                   <Badge variant="warning" size="sm">
-                    Premium · GoDaddy
+                    Premium
                   </Badge>
                 </span>
               )}
@@ -102,7 +102,7 @@ export function DomainResultCard({
                 {isLoading
                   ? 'Checking...'
                   : premium
-                    ? 'Premium · GoDaddy'
+                    ? 'Premium'
                     : isAvailable
                       ? 'Available'
                       : 'Taken'}

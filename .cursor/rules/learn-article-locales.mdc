@@ -1,0 +1,18 @@
+---
+description: When adding or updating a Learn article, publish the same article in all 11 language files before finishing.
+alwaysApply: true
+---
+
+# Learn articles publish in every language
+
+English lives in `src/data/learn-articles.json`. The other languages are `zh`, `de`, `es`, `ja`, `fr`, `pt`, `hi`, `ar`, `ru`, `bn`, and `ur`.
+
+When you add or edit a Learn article:
+
+1. Write the English article in `src/data/learn-articles.json` with the same `slug` and the same number of sections and paragraphs.
+2. Add that slug to every file in `src/data/learn-locales/{locale}.json` under `articles`. Each entry needs `title`, `description`, and `sections` with the same shape as English. Translate the wording. Keep the slug, URLs, brand name DomainDiscovery, and TLD codes unchanged.
+3. Run `node scripts/check-learn-locales.mjs` and fix any failure before you finish.
+
+Articles dated before 2026-10-25 stay English until they are edited. The first edit of an older article must add all 11 translations in the same change.
+
+Do not mark a language URL indexable for that slug until its locale entry exists. Do not call a translation API at page-view time.

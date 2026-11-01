@@ -7,6 +7,8 @@ import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { getTldAboutDetail, getTldAboutSlugs } from '@/lib/tldAboutData';
+import { getRequestLocale } from '@/lib/i18n/request';
+import { fillTld, libraryChrome } from '@/lib/i18n/libraryChrome';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,8 +20,8 @@ export function generateStaticParams() {
   return getTldAboutSlugs().map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const detail = getTldAboutDetail(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const detail = await getTldAboutDetail(params.slug);
   if (!detail) {
     return { title: 'TLD not found' };
   }
@@ -46,9 +48,12 @@ export function generateMetadata({ params }: PageProps): Metadata {
   };
 }
 
-export default function TldAboutPage({ params }: PageProps) {
-  const detail = getTldAboutDetail(params.slug);
+export default async function TldAboutPage({ params }: PageProps) {
+  const detail = await getTldAboutDetail(params.slug);
   if (!detail) notFound();
+  const locale = await getRequestLocale();
+  const lib = libraryChrome(locale);
+  const tld = detail.tld.startsWith('.') ? detail.tld : `.${detail.tld}`;
 
   const features = Object.entries(detail.features || {}).filter(([k]) => k !== 'note');
   const restrictions = detail.registrationRestrictions || {};
@@ -61,9 +66,9 @@ export default function TldAboutPage({ params }: PageProps) {
       <main className={`${PAGE_MAIN_CLASS} pb-14`}>
         <PageBreadcrumb
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Blog', href: '/blog' },
-            { label: 'TLD encyclopedia', href: '/blog/tlds' },
+            { label: lib?.home ?? 'Home', href: '/' },
+            { label: lib?.blog ?? 'Blog', href: '/blog' },
+            { label: lib?.encyclopedia ?? 'TLD encyclopedia', href: '/blog/tlds' },
             { label: detail.tld },
           ]}
         />
@@ -72,7 +77,7 @@ export default function TldAboutPage({ params }: PageProps) {
           <header className="mt-2 sm:mt-4">
             <div className="flex flex-wrap items-center gap-2 mb-3">
               <span className="relative isolate overflow-hidden rounded-full border border-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white/55">
-                <span aria-hidden className="pointer-events-none absolute inset-0 rounded-full bg-[#0a0a0c]" />
+                <span aria-hidden className="pointer-events-none absolute inset-0 rounded-full bg-[#0a0a0a]" />
                 <span className="relative z-[1]">{detail.type}</span>
               </span>
               {detail.typeLabel && (
@@ -84,14 +89,14 @@ export default function TldAboutPage({ params }: PageProps) {
             <h1 className="text-3xl sm:text-5xl font-black tracking-tight">{detail.title}</h1>
             {detail.sponsor && (
               <p className="mt-3 text-sm sm:text-base" style={{ color: 'var(--text-secondary)' }}>
-                Registry / sponsor: <strong className="text-white/90">{detail.sponsor}</strong>
+                {lib?.sponsor ?? 'Registry / sponsor'}: <strong className="text-white/90">{detail.sponsor}</strong>
               </p>
             )}
           </header>
 
           {/* About */}
-          <section className="mt-8 rounded-2xl border border-white/10 bg-[#0c0c0e] p-5 sm:p-6">
-            <h2 className="text-lg font-bold mb-3">About {detail.tld} domains</h2>
+          <section className="mt-8 rounded-2xl border border-white/10 bg-[#0a0a0a] p-5 sm:p-6">
+            <h2 className="text-lg font-bold mb-3">{lib ? fillTld(lib.aboutTld, tld) : `About ${detail.tld} domains`}</h2>
             {detail.about.split('\n\n').map((para, i) => (
               <p key={i} className="text-[14px] sm:text-[15px] leading-relaxed mb-3 last:mb-0" style={{ color: 'var(--text-secondary)' }}>
                 {para}
@@ -100,16 +105,16 @@ export default function TldAboutPage({ params }: PageProps) {
           </section>
 
           {/* Who can register */}
-          <section className="mt-4 rounded-2xl border border-white/10 bg-[#0c0c0e] p-5 sm:p-6">
-            <h2 className="text-lg font-bold mb-3">Who can register {detail.tld} domains?</h2>
+          <section className="mt-4 rounded-2xl border border-white/10 bg-[#0a0a0a] p-5 sm:p-6">
+            <h2 className="text-lg font-bold mb-3">{lib ? fillTld(lib.whoCanRegister, tld) : `Who can register ${detail.tld} domains?`}</h2>
             <p className="text-[14px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               {detail.whoCanRegister}
             </p>
           </section>
 
           {/* Restrictions */}
-          <section className="mt-4 rounded-2xl border border-white/10 bg-[#0c0c0e] p-5 sm:p-6">
-            <h2 className="text-lg font-bold mb-3">Registration restrictions</h2>
+          <section className="mt-4 rounded-2xl border border-white/10 bg-[#0a0a0a] p-5 sm:p-6">
+            <h2 className="text-lg font-bold mb-3">{lib?.restrictions ?? 'Registration restrictions'}</h2>
             {restrictions.note && (
               <p className="text-[12px] mb-4" style={{ color: 'var(--text-muted)' }}>
                 {restrictions.note}
@@ -118,15 +123,16 @@ export default function TldAboutPage({ params }: PageProps) {
             <dl className="space-y-3 text-[14px]">
               <div>
                 <dt className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
-                  Length
+                  {lib?.length ?? 'Length'}
                 </dt>
                 <dd className="mt-0.5" style={{ color: 'var(--text-secondary)' }}>
-                  {restrictions.minLength ?? 1} – {restrictions.maxLength ?? 63} characters (label before {detail.tld})
+                  {restrictions.minLength ?? 1} – {restrictions.maxLength ?? 63}{' '}
+                  {lib ? fillTld(lib.charactersBefore, tld) : `characters (label before ${detail.tld})`}
                 </dd>
               </div>
               <div>
                 <dt className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
-                  Can use
+                  {lib?.canUse ?? 'Can use'}
                 </dt>
                 <dd className="mt-0.5" style={{ color: 'var(--text-secondary)' }}>
                   {restrictions.canUse}
@@ -134,7 +140,7 @@ export default function TldAboutPage({ params }: PageProps) {
               </div>
               <div>
                 <dt className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
-                  Cannot use
+                  {lib?.cannotUse ?? 'Cannot use'}
                 </dt>
                 <dd className="mt-0.5" style={{ color: 'var(--text-secondary)' }}>
                   {restrictions.cannotUse}
@@ -152,8 +158,8 @@ export default function TldAboutPage({ params }: PageProps) {
           </section>
 
           {/* Features */}
-          <section className="mt-4 rounded-2xl border border-white/10 bg-[#0c0c0e] p-5 sm:p-6">
-            <h2 className="text-lg font-bold mb-3">Features</h2>
+          <section className="mt-4 rounded-2xl border border-white/10 bg-[#0a0a0a] p-5 sm:p-6">
+            <h2 className="text-lg font-bold mb-3">{lib?.features ?? 'Features'}</h2>
             {detail.features?.note && (
               <p className="text-[12px] mb-4" style={{ color: 'var(--text-muted)' }}>
                 {detail.features.note}
@@ -161,7 +167,7 @@ export default function TldAboutPage({ params }: PageProps) {
             )}
             <div className="grid sm:grid-cols-2 gap-3">
               {features.map(([key, value]) => (
-                <div key={key} className="rounded-xl border border-white/10 bg-black/20 px-3 py-2.5">
+                <div key={key} className="rounded-xl border border-white/10 bg-black px-3 py-2.5">
                   <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                     {key.replace(/([A-Z])/g, ' $1').trim()}
                   </div>
@@ -174,16 +180,16 @@ export default function TldAboutPage({ params }: PageProps) {
           </section>
 
           {/* Registry technical */}
-          <section className="mt-4 rounded-2xl border border-white/10 bg-[#0c0c0e] p-5 sm:p-6">
-            <h2 className="text-lg font-bold mb-3">Registry information</h2>
+          <section className="mt-4 rounded-2xl border border-white/10 bg-[#0a0a0a] p-5 sm:p-6">
+            <h2 className="text-lg font-bold mb-3">{lib?.registry ?? 'Registry information'}</h2>
             <dl className="space-y-2.5 text-[13px]">
               {[
-                ['Sponsor / manager', detail.sponsor],
-                ['Registration services', detail.registryUrl],
-                ['WHOIS server', detail.whoisServer],
-                ['RDAP server', detail.rdapServer],
-                ['Root zone registration', detail.registrationDate],
-                ['Record last updated', detail.recordUpdated],
+                [lib?.sponsor ?? 'Sponsor / manager', detail.sponsor],
+                [lib?.registrationServices ?? 'Registration services', detail.registryUrl],
+                [lib?.whoisServer ?? 'WHOIS server', detail.whoisServer],
+                [lib?.rdapServer ?? 'RDAP server', detail.rdapServer],
+                [lib?.rootZone ?? 'Root zone registration', detail.registrationDate],
+                [lib?.recordUpdated ?? 'Record last updated', detail.recordUpdated],
               ].map(([label, value]) =>
                 value ? (
                   <div key={label as string} className="flex flex-col sm:flex-row sm:gap-3">
@@ -206,7 +212,7 @@ export default function TldAboutPage({ params }: PageProps) {
 
             {detail.nameServers && detail.nameServers.length > 0 && (
               <div className="mt-5">
-                <h3 className="text-sm font-bold mb-2">Name servers</h3>
+                <h3 className="text-sm font-bold mb-2">{lib?.nameServers ?? 'Name servers'}</h3>
                 <ul className="space-y-1.5 font-mono text-[12px]" style={{ color: 'var(--text-tertiary)' }}>
                   {detail.nameServers.map((ns) => (
                     <li key={ns.host}>
@@ -228,13 +234,13 @@ export default function TldAboutPage({ params }: PageProps) {
               href={`/tools/whois?domain=example${detail.tld}`}
               className="rounded-xl bg-white text-black px-4 py-2.5 text-sm font-bold hover:bg-white/90"
             >
-              WHOIS lookup
+              {lib?.whoisLookup ?? 'WHOIS lookup'}
             </Link>
             <Link
               href="/tools/compare"
               className="rounded-xl border border-white/15 px-4 py-2.5 text-sm font-semibold text-white/80 hover:bg-white/[0.05]"
             >
-              Compare prices
+              {lib?.comparePrices ?? 'Compare prices'}
             </Link>
             <Link
               href="/blog/tlds"

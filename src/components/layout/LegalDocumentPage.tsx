@@ -8,6 +8,7 @@ import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 
 export type LegalSection = {
   id?: string;
@@ -30,6 +31,17 @@ export type LegalDocumentPageProps = {
   sections: LegalSection[];
   relatedLinks?: LegalRelatedLink[];
   cta?: { href: string; label: string };
+  labels?: {
+    legal: string;
+    lastUpdated: string;
+    effective: string;
+    onThisPage: string;
+    related: string;
+    questions: string;
+    email: string;
+    noticeTitle: string;
+    noticeBody: string;
+  };
 };
 
 /** Opaque plate — ambient dots never show through legal cards/text */
@@ -45,29 +57,21 @@ function SolidPlate({
   tone?: 'surface' | 'inset' | 'hero' | 'notice';
 }) {
   const fill =
-    tone === 'hero'
+    tone === 'notice'
       ? isLight
+        ? '#fffbeb'
+        : '#12100c'
+      : isLight
         ? '#ffffff'
-        : '#050505'
-      : tone === 'notice'
-        ? isLight
-          ? '#fffbeb'
-          : '#12100c'
-        : tone === 'inset'
-          ? isLight
-            ? '#f8fafc'
-            : '#121214'
-          : isLight
-            ? '#ffffff'
-            : '#0c0c0e';
+        : '#0a0a0a';
   const border =
     tone === 'notice'
       ? isLight
         ? 'border-amber-200'
         : 'border-amber-500/30'
       : isLight
-        ? 'border-slate-200'
-        : 'border-white/10';
+        ? 'border-[#d7dbdc]'
+        : 'border-white/[0.08]';
 
   return (
     <div
@@ -95,8 +99,22 @@ export function LegalDocumentPage({
   sections,
   relatedLinks,
   cta,
+  labels,
 }: LegalDocumentPageProps) {
   const { theme } = useTheme();
+  const { href, messages } = useLocale();
+  const chrome = {
+    legal: 'Legal',
+    lastUpdated: 'Last updated',
+    effective: 'Effective',
+    onThisPage: 'On this page',
+    related: 'Related legal pages',
+    questions: 'Questions?',
+    email: 'Email',
+    noticeTitle: 'Important',
+    noticeBody: `This document is provided for transparency about how ${brandName} operates. It is not legal advice. If you need advice for your situation, consult a qualified attorney. By using the service, you agree to the Terms of Use and this Privacy Policy (as applicable).`,
+    ...labels,
+  };
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
   const isLight = mounted ? theme === 'light' : false;
@@ -104,7 +122,7 @@ export function LegalDocumentPage({
   const ink = isLight ? 'text-slate-900' : 'text-white';
   const muted = isLight ? 'text-slate-600' : 'text-white/60';
   const faint = isLight ? 'text-slate-600' : 'text-white/50';
-  const chipFill = isLight ? '#ffffff' : '#121214';
+  const chipFill = isLight ? '#ffffff' : '#111111';
 
   const documentBody = (
     <>
@@ -113,7 +131,7 @@ export function LegalDocumentPage({
         <div className="max-w-3xl mx-auto">
           <SolidPlate isLight={isLight} tone="hero" className="rounded-3xl p-5 sm:p-8">
             <p className={`text-[10px] font-bold uppercase tracking-[0.16em] mb-2 ${faint}`}>
-              {brandName} · Legal
+              {brandName} · {chrome.legal}
             </p>
             <h1 className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-3 ${ink}`}>
               {title}
@@ -122,8 +140,8 @@ export function LegalDocumentPage({
             <div
               className={`mt-4 flex flex-wrap gap-x-4 gap-y-1 text-[11px] font-semibold ${faint}`}
             >
-              <span>Last updated: {lastUpdated}</span>
-              {effectiveDate && <span>Effective: {effectiveDate}</span>}
+              <span>{chrome.lastUpdated}: {lastUpdated}</span>
+              {effectiveDate && <span>{chrome.effective}: {effectiveDate}</span>}
               <a
                 href={`mailto:${contactEmail}`}
                 className="underline underline-offset-2 hover:opacity-80"
@@ -148,17 +166,14 @@ export function LegalDocumentPage({
                 isLight ? 'text-amber-900' : 'text-[#c4a574]'
               }`}
             >
-              Important
+              {chrome.noticeTitle}
             </p>
             <p
               className={`text-xs sm:text-sm leading-relaxed ${
                 isLight ? 'text-amber-950' : 'text-white/70'
               }`}
             >
-              This document is provided for transparency about how {brandName} operates. It is not
-              legal advice. If you need advice for your situation, consult a qualified attorney. By
-              using the service, you agree to the Terms of Use and this Privacy Policy (as
-              applicable).
+              {chrome.noticeBody}
             </p>
           </SolidPlate>
 
@@ -169,7 +184,7 @@ export function LegalDocumentPage({
           >
             <nav aria-label="On this page">
               <p className={`text-[10px] font-bold uppercase tracking-[0.14em] mb-2 ${faint}`}>
-                On this page
+                {chrome.onThisPage}
               </p>
               <ol className="grid sm:grid-cols-2 gap-x-4 gap-y-1.5">
                 {sections.map((s, i) => {
@@ -227,12 +242,12 @@ export function LegalDocumentPage({
 
           {relatedLinks && relatedLinks.length > 0 && (
             <SolidPlate isLight={isLight} className="shine-border rounded-2xl p-4 sm:p-5">
-              <p className={`text-sm font-bold mb-2 ${ink}`}>Related legal pages</p>
+              <p className={`text-sm font-bold mb-2 ${ink}`}>{chrome.related}</p>
               <div className="flex flex-wrap gap-2">
                 {relatedLinks.map((l) => (
                   <Link
                     key={l.href}
-                    href={l.href}
+                    href={href(l.href)}
                     className={`relative isolate rounded-full border px-3 py-1.5 text-[11px] font-bold transition ${
                       isLight
                         ? 'border-slate-200 text-slate-700 hover:border-slate-300'
@@ -255,9 +270,9 @@ export function LegalDocumentPage({
             >
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
-                  <div className={`text-base font-bold ${ink}`}>Questions?</div>
+                  <div className={`text-base font-bold ${ink}`}>{chrome.questions}</div>
                   <p className={`text-sm ${faint}`}>
-                    Email{' '}
+                    {chrome.email}{' '}
                     <a
                       href={`mailto:${contactEmail}`}
                       className="underline underline-offset-2 font-semibold"
@@ -267,7 +282,7 @@ export function LegalDocumentPage({
                   </p>
                 </div>
                 <Link
-                  href={cta.href}
+                  href={href(cta.href)}
                   className={`inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors ${
                     isLight
                       ? 'bg-slate-900 text-white hover:bg-slate-800'
@@ -297,7 +312,7 @@ export function LegalDocumentPage({
       <PageBackground variant="default" />
       <Navigation />
       <main className={`${PAGE_MAIN_CLASS} pb-12 sm:pb-16`}>
-        <PageBreadcrumb items={[{ label: 'Home', href: '/' }, { label: title }]} />
+        <PageBreadcrumb items={[{ label: messages.nav.home, href: '/' }, { label: title }]} />
         <SectionAmbient intensity="hero" className="w-full min-h-[50vh]" contentClassName="page-gutter">
           <div className="relative z-10">{documentBody}</div>
         </SectionAmbient>

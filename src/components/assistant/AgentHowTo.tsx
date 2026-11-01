@@ -17,7 +17,7 @@ function CodeBlock({
   isLight: boolean;
 }) {
   const [copied, setCopied] = React.useState(false);
-  const fill = '#0a0a0c';
+  const fill = '#0a0a0a';
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(code);
@@ -124,9 +124,9 @@ export function AgentHowTo({ isLight }: { isLight: boolean }) {
 
   const sectionTitle = isLight ? 'text-slate-900' : 'text-white';
   const muted = isLight ? 'text-slate-500' : 'text-white/55';
-  const cardFill = isLight ? '#ffffff' : '#0a0a0c';
+  const cardFill = isLight ? '#ffffff' : '#0a0a0a';
   const cardBorder = isLight ? 'border-slate-200' : 'border-white/10';
-  const chipFill = isLight ? '#ffffff' : '#121214';
+  const chipFill = isLight ? '#ffffff' : '#111111';
 
   return (
     <div className="space-y-8">

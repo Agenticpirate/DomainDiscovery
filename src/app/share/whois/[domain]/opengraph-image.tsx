@@ -60,7 +60,7 @@ export default async function Image({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(145deg, #07070a 0%, #0c0c10 50%, #121218 100%)',
+          background: 'linear-gradient(145deg, #000000 0%, #0a0a0a 50%, #111111 100%)',
           position: 'relative',
         }}
       >
@@ -97,7 +97,7 @@ export default async function Image({
             height: 500,
             borderRadius: 28,
             border: '1px solid rgba(255,255,255,0.14)',
-            background: 'linear-gradient(145deg, #16161c 0%, #0f0f14 55%, #14141a 100%)',
+            background: 'linear-gradient(145deg, #171717 0%, #111111 55%, #111111 100%)',
             padding: '40px 44px',
             boxShadow: '0 40px 80px rgba(0,0,0,0.55)',
             position: 'relative',

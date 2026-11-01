@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
   DEFAULT_REGISTRAR,
+  LEGACY_REGISTRAR_STORAGE_KEY,
   PREFERRED_REGISTRAR_EVENT,
   REGISTRARS,
   REGISTRAR_STORAGE_KEY,
@@ -15,8 +16,13 @@ function readPreferredRegistrar(): RegistrarName {
     return DEFAULT_REGISTRAR;
   }
 
-  const stored = window.localStorage.getItem(REGISTRAR_STORAGE_KEY);
-  return stored && isRegistrarName(stored) ? stored : DEFAULT_REGISTRAR;
+  try {
+    window.localStorage.removeItem(LEGACY_REGISTRAR_STORAGE_KEY);
+    const stored = window.sessionStorage.getItem(REGISTRAR_STORAGE_KEY);
+    return stored && isRegistrarName(stored) ? stored : DEFAULT_REGISTRAR;
+  } catch {
+    return DEFAULT_REGISTRAR;
+  }
 }
 
 function persistPreferredRegistrar(nextRegistrar: RegistrarName) {
@@ -24,7 +30,11 @@ function persistPreferredRegistrar(nextRegistrar: RegistrarName) {
     return;
   }
 
-  window.localStorage.setItem(REGISTRAR_STORAGE_KEY, nextRegistrar);
+  try {
+    window.sessionStorage.setItem(REGISTRAR_STORAGE_KEY, nextRegistrar);
+  } catch {
+    /* storage blocked */
+  }
   window.dispatchEvent(new Event(PREFERRED_REGISTRAR_EVENT));
 }
 

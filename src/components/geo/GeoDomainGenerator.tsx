@@ -5,8 +5,8 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
-import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
-import { resolveRegisterUrl } from '@/lib/registrars';
+import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
+import { recordDomainsChecked } from '@/lib/searchCounter';
 import countriesData from '@/data/countries.json';
 import citiesData from '@/data/cities-expanded.json';
 import usStatesData from '@/data/us-states.json';
@@ -251,11 +251,10 @@ const sanitizeDomainName = (name: string): string =>
     .replace(/[^a-z0-9]/g, '')
     .substring(0, 63);
 
-/** Fully opaque shells — ambient dots must never bleed through cards/text */
 function shell(isLight: boolean) {
   return isLight
     ? 'border-slate-200 bg-white shadow-[0_1px_0_rgba(15,23,42,0.04),0_12px_40px_-16px_rgba(15,23,42,0.18)]'
-    : 'border-white/[0.1] bg-[#0a0a0c] shadow-[0_20px_50px_-24px_rgba(0,0,0,0.65)]';
+    : 'surface-premium border-white/[0.08]';
 }
 
 function chipCls(active: boolean, isLight: boolean) {
@@ -266,7 +265,7 @@ function chipCls(active: boolean, isLight: boolean) {
   }
   return isLight
     ? 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50'
-    : 'border-white/10 bg-white/[0.02] text-white/60 hover:border-white/20 hover:bg-white/[0.05]';
+    : 'border-white/10 bg-[#0a0a0a] text-white/60 hover:border-white/20 hover:bg-white/[0.05]';
 }
 
 function locationIsoCode(loc: Location): string | undefined {
@@ -283,7 +282,6 @@ export const GeoDomainGenerator: React.FC = () => {
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const reduceMotion = useReducedMotion();
-  const { selectedRegistrar } = usePreferredRegistrar();
 
   const [keyword, setKeyword] = useState('');
   const [locationType, setLocationType] = useState<LocationType>('mega_cities');
@@ -639,6 +637,7 @@ export const GeoDomainGenerator: React.FC = () => {
 
       const runBatch = async (batch: GeneratedDomain[]) => {
         const domainNames = batch.map((d) => d.domain);
+        recordDomainsChecked(domainNames.length, `geo:${domainNames[0] || 'batch'}:${domainNames.length}`);
         try {
           const response = await fetch('/api/domains/instant-check', {
             method: 'POST',
@@ -1001,15 +1000,7 @@ export const GeoDomainGenerator: React.FC = () => {
     flash(`Copied ${list.length} free domains`);
   };
 
-  const registerUrl = (
-    domain: string,
-    buyUrl?: string | null,
-    premium?: boolean
-  ) =>
-    resolveRegisterUrl(domain, selectedRegistrar, buyUrl, {
-      premium: Boolean(premium),
-      available: premium ? false : undefined,
-    });
+  const registerUrl = (domain: string) => getSpaceshipAffiliateUrl(domain);
   const whoisUrl = (domain: string) => `/tools/whois?domain=${encodeURIComponent(domain)}`;
 
   const locationGroups = useMemo(() => {
@@ -1056,7 +1047,7 @@ export const GeoDomainGenerator: React.FC = () => {
 
   const inputCls = isLight
     ? 'border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:ring-2 focus:ring-slate-900/10'
-    : 'border-white/10 bg-[#121214] text-white placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-white/10';
+    : 'border-white/10 bg-[#111111] text-white placeholder:text-white/30 focus:border-white/25 focus:ring-2 focus:ring-white/10';
 
   const canGenerate =
     Boolean(keyword.trim()) && selectedTlds.length > 0 && locations.length > 0 && !isGenerating && !isChecking;
@@ -1099,7 +1090,7 @@ export const GeoDomainGenerator: React.FC = () => {
     reduceMotion
       ? { initial: false as const, animate: { opacity: 1, y: 0 } }
       : {
-          initial: { opacity: 0, y: 12 },
+          initial: { opacity: 1, y: 8 },
           animate: { opacity: 1, y: 0 },
           transition: { duration: 0.45, delay, ease: easeOut },
         };
@@ -1109,7 +1100,7 @@ export const GeoDomainGenerator: React.FC = () => {
       {/* Premium metrics bar */}
       <motion.div
         {...rise(0)}
-        className={`relative overflow-hidden rounded-2xl border px-4 py-4 sm:px-5 ${shell(isLight)}`}
+        className={`relative overflow-hidden rounded-2xl border px-3.5 py-3 sm:px-4 ${shell(isLight)}`}
       >
         <div
           className={`pointer-events-none absolute inset-0 opacity-60 ${
@@ -1118,28 +1109,32 @@ export const GeoDomainGenerator: React.FC = () => {
               : 'bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.06),transparent_55%)]'
           }`}
         />
-        <div className="relative flex flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+        <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <dl className="grid flex-1 grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-4">
             {[
               ['Catalog', `${catalogMega.toLocaleString()} cities 1M+ · ${catalogTotal.toLocaleString()}`],
               ['Scope', `${locations.length.toLocaleString()} places`],
               ['Output', `~${estimateCount.toLocaleString()} names`],
               ['Check', `top ${maxCheck}`],
             ].map(([k, v]) => (
-              <div key={k}>
-                <span
-                  className={`text-[10px] font-bold uppercase tracking-[0.16em] ${
+              <div key={k} className="min-w-0">
+                <dt
+                  className={`text-[10px] font-semibold uppercase tracking-[0.14em] ${
                     isLight ? 'text-slate-400' : 'text-white/35'
                   }`}
                 >
                   {k}
-                </span>
-                <div className={`font-semibold tabular-nums tracking-tight ${isLight ? 'text-slate-900' : 'text-white/90'}`}>
+                </dt>
+                <dd
+                  className={`text-[13px] font-semibold leading-snug tabular-nums tracking-tight ${
+                    isLight ? 'text-slate-900' : 'text-white/90'
+                  }`}
+                >
                   {v}
-                </div>
+                </dd>
               </div>
             ))}
-          </div>
+          </dl>
 
           <div className="flex flex-wrap items-center gap-2">
             {locationType === 'country_cities' && selectedCountryMeta && (
@@ -1283,6 +1278,8 @@ export const GeoDomainGenerator: React.FC = () => {
                   >
                     {presetFlag ? (
                       <CountryFlag code={presetFlag} size={18} />
+                    ) : option.value === 'country_cities' ? (
+                      <Icons.Globe className="h-4 w-4 shrink-0 opacity-80" />
                     ) : (
                       <span className="text-sm leading-none opacity-90">{option.icon}</span>
                     )}
@@ -1295,10 +1292,10 @@ export const GeoDomainGenerator: React.FC = () => {
             {/* Country picker — flags + population in millions */}
             {(locationType === 'country_cities' || locationGroupTab === 'By country') && (
               <div
-                className={`mb-3 overflow-hidden rounded-2xl border ${
+                className={`mb-3 overflow-hidden rounded-xl border ${
                   isLight
-                    ? 'border-slate-200/90 bg-gradient-to-br from-slate-50 via-white to-slate-50/80'
-                    : 'border-white/[0.08] bg-gradient-to-br from-white/[0.05] via-black/20 to-black/40'
+                    ? 'border-slate-200 bg-slate-50'
+                    : 'border-white/[0.08] bg-[#0a0a0a]'
                 }`}
               >
                 <div
@@ -1340,7 +1337,7 @@ export const GeoDomainGenerator: React.FC = () => {
 
                   <div
                     className={`rounded-xl border ${
-                      isLight ? 'border-slate-200 bg-white' : 'border-white/[0.08] bg-black/25'
+                      isLight ? 'border-slate-200 bg-white' : 'border-white/[0.08] bg-black'
                     }`}
                   >
                     <div className="grid grid-cols-1 sm:grid-cols-2">
@@ -1416,7 +1413,7 @@ export const GeoDomainGenerator: React.FC = () => {
                     {filteredCountryPicker.length > COUNTRY_PAGE_SIZE && (
                       <div
                         className={`flex flex-wrap items-center justify-between gap-2 border-t px-3 py-2.5 ${
-                          isLight ? 'border-slate-100 bg-slate-50/80' : 'border-white/[0.06] bg-black/20'
+                          isLight ? 'border-slate-100 bg-slate-50/80' : 'border-white/[0.06] bg-black'
                         }`}
                       >
                         <span className={`text-[11px] tabular-nums ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
@@ -1758,7 +1755,7 @@ export const GeoDomainGenerator: React.FC = () => {
             {showAdvanced && (
               <div
                 className={`mb-3 space-y-3 rounded-xl border p-3 ${
-                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-black/25'
+                  isLight ? 'border-slate-200 bg-slate-50' : 'border-white/10 bg-black'
                 }`}
               >
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -1811,7 +1808,7 @@ export const GeoDomainGenerator: React.FC = () => {
 
             <div
               className={`mb-4 rounded-xl border px-3 py-2.5 ${
-                isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/[0.08] bg-black/25'
+                isLight ? 'border-slate-200 bg-slate-50/80' : 'border-white/[0.08] bg-black'
               }`}
             >
               <div
@@ -1828,7 +1825,7 @@ export const GeoDomainGenerator: React.FC = () => {
                     className={`rounded-md border px-2 py-1 font-mono text-[11px] ${
                       isLight
                         ? 'border-slate-200 bg-white text-slate-700'
-                        : 'border-white/10 bg-white/[0.04] text-white/70'
+                        : 'border-white/10 bg-[#111111] text-white/70'
                     }`}
                   >
                     {s}
@@ -1992,41 +1989,42 @@ export const GeoDomainGenerator: React.FC = () => {
       {generatedDomains.length === 0 && !isGenerating && (
         <motion.div
           {...rise(0.12)}
-          className={`rounded-2xl border px-5 py-10 text-center ${shell(isLight)}`}
+          className={`overflow-hidden rounded-2xl border ${shell(isLight)}`}
         >
-          <motion.div
-            animate={
-              reduceMotion
-                ? undefined
-                : { y: [0, -4, 0], transition: { duration: 3.2, repeat: Infinity, ease: 'easeInOut' } }
-            }
-            className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${
-              isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/5 text-white/40'
-            }`}
-          >
-            <Icons.Magic />
-          </motion.div>
-          <h3 className={`text-base font-black ${isLight ? 'text-slate-900' : 'text-white'}`}>
-            Your inventory appears here
-          </h3>
-          <p className={`mx-auto mt-1.5 max-w-md text-sm ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-            Pick a keyword and market, then generate. We live-check the top {maxCheck} names for
-            available, premium, and registered status. Populations are city-proper (not metro).
-          </p>
-          <div className="mt-4 flex flex-wrap justify-center gap-1.5">
-            {livePreview.map((s, i) => (
-              <motion.span
-                key={s}
-                initial={reduceMotion ? false : { opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: reduceMotion ? 0 : 0.15 + i * 0.05, duration: 0.35 }}
-                className={`rounded-md border px-2 py-1 font-mono text-[11px] ${
-                  isLight ? 'border-slate-200 text-slate-600' : 'border-white/10 text-white/50'
+          <div className="flex flex-col gap-2.5 px-3.5 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-4 sm:py-3.5">
+            <div className="flex min-w-0 items-center gap-3 text-left">
+              <span
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border ${
+                  isLight
+                    ? 'border-slate-200 bg-slate-50 text-slate-600'
+                    : 'border-white/10 bg-white/[0.04] text-white/70'
                 }`}
               >
-                {s}
-              </motion.span>
-            ))}
+                <Icons.Magic className="h-3.5 w-3.5" />
+              </span>
+              <div className="min-w-0">
+                <h3 className={`text-[13px] font-semibold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
+                  Your inventory appears here
+                </h3>
+                <p className={`mt-0.5 text-[12px] leading-snug ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
+                  Add a keyword, then generate. We live-check the top {maxCheck} for free, premium, and registered.
+                </p>
+              </div>
+            </div>
+            <div className="flex min-w-0 flex-wrap gap-1.5 sm:max-w-[46%] sm:justify-end">
+              {livePreview.slice(0, 2).map((s) => (
+                <span
+                  key={s}
+                  className={`max-w-full truncate rounded-full border px-2.5 py-1 font-mono text-[11px] ${
+                    isLight
+                      ? 'border-slate-200 bg-slate-50 text-slate-700'
+                      : 'border-white/10 bg-black/40 text-white/65'
+                  }`}
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
           </div>
         </motion.div>
       )}
@@ -2207,7 +2205,7 @@ export const GeoDomainGenerator: React.FC = () => {
           <div className={`overflow-x-auto rounded-2xl border ${shell(isLight)}`}>
             <table className="w-full min-w-[720px] text-sm">
               <thead>
-                <tr className={`border-b ${isLight ? 'border-slate-100 bg-slate-50/80' : 'border-white/[0.06] bg-white/[0.02]'}`}>
+                <tr className={`border-b ${isLight ? 'border-slate-100 bg-slate-50/80' : 'border-white/[0.06] bg-[#0a0a0a]'}`}>
                   {['Domain', 'Status', 'Location', 'Pop.', 'Actions'].map((h, i) => (
                     <th
                       key={h}
@@ -2237,24 +2235,10 @@ export const GeoDomainGenerator: React.FC = () => {
                     >
                       <td className="py-3 px-3">
                         <a
-                          href={registerUrl(
-                            domain.domain,
-                            domain.buyUrl,
-                            domain.premium
-                          )}
+                          href={registerUrl(domain.domain)}
                           target="_blank"
-                          rel={
-                            domain.premium
-                              ? 'noopener noreferrer'
-                              : selectedRegistrar === 'Spaceship'
-                                ? 'sponsored noopener noreferrer'
-                                : 'noopener noreferrer'
-                          }
-                          data-affiliate={
-                            !domain.premium && selectedRegistrar === 'Spaceship'
-                              ? 'spaceship'
-                              : undefined
-                          }
+                          rel="sponsored noopener noreferrer"
+                          data-affiliate="spaceship"
                           data-premium={domain.premium ? 'true' : undefined}
                           data-placement="geo-domain-link"
                           className={`font-mono text-[13px] font-semibold tracking-tight ${
@@ -2312,24 +2296,10 @@ export const GeoDomainGenerator: React.FC = () => {
                       <td className="py-2.5 px-3">
                         <div className="flex items-center justify-center gap-1.5">
                           <a
-                            href={registerUrl(
-                              domain.domain,
-                              domain.buyUrl,
-                              domain.premium
-                            )}
+                            href={registerUrl(domain.domain)}
                             target="_blank"
-                            rel={
-                              domain.premium
-                                ? 'noopener noreferrer'
-                                : selectedRegistrar === 'Spaceship'
-                                  ? 'sponsored noopener noreferrer'
-                                  : 'noopener noreferrer'
-                            }
-                            data-affiliate={
-                              !domain.premium && selectedRegistrar === 'Spaceship'
-                                ? 'spaceship'
-                                : undefined
-                            }
+                            rel="sponsored noopener noreferrer"
+                            data-affiliate="spaceship"
                             data-premium={domain.premium ? 'true' : undefined}
                             data-placement="geo-register"
                             className={`inline-flex rounded-lg px-2.5 py-1.5 text-[11px] font-bold transition ${

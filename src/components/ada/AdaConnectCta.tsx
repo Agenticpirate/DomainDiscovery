@@ -76,16 +76,16 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
   const line = isLight ? 'border-slate-200' : 'border-white/[0.09]';
   const surface = isLight
     ? 'bg-white border-slate-200 shadow-[0_12px_36px_-18px_rgba(15,23,42,0.14)]'
-    : 'bg-[#0b0b0d] shadow-[0_28px_64px_-38px_rgba(0,0,0,0.92)]';
+    : 'bg-[#0a0a0a] shadow-[0_28px_64px_-38px_rgba(0,0,0,0.92)]';
   const row = isLight
     ? 'border-slate-200 bg-slate-50 hover:bg-white'
-    : 'border-white/[0.06] bg-[#121214] hover:bg-[#16161a]';
+    : 'border-white/[0.06] bg-[#111111] hover:bg-[#171717]';
   const iconBox = isLight
     ? 'border-slate-200 bg-white text-slate-800 shadow-sm'
-    : 'border-white/[0.1] bg-[#0a0a0c] text-white/90';
+    : 'border-white/[0.1] bg-[#0a0a0a] text-white/90';
 
-  const plate = isLight ? '#ffffff' : '#0c0c0e';
-  const inset = isLight ? '#f8fafc' : '#121214';
+  const plate = isLight ? '#ffffff' : '#0a0a0a';
+  const inset = isLight ? '#f4f5f5' : '#111111';
 
   return (
     <>
@@ -192,7 +192,7 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
                 className={`rounded-lg sm:rounded-xl border px-3 sm:px-4 py-1.5 sm:py-2.5 text-[11px] sm:text-xs font-bold transition ${line} ${
                   isLight
                     ? 'text-slate-700 hover:border-slate-300 bg-white'
-                    : 'text-white/75 hover:border-white/25 bg-[#0a0a0c]'
+                    : 'text-white/75 hover:border-white/25 bg-[#0a0a0a]'
                 }`}
               >
                 Security
@@ -202,7 +202,7 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
                 className={`rounded-lg sm:rounded-xl border px-3 sm:px-4 py-1.5 sm:py-2.5 text-[11px] sm:text-xs font-bold transition ${line} ${
                   isLight
                     ? 'text-slate-700 hover:border-slate-300 bg-white'
-                    : 'text-white/75 hover:border-white/25 bg-[#0a0a0c]'
+                    : 'text-white/75 hover:border-white/25 bg-[#0a0a0a]'
                 }`}
               >
                 Agent Card
@@ -273,7 +273,7 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
               style={{
                 backgroundColor: inset,
                 borderColor: isLight ? 'rgba(226,232,240,1)' : 'rgba(255,255,255,0.1)',
-                color: isLight ? '#475569' : 'rgba(255,255,255,0.5)',
+                color: isLight ? '#52595b' : 'rgba(255,255,255,0.5)',
               }}
             >
               <span className={`font-black ${ink}`}>Shipped · </span>
@@ -304,15 +304,15 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
           className={`shine-border relative isolate max-w-4xl mx-auto overflow-hidden rounded-xl sm:rounded-[1.75rem] border ${line} ${
             isLight
               ? 'bg-white shadow-[0_28px_70px_-40px_rgba(15,23,42,0.4)]'
-              : 'bg-[#0a0a0c] shadow-[0_32px_80px_-40px_rgba(0,0,0,0.95)]'
+              : 'bg-[#0a0a0a] shadow-[0_32px_80px_-40px_rgba(0,0,0,0.95)]'
           }`}
-          style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+          style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
         >
           {/* Opaque slab so ambient dots never show through */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 rounded-[inherit]"
-            style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+            style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
           />
           <div
             aria-hidden
@@ -362,7 +362,7 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
                 className={`rounded-lg sm:rounded-2xl border px-3.5 sm:px-6 py-2 sm:py-3 text-[12px] sm:text-sm font-bold transition ${line} ${
                   isLight
                     ? 'bg-white text-slate-800 hover:border-slate-300'
-                    : 'bg-[#0c0c0e] text-white/85 hover:border-white/25'
+                    : 'bg-[#0a0a0a] text-white/85 hover:border-white/25'
                 }`}
               >
                 Start with a brief
@@ -372,7 +372,7 @@ export function AdaConnectCta({ isLight }: { isLight: boolean }) {
                 className={`rounded-lg sm:rounded-2xl border px-3.5 sm:px-6 py-2 sm:py-3 text-[12px] sm:text-sm font-bold transition ${line} ${
                   isLight
                     ? 'text-slate-600 hover:border-slate-300'
-                    : 'bg-[#0c0c0e] text-white/55 hover:border-white/25'
+                    : 'bg-[#0a0a0a] text-white/55 hover:border-white/25'
                 }`}
               >
                 Read agent docs

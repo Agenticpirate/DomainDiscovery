@@ -3,6 +3,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLocale } from '@/components/i18n/LocaleProvider';
+import { libraryChrome } from '@/lib/i18n/libraryChrome';
 import type { LearnArticle, LearnClusterHub } from '@/lib/learnArticles';
 import {
   extractFaqPairs,
@@ -37,6 +39,8 @@ export function LearnArticleView({
   toolCtas,
 }: LearnArticleViewProps) {
   const { theme } = useTheme();
+  const { href, locale } = useLocale();
+  const lib = libraryChrome(locale);
   const [mounted, setMounted] = useState(false);
   const [tocOpen, setTocOpen] = useState(false);
   const [activeId, setActiveId] = useState<string>('');
@@ -49,8 +53,8 @@ export function LearnArticleView({
   const takeaways = useMemo(() => getArticleKeyTakeaways(article, 5), [article]);
 
   // Fully opaque fills — ambient dots only in page gutters, never through text/cards
-  const solid = isLight ? '#ffffff' : '#0a0a0c';
-  const solidInset = isLight ? '#f8fafc' : '#121214';
+  const solid = isLight ? '#ffffff' : '#0a0a0a';
+  const solidInset = isLight ? '#f4f5f5' : '#111111';
   // learn-plate / learn-plate-deep also forced opaque via page CSS
   const plate = `learn-plate border ${
     isLight
@@ -128,7 +132,7 @@ export function LearnArticleView({
           )}
           <span
             className={`rounded-full border px-2 py-0.5 text-[10px] sm:text-[11px] ${muted}`}
-            style={{ backgroundColor: isLight ? '#f8fafc' : solidInset, borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)' }}
+            style={{ backgroundColor: isLight ? '#f4f5f5' : solidInset, borderColor: isLight ? '#d7dbdc' : 'rgba(255,255,255,0.1)' }}
           >
             {article.readTime}
           </span>
@@ -136,7 +140,7 @@ export function LearnArticleView({
             <time
               dateTime={article.publishedAt}
               className={`rounded-full border px-2 py-0.5 text-[10px] sm:text-[11px] ${muted}`}
-              style={{ backgroundColor: isLight ? '#f8fafc' : solidInset, borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.1)' }}
+              style={{ backgroundColor: isLight ? '#f4f5f5' : solidInset, borderColor: isLight ? '#d7dbdc' : 'rgba(255,255,255,0.1)' }}
             >
               Updated {article.publishedAt}
             </time>
@@ -160,12 +164,12 @@ export function LearnArticleView({
           className={`mt-3 sm:mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] sm:text-[11px] ${muted}`}
         >
           <span>
-            By <strong className={isLight ? 'text-slate-800' : 'text-white/80'}>{SITE_BRAND.name}</strong>
+            {lib?.by ?? 'By'} <strong className={isLight ? 'text-slate-800' : 'text-white/80'}>{SITE_BRAND.name}</strong>
           </span>
           <span aria-hidden>·</span>
-          <span>Educational guide · free tools</span>
+          <span>{lib?.educational ?? 'Educational guide · free tools'}</span>
           <span aria-hidden className="hidden sm:inline">·</span>
-          <span className="hidden sm:inline">Research, not registrar checkout</span>
+          <span className="hidden sm:inline">{lib?.researchNotCheckout ?? 'Research, not registrar checkout'}</span>
         </div>
 
         <div className="mt-2.5 sm:mt-3 flex flex-wrap gap-1 sm:gap-1.5">
@@ -201,7 +205,7 @@ export function LearnArticleView({
               On this page
             </span>
             <span className="block text-[12px] font-semibold truncate">
-              {toc.find((t) => t.id === activeId)?.heading || toc[0]?.heading || 'Contents'}
+              {toc.find((t) => t.id === activeId)?.heading || toc[0]?.heading || (lib?.contents ?? 'Contents')}
             </span>
           </span>
           <span
@@ -259,10 +263,10 @@ export function LearnArticleView({
             aria-labelledby="article-definition"
           >
             <p className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] mb-1 ${muted}`}>
-              Quick answer
+              {lib?.quickAnswer ?? 'Quick answer'}
             </p>
             <h2 id="article-definition" className="text-[14px] sm:text-lg font-bold tracking-tight mb-1.5 sm:mb-2">
-              What this guide covers
+              {lib?.covers ?? 'What this guide covers'}
             </h2>
             <p className={`text-[12.5px] sm:text-[14px] leading-relaxed break-words ${secondary}`}>
               {definition}
@@ -273,11 +277,11 @@ export function LearnArticleView({
           {takeaways.length > 0 && (
             <section
               className={`rounded-xl sm:rounded-2xl border p-3.5 sm:p-5 mb-3 sm:mb-5 ${plateSoft}`}
-              style={{ backgroundColor: isLight ? '#f1f5f9' : solidInset }}
+              style={{ backgroundColor: isLight ? '#e7e9ea' : solidInset }}
               aria-labelledby="key-takeaways"
             >
               <h2 id="key-takeaways" className="text-[13px] sm:text-base font-bold mb-2">
-                Key takeaways
+                {lib?.takeaways ?? 'Key takeaways'}
               </h2>
               <ul className="space-y-1.5 sm:space-y-2">
                 {takeaways.map((t, i) => (
@@ -388,21 +392,20 @@ export function LearnArticleView({
           {/* —— Tools CTA —— */}
           <section
             className={`mt-4 sm:mt-8 rounded-xl sm:rounded-2xl border p-3.5 sm:p-6 ${plateSoft}`}
-            style={{ backgroundColor: isLight ? '#f1f5f9' : solidInset }}
+            style={{ backgroundColor: isLight ? '#e7e9ea' : solidInset }}
             aria-labelledby="try-tools"
           >
             <h2 id="try-tools" className="text-[14px] sm:text-base font-bold mb-1 sm:mb-2">
-              Try DomainDiscovery tools
+              {lib?.tryTools ?? 'Try DomainDiscovery tools'}
             </h2>
             <p className={`text-[12px] sm:text-sm mb-2.5 sm:mb-3 break-words ${secondary}`}>
-              {SITE_BRAND.name} is free domain name search plus geo lists, WHOIS, bulk checks, and price
-              compare — no account required.
+              {lib?.tryToolsBody ?? `${SITE_BRAND.name} is free domain name search plus geo lists, WHOIS, bulk checks, and price compare — no account required.`}
             </p>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {toolCtas.map((c) => (
                 <Link
                   key={c.href}
-                  href={c.href}
+                  href={href(c.href)}
                   className={`rounded-lg sm:rounded-xl border px-2.5 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-sm font-semibold transition-colors ${
                     isLight
                       ? 'border-slate-200 text-slate-800 hover:border-slate-300'
@@ -419,15 +422,15 @@ export function LearnArticleView({
           {/* —— Primary actions —— */}
           <div className="mt-4 sm:mt-6 flex flex-wrap gap-1.5 sm:gap-2">
             <Link
-              href="/"
+              href={href('/')}
               className={`rounded-xl px-3.5 sm:px-4 py-2 sm:py-2.5 text-[12px] sm:text-sm font-bold ${
                 isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
               }`}
             >
-              Search domains
+              {lib?.searchDomains ?? 'Search domains'}
             </Link>
             <Link
-              href="/learn"
+              href={href('/learn')}
               className={`rounded-xl border px-3.5 sm:px-4 py-2 sm:py-2.5 text-[12px] sm:text-sm font-semibold ${
                 isLight
                   ? 'border-slate-200 text-slate-800'
@@ -435,10 +438,10 @@ export function LearnArticleView({
               }`}
               style={{ backgroundColor: solidInset }}
             >
-              All guides
+              {lib?.allGuides ?? 'All guides'}
             </Link>
             <Link
-              href="/faq"
+              href={href('/faq')}
               className={`rounded-xl border px-3.5 sm:px-4 py-2 sm:py-2.5 text-[12px] sm:text-sm font-semibold ${
                 isLight
                   ? 'border-slate-200 text-slate-800'
@@ -446,7 +449,7 @@ export function LearnArticleView({
               }`}
               style={{ backgroundColor: solidInset }}
             >
-              FAQ
+              {lib?.faq ?? 'FAQ'}
             </Link>
           </div>
 
@@ -457,7 +460,7 @@ export function LearnArticleView({
               aria-labelledby="topic-cluster"
             >
               <p className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.16em] mb-1 ${muted}`}>
-                Topic cluster
+                {lib?.topicCluster ?? 'Topic cluster'}
               </p>
               <h2 id="topic-cluster" className="text-[14px] sm:text-lg font-bold mb-1 break-words">
                 {cluster.title}
@@ -468,16 +471,16 @@ export function LearnArticleView({
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {cluster.hubSlug !== article.slug && (
                   <Link
-                    href={`/learn/${cluster.hubSlug}`}
+                    href={href(`/learn/${cluster.hubSlug}`)}
                     className={`rounded-full px-3 py-1.5 text-[11px] sm:text-xs font-bold ${
                       isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
                     }`}
                   >
-                    Cluster hub
+                    {lib?.clusterHub ?? 'Cluster hub'}
                   </Link>
                 )}
                 <Link
-                  href={cluster.toolHref}
+                  href={href(cluster.toolHref)}
                   className={`rounded-full border px-3 py-1.5 text-[11px] sm:text-xs font-semibold ${
                     isLight
                       ? 'border-slate-200 text-slate-700'
@@ -488,7 +491,7 @@ export function LearnArticleView({
                   {cluster.toolLabel}
                 </Link>
                 <Link
-                  href="/learn"
+                  href={href('/learn')}
                   className={`rounded-full border px-3 py-1.5 text-[11px] sm:text-xs font-semibold ${
                     isLight
                       ? 'border-slate-200 text-slate-700'
@@ -496,7 +499,7 @@ export function LearnArticleView({
                   }`}
                   style={{ backgroundColor: solid }}
                 >
-                  All clusters
+                  {lib?.allClusters ?? 'All clusters'}
                 </Link>
               </div>
             </section>
@@ -510,13 +513,13 @@ export function LearnArticleView({
               aria-labelledby="continue-learning"
             >
               <h2 id="continue-learning" className="text-[15px] sm:text-lg font-bold mb-2.5 sm:mb-3">
-                Continue learning
+                {lib?.continueLearning ?? 'Continue learning'}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {continueLinks.map((a) => (
                   <Link
                     key={a.slug}
-                    href={`/learn/${a.slug}`}
+                    href={href(`/learn/${a.slug}`)}
                     className={`rounded-xl border p-3 sm:p-3.5 transition-colors min-w-0 ${
                       isLight
                         ? 'border-slate-200 hover:border-slate-300'
@@ -573,12 +576,12 @@ export function LearnArticleView({
             </ol>
             <div className={`mt-3 pt-3 border-t ${isLight ? 'border-slate-100' : 'border-white/8'}`}>
               <Link
-                href="/"
+                href={href('/')}
                 className={`block text-center rounded-xl px-3 py-2 text-[12px] font-bold ${
                   isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
                 }`}
               >
-                Search domains
+                {lib?.searchDomains ?? 'Search domains'}
               </Link>
             </div>
           </nav>
@@ -593,15 +596,15 @@ export function LearnArticleView({
       >
         <div className="flex gap-2 max-w-3xl mx-auto">
           <Link
-            href="/"
+            href={href('/')}
             className={`flex-1 text-center rounded-xl py-2.5 text-[12px] font-bold ${
               isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
             }`}
           >
-            Search domains
+            {lib?.searchDomains ?? 'Search domains'}
           </Link>
           <Link
-            href={cluster?.toolHref || '/generator'}
+            href={href(cluster?.toolHref || '/generator')}
             className={`flex-1 text-center rounded-xl border py-2.5 text-[12px] font-semibold ${
               isLight
                 ? 'border-slate-200 text-slate-800'

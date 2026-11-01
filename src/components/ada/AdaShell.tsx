@@ -259,7 +259,7 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
       className={`min-h-screen flex flex-col ${surfaceEase}`}
       style={{
         backgroundColor: pageBg,
-        color: isLight ? '#0f172a' : '#fff',
+        color: isLight ? '#141517' : '#fff',
         isolation: 'isolate',
       }}
     >
@@ -340,7 +340,7 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
               className={`inline-flex h-9 w-9 items-center justify-center rounded-lg border transition ${
                 isLight
                   ? 'border-slate-200 bg-white text-slate-800 hover:bg-slate-50'
-                  : 'border-white/12 bg-[#0a0a0c] text-white/90 hover:bg-[#121214]'
+                  : 'border-white/12 bg-[#0a0a0a] text-white/90 hover:bg-[#111111]'
               }`}
             >
               <MenuIcon open={menuOpen} />
@@ -361,9 +361,9 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
               className={`overflow-hidden rounded-2xl border shadow-2xl ${
                 isLight
                   ? 'border-slate-200 bg-white shadow-slate-900/10'
-                  : 'border-white/10 bg-[#0a0a0c] shadow-black/60'
+                  : 'border-white/10 bg-[#0a0a0a] shadow-black/60'
               }`}
-              style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+              style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
             >
               <ul className="p-1.5 space-y-0.5">
                 {NAV.map((item) => {
@@ -381,7 +381,7 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
                               : 'bg-white text-black'
                             : isLight
                               ? 'text-slate-700 hover:bg-slate-50'
-                              : 'text-white/85 hover:bg-[#121214]'
+                              : 'text-white/85 hover:bg-[#111111]'
                         }`}
                       >
                         <span
@@ -392,11 +392,11 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
                                 : 'bg-black/8 text-black'
                               : isLight
                                 ? 'bg-slate-100 text-slate-600'
-                                : 'bg-[#121214] text-white/65'
+                                : 'bg-[#111111] text-white/65'
                           }`}
                           style={
                             !active
-                              ? { backgroundColor: isLight ? undefined : '#121214' }
+                              ? { backgroundColor: isLight ? undefined : '#111111' }
                               : undefined
                           }
                         >
@@ -451,19 +451,19 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
                             active
                               ? isLight
                                 ? 'bg-slate-100 text-slate-900'
-                                : 'bg-[#121214] text-white'
+                                : 'bg-[#111111] text-white'
                               : isLight
                                 ? 'text-slate-600 hover:bg-slate-50'
-                                : 'text-white/55 hover:bg-[#121214] hover:text-white/85'
+                                : 'text-white/55 hover:bg-[#111111] hover:text-white/85'
                           }`}
                         >
                           <span
                             className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md ${
                               isLight
                                 ? 'bg-slate-100 text-slate-500'
-                                : 'bg-[#121214] text-white/45'
+                                : 'bg-[#111111] text-white/45'
                             }`}
-                            style={{ backgroundColor: isLight ? undefined : '#121214' }}
+                            style={{ backgroundColor: isLight ? undefined : '#111111' }}
                           >
                             <NavGlyph id={item.icon} />
                           </span>
@@ -527,7 +527,7 @@ export function AdaShell({ children }: { children: React.ReactNode }) {
                   className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[9px] font-bold uppercase tracking-wide border ${
                     isLight
                       ? 'bg-white text-slate-600 border-slate-200 shadow-sm'
-                      : 'bg-[#121214] text-white/65 border-white/12'
+                      : 'bg-[#111111] text-white/65 border-white/12'
                   }`}
                 >
                   <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-500' : 'bg-white/55'}`} />

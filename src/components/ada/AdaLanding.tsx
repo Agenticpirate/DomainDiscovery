@@ -161,8 +161,8 @@ export function AdaLanding() {
   const t = useAdaTheme();
   const { isLight, ink, muted, faint, card, pill, band, btnPrimary, btnSecondary, btnGhost } = t;
 
-  const solidPlate = isLight ? '#ffffff' : '#0a0a0c';
-  const solidScrim = isLight ? '#f8fafc' : '#050505';
+  const solidPlate = isLight ? '#ffffff' : '#0a0a0a';
+  const solidScrim = isLight ? '#f4f5f5' : '#000000';
 
   return (
     <div className="relative overflow-hidden">
@@ -262,7 +262,7 @@ export function AdaLanding() {
                   <Link
                     href={adaPath("/app")}
                     className={`cta-mobile-tap cta-mobile-tap-ghost relative isolate inline-flex h-10 items-center justify-center gap-1.5 overflow-hidden rounded-xl border px-2 text-[12px] font-bold ${btnSecondary}`}
-                    style={{ backgroundColor: isLight ? '#ffffff' : '#121214' }}
+                    style={{ backgroundColor: isLight ? '#ffffff' : '#111111' }}
                   >
                     <IconSlot>
                       <AppIcon />
@@ -280,7 +280,7 @@ export function AdaLanding() {
                       key={item.href}
                       href={item.href}
                       className={`cta-mobile-tap cta-mobile-tap-ghost relative isolate inline-flex h-8 items-center justify-center overflow-hidden rounded-lg border px-1 text-[10.5px] font-semibold ${btnGhost}`}
-                      style={{ backgroundColor: isLight ? '#ffffff' : '#121214' }}
+                      style={{ backgroundColor: isLight ? '#ffffff' : '#111111' }}
                     >
                       {item.label}
                     </Link>
@@ -323,7 +323,7 @@ export function AdaLanding() {
                     <span
                       aria-hidden
                       className="pointer-events-none absolute inset-0 rounded-full"
-                      style={{ backgroundColor: isLight ? '#0f172a' : '#ffffff' }}
+                      style={{ backgroundColor: isLight ? '#141517' : '#ffffff' }}
                     />
                     <span className="cta-shine-sweep" aria-hidden />
                     <span className="relative z-[1] inline-flex items-center gap-2.5">
@@ -356,7 +356,7 @@ export function AdaLanding() {
                     <span
                       aria-hidden
                       className="pointer-events-none absolute inset-0 rounded-full"
-                      style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                      style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                     />
                     <span className="cta-shine-sweep" aria-hidden />
                     <span className="relative z-[1] inline-flex items-center gap-2.5">

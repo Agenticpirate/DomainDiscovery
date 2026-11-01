@@ -39,7 +39,7 @@ const faqItems = [
     icon: <Icons.Dollar />,
     question: 'How do I register a domain after finding it available?',
     answer:
-      'Click Register to open a partner registrar (GoDaddy, Namecheap, Porkbun, and others). Compare prices, then complete checkout on the registrar you choose. DomainDiscovery is free research — not a registrar.',
+      'Click Go on an available name. It opens Spaceship so you can register there. DomainDiscovery is free research — not a registrar.',
   },
   {
     icon: <Icons.Magic />,
@@ -92,7 +92,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({
         </p>
         <a
           href="mailto:support@domainsdiscovery.com"
-          className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-bold transition hover:border-white/20"
+          className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-[#111111] px-5 py-2.5 text-sm font-bold transition hover:border-white/20"
         >
           Contact Support
         </a>

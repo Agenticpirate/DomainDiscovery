@@ -12,6 +12,8 @@ import { FEATURE_FLAGS } from '@/lib/featureFlags';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
 import type { AgentAutoResult, AgentJobStep } from '@/lib/agent/types';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLocale } from '@/components/i18n/LocaleProvider';
+import { pageShell } from '@/lib/i18n/pageShells';
 import { BriefForm } from './BriefForm';
 import { RunSteps } from './RunSteps';
 import { RankedResults } from './RankedResults';
@@ -32,6 +34,8 @@ function persistSave(domain: string) {
 
 export function AssistantShell() {
   const { theme } = useTheme();
+  const { href, locale } = useLocale();
+  const shell = pageShell(locale);
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
   const isLight = mounted ? theme === 'light' : false;
@@ -133,7 +137,7 @@ export function AssistantShell() {
         <main className="relative pt-24 px-4 max-w-xl mx-auto text-center">
           <h1 className="text-2xl font-black mb-2">AI Domain Assistant</h1>
           <p className="text-sm opacity-60 mb-4">This feature is currently disabled.</p>
-          <Link href="/" className="underline text-sm font-semibold">
+          <Link href={href('/')} className="underline text-sm font-semibold">
             Back to search
           </Link>
         </main>
@@ -148,7 +152,7 @@ export function AssistantShell() {
       <Navigation activeTool="assistant" />
 
       <main className={`${PAGE_MAIN_CLASS} pb-10 sm:pb-14`}>
-        <PageBreadcrumb items={[{ label: 'Tools', href: '/' }, { label: 'Agent Hub' }]} />
+        <PageBreadcrumb items={[{ label: shell?.tools ?? 'Tools', href: '/' }, { label: shell?.assistantTitle ?? 'Agent Hub' }]} />
         <SectionAmbient intensity="hero" className="w-full" contentClassName="relative z-[1]">
         <section className="page-gutter pb-5 sm:pb-7">
           <div className="max-w-3xl mx-auto text-center mt-1 sm:mt-2 relative isolate">
@@ -157,8 +161,8 @@ export function AssistantShell() {
               className="pointer-events-none absolute left-1/2 top-0 h-full w-[min(100%,36rem)] -translate-x-1/2 rounded-[2rem]"
               style={{
                 background: isLight
-                  ? 'radial-gradient(ellipse 90% 80% at 50% 40%, #f8fafc 0%, #f8fafc 50%, rgba(248,250,252,0) 100%)'
-                  : 'radial-gradient(ellipse 90% 80% at 50% 40%, #050505 0%, #050505 50%, rgba(5,5,5,0) 100%)',
+                  ? 'radial-gradient(ellipse 90% 80% at 50% 40%, #f4f5f5 0%, #f4f5f5 50%, rgba(248,250,252,0) 100%)'
+                  : 'radial-gradient(ellipse 90% 80% at 50% 40%, #000000 0%, #000000 50%, rgba(0,0,0,0) 100%)',
               }}
             />
             <div className="relative z-[1]">
@@ -170,11 +174,11 @@ export function AssistantShell() {
               <span
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-full"
-                style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+                style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
               />
               <span className="relative z-[1] inline-flex items-center gap-1.5">
                 <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-500' : 'bg-white/60'}`} />
-                Agent Hub · MCP · Budget-aware research
+                {shell?.assistantBadge ?? 'Agent Hub · MCP · Budget-aware research'}
               </span>
             </p>
             <h1
@@ -182,11 +186,10 @@ export function AssistantShell() {
                 isLight ? 'text-slate-900' : 'text-white'
               }`}
             >
-              AI Domain Assistant
+              {shell?.assistantTitle ?? 'AI Domain Assistant'}
             </h1>
             <p className={`text-sm sm:text-base max-w-2xl mx-auto ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
-              Agent-ready domain intelligence on DomainDiscovery. Demo auto shortlists with a budget cap, or connect
-              via MCP / REST so agents can find and rank brands. Research only — you confirm registration.
+              {shell?.assistantBody ?? 'Agent-ready domain intelligence on DomainDiscovery. Demo auto shortlists with a budget cap, or connect via MCP / REST so agents can find and rank brands. Research only — you confirm registration.'}
             </p>
             </div>
           </div>
@@ -219,12 +222,12 @@ export function AssistantShell() {
                   className={`shine-border relative isolate overflow-hidden rounded-2xl border border-dashed p-6 text-sm ${
                     isLight ? 'border-slate-200 text-slate-500' : 'border-white/12 text-white/45'
                   }`}
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                 >
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                    style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+                    style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                   />
                   <p className="relative z-[1]">
                     Your ranked shortlist will appear here after you run{' '}
@@ -237,12 +240,12 @@ export function AssistantShell() {
                   className={`shine-border relative isolate overflow-hidden rounded-2xl border p-6 text-sm animate-pulse ${
                     isLight ? 'border-slate-200 text-slate-500' : 'border-white/10 text-white/45'
                   }`}
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                 >
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                    style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+                    style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                   />
                   <p className="relative z-[1]">
                     Running auto pipeline — generating names
@@ -294,8 +297,8 @@ export function AssistantShell() {
         <div
           className="relative z-10 border-t"
           style={{
-            backgroundColor: isLight ? '#ffffff' : '#050505',
-            borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.06)',
+            backgroundColor: isLight ? '#ffffff' : '#000000',
+            borderColor: isLight ? '#d7dbdc' : 'rgba(255,255,255,0.06)',
           }}
         >
           <section className="px-4 sm:px-6 pt-12 sm:pt-16 pb-4">

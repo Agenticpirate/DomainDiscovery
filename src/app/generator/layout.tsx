@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
 import { ToolPageJsonLd } from '@/components/seo/JsonLd';
-import { buildToolMetadata } from '@/lib/seoSiteFacts';
+import { buildLocalizedToolMetadata } from '@/lib/i18n/metadata';
 
 const title = 'AI Domain Name Generator — Free Brandable Ideas';
 const description =
   'Free AI domain name generator: turn a keyword into brandable short names with live availability checks. No account required.';
 const path = '/generator';
 
-export const metadata: Metadata = buildToolMetadata({
+export function generateMetadata() {
+  return buildLocalizedToolMetadata({
   title,
   description,
   path,
@@ -18,6 +18,7 @@ export const metadata: Metadata = buildToolMetadata({
     'free domain generator',
   ],
 });
+}
 
 export default function GeneratorLayout({ children }: { children: React.ReactNode }) {
   return (

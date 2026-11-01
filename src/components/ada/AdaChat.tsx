@@ -362,7 +362,7 @@ export function AdaChat() {
   // Solid surfaces so hero bubble dots stay behind panels, not inside them
   const surface = isLight
     ? 'bg-white shadow-[0_12px_40px_-16px_rgba(15,23,42,0.12)] border-slate-200'
-    : 'bg-[#0a0a0c]';
+    : 'bg-[#0a0a0a]';
   const activeStep = stepIndex(intake?.step);
   const showWelcomeOnly = messages.length <= 1 && !loading;
 
@@ -533,7 +533,7 @@ export function AdaChat() {
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 rounded-[inherit]"
-              style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+              style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
             />
             <div className="relative z-[1]">
             <div className="flex items-center gap-2 sm:gap-2.5 mb-2 sm:mb-3">
@@ -561,7 +561,7 @@ export function AdaChat() {
                 <Link
                   href={adaPath("/app")}
                   className={`rounded-lg border px-2 py-1 text-[10px] font-bold ${border} ${muted}`}
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#121214' }}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#111111' }}
                 >
                   App
                 </Link>
@@ -569,7 +569,7 @@ export function AdaChat() {
                   type="button"
                   onClick={resetSession}
                   className={`rounded-lg border px-2 py-1 text-[10px] font-bold ${border} ${faint}`}
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#121214' }}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#111111' }}
                 >
                   Reset
                 </button>
@@ -582,7 +582,7 @@ export function AdaChat() {
             {/* Desktop: full checklist. Mobile: compact chips */}
             <div
               className={`mt-2.5 sm:mt-3.5 rounded-xl border p-2 sm:p-3 overflow-hidden ${border}`}
-              style={{ backgroundColor: isLight ? '#f8fafc' : '#121214' }}
+              style={{ backgroundColor: isLight ? '#f4f5f5' : '#111111' }}
             >
               <p className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] mb-1.5 sm:mb-2.5 ${faint}`}>
                 You only need to share
@@ -638,7 +638,7 @@ export function AdaChat() {
                       className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border ${
                         isLight
                           ? 'border-slate-200 bg-white text-slate-700'
-                          : 'border-white/10 bg-[#0a0a0c] text-white/70'
+                          : 'border-white/10 bg-[#0a0a0a] text-white/70'
                       }`}
                     >
                       {row.icon}
@@ -652,7 +652,7 @@ export function AdaChat() {
                   <span
                     key={chip}
                     className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${border} ${muted}`}
-                    style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+                    style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                   >
                     {chip}
                   </span>
@@ -672,7 +672,7 @@ export function AdaChat() {
             <div
               aria-hidden
               className={`pointer-events-none absolute inset-0 ${
-                isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+                isLight ? 'bg-white' : 'bg-[#0a0a0a]'
               }`}
             />
             <div className="relative z-[1]">
@@ -688,7 +688,7 @@ export function AdaChat() {
             <div className="sm:hidden">
               <div
                 className={`h-1.5 w-full overflow-hidden rounded-full ${
-                  isLight ? 'bg-slate-100' : 'bg-[#121214]'
+                  isLight ? 'bg-slate-100' : 'bg-[#111111]'
                 }`}
               >
                 <div
@@ -716,7 +716,7 @@ export function AdaChat() {
                                 : 'bg-white/90 text-black'
                               : isLight
                                 ? 'bg-slate-100 text-slate-400'
-                                : 'bg-[#121214] text-white/35'
+                                : 'bg-[#111111] text-white/35'
                         }`}
                       >
                         {done ? '✓' : i + 1}
@@ -791,7 +791,7 @@ export function AdaChat() {
             <div
               aria-hidden
               className={`pointer-events-none absolute inset-0 ${
-                isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+                isLight ? 'bg-white' : 'bg-[#0a0a0a]'
               }`}
             />
             <div className="relative z-[1]">
@@ -804,7 +804,7 @@ export function AdaChat() {
                   key={s.id}
                   title={s.description}
                   className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${border} ${
-                    isLight ? 'bg-slate-50' : 'bg-[#111114]'
+                    isLight ? 'bg-slate-50' : 'bg-[#111111]'
                   } ${muted}`}
                 >
                   {s.short}
@@ -818,7 +818,7 @@ export function AdaChat() {
             <Link
               href={adaPath("/app")}
               className={`rounded-xl border px-3 py-2 text-[11px] font-bold transition ${border} ${muted} ${
-                isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+                isLight ? 'bg-white' : 'bg-[#0a0a0a]'
               }`}
             >
               Structured app
@@ -826,7 +826,7 @@ export function AdaChat() {
             <Link
               href={adaPath("/docs")}
               className={`rounded-xl border px-3 py-2 text-[11px] font-bold transition ${border} ${muted} ${
-                isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+                isLight ? 'bg-white' : 'bg-[#0a0a0a]'
               }`}
             >
               Agent docs
@@ -835,7 +835,7 @@ export function AdaChat() {
               type="button"
               onClick={resetSession}
               className={`rounded-xl border px-3 py-2 text-[11px] font-bold ${border} ${faint} ${
-                isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+                isLight ? 'bg-white' : 'bg-[#0a0a0a]'
               }`}
             >
               Reset
@@ -857,7 +857,7 @@ export function AdaChat() {
           <div
             aria-hidden
             className={`pointer-events-none absolute inset-0 z-0 ${
-              isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+              isLight ? 'bg-white' : 'bg-[#0a0a0a]'
             }`}
           />
           {/* Top hairline + bar */}
@@ -871,7 +871,7 @@ export function AdaChat() {
           />
           <div
             className={`relative z-[1] flex items-center justify-between gap-2 sm:gap-3 border-b px-3 sm:px-5 py-2.5 sm:py-3 ${border} ${
-              isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+              isLight ? 'bg-white' : 'bg-[#0a0a0a]'
             }`}
           >
             <div className="flex items-center gap-2 min-w-0">
@@ -904,7 +904,7 @@ export function AdaChat() {
             <div className="flex items-center gap-1.5 shrink-0">
               <span
                 className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider ${border} ${faint}`}
-                style={{ backgroundColor: isLight ? '#f8fafc' : '#121214' }}
+                style={{ backgroundColor: isLight ? '#f4f5f5' : '#111111' }}
               >
                 <span
                   className={`h-1 w-1 rounded-full ${
@@ -916,7 +916,7 @@ export function AdaChat() {
               <Link
                 href={adaPath("/docs")}
                 className={`hidden sm:inline-flex rounded-lg border px-2 py-1 text-[10px] font-bold ${border} ${muted}`}
-                style={{ backgroundColor: isLight ? '#ffffff' : '#121214' }}
+                style={{ backgroundColor: isLight ? '#ffffff' : '#111111' }}
               >
                 Docs
               </Link>
@@ -965,11 +965,11 @@ export function AdaChat() {
                             : 'bg-white text-black rounded-br-md shadow-lg shadow-white/5'
                           : isLight
                             ? 'bg-slate-50 border border-slate-200/90 text-slate-800 rounded-tl-md'
-                            : 'bg-[#121214] border border-white/[0.08] text-white/88 rounded-tl-md'
+                            : 'bg-[#111111] border border-white/[0.08] text-white/88 rounded-tl-md'
                       }`}
                       style={
                         m.role === 'assistant'
-                          ? { backgroundColor: isLight ? undefined : '#121214' }
+                          ? { backgroundColor: isLight ? undefined : '#111111' }
                           : undefined
                       }
                     >
@@ -1047,7 +1047,7 @@ export function AdaChat() {
                 {/* What to share */}
                 <div
                   className={`shine-border relative isolate overflow-hidden rounded-xl sm:rounded-2xl border p-3 sm:p-5 ${border}`}
-                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+                  style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                 >
                   <p className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] mb-0.5 sm:mb-1 ${faint}`}>
                     First time here?
@@ -1064,7 +1064,7 @@ export function AdaChat() {
                       <div
                         key={item.step}
                         className={`rounded-lg sm:rounded-xl border p-2 sm:p-3 ${border}`}
-                        style={{ backgroundColor: isLight ? '#f8fafc' : '#121214' }}
+                        style={{ backgroundColor: isLight ? '#f4f5f5' : '#111111' }}
                       >
                         <div className="flex items-start gap-1.5 sm:gap-2.5">
                           <span
@@ -1092,7 +1092,7 @@ export function AdaChat() {
                 {/* Easy start form */}
                 <div
                   className={`shine-border relative isolate overflow-hidden rounded-xl sm:rounded-2xl border p-3 sm:p-5 ${border}`}
-                  style={{ backgroundColor: isLight ? '#f8fafc' : '#0a0a0c' }}
+                  style={{ backgroundColor: isLight ? '#f4f5f5' : '#0a0a0a' }}
                 >
                   <p className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] mb-0.5 sm:mb-1 ${faint}`}>
                     Easiest start
@@ -1112,7 +1112,7 @@ export function AdaChat() {
                         className={`w-full rounded-lg sm:rounded-xl border px-2.5 sm:px-3 py-2 sm:py-2.5 text-[13px] sm:text-sm outline-none transition focus:ring-1 ${border} ${
                           isLight
                             ? 'bg-white text-slate-900 focus:ring-slate-200'
-                            : 'bg-[#121214] text-white focus:ring-white/15'
+                            : 'bg-[#111111] text-white focus:ring-white/15'
                         }`}
                       />
                     </div>
@@ -1127,14 +1127,14 @@ export function AdaChat() {
                         className={`w-full rounded-lg sm:rounded-xl border px-2.5 sm:px-3 py-2 sm:py-2.5 text-[13px] sm:text-sm outline-none transition focus:ring-1 ${border} ${
                           isLight
                             ? 'bg-white text-slate-900 focus:ring-slate-200'
-                            : 'bg-[#121214] text-white focus:ring-white/15'
+                            : 'bg-[#111111] text-white focus:ring-white/15'
                         }`}
                       />
                     </div>
                     <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                       <label
                         className={`inline-flex items-center gap-1.5 rounded-lg sm:rounded-xl border px-2 sm:px-2.5 py-1.5 sm:py-2 ${border}`}
-                        style={{ backgroundColor: isLight ? '#ffffff' : '#121214' }}
+                        style={{ backgroundColor: isLight ? '#ffffff' : '#111111' }}
                       >
                         <span className={`text-[9px] sm:text-[10px] font-bold ${faint}`}>Budget ~$</span>
                         <input
@@ -1178,11 +1178,11 @@ export function AdaChat() {
                         disabled={loading}
                         onClick={() => send(s.prompt)}
                         className={`cta-mobile-tap shine-border rounded-xl sm:rounded-2xl border p-2.5 sm:p-3 text-left transition sm:hover:-translate-y-0.5 ${border}`}
-                        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+                        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                       >
                         <span
                           className={`mb-1 sm:mb-1.5 flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-md text-[9px] sm:text-[10px] font-black ${
-                            isLight ? 'bg-slate-100 text-slate-600' : 'bg-[#121214] text-white/60'
+                            isLight ? 'bg-slate-100 text-slate-600' : 'bg-[#111111] text-white/60'
                           }`}
                         >
                           {i + 1}
@@ -1206,7 +1206,7 @@ export function AdaChat() {
                 animate={{ opacity: 1, y: 0 }}
                 className={`relative isolate rounded-xl sm:rounded-2xl border px-3 py-2.5 sm:px-3.5 sm:py-3 ${border}`}
                 style={{
-                  backgroundColor: isLight ? '#fffbeb' : '#0a0a0c',
+                  backgroundColor: isLight ? '#fffbeb' : '#0a0a0a',
                   borderColor: isLight ? 'rgba(253, 230, 138, 0.6)' : undefined,
                 }}
               >
@@ -1226,7 +1226,7 @@ export function AdaChat() {
                       className={`cta-mobile-tap rounded-full border px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold transition ${border} ${
                         isLight
                           ? 'bg-white text-slate-700 hover:border-slate-400'
-                          : 'bg-[#121214] text-white/75 hover:border-white/25'
+                          : 'bg-[#111111] text-white/75 hover:border-white/25'
                       }`}
                     >
                       {ex.label}
@@ -1242,7 +1242,7 @@ export function AdaChat() {
           {/* Composer */}
           <div
             className={`relative z-[1] border-t px-2.5 sm:px-5 py-2.5 sm:py-4 ${border} ${
-              isLight ? 'bg-white' : 'bg-[#0a0a0c]'
+              isLight ? 'bg-white' : 'bg-[#0a0a0a]'
             }`}
           >
             {!showWelcomeOnly && stepHelp && (
@@ -1260,7 +1260,7 @@ export function AdaChat() {
                       className={`cta-mobile-tap rounded-full border px-2 sm:px-2.5 py-1 text-[10px] sm:text-[11px] font-bold transition ${border} ${
                         isLight
                           ? 'bg-white text-slate-700 hover:border-slate-400'
-                          : 'bg-[#121214] text-white/70 hover:border-white/25'
+                          : 'bg-[#111111] text-white/70 hover:border-white/25'
                       }`}
                     >
                       {ex.label}
@@ -1274,7 +1274,7 @@ export function AdaChat() {
               <div className="mb-2 flex flex-wrap items-center gap-1.5 sm:gap-2">
                 <label
                   className={`inline-flex items-center gap-1.5 rounded-lg sm:rounded-xl border px-2 sm:px-2.5 py-1 sm:py-1.5 ${border}`}
-                  style={{ backgroundColor: isLight ? '#f8fafc' : '#121214' }}
+                  style={{ backgroundColor: isLight ? '#f4f5f5' : '#111111' }}
                 >
                   <span className={`text-[9px] font-bold uppercase tracking-wider ${faint}`}>
                     Budget $
@@ -1306,7 +1306,7 @@ export function AdaChat() {
               className={`flex items-end gap-1.5 sm:gap-2 rounded-xl sm:rounded-2xl border p-1 sm:p-2 transition focus-within:ring-1 ${border} ${
                 isLight
                   ? 'bg-slate-50/80 shadow-sm focus-within:ring-slate-200 focus-within:bg-white'
-                  : 'bg-[#121214] focus-within:ring-white/15'
+                  : 'bg-[#111111] focus-within:ring-white/15'
               }`}
             >
               <input

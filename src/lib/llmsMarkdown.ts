@@ -9,8 +9,7 @@
  * These files help assistants (ChatGPT, Claude, Perplexity, etc.) ingest clean facts.
  */
 
-import fs from 'fs';
-import path from 'path';
+import priceData from '@/data/tld-price-comparison.json';
 import {
   getSiteBaseUrl,
   SITE_BRAND,
@@ -66,13 +65,7 @@ const HIGHLIGHT_REGISTRARS = [
 ];
 
 function loadPriceFile(): PriceFile | null {
-  try {
-    const p = path.join(process.cwd(), 'src/data/tld-price-comparison.json');
-    if (!fs.existsSync(p)) return null;
-    return JSON.parse(fs.readFileSync(p, 'utf8')) as PriceFile;
-  } catch {
-    return null;
-  }
+  return (priceData as PriceFile) ?? null;
 }
 
 function fmtPrice(cell?: PriceCell | null): string {

@@ -4,11 +4,11 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 
 interface HeroSearchProps {
   initialQuery?: string;
   onSearch: (query: string) => void;
-  popularSearches?: string[];
   /** When true, search bar blends into parent panel (no double border) */
   embedded?: boolean;
   /**
@@ -22,7 +22,6 @@ interface HeroSearchProps {
 export const HeroSearch: React.FC<HeroSearchProps> = ({
   initialQuery = '',
   onSearch,
-  popularSearches = ['nova', 'pulse', 'studio', 'launch'],
   embedded = false,
   debounceMs = 3500,
 }) => {
@@ -32,6 +31,8 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastRoutedRef = useRef('');
   const router = useRouter();
+  const { messages, href } = useLocale();
+  const hero = messages.hero;
   const { theme } = useTheme();
   const isLight = theme === 'light';
 
@@ -77,7 +78,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
     if (debounceRef.current) clearTimeout(debounceRef.current);
     lastRoutedRef.current = q;
     if (aiMode) {
-      router.push(`/generator?q=${encodeURIComponent(q)}`);
+      router.push(href(`/generator?q=${encodeURIComponent(q)}`));
       return;
     }
     onSearch(q);
@@ -90,25 +91,26 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
     }
   };
 
-  // Fewer chips on mobile for a cleaner row
-  const chips = popularSearches.slice(0, 4);
-
   const fieldShell = embedded
     ? isLight
-      ? 'bg-ds-soft border border-[#c8c8c8] focus-within:border-[#171717] focus-within:shadow-[0_0_0_3px_rgba(0,112,243,0.14)] transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]'
-      : 'bg-black/40 border border-white/10 focus-within:border-white/30 focus-within:shadow-[0_0_0_3px_rgba(0,112,243,0.2)] transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]'
+      ? 'min-h-[3.75rem] bg-white border border-[#e6e8e8] shadow-[0_1px_1px_rgba(0,0,0,0.03),0_12px_32px_-16px_rgba(0,0,0,0.12)] focus-within:border-[#0a0a0a] focus-within:shadow-[0_0_0_4px_rgba(20,21,23,0.06),0_12px_32px_-16px_rgba(0,0,0,0.12)] transition-[border-color,box-shadow] duration-300'
+      : 'min-h-[3.75rem] bg-[#0a0a0a] border border-white/[0.1] shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_24px_60px_-30px_rgba(0,0,0,1)] hover:border-white/[0.16] focus-within:border-white/30 focus-within:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_0_0_4px_rgba(255,255,255,0.05),0_24px_60px_-30px_rgba(0,0,0,1)] transition-[border-color,box-shadow] duration-300'
     : isLight
       ? 'bg-white border border-[#c8c8c8] shadow-[0_1px_2px_rgba(0,0,0,0.05),0_8px_24px_rgba(0,0,0,0.05)] focus-within:border-[#171717] focus-within:shadow-[0_0_0_3px_rgba(0,112,243,0.14),0_12px_40px_rgba(0,0,0,0.08)] transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]'
-      : 'bg-white/[0.03] border border-white/10 backdrop-blur-2xl focus-within:border-white/28 focus-within:shadow-[0_0_0_3px_rgba(0,112,243,0.18),0_20px_50px_-20px_rgba(0,0,0,0.7)] transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]';
+      : 'bg-[#0a0a0a] border border-white/10 backdrop-blur-2xl focus-within:border-white/28 focus-within:shadow-[0_0_0_3px_rgba(0,112,243,0.18),0_20px_50px_-20px_rgba(0,0,0,0.7)] transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]';
 
-  const aiBtnClass = `inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-[12px] sm:text-[12px] font-semibold tracking-tight transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] active:scale-[0.97] ${
+  const aiBtnClass = `inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 text-[12px] font-semibold tracking-tight transition-colors duration-200 active:scale-[0.97] ${
     aiMode
       ? isLight
-        ? 'bg-[#171717] text-white shadow-sm'
-        : 'bg-white text-black shadow-[0_0_0_1px_rgba(255,255,255,0.1)]'
-      : isLight
-        ? 'bg-ds-soft text-ds-body border border-[#c8c8c8] hover:border-[#9a9a9a] hover:bg-[#f0f0f0] hover:text-ds-ink'
-        : 'bg-white/[0.06] text-white/65 border border-white/10 hover:bg-white/10 hover:text-white'
+        ? 'bg-[#171717] text-white'
+        : 'bg-white text-black'
+      : embedded
+        ? isLight
+          ? 'text-[#6e7679] hover:text-[#0a0a0a]'
+          : 'text-[#8b9194] hover:text-[#f0f0f0]'
+        : isLight
+          ? 'bg-ds-soft text-ds-body border border-[#c8c8c8] hover:border-[#9a9a9a] hover:bg-[#f0f0f0] hover:text-ds-ink'
+          : 'bg-white/[0.06] text-white/65 border border-white/10 hover:bg-white/10 hover:text-white'
   }`;
 
   const searchBtnClass =
@@ -134,13 +136,17 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
   return (
     <div className="w-full max-w-full sm:max-w-[46rem] mx-auto">
       {/* —— Mobile only (desktop layout untouched below) —— */}
-      <div className="sm:hidden w-full space-y-2">
+      <div className="sm:hidden w-full">
         <div
-          className={`flex items-center gap-1.5 rounded-2xl px-2.5 min-h-[3.15rem] transition-all ${fieldShell}`}
+          className={`flex items-center gap-1 rounded-2xl pl-3 pr-1.5 min-h-[3.25rem] border transition-colors ${
+            isLight
+              ? 'bg-white border-[#d7dbdc] focus-within:border-[#0a0a0a]'
+              : 'bg-[#0a0a0a] border-white/[0.1] focus-within:border-white/25'
+          }`}
         >
           <div
-            className={`shrink-0 flex items-center justify-center w-8 h-8 ${
-              isLight ? 'text-slate-400' : 'text-white/45'
+            className={`shrink-0 flex items-center justify-center ${
+              isLight ? 'text-[#6e7679]' : 'text-[#878d8f]'
             }`}
           >
             <Icons.Search />
@@ -155,18 +161,18 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
                 submit();
               }
             }}
-            placeholder={aiMode ? 'Describe a brand idea…' : 'Search domain names...'}
-            autoFocus
+            placeholder={aiMode ? hero.placeholderAi : hero.placeholder}
             enterKeyHint={aiMode ? 'go' : 'search'}
             autoCapitalize="none"
             autoCorrect="off"
             spellCheck={false}
-            className={`flex-1 min-w-0 bg-transparent border-none outline-none text-[16px] font-medium py-2.5 pr-1 ${
+            inputMode="text"
+            className={`flex-1 min-w-0 bg-transparent border-none outline-none text-[15px] font-medium py-2.5 pr-1 ${
               isLight
-                ? 'text-slate-900 placeholder:text-slate-400'
-                : 'text-white placeholder:text-white/40'
+                ? 'text-[#0a0a0a] placeholder:text-[#6e7679]'
+                : 'text-[#f0f0f0] placeholder:text-[#878d8f]'
             }`}
-            aria-label="Search domain names"
+            aria-label={hero.aria}
           />
           {query ? (
             <button
@@ -177,25 +183,20 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
                 if (debounceRef.current) clearTimeout(debounceRef.current);
                 inputRef.current?.focus();
               }}
-              className={`shrink-0 flex h-8 w-8 items-center justify-center rounded-full ${
-                isLight ? 'text-slate-400 active:bg-slate-200' : 'text-white/45 active:bg-white/10'
+              className={`shrink-0 flex h-11 w-11 items-center justify-center rounded-xl ${
+                isLight ? 'text-[#52595b] active:bg-[#f4f5f5]' : 'text-[#a1a4a5] active:bg-white/10'
               }`}
               aria-label="Clear search"
             >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           ) : null}
-        </div>
-
-        <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.85fr)] gap-2">
           <button
             type="button"
             onClick={() => setAiMode((v) => !v)}
-            className={`${aiBtnClass} w-full min-h-[2.85rem] rounded-2xl text-[13px] font-bold ${
-              aiMode ? 'ring-2 ring-white/20' : ''
-            }`}
+            className={`${aiBtnClass} shrink-0 px-2.5 py-2 min-h-[44px]`}
             title="Toggle AI generator mode"
             aria-pressed={aiMode}
           >
@@ -205,27 +206,17 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
           <button
             type="button"
             onClick={() => submit()}
-            className={`${searchBtnClass} w-full min-h-[2.85rem] rounded-2xl text-[14px] font-bold`}
+            className={`${searchBtnClass} shrink-0 rounded-full px-3.5 py-2 text-[12px] min-h-[44px]`}
           >
-            <span>{aiMode ? 'Generate' : 'Search'}</span>
+            <span>{aiMode ? hero.generate : hero.searchDomains}</span>
             {searchArrow}
           </button>
         </div>
-
-        {aiMode ? (
-          <p
-            className={`text-center text-[11px] font-medium leading-snug ${
-              isLight ? 'text-slate-500' : 'text-white/45'
-            }`}
-          >
-            AI mode — describe a brand, get name ideas
-          </p>
-        ) : null}
       </div>
 
       {/* —— Desktop / tablet: field + AI + Search on one row —— */}
       <div
-        className={`hidden sm:flex items-center gap-2 rounded-2xl p-1.5 transition-all ${fieldShell}`}
+        className={`hidden sm:flex items-center gap-1.5 rounded-full py-1.5 pl-1.5 pr-1.5 transition-all ${fieldShell}`}
       >
         <div
           className={`ml-2 shrink-0 flex items-center justify-center w-8 h-8 ${
@@ -244,13 +235,13 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
               submit();
             }
           }}
-          placeholder={aiMode ? 'Describe a brand idea…' : 'Search domain names...'}
-          className={`flex-1 min-w-0 bg-transparent border-none outline-none text-[15px] font-medium py-2.5 pr-1 ${
+          placeholder={aiMode ? hero.placeholderAi : hero.placeholderDots}
+          className={`flex-1 min-w-0 bg-transparent border-none outline-none text-[16px] font-medium py-2.5 pr-1 ${
             isLight
               ? 'text-slate-900 placeholder:text-slate-400'
               : 'text-white placeholder:text-white/35'
           }`}
-          aria-label="Search domain names"
+          aria-label={hero.aria}
         />
 
         <button
@@ -267,40 +258,11 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
         <button
           type="button"
           onClick={() => submit()}
-          className={`${searchBtnClass} shrink-0 px-5 py-2.5`}
+          className={`${searchBtnClass} shrink-0 rounded-full px-5 py-3 transition-transform duration-200 hover:-translate-y-px active:translate-y-0`}
         >
-          <span>{aiMode ? 'Generate' : 'Search'}</span>
+          <span>{aiMode ? hero.generate : hero.search}</span>
           {searchArrow}
         </button>
-      </div>
-
-      <div className="mt-2 sm:mt-2.5 flex flex-nowrap sm:flex-wrap items-center justify-center gap-1.5 overflow-x-auto scrollbar-none px-0.5">
-        <span
-          className={`shrink-0 text-[10.5px] sm:text-[11px] font-medium ${
-            isLight ? 'text-slate-500' : 'text-white/40'
-          }`}
-        >
-          Try:
-        </span>
-        {chips.map((term) => (
-          <button
-            key={term}
-            type="button"
-            onClick={() => {
-              setQuery(term);
-              if (debounceRef.current) clearTimeout(debounceRef.current);
-              lastRoutedRef.current = term;
-              onSearch(term);
-            }}
-            className={`shrink-0 rounded-full px-2.5 py-1 sm:py-1 text-[11px] font-semibold transition-all active:scale-[0.97] ${
-              isLight
-                ? 'bg-white border border-[#cfcfcf] text-ds-body hover:border-[#9a9a9a] hover:bg-ds-soft hover:text-ds-ink'
-                : 'bg-white/[0.05] border border-white/12 text-white/65 hover:border-white/22 hover:text-white/85'
-            }`}
-          >
-            {term}
-          </button>
-        ))}
       </div>
     </div>
   );

@@ -16,8 +16,8 @@ const TOOLS: { name: string; description: string }[] = [
 ];
 
 export function AgentToolCatalog({ isLight }: { isLight: boolean }) {
-  const fill = isLight ? '#ffffff' : '#0a0a0c';
-  const headFill = isLight ? '#f8fafc' : '#121214';
+  const fill = isLight ? '#ffffff' : '#0a0a0a';
+  const headFill = isLight ? '#f4f5f5' : '#111111';
 
   return (
     <SolidPlate

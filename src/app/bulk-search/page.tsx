@@ -5,39 +5,33 @@ import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
-import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { BulkDomainSearch } from '@/components/domain/BulkDomainSearch';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
-import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
-import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
-import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
-import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
-
+import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
+import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 export default function BulkSearchPage() {
+  const { messages, href } = useLocale();
   return (
     <div className="page-x-lock min-h-screen overflow-x-hidden" style={{ backgroundColor: 'var(--bg-main)' }}>
-      <PageBackground variant="minimal" />
+      <PageBackground variant="hero" />
 
       <Navigation activeTool="bulk" />
 
       <main className={`${PAGE_MAIN_CLASS} pb-2`}>
         <PageBreadcrumb
           items={[
-            { label: 'Search', href: '/' },
-            { label: 'Bulk Domain Search' },
+            { label: messages.nav.search, href: href('/search') },
+            { label: messages.crumbs.bulk },
           ]}
         />
-        <SectionAmbient
-          intensity="soft"
-          className="w-full"
-          contentClassName="page-gutter relative z-[1]"
-        >
+        <div className="page-gutter relative z-[1] w-full">
           <div className="max-w-7xl mx-auto">
             <BulkDomainSearch />
           </div>
-        </SectionAmbient>
-        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.bulk} compact />
-        <SeoGuidePack {...TOOL_GUIDE_PACKS.bulk} />
+        </div>
+        <LocalizedDefinition id="bulk" compact />
+        <LocalizedGuidePack pack="bulk" />
         {/* Big ad banner sits below FAQ / guide content */}
         <div className="pt-6 sm:pt-8 pb-4 sm:pb-6">
           <AffiliateAdRail placement="bulk" variant="billboard" />

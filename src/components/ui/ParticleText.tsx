@@ -40,6 +40,8 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
   const wrapRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const fontMetaRef = useRef({ size: 40, y: 56 });
+  const assembledRef = useRef(false);
+  const bornRef = useRef(0);
   const rafRef = useRef(0);
   const pointerRef = useRef({
     x: -9999,
@@ -197,12 +199,24 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
 
             const jx = (Math.random() - 0.5) * 0.4;
             const jy = (Math.random() - 0.5) * 0.4;
+            const homeX = x + jx;
+            const homeY = y + jy;
+            let startX = homeX;
+            let startY = homeY;
+            if (!assembledRef.current) {
+              const dx = homeX - midX;
+              const dy = homeY - opticalY;
+              const len = Math.hypot(dx, dy) || 1;
+              const kick = isMobile ? 42 : 72;
+              startX = homeX + (dx / len) * kick + (Math.random() - 0.5) * 18;
+              startY = homeY + (dy / len) * kick * 0.62 + (Math.random() - 0.5) * 14;
+            }
 
             list.push({
-              x: x + jx + (Math.random() - 0.5) * 6,
-              y: y + jy + (Math.random() - 0.5) * 5,
-              ox: x + jx,
-              oy: y + jy,
+              x: startX,
+              y: startY,
+              ox: homeX,
+              oy: homeY,
               vx: 0,
               vy: 0,
               size: isEdge
@@ -219,13 +233,18 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
       }
 
       particlesRef.current = list;
+      if (!assembledRef.current) {
+        bornRef.current = performance.now();
+        assembledRef.current = true;
+      }
     };
 
     const resize = () => {
       const rect = wrap.getBoundingClientRect();
       const cssW = Math.max(240, Math.floor(rect.width));
       // Room for larger mobile wordmark; desktop uses full height
-      const cssH = cssW < 480 ? Math.min(height, 128) : height;
+      const cssH = cssW < 640 ? Math.min(height, Math.max(156, Math.round(cssW * 0.48))) : height;
+      wrap.style.height = `${cssH}px`;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.floor(cssW * dpr);
       canvas.height = Math.floor(cssH * dpr);
@@ -338,13 +357,16 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
       // Physics — calm
       for (let i = 0; i < parts.length; i++) {
         const p = parts[i];
-        const amp = p.isBrand ? 0.35 : 0.85;
+        const amp = p.isBrand ? 0.42 : 0.85;
+        const wave = Math.sin(time * 2.4 - p.ox * 0.02) * (p.isBrand ? 2.4 : 0.55);
         const floatX = Math.sin(time * 0.85 + p.phase) * amp;
-        const floatY = Math.cos(time * 1.0 + p.phase * 1.1) * amp * 0.8;
+        const floatY = Math.cos(time * 1.0 + p.phase * 1.1) * amp * 0.8 + wave;
 
         const dx = p.ox + floatX - p.x;
         const dy = p.oy + floatY - p.y;
-        const spring = p.isBrand ? 0.035 : 0.018;
+        const age = now - bornRef.current;
+        const assemble = age < 1400 ? 1 - age / 1400 : 0;
+        const spring = (p.isBrand ? 0.04 : 0.018) + (p.isBrand ? assemble * 0.11 : 0);
         p.vx += dx * spring * dt;
         p.vy += dy * spring * dt;
 
@@ -388,11 +410,10 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
         ctx.fill();
       }
 
-      // Diagonal shine sweep across brand — full L→R pass every 2 seconds
-      const SHINE_PERIOD_MS = 2000;
-      const shineProgress = (now % SHINE_PERIOD_MS) / SHINE_PERIOD_MS; // 0 → 1
-      // Start slightly left of text, end slightly past right edge
-      const shineX = (shineProgress * 1.35 - 0.15) * w;
+      // Shine sweep — soft halo plus a narrow bright core, left to right
+      const SHINE_PERIOD_MS = 2400;
+      const shineProgress = (now % SHINE_PERIOD_MS) / SHINE_PERIOD_MS;
+      const shineX = (shineProgress * 1.4 - 0.18) * w;
 
       // —— Soft shine halo on brand core (controlled) ——
       ctx.globalCompositeOperation = 'lighter';
@@ -401,21 +422,21 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
         if (!p.isBrand || p.core < 0.5) continue;
 
         const distToShine = Math.abs(p.x - shineX);
-        const shineBand = Math.max(0, 1 - distToShine / (w * 0.1));
+        const shineBand = Math.max(0, 1 - distToShine / (w * 0.16));
+        const shineCore = Math.max(0, 1 - distToShine / (w * 0.032));
         const tw =
           0.5 + 0.5 * Math.sin(time * p.twinkle * 1.5 + p.phase);
 
-        // base micro-glow + stronger when shine passes
         const glowA =
           p.baseAlpha *
           (isLight
-            ? 0.03 + tw * 0.04 + shineBand * 0.14
-            : 0.04 + tw * 0.06 + shineBand * 0.28);
+            ? 0.03 + tw * 0.04 + shineBand * 0.16 + shineCore * 0.2
+            : 0.04 + tw * 0.06 + shineBand * 0.32 + shineCore * 0.38);
         if (glowA < 0.02) continue;
 
         ctx.beginPath();
-        ctx.fillStyle = `rgba(${brandGlow}, ${Math.min(isLight ? 0.2 : 0.34, glowA)})`;
-        ctx.arc(p.x, p.y, p.size * (1.8 + shineBand * 1.6), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${brandGlow}, ${Math.min(isLight ? 0.28 : 0.5, glowA)})`;
+        ctx.arc(p.x, p.y, p.size * (1.8 + shineBand * 1.8 + shineCore * 1.4), 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.globalCompositeOperation = 'source-over';
@@ -426,27 +447,28 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
         if (!p.isBrand) continue;
 
         const distToShine = Math.abs(p.x - shineX);
-        const shineBand = Math.max(0, 1 - distToShine / (w * 0.11));
+        const shineBand = Math.max(0, 1 - distToShine / (w * 0.14));
+        const shineCore = Math.max(0, 1 - distToShine / (w * 0.028));
         const tw =
           0.78 +
           0.22 *
             Math.pow(0.5 + 0.5 * Math.sin(time * p.twinkle * 1.6 + p.phase), 1.6);
 
-        // Light: solid slate wordmark; dark: bright silver
         let rgb = p.core > 0.6 ? brandBright : brandMid;
-        if (shineBand > 0.3 && p.core > 0.5) {
+        if (shineCore > 0.35 && p.core > 0.45) {
           rgb = isLight ? '2, 6, 23' : '255, 255, 255';
         }
         const a = Math.min(
           1,
           p.baseAlpha * tw +
-            shineBand * (isLight ? 0.16 : 0.36) +
+            shineBand * (isLight ? 0.18 : 0.34) +
+            shineCore * (isLight ? 0.22 : 0.4) +
             (tw > 0.95 ? 0.08 : 0)
         );
 
         ctx.beginPath();
         ctx.fillStyle = `rgba(${rgb}, ${a})`;
-        ctx.arc(p.x, p.y, p.size * (1 + shineBand * 0.08), 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.size * (1 + shineBand * 0.1 + shineCore * 0.22), 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -523,7 +545,7 @@ export const ParticleText: React.FC<ParticleTextProps> = ({
           style={{
             letterSpacing: '-0.02em',
             backgroundImage: isLight
-              ? 'linear-gradient(90deg, #94a3b8 0%, #0f172a 35%, #64748b 50%, #0f172a 65%, #94a3b8 100%)'
+              ? 'linear-gradient(90deg, #a1a4a5 0%, #141517 35%, #6e7679 50%, #141517 65%, #a1a4a5 100%)'
               : 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, #fff 35%, rgba(255,255,255,0.55) 50%, #fff 65%, rgba(255,255,255,0.4) 100%)',
             backgroundSize: '200% 100%',
             WebkitBackgroundClip: 'text',

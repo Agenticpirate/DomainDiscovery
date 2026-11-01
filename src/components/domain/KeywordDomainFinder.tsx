@@ -7,9 +7,10 @@ import { Input } from '@/components/ui/Input';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/components/ui/Toast';
 import { checkDomainAvailability } from '@/services/instantDomainService';
-import { PreferredRegistrarSelect, RegistrarActionMenu } from '@/components/domain/RegistrarControls';
+import { RegistrarActionMenu } from '@/components/domain/RegistrarControls';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
+import { recordDomainsChecked } from '@/lib/searchCounter';
 import keywordTool from '@/data/keyword-tool.json';
 import { ds } from '@/lib/ds';
 
@@ -168,6 +169,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           const start = i + j * BATCH_SIZE;
           const batch = domainNames.slice(start, start + BATCH_SIZE);
           if (batch.length === 0) continue;
+          recordDomainsChecked(batch.length, `kw:${gen}:${batch[0]}`);
           batchPromises.push(
             checkDomainAvailability(batch)
               .then((results) => {
@@ -440,7 +442,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
       <div className={`${ds.card} overflow-hidden rounded-2xl`}>
         {/* Header — polarity ink band (DESIGN.md showcase-band-dark) */}
         <div
-          className={`flex flex-wrap items-start justify-between gap-3 px-4 sm:px-6 py-3.5 sm:py-4 border-b ${
+          className={`hidden sm:flex flex-wrap items-start justify-between gap-3 px-4 sm:px-6 py-3.5 sm:py-4 border-b ${
             isLight
               ? 'bg-[#171717] text-white border-white/[0.08]'
               : 'border-ds-hairline pt-4 sm:pt-5 pb-0'
@@ -468,22 +470,18 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               </p>
             </div>
           </div>
-          <PreferredRegistrarSelect
-            selectedRegistrar={selectedRegistrar}
-            onSelectRegistrar={setSelectedRegistrar}
-            label="Registrar"
-          />
         </div>
 
-        <div className="p-4 sm:p-6 pt-4 sm:pt-5">
+        <div className="p-3 sm:p-6 sm:pt-5">
 
         {/* 1) Search fields first */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-2 sm:mb-3">
           <Input
-            label="Primary keyword"
+            label="Keyword"
             value={primaryKeyword}
             onChange={(e) => setPrimaryKeyword(e.target.value)}
-            placeholder="Type any word — e.g. ai, coffee, travel…"
+            placeholder="ai, coffee, travel…"
+            className="!min-h-10 !py-2 !text-sm"
             autoComplete="off"
             spellCheck={false}
             onKeyDown={(e) => {
@@ -497,10 +495,10 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             label="Secondary (optional)"
             value={secondaryKeyword}
             onChange={(e) => setSecondaryKeyword(e.target.value)}
-            placeholder="Optional — e.g. hub, pro, buddy"
+            placeholder="hub, pro, buddy"
             autoComplete="off"
             spellCheck={false}
-            helperText="Combines with primary (aibuddy, buddyai, …). Works alone if primary is empty."
+            className="!min-h-10 !py-2 !text-sm"
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault();
@@ -511,24 +509,24 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         </div>
 
         {/* Keyword position — filters result list after generate (not generation shape) */}
-        <div className="mb-4">
-          <label className={`${ds.label} block mb-1.5`}>Filter by position</label>
-          <div className="flex flex-wrap gap-1.5">
+        <div className="mb-2 sm:mb-4">
+          <label className={`${ds.label} mb-1 hidden sm:block sm:mb-1.5`}>Filter by position</label>
+          <div className="grid grid-cols-3 gap-1 sm:flex sm:flex-wrap sm:gap-1.5">
             {(
               [
                 {
                   id: 'all' as const,
-                  label: 'All matches',
+                  label: 'All',
                   hint: 'Prefixes, suffixes & combos around your keyword',
                 },
                 {
                   id: 'starts' as const,
-                  label: 'Starts with',
+                  label: 'Starts',
                   hint: 'Names that begin with your keyword (e.g. jobs…)',
                 },
                 {
                   id: 'ends' as const,
-                  label: 'Ends with',
+                  label: 'Ends',
                   hint: 'Names that end with your keyword (e.g. …jobs)',
                 },
               ] as const
@@ -544,7 +542,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               </button>
             ))}
           </div>
-          <p className={`mt-1.5 text-[10px] sm:text-[11px] ${ds.mute}`}>
+          <p className={`mt-1.5 hidden text-[10px] sm:block sm:text-[11px] ${ds.mute}`}>
             {filterMode === 'starts' && 'Only domains that start with your keyword.'}
             {filterMode === 'ends' && 'Only domains that end with your keyword.'}
             {filterMode === 'all' && 'All prefix, suffix, and combo patterns.'}
@@ -552,10 +550,10 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         </div>
 
         {/* 2) Extensions — type any TLD, pick presets, chips for selected */}
-        <div className="mb-4 space-y-2.5">
+        <div className="mb-2 space-y-1.5 sm:mb-4 sm:space-y-2.5">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <label className={ds.label}>Extensions</label>
-            <span className={`text-[10px] ${ds.mute}`}>
+            <span className={`hidden text-[10px] sm:inline ${ds.mute}`}>
               Type any TLD (e.g. shop, .io, co.uk) or pick a preset
             </span>
           </div>
@@ -592,7 +590,11 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 type="button"
                 onClick={commitCustomTld}
                 disabled={!normalizeTld(customTldInput)}
-                className={`shrink-0 rounded-ds-md border px-3 py-2 text-[11px] font-bold transition-colors disabled:opacity-40 ${ds.btnSecondary} !rounded-ds-md`}
+                className={`shrink-0 rounded-xl border px-3 py-2 text-[11px] font-bold transition-colors disabled:opacity-40 ${
+                  isLight
+                    ? 'border-[#d7dbdc] bg-white text-[#141517] hover:border-[#141517]'
+                    : 'border-white/15 bg-[#111111] text-[#f0f0f0] hover:border-white/30'
+                }`}
               >
                 Add
               </button>
@@ -619,9 +621,13 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               type="button"
               onClick={() => void handleSearch()}
               disabled={!canSearch || isGenerating}
-              className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-[13px] font-bold transition-all duration-150 w-full sm:w-auto shrink-0 ${
-                !canSearch || isGenerating ? ds.btnDisabled : ds.btnPrimary
-              } !rounded-xl`}
+              className={`inline-flex w-full shrink-0 items-center justify-center gap-1.5 rounded-xl px-4 py-2 text-[12px] font-bold transition-colors sm:w-auto sm:px-5 sm:py-2.5 sm:text-[13px] ${
+                !canSearch || isGenerating
+                  ? 'cursor-not-allowed border border-white/10 bg-[#1a1a1a] text-[#6e7679]'
+                  : isLight
+                    ? 'bg-[#141517] text-white hover:bg-black'
+                    : 'bg-[#f0f0f0] text-[#0a0a0a] hover:bg-white'
+              }`}
             >
               {isGenerating ? (
                 <>
@@ -649,7 +655,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                       ? 'At least one extension required'
                       : `Remove ${tld}`
                   }
-                  className="inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-mono font-semibold transition-colors bg-ds-ink text-white border-ds-ink hover:brightness-110"
+                  className="inline-flex items-center gap-1 rounded-full border border-[#f0f0f0] bg-[#f0f0f0] px-2.5 py-1 text-[11px] font-mono font-semibold text-[#0a0a0a] transition-colors hover:bg-white"
                 >
                   {tld}
                   {selectedTlds.length > 1 && (
@@ -762,7 +768,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         )}
 
         {!canSearch && (
-          <p className={`mt-2 text-[11px] ${ds.mute}`}>
+          <p className={`mt-2 hidden text-[11px] sm:block ${ds.mute}`}>
             Type a primary or secondary keyword, then click Find domains
           </p>
         )}
@@ -771,12 +777,12 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
       {/* Results */}
       {generated.length > 0 && (
-        <div className={`${ds.card} overflow-hidden rounded-2xl`}>
+        <div className={`${ds.card} min-w-0 max-w-full overflow-x-hidden rounded-2xl`}>
           {/* Dark stats chrome (light mode) — same surfaces as dark product UI */}
           <div
             className={`px-3 sm:px-4 py-2.5 sm:py-3 border-b ${
               isLight
-                ? 'bg-[#0c0c0e] border-white/[0.06] text-white'
+                ? 'bg-[#0a0a0a] border-white/[0.06] text-white'
                 : 'border-white/[0.06]'
             }`}
           >
@@ -809,12 +815,6 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 )}
               </div>
               <div className="flex flex-wrap items-center gap-2">
-                <PreferredRegistrarSelect
-                  selectedRegistrar={selectedRegistrar}
-                  onSelectRegistrar={setSelectedRegistrar}
-                  label="Register at"
-                  className="text-[11px]"
-                />
                 {isChecking && (
                   <button type="button" onClick={handleStop} className={pill(false)}>
                     Stop
@@ -866,23 +866,72 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               ))}
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <div className="flex flex-wrap items-center gap-1.5">
-                {(
-                  [
-                    { id: 'all' as const, label: `All (${positionTotal})` },
-                    { id: 'available' as const, label: `Free (${availableCount})` },
-                    { id: 'premium' as const, label: `Premium (${premiumCount})` },
-                    { id: 'taken' as const, label: `Taken (${takenCount})` },
-                    { id: 'unchecked' as const, label: `Pending (${uncheckedCount})` },
-                  ] as const
-                ).map((m) => (
-                  <button key={m.id} type="button" onClick={() => setAvailFilter(m.id)} className={pill(availFilter === m.id)}>
-                    {m.label}
+            <div
+              role="tablist"
+              aria-label="Filter by availability"
+              className={`grid grid-cols-4 gap-0.5 w-full min-w-0 rounded-2xl border p-1 ${
+                isLight ? 'bg-slate-100/70 border-slate-200/90' : 'bg-[#0a0a0a] border-white/[0.08]'
+              }`}
+            >
+              {(
+                [
+                  {
+                    id: 'available' as const,
+                    label: 'Available',
+                    n: availableCount,
+                    dot: isLight ? 'bg-emerald-500' : 'bg-emerald-400',
+                  },
+                  {
+                    id: 'premium' as const,
+                    label: 'Premium',
+                    n: premiumCount,
+                    dot: 'bg-amber-400',
+                  },
+                  {
+                    id: 'taken' as const,
+                    label: 'Taken',
+                    n: takenCount,
+                    dot: isLight ? 'bg-rose-500' : 'bg-rose-400',
+                  },
+                  {
+                    id: 'all' as const,
+                    label: 'All',
+                    n: positionTotal,
+                    dot: isLight ? 'bg-slate-400' : 'bg-white/45',
+                  },
+                ] as const
+              ).map((item) => {
+                const active = availFilter === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={active}
+                    onClick={() => setAvailFilter(item.id)}
+                    className={`flex min-w-0 flex-col items-center justify-center gap-0.5 rounded-[0.85rem] px-1 py-1.5 ${
+                      active
+                        ? isLight
+                          ? 'bg-white text-slate-900 shadow-sm ring-1 ring-black/[0.05]'
+                          : 'bg-white text-black'
+                        : isLight
+                          ? 'text-slate-600'
+                          : 'text-white/55'
+                    }`}
+                  >
+                    <span className="flex max-w-full items-center gap-1">
+                      <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${item.dot}`} />
+                      <span className="truncate text-[11px] font-semibold leading-none sm:text-[12px]">
+                        {item.label}
+                      </span>
+                    </span>
+                    <span className="text-[14px] font-black tabular-nums leading-none">{item.n.toLocaleString()}</span>
                   </button>
-                ))}
-              </div>
-              <div className="flex flex-wrap items-center gap-1.5">
+                );
+              })}
+            </div>
+            <div className="flex min-w-0 flex-wrap items-center justify-between gap-2">
+              <div className="flex min-w-0 flex-wrap items-center gap-1.5">
                 <select
                   value={typeFilter}
                   onChange={(e) => setTypeFilter(e.target.value as TypeFilter)}
@@ -919,7 +968,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             </div>
           </div>
 
-          <div className="max-h-[min(68vh,calc(100vh-16rem))] overflow-y-auto overscroll-contain p-2 sm:p-2.5 bg-ds-soft/40">
+          <div className="max-sm:max-h-none max-sm:overflow-visible sm:max-h-[min(68vh,calc(100vh-16rem))] sm:overflow-y-auto sm:overscroll-contain p-2 sm:p-2.5 bg-ds-soft/40">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5 auto-rows-auto">
               {visible.map((item) => (
                 <DomainRow
@@ -1017,83 +1066,29 @@ function DomainRow({
   const isAvailable = item.available === true && !isPremium;
   const isTaken = item.available === false && !isPremium;
   const isUnchecked = item.available === null;
-  const canRegister = isAvailable || isPremium;
-
-  // Card surfaces: light mode needs strong tinted plates (same language as bulk search)
-  const cardClass = isUnchecked
-    ? isLight
-      ? 'bg-white border-slate-200/90 shadow-sm shadow-slate-900/[0.03] hover:border-slate-300 hover:shadow-md'
-      : 'bg-[#121214] border-white/[0.08] hover:bg-[#161618]'
-    : isAvailable
-      ? isLight
-        ? 'bg-emerald-50 border-emerald-200/90 shadow-sm shadow-emerald-900/[0.04] hover:border-emerald-300 hover:bg-emerald-50/95'
-        : 'bg-emerald-500/[0.08] border-emerald-500/25 hover:bg-emerald-500/[0.12]'
-      : isPremium
-        ? isLight
-          ? 'bg-amber-50 border-amber-200/90 shadow-sm shadow-amber-900/[0.05] hover:border-amber-300 hover:bg-amber-50/95'
-          : 'bg-amber-500/[0.08] border-amber-500/25 hover:bg-amber-500/[0.12]'
-        : isLight
-          ? 'bg-rose-50/90 border-rose-200/80 shadow-sm shadow-rose-900/[0.03] hover:border-rose-300'
-          : 'bg-rose-500/[0.07] border-rose-500/20 hover:bg-rose-500/[0.1]';
-
-  const dotClass = isUnchecked
-    ? isLight
-      ? 'bg-slate-300'
-      : 'bg-white/20'
-    : isAvailable
-      ? isLight
-        ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.45)]'
-        : 'bg-emerald-400 shadow-[0_0_7px_rgba(52,211,153,0.45)]'
-      : isPremium
-        ? isLight
-          ? 'bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.45)]'
-          : 'bg-amber-400 shadow-[0_0_7px_rgba(251,191,36,0.45)]'
-        : isLight
-          ? 'bg-rose-500'
-          : 'bg-rose-400/90';
-
+  const cardClass = isLight
+    ? 'bg-white hover:bg-slate-50 border-slate-200'
+    : 'bg-[#111111] hover:bg-white/[0.06] border-white/[0.08]';
   const nameClass = isUnchecked
     ? isLight
-      ? 'text-slate-600'
-      : 'text-white/55'
-    : isAvailable
+      ? 'text-slate-500'
+      : 'text-white/45'
+    : isTaken
       ? isLight
-        ? 'text-emerald-950 font-semibold'
-        : 'text-emerald-50 font-semibold'
-      : isPremium
-        ? isLight
-          ? 'text-amber-950 font-semibold'
-          : 'text-amber-50 font-semibold'
-        : isLight
-          ? 'text-rose-800/80 line-through decoration-rose-300'
-          : 'text-white/30 line-through decoration-white/15';
-
+        ? 'text-slate-500 line-through decoration-slate-300'
+        : 'text-white/35 line-through decoration-white/15'
+      : isLight
+        ? 'text-slate-900'
+        : 'text-white/90';
   const saveClass = isSaved
     ? isLight
-      ? isAvailable
-        ? 'text-emerald-800 border-emerald-600 bg-emerald-100'
-        : isPremium
-          ? 'text-amber-900 border-amber-600 bg-amber-100'
-          : isTaken
-            ? 'text-rose-800 border-rose-500 bg-rose-100'
-            : 'text-slate-900 border-slate-900 bg-slate-100'
+      ? 'text-slate-900 border-slate-900 bg-slate-100'
       : 'text-white border-white/30 bg-white/10'
     : isLight
-      ? isAvailable
-        ? 'text-emerald-600/50 border-emerald-200 hover:text-emerald-800 hover:bg-emerald-100'
-        : isPremium
-          ? 'text-amber-700/50 border-amber-200 hover:text-amber-900 hover:bg-amber-100'
-          : isTaken
-            ? 'text-rose-500/50 border-rose-200 hover:text-rose-800 hover:bg-rose-100'
-            : 'text-slate-400 border-slate-200 bg-white hover:text-slate-700 hover:border-slate-300'
+      ? 'text-slate-400 border-slate-200 hover:text-slate-700'
       : 'text-white/40 border-white/10 hover:text-white/80';
-
   const goPrimary = isLight
-    ? isAvailable
-      ? 'bg-emerald-700 text-white hover:bg-emerald-800 shadow-sm shadow-emerald-900/15'
-      : isPremium
-        ? 'bg-amber-600 text-white hover:bg-amber-700 shadow-sm shadow-amber-900/15'
-        : 'bg-slate-900 text-white hover:bg-slate-800 shadow-sm shadow-slate-900/15'
+    ? 'bg-slate-900 text-white hover:bg-slate-800'
     : 'bg-white text-black hover:bg-white/90';
 
   return (
@@ -1105,33 +1100,54 @@ function DomainRow({
         className="flex items-center gap-1.5 min-w-0 flex-1 text-left"
         onClick={() => onSelect?.(item.domain)}
       >
-        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotClass}`} />
-        <span className={`font-mono text-[12px] sm:text-[13px] truncate ${nameClass}`}>
+        {isUnchecked ? (
+          <span
+            className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
+              isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/[0.06] text-white/35'
+            }`}
+            title="Not checked yet"
+          >
+            <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-300' : 'bg-white/30'}`} />
+          </span>
+        ) : isPremium ? (
+          <span
+            className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
+              isLight ? 'bg-amber-100 text-amber-600' : 'bg-amber-500/15 text-amber-400'
+            }`}
+            title="Premium"
+          >
+            <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 2h14v2H5v-2z" />
+            </svg>
+          </span>
+        ) : isAvailable ? (
+          <span
+            className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+              isLight
+                ? 'bg-emerald-50 text-emerald-600 border border-emerald-200/80'
+                : 'bg-emerald-500/12 text-emerald-400 border border-emerald-500/25'
+            }`}
+            title="Available"
+          >
+            <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+            </svg>
+          </span>
+        ) : (
+          <span
+            className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
+              isLight ? 'bg-rose-50 text-rose-500' : 'bg-rose-500/10 text-rose-400/90'
+            }`}
+            title="Taken"
+          >
+            <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </span>
+        )}
+        <span className={`font-mono text-[12px] sm:text-[13px] font-medium truncate ${nameClass}`}>
           {item.domain}
         </span>
-        {isPremium && (
-          <span
-            className={`shrink-0 rounded-md border px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
-              isLight
-                ? 'bg-amber-100 text-amber-800 border-amber-200'
-                : 'bg-amber-400/15 text-amber-200 border-amber-400/25'
-            }`}
-            title="Premium listing from GoDaddy"
-          >
-            Premium · GoDaddy
-          </span>
-        )}
-        {isAvailable && (
-          <span
-            className={`shrink-0 rounded-md border px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
-              isLight
-                ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
-                : 'bg-emerald-400/15 text-emerald-200 border-emerald-400/25'
-            }`}
-          >
-            Free
-          </span>
-        )}
       </button>
 
       <button
@@ -1166,11 +1182,11 @@ function DomainRow({
             domain={item.domain}
             selectedRegistrar={selectedRegistrar}
             onSelectRegistrar={onSelectRegistrar}
-            canRegister={canRegister}
+            canRegister
             isPremium={isPremium}
             premiumUrl={isPremium ? item.buyUrl : undefined}
-            primaryLabel={isPremium ? 'Go · GoDaddy' : 'Go'}
-            premiumLabel={isPremium ? 'Premium listing from GoDaddy' : undefined}
+            primaryLabel={isPremium ? 'Go' : 'Go'}
+            premiumLabel={isPremium ? 'Premium listing' : undefined}
             primaryButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${goPrimary}`}
             chevronButtonClassName={`rounded-full p-1 transition-colors ${goPrimary}`}
             fallbackButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${

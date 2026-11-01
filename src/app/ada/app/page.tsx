@@ -122,7 +122,7 @@ export default function AdaAppPage() {
     }
   };
 
-  const solid = isLight ? '#ffffff' : '#0a0a0c';
+  const solid = isLight ? '#ffffff' : '#0a0a0a';
 
   return (
     <div className="relative px-3 sm:px-6 py-5 sm:py-10">

@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import indexData from '@/data/tld-about/index.json';
 
 export type TldAboutSummary = {
@@ -54,8 +52,6 @@ type IndexFile = {
 };
 
 const index = indexData as IndexFile;
-const ABOUT_DIR = path.join(process.cwd(), 'src/data/tld-about');
-
 export function getTldAboutIndex(): TldAboutSummary[] {
   return index.extensions || [];
 }
@@ -72,12 +68,12 @@ export function getTldAboutSlugs(): string[] {
   return (index.extensions || []).map((e) => e.slug);
 }
 
-export function getTldAboutDetail(slug: string): TldAboutDetail | null {
+export async function getTldAboutDetail(slug: string): Promise<TldAboutDetail | null> {
   const normalized = slug.replace(/^\./, '').toLowerCase();
-  const filePath = path.join(ABOUT_DIR, `${normalized}.json`);
+  if (!/^[a-z0-9-]+$/.test(normalized) || normalized === 'index') return null;
   try {
-    if (!fs.existsSync(filePath)) return null;
-    return JSON.parse(fs.readFileSync(filePath, 'utf8')) as TldAboutDetail;
+    const mod = (await import(`@/data/tld-about/${normalized}.json`)) as { default: TldAboutDetail };
+    return mod.default;
   } catch {
     return null;
   }

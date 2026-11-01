@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
 import { ToolPageJsonLd } from '@/components/seo/JsonLd';
-import { buildToolMetadata } from '@/lib/seoSiteFacts';
+import { buildLocalizedToolMetadata } from '@/lib/i18n/metadata';
 
 const title = 'Domain Availability Checker — Instant Domain Search';
 const description =
   'Instant domain availability checker across popular TLDs. Type a name, see live free or taken results, and explore brandable alternatives.';
 const path = '/search';
 
-export const metadata: Metadata = buildToolMetadata({
+export function generateMetadata() {
+  return buildLocalizedToolMetadata({
   title,
   description,
   path,
@@ -18,6 +18,7 @@ export const metadata: Metadata = buildToolMetadata({
     'domain name search',
   ],
 });
+}
 
 export default function SearchLayout({ children }: { children: React.ReactNode }) {
   return (

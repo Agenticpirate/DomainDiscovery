@@ -101,10 +101,10 @@ export function AdaHowItWorks({ isLight }: { isLight: boolean }) {
   const line = isLight ? 'border-slate-200' : 'border-white/[0.09]';
   const surface = isLight
     ? 'bg-white border-slate-200 shadow-[0_8px_28px_-14px_rgba(15,23,42,0.12)]'
-    : 'bg-[#0c0c0e] shadow-[0_24px_56px_-36px_rgba(0,0,0,0.9)]';
+    : 'bg-[#0a0a0a] shadow-[0_24px_56px_-36px_rgba(0,0,0,0.9)]';
   const iconWrap = isLight
     ? 'border-slate-200 bg-slate-50 text-slate-800 shadow-sm'
-    : 'border-white/[0.1] bg-[#121214] text-white/90';
+    : 'border-white/[0.1] bg-[#111111] text-white/90';
 
   return (
     <section className="relative overflow-hidden px-3 sm:px-6 py-5 sm:py-16">
@@ -130,12 +130,12 @@ export function AdaHowItWorks({ isLight }: { isLight: boolean }) {
               <div key={s.n} className="relative">
                 <div
                   className={`relative isolate overflow-hidden rounded-xl border ${line} ${surface}`}
-                  style={{ backgroundColor: isLight ? undefined : '#0c0c0e' }}
+                  style={{ backgroundColor: isLight ? undefined : '#0a0a0a' }}
                 >
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-0 rounded-[inherit]"
-                    style={{ backgroundColor: isLight ? '#ffffff' : '#0c0c0e' }}
+                    style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
                   />
                   <div className="relative z-[1] flex gap-2.5 p-2.5">
                     <div
@@ -182,7 +182,7 @@ export function AdaHowItWorks({ isLight }: { isLight: boolean }) {
                   whileHover={reduce ? undefined : { y: -3 }}
                   transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                   className={`how-step-card scroll-reveal-item shine-border relative flex-1 rounded-[1.25rem] border p-6 ${line} ${surface}`}
-                  style={{ backgroundColor: isLight ? undefined : '#0c0c0e' }}
+                  style={{ backgroundColor: isLight ? undefined : '#0a0a0a' }}
                 >
                   <div className="flex items-start justify-between gap-3 mb-4">
                     <div
@@ -215,7 +215,7 @@ export function AdaHowItWorks({ isLight }: { isLight: boolean }) {
                       className={`flex h-8 w-8 items-center justify-center rounded-full border ${
                         isLight
                           ? 'border-slate-200 bg-white text-slate-400 shadow-sm'
-                          : 'border-white/[0.1] bg-[#0c0c0e] text-white/35'
+                          : 'border-white/[0.1] bg-[#0a0a0a] text-white/35'
                       }`}
                     >
                       <IconArrow className="h-3.5 w-3.5" />
@@ -243,7 +243,7 @@ export function AdaHowItWorks({ isLight }: { isLight: boolean }) {
             className={`rounded-lg sm:rounded-2xl border px-4 sm:px-6 py-2 sm:py-2.5 text-[12px] sm:text-sm font-bold transition ${
               isLight
                 ? 'border-slate-200 text-slate-700 hover:border-slate-300 bg-white/80'
-                : 'border-white/12 text-white/75 hover:border-white/25 bg-[#0a0a0c]'
+                : 'border-white/12 text-white/75 hover:border-white/25 bg-[#0a0a0a]'
             }`}
           >
             Call it from an agent

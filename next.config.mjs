@@ -1,5 +1,8 @@
+const isDev = process.env.NODE_ENV !== 'production';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   allowedDevOrigins: [
     process.env.REPLIT_DEV_DOMAIN,
     '127.0.0.1',
@@ -42,16 +45,20 @@ const nextConfig = {
           { key: 'X-Content-Type-Options', value: 'nosniff' },
         ],
       },
-      {
-        // Cache static assets aggressively
-        source: '/_next/static/(.*)',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-        ],
-      },
+      // Dev chunk names are not content-hashed, so a year-long cache serves stale code after edits.
+      ...(isDev
+        ? []
+        : [
+            {
+              source: '/_next/static/(.*)',
+              headers: [
+                { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+              ],
+            },
+          ]),
       {
         // Brand icons / favicons — long cache; SERP refetch uses ?v= cache-bust in HTML
-        source: '/:file(favicon.ico|favicon.svg|favicon-48.png|favicon-96.png|icon-16.png|icon-32.png|icon-48.png|icon-96.png|icon-192.png|icon-512.png|icon.png|apple-touch-icon.png|app-icon.png|logo-solid.png|logo.png|logo-black.png|site.webmanifest)',
+        source: '/:file(favicon.ico|favicon.svg|favicon-48.png|favicon-96.png|icon-16.png|icon-32.png|icon-48.png|icon-96.png|icon-192.png|icon-512.png|icon.png|apple-touch-icon.png|app-icon.png|logo-solid.png|logo.png|logo-black.png|logo-mark-160.webp|logo-black-mark-160.webp|site.webmanifest)',
         headers: [
           {
             key: 'Cache-Control',

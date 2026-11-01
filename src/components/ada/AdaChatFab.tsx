@@ -181,7 +181,7 @@ export function AdaChatFab() {
             className={`pointer-events-none relative max-w-[13.5rem] overflow-hidden rounded-2xl border px-3.5 py-2.5 shadow-2xl backdrop-blur-xl ${
               isLight
                 ? 'border-slate-200/80 bg-white/95 text-slate-800 shadow-slate-900/10'
-                : 'border-white/10 bg-[#0a0a0c]/95 text-white/90 shadow-black/60'
+                : 'border-white/10 bg-[#0a0a0a]/95 text-white/90 shadow-black/60'
             }`}
           >
             <span
@@ -381,7 +381,7 @@ export function AdaChatFab() {
         {/* Status pill — organic sand-gold */}
         <motion.span
           className={`absolute -top-0.5 -right-0.5 z-[3] flex h-3.5 w-3.5 sm:h-4 sm:w-4 items-center justify-center rounded-full ring-2 ${
-            isLight ? 'bg-slate-900 ring-slate-900' : 'bg-[#0a0a0c] ring-[#0a0a0c]'
+            isLight ? 'bg-slate-900 ring-slate-900' : 'bg-[#0a0a0a] ring-[#0a0a0a]'
           }`}
           animate={reducedMotion ? undefined : { scale: [1, 1.08, 1] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}

@@ -6,7 +6,7 @@ import { SolidPlate } from '@/components/ui/SolidPlate';
 export function AgentSecuritySection({ isLight }: { isLight: boolean }) {
   const title = isLight ? 'text-slate-900' : 'text-white';
   const muted = isLight ? 'text-slate-500' : 'text-white/55';
-  const fill = isLight ? '#ffffff' : '#0a0a0c';
+  const fill = isLight ? '#ffffff' : '#0a0a0a';
 
   return (
     <SolidPlate

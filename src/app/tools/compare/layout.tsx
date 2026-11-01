@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
 import { ToolPageJsonLd } from '@/components/seo/JsonLd';
-import { buildToolMetadata } from '@/lib/seoSiteFacts';
+import { buildLocalizedToolMetadata } from '@/lib/i18n/metadata';
 
 const title = 'Domain Price Comparison — Registrar Pricing by TLD';
 const description =
   'Compare regular domain registration prices across registrars by TLD. Research .com and other extensions before you buy.';
 const path = '/tools/compare';
 
-export const metadata: Metadata = buildToolMetadata({
+export function generateMetadata() {
+  return buildLocalizedToolMetadata({
   title,
   description,
   path,
@@ -18,6 +18,7 @@ export const metadata: Metadata = buildToolMetadata({
     'TLD pricing',
   ],
 });
+}
 
 export default function CompareLayout({ children }: { children: React.ReactNode }) {
   return (

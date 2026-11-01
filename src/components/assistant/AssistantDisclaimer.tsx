@@ -8,7 +8,7 @@ import { SolidPlate } from '@/components/ui/SolidPlate';
 export function AssistantDisclaimer({ isLight }: { isLight: boolean }) {
   return (
     <SolidPlate
-      fill={isLight ? '#f8fafc' : '#0a0a0c'}
+      fill={isLight ? '#f4f5f5' : '#0a0a0a'}
       className={`rounded-2xl border p-4 text-xs sm:text-sm leading-relaxed ${
         isLight ? 'border-slate-200 text-slate-600' : 'border-white/10 text-white/50'
       }`}

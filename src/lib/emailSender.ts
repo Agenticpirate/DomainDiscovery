@@ -185,17 +185,17 @@ export function buildConfirmEmail(opts: {
   ].join('\n');
 
   const html = `
-    <div style="font-family:Inter,system-ui,sans-serif;max-width:520px;margin:0 auto;color:#0f172a">
+    <div style="font-family:Inter,system-ui,sans-serif;max-width:520px;margin:0 auto;color:#141517">
       <h2 style="margin:0 0 12px">Confirm your free domain watch</h2>
-      <p style="line-height:1.55;color:#334155">You asked to track <strong>${domain}</strong> for registration status changes.</p>
+      <p style="line-height:1.55;color:#434a4d">You asked to track <strong>${domain}</strong> for registration status changes.</p>
       <p style="margin:24px 0">
-        <a href="${confirmUrl}" style="display:inline-block;background:#0f172a;color:#fff;text-decoration:none;padding:12px 18px;border-radius:10px;font-weight:600">
+        <a href="${confirmUrl}" style="display:inline-block;background:#141517;color:#fff;text-decoration:none;padding:12px 18px;border-radius:10px;font-weight:600">
           Confirm free alerts
         </a>
       </p>
-      <p style="font-size:13px;color:#64748b;line-height:1.5">
+      <p style="font-size:13px;color:#6e7679;line-height:1.5">
         Alerts go to ${email}. Unsubscribe anytime:
-        <a href="${unsubscribeUrl}" style="color:#0f172a">unsubscribe</a>.
+        <a href="${unsubscribeUrl}" style="color:#141517">unsubscribe</a>.
       </p>
     </div>
   `;
@@ -229,22 +229,22 @@ export function buildChangeEmail(opts: {
   const htmlItems = changes
     .map(
       (c) =>
-        `<li style="margin:0 0 8px"><span style="display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#64748b;margin-right:6px">${c.type}</span>${c.detail}</li>`
+        `<li style="margin:0 0 8px"><span style="display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#6e7679;margin-right:6px">${c.type}</span>${c.detail}</li>`
     )
     .join('');
 
   const html = `
-    <div style="font-family:Inter,system-ui,sans-serif;max-width:520px;margin:0 auto;color:#0f172a">
+    <div style="font-family:Inter,system-ui,sans-serif;max-width:520px;margin:0 auto;color:#141517">
       <h2 style="margin:0 0 8px">Update on ${domain}</h2>
-      <p style="color:#64748b;margin:0 0 16px">Free RDAP status watch · DomainDiscovery</p>
-      <ul style="padding-left:18px;line-height:1.5;color:#334155">${htmlItems}</ul>
+      <p style="color:#6e7679;margin:0 0 16px">Free RDAP status watch · DomainDiscovery</p>
+      <ul style="padding-left:18px;line-height:1.5;color:#434a4d">${htmlItems}</ul>
       <p style="margin:20px 0">
-        <a href="${lookupUrl}" style="display:inline-block;background:#0f172a;color:#fff;text-decoration:none;padding:10px 16px;border-radius:10px;font-weight:600">
+        <a href="${lookupUrl}" style="display:inline-block;background:#141517;color:#fff;text-decoration:none;padding:10px 16px;border-radius:10px;font-weight:600">
           Open WHOIS
         </a>
       </p>
-      <p style="font-size:12px;color:#94a3b8">
-        <a href="${unsubscribeUrl}" style="color:#64748b">Unsubscribe</a> from this watch.
+      <p style="font-size:12px;color:#a1a4a5">
+        <a href="${unsubscribeUrl}" style="color:#6e7679">Unsubscribe</a> from this watch.
       </p>
     </div>
   `;

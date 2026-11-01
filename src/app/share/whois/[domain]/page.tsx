@@ -86,7 +86,7 @@ export default async function WhoisSharePage({ params }: PageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#07070a] text-white flex flex-col">
+    <div className="min-h-screen bg-[#000000] text-white flex flex-col">
       <Navigation />
       <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-10 sm:py-14 pt-20 sm:pt-24">
         <div className="mb-8 text-center">

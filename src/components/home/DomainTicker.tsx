@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 
 export type Testimonial = {
   quote: string;
@@ -21,10 +22,11 @@ export const DEFAULT_TESTIMONIALS: Testimonial[] = [
 
 /** Real human headshots — greyscale by default, full color / lift on hover */
 const HERO_AVATARS = [
-  // WebP preferred (smaller); same photos, no visual redesign
   { src: '/avatars/person-1.webp', alt: 'Privacy-conscious founder' },
   { src: '/avatars/person-2.webp', alt: 'Independent builder' },
   { src: '/avatars/person-3.webp', alt: 'Startup developer' },
+  { src: '/avatars/person-4.jpg', alt: 'Product designer' },
+  { src: '/avatars/person-5.jpg', alt: 'Agency founder' },
 ] as const;
 
 interface DomainTickerProps {
@@ -34,19 +36,33 @@ interface DomainTickerProps {
 }
 
 export const DomainTicker: React.FC<DomainTickerProps> = ({
-  items = DEFAULT_TESTIMONIALS,
+  items,
   className = '',
   intervalMs = 3600,
 }) => {
+  const { messages } = useLocale();
+  const slides = items ?? messages.ticker;
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [index, setIndex] = useState(0);
   const [phase, setPhase] = useState<'in' | 'out'>('in');
+  const [facesColor, setFacesColor] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    if (items.length < 2) return;
+    const onDown = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') return;
+      const root = document.querySelector('[data-domain-ticker]');
+      const inside = root && event.target instanceof Node && root.contains(event.target);
+      setFacesColor(Boolean(inside));
+    };
+    document.addEventListener('pointerdown', onDown);
+    return () => document.removeEventListener('pointerdown', onDown);
+  }, []);
+
+  useEffect(() => {
+    if (slides.length < 2) return;
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return;
     }
@@ -59,7 +75,7 @@ export const DomainTicker: React.FC<DomainTickerProps> = ({
       if (document.visibilityState !== 'visible' || !inView) return;
       setPhase('out');
       timeoutId = window.setTimeout(() => {
-        setIndex((i) => (i + 1) % items.length);
+        setIndex((i) => (i + 1) % slides.length);
         setPhase('in');
       }, 200);
     };
@@ -104,29 +120,32 @@ export const DomainTicker: React.FC<DomainTickerProps> = ({
       document.removeEventListener('visibilitychange', onVis);
       io?.disconnect();
     };
-  }, [items.length, intervalMs]);
+  }, [slides.length, intervalMs]);
 
   const isLight = mounted ? theme === 'light' : false;
-  const current = items[index] ?? items[0];
-  const longestQuote = useMemo(
-    () => items.reduce((a, b) => (a.quote.length >= b.quote.length ? a : b)).quote,
-    [items]
-  );
-
+  const current = slides[index] ?? slides[0];
   if (!current) return null;
+  const longest = slides.reduce((a, b) =>
+    `${a.quote}${a.role}`.length >= `${b.quote}${b.role}`.length ? a : b
+  );
 
   return (
     <div data-domain-ticker className={`flex justify-center w-full px-0 ${className}`}>
-      {/* Mobile: full-width strip. Desktop: compact centered pill (not stretched) */}
       <div
-        className={`group/ticker shine-border inline-flex items-center gap-2 sm:gap-2.5 rounded-xl sm:rounded-full pl-1.5 pr-2.5 sm:pl-3 sm:pr-4 py-1 sm:py-2 text-[10px] sm:text-[13px] w-full sm:w-auto sm:max-w-[min(100%,34rem)] ${
+        onPointerEnter={(event) => {
+          if (event.pointerType === 'mouse') setFacesColor(true);
+        }}
+        onPointerLeave={(event) => {
+          if (event.pointerType === 'mouse') setFacesColor(false);
+        }}
+        className={`group/ticker flex w-full max-w-full items-center gap-2 rounded-xl px-2.5 py-1.5 text-[12px] sm:w-fit sm:gap-2.5 sm:rounded-full sm:py-2 sm:pl-3 sm:pr-5 sm:text-[13px] ${
           isLight
-            ? 'bg-white border border-[#cfcfcf] text-ds-body shadow-sm shadow-slate-900/[0.05] sm:border-[#c0c0c0] sm:shadow-md sm:shadow-slate-900/[0.06]'
-            : 'bg-white/[0.04] border border-white/10 text-white/60 sm:border-white/16 sm:bg-white/[0.05] sm:shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_8px_24px_rgba(0,0,0,0.25)]'
+            ? 'bg-white border border-[#cfcfcf] text-ds-body shadow-sm shadow-slate-900/[0.05]'
+            : 'surface-premium border border-white/[0.08] text-[#a1a4a5]'
         }`}
       >
         <div
-          className="flex -space-x-1.5 sm:-space-x-2 shrink-0"
+          className="flex -space-x-1.5 shrink-0"
           role="img"
           aria-label="People using Domain Discovery"
         >
@@ -136,18 +155,18 @@ export const DomainTicker: React.FC<DomainTickerProps> = ({
               key={avatar.src}
               src={avatar.src}
               alt={avatar.alt}
-              width={28}
-              height={28}
-              tabIndex={0}
-              className={`h-5 w-5 sm:h-7 sm:w-7 rounded-full object-cover object-top ring-2 transition-all duration-300 ease-out cursor-pointer
-                grayscale contrast-[1.05] brightness-[0.9] opacity-75
-                group-hover/ticker:opacity-90
-                hover:grayscale-0 hover:brightness-110 hover:opacity-100 hover:scale-110 hover:z-20
-                focus-visible:grayscale-0 focus-visible:brightness-110 focus-visible:opacity-100 focus-visible:scale-110 focus-visible:z-20 focus-visible:outline-none focus-visible:ring-offset-1
+              width={24}
+              height={24}
+              className={`h-5 w-5 sm:h-7 sm:w-7 rounded-full object-cover object-top ring-2 transition-all duration-300 ease-out
+                ${
+                  facesColor
+                    ? 'grayscale-0 contrast-100 brightness-100 opacity-100'
+                    : 'grayscale contrast-[1.05] brightness-[0.9] opacity-80'
+                }
                 ${
                   isLight
                     ? 'ring-white bg-slate-200 shadow-sm hover:shadow-md focus-visible:ring-slate-400'
-                    : 'ring-[#0a0a0a] bg-white/10 hover:ring-white/50 focus-visible:ring-white/40'
+                    : 'ring-black bg-white/10 hover:ring-white/50 focus-visible:ring-white/40'
                 }`}
               style={{ zIndex: HERO_AVATARS.length - h }}
               loading="lazy"
@@ -163,43 +182,21 @@ export const DomainTicker: React.FC<DomainTickerProps> = ({
           ))}
         </div>
 
-        {/* Brand palette — desktop badge only */}
-        <span
-          className={`hidden sm:inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide border ${
-            isLight
-              ? 'bg-ds-soft text-ds-ink border-[#cfcfcf]'
-              : 'bg-white/[0.06] text-white/75 border-white/15'
-          }`}
-        >
-          <span
-            className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-500' : 'bg-white/70'}`}
-          />
-          Private
-        </span>
-
-        <div className="relative min-w-0 flex-1 sm:flex-none overflow-hidden">
-          {/* Width stabilizer — longest quote, capped so pill stays compact on desktop */}
-          <p
-            className="invisible whitespace-nowrap text-[10px] sm:text-[13px] leading-snug max-w-none sm:max-w-[22rem] truncate"
-            aria-hidden
-          >
-            “{longestQuote}” — Role
+        <div className="relative flex min-w-0 flex-1 items-center gap-2 sm:block sm:min-h-0">
+          <p className="invisible hidden leading-snug whitespace-nowrap sm:block" aria-hidden>
+            “{longest.quote}” — {longest.role}
           </p>
-          <div
-            className={`absolute inset-0 flex items-center transition-opacity duration-200 ${
+          <p
+            className={`min-w-0 flex-1 text-left text-[12px] leading-snug transition-opacity duration-200 sm:absolute sm:inset-0 sm:flex sm:items-center sm:justify-center sm:truncate sm:whitespace-nowrap sm:text-center sm:text-[13px] ${
               phase === 'in' ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <p className="truncate leading-snug text-[10px] sm:text-[13px] sm:max-w-[22rem]">
-              <span className="font-medium" style={{ color: 'var(--text-primary)' }}>
-                “{current.quote}”
-              </span>
-              <span style={{ color: isLight ? '#94a3b8' : 'rgba(255,255,255,0.4)' }}>
-                {' '}
-                — {current.role}
-              </span>
-            </p>
-          </div>
+            <span className="font-medium text-ds-ink">“{current.quote}”</span>
+            <span className="hidden text-ds-mute sm:inline"> — {current.role}</span>
+          </p>
+          <span className="flex shrink-0 gap-0.5 text-[10px] leading-none text-amber-300 sm:hidden" aria-label="5 stars">
+            ★★★★★
+          </span>
         </div>
       </div>
     </div>

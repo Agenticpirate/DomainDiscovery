@@ -49,8 +49,8 @@ export function EvervaultHover({
   const rootRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(-1000);
   const mouseY = useMotionValue(-1000);
-  const [active, setActive] = useState(false);
   const [randomString, setRandomString] = useState('');
+  const [lit, setLit] = useState(false);
   const lastRegenRef = useRef(0);
   const hoverRef = useRef(false);
   const targetRef = useRef({ x: 0, y: 0 });
@@ -112,12 +112,13 @@ export function EvervaultHover({
     let raf = 0;
     let running = true;
     let tabVisible = document.visibilityState === 'visible';
+    let inView = true;
     const t0 = performance.now();
     let lastFrame = 0;
 
     const tick = (now: number) => {
       if (!running) return;
-      if (!tabVisible) {
+      if (!tabVisible || !inView) {
         raf = 0;
         return;
       }
@@ -149,7 +150,7 @@ export function EvervaultHover({
 
     const onVis = () => {
       tabVisible = document.visibilityState === 'visible';
-      if (tabVisible && running && !raf) raf = requestAnimationFrame(tick);
+      if (tabVisible && inView && running && !raf) raf = requestAnimationFrame(tick);
     };
     document.addEventListener('visibilitychange', onVis);
 
@@ -160,11 +161,24 @@ export function EvervaultHover({
     });
     ro.observe(el);
 
+    const io =
+      typeof IntersectionObserver !== 'undefined'
+        ? new IntersectionObserver(
+            (entries) => {
+              inView = entries.some((e) => e.isIntersecting);
+              if (tabVisible && inView && running && !raf) raf = requestAnimationFrame(tick);
+            },
+            { rootMargin: '80px' }
+          )
+        : null;
+    io?.observe(el);
+
     return () => {
       running = false;
       cancelAnimationFrame(raf);
       document.removeEventListener('visibilitychange', onVis);
       ro.disconnect();
+      io?.disconnect();
     };
   }, [ambient, mouseX, mouseY]);
 
@@ -193,10 +207,8 @@ export function EvervaultHover({
     [ambient, mouseX, mouseY, regenChars]
   );
 
-  const maskImage = useMotionTemplate`radial-gradient(${radius}px circle at ${mouseX}px ${mouseY}px, white, transparent 70%)`;
+  const maskImage = useMotionTemplate`radial-gradient(${radius}px circle at ${mouseX}px ${mouseY}px, white, transparent 72%)`;
   const maskStyle = { maskImage, WebkitMaskImage: maskImage };
-
-  const idleOn = ambient || active;
 
   return (
     <div
@@ -207,7 +219,7 @@ export function EvervaultHover({
         if (ambient) {
           hoverRef.current = true;
         } else {
-          setActive(true);
+          setLit(true);
           regenChars();
         }
       }}
@@ -215,7 +227,7 @@ export function EvervaultHover({
         if (ambient) {
           hoverRef.current = false;
         } else {
-          setActive(false);
+          setLit(false);
           mouseX.set(-1000);
           mouseY.set(-1000);
         }
@@ -235,101 +247,40 @@ export function EvervaultHover({
           />
         ) : (
           <>
-            {/* Footer interactive: matrix + color spotlight */}
-            <div
-              className={cn(
-                'absolute inset-0 transition-opacity duration-700',
-                idleOn ? 'opacity-100' : 'opacity-30'
-              )}
-            >
-              <div
-                className={cn(
-                  'absolute inset-0 opacity-[0.07]',
-                  isLight ? 'text-slate-700' : 'text-white'
-                )}
-              >
-                <p className="absolute inset-0 break-words whitespace-pre-wrap font-mono text-[10px] leading-[1.15] font-bold tracking-tight sm:text-[11px]">
-                  {randomString}
-                </p>
-              </div>
+            {/* Quiet letters in every corner. The color only appears under the pointer. */}
+            <div className={cn('absolute inset-0', isLight ? 'text-slate-700' : 'text-white')}>
+              <p className="absolute -inset-8 break-words whitespace-pre-wrap font-mono text-[10px] font-bold leading-[1.15] tracking-tight opacity-[0.16] sm:text-[11px]">
+                {randomString}
+                {randomString}
+              </p>
             </div>
-
-            <div
-              className={cn(
-                'absolute inset-0 transition-opacity duration-500',
-                idleOn ? 'opacity-50' : 'opacity-0',
-                isLight
-                  ? '[mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]'
-                  : '[mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]'
-              )}
-            />
-
             <motion.div
               className={cn(
                 'absolute inset-0 transition-opacity duration-500',
-                idleOn ? 'opacity-100' : 'opacity-0',
+                lit ? 'opacity-100' : 'opacity-0',
                 isLight
-                  ? 'bg-gradient-to-r from-emerald-400/55 via-cyan-400/40 to-blue-500/50'
-                  : 'bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-700'
+                  ? 'bg-gradient-to-r from-emerald-400/40 via-cyan-400/28 to-blue-500/35'
+                  : 'bg-gradient-to-r from-emerald-400/50 via-cyan-500/35 to-blue-700/45'
               )}
               style={maskStyle}
             />
-
-            <motion.div
-              className={cn(
-                'absolute inset-0 transition-opacity duration-500',
-                idleOn ? 'opacity-90' : 'opacity-0',
-                isLight
-                  ? 'bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.35),transparent_70%)]'
-                  : 'bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.35),rgba(29,78,216,0.25)_45%,transparent_70%)]'
-              )}
-              style={maskStyle}
-            />
-
             <motion.div
               className={cn(
                 'absolute inset-0 mix-blend-overlay transition-opacity duration-500',
-                idleOn ? 'opacity-100' : 'opacity-0'
+                lit ? 'opacity-100' : 'opacity-0'
               )}
               style={maskStyle}
             >
               <p
                 className={cn(
-                  'absolute inset-0 h-full break-words whitespace-pre-wrap font-mono text-[10px] leading-[1.15] font-bold tracking-tight sm:text-[11px]',
-                  isLight ? 'text-slate-900/90' : 'text-white'
+                  'absolute -inset-8 break-words whitespace-pre-wrap font-mono text-[10px] font-bold leading-[1.15] tracking-tight sm:text-[11px]',
+                  isLight ? 'text-slate-900/80' : 'text-white'
                 )}
               >
                 {randomString}
+                {randomString}
               </p>
             </motion.div>
-
-            <motion.div
-              className={cn(
-                'absolute inset-0 transition-opacity duration-500',
-                idleOn ? 'opacity-100' : 'opacity-0'
-              )}
-              style={maskStyle}
-            >
-              <div
-                className={cn(
-                  'absolute inset-0',
-                  isLight
-                    ? 'bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0.08)_28%,transparent_55%)]'
-                    : 'bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.35)_22%,transparent_52%)]'
-                )}
-              />
-            </motion.div>
-
-            <motion.div
-              className={cn(
-                'absolute inset-0 blur-2xl transition-opacity duration-700',
-                idleOn ? 'opacity-40' : 'opacity-0',
-                isLight
-                  ? 'bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.25),transparent_50%)]'
-                  : 'bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.2),transparent_50%)]'
-              )}
-              style={maskStyle}
-            />
           </>
         )}
       </div>

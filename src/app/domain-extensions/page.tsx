@@ -9,10 +9,10 @@ import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { DomainExtensionsView } from '@/components/domain/DomainExtensionsView';
 import { ExtensionsGuideContent } from '@/components/domain/ExtensionsGuideContent';
-import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
-import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
-import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
-import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
+import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
+import { useLocale } from '@/components/i18n/LocaleProvider';
+import { pageHeading } from '@/lib/i18n/locales';
 import { useTheme } from '@/contexts/ThemeContext';
 
 /**
@@ -70,16 +70,11 @@ const PAGE_MOBILE_CSS = `
     font-size: 0.95rem !important;
   }
   .domain-extensions-page #extension-faqs .shine-border {
-    background-color: #0a0a0c !important;
-    background-image: none !important;
     transform: none !important;
     max-width: 100% !important;
     width: 100% !important;
     min-width: 0 !important;
     overflow: hidden !important;
-  }
-  html.light .domain-extensions-page #extension-faqs .shine-border {
-    background-color: #ffffff !important;
   }
 
   /* Guide / FAQ text — keep ambient dots off body copy on mobile */
@@ -185,7 +180,7 @@ const PAGE_MOBILE_CSS = `
   }
 }
 
-/* FAQ / definition — solid plates, no sheen shade, aligned to page content width */
+/* FAQ / definition — aligned to page content width */
 .domain-extensions-page #extension-faqs.section-shell {
   max-width: none !important;
   width: 100% !important;
@@ -194,33 +189,7 @@ const PAGE_MOBILE_CSS = `
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
-.domain-extensions-page #extension-faqs .shine-border,
-.domain-extensions-page [id^="seo-faqs-"] .shine-border,
-.domain-extensions-page [data-aeo-definition] .relative.isolate {
-  background-color: #0a0a0c !important;
-  background-image: none !important;
-  box-shadow: none !important;
-}
-.domain-extensions-page #extension-faqs .shine-border::before,
-.domain-extensions-page #extension-faqs .shine-border::after,
-.domain-extensions-page [id^="seo-faqs-"] .shine-border::before,
-.domain-extensions-page [id^="seo-faqs-"] .shine-border::after {
-  display: none !important;
-  content: none !important;
-  opacity: 0 !important;
-}
-.domain-extensions-page #extension-faqs .shine-border:hover,
-.domain-extensions-page #extension-faqs .shine-border:focus-within {
-  transform: none !important;
-}
-html.light .domain-extensions-page #extension-faqs .shine-border,
-html.light .domain-extensions-page [id^="seo-faqs-"] .shine-border,
-html.light .domain-extensions-page [data-aeo-definition] .relative.isolate {
-  background-color: #ffffff !important;
-  background-image: none !important;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
-}
-/* Title block matches card plate (no darker #050505 shade) */
+/* Title block matches card plate (no darker #000000 shade) */
 .domain-extensions-page #extension-faqs .section-title,
 .domain-extensions-page #extension-faqs .section-sub,
 .domain-extensions-page [id^="seo-faqs-"] .section-title,
@@ -230,17 +199,10 @@ html.light .domain-extensions-page [data-aeo-definition] .relative.isolate {
 }
 .domain-extensions-page #extension-faqs > div:first-child,
 .domain-extensions-page [id^="seo-faqs-"] > div:first-child {
-  background: #0a0a0c !important;
-  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   max-width: 100% !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
-}
-html.light .domain-extensions-page #extension-faqs > div:first-child,
-html.light .domain-extensions-page [id^="seo-faqs-"] > div:first-child {
-  background: #ffffff !important;
-  border-color: #e2e8f0;
 }
 /* Soften ambient field on this long page (less bubble density behind cards) */
 .domain-extensions-page [data-ambient-dots="single"] {
@@ -248,18 +210,26 @@ html.light .domain-extensions-page [id^="seo-faqs-"] > div:first-child {
 }
 `;
 
+function ExtensionsViewFromUrl({ guideSlot }: { guideSlot: React.ReactNode }) {
+  const searchParams = useSearchParams();
+  // Carry keyword from /search?q=… via Full catalog / TLDs tab
+  // DomainExtensionsView also reads ?q= and sessionStorage itself (belt + suspenders)
+  const seedQuery = (searchParams.get('q') || '').trim();
+  return (
+    <DomainExtensionsView key={seedQuery || 'browse'} searchQuery={seedQuery} guideSlot={guideSlot} />
+  );
+}
+
 function DomainExtensionsPageContent() {
   const { theme } = useTheme();
-  const searchParams = useSearchParams();
+  const { locale, messages, href } = useLocale();
+  const localized = locale !== 'en';
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => setMounted(true), []);
   const isLight = mounted ? theme === 'light' : false;
 
-  const solid = isLight ? '#ffffff' : '#0a0a0c';
-  // Carry keyword from /search?q=… via Full catalog / TLDs tab
-  // DomainExtensionsView also reads ?q= and sessionStorage itself (belt + suspenders)
-  const seedQuery = (searchParams.get('q') || '').trim();
+  const solid = isLight ? '#ffffff' : '#0a0a0a';
 
   return (
     <div
@@ -274,8 +244,8 @@ function DomainExtensionsPageContent() {
       <main className={PAGE_MAIN_CLASS}>
         <PageBreadcrumb
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Domain Extensions' },
+            { label: messages.nav.home, href: href('/') },
+            { label: messages.crumbs.extensions },
           ]}
         />
         <SectionAmbient intensity="soft" className="w-full max-w-full min-w-0" contentClassName="relative z-[1]">
@@ -314,35 +284,48 @@ function DomainExtensionsPageContent() {
                     className="bg-clip-text text-transparent"
                     style={{
                       backgroundImage: isLight
-                        ? 'linear-gradient(to right, #0f172a, #1e293b, #475569)'
+                        ? 'linear-gradient(to right, #141517, #2a2f31, #52595b)'
                         : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.55))',
                     }}
                   >
-                    Domain extensions list
+                    {localized ? pageHeading(messages.pages.extensions.title) : 'Domain extensions list'}
                   </span>
                 </h1>
 
                 {/* Mobile: one short line. Desktop: full copy. */}
+                {localized ? (
+                  <p
+                    className="text-[13px] sm:text-[16px] leading-relaxed max-w-xl mb-2"
+                    style={{ color: isLight ? '#52595b' : 'rgba(255,255,255,0.55)' }}
+                  >
+                    {messages.pages.extensions.description}
+                  </p>
+                ) : (
+                <>
                 <p
                   className="sm:hidden text-[11.5px] leading-snug mb-2"
-                  style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.55)' }}
+                  style={{ color: isLight ? '#52595b' : 'rgba(255,255,255,0.55)' }}
                 >
                   Check every TLD live — free, private, no account.
                 </p>
                 <p
                   className="hidden sm:block text-[16px] leading-relaxed max-w-xl mb-2"
-                  style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.55)' }}
+                  style={{ color: isLight ? '#52595b' : 'rgba(255,255,255,0.55)' }}
                 >
                   Search <strong className="font-bold" style={{ color: 'var(--text-primary)' }}>every</strong>{' '}
                   domain extension and check availability instantly. Compare prices, weigh renewals, and find the best
                   domain ending for your website — as you type.
                 </p>
+                </>
+                )}
+                {!localized && (
                 <p
                   className="hidden sm:block text-[13px] leading-relaxed max-w-xl"
                   style={{ color: 'var(--text-tertiary)' }}
                 >
                   Type a name below to check all 1,001 extensions at once. Free · Private · No account required.
                 </p>
+                )}
 
                 <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-2 sm:mt-3.5">
                   <a
@@ -409,25 +392,28 @@ function DomainExtensionsPageContent() {
               </div>
             </div>
 
-            <DomainExtensionsView
-              key={seedQuery || 'browse'}
-              searchQuery={seedQuery}
-              guideSlot={
-                <div id="how-to-choose" className="scroll-mt-24">
-                  <ExtensionsGuideContent />
-                </div>
-              }
-            />
+            {/* Only the URL-driven view waits for the client; the rest of the page prerenders */}
+            <Suspense fallback={<div className="min-h-screen" />}>
+              <ExtensionsViewFromUrl
+                guideSlot={
+                  locale === 'en' ? (
+                  <div id="how-to-choose" className="scroll-mt-24">
+                    <ExtensionsGuideContent />
+                  </div>
+                  ) : null
+                }
+              />
+            </Suspense>
           </div>
         </div>
 
         {/* SEO packs — solid strip so ambient dots stay out of definition + FAQ cards/text */}
         <div
           className="hidden sm:block relative z-[1]"
-          style={{ backgroundColor: isLight ? '#f8fafc' : '#050505' }}
+          style={{ backgroundColor: isLight ? '#f4f5f5' : '#000000' }}
         >
-          <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.extensions} compact />
-          <SeoGuidePack {...TOOL_GUIDE_PACKS.extensions} />
+          <LocalizedDefinition id="extensions" compact />
+          <LocalizedGuidePack pack="extensions" />
         </div>
         {/* Footer affiliate banner only — no stacked inline ad above it */}
         </SectionAmbient>
@@ -439,13 +425,5 @@ function DomainExtensionsPageContent() {
 }
 
 export default function DomainExtensionsPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-main)' }} />
-      }
-    >
-      <DomainExtensionsPageContent />
-    </Suspense>
-  );
+  return <DomainExtensionsPageContent />;
 }

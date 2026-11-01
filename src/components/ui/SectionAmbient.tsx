@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { DottedGlowBackground } from '@/components/ui/DottedGlowBackground';
 import { EvervaultHover } from '@/components/ui/EvervaultHover';
 import { cn } from '@/lib/utils';
 
@@ -58,44 +57,8 @@ export function SectionAmbient({
   const showDots = !nestedUnderAmbient && !disabled;
   const spotlightRadius = intensity === 'page' ? 96 : 88;
 
-  const dots = {
-    // Landing hero: brighter silver + sparkle; center still soft-cleared by mask
-    hero: {
-      gap: 17,
-      radius: 1.2,
-      opacity: isLight ? 0.22 : 0.38,
-      speedMin: 0.22,
-      speedMax: 0.62,
-      speedScale: 0.52,
-    },
-    page: {
-      gap: 16,
-      radius: 1.18,
-      opacity: isLight ? 0.22 : 0.34,
-      speedMin: 0.22,
-      speedMax: 0.58,
-      speedScale: 0.5,
-    },
-    soft: {
-      gap: 20,
-      radius: 0.95,
-      opacity: isLight ? 0.12 : 0.16,
-      speedMin: 0.18,
-      speedMax: 0.42,
-      speedScale: 0.4,
-    },
-    dots: {
-      gap: 17,
-      radius: 1.15,
-      opacity: isLight ? 0.18 : 0.28,
-      speedMin: 0.2,
-      speedMax: 0.52,
-      speedScale: 0.46,
-    },
-  }[intensity];
-
   const baseStyle: React.CSSProperties | undefined = useSolid
-    ? { backgroundColor: isLight ? undefined : '#050505' }
+    ? { backgroundColor: isLight ? undefined : '#000000' }
     : undefined;
 
   const vignette = isLight
@@ -119,18 +82,19 @@ export function SectionAmbient({
         style={{ background: vignette }}
       />
       {mounted && showDots && (
+        <div className="ambient-edge-fade pointer-events-none absolute inset-0 z-0" aria-hidden>
         <div
-          className="pointer-events-none absolute inset-0 z-0"
+          className="pointer-events-none absolute inset-0"
           aria-hidden
           data-ambient-dots="single"
           style={
             intensity === 'hero' || intensity === 'page'
-              ? // Landing + internal pages: clear under badge / title / copy / CTAs; dots in gutters
+              ? // Symmetric clear under centered copy; dots live in the side gutters
                 {
                   maskImage:
-                    'radial-gradient(ellipse 78% 76% at 50% 36%, transparent 0%, transparent 48%, rgba(0,0,0,0.35) 62%, rgba(0,0,0,0.8) 78%, black 92%)',
+                    'radial-gradient(ellipse 50% 70% at 50% 44%, transparent 0%, transparent 42%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.9) 76%, black 90%)',
                   WebkitMaskImage:
-                    'radial-gradient(ellipse 78% 76% at 50% 36%, transparent 0%, transparent 48%, rgba(0,0,0,0.35) 62%, rgba(0,0,0,0.8) 78%, black 92%)',
+                    'radial-gradient(ellipse 50% 70% at 50% 44%, transparent 0%, transparent 42%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.9) 76%, black 90%)',
                 }
               : intensity === 'dots' || intensity === 'soft'
                 ? // Mild center clear so mid-section copy stays readable
@@ -149,15 +113,19 @@ export function SectionAmbient({
           }
         >
           {/* Stable key — avoid remounting a second canvas on theme hydrate */}
-          <DottedGlowBackground
-            gap={dots.gap}
-            radius={dots.radius}
-            opacity={dots.opacity}
-            speedMin={dots.speedMin}
-            speedMax={dots.speedMax}
-            speedScale={dots.speedScale}
-            sparkle
+          <div
+            className={`absolute inset-0 ambient-dots ${
+              intensity === 'hero' ? 'ambient-dots-hero ambient-drift-soft' : 'ambient-breathe'
+            }`}
           />
+          {intensity === 'hero' && (
+            <div className="absolute inset-0 ambient-sweep ambient-sweep-hero">
+              <div className="ambient-sweep-band">
+                <div className="ambient-dots ambient-sweep-dots" />
+              </div>
+            </div>
+          )}
+        </div>
         </div>
       )}
     </>

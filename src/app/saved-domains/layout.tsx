@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Saved Domains — Local Folders & Shortlist',
   description:
-    'Organize domains into custom folders on this device. Shortlists stay in your browser only — download a CSV backup; we do not store them on our servers.',
+    'Organize domains into folders and category tags on this device. A name can carry several categories. Shortlists stay in your browser only.',
   alternates: { canonical: '/saved-domains' },
   robots: {
     index: false,

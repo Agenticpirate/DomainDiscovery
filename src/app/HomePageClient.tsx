@@ -2,48 +2,52 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/layout/Navigation';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { HeroSearch } from '@/components/home/HeroSearch';
-import { FadeIn } from '@/components/ui/motion';
-import { useTheme } from '@/contexts/ThemeContext';
+import { SearchCountPill } from '@/components/home/SearchCountPill';
+import { HomePageContent } from '@/components/home/HomePageContent';
+import { Footer } from '@/components/layout/Footer';
+import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 
-const HomePageContent = dynamic(
-  () => import('@/components/home/HomePageContent').then((m) => m.HomePageContent),
-  { ssr: true }
-);
-const Footer = dynamic(() => import('@/components/layout/Footer').then((m) => m.Footer), {
-  ssr: true,
-});
-const AffiliateAdRail = dynamic(
-  () => import('@/components/ads/AffiliateAdRail').then((m) => m.AffiliateAdRail),
-  { ssr: false }
-);
+const HERO_TRUST_ICONS: React.ReactNode[] = [
+  <>
+    <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z" />
+    <path d="M9 12l2 2 4-4" />
+  </>,
+  <>
+    <path d="M3 3l18 18" />
+    <path d="M10.6 5.1A9.8 9.8 0 0 1 12 5c6 0 9.5 7 9.5 7a17 17 0 0 1-2.6 3.4M6.3 6.3C3.9 8 2.5 12 2.5 12s3.5 7 9.5 7a9.5 9.5 0 0 0 5.7-1.8" />
+    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
+  </>,
+  <path d="M13 2L4.5 13.5H12L11 22l8.5-11.5H12L13 2z" />,
+  <>
+    <path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z" />
+    <circle cx="7.5" cy="7.5" r="1.2" />
+  </>,
+];
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false);
+  const { messages, href } = useLocale();
+  const hero = messages.hero;
   const [searchQuery, setSearchQuery] = useState('');
   const [showHeroAd, setShowHeroAd] = useState(false);
-  const { theme } = useTheme();
-  const isLight = mounted ? theme === 'light' : false;
   const router = useRouter();
 
   useEffect(() => {
-    setMounted(true);
-
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) {
         e.preventDefault();
-        router.push('/search');
+        router.push(href('/search'));
       }
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [router]);
+  }, [href, router]);
 
   // Defer hero ad until after first paint (LCP is the headline text)
   useEffect(() => {
@@ -63,13 +67,13 @@ export default function Home() {
     const normalized = query.trim();
     if (!normalized) return;
     setSearchQuery(normalized);
-    router.push(`/search?q=${encodeURIComponent(normalized)}`);
+    router.push(href(`/search?q=${encodeURIComponent(normalized)}`));
   };
 
   return (
     <div
       id="top"
-      className="min-h-screen overflow-x-hidden"
+      className="page-x-lock min-h-screen"
       style={{ backgroundColor: 'var(--bg-main)', color: 'var(--text-primary)' }}
     >
       <PageBackground variant="hero" />
@@ -81,79 +85,54 @@ export default function Home() {
             Mobile-only visual polish via max-sm: classes; sm+ layout unchanged. */}
         <SectionAmbient
           intensity="hero"
-          spotlight
-          contentClassName="px-3.5 sm:px-6 pt-3.5 max-sm:pt-5 sm:pt-12 md:pt-14 pb-3.5 max-sm:pb-5 sm:pb-10"
+          className="home-hero-ambient"
+          contentClassName="px-3.5 sm:px-6 pt-3 max-sm:pt-4 sm:pt-12 md:pt-14 pb-3 max-sm:pb-4 sm:pb-10"
         >
-          <div className="relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto text-center">
-            {/* Soft mobile-only glow behind title (desktop unchanged) */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute left-1/2 top-2 z-0 h-40 w-[18rem] -translate-x-1/2 rounded-full blur-3xl sm:hidden animate-ambient-drift"
-              style={{
-                background: isLight
-                  ? 'radial-gradient(ellipse, rgba(0,112,243,0.1) 0%, transparent 70%)'
-                  : 'radial-gradient(ellipse, rgba(255,255,255,0.1) 0%, transparent 70%)',
-              }}
-            />
-
-            <FadeIn delay={0.02}>
-            <div
-              className={`relative z-[1] inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 sm:px-3 sm:py-1.5 mb-2.5 max-sm:mb-3.5 sm:mb-5 text-[10px] max-sm:text-[10.5px] sm:text-[12px] font-semibold tracking-wide border ${
-                isLight
-                  ? 'bg-ds-soft text-ds-body border-ds-hairline shadow-sm'
-                  : 'text-white/70 border-white/12 max-sm:border-white/14'
-              }`}
-              style={isLight ? undefined : { backgroundColor: '#0a0a0a' }}
-            >
-              <span className="relative flex h-1.5 w-1.5">
-                <span
-                  className={`relative inline-flex rounded-full h-1.5 w-1.5 ${
-                    isLight ? 'bg-ds-link' : 'bg-white/80'
-                  }`}
-                />
-              </span>
-              <span className="sm:hidden">Free · Live · No account</span>
-              <span className="hidden sm:inline">
-                Free domain name search · Live availability · 1,600+ TLDs
-              </span>
+          <div className="home-hero-stage relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto text-center">
+            <div className="relative z-[1] mb-2.5 flex flex-wrap items-center justify-center gap-1 sm:mb-6 sm:gap-2">
+              <div className="hero-badge inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-full px-1.5 py-0.5 text-[9px] font-medium leading-none tracking-wide text-ds-body sm:gap-2 sm:px-3 sm:py-1.5 sm:text-[12px]">
+                <span className="relative flex h-1.5 w-1.5" aria-hidden>
+                  <span className="home-live-dot absolute inset-0 rounded-full bg-emerald-400" />
+                </span>
+                <span>
+                  <span className="text-ds-ink">{hero.live}</span> {hero.liveRest}
+                </span>
+              </div>
+              <SearchCountPill />
             </div>
-            </FadeIn>
 
-            <FadeIn delay={0.08}>
-            <h1 className="relative z-[1] text-[2.15rem] max-sm:text-[2.25rem] leading-[1.05] max-sm:leading-[1.04] sm:text-[3.65rem] md:text-[4.35rem] font-black tracking-[-0.035em] mb-1.5 max-sm:mb-2.5 sm:mb-3.5">
-              <span
-                className="block bg-clip-text text-transparent"
-                style={{
-                  backgroundImage: isLight
-                    ? 'linear-gradient(115deg, #171717 0%, #4d4d4d 60%, #0070f3 100%)'
-                    : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.55))',
-                }}
-              >
-                <span className="sm:hidden">Find your domain</span>
-                <span className="hidden sm:inline">Domain name search</span>
+            <h1 className="relative z-[1] text-[2.65rem] leading-[0.98] sm:text-[3.65rem] sm:leading-[1.02] md:text-[4.5rem] font-semibold tracking-[-0.045em] sm:tracking-[-0.05em] mb-3 sm:mb-4">
+              <span className="hero-ink hero-ink-live block pb-[0.06em]">
+                <span className="sm:hidden">{hero.h1Mobile}</span>
+                <span className="hidden sm:inline">{hero.h1Desktop}</span>
               </span>
-              <span
-                className="block text-[1.02rem] max-sm:text-[1.08rem] sm:text-[1.55rem] md:text-[1.95rem] mt-1 max-sm:mt-1.5 sm:mt-1.5 font-semibold tracking-tight text-ds-body"
-              >
-                <span className="sm:hidden">Live check across 1,600+ TLDs</span>
-                <span className="hidden sm:inline">Check availability in seconds</span>
+              <span className="block text-[1.35rem] sm:text-[1.5rem] md:text-[1.85rem] mt-1.5 sm:mt-2 font-medium tracking-[-0.02em] sm:tracking-[-0.025em] text-ds-body">
+                {hero.sub}
               </span>
             </h1>
-            </FadeIn>
 
-            <FadeIn delay={0.14}>
-            <p
-              className="hidden sm:block text-[15px] leading-relaxed max-w-[40rem] mx-auto mb-6 tracking-[-0.01em]"
-              style={{ color: 'var(--text-tertiary)' }}
-            >
-              Type a name and see live availability across 1,600+ extensions. Generate brandable ideas with AI,
-              build geo lists for local SEO, run bulk checks, look up WHOIS, and compare registrar prices — free,
-              no account required, shortlist saved on your device.
-            </p>
-            <p className="sm:hidden relative z-[1] text-[13px] leading-snug max-w-[20.5rem] mx-auto mb-4 text-ds-body">
-              Free domain search, AI names &amp; geo tools — no signup
-            </p>
-            </FadeIn>
+            <ul className="relative z-[1] mx-auto mb-3 grid w-full grid-cols-4 gap-1.5 text-[10px] font-medium leading-none text-ds-body sm:mb-8 sm:flex sm:max-w-none sm:flex-wrap sm:justify-center sm:gap-2.5 sm:text-[13px]">
+              {hero.trust.map((label, index) => (
+                <li
+                  key={label}
+                  className="hero-badge inline-flex min-w-0 items-center justify-center gap-1 whitespace-nowrap rounded-full px-1 py-1.5 sm:gap-1.5 sm:px-3 sm:py-1"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-2.5 w-2.5 shrink-0 text-ds-ink sm:h-3.5 sm:w-3.5"
+                    aria-hidden
+                  >
+                    {HERO_TRUST_ICONS[index]}
+                  </svg>
+                  {label}
+                </li>
+              ))}
+            </ul>
 
             {/*
               Search panel — solid bg on the shell (blocks ambient dots).
@@ -161,87 +140,108 @@ export default function Home() {
               .shine-border — globals force `.shine-border > * { position: relative }`,
               which turns absolute h-* layers into empty black boxes in flow (mobile bug).
             */}
-            <FadeIn delay={0.2}>
-            <div
-              className={`shine-border relative z-[2] isolate overflow-hidden rounded-2xl sm:rounded-2xl p-3 max-sm:p-2.5 sm:p-5 max-w-[40rem] sm:max-w-[50rem] mx-auto bg-ds-canvas border border-ds-hairline shadow-ds-card ${
-                isLight
-                  ? 'max-sm:shadow-ds-card-hover'
-                  : 'max-sm:shadow-[0_16px_44px_-14px_rgba(0,0,0,0.75)] sm:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.55)]'
-              }`}
-            >
-              <div className="relative">
+            <div className="relative z-[2] mx-auto w-full max-w-[40rem] sm:max-w-[44rem]">
+              <div className="hero-halo">
                 <HeroSearch
                   initialQuery={searchQuery}
                   onSearch={handleHeroSearch}
-                  popularSearches={['nova', 'pulse', 'studio', 'launch']}
                   embedded
                 />
+              </div>
 
-                {/* Mobile: equal full-width tool chips · Desktop: flex wrap unchanged */}
-                <div className="mt-2 max-sm:mt-2 sm:mt-3.5 grid grid-cols-2 gap-1.5 max-sm:gap-1.5 sm:gap-3 sm:max-w-none sm:flex sm:flex-wrap sm:items-center sm:justify-center">
+              <div className="mt-2.5 grid grid-cols-3 overflow-hidden rounded-2xl border border-white/[0.1] bg-[#0a0a0a] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:hidden [.light_&]:border-[#d7dbdc] [.light_&]:bg-white">
+                {[
+                  {
+                    href: href('/bulk-search'),
+                    title: messages.crumbs.bulk,
+                    hint: hero.bulkHint,
+                    icon: (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-4 w-4" aria-hidden>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l8 4-8 4-8-4 8-4zM4 12l8 4 8-4M4 16.5l8 4 8-4" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    href: href('/tools/geo'),
+                    title: messages.crumbs.geo,
+                    hint: hero.geoHint,
+                    icon: (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-4 w-4" aria-hidden>
+                        <circle cx="12" cy="12" r="8" />
+                        <path strokeLinecap="round" d="M4 12h16M12 4c2.2 2.4 3.3 5.2 3.3 8s-1.1 5.6-3.3 8c-2.2-2.4-3.3-5.2-3.3-8s1.1-5.6 3.3-8z" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    href: href('/tools/leads'),
+                    title: messages.crumbs.leads || 'Domain leads',
+                    hint: 'Track buyer prospects',
+                    icon: (
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-4 w-4" aria-hidden>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                      </svg>
+                    ),
+                  },
+                ].map((item, index) => (
                   <Link
-                    href="/bulk-search"
-                    className="cta-shine cta-shine-primary group/cta inline-flex items-center justify-center gap-1 max-sm:gap-1 sm:gap-1.5 rounded-xl max-sm:rounded-xl sm:rounded-full px-2.5 py-1.5 max-sm:py-1.5 sm:px-4 sm:py-2.5 text-[11px] max-sm:text-[11px] sm:text-[13px] font-semibold min-h-0 max-sm:min-h-[2.15rem] sm:min-h-0 bg-ds-ink text-ds-soft hover:brightness-110"
+                    key={item.href}
+                    href={item.href}
+                    className={`flex min-w-0 items-center gap-2 px-2.5 py-2.5 text-left ${
+                      index > 0 ? 'border-l border-white/[0.08] [.light_&]:border-[#e7e9ea]' : ''
+                    }`}
                   >
-                    <span className="cta-shine-sweep" aria-hidden />
-                    <svg className="w-3 h-3 max-sm:w-3 max-sm:h-3 sm:w-4 sm:h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                    </svg>
-                    <span className="sm:hidden">Bulk check</span>
-                    <span className="hidden sm:inline">Bulk Domain Search</span>
-                    <span
-                      className="text-[8px] max-sm:text-[8px] sm:text-[9px] font-bold px-1 max-sm:px-1 sm:px-1.5 py-0.5 rounded-full bg-ds-soft/20"
-                    >
-                      1K
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-[#111111] text-white/80 [.light_&]:border-[#e7e9ea] [.light_&]:bg-[#f4f5f5] [.light_&]:text-[#141517]">
+                      {item.icon}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-[12px] font-semibold leading-tight text-ds-ink">{item.title}</span>
+                      <span className="mt-0.5 block truncate text-[10px] leading-tight text-ds-mute">{item.hint}</span>
+                    </span>
+                    <span className="shrink-0 text-[14px] text-ds-mute" aria-hidden>
+                      ›
                     </span>
                   </Link>
+                ))}
+              </div>
+
+              <div className="mt-4 hidden justify-center sm:flex">
+                <div className="hero-badge inline-flex items-center rounded-full p-1">
                   <Link
-                    href="/tools/geo"
-                    className="cta-shine cta-shine-secondary group/cta inline-flex items-center justify-center gap-1 max-sm:gap-1 sm:gap-1.5 rounded-xl max-sm:rounded-xl sm:rounded-full px-2.5 py-1.5 max-sm:py-1.5 sm:px-4 sm:py-2.5 text-[11px] max-sm:text-[11px] sm:text-[13px] font-semibold min-h-0 max-sm:min-h-[2.15rem] sm:min-h-0 bg-ds-canvas text-ds-ink border border-ds-hairline hover:border-ds-strong hover:bg-ds-inset"
+                    href={href('/bulk-search')}
+                    className="group/link inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5]"
                   >
-                    <span className="cta-shine-sweep" aria-hidden />
-                    <svg className="w-3 h-3 max-sm:w-3 max-sm:h-3 sm:w-4 sm:h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="text-ds-body transition-colors group-hover/link:text-ds-ink" aria-hidden>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l9 4.5-9 4.5-9-4.5L12 3zM3 12l9 4.5 9-4.5M3 16.5L12 21l9-4.5" />
                     </svg>
-                    <span className="sm:hidden">Geo domains</span>
-                    <span className="hidden sm:inline">Geo Domains</span>
+                    {messages.crumbs.bulk}
+                  </Link>
+                  <span className="mx-0.5 h-4 w-px bg-ds-hairline" aria-hidden />
+                  <Link
+                    href={href('/tools/geo')}
+                    className="group/link inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5]"
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="text-ds-body transition-colors group-hover/link:text-ds-ink" aria-hidden>
+                      <circle cx="12" cy="12" r="9" />
+                      <path strokeLinecap="round" d="M3 12h18M12 3c2.5 2.6 3.75 5.6 3.75 9S14.5 18.4 12 21c-2.5-2.6-3.75-5.6-3.75-9S9.5 5.6 12 3z" />
+                    </svg>
+                    {messages.crumbs.geo}
+                  </Link>
+                  <span className="mx-0.5 h-4 w-px bg-ds-hairline" aria-hidden />
+                  <Link
+                    href={href('/tools/leads')}
+                    className="group/link inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5]"
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="text-ds-body transition-colors group-hover/link:text-ds-ink" aria-hidden>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                    </svg>
+                    {messages.crumbs.leads || 'Domain leads'}
                   </Link>
                 </div>
-
-                {/* Mobile trust chips — desktop keeps its longer row */}
-                <div className="sm:hidden mt-2.5 flex flex-wrap items-center justify-center gap-1.5">
-                  {[
-                    { label: 'Live results', live: true },
-                    { label: 'No signup' },
-                    { label: '1,600+ TLDs' },
-                  ].map((item) => (
-                    <span
-                      key={item.label}
-                      className="inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold border-ds-hairline bg-ds-soft text-ds-body"
-                    >
-                      {item.live ? (
-                        <span className="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden />
-                      ) : null}
-                      {item.label}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Desktop trust row under CTAs */}
-                <p className="hidden sm:flex items-center justify-center gap-2 mt-3.5 text-[12px] font-medium tracking-tight text-ds-mute">
-                  <span>Live availability</span>
-                  <span className="opacity-40">·</span>
-                  <span>Price comparison</span>
-                  <span className="opacity-40">·</span>
-                  <span>No account required</span>
-                </p>
               </div>
             </div>
-            </FadeIn>
           </div>
         </SectionAmbient>
 
-        {/* Hero strip — smaller section width; full banner art (no crop) */}
         {showHeroAd && (
           <div className="pt-1.5 max-sm:pt-2 pb-2 max-sm:pb-2.5 sm:pt-2.5 sm:pb-3 page-gutter w-full">
             <AffiliateAdRail

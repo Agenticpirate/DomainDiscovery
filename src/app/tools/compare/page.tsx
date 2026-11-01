@@ -5,10 +5,11 @@ import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { PriceComparison } from '@/components/domain/PriceComparison';
-import { SeoGuidePack } from '@/components/seo/SeoGuidePack';
-import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
-import { TOOL_GUIDE_PACKS } from '@/components/seo/toolGuidePacks';
-import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
+import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
+import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
+import { getMessages } from '@/lib/i18n';
+import { localeHref } from '@/lib/i18n/locales';
+import { getRequestLocale } from '@/lib/i18n/request';
 import {
   getTldMatrixRowsPreview,
   getTldPriceDatasetMeta,
@@ -20,7 +21,9 @@ import { ComparePageClientChrome } from './ComparePageClientChrome';
  * Server Component — heavy 6MB price JSON never enters the client bundle.
  * First paint ships only a priority matrix preview (~80 TLDs); full matrix loads async.
  */
-export default function ComparePage() {
+export default async function ComparePage() {
+  const locale = await getRequestLocale();
+  const messages = getMessages(locale);
   const matrixPreview = getTldMatrixRowsPreview(80);
   const meta = getTldPriceDatasetMeta();
   const initialDetail = getTldPriceDetailSlim('.com');
@@ -37,8 +40,8 @@ export default function ComparePage() {
       <main className={`${PAGE_MAIN_CLASS} pb-10 sm:pb-14`}>
         <PageBreadcrumb
           items={[
-            { label: 'Tools', href: '/tools/keyword' },
-            { label: 'Price Comparison' },
+            { label: messages.nav.tools, href: localeHref(locale, '/') },
+            { label: messages.crumbs.compare },
           ]}
         />
 
@@ -59,11 +62,12 @@ export default function ComparePage() {
           />
         </section>
 
-        <CompareHowItWorks />
+        {locale === 'en' && <CompareHowItWorks />}
 
-        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.compare} compact />
-        <SeoGuidePack {...TOOL_GUIDE_PACKS.compare} />
+        <LocalizedDefinition id="compare" compact />
+        <LocalizedGuidePack pack="compare" />
 
+        {locale === 'en' && (
         <section className="mt-6 sm:mt-10 max-w-3xl mx-auto px-4 text-center text-[12px] sm:text-sm opacity-60">
           <p>
             Prefer to check availability first?{' '}
@@ -76,6 +80,7 @@ export default function ComparePage() {
             </Link>
           </p>
         </section>
+        )}
       </main>
 
       <Footer />
@@ -130,7 +135,7 @@ function CompareHowItWorks() {
           </h2>
           <p
             className="max-w-xl mx-auto text-[11px] sm:text-[15px] leading-snug sm:leading-relaxed px-1"
-            style={{ color: 'var(--text-secondary, #94a3b8)' }}
+            style={{ color: 'var(--text-secondary, #a1a4a5)' }}
           >
             <span className="sm:hidden">Regular list prices — so renewals never surprise you.</span>
             <span className="hidden sm:inline">
@@ -143,7 +148,7 @@ function CompareHowItWorks() {
           {steps.map((item) => (
             <div
               key={item.step}
-              className="rounded-xl border border-white/10 bg-[var(--bg-elevated,#0c0c0e)] p-3 sm:p-5"
+              className="surface-premium rounded-xl border border-white/[0.08] [.light_&]:border-[#d7dbdc] p-3 sm:p-5"
             >
               <div className="text-[10px] font-black tabular-nums opacity-40 mb-1">{item.step}</div>
               <h3 className="text-sm sm:text-base font-bold mb-1">{item.title}</h3>

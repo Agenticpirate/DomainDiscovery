@@ -7,6 +7,7 @@ import {
 } from '@/lib/affiliateAds';
 import { useTheme } from '@/contexts/ThemeContext';
 import { isLabAutomation, scheduleIdle } from '@/lib/perfRuntime';
+import { SpaceshipMark } from '@/components/ads/CrispAffiliateStrip';
 
 function ssGet(key: string): string | null {
   try {
@@ -43,7 +44,6 @@ export function AffiliateInterstitial() {
   const [open, setOpen] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState<number>(INTERSTITIAL_CONFIG.dismissWaitSec);
   const [clickedAd, setClickedAd] = useState(false);
-  const [imgSrc, setImgSrc] = useState(creative.localSrc);
 
   const impressionFired = useRef(false);
   const completedRef = useRef(false);
@@ -204,13 +204,13 @@ export function AffiliateInterstitial() {
       aria-labelledby="aff-interstitial-title"
       aria-describedby="aff-interstitial-desc"
     >
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-md" aria-hidden />
+      <div className="aff-interstitial-backdrop absolute inset-0 bg-black/80 backdrop-blur-md" aria-hidden />
 
       <div
-        className={`relative z-[1] w-full max-w-[min(26rem,100%)] sm:max-w-[28rem] overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl ${
+        className={`aff-interstitial-panel relative z-[1] w-full max-w-[min(26rem,100%)] sm:max-w-[28rem] overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl ${
           isLight
             ? 'bg-white border border-slate-200'
-            : 'bg-[#0a0a0c] border border-white/12'
+            : 'bg-[#0a0a0a] border border-white/12'
         }`}
       >
         <div className="px-4 pt-4 pb-2 sm:px-5 sm:pt-5 text-center">
@@ -253,25 +253,25 @@ export function AffiliateInterstitial() {
             className={`group relative flex justify-center rounded-xl overflow-hidden border transition focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 ${
               isLight
                 ? 'border-slate-200 bg-slate-50 hover:border-slate-300'
-                : 'border-white/10 bg-black/40 hover:border-white/20'
+                : 'border-white/10 bg-black hover:border-white/20'
             }`}
             aria-label={`${creative.alt} (sponsored — opens in new tab)`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={imgSrc}
-              alt={creative.alt}
-              width={creative.width}
-              height={creative.height}
-              className="block w-full h-auto max-h-[min(52vh,420px)] object-contain"
-              onError={() => {
-                if (imgSrc.endsWith('.webp')) {
-                  setImgSrc(creative.localSrc.replace(/\.webp$/i, '.png'));
-                } else if (creative.displayAdCdn && imgSrc !== creative.displayAdCdn) {
-                  setImgSrc(creative.displayAdCdn);
-                }
-              }}
-            />
+            <span className="aff-interstitial-card relative block w-full overflow-hidden px-5 pb-5 pt-6 sm:px-6 sm:pb-6 sm:pt-7 text-left">
+              <span className="aff-interstitial-sheen" aria-hidden />
+              <span className="relative z-[1] block text-[clamp(26px,4.4vw,34px)] font-semibold leading-[1.12] tracking-[-0.03em] text-white [text-rendering:geometricPrecision]">
+                Want to manage your domain easier, cheaper?
+                <br />
+                You&apos;re closer than you think
+              </span>
+              <span className="aff-interstitial-pill relative z-[1] mt-6 inline-flex items-center rounded-full bg-white px-4 py-2 text-[14px] font-semibold text-[#2563eb]">
+                Register now
+              </span>
+              <span className="relative z-[1] mt-10 flex items-center gap-2 text-white">
+                <SpaceshipMark className="h-7 w-7" />
+                <span className="text-[20px] font-semibold tracking-[-0.03em]">spaceship</span>
+              </span>
+            </span>
           </a>
         </div>
 
@@ -290,7 +290,7 @@ export function AffiliateInterstitial() {
             }`}
           >
             {creative.ctaLabel}
-            <svg className="w-4 h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+            <svg className="aff-interstitial-arrow w-4 h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </a>
@@ -348,7 +348,7 @@ export function AffiliateInterstitial() {
                   : 'bg-white/10 text-white hover:bg-white/15 border border-white/15'
                 : isLight
                   ? 'bg-slate-50 text-slate-300 border border-slate-100 cursor-not-allowed'
-                  : 'bg-white/[0.04] text-white/25 border border-white/[0.06] cursor-not-allowed'
+                  : 'bg-[#111111] text-white/25 border border-white/[0.06] cursor-not-allowed'
             }`}
           >
             {canDismiss ? 'Continue to DomainDiscovery' : `Continue available in ${secondsLeft}s`}
@@ -362,6 +362,7 @@ export function AffiliateInterstitial() {
           width={0}
           alt=""
           src={creative.impressionPixel}
+          fetchPriority="low"
           style={{ position: 'absolute', visibility: 'hidden', width: 0, height: 0, border: 0 }}
           aria-hidden
         />

@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next';
 import { getTldAboutSlugs } from '@/lib/tldAboutData';
 import { getLearnSlugs } from '@/lib/learnArticles';
 import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
+import { absoluteLocaleUrl, languageAlternates } from '@/lib/i18n/metadata';
+import { INDEXABLE_LOCALE_PATHS, LOCALES } from '@/lib/i18n/locales';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getSiteBaseUrl();
@@ -57,12 +59,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/ai.txt', priority: 0.5, changeFrequency: 'monthly' as const },
     { path: '/feed.xml', priority: 0.55, changeFrequency: 'daily' as const },
     { path: '/opensearch.xml', priority: 0.4, changeFrequency: 'monthly' as const },
-  ].map(({ path, priority, changeFrequency }) => ({
-    url: `${baseUrl}${path}`,
-    lastModified,
-    changeFrequency,
-    priority,
-  }));
+  ].map(({ path, priority, changeFrequency }) => {
+    const bare = path === '' ? '/' : path;
+    const indexable = (INDEXABLE_LOCALE_PATHS as readonly string[]).includes(bare);
+    return {
+      url: `${baseUrl}${path}`,
+      lastModified,
+      changeFrequency,
+      priority,
+      ...(indexable ? { alternates: { languages: languageAlternates(bare) } } : {}),
+    };
+  });
+
+  const localizedRoutes = INDEXABLE_LOCALE_PATHS.flatMap((path) => {
+    const english = coreRoutes.find((route) => route.url === (path === '/' ? baseUrl : `${baseUrl}${path}`));
+    return LOCALES.filter((locale) => locale.id !== 'en').map((locale) => ({
+      url: absoluteLocaleUrl(locale.id, path),
+      lastModified,
+      changeFrequency: english?.changeFrequency ?? ('weekly' as const),
+      priority: english?.priority ?? 0.8,
+      alternates: { languages: languageAlternates(path) },
+    }));
+  });
 
   const learnRoutes = getLearnSlugs().flatMap((slug) => [
     {
@@ -86,5 +104,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  return [...coreRoutes, ...learnRoutes, ...tldAboutRoutes];
+  return [...coreRoutes, ...localizedRoutes, ...learnRoutes, ...tldAboutRoutes];
 }

@@ -7,8 +7,8 @@ import { SolidPlate } from '@/components/ui/SolidPlate';
 export function AgentIntegrationSection({ isLight }: { isLight: boolean }) {
   const title = isLight ? 'text-slate-900' : 'text-white';
   const muted = isLight ? 'text-slate-500' : 'text-white/55';
-  const fill = isLight ? '#ffffff' : '#0a0a0c';
-  const insetFill = isLight ? '#f8fafc' : '#121214';
+  const fill = isLight ? '#ffffff' : '#0a0a0a';
+  const insetFill = isLight ? '#f4f5f5' : '#111111';
   const origin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5001';
 
   return (

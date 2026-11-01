@@ -171,7 +171,7 @@ export function SearchInterface({
         {query && (
           <button
             onClick={handleClear}
-            className="absolute right-8 sm:right-11 top-1/2 -translate-y-1/2 p-1 transition-colors"
+            className="absolute right-1 sm:right-10 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-xl transition-colors"
             style={{ color: 'var(--text-muted)' }}
             aria-label="Clear search"
           >
@@ -192,7 +192,7 @@ export function SearchInterface({
         )}
 
         {isLoading && (
-          <div className="absolute right-2.5 sm:right-3 top-1/2 -translate-y-1/2">
+          <div className="absolute right-14 sm:right-3 top-1/2 -translate-y-1/2">
             <div className="w-3.5 h-3.5 border-2 rounded-full animate-spin" style={{
               borderColor: 'var(--input-border)',
               borderTopColor: 'var(--text-primary)'

@@ -19,12 +19,12 @@ export const Badge: React.FC<BadgeProps> = ({
 
   // Solid fills so ambient dots never show through badges
   const variants = {
-    default: 'bg-[#121214] text-white border border-white/20',
+    default: 'bg-[#111111] text-white border border-white/20',
     success: 'bg-emerald-950 text-emerald-300 border border-emerald-500/30',
     error: 'bg-rose-950 text-rose-300 border border-rose-500/30',
     warning: 'bg-amber-950 text-amber-200 border border-amber-500/30',
     info: 'bg-sky-950 text-sky-300 border border-sky-500/30',
-    neutral: 'bg-[#121214] text-white/55 border border-white/12',
+    neutral: 'bg-[#111111] text-white/55 border border-white/12',
   };
 
   const sizes = {

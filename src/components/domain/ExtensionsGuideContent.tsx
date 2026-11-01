@@ -314,24 +314,24 @@ export const ExtensionsGuideContent: React.FC = () => {
   // Solid plates so ambient dots only show in page gutters — never through text/cards
   const panel = isLight
     ? 'bg-white border border-slate-200 shadow-sm shadow-slate-900/[0.03]'
-    : 'bg-[#0a0a0c] border border-white/10';
+    : 'bg-[#0a0a0a] border border-white/10';
 
   const chip = isLight
     ? 'bg-slate-50 border border-slate-200 text-slate-700'
-    : 'bg-[#121214] border border-white/10 text-white/75';
+    : 'bg-[#111111] border border-white/10 text-white/75';
 
   const priceRows = showAllPrices ? PRICE_TABLE : PRICE_TABLE.slice(0, 8);
 
   return (
     <div className="ext-guide mt-5 sm:mt-14 space-y-5 sm:space-y-14 w-full min-w-0 max-w-full">
       {/* —— How to choose —— */}
-      <section className="border-t pt-5 sm:pt-12" style={{ borderColor: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)' }}>
+      <section className="border-t pt-5 sm:pt-12" style={{ borderColor: isLight ? '#d7dbdc' : 'rgba(255,255,255,0.08)' }}>
         <div className="text-center max-w-2xl mx-auto mb-3 sm:mb-7">
           <p
             className={`inline-flex text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mb-1.5 sm:mb-2 px-2 py-0.5 rounded-full border ${
               isLight ? 'border-slate-200 bg-white text-slate-500' : 'border-white/10 text-white/45'
             }`}
-            style={isLight ? undefined : { backgroundColor: '#0a0a0c' }}
+            style={isLight ? undefined : { backgroundColor: '#0a0a0a' }}
           >
             Guides & education
           </p>
@@ -367,7 +367,7 @@ export const ExtensionsGuideContent: React.FC = () => {
                         : 'bg-white text-black border-white'
                       : isLight
                         ? 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-                        : 'bg-[#121214] text-white/55 border-white/10 hover:border-white/20'
+                        : 'bg-[#111111] text-white/55 border-white/10 hover:border-white/20'
                   }`}
                 >
                   {tab}
@@ -413,7 +413,7 @@ export const ExtensionsGuideContent: React.FC = () => {
                   </span>
                   <div
                     className="flex-1 min-w-0 h-1.5 rounded-full overflow-hidden"
-                    style={{ background: isLight ? '#e2e8f0' : 'rgba(255,255,255,0.08)' }}
+                    style={{ background: isLight ? '#d7dbdc' : 'rgba(255,255,255,0.08)' }}
                   >
                     <div
                       className={`h-full rounded-full ${isLight ? 'bg-slate-800' : 'bg-white/80'}`}
@@ -613,7 +613,7 @@ export const ExtensionsGuideContent: React.FC = () => {
               className={`shine-border font-mono text-[11px] sm:text-[13px] font-black px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg sm:rounded-xl border transition-all ${
                 isLight
                   ? 'bg-slate-50 border-slate-200 text-slate-900 hover:bg-white'
-                  : 'bg-[#0c0c0e] border-white/10 text-white hover:bg-[#121214]'
+                  : 'bg-[#0a0a0a] border-white/10 text-white hover:bg-[#111111]'
               }`}
             >
               {tld}
@@ -661,7 +661,7 @@ export const ExtensionsGuideContent: React.FC = () => {
                     className={`font-mono text-[11px] font-bold px-2 py-1 rounded-lg transition-colors ${
                       isLight
                         ? 'bg-slate-100 text-slate-800 hover:bg-slate-200'
-                        : 'bg-[#121214] text-white/80 hover:bg-[#16161a]'
+                        : 'bg-[#111111] text-white/80 hover:bg-[#171717]'
                     }`}
                   >
                     {tld}
@@ -718,7 +718,7 @@ export const ExtensionsGuideContent: React.FC = () => {
                   <span
                     key={ex}
                     className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${
-                      isLight ? 'bg-slate-50 text-slate-500' : 'bg-[#121214] text-white/40'
+                      isLight ? 'bg-slate-50 text-slate-500' : 'bg-[#111111] text-white/40'
                     }`}
                   >
                     {ex}
@@ -852,7 +852,7 @@ export const ExtensionsGuideContent: React.FC = () => {
             className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-[12px] font-semibold border ${
               isLight
                 ? 'bg-white text-slate-800 border-slate-200'
-                : 'bg-[#121214] text-white border-white/15'
+                : 'bg-[#111111] text-white border-white/15'
             }`}
           >
             <span className="sm:hidden">AI Generator</span>
@@ -863,7 +863,7 @@ export const ExtensionsGuideContent: React.FC = () => {
             className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-[12px] font-semibold border ${
               isLight
                 ? 'bg-white text-slate-800 border-slate-200'
-                : 'bg-[#121214] text-white border-white/15'
+                : 'bg-[#111111] text-white border-white/15'
             }`}
           >
             Price Compare
@@ -889,7 +889,7 @@ export const ExtensionsGuideContent: React.FC = () => {
             <div
               key={r.name}
               className={`flex items-center gap-2 rounded-lg px-2.5 py-2 border min-w-0 ${
-                isLight ? 'bg-slate-50 border-slate-100' : 'bg-[#121214] border-white/[0.06]'
+                isLight ? 'bg-slate-50 border-slate-100' : 'bg-[#111111] border-white/[0.06]'
               }`}
             >
               <div className="min-w-0 flex-1 text-[12px] font-bold truncate">{r.name}</div>
@@ -908,7 +908,7 @@ export const ExtensionsGuideContent: React.FC = () => {
             <div
               key={r.name}
               className={`rounded-xl px-3 py-2.5 text-center border min-w-0 ${
-                isLight ? 'bg-slate-50 border-slate-100' : 'bg-[#121214] border-white/[0.06]'
+                isLight ? 'bg-slate-50 border-slate-100' : 'bg-[#111111] border-white/[0.06]'
               }`}
             >
               <div className="text-[12px] font-bold truncate">{r.name}</div>
@@ -943,7 +943,7 @@ export const ExtensionsGuideContent: React.FC = () => {
       {/* —— Bottom CTA —— */}
       <section
         className={`ext-guide-cta shine-border rounded-xl sm:rounded-2xl p-4 sm:p-7 text-center ${
-          isLight ? 'bg-white border border-slate-200 shadow-sm' : 'bg-[#0c0c0e] border border-white/10'
+          isLight ? 'bg-white border border-slate-200 shadow-sm' : 'bg-[#0a0a0a] border border-white/10'
         }`}
       >
         <h2 className="text-[0.95rem] sm:text-xl font-black mb-1 sm:mb-1.5">Ready to find your perfect domain ending?</h2>

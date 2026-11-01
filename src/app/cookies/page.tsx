@@ -1,36 +1,27 @@
 import type { Metadata } from 'next';
-import { LegalDocumentPage } from '@/components/layout/LegalDocumentPage';
-import {
-  DD_CONTACT,
-  LEGAL_EFFECTIVE,
-  LEGAL_LAST_UPDATED,
-  ddCookieSections,
-} from '@/lib/legal/domainDiscoveryLegal';
+import { LocalizedCookiesPage } from '@/components/legal/LocalizedCookiesPage';
+import { getRequestLocale } from '@/lib/i18n/request';
+import { getCookieCopy } from '@/lib/i18n/legal/cookies';
+import { languageAlternates } from '@/lib/i18n/metadata';
+import { localeHref } from '@/lib/i18n/locales';
 
-export const metadata: Metadata = {
-  title: 'Cookie Policy',
-  description:
-    'How DomainDiscovery uses cookies, localStorage, and similar technologies for preferences, shortlists, security, and optional analytics.',
-  alternates: { canonical: '/cookies' },
-  robots: { index: true, follow: true },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const copy = getCookieCopy(locale);
+  const path = '/cookies';
+  return {
+    title: copy?.title ?? 'Cookie Policy',
+    description:
+      copy?.metaDescription ??
+      'How DomainDiscovery uses cookies, localStorage, and similar technologies for preferences, shortlists, security, and optional analytics.',
+    alternates: {
+      canonical: localeHref(locale, path),
+      languages: languageAlternates(path),
+    },
+    robots: { index: true, follow: true },
+  };
+}
 
 export default function CookiesPage() {
-  return (
-    <LegalDocumentPage
-      brandName={DD_CONTACT.brand}
-      title="Cookie Policy"
-      description="Details on cookies and local browser storage used by DomainDiscovery, and how you can control them."
-      lastUpdated={LEGAL_LAST_UPDATED}
-      effectiveDate={LEGAL_EFFECTIVE}
-      contactEmail={DD_CONTACT.support}
-      sections={ddCookieSections}
-      relatedLinks={[
-        { label: 'Privacy Policy', href: '/privacy' },
-        { label: 'Terms of Use', href: '/terms' },
-        { label: 'Disclaimer', href: '/disclaimer' },
-      ]}
-      cta={{ href: '/privacy', label: 'Read Privacy Policy' }}
-    />
-  );
+  return <LocalizedCookiesPage />;
 }

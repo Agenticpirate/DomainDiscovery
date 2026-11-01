@@ -2,12 +2,14 @@
 
 import React, { useEffect, useId, useRef, useState } from 'react';
 import {
+  adSrcSet,
   getAdForPlacement,
   getDefaultVariant,
   type AffiliateAdCreative,
   type AffiliateAdPlacement,
 } from '@/lib/affiliateAds';
 import { useTheme } from '@/contexts/ThemeContext';
+import { CrispAffiliateStrip, isCrispStrip } from '@/components/ads/CrispAffiliateStrip';
 
 export type AffiliateAdBannerProps = {
   placement: AffiliateAdPlacement;
@@ -41,6 +43,7 @@ export function AffiliateAdBanner({
   const [imgSrc, setImgSrc] = useState(creative.localSrc);
   const pixelId = `imp-${creative.id}-${placement}-${reactId.replace(/:/g, '')}`;
   const pngFallback = creative.localSrc.replace(/\.webp$/i, '.png');
+  const srcSet = imgSrc === creative.localSrc ? adSrcSet(imgSrc) : undefined;
 
   useEffect(() => setMounted(true), []);
 
@@ -115,6 +118,7 @@ export function AffiliateAdBanner({
       width={0}
       alt=""
       src={creative.impressionPixel}
+      fetchPriority="low"
       style={{ position: 'absolute', visibility: 'hidden', width: 0, height: 0, border: 0 }}
       aria-hidden
     />
@@ -143,6 +147,8 @@ export function AffiliateAdBanner({
               alt={creative.alt}
               width={160}
               height={600}
+              srcSet={srcSet}
+              sizes="160px"
               loading="lazy"
               decoding="async"
               className="block h-[600px] w-[160px] max-h-[70vh] object-cover object-center"
@@ -174,6 +180,7 @@ export function AffiliateAdBanner({
               alt={creative.alt}
               width={creative.width}
               height={creative.height}
+              srcSet={srcSet}
               loading="lazy"
               decoding="async"
               fetchPriority="low"
@@ -192,22 +199,21 @@ export function AffiliateAdBanner({
     );
   }
 
-  // strip / card / leaderboard — full art, capped near native width so it stays sharp
-  // 668px native → display up to ~720–800px (slight retina scale only)
-  const maxDisplayPx = Math.round(creative.width * 1.15);
+  const crisp = isCrispStrip(creative);
 
   return (
     <div ref={rootRef} className={`relative w-full flex justify-center ${visibility}`}>
       {trackedAnchor(
-        <span
-          className="relative block w-full overflow-hidden rounded-2xl shadow-[0_14px_44px_-20px_rgba(0,0,0,0.55)] transition-transform active:scale-[0.997]"
-          style={{ maxWidth: maxDisplayPx }}
-        >
+        <span className="relative block w-full overflow-hidden rounded-2xl shadow-[0_14px_44px_-20px_rgba(0,0,0,0.55)] transition-transform active:scale-[0.997]">
           {sponsoredBadge}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {crisp ? (
+            <CrispAffiliateStrip creative={creative} />
+          ) : (
+          /* eslint-disable-next-line @next/next/no-img-element */
           <img
             src={imgSrc}
             alt={creative.alt}
+            srcSet={srcSet}
             width={creative.width}
             height={creative.height}
             loading="lazy"
@@ -218,12 +224,13 @@ export function AffiliateAdBanner({
               aspectRatio: `${creative.width} / ${creative.height}`,
               imageRendering: 'auto',
             }}
-            sizes={`${maxDisplayPx}px`}
+            sizes="100vw"
             onError={() => {
               if (imgSrc.endsWith('.webp')) setImgSrc(pngFallback);
               else if (creative.displayAdCdn) setImgSrc(creative.displayAdCdn);
             }}
           />
+          )}
         </span>,
         'w-full max-w-full flex justify-center'
       )}

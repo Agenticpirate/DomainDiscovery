@@ -8,8 +8,8 @@ export const ds = {
   /** Page shell */
   page: 'bg-ds-soft text-ds-ink',
   /** Elevated white/dark card */
-  card: 'bg-ds-canvas border border-ds-hairline rounded-ds-xl shadow-ds-card',
-  cardHover: 'bg-ds-canvas border border-ds-hairline rounded-ds-xl shadow-ds-card hover:shadow-ds-card-hover hover:border-ds-strong transition-shadow',
+  card: 'surface-premium border border-[var(--card-border)] rounded-ds-xl shadow-ds-card',
+  cardHover: 'surface-premium border border-[var(--card-border)] rounded-ds-xl shadow-ds-card hover:shadow-ds-card-hover hover:border-ds-strong hover:bg-[var(--card-bg-hover)] transition-shadow',
   /** Soft inset tray */
   inset: 'bg-ds-soft border border-ds-hairline rounded-ds-lg',
   insetDeep: 'bg-ds-inset border border-ds-hairline rounded-ds-lg',
@@ -43,5 +43,5 @@ export const ds = {
     'inline-flex items-center gap-1.5 rounded-full border border-ds-hairline bg-ds-soft text-ds-body text-[10px] sm:text-[11px] font-semibold tracking-wide px-2.5 py-1 shadow-sm',
   /** Ink polarity badge (dark plate) */
   badgeInk:
-    'inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#0a0a0c] text-white/85 text-[10px] sm:text-[11px] font-semibold tracking-wide px-2.5 py-1 shadow-sm',
+    'inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-[#0a0a0a] text-white/85 text-[10px] sm:text-[11px] font-semibold tracking-wide px-2.5 py-1 shadow-sm',
 } as const;

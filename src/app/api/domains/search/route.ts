@@ -4,18 +4,19 @@ import { checkDomainsWithGoDaddy } from '@/lib/godaddyAPI';
 import { checkDomainAvailabilityViaMCP } from '@/lib/instantDomainMCP';
 import { getSearchRateLimiter, getClientIP, rateLimitResponse } from '@/lib/rateLimiter';
 import { errorResponse, isValidQuery, jsonResponse, corsPreflightResponse } from '@/lib/apiHelpers';
+import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
+import { checkDnsAvailability, type DnsAvailability } from '@/lib/dnsAvailability';
 
 const DEFAULT_TLDS = ['.com', '.net', '.org', '.ai', '.io', '.co'];
 const MAX_SEARCH_TLDS = 320;
-const DNS_TIMEOUT_MS = 700;
-const DNS_CONCURRENCY = 60;
+const DNS_CONCURRENCY = 40;
 const DNS_CACHE_TTL_MS = 10 * 60 * 1000;
 const PREMIUM_ENRICHMENT_LIMIT = 30;
 const EXACT_DOMAIN_PATTERN = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/i;
 const ENABLE_MCP_SEARCH = process.env.ENABLE_MCP_SEARCH === 'true';
 const ENABLE_PREMIUM_ENRICHMENT = process.env.ENABLE_PREMIUM_ENRICHMENT === 'true';
 
-const dnsCache = new Map<string, { available: boolean; timestamp: number }>();
+const dnsCache = new Map<string, { state: Exclude<DnsAvailability, 'unknown'>; timestamp: number }>();
 
 function normalizeSearchTlds(tlds: unknown): string[] {
   if (!Array.isArray(tlds)) return DEFAULT_TLDS;
@@ -36,18 +37,18 @@ function normalizeSearchTlds(tlds: unknown): string[] {
   return normalized.length > 0 ? normalized : DEFAULT_TLDS;
 }
 
-function cacheGet(domain: string): boolean | undefined {
+function cacheGet(domain: string): Exclude<DnsAvailability, 'unknown'> | undefined {
   const entry = dnsCache.get(domain);
   if (!entry) return undefined;
   if (Date.now() - entry.timestamp > DNS_CACHE_TTL_MS) {
     dnsCache.delete(domain);
     return undefined;
   }
-  return entry.available;
+  return entry.state;
 }
 
-function cacheSet(domain: string, available: boolean) {
-  dnsCache.set(domain, { available, timestamp: Date.now() });
+function cacheSet(domain: string, state: Exclude<DnsAvailability, 'unknown'>) {
+  dnsCache.set(domain, { state, timestamp: Date.now() });
 }
 
 function isExactDomainQuery(value: string): boolean {
@@ -96,6 +97,19 @@ export async function OPTIONS(request: NextRequest) {
   return corsPreflightResponse(request);
 }
 
+export async function GET(request: NextRequest) {
+  const ip = getClientIP(request);
+  const rl = getSearchRateLimiter().check(ip);
+  if (!rl.allowed) return rateLimitResponse(rl);
+
+  const url = new URL(request.url);
+  const query = url.searchParams.get('q') || url.searchParams.get('query');
+  const tldParam = url.searchParams.get('tlds');
+  const tlds = tldParam ? tldParam.split(',') : undefined;
+
+  return handleSearch(query, tlds, request, rl);
+}
+
 export async function POST(request: NextRequest) {
   const ip = getClientIP(request);
   const rl = getSearchRateLimiter().check(ip);
@@ -103,8 +117,19 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { query, tlds } = body;
+    return handleSearch(body.query, body.tlds, request, rl);
+  } catch {
+    return errorResponse('Invalid JSON body', 400);
+  }
+}
 
+async function handleSearch(
+  query: string | null | undefined,
+  tlds: unknown,
+  request: NextRequest,
+  rl: { remaining: number }
+) {
+  try {
     if (!query || !isValidQuery(query)) {
       return errorResponse('Invalid or missing query parameter', 400);
     }
@@ -114,7 +139,7 @@ export async function POST(request: NextRequest) {
     const exactDomainQuery = isExactDomainQuery(cleanQuery);
 
     // Try MCP first (only on small TLD requests), then fill missing via DNS fallback.
-    const mcpByDomain = new Map<string, { domain: string; available: boolean; price?: string; premium: boolean }>();
+    const mcpByDomain = new Map<string, { domain: string; available: boolean; checked: boolean; price?: string; premium: boolean }>();
     const shouldUseMCP = ENABLE_MCP_SEARCH && !exactDomainQuery && searchTlds.length <= 60;
 
     if (shouldUseMCP) {
@@ -127,6 +152,7 @@ export async function POST(request: NextRequest) {
           mcpByDomain.set(domain, {
             domain,
             available: !!r.available,
+            checked: true,
             price: r.price,
             premium: !!r.premium,
           });
@@ -139,15 +165,22 @@ export async function POST(request: NextRequest) {
 
     const allDomains = exactDomainQuery ? [cleanQuery] : searchTlds.map((tld: string) => `${cleanQuery}${tld}`);
     const missingDomains = allDomains.filter((domain) => !mcpByDomain.has(domain));
-    const dnsByDomain = new Map<string, { domain: string; available: boolean; tld: string; price: string; premium: boolean }>();
+    const dnsByDomain = new Map<string, { domain: string; available: boolean; checked: boolean; tld: string; price: string; premium: boolean }>();
 
     // DNS fallback for all missing domains so result count matches requested TLD count.
     const resolvedMissing = await mapWithConcurrency(missingDomains, DNS_CONCURRENCY, async (domain: string) => {
       const tldPart = '.' + domain.split('.').slice(1).join('.');
       const cached = cacheGet(domain);
-      const available = cached !== undefined ? cached : await checkViaDNS(domain);
-      if (cached === undefined) cacheSet(domain, available);
-      return { domain, available, tld: tldPart.replace('.', ''), price: getPriceForTLD(tldPart), premium: false };
+      const state = cached ?? (await checkDnsAvailability(domain));
+      if (!cached && state !== 'unknown') cacheSet(domain, state);
+      return {
+        domain,
+        available: state === 'available',
+        checked: state !== 'unknown',
+        tld: tldPart.replace('.', ''),
+        price: getPriceForTLD(tldPart),
+        premium: false,
+      };
     });
 
     resolvedMissing.forEach((result) => {
@@ -161,15 +194,17 @@ export async function POST(request: NextRequest) {
         return {
           domain,
           available: fromMcp.available,
+          checked: true,
           tld: tldPart.replace('.', ''),
           price: fromMcp.price || getPriceForTLD(tldPart),
           premium: fromMcp.premium,
         };
       }
-      return (
+        return (
         dnsByDomain.get(domain) || {
           domain,
           available: false,
+          checked: false,
           tld: domain.split('.').slice(1).join('.'),
           price: getPriceForTLD('.' + domain.split('.').slice(1).join('.')),
           premium: false,
@@ -178,7 +213,7 @@ export async function POST(request: NextRequest) {
     });
 
     const premiumCandidates = orderedResults
-      .filter((item) => !item.available)
+      .filter((item) => item.checked !== false && !item.available)
       .map((item) => item.domain)
       .slice(0, PREMIUM_ENRICHMENT_LIMIT);
 
@@ -236,30 +271,18 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const resp = jsonResponse(orderedResults, request, 30);
+    const withAffiliate = orderedResults.map((item) => ({
+      ...item,
+      buyUrl: getSpaceshipAffiliateUrl(item.domain),
+    }));
+
+    const resp = jsonResponse(withAffiliate, request, 30);
     resp.headers.set('X-RateLimit-Remaining', String(rl.remaining));
     return resp;
   } catch (error) {
     console.error('Domain search error:', error);
     return errorResponse('Search failed. Please try again.', 500);
   }
-}
-
-async function checkViaDNS(domain: string): Promise<boolean> {
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), DNS_TIMEOUT_MS);
-    const response = await fetch(
-      `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=A`,
-      { signal: controller.signal, headers: { Accept: 'application/dns-json' } }
-    );
-    clearTimeout(timeout);
-    if (response.ok) {
-      const data = await response.json();
-      return data.Status === 3;
-    }
-  } catch { /* safe default */ }
-  return false;
 }
 
 function getPriceForTLD(tld: string): string {

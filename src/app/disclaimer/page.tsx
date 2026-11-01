@@ -1,36 +1,27 @@
 import type { Metadata } from 'next';
-import { LegalDocumentPage } from '@/components/layout/LegalDocumentPage';
-import {
-  DD_CONTACT,
-  LEGAL_EFFECTIVE,
-  LEGAL_LAST_UPDATED,
-  ddDisclaimerSections,
-} from '@/lib/legal/domainDiscoveryLegal';
+import { LocalizedDisclaimerPage } from '@/components/legal/LocalizedDisclaimerPage';
+import { getRequestLocale } from '@/lib/i18n/request';
+import { disclaimerCopy } from '@/lib/i18n/legal/disclaimer';
+import { languageAlternates } from '@/lib/i18n/metadata';
+import { localeHref } from '@/lib/i18n/locales';
 
-export const metadata: Metadata = {
-  title: 'Disclaimer',
-  description:
-    'DomainDiscovery research disclaimer: not a registrar, no guarantee of availability or pricing, not trademark or legal advice.',
-  alternates: { canonical: '/disclaimer' },
-  robots: { index: true, follow: true },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  const copy = disclaimerCopy(locale);
+  const path = '/disclaimer';
+  return {
+    title: copy?.title ?? 'Disclaimer',
+    description:
+      copy?.metaDescription ??
+      'DomainDiscovery research disclaimer: not a registrar, no guarantee of availability or pricing, not trademark or legal advice.',
+    alternates: {
+      canonical: localeHref(locale, path),
+      languages: languageAlternates(path),
+    },
+    robots: { index: true, follow: true },
+  };
+}
 
 export default function DisclaimerPage() {
-  return (
-    <LegalDocumentPage
-      brandName={DD_CONTACT.brand}
-      title="Disclaimer"
-      description="Important limits on DomainDiscovery as a free research toolkit—not a registrar and not legal advice."
-      lastUpdated={LEGAL_LAST_UPDATED}
-      effectiveDate={LEGAL_EFFECTIVE}
-      contactEmail={DD_CONTACT.support}
-      sections={ddDisclaimerSections}
-      relatedLinks={[
-        { label: 'Terms of Use', href: '/terms' },
-        { label: 'Privacy Policy', href: '/privacy' },
-        { label: 'Cookie Policy', href: '/cookies' },
-      ]}
-      cta={{ href: '/terms', label: 'Read full Terms' }}
-    />
-  );
+  return <LocalizedDisclaimerPage />;
 }

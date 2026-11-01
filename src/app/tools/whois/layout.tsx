@@ -1,18 +1,19 @@
-import type { Metadata } from 'next';
 import { ToolPageJsonLd } from '@/components/seo/JsonLd';
-import { buildToolMetadata } from '@/lib/seoSiteFacts';
+import { buildLocalizedToolMetadata } from '@/lib/i18n/metadata';
 
 const title = 'WHOIS Lookup — Free RDAP Domain Ownership Check';
 const description =
   'Free WHOIS / RDAP lookup: registration dates, registrar, name servers, and ownership signals. Research domains before you buy or brand.';
 const path = '/tools/whois';
 
-export const metadata: Metadata = buildToolMetadata({
+export function generateMetadata() {
+  return buildLocalizedToolMetadata({
   title,
   description,
   path,
   keywords: ['WHOIS lookup', 'RDAP lookup', 'domain ownership', 'domain registration data'],
 });
+}
 
 export default function WhoisLayout({ children }: { children: React.ReactNode }) {
   return (

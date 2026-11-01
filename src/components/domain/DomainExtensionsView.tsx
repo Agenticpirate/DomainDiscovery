@@ -12,6 +12,7 @@ import {
   readCatalogSeed,
 } from '@/lib/catalogHandoff';
 import { resolveRegisterUrl } from '@/lib/registrars';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 
 interface Extension {
   tld: string;
@@ -126,6 +127,7 @@ const checkDomainsAvailability = async (
 };
 
 export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExtensionsViewProps) {
+  const { href } = useLocale();
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const searchParams = useSearchParams();
@@ -396,8 +398,8 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
 
   const hasLiveResults = extensions.some((e) => e.available !== null);
 
-  const plate = isLight ? '#ffffff' : '#0a0a0c';
-  const plateInset = isLight ? '#f8fafc' : '#121214';
+  const plate = isLight ? '#ffffff' : '#0a0a0a';
+  const plateInset = isLight ? '#f4f5f5' : '#111111';
 
   /** Compact preview sits directly under filters, always before Guides / education */
   const resultsPreview = (
@@ -465,7 +467,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
             )}
             {isNameSearch && cleanKeyword && (
               <Link
-                href={`/search?q=${encodeURIComponent(cleanKeyword)}`}
+                href={href(`/search?q=${encodeURIComponent(cleanKeyword)}`)}
                 className={`text-[10px] sm:text-[12px] font-bold ${
                   isLight ? 'text-slate-900' : 'text-white/85'
                 }`}
@@ -559,7 +561,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                       ? 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
                       : 'text-white/70 border-white/12 hover:border-white/25'
                   }`}
-                  style={isLight ? undefined : { backgroundColor: '#121214' }}
+                  style={isLight ? undefined : { backgroundColor: '#111111' }}
                 >
                   Show all {filteredExtensions.length}
                 </button>
@@ -576,7 +578,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                       ? 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
                       : 'text-white/70 border-white/12 hover:border-white/25'
                   }`}
-                  style={isLight ? undefined : { backgroundColor: '#121214' }}
+                  style={isLight ? undefined : { backgroundColor: '#111111' }}
                 >
                   Show less
                 </button>
@@ -685,7 +687,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                 onChange={(e) => setLocalSearch(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && cleanKeyword) {
-                    window.location.href = `/search?q=${encodeURIComponent(cleanKeyword)}`;
+                    window.location.href = href(`/search?q=${encodeURIComponent(cleanKeyword)}`);
                   }
                 }}
                 placeholder={`Brand name · checks ${totalTlds.toLocaleString()} TLDs`}
@@ -747,7 +749,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
           {/* Filters toolbar — one row: primary segments + more select + status */}
           <div
             className={`flex flex-col gap-2 rounded-2xl border p-1.5 sm:p-2 ${
-              isLight ? 'border-slate-200/90 bg-white/60' : 'border-white/[0.08] bg-white/[0.02]'
+              isLight ? 'border-slate-200/90 bg-white/60' : 'border-white/[0.08] bg-[#0a0a0a]'
             }`}
           >
             <div className="flex items-center gap-2 min-w-0">
@@ -1011,6 +1013,7 @@ interface ExtensionCardProps {
 
 function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCardProps) {
   const { theme } = useTheme();
+  const { href } = useLocale();
   const isLight = theme === 'light';
 
   const cleanKeyword = searchQuery.toLowerCase().replace(/\s+/g, '').replace(/^\./, '');
@@ -1027,15 +1030,15 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
         'noopener,noreferrer'
       );
     } else if (extension.premium) {
-      // Premium / aftermarket → GoDaddy listing source
+      // Premium / aftermarket → Spaceship affiliate
       window.open(
-        resolveRegisterUrl(fullDomain, 'GoDaddy', null, { premium: true }),
+        resolveRegisterUrl(fullDomain, 'Spaceship', null, { premium: true }),
         '_blank',
         'noopener,noreferrer'
       );
     } else if (extension.available === false) {
       // Taken: open full search so user can check aftermarket / alternatives for that name
-      window.location.href = `/search?q=${encodeURIComponent(cleanKeyword)}`;
+      window.location.href = href(`/search?q=${encodeURIComponent(cleanKeyword)}`);
     }
   };
 
@@ -1089,12 +1092,12 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
       } ${cardBorder} ${
         isLight ? `shadow-sm shadow-slate-900/[0.03] ${cardHover}` : cardHover
       }`}
-      style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+      style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
     >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-[inherit] z-0"
-        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0c' }}
+        style={{ backgroundColor: isLight ? '#ffffff' : '#0a0a0a' }}
       />
       <div className="relative z-[1] flex flex-col flex-1">
       <div className="flex items-start justify-between gap-1.5 mb-1">

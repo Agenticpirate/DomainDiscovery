@@ -20,7 +20,7 @@ export const GeneratorContent: React.FC = () => {
       icon: <Icons.Layers />,
       question: 'How does the DomainDiscovery generator work?',
       answer:
-        'Your keyword expands with 3,000+ prefixes and suffixes, semantic maps, and brand morphs — up to 5,000 unique .com ideas. Availability streams in progressive batches while you browse.',
+        'Your keyword is joined with 5,500+ ranked words on either side — up to 11,000 names, shown immediately. Live availability checks the rows you are looking at.',
     },
     {
       icon: <Icons.Sparkles />,
@@ -121,7 +121,7 @@ export const GeneratorContent: React.FC = () => {
     {
       title: 'Thousands of ideas',
       description:
-        'Type one keyword and expand it into up to 5,000 brandable .com combinations — prefixes, suffixes, morphs, and compounds.',
+        'Type one keyword and join it with 5,500+ words — prefixes, suffixes, morphs, and compounds — up to 11,000 .com ideas.',
       stat: '5K',
       statLabel: 'ideas / keyword',
       icon: <Icons.Sparkles />,
@@ -145,7 +145,7 @@ export const GeneratorContent: React.FC = () => {
     {
       title: 'Massive keyword library',
       description:
-        '3,000+ prefixes and suffixes drawn from top domain naming patterns (my, online, hub, network, jobs, buddy…).',
+        '5,500+ words drawn from common domain modifiers (national, matrix, online, hub, network, jobs…).',
       stat: '3K+',
       statLabel: 'affixes',
       icon: <Icons.Layers />,
@@ -168,7 +168,7 @@ export const GeneratorContent: React.FC = () => {
           </h2>
           <p
             className="text-[13px] sm:text-[15px] max-w-2xl mx-auto leading-relaxed"
-            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+            style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
           >
             A faster way to invent brandable names: one keyword becomes thousands of ideas, ranked by meaning,
             with live availability so you only chase domains you can buy.
@@ -179,7 +179,7 @@ export const GeneratorContent: React.FC = () => {
           className={`shine-border relative overflow-hidden rounded-2xl border p-5 sm:p-7 mb-3 sm:mb-4 ${
             isLight
               ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.03]'
-              : 'bg-white/[0.03] border-white/10'
+              : 'bg-[#0a0a0a] border-white/10'
           }`}
         >
           <div
@@ -193,7 +193,7 @@ export const GeneratorContent: React.FC = () => {
             <div className="lg:col-span-7 space-y-3.5 sm:space-y-4">
               <p
                 className="text-[13px] sm:text-[15px] leading-relaxed"
-                style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.65)' }}
+                style={{ color: isLight ? '#52595b' : 'rgba(255,255,255,0.65)' }}
               >
                 Instead of brainstorming and checking names one by one, the generator expands your keyword into
                 creative, brandable .com suggestions — prefixes, suffixes, morphs, and compounds — so founders,
@@ -201,7 +201,7 @@ export const GeneratorContent: React.FC = () => {
               </p>
               <p
                 className="text-[13px] sm:text-[15px] leading-relaxed"
-                style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.65)' }}
+                style={{ color: isLight ? '#52595b' : 'rgba(255,255,255,0.65)' }}
               >
                 What sets it apart is{' '}
                 <span className={`font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>
@@ -212,10 +212,10 @@ export const GeneratorContent: React.FC = () => {
               </p>
               <p
                 className="text-[13px] sm:text-[15px] leading-relaxed"
-                style={{ color: isLight ? '#475569' : 'rgba(255,255,255,0.65)' }}
+                style={{ color: isLight ? '#52595b' : 'rgba(255,255,255,0.65)' }}
               >
-                Every idea is checked live against registrar data. Spot a winner, open your preferred registrar,
-                and register before someone else does.
+                Every idea is checked live against registrar data. Spot a winner and use Go to register it on
+                Spaceship.
               </p>
             </div>
 
@@ -242,7 +242,7 @@ export const GeneratorContent: React.FC = () => {
                   className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 sm:py-3 ${
                     isLight
                       ? 'bg-slate-50/80 border-slate-200'
-                      : 'bg-black/40 border-white/[0.08]'
+                      : 'bg-black border-white/[0.08]'
                   }`}
                 >
                   <div
@@ -300,7 +300,7 @@ export const GeneratorContent: React.FC = () => {
               className={`rounded-xl border px-3.5 py-3 sm:px-4 sm:py-3.5 ${
                 isLight
                   ? 'bg-white border-slate-200'
-                  : 'bg-white/[0.02] border-white/[0.08]'
+                  : 'bg-[#0a0a0a] border-white/[0.08]'
               }`}
             >
               <div
@@ -312,7 +312,7 @@ export const GeneratorContent: React.FC = () => {
               </div>
               <p
                 className="text-[11px] sm:text-[12px] leading-relaxed"
-                style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.45)' }}
+                style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.45)' }}
               >
                 {card.text}
               </p>
@@ -335,7 +335,7 @@ export const GeneratorContent: React.FC = () => {
           </h2>
           <p
             className="text-[13px] sm:text-[14px] max-w-xl mx-auto leading-relaxed"
-            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+            style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
           >
             One keyword. Thousands of brandable names. Live availability. Sort, filter, and register when you find the one.
           </p>
@@ -348,8 +348,8 @@ export const GeneratorContent: React.FC = () => {
           }`}
         >
           {[
-            { value: '3,000+', label: 'Prefixes & suffixes' },
-            { value: '5,000', label: 'Ideas per keyword' },
+            { value: '5,500+', label: 'Ranked words' },
+            { value: '11,000', label: 'Ideas per keyword' },
             { value: 'Live', label: '.com availability' },
             { value: '8', label: 'Registrar options' },
           ].map((s) => (
@@ -377,7 +377,7 @@ export const GeneratorContent: React.FC = () => {
               className={`shine-border group relative rounded-2xl border p-4 sm:p-5 transition-all duration-300 ${
                 isLight
                   ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.03] hover:border-slate-300 hover:shadow-md'
-                  : 'bg-white/[0.03] border-white/10 hover:border-white/18 hover:bg-white/[0.05]'
+                  : 'bg-[#0a0a0a] border-white/10 hover:border-white/18 hover:bg-white/[0.05]'
               }`}
             >
               <div className="flex items-start gap-3 sm:gap-3.5">
@@ -413,7 +413,7 @@ export const GeneratorContent: React.FC = () => {
                   </div>
                   <p
                     className="text-[12px] sm:text-[13px] leading-relaxed"
-                    style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+                    style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
                   >
                     {benefit.description}
                   </p>
@@ -438,7 +438,7 @@ export const GeneratorContent: React.FC = () => {
           </h2>
           <p
             className="text-[13px] sm:text-[14px] max-w-lg mx-auto leading-relaxed"
-            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+            style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
           >
             Six rules that separate forgettable names from brandable ones you can own with confidence.
           </p>
@@ -455,7 +455,7 @@ export const GeneratorContent: React.FC = () => {
               className={`group flex flex-col p-4 sm:p-5 transition-colors duration-200 ${
                 isLight
                   ? 'bg-white hover:bg-slate-50'
-                  : 'bg-[#0c0c0e] hover:bg-[#121214]'
+                  : 'bg-[#0a0a0a] hover:bg-[#111111]'
               }`}
             >
               <div className="flex items-center justify-between gap-2 mb-3.5">
@@ -486,7 +486,7 @@ export const GeneratorContent: React.FC = () => {
               </h3>
               <p
                 className="text-[12px] sm:text-[12.5px] leading-relaxed flex-1"
-                style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}
+                style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.48)' }}
               >
                 {tip.description}
               </p>
@@ -499,7 +499,7 @@ export const GeneratorContent: React.FC = () => {
                       className={`inline-flex items-center rounded-md border px-2 py-0.5 text-[10px] font-semibold tracking-wide ${
                         isLight
                           ? 'bg-slate-50 text-slate-600 border-slate-200'
-                          : 'bg-white/[0.04] text-white/50 border-white/[0.08]'
+                          : 'bg-[#111111] text-white/50 border-white/[0.08]'
                       }`}
                     >
                       {tag}
@@ -526,7 +526,7 @@ export const GeneratorContent: React.FC = () => {
           </h2>
           <p
             className="text-[13px] sm:text-[14px] max-w-lg mx-auto leading-relaxed"
-            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+            style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
           >
             From keyword to registration in four clean steps — no account, no clutter.
           </p>
@@ -545,7 +545,7 @@ export const GeneratorContent: React.FC = () => {
               step: '02',
               title: 'Expand variations',
               description:
-                'We pair it with 3,000+ prefixes & suffixes, semantic maps, and brand morphs — up to 5,000 ideas.',
+                'We join it with 5,500+ ranked words on either side — up to 11,000 ideas, shown immediately.',
               meta: '3K+ affixes',
             },
             {
@@ -559,7 +559,7 @@ export const GeneratorContent: React.FC = () => {
               step: '04',
               title: 'Register & go',
               description:
-                'Continue on available names via GoDaddy, Spaceship, Namecheap, Porkbun, Atom, and more.',
+                'Go on an available name opens Spaceship so you can register it.',
               meta: '8 registrars',
             },
           ].map((item) => (
@@ -568,7 +568,7 @@ export const GeneratorContent: React.FC = () => {
               className={`shine-border group rounded-2xl border p-4 sm:p-5 transition-[border-color,background-color,box-shadow] duration-300 ${
                 isLight
                   ? 'bg-white border-slate-200 shadow-sm shadow-slate-900/[0.03] hover:border-slate-300 hover:shadow-md'
-                  : 'bg-white/[0.03] border-white/10 hover:border-white/16 hover:bg-white/[0.05]'
+                  : 'bg-[#0a0a0a] border-white/10 hover:border-white/16 hover:bg-white/[0.05]'
               }`}
             >
               <div className="flex items-center justify-between gap-2 mb-3">
@@ -585,7 +585,7 @@ export const GeneratorContent: React.FC = () => {
                   className={`inline-flex rounded-full px-2 py-0.5 text-[9px] sm:text-[10px] font-bold border ${
                     isLight
                       ? 'bg-slate-50 text-slate-500 border-slate-200'
-                      : 'bg-white/[0.04] text-white/40 border-white/10'
+                      : 'bg-[#111111] text-white/40 border-white/10'
                   }`}
                 >
                   {item.meta}
@@ -601,7 +601,7 @@ export const GeneratorContent: React.FC = () => {
               </h3>
               <p
                 className="text-[12px] sm:text-[12.5px] leading-relaxed"
-                style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.48)' }}
+                style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.48)' }}
               >
                 {item.description}
               </p>
@@ -633,7 +633,7 @@ export const GeneratorContent: React.FC = () => {
           </h2>
           <p
             className="text-[12px] sm:text-[14px] max-w-md mx-auto leading-relaxed"
-            style={{ color: isLight ? '#64748b' : 'rgba(255,255,255,0.5)' }}
+            style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
           >
             One tap seeds the generator — prefixes, suffixes, and live .com checks start immediately.
           </p>
@@ -677,7 +677,7 @@ export const GeneratorContent: React.FC = () => {
                   <div
                     key={group.label}
                     className={`flex flex-col p-4 sm:p-5 ${
-                      isLight ? 'bg-white' : 'bg-[#0c0c0e]'
+                      isLight ? 'bg-white' : 'bg-[#0a0a0a]'
                     }`}
                   >
                     <div className="mb-3 sm:mb-3.5">
@@ -714,7 +714,7 @@ export const GeneratorContent: React.FC = () => {
                           className={`inline-flex items-center rounded-lg border px-2.5 py-1.5 text-[11px] sm:text-[12px] font-semibold transition-colors duration-150 ${
                             isLight
                               ? 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-900 hover:text-white hover:border-slate-900'
-                              : 'bg-white/[0.04] text-white/70 border-white/[0.1] hover:bg-white hover:text-black hover:border-white'
+                              : 'bg-[#111111] text-white/70 border-white/[0.1] hover:bg-white hover:text-black hover:border-white'
                           }`}
                         >
                           {keyword}
@@ -730,7 +730,7 @@ export const GeneratorContent: React.FC = () => {
                 className={`relative overflow-hidden rounded-2xl border px-5 py-6 sm:px-10 sm:py-8 ${
                   isLight
                     ? 'bg-slate-900 border-slate-900 text-white shadow-xl shadow-slate-900/15'
-                    : 'bg-[#0c0c0e] border-white/[0.12]'
+                    : 'bg-[#0a0a0a] border-white/[0.12]'
                 }`}
               >
                 <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 sm:gap-6">
@@ -742,7 +742,7 @@ export const GeneratorContent: React.FC = () => {
                       Free · Live availability · Thousands of brandable ideas — no account required.
                     </p>
                     <div className="mt-3 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-1">
-                      {['3,000+ affixes', 'Live .com checks', '8 registrars'].map((item) => (
+                      {['5,500+ words', 'Instant ideas', '8 registrars'].map((item) => (
                         <span
                           key={item}
                           className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-medium text-white/40"
