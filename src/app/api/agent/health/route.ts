@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { jsonResponse, corsPreflightResponse } from '@/lib/apiHelpers';
 import { FEATURE_FLAGS } from '@/lib/featureFlags';
-import { useInstantDomainMcp } from '@/lib/ada/freeMode';
+import { isInstantDomainMcpEnabled } from '@/lib/ada/freeMode';
 import { agentAuthStatus } from '@/lib/agent/mcp/auth';
 import { AGENT_TOOL_CATALOG } from '@/lib/agent/tools/registry';
 import { listWiredAdapterIds } from '@/lib/agent/registrars/dispatch';
@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
     time: new Date().toISOString(),
     flags: {
       domainAgent,
-      instantDomainMcp: useInstantDomainMcp(),
+      instantDomainMcp: isInstantDomainMcpEnabled(),
       registrarMutations: mutations,
       serverLlmEnabled: llm.enabled && llm.source === 'env',
     },

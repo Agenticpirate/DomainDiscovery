@@ -4,7 +4,7 @@
 
 import { checkDomainAvailabilityViaMCP } from '@/lib/instantDomainMCP';
 import { checkDomainsFreeRdap } from '@/lib/ada/freeDomainCheck';
-import { useInstantDomainMcp } from '@/lib/ada/freeMode';
+import { isInstantDomainMcpEnabled } from '@/lib/ada/freeMode';
 import { resolveRegisterUrl } from '@/lib/registrars';
 import { parseBusinessBrief } from './brief';
 import { generateCandidateDomains } from './generateCandidates';
@@ -50,7 +50,7 @@ async function checkBatch(
 ): Promise<Map<string, { available: boolean; premium?: boolean; price?: string; buyUrl?: string }>> {
   const map = new Map<string, { available: boolean; premium?: boolean; price?: string; buyUrl?: string }>();
   // Same free Instant Domain MCP stack as main DomainDiscovery site (default ON)
-  const preferInstantMcp = useInstantDomainMcp();
+  const preferInstantMcp = isInstantDomainMcpEnabled();
 
   for (let i = 0; i < domains.length; i += CHECK_BATCH) {
     const slice = domains.slice(i, i + CHECK_BATCH);
@@ -144,9 +144,9 @@ export async function runAutoPipeline(
   });
 
   emit({ id: 'generate', label: 'Brand brain inventing candidates', status: 'running' });
-  let { domains, source } = await generateCandidateDomains(brief, MAX_CANDIDATES);
-  // Drop generic mashups before any network spend
-  domains = domains.filter((d) => !isGenericKeywordMashup(d.split('.')[0] || d));
+  const candidateResult = await generateCandidateDomains(brief, MAX_CANDIDATES);
+  const { source } = candidateResult;
+  let domains = candidateResult.domains.filter((d) => !isGenericKeywordMashup(d.split('.')[0] || d));
   emit({
     id: 'generate',
     label: 'Brand brain inventing candidates',

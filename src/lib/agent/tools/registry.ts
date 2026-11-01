@@ -167,7 +167,7 @@ export async function toolRankDomains(args: {
     return jsonToolResult({ error: 'Provide domains to rank' }, true);
   }
 
-  let meta = new Map<string, { available?: boolean; premium?: boolean; priceHint?: string; buyUrl?: string }>();
+  const meta = new Map<string, { available?: boolean; premium?: boolean; priceHint?: string; buyUrl?: string }>();
   if (args.checkAvailability !== false) {
     try {
       const checked = await checkDomainAvailabilityViaMCP({ domains });

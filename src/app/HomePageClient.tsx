@@ -14,20 +14,20 @@ import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { useLocale } from '@/components/i18n/LocaleProvider';
 
 const HERO_TRUST_ICONS: React.ReactNode[] = [
-  <>
+  <React.Fragment key="shield">
     <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z" />
     <path d="M9 12l2 2 4-4" />
-  </>,
-  <>
+  </React.Fragment>,
+  <React.Fragment key="eye">
     <path d="M3 3l18 18" />
     <path d="M10.6 5.1A9.8 9.8 0 0 1 12 5c6 0 9.5 7 9.5 7a17 17 0 0 1-2.6 3.4M6.3 6.3C3.9 8 2.5 12 2.5 12s3.5 7 9.5 7a9.5 9.5 0 0 0 5.7-1.8" />
     <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
-  </>,
-  <path d="M13 2L4.5 13.5H12L11 22l8.5-11.5H12L13 2z" />,
-  <>
+  </React.Fragment>,
+  <path key="bolt" d="M13 2L4.5 13.5H12L11 22l8.5-11.5H12L13 2z" />,
+  <React.Fragment key="tag">
     <path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z" />
     <circle cx="7.5" cy="7.5" r="1.2" />
-  </>,
+  </React.Fragment>,
 ];
 
 export default function Home() {

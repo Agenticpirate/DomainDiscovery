@@ -5,7 +5,7 @@ import { getSiteBaseUrl, SITE_BRAND, SITE_PRODUCT_FACTS } from '@/lib/seoSiteFac
 import { AGENT_TOOL_CATALOG } from '@/lib/agent/tools/registry';
 import { MCP_SERVER_NAME, MCP_SERVER_VERSION } from '@/lib/agent/mcp/server';
 import { agentAuthStatus } from '@/lib/agent/mcp/auth';
-import { useInstantDomainMcp } from '@/lib/ada/freeMode';
+import { isInstantDomainMcpEnabled } from '@/lib/ada/freeMode';
 import { listWiredAdapterIds } from '@/lib/agent/registrars/dispatch';
 import { skillsManifest } from '@/lib/agent/skills/catalog';
 
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
           : 'Auth optional in this environment; if AGENT_API_KEY is set, it is enforced.',
       },
       runtime: {
-        instantDomainMcp: useInstantDomainMcp(),
+        instantDomainMcp: isInstantDomainMcpEnabled(),
         registrarMutations: mutations,
         wiredAdapters: listWiredAdapterIds(),
       },

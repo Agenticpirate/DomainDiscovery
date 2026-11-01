@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server';
 import { jsonResponse, corsPreflightResponse } from '@/lib/apiHelpers';
 import { skillsManifest } from '@/lib/agent/skills/catalog';
 import { byokFromHeaders, byokStatus } from '@/lib/agent/byokContext';
-import { useInstantDomainMcp } from '@/lib/ada/freeMode';
+import { isInstantDomainMcpEnabled } from '@/lib/ada/freeMode';
 import { agentRegistrarsManifest } from '@/lib/agent/registrars/agentReadyRegistrars';
 
 export async function OPTIONS(request: NextRequest) {
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     ...skillsManifest(),
     registrars: agentRegistrarsManifest(),
     runtime: {
-      instantDomainMcp: useInstantDomainMcp(),
+      instantDomainMcp: isInstantDomainMcpEnabled(),
       registrarMutations:
         (process.env.ADA_ENABLE_REGISTRAR_MUTATIONS || '').toLowerCase() === 'true',
       byok: byokStatus(byok),

@@ -52,20 +52,20 @@ export function allowPaidLlm(): boolean {
  * Instant Domain Search MCP — same free service as main DomainDiscovery site.
  * Default ON. Set ADA_USE_INSTANT_DOMAIN_MCP=false to force RDAP-only.
  */
-export function useInstantDomainMcp(): boolean {
+export function isInstantDomainMcpEnabled(): boolean {
   if (envFalse('ADA_USE_INSTANT_DOMAIN_MCP')) return false;
   // Legacy opt-in still honored if someone set it
   if (envTrue('ADA_ALLOW_EXTERNAL_MCP')) return true;
   return true; // default: same as main website
 }
 
-/** @deprecated use useInstantDomainMcp */
+/** @deprecated use isInstantDomainMcpEnabled */
 export function allowExternalDomainMcp(): boolean {
-  return useInstantDomainMcp();
+  return isInstantDomainMcpEnabled();
 }
 
 export function freeModeBanner(): string {
-  return useInstantDomainMcp()
+  return isInstantDomainMcpEnabled()
     ? 'No paid LLM keys. Availability via Instant Domain Search MCP (same free stack as DomainDiscovery). Ranking is local.'
     : 'No paid LLM keys. Availability via free public RDAP. Ranking is local.';
 }

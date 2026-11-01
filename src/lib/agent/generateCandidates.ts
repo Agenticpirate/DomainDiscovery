@@ -8,7 +8,7 @@ import {
   generateDomainVariationsViaMCP,
   searchDomainsViaMCP,
 } from '@/lib/instantDomainMCP';
-import { useInstantDomainMcp } from '@/lib/ada/freeMode';
+import { isInstantDomainMcpEnabled } from '@/lib/ada/freeMode';
 import type { DomainBrief } from './types';
 import { primaryStem, resolveVertical } from './brief';
 import {
@@ -151,7 +151,7 @@ export async function generateCandidateDomains(
 
   // Instant Domain MCP — only seed with *inventive* labels to avoid flooding with taken generics
   const fromMcp: string[] = [];
-  if (useInstantDomainMcp()) {
+  if (isInstantDomainMcpEnabled()) {
     try {
       const v = getVertical(vertical);
       const inventiveSeeds = Array.from(

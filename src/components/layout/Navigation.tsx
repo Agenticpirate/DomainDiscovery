@@ -123,20 +123,20 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   const searchIds = ['search', 'extensions', 'assistant', 'generator', 'bulk', 'leads'] as const;
   const searchHrefs = ['/', '/domain-extensions', '/assistant', '/generator', '/bulk-search', '/tools/leads'];
   const searchIcons = [
-    <Icons.Search className={iconSm} />,
-    <Icons.Layers className={iconSm} />,
-    <Icons.Magic className={iconSm} />,
-    <Icons.Magic className={iconSm} />,
-    <Icons.Bulk className={iconSm} />,
-    <Icons.Users className={iconSm} />,
+    <Icons.Search key="search" className={iconSm} />,
+    <Icons.Layers key="layers" className={iconSm} />,
+    <Icons.Magic key="assistant" className={iconSm} />,
+    <Icons.Magic key="generator" className={iconSm} />,
+    <Icons.Bulk key="bulk" className={iconSm} />,
+    <Icons.Users key="leads" className={iconSm} />,
   ];
   const toolIds = ['keyword', 'compare', 'whois', 'geo'] as const;
   const toolHrefs = ['/tools/keyword', '/tools/compare', '/tools/whois', '/tools/geo'];
   const toolIcons = [
-    <Icons.Keyword className={iconSm} />,
-    <Icons.Dollar className={iconSm} />,
-    <Icons.Info className={iconSm} />,
-    <Icons.Globe className={iconSm} />,
+    <Icons.Keyword key="keyword" className={iconSm} />,
+    <Icons.Dollar key="dollar" className={iconSm} />,
+    <Icons.Info key="info" className={iconSm} />,
+    <Icons.Globe key="globe" className={iconSm} />,
   ];
 
   const searchMenu: DropdownMenu = {
