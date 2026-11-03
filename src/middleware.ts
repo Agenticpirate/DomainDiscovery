@@ -39,7 +39,30 @@ function adaPublicBase(): string {
  * - Local monorepo keeps /ada/* for development
  */
 export function middleware(request: NextRequest) {
-  const host = request.headers.get('host') || '';
+  const host = request.headers.get('host') || request.nextUrl.host || '';
+  const isLocal =
+    host.includes('localhost') ||
+    host.includes('127.0.0.1') ||
+    host.includes('0.0.0.0') ||
+    host.endsWith('.local');
+
+  // Enforce HTTPS in production: redirect all plain HTTP requests to HTTPS immediately
+  if (process.env.NODE_ENV === 'production' && !isLocal) {
+    const forwardedProto = request.headers.get('x-forwarded-proto');
+    const cfVisitor = request.headers.get('cf-visitor');
+    const isHttp =
+      forwardedProto === 'http' ||
+      (cfVisitor ? cfVisitor.includes('"scheme":"http"') : false) ||
+      request.url.startsWith('http://');
+
+    if (isHttp) {
+      const httpsUrl = request.nextUrl.clone();
+      httpsUrl.protocol = 'https:';
+      httpsUrl.host = host;
+      return NextResponse.redirect(httpsUrl, 301);
+    }
+  }
+
   const { pathname } = request.nextUrl;
 
   // Production DomainDiscovery: send /ada traffic to dedicated product site
