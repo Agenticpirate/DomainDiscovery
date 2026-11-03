@@ -84,14 +84,14 @@ export default function Home() {
 
       <main className="relative page-main">
         {/* Full-viewport mobile hero zone: fills 100svh evenly without blank dead zones; Section 2 stays strictly below fold */}
-        <div className="min-h-[calc(100svh-4rem-env(safe-area-inset-top,0px))] flex flex-col justify-center sm:justify-start sm:min-h-0 sm:block pt-0 pb-2 min-[390px]:pb-3 sm:py-0">
+        <div className="min-h-[calc(100svh-4rem-env(safe-area-inset-top,0px))] flex flex-col justify-between sm:justify-start sm:min-h-0 sm:block pt-1 pb-3 min-[390px]:pb-4 sm:py-0">
           <SectionAmbient
             intensity="hero"
             className="home-hero-ambient w-full"
-            contentClassName="px-3.5 sm:px-6 pt-0 pb-1 sm:pt-12 md:pt-14 sm:pb-8"
+            contentClassName="px-3.5 sm:px-6 pt-3 min-[390px]:pt-4 pb-1 sm:pt-12 md:pt-14 sm:pb-8"
           >
           <div className="home-hero-stage relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto text-center">
-            <div className="relative z-[1] -mt-1.5 min-[390px]:-mt-2.5 sm:mt-0 mb-3 flex flex-wrap items-center justify-center gap-1.5 sm:mb-6 sm:gap-2">
+            <div className="relative z-[1] mt-1 min-[390px]:mt-1.5 sm:mt-0 mb-3 flex flex-wrap items-center justify-center gap-1.5 sm:mb-6 sm:gap-2">
               <div className="hero-badge inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-medium leading-none tracking-wide text-ds-body sm:gap-2 sm:px-3 sm:py-1.5 sm:text-[12px]">
                 <span className="relative flex h-1.5 w-1.5" aria-hidden>
                   <span className="home-live-dot absolute inset-0 rounded-full bg-emerald-400" />
@@ -193,7 +193,7 @@ export default function Home() {
         </SectionAmbient>
 
         {/* Social proof + stats + sponsor rail — seamless spacing without artificial gaps */}
-        <div className="w-full section-shell space-y-2 min-[390px]:space-y-2.5 !mt-3.5 min-[390px]:!mt-4 sm:!mt-3 sm:space-y-2.5 sm:!max-w-[50rem]">
+        <div className="w-full section-shell space-y-2 min-[390px]:space-y-2.5 !mt-2.5 min-[390px]:!mt-3 sm:!mt-3 sm:space-y-2.5 sm:!max-w-[50rem]">
           {showHeroAd && (
             <AffiliateAdRail
               placement="home-hero"
@@ -203,7 +203,9 @@ export default function Home() {
             />
           )}
           <DomainTicker />
-          <StatsBar />
+          <div className="pt-2 min-[390px]:pt-2.5 sm:pt-0">
+            <StatsBar />
+          </div>
         </div>
       </div>
 
