@@ -25,7 +25,7 @@ export function SpaceshipMark({
 function SpaceshipStrip() {
   return (
     <div
-      className="flex h-full min-h-[76px] min-[390px]:min-h-[82px] w-full flex-row items-center justify-between gap-2 min-[390px]:gap-3 px-3 min-[390px]:px-4 py-2.5 min-[390px]:py-3 sm:min-h-[112px] sm:gap-6 sm:px-8 sm:py-5"
+      className="flex h-[76px] min-[390px]:h-[82px] max-h-[84px] sm:max-h-none sm:h-auto sm:min-h-[112px] w-full flex-row items-center justify-between gap-2 min-[390px]:gap-3 px-3 min-[390px]:px-4 py-2 min-[390px]:py-2.5 sm:gap-6 sm:px-8 sm:py-5 overflow-hidden"
       style={{
         background:
           'linear-gradient(100deg, #1d4ed8 0%, #2563eb 18%, #2dd4bf 48%, #3b82f6 72%, #1e40af 100%)',
@@ -33,7 +33,7 @@ function SpaceshipStrip() {
     >
       {/* Left: Brand Logo */}
       <div className="flex shrink-0 items-center gap-1.5 text-white sm:gap-2.5">
-        <SpaceshipMark className="h-4.5 w-4.5 sm:h-9 sm:w-9" />
+        <SpaceshipMark className="h-5 w-5 sm:h-9 sm:w-9" />
         <span className="text-[12px] min-[380px]:text-[13px] font-bold leading-none tracking-[-0.03em] sm:text-[22px]">
           spaceship
         </span>
@@ -61,7 +61,7 @@ function SpaceshipStrip() {
 function SpacemailStrip() {
   return (
     <div
-      className="flex h-full min-h-[76px] min-[390px]:min-h-[82px] w-full flex-row items-center justify-between gap-2 min-[390px]:gap-3 px-3 min-[390px]:px-4 py-2.5 min-[390px]:py-3 sm:min-h-[112px] sm:gap-6 sm:px-8 sm:py-5"
+      className="flex h-[76px] min-[390px]:h-[82px] max-h-[84px] sm:max-h-none sm:h-auto sm:min-h-[112px] w-full flex-row items-center justify-between gap-2 min-[390px]:gap-3 px-3 min-[390px]:px-4 py-2 min-[390px]:py-2.5 sm:gap-6 sm:px-8 sm:py-5 overflow-hidden"
       style={{
         background:
           'linear-gradient(90deg, #20163b 0%, #291a4c 28%, #352067 52%, #2a1b4e 78%, #291a4c 100%)',
@@ -75,7 +75,8 @@ function SpacemailStrip() {
           alt=""
           width={253}
           height={239}
-          className="h-4.5 w-4.5 sm:h-12 sm:w-12"
+          className="h-5 w-5 object-contain sm:h-12 sm:w-12"
+          style={{ maxHeight: '20px', maxWidth: '20px' }}
           draggable={false}
         />
         <span className="text-[12px] min-[380px]:text-[13px] font-bold leading-none tracking-[-0.03em] sm:text-[16px]">

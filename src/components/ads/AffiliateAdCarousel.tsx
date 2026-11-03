@@ -167,7 +167,9 @@ export function AffiliateAdCarousel({
               return (
                 <div
                   key={ad.id}
-                  className="relative flex w-full shrink-0 grow-0 basis-full items-stretch"
+                  className={`relative flex w-full shrink-0 grow-0 basis-full items-stretch ${
+                    crisp ? 'max-h-[84px] sm:max-h-none overflow-hidden' : ''
+                  }`}
                 >
                   {crisp ? (
                     <CrispAffiliateStrip creative={ad} />
