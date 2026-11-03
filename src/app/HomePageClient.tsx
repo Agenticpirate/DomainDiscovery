@@ -9,8 +9,10 @@ import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { HeroSearch } from '@/components/home/HeroSearch';
 import { SearchCountPill } from '@/components/home/SearchCountPill';
 import { HomePageContent } from '@/components/home/HomePageContent';
-import { Footer } from '@/components/layout/Footer';
+import { DomainTicker } from '@/components/home/DomainTicker';
+import { StatsBar } from '@/components/home/StatsBar';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
+import { Footer } from '@/components/layout/Footer';
 import { useLocale } from '@/components/i18n/LocaleProvider';
 
 const HERO_TRUST_ICONS: React.ReactNode[] = [
@@ -81,16 +83,16 @@ export default function Home() {
       <Navigation />
 
       <main className="relative page-main">
-        {/* Hero — dots clear under center copy (intensity=hero), solid search plate.
-            Mobile-only visual polish via max-sm: classes; sm+ layout unchanged. */}
-        <SectionAmbient
-          intensity="hero"
-          className="home-hero-ambient"
-          contentClassName="px-3.5 sm:px-6 pt-3 max-sm:pt-4 sm:pt-12 md:pt-14 pb-3 max-sm:pb-4 sm:pb-10"
-        >
+        {/* Full-viewport mobile hero zone: fills 100svh evenly without blank dead zones; Section 2 stays strictly below fold */}
+        <div className="min-h-[calc(100svh-4rem-env(safe-area-inset-top,0px))] flex flex-col justify-center sm:justify-start sm:min-h-0 sm:block pt-0 pb-2 min-[390px]:pb-3 sm:py-0">
+          <SectionAmbient
+            intensity="hero"
+            className="home-hero-ambient w-full"
+            contentClassName="px-3.5 sm:px-6 pt-0 pb-1 sm:pt-12 md:pt-14 sm:pb-8"
+          >
           <div className="home-hero-stage relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto text-center">
-            <div className="relative z-[1] mb-2.5 flex flex-wrap items-center justify-center gap-1 sm:mb-6 sm:gap-2">
-              <div className="hero-badge inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-full px-1.5 py-0.5 text-[9px] font-medium leading-none tracking-wide text-ds-body sm:gap-2 sm:px-3 sm:py-1.5 sm:text-[12px]">
+            <div className="relative z-[1] -mt-1.5 min-[390px]:-mt-2.5 sm:mt-0 mb-3 flex flex-wrap items-center justify-center gap-1.5 sm:mb-6 sm:gap-2">
+              <div className="hero-badge inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-medium leading-none tracking-wide text-ds-body sm:gap-2 sm:px-3 sm:py-1.5 sm:text-[12px]">
                 <span className="relative flex h-1.5 w-1.5" aria-hidden>
                   <span className="home-live-dot absolute inset-0 rounded-full bg-emerald-400" />
                 </span>
@@ -101,21 +103,21 @@ export default function Home() {
               <SearchCountPill />
             </div>
 
-            <h1 className="relative z-[1] text-[2.65rem] leading-[0.98] sm:text-[3.65rem] sm:leading-[1.02] md:text-[4.5rem] font-semibold tracking-[-0.045em] sm:tracking-[-0.05em] mb-3 sm:mb-4">
+            <h1 className="relative z-[1] text-[2.75rem] leading-[1.04] sm:text-[3.65rem] sm:leading-[1.02] md:text-[4.5rem] font-bold tracking-[-0.04em] sm:tracking-[-0.05em] mb-3 sm:mb-4">
               <span className="hero-ink hero-ink-live block pb-[0.06em]">
                 <span className="sm:hidden">{hero.h1Mobile}</span>
                 <span className="hidden sm:inline">{hero.h1Desktop}</span>
               </span>
-              <span className="block text-[1.35rem] sm:text-[1.5rem] md:text-[1.85rem] mt-1.5 sm:mt-2 font-medium tracking-[-0.02em] sm:tracking-[-0.025em] text-ds-body">
+              <span className="block text-[1.18rem] min-[380px]:text-[1.25rem] sm:text-[1.5rem] md:text-[1.85rem] mt-1.5 sm:mt-2 font-medium tracking-[-0.02em] sm:tracking-[-0.025em] text-ds-body">
                 {hero.sub}
               </span>
             </h1>
 
-            <ul className="relative z-[1] mx-auto mb-3 grid w-full grid-cols-4 gap-1.5 text-[10px] font-medium leading-none text-ds-body sm:mb-8 sm:flex sm:max-w-none sm:flex-wrap sm:justify-center sm:gap-2.5 sm:text-[13px]">
+            <ul className="relative z-[1] mx-auto mb-4 sm:mb-8 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 text-[11px] min-[380px]:text-[12px] sm:text-[13px] font-medium text-ds-body">
               {hero.trust.map((label, index) => (
                 <li
                   key={label}
-                  className="hero-badge inline-flex min-w-0 items-center justify-center gap-1 whitespace-nowrap rounded-full px-1 py-1.5 sm:gap-1.5 sm:px-3 sm:py-1"
+                  className="hero-badge inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-1 min-[380px]:px-3 min-[380px]:py-1.5 sm:px-3.5 sm:py-1.5"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -124,7 +126,7 @@ export default function Home() {
                     strokeWidth={2}
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="h-2.5 w-2.5 shrink-0 text-ds-ink sm:h-3.5 sm:w-3.5"
+                    className="h-3 w-3 shrink-0 text-ds-ink sm:h-3.5 sm:w-3.5"
                     aria-hidden
                   >
                     {HERO_TRUST_ICONS[index]}
@@ -149,92 +151,40 @@ export default function Home() {
                 />
               </div>
 
-              <div className="mt-2.5 grid grid-cols-3 overflow-hidden rounded-2xl border border-white/[0.1] bg-[#0a0a0a] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:hidden [.light_&]:border-[#d7dbdc] [.light_&]:bg-white">
-                {[
-                  {
-                    href: href('/bulk-search'),
-                    title: messages.crumbs.bulk,
-                    hint: hero.bulkHint,
-                    icon: (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-4 w-4" aria-hidden>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l8 4-8 4-8-4 8-4zM4 12l8 4 8-4M4 16.5l8 4 8-4" />
-                      </svg>
-                    ),
-                  },
-                  {
-                    href: href('/tools/geo'),
-                    title: messages.crumbs.geo,
-                    hint: hero.geoHint,
-                    icon: (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-4 w-4" aria-hidden>
-                        <circle cx="12" cy="12" r="8" />
-                        <path strokeLinecap="round" d="M4 12h16M12 4c2.2 2.4 3.3 5.2 3.3 8s-1.1 5.6-3.3 8c-2.2-2.4-3.3-5.2-3.3-8s1.1-5.6 3.3-8z" />
-                      </svg>
-                    ),
-                  },
-                  {
-                    href: href('/tools/leads'),
-                    title: messages.crumbs.leads || 'Domain leads',
-                    hint: 'Track buyer prospects',
-                    icon: (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="h-4 w-4" aria-hidden>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                      </svg>
-                    ),
-                  },
-                ].map((item, index) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`flex min-w-0 items-center gap-2 px-2.5 py-2.5 text-left ${
-                      index > 0 ? 'border-l border-white/[0.08] [.light_&]:border-[#e7e9ea]' : ''
-                    }`}
-                  >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-[#111111] text-white/80 [.light_&]:border-[#e7e9ea] [.light_&]:bg-[#f4f5f5] [.light_&]:text-[#141517]">
-                      {item.icon}
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block truncate text-[12px] font-semibold leading-tight text-ds-ink">{item.title}</span>
-                      <span className="mt-0.5 block truncate text-[10px] leading-tight text-ds-mute">{item.hint}</span>
-                    </span>
-                    <span className="shrink-0 text-[14px] text-ds-mute" aria-hidden>
-                      ›
-                    </span>
-                  </Link>
-                ))}
-              </div>
-
-              <div className="mt-4 hidden justify-center sm:flex">
-                <div className="hero-badge inline-flex items-center rounded-full p-1">
+              <div className="mt-3.5 sm:mt-5 flex justify-center">
+                <div className="hero-badge inline-flex max-w-full items-center rounded-full p-1 shadow-sm">
                   <Link
                     href={href('/bulk-search')}
-                    className="group/link inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5]"
+                    className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"
                   >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="text-ds-body transition-colors group-hover/link:text-ds-ink" aria-hidden>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-3.5 w-3.5 sm:h-[15px] sm:w-[15px] text-ds-body transition-colors group-hover/link:text-ds-ink shrink-0" aria-hidden>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l9 4.5-9 4.5-9-4.5L12 3zM3 12l9 4.5 9-4.5M3 16.5L12 21l9-4.5" />
                     </svg>
-                    {messages.crumbs.bulk}
+                    <span className="inline min-[360px]:hidden">Bulk</span>
+                    <span className="hidden min-[360px]:inline">{messages.crumbs.bulk}</span>
                   </Link>
-                  <span className="mx-0.5 h-4 w-px bg-ds-hairline" aria-hidden />
+                  <span className="mx-0.5 h-3.5 sm:h-4 w-px bg-ds-hairline shrink-0" aria-hidden />
                   <Link
                     href={href('/tools/geo')}
-                    className="group/link inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5]"
+                    className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"
                   >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="text-ds-body transition-colors group-hover/link:text-ds-ink" aria-hidden>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-3.5 w-3.5 sm:h-[15px] sm:w-[15px] text-ds-body transition-colors group-hover/link:text-ds-ink shrink-0" aria-hidden>
                       <circle cx="12" cy="12" r="9" />
                       <path strokeLinecap="round" d="M3 12h18M12 3c2.5 2.6 3.75 5.6 3.75 9S14.5 18.4 12 21c-2.5-2.6-3.75-5.6-3.75-9S9.5 5.6 12 3z" />
                     </svg>
-                    {messages.crumbs.geo}
+                    <span className="inline min-[360px]:hidden">Geo</span>
+                    <span className="hidden min-[360px]:inline">{messages.crumbs.geo}</span>
                   </Link>
-                  <span className="mx-0.5 h-4 w-px bg-ds-hairline" aria-hidden />
+                  <span className="mx-0.5 h-3.5 sm:h-4 w-px bg-ds-hairline shrink-0" aria-hidden />
                   <Link
                     href={href('/tools/leads')}
-                    className="group/link inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5]"
+                    className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"
                   >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="text-ds-body transition-colors group-hover/link:text-ds-ink" aria-hidden>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-3.5 w-3.5 sm:h-[15px] sm:w-[15px] text-ds-body transition-colors group-hover/link:text-ds-ink shrink-0" aria-hidden>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                     </svg>
-                    {messages.crumbs.leads || 'Domain leads'}
+                    <span className="inline min-[360px]:hidden">Leads</span>
+                    <span className="hidden min-[360px]:inline">{messages.crumbs.leads || 'Domain leads'}</span>
                   </Link>
                 </div>
               </div>
@@ -242,16 +192,20 @@ export default function Home() {
           </div>
         </SectionAmbient>
 
-        {showHeroAd && (
-          <div className="pt-1.5 max-sm:pt-2 pb-2 max-sm:pb-2.5 sm:pt-2.5 sm:pb-3 page-gutter w-full">
+        {/* Social proof + stats + sponsor rail — seamless spacing without artificial gaps */}
+        <div className="w-full section-shell space-y-2 min-[390px]:space-y-2.5 !mt-3.5 min-[390px]:!mt-4 sm:!mt-3 sm:space-y-2.5 sm:!max-w-[50rem]">
+          {showHeroAd && (
             <AffiliateAdRail
               placement="home-hero"
               variant="strip"
               contained={false}
               size="compact"
             />
-          </div>
-        )}
+          )}
+          <DomainTicker />
+          <StatsBar />
+        </div>
+      </div>
 
         <HomePageContent />
       </main>

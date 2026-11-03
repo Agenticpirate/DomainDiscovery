@@ -206,9 +206,18 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
           <button
             type="button"
             onClick={() => submit()}
-            className={`${searchBtnClass} shrink-0 rounded-full px-3.5 py-2 text-[12px] min-h-[44px]`}
+            className={`${searchBtnClass} shrink-0 rounded-full px-3 min-[400px]:px-3.5 py-2 text-[12px] min-h-[44px]`}
           >
-            <span>{aiMode ? hero.generate : hero.searchDomains}</span>
+            <span>
+              {aiMode ? (
+                hero.generate
+              ) : (
+                <>
+                  <span>Search</span>
+                  <span className="hidden min-[420px]:inline"> domains</span>
+                </>
+              )}
+            </span>
             {searchArrow}
           </button>
         </div>

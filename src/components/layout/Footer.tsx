@@ -437,40 +437,61 @@ export const Footer: React.FC = () => {
         data-footer-brand
         className={`relative z-[1] h-[5.75rem] w-full overflow-hidden sm:h-[20rem] md:h-[22rem] ${hairline} border-t`}
       >
-        {mounted && showParticles ? (
-          <>
-            <HalftoneWordmark key={isLight ? 'light' : 'dark'} text={BRAND} />
-            <p
-              className={`pointer-events-none absolute inset-x-0 top-2 z-[1] px-4 text-center text-[11px] font-semibold uppercase tracking-[0.18em] sm:top-6 sm:text-[12px] ${
-                isLight ? 'text-[#6e7679]' : 'text-white/45'
-              }`}
-            >
-              {foot.tagline}
-            </p>
-          </>
-        ) : (
-          <div className="relative z-[1] flex h-full flex-col items-center justify-center gap-1 px-4 py-3">
-            <p className="footer-brand-word footer-brand-wordmark select-none text-center leading-none" aria-hidden>
-              {BRAND.split('').map((ch, i) => (
-                <span
-                  key={`${ch}-${i}`}
-                  className="footer-brand-letter"
-                  style={{ animationDelay: `${i * 0.08}s` }}
-                >
-                  {ch}
-                </span>
-              ))}
-            </p>
-            <p className="sr-only">{BRAND}</p>
-            <p
-              className={`text-center text-[12px] font-semibold tracking-[0.12em] sm:tracking-[0.16em] uppercase ${
-                isLight ? 'text-[#52595b]' : 'text-white/55'
-              }`}
-            >
-              {foot.tagline}
-            </p>
-          </div>
-        )}
+        {/* Desktop: Interactive Halftone Wordmark (unchanged) */}
+        <div className="hidden sm:block h-full w-full relative">
+          {mounted && showParticles ? (
+            <>
+              <HalftoneWordmark key={isLight ? 'light' : 'dark'} text={BRAND} />
+              <p
+                className={`pointer-events-none absolute inset-x-0 top-6 z-[1] px-4 text-center text-[12px] font-semibold uppercase tracking-[0.18em] ${
+                  isLight ? 'text-[#6e7679]' : 'text-white/45'
+                }`}
+              >
+                {foot.tagline}
+              </p>
+            </>
+          ) : (
+            <div className="relative z-[1] flex h-full flex-col items-center justify-center gap-1 px-4 py-3">
+              <p className="footer-brand-word footer-brand-wordmark select-none text-center leading-none" aria-hidden>
+                {BRAND.split('').map((ch, i) => (
+                  <span
+                    key={`${ch}-${i}`}
+                    className="footer-brand-letter"
+                    style={{ animationDelay: `${i * 0.08}s` }}
+                  >
+                    {ch}
+                  </span>
+                ))}
+              </p>
+              <p className="sr-only">{BRAND}</p>
+              <p
+                className={`text-center text-[12px] font-semibold tracking-[0.16em] uppercase ${
+                  isLight ? 'text-[#52595b]' : 'text-white/55'
+                }`}
+              >
+                {foot.tagline}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Mobile: Ultra-clear, high-contrast, razor-sharp typography */}
+        <div className="flex sm:hidden h-full w-full flex-col items-center justify-center gap-1 px-4 py-2 select-none">
+          <p
+            className={`text-center text-[12px] min-[380px]:text-[12.5px] font-semibold uppercase tracking-[0.18em] ${
+              isLight ? 'text-[#6e7679]' : 'text-white/60'
+            }`}
+          >
+            {foot.tagline}
+          </p>
+          <p
+            className={`text-center text-[1.85rem] min-[360px]:text-[2.1rem] min-[390px]:text-[2.35rem] font-bold tracking-[-0.035em] leading-none antialiased ${
+              isLight ? 'text-[#0a0a0a]' : 'text-white'
+            }`}
+          >
+            Domain<span className={isLight ? 'text-[#52595b]' : 'text-white/85'}>Discovery</span>
+          </p>
+        </div>
       </div>
 
       {/* Legal bar — with safe-area padding for mobile home indicators */}

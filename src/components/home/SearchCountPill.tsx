@@ -83,7 +83,7 @@ export function SearchCountPill() {
 
   return (
     <div
-      className="hero-badge inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-full px-1.5 py-0.5 text-[9px] font-medium leading-none tracking-wide text-ds-body sm:gap-2 sm:px-3 sm:py-1.5 sm:text-[12px]"
+      className="hero-badge inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-medium leading-none tracking-wide text-ds-body sm:gap-2 sm:px-3 sm:py-1.5 sm:text-[12px]"
       aria-live="polite"
     >
       <svg className="h-3 w-3 shrink-0 text-ds-ink sm:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>

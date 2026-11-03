@@ -126,10 +126,6 @@ export function AffiliateAdCarousel({
 
   const aboveFold = placement === 'home-hero' || placement === 'ada-hero';
 
-  // compact = smaller *section* (narrower max-width from parent), never crop the art
-  const compact = size === 'compact';
-  const tinyMobile = ads.length > 0 && ads.every((ad) => isCrispStrip(ad));
-
   return (
     <div
       ref={rootRef}
@@ -147,23 +143,18 @@ export function AffiliateAdCarousel({
         data-campaign={active.campaignId}
         data-placement={placement}
         data-creative-format="billboard-carousel"
-        className={`group relative block w-full overflow-hidden rounded-xl sm:rounded-2xl transition-[transform,box-shadow] duration-500 ease-out active:scale-[0.995] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 ${
-          tinyMobile ? 'max-sm:rounded-full' : ''
-        } ${
+        className={`group relative block w-full overflow-hidden rounded-2xl transition-[transform,box-shadow] duration-500 ease-out active:scale-[0.995] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 ${
           isLight
             ? 'shadow-[0_12px_36px_-20px_rgba(15,23,42,0.4)] hover:shadow-[0_16px_40px_-18px_rgba(15,23,42,0.45)] focus-visible:ring-offset-white border border-slate-200/80'
             : 'shadow-[0_16px_44px_-22px_rgba(0,0,0,0.85)] hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.9)] focus-visible:ring-offset-[#000000] border border-white/[0.1]'
         }`}
         aria-label={`${active.alt} (sponsored)`}
       >
-        {/* Minimal frosted Ad chip — transparent, not black/grey solid */}
+        {/* Ghost watermark SPONSORED indicator — completely borderless, seamless & non-intrusive */}
         <span
-          className={`pointer-events-none absolute z-[2] items-center rounded-full border border-white/30 bg-white/10 font-semibold uppercase text-white/90 right-1.5 top-1.5 px-1 py-px text-[7px] tracking-[0.06em] sm:left-2 sm:right-auto sm:top-2 sm:px-2 sm:py-0.5 sm:text-[9px] sm:tracking-[0.12em] ${
-            tinyMobile ? 'hidden sm:inline-flex' : 'inline-flex'
-          }`}
-          style={{ backgroundColor: 'rgba(255,255,255,0.14)' }}
+          className="pointer-events-none absolute z-[4] left-2.5 top-1.5 select-none text-[5.5px] min-[390px]:text-[6px] font-medium uppercase tracking-[0.14em] text-white/30 sm:left-3.5 sm:top-2 sm:text-[6.5px]"
         >
-          Ad
+          SPONSORED
         </span>
 
         <div className="relative w-full overflow-hidden">

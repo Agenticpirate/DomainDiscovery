@@ -4,9 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
-import { DomainTicker } from '@/components/home/DomainTicker';
 import { HomeProductRows } from '@/components/home/HomeProductRows';
-import { StatsBar } from '@/components/home/StatsBar';
 import { PremiumFaqGrid } from '@/components/sections/PremiumFaqGrid';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
@@ -248,13 +246,7 @@ export const HomePageContent: React.FC = () => {
     : 'bg-[#111111] border-white/[0.08] text-[#f0f0f0] group-hover:bg-[#f0f0f0] group-hover:text-black group-hover:border-[#f0f0f0]';
 
   return (
-    <div className="pb-1 sm:pb-2">
-      {/* Social proof + stats — mobile full-width; desktop centered compact ticker */}
-      <section className="section-shell space-y-2 sm:space-y-3 !mb-6 sm:!mb-10 !mt-0 sm:!max-w-[50rem]">
-        <DomainTicker />
-        <StatsBar />
-      </section>
-
+    <div className="pb-1 sm:pb-2 pt-4 sm:pt-8">
       <HomeProductRows />
 
       {/*

@@ -25,24 +25,25 @@ export function SpaceshipMark({
 function SpaceshipStrip() {
   return (
     <div
-      className="flex h-full min-h-0 w-full flex-row items-center gap-2 px-2.5 py-1.5 sm:min-h-[112px] sm:gap-6 sm:px-8 sm:py-5"
+      className="flex h-full min-h-[82px] min-[390px]:min-h-[88px] w-full flex-row items-center gap-2.5 min-[390px]:gap-3 px-3.5 min-[390px]:px-4.5 py-3 min-[390px]:py-3.5 sm:min-h-[112px] sm:gap-6 sm:px-8 sm:py-5"
       style={{
         background:
           'linear-gradient(100deg, #1d4ed8 0%, #2563eb 18%, #2dd4bf 48%, #3b82f6 72%, #1e40af 100%)',
       }}
     >
       <div className="contents">
-        <div className="flex shrink-0 items-center gap-1 text-white sm:gap-2.5">
-          <SpaceshipMark className="h-4 w-4 sm:h-9 sm:w-9" />
-          <span className="text-[12px] font-semibold leading-none tracking-[-0.03em] sm:text-[22px]">spaceship</span>
+        <div className="flex shrink-0 items-center gap-1.5 text-white sm:gap-2.5">
+          <SpaceshipMark className="h-5 w-5 sm:h-9 sm:w-9" />
+          <span className="text-[13px] font-bold leading-none tracking-[-0.03em] sm:text-[22px]">spaceship</span>
         </div>
-        <span className="order-3 inline-flex shrink-0 items-center rounded-full bg-white px-2.5 py-1 text-[11px] font-semibold leading-none text-[#2563eb] sm:px-6 sm:py-3 sm:text-[17px]">
+        <span className="order-3 inline-flex shrink-0 items-center rounded-full bg-white px-3 min-[380px]:px-4 py-2 text-[11.5px] min-[380px]:text-[12.5px] font-bold leading-none text-[#2563eb] shadow-md active:scale-95 transition-transform sm:px-6 sm:py-3 sm:text-[17px]">
           Register now
         </span>
       </div>
       <div className="order-2 min-w-0 flex-1 text-white">
-        <p className="text-[12px] font-medium leading-snug tracking-[-0.02em] sm:text-[22px] sm:font-semibold sm:leading-tight [text-rendering:geometricPrecision]">
-          Want to manage your domain easier, cheaper?
+        <p className="text-[12px] min-[380px]:text-[13px] font-semibold leading-snug tracking-[-0.02em] sm:text-[22px] sm:font-semibold sm:leading-tight [text-rendering:geometricPrecision]">
+          <span className="block sm:inline">Want to manage your domain</span>{' '}
+          <span className="block sm:inline">easier, cheaper?</span>
         </p>
         <p className="mt-0.5 hidden text-[14px] font-medium leading-snug text-white/90 sm:mt-1 sm:block sm:text-[16px]">
           You&apos;re closer than you think
@@ -55,34 +56,35 @@ function SpaceshipStrip() {
 function SpacemailStrip() {
   return (
     <div
-      className="flex h-full min-h-0 w-full flex-row items-center gap-2 px-2.5 py-1.5 sm:min-h-[112px] sm:gap-6 sm:px-8 sm:py-5"
+      className="flex h-full min-h-[82px] min-[390px]:min-h-[88px] w-full flex-row items-center gap-2.5 min-[390px]:gap-3 px-3.5 min-[390px]:px-4.5 py-3 min-[390px]:py-3.5 sm:min-h-[112px] sm:gap-6 sm:px-8 sm:py-5"
       style={{
         background:
           'linear-gradient(90deg, #20163b 0%, #291a4c 28%, #352067 52%, #2a1b4e 78%, #291a4c 100%)',
       }}
     >
       <div className="contents">
-        <div className="flex shrink-0 items-center gap-1 text-white sm:flex-col sm:gap-1.5">
+        <div className="flex shrink-0 items-center gap-1.5 text-white sm:flex-col sm:gap-1.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/ads/spacemail-mark.png"
             alt=""
             width={253}
             height={239}
-            className="h-4 w-4 sm:h-12 sm:w-12"
+            className="h-5 w-5 sm:h-12 sm:w-12"
             draggable={false}
           />
-          <span className="text-[12px] font-semibold leading-none tracking-[-0.03em] sm:text-[16px]">
+          <span className="text-[13px] font-bold leading-none tracking-[-0.03em] sm:text-[16px]">
             spacemail
           </span>
         </div>
-        <span className="order-3 inline-flex shrink-0 items-center rounded-full bg-[#793bff] px-2.5 py-1 text-[11px] font-semibold leading-none text-white sm:px-7 sm:py-3 sm:text-[17px]">
+        <span className="order-3 inline-flex shrink-0 items-center rounded-full bg-[#793bff] px-3 min-[380px]:px-4 py-2 text-[11.5px] min-[380px]:text-[12.5px] font-bold leading-none text-white shadow-md active:scale-95 transition-transform sm:px-7 sm:py-3 sm:text-[17px]">
           Start free
         </span>
       </div>
-      <p className="order-2 min-w-0 flex-1 text-white sm:text-center [text-rendering:geometricPrecision]">
-        <span className="block text-[12px] font-medium leading-snug tracking-[-0.02em] sm:hidden">
-          Premium email for your domains, made simple.
+      <p className="order-2 min-w-0 flex-1 text-white [text-rendering:geometricPrecision]">
+        <span className="block text-[12px] min-[380px]:text-[13px] font-semibold leading-snug tracking-[-0.02em] sm:hidden">
+          <span>Premium email for your</span>{' '}
+          <span className="block">domains, made simple.</span>
         </span>
         <span className="hidden text-[26px] font-semibold leading-tight tracking-[-0.03em] sm:inline">
           Premium email for your domains,

@@ -96,7 +96,7 @@ export const StatsBar: React.FC = () => {
       {STATS.map((stat, i) => (
         <div
           key={stat.label}
-          className={`flex items-center justify-center gap-2 px-2 py-2 text-left sm:block sm:gap-0 sm:px-2 sm:py-4 sm:text-center ${
+          className={`flex items-center justify-start gap-2.5 px-3 min-[360px]:px-4 py-2.5 min-[380px]:py-3 text-left sm:block sm:gap-0 sm:px-2 sm:py-4 sm:text-center ${
             i % 2 === 1 ? (isLight ? 'border-l border-[#d7dbdc]' : 'border-l border-white/[0.08]') : ''
           } ${
             i >= 2 ? (isLight ? 'border-t border-[#d7dbdc] sm:border-t-0' : 'border-t border-white/[0.08] sm:border-t-0') : ''
@@ -105,7 +105,7 @@ export const StatsBar: React.FC = () => {
           }`}
         >
           <span
-            className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border sm:hidden ${
+            className={`flex h-7 w-7 min-[380px]:h-8 min-[380px]:w-8 shrink-0 items-center justify-center rounded-lg border sm:hidden ${
               isLight ? 'border-[#d7dbdc] bg-[#f4f5f5] text-[#141517]' : 'border-white/[0.08] bg-[#111111] text-white/80'
             }`}
           >
@@ -115,13 +115,13 @@ export const StatsBar: React.FC = () => {
           </span>
           <div className="min-w-0">
             <div
-              className={`text-[1.05rem] sm:text-2xl font-semibold leading-none tracking-tight tabular-nums ${
+              className={`text-[1.05rem] min-[380px]:text-[1.15rem] sm:text-2xl font-bold leading-none tracking-tight tabular-nums ${
                 isLight ? 'text-[#0a0a0a]' : 'text-[#f0f0f0]'
               }`}
             >
               {formatStat(counts[i], stat.suffix, stat.decimals ?? 0, numberLocale)}
             </div>
-            <div className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.12em] text-ds-mute sm:mt-1.5 sm:text-[11px]">
+            <div className="mt-1 text-[9px] min-[380px]:text-[9.5px] font-medium uppercase tracking-[0.12em] text-ds-mute sm:mt-1.5 sm:text-[11px]">
               {messages.stats[i]}
             </div>
           </div>

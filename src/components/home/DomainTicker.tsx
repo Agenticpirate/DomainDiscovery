@@ -138,9 +138,9 @@ export const DomainTicker: React.FC<DomainTickerProps> = ({
         onPointerLeave={(event) => {
           if (event.pointerType === 'mouse') setFacesColor(false);
         }}
-        className={`group/ticker flex w-full max-w-full items-center gap-2 rounded-xl px-2.5 py-1.5 text-[12px] sm:w-fit sm:gap-2.5 sm:rounded-full sm:py-2 sm:pl-3 sm:pr-5 sm:text-[13px] ${
+        className={`group/ticker flex w-full max-w-full items-center gap-2 sm:gap-2.5 rounded-2xl px-3 py-2 min-[380px]:px-3.5 min-[380px]:py-2.5 text-[12px] sm:w-fit sm:rounded-full sm:py-2 sm:pl-3 sm:pr-5 sm:text-[13px] ${
           isLight
-            ? 'bg-white border border-[#cfcfcf] text-ds-body shadow-sm shadow-slate-900/[0.05]'
+            ? 'bg-white border border-[#d7dbdc] text-ds-body shadow-sm shadow-slate-900/[0.05]'
             : 'surface-premium border border-white/[0.08] text-[#a1a4a5]'
         }`}
       >
