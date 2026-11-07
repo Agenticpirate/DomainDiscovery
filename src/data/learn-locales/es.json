@@ -15110,6 +15110,184 @@
           ]
         }
       ]
+    },
+    "how-much-is-my-domain-name-worth-free-valuation-methods": {
+      "title": "¿Cuánto vale mi nombre de dominio? (Métodos de valoración gratuitos)",
+      "description": "¿Te preguntas cuánto vale tu nombre de dominio? Descubre métodos gratuitos de tasación, herramientas de valoración y los factores que determinan el valor real de un dominio en 2026.",
+      "category": "Valoración",
+      "topics": [
+        "cuánto vale mi dominio",
+        "Valoración"
+      ],
+      "readTime": "16 min de lectura",
+      "sections": [
+        {
+          "heading": "Resumen",
+          "body": [
+            "El valor de un nombre de dominio depende de seis factores: longitud (cuanto más corto, más valioso), extensión (.com vale de 3 a 5 veces más que las alternativas), intención comercial de la palabra clave (las categorías con CPC alto, como finanzas y seguros, añaden primas importantes), tráfico y backlinks existentes, potencial de marca y momento del mercado. Usa EstiBot, la tasación de dominios de GoDaddy, la valoración de Sedo y las ventas comparables de NameBio para triangular gratis un rango de valor realista."
+          ]
+        },
+        {
+          "heading": "Por qué es difícil valorar un dominio",
+          "body": [
+            "A diferencia de las acciones o los inmuebles, los dominios no se negocian en mercados públicos líquidos con precios transparentes. No hay una bolsa central que liste miles de transacciones recientes con comparables detallados. En cambio, las ventas suelen ser privadas, los precios varían muchísimo según quién compra y por qué quiere el nombre, y el mercado está repartido entre decenas de plataformas.",
+            "Un dominio que vale $500 para un comprador puede valer $50,000 para una empresa para la que representa el nombre de marca perfecto. El contexto importa muchísimo.",
+            "Aun así, hay métodos fiables y herramientas gratuitas que te acercan mucho más a una valoración realista que adivinar."
+          ]
+        },
+        {
+          "heading": "Los factores que determinan el valor de un dominio",
+          "body": [
+            "1. Longitud",
+            "Cada carácter adicional suele reducir el valor de un dominio. En el espacio .com:",
+            "Dominios de una sola palabra: extremadamente valiosos, a menudo de seis o siete cifras",
+            "Combinaciones de dos palabras: valiosas si ambas palabras son comercialmente relevantes",
+            "Combinaciones de tres palabras: menos valor, salvo que sean muy de marca",
+            "Cuatro palabras o más: normalmente muy poco valor",
+            "Regla práctica: ¿pondrías este dominio en una tarjeta de visita y alguien lo recordaría? Cuanto más corto y sencillo, más valioso.",
+            "2. Extensión",
+            "El TLD importa muchísimo:",
+            ".com: premium. Sigue siendo la extensión más fiable y valiosa del mundo",
+            ".io: mercado secundario fuerte, sobre todo en tecnología",
+            ".ai: crece rápido y consigue primas reales para marcas relacionadas con la IA",
+            ".co: muy reconocida como abreviatura de «company»; mercado secundario aceptable",
+            ".net / .org: bastante menos valor que su equivalente .com",
+            "Códigos de país y gTLD nuevos: el valor varía; la mayoría valen menos que .com",
+            "3. Relevancia de la palabra clave e intención comercial",
+            "Los dominios con palabras clave comerciales valiosas valen más porque llevan implícito un valor de SEO y publicidad. Finanzas, seguros, salud, derecho, viajes e inmobiliaria son históricamente las categorías de palabras clave más lucrativas.",
+            "Consulta el volumen de búsqueda mensual y el coste por clic (CPC) de las palabras de tu dominio con Google Keyword Planner o Ahrefs. Un volumen alto y un CPC alto indican una demanda comercial que se traduce en valor del dominio.",
+            "4. Tráfico y backlinks existentes",
+            "¿Tu dominio tiene:",
+            "Tráfico directo: ¿gente que escribe la URL directamente?",
+            "Dominios de referencia: ¿otros sitios que enlazan a tu dominio?",
+            "Autoridad de dominio: ¿una puntuación DA o DR alta por un uso anterior?",
+            "Cualquiera de estas métricas añade un valor importante más allá del nombre. Un dominio con 100 backlinks de calidad y tráfico mensual medible vale mucho más que un dominio idéntico sin historial.",
+            "5. Potencial de marca",
+            "Más allá de las métricas de palabras clave, ¿qué tal funciona el nombre como marca? ¿Es:",
+            "¿Corto y fácil de pronunciar?",
+            "¿Memorable tras oírlo una vez?",
+            "¿Sin guiones ni números?",
+            "¿Podría ser una palabra de marca por sí sola?",
+            "En ciertos mercados, los dominios de marca suelen venderse por más que los de palabra clave exacta, sobre todo a startups y empresas tecnológicas que priorizan diferenciarse antes que describir.",
+            "6. Momento del mercado y tendencias",
+            "El valor de un dominio depende de lo que pasa en el mercado en general. Un dominio relacionado con la IA o el aprendizaje automático consigue en 2026 una prima importante frente a hace tres años. Un dominio de un sector en declive sufre la presión contraria. Estar en el nicho adecuado en el momento adecuado multiplica el valor.",
+            "Datos clave para 2026:",
+            "La venta de dominio más cara registrada es Cars.com por $872 million (2014), pero la venta mediana en NameBio en 2025 fue de unos $1,500, lo que muestra lo sesgada que está la distribución de precios.",
+            "Según los datos agregados de ventas de NameBio, en el mercado secundario los .com consiguen una prima de 3 a 5 veces frente a los .net equivalentes y de 5 a 10 veces frente a los .org.",
+            "Los dominios con palabras relacionadas con la IA («ai», «neural», «gpt», «model») se revalorizaron de media un 400 % entre enero de 2022 y diciembre de 2025 en el mercado secundario.",
+            "Según análisis independientes que comparan NameBio con las herramientas de tasación, herramientas automáticas como EstiBot y GoDaddy Appraisal infravaloran los dominios de marca y de tendencia una media del 30–60 % frente a los precios de venta reales."
+          ]
+        },
+        {
+          "heading": "Herramientas gratuitas de tasación de dominios",
+          "body": [
+            "EstiBot",
+            "EstiBot es una de las herramientas automáticas de tasación más usadas. Analiza:",
+            "Volumen de búsqueda y datos de CPC de las palabras clave",
+            "Longitud y extensión del dominio",
+            "Ventas pasadas comparables",
+            "Datos de tráfico y backlinks (cuando hay)",
+            "EstiBot da una estimación en dólares con un rango, una base que los inversores en dominios se toman en serio. No es perfecta (ninguna herramienta automática lo es), pero es un buen punto de partida.",
+            "URL: estidomain.com",
+            "Tasación de dominios de GoDaddy",
+            "La herramienta gratuita de GoDaddy usa aprendizaje automático entrenado con millones de ventas pasadas para dar una valoración al instante. Las estimaciones suelen ser conservadoras, pero sirven como suelo.",
+            "Cómo usarla: entra en la página principal de GoDaddy, busca un dominio y, si está ocupado, verás un valor de tasación en la página de resultados.",
+            "Limitación: las tasaciones de GoDaddy tienden a infravalorar los dominios muy de marca o ligados a tendencias.",
+            "Valoración de dominios de Sedo",
+            "Sedo, uno de los mayores mercados de dominios del mundo, ofrece una herramienta de valoración que tiene en cuenta los datos de ventas de su propio mercado. Si tu dominio se parece a nombres que se han vendido en Sedo, puede dar estimaciones especialmente precisas.",
+            "Extra: mientras ves la valoración, publicar el dominio en Sedo es inmediato.",
+            "Búsqueda de ventas comparables en NameBio",
+            "NameBio no es una herramienta de valoración: es una base de datos de ventas históricas. Pero buscar dominios comparables que se hayan vendido de verdad es probablemente más fiable que cualquier tasación automática.",
+            "1. Cómo usarla:",
+            "2. Entra en NameBio.com",
+            "3. Busca dominios parecidos al tuyo (mismas palabras clave, longitud similar, misma extensión)",
+            "4. Filtra por extensión y fecha de venta",
+            "5. Mira el rango de precios de venta reales",
+            "Este es el método que usan los inversores profesionales. Los datos de ventas reales ganan siempre a las estimaciones algorítmicas.",
+            "Ejemplo: si tienes «CloudAccounting.com», busca en NameBio «cloud + accounting», «cloud + finance» y pares de palabras parecidos en .com para ver lo que los compradores han pagado realmente."
+          ]
+        },
+        {
+          "heading": "Proceso de valoración paso a paso",
+          "body": [
+            "Paso 1: Haz tres tasaciones automáticas",
+            "Usa EstiBot, GoDaddy y Sedo. Anota el rango y calcula la media. Esa es tu base automática.",
+            "Paso 2: Investiga ventas comparables en NameBio",
+            "Encuentra de 5 a 10 ventas de dominios comparables. Busca:",
+            "Misma extensión (.com con .com)",
+            "Categoría de palabra clave similar",
+            "Longitud similar (una palabra frente a dos)",
+            "Ventas de los últimos 12–24 meses (el mercado cambia)",
+            "Calcula la media y la mediana del precio de venta de tus comparables.",
+            "Paso 3: Revisa las métricas de palabras clave",
+            "Busca las palabras de tu dominio en Google Keyword Planner o Ahrefs. Anota:",
+            "Volumen de búsqueda mensual",
+            "CPC medio",
+            "Mucho volumen + CPC alto = más valor del dominio. Son los datos que usan los compradores expertos para justificar precios premium.",
+            "Paso 4: Comprueba el tráfico y los backlinks",
+            "Usa Ahrefs o Moz (ambos tienen acceso gratuito limitado) para revisar:",
+            "Domain Rating / Domain Authority",
+            "Número de dominios de referencia",
+            "Estimación del tráfico orgánico mensual",
+            "Unas métricas destacadas en cualquiera de estas categorías añaden una prima considerable.",
+            "Paso 5: Ten en cuenta el contexto del comprador",
+            "Pregúntate: ¿quién querría comprar realmente este dominio y por qué?",
+            "¿Una startup que crea una marca nueva? (Valora el potencial de marca)",
+            "¿Una empresa que protege su marca? (Valora la relación con su nombre)",
+            "¿Un inversor que compra para revender? (Valora el atractivo amplio)",
+            "¿Un negocio que quiere tráfico por palabra clave? (Valora las métricas SEO)",
+            "Entender quién es el comprador más probable te ayuda a posicionar bien tu dominio."
+          ]
+        },
+        {
+          "heading": "Señales de que tu dominio podría valer más de lo que crees",
+          "body": [
+            "Contiene una palabra clave con un CPC de $5+ en Google Ads",
+            "Antes alojaba un sitio web activo con contenido",
+            "Tiene más de 50 backlinks de calidad",
+            "Coincide exactamente con una categoría popular de producto o servicio",
+            "Tiene menos de 10 caracteres y solo palabras reales",
+            "Pertenece a un sector en crecimiento (IA, tecnología climática, tecnología sanitaria)"
+          ]
+        },
+        {
+          "heading": "Señales de que tu dominio podría valer menos de lo que esperas",
+          "body": [
+            "Contiene guiones o números",
+            "Tiene más de tres palabras",
+            "La extensión es .net, .info o un ccTLD poco conocido",
+            "Nadie busca las palabras clave que contiene",
+            "Imita de cerca una marca registrada (lo que además supone un riesgo legal)"
+          ]
+        },
+        {
+          "heading": "Obtener una tasación profesional",
+          "body": [
+            "Para dominios que creas que realmente valen $5,000 o más, plantéate una tasación profesional de pago con un tasador acreditado. La American Society of Appraisers tiene miembros especializados en dominios. Sedo ofrece servicios formales de tasación. Un informe profesional también puede respaldar las negociaciones con compradores que necesitan justificar un precio más alto.",
+            "¿Quieres saber qué dominios están disponibles en tu nicho o investigar nombres comparables? Usa DomainsDiscovery.com para comprobar al instante la disponibilidad de dominios y comparar precios entre registradores."
+          ]
+        },
+        {
+          "heading": "Veredicto experto",
+          "body": [
+            "La valoración de dominios es la habilidad básica de la inversión en dominios y una capacidad infravalorada para cualquier empresa que compra dominios para su marca. La diferencia entre las estimaciones de las herramientas automáticas y los precios de venta reales, que puede ir del 30 % al 300 % según el tipo de dominio, hace que fiarse solo de valoraciones algorítmicas produzca una y otra vez anuncios demasiado caros que no se venden o compras demasiado baratas que dejan dinero sobre la mesa.",
+            "El enfoque del inversor profesional (triangular las herramientas automáticas con las ventas comparables de NameBio y los datos de CPC) da valoraciones lo bastante precisas para tomar buenas decisiones. No es una metodología compleja: requiere entre 20 y 30 minutos de investigación por dominio. Pero la disciplina de hacer de verdad esa investigación, en lugar de adivinar o fiarse de una sola herramienta, es lo que separa a los inversores que ganan dinero de forma constante de los que no.",
+            "La idea más importante de la valoración de dominios es que el contexto del comprador determina el precio tanto como las características del propio dominio. Un dominio de palabra clave mediocre puede conseguir una prima si lo encuentra el comprador estratégico adecuado, uno para el que el dominio tiene una relevancia única. Por eso los dominios publicados en varios mercados y mantenidos con paciencia se venden de media más caros que los que se liquidan rápido por un solo canal. El tiempo invertido en encontrar al comprador adecuado es, en sí mismo, un multiplicador del valor."
+          ]
+        },
+        {
+          "heading": "Preguntas frecuentes",
+          "body": [
+            "P: ¿Cómo sé cuánto vale mi nombre de dominio?\nR: Combina EstiBot (tasación automática con datos de palabras clave y comparables), la tasación de dominios de GoDaddy (base gratuita y conservadora), la valoración de Sedo (datos comparables de su mercado) y la búsqueda de ventas comparables en NameBio (ventas históricas reales de dominios similares). Haz la media de estas estimaciones y ajústala al alza si tu dominio tiene tráfico, backlinks o encaje con tendencias, y a la baja si tiene guiones, números o extensiones poco conocidas.",
+            "P: ¿Cuál es el precio medio de venta de un nombre de dominio?\nR: El precio medio de venta declarado de un .com en todas las categorías de NameBio ronda los $3,800. Sin embargo, la mediana está en torno a $1,500, lo que refleja el fuerte sesgo de las ventas premium. La mayoría de los dominios que se venden lo hacen por menos de $5,000; los .com premium de una palabra y los nombres que definen una categoría se venden con frecuencia por $50,000–$500,000+; los dominios icónicos de una palabra pueden alcanzar millones.",
+            "P: ¿Vale más un dominio .com que uno .io o .co?\nR: Sí, en la mayoría de los casos bastante más. En el mercado secundario, .com consigue una prima de 3 a 5 veces frente a los .io equivalentes y de 5 a 10 veces frente a los .org. La excepción son las extensiones de nicho que han logrado una adopción real: .io tiene valor de verdad en el mundo de las startups tecnológicas y .ai consigue primas importantes para productos y empresas centrados en la IA.",
+            "P: ¿Tener una web en mi dominio aumenta su valor?\nR: Sí, mucho, si la web genera tráfico directo, tráfico orgánico o backlinks de calidad. Un dominio con 100 dominios de referencia y 1,000 visitas al mes puede valer de 5 a 10 veces más que un dominio aparcado idéntico. Al contrario, un dominio que antes alojó spam o contenido de baja calidad puede valer menos que uno nuevo por penalizaciones manuales de Google o perfiles de backlinks tóxicos.",
+            "P: ¿Qué precisión tienen las herramientas gratuitas de tasación?\nR: Las herramientas automáticas (EstiBot, GoDaddy) sirven como base, pero infravaloran de forma sistemática los dominios de marca y de tendencia, una media del 30–60 %. Funcionan mejor con dominios .com de palabra clave en categorías comerciales consolidadas. Para nombres de marca, palabras inventadas y dominios de categorías emergentes, investigar ventas comparables en NameBio da valoraciones más precisas que cualquier herramienta automática.",
+            "P: ¿Puedo conseguir una tasación profesional de mi dominio?\nR: Sí. La American Society of Appraisers tiene tasadores de dominios acreditados. Sedo ofrece servicios formales de tasación con informes escritos. La tasación profesional es más útil para dominios que se cree que valen $5,000+, donde el informe puede respaldar negociaciones de precio o procesos legales. Para los dominios típicos de una cartera, basta con combinar las herramientas gratuitas y la investigación en NameBio.",
+            "P: ¿Qué hace que un dominio valga seis cifras o más?\nR: Los dominios de seis cifras suelen reunir la mayoría de estas características: .com de una sola palabra; gran relevancia comercial de la palabra clave (finanzas, seguros, salud, tecnología); poca longitud (1–2 sílabas, menos de 10 caracteres); mucho volumen de búsqueda mensual para la palabra exacta; tráfico directo existente; un buen historial de backlinks; o valor cultural y de marca como nombre por sí solo. Los .com genéricos de una palabra que definen una categoría, como Insurance.com, Loans.com o Health.com, son la cima de este mercado."
+          ]
+        }
+      ]
     }
   }
 }
