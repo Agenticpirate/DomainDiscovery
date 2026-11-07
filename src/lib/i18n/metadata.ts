@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getSiteBaseUrl, SITE_BRAND } from '@/lib/seoSiteFacts';
 import { getMessages, getPageCopy } from './index';
 import { getRequestLocale } from './request';
+import { clampMetaDescription } from '@/lib/seo/metaDescription';
 import {
   getLocaleMeta,
   INDEXABLE_LOCALE_PATHS,
@@ -37,7 +38,7 @@ export async function buildLocalizedToolMetadata(opts: {
   const meta = getLocaleMeta(locale);
   const copy = locale === 'en' ? null : getPageCopy(locale, opts.path);
   const title = copy?.title ?? opts.title;
-  const description = copy?.description ?? opts.description;
+  const description = clampMetaDescription(copy?.description ?? opts.description);
   const publicPath = localeHref(locale, opts.path);
   const indexable = (INDEXABLE_LOCALE_PATHS as readonly string[]).includes(opts.path);
 

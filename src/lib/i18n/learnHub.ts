@@ -44,7 +44,7 @@ export type LearnHubCopy = {
 const en: LearnHubCopy = {
   metaTitle: 'Domain Name Guides — Naming, SEO, Valuation & DNS',
   metaDescription:
-    'Free guides on choosing a domain name, brandable vs keyword domains, geo domains, valuation, DNS, auctions, and registration strategy. Learn then search live availability.',
+    'Free guides on choosing a domain name: brandable vs keyword domains, geo domains, valuation, DNS, auctions, and registration. Then check availability live.',
   keywords: ['domain name guides', 'how to choose a domain name', 'domain registration guide', 'domain valuation', 'DNS guide'],
   home: 'Home',
   learn: 'Learn',
@@ -123,7 +123,7 @@ const copy: Record<Exclude<LocaleId, 'en'>, LearnHubCopy> = {
   },
   de: {
     metaTitle: 'Domain-Ratgeber — Namensfindung, SEO, Bewertung & DNS',
-    metaDescription: 'Kostenlose Ratgeber zur Wahl eines Domainnamens, Marken- vs. Keyword-Domains, Geo-Domains, Bewertung, DNS, Auktionen und Registrierungsstrategie. Erst lernen, dann live die Verfügbarkeit prüfen.',
+    metaDescription: 'Kostenlose Ratgeber zur Domainwahl: Marken- vs. Keyword-Domains, Geo-Domains, Bewertung, DNS, Auktionen und Registrierung. Danach live verfügbar prüfen.',
     keywords: ['Domain Ratgeber', 'Domainnamen wählen', 'Domain registrieren Anleitung', 'Domain bewerten', 'DNS Ratgeber'],
     home: 'Start',
     learn: 'Ratgeber',
@@ -162,7 +162,7 @@ const copy: Record<Exclude<LocaleId, 'en'>, LearnHubCopy> = {
   },
   es: {
     metaTitle: 'Guías de dominios — Nombres, SEO, valoración y DNS',
-    metaDescription: 'Guías gratuitas para elegir un nombre de dominio, dominios de marca frente a palabra clave, dominios geográficos, valoración, DNS, subastas y estrategia de registro. Aprende y comprueba la disponibilidad en directo.',
+    metaDescription: 'Guías gratis para elegir dominio: marca o palabra clave, dominios geográficos, valoración, DNS, subastas y registro. Luego comprueba la disponibilidad en vivo.',
     keywords: ['guías de dominios', 'cómo elegir un nombre de dominio', 'guía para registrar un dominio', 'valoración de dominios', 'guía DNS'],
     home: 'Inicio',
     learn: 'Aprender',
@@ -240,7 +240,7 @@ const copy: Record<Exclude<LocaleId, 'en'>, LearnHubCopy> = {
   },
   fr: {
     metaTitle: 'Guides des noms de domaine — Nommage, SEO, valeur et DNS',
-    metaDescription: 'Guides gratuits pour choisir un nom de domaine, domaines de marque ou à mot-clé, domaines géographiques, estimation, DNS, enchères et stratégie d’enregistrement. Apprenez, puis vérifiez la disponibilité en direct.',
+    metaDescription: 'Guides gratuits pour choisir un domaine : marque ou mot-clé, domaines géo, estimation, DNS, enchères et enregistrement. Vérifiez ensuite la disponibilité.',
     keywords: ['guides noms de domaine', 'choisir un nom de domaine', 'guide enregistrement de domaine', 'estimation de domaine', 'guide DNS'],
     home: 'Accueil',
     learn: 'Guides',
@@ -279,7 +279,7 @@ const copy: Record<Exclude<LocaleId, 'en'>, LearnHubCopy> = {
   },
   pt: {
     metaTitle: 'Guias de domínios — Nomes, SEO, avaliação e DNS',
-    metaDescription: 'Guias grátis para escolher um nome de domínio, domínios de marca ou de palavra-chave, domínios geográficos, avaliação, DNS, leilões e estratégia de registro. Aprenda e verifique a disponibilidade ao vivo.',
+    metaDescription: 'Guias grátis para escolher domínio: marca ou palavra-chave, domínios geográficos, avaliação, DNS, leilões e registro. Depois verifique a disponibilidade.',
     keywords: ['guias de domínios', 'como escolher um nome de domínio', 'guia de registro de domínio', 'avaliação de domínios', 'guia DNS'],
     home: 'Início',
     learn: 'Aprender',
@@ -357,7 +357,7 @@ const copy: Record<Exclude<LocaleId, 'en'>, LearnHubCopy> = {
   },
   ar: {
     metaTitle: 'أدلة أسماء النطاقات — التسمية وSEO والتقييم وDNS',
-    metaDescription: 'أدلة مجانية لاختيار اسم النطاق، والنطاقات التجارية مقابل نطاقات الكلمات المفتاحية، والنطاقات الجغرافية، والتقييم، وDNS، والمزادات، واستراتيجية التسجيل. تعلّم ثم تحقّق من التوفر مباشرة.',
+    metaDescription: 'أدلة مجانية لاختيار اسم النطاق: النطاقات التجارية أم الكلمات المفتاحية، والنطاقات الجغرافية، والتقييم، وDNS، والمزادات، والتسجيل. ثم تحقّق من التوفر مباشرة.',
     keywords: ['أدلة أسماء النطاقات', 'كيف تختار اسم نطاق', 'دليل تسجيل النطاق', 'تقييم النطاقات', 'دليل DNS'],
     home: 'الرئيسية',
     learn: 'تعلّم',
@@ -396,7 +396,7 @@ const copy: Record<Exclude<LocaleId, 'en'>, LearnHubCopy> = {
   },
   ru: {
     metaTitle: 'Руководства по доменам — названия, SEO, оценка и DNS',
-    metaDescription: 'Бесплатные руководства: как выбрать доменное имя, брендовые и ключевые домены, геодомены, оценка, DNS, аукционы и стратегия регистрации. Изучите тему и сразу проверьте доступность.',
+    metaDescription: 'Бесплатные гайды: как выбрать домен, брендовые и ключевые домены, геодомены, оценка, DNS, аукционы и регистрация. Затем проверьте доступность онлайн.',
     keywords: ['руководства по доменам', 'как выбрать доменное имя', 'как зарегистрировать домен', 'оценка домена', 'руководство по DNS'],
     home: 'Главная',
     learn: 'Обучение',
@@ -435,7 +435,7 @@ const copy: Record<Exclude<LocaleId, 'en'>, LearnHubCopy> = {
   },
   bn: {
     metaTitle: 'ডোমেইন নাম গাইড — নাম বাছাই, SEO, মূল্যায়ন ও DNS',
-    metaDescription: 'ডোমেইন নাম বাছাই, ব্র্যান্ডযোগ্য বনাম কীওয়ার্ড ডোমেইন, ভৌগোলিক ডোমেইন, মূল্যায়ন, DNS, নিলাম ও রেজিস্ট্রেশন কৌশল নিয়ে বিনামূল্যের গাইড। শিখুন, তারপর সরাসরি প্রাপ্যতা যাচাই করুন।',
+    metaDescription: 'ডোমেইন নাম বাছাই, ব্র্যান্ডযোগ্য বনাম কীওয়ার্ড ডোমেইন, ভৌগোলিক ডোমেইন, মূল্যায়ন, DNS, নিলাম ও রেজিস্ট্রেশন নিয়ে বিনামূল্যের গাইড। তারপর প্রাপ্যতা যাচাই করুন।',
     keywords: ['ডোমেইন নাম গাইড', 'ডোমেইন নাম কীভাবে বাছবেন', 'ডোমেইন রেজিস্ট্রেশন গাইড', 'ডোমেইন মূল্যায়ন', 'DNS গাইড'],
     home: 'হোম',
     learn: 'শিখুন',
@@ -474,7 +474,7 @@ const copy: Record<Exclude<LocaleId, 'en'>, LearnHubCopy> = {
   },
   ur: {
     metaTitle: 'ڈومین نام گائیڈز — نام کا انتخاب، SEO، قیمت اور DNS',
-    metaDescription: 'ڈومین نام کے انتخاب، برانڈ ایبل بمقابلہ کی ورڈ ڈومینز، جغرافیائی ڈومینز، قیمت کا اندازہ، DNS، نیلامی اور رجسٹریشن کی حکمتِ عملی پر مفت گائیڈز۔ پہلے سیکھیں، پھر براہِ راست دستیابی چیک کریں۔',
+    metaDescription: 'ڈومین نام کے انتخاب، برانڈ ایبل بمقابلہ کی ورڈ ڈومینز، جغرافیائی ڈومینز، قیمت، DNS، نیلامی اور رجسٹریشن پر مفت گائیڈز۔ پھر براہِ راست دستیابی چیک کریں۔',
     keywords: ['ڈومین نام گائیڈ', 'ڈومین نام کیسے چنیں', 'ڈومین رجسٹریشن گائیڈ', 'ڈومین کی قیمت', 'DNS گائیڈ'],
     home: 'ہوم',
     learn: 'سیکھیں',

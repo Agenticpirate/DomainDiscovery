@@ -5,7 +5,7 @@ import { en } from './en';
 export const pt: Messages = {
   ...en,
   pages: {
-    home: { title: 'Pesquisa de nome de domínio — disponibilidade grátis | DomainDiscovery', description: 'Pesquisa grátis de nomes de domínio com disponibilidade ao vivo em mais de 1.600 TLD. Gerador com IA, verificação em massa, domínios geo, WHOIS e comparação de preços — sem conta.', keywords: ['pesquisa de nome de domínio', 'disponibilidade de domínio', 'verificar domínio', 'gerador de domínios'] },
+    home: { title: 'Pesquisa de nome de domínio — disponibilidade grátis | DomainDiscovery', description: 'Pesquisa grátis de domínios com disponibilidade ao vivo em mais de 1.600 TLD. Gerador com IA, verificação em massa, WHOIS e comparação de preços. Sem conta.', keywords: ['pesquisa de nome de domínio', 'disponibilidade de domínio', 'verificar domínio', 'gerador de domínios'] },
     search: { title: 'Verificar disponibilidade de domínio', description: 'Veja na hora se um nome de domínio está livre, registado ou é premium.', keywords: ['disponibilidade de domínio', 'domínio livre', 'pesquisar domínio'] },
     generator: { title: 'Gerador de domínios com IA — ideias grátis', description: 'Gerador grátis: uma palavra-chave vira nomes curtos e memoráveis, com disponibilidade ao vivo. Sem conta.', keywords: ['gerador de domínios', 'nome de domínio com IA', 'domínios de marca'] },
     bulk: { title: 'Pesquisa de domínios em massa — 1.000 nomes', description: 'Verifique até 1.000 nomes de uma vez. Veja livres, registados e premium e exporte a lista.', keywords: ['pesquisa de domínios em massa', 'verificar lista de domínios'] },
