@@ -1,0 +1,17 @@
+godaddy-auctions-guide||GoDaddy Auctions 实用指南||GoDaddy Auctions 上的过期拍卖、清仓、竞价策略和尽职调查。
+drop-catching-basics||域名抢注（Drop Catching）基础||域名如何掉落、预订（backorder）、DropCatch 等服务以及抢注池中的竞争。
+namejet-expired-domains||NameJet 与过期域名机会||私有注册局和过期列表如何为投资者呈现库存。
+afternic-fast-transfer||Afternic 快速转移详解||分销网络如何让一口价销售覆盖各注册商的店面。
+sedo-domain-sales||在 Sedo 上出售域名||Sedo 的 MLS 分发、经纪人和国际买家。
+domain-brokers||何时该使用域名经纪人||经纪佣金、主动联系、谈判，以及哪些域名值得委托代理。
+bin-vs-make-offer||一口价与报价模式的定价||一口价带来的流动性与以谈判为主的定价策略。
+lto-domain-financing||先租后买（LTO）域名交易||分期和 LTO 方案如何扩大买家群体，以及可能出什么问题。
+udrp-basics||域名持有者的 UDRP 基础||统一域名争议解决政策：恶意、权利以及案件如何进行。
+trademark-domain-risk||域名投资中的商标风险||如何在注册或拍卖出价前筛查商标。
+cybersquatting-explained||域名抢注（Cybersquatting）详解||什么是恶意抢注、法律救济，以及合乎道德的投资边界。
+udrp-case-lessons||近期 UDRP 案例的启示||域名投资者应当牢记的争议裁决规律。
+domain-privacy-laws||GDPR 与域名隐私||隐私法如何改变了公开 WHOIS，以及 RDAP 中仍会显示什么。
+tmch-basics||商标信息交换中心（TMCH）基础||为什么新 gTLD 上线时会通知商标权利人。
+expired-domains-guide||过期域名的运作方式||宽限期、赎回期、待删除，以及投资者关注什么。
+domain-history-checks||购买前如何检查域名历史||Archive.org、外链、垃圾信号和恶意软件历史检查。
+aged-domains-seo||老域名与 SEO 的现实||域名年龄到底有什么帮助，以及关于“老域名魔力”的误区。

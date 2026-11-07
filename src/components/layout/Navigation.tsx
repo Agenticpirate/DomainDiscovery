@@ -30,6 +30,10 @@ interface DropdownMenu {
   items: DropdownItem[];
 }
 
+/** Notch geometry (px): flat side rails are RAIL_H tall, the centre notch floor is NOTCH_H. */
+const NOTCH_H = 60;
+const RAIL_H = 38;
+
 export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -197,7 +201,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     ? 'text-[#4d4d4d] hover:text-[#171717] hover:bg-[#fafafa] border border-transparent hover:border-[#d0d0d0]'
     : 'text-white/70 hover:text-white hover:bg-gradient-to-b hover:from-white/[0.08] hover:to-white/[0.04] border border-transparent hover:border-white/[0.15]';
 
-  const renderDropdown = (menu: DropdownMenu, menuKey: string) => (
+  const renderDropdown = (menu: DropdownMenu, menuKey: string, align: 'left' | 'right' = 'right') => (
     <div 
       className="relative" 
       key={menuKey}
@@ -220,7 +224,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
 
       {openDropdown === menuKey && (
         <div
-          className="nav-dropdown-panel absolute top-full right-0 z-[200] pt-2"
+          className={`nav-dropdown-panel absolute top-full z-[200] pt-2 ${align === 'left' ? 'left-0' : 'right-0'}`}
           style={{ width: 480, maxWidth: 'min(480px, calc(100vw - 1.5rem))' }}
         >
           {/* Solid panel — no animated sheens on hover (avoids icon blink) */}
@@ -296,71 +300,111 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     </div>
   );
 
+  const sunIcon = (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+  );
+  const moonIcon = (
+    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+    </svg>
+  );
+  const bookmarkIcon = (
+    <svg className="w-4 h-4" fill={savedDomainsCount > 0 ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+    </svg>
+  );
+  const savedLabel =
+    savedDomainsCount > 0 ? navCopy.savedAria.replace('{count}', String(savedDomainsCount)) : navCopy.saved;
+  const savedCount = savedDomainsCount > 99 ? '99+' : String(savedDomainsCount);
+
+  /* Notch hairlines (double rule, like the reference): outer + inner line, theme-aware ink. */
+  const lineOuter = isLight ? 'rgba(10,10,10,0.11)' : 'rgba(255,255,255,0.12)';
+  const lineInner = isLight ? 'rgba(10,10,10,0.05)' : 'rgba(255,255,255,0.06)';
+  const fill = 'var(--bg-main)';
+  const mobileIconBtn = `inline-flex h-10 w-10 items-center justify-center rounded-xl ${isLight ? 'text-[#434a4d]' : 'text-[#a1a4a5]'}`;
+
+  /** Flat side rail (shorter than the notch). */
+  const rail = (
+    <div className="relative flex-1 min-w-0" style={{ height: RAIL_H, background: fill }} aria-hidden>
+      <span className="absolute inset-x-0 bottom-0 h-px" style={{ background: lineOuter }} />
+      <span className="absolute inset-x-0 bottom-[3px] h-px" style={{ background: lineInner }} />
+    </div>
+  );
+
+  /** Curved shoulder joining the rail (38px) to the notch floor (60px). Mirrored on the right. */
+  const shoulder = (side: 'left' | 'right') => {
+    const fillPath =
+      side === 'left'
+        ? `M0 0 H44 V${NOTCH_H} C22 ${NOTCH_H} 22 ${RAIL_H} 0 ${RAIL_H} Z`
+        : `M0 0 H44 V${RAIL_H} C22 ${RAIL_H} 22 ${NOTCH_H} 0 ${NOTCH_H} Z`;
+    const curve = (offset: number) =>
+      side === 'left'
+        ? `M0 ${RAIL_H - 0.5 - offset} C22 ${RAIL_H - 0.5 - offset} 22 ${NOTCH_H - 0.5 - offset} 44 ${NOTCH_H - 0.5 - offset}`
+        : `M0 ${NOTCH_H - 0.5 - offset} C22 ${NOTCH_H - 0.5 - offset} 22 ${RAIL_H - 0.5 - offset} 44 ${RAIL_H - 0.5 - offset}`;
+    return (
+      <svg
+        className="notch-shoulder block shrink-0 w-[22px] lg:w-[44px] -mx-px"
+        style={{ height: NOTCH_H }}
+        viewBox={`0 0 44 ${NOTCH_H}`}
+        preserveAspectRatio="none"
+        aria-hidden
+      >
+        <path d={fillPath} fill={fill} />
+        <path d={curve(0)} fill="none" stroke={lineOuter} strokeWidth={1} vectorEffect="non-scaling-stroke" />
+        <path d={curve(3)} fill="none" stroke={lineInner} strokeWidth={1} vectorEffect="non-scaling-stroke" />
+      </svg>
+    );
+  };
+
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-[100] py-1 sm:py-1.5 px-2 sm:px-4"
-      style={{ paddingTop: 'max(0.25rem, env(safe-area-inset-top, 0px))' }}
+      className="notch-nav fixed top-0 left-0 right-0 z-[100]"
+      style={{ paddingTop: 'env(safe-area-inset-top, 0px)', background: 'transparent' }}
       data-site-nav
       aria-label="Primary"
     >
-      <style>{`nav svg{width:16px;height:16px;max-width:16px;max-height:16px;flex-shrink:0}`}</style>
-      <div className="max-w-7xl mx-auto">
-        <div className={`relative overflow-visible border rounded-2xl ${
-          isLight
-            ? 'bg-white border-[#d7dbdc] shadow-[0_1px_1px_rgba(0,0,0,0.03),0_2px_8px_rgba(0,0,0,0.05)]'
-            : 'bg-black border-white/[0.08]'
-        }`}>
-          
-          <div className="relative px-2 sm:px-3 py-1.5 sm:py-1.5">
-            <div className="flex items-center justify-between">
-              <Link
-                href={href('/')}
-                className="min-w-0 flex-1 hover:opacity-90 transition-opacity lg:flex-none lg:shrink-0"
-              >
-                <Logo size="sm" showText />
-              </Link>
+      <style>{`nav[data-site-nav] .notch-content svg{width:16px;height:16px;max-width:16px;max-height:16px;flex-shrink:0}`}</style>
+      {/* Safe-area strip keeps the notch shape flush on iOS */}
+      <div className="absolute inset-x-0 top-0" style={{ height: 'env(safe-area-inset-top, 0px)', background: fill }} aria-hidden />
 
-              <div className="hidden lg:flex items-center gap-1" ref={dropdownRef}>
+      <div className="relative flex items-start">
+        {rail}
+
+        {/* Notch: shoulders + content floor */}
+        <div className="relative flex shrink-0 max-w-full">
+          {shoulder('left')}
+          <div className="notch-content relative min-w-0" style={{ height: NOTCH_H, background: fill }}>
+            <span className="absolute inset-x-0 bottom-0 h-px" style={{ background: lineOuter }} aria-hidden />
+            <span className="absolute inset-x-0 bottom-[3px] h-px" style={{ background: lineInner }} aria-hidden />
+
+            {/* Desktop */}
+            <div className="hidden lg:flex h-full items-center gap-6 px-3 pb-1" ref={dropdownRef}>
+              <div className="flex items-center gap-1">
                 <Link
                   href={href('/')}
                   className={`${navBtnBase} ${currentTool === 'home' || currentTool === 'search' ? navBtnActive : navBtnInactive}`}
                 >
                   <span>{navCopy.home}</span>
                 </Link>
-                {renderDropdown(searchMenu, 'search')}
-                {renderDropdown(toolsMenu, 'tools')}
+                {renderDropdown(searchMenu, 'search', 'left')}
+                {renderDropdown(toolsMenu, 'tools', 'left')}
                 <Link
                   href={href('/learn')}
-                  className={`${navBtnBase} ${
-                    barePath.startsWith('/learn') ? navBtnActive : navBtnInactive
-                  }`}
+                  className={`${navBtnBase} ${barePath.startsWith('/learn') ? navBtnActive : navBtnInactive}`}
                 >
                   {navCopy.learn}
                 </Link>
+              </div>
 
-                <Link
-                  href={href('/saved-domains')}
-                  className={`group ${navBtnBase} ${navBtnInactive}`}
-                  aria-label={
-                    savedDomainsCount > 0
-                      ? navCopy.savedAria.replace('{count}', String(savedDomainsCount))
-                      : navCopy.saved
-                  }
-                >
-                  <svg
-                    className="w-4 h-4"
-                    fill={savedDomainsCount > 0 ? 'currentColor' : 'none'}
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                    />
-                  </svg>
+              <Link href={href('/')} className="shrink-0 hover:opacity-90 transition-opacity" aria-label="DomainDiscovery home">
+                <Logo size="sm" showText />
+              </Link>
+
+              <div className="flex items-center gap-1">
+                <Link href={href('/saved-domains')} className={`group ${navBtnBase} ${navBtnInactive}`} aria-label={savedLabel}>
+                  {bookmarkIcon}
                   <span>{navCopy.saved}</span>
                   {savedDomainsCount > 0 && (
                     <span
@@ -370,230 +414,198 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                           : 'bg-white/[0.06] text-white/55 ring-1 ring-inset ring-white/10'
                       }`}
                     >
-                      {savedDomainsCount > 99 ? '99+' : savedDomainsCount}
+                      {savedCount}
                     </span>
                   )}
                 </Link>
-
                 <LanguageSwitcher />
                 <button
                   onClick={toggleTheme}
                   className={`${navBtnBase} ${navBtnInactive} px-2`}
                   title={theme === 'dark' ? navCopy.light : navCopy.dark}
-                >
-                  {theme === 'dark' ? (
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                  ) : (
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                  )}
-                </button>
-              </div>
-
-              <div className="flex shrink-0 items-center lg:hidden">
-                <LanguageSwitcher compact />
-                <button
-                  onClick={toggleTheme}
-                  className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${isLight ? 'text-[#434a4d]' : 'text-[#a1a4a5]'}`}
                   aria-label={theme === 'dark' ? navCopy.light : navCopy.dark}
                 >
-                  {theme === 'dark' ? (
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                  ) : (
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                  )}
-                </button>
-                <Link
-                  href={href('/saved-domains')}
-                  className={`relative inline-flex h-11 w-11 items-center justify-center rounded-xl ${isLight ? 'text-[#434a4d]' : 'text-[#a1a4a5]'}`}
-                  aria-label={
-                    savedDomainsCount > 0
-                      ? navCopy.savedAria.replace('{count}', String(savedDomainsCount))
-                      : navCopy.saved
-                  }
-                >
-                  <svg
-                    className="w-4 h-4"
-                    fill={savedDomainsCount > 0 ? 'currentColor' : 'none'}
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                    />
-                  </svg>
-                  {savedDomainsCount > 0 && (
-                    <span
-                      className={`absolute -top-0.5 -right-0.5 inline-flex h-3.5 min-w-[0.875rem] items-center justify-center rounded px-1 text-[9px] font-semibold tabular-nums leading-none ${
-                        isLight
-                          ? 'bg-slate-100 text-slate-600 ring-1 ring-slate-200'
-                          : 'bg-[#111111] text-white/65 ring-1 ring-white/12'
-                      }`}
-                    >
-                      {savedDomainsCount > 99 ? '99+' : savedDomainsCount}
-                    </span>
-                  )}
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  aria-expanded={mobileMenuOpen}
-                  aria-controls="mobile-nav-menu"
-                  aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-                  className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${
-                    mobileMenuOpen
-                      ? isLight
-                        ? 'bg-[#f4f5f5] text-[#0a0a0a]'
-                        : 'bg-white/[0.08] text-[#f0f0f0]'
-                      : isLight
-                        ? 'text-[#0a0a0a]'
-                        : 'text-[#f0f0f0]'
-                  }`}
-                >
-                  <svg className="w-5 h-5" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    {mobileMenuOpen ? (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    ) : (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                    )}
-                  </svg>
+                  {theme === 'dark' ? sunIcon : moonIcon}
                 </button>
               </div>
+            </div>
+
+            {/* Mobile / tablet */}
+            <div className="flex lg:hidden h-full items-center gap-1 px-0.5 pb-1">
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-nav-menu"
+                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${
+                  mobileMenuOpen
+                    ? isLight
+                      ? 'bg-[#f4f5f5] text-[#0a0a0a]'
+                      : 'bg-white/[0.08] text-[#f0f0f0]'
+                    : isLight
+                      ? 'text-[#0a0a0a]'
+                      : 'text-[#f0f0f0]'
+                }`}
+              >
+                <svg className="w-5 h-5" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {mobileMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+
+              <Link href={href('/')} className="min-w-0 px-1 hover:opacity-90 transition-opacity" aria-label="DomainDiscovery home">
+                <Logo size="sm" showText />
+              </Link>
+
+              <LanguageSwitcher compact />
+              <Link href={href('/saved-domains')} className={`relative ${mobileIconBtn}`} aria-label={savedLabel}>
+                {bookmarkIcon}
+                {savedDomainsCount > 0 && (
+                  <span
+                    className={`absolute top-0.5 right-0.5 inline-flex h-3.5 min-w-[0.875rem] items-center justify-center rounded px-1 text-[9px] font-semibold tabular-nums leading-none ${
+                      isLight
+                        ? 'bg-slate-100 text-slate-600 ring-1 ring-slate-200'
+                        : 'bg-[#111111] text-white/65 ring-1 ring-white/12'
+                    }`}
+                  >
+                    {savedCount}
+                  </span>
+                )}
+              </Link>
             </div>
           </div>
+          {shoulder('right')}
+        </div>
 
-          {mobileMenuOpen && (
-            <div
-              id="mobile-nav-menu"
-              className={`mobile-nav-panel lg:hidden border-t max-h-[calc(100vh-5rem)] overflow-y-auto overscroll-contain ${
-                isLight ? 'border-[#d7dbdc] bg-white' : 'border-white/[0.08] bg-black'
-              }`}
-            >
-              <div className="px-2 pt-2 pb-2">
-                <div className="grid grid-cols-2 gap-1">
-                  {[{
-                    id: 'home',
-                    label: navCopy.home,
-                    mobileLabel: navCopy.home,
-                    href: href('/'),
-                    icon: (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z" />
-                      </svg>
-                    ),
-                  }, ...searchMenu.items, ...toolsMenu.items].map((item) => {
-                    const active = item.id === 'home'
-                      ? currentTool === 'home'
-                      : item.id === 'search'
-                        ? currentTool === 'search'
-                        : isMenuItemActive(item.id, item.href);
-                    return (
-                    <Link key={item.id} href={item.href} onClick={handleDropdownClose}
-                      title={item.label}
-                      aria-current={active ? 'page' : undefined}
-                      className={`flex min-h-[44px] items-center gap-2 rounded-xl px-2 min-w-0 ${
-                        active
-                          ? isLight ? 'bg-[#f4f5f5] text-[#0a0a0a]' : 'bg-white/[0.08] text-[#f0f0f0]'
-                          : isLight ? 'text-[#434a4d]' : 'text-[#c4c7c8]'
-                      }`}
-                    >
-                      <div className={`flex h-8 w-8 items-center justify-center rounded-lg shrink-0 ${
-                        active
-                          ? isLight ? 'bg-white text-[#0a0a0a] shadow-sm' : 'bg-white/[0.1] text-white'
-                          : isLight ? 'bg-[#f4f5f5] text-[#6e7679]' : 'bg-white/[0.05] text-white/55'
-                      }`}>{item.icon}</div>
-                      <span className="min-w-0 truncate text-[13px] font-medium leading-none">{item.mobileLabel}</span>
-                    </Link>
-                    );
-                  })}
-                </div>
+        {rail}
+      </div>
 
-                <p className={`px-1.5 pt-3 pb-1.5 text-[11px] font-semibold tracking-wide ${isLight ? 'text-[#6e7679]' : 'text-white/45'}`}>
-                  {navCopy.language}
-                </p>
-                <div className="grid grid-cols-4 gap-1 px-0.5 pb-1">
-                  {LOCALES.map((item) => {
-                    const active = item.id === locale;
-                    return (
-                      <Link
-                        key={item.id}
-                        href={switchHref(item.id, pathname || '/')}
-                        hrefLang={item.hreflang}
-                        lang={item.htmlLang}
-                        onClick={() => {
-                          persistLocaleChoice(item.id);
-                          handleDropdownClose();
-                        }}
-                        aria-current={active ? 'true' : undefined}
-                        className={`flex min-h-[36px] items-center justify-center rounded-lg px-1 text-center text-[11px] font-medium leading-none ${
-                          active
-                            ? isLight ? 'bg-[#0a0a0a] text-white' : 'bg-white text-[#0a0a0a]'
-                            : isLight ? 'bg-[#f4f5f5] text-[#434a4d]' : 'bg-white/[0.05] text-white/70'
-                        }`}
-                      >
-                        <span className="truncate">{item.name}</span>
-                      </Link>
-                    );
-                  })}
-                </div>
+      {mobileMenuOpen && (
+          <div
+            id="mobile-nav-menu"
+            className={`mobile-nav-panel lg:hidden fixed left-2 right-2 z-[99] rounded-2xl border max-h-[calc(100vh-5.5rem)] overflow-y-auto overscroll-contain ${
+              isLight
+                ? 'border-[#d7dbdc] bg-white shadow-[0_1px_1px_rgba(0,0,0,0.03),0_8px_24px_rgba(0,0,0,0.08)]'
+                : 'border-white/[0.08] bg-[#0a0a0a] shadow-2xl shadow-black/60'
+            }`}
+            style={{ top: `calc(${NOTCH_H + 6}px + env(safe-area-inset-top, 0px))` }}
+          >
+            <div className="px-2 pt-2 pb-2">
+              <div className="grid grid-cols-2 gap-1">
+                {[{
+                  id: 'home',
+                  label: navCopy.home,
+                  mobileLabel: navCopy.home,
+                  href: href('/'),
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z" />
+                    </svg>
+                  ),
+                }, ...searchMenu.items, ...toolsMenu.items].map((item) => {
+                  const active = item.id === 'home'
+                    ? currentTool === 'home'
+                    : item.id === 'search'
+                      ? currentTool === 'search'
+                      : isMenuItemActive(item.id, item.href);
+                  return (
+                  <Link key={item.id} href={item.href} onClick={handleDropdownClose}
+                    title={item.label}
+                    aria-current={active ? 'page' : undefined}
+                    className={`flex min-h-[44px] items-center gap-2 rounded-xl px-2 min-w-0 ${
+                      active
+                        ? isLight ? 'bg-[#f4f5f5] text-[#0a0a0a]' : 'bg-white/[0.08] text-[#f0f0f0]'
+                        : isLight ? 'text-[#434a4d]' : 'text-[#c4c7c8]'
+                    }`}
+                  >
+                    <div className={`flex h-8 w-8 items-center justify-center rounded-lg shrink-0 ${
+                      active
+                        ? isLight ? 'bg-white text-[#0a0a0a] shadow-sm' : 'bg-white/[0.1] text-white'
+                        : isLight ? 'bg-[#f4f5f5] text-[#6e7679]' : 'bg-white/[0.05] text-white/55'
+                    }`}>{item.icon}</div>
+                    <span className="min-w-0 truncate text-[13px] font-medium leading-none">{item.mobileLabel}</span>
+                  </Link>
+                  );
+                })}
               </div>
 
-              {/* Bottom bar */}
-              <div className={`flex items-center justify-between px-3 py-1 border-t ${isLight ? 'border-[#d7dbdc]' : 'border-white/[0.08]'}`}>
-                <Link href={href('/learn')} onClick={handleDropdownClose} className={`inline-flex min-h-[44px] items-center text-[13px] font-semibold ${isLight ? 'text-[#434a4d]' : 'text-[#a1a4a5]'}`}>{navCopy.learn}</Link>
-                <Link
-                  href={href('/saved-domains')}
-                  onClick={handleDropdownClose}
-                  className={`inline-flex min-h-[44px] items-center gap-1.5 text-[13px] font-semibold ${isLight ? 'text-[#434a4d]' : 'text-[#a1a4a5]'}`}
-                >
-                  <svg
-                    className="w-3.5 h-3.5"
-                    fill={savedDomainsCount > 0 ? 'currentColor' : 'none'}
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                    />
-                  </svg>
-                  {navCopy.saved}
-                  {savedDomainsCount > 0 && (
-                    <span
-                      className={`inline-flex h-4 min-w-[1rem] items-center justify-center rounded px-1 text-[9px] font-semibold tabular-nums ${
-                        isLight
-                          ? 'bg-slate-100 text-slate-600 ring-1 ring-slate-200'
-                          : 'bg-white/[0.06] text-white/55 ring-1 ring-white/10'
+              <p className={`px-1.5 pt-3 pb-1.5 text-[11px] font-semibold tracking-wide ${isLight ? 'text-[#6e7679]' : 'text-white/45'}`}>
+                {navCopy.language}
+              </p>
+              <div className="grid grid-cols-4 gap-1 px-0.5 pb-1">
+                {LOCALES.map((item) => {
+                  const active = item.id === locale;
+                  return (
+                    <Link
+                      key={item.id}
+                      href={switchHref(item.id, pathname || '/')}
+                      hrefLang={item.hreflang}
+                      lang={item.htmlLang}
+                      onClick={() => {
+                        persistLocaleChoice(item.id);
+                        handleDropdownClose();
+                      }}
+                      aria-current={active ? 'true' : undefined}
+                      className={`flex min-h-[36px] items-center justify-center rounded-lg px-1 text-center text-[11px] font-medium leading-none ${
+                        active
+                          ? isLight ? 'bg-[#0a0a0a] text-white' : 'bg-white text-[#0a0a0a]'
+                          : isLight ? 'bg-[#f4f5f5] text-[#434a4d]' : 'bg-white/[0.05] text-white/70'
                       }`}
                     >
-                      {savedDomainsCount > 99 ? '99+' : savedDomainsCount}
-                    </span>
-                  )}
-                </Link>
-                <button onClick={toggleTheme} className={`inline-flex min-h-10 items-center gap-1 text-[13px] font-semibold ${isLight ? 'text-[#434a4d]' : 'text-[#a1a4a5]'}`}>
-                  {theme === 'dark' ? <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                  : <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>}
-                  {theme === 'dark' ? navCopy.light : navCopy.dark}
-                </button>
+                      <span className="truncate">{item.name}</span>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
-          )}
-        </div>
-      </div>
+
+            {/* Bottom bar */}
+            <div className={`flex items-center justify-between px-3 py-1 border-t ${isLight ? 'border-[#d7dbdc]' : 'border-white/[0.08]'}`}>
+              <Link href={href('/learn')} onClick={handleDropdownClose} className={`inline-flex min-h-[44px] items-center text-[13px] font-semibold ${isLight ? 'text-[#434a4d]' : 'text-[#a1a4a5]'}`}>{navCopy.learn}</Link>
+              <Link
+                href={href('/saved-domains')}
+                onClick={handleDropdownClose}
+                className={`inline-flex min-h-[44px] items-center gap-1.5 text-[13px] font-semibold ${isLight ? 'text-[#434a4d]' : 'text-[#a1a4a5]'}`}
+              >
+                <svg
+                  className="w-3.5 h-3.5"
+                  fill={savedDomainsCount > 0 ? 'currentColor' : 'none'}
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                  />
+                </svg>
+                {navCopy.saved}
+                {savedDomainsCount > 0 && (
+                  <span
+                    className={`inline-flex h-4 min-w-[1rem] items-center justify-center rounded px-1 text-[9px] font-semibold tabular-nums ${
+                      isLight
+                        ? 'bg-slate-100 text-slate-600 ring-1 ring-slate-200'
+                        : 'bg-white/[0.06] text-white/55 ring-1 ring-white/10'
+                    }`}
+                  >
+                    {savedDomainsCount > 99 ? '99+' : savedDomainsCount}
+                  </span>
+                )}
+              </Link>
+              <button onClick={toggleTheme} className={`inline-flex min-h-10 items-center gap-1 text-[13px] font-semibold ${isLight ? 'text-[#434a4d]' : 'text-[#a1a4a5]'}`}>
+                {theme === 'dark' ? <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                : <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>}
+                {theme === 'dark' ? navCopy.light : navCopy.dark}
+              </button>
+            </div>
+          </div>
+      )}
     </nav>
   );
 };

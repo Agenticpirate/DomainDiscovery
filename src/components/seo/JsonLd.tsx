@@ -1,4 +1,5 @@
 import {
+  getSiteBaseUrl,
   getBreadcrumbListJsonLd,
   getWebPageJsonLd,
   type BreadcrumbItem,
@@ -85,5 +86,43 @@ export async function ToolPageJsonLd({
       />
       <JsonLd data={getBreadcrumbListJsonLd(crumbs)} />
     </>
+  );
+}
+
+/**
+ * FAQPage structured data built from the same localized copy that renders the visible FAQ,
+ * so the markup always matches what people see. Server-rendered for crawlers.
+ */
+export async function FaqPageJsonLd({
+  source,
+  path,
+}: {
+  source: 'home' | 'faqPage';
+  path: string;
+}) {
+  const locale = await getRequestLocale();
+  const meta = getLocaleMeta(locale);
+  const messages = getMessages(locale);
+  const items = source === 'home' ? messages.home.faqs : messages.faqPage.items;
+  if (!items?.length) return null;
+  const base = getSiteBaseUrl();
+  const publicPath = localeHref(locale, path);
+  const url = publicPath === '/' ? base : `${base}${publicPath}`;
+
+  return (
+    <JsonLd
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        '@id': `${url}#faq`,
+        url,
+        inLanguage: locale === 'en' ? 'en-US' : meta.htmlLang,
+        mainEntity: items.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: { '@type': 'Answer', text: item.answer },
+        })),
+      }}
+    />
   );
 }

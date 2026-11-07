@@ -9,6 +9,9 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { isLabAutomation, scheduleIdle } from '@/lib/perfRuntime';
 import { SpaceshipMark } from '@/components/ads/CrispAffiliateStrip';
 
+/** Circumference of the countdown ring (r = 15.5). */
+const RING = 2 * Math.PI * 15.5;
+
 function ssGet(key: string): string | null {
   try {
     return sessionStorage.getItem(key);
@@ -257,25 +260,74 @@ export function AffiliateInterstitial() {
             }`}
             aria-label={`${creative.alt} (sponsored — opens in new tab)`}
           >
-            <span className="aff-interstitial-card relative block w-full overflow-hidden px-5 pb-5 pt-6 sm:px-6 sm:pb-6 sm:pt-7 text-left">
+            <span className="aff-interstitial-card relative block w-full overflow-hidden px-5 pb-5 pt-5 sm:px-6 sm:pb-5 sm:pt-6 text-left">
               <span className="aff-interstitial-sheen" aria-hidden />
-              <span className="relative z-[1] block text-[clamp(26px,4.4vw,34px)] font-semibold leading-[1.12] tracking-[-0.03em] text-white [text-rendering:geometricPrecision]">
+              <span className="relative z-[1] block text-[clamp(22px,3.6vw,28px)] font-semibold leading-[1.15] tracking-[-0.03em] text-white [text-rendering:geometricPrecision]">
                 Want to manage your domain easier, cheaper?
                 <br />
                 You&apos;re closer than you think
               </span>
-              <span className="aff-interstitial-pill relative z-[1] mt-6 inline-flex items-center rounded-full bg-white px-4 py-2 text-[14px] font-semibold text-[#2563eb]">
+              <span className="aff-interstitial-pill relative z-[1] mt-5 inline-flex items-center rounded-full bg-white px-3.5 py-1.5 text-[13px] font-semibold text-[#2563eb]">
                 Register now
               </span>
-              <span className="relative z-[1] mt-10 flex items-center gap-2 text-white">
-                <SpaceshipMark className="h-7 w-7" />
-                <span className="text-[20px] font-semibold tracking-[-0.03em]">spaceship</span>
+              <span className="relative z-[1] mt-7 flex items-center gap-2 text-white">
+                <SpaceshipMark className="h-6 w-6" />
+                <span className="text-[18px] font-semibold tracking-[-0.03em]">spaceship</span>
               </span>
             </span>
           </a>
         </div>
 
-        <div className="px-4 sm:px-5 pt-3 pb-4 sm:pb-5 space-y-3">
+        {/* Compact footer: countdown ring (or Continue) on the left, CTA pill on the right */}
+        <div className="flex items-center justify-between gap-3 px-4 sm:px-5 pt-3 pb-4 sm:pb-5">
+          {canDismiss ? (
+            <button
+              type="button"
+              onClick={complete}
+              autoFocus
+              className={`inline-flex h-9 items-center gap-1.5 rounded-full px-3.5 text-[12.5px] font-semibold transition ${
+                isLight
+                  ? 'bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200'
+                  : 'bg-white/10 text-white hover:bg-white/15 border border-white/15'
+              }`}
+            >
+              Continue
+              <svg className="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          ) : (
+            <div className="flex min-w-0 items-center gap-2.5" aria-live="off">
+              <span className="relative inline-flex h-9 w-9 shrink-0 items-center justify-center">
+                <svg className="absolute inset-0 h-9 w-9 -rotate-90" viewBox="0 0 36 36" aria-hidden>
+                  <circle cx="18" cy="18" r="15.5" fill="none" strokeWidth="2.5" className={isLight ? 'stroke-slate-200' : 'stroke-white/10'} />
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="15.5"
+                    fill="none"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    className={`transition-[stroke-dashoffset] duration-1000 ease-linear ${isLight ? 'stroke-slate-800' : 'stroke-white/80'}`}
+                    strokeDasharray={RING}
+                    strokeDashoffset={RING * (1 - Math.min(1, Math.max(0, progress)))}
+                  />
+                </svg>
+                <span className={`relative text-[11px] font-bold tabular-nums ${isLight ? 'text-slate-800' : 'text-white/85'}`}>
+                  {secondsLeft}
+                </span>
+              </span>
+              <span className="min-w-0 leading-tight">
+                <span className={`block text-[12px] font-semibold ${isLight ? 'text-slate-700' : 'text-white/75'}`}>
+                  Continue in {secondsLeft}s
+                </span>
+                <span className={`block truncate text-[10.5px] ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
+                  Pauses if you leave this tab
+                </span>
+              </span>
+            </div>
+          )}
+
           <a
             href={creative.clickUrl}
             target="_blank"
@@ -283,76 +335,17 @@ export function AffiliateInterstitial() {
             data-ad-id={creative.id}
             data-placement="interstitial-cta"
             onClick={onAdClick}
-            className={`flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-[13px] font-bold transition ${
+            className={`inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full px-4 text-[12.5px] font-semibold transition ${
               isLight
                 ? 'bg-slate-900 text-white hover:bg-slate-800'
                 : 'bg-white text-black hover:bg-white/90'
             }`}
           >
             {creative.ctaLabel}
-            <svg className="aff-interstitial-arrow w-4 h-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+            <svg className="aff-interstitial-arrow w-3.5 h-3.5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </a>
-
-          <div>
-            <div
-              className={`h-1.5 w-full overflow-hidden rounded-full ${
-                isLight ? 'bg-slate-100' : 'bg-white/10'
-              }`}
-            >
-              <div
-                className={`h-full rounded-full transition-[width] duration-1000 ease-linear ${
-                  canDismiss
-                    ? isLight
-                      ? 'bg-emerald-500'
-                      : 'bg-emerald-400'
-                    : isLight
-                      ? 'bg-slate-800'
-                      : 'bg-white/70'
-                }`}
-                style={{ width: `${Math.min(100, Math.round(progress * 100))}%` }}
-              />
-            </div>
-            <p
-              className={`mt-2 text-center text-[11px] font-medium ${
-                isLight ? 'text-slate-500' : 'text-white/45'
-              }`}
-            >
-              {canDismiss ? (
-                clickedAd && secondsLeft > 0 ? (
-                  <span>Thanks — you can continue anytime</span>
-                ) : (
-                  <span>You can continue to DomainDiscovery</span>
-                )
-              ) : (
-                <span>
-                  Non-skippable ·{' '}
-                  <span className="tabular-nums font-bold">{secondsLeft}s</span> remaining
-                  <span className="block sm:inline sm:before:content-['·_'] mt-0.5 sm:mt-0 opacity-80">
-                    timer pauses if you leave this tab
-                  </span>
-                </span>
-              )}
-            </p>
-          </div>
-
-          <button
-            type="button"
-            disabled={!canDismiss}
-            onClick={complete}
-            className={`w-full rounded-xl px-4 py-2.5 text-[12.5px] font-bold transition ${
-              canDismiss
-                ? isLight
-                  ? 'bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200'
-                  : 'bg-white/10 text-white hover:bg-white/15 border border-white/15'
-                : isLight
-                  ? 'bg-slate-50 text-slate-300 border border-slate-100 cursor-not-allowed'
-                  : 'bg-[#111111] text-white/25 border border-white/[0.06] cursor-not-allowed'
-            }`}
-          >
-            {canDismiss ? 'Continue to DomainDiscovery' : `Continue available in ${secondsLeft}s`}
-          </button>
         </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}

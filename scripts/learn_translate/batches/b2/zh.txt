@@ -1,0 +1,17 @@
+what-is-a-tld-domain-extension||什么是 TLD？域名后缀详解||什么是顶级域（TLD）、gTLD 与 ccTLD 有何不同、如何选择后缀，以及 DomainDiscovery 如何帮你在注册前浏览 1,600 多个 TLD。
+domain-extensions||认识域名后缀（TLD）||从信任度、SEO 和品牌契合度的角度，比较 .com、.io、.ai、ccTLD 和新 gTLD。
+com-vs-io-vs-ai||.com、.io 还是 .ai：哪个后缀胜出？||针对科技初创公司，对讨论最多的三个后缀做一次务实的比较。
+new-gtld-strategy||面向品牌的新 gTLD 策略||如何评估 .shop、.app、.dev、.xyz 等新通用后缀，避免日后为续费成本后悔。
+premium-tld-renewals||溢价 TLD 续费的陷阱||注册局溢价定价和促销续费如何让域名持有人措手不及。
+nonprofit-domains||非营利组织的域名（.org 及其他）||.org 的信任信号，以及何时选择其他后缀更合适。
+new-gtld-sunrise-periods||Sunrise、Landrush 与全面开放注册||新 TLD 的发布阶段如何面向商标持有人和公众运作。
+ccild-trustee-services||本地存在要求与受托代理服务||受托代理如何帮助外国人注册有限制的 ccTLD，以及其中的风险。
+whois-privacy-guide||WHOIS 隐私：保护你的域名联系数据||WHOIS 隐私的作用、何时启用、数据遮蔽如何运作，以及域名持有人在注册商处和使用 DomainDiscovery 调研工具时可以采取的实用安全措施。
+domain-lock-security||转移锁定与域名安全||注册商锁定、双重验证，以及防止未经授权的转移。
+registrar-lock-and-2fa||注册商账号安全清单||双重验证、恢复码，以及防止高价值域名的账号被接管。
+dnssec-for-domains||面向域名持有人的 DNSSEC||DNSSEC 保护什么，以及何时启用。
+premium-domain-insurance||为高价值域名投保||面向七位数域名的保险选项与安全控制措施。
+brand-protection-portfolio||用于品牌保护的域名组合||哪些防御性注册值得做（哪些纯属浪费）。
+typosquatting-defense||抢注拼写错误域名的防御||监控相似域名，并下架滥用变体。
+phishing-domains||钓鱼域名：滥用是如何发生的||攻击者如何利用域名，以及注册商如何应对。
+brand-protection||在线保护你的品牌||在多个后缀上保护品牌，启用隐私保护、锁定和 DNSSEC，并监控恶意抢注。

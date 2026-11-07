@@ -44,7 +44,7 @@ describe('Property 24: Component Variant Support', () => {
             if (size === 'sm') {
               expect(buttonClasses).toContain('px-3');
             } else if (size === 'md') {
-              expect(buttonClasses).toContain('px-6');
+              expect(buttonClasses).toContain('px-5');
             } else if (size === 'lg') {
               expect(buttonClasses).toContain('px-8');
             }

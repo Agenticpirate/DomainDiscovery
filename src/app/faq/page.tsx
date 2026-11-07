@@ -1,5 +1,5 @@
 import { SiteFaqPage } from '@/components/sections/SiteFaqPage';
-import { ToolPageJsonLd } from '@/components/seo/JsonLd';
+import { FaqPageJsonLd, ToolPageJsonLd } from '@/components/seo/JsonLd';
 import { buildLocalizedToolMetadata } from '@/lib/i18n/metadata';
 
 const title = 'Domain Search FAQ — Availability, Registration & Tools';
@@ -28,6 +28,7 @@ export default function FAQPage() {
           { name: 'FAQ', path },
         ]}
       />
+      <FaqPageJsonLd source="faqPage" path={path} />
       <SiteFaqPage />
     </>
   );

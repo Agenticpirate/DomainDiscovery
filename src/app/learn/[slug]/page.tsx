@@ -19,11 +19,25 @@ import {
   getRelatedArticles,
   getTrendingArticles,
   isFaqSection,
+  getLearnTranslatedLocales,
+  isLearnTranslated,
 } from '@/lib/learnArticles';
 import { getSiteBaseUrl, SITE_BRAND } from '@/lib/seoSiteFacts';
 import { getRequestLocale } from '@/lib/i18n/request';
+import { getMessages } from '@/lib/i18n';
+import { getLocaleMeta, type LocaleId } from '@/lib/i18n/locales';
+import { learnArticleUrl, learnLanguageAlternates } from '@/lib/i18n/metadata';
 
-type PageProps = { params: { slug: string } };
+/**
+ * Language the page content is actually written in. A guide is shown (and indexed) in a
+ * language once that language has a full translation; otherwise the English text is shown
+ * and the page points back to the English URL.
+ */
+function contentLocaleFor(slug: string, locale: LocaleId): LocaleId {
+  return locale !== 'en' && isLearnTranslated(slug, locale) ? locale : 'en';
+}
+
+type PageProps = { params: Promise<{ slug: string }> };
 
 const BASE = getSiteBaseUrl();
 
@@ -38,7 +52,8 @@ export function generateStaticParams() {
   return getAllLearnSlugs().map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
   const locale = await getRequestLocale();
   const article = localizeLearnArticle(getLearnArticle(params.slug), locale);
   if (!article) {
@@ -50,7 +65,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     article.description.length > 155
       ? `${article.description.slice(0, 152)}…`
       : article.description;
-  const url = `${BASE}/learn/${article.slug}`;
+  const contentLocale = contentLocaleFor(article.slug, locale);
+  const translated = contentLocale !== 'en';
+  const url = learnArticleUrl(contentLocale, article.slug);
+  const translatedLocales = getLearnTranslatedLocales(article.slug);
+  const ogLocale = getLocaleMeta(contentLocale).og;
   const keywords = [
     ...article.topics,
     article.category,
@@ -71,6 +90,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
       type: 'article',
       url,
+      locale: ogLocale,
       publishedTime: article.publishedAt,
       modifiedTime: article.publishedAt,
       section: article.category,
@@ -84,9 +104,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     alternates: {
       canonical: url,
+      ...(translatedLocales.length
+        ? { languages: learnLanguageAlternates(article.slug, translatedLocales) }
+        : {}),
     },
     robots: {
-      index: true,
+      // A language URL without a real translation is a duplicate of the English page.
+      index: locale === 'en' || translated,
       follow: true,
       'max-image-preview': 'large',
       'max-snippet': -1,
@@ -95,7 +119,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function LearnArticlePage({ params }: PageProps) {
+export default async function LearnArticlePage(props: PageProps) {
+  const params = await props.params;
   const locale = await getRequestLocale();
   const article = localizeLearnArticle(getLearnArticle(params.slug), locale);
   if (!article) notFound();
@@ -108,7 +133,10 @@ export default async function LearnArticlePage({ params }: PageProps) {
     .slice(0, 3)
     .map((item) => localizeLearnArticle(item, locale)!);
 
-  const pageUrl = `${BASE}/learn/${article.slug}`;
+  const contentLocale = contentLocaleFor(article.slug, locale);
+  const pageUrl = learnArticleUrl(contentLocale, article.slug);
+  const crumbMessages = getMessages(contentLocale);
+  const inLanguage = contentLocale === 'en' ? 'en-US' : getLocaleMeta(contentLocale).htmlLang;
   const datePublished = article.publishedAt || '2026-07-22';
   const wordCount = getArticleWordCount(article);
   const toc = getArticleToc(article);
@@ -129,7 +157,7 @@ export default async function LearnArticlePage({ params }: PageProps) {
     wordCount,
     keywords: article.topics.join(', '),
     articleSection: article.category,
-    inLanguage: 'en-US',
+    inLanguage,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': pageUrl,
@@ -162,8 +190,18 @@ export default async function LearnArticlePage({ params }: PageProps) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE },
-      { '@type': 'ListItem', position: 2, name: 'Learn', item: `${BASE}/learn` },
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: crumbMessages.nav.home,
+        item: contentLocale === 'en' ? BASE : `${BASE}/${contentLocale}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: crumbMessages.nav.learn,
+        item: contentLocale === 'en' ? `${BASE}/learn` : `${BASE}/${contentLocale}/learn`,
+      },
       { '@type': 'ListItem', position: 3, name: article.title, item: pageUrl },
     ],
   };
@@ -173,6 +211,7 @@ export default async function LearnArticlePage({ params }: PageProps) {
     '@type': 'WebPage',
     '@id': pageUrl,
     url: pageUrl,
+    inLanguage,
     name: article.title,
     description: article.description,
     datePublished,
@@ -198,6 +237,7 @@ export default async function LearnArticlePage({ params }: PageProps) {
       ? {
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
+          inLanguage,
           mainEntity: faqPairs.map((f) => ({
             '@type': 'Question',
             name: f.question,

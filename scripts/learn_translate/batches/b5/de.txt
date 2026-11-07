@@ -1,0 +1,21 @@
+top-domain-registrars-compared||Die wichtigsten Domain-Registrare im Vergleich||Spaceship, Cloudflare, Porkbun, Namecheap, GoDaddy und andere im Vergleich nach Preis und Bedienung.
+cloudflare-registrar-guide||Cloudflare Registrar: Vor- und Nachteile||Das Preismodell zum Selbstkostenpreis, kostenloser Datenschutz und die Abwägungen im Ökosystem.
+transferring-domains||So transferieren Sie eine Domain zwischen Registraren||Auth-Codes, Entsperrung, 60-Tage-Sperren und eine Schritt-für-Schritt-Checkliste für den Transfer.
+domain-push-vs-transfer||Account-Push oder Registrar-Transfer||Pushes innerhalb desselben Registrars gehen schneller als Transfers zwischen Registraren.
+namepros-guide||NamePros für Domain-Investoren||So nutzen Sie die Foren, Bewertungen und Marktplatzdiskussionen von NamePros sinnvoll.
+domainsherpa-lessons||Lehren aus den DomainSherpa-Interviews||Wiederkehrende Erkenntnisse aus langen Interviews mit Domain-Investoren.
+dnjournal-market-reading||Den Markt mit DNJournal verfolgen||Wie Branchennachrichten und Verkaufscharts den Zeitpunkt von Käufen beeinflussen.
+domaining-news-roundup||Domain-Nachrichten effizient verfolgen||Eine schlanke Medienauswahl: DNJournal, Domaining.com, aktuelle NamePros-Threads und Registry-Blogs.
+domain-investing-high-value-sales-2026||Lehren aus hochpreisigen Domainverkäufen (2026)||Was aktuelle Premium-Verkäufe über Liquidität, Kategorien und Käuferbudgets verraten.
+startup-domain-budgets||So planen Startups ihr Domainbudget||Namensbudgets in der Seed-Phase, Verhandlung und wann man sich mit alternativen Endungen begnügt.
+fractional-domain-ownership||Gebrochenes Domaineigentum erklärt||Neue Modelle für geteiltes Eigentum an Premium-Namen – Chancen und Vorbehalte.
+domain-liquidation-auctions||Domain-Liquidationsauktionen||Wie Liquidationen Chancen – und Fallen – für Schnäppchenjäger schaffen.
+multi-domain-architecture||Markenarchitektur mit mehreren Domains||Hauptmarken-Domain plus Produkt- und Kampagnendomains.
+domain-rebrand-playbook||Playbook für ein domaingetriebenes Rebranding||301-Weiterleitungen, E-Mail-Umstellung und Kommunikation beim Domainwechsel.
+building-in-public-domains||Building in Public mit Ihrer Domain-Marke||Wie Inhalte und Social Proof eine Brandable-Domain wertvoller machen.
+domain-parking-guide||Domain-Parking und Traffic-Monetarisierung||Wann Parking sich lohnt, wann nicht, und Alternativen wie Entwicklung oder Lead-Generierung.
+type-in-traffic-domains||Type-in-Traffic-Domains||Nachfrage durch direkte Eingabe und wie Sie abschätzen, ob ein Name echte Besuche erhält.
+https-and-seo||HTTPS, Domains und Rankings||HTTPS als leichtes Ranking-Signal und wichtige Nutzererfahrung.
+international-seo-domains||Internationales SEO und Domainstruktur||ccTLDs, Unterordner und Subdomains für Websites in mehreren Ländern.
+building-domain-content-sites||Content-Websites auf Domains aufbauen||Nischenseiten, die eine Entwicklung über reine Verkaufsseiten hinaus rechtfertigen.
+leadgen-domain-strategy||Domainstrategie für Lead-Generierung||Service-Domains, die Anrufe und Formulare für lokale Fachleute bringen.

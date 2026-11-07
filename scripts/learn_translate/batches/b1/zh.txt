@@ -1,0 +1,48 @@
+the-radio-test-brandable-domains||品牌化域名的“电台测试”||如何像专业命名师和投资者一样，用电台测试来筛选有品牌感的域名。
+smile-and-scratch-framework||“微笑与搔头”命名框架||亚历山德拉·沃特金斯（Alexandra Watkins）的“微笑与搔头”（Smile & Scratch）框架，应用于域名和品牌名称。
+domain-length-psychology||域名长度的心理学||为什么越短的域名越能卖出溢价，以及长度如何影响信任、输入和记忆。
+brandable-vs-keyword-domains||品牌化域名与关键词域名||什么时候买自创的品牌名，什么时候买富含关键词的精确匹配域名。
+exact-match-domains-2026||精确匹配域名还值得买吗？||谷歌的演进如何改变了精确匹配域名（EMD）的价值，以及 EMD 仍然占优的场景。
+compound-word-domains||复合词域名策略||两个词的组合如何在不自创拼写的前提下，造出好记的品牌化域名。
+one-word-domain-guide||单词域名：终极资产类别||为什么词典里的单词 .com 主导着溢价成交，以及如何评估它们。
+cctld-local-seo||ccTLD 与本地 SEO：国家域名何时有帮助||何时为本地 SEO 使用国家和地区代码顶级域、ccTLD 与 gTLD 有何不同，以及如何把它们与地域域名和 DomainDiscovery 的调研工具结合起来。
+domain-portfolio-management||域名组合管理基础||像管理真正的投资账簿一样，跟踪续费、成本、投资回报和流动性。
+hand-registration-strategy||2026 年的手动注册策略||手动注册何时仍然有效，以及如何避免囤积毫无价值的库存。
+domain-flipping-guide||新手域名倒卖指南||低买高卖：倒卖的现实周期、利润空间和平台。
+geo-domain-investing||地域域名投资||“城市 + 服务”域名和纯城市名：需求模式与风险。
+ai-domain-investing||AI 域名投资趋势||AI 热潮如何重塑了对 .ai 和含 AI 关键词的品牌名的需求。
+how-dns-works||域名系统如何运作||查询链路中的解析器、根服务器、TLD 服务器和权威名称服务器。
+nameservers-explained||名称服务器详解||自定义名称服务器与注册商 DNS 的区别，以及何时改用 Cloudflare 等服务。
+email-authentication-spf-dkim-dmarc||域名邮件的 SPF、DKIM 和 DMARC||用现代邮件认证保护送达率并防止仿冒。
+https-ssl-domains||SSL/TLS 证书与域名||证书如何与主机名绑定，以及为什么 HTTPS 是基本要求。
+dns-propagation-troubleshooting||DNS 生效传播问题排查||为什么变更看起来“卡住了”，以及如何用 dig、DoH 和 TTL 计算来验证。
+domains-and-seo||域名与 SEO：真正影响排名的是什么||域名对 SEO 能做什么、不能做什么。精确匹配的误区、ccTLD、HTTPS，以及如何把 DomainDiscovery 工具与以用户为本的内容结合起来。
+domain-tools-stack||域名必备工具组合||NameBio、DNJournal、WHOIS/RDAP、archive.org、商标搜索和域名组合追踪工具。
+register-vs-buy-aftermarket||新注册还是从二级市场购买||何时手动注册，何时从二级市场购买溢价域名。
+domain-email-setup||在你的域名上设置邮箱||Google Workspace、Microsoft 365、Fastmail 以及免费转发方案。
+domain-name-generators||高效使用 AI 域名生成器||如何给生成器写提示词，并筛掉质量不高的结果。
+bulk-domain-search-tips||批量域名查询的工作流程||用批量工具高效检查数百个名称。
+icann-basics||域名购买者需要了解的 ICANN 基础||ICANN 在域名体系中管什么、不管什么。
+registry-vs-registrar||注册局、注册商与分销商||每一次域名购买背后的行业结构。
+premium-renewal-planning||规划溢价域名的续费||当每个名称的续费从 50 美元到 5,000 美元以上时，如何规划现金流。
+domain-hacks||域名梗：聪明还是让人困惑？||把后缀当作单词的一部分（历史上的 del.icio.us）：利与弊。
+numbers-in-domains||域名中的数字||数字何时有帮助（24、365），何时损害品牌感。
+hyphenated-domains||带连字符的域名：通常应避免||为什么连字符会降低大多数品牌的直接输入和信任度。
+personal-name-domains||个人姓名域名||名字.com 有多稀缺，以及个人品牌的实用替代方案。
+domain-development-vs-hold||开发还是持有域名||何时建站能使价值倍增，何时纯粹持有待售更合适。
+domain-metrics-to-track||值得跟踪的域名指标||成交率、平均持有时间、投资回报率和询价率。
+transfer-auth-codes||EPP/授权码详解||授权码是什么，以及如何安全地处理。
+cdn-and-domains||CDN 与你的域名||让流量经过 Cloudflare 或 Fastly，同时保持 DNS 干净。
+investor-psychology||域名投资者的心理||沉没成本、拍卖狂热和续费愧疚。
+sales-year-planning||规划域名销售年度||按季度的主动联系冲刺、定价实验和库存更新。
+domain-name-spelling||自创品牌的拼写策略||创意拼写能走多远，才不会让电台测试失败。
+two-letter-domains||双字母域名的经济学||稀缺性、企业需求，以及双字母 .com（LL）的流动性。
+three-letter-domains||三字母 .com（LLL）指南||可发音与辅音堆叠的 LLL，以及各价格档位。
+number-domains||数字域名投资||中国数字谐音文化带来的需求模式及流动性说明。
+idns-explained||国际化域名（IDN）||Punycode、文字体系，以及相似字符带来的钓鱼风险。
+domain-forwarding||域名转发最佳实践||301 重定向与隐藏式转发，以及对 SEO 的副作用。
+www-vs-naked-domain||带 www 还是不带 www||选定一个规范主机并始终如一。
+domain-monitoring-services||域名监控与监视服务||可用性、WHOIS 变更提醒和品牌监控。
+domain-joint-ventures||域名合资合作||域名持有人与运营方合作，而不是直接卖断。
+corporate-domain-management||企业域名管理||集中的域名清单、品牌保护，以及减少“影子 IT”域名。
+safe-domain-purchase-checklist||安全购买域名清单||在任何注册或拍卖出价之前，可打印的思维清单。

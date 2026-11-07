@@ -1,0 +1,17 @@
+godaddy-auctions-guide||GoDaddy Auctions: guia prático||Leilões de expirados, liquidações, estratégia de lances e due diligence no GoDaddy Auctions.
+drop-catching-basics||Noções básicas de drop catching de domínios||Como os domínios caem, backorders e serviços como DropCatch, com a concorrência do pool.
+namejet-expired-domains||NameJet e oportunidades com domínios expirados||Como registros privados e listas de expirados revelam estoque para investidores.
+afternic-fast-transfer||Afternic Fast Transfer explicado||Como as redes de distribuição liberam vendas de compra imediata nas lojas dos registradores.
+sedo-domain-sales||Vendendo domínios na Sedo||Distribuição MLS, corretores e compradores internacionais na Sedo.
+domain-brokers||Quando usar um corretor de domínios||Comissões de corretores, prospecção, negociação e quais nomes merecem representação.
+bin-vs-make-offer||Preço BIN versus fazer oferta||Liquidez da compra imediata versus estratégias de preço baseadas em negociação.
+lto-domain-financing||Negócios de domínios com lease-to-own (LTO)||Como planos parcelados e LTO ampliam o público comprador e o que pode dar errado.
+udrp-basics||Noções básicas da UDRP para donos de domínios||Política Uniforme de Resolução de Disputas: má-fé, direitos e como os casos funcionam.
+trademark-domain-risk||Risco de marcas no investimento em domínios||Como verificar marcas antes do registro ou de lances em leilões.
+cybersquatting-explained||Cybersquatting explicado||O que é cybersquatting, os remédios jurídicos e os limites éticos do investimento.
+udrp-case-lessons||Lições de casos recentes da UDRP||Padrões nos resultados de disputas que investidores de domínios devem internalizar.
+domain-privacy-laws||GDPR e privacidade de domínios||Como a lei de privacidade mudou o WHOIS público e o que ainda aparece no RDAP.
+tmch-basics||Noções básicas do Trademark Clearinghouse (TMCH)||Por que titulares de marcas são notificados em lançamentos de novos gTLDs.
+expired-domains-guide||Como funcionam os domínios expirados||Período de carência, resgate, exclusão pendente e o que os investidores acompanham.
+domain-history-checks||Como verificar o histórico de um domínio antes de comprar||Archive.org, backlinks, sinais de spam e verificações de histórico de malware.
+aged-domains-seo||Domínios antigos e a realidade do SEO||O que a idade realmente ajuda e os mitos sobre a “mágica do domínio antigo”.

@@ -1,0 +1,16 @@
+domain-sales-outbound||域名主动销售实战手册||如何专业地给终端用户发邮件，又不显得像骗子。
+domain-landing-pages||高转化的域名出售落地页||一口价按钮、信任、托管说明和快速加载的销售落地页要点。
+escrow-for-domains||域名交易使用托管（Escrow）||为什么托管能在较高价值的域名交易中保护买卖双方。
+premium-domain-negotiation||高端域名购买谈判||买入高端域名而不多付钱的策略。
+brandable-marketplace-guide||在品牌域名交易平台上出售||品牌域名平台上的 Logo、定价和精选标准。
+outbound-email-compliance||域名销售的冷邮件合规||符合 CAN-SPAM 与 GDPR 的域名报价外联规范。
+aftermarket-commissions||各交易平台佣金对比||10–30% 的佣金如何影响净收入。
+domain-financing-risks||域名融资报价的风险||分期销售中的违约率、拒付和机会成本。
+domain-marketplace-seo||域名销售落地页的 SEO||出售页面到底要不要追求排名？
+end-user-psychology||终端用户买家心理||为什么企业愿意为合适的名字支付零售价。
+domain-valuation||域名估值指南||从 100 美元到 100 万美元以上，决定域名价格的因素：长度、关键词、可比成交和流动性。
+how-to-use-namebio||用 NameBio 做域名研究||使用 NameBio 类成交数据研究可比成交的实用流程。
+reading-dnjournal-charts||如何阅读 DNJournal 销售榜单||借助 DNJournal 的周榜和年度累计榜单了解高端域名市场趋势。
+godaddy-appraisal-limits||GoDaddy 域名估价：用途与局限||自动估价何时有用，何时会错估品牌类和地理类域名。
+wholesale-vs-retail-domain-pricing||域名批发价与零售价||投资者批发价与交易平台上终端用户零售价的对比。
+domain-appraisal-diy||自己动手的域名估价框架||一份清单，让你不必每次都外包也能评估域名。

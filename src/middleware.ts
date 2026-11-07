@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import {
   isIndexableLocalePath,
+  isLearnArticlePath,
   isLocaleId,
   isLocaleNavigablePath,
   LOCALE_COOKIE,
@@ -112,6 +113,34 @@ function localeCookie(response: NextResponse, locale: string) {
   });
 }
 
+/**
+ * Public, rarely-changing pages that a shared cache may keep. Search results, tools with
+ * per-visitor state, the assistant, and anything with a query string are left uncached.
+ */
+function isEdgeCacheablePath(bare: string): boolean {
+  return (
+    bare === '/' ||
+    bare === '/learn' ||
+    bare.startsWith('/learn/') ||
+    bare === '/blog' ||
+    bare.startsWith('/blog/') ||
+    ['/faq', '/domain-extensions', '/contact', '/privacy', '/terms', '/cookies', '/disclaimer', '/for-ai'].includes(bare)
+  );
+}
+
+/**
+ * Let crawlers (and anything else that arrives without our language cookie) be served from a
+ * shared cache. Crawlers never get the language cookie or the cookie redirect, so their
+ * response is identical for everyone and safe to cache. People still get uncached responses.
+ * Short TTL plus stale-while-revalidate keeps daily Learn publishing fresh.
+ */
+function applyCrawlerCache(response: NextResponse, request: NextRequest, bare: string) {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return;
+  if (request.nextUrl.search) return;
+  if (!isCrawler(request) || !isEdgeCacheablePath(bare)) return;
+  response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400');
+}
+
 function handleLocale(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const segment = pathname.split('/')[1] || '';
@@ -121,7 +150,11 @@ function handleLocale(request: NextRequest) {
   // Next runs middleware again after a rewrite. The bare path has no locale
   // prefix, but the first pass already set x-dd-locale. Keep that header.
   if (!localeFromPath && incoming && isLocaleId(incoming)) {
-    return NextResponse.next();
+    // This is the pass after a language rewrite: it produces the final response headers,
+    // so the crawler cache header has to be applied here too.
+    const passthrough = NextResponse.next();
+    applyCrawlerCache(passthrough, request, stripLocalePrefix(pathname));
+    return passthrough;
   }
 
   const bare = stripLocalePrefix(pathname);
@@ -156,6 +189,7 @@ function handleLocale(request: NextRequest) {
     const response = NextResponse.next({ request: { headers: requestHeaders } });
     // Files and APIs must not clear a language the visitor already chose.
     if (!isCrawler(request) && isLocaleNavigablePath(bare)) localeCookie(response, 'en');
+    applyCrawlerCache(response, request, bare);
     return response;
   }
 
@@ -163,9 +197,11 @@ function handleLocale(request: NextRequest) {
   url.pathname = bare;
   const response = NextResponse.rewrite(url, { request: { headers: requestHeaders } });
   if (!isCrawler(request)) localeCookie(response, locale);
-  if (!isIndexableLocalePath(bare)) {
+  // Learn guides decide for themselves: indexed once a guide exists in every language.
+  if (!isIndexableLocalePath(bare) && !isLearnArticlePath(bare)) {
     response.headers.set('X-Robots-Tag', 'noindex, follow');
   }
+  applyCrawlerCache(response, request, bare);
   return response;
 }
 

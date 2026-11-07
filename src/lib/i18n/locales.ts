@@ -93,6 +93,12 @@ export function stripLocalePrefix(pathname: string): string {
   return pathOnly.endsWith('/') && pathOnly.length > 1 ? pathOnly.slice(0, -1) : pathOnly;
 }
 
+/** A single Learn guide, such as /learn/whois-lookup-guide. Indexing for these is decided per guide by the page itself. */
+export function isLearnArticlePath(pathname: string): boolean {
+  const bare = stripLocalePrefix(pathname.split('?')[0]);
+  return /^\/learn\/[^/]+$/.test(bare) && bare !== '/learn/md';
+}
+
 export function isIndexableLocalePath(pathname: string): boolean {
   const bare = stripLocalePrefix(pathname.split('?')[0]);
   return INDEXABLE.has(bare);
