@@ -173,7 +173,7 @@ function mdToSections(md, quickAnswerHint) {
     // Skip residual TOC
     if (/^table of contents$/i.test(heading)) continue;
 
-    let content = m[2].trim();
+    const content = m[2].trim();
     if (/frequently asked|^\s*faq\b/i.test(heading)) {
       const faqBody = faqSectionToQA(content);
       if (faqBody.length) sections.push({ heading: 'Frequently Asked Questions', body: faqBody });

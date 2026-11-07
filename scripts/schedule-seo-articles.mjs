@@ -103,7 +103,7 @@ function main() {
   const missing = [];
 
   for (const item of ordered) {
-    let article =
+    const article =
       byTitle.get(item.title) ||
       bySlug.get(item.baseSlug) ||
       data.articles.find(
