@@ -1,0 +1,169 @@
+{
+ "title": "Was ist WHOIS und wie recherchiert man damit eine Domain?",
+ "description": "Was ist WHOIS und wie nutzt man es? Erfahren Sie, wie eine WHOIS-Abfrage funktioniert, welche Informationen zum Domaininhaber sie liefert und wie Sie jeden Domainnamen recherchieren.",
+ "sections": [
+  [
+   "Überblick",
+   [
+    "WHOIS ist eine öffentliche Datenbank, die die Registrierungsinformationen jeder Domain speichert. Eine WHOIS-Abfrage zeigt den Registrar, Registrierungs- und Ablaufdatum, Nameserver und (wenn kein Datenschutz aktiv ist) die Kontaktdaten des Domaininhabers. Für eine WHOIS-Abfrage rufen Sie whois.icann.org oder whois.domaintools.com auf und geben einen beliebigen Domainnamen ein."
+   ]
+  ],
+  [
+   "Was ist WHOIS?",
+   [
+    "WHOIS (gesprochen „who is“, also „wer ist“) ist eine öffentliche Datenbank und ein Protokoll, das Registrierungsinformationen zu Domainnamen speichert. Jedes Mal, wenn jemand eine Domain registriert, verlangt die ICANN (die Organisation, die Domainnamen weltweit beaufsichtigt), dass bestimmte Angaben erfasst und über WHOIS verfügbar gemacht werden.",
+    "Die WHOIS-Datenbank ist dezentral aufgebaut: Jeder Domain-Registrar und jede Registry führt eigene Datensätze, und WHOIS-Abfragen greifen auf diese zu. Das Ergebnis ist ein öffentlich zugängliches System, in dem Sie Informationen zu praktisch jeder registrierten Domain nachschlagen können.",
+    "Eine kurze Geschichte von WHOIS",
+    "WHOIS stammt aus dem Jahr 1982 und ist damit eines der ältesten Internetprotokolle, die noch aktiv genutzt werden. Es wurde ursprünglich entwickelt, damit Netzwerkadministratoren die Kontaktdaten anderer Netzwerke finden konnten. Mit dem Wachstum des Internets wurde es zum Standardverfahren für Transparenz bei Domaininhabern.",
+    "In den letzten Jahren hat sich WHOIS durch die DSGVO (GDPR) und ähnliche Datenschutzvorschriften stark verändert, die einschränken, welche Informationen öffentlich sichtbar sind. Dazu später mehr."
+   ]
+  ],
+  [
+   "Was zeigt Ihnen WHOIS?",
+   [
+    "Eine WHOIS-Abfrage kann viele Informationen zu einer Domain offenlegen, abhängig von den Datenschutzeinstellungen der Domain und der beteiligten Registry.",
+    "Standard-WHOIS-Felder",
+    "Registranten-Informationen (der Domaininhaber):",
+    "Name oder Organisationsname",
+    "Postanschrift",
+    "Telefonnummer",
+    "E-Mail-Adresse",
+    "Administrativer Kontakt: - Name und Details der Person, die die Domain verwaltet",
+    "Technischer Kontakt: - Technische Kontaktdaten",
+    "Domainstatus:",
+    "Aktueller Status (active, pendingDelete, clientTransferProhibited usw.)",
+    "Status der Transfersperre",
+    "Registrar-Informationen:",
+    "Bei welchem Unternehmen die Domain registriert ist",
+    "Kontaktdaten des Registrars und Missbrauchs-E-Mail",
+    "Wichtige Daten:",
+    "Erstellungsdatum: Wann die Domain erstmals registriert wurde",
+    "Aktualisierungsdatum: Wann der WHOIS-Eintrag zuletzt geändert wurde",
+    "Ablaufdatum: Wann die Domainregistrierung ausläuft",
+    "Nameserver: - Welche Nameserver das DNS der Domain betreiben (verrät, welcher Hosting- oder DNS-Anbieter genutzt wird)"
+   ]
+  ],
+  [
+   "So führen Sie eine WHOIS-Abfrage durch",
+   [
+    "Es gibt mehrere Wege, eine WHOIS-Suche nach dem Domaininhaber durchzuführen.",
+    "Methode 1: Eine WHOIS-Abfrage-Website nutzen",
+    "Der einfachste Weg. Mehrere Websites bieten kostenlose WHOIS-Abfragen an:",
+    "whois.domaintools.com: Eines der umfassendsten WHOIS-Tools, mit historischen WHOIS-Daten",
+    "whois.icann.org: Das offizielle WHOIS-Tool der ICANN",
+    "lookup.icann.org: Die neuere Abfrageoberfläche der ICANN",
+    "who.is: Übersichtliche, benutzerfreundliche Oberfläche",
+    "namecheap.com/domains/whois/: Schnelle Abfrage direkt bei einem großen Registrar",
+    "Geben Sie einfach den Domainnamen ein und klicken Sie auf Suchen. Die Ergebnisse erscheinen binnen Sekunden.",
+    "Methode 2: Die Kommandozeile nutzen (für Fortgeschrittene)",
+    "Unter Mac und Linux können Sie WHOIS-Abfragen direkt im Terminal ausführen:",
+    "`` whois example.com ``",
+    "Unter Windows ist WHOIS nicht integriert, aber Sie können das WHOIS-Tool von Sysinternals herunterladen oder das Windows-Subsystem für Linux nutzen.",
+    "Methode 3: Das WHOIS-Tool Ihres Registrars nutzen",
+    "Die meisten großen Registrare (GoDaddy, Namecheap usw.) bieten WHOIS-Abfragen direkt auf ihren Websites an. Das ist praktisch, wenn Sie ohnehin gerade einkaufen und eine Domain recherchieren möchten, bevor Sie ein Angebot machen."
+   ]
+  ],
+  [
+   "So lesen Sie WHOIS-Ergebnisse",
+   [
+    "Die WHOIS-Ausgabe kann wie eine Wand aus technischem Text wirken. So holen Sie schnell die wichtigen Informationen heraus.",
+    "Den Registrierungsstatus erkennen",
+    "Suchen Sie nach Zeilen, die mit „Domain Status“ beginnen. Häufige Status sind:",
+    "clientTransferProhibited: Die Transfersperre ist aktiv, die Domain kann ohne Zutun des Inhabers nicht zu einem anderen Registrar wechseln",
+    "serverDeleteProhibited: Die Registry hat die Domain gesperrt",
+    "pendingDelete: Die Domain wird bald gelöscht (folgt oft auf den Ablauf)",
+    "ok / active: Die Domain hat den normalen, aktiven Status",
+    "Die wichtigen Daten finden",
+    "Achten Sie auf:",
+    "Creation Date: Wie lange ist die Domain schon registriert? Eine ältere Domain hat mehr Historie und möglicherweise etablierte SEO-Autorität",
+    "Expiration Date: Wann läuft die Registrierung ab? Eine bald ablaufende Domain kann eine Gelegenheit zum Erwerb sein",
+    "Updated Date: Wann wurde der Eintrag zuletzt geändert? Kürzliche Aktualisierungen deuten manchmal darauf hin, dass der Inhaber die Domain aktiv verwaltet",
+    "Die Nameserver-Informationen lesen",
+    "Nameserver verraten, auf welcher Plattform das DNS der Domain läuft:",
+    "Cloudflare-Nameserver (ns1.cloudflare.com usw.) → Der Inhaber nutzt Cloudflare für DNS/CDN",
+    "Nameserver des Registrars → Die Domain ist möglicherweise geparkt oder wird über den Registrar gehostet",
+    "Nameserver von Squarespace/Wix/Shopify → Die Website basiert auf dieser Plattform",
+    "Datenschutz erkennen",
+    "Sehen Sie Angaben wie „WhoisGuard Protected“, „Privacy Protected“ oder geschwärzte Felder mit nur einer Proxy-E-Mail-Adresse, hat der Domaininhaber den WHOIS-Datenschutz aktiviert. Seine persönlichen Daten sind verborgen. Registrar, Nameserver und wichtige Daten sehen Sie weiterhin, nicht aber die persönlichen Kontaktdaten des Inhabers."
+   ]
+  ],
+  [
+   "Praktische Einsatzmöglichkeiten der WHOIS-Domainrecherche",
+   [
+    "Den Inhaber einer Domain finden, die Sie kaufen möchten",
+    "Wenn Sie eine bereits registrierte Domain erwerben möchten, ist WHOIS Ihr Ausgangspunkt. Achten Sie auf:",
+    "Kontaktdaten, um den Inhaber direkt anzusprechen (falls kein Datenschutz aktiv ist)",
+    "Ablaufdatum: Läuft sie bald ab, gibt der Inhaber sie vielleicht gern ab",
+    "Registrar: Ist die Domain bei einem Marktplatz wie Afternic oder Sedo registriert, steht sie womöglich schon zum Verkauf",
+    "Die Historie einer Domain vor dem Kauf prüfen",
+    "Bevor Sie eine ältere Domain kaufen, prüfen Sie:",
+    "Das ursprüngliche Registrierungsdatum (ältere Domains haben oft SEO-Wert)",
+    "Frühere Inhaber (DomainTools und ähnliche Dienste bieten WHOIS-Historie)",
+    "Frühere Nameserver-Konfigurationen (zeigen frühere Nutzungen)",
+    "Verdächtige Websites untersuchen",
+    "Wirkt eine Website betrügerisch oder möchten Sie wissen, wer dahintersteckt, kann eine WHOIS-Abfrage manchmal die Daten des Registranten liefern. Die DSGVO hat die Sichtbarkeit zwar eingeschränkt, der Missbrauchskontakt des Registrars ist aber immer aufgeführt, nützlich, um problematische Domains zu melden.",
+    "Wettbewerbsrecherche",
+    "Zu wissen, welche Domains Ihre Wettbewerber besitzen (oder haben auslaufen lassen), kann Ihre eigene Domainstrategie unterstützen. Prüfen Sie Registrierungsdaten, Hosting-Setups und die Inhaber verwandter Domains.",
+    "Domain-Ablauf überwachen",
+    "Wenn Sie eine Domain beobachten und sie beim Ablauf erwerben möchten, ist es entscheidend, das Ablaufdatum per WHOIS zu verfolgen. Legen Sie sich vor dem Ablaufdatum eine Erinnerung an, damit Sie rechtzeitig eine Backorder platzieren können."
+   ]
+  ],
+  [
+   "Wie die DSGVO WHOIS verändert hat",
+   [
+    "Die Datenschutz-Grundverordnung (DSGVO bzw. GDPR), die 2018 in der EU in Kraft trat, hat die Verfügbarkeit von WHOIS-Daten erheblich beeinflusst. Da WHOIS personenbezogene Daten der Domainregistranten (Namen, Adressen, Telefonnummern, E-Mail-Adressen) öffentlich anzeigt, verstieß es möglicherweise gegen die Datenschutzgrundsätze der DSGVO.",
+    "Deshalb hat die ICANN gemeinsam mit den Registraren dafür gesorgt, dass personenbezogene Registrantendaten bei Domains von Privatpersonen (insbesondere europäischen Registranten) aus dem öffentlichen WHOIS geschwärzt werden. Stattdessen sehen Sie heute oft:",
+    "Name des Registranten: REDACTED FOR PRIVACY",
+    "E-Mail: Kontakt über Proxy-Adresse",
+    "Telefon: REDACTED FOR PRIVACY",
+    "Registrar-Informationen, Nameserver, Domainstatus und wichtige Daten bleiben jedoch auch nach den DSGVO-Änderungen öffentlich sichtbar. Für berechtigte Zwecke (etwa Strafverfolgung oder Streitigkeiten über geistiges Eigentum) lassen sich die vollständigen Registrantendaten weiterhin über formelle Kanäle abrufen."
+   ]
+  ],
+  [
+   "WHOIS-Historie: Domainrecherche in die Tiefe",
+   [
+    "Bei Domains mit langer Geschichte zeigt das einfache WHOIS nur die aktuellen Daten. Tools wie DomainTools bieten WHOIS-Historie-Funktionen, die zeigen, wie sich der Registrierungseintrag im Lauf der Zeit verändert hat:",
+    "Frühere Inhaber",
+    "Frühere Registrare",
+    "Frühere Nameserver-Konfigurationen",
+    "Änderungen bei den Kontaktdaten",
+    "Diese Historie kann verraten, ob eine Domain früher für Spam genutzt wurde, einer bekannten Marke gehörte oder mehrfach den Besitzer gewechselt hat. All das ist für ihren heutigen Wert und ihr SEO-Profil relevant."
+   ]
+  ],
+  [
+   "Häufige Fragen zur WHOIS-Abfrage",
+   [
+    "Kann ich mit WHOIS persönliche Daten einer Person herausfinden? Nur, wenn sie den WHOIS-Datenschutz nicht aktiviert hat. Die meisten privaten Domaininhaber nutzen heute einen Datenschutzdienst, der ihre Daten hinter einem Proxy verbirgt.",
+    "Ist WHOIS kostenlos? Ja. Einfache WHOIS-Abfragen sind über ICANN-Tools und alle großen Registrar-Websites kostenlos. Einige erweiterte WHOIS-Historie-Tools erfordern ein kostenpflichtiges Abonnement.",
+    "Wie genau sind WHOIS-Informationen? Die ICANN verlangt korrekte Angaben, doch die Durchsetzung ist begrenzt. Manche Registranten machen falsche Angaben (das verstößt gegen die ICANN-Richtlinien, kommt aber trotzdem vor). Betrachten Sie WHOIS-Daten immer als Ausgangspunkt für die Recherche, nicht als abschließende Quelle."
+   ]
+  ],
+  [
+   "Fazit des Experten",
+   [
+    "WHOIS bleibt ein unverzichtbares Recherchewerkzeug für Domainkäufer, -verkäufer, -investoren und Sicherheitsforscher, obwohl die DSGVO die Datenverfügbarkeit erheblich verändert hat. Die für die praktische Domainrecherche wichtigsten Informationen, nämlich Registrierungs- und Ablaufdatum, Identität des Registrars und Nameserver-Konfiguration, bleiben bei jeder WHOIS-Abfrage vollständig öffentlich zugänglich.",
+    "Für Domaininvestoren ist das Ablaufdatum der handlungsrelevanteste Datenpunkt eines WHOIS-Ergebnisses. Läuft eine Domain innerhalb von 60–90 Tagen ab und hat sich der WHOIS-Eintrag nicht verändert (kein aktuelles „Updated Date“), deutet das darauf hin, dass der Inhaber sie auslaufen lässt. Monitoring-Tools, die die Ablaufdaten von Zieldomains verfolgen, bieten zusammen mit Backorder-Diensten bei GoDaddy oder NameJet Investoren die Möglichkeit, sich für den Erwerb zu positionieren, bevor die Allgemeinheit die Verfügbarkeit bemerkt.",
+    "Für Wettbewerbsrecherche oder die Bewertung eines Domainkaufs liefern die Nameserver-Angaben im WHOIS wertvolle Hinweise darauf, wie die Domain aktuell genutzt wird, ganz ohne Website-Besuch. Cloudflare-Nameserver deuten auf einen aktiven, technisch versierten Inhaber hin. Standard-Nameserver des Registrars deuten oft auf eine geparkte oder ruhende Domain hin, die sich leichter erwerben lässt als eine aktiv gepflegte. Vor jedem Kaufversuch eine WHOIS-Abfrage durchzuführen, gehört zu den kosteneffizientesten Recherchegewohnheiten im Domainmanagement."
+   ]
+  ],
+  [
+   "Häufig gestellte Fragen",
+   [
+    "F: Was ist eine WHOIS-Abfrage und was verrät sie?\nA: Eine WHOIS-Abfrage ist eine Anfrage an die öffentliche Domainregistrierungsdatenbank, die Informationen zu jedem registrierten Domainnamen zurückgibt. Sie zeigt, wer der Registrar ist, wann die Domain registriert wurde, wann sie abläuft, welche Nameserver sie nutzt und (ohne Datenschutz) die Kontaktdaten des Registranten. Sie ist das wichtigste Werkzeug für die Recherche zum Domaininhaber.",
+    "F: Wie finde ich heraus, wem eine Domain gehört?\nA: Führen Sie eine WHOIS-Abfrage auf whois.icann.org, whois.domaintools.com oder mit dem WHOIS-Tool Ihres Registrars durch. Geben Sie den Domainnamen ein und sehen Sie sich den Bereich mit den Registranten-Informationen an. Hat der Inhaber den WHOIS-Datenschutz aktiviert, sehen Sie statt persönlicher Daten eine Proxy-Adresse. Über die im Proxy-Registranten-Bereich angezeigte Weiterleitungs-E-Mail-Adresse können Sie ihn trotzdem kontaktieren.",
+    "F: Sind WHOIS-Daten korrekt?\nA: WHOIS-Daten müssen nach ICANN-Richtlinie korrekt sein, die Genauigkeit schwankt aber. Große Registrare setzen korrekte Einträge in der Regel durch. Manche Registranten machen falsche Angaben, was technisch gegen die ICANN-Bedingungen verstößt. Für eine verbindliche Überprüfung des Eigentums betrachten Sie WHOIS als Ausgangspunkt und verifizieren über andere Kanäle, besonders bei hochwertigen Transaktionen.",
+    "F: Kann ich sehen, wem eine Domain früher gehörte?\nA: Das einfache WHOIS zeigt nur die aktuellen Registrierungsdaten. Für frühere Inhaber nutzen Sie kostenpflichtige Dienste wie DomainTools Whois History, die WHOIS-Änderungen über die Zeit festhalten. Diese Historie zeigt frühere Inhaber, Registrare und Nameserver-Konfigurationen, nützlich, um die SEO-Historie und frühere Nutzung einer älteren Domain zu beurteilen.",
+    "F: Was bedeutet „clientTransferProhibited“ im WHOIS?\nA: „clientTransferProhibited“ bedeutet, dass der Registrant oder der Registrar eine Transfersperre für die Domain aktiviert hat. Die Domain kann nur zu einem anderen Registrar wechseln, wenn der Inhaber sie zuvor bei seinem aktuellen Registrar entsperrt. Das ist eine übliche Sicherheitsfunktion, die unbefugte Domain-Transfers verhindert. Bei einem legitimen Transfer wird sie routinemäßig aufgehoben.",
+    "F: Wie oft werden WHOIS-Daten aktualisiert?\nA: WHOIS-Daten werden innerhalb von Minuten bis Stunden nach Änderungen durch den Registranten (Kontaktdaten, Nameserver) oder den Registrar (Statusänderungen) aktualisiert. Öffentliche WHOIS-Abfragen können je nach verwendetem Tool jedoch leicht verzögerte Ergebnisse zeigen. Das offizielle Abfragetool der ICANN (whois.icann.org) bildet in der Regel die aktuellsten Daten ab.",
+    "F: Zeigt WHOIS alle Domains einer Person?\nA: Das Standard-WHOIS bietet keine Rückwärtssuche (alle auf eine Person oder Organisation registrierten Domains finden). Tools wie DomainTools bieten die Reverse-WHOIS-Suche als kostenpflichtige Funktion an. Damit lassen sich alle Domains finden, die mit einer bestimmten E-Mail-Adresse, einem Organisationsnamen oder einer Telefonnummer verknüpft sind. Das ist nützlich für Wettbewerbsanalysen und Betrugsermittlungen."
+   ]
+  ],
+  [
+   "Domains recherchieren wie ein Profi",
+   [
+    "WHOIS ist ein leistungsstarkes Werkzeug für die Domainrecherche, aber noch wirkungsvoller in Kombination mit Verfügbarkeitsdaten in Echtzeit und Preisvergleichen.",
+    "Prüfen Sie mit DomainsDiscovery.com sofort die Verfügbarkeit einer Domain und vergleichen Sie die Preise der Registrare. Suchen Sie nach beliebigen Domains, sehen Sie, was verfügbar ist, und holen Sie sich die Informationen für kluge Domainentscheidungen, alles an einem Ort."
+   ]
+  ]
+ ]
+}

@@ -1,0 +1,160 @@
+{
+ "title": "Comment faire pointer un domaine vers un autre site web ou serveur",
+ "description": "Apprenez à faire pointer un domaine vers un autre site web ou serveur avec des enregistrements DNS A, CNAME et des serveurs de noms. Guide pas à pas pour débutants.",
+ "sections": [
+  [
+   "Vue d’ensemble",
+   [
+    "Pour faire pointer un domaine vers un site web ou un serveur, connectez-vous aux paramètres DNS de votre registrar et choisissez l’une de ces options : (1) définir un enregistrement A avec l’adresse IP de votre serveur, (2) ajouter un enregistrement CNAME pointant vers un nom d’hôte, ou (3) remplacer vos serveurs de noms par ceux de votre hébergeur. Les modifications mettent de 2 à 48 heures à se propager."
+   ]
+  ],
+  [
+   "Pourquoi faire pointer votre domaine",
+   [
+    "Quand quelqu’un saisit votre domaine dans un navigateur, internet doit savoir où trouver votre site. C’est le rôle du DNS (Domain Name System). Les enregistrements DNS fonctionnent comme un annuaire : ils associent votre nom de domaine lisible (comme yourbrand.com) à l’adresse IP ou à l’emplacement du serveur où se trouve votre contenu.",
+    "Sans configuration DNS correcte, votre domaine ne sert à rien. En le faisant pointer comme il faut, vous donnez vie à votre site."
+   ]
+  ],
+  [
+   "Comprendre les principaux enregistrements DNS",
+   [
+    "Avant d’entrer dans les étapes, il est utile de connaître les types d’enregistrements DNS que vous allez manipuler.",
+    "Enregistrement A (Address Record)",
+    "L’enregistrement DNS A est le type le plus fondamental. Il associe directement votre domaine à une adresse IPv4 (comme 192.168.1.1). Pour faire pointer un domaine vers un serveur web, on définit généralement un enregistrement A.",
+    "Enregistrement AAAA",
+    "Identique à l’enregistrement A, mais pour les adresses IPv6 (comme 2001:0db8:85a3::8a2e:0370:7334). La plupart des hébergeurs modernes prennent en charge les deux.",
+    "Enregistrement CNAME (Canonical Name)",
+    "Un CNAME associe un domaine ou sous-domaine à un autre nom de domaine plutôt qu’à une adresse IP. Par exemple, vous pouvez faire pointer www.yourdomain.com vers yourdomain.com avec un CNAME. Les CNAME servent aussi souvent à faire pointer des sous-domaines vers des services tiers.",
+    "Serveurs de noms (enregistrements NS)",
+    "Les serveurs de noms indiquent à internet quel fournisseur DNS gère les enregistrements de votre domaine. Si vous remplacez vos serveurs de noms par ceux d’un nouvel hébergeur, c’est lui qui gérera désormais tous vos enregistrements DNS."
+   ]
+  ],
+  [
+   "Méthode 1 : faire pointer le domaine avec un enregistrement A",
+   [
+    "C’est la façon la plus directe de faire pointer un domaine vers un serveur web. Utilisez-la quand votre hébergeur vous fournit une adresse IP.",
+    "Pas à pas : configurer un enregistrement DNS A",
+    "Étape 1 : récupérez l’adresse IP de votre serveur Connectez-vous à votre compte d’hébergement et trouvez l’adresse IP de votre serveur. Elle figure généralement sous « Détails de l’hébergement », « Informations du compte » ou dans votre e-mail de bienvenue.",
+    "Étape 2 : connectez-vous à votre registrar Rendez-vous sur le site où vous avez acheté votre domaine (GoDaddy, Namecheap, Google Domains, etc.) et connectez-vous.",
+    "Étape 3 : trouvez la section de gestion DNS Cherchez « Paramètres DNS », « Gérer le DNS », « Éditeur de zone DNS » ou équivalent. Cela varie selon le registrar.",
+    "Étape 4 : repérez ou créez l’enregistrement A",
+    "Trouvez un enregistrement A existant pour votre domaine racine (@) ou créez-en un",
+    "Indiquez @ dans le champ Hôte/Nom (il représente le domaine racine lui-même)",
+    "Indiquez l’adresse IP de votre serveur dans le champ Valeur/Pointe vers",
+    "Réglez le TTL sur 3600 (1 heure) ou sur la valeur par défaut de votre registrar",
+    "Étape 5 : mettez à jour l’enregistrement A de www Répétez l’opération pour www : indiquez www comme Hôte et la même adresse IP comme Valeur.",
+    "Étape 6 : enregistrez et patientez Enregistrez vos modifications. La propagation DNS prend en général de 2 à 48 heures, mais beaucoup de changements sont effectifs en quelques heures."
+   ]
+  ],
+  [
+   "Méthode 2 : faire pointer un sous-domaine avec un enregistrement CNAME",
+   [
+    "Si vous voulez faire pointer un sous-domaine (comme shop.yourdomain.com ou blog.yourdomain.com) vers une plateforme tierce, un CNAME est généralement la bonne approche.",
+    "Pas à pas : configurer un enregistrement CNAME",
+    "Étape 1 : récupérez le nom d’hôte cible auprès de votre prestataire Par exemple, Shopify peut vous donner shops.myshopify.com, et Squarespace ext-cust.squarespace.com. Consultez la documentation de votre plateforme.",
+    "Étape 2 : accédez à vos paramètres DNS Connectez-vous au panneau de gestion DNS de votre registrar.",
+    "Étape 3 : créez un enregistrement CNAME",
+    "Indiquez dans Hôte/Nom le préfixe de votre sous-domaine (par ex. shop)",
+    "Indiquez dans Valeur/Pointe vers le nom d’hôte cible fourni par votre plateforme (par ex. shops.myshopify.com)",
+    "Ajoutez un point final si votre registrar l’exige (par ex. shops.myshopify.com.)",
+    "Étape 4 : enregistrez et vérifiez Enregistrez l’enregistrement et laissez le temps à la propagation. Utilisez un outil comme whatsmydns.net ou dig pour vérifier que le CNAME se résout correctement."
+   ]
+  ],
+  [
+   "Méthode 3 : changer les serveurs de noms pour pointer vers un nouvel hébergeur",
+   [
+    "Si vous déplacez tout votre site chez un nouvel hébergeur, la solution la plus propre consiste à mettre à jour vos serveurs de noms. Cela délègue toute la gestion DNS à votre nouvel hébergeur.",
+    "Pas à pas : mettre à jour les serveurs de noms",
+    "Étape 1 : récupérez les serveurs de noms de votre nouvel hébergeur",
+    "Votre hébergeur vous donnera au moins deux adresses de serveurs de noms, par exemple :",
+    "ns1.newhost.com",
+    "ns2.newhost.com",
+    "Étape 2 : connectez-vous à votre registrar Accédez aux paramètres de votre domaine.",
+    "Étape 3 : trouvez les paramètres des serveurs de noms Cherchez « Serveurs de noms », « Serveurs DNS » ou « Serveurs de noms personnalisés ».",
+    "Étape 4 : remplacez les serveurs de noms actuels Supprimez les serveurs de noms existants et saisissez ceux de votre nouvel hébergeur. La plupart des fournisseurs en exigent au moins deux.",
+    "Étape 5 : enregistrez et patientez Les changements de serveurs de noms peuvent mettre jusqu’à 48 heures à se propager dans le monde entier. Pendant ce temps, certains internautes verront votre ancien site et d’autres le nouveau."
+   ]
+  ],
+  [
+   "Méthode 4 : redirection d’URL (transfert de domaine)",
+   [
+    "Si vous voulez rediriger votre domaine vers un tout autre site web (et non vers un serveur que vous contrôlez), vous pouvez utiliser la redirection d’URL.",
+    "Types de redirections",
+    "Redirection 301 (permanente) : indique aux navigateurs et aux moteurs de recherche que le déménagement est définitif. C’est le meilleur choix pour le SEO si vous changez de domaine à long terme.",
+    "Redirection 302 (temporaire) : indique un déménagement temporaire. Les moteurs de recherche conservent l’URL d’origine dans leur index.",
+    "Comment configurer la redirection d’URL",
+    "1. Connectez-vous à votre registrar",
+    "2. Trouvez les paramètres « Redirection de domaine » ou « Redirection d’URL »",
+    "3. Saisissez l’URL de destination (par ex. https://www.newwebsite.com)",
+    "4. Choisissez le type de redirection (301 ou 302)",
+    "5. Enregistrez et attendez la propagation",
+    "Remarque : la redirection d’URL fonctionne au niveau du registrar et ne transmet pas toujours les sous-dossiers ni les paramètres de requête. Pour les redirections complexes, une configuration au niveau du serveur est préférable."
+   ]
+  ],
+  [
+   "Erreurs courantes quand on fait pointer un domaine",
+   [
+    "Erreur 1 : oublier le sous-domaine www",
+    "Si vous configurez l’enregistrement A pour @ (domaine racine) mais pas pour www, les visiteurs qui tapent www.yourdomain.com n’atteindront pas votre site. Configurez toujours les deux.",
+    "Erreur 2 : utiliser un CNAME sur le domaine racine",
+    "La plupart des fournisseurs DNS n’autorisent pas de CNAME sur le domaine racine (@), car il entre en conflit avec d’autres enregistrements indispensables (comme les MX pour la messagerie). Utilisez un enregistrement A pour la racine et un CNAME pour www si nécessaire.",
+    "Erreur 3 : ne pas attendre la propagation",
+    "Les changements prennent du temps à se diffuser. Si le site n’apparaît pas tout de suite, ne multipliez pas les modifications dans la précipitation : vous risqueriez de créer des enregistrements contradictoires.",
+    "Erreur 4 : confondre les adresses IP de l’hébergement",
+    "Si votre hébergeur propose des IP mutualisées et dédiées, assurez-vous d’utiliser la bonne. Si vous pointez vers la mauvaise IP, votre site ne se chargera pas."
+   ]
+  ],
+  [
+   "Comment vérifier que votre configuration DNS fonctionne",
+   [
+    "Une fois la propagation terminée, vérifiez que tout est correct :",
+    "1. Avec dig (Mac/Linux) : exécutez dig yourdomain.com A pour voir vers quelle IP le domaine se résout",
+    "2. Avec nslookup (Windows) : exécutez nslookup yourdomain.com",
+    "3. Avec un vérificateur en ligne : des sites comme mxtoolbox.com ou dnschecker.org permettent de contrôler les enregistrements A, CNAME, MX et autres depuis plusieurs endroits",
+    "Si l’adresse IP affichée correspond à celle de votre serveur, tout est bon."
+   ]
+  ],
+  [
+   "Exemple concret",
+   [
+    "Imaginons que vous ayez acheté yourbrand.com chez Namecheap et souscrit un hébergement chez SiteGround. SiteGround vous donne l’adresse IP 185.68.14.3.",
+    "Voici ce que vous feriez :",
+    "1. Connectez-vous à Namecheap → Manage → Advanced DNS",
+    "2. Créez un enregistrement A : Host = @, Value = 185.68.14.3, TTL = Automatic",
+    "3. Créez un enregistrement A : Host = www, Value = 185.68.14.3, TTL = Automatic",
+    "4. Supprimez tout enregistrement CNAME en conflit pour @ ou www",
+    "5. Enregistrez les modifications et attendez jusqu’à 48 heures",
+    "En une journée, toute personne qui tape yourbrand.com ou www.yourbrand.com arrivera sur votre site hébergé chez SiteGround."
+   ]
+  ],
+  [
+   "Verdict de l’expert",
+   [
+    "Faire pointer un domaine est l’une des tâches DNS les plus fondamentales, et pourtant c’est une étape où bien des lancements de sites calent. L’erreur la plus courante consiste à configurer l’enregistrement A du domaine racine sans configurer celui de www : environ la moitié des variantes d’URL échouent alors en silence. Considérez toujours le domaine racine et www comme deux enregistrements distincts, à configurer explicitement.",
+    "Pour les équipes qui migrent d’un hébergeur à un autre, la méthode des serveurs de noms est la plus propre sur le long terme, car elle centralise toute la gestion DNS chez le nouvel hébergeur. La méthode de l’enregistrement A convient mieux aux configurations fines, quand vous voulez que le registrar continue de gérer séparément le DNS de la messagerie ou des sous-domaines. La méthode CNAME est le bon choix pour relier des sous-domaines à des services tiers, et il est essentiel de bien la maîtriser, car des plateformes comme Shopify, HubSpot et Squarespace fournissent des noms d’hôte cibles qu’il faut reproduire à l’identique.",
+    "En cas de doute, vérifiez chaque modification avec dig ou un vérificateur DNS en ligne avant de considérer la configuration comme terminée. Les erreurs DNS sont silencieuses par défaut : le domaine ne se résout tout simplement pas, sans message d’erreur évident."
+   ]
+  ],
+  [
+   "Questions fréquentes",
+   [
+    "Q : Quelle est la façon la plus rapide de faire pointer un domaine vers un nouveau serveur ?\nR : La plus rapide consiste à mettre à jour l’enregistrement A directement dans le panneau DNS de votre registrar, avec un TTL de 300 secondes (abaissé au moins 48 heures à l’avance). La propagation prend alors moins de 30 minutes sur la plupart des résolveurs, contre 24 à 48 heures pour un changement de serveurs de noms.",
+    "Q : Puis-je faire pointer mon domaine vers un site qui ne m’appartient pas ?\nR : Avec une redirection d’URL (301/302), oui : votre domaine peut renvoyer les visiteurs vers n’importe quelle URL. Avec un enregistrement A ou un CNAME, le serveur cible devrait être configuré pour accepter et servir du contenu pour votre domaine, ce qui demande généralement une configuration côté serveur chez l’hébergeur cible.",
+    "Q : Pourquoi ne puis-je pas utiliser un CNAME pour mon domaine racine ?\nR : Les enregistrements CNAME entrent en conflit avec d’autres enregistrements DNS requis à la racine, notamment les MX de la messagerie et les SOA. La plupart des fournisseurs DNS appliquent les restrictions des RFC qui interdisent un CNAME à l’apex. Certains proposent des enregistrements propriétaires « ALIAS » ou « ANAME » qui produisent un résultat proche d’un CNAME à la racine sans enfreindre les règles des RFC.",
+    "Q : Quelle est la différence entre les enregistrements A et les serveurs de noms ?\nR : Un enregistrement A associe un domaine ou sous-domaine précis à une adresse IP et se gère dans votre zone DNS actuelle. Les serveurs de noms déterminent quel fournisseur DNS contrôle toute la zone. Changer de serveurs de noms délègue toute la gestion DNS à un nouveau fournisseur ; changer des enregistrements A modifie des entrées individuelles dans la zone existante.",
+    "Q : Comment savoir si ma modification DNS a fonctionné ?\nR : Exécutez dig yourdomain.com A dans un terminal, ou utilisez dnschecker.org pour vérifier depuis plusieurs endroits du monde. Si l’IP renvoyée correspond à votre serveur cible, la modification s’est propagée à cet endroit.",
+    "Q : Puis-je faire pointer plusieurs domaines vers le même serveur ?\nR : Oui. Créez un enregistrement A pour chaque domaine, pointant vers la même adresse IP. Côté serveur, vous devrez configurer l’hébergement virtuel (virtual hosts Apache ou server blocks Nginx) pour diriger chaque domaine vers le contenu de son propre site.",
+    "Q : Que devient ma messagerie quand je change de serveurs de noms ?\nR : Quand vous changez de serveurs de noms, toute la gestion DNS passe au nouveau fournisseur, y compris les enregistrements MX. Si le nouveau fournisseur n’a pas vos enregistrements MX actuels, la messagerie cessera de fonctionner. Reproduisez toujours vos enregistrements MX, SPF, DKIM et DMARC chez le nouveau fournisseur DNS avant de changer de serveurs de noms."
+   ]
+  ],
+  [
+   "Conclusion",
+   [
+    "Faire pointer un domaine vers un site web ou un serveur est une compétence de base pour quiconque gère une présence en ligne. Que vous utilisiez un enregistrement DNS A pour une connexion IP directe, un CNAME pour des sous-domaines ou un changement de serveurs de noms pour une migration complète, le processus reste simple dès que l’on comprend les étapes.",
+    "L’essentiel est de savoir quelle méthode convient à votre situation et de rester patient pendant la propagation.",
+    "Vous voulez enregistrer le domaine idéal avant de configurer votre DNS ?",
+    "Utilisez DomainsDiscovery.com pour vérifier instantanément la disponibilité d’un domaine et comparer les prix des registrars."
+   ]
+  ]
+ ]
+}

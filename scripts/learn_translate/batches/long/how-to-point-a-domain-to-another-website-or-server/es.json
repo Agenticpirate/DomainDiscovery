@@ -1,0 +1,160 @@
+{
+ "title": "Cómo apuntar un dominio a otro sitio web o servidor",
+ "description": "Aprende a apuntar un dominio a otro sitio web o servidor con registros DNS A, registros CNAME y servidores de nombres. Guía paso a paso para principiantes.",
+ "sections": [
+  [
+   "Resumen",
+   [
+    "Para apuntar un dominio a un sitio web o servidor, inicia sesión en la configuración DNS de tu registrador de dominios y haz una de estas tres cosas: (1) configurar un registro A con la dirección IP de tu servidor, (2) añadir un registro CNAME que apunte a un nombre de host, o (3) cambiar los servidores de nombres por los de tu proveedor de hosting. Los cambios tardan entre 2 y 48 horas en propagarse."
+   ]
+  ],
+  [
+   "Por qué necesitas apuntar tu dominio",
+   [
+    "Cuando alguien escribe tu dominio en el navegador, internet necesita saber dónde encontrar tu sitio web. De eso se encarga el DNS (Sistema de Nombres de Dominio). Los registros DNS funcionan como un directorio: relacionan el nombre de dominio legible (como yourbrand.com) con la dirección IP o la ubicación del servidor donde está tu contenido.",
+    "Sin una configuración DNS correcta, tu dominio no sirve de nada. Si lo apuntas bien, tu sitio cobra vida."
+   ]
+  ],
+  [
+   "Los registros DNS clave",
+   [
+    "Antes de ir a los pasos, conviene conocer los tipos de registros DNS con los que vas a trabajar.",
+    "Registro A (registro de dirección)",
+    "El registro DNS A es el tipo más básico. Asocia tu dominio directamente con una dirección IPv4 (como 192.168.1.1). Cuando quieres apuntar un dominio a un servidor web, lo habitual es configurar un registro A.",
+    "Registro AAAA",
+    "Igual que el registro A, pero para direcciones IPv6 (como 2001:0db8:85a3::8a2e:0370:7334). La mayoría de los proveedores de hosting modernos admiten ambos.",
+    "Registro CNAME (nombre canónico)",
+    "Un CNAME asocia un dominio o subdominio con otro nombre de dominio en lugar de una dirección IP. Por ejemplo, puedes apuntar www.yourdomain.com a yourdomain.com mediante un CNAME. Los CNAME también se usan mucho para apuntar subdominios a servicios de terceros.",
+    "Servidores de nombres (registros NS)",
+    "Los servidores de nombres indican a internet qué proveedor de DNS controla los registros de tu dominio. Si cambias los servidores de nombres a los de un nuevo proveedor de hosting, ese proveedor gestionará a partir de ahí todos tus registros DNS."
+   ]
+  ],
+  [
+   "Método 1: apuntar el dominio con un registro A",
+   [
+    "Es la forma más directa de apuntar un dominio a un servidor web. Úsala cuando tu proveedor de hosting te dé una dirección IP.",
+    "Paso a paso: configurar un registro DNS A",
+    "Paso 1: obtén la dirección IP de tu servidor Inicia sesión en tu cuenta de hosting y busca la IP de tu servidor. Suele aparecer en “Detalles del hosting”, “Información de la cuenta” o en el correo de bienvenida.",
+    "Paso 2: inicia sesión en tu registrador de dominios Entra en el sitio donde compraste el dominio (GoDaddy, Namecheap, Google Domains, etc.) e inicia sesión.",
+    "Paso 3: encuentra la sección de gestión de DNS Busca “Configuración DNS”, “Administrar DNS”, “Editor de zona DNS” o algo parecido. Varía según el registrador.",
+    "Paso 4: localiza o crea el registro A",
+    "Busca un registro A existente para tu dominio raíz (@) o crea uno nuevo",
+    "Pon en el campo Host/Nombre el valor @ (que representa el propio dominio raíz)",
+    "Pon en el campo Valor/Apunta a la dirección IP de tu servidor",
+    "Configura el TTL en 3600 (1 hora) o el valor predeterminado de tu registrador",
+    "Paso 5: actualiza el registro A de www Repite el proceso para www: pon www como Host y la misma dirección IP como Valor.",
+    "Paso 6: guarda y espera Guarda los cambios. La propagación del DNS suele tardar entre 2 y 48 horas, aunque muchos cambios se aplican en pocas horas."
+   ]
+  ],
+  [
+   "Método 2: apuntar un subdominio con un registro CNAME",
+   [
+    "Si quieres apuntar un subdominio (como shop.yourdomain.com o blog.yourdomain.com) a una plataforma de terceros, normalmente lo correcto es un CNAME.",
+    "Paso a paso: configurar un registro CNAME",
+    "Paso 1: obtén el nombre de host de destino de tu proveedor de servicios Por ejemplo, Shopify puede darte shops.myshopify.com y Squarespace, ext-cust.squarespace.com. Consulta la documentación de tu plataforma.",
+    "Paso 2: ve a tu configuración DNS Inicia sesión en el panel de gestión DNS de tu registrador.",
+    "Paso 3: crea un registro CNAME",
+    "Pon en Host/Nombre el prefijo de tu subdominio (por ejemplo, shop)",
+    "Pon en Valor/Apunta a el nombre de host de destino que te dio la plataforma (por ejemplo, shops.myshopify.com)",
+    "Añade un punto final si tu registrador lo exige (por ejemplo, shops.myshopify.com.)",
+    "Paso 4: guarda y verifica Guarda el registro y deja tiempo para la propagación. Usa una herramienta como whatsmydns.net o dig para comprobar que el CNAME se resuelve bien."
+   ]
+  ],
+  [
+   "Método 3: cambiar los servidores de nombres para apuntar a un nuevo hosting",
+   [
+    "Si vas a trasladar todo tu sitio web a un nuevo proveedor de hosting, lo más limpio es actualizar los servidores de nombres. Así delegas toda la gestión del DNS en tu nuevo proveedor.",
+    "Paso a paso: actualizar los servidores de nombres",
+    "Paso 1: obtén los servidores de nombres de tu nuevo hosting",
+    "Tu proveedor de hosting te dará dos o más direcciones de servidores de nombres, por ejemplo:",
+    "ns1.newhost.com",
+    "ns2.newhost.com",
+    "Paso 2: inicia sesión en tu registrador de dominios Ve a la configuración de tu dominio.",
+    "Paso 3: busca la configuración de servidores de nombres Busca “Nameservers”, “Servidores DNS” o “Servidores de nombres personalizados”.",
+    "Paso 4: sustituye los servidores de nombres actuales Elimina los servidores de nombres existentes e introduce los de tu nuevo proveedor. La mayoría exige al menos dos.",
+    "Paso 5: guarda y espera Los cambios en los servidores de nombres pueden tardar hasta 48 horas en propagarse por todo el mundo. Durante ese tiempo, algunos usuarios verán tu sitio antiguo y otros el nuevo."
+   ]
+  ],
+  [
+   "Método 4: redirección de URL (reenvío de dominio)",
+   [
+    "Si quieres redirigir tu dominio a un sitio web completamente distinto (no a un servidor que controles), puedes usar el reenvío de URL.",
+    "Tipos de redirección",
+    "Redirección 301 (permanente): indica a navegadores y buscadores que el cambio es definitivo. Es lo mejor para el SEO si cambias de dominio a largo plazo.",
+    "Redirección 302 (temporal): indica un cambio temporal. Los buscadores mantienen indexada la URL original.",
+    "Cómo configurar el reenvío de URL",
+    "1. Inicia sesión en tu registrador",
+    "2. Busca la configuración de “Reenvío de dominio” o “Redirección de URL”",
+    "3. Introduce la URL de destino (por ejemplo, https://www.newwebsite.com)",
+    "4. Elige el tipo de redirección (301 o 302)",
+    "5. Guarda y espera la propagación",
+    "Nota: el reenvío de URL funciona a nivel del registrador y puede que no reenvíe subcarpetas ni parámetros de consulta en todos los casos. Para redirecciones complejas es mejor configurarlo en el servidor."
+   ]
+  ],
+  [
+   "Errores comunes al apuntar un dominio",
+   [
+    "Error 1: olvidar el subdominio www",
+    "Si configuras el registro A para @ (dominio raíz) pero no para www, los visitantes que escriban www.yourdomain.com no llegarán a tu sitio. Configura siempre ambos.",
+    "Error 2: usar un CNAME en el dominio raíz",
+    "La mayoría de los proveedores de DNS no permiten un CNAME en el dominio raíz (@) porque choca con otros registros necesarios (como los MX del correo). Usa un registro A para la raíz y, si hace falta, un CNAME para www.",
+    "Error 3: no esperar a la propagación",
+    "Los cambios tardan en extenderse. Si el sitio no aparece enseguida, no hagas más cambios por impaciencia: podrías acabar con registros en conflicto.",
+    "Error 4: confundir las direcciones IP del hosting",
+    "Si tu proveedor ofrece IP compartidas y dedicadas, asegúrate de usar la correcta. Si apuntas a la IP equivocada, tu sitio no cargará."
+   ]
+  ],
+  [
+   "Cómo comprobar que tu configuración DNS funciona",
+   [
+    "Cuando la propagación se haya asentado, verifica que todo esté bien:",
+    "1. Usa dig (Mac/Linux): ejecuta dig yourdomain.com A para ver a qué IP se resuelve el dominio",
+    "2. Usa nslookup (Windows): ejecuta nslookup yourdomain.com",
+    "3. Usa un verificador en línea: sitios como mxtoolbox.com o dnschecker.org permiten comprobar registros A, CNAME, MX y otros desde varias ubicaciones",
+    "Si la dirección IP que aparece coincide con la de tu servidor, todo está listo."
+   ]
+  ],
+  [
+   "Ejemplo real",
+   [
+    "Imagina que compraste yourbrand.com en Namecheap y contrataste hosting con SiteGround. SiteGround te da la dirección IP 185.68.14.3.",
+    "Esto es lo que harías:",
+    "1. Inicia sesión en Namecheap → Manage → Advanced DNS",
+    "2. Crea un registro A: Host = @, Value = 185.68.14.3, TTL = Automatic",
+    "3. Crea un registro A: Host = www, Value = 185.68.14.3, TTL = Automatic",
+    "4. Elimina cualquier registro CNAME en conflicto para @ o www",
+    "5. Guarda los cambios y espera hasta 48 horas",
+    "En un día, cualquiera que escriba yourbrand.com o www.yourbrand.com llegará a tu sitio alojado en SiteGround."
+   ]
+  ],
+  [
+   "Veredicto del experto",
+   [
+    "Apuntar un dominio es una de las tareas DNS más básicas, y aun así es un paso en el que se atascan muchos lanzamientos web. El fallo más común es configurar el registro A del dominio raíz sin configurar también el de www, con lo que cerca de la mitad de las variantes de URL fallan sin avisar. Trata siempre el dominio raíz y www como registros distintos, que requieren configuración explícita.",
+    "Para los equipos que migran de un hosting a otro, el método de servidores de nombres es el más limpio a largo plazo, porque centraliza toda la gestión del DNS en el nuevo proveedor. El método del registro A es mejor para configuraciones más finas, en las que quieres que el registrador siga gestionando por separado el DNS del correo o de los subdominios. El método CNAME es la opción correcta para conectar subdominios con servicios de terceros, y es crucial hacerlo bien, porque plataformas como Shopify, HubSpot y Squarespace dan nombres de host de destino que deben coincidir exactamente.",
+    "Ante la duda, verifica cada cambio con dig o con un verificador de DNS en línea antes de dar la configuración por terminada. Los errores de DNS son silenciosos por defecto: el dominio simplemente no se resuelve, sin mostrar un mensaje de error evidente."
+   ]
+  ],
+  [
+   "Preguntas frecuentes",
+   [
+    "P: ¿Cuál es la forma más rápida de apuntar un dominio a un servidor nuevo?\nR: La más rápida es actualizar el registro A directamente en el panel DNS de tu registrador, con el TTL en 300 segundos (bajado al menos 48 horas antes). Así la propagación tarda menos de 30 minutos en la mayoría de los resolvers, frente a las 24–48 horas de un cambio de servidores de nombres.",
+    "P: ¿Puedo apuntar mi dominio a un sitio web que no es mío?\nR: Mediante una redirección de URL (301/302), sí: tu dominio puede reenviar a los visitantes a cualquier URL. Con un registro A o un CNAME, el servidor de destino tendría que estar configurado para aceptar y servir contenido de tu dominio, lo que normalmente exige configuración en el servidor del host de destino.",
+    "P: ¿Por qué no puedo usar un CNAME en mi dominio raíz?\nR: Los registros CNAME chocan con otros registros DNS necesarios en la raíz, como los MX del correo y los SOA. La mayoría de los proveedores de DNS aplican las restricciones de los RFC que impiden un CNAME en el ápice. Algunos ofrecen registros propios “ALIAS” o “ANAME” que logran un resultado parecido al de un CNAME en la raíz sin infringir las reglas de los RFC.",
+    "P: ¿Qué diferencia hay entre los registros A y los servidores de nombres?\nR: Un registro A asocia un dominio o subdominio concreto con una dirección IP y se gestiona dentro de tu zona DNS actual. Los servidores de nombres definen qué proveedor de DNS controla toda la zona. Cambiar los servidores de nombres delega toda la gestión del DNS en un proveedor nuevo; cambiar los registros A modifica entradas individuales dentro de la zona existente.",
+    "P: ¿Cómo sé si mi cambio de DNS funcionó?\nR: Ejecuta dig yourdomain.com A en una terminal o usa dnschecker.org para comprobarlo desde varias ubicaciones del mundo. Si la IP devuelta coincide con la de tu servidor de destino, el cambio se ha propagado a esa ubicación.",
+    "P: ¿Puedo apuntar varios dominios al mismo servidor?\nR: Sí. Crea un registro A para cada dominio que apunte a la misma dirección IP. En el servidor tendrás que configurar hosts virtuales (virtual hosts de Apache o server blocks de Nginx) para dirigir cada dominio a su propio contenido.",
+    "P: ¿Qué pasa con mi correo cuando cambio los servidores de nombres?\nR: Al cambiar los servidores de nombres, toda la gestión del DNS pasa al nuevo proveedor, incluidos los registros MX. Si el nuevo proveedor no tiene configurados tus registros MX actuales, el correo dejará de funcionar. Replica siempre tus registros MX, SPF, DKIM y DMARC en el nuevo proveedor de DNS antes de cambiar los servidores de nombres."
+   ]
+  ],
+  [
+   "Conclusión",
+   [
+    "Apuntar un dominio a un sitio web o servidor es una habilidad básica para cualquiera que gestione una presencia en la web. Tanto si usas un registro DNS A para una conexión directa por IP, un CNAME para subdominios o cambias los servidores de nombres para migrar todo el hosting, el proceso es manejable cuando entiendes los pasos.",
+    "La clave está en saber qué método encaja con tu caso y tener paciencia durante la propagación.",
+    "¿Quieres registrar el dominio perfecto antes de configurar tu DNS?",
+    "Usa DomainsDiscovery.com para comprobar al instante la disponibilidad de un dominio y comparar precios entre registradores."
+   ]
+  ]
+ ]
+}

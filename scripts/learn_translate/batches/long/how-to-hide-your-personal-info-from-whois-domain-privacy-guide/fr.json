@@ -1,0 +1,162 @@
+{
+ "title": "Comment masquer vos informations personnelles dans WHOIS (guide de la confidentialité des domaines)",
+ "description": "Apprenez à masquer vos informations personnelles dans WHOIS grâce à la protection de la vie privée du domaine. Découvrez comment elle fonctionne, combien elle coûte et quels registrars l’offrent gratuitement.",
+ "sections": [
+  [
+   "Vue d’ensemble",
+   [
+    "La protection de la vie privée du domaine (confidentialité WHOIS) remplace votre nom, votre adresse, votre téléphone et votre e-mail dans la base WHOIS publique par des informations proxy de votre registrar. Activez-la dans les paramètres de domaine de votre registrar, sous « WHOIS Privacy », « Domain Privacy » ou « WhoisGuard ». Elle est gratuite chez Namecheap, Cloudflare et Porkbun, et mérite d’être activée sur chaque domaine que vous possédez."
+   ]
+  ],
+  [
+   "Pourquoi vos informations figurent-elles dans WHOIS ?",
+   [
+    "L’ICANN, l’organisation qui supervise les noms de domaine à l’échelle mondiale, a historiquement exigé des titulaires de domaines qu’ils fournissent des coordonnées exactes lors de l’enregistrement. Cette politique de transparence visait à :",
+    "Permettre de régler les litiges liés aux abus (contacter des spammeurs, des contrevenants au droit d’auteur, etc.)",
+    "Aider les entreprises à vérifier la propriété d’un domaine",
+    "Permettre de joindre les contacts techniques en cas de problème réseau",
+    "Le problème : ces données accessibles au public sont vite devenues une cible pour les spammeurs, les télévendeurs, les escrocs et, parfois, les harceleurs. Les propriétaires de domaines ont commencé à recevoir des déluges de spam, d’appels non sollicités et d’e-mails de phishing simplement parce qu’ils avaient enregistré un nom de domaine.",
+    "C’est là qu’intervient la protection de la vie privée du domaine."
+   ]
+  ],
+  [
+   "Qu’est-ce que la protection de la vie privée du domaine ?",
+   [
+    "La protection de la vie privée du domaine (parfois appelée confidentialité WHOIS, privacy guard ou domain privacy) est un service proposé par la plupart des registrars, qui remplace vos informations WHOIS personnelles par les coordonnées du registrar (ou d’un service proxy).",
+    "Au lieu que votre enregistrement WHOIS affiche :",
+    "`` Registrant Name: Jane Smith Registrant Address: 123 Main Street, Austin, TX 78701 Registrant Phone: +1.5125551234 Registrant Email: jane@personalmail.com ``",
+    "Il affiche quelque chose comme :",
+    "`` Registrant Name: WhoisGuard Protected Registrant Address: 11400 W. Olympic Blvd., Suite 200, Los Angeles, CA 90064 Registrant Phone: +1.6614842237 Registrant Email: abc123@proxy.whoisguard.com ``",
+    "L’adresse e-mail proxy vous transmet les messages légitimes, ce qui vous permet de recevoir les avis importants du registrar sans exposer votre véritable adresse."
+   ]
+  ],
+  [
+   "Comment fonctionne techniquement la protection de la vie privée du domaine",
+   [
+    "Lorsque vous activez la protection, votre registrar crée une identité proxy qui vous remplace dans l’enregistrement WHOIS public. Voici le déroulement :",
+    "1. Quelqu’un consulte votre domaine dans WHOIS : il voit les informations proxy",
+    "2. S’il envoie un e-mail à l’adresse proxy, celui-ci est transféré à votre véritable e-mail",
+    "3. Votre vrai nom, votre adresse et votre téléphone ne sont conservés que dans les dossiers privés du registrar",
+    "4. Les forces de l’ordre et les procédures légales légitimes peuvent toujours demander vos véritables informations par les voies appropriées",
+    "Point essentiel : cela n’affecte en rien le fonctionnement de votre domaine ou de votre site. Il s’agit uniquement d’une modification de l’enregistrement WHOIS : votre DNS, vos serveurs de noms et votre site fonctionnent à l’identique."
+   ]
+  ],
+  [
+   "De quoi la confidentialité WHOIS vous protège",
+   [
+    "Spam et sollicitations non désirées",
+    "C’est le principal avantage pratique. Des robots collecteurs de WHOIS récupèrent les adresses e-mail des titulaires et les revendent à des listes de diffusion. Masquer vos informations WHOIS réduit considérablement le spam lié au domaine.",
+    "Appels non sollicités et télémarketing",
+    "Si votre numéro figure dans WHOIS, les courtiers en domaines, les commerciaux de l’hébergement et les télévendeurs peuvent le trouver. La protection de la vie privée supprime ce vecteur.",
+    "Exposition de votre adresse postale",
+    "Si vous dirigez une entreprise depuis chez vous et enregistrez des domaines à votre adresse personnelle, cette adresse est visible publiquement sans protection. C’est une préoccupation de sécurité légitime pour de nombreux indépendants et créateurs.",
+    "Attaques d’ingénierie sociale",
+    "Les cybercriminels utilisent les données WHOIS pour des attaques ciblées. Connaître votre vrai nom, votre e-mail et votre registrar peut les aider à rédiger des e-mails de phishing convaincants ou à tenter de prendre le contrôle de comptes. Retirer vos données de WHOIS réduit cette surface de risque."
+   ]
+  ],
+  [
+   "De quoi la confidentialité WHOIS NE vous protège PAS",
+   [
+    "Il est important d’être clair sur ses limites :",
+    "Procédures légales : les tribunaux, les forces de l’ordre et l’ICANN peuvent toujours accéder à vos véritables informations par des demandes formelles auprès de votre registrar",
+    "Litiges de marques : si vous enfreignez une marque, la protection de la vie privée n’empêchera pas une procédure UDRP (Uniform Domain Name Dispute Resolution Policy)",
+    "Historique de paiement : vos données financières chez le registrar restent privées quels que soient les paramètres de confidentialité WHOIS",
+    "Surveillance des domaines : on peut toujours voir qu’un domaine est enregistré, quand il expire et quels serveurs de noms il utilise, mais pas vos informations personnelles",
+    "La confidentialité WHOIS est un outil légitime pour des titulaires légitimes. Ce n’est pas un bouclier pour des activités illégales."
+   ]
+  ],
+  [
+   "Le RGPD me protège-t-il déjà ?",
+   [
+    "Si vous êtes dans l’Union européenne (ou si vous enregistrez depuis un pays aux lois de confidentialité similaires), le RGPD a déjà conduit la plupart des registrars à masquer automatiquement les informations personnelles dans le WHOIS public. En pratique, la plupart des titulaires basés dans l’UE bénéficient d’une protection de fait sans l’activer explicitement.",
+    "Toutefois, la protection du RGPD n’est pas garantie pour tous les domaines ni tous les registrars, et ne s’applique pas aux titulaires hors de l’UE. Activer explicitement la protection de la vie privée du domaine reste la méthode la plus fiable pour garder vos données privées, où que vous soyez."
+   ]
+  ],
+  [
+   "Combien coûte la confidentialité d’un domaine ?",
+   [
+    "C’est là que les politiques des registrars diffèrent beaucoup. Certains font payer la protection de la vie privée ; d’autres l’incluent gratuitement.",
+    "Registrars qui offrent la confidentialité WHOIS gratuitement",
+    "Namecheap : inclut la confidentialité WhoisGuard gratuitement à vie sur tous les domaines éligibles",
+    "Cloudflare Registrar : confidentialité incluse sans frais supplémentaires",
+    "Porkbun : confidentialité gratuite sur tous les domaines enregistrés",
+    "Google Domains (désormais Squarespace) : confidentialité incluse gratuitement",
+    "Hover : confidentialité incluse pour la plupart des TLD",
+    "Registrars qui font payer la confidentialité",
+    "GoDaddy : facture environ $9.99/an son option « Full Domain Privacy + Protection »",
+    "Network Solutions : facture la confidentialité en option",
+    "Register.com : confidentialité disponible moyennant un supplément",
+    "Le coût de la confidentialité d’un domaine varie, mais dépasse rarement $10–$15/an. Vu le volume de spam et le risque qu’elle réduit, elle vaut presque toujours la peine d’être payée si votre registrar la facture.",
+    "Conseil de pro : si votre registrar actuel fait payer la confidentialité du domaine et que votre budget est serré, passer chez Namecheap, Porkbun ou Cloudflare pour bénéficier d’une confidentialité intégrée gratuite est une économie légitime, surtout pour de gros portefeuilles de domaines."
+   ]
+  ],
+  [
+   "Comment activer la protection de la vie privée du domaine (pas à pas)",
+   [
+    "Étape 1 : connectez-vous à votre compte registrar",
+    "Rendez-vous sur le site de votre registrar et connectez-vous. Accédez à l’espace de gestion des domaines.",
+    "Étape 2 : sélectionnez le domaine",
+    "Cliquez sur le domaine pour lequel vous voulez activer la confidentialité. Vous accédez à la page de paramètres propre à ce domaine.",
+    "Étape 3 : trouvez le paramètre de confidentialité",
+    "Cherchez les options intitulées :",
+    "« WHOIS Privacy »",
+    "« Domain Privacy »",
+    "« WhoisGuard »",
+    "« Privacy Protection »",
+    "« Registrant Data Masking »",
+    "L’emplacement varie selon le registrar. On le trouve généralement dans les paramètres principaux ou de sécurité du domaine.",
+    "Étape 4 : activez la confidentialité",
+    "Activez l’option ou ajoutez le service au panier s’il faut l’acheter séparément. Effectuez les étapes de paiement nécessaires.",
+    "Étape 5 : vérifiez la modification",
+    "Après l’activation, effectuez une recherche WHOIS sur votre domaine (avec whois.domaintools.com ou whois.icann.org). Vérifiez que vos informations personnelles ont bien été remplacées par les informations proxy.",
+    "Remarque : les mises à jour WHOIS ne sont pas toujours instantanées. Prévoyez jusqu’à 24–48 heures pour que le masquage apparaisse dans les résultats WHOIS publics."
+   ]
+  ],
+  [
+   "Confidentialité du domaine : enregistrements professionnels et personnels",
+   [
+    "Enregistrements individuels / personnels",
+    "La protection de la vie privée est fortement recommandée. Votre adresse personnelle, votre téléphone personnel et votre e-mail personnel n’ont rien à faire dans une base de données publique. Activez-la sur chaque domaine que vous possédez.",
+    "Enregistrements professionnels",
+    "Pour les entreprises, le calcul est un peu différent. L’adresse d’une entreprise (surtout d’un bureau commercial) est souvent publique de toute façon. Certaines entreprises choisissent d’afficher leur véritable adresse professionnelle dans WHOIS comme signal de confiance, notamment dans les secteurs où la transparence compte.",
+    "Cependant, même pour une entreprise, utiliser une adresse générique de la société plutôt que les coordonnées d’un employé en particulier est une bonne pratique.",
+    "Domaines et marques très visibles",
+    "Si vous possédez un domaine de grande valeur ou très reconnaissable, la protection de la vie privée est essentielle. Les domaines très visibles attirent davantage l’attention des courtiers en domaines, des cybersquatteurs et, parfois, de personnes malveillantes. Limiter leur accès à vos informations personnelles relève d’une saine hygiène de sécurité."
+   ]
+  ],
+  [
+   "Changer de registrar pour de meilleures options de confidentialité",
+   [
+    "Si vous payez actuellement la confidentialité WHOIS chez un registrar qui la facture, faites le calcul : pour 10 domaines à $10/an de confidentialité, cela fait $100/an rien que pour la confidentialité. Passez chez un registrar qui l’inclut gratuitement et vous économisez immédiatement cette somme (avec une protection équivalente).",
+    "Le transfert est simple (voir notre guide sur le transfert d’un nom de domaine), et la protection de la vie privée chez des registrars de destination comme Namecheap ou Porkbun est tout aussi efficace que celle que vous payez actuellement."
+   ]
+  ],
+  [
+   "Verdict de l’expert",
+   [
+    "La protection de la vie privée du domaine est la mesure de protection la plus sous-utilisée dont disposent les propriétaires de domaines, et il est inexcusable de la négliger quand son activation ne coûte rien. Le risque pratique de laisser des informations personnelles dans la base WHOIS publique n’est pas théorique : c’est une source active et continue de spam, d’appels non sollicités et, dans les pires cas, d’attaques de phishing ciblées exploitant les informations de registrar et de domaine visibles dans l’enregistrement WHOIS.",
+    "L’argument professionnel est tout aussi simple. Les propriétaires individuels qui enregistrent depuis leur domicile exposent publiquement leur lieu de résidence. Les employés qui enregistrent des domaines d’entreprise sous un compte personnel exposent leurs coordonnées privées au nom de la société. Aucun de ces risques n’est acceptable quand la parade est gratuite ou coûte $10 par an.",
+    "Le paysage des registrars en 2026 s’est clairement scindé sur la confidentialité : les registrars conçus pour les propriétaires soucieux des coûts (Namecheap, Cloudflare, Porkbun) l’incluent gratuitement par défaut, tandis que les registrars historiques (GoDaddy, Network Solutions) continuent de la facturer comme option premium. Pour tout propriétaire gérant plus de 2–3 domaines chez un registrar qui fait payer la confidentialité, l’intérêt économique de passer chez un registrar à confidentialité gratuite est sans équivoque. La qualité de la protection est équivalente ; la seule différence est de savoir si vous la payez."
+   ]
+  ],
+  [
+   "Questions fréquentes",
+   [
+    "Q : La protection de la vie privée du domaine affecte-t-elle mon site ou mes e-mails ?\nR : Non. Elle ne modifie que les informations affichées dans la base WHOIS publique. Elle n’a aucun effet sur votre site, vos enregistrements DNS, vos serveurs de noms, la remise des e-mails ou les possibilités de transfert du domaine. Votre site et vos e-mails fonctionnent à l’identique, avec ou sans confidentialité.",
+    "Q : La confidentialité WHOIS est-elle gratuite ou payante ?\nR : Cela dépend de votre registrar. Namecheap, Cloudflare Registrar et Porkbun incluent gratuitement la confidentialité WHOIS sur tous les domaines éligibles. GoDaddy et Network Solutions facturent environ $9.99–$15 par an la confidentialité en option. La qualité de la protection est équivalente quel que soit le prix : si vous payez la confidentialité, envisagez de passer chez un registrar qui l’inclut gratuitement.",
+    "Q : Quelqu’un peut-il encore trouver mes informations personnelles si j’utilise la confidentialité WHOIS ?\nR : Avec la confidentialité activée, vos informations personnelles ne sont pas visibles dans les requêtes WHOIS publiques. Les informations proxy (l’adresse du registrar et un e-mail de transfert) s’affichent à la place. Toutefois, vos véritables informations restent accessibles aux forces de l’ordre par des demandes légales formelles auprès de votre registrar, et aux titulaires de droits de propriété intellectuelle via la procédure de litige UDRP.",
+    "Q : La confidentialité WHOIS empêche-t-elle les transferts de domaine ?\nR : Non. Elle ne bloque ni ne restreint les transferts de domaine. Lors d’un transfert, le code d’autorisation EPP est toujours envoyé à votre véritable adresse e-mail (via le système de transfert du proxy de confidentialité), et la procédure d’approbation se déroule normalement. La protection de la vie privée et les transferts de domaine fonctionnent indépendamment.",
+    "Q : Que deviennent les e-mails envoyés à mon adresse proxy WHOIS ?\nR : Les messages envoyés à votre adresse proxy WHOIS (l’e-mail de transfert affiché dans l’enregistrement WHOIS public) sont automatiquement transférés à votre véritable adresse par le service de confidentialité du registrar. Vous recevez les messages légitimes, comme les avis du registrar ou les demandes concernant le domaine, sans exposer votre vraie adresse. Les filtres antispam peuvent intercepter certains messages transférés ; vérifiez votre dossier spam si vous attendez du courrier transféré.",
+    "Q : Dois-je activer la confidentialité WHOIS sur chacun de mes domaines ?\nR : Oui, en règle générale. Pour les titulaires particuliers, la protection de la vie privée sur chaque domaine est fortement recommandée : vos informations personnelles n’ont aucune raison d’être accessibles au public. Pour les enregistrements professionnels, utiliser une adresse de société et un e-mail générique dans WHOIS (plutôt que les coordonnées d’un employé) offre une transparence appropriée tout en protégeant les personnes de l’organisation.",
+    "Q : Puis-je activer la confidentialité WHOIS après l’enregistrement du domaine ?\nR : Oui. Vous pouvez activer la protection de la vie privée à tout moment, même des années après l’enregistrement du domaine sans elle. Une fois activée, les mises à jour WHOIS se propagent en 24–48 heures et remplacent vos informations personnelles par les informations proxy. Les données personnelles qui étaient visibles auparavant dans WHOIS ne peuvent toutefois pas être retirées rétroactivement des enregistrements en cache ni des services tiers d’historique WHOIS qui les ont capturées plus tôt."
+   ]
+  ],
+  [
+   "Protégez votre vie privée dès le départ",
+   [
+    "Le meilleur moment pour activer la confidentialité du domaine est celui de l’enregistrement, avant même que vos véritables informations n’apparaissent dans la base WHOIS publique.",
+    "Utilisez DomainsDiscovery.com pour vérifier instantanément la disponibilité d’un domaine et comparer les prix des registrars. Comparez les registrars qui incluent la confidentialité WHOIS gratuite, trouvez les meilleurs tarifs d’enregistrement et démarrez chaque enregistrement de domaine avec votre vie privée protégée dès le premier jour."
+   ]
+  ]
+ ]
+}

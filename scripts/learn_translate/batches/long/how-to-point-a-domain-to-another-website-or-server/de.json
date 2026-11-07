@@ -1,0 +1,160 @@
+{
+ "title": "So leiten Sie eine Domain auf eine andere Website oder einen anderen Server",
+ "description": "Erfahren Sie, wie Sie eine Domain mit DNS-A-Records, CNAME-Records und Nameservern auf eine andere Website oder einen anderen Server verweisen lassen. Schritt-für-Schritt-Anleitung für Einsteiger.",
+ "sections": [
+  [
+   "Überblick",
+   [
+    "Um eine Domain auf eine Website oder einen Server zu verweisen, melden Sie sich in den DNS-Einstellungen Ihres Domain-Registrars an und tun eines von drei Dingen: (1) einen A-Record auf die IP-Adresse Ihres Servers setzen, (2) einen CNAME-Record hinzufügen, der auf einen Hostnamen zeigt, oder (3) die Nameserver auf die Nameserver Ihres Hosting-Anbieters umstellen. Änderungen brauchen 2–48 Stunden, bis sie sich verbreitet haben."
+   ]
+  ],
+  [
+   "Warum Sie Ihre Domain verweisen müssen",
+   [
+    "Wenn jemand Ihre Domain in den Browser eingibt, muss das Internet wissen, wo Ihre Website zu finden ist. Das ist die Aufgabe des DNS (Domain Name System). DNS-Records funktionieren wie ein Verzeichnis: Sie ordnen Ihren lesbaren Domainnamen (etwa yourbrand.com) einer tatsächlichen IP-Adresse oder einem Serverstandort zu, auf dem Ihre Inhalte liegen.",
+    "Ohne passende DNS-Konfiguration liegt Ihre Domain einfach brach. Erst mit der richtigen Weiterleitung erwacht Ihre Website zum Leben."
+   ]
+  ],
+  [
+   "Die wichtigsten DNS-Records im Überblick",
+   [
+    "Bevor wir zu den Schritten kommen, hilft es, die DNS-Record-Typen zu kennen, mit denen Sie arbeiten werden.",
+    "A-Record (Address Record)",
+    "Der DNS-A-Record ist der grundlegendste Record-Typ. Er ordnet Ihre Domain direkt einer IPv4-Adresse zu (etwa 192.168.1.1). Wenn Sie eine Domain auf einen Webserver verweisen, setzen Sie in der Regel einen A-Record.",
+    "AAAA-Record",
+    "Wie ein A-Record, nur für IPv6-Adressen (etwa 2001:0db8:85a3::8a2e:0370:7334). Die meisten modernen Hosting-Anbieter unterstützen beides.",
+    "CNAME-Record (Canonical Name)",
+    "Ein CNAME ordnet eine Domain oder Subdomain einem anderen Domainnamen statt einer IP-Adresse zu. So können Sie zum Beispiel www.yourdomain.com per CNAME auf yourdomain.com verweisen lassen. CNAMEs werden außerdem häufig genutzt, um Subdomains auf Dienste von Drittanbietern zu richten.",
+    "Nameserver (NS-Records)",
+    "Nameserver teilen dem Internet mit, welcher DNS-Anbieter die Records Ihrer Domain verwaltet. Stellen Sie Ihre Nameserver auf einen neuen Hosting-Anbieter um, übernimmt dieser künftig alle Ihre DNS-Records."
+   ]
+  ],
+  [
+   "Methode 1: Domain per A-Record verweisen",
+   [
+    "Das ist der direkteste Weg, eine Domain auf einen Webserver zu richten. Nutzen Sie ihn, wenn Ihr Hosting-Anbieter Ihnen eine IP-Adresse nennt.",
+    "Schritt für Schritt: einen DNS-A-Record einrichten",
+    "Schritt 1: IP-Adresse Ihres Servers herausfinden Melden Sie sich in Ihrem Hosting-Konto an und suchen Sie die IP-Adresse Ihres Servers. Sie steht meist unter „Hosting-Details“, „Kontoinformationen“ oder in Ihrer Willkommens-E-Mail.",
+    "Schritt 2: Beim Domain-Registrar anmelden Rufen Sie die Website auf, bei der Sie Ihre Domain gekauft haben (GoDaddy, Namecheap, Google Domains usw.), und melden Sie sich an.",
+    "Schritt 3: Den DNS-Verwaltungsbereich finden Suchen Sie nach „DNS-Einstellungen“, „DNS verwalten“, „DNS-Zone-Editor“ oder Ähnlichem. Die Bezeichnung hängt vom Registrar ab.",
+    "Schritt 4: A-Record suchen oder anlegen",
+    "Suchen Sie einen vorhandenen A-Record für Ihre Root-Domain (@) oder legen Sie einen neuen an",
+    "Tragen Sie im Feld Host/Name @ ein (das steht für die Root-Domain selbst)",
+    "Tragen Sie im Feld Wert/Zeigt auf die IP-Adresse Ihres Servers ein",
+    "Setzen Sie die TTL auf 3600 (1 Stunde) oder den Standardwert Ihres Registrars",
+    "Schritt 5: A-Record für www aktualisieren Wiederholen Sie den Vorgang für www: Host ist www, der Wert dieselbe IP-Adresse.",
+    "Schritt 6: Speichern und warten Speichern Sie Ihre Änderungen. Die DNS-Verbreitung dauert in der Regel 2–48 Stunden, viele Änderungen greifen aber schon nach wenigen Stunden."
+   ]
+  ],
+  [
+   "Methode 2: Subdomain per CNAME-Record verweisen",
+   [
+    "Wenn Sie eine Subdomain (etwa shop.yourdomain.com oder blog.yourdomain.com) auf eine Plattform eines Drittanbieters richten möchten, ist meist ein CNAME der richtige Weg.",
+    "Schritt für Schritt: einen CNAME-Record einrichten",
+    "Schritt 1: Ziel-Hostnamen vom Dienstanbieter holen Shopify nennt Ihnen zum Beispiel shops.myshopify.com, Squarespace vielleicht ext-cust.squarespace.com. Schauen Sie in die Dokumentation Ihrer Plattform.",
+    "Schritt 2: Zu den DNS-Einstellungen gehen Melden Sie sich im DNS-Verwaltungsbereich Ihres Registrars an.",
+    "Schritt 3: CNAME-Record anlegen",
+    "Tragen Sie bei Host/Name das Präfix Ihrer Subdomain ein (z. B. shop)",
+    "Tragen Sie bei Wert/Zeigt auf den Ziel-Hostnamen Ihrer Plattform ein (z. B. shops.myshopify.com)",
+    "Ergänzen Sie einen abschließenden Punkt, falls Ihr Registrar das verlangt (z. B. shops.myshopify.com.)",
+    "Schritt 4: Speichern und prüfen Speichern Sie den Record und geben Sie der Verbreitung Zeit. Mit einem Tool wie whatsmydns.net oder dig prüfen Sie, ob der CNAME korrekt aufgelöst wird."
+   ]
+  ],
+  [
+   "Methode 3: Nameserver auf einen neuen Host umstellen",
+   [
+    "Wenn Sie Ihre gesamte Website zu einem neuen Hosting-Anbieter umziehen, ist die Umstellung der Nameserver der sauberste Weg. Dadurch geht die komplette DNS-Verwaltung an Ihren neuen Host über.",
+    "Schritt für Schritt: Nameserver aktualisieren",
+    "Schritt 1: Nameserver des neuen Hosts besorgen",
+    "Ihr Hosting-Anbieter nennt Ihnen zwei oder mehr Nameserver-Adressen, zum Beispiel:",
+    "ns1.newhost.com",
+    "ns2.newhost.com",
+    "Schritt 2: Beim Domain-Registrar anmelden Öffnen Sie die Einstellungen Ihrer Domain.",
+    "Schritt 3: Die Nameserver-Einstellungen finden Suchen Sie nach „Nameserver“, „DNS-Server“ oder „Benutzerdefinierte Nameserver“.",
+    "Schritt 4: Die aktuellen Nameserver ersetzen Löschen Sie die vorhandenen Nameserver und tragen Sie die Ihres neuen Hosts ein. Die meisten Anbieter verlangen mindestens zwei.",
+    "Schritt 5: Speichern und warten Nameserver-Änderungen können bis zu 48 Stunden brauchen, bis sie weltweit greifen. In dieser Zeit sehen manche Nutzer noch Ihre alte Website, andere schon die neue."
+   ]
+  ],
+  [
+   "Methode 4: URL-Weiterleitung (Domain-Forwarding)",
+   [
+    "Wenn Sie Ihre Domain auf eine ganz andere Website umleiten möchten (nicht auf einen Server, den Sie kontrollieren), können Sie die URL-Weiterleitung nutzen.",
+    "Arten von Weiterleitungen",
+    "301-Weiterleitung (dauerhaft): Sagt Browsern und Suchmaschinen, dass der Umzug dauerhaft ist. Die beste Wahl für SEO, wenn Sie Ihre Domain langfristig wechseln.",
+    "302-Weiterleitung (temporär): Zeigt einen vorübergehenden Umzug an. Suchmaschinen behalten die ursprüngliche URL im Index.",
+    "So richten Sie die URL-Weiterleitung ein",
+    "1. Melden Sie sich bei Ihrem Registrar an",
+    "2. Suchen Sie die Einstellungen „Domain-Weiterleitung“ oder „URL-Redirect“",
+    "3. Geben Sie die Ziel-URL ein (z. B. https://www.newwebsite.com)",
+    "4. Wählen Sie die Art der Weiterleitung (301 oder 302)",
+    "5. Speichern und die Verbreitung abwarten",
+    "Hinweis: Die URL-Weiterleitung arbeitet auf Registrar-Ebene und leitet Unterordner oder Query-Strings nicht in jedem Fall mit weiter. Für komplexe Weiterleitungen ist eine Konfiguration auf Serverebene besser."
+   ]
+  ],
+  [
+   "Häufige Fehler beim Verweisen einer Domain",
+   [
+    "Fehler 1: Die Subdomain www vergessen",
+    "Wenn Sie den A-Record nur für @ (Root-Domain) einrichten, aber nicht für www, erreichen Besucher, die www.yourdomain.com eingeben, Ihre Website nicht. Konfigurieren Sie immer beide.",
+    "Fehler 2: Einen CNAME auf der Root-Domain verwenden",
+    "Die meisten DNS-Anbieter erlauben keinen CNAME auf der Root-Domain (@), weil er mit anderen nötigen Records (etwa MX-Records für E-Mail) kollidiert. Nehmen Sie für die Root-Domain einen A-Record und bei Bedarf einen CNAME für www.",
+    "Fehler 3: Nicht auf die Verbreitung warten",
+    "Änderungen brauchen Zeit, bis sie sich verbreitet haben. Nehmen Sie keine hektischen weiteren Änderungen vor, wenn die Website nicht sofort erscheint, sonst entstehen womöglich widersprüchliche Records.",
+    "Fehler 4: Hosting-IP-Adressen verwechseln",
+    "Bietet Ihr Host sowohl geteilte als auch dedizierte IPs an, achten Sie darauf, die richtige zu verwenden. Zeigt der Record auf die falsche IP, lädt Ihre Website nicht."
+   ]
+  ],
+  [
+   "So prüfen Sie, ob Ihr DNS-Setup funktioniert",
+   [
+    "Sobald sich die Verbreitung gelegt hat, prüfen Sie, ob alles stimmt:",
+    "1. Mit dig (Mac/Linux): Führen Sie dig yourdomain.com A aus, um zu sehen, auf welche IP die Domain aufgelöst wird",
+    "2. Mit nslookup (Windows): Führen Sie nslookup yourdomain.com aus",
+    "3. Mit einem Online-Checker: Seiten wie mxtoolbox.com oder dnschecker.org prüfen A-, CNAME-, MX- und andere Records von mehreren Standorten aus",
+    "Stimmt die angezeigte IP-Adresse mit der IP Ihres Servers überein, ist alles in Ordnung."
+   ]
+  ],
+  [
+   "Praxisbeispiel",
+   [
+    "Angenommen, Sie haben yourbrand.com bei Namecheap gekauft und ein Hosting bei SiteGround abgeschlossen. SiteGround nennt Ihnen die IP-Adresse 185.68.14.3.",
+    "So gehen Sie vor:",
+    "1. Bei Namecheap anmelden → Manage → Advanced DNS",
+    "2. A-Record setzen: Host = @, Value = 185.68.14.3, TTL = Automatic",
+    "3. A-Record setzen: Host = www, Value = 185.68.14.3, TTL = Automatic",
+    "4. Widersprüchliche CNAME-Records für @ oder www löschen",
+    "5. Änderungen speichern und bis zu 48 Stunden warten",
+    "Innerhalb eines Tages landet jeder, der yourbrand.com oder www.yourbrand.com eingibt, auf Ihrer bei SiteGround gehosteten Website."
+   ]
+  ],
+  [
+   "Fazit des Experten",
+   [
+    "Eine Domain zu verweisen gehört zu den grundlegendsten DNS-Aufgaben, und doch geraten an diesem Schritt viele Website-Starts ins Stocken. Der häufigste Fehler ist, den A-Record der Root-Domain einzurichten, den A-Record für www aber nicht. Dann schlägt etwa die Hälfte aller URL-Varianten stillschweigend fehl. Behandeln Sie Root-Domain und www immer als getrennte Records, die beide ausdrücklich konfiguriert werden müssen.",
+    "Für Teams, die von einem Host zum anderen umziehen, ist die Nameserver-Methode langfristig der sauberste Weg, weil sie die gesamte DNS-Verwaltung beim neuen Host bündelt. Die A-Record-Methode eignet sich besser für feingranulare Konfigurationen, bei denen der Registrar das DNS für E-Mail oder Subdomains weiter getrennt verwalten soll. Die CNAME-Methode ist die richtige Wahl, um Subdomains mit Diensten von Drittanbietern zu verbinden. Sie muss exakt stimmen, denn Plattformen wie Shopify, HubSpot und Squarespace liefern Hostnamen als Ziel, die genau übernommen werden müssen.",
+    "Im Zweifel prüfen Sie jede Änderung mit dig oder einem Online-DNS-Checker, bevor Sie die Konfiguration für abgeschlossen halten. DNS-Fehler bleiben standardmäßig stumm: Die Domain wird einfach nicht aufgelöst, statt eine eindeutige Fehlermeldung auszugeben."
+   ]
+  ],
+  [
+   "Häufig gestellte Fragen",
+   [
+    "F: Was ist der schnellste Weg, eine Domain auf einen neuen Server zu verweisen?\nA: Am schnellsten aktualisieren Sie den A-Record direkt im DNS-Bereich Ihres Registrars, mit einer TTL von 300 Sekunden (mindestens 48 Stunden vorher abgesenkt). Dadurch dauert die Verbreitung bei den meisten Resolvern unter 30 Minuten, während Nameserver-Änderungen 24–48 Stunden brauchen.",
+    "F: Kann ich meine Domain auf eine Website verweisen, die mir nicht gehört?\nA: Per URL-Weiterleitung (301/302) ja, Ihre Domain kann Besucher an jede beliebige URL weiterleiten. Bei einem A-Record oder CNAME müsste der Zielserver so konfiguriert sein, dass er Inhalte für Ihre Domain annimmt und ausliefert, was in der Regel eine serverseitige Konfiguration beim Ziel-Host erfordert.",
+    "F: Warum kann ich für meine Root-Domain keinen CNAME verwenden?\nA: CNAME-Records kollidieren mit anderen DNS-Records, die auf der Root-Ebene erforderlich sind, darunter MX-Records für E-Mail und SOA-Records. Die meisten DNS-Anbieter setzen die RFC-Vorgaben durch, die einen CNAME am Apex verbieten. Manche Anbieter bieten eigene „ALIAS“- oder „ANAME“-Records an, die auf der Root-Ebene ein CNAME-ähnliches Ergebnis erzielen, ohne gegen die RFC-Regeln zu verstoßen.",
+    "F: Was ist der Unterschied zwischen A-Records und Nameservern?\nA: Ein A-Record ordnet eine bestimmte Domain oder Subdomain einer IP-Adresse zu und wird innerhalb Ihrer aktuellen DNS-Zone verwaltet. Nameserver legen fest, welcher DNS-Anbieter die gesamte Zone kontrolliert. Wer die Nameserver ändert, überträgt die komplette DNS-Verwaltung an einen neuen Anbieter. Wer A-Records ändert, passt nur einzelne Einträge in der bestehenden Zone an.",
+    "F: Woran erkenne ich, ob meine DNS-Änderung funktioniert hat?\nA: Führen Sie im Terminal dig yourdomain.com A aus oder prüfen Sie mit dnschecker.org von mehreren Standorten weltweit. Entspricht die zurückgegebene IP Ihrem Zielserver, hat sich die Änderung an diesem Standort verbreitet.",
+    "F: Kann ich mehrere Domains auf denselben Server verweisen?\nA: Ja. Legen Sie für jede Domain einen A-Record an, der auf dieselbe IP-Adresse zeigt. Auf dem Server müssen Sie dann virtuelles Hosting einrichten (Apache Virtual Hosts oder Nginx Server Blocks), damit jede Domain ihre eigenen Website-Inhalte erhält.",
+    "F: Was passiert mit meiner E-Mail, wenn ich die Nameserver ändere?\nA: Ändern Sie die Nameserver, wandert die gesamte DNS-Verwaltung zum neuen Anbieter, einschließlich der MX-Records. Hat der neue Anbieter Ihre bisherigen MX-Records nicht hinterlegt, funktioniert die E-Mail nicht mehr. Legen Sie Ihre MX-, SPF-, DKIM- und DMARC-Records deshalb immer beim neuen DNS-Anbieter an, bevor Sie die Nameserver umstellen."
+   ]
+  ],
+  [
+   "Fazit",
+   [
+    "Eine Domain auf eine Website oder einen Server zu verweisen, ist eine Grundfertigkeit für jeden, der einen Webauftritt betreibt. Ob Sie einen DNS-A-Record für die direkte IP-Verbindung nutzen, einen CNAME für Subdomains oder die Nameserver für einen kompletten Hosting-Umzug ändern: Der Ablauf ist gut zu bewältigen, sobald Sie die Schritte kennen.",
+    "Entscheidend ist, die passende Methode für Ihre Situation zu wählen und bei der Verbreitung geduldig zu bleiben.",
+    "Sie möchten die perfekte Domain registrieren, bevor Sie Ihr DNS einrichten?",
+    "Prüfen Sie mit DomainsDiscovery.com sofort die Verfügbarkeit einer Domain und vergleichen Sie die Preise der Registrare."
+   ]
+  ]
+ ]
+}

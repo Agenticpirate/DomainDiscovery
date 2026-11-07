@@ -1,0 +1,169 @@
+{
+ "title": "O que é WHOIS e como usá-lo para pesquisar um domínio",
+ "description": "O que é WHOIS e como usá-lo? Veja como funciona a consulta WHOIS, quais informações sobre a titularidade de um domínio ela revela e como pesquisar qualquer nome de domínio.",
+ "sections": [
+  [
+   "Visão geral",
+   [
+    "WHOIS é um banco de dados público que armazena as informações de registro de cada nome de domínio. Uma consulta WHOIS revela o registrador, as datas de registro e de expiração, os servidores de nomes e (quando não há proteção de privacidade) os dados de contato do titular do domínio. Para fazer uma consulta WHOIS, acesse whois.icann.org ou whois.domaintools.com e digite qualquer nome de domínio."
+   ]
+  ],
+  [
+   "O que é WHOIS?",
+   [
+    "WHOIS (pronuncia-se “who is”, “quem é”) é um banco de dados e protocolo públicos que armazenam as informações de registro de nomes de domínio. Sempre que alguém registra um domínio, a ICANN (a organização que supervisiona os nomes de domínio no mundo todo) exige que certas informações sejam gravadas e disponibilizadas pelo WHOIS.",
+    "O banco de dados WHOIS é descentralizado: cada registrador e cada registro mantém seus próprios dados, e as consultas WHOIS buscam nesses registros. O resultado é um sistema de acesso público em que você pode consultar informações de praticamente qualquer domínio registrado.",
+    "Uma breve história do WHOIS",
+    "O WHOIS surgiu em 1982, o que o torna um dos protocolos mais antigos da internet ainda em uso. Foi criado para que administradores de rede pudessem encontrar os dados de contato de outras redes. Com o crescimento da internet, virou o mecanismo padrão de transparência sobre a titularidade dos domínios.",
+    "Nos últimos anos, o WHOIS mudou bastante por causa do GDPR e de regulamentos de privacidade semelhantes, que restringiram as informações visíveis publicamente. Falaremos mais disso adiante."
+   ]
+  ],
+  [
+   "O que o WHOIS mostra?",
+   [
+    "Uma consulta WHOIS pode revelar bastante informação sobre um domínio, dependendo das configurações de privacidade dele e do registro envolvido.",
+    "Campos padrão do WHOIS",
+    "Informações do registrante (o titular do domínio):",
+    "Nome ou nome da organização",
+    "Endereço postal",
+    "Número de telefone",
+    "Endereço de e-mail",
+    "Contato administrativo: - Nome e dados da pessoa que administra o domínio",
+    "Contato técnico: - Informações de contato técnico",
+    "Status do domínio:",
+    "Status atual (active, pendingDelete, clientTransferProhibited etc.)",
+    "Status do bloqueio de transferência",
+    "Informações do registrador:",
+    "Em qual empresa o domínio está registrado",
+    "Dados de contato do registrador e e-mail para denúncias de abuso",
+    "Datas importantes:",
+    "Data de criação: quando o domínio foi registrado pela primeira vez",
+    "Data de atualização: quando o registro WHOIS foi alterado pela última vez",
+    "Data de expiração: quando o registro do domínio expira",
+    "Servidores de nomes: - Quais servidores de nomes cuidam do DNS do domínio (revela qual provedor de hospedagem ou DNS é usado)"
+   ]
+  ],
+  [
+   "Como fazer uma consulta WHOIS",
+   [
+    "Há várias formas de pesquisar quem é o titular de um domínio no WHOIS.",
+    "Método 1: usar um site de consulta WHOIS",
+    "É a forma mais simples. Vários sites oferecem ferramentas gratuitas de consulta WHOIS:",
+    "whois.domaintools.com: uma das consultas WHOIS mais completas, com dados históricos de WHOIS",
+    "whois.icann.org: a ferramenta oficial de consulta WHOIS da ICANN",
+    "lookup.icann.org: a interface de consulta mais nova da ICANN",
+    "who.is: interface limpa e fácil de usar",
+    "namecheap.com/domains/whois/: consulta rápida direto em um grande registrador",
+    "Basta digitar o nome do domínio e clicar em buscar. Os resultados aparecem em segundos.",
+    "Método 2: usar a linha de comando (usuários avançados)",
+    "No Mac e no Linux, você pode fazer consultas WHOIS direto no terminal:",
+    "`` whois example.com ``",
+    "No Windows o WHOIS não vem embutido, mas você pode baixar a ferramenta WHOIS da Sysinternals ou usar o Subsistema do Windows para Linux.",
+    "Método 3: usar a ferramenta WHOIS do seu registrador",
+    "A maioria dos grandes registradores (GoDaddy, Namecheap etc.) tem ferramentas de consulta WHOIS nos próprios sites. São úteis quando você já está comprando e quer pesquisar um domínio antes de fazer uma oferta."
+   ]
+  ],
+  [
+   "Como ler os resultados do WHOIS",
+   [
+    "A saída do WHOIS pode parecer um paredão de texto técnico. Veja como extrair rápido o que importa.",
+    "Identifique o status do registro",
+    "Procure as linhas que começam com “Domain Status”. Os status mais comuns são:",
+    "clientTransferProhibited: o bloqueio de transferência está ativo e o domínio não pode ir para outro registrador sem uma ação do titular",
+    "serverDeleteProhibited: o registro colocou uma retenção no domínio",
+    "pendingDelete: o domínio está prestes a ser excluído (costuma vir após a expiração)",
+    "ok / active: o domínio está em status normal e ativo",
+    "Encontre as datas principais",
+    "Procure:",
+    "Creation Date: há quanto tempo este domínio está registrado? Um domínio mais antigo tem mais histórico e pode ter autoridade de SEO consolidada",
+    "Expiration Date: quando o registro acaba? Um domínio prestes a expirar pode ser uma oportunidade de aquisição",
+    "Updated Date: quando o registro foi alterado pela última vez? Atualizações recentes às vezes indicam que o titular administra o domínio ativamente",
+    "Leia as informações dos servidores de nomes",
+    "Os servidores de nomes dizem em qual plataforma está o DNS do domínio:",
+    "Servidores de nomes da Cloudflare (ns1.cloudflare.com etc.) → o titular usa a Cloudflare para DNS/CDN",
+    "Servidores de nomes do registrador → o domínio pode estar estacionado ou hospedado pelo registrador",
+    "Servidores de nomes da Squarespace/Wix/Shopify → o site foi criado nessa plataforma",
+    "Identifique a proteção de privacidade",
+    "Se você vir informações como “WhoisGuard Protected”, “Privacy Protected” ou campos ocultos mostrando apenas endereços de e-mail proxy, o titular ativou a privacidade WHOIS. Os dados pessoais dele estão ocultos. Você ainda verá o registrador, os servidores de nomes e as datas importantes, mas não os dados de contato pessoais do titular."
+   ]
+  ],
+  [
+   "Usos práticos do WHOIS na pesquisa de domínios",
+   [
+    "Descobrir o titular de um domínio que você quer comprar",
+    "Se você quer adquirir um domínio que já está registrado, o WHOIS é o ponto de partida. Procure:",
+    "Dados de contato para falar direto com o titular (se a privacidade não estiver ativada)",
+    "A data de expiração: se estiver perto de vencer, o titular pode estar disposto a abrir mão",
+    "O registrador: se o domínio está registrado em um marketplace como Afternic ou Sedo, ele pode já estar à venda",
+    "Verificar o histórico de um domínio antes de comprar",
+    "Antes de comprar um domínio antigo, confira:",
+    "A data original de registro (domínios mais antigos costumam ter valor de SEO)",
+    "Os titulares anteriores (DomainTools e serviços semelhantes oferecem histórico de WHOIS)",
+    "As configurações passadas de servidores de nomes (indicam usos anteriores)",
+    "Investigar sites suspeitos",
+    "Se um site parece fraudulento ou você quer saber quem está por trás dele, uma consulta WHOIS às vezes revela os dados do registrante. Embora o GDPR tenha limitado a visibilidade, o contato de abuso do registrador sempre aparece, o que é útil para denunciar domínios problemáticos.",
+    "Pesquisa da concorrência",
+    "Saber quais domínios seus concorrentes possuem (ou deixaram expirar) pode orientar sua própria estratégia de domínios. Confira datas de registro, estruturas de hospedagem e a titularidade de domínios relacionados.",
+    "Monitorar a expiração de um domínio",
+    "Se você está de olho em um domínio e quer adquiri-lo quando expirar, acompanhar a data de expiração pelo WHOIS é essencial. Crie um lembrete antes dessa data para poder fazer um backorder."
+   ]
+  ],
+  [
+   "Como o GDPR mudou o WHOIS",
+   [
+    "O Regulamento Geral de Proteção de Dados (GDPR), em vigor na UE desde 2018, afetou bastante a disponibilidade dos dados do WHOIS. Como o WHOIS exibe publicamente dados pessoais dos registrantes (nomes, endereços, telefones, e-mails), ele poderia violar os princípios de privacidade do GDPR.",
+    "Por isso, a ICANN trabalhou com os registradores para ocultar os dados pessoais do registrante no WHOIS público dos domínios registrados por pessoas físicas (principalmente registrantes europeus). O que agora se vê com frequência é:",
+    "Nome do registrante: REDACTED FOR PRIVACY",
+    "E-mail: contato por endereço proxy",
+    "Telefone: REDACTED FOR PRIVACY",
+    "Mesmo assim, as informações do registrador, os servidores de nomes, o status do domínio e as datas principais continuam visíveis publicamente depois das mudanças do GDPR. Para fins legítimos (como aplicação da lei ou disputas de propriedade intelectual), os dados completos do registrante ainda podem ser obtidos por canais formais."
+   ]
+  ],
+  [
+   "Histórico do WHOIS: aprofundando a pesquisa de domínios",
+   [
+    "Em domínios com longa história, o WHOIS básico mostra apenas os dados atuais. Ferramentas como a DomainTools oferecem recursos de histórico do WHOIS que mostram como o registro mudou ao longo do tempo:",
+    "Titulares anteriores",
+    "Registradores anteriores",
+    "Configurações passadas de servidores de nomes",
+    "Mudanças nos dados de contato",
+    "Esse histórico pode revelar se um domínio já foi usado para spam, pertenceu a uma marca conhecida ou mudou de mãos várias vezes, tudo relevante para seu valor atual e perfil de SEO."
+   ]
+  ],
+  [
+   "Perguntas comuns sobre a consulta WHOIS",
+   [
+    "Posso descobrir dados pessoais de alguém com o WHOIS? Só se a pessoa não tiver ativado a privacidade WHOIS. Hoje, a maioria dos titulares pessoa física usa proteção de privacidade, que esconde seus dados atrás de um proxy.",
+    "O WHOIS é gratuito? Sim. As consultas WHOIS básicas são gratuitas nas ferramentas da ICANN e em todos os sites dos grandes registradores. Algumas ferramentas avançadas de histórico de WHOIS exigem assinatura paga.",
+    "Qual a precisão das informações do WHOIS? A ICANN exige informações corretas, mas a fiscalização é limitada. Alguns registrantes fornecem dados incorretos (o que viola a política da ICANN, mas acontece mesmo assim). Trate sempre os dados do WHOIS como ponto de partida da pesquisa, não como fonte definitiva."
+   ]
+  ],
+  [
+   "Veredito do especialista",
+   [
+    "O WHOIS continua sendo uma ferramenta de pesquisa indispensável para compradores, vendedores, investidores e pesquisadores de segurança, apesar das grandes mudanças que o GDPR trouxe à disponibilidade dos dados. As informações mais importantes para a pesquisa prática de domínios (datas de registro e de expiração, identidade do registrador e configuração dos servidores de nomes) continuam totalmente públicas e acessíveis em toda consulta WHOIS.",
+    "Para investidores em domínios, a data de expiração é o dado mais acionável de um resultado WHOIS. Um domínio que expira em 60–90 dias com registro WHOIS inalterado (sem “updated date” recente) sinaliza que o titular pode estar deixando-o expirar. Ferramentas de monitoramento que acompanham as datas de expiração dos domínios-alvo, combinadas com serviços de backorder da GoDaddy ou da NameJet, permitem que os investidores se posicionem para a aquisição antes que o público em geral perceba a disponibilidade.",
+    "Para quem faz pesquisa de concorrência ou avalia a compra de um domínio, os servidores de nomes no WHOIS oferecem informações valiosas sobre como o domínio é usado hoje, sem precisar visitar o site. Servidores de nomes da Cloudflare indicam um titular ativo e tecnicamente sofisticado. Servidores de nomes padrão do registrador costumam indicar um domínio estacionado ou inativo, que pode ser mais fácil de adquirir do que um administrado ativamente. Criar o hábito de fazer uma consulta WHOIS antes de qualquer tentativa de aquisição é um dos hábitos de pesquisa de melhor custo-benefício na gestão de domínios."
+   ]
+  ],
+  [
+   "Perguntas frequentes",
+   [
+    "P: O que é uma consulta WHOIS e o que ela mostra?\nR: Uma consulta WHOIS é uma busca no banco de dados público de registro de domínios que retorna informações sobre qualquer nome de domínio registrado. Ela mostra quem é o registrador, quando o domínio foi registrado, quando expira, quais servidores de nomes usa e (se não houver proteção de privacidade) os dados de contato do registrante. É a principal ferramenta para pesquisar a titularidade de um domínio.",
+    "P: Como descubro quem é o dono de um nome de domínio?\nR: Faça uma consulta WHOIS em whois.icann.org, whois.domaintools.com ou na ferramenta WHOIS do seu registrador. Digite o nome do domínio e veja a seção de informações do registrante. Se o titular ativou a privacidade WHOIS, você verá um endereço proxy em vez de dados pessoais. Ainda é possível contatá-lo pelo e-mail de encaminhamento exibido na seção do registrante proxy.",
+    "P: Os dados do WHOIS são precisos?\nR: Pela política da ICANN, os dados do WHOIS precisam ser precisos, mas a precisão varia. Os grandes registradores costumam exigir registros corretos. Alguns registrantes fornecem informações falsas, o que tecnicamente viola os termos da ICANN. Para uma verificação definitiva da titularidade, trate o WHOIS como ponto de partida e confirme por outros canais, principalmente em transações de alto valor.",
+    "P: Posso ver quem era o dono anterior de um domínio?\nR: O WHOIS básico mostra apenas os dados de registro atuais. Para o histórico de titularidade, use serviços pagos como o DomainTools Whois History, que guarda as alterações do WHOIS ao longo do tempo. Esse histórico revela titulares, registradores e configurações de servidores de nomes anteriores, útil para avaliar o histórico de SEO e os usos passados de um domínio antigo.",
+    "P: O que significa “clientTransferProhibited” no WHOIS?\nR: “clientTransferProhibited” significa que o domínio tem um bloqueio de transferência ativado pelo registrante ou pelo registrador. O domínio não pode ir para outro registrador sem que o titular o desbloqueie antes no registrador atual. É um recurso de segurança padrão que evita transferências não autorizadas. Costuma ser desativado ao iniciar uma transferência legítima.",
+    "P: Com que frequência os dados do WHOIS são atualizados?\nR: Os dados do WHOIS são atualizados de minutos a horas depois de qualquer alteração feita pelo registrante (dados de contato, servidores de nomes) ou pelo registrador (mudanças de status). Porém, as consultas WHOIS públicas podem mostrar resultados com um pequeno atraso, dependendo da ferramenta usada. A ferramenta oficial de consulta da ICANN (whois.icann.org) normalmente reflete os dados mais atuais.",
+    "P: O WHOIS mostra todos os domínios de uma pessoa?\nR: O WHOIS padrão não oferece busca reversa (encontrar todos os domínios registrados em nome de uma pessoa ou organização). Ferramentas como a DomainTools oferecem a busca WHOIS reversa como recurso pago, que encontra todos os domínios associados a um e-mail, nome de organização ou telefone específico. É útil para inteligência competitiva e investigação de fraudes."
+   ]
+  ],
+  [
+   "Pesquise domínios como um profissional",
+   [
+    "O WHOIS é uma ferramenta poderosa para pesquisar domínios, mas fica ainda mais eficaz combinado com dados de disponibilidade em tempo real e comparações de preços.",
+    "Use o DomainsDiscovery.com para verificar na hora a disponibilidade de um domínio e comparar preços entre registradores. Busque qualquer domínio, veja o que está disponível e obtenha as informações de que precisa para tomar boas decisões sobre domínios, tudo em um só lugar."
+   ]
+  ]
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "title": "Was passiert, wenn Sie Ihre Domain nicht verlängern?",
+ "description": "Was passiert, wenn Ihre Domain abläuft? Lernen Sie den gesamten Zeitablauf der Folgen einer abgelaufenen Domain kennen, von der Kulanzfrist bis zur Löschung, und wie Sie Ihr Unternehmen schützen.",
+ "sections": [
+  [
+   "Überblick",
+   [
+    "Läuft eine Domain ab, gehen Ihre Website und Ihre E-Mail sofort offline. Sie haben etwa 30 Tage, um zum normalen Preis zu verlängern (Kulanzfrist). Danach folgt eine 30-tägige Einlösefrist (Redemption Period) mit Gebühren von $100–$400, dann 5 Tage „Pending Delete“, nach denen die Domain öffentlich freigegeben wird. Aktivieren Sie die automatische Verlängerung und halten Sie die Kontaktdaten bei Ihrem Registrar aktuell, um diese völlig vermeidbare Katastrophe zu verhindern."
+   ]
+  ],
+  [
+   "Der Zeitablauf beim Domain-Ablauf: Tag für Tag",
+   [
+    "Ein Domain-Ablauf geschieht nicht schlagartig. Es gibt ein gestuftes Verfahren, das Ihnen mehrere Chancen gibt, Ihre Domain zurückzuholen, aber das Zeitfenster schrumpft schnell, und die Kosten steigen.",
+    "Vor dem Ablauf: die Warnphase",
+    "Die meisten Registrare schicken 60 bis 90 Tage vor dem Ablauf Ihrer Domain erste Verlängerungserinnerungen. Sie gehen per E-Mail an die bei Ihrem Registrar hinterlegte Adresse. Das ist entscheidend: Haben Sie Ihre E-Mail-Adresse geändert, das Postfach geschlossen oder Mails Ihres Registrars im Spam landen lassen, sehen Sie diese Warnungen womöglich nie.",
+    "Stellen Sie sicher, dass Ihr Registrar stets Ihre aktuelle, tatsächlich gelesene E-Mail-Adresse hat. Noch besser: Aktivieren Sie die automatische Verlängerung mit einer gültigen hinterlegten Zahlungsmethode.",
+    "Tag 0: Ablaufdatum",
+    "Erreicht Ihre Domain das Ablaufdatum, ohne verlängert worden zu sein, sperrt der Registrar sie in der Regel sofort. In der Praxis bedeutet das:",
+    "Ihre Website geht offline (Besucher sehen eine Fehlerseite oder eine vom Registrar gehostete Parkseite)",
+    "Ihre E-Mail funktioniert nicht mehr: Eingehende Nachrichten können zurückgewiesen werden, und Sie können nicht senden",
+    "Alle mit der Domain verbundenen Dienste (Subdomains, Apps, APIs) funktionieren nicht mehr",
+    "Wie gravierend das ist, hängt von Ihrem Hosting-Setup ab, aber in den meisten Fällen ist die Störung sofortig und vollständig.",
+    "Tage 1–30: die Kulanzfrist",
+    "Die meisten Registrare bieten nach dem Ablauf eine Kulanzfrist von etwa 30 Tagen. In dieser Zeit können Sie Ihre Domain noch zum normalen Verlängerungspreis ohne Zusatzgebühren verlängern.",
+    "Während der Kulanzfrist:",
+    "Die Domain befindet sich noch in Ihrem Konto",
+    "Sie können sie verlängern und die volle Funktion schnell wiederherstellen",
+    "Website und E-Mail bleiben meist gesperrt, die Wiederherstellung geht nach der Verlängerung aber schnell",
+    "Handeln Sie sofort, wenn Sie merken, dass Ihre Domain abgelaufen ist. Warten Sie nicht: Das Zeitfenster wird mit der Zeit teurer und unsicherer.",
+    "Tage 30–45: die Redemption Grace Period",
+    "Nach Ende der normalen Kulanzfrist treten die meisten Domains in die sogenannte Redemption Grace Period (RGP) ein, die in der Regel 30 Tage dauert. Hier wird es teuer.",
+    "Während der RGP:",
+    "Sie können Ihre Domain noch zurückholen, aber die Einlösegebühren liegen meist bei $100 bis $400 zusätzlich zu den normalen Verlängerungskosten",
+    "Die Domain bleibt auf Ihren Namen registriert, wird aber nicht aufgelöst (Website und E-Mail bleiben down)",
+    "Die Domain steht anderen noch nicht zur Registrierung offen",
+    "Die RGP ist eine deutliche Eskalation bei Kosten und Stress. Befinden Sie sich in diesem Fenster, verlängern Sie sofort.",
+    "Tage 45–75: Pending Delete",
+    "Nach der Redemption Grace Period wechselt Ihre Domain in den Status „Pending Delete“. Diese Phase dauert in der Regel etwa 5 Tage.",
+    "In dieser Phase:",
+    "Sie können die Domain NICHT mehr verlängern oder zurückholen, sie liegt nicht mehr in Ihrer Hand",
+    "Die Domain steht in der Löschwarteschlange",
+    "Domain-Registrare und Drop-Catching-Dienste beobachten in dieser Phase ablaufende Domains",
+    "Ab Tag 75: Domain freigegeben und verfügbar",
+    "Endet die Pending-Delete-Phase, wird die Domain wieder in den allgemeinen Pool freigegeben und kann von jedem registriert werden, auch von Domain-Investoren, Wettbewerbern und Cybersquattern.",
+    "Hatte Ihre Domain Wert (etablierter Traffic, Backlinks, Markenbekanntheit), verlieren Sie sie mit ziemlicher Sicherheit an einen professionellen Domain-Investor, der auf ihre Freigabe gewartet hat."
+   ]
+  ],
+  [
+   "Die Folgen einer abgelaufenen Domain: Was wirklich ausfällt",
+   [
+    "Ihre Website geht offline",
+    "Das ist die sichtbarste Folge. Besucher, die Ihre Website aufrufen wollen, sehen die Fehlermeldung „Diese Website ist nicht erreichbar“ oder eine allgemeine Parkseite des Registrars, oft voller Werbung für Ihre Wettbewerber.",
+    "Jede Minute, in der Ihre Website offline ist, kostet Sie potenzielle Kunden, Umsatz und Vertrauen.",
+    "Ihre E-Mail funktioniert nicht mehr",
+    "Das ist oft schädlicher als der Ausfall der Website. Jede an Ihre Domain-Adresse gesendete E-Mail wird mit einer Fehlermeldung zurückgewiesen. Kunden, die Sie erreichen wollen, erhalten Unzustellbarkeitsmeldungen und glauben, Sie hätten geschlossen. Wichtige Korrespondenz geht dauerhaft verloren.",
+    "Für ein Unternehmen, das für Kundenkommunikation, Vertragsverwaltung oder Auftragsabwicklung auf E-Mail angewiesen ist, ist das katastrophal.",
+    "SEO-Rankings fallen",
+    "Suchmaschinen entfernen Ihre Website aus dem Index, wenn sie über längere Zeit offline ist. Google durchsucht Websites regelmäßig. Findet es wiederholt einen 404-Fehler oder eine Parkseite, beginnt es, Ihre Seiten aus dem Index zu entfernen.",
+    "Die Wiederherstellung der Suchmaschinen-Rankings nach einem Ablauf dauert in der Regel Monate. Jahre an SEO-Arbeit können durch wenige Wochen Ausfallzeit zunichtegemacht werden.",
+    "Sie verlieren Ihre Backlinks und Autorität",
+    "Die Links anderer Websites auf Ihre Domain verschwinden nicht sofort. Wird die Domain aber von jemand anderem übernommen, der darauf eine völlig andere Website aufbaut, geht die SEO-Autorität, die Sie aufgebaut haben, nicht auf Ihre neue Domain über. Sie bleibt bei der alten Domain und nützt jetzt jemand anderem.",
+    "Ihr Unternehmen wirkt unprofessionell oder aufgegeben",
+    "Kunden, Partner und Investoren, die merken, dass Ihre Domain abgelaufen ist, könnten annehmen, Sie seien pleite, steckten in ernsten Schwierigkeiten oder seien schlicht unzuverlässig. Vertrauen ist schwer wiederaufzubauen, sobald sich dieser Eindruck festgesetzt hat."
+   ]
+  ],
+  [
+   "Wie Domain-Squatter und Drop-Catcher arbeiten",
+   [
+    "Domain-Drop-Catching ist eine ausgefeilte, automatisierte Branche. Spezialisierte Dienste überwachen jede ablaufende Domain, analysieren Traffic, Backlinks und Keyword-Wert und geben im Moment der Freigabe automatisiert Registrierungsgebote ab.",
+    "Hat Ihre Domain irgendeinen Wert, selbst einen mäßigen, wird sie mit ziemlicher Sicherheit innerhalb von Sekunden nach der Freigabe von einem Drop-Catcher registriert. Sie müssen sie dann von einem Domain-Investor zurückkaufen, möglicherweise zu einem Vielfachen der ursprünglichen Registrierungskosten.",
+    "Bekannte Marken haben genau dieses Szenario erlebt. Die Kosten der Wiederbeschaffung, finanziell wie durch verlorene Markenzeit, sind fast immer weit höher als die Kosten einer automatischen Verlängerung."
+   ]
+  ],
+  [
+   "So verhindern Sie den Ablauf einer Domain",
+   [
+    "Automatische Verlängerung aktivieren",
+    "Dieser eine Schritt verhindert die allermeisten Domain-Abläufe. Melden Sie sich in Ihrem Registrar-Konto an, öffnen Sie die Domain-Einstellungen und aktivieren Sie die automatische Verlängerung. Stellen Sie sicher, dass eine gültige Kreditkarte hinterlegt ist.",
+    "Legen Sie alle 6 Monate eine Kalendererinnerung an, um zu prüfen, dass die automatische Verlängerung noch aktiv ist und Ihre Zahlungsdaten nicht abgelaufen sind.",
+    "Für mehrere Jahre registrieren",
+    "Wer 2–5 Jahre statt 1 Jahr registriert, muss weniger Verlängerungen verwalten und hat mehr Puffer. Außerdem liefert es ein leichtes SEO-Signal: Google hat angemerkt, dass längere Registrierungszeiträume auf einen seriösen, langfristigen Betrieb hindeuten können.",
+    "Kontaktdaten aktuell halten",
+    "Ihr Registrar schickt Verlängerungshinweise an Ihre hinterlegte E-Mail-Adresse. Ändert sich diese, aktualisieren Sie sie sofort. Viele Unternehmen verlieren Domains, weil die Hinweise an die E-Mail eines ehemaligen Mitarbeiters oder eine nicht mehr existierende Adresse gingen.",
+    "Mehrere Erinnerungen einrichten",
+    "Richten Sie zusätzlich zu den E-Mails des Registrars eigene Kalendererinnerungen 90, 60 und 30 Tage vor dem Ablauf ein. Verlassen Sie sich nicht allein auf die Kommunikation Ihres Registrars.",
+    "Ablaufdaten Ihrer Domains überwachen",
+    "Verwalten Sie mehrere Domains, erfassen Sie alle Ablaufdaten an einem Ort, etwa in einer Tabelle oder mit einem Domain-Management-Tool. Mehrere kostenlose und kostenpflichtige Tools (wie DomainAlert, Domainr oder einfach ein Google Sheet) helfen dabei."
+   ]
+  ],
+  [
+   "Was tun, wenn Ihre Domain bereits abgelaufen ist",
+   [
+    "1. Prüfen Sie sofort Ihren Registrar. Melden Sie sich an und sehen Sie, in welcher Phase sich Ihre Domain befindet. Ist sie in der Kulanzfrist, verlängern Sie jetzt: Die Kosten entsprechen dem normalen Verlängerungspreis.",
+    "2. Befinden Sie sich in der Redemption Period, zahlen Sie die Einlösegebühr und verlängern Sie. Ja, das ist teuer. Es ist aber weit billiger, als die Domain ganz zu verlieren.",
+    "3. Steht die Domain auf Pending Delete, wenden Sie sich an Ihren Registrar. Manche haben Early-Access-Programme oder können in Ihrem Namen Backorder-Anfragen stellen.",
+    "4. Wurde die Domain bereits neu registriert, müssen Sie sich möglicherweise an den neuen Inhaber wenden, um sie zurückzukaufen. Nutzen Sie WHOIS, um dessen Kontaktdaten zu finden. Handeln Sie schnell: Je länger Sie warten, desto mehr Wert holt er aus Ihrer Lage heraus."
+   ]
+  ],
+  [
+   "Fazit des Experten",
+   [
+    "Der Domain-Ablauf ist die am besten vermeidbare Katastrophe im Website-Besitz. Anders als Serverausfälle, Hackerangriffe oder Algorithmus-Strafen lässt sich der Domain-Ablauf zu 100 % durch eine einzige, einmalige Handlung vermeiden: die automatische Verlängerung mit einer gültigen Zahlungsmethode zu aktivieren. Die Folgen eines Ablaufs (Website-Ausfall, E-Mail-Ausfall, Entfernung aus dem SEO-Index, Imageschaden und möglicher dauerhafter Domainverlust) sind im Vergleich zum geringen Aufwand der Vorbeugung unverhältnismäßig schwer.",
+    "Unternehmen, bei denen eine Domain abläuft, teilen ein gemeinsames Fehlermuster: Sie verlassen sich allein auf E-Mail-Benachrichtigungen des Registrars und übersehen diese dann wegen Adressänderungen, Spamfiltern oder vernachlässigter Postfächer. Die Lösung ist gestaffelte Absicherung: automatische Verlängerung als primärer Schutz, persönliche Kalendererinnerungen als sekundärer Schutz und eine teamweite Dokumentation von Domaininhabern und Ablaufdaten als dritte Ebene.",
+    "Für Unternehmen mit mehr als drei Domains lohnt sich jährlich eine Prüfung der Domainverwaltung. Bündeln Sie alle Domains bei einem Registrar, prüfen Sie für jede den Status der automatischen Verlängerung und die Gültigkeit der Zahlungsmethode, stellen Sie alle Kontakt-E-Mails auf eine aktiv überwachte Gruppenadresse statt auf das Postfach eines einzelnen Mitarbeiters um und dokumentieren Sie die Ablaufdaten in einem gemeinsamen System, auf das mehr als ein Teammitglied zugreifen kann. Diese Schritte dauern eine Stunde pro Jahr und beseitigen das Risiko vollständig."
+   ]
+  ],
+  [
+   "Häufig gestellte Fragen",
+   [
+    "F: Was passiert mit meiner Website, wenn meine Domain abläuft?\nA: Läuft Ihre Domain ab, geht Ihre Website am oder um das Ablaufdatum sofort offline. Besucher sehen entweder die Fehlermeldung „Website nicht erreichbar“ oder eine vom Registrar gehostete Parkseite, oft mit Werbung von Wettbewerbern. Ihre Website bleibt während der Kulanzfrist und der Redemption Grace Period offline. Auch wenn Sie in diesen Phasen verlängern, dauert die Wiederherstellung der vollen Funktion nach der Verarbeitung der Verlängerung in der Regel Minuten bis wenige Stunden.",
+    "F: Wie lange habe ich Zeit, eine abgelaufene Domain zu verlängern?\nA: Sie haben ab dem Ablaufdatum etwa 60–65 Tage, um Ihre Domain zurückzuholen, allerdings zu steigenden Kosten. Die ersten 30 Tage (Kulanzfrist) erlauben die Verlängerung zum normalen Preis ohne Zusatzgebühren. In den Tagen 30–60 (Redemption Grace Period) kommen Einlösegebühren von $100–$400 hinzu. Nach etwa Tag 65 erreicht die Domain den Status „Pending Delete“ und kann gar nicht mehr zurückgeholt werden. Etwa 5 Tage später wird sie öffentlich freigegeben.",
+    "F: Kann jemand anderes meine Domain registrieren, nachdem sie abgelaufen ist?\nA: Ja. Hat eine Domain die Pending-Delete-Phase durchlaufen (etwa 75 Tage nach dem Ablauf), wird sie öffentlich freigegeben und kann von jedem registriert werden, auch von Wettbewerbern, Domain-Investoren und Cybersquattern. Professionelle Drop-Catching-Dienste überwachen ablaufende Domains laufend und können eine freigegebene Domain mit automatisierten Systemen binnen Millisekunden registrieren. Hatte Ihre Domain Traffic, Markenbekanntheit oder Backlink-Wert, wird sie sehr wahrscheinlich im Moment ihrer Verfügbarkeit von einem Drop-Catcher erfasst.",
+    "F: Was kostet es, eine abgelaufene Domain zurückzubekommen?\nA: Die Kosten hängen von der Wiederherstellungsphase ab. Während der Kulanzfrist (erste 30 Tage): normaler Verlängerungspreis ($10–$15 für .com). Während der Redemption Grace Period (Tage 30–60): insgesamt $110–$415 (normale Verlängerung plus $100–$400 Einlösegebühr). Nach dem Erwerb durch einen Dritten: Marktpreis, den der neue Inhaber bestimmt, in der Regel zwischen $200 und mehreren tausend Dollar je nach wahrgenommenem Wert der Domain. Die Rückholung von Drop-Catchern wird verhandelt und kann teuer sein.",
+    "F: Wie verhindere ich, dass meine Domain versehentlich abläuft?\nA: Am zuverlässigsten ist die automatische Verlängerung im Registrar-Konto mit hinterlegter gültiger Zahlungsmethode. Ergänzen Sie sie durch persönliche Kalendererinnerungen 90, 60 und 30 Tage vor dem Ablauf, durch eine aktuelle, aktiv überwachte E-Mail-Adresse bei Ihrem Registrar, durch eine Registrierung für mehrere Jahre (2–5 statt 1) und durch die Dokumentation der Ablaufdaten an einem für das Team zugänglichen Ort, statt sich auf das Wissen einer einzelnen Person zu verlassen.",
+    "F: Schadet ein Domain-Ablauf dem SEO?\nA: Ja, erheblich. Läuft eine Domain ab und die Website geht offline, stoßen die Crawler von Google bei ihren regelmäßigen Durchläufen auf Fehler statt auf Inhalte. Nach wiederholten Crawl-Fehlern beginnt Google, die Seiten der Website aus dem Index zu entfernen. Die vollständige Wiederherstellung der Rankings nach einem Ablauf dauert in der Regel 3–6 Monate stabilen Betriebs nach der Wiederherstellung der Domain. Wurde die Domain von einem Dritten übernommen, der andere Inhalte darauf aufgebaut hat, kommen Ranking-Historie und Backlink-Wert der ursprünglichen Website faktisch dem neuen Inhaber zugute, nicht der ursprünglichen Website.",
+    "F: Was ist der Unterschied zwischen der Kulanzfrist und der Redemption Grace Period einer Domain?\nA: Die Kulanzfrist (etwa Tage 1–30 nach dem Ablauf) erlaubt die Verlängerung zum normalen Preis ohne Zusatzgebühren und ist das einfachste und günstigste Zeitfenster zur Wiederherstellung. Die Redemption Grace Period (etwa Tage 30–60) ist eine teurere Phase, in der der Registrar zusätzlich zu den normalen Verlängerungskosten erhebliche Einlösegebühren ($100–$400) verlangt und dafür die Wiederherstellung vor der endgültigen Löschung erlaubt. Der entscheidende Unterschied: In der Kulanzfrist ist die Domain nur gesperrt, in der RGP ist sie bereits im Löschverfahren, kann aber gegen eine hohe Gebühr noch zurückgeholt werden."
+   ]
+  ]
+ ]
+}
