@@ -94,203 +94,183 @@ const pill = (label, dot) =>
     label
   );
 
-const STATUS = {
-  available: { label: 'Available', color: '#34d399', bg: 'rgba(52,211,153,0.12)', border: 'rgba(52,211,153,0.35)' },
-  taken: { label: 'Taken', color: 'rgba(255,255,255,0.45)', bg: 'rgba(255,255,255,0.04)', border: 'rgba(255,255,255,0.12)' },
-  premium: { label: 'Premium', color: '#fbbf24', bg: 'rgba(251,191,36,0.10)', border: 'rgba(251,191,36,0.32)' },
+const GREEN = '#34d399';
+const AMBER = '#fbbf24';
+
+const icon = (paths) =>
+  dataUrl(
+    'image/svg+xml',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`
+  );
+const ICONS = {
+  search: icon('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/>'),
+  layers: icon('<path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/><path d="m3 17.5 9 5 9-5" opacity="0.5"/>'),
+  leads: icon('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18.5 14.8c1.7.8 2.7 2.6 3 5.2"/>'),
 };
 
-const row = (name, tld, status, price, last = false) => {
-  const s = STATUS[status];
-  return h(
+const badge = (label, color, bg, border) =>
+  h(
+    'div',
+    { alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, fontSize: 13, fontWeight: 600, color, background: bg, border: `1px solid ${border}` },
+    h('div', { width: 6, height: 6, borderRadius: 999, background: color }),
+    label
+  );
+const available = (label = 'Available') => badge(label, GREEN, 'rgba(52,211,153,0.12)', 'rgba(52,211,153,0.35)');
+const lead = (label) => badge(label, AMBER, 'rgba(251,191,36,0.10)', 'rgba(251,191,36,0.32)');
+
+/** One feature card: icon tile, title + blurb, and a small product visual on the right. */
+const card = (n, iconSrc, title, blurb, visual) =>
+  h(
     'div',
     {
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '16px 22px',
-      borderBottom: last ? 'none' : '1px solid rgba(255,255,255,0.07)',
+      height: 116,
+      padding: '0 20px',
+      borderRadius: 20,
+      border: '1px solid rgba(255,255,255,0.13)',
+      background: 'linear-gradient(180deg, rgba(30,30,30,0.95), rgba(12,12,12,0.95))',
+      boxShadow: '0 24px 60px rgba(0,0,0,0.55)',
     },
-    h(
-      'div',
-      { alignItems: 'baseline', fontSize: 24, fontWeight: 600 },
-      h('div', { color: status === 'taken' ? 'rgba(255,255,255,0.45)' : '#fff' }, name),
-      h('div', { color: status === 'taken' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.55)' }, tld)
-    ),
-    h(
-      'div',
-      { alignItems: 'center', gap: 14 },
-      price ? h('div', { fontFamily: 'Geist Mono', fontSize: 17, color: 'rgba(255,255,255,0.5)' }, price) : [],
-      h(
-        'div',
-        {
-          alignItems: 'center',
-          gap: 7,
-          padding: '5px 12px',
-          borderRadius: 999,
-          fontSize: 15,
-          fontWeight: 600,
-          color: s.color,
-          background: s.bg,
-          border: `1px solid ${s.border}`,
-        },
-        h('div', { width: 7, height: 7, borderRadius: 999, background: s.color }),
-        s.label
-      )
-    )
-  );
-};
-
-const tree = h(
-  'div',
-  {
-    width: W,
-    height: H,
-    position: 'relative',
-    flexDirection: 'column',
-    background: '#000',
-    fontFamily: 'Geist',
-    color: '#fff',
-    overflow: 'hidden',
-  },
-  // Background: dot grid, spotlights and vignette as one SVG (resvg renders gradients cleanly).
-  img(background, W, H, { position: 'absolute', top: 0, left: 0 }),
-
-  // Header
-  h(
-    'div',
-    { position: 'absolute', top: 48, left: 64, right: 64, alignItems: 'center', justifyContent: 'space-between' },
     h(
       'div',
       { alignItems: 'center', gap: 16 },
       h(
         'div',
         {
-          width: 58,
-          height: 58,
-          borderRadius: 16,
-          overflow: 'hidden',
-          border: '1px solid rgba(255,255,255,0.18)',
+          width: 50,
+          height: 50,
+          borderRadius: 14,
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#000',
+          background: 'rgba(255,255,255,0.07)',
+          border: '1px solid rgba(255,255,255,0.14)',
         },
+        img(iconSrc, 24, 24)
+      ),
+      h(
+        'div',
+        { flexDirection: 'column', width: 210 },
+        h(
+          'div',
+          { alignItems: 'center', gap: 8 },
+          h('div', { fontFamily: 'Geist Mono', fontSize: 13, color: 'rgba(255,255,255,0.4)' }, n),
+          h('div', { fontSize: 23, fontWeight: 700, letterSpacing: '-0.02em' }, title)
+        ),
+        h('div', { marginTop: 4, fontSize: 15.5, lineHeight: 1.35, color: 'rgba(255,255,255,0.55)' }, blurb)
+      )
+    ),
+    visual
+  );
+
+const mono = (text, color = '#fff') => h('div', { fontFamily: 'Geist Mono', fontSize: 14.5, color }, text);
+const miniRow = (left, right) => h('div', { alignItems: 'center', justifyContent: 'space-between', gap: 10 }, left, right);
+const visualBox = (...children) =>
+  h(
+    'div',
+    {
+      flexDirection: 'column',
+      gap: 7,
+      width: 200,
+      padding: '10px 12px',
+      borderRadius: 12,
+      background: 'rgba(255,255,255,0.04)',
+      border: '1px solid rgba(255,255,255,0.09)',
+    },
+    ...children
+  );
+
+const findVisual = visualBox(
+  miniRow(mono('yourbrand.com'), available('Free')),
+  miniRow(mono('yourbrand.ai'), available('Free'))
+);
+
+const bulkVisual = visualBox(
+  miniRow(mono('500 names', 'rgba(255,255,255,0.7)'), mono('1 click', GREEN)),
+  h(
+    'div',
+    { height: 7, borderRadius: 999, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' },
+    h('div', { width: '72%', height: 7, borderRadius: 999, background: `linear-gradient(90deg, ${GREEN}, #a7f3d0)` })
+  ),
+  miniRow(mono('248 available', GREEN), mono('CSV ↓', 'rgba(255,255,255,0.55)'))
+);
+
+const leadsVisual = visualBox(
+  miniRow(mono('yourbrand.io'), lead('Buyer')),
+  miniRow(mono('yourbrand.de'), lead('Buyer'))
+);
+
+const tree = h(
+  'div',
+  { width: W, height: H, position: 'relative', flexDirection: 'column', background: '#000', fontFamily: 'Geist', color: '#fff', overflow: 'hidden' },
+  img(background, W, H, { position: 'absolute', top: 0, left: 0 }),
+
+  // Header
+  h(
+    'div',
+    { position: 'absolute', top: 44, left: 64, right: 64, alignItems: 'center', justifyContent: 'space-between' },
+    h(
+      'div',
+      { alignItems: 'center', gap: 16 },
+      h(
+        'div',
+        { width: 58, height: 58, borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.18)', alignItems: 'center', justifyContent: 'center', background: '#000' },
         img(logo, 58, 58)
       ),
       h(
         'div',
         { flexDirection: 'column' },
         h('div', { fontSize: 28, fontWeight: 700, letterSpacing: '-0.02em' }, 'DomainDiscovery'),
-        h(
-          'div',
-          { fontFamily: 'Geist Mono', fontSize: 13, letterSpacing: '0.22em', color: 'rgba(255,255,255,0.45)', marginTop: 2 },
-          'AI-POWERED'
-        )
+        h('div', { fontFamily: 'Geist Mono', fontSize: 13, letterSpacing: '0.22em', color: 'rgba(255,255,255,0.45)', marginTop: 2 }, 'AI-POWERED')
       )
     ),
-    pill('Live across 1,600+ TLDs', '#34d399')
+    pill('Live across 1,600+ TLDs', GREEN)
   ),
 
-  // Left: headline
+  // Left: headline built from the three core features
   h(
     'div',
-    { position: 'absolute', top: 150, left: 64, width: 600, flexDirection: 'column' },
+    { position: 'absolute', top: 158, left: 64, width: 500, flexDirection: 'column' },
     h(
       'div',
-      { flexDirection: 'column', fontSize: 72, fontWeight: 900, letterSpacing: '-0.045em', lineHeight: 1.02, whiteSpace: 'nowrap' },
-      h('div', {}, 'Find your'),
-      h('div', {}, 'perfect domain'),
+      { flexDirection: 'column', fontSize: 64, fontWeight: 900, letterSpacing: '-0.045em', lineHeight: 1.04, whiteSpace: 'nowrap' },
+      h('div', {}, 'Find domains.'),
+      h('div', {}, 'Check in bulk.'),
       h(
         'div',
-        {
-          backgroundImage: 'linear-gradient(90deg, #8f8f8f 0%, #f5f5f5 55%, #a3a3a3 100%)',
-          backgroundClip: 'text',
-          color: 'transparent',
-        },
-        'in seconds.'
+        { backgroundImage: 'linear-gradient(90deg, #8f8f8f 0%, #f5f5f5 55%, #a3a3a3 100%)', backgroundClip: 'text', color: 'transparent' },
+        'Find buyers.'
       )
     ),
     h(
       'div',
-      { marginTop: 24, width: 520, fontSize: 23, lineHeight: 1.4, color: 'rgba(255,255,255,0.6)', fontWeight: 400 },
-      'Free search, AI name generator, bulk checks, WHOIS and registrar price compare.'
+      { marginTop: 24, width: 470, fontSize: 22, lineHeight: 1.42, color: 'rgba(255,255,255,0.6)' },
+      'Free domain search, bulk availability checks and domain leads, all in one toolkit.'
     )
   ),
 
-  // Left bottom: trust pills + URL
+  // Left bottom: trust pills
   h(
     'div',
-    { position: 'absolute', bottom: 50, left: 64, alignItems: 'center', gap: 12 },
+    { position: 'absolute', bottom: 48, left: 64, alignItems: 'center', gap: 12 },
     pill('Free'),
     pill('Instant'),
-    pill('Private'),
     pill('No signup')
   ),
-
-  // Right: product card
   h(
     'div',
-    { position: 'absolute', top: 196, right: 64, width: 450, flexDirection: 'column' },
-    // Owl perched on the card
-    img(owl, 88, 88, { position: 'absolute', top: -72, left: 30 }),
-    h(
-      'div',
-      {
-        flexDirection: 'column',
-        borderRadius: 22,
-        border: '1px solid rgba(255,255,255,0.14)',
-        background: 'linear-gradient(180deg, rgba(28,28,28,0.96), rgba(12,12,12,0.96))',
-        boxShadow: '0 30px 80px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.03)',
-        overflow: 'hidden',
-      },
-      // Search bar
-      h(
-        'div',
-        {
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          margin: 14,
-          padding: '8px 8px 8px 18px',
-          borderRadius: 14,
-          background: 'rgba(255,255,255,0.05)',
-          border: '1px solid rgba(255,255,255,0.12)',
-        },
-        h(
-          'div',
-          { alignItems: 'center', gap: 12 },
-          // Magnifier glyph
-          h(
-            'div',
-            { position: 'relative', width: 20, height: 20 },
-            h('div', { position: 'absolute', top: 0, left: 0, width: 15, height: 15, borderRadius: 999, border: '2.5px solid rgba(255,255,255,0.5)' }),
-            h('div', { position: 'absolute', top: 15, left: 13, width: 8, height: 2.5, borderRadius: 2, background: 'rgba(255,255,255,0.5)', transform: 'rotate(45deg)' })
-          ),
-          h('div', { fontSize: 23, fontWeight: 500, color: '#fff' }, 'yourbrand'),
-          h('div', { width: 2, height: 26, background: 'rgba(255,255,255,0.8)', marginLeft: -8 })
-        ),
-        h(
-          'div',
-          {
-            alignItems: 'center',
-            padding: '10px 18px',
-            borderRadius: 10,
-            background: '#f5f5f5',
-            color: '#000',
-            fontSize: 18,
-            fontWeight: 600,
-          },
-          'Search →'
-        )
-      ),
-      row('yourbrand', '.com', 'available', '$9.98'),
-      row('yourbrand', '.ai', 'available', '$69.98'),
-      row('yourbrand', '.io', 'taken', ''),
-      row('yourbrand', '.co', 'premium', '$2,400', true)
-    ),
-    h(
-      'div',
-      { marginTop: 18, justifyContent: 'flex-end', fontFamily: 'Geist Mono', fontSize: 18, color: 'rgba(255,255,255,0.5)' },
-      'domainsdiscovery.com'
-    )
+    { position: 'absolute', bottom: 58, right: 64, fontFamily: 'Geist Mono', fontSize: 18, color: 'rgba(255,255,255,0.5)' },
+    'domainsdiscovery.com'
+  ),
+
+  // Right: the three core features
+  h(
+    'div',
+    { position: 'absolute', top: 160, right: 64, width: 560, flexDirection: 'column', gap: 14 },
+    img(owl, 70, 70, { position: 'absolute', top: -56, right: 250 }),
+    card('01', ICONS.search, 'Find domains', 'Live availability on 1,600+ TLDs, plus AI name ideas.', findVisual),
+    card('02', ICONS.layers, 'Bulk search', 'Check hundreds of names at once and export the results.', bulkVisual),
+    card('03', ICONS.leads, 'Domain leads', 'See who uses your name on other TLDs and pitch them.', leadsVisual)
   )
 );
 
@@ -298,7 +278,7 @@ await initWasm(readFileSync(require.resolve('@resvg/resvg-wasm/index_bg.wasm')))
 const svg = await satori(tree, { width: W, height: H, fonts });
 const png = new Resvg(svg, { fitTo: { mode: 'width', value: W } }).render().asPng();
 
-const alt = 'DomainDiscovery: free domain name search with live availability across 1,600+ TLDs, AI name generator, bulk checks, WHOIS and price compare';
+const alt = 'DomainDiscovery: find domains across 1,600+ TLDs, bulk domain search, and domain leads to find buyers';
 for (const name of ['opengraph-image', 'twitter-image']) {
   writeFileSync(path.join(root, 'src/app', `${name}.png`), png);
   writeFileSync(path.join(root, 'src/app', `${name}.alt.txt`), alt);
