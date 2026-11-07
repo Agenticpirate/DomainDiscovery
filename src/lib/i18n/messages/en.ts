@@ -5,7 +5,7 @@ export const en: Messages = {
     home: {
       title: 'Domain Name Search — Free Instant Availability | DomainDiscovery',
       description:
-        'Free domain name search with live availability across 1,600+ TLDs. AI domain generator, bulk checker, geo domains, WHOIS lookup, and registrar price comparison — no account required.',
+        'Free domain name search across 1,600+ TLDs with live availability. AI name generator, bulk checker, WHOIS lookup, and registrar price comparison. No signup.',
       keywords: ['domain name search', 'domain availability checker', 'check domain availability', 'AI domain generator'],
     },
     search: {

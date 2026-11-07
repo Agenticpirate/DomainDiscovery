@@ -7,7 +7,7 @@ export const fr: Messages = {
   pages: {
     home: {
       title: 'Recherche de nom de domaine — disponibilité gratuite | DomainDiscovery',
-      description: 'Recherche de nom de domaine gratuite, disponibilité en direct sur plus de 1 600 extensions. Générateur IA, vérification en masse, domaines géo, WHOIS et comparaison de prix — sans compte.',
+      description: 'Recherche de domaine gratuite en direct sur plus de 1 600 extensions. Générateur IA, vérification en masse, WHOIS et comparaison de prix. Sans compte.',
       keywords: ['recherche nom de domaine', 'disponibilité nom de domaine', 'vérifier un nom de domaine', 'générateur de nom de domaine'],
     },
     search: {

@@ -5,7 +5,7 @@ import { en } from './en';
 export const es: Messages = {
   ...en,
   pages: {
-    home: { title: 'Búsqueda de nombres de dominio — disponibilidad gratis | DomainDiscovery', description: 'Búsqueda gratis de nombres de dominio con disponibilidad en vivo en más de 1.600 TLD. Generador con IA, comprobación masiva, dominios geo, WHOIS y comparación de precios — sin cuenta.', keywords: ['búsqueda de nombres de dominio', 'disponibilidad de dominio', 'comprobar dominio', 'generador de dominios'] },
+    home: { title: 'Búsqueda de nombres de dominio — disponibilidad gratis | DomainDiscovery', description: 'Búsqueda gratis de dominios con disponibilidad en vivo en más de 1.600 TLD. Generador con IA, comprobación masiva, WHOIS y comparación de precios. Sin cuenta.', keywords: ['búsqueda de nombres de dominio', 'disponibilidad de dominio', 'comprobar dominio', 'generador de dominios'] },
     search: { title: 'Comprobar disponibilidad de un dominio', description: 'Vea al instante si un nombre de dominio está libre, registrado o es premium.', keywords: ['disponibilidad de dominio', 'dominio libre', 'buscar dominio', 'comprobar dominio'] },
     generator: { title: 'Generador de dominios con IA — ideas gratis', description: 'Generador gratis: una palabra clave se convierte en nombres cortos y memorizables, con disponibilidad en vivo. Sin cuenta.', keywords: ['generador de dominios', 'nombres de dominio con IA', 'dominios de marca'] },
     bulk: { title: 'Búsqueda masiva de dominios — 1.000 nombres', description: 'Compruebe hasta 1.000 nombres de una vez. Vea libres, registrados y premium, y exporte la lista.', keywords: ['búsqueda masiva de dominios', 'comprobar lista de dominios'] },

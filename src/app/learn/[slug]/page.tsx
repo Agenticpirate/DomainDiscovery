@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { clampMetaDescription } from '@/lib/seo/metaDescription';
 import { notFound } from 'next/navigation';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
@@ -61,10 +62,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   }
   const title =
     article.title.length > 55 ? `${article.title.slice(0, 52)}…` : article.title;
-  const description =
-    article.description.length > 155
-      ? `${article.description.slice(0, 152)}…`
-      : article.description;
+  const description = clampMetaDescription(article.description);
   const contentLocale = contentLocaleFor(article.slug, locale);
   const translated = contentLocale !== 'en';
   const url = learnArticleUrl(contentLocale, article.slug);

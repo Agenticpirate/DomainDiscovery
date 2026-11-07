@@ -3,7 +3,7 @@ import { buildLocalizedToolMetadata } from '@/lib/i18n/metadata';
 
 const title = 'Geo Domain Generator — City & Country Domains for Local SEO';
 const description =
-  'Free geo domain generator: combine any niche with cities and countries, live-check availability, and export CSV. Built for local SEO and multi-market domain lists.';
+  'Free geo domain generator: combine any niche with cities and countries, check live availability, and export CSV. Built for local SEO and multi-market lists.';
 const path = '/tools/geo';
 
 export function generateMetadata() {
