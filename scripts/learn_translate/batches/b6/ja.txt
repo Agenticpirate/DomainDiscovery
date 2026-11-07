@@ -1,0 +1,1 @@
+premium-vs-standard-registration||プレミアムと標準の登録価格の違い||レジストリが TLD の中でプレミアム文字列を指定する仕組み。

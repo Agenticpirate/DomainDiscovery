@@ -77,3 +77,25 @@ export async function buildLocalizedToolMetadata(opts: {
     },
   };
 }
+
+/** Public URL of a Learn guide in one language. English has no prefix. */
+export function learnArticleUrl(locale: LocaleId, slug: string): string {
+  const base = getSiteBaseUrl();
+  return locale === 'en' ? `${base}/learn/${slug}` : `${base}/${locale}/learn/${slug}`;
+}
+
+/**
+ * hreflang set for a guide: English (also x-default) plus each language that has a real
+ * translation. Every page in the set emits the same list, so the annotations stay reciprocal.
+ */
+export function learnLanguageAlternates(
+  slug: string,
+  translatedLocales: readonly LocaleId[]
+): Record<string, string> {
+  const languages: Record<string, string> = { 'x-default': learnArticleUrl('en', slug) };
+  for (const locale of LOCALES) {
+    if (locale.id !== 'en' && !translatedLocales.includes(locale.id)) continue;
+    languages[locale.hreflang] = learnArticleUrl(locale.id, slug);
+  }
+  return languages;
+}

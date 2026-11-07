@@ -7,10 +7,7 @@ const nextConfig = {
     process.env.REPLIT_DEV_DOMAIN,
     '127.0.0.1',
   ].filter(Boolean),
-  // Production: enable type checking and linting
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // Production: enable type checking
   typescript: {
     ignoreBuildErrors: false,
   },

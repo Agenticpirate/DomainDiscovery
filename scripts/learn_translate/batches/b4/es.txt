@@ -1,0 +1,17 @@
+godaddy-auctions-guide||GoDaddy Auctions: guía práctica||Subastas de caducados, liquidaciones, estrategia de pujas y debida diligencia en GoDaddy Auctions.
+drop-catching-basics||Fundamentos del drop catching de dominios||Cómo caen los dominios, los backorders y servicios como DropCatch, con la competencia del pool.
+namejet-expired-domains||NameJet y oportunidades con dominios caducados||Cómo los registros privados y las listas de caducados dejan ver inventario a los inversores.
+afternic-fast-transfer||Afternic Fast Transfer explicado||Cómo las redes de distribución habilitan ventas de compra inmediata en las tiendas de los registradores.
+sedo-domain-sales||Vender dominios en Sedo||Distribución MLS, corredores y compradores internacionales en Sedo.
+domain-brokers||Cuándo usar un corredor de dominios||Comisiones de corredores, prospección, negociación y qué nombres merecen representación.
+bin-vs-make-offer||Precio BIN frente a hacer oferta||Liquidez de compra inmediata frente a estrategias de precio basadas en la negociación.
+lto-domain-financing||Acuerdos de alquiler con opción a compra (LTO) de dominios||Cómo los planes a plazos y LTO amplían el público comprador y qué puede salir mal.
+udrp-basics||Fundamentos de la UDRP para titulares de dominios||Política Uniforme de Resolución de Disputas: mala fe, derechos y cómo funcionan los casos.
+trademark-domain-risk||Riesgo de marcas en la inversión en dominios||Cómo revisar marcas antes del registro o de pujar en subastas.
+cybersquatting-explained||Cybersquatting explicado||Qué es el cybersquatting, los remedios legales y los límites éticos de la inversión.
+udrp-case-lessons||Lecciones de casos recientes de la UDRP||Patrones en los resultados de disputas que los inversores en dominios deben interiorizar.
+domain-privacy-laws||RGPD y privacidad de dominios||Cómo la ley de privacidad cambió el WHOIS público y qué sigue apareciendo en RDAP.
+tmch-basics||Fundamentos del Trademark Clearinghouse (TMCH)||Por qué se notifica a los titulares de marcas en los lanzamientos de nuevos gTLD.
+expired-domains-guide||Cómo funcionan los dominios caducados||Periodo de gracia, redención, pendiente de eliminación y qué vigilan los inversores.
+domain-history-checks||Cómo comprobar el historial de un dominio antes de comprar||Archive.org, backlinks, señales de spam y comprobaciones de historial de malware.
+aged-domains-seo||Dominios antiguos y la realidad del SEO||Qué ayuda realmente la antigüedad y los mitos sobre la “magia del dominio antiguo”.

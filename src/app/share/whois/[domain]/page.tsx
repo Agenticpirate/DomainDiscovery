@@ -39,7 +39,8 @@ async function loadWhois(domain: string) {
   }
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
   const resolved = await Promise.resolve(params);
   const domain = normalizeShareDomain(decodeURIComponent(resolved.domain || 'example.com'));
   const path = buildWhoisSharePath(domain);
@@ -69,7 +70,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function WhoisSharePage({ params }: PageProps) {
+export default async function WhoisSharePage(props: PageProps) {
+  const params = await props.params;
   const resolved = await Promise.resolve(params);
   const domain = normalizeShareDomain(decodeURIComponent(resolved.domain || 'example.com'));
   const data = await loadWhois(domain);

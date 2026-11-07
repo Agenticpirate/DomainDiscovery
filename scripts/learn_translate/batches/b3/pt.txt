@@ -1,0 +1,16 @@
+domain-sales-outbound||Playbook de vendas ativas de domínios||Como escrever para usuários finais de forma profissional sem parecer golpista.
+domain-landing-pages||Páginas de venda de domínios que convertem||Botões de compra imediata, confiança, menção ao escrow e carregamento rápido para páginas de venda.
+escrow-for-domains||Como usar escrow na venda de domínios||Por que o escrow protege compradores e vendedores em transações de domínios de maior valor.
+premium-domain-negotiation||Negociando a compra de domínios premium||Táticas para comprar nomes premium sem pagar a mais.
+brandable-marketplace-guide||Vendendo em marketplaces de nomes de marca||Logotipos, preços e padrões de curadoria em plataformas de nomes de marca.
+outbound-email-compliance||Conformidade de e-mail frio na venda de domínios||Boas práticas de prospecção alinhadas à CAN-SPAM e à LGPD/GDPR para ofertas de domínios.
+aftermarket-commissions||Comissões de marketplaces comparadas||Como comissões de 10 a 30% mudam o valor líquido recebido.
+domain-financing-risks||Riscos das ofertas de financiamento de domínios||Taxas de inadimplência, chargebacks e custo de oportunidade em vendas parceladas.
+domain-marketplace-seo||SEO para páginas de venda de domínios||As páginas de venda devem sequer tentar ranquear?
+end-user-psychology||Psicologia do comprador final||Por que empresas pagam preço de varejo pelo nome certo.
+domain-valuation||Guia de avaliação de domínios||O que determina preços de domínios de US$ 100 a mais de US$ 1 milhão: tamanho, palavras-chave, comparáveis e liquidez.
+how-to-use-namebio||Como usar o NameBio na pesquisa de domínios||Um fluxo de trabalho prático para pesquisar vendas comparáveis com dados de vendas no estilo NameBio.
+reading-dnjournal-charts||Como ler os gráficos de vendas do DNJournal||Usar os gráficos semanais e do ano até a data do DNJournal para entender as tendências do mercado premium.
+godaddy-appraisal-limits||Avaliação de domínios do GoDaddy: usos e limites||Quando as avaliações automáticas ajudam e quando precificam errado nomes de marca e geográficos.
+wholesale-vs-retail-domain-pricing||Preço de atacado e de varejo de domínios||Preços de atacado de investidores versus preços de varejo para usuários finais em marketplaces.
+domain-appraisal-diy||Estrutura de avaliação de domínios por conta própria||Um checklist para avaliar nomes sem terceirizar sempre.

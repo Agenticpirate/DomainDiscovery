@@ -1,0 +1,17 @@
+godaddy-auctions-guide||GoDaddy Auctions 実践ガイド||GoDaddy Auctions での期限切れオークション、クローズアウト、入札戦略、デューデリジェンス。
+drop-catching-basics||ドメインのドロップキャッチ入門||ドメインが削除される仕組み、バックオーダー、DropCatch などのサービス、プール内の競争。
+namejet-expired-domains||NameJet と期限切れドメインの機会||プライベートレジストリや期限切れリストが、投資家に在庫を見せる仕組み。
+afternic-fast-transfer||Afternic ファストトランスファーの解説||流通ネットワークが、レジストラのストアフロント全体で即決販売を可能にする仕組み。
+sedo-domain-sales||Sedo でドメインを売る||Sedo の MLS 配信、ブローカー、海外の買い手。
+domain-brokers||ドメインブローカーを使うべきとき||ブローカーの手数料、アウトリーチ、交渉、代理を任せる価値のある名前。
+bin-vs-make-offer||BIN と価格交渉型の値付け||即決購入の流動性と、交渉を前提にした価格戦略の比較。
+lto-domain-financing||ドメインのリース・トゥ・オウン（LTO）取引||分割払いや LTO が買い手層を広げる仕組みと、起こりうるトラブル。
+udrp-basics||ドメイン所有者のための UDRP 入門||統一ドメイン名紛争処理方針：悪意、権利、事案の進み方。
+trademark-domain-risk||ドメイン投資における商標リスク||登録やオークション入札の前に商標を確認する方法。
+cybersquatting-explained||サイバースクワッティングの解説||サイバースクワッティングとは何か、法的救済、投資の倫理的な境界線。
+udrp-case-lessons||最近の UDRP 事例から学ぶ教訓||ドメイン投資家が押さえておくべき紛争結果のパターン。
+domain-privacy-laws||GDPR とドメインのプライバシー||プライバシー法が公開 WHOIS をどう変えたか、RDAP に今も表示される情報。
+tmch-basics||商標クリアリングハウス（TMCH）入門||新 gTLD のローンチ時に商標権者へ通知される理由。
+expired-domains-guide||期限切れドメインの仕組み||猶予期間、償還期間、削除保留、投資家が注目する点。
+domain-history-checks||購入前にドメインの履歴を確認する方法||Archive.org、被リンク、スパムの兆候、マルウェア履歴のチェック。
+aged-domains-seo||中古ドメインと SEO の現実||ドメインの年齢が実際にどう役立つか、「中古ドメインの魔法」にまつわる誤解。

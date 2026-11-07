@@ -23,12 +23,13 @@ const packs = Object.fromEntries(
 const failures = [];
 
 for (const article of english.articles) {
+  // New articles need every language. Backlog articles may be translated one language at a
+  // time; each language that is present must still match the English structure.
   const required = !article.publishedAt || article.publishedAt >= CUTOFF;
   const present = LOCALES.filter((locale) => packs[locale][article.slug]);
-  const mustHaveAll = required || present.length > 0;
-  if (!mustHaveAll) continue;
+  const toCheck = required ? LOCALES : present;
 
-  for (const locale of LOCALES) {
+  for (const locale of toCheck) {
     const copy = packs[locale][article.slug];
     if (!copy?.title || !copy?.description || !Array.isArray(copy.sections) || copy.sections.length !== article.sections.length) {
       failures.push(

@@ -1,4 +1,4 @@
-import { ToolPageJsonLd } from '@/components/seo/JsonLd';
+import { FaqPageJsonLd, ToolPageJsonLd } from '@/components/seo/JsonLd';
 import HomePageClient from './HomePageClient';
 
 const title = 'Domain Name Search — Free Instant Availability | DomainDiscovery';
@@ -18,6 +18,7 @@ export default function HomePage() {
         description={description}
         breadcrumbs={[{ name: 'Home', path: '/' }]}
       />
+      <FaqPageJsonLd source="home" path="/" />
       <HomePageClient />
     </>
   );

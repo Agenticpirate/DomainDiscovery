@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useLocale } from '@/components/i18n/LocaleProvider';
+import { Owl, type OwlMood } from '@/components/ui/Owl';
 
 type Status = 'free' | 'taken' | 'premium';
 
@@ -26,10 +27,21 @@ function StatusMark({ status }: { status: Status }) {
   );
 }
 
-function MockShell({ children, label }: { children: React.ReactNode; label: string }) {
+function MockShell({
+  children,
+  label,
+  mood,
+}: {
+  children: React.ReactNode;
+  label: string;
+  mood?: OwlMood;
+}) {
   return (
-    <div className="surface-premium rounded-2xl border border-ds-hairline p-3 sm:p-4">
-      <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ds-mute">{label}</p>
+    <div className="surface-premium relative rounded-2xl border border-ds-hairline p-3 sm:p-4">
+      <div className="mb-2 flex items-center justify-between gap-2">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ds-mute">{label}</p>
+        {mood && <Owl mood={mood} className="-mt-5 h-10 w-10 shrink-0 sm:-mt-6 sm:h-11 sm:w-11" />}
+      </div>
       {children}
     </div>
   );
@@ -132,7 +144,10 @@ export function HomeProductRows() {
               {copy.searchCta}
             </Link>
           </div>
-          <MockShell label={messages.ui.example}>
+          <MockShell
+            label={messages.ui.example}
+            mood={demo.rows[0][1] === 'free' ? 'happy' : demo.rows[0][1] === 'taken' ? 'shrug' : 'idle'}
+          >
             <div className="mb-2 flex items-center overflow-hidden rounded-xl border border-ds-hairline bg-ds-canvas px-3 py-2.5">
               <span key={demo.query} className="home-swap truncate text-[14px] font-medium text-ds-ink">
                 {demo.query}

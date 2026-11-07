@@ -1,0 +1,16 @@
+domain-sales-outbound||Playbook für Domainverkäufe per Direktansprache||So schreiben Sie Endnutzer professionell an, ohne wie ein Betrüger zu klingen.
+domain-landing-pages||Verkaufsseiten für Domains, die konvertieren||Sofort-Kaufen-Buttons, Vertrauen, Hinweise auf Escrow und schnelle Ladezeiten für Verkaufsseiten.
+escrow-for-domains||Escrow beim Domainverkauf nutzen||Warum Escrow Käufer und Verkäufer bei höherwertigen Domaintransaktionen schützt.
+premium-domain-negotiation||Premium-Domains verhandeln und kaufen||Taktiken, um Premium-Namen zu kaufen, ohne zu viel zu zahlen.
+brandable-marketplace-guide||Verkaufen auf Brandable-Marktplätzen||Logos, Preise und Kurationsstandards auf Brandable-Plattformen.
+outbound-email-compliance||Cold-E-Mail-Compliance bei Domainverkäufen||Saubere Direktansprache für Domainangebote unter Beachtung von CAN-SPAM und DSGVO.
+aftermarket-commissions||Marktplatzprovisionen im Vergleich||Wie Provisionen von 10–30 % den Nettoerlös verändern.
+domain-financing-risks||Risiken von Finanzierungsangeboten beim Domainverkauf||Ausfallquoten, Rückbuchungen und Opportunitätskosten bei Ratenverkäufen.
+domain-marketplace-seo||SEO für Domain-Verkaufsseiten||Sollten Verkaufsseiten überhaupt versuchen, zu ranken?
+end-user-psychology||Psychologie von Endnutzer-Käufern||Warum Unternehmen für den richtigen Namen den Einzelhandelspreis zahlen.
+domain-valuation||Leitfaden zur Domainbewertung||Was Domainpreise von 100 $ bis über 1 Mio. $ bestimmt: Länge, Keywords, Vergleichsverkäufe und Liquidität.
+how-to-use-namebio||NameBio für die Domainrecherche nutzen||Ein praktischer Ablauf für die Recherche von Vergleichsverkäufen mit Verkaufsdaten im Stil von NameBio.
+reading-dnjournal-charts||DNJournal-Verkaufscharts lesen||Wöchentliche und YTD-Charts von DNJournal nutzen, um Trends am Premium-Domainmarkt zu verstehen.
+godaddy-appraisal-limits||GoDaddy-Domainbewertung: Nutzen und Grenzen||Wann automatische Bewertungen helfen und wann sie Brandables und Geo-Namen falsch einpreisen.
+wholesale-vs-retail-domain-pricing||Großhandels- und Einzelhandelspreise bei Domains||Großhandelspreise von Investoren im Vergleich zu Endnutzer-Einzelhandelspreisen auf Marktplätzen.
+domain-appraisal-diy||Do-it-yourself-Framework für die Domainbewertung||Eine Checkliste, um Namen zu bewerten, ohne jedes Mal auszulagern.

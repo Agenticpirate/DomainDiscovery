@@ -15,8 +15,8 @@ export function generateStaticParams() {
   return getLearnSlugs().map((slug) => ({ slug }));
 }
 
-export function GET(_req: Request, ctx: { params: { slug: string } }) {
-  const article = getLearnArticle(ctx.params.slug);
+export async function GET(_req: Request, ctx: { params: Promise<{ slug: string }> }) {
+  const article = getLearnArticle((await ctx.params).slug);
   if (!article) {
     return new Response('Not found', { status: 404, headers: { 'Content-Type': 'text/plain' } });
   }

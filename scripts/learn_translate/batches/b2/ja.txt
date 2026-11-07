@@ -1,0 +1,17 @@
+what-is-a-tld-domain-extension||TLDとは？ドメイン拡張子の解説||トップレベルドメイン（TLD）とは何か、gTLDとccTLDの違い、拡張子の選び方、そしてDomainDiscoveryが登録前に1,600以上のTLDを閲覧する手助けをする方法。
+domain-extensions||ドメイン拡張子（TLD）を理解する||.com、.io、.ai、ccTLD、新しいgTLDを、信頼性、SEO、ブランドとの相性で比較します。
+com-vs-io-vs-ai||.com、.io、.ai：勝つ拡張子はどれ？||テック系スタートアップで最もよく話題になる3つの拡張子の実践的な比較。
+new-gtld-strategy||ブランドのための新gTLD戦略||.shop、.app、.dev、.xyz などの新しいジェネリックを、更新料で後悔せずに評価する方法。
+premium-tld-renewals||プレミアムTLDの更新料の落とし穴||レジストリのプレミアム価格やキャンペーン更新が、ドメイン所有者を驚かせる仕組み。
+nonprofit-domains||非営利団体のドメイン（.orgとそれ以外）||.org の信頼のシグナルと、代替を選ぶのが妥当なとき。
+new-gtld-sunrise-periods||サンライズ、ランドラッシュ、一般提供開始||商標権者と一般の人にとって、新しいTLDの提供フェーズがどう進むか。
+ccild-trustee-services||現地の存在要件と代理人サービス||外国人が制限付きccTLDを登録するのを代理人がどう助けるか、そのリスク。
+whois-privacy-guide||WHOISプライバシー：ドメインの連絡先情報を守る||WHOISプライバシーの働き、有効にするタイミング、マスクの仕組み、そしてレジストラやDomainDiscoveryの調査ツールを使うドメイン所有者が取れる実践的なセキュリティ対策。
+domain-lock-security||移管ロックとドメインのセキュリティ||レジストラロック、2FA、不正な移管の防止。
+registrar-lock-and-2fa||レジストラアカウントのセキュリティチェックリスト||2FA、リカバリーコード、価値の高いドメインのアカウント乗っ取りの防止。
+dnssec-for-domains||ドメイン所有者のためのDNSSEC||DNSSECが守るものと、有効にするタイミング。
+premium-domain-insurance||高額ドメインに保険をかける||7桁の価値がある名前のための保険の選択肢とセキュリティ対策。
+brand-protection-portfolio||ブランド保護のためのドメインポートフォリオ||どの防御的登録が価値があり、どれが無駄か。
+typosquatting-defense||タイポスクワッティング対策||紛らわしいドメインを監視し、悪用された派生ドメインを削除させる。
+phishing-domains||フィッシングドメイン：悪用の仕組み||攻撃者がドメインをどう使い、レジストラがどう対応するか。
+brand-protection||オンラインでブランドを守る||複数の拡張子でブランドを守り、プライバシー、ロック、DNSSECを有効にして、サイバースクワッティングを監視します。

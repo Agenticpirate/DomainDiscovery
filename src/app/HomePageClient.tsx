@@ -11,6 +11,8 @@ import { SearchCountPill } from '@/components/home/SearchCountPill';
 import { HomePageContent } from '@/components/home/HomePageContent';
 import { DomainTicker } from '@/components/home/DomainTicker';
 import { StatsBar } from '@/components/home/StatsBar';
+import { Owl } from '@/components/ui/Owl';
+import { HeroStickyNote } from '@/components/home/HeroStickyNote';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { Footer } from '@/components/layout/Footer';
 import { useLocale } from '@/components/i18n/LocaleProvider';
@@ -83,6 +85,7 @@ export default function Home() {
       <Navigation />
 
       <main className="relative page-main">
+        <HeroStickyNote />
         {/* Full-viewport mobile hero zone: fills 100svh evenly without blank dead zones; Section 2 stays strictly below fold */}
         <div className="min-h-[calc(100svh-4rem-env(safe-area-inset-top,0px))] flex flex-col justify-between sm:justify-start sm:min-h-0 sm:block pt-1 pb-3 min-[390px]:pb-4 sm:py-0">
           <SectionAmbient
@@ -143,6 +146,11 @@ export default function Home() {
               which turns absolute h-* layers into empty black boxes in flow (mobile bug).
             */}
             <div className="relative z-[2] mx-auto w-full max-w-[40rem] sm:max-w-[44rem]">
+              {/* Mascot perched on the search panel (hover to make it hop) */}
+              <Owl
+                mood="idle"
+                className="pointer-events-auto absolute -top-[3.1rem] right-5 z-[3] hidden h-14 w-14 sm:block"
+              />
               <div className="hero-halo">
                 <HeroSearch
                   initialQuery={searchQuery}

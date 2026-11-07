@@ -1,0 +1,16 @@
+domain-sales-outbound||Guide des ventes sortantes de domaines||Comment écrire aux utilisateurs finaux de façon professionnelle sans passer pour un escroc.
+domain-landing-pages||Pages de vente de domaines qui convertissent||Boutons d'achat immédiat, confiance, mentions du séquestre et chargement rapide pour les pages de vente.
+escrow-for-domains||Utiliser le séquestre pour vendre des domaines||Pourquoi le séquestre protège acheteurs et vendeurs sur les transactions de domaines de plus grande valeur.
+premium-domain-negotiation||Négocier l'achat de domaines premium||Tactiques pour acheter des noms premium sans payer trop cher.
+brandable-marketplace-guide||Vendre sur les places de marché de noms de marque||Logos, prix et critères de sélection sur les plateformes de noms de marque.
+outbound-email-compliance||Conformité de l'e-mail à froid pour la vente de domaines||Bonnes pratiques de prospection conformes à CAN-SPAM et au RGPD pour les offres de domaines.
+aftermarket-commissions||Comparatif des commissions des places de marché||Comment des commissions de 10 à 30 % modifient le produit net.
+domain-financing-risks||Risques des offres de financement de domaines||Taux de défaut, rétrofacturations et coût d'opportunité des ventes à tempérament.
+domain-marketplace-seo||Le SEO des pages de vente de domaines||Les pages de vente doivent-elles seulement essayer de se classer ?
+end-user-psychology||Psychologie de l'acheteur final||Pourquoi les entreprises paient le prix du détail pour le bon nom.
+domain-valuation||Guide de la valorisation des domaines||Ce qui fait varier les prix de 100 $ à plus d'1 M$ : longueur, mots-clés, comparables et liquidité.
+how-to-use-namebio||Utiliser NameBio pour rechercher des domaines||Un processus pratique pour étudier les ventes comparables avec des données de ventes de type NameBio.
+reading-dnjournal-charts||Lire les graphiques de ventes de DNJournal||Utiliser les graphiques hebdomadaires et cumulés sur l'année de DNJournal pour comprendre les tendances du marché premium.
+godaddy-appraisal-limits||Évaluation de domaine GoDaddy : usages et limites||Quand les évaluations automatiques aident et quand elles sous-estiment ou surestiment les noms de marque et géographiques.
+wholesale-vs-retail-domain-pricing||Prix de gros et prix de détail des domaines||Prix de gros des investisseurs face aux prix de détail pour utilisateurs finaux sur les places de marché.
+domain-appraisal-diy||Méthode d'évaluation de domaine à faire soi-même||Une liste de contrôle pour évaluer des noms sans tout externaliser.

@@ -1,0 +1,48 @@
+the-radio-test-brandable-domains||ブランドらしいドメインのためのラジオテスト||プロのネーミング担当者や投資家のように、ラジオテストでブランドらしいドメイン名を絞り込む方法。
+smile-and-scratch-framework||スマイル＆スクラッチのネーミング手法||アレクサンドラ・ワトキンスの「スマイル＆スクラッチ」手法を、ドメイン名とブランド名に当てはめます。
+domain-length-psychology||ドメインの長さの心理学||短いドメインがなぜ高値になるのか、長さが信頼、入力、記憶にどう影響するのか。
+brandable-vs-keyword-domains||ブランド向きドメインとキーワードドメイン||造語のブランド名を買うべきときと、キーワードを含む完全一致ドメインを買うべきとき。
+exact-match-domains-2026||完全一致ドメインは今も価値があるか||Googleの進化が完全一致ドメイン（EMD）の価値をどう変えたか、そしてEMDが今も強い場面。
+compound-word-domains||複合語ドメインの戦略||綴りを作り込まなくても、2語の組み合わせで覚えやすいブランドドメインを作る方法。
+one-word-domain-guide||1語ドメイン：究極の資産クラス||辞書にある1語の .com がなぜプレミアム販売を支配するのか、どう評価するのか。
+cctld-local-seo||ccTLDとローカルSEO：国別ドメインが役立つとき||ローカルSEOで国別コードTLDを使うべきとき、ccTLDとgTLDの違い、そして地域ドメインやDomainDiscoveryの調査ツールとの組み合わせ方。
+domain-portfolio-management||ドメインポートフォリオ管理の基本||更新、コスト、ROI、流動性を、本物の投資台帳のように追跡します。
+hand-registration-strategy||2026年のハンドレジ戦略||ハンドレジがまだ通用する場面と、価値のない在庫を避ける方法。
+domain-flipping-guide||初心者のためのドメイン転売||安く買って高く売る：転売の現実的な期間、利益率、プラットフォーム。
+geo-domain-investing||地域ドメイン投資||都市名＋サービスのドメインと純粋な都市名：需要のパターンとリスク。
+ai-domain-investing||AIドメイン投資のトレンド||AIブームが .ai やAI関連のブランド名の需要をどう変えたか。
+how-dns-works||ドメインネームシステムの仕組み||名前解決の流れにあるリゾルバー、ルートサーバー、TLDサーバー、権威ネームサーバー。
+nameservers-explained||ネームサーバーの解説||独自ネームサーバーとレジストラのDNSの違い、そしてCloudflareなどへ切り替えるタイミング。
+email-authentication-spf-dkim-dmarc||ドメインメールのSPF・DKIM・DMARC||最新のメール認証で到達率を守り、なりすましを防ぎます。
+https-ssl-domains||SSL/TLS証明書とドメイン||証明書がホスト名にどう結び付くのか、なぜHTTPSが必須なのか。
+dns-propagation-troubleshooting||DNS反映のトラブルシューティング||変更が「止まっている」ように見える理由と、dig、DoH、TTLの計算での確認方法。
+domains-and-seo||ドメインとSEO：順位に本当に影響するもの||ドメイン名がSEOにできること、できないこと。完全一致の誤解、ccTLD、HTTPS、そしてDomainDiscoveryのツールと人のためのコンテンツの組み合わせ方。
+domain-tools-stack||ドメインに欠かせないツール一式||NameBio、DNJournal、WHOIS/RDAP、archive.org、商標検索、ポートフォリオ管理ツール。
+register-vs-buy-aftermarket||新規登録か二次市場での購入か||ハンドレジで登録するときと、プレミアムの二次市場ドメインを購入するとき。
+domain-email-setup||自分のドメインでメールを設定する||Google Workspace、Microsoft 365、Fastmail、無料の転送オプション。
+domain-name-generators||AIドメインジェネレーターを使いこなす||ジェネレーターへの指示の出し方と、弱い結果の絞り込み方。
+bulk-domain-search-tips||一括ドメイン検索のワークフロー||一括ツールで数百件の名前を効率よくチェックします。
+icann-basics||ドメイン購入者のためのICANN入門||ドメインの仕組みの中で、ICANNが管理するものとしないもの。
+registry-vs-registrar||レジストリ、レジストラ、リセラー||あらゆるドメイン購入の裏にある業界の構造。
+premium-renewal-planning||プレミアム更新料の計画||更新料が1件あたり50ドルから5,000ドル以上になるときの資金繰り計画。
+domain-hacks||ドメインハック：巧みか、紛らわしいか||拡張子を単語の一部として使う（歴史的には del.icio.us）：長所と短所。
+numbers-in-domains||ドメイン名の中の数字||数字が役立つとき（24、365）と、ブランドらしさを損なうとき。
+hyphenated-domains||ハイフン付きドメイン：基本は避ける||ほとんどのブランドで、ハイフンが直接入力と信頼を下げる理由。
+personal-name-domains||個人名ドメイン||名前.com の希少性と、パーソナルブランドの現実的な代替案。
+domain-development-vs-hold||ドメインを開発するか保有するか||サイトを作ると価値が何倍にもなるときと、売るために保有するだけが良いとき。
+domain-metrics-to-track||追跡する価値のあるドメイン指標||販売率、平均保有期間、ROI、問い合わせ率。
+transfer-auth-codes||EPP／認証コードの解説||認証コードとは何か、安全に扱う方法。
+cdn-and-domains||CDNとあなたのドメイン||クリーンなDNSを保ちながら、CloudflareやFastly経由でトラフィックを流します。
+investor-psychology||ドメイン投資家の心理||サンクコスト、オークション熱、更新料への罪悪感。
+sales-year-planning||ドメイン販売の1年を計画する||四半期ごとのアウトバウンド施策、価格の実験、在庫の入れ替え。
+domain-name-spelling||造語ブランドの綴り戦略||ラジオテストに失敗する前に、独創的な綴りをどこまで押し進められるか。
+two-letter-domains||2文字ドメインの経済学||希少性、企業の需要、2文字（LL）の .com の流動性。
+three-letter-domains||3文字の .com（LLL）ガイド||発音できるLLLと子音だらけのLLL、価格帯。
+number-domains||数字ドメイン投資||中国の数字の語呂合わせに基づく需要のパターンと流動性のメモ。
+idns-explained||国際化ドメイン名（IDN）||Punycode、文字体系、紛らわしい文字によるフィッシングのリスク。
+domain-forwarding||ドメイン転送のベストプラクティス||301リダイレクトとマスク転送、SEOへの副作用。
+www-vs-naked-domain||wwwありかなしか||正規のホストを1つ決めて、それを貫きます。
+domain-monitoring-services||ドメイン監視・ウォッチサービス||稼働、WHOIS変更の通知、ブランド監視。
+domain-joint-ventures||ドメインのジョイントベンチャー||ドメインの所有者が、売り切るのではなく運営者と提携する場合。
+corporate-domain-management||企業のドメイン管理||一元的な台帳、ブランド保護、シャドーITドメインの削減。
+safe-domain-purchase-checklist||安全なドメイン購入チェックリスト||登録やオークション入札の前に使える、印刷用の頭の中のチェックリスト。

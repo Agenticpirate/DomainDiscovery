@@ -1,0 +1,16 @@
+domain-sales-outbound||Playbook de ventas salientes de dominios||Cómo escribir a usuarios finales de forma profesional sin parecer un estafador.
+domain-landing-pages||Páginas de venta de dominios que convierten||Botones de compra inmediata, confianza, menciones al escrow y tiempos de carga rápidos para páginas de venta.
+escrow-for-domains||Usar escrow en la venta de dominios||Por qué el escrow protege a compradores y vendedores en transacciones de dominios de mayor valor.
+premium-domain-negotiation||Negociar la compra de dominios premium||Tácticas para comprar nombres premium sin pagar de más.
+brandable-marketplace-guide||Vender en marketplaces de nombres de marca||Logotipos, precios y estándares de curación en plataformas de nombres de marca.
+outbound-email-compliance||Cumplimiento del correo en frío en la venta de dominios||Buenas prácticas de prospección acordes con CAN-SPAM y el RGPD para ofertas de dominios.
+aftermarket-commissions||Comparativa de comisiones de marketplaces||Cómo las comisiones del 10 al 30 % cambian los ingresos netos.
+domain-financing-risks||Riesgos de las ofertas de financiación de dominios||Tasas de impago, contracargos y coste de oportunidad en ventas a plazos.
+domain-marketplace-seo||SEO para páginas de venta de dominios||¿Deben las páginas de venta intentar posicionarse?
+end-user-psychology||Psicología del comprador final||Por qué las empresas pagan precio de mercado por el nombre adecuado.
+domain-valuation||Guía de valoración de dominios||Qué determina los precios de dominios desde 100 $ hasta más de 1 M$: longitud, palabras clave, comparables y liquidez.
+how-to-use-namebio||Cómo usar NameBio para investigar dominios||Un flujo de trabajo práctico para investigar ventas comparables con datos de ventas al estilo de NameBio.
+reading-dnjournal-charts||Cómo leer los gráficos de ventas de DNJournal||Usar los gráficos semanales y acumulados del año de DNJournal para entender las tendencias del mercado premium.
+godaddy-appraisal-limits||Tasación de dominios de GoDaddy: usos y límites||Cuándo ayudan las tasaciones automáticas y cuándo valoran mal los nombres de marca y los geográficos.
+wholesale-vs-retail-domain-pricing||Precios mayoristas y minoristas de dominios||Precios mayoristas para inversores frente a precios minoristas para usuarios finales en marketplaces.
+domain-appraisal-diy||Marco de tasación de dominios por tu cuenta||Una lista de comprobación para tasar nombres sin externalizarlo cada vez.

@@ -1,0 +1,17 @@
+what-is-a-tld-domain-extension||O que é uma TLD? Extensões de domínio explicadas||O que é um domínio de nível superior (TLD), como gTLDs e ccTLDs se diferenciam, como escolher uma extensão e como o DomainDiscovery ajuda você a explorar mais de 1.600 TLDs antes de registrar.
+domain-extensions||Entendendo as extensões de domínio (TLDs)||Compare .com, .io, .ai, ccTLDs e novas gTLDs quanto a confiança, SEO e adequação à marca.
+com-vs-io-vs-ai||.com, .io ou .ai: qual extensão vence?||Uma comparação prática das três extensões mais debatidas entre startups de tecnologia.
+new-gtld-strategy||Estratégia de novas gTLDs para marcas||Como avaliar .shop, .app, .dev, .xyz e outras novas genéricas sem se arrepender dos custos de renovação.
+premium-tld-renewals||Armadilhas das renovações de TLDs premium||Como os preços premium do registro e as renovações promocionais podem surpreender os donos de domínios.
+nonprofit-domains||Domínios para organizações sem fins lucrativos (.org e além)||Sinais de confiança do .org e quando as alternativas fazem sentido.
+new-gtld-sunrise-periods||Sunrise, Landrush e disponibilidade geral||Como funcionam as fases de lançamento de novas TLDs para titulares de marcas e para o público.
+ccild-trustee-services||Presença local e serviços de representante||Como os representantes ajudam estrangeiros a registrar ccTLDs restritas, e quais são os riscos.
+whois-privacy-guide||Privacidade do WHOIS: proteja os dados de contato do seu domínio||O que a privacidade do WHOIS faz, quando ativá-la, como funciona a ocultação de dados e quais passos práticos de segurança os donos de domínios podem dar com registradores e com as ferramentas de pesquisa do DomainDiscovery.
+domain-lock-security||Bloqueio de transferência e segurança do domínio||Bloqueios do registrador, 2FA e prevenção de transferências não autorizadas.
+registrar-lock-and-2fa||Checklist de segurança da conta no registrador||2FA, códigos de recuperação e prevenção do sequestro de contas com domínios de alto valor.
+dnssec-for-domains||DNSSEC para donos de domínios||O que o DNSSEC protege e quando ativá-lo.
+premium-domain-insurance||Segurando domínios de alto valor||Opções de seguro e controles de segurança para nomes de sete dígitos.
+brand-protection-portfolio||Portfólios de domínios para proteção de marca||Quais registros defensivos valem a pena (e quais são desperdício).
+typosquatting-defense||Defesa contra typosquatting||Monitore domínios parecidos e derrube as variantes abusivas.
+phishing-domains||Domínios de phishing: como funciona o abuso||Como os atacantes usam domínios e como os registradores respondem.
+brand-protection||Protegendo sua marca on-line||Proteja sua marca em várias extensões, ative privacidade, bloqueios e DNSSEC e monitore o ciberocupação.

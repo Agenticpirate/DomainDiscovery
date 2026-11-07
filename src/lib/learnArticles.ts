@@ -101,6 +101,37 @@ export function localizeLearnArticle(
   };
 }
 
+/** True when this language has a full translation of the slug. English always counts. */
+export function isLearnTranslated(slug: string, locale: LocaleId): boolean {
+  if (locale === 'en') return true;
+  const copy = LEARN_LOCALES[locale]?.articles?.[slug];
+  return Boolean(copy?.title && copy.sections?.length);
+}
+
+/**
+ * Non-English languages that have a full translation of the slug. Each one is indexed on its
+ * own, and the hreflang set lists English plus exactly these languages (all reciprocal).
+ */
+export function getLearnTranslatedLocales(slug: string): Array<Exclude<LocaleId, 'en'>> {
+  return (Object.keys(LEARN_LOCALES) as Array<Exclude<LocaleId, 'en'>>).filter((locale) =>
+    isLearnTranslated(slug, locale)
+  );
+}
+
+/** True when every language has the slug. */
+export function isLearnFullyTranslated(slug: string): boolean {
+  return (Object.keys(LEARN_LOCALES) as Array<Exclude<LocaleId, 'en'>>).every((locale) =>
+    isLearnTranslated(slug, locale)
+  );
+}
+
+/** Published slugs that exist in all languages. Used by the sitemap, hreflang, and llms files. */
+export function getFullyTranslatedLearnSlugs(): string[] {
+  return getLearnArticles()
+    .map((a) => a.slug)
+    .filter(isLearnFullyTranslated);
+}
+
 /** Today's date as YYYY-MM-DD in UTC (publish gate source of truth). */
 export function learnTodayUTC(asOf: Date = new Date()): string {
   return asOf.toISOString().slice(0, 10);

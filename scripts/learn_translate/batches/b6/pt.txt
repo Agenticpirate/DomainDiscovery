@@ -1,0 +1,1 @@
+premium-vs-standard-registration||Preços de registro premium e padrão||Como os registros definem as sequências premium dentro de uma TLD.

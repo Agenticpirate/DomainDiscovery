@@ -13,14 +13,15 @@ import { fillTld, libraryChrome } from '@/lib/i18n/libraryChrome';
 export const dynamic = 'force-dynamic';
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
   return getTldAboutSlugs().map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
   const detail = await getTldAboutDetail(params.slug);
   if (!detail) {
     return { title: 'TLD not found' };
@@ -48,7 +49,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function TldAboutPage({ params }: PageProps) {
+export default async function TldAboutPage(props: PageProps) {
+  const params = await props.params;
   const detail = await getTldAboutDetail(params.slug);
   if (!detail) notFound();
   const locale = await getRequestLocale();

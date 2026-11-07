@@ -1,0 +1,16 @@
+domain-sales-outbound||アウトバウンド型ドメイン販売の実践ガイド||詐欺師のように見られず、エンドユーザーに丁寧にメールする方法。
+domain-landing-pages||成約につながるドメイン販売ランディングページ||即決購入ボタン、信頼、エスクローの案内、高速表示など、販売ページの要点。
+escrow-for-domains||ドメイン販売でエスクローを使う||高額なドメイン取引で、エスクローが買い手と売り手を守る理由。
+premium-domain-negotiation||プレミアムドメイン購入の交渉術||払いすぎずにプレミアム名を買うための戦術。
+brandable-marketplace-guide||ブランダブル系マーケットプレイスでの販売||ブランダブルのプラットフォームにおけるロゴ、価格設定、キュレーション基準。
+outbound-email-compliance||ドメイン販売のコールドメール コンプライアンス||CAN-SPAM と GDPR に配慮した、ドメインオファーのアウトリーチ作法。
+aftermarket-commissions||マーケットプレイス手数料の比較||10〜30% の手数料が手取り額をどう変えるか。
+domain-financing-risks||ドメイン分割販売のリスク||分割販売における不払い率、チャージバック、機会費用。
+domain-marketplace-seo||ドメイン販売ページの SEO||販売ページは検索順位を狙うべきか。
+end-user-psychology||エンドユーザー買い手の心理||ふさわしい名前に企業が小売価格を払う理由。
+domain-valuation||ドメイン評価ガイド||100 ドルから 100 万ドル超まで、価格を左右する要素：長さ、キーワード、比較事例、流動性。
+how-to-use-namebio||NameBio でドメインを調べる方法||NameBio 型の売買データを使った、比較事例リサーチの実践手順。
+reading-dnjournal-charts||DNJournal の売買チャートの読み方||DNJournal の週次・年初来チャートからプレミアムドメイン市場の動向をつかむ。
+godaddy-appraisal-limits||GoDaddy のドメイン査定：使いどころと限界||自動査定が役立つ場面と、ブランダブルや地名ドメインを見誤る場面。
+wholesale-vs-retail-domain-pricing||卸売価格と小売価格のドメイン相場||投資家向け卸売価格と、マーケットプレイスでのエンドユーザー向け小売価格の違い。
+domain-appraisal-diy||自分でできるドメイン査定フレームワーク||毎回外注せずに名前を査定するためのチェックリスト。

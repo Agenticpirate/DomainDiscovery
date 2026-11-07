@@ -1,0 +1,17 @@
+godaddy-auctions-guide||GoDaddy Auctions : guide pratique||Enchères de noms expirés, soldes, stratégie d'enchères et vérifications préalables sur GoDaddy Auctions.
+drop-catching-basics||Bases du drop catching de domaines||Comment les domaines tombent, les précommandes (backorders) et des services comme DropCatch, avec la concurrence du pool.
+namejet-expired-domains||NameJet et opportunités sur les domaines expirés||Comment les registres privés et les listes de noms expirés font apparaître du stock pour les investisseurs.
+afternic-fast-transfer||Afternic Fast Transfer expliqué||Comment les réseaux de distribution débloquent les ventes en achat immédiat dans les boutiques des registraires.
+sedo-domain-sales||Vendre des domaines sur Sedo||Distribution MLS, courtiers et acheteurs internationaux sur Sedo.
+domain-brokers||Quand faire appel à un courtier en domaines||Commissions des courtiers, prospection, négociation et quels noms méritent d'être représentés.
+bin-vs-make-offer||Prix BIN ou faire une offre||Liquidité de l'achat immédiat face aux stratégies de prix fondées sur la négociation.
+lto-domain-financing||Ventes de domaines en location-vente (LTO)||Comment les paiements échelonnés et la LTO élargissent le public d'acheteurs, et ce qui peut mal tourner.
+udrp-basics||Bases de l'UDRP pour les titulaires de domaines||Politique uniforme de règlement des litiges : mauvaise foi, droits et déroulement des affaires.
+trademark-domain-risk||Risque de marque dans l'investissement en domaines||Comment vérifier les marques avant l'enregistrement ou les enchères.
+cybersquatting-explained||Le cybersquattage expliqué||Ce qu'est le cybersquattage, les recours juridiques et les limites éthiques de l'investissement.
+udrp-case-lessons||Leçons des récentes affaires UDRP||Tendances dans l'issue des litiges que les investisseurs en domaines doivent intégrer.
+domain-privacy-laws||RGPD et confidentialité des domaines||Comment le droit à la vie privée a transformé le WHOIS public et ce qui apparaît encore dans RDAP.
+tmch-basics||Bases du Trademark Clearinghouse (TMCH)||Pourquoi les titulaires de marques sont notifiés lors des lancements de nouveaux gTLD.
+expired-domains-guide||Comment fonctionnent les domaines expirés||Période de grâce, rédemption, suppression en attente et ce que surveillent les investisseurs.
+domain-history-checks||Vérifier l'historique d'un domaine avant d'acheter||Archive.org, backlinks, signaux de spam et contrôles de l'historique de malwares.
+aged-domains-seo||Domaines anciens et réalité du SEO||Ce que l'ancienneté apporte vraiment, et les mythes sur la « magie du domaine ancien ».

@@ -6,11 +6,6 @@ import { usePathname } from 'next/navigation';
 import { isLabAutomation, scheduleIdle } from '@/lib/perfRuntime';
 import { stripLocalePrefix } from '@/lib/i18n/locales';
 
-const AffiliateGutterSpots = dynamic(
-  () => import('@/components/ads/AffiliateGutterSpots').then((m) => m.AffiliateGutterSpots),
-  { ssr: false }
-);
-
 const AffiliateSkyscraper = dynamic(
   () => import('@/components/ads/RightSkyscraperAd').then((m) => m.RightSkyscraperAd),
   { ssr: false }
@@ -24,8 +19,8 @@ const AffiliateInterstitial = dynamic(
  * Mount sitewide ads after idle so Lighthouse/GTmetrix can finish first paint
  * without continuous timers blocking CPU idle.
  *
- * Side rails render on every page, and only while their gutter is empty
- * so they never cover or crop the page.
+ * The right skyscraper renders while its gutter is empty so it never covers
+ * or crops the page. (The empty left "open spot" boxes were removed.)
  * Interstitial: sitewide after engaged time.
  */
 export function DeferredSiteAds() {
@@ -60,7 +55,6 @@ export function DeferredSiteAds() {
 
   return (
     <>
-      <AffiliateGutterSpots />
       <AffiliateSkyscraper />
       <AffiliateInterstitial />
     </>

@@ -1,0 +1,1 @@
+premium-vs-standard-registration||Premium- oder Standardregistrierung: Preise im Vergleich||Wie Registries innerhalb einer TLD Premium-Zeichenfolgen festlegen.

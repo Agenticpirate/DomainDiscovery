@@ -1,0 +1,17 @@
+what-is-a-tld-domain-extension||Qu'est-ce qu'une TLD ? Les extensions de domaine expliquées||Ce qu'est un domaine de premier niveau (TLD), en quoi les gTLD et les ccTLD diffèrent, comment choisir une extension et comment DomainDiscovery vous aide à parcourir plus de 1 600 TLD avant d'enregistrer.
+domain-extensions||Comprendre les extensions de domaine (TLD)||Comparez .com, .io, .ai, les ccTLD et les nouvelles gTLD en termes de confiance, de SEO et d'adéquation à la marque.
+com-vs-io-vs-ai||.com, .io ou .ai : quelle extension l'emporte ?||Une comparaison pratique des trois extensions les plus débattues chez les start-up technologiques.
+new-gtld-strategy||Stratégie des nouvelles gTLD pour les marques||Comment évaluer .shop, .app, .dev, .xyz et d'autres nouvelles génériques sans regretter les coûts de renouvellement.
+premium-tld-renewals||Pièges des renouvellements de TLD premium||Comment les prix premium du registre et les renouvellements promotionnels peuvent surprendre les titulaires de domaines.
+nonprofit-domains||Domaines pour les associations (.org et au-delà)||Les signaux de confiance de .org et les cas où des alternatives se justifient.
+new-gtld-sunrise-periods||Sunrise, Landrush et disponibilité générale||Comment fonctionnent les phases de lancement des nouvelles TLD pour les titulaires de marques et le public.
+ccild-trustee-services||Présence locale et services de mandataire||Comment les mandataires aident les étrangers à enregistrer des ccTLD restreintes, et quels sont les risques.
+whois-privacy-guide||Confidentialité WHOIS : protéger les coordonnées de votre domaine||Ce que fait la confidentialité WHOIS, quand l'activer, comment fonctionne le masquage et quelles mesures de sécurité pratiques les titulaires peuvent prendre avec les bureaux d'enregistrement et les outils de recherche de DomainDiscovery.
+domain-lock-security||Verrou de transfert et sécurité du domaine||Verrous du bureau d'enregistrement, 2FA et prévention des transferts non autorisés.
+registrar-lock-and-2fa||Liste de contrôle de sécurité du compte chez le bureau d'enregistrement||2FA, codes de récupération et prévention de la prise de contrôle des comptes de domaines de grande valeur.
+dnssec-for-domains||DNSSEC pour les titulaires de domaines||Ce que protège DNSSEC et quand l'activer.
+premium-domain-insurance||Assurer les domaines de grande valeur||Options d'assurance et contrôles de sécurité pour des noms à sept chiffres.
+brand-protection-portfolio||Portefeuilles de domaines de protection de marque||Quels enregistrements défensifs valent la peine (et lesquels sont du gaspillage).
+typosquatting-defense||Se défendre contre le typosquatting||Surveiller les sosies et faire retirer les variantes abusives.
+phishing-domains||Domaines d'hameçonnage : comment fonctionne l'abus||Comment les attaquants utilisent les domaines et comment les bureaux d'enregistrement réagissent.
+brand-protection||Protéger votre marque en ligne||Sécurisez votre marque sur plusieurs extensions, activez la confidentialité, les verrous et DNSSEC, et surveillez le cybersquattage.

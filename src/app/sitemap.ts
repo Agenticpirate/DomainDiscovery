@@ -1,27 +1,36 @@
 import { MetadataRoute } from 'next';
 import { getTldAboutSlugs } from '@/lib/tldAboutData';
-import { getLearnSlugs } from '@/lib/learnArticles';
+import { getLearnArticles, getLearnTranslatedLocales } from '@/lib/learnArticles';
 import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
-import { absoluteLocaleUrl, languageAlternates } from '@/lib/i18n/metadata';
+import {
+  absoluteLocaleUrl,
+  languageAlternates,
+  learnArticleUrl,
+  learnLanguageAlternates,
+} from '@/lib/i18n/metadata';
 import { INDEXABLE_LOCALE_PATHS, LOCALES } from '@/lib/i18n/locales';
 
+/**
+ * Page sitemap for search engines. HTML pages only.
+ *
+ * Left out on purpose:
+ * - /ada/*: production redirects these to the dedicated ADA domain (308), so listing
+ *   them here only produces "Page with redirect" reports. They belong in that site's sitemap.
+ * - .txt / .md / .xml files and /learn/md/*: machine-readable mirrors for AI crawlers.
+ *   They are linked from llms.txt, not submitted as pages to Google.
+ * - /saved-domains: per-visitor page with no public content.
+ *
+ * lastmod is only set where we know a real date (Learn publish date). A sitemap where every
+ * URL claims "modified now" teaches Google to ignore the field.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getSiteBaseUrl();
-  const lastModified = new Date();
 
-  /** Only routes that resolve to real pages (no 404s). */
   const coreRoutes = [
     { path: '', priority: 1.0, changeFrequency: 'daily' as const },
     { path: '/search', priority: 0.9, changeFrequency: 'daily' as const },
     { path: '/domain-extensions', priority: 0.85, changeFrequency: 'daily' as const },
     { path: '/assistant', priority: 0.9, changeFrequency: 'daily' as const },
-    { path: '/ada', priority: 0.85, changeFrequency: 'weekly' as const },
-    { path: '/ada/docs', priority: 0.8, changeFrequency: 'weekly' as const },
-    { path: '/ada/docs/industry', priority: 0.8, changeFrequency: 'weekly' as const },
-    { path: '/ada/docs/registrars', priority: 0.8, changeFrequency: 'weekly' as const },
-    { path: '/ada/agent-card', priority: 0.75, changeFrequency: 'weekly' as const },
-    { path: '/ada/app', priority: 0.85, changeFrequency: 'weekly' as const },
-    { path: '/ada/chat', priority: 0.88, changeFrequency: 'weekly' as const },
     { path: '/generator', priority: 0.85, changeFrequency: 'daily' as const },
     { path: '/bulk-search', priority: 0.85, changeFrequency: 'daily' as const },
     { path: '/tools/keyword', priority: 0.85, changeFrequency: 'daily' as const },
@@ -32,39 +41,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/blog', priority: 0.75, changeFrequency: 'weekly' as const },
     { path: '/blog/tlds', priority: 0.75, changeFrequency: 'weekly' as const },
     { path: '/faq', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/for-ai', priority: 0.75, changeFrequency: 'weekly' as const },
     { path: '/contact', priority: 0.65, changeFrequency: 'monthly' as const },
     { path: '/privacy', priority: 0.4, changeFrequency: 'yearly' as const },
     { path: '/terms', priority: 0.4, changeFrequency: 'yearly' as const },
     { path: '/cookies', priority: 0.35, changeFrequency: 'yearly' as const },
     { path: '/disclaimer', priority: 0.35, changeFrequency: 'yearly' as const },
-    { path: '/ada/privacy', priority: 0.35, changeFrequency: 'yearly' as const },
-    { path: '/ada/terms', priority: 0.35, changeFrequency: 'yearly' as const },
-    { path: '/ada/cookies', priority: 0.3, changeFrequency: 'yearly' as const },
-    { path: '/ada/disclaimer', priority: 0.3, changeFrequency: 'yearly' as const },
-    { path: '/saved-domains', priority: 0.5, changeFrequency: 'monthly' as const },
     { path: '/premium', priority: 0.55, changeFrequency: 'weekly' as const },
     { path: '/expired', priority: 0.55, changeFrequency: 'weekly' as const },
-    // GEO / LLM Markdown surfaces (AI crawler indexes)
-    { path: '/llms.txt', priority: 0.7, changeFrequency: 'weekly' as const },
-    { path: '/llms-full.txt', priority: 0.7, changeFrequency: 'weekly' as const },
-    { path: '/search.md', priority: 0.65, changeFrequency: 'weekly' as const },
-    { path: '/generator.md', priority: 0.65, changeFrequency: 'weekly' as const },
-    { path: '/geo.md', priority: 0.65, changeFrequency: 'weekly' as const },
-    { path: '/whois.md', priority: 0.65, changeFrequency: 'weekly' as const },
-    { path: '/bulk-search.md', priority: 0.65, changeFrequency: 'weekly' as const },
-    { path: '/pricing.md', priority: 0.65, changeFrequency: 'weekly' as const },
-    { path: '/extensions.md', priority: 0.65, changeFrequency: 'weekly' as const },
-    { path: '/about.md', priority: 0.6, changeFrequency: 'monthly' as const },
-    { path: '/for-ai', priority: 0.75, changeFrequency: 'weekly' as const },
-    { path: '/ai.txt', priority: 0.5, changeFrequency: 'monthly' as const },
-    { path: '/feed.xml', priority: 0.55, changeFrequency: 'daily' as const },
-    { path: '/opensearch.xml', priority: 0.4, changeFrequency: 'monthly' as const },
   ].map(({ path, priority, changeFrequency }) => {
     const bare = path === '' ? '/' : path;
     const indexable = (INDEXABLE_LOCALE_PATHS as readonly string[]).includes(bare);
     return {
       url: `${baseUrl}${path}`,
-      lastModified,
       changeFrequency,
       priority,
       ...(indexable ? { alternates: { languages: languageAlternates(bare) } } : {}),
@@ -75,31 +64,40 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const english = coreRoutes.find((route) => route.url === (path === '/' ? baseUrl : `${baseUrl}${path}`));
     return LOCALES.filter((locale) => locale.id !== 'en').map((locale) => ({
       url: absoluteLocaleUrl(locale.id, path),
-      lastModified,
       changeFrequency: english?.changeFrequency ?? ('weekly' as const),
       priority: english?.priority ?? 0.8,
       alternates: { languages: languageAlternates(path) },
     }));
   });
 
-  const learnRoutes = getLearnSlugs().flatMap((slug) => [
-    {
-      url: `${baseUrl}/learn/${slug}`,
-      lastModified,
-      changeFrequency: 'weekly' as const,
+  const learnRoutes = getLearnArticles().flatMap((article) => {
+    const published = article.publishedAt ? new Date(article.publishedAt) : null;
+    const lastModified =
+      published && !Number.isNaN(published.getTime()) ? { lastModified: published } : {};
+    // Each language with a real translation gets its own URL; hreflang lists exactly those.
+    const translatedLocales = getLearnTranslatedLocales(article.slug);
+    const alternates = translatedLocales.length
+      ? { alternates: { languages: learnLanguageAlternates(article.slug, translatedLocales) } }
+      : {};
+    const english = {
+      url: learnArticleUrl('en', article.slug),
+      ...lastModified,
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/learn/md/${slug}`,
-      lastModified,
-      changeFrequency: 'weekly' as const,
-      priority: 0.55,
-    },
-  ]);
+      ...alternates,
+    };
+    const localized = translatedLocales.map((locale) => ({
+      url: learnArticleUrl(locale, article.slug),
+      ...lastModified,
+      changeFrequency: 'monthly' as const,
+      priority: 0.65,
+      ...alternates,
+    }));
+    return [english, ...localized];
+  });
 
   const tldAboutRoutes = getTldAboutSlugs().map((slug) => ({
     url: `${baseUrl}/blog/tlds/${slug}`,
-    lastModified,
     changeFrequency: 'monthly' as const,
     priority: 0.65,
   }));

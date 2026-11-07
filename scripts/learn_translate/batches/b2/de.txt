@@ -1,0 +1,17 @@
+what-is-a-tld-domain-extension||Was ist eine TLD? Domain-Endungen erklärt||Was eine Top-Level-Domain (TLD) ist, wie sich gTLDs und ccTLDs unterscheiden, wie Sie eine Endung wählen und wie DomainDiscovery Ihnen hilft, vor der Registrierung mehr als 1.600 TLDs zu durchstöbern.
+domain-extensions||Domain-Endungen (TLDs) verstehen||Vergleichen Sie .com, .io, .ai, ccTLDs und neue gTLDs nach Vertrauen, SEO und Markenpassung.
+com-vs-io-vs-ai||.com, .io oder .ai: Welche Endung gewinnt?||Ein praktischer Vergleich der drei meistdiskutierten Endungen für Tech-Startups.
+new-gtld-strategy||Strategie für neue gTLDs für Marken||So bewerten Sie .shop, .app, .dev, .xyz und andere neue generische Endungen, ohne die Verlängerungskosten zu bereuen.
+premium-tld-renewals||Fallstricke bei Premium-TLD-Verlängerungen||Wie Premiumpreise der Registry und Aktions-Verlängerungen Domaininhaber überraschen können.
+nonprofit-domains||Domains für gemeinnützige Organisationen (.org und mehr)||Vertrauenssignale von .org und wann Alternativen sinnvoll sind.
+new-gtld-sunrise-periods||Sunrise, Landrush und allgemeine Verfügbarkeit||Wie die Startphasen neuer TLDs für Markeninhaber und die Öffentlichkeit ablaufen.
+ccild-trustee-services||Lokale Präsenz und Treuhand-Dienste||Wie Treuhänder Ausländern bei der Registrierung beschränkter ccTLDs helfen – und welche Risiken es gibt.
+whois-privacy-guide||WHOIS-Datenschutz: Ihre Domain-Kontaktdaten schützen||Was der WHOIS-Datenschutz bewirkt, wann Sie ihn aktivieren sollten, wie die Schwärzung funktioniert und welche praktischen Sicherheitsschritte Domaininhaber bei Registraren und mit den Recherche-Werkzeugen von DomainDiscovery gehen können.
+domain-lock-security||Transfersperre und Domainsicherheit||Registrar-Sperren, 2FA und der Schutz vor unbefugten Transfers.
+registrar-lock-and-2fa||Sicherheits-Checkliste für das Registrar-Konto||2FA, Wiederherstellungscodes und der Schutz vor Kontoübernahme bei wertvollen Domains.
+dnssec-for-domains||DNSSEC für Domaininhaber||Was DNSSEC schützt und wann Sie es aktivieren sollten.
+premium-domain-insurance||Wertvolle Domains versichern||Versicherungsoptionen und Sicherheitsmaßnahmen für Namen im Millionenwert.
+brand-protection-portfolio||Domain-Portfolios zum Markenschutz||Welche Schutzregistrierungen sich lohnen (und welche Verschwendung sind).
+typosquatting-defense||Abwehr von Typosquatting||Ähnliche Domains überwachen und missbräuchliche Varianten entfernen lassen.
+phishing-domains||Phishing-Domains: So funktioniert der Missbrauch||Wie Angreifer Domains nutzen und wie Registrare darauf reagieren.
+brand-protection||Ihre Marke online schützen||Sichern Sie Ihre Marke über mehrere Endungen, aktivieren Sie Datenschutz, Sperren und DNSSEC und beobachten Sie Cybersquatting.

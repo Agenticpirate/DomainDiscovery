@@ -13,7 +13,7 @@ export async function OPTIONS(request: NextRequest) {
  */
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   if (!FEATURE_FLAGS.domainAgent) {
     return errorResponse('AI Domain Assistant is disabled', 503);
@@ -23,7 +23,7 @@ export async function GET(
   if (!gate.ok) return gate.response as NextResponse;
 
   try {
-    const id = context.params?.id;
+    const id = (await context.params)?.id;
     if (!id || !/^job_[a-z0-9_]+$/i.test(id)) {
       return errorResponse('Invalid job id', 400);
     }

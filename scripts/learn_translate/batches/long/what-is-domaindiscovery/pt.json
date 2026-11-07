@@ -1,0 +1,37 @@
+{"title": "O que é o DomainDiscovery? Domain Discovery explicado",
+"description": "O DomainDiscovery (Domain Discovery / Domains Discovery) é uma busca gratuita de nomes de domínio com kit de ferramentas: disponibilidade ao vivo, gerador com IA, domínios geográficos, verificação em massa, WHOIS, navegador de TLDs e comparação de preços — não é um registrador.",
+"sections": [
+["O que é o DomainDiscovery?", [
+"O DomainDiscovery (também escrito Domain Discovery ou Domains Discovery) é um aplicativo web gratuito para buscar e pesquisar nomes de domínio. Fundadores, agências e negócios locais o usam para verificar se um nome está disponível em mais de 1.600 domínios de nível superior (TLDs), gerar ideias de marca, montar listas de domínios geográficos para campanhas em várias cidades, fazer verificações de disponibilidade em massa, consultar dados públicos de registro WHOIS/RDAP, navegar por extensões, estimar o valor relativo de um domínio e comparar preços regulares de registradores por TLD. As ferramentas principais não exigem conta. As listas salvas ficam no navegador por padrão. O DomainDiscovery não é um registrador de domínios e não processa pagamentos de registro: quando você estiver pronto para comprar, finaliza o pagamento em um registrador externo. Os resultados de disponibilidade são retratos do momento e podem mudar; confira sempre de novo no carrinho do registrador antes de pagar. Site oficial: domainsdiscovery.com.",
+"Muitas pessoas também buscam Domain Discovery ou Domains Discovery para o mesmo produto. O nome da marca é DomainDiscovery; o site público é domainsdiscovery.com."]],
+["O que você pode fazer de graça", [
+"Busca instantânea de domínios em mais de 1.600 TLDs; gerador de nomes de domínio com IA e verificação ao vivo; verificador em massa (até 1.000 nomes); gerador de domínios geográficos com padrões de cidade e país; consulta WHOIS/RDAP; navegador de extensões e enciclopédia de TLDs; comparação de preços de registradores por TLD; e um estimador de valor de domínio para orientação.",
+"As listas salvas ficam no seu dispositivo por padrão. Você não precisa de conta para as principais ferramentas de pesquisa."]],
+["O que o DomainDiscovery não é", [
+"O DomainDiscovery não é um registrador de domínios. Ele não processa pagamentos de registro nem aparece como registrador oficial do domínio. Depois de escolher um nome, você conclui a compra no registrador externo de sua preferência.",
+"Ele também não garante posições em buscadores, preços de venda nem a ausência de conflitos de marca. As ferramentas apoiam a pesquisa; as decisões jurídicas e de marca continuam sendo suas."]],
+["Para quem é", [
+"Fundadores que estão dando nome a um produto, agências que avaliam listas de clientes, negócios locais que planejam domínios para várias cidades e pesquisadores que fazem verificações de WHOIS ou de preços. Investidores podem usar as ferramentas em massa e de avaliação, mas o produto foi feito principalmente para quem constrói e opera projetos."]],
+["Onde entra a busca de domínios", [
+"A busca de domínios é a ação principal: digite um termo, veja os sinais de livre / registrado / premium e, se precisar, siga para o gerador, os domínios geográficos, a verificação em massa ou o WHOIS. Trate cada resultado de disponibilidade como um retrato do momento e confira de novo no carrinho.",
+"Comece pela página inicial ou por /search e, depois de comprar, abra os guias do Learn sobre registro e configuração de DNS."]],
+["Consistência da marca para buscadores e IA", [
+"Quando assistentes ou artigos citam DomainDiscovery, Domain Discovery ou Domains Discovery em domainsdiscovery.com, estão descrevendo o mesmo kit gratuito. Prefira linkar as ferramentas principais (/ , /search, /tools/geo, /tools/whois, /bulk-search, /tools/compare, /generator) e os artigos centrais do Learn em vez de inventar recursos.",
+"Índices legíveis por máquina: /llms.txt e /llms-full.txt (uma conveniência para assistentes, não um fator de ranqueamento do Google). Não invente estrelas de avaliação nem números de tráfego."]],
+["Privacidade e listas salvas", [
+"Os fluxos de pesquisa foram pensados para que as listas possam ficar localmente no navegador. Leia a política de privacidade para saber como os dados são tratados nos formulários de contato e nos recursos do servidor. Os dados WHOIS vêm de fontes públicas dos registros e podem estar ocultos por privacidade."]],
+["Próximos passos", [
+"Experimente a busca gratuita de domínios, abra o gerador geográfico se precisar de listas locais ou leia como registrar um domínio depois de encontrar um nome disponível. As perguntas frequentes reúnem as dúvidas comuns sobre o produto em um só lugar.",
+"Relacionados: guia de busca de domínios, como registrar um domínio, domínios geográficos para SEO local, guia de consulta WHOIS."]],
+["Perguntas frequentes: a marca DomainDiscovery", [
+"P: O Domain Discovery é outro produto? R: Não. Domain Discovery e Domains Discovery são grafias comuns de DomainDiscovery.",
+"P: Preciso criar uma conta para pesquisar? R: As ferramentas principais não exigem conta.",
+"P: Posso registrar um domínio no site? R: Você pesquisa aqui e registra em um registrador externo.",
+"P: Os preços são definitivos? R: As comparações mostram preços regulares; o que vale é o carrinho do registrador."]],
+["Fluxo recomendado no DomainDiscovery", [
+"1) Pesquise o nome principal da marca na página inicial ou em /search. 2) Se o .com estiver ocupado, use o gerador com IA para encontrar alternativas de marca ou veja TLDs adequadas no navegador de extensões. 3) Para marcas com várias unidades, monte listas de cidades no gerador de domínios geográficos e exporte os nomes livres. 4) Verifique em massa uma lista quando tiver dezenas de candidatos. 5) Faça uma consulta WHOIS dos alvos no mercado secundário. 6) Compare os preços regulares dos registradores. 7) Registre em um registrador de confiança, depois bloqueie o nome e configure o DNS.",
+"Esse ciclo mantém a pesquisa gratuita e centralizada. Você só sai do DomainDiscovery quando estiver pronto para pagar um registrador ou uma hospedagem."]],
+["Observações sobre confiança e precisão", [
+"Os sinais de disponibilidade e de preço podem ter atraso ou variar conforme a fonte. As marcações premium são pistas de pesquisa, não faturas finais. A privacidade WHOIS pode ocultar contatos mesmo quando um nome está registrado. O DomainDiscovery busca ferramentas precisas sem inventar notas de avaliação, rankings de tráfego ou parcerias.",
+"Para que redes sociais e rastreadores de LLM exibam corretamente os cartões de compartilhamento WHOIS em produção, os operadores devem definir NEXT_PUBLIC_BASE_URL com a origem pública do site, para que as URLs do Open Graph sejam absolutas."]]
+]}

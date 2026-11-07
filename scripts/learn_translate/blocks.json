@@ -1,0 +1,431 @@
+{
+  "de": {
+    "impl": {
+      "heading": "Hinweise zur Umsetzung von {T}",
+      "body": [
+        "Die Ideen aus „{T}“ lassen sich am besten in Wochenzyklen umsetzen: Montag recherchieren, Dienstag die Shortlist erstellen, Mittwoch prüfen, Donnerstag über den Kauf entscheiden, Freitag DNS und E-Mail einrichten.",
+        "Halten Sie Entscheidungen in einer gemeinsamen Notiz fest: Kandidaten, TLD-Wahl, Registrar, Verlängerungstermine und den geschäftlichen Zweck. So vermeiden Sie Doppelkäufe und vergessene Verlängerungen.",
+        "Kennzahlen nach dem Start: Direktzugriffe, Suchanfragen nach der Marke, E-Mail-Zustellbarkeit und Conversion-Rate auf Landingpages, die die Domain in Anzeigen verwenden.",
+        "Wenn Sie mit Freelancern zusammenarbeiten, vergeben Sie nur die nötigsten Rechte und entziehen Sie sie, sobald Verträge enden. Die Kontrolle über die Domain ist die Kontrolle über das Geschäft.",
+        "Prüfen Sie bei internationalen Ideen die Bedeutung und Aussprache in den Zielmärkten. Ein cleverer englischer Domain-Hack kann anderswo unbeholfen oder negativ wirken.",
+        "Lesen Sie diesen Leitfaden erneut, wenn Sie die Marke wechseln, in ein neues Land expandieren oder ein Portfolio bereinigen. Die Rahmenbedingungen ändern sich, auch wenn die Definitionen gleich bleiben."
+      ]
+    },
+    "examples": {
+      "heading": "Beispiele und Szenarien",
+      "body": [
+        "Szenario A – Einzelgründer: eine Hauptdomain wählen, Sperre und 2FA aktivieren, eine einzige Website starten und spekulative Extras bis zum Product-Market-Fit ignorieren.",
+        "Szenario B – Dienstleister mit mehreren Standorten: eine Hauptmarken-Domain plus gezielte Stadtseiten oder Geo-Namen nur dort, wo Teams arbeiten. Geo-Werkzeuge dienen der Planung, nicht dem Spam.",
+        "Szenario C – Einen gebrauchten Namen erwerben: Treuhand, Historienprüfung, WHOIS/RDAP, sauberes DNS und ein Inhaltsplan, der gegenüber der früheren Nutzung nicht irreführend ist.",
+        "Szenario D – Portfolio bereinigen: alle Namen exportieren, den Zweck markieren, Namen ohne These aufgeben und neu verhandeln, welches Teambudget die Verlängerungen zahlt.",
+        "Alle diese Szenarien nutzen dieselbe Recherche-Schleife von DomainDiscovery: Domainnamen-Suche, optional Massen- oder Geo-Generierung, WHOIS und Preisvergleich vor der Kasse beim Registrar."
+      ]
+    },
+    "extra": {
+      "heading": "Weitere Überlegungen ({N})",
+      "body": [
+        "Zusätzliche Hinweise zu {T}: Beziehen Sie Beteiligte früh ein, planen Sie die Verlängerungen im Budget und führen Sie schriftliche Nachweise über die Inhaberschaft.",
+        "Bewerten Sie beim Vergleich von Alternativen jeden Kandidaten nach Verständlichkeit beim Aussprechen, Schreibweise, Markenrisiko, TLD-Passung und den Kosten über fünf Jahre – nicht nur nach der Verfügbarkeit am ersten Tag.",
+        "Bildungsinhalte ersetzen keine Rechtsberatung bei Streitfällen oder komplexen Markenfragen. Holen Sie Hilfe, wenn das Risiko erheblich ist.",
+        "Kehren Sie zur kostenlosen Domainnamen-Suche zurück, sobald ein neuer Kandidat auftaucht, damit Sie sich nicht auf veraltete Screenshots aus Chats verlassen."
+      ]
+    },
+    "boiler": "Lernen Sie praktische Schritte, Risiken und DomainDiscovery-Abläufe für Domainnamen-Suche und Registrierungsrecherche kennen.",
+    "extra5": {
+      "paste": "Fügen Sie unter /bulk-search bis zu 100 Namen in die Massensuche ein, um eine Shortlist in einem Durchgang zu prüfen.",
+      "brainstorm": "Sammeln Sie unter /generator mit dem KI-Domaingenerator einprägsame Alternativen, wenn die .com vergeben ist.",
+      "geo": "Erstellen Sie mit dem Geo-Domaingenerator unter /tools/geo Namenslisten für Städte und Länder und exportieren Sie sie dann als CSV für Massenprüfungen.",
+      "browse": "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen."
+    }
+  },
+  "es": {
+    "impl": {
+      "heading": "Notas de implementación de {T}",
+      "body": [
+        "Poner en práctica las ideas de «{T}» funciona mejor en ciclos semanales: investigar el lunes, preseleccionar el martes, verificar el miércoles, decidir las compras el jueves y configurar DNS y correo el viernes.",
+        "Documenta las decisiones en una nota compartida: nombres candidatos, elección de TLD, registrador, fechas de renovación y la finalidad del negocio. Así evitas compras duplicadas y renovaciones olvidadas.",
+        "Métricas que vigilar tras el lanzamiento: tráfico directo, búsquedas de la marca, entregabilidad del correo y tasa de conversión de las páginas de destino que usan el dominio en anuncios.",
+        "Si colaboras con autónomos, concede el mínimo acceso necesario y retíralo cuando acabe el contrato. Controlar el dominio es controlar el negocio.",
+        "En ideas internacionales, confirma el significado y la pronunciación en los mercados de destino. Un ingenioso juego de palabras en inglés puede resultar torpe o negativo en otros lugares.",
+        "Vuelve a esta guía cuando cambies de marca, te expandas a otro país o reorganices una cartera: las limitaciones cambian aunque las definiciones no."
+      ]
+    },
+    "examples": {
+      "heading": "Ejemplos y escenarios",
+      "body": [
+        "Escenario A: fundador en solitario. Elige un dominio principal, activa el bloqueo y la 2FA, lanza un único sitio e ignora los extras especulativos hasta encontrar el encaje producto-mercado.",
+        "Escenario B: negocio de servicios con varias sedes. Dominio principal de marca más páginas de ciudad o nombres geográficos selectivos solo donde haya equipos; usa las herramientas geográficas para planificar, no para hacer spam.",
+        "Escenario C: adquirir un nombre usado. Depósito en garantía, revisión del historial, WHOIS/RDAP, DNS limpio y un plan de contenido que no engañe respecto al uso anterior.",
+        "Escenario D: limpieza de cartera. Exporta todos los nombres, etiqueta su finalidad, descarta los que no tengan una tesis y renegocia qué presupuesto del equipo paga las renovaciones.",
+        "Todos estos escenarios usan el mismo ciclo de investigación disponible en DomainDiscovery: búsqueda de nombres de dominio, generación masiva o geográfica opcional, WHOIS y comparación de precios antes del pago en el registrador."
+      ]
+    },
+    "extra": {
+      "heading": "Consideraciones adicionales ({N})",
+      "body": [
+        "Detalle adicional sobre {T}: alinea pronto a las partes interesadas, presupuesta las renovaciones y conserva registros escritos de la titularidad.",
+        "Al comparar alternativas, puntúa cada candidato según claridad al decirlo, ortografía, riesgo de marca, encaje de la TLD y coste de cinco años de titularidad, no solo la disponibilidad del primer día.",
+        "El contenido educativo no sustituye el asesoramiento jurídico profesional en disputas ni en cuestiones complejas de marcas. Acude a un profesional cuando el riesgo sea importante.",
+        "Vuelve a la búsqueda gratuita de nombres de dominio cada vez que aparezca un candidato nuevo, para no depender de capturas de pantalla desactualizadas de los chats."
+      ]
+    },
+    "boiler": "Aprende pasos prácticos, riesgos y flujos de trabajo de DomainDiscovery para la búsqueda de nombres de dominio y la investigación del registro.",
+    "extra5": {
+      "paste": "Pega hasta 100 nombres en la búsqueda masiva de /bulk-search para comprobar una lista de preseleccionados de una sola vez.",
+      "brainstorm": "Piensa alternativas de marca con el generador de dominios con IA en /generator cuando el .com esté ocupado.",
+      "geo": "Crea listas de nombres de ciudades y países con el generador de dominios geográficos en /tools/geo y luego exporta un CSV para comprobaciones masivas.",
+      "browse": "Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
+    }
+  },
+  "fr": {
+    "impl": {
+      "heading": "Notes de mise en œuvre pour {T}",
+      "body": [
+        "Mettre en pratique les idées de « {T} » fonctionne mieux par cycles hebdomadaires : recherche le lundi, présélection le mardi, vérification le mercredi, décisions d'achat le jeudi, DNS et e-mail le vendredi.",
+        "Consignez les décisions dans une note partagée : noms candidats, choix de TLD, bureau d'enregistrement, dates de renouvellement et finalité professionnelle. Cela évite les achats en double et les renouvellements oubliés.",
+        "Indicateurs à suivre après le lancement : trafic direct, recherches sur la marque, délivrabilité des e-mails et taux de conversion des pages de destination qui utilisent le domaine dans les publicités.",
+        "Si vous collaborez avec des indépendants, accordez le minimum de droits nécessaires et retirez-les à la fin du contrat. Contrôler le domaine, c'est contrôler l'entreprise.",
+        "Pour les projets internationaux, vérifiez le sens et la prononciation dans les marchés visés. Un jeu de mots anglais astucieux peut sembler maladroit ou négatif ailleurs.",
+        "Relisez ce guide lorsque vous changez de marque, vous étendez à un nouveau pays ou réorganisez un portefeuille : les contraintes évoluent même si les définitions restent les mêmes."
+      ]
+    },
+    "examples": {
+      "heading": "Exemples et scénarios",
+      "body": [
+        "Scénario A – Fondateur seul : choisir un domaine principal, activer le verrouillage et la 2FA, lancer un seul site et ignorer les extras spéculatifs jusqu'à l'adéquation produit-marché.",
+        "Scénario B – Entreprise de services multi-sites : un domaine de marque principal plus des pages de villes ou des noms géographiques ciblés uniquement là où les équipes opèrent ; utilisez les outils géographiques pour planifier, pas pour spammer.",
+        "Scénario C – Acquérir un nom d'occasion : séquestre, vérification de l'historique, WHOIS/RDAP, DNS propre et plan de contenu non trompeur par rapport à l'usage précédent.",
+        "Scénario D – Nettoyage de portefeuille : exporter tous les noms, étiqueter leur finalité, abandonner ceux sans thèse et renégocier quel budget d'équipe paie les renouvellements.",
+        "Tous ces scénarios reposent sur la même boucle de recherche disponible sur DomainDiscovery : recherche de nom de domaine, génération en masse ou géographique facultative, WHOIS et comparaison de prix avant la caisse du bureau d'enregistrement."
+      ]
+    },
+    "extra": {
+      "heading": "Considérations supplémentaires ({N})",
+      "body": [
+        "Précisions supplémentaires sur {T} : alignez tôt les parties prenantes, budgétez les renouvellements et conservez des justificatifs écrits de propriété.",
+        "Pour comparer des alternatives, notez chaque candidat selon la clarté à l'oral, l'orthographe, le risque de marque, l'adéquation de la TLD et le coût de cinq ans de détention, et pas seulement la disponibilité du premier jour.",
+        "Un contenu pédagogique ne remplace pas un conseil juridique professionnel pour les litiges ou les questions de marque complexes. Faites-vous accompagner quand le risque est important.",
+        "Revenez à la recherche gratuite de nom de domaine chaque fois qu'un nouveau candidat apparaît, afin de ne pas vous fier à d'anciennes captures d'écran échangées dans des discussions."
+      ]
+    },
+    "boiler": "Découvrez des étapes pratiques, les risques et les processus DomainDiscovery pour la recherche de nom de domaine et la préparation de l'enregistrement.",
+    "extra5": {
+      "paste": "Collez jusqu'à 100 noms dans la recherche en masse sur /bulk-search pour vérifier une présélection en un seul passage.",
+      "brainstorm": "Imaginez des alternatives de marque avec le générateur de domaines par IA sur /generator quand le .com est pris.",
+      "geo": "Créez des listes de noms de villes et de pays avec le générateur de domaines géographiques sur /tools/geo, puis exportez un CSV pour des vérifications en masse.",
+      "browse": "Parcourez plus de 1 600 extensions dans le catalogue des extensions de domaine sur /domain-extensions et dans l'encyclopédie des TLD sur /blog/tlds."
+    }
+  },
+  "pt": {
+    "impl": {
+      "heading": "Notas de implementação de {T}",
+      "body": [
+        "Colocar em prática as ideias de “{T}” funciona melhor em ciclos semanais: pesquisar na segunda, selecionar na terça, verificar na quarta, decidir as compras na quinta e configurar DNS e e-mail na sexta.",
+        "Documente as decisões em uma nota compartilhada: nomes candidatos, escolha de TLD, registrador, datas de renovação e a finalidade do negócio. Isso evita compras duplicadas e renovações esquecidas.",
+        "Métricas para acompanhar depois do lançamento: tráfego direto, buscas pela marca, entregabilidade de e-mail e taxa de conversão das páginas de destino que usam o domínio em anúncios.",
+        "Se você trabalha com freelancers, conceda o mínimo de acesso necessário e retire-o quando o contrato terminar. Controlar o domínio é controlar o negócio.",
+        "Em ideias internacionais, confirme o significado e a pronúncia nos mercados-alvo. Um trocadilho esperto em inglês pode soar estranho ou negativo em outros lugares.",
+        "Volte a este guia quando mudar de marca, expandir para um novo país ou reorganizar um portfólio: as restrições mudam, ainda que as definições permaneçam as mesmas."
+      ]
+    },
+    "examples": {
+      "heading": "Exemplos e cenários",
+      "body": [
+        "Cenário A – Fundador solo: escolha um domínio principal, ative o bloqueio e a 2FA, lance um único site e ignore extras especulativos até encontrar o encaixe entre produto e mercado.",
+        "Cenário B – Negócio de serviços com várias unidades: domínio principal da marca mais páginas de cidades ou nomes geográficos seletivos apenas onde há equipes; use as ferramentas geográficas para planejar, não para fazer spam.",
+        "Cenário C – Adquirir um nome usado: custódia (escrow), verificação de histórico, WHOIS/RDAP, DNS limpo e um plano de conteúdo que não engane em relação ao uso anterior.",
+        "Cenário D – Limpeza de portfólio: exporte todos os nomes, marque a finalidade, descarte os que não têm uma tese e renegocie qual orçamento da equipe paga as renovações.",
+        "Todos esses cenários usam o mesmo ciclo de pesquisa disponível no DomainDiscovery: pesquisa de nome de domínio, geração em massa ou geográfica opcional, WHOIS e comparação de preços antes do checkout no registrador."
+      ]
+    },
+    "extra": {
+      "heading": "Considerações adicionais ({N})",
+      "body": [
+        "Detalhes adicionais sobre {T}: alinhe cedo as partes interessadas, preveja as renovações no orçamento e mantenha registros escritos de titularidade.",
+        "Ao comparar alternativas, pontue cada candidato por clareza ao falar, grafia, risco de marca, adequação da TLD e custo de cinco anos de titularidade, e não apenas pela disponibilidade no primeiro dia.",
+        "Conteúdo educativo não substitui aconselhamento jurídico profissional em disputas ou questões complexas de marca. Busque ajuda quando o risco for relevante.",
+        "Volte à pesquisa gratuita de nome de domínio sempre que surgir um novo candidato, para não depender de capturas de tela desatualizadas de conversas."
+      ]
+    },
+    "boiler": "Conheça passos práticos, riscos e fluxos de trabalho do DomainDiscovery para a pesquisa de nome de domínio e a preparação do registro.",
+    "extra5": {
+      "paste": "Cole até 100 nomes na pesquisa em massa em /bulk-search para verificar uma lista de candidatos de uma só vez.",
+      "brainstorm": "Pense em alternativas de marca com o gerador de domínios com IA em /generator quando o .com estiver ocupado.",
+      "geo": "Monte listas de nomes de cidades e países com o gerador de domínios geográficos em /tools/geo e depois exporte um CSV para verificações em massa.",
+      "browse": "Explore mais de 1.600 extensões no catálogo de extensões de domínio em /domain-extensions e na enciclopédia de TLDs em /blog/tlds."
+    }
+  },
+  "ru": {
+    "impl": {
+      "heading": "Заметки по внедрению: {T}",
+      "body": [
+        "Идеи из «{T}» лучше всего внедрять недельными циклами: исследование в понедельник, короткий список во вторник, проверка в среду, решения о покупке в четверг, DNS и почта в пятницу.",
+        "Фиксируйте решения в общей заметке: имена-кандидаты, выбор зон, регистратор, даты продления и деловая цель. Так вы избежите двойных покупок и забытых продлений.",
+        "Показатели после запуска: прямой трафик, поисковые запросы по бренду, доставляемость почты и конверсия на посадочных страницах, где домен используется в рекламе.",
+        "Если вы работаете с фрилансерами, давайте минимально необходимые права и отзывайте их по окончании договора. Контроль над доменом — это контроль над бизнесом.",
+        "Для международных идей проверяйте значение и произношение в целевых странах. Остроумная английская игра слов в домене в другом месте может звучать неловко или негативно.",
+        "Возвращайтесь к этому руководству при ребрендинге, выходе в новую страну или упорядочивании портфеля: ограничения меняются, даже если определения остаются прежними."
+      ]
+    },
+    "examples": {
+      "heading": "Примеры и сценарии",
+      "body": [
+        "Сценарий A — основатель-одиночка: выбрать один основной домен, включить блокировку и 2FA, запустить один сайт и не заниматься спекулятивными дополнениями до соответствия продукта рынку.",
+        "Сценарий B — сервисный бизнес с несколькими точками: основной домен бренда плюс выборочные страницы городов или геоимена только там, где работают команды; геоинструменты нужны для планирования, а не для спама.",
+        "Сценарий C — покупка имени с историей: эскроу, проверка истории, WHOIS/RDAP, чистый DNS и план контента, который не вводит в заблуждение относительно прежнего использования.",
+        "Сценарий D — чистка портфеля: выгрузить все имена, отметить назначение, отказаться от имён без обоснования и пересогласовать, из какого бюджета команды оплачиваются продления.",
+        "Во всех этих сценариях используется один и тот же исследовательский цикл DomainDiscovery: поиск доменных имён, при необходимости массовая или гео-генерация, WHOIS и сравнение цен перед оплатой у регистратора."
+      ]
+    },
+    "extra": {
+      "heading": "Дополнительные соображения ({N})",
+      "body": [
+        "Дополнительные сведения по теме «{T}»: заранее согласуйте позиции участников, заложите продления в бюджет и ведите письменный учёт владения.",
+        "При сравнении вариантов оценивайте каждого кандидата по понятности на слух, написанию, риску по товарным знакам, подходящей зоне и стоимости пятилетнего владения, а не только по доступности в первый день.",
+        "Обучающие материалы не заменяют профессиональную юридическую консультацию при спорах или сложных вопросах о товарных знаках. Обращайтесь к специалисту, когда риск существенен.",
+        "Возвращайтесь к бесплатному поиску доменных имён каждый раз, когда появляется новый кандидат, чтобы не полагаться на устаревшие скриншоты из чатов."
+      ]
+    },
+    "boiler": "Узнайте о практических шагах, рисках и процессах DomainDiscovery для поиска доменных имён и подготовки регистрации.",
+    "extra5": {
+      "paste": "Вставьте до 100 имён в массовый поиск на /bulk-search, чтобы проверить короткий список за один проход.",
+      "brainstorm": "Придумывайте брендовые альтернативы в ИИ-генераторе доменов на /generator, когда .com занят.",
+      "geo": "Составляйте списки названий городов и стран в геодомен-генераторе на /tools/geo, а затем экспортируйте CSV для массовых проверок.",
+      "browse": "Просматривайте более 1 600 расширений в каталоге доменных расширений на /domain-extensions и в энциклопедии зон на /blog/tlds."
+    }
+  },
+  "zh": {
+    "impl": {
+      "heading": "{T} 的落地要点",
+      "body": [
+        "落实《{T}》中的想法，最好以每周为周期：周一调研，周二筛选，周三核验，周四决定购买，周五配置 DNS 和邮箱。",
+        "把决策记录在共享笔记里：候选名称、TLD 选择、注册商、续费日期和业务用途。这样可以避免重复购买和遗忘续费。",
+        "上线后需要关注的指标：直接访问量、品牌词搜索、邮件送达率，以及在广告中使用该域名的落地页转化率。",
+        "如果你与自由职业者合作，请授予最小必要权限，并在合同结束时收回。控制域名，就是控制业务。",
+        "对于面向国际的想法，要确认目标市场中的含义和发音。一个巧妙的英文域名梗，在别处可能显得别扭甚至带有负面含义。",
+        "当你更换品牌、拓展到新国家或整合域名组合时，请重温本指南：即使定义不变，约束条件也会改变。"
+      ]
+    },
+    "examples": {
+      "heading": "示例与场景",
+      "body": [
+        "场景 A——独立创始人：选定一个主域名，启用锁定和双重验证，上线一个网站，在找到产品与市场的契合点之前不去理会投机性的附加项。",
+        "场景 B——多地点服务企业：一个主品牌域名，外加仅在团队实际运营的地方才设立的城市页面或地域名称；用地域工具做规划，而不是制造垃圾内容。",
+        "场景 C——购入二手名称：担保交易、历史核查、WHOIS/RDAP、干净的 DNS，以及一份与此前用途相比不具误导性的内容计划。",
+        "场景 D——整理域名组合：导出所有名称，标注用途，放弃没有明确理由的名称，并重新协商由哪个团队预算支付续费。",
+        "这些场景都用到 DomainDiscovery 提供的同一套调研流程：域名查询、可选的批量或地域生成、WHOIS，以及在注册商结账前的价格对比。"
+      ]
+    },
+    "extra": {
+      "heading": "补充考虑（{N}）",
+      "body": [
+        "关于 {T} 的补充说明：尽早让相关方达成一致，把续费纳入预算，并保留书面的所有权记录。",
+        "比较备选方案时，请按口头表达是否清晰、拼写、商标风险、TLD 契合度以及五年持有成本给每个候选打分，而不只是看第一天是否可用。",
+        "教育性内容不能替代专业法律意见，遇到纠纷或复杂的商标问题时尤其如此。风险较大时请及时寻求专业帮助。",
+        "每当出现新的候选名称，就回到免费的域名查询，避免依赖聊天记录里过时的截图。"
+      ]
+    },
+    "boiler": "了解实用步骤、风险，以及 DomainDiscovery 在域名查询和注册调研方面的工作流程。",
+    "extra5": {
+      "paste": "在 /bulk-search 的批量查询中粘贴最多 100 个名称，一次完成对候选清单的检查。",
+      "brainstorm": "当 .com 已被占用时，到 /generator 用 AI 域名生成器头脑风暴品牌化备选名称。",
+      "geo": "使用 /tools/geo 的地域域名生成器建立城市和国家名称列表，然后导出 CSV 进行批量检查。",
+      "browse": "在 /domain-extensions 的域名后缀目录和 /blog/tlds 的 TLD 百科中浏览 1,600 多个后缀。"
+    }
+  },
+  "ja": {
+    "impl": {
+      "heading": "{T} の実践メモ",
+      "body": [
+        "「{T}」の考え方は、週単位のサイクルで実践するのが効果的です。月曜に調査、火曜に候補の絞り込み、水曜に確認、木曜に購入の判断、金曜にDNSとメールの設定を行います。",
+        "判断は共有メモに記録しましょう。候補名、TLDの選択、レジストラ、更新日、そして事業上の目的です。これで二重購入や更新忘れを防げます。",
+        "公開後に見るべき指標：直接アクセス、ブランド名での検索、メールの到達率、そして広告でそのドメインを使うランディングページのコンバージョン率です。",
+        "フリーランスと協力する場合は、必要最小限の権限だけを与え、契約が終わったら取り消しましょう。ドメインの管理は、事業の管理です。",
+        "海外向けのアイデアでは、対象市場での意味や発音を確認してください。英語の気の利いたドメインの言葉遊びも、他の地域では不自然だったり、悪い意味になったりすることがあります。",
+        "ブランドを変更するとき、新しい国に展開するとき、ポートフォリオを整理するときには、このガイドを読み直しましょう。定義は同じでも、条件は変わります。"
+      ]
+    },
+    "examples": {
+      "heading": "事例とシナリオ",
+      "body": [
+        "シナリオA：ひとりで創業した場合。メインのドメインを1つ選び、ロックと2FAを有効にして、サイトを1つ公開します。製品と市場が合うまでは、投機的な追加を気にしません。",
+        "シナリオB：複数拠点のサービス事業。ブランドの主ドメインに加え、チームが実際に稼働する場所だけ、都市ページや地域名を選んで用意します。地域ツールは計画のために使い、スパムのために使いません。",
+        "シナリオC：使用歴のある名前を取得する場合。エスクロー、履歴の確認、WHOIS/RDAP、整ったDNS、そして以前の用途と比べて誤解を招かないコンテンツ計画を用意します。",
+        "シナリオD：ポートフォリオの整理。すべての名前をエクスポートし、目的のタグを付け、根拠のない名前は手放し、更新料をどのチーム予算で支払うかを交渉し直します。",
+        "これらのシナリオはいずれも、DomainDiscoveryで使える同じ調査ループを使います。ドメイン名検索、必要に応じた一括または地域生成、WHOIS、そしてレジストラのチェックアウト前の価格比較です。"
+      ]
+    },
+    "extra": {
+      "heading": "追加の検討事項（{N}）",
+      "body": [
+        "{T}についての補足：関係者を早めにそろえ、更新料を予算に組み込み、所有の記録を書面で残しましょう。",
+        "代案を比較するときは、各候補を、口に出したときのわかりやすさ、綴り、商標リスク、TLDの適合性、5年間保有する費用で採点してください。初日に空いているかどうかだけで判断してはいけません。",
+        "教育的なコンテンツは、紛争や複雑な商標の問題に関する専門的な法律相談の代わりにはなりません。リスクが大きいときは専門家に相談してください。",
+        "新しい候補が出てきたら、そのたびに無料のドメイン名検索に戻りましょう。チャットで共有された古いスクリーンショットに頼らないためです。"
+      ]
+    },
+    "boiler": "ドメイン名検索と登録調査のための、実践的な手順、リスク、DomainDiscoveryの使い方を学びましょう。",
+    "extra5": {
+      "paste": "/bulk-search の一括検索に最大100件の名前を貼り付けて、候補リストを一度にチェックしましょう。",
+      "brainstorm": ".com が取られているときは、/generator のAIドメインジェネレーターでブランドらしい代案を考えましょう。",
+      "geo": "/tools/geo の地域ドメインジェネレーターで都市名・国名のリストを作成し、CSVをエクスポートして一括チェックに使いましょう。",
+      "browse": "/domain-extensions のドメイン拡張子カタログと、/blog/tlds のTLD百科で、1,600以上の拡張子を閲覧できます。"
+    }
+  },
+  "ar": {
+    "impl": {
+      "heading": "ملاحظات التنفيذ حول {T}",
+      "body": [
+        "يعمل تطبيق أفكار «{T}» على أفضل وجه في دورات أسبوعية: البحث يوم الاثنين، والقائمة المختصرة يوم الثلاثاء، والتحقق يوم الأربعاء، وقرارات الشراء يوم الخميس، وإعداد DNS والبريد يوم الجمعة.",
+        "دوّن القرارات في ملاحظة مشتركة: الأسماء المرشحة، واختيار الامتدادات، وجهة التسجيل، وتواريخ التجديد، والغرض التجاري. هذا يمنع الشراء المكرر ونسيان التجديدات.",
+        "مؤشرات تستحق المتابعة بعد الإطلاق: الزيارات المباشرة، وعمليات البحث عن العلامة، وقابلية وصول البريد، ومعدل التحويل في صفحات الهبوط التي تستخدم النطاق في الإعلانات.",
+        "إذا تعاونت مع مستقلين، فامنحهم أقل صلاحيات لازمة واسحبها عند انتهاء العقود. السيطرة على النطاق هي السيطرة على العمل.",
+        "في الأفكار الدولية، تأكد من المعنى والنطق في الأسواق المستهدفة. فقد تبدو لعبة كلمات إنجليزية ذكية في النطاق محرجة أو سلبية في مكان آخر.",
+        "ارجع إلى هذا الدليل عند تغيير العلامة أو التوسع إلى بلد جديد أو دمج محفظة نطاقات، فالقيود تتغير حتى لو بقيت التعريفات كما هي."
+      ]
+    },
+    "examples": {
+      "heading": "أمثلة وسيناريوهات",
+      "body": [
+        "السيناريو أ — مؤسس فردي: اختر نطاقًا رئيسيًا واحدًا، وفعّل القفل والمصادقة الثنائية، وأطلق موقعًا واحدًا، وتجاهل الإضافات المضاربية إلى أن يتحقق ملاءمة المنتج للسوق.",
+        "السيناريو ب — نشاط خدمي متعدد المواقع: نطاق العلامة الرئيسي مع صفحات مدن أو أسماء جغرافية منتقاة حيث تعمل الفرق فقط؛ استخدم الأدوات الجغرافية للتخطيط لا للسبام.",
+        "السيناريو ج — اقتناء اسم مستعمل: حساب ضمان (إسكرو)، وفحص السجل التاريخي، وWHOIS/RDAP، وDNS نظيف، وخطة محتوى لا تضلّل مقارنةً بالاستخدام السابق.",
+        "السيناريو د — تنظيف المحفظة: صدّر كل الأسماء، ووسمها بالغرض، وتخلَّ عن الأسماء التي لا مبرر لها، وأعد التفاوض حول ميزانية أي فريق تدفع التجديدات.",
+        "تستخدم هذه السيناريوهات كلها حلقة البحث نفسها المتاحة في DomainDiscovery: البحث عن اسم نطاق، والتوليد الجماعي أو الجغرافي عند الحاجة، وWHOIS، ومقارنة الأسعار قبل الدفع لدى جهة التسجيل."
+      ]
+    },
+    "extra": {
+      "heading": "اعتبارات إضافية ({N})",
+      "body": [
+        "تفاصيل إضافية حول {T}: نسّق مع أصحاب المصلحة مبكرًا، وأدرج التجديدات في الميزانية، واحتفظ بسجلات مكتوبة للملكية.",
+        "عند مقارنة البدائل، قيّم كل مرشح بحسب وضوح النطق والتهجئة ومخاطر العلامة التجارية وملاءمة الامتداد وتكلفة التملك لخمس سنوات، لا بالتوفر في اليوم الأول فقط.",
+        "لا يغني المحتوى التعليمي عن الاستشارة القانونية المتخصصة في النزاعات أو مسائل العلامات التجارية المعقدة. اطلب المساعدة عندما تكون المخاطر جوهرية.",
+        "ارجع إلى البحث المجاني عن اسم نطاق كلما ظهر مرشح جديد حتى لا تعتمد على لقطات شاشة قديمة من المحادثات."
+      ]
+    },
+    "boiler": "تعرّف على خطوات عملية ومخاطر وسير عمل DomainDiscovery للبحث عن أسماء النطاقات والبحث قبل التسجيل.",
+    "extra5": {
+      "paste": "الصق ما يصل إلى 100 اسم في البحث الجماعي على /bulk-search لفحص قائمة مختصرة دفعة واحدة.",
+      "brainstorm": "اعصف ذهنيًا ببدائل مناسبة للعلامة عبر مولّد النطاقات بالذكاء الاصطناعي في /generator عندما يكون .com محجوزًا.",
+      "geo": "أنشئ قوائم بأسماء المدن والدول بمولّد النطاقات الجغرافية في /tools/geo، ثم صدّر ملف CSV لإجراء فحوصات جماعية.",
+      "browse": "تصفّح أكثر من 1,600 امتداد في فهرس امتدادات النطاقات على /domain-extensions وفي موسوعة الامتدادات على /blog/tlds."
+    }
+  },
+  "hi": {
+    "impl": {
+      "heading": "{T} के क्रियान्वयन के नोट्स",
+      "body": [
+        "“{T}” के विचारों को साप्ताहिक चक्रों में लागू करना सबसे अच्छा रहता है: सोमवार को शोध, मंगलवार को शॉर्टलिस्ट, बुधवार को जाँच, गुरुवार को खरीद के फ़ैसले और शुक्रवार को DNS/ईमेल।",
+        "फ़ैसलों को साझा नोट में दर्ज करें: उम्मीदवार नाम, TLD के विकल्प, रजिस्ट्रार, नवीकरण की तारीख़ें और व्यावसायिक उद्देश्य। इससे दोहरी खरीद और भूले हुए नवीकरण से बचाव होता है।",
+        "लॉन्च के बाद देखने लायक पैमाने: सीधा ट्रैफ़िक, ब्रांड के नाम से खोज, ईमेल की डिलीवरी, और उन लैंडिंग पेज की कन्वर्ज़न दर जो विज्ञापनों में डोमेन इस्तेमाल करते हैं।",
+        "अगर आप फ़्रीलांसरों के साथ काम करते हैं, तो ज़रूरत भर की ही पहुँच दें और अनुबंध खत्म होने पर उसे हटा दें। डोमेन पर नियंत्रण यानी कारोबार पर नियंत्रण।",
+        "अंतरराष्ट्रीय विचारों के लिए लक्षित बाज़ारों में अर्थ और उच्चारण की पुष्टि करें। अंग्रेज़ी का कोई चतुर डोमेन शब्द-खेल दूसरी जगह बेढंगा या नकारात्मक लग सकता है।",
+        "जब आप ब्रांड बदलें, किसी नए देश में विस्तार करें या पोर्टफ़ोलियो को समेटें, तो इस गाइड पर दोबारा लौटें: परिभाषाएँ वही रहती हैं, पर बंदिशें बदल जाती हैं।"
+      ]
+    },
+    "examples": {
+      "heading": "उदाहरण और परिदृश्य",
+      "body": [
+        "परिदृश्य A — अकेला संस्थापक: एक मुख्य डोमेन चुनें, लॉक/2FA चालू करें, एक ही साइट लॉन्च करें, और उत्पाद-बाज़ार का तालमेल बैठने तक सट्टेबाज़ी वाले अतिरिक्त नामों को नज़रअंदाज़ करें।",
+        "परिदृश्य B — कई जगहों पर सेवा देने वाला व्यवसाय: मुख्य ब्रांड डोमेन के साथ चुनिंदा शहरों के पन्ने या जियो नाम केवल वहीं, जहाँ टीमें काम करती हैं; जियो उपकरण योजना के लिए इस्तेमाल करें, स्पैम के लिए नहीं।",
+        "परिदृश्य C — इस्तेमाल हो चुका नाम खरीदना: एस्क्रो, इतिहास की जाँच, WHOIS/RDAP, साफ़ DNS, और ऐसी सामग्री योजना जो पिछले उपयोग के मुक़ाबले भ्रामक न हो।",
+        "परिदृश्य D — पोर्टफ़ोलियो की सफ़ाई: सभी नाम निर्यात करें, उद्देश्य का टैग लगाएँ, बिना आधार वाले नाम छोड़ें, और तय करें कि नवीकरण किस टीम के बजट से चुकाए जाएँगे।",
+        "ये सभी परिदृश्य DomainDiscovery पर उपलब्ध उसी शोध-चक्र का इस्तेमाल करते हैं: डोमेन नाम खोज, वैकल्पिक थोक या जियो जनरेशन, WHOIS, और रजिस्ट्रार के चेकआउट से पहले कीमतों की तुलना।"
+      ]
+    },
+    "extra": {
+      "heading": "अतिरिक्त विचारणीय बातें ({N})",
+      "body": [
+        "{T} के बारे में अतिरिक्त जानकारी: हितधारकों को शुरू में ही साथ लें, नवीकरण का बजट रखें, और स्वामित्व के लिखित रिकॉर्ड सँभालकर रखें।",
+        "विकल्पों की तुलना करते समय हर उम्मीदवार को बोलने में स्पष्टता, वर्तनी, ट्रेडमार्क जोखिम, TLD की उपयुक्तता और पाँच साल के स्वामित्व की लागत पर अंक दें, केवल पहले दिन की उपलब्धता पर नहीं।",
+        "शैक्षिक सामग्री विवादों या जटिल ट्रेडमार्क सवालों में पेशेवर कानूनी सलाह की जगह नहीं ले सकती। जोखिम बड़ा हो तो विशेषज्ञ की मदद लें।",
+        "जब भी कोई नया उम्मीदवार सामने आए, मुफ़्त डोमेन नाम खोज पर लौटें, ताकि आप चैट के पुराने स्क्रीनशॉट पर निर्भर न रहें।"
+      ]
+    },
+    "boiler": "डोमेन नाम खोज और रजिस्ट्रेशन शोध के लिए व्यावहारिक कदम, जोखिम और DomainDiscovery के कार्यप्रवाह जानें।",
+    "extra5": {
+      "paste": "/bulk-search पर थोक खोज में 100 तक नाम चिपकाएँ ताकि एक ही बार में शॉर्टलिस्ट जाँची जा सके।",
+      "brainstorm": "जब .com ले लिया गया हो, तो /generator पर AI डोमेन जनरेटर से ब्रांडेबल विकल्पों पर विचार करें।",
+      "geo": "/tools/geo पर जियो डोमेन जनरेटर से शहरों और देशों के नामों की सूचियाँ बनाएँ, फिर थोक जाँच के लिए CSV निर्यात करें।",
+      "browse": "/domain-extensions पर डोमेन एक्सटेंशन कैटलॉग और /blog/tlds पर TLD विश्वकोश में 1,600 से अधिक एक्सटेंशन देखें।"
+    }
+  },
+  "bn": {
+    "impl": {
+      "heading": "{T} বাস্তবায়নের নোট",
+      "body": [
+        "“{T}”-এর ধারণাগুলো সাপ্তাহিক চক্রে কাজে লাগানো সবচেয়ে ভালো: সোমবার গবেষণা, মঙ্গলবার তালিকা, বুধবার যাচাই, বৃহস্পতিবার কেনার সিদ্ধান্ত, শুক্রবার DNS/ইমেইল।",
+        "সিদ্ধান্তগুলো একটি শেয়ার করা নোটে লিখে রাখুন: প্রার্থী নাম, TLD-র পছন্দ, রেজিস্ট্রার, নবায়নের তারিখ ও ব্যবসায়িক উদ্দেশ্য। এতে দুবার কেনা ও ভুলে যাওয়া নবায়ন এড়ানো যায়।",
+        "চালুর পর যেসব মাপকাঠি দেখবেন: সরাসরি ট্রাফিক, ব্র্যান্ডের নামে সার্চ, ইমেইল পৌঁছানোর হার এবং বিজ্ঞাপনে ডোমেইন ব্যবহার করা ল্যান্ডিং পেজের কনভার্সন হার।",
+        "ফ্রিল্যান্সারদের সঙ্গে কাজ করলে শুধু প্রয়োজনীয় ন্যূনতম প্রবেশাধিকার দিন এবং চুক্তি শেষ হলে তা তুলে নিন। ডোমেইনের নিয়ন্ত্রণ মানে ব্যবসার নিয়ন্ত্রণ।",
+        "আন্তর্জাতিক ধারণার ক্ষেত্রে লক্ষ্য বাজারে অর্থ ও উচ্চারণ নিশ্চিত করুন। ইংরেজিতে চতুর ডোমেইন শব্দখেলা অন্য জায়গায় বেমানান বা নেতিবাচক শোনাতে পারে।",
+        "ব্র্যান্ড বদলালে, নতুন দেশে সম্প্রসারণ করলে বা পোর্টফোলিও গুছিয়ে আনলে এই গাইডে ফিরে আসুন: সংজ্ঞা একই থাকলেও সীমাবদ্ধতা বদলে যায়।"
+      ]
+    },
+    "examples": {
+      "heading": "উদাহরণ ও পরিস্থিতি",
+      "body": [
+        "পরিস্থিতি A — একক প্রতিষ্ঠাতা: একটি মূল ডোমেইন বেছে নিন, লক/2FA চালু করুন, একটিমাত্র সাইট চালু করুন, এবং পণ্য-বাজারের মিল না আসা পর্যন্ত অনুমানভিত্তিক বাড়তি নাম উপেক্ষা করুন।",
+        "পরিস্থিতি B — একাধিক স্থানে সেবা দেওয়া ব্যবসা: মূল ব্র্যান্ড ডোমেইনের সঙ্গে বেছে নেওয়া শহরের পাতা বা জিও নাম শুধু সেখানেই, যেখানে দল কাজ করে; জিও টুল পরিকল্পনার জন্য ব্যবহার করুন, স্প্যামের জন্য নয়।",
+        "পরিস্থিতি C — ব্যবহৃত নাম কেনা: এসক্রো, ইতিহাস যাচাই, WHOIS/RDAP, পরিচ্ছন্ন DNS, এবং আগের ব্যবহারের তুলনায় বিভ্রান্তিকর নয় এমন কনটেন্ট পরিকল্পনা।",
+        "পরিস্থিতি D — পোর্টফোলিও গোছানো: সব নাম রপ্তানি করুন, উদ্দেশ্যের ট্যাগ দিন, যুক্তিহীন নাম ছেড়ে দিন এবং কোন দলের বাজেট থেকে নবায়নের টাকা যাবে তা নতুন করে ঠিক করুন।",
+        "এই সব পরিস্থিতিতেই DomainDiscovery-তে থাকা একই গবেষণা-চক্র কাজে লাগে: ডোমেইন নাম অনুসন্ধান, ঐচ্ছিক বাল্ক বা জিও জেনারেশন, WHOIS, এবং রেজিস্ট্রারের চেকআউটের আগে দামের তুলনা।"
+      ]
+    },
+    "extra": {
+      "heading": "অতিরিক্ত বিবেচ্য বিষয় ({N})",
+      "body": [
+        "{T} নিয়ে বাড়তি তথ্য: সংশ্লিষ্টদের শুরুতেই একমত করুন, নবায়নের জন্য বাজেট রাখুন এবং মালিকানার লিখিত নথি সংরক্ষণ করুন।",
+        "বিকল্প তুলনার সময় প্রতিটি প্রার্থীকে বলার স্পষ্টতা, বানান, ট্রেডমার্কের ঝুঁকি, TLD-র উপযুক্ততা ও পাঁচ বছরের মালিকানার খরচের ভিত্তিতে নম্বর দিন—শুধু প্রথম দিনের উপলব্ধতা দেখে নয়।",
+        "শিক্ষামূলক বিষয়বস্তু বিরোধ বা জটিল ট্রেডমার্কের প্রশ্নে পেশাদার আইনি পরামর্শের বিকল্প হতে পারে না। ঝুঁকি বড় হলে বিশেষজ্ঞের সাহায্য নিন।",
+        "নতুন প্রার্থী এলেই বিনামূল্যের ডোমেইন নাম অনুসন্ধানে ফিরে আসুন, যাতে চ্যাটের পুরোনো স্ক্রিনশটের ওপর নির্ভর করতে না হয়।"
+      ]
+    },
+    "boiler": "ডোমেইন নাম অনুসন্ধান ও নিবন্ধন গবেষণার জন্য ব্যবহারিক ধাপ, ঝুঁকি এবং DomainDiscovery-র কর্মপ্রবাহ জানুন।",
+    "extra5": {
+      "paste": "/bulk-search-এ বাল্ক অনুসন্ধানে ১০০টি পর্যন্ত নাম পেস্ট করুন, যাতে একবারেই একটি তালিকা যাচাই করা যায়।",
+      "brainstorm": ".com নেওয়া হয়ে গেলে /generator-এ AI ডোমেইন জেনারেটর দিয়ে ব্র্যান্ডযোগ্য বিকল্প নিয়ে ভাবুন।",
+      "geo": "/tools/geo-তে জিও ডোমেইন জেনারেটর দিয়ে শহর ও দেশের নামের তালিকা বানান, তারপর একসঙ্গে যাচাইয়ের জন্য CSV রপ্তানি করুন।",
+      "browse": "/domain-extensions-এর ডোমেইন এক্সটেনশন ক্যাটালগ এবং /blog/tlds-এর TLD বিশ্বকোষে ১,৬০০-র বেশি এক্সটেনশন ঘুরে দেখুন।"
+    }
+  },
+  "ur": {
+    "impl": {
+      "heading": "{T} کے نفاذ کے نوٹس",
+      "body": [
+        "“{T}” کے خیالات کو ہفتہ وار چکروں میں نافذ کرنا سب سے بہتر رہتا ہے: پیر کو تحقیق، منگل کو مختصر فہرست، بدھ کو جانچ، جمعرات کو خریداری کے فیصلے اور جمعہ کو DNS/ای میل۔",
+        "فیصلوں کو مشترکہ نوٹ میں درج کریں: امیدوار نام، TLD کے انتخاب، رجسٹرار، تجدید کی تاریخیں اور کاروباری مقصد۔ اس سے دوہری خریداری اور بھولی ہوئی تجدید سے بچاؤ ہوتا ہے۔",
+        "لانچ کے بعد دیکھنے کے پیمانے: براہ راست ٹریفک، برانڈ کے نام سے تلاش، ای میل کی ڈیلیوری، اور ان لینڈنگ پیجز کی کنورژن شرح جو اشتہارات میں ڈومین استعمال کرتے ہیں۔",
+        "اگر آپ فری لانسرز کے ساتھ کام کرتے ہیں تو صرف ضرورت بھر رسائی دیں اور معاہدہ ختم ہونے پر اسے ہٹا دیں۔ ڈومین پر کنٹرول کا مطلب کاروبار پر کنٹرول ہے۔",
+        "بین الاقوامی خیالات کے لیے ہدف منڈیوں میں معنی اور تلفظ کی تصدیق کریں۔ انگریزی کا کوئی ذہین ڈومین لفظی کھیل دوسری جگہ بے ڈھنگا یا منفی لگ سکتا ہے۔",
+        "جب آپ برانڈ بدلیں، کسی نئے ملک میں پھیلیں یا پورٹ فولیو سمیٹیں تو اس رہنما کی طرف لوٹیں: تعریفیں وہی رہتی ہیں مگر پابندیاں بدل جاتی ہیں۔"
+      ]
+    },
+    "examples": {
+      "heading": "مثالیں اور منظرنامے",
+      "body": [
+        "منظرنامہ A — اکیلا بانی: ایک مرکزی ڈومین چنیں، لاک/2FA فعال کریں، ایک ہی سائٹ لانچ کریں، اور پروڈکٹ اور منڈی کا تال میل بیٹھنے تک قیاسی اضافی ناموں کو نظرانداز کریں۔",
+        "منظرنامہ B — کئی مقامات پر خدمات دینے والا کاروبار: مرکزی برانڈ ڈومین کے ساتھ منتخب شہروں کے صفحات یا جیو نام صرف وہیں، جہاں ٹیمیں کام کرتی ہیں؛ جیو ٹولز منصوبہ بندی کے لیے استعمال کریں، اسپام کے لیے نہیں۔",
+        "منظرنامہ C — استعمال شدہ نام خریدنا: ایسکرو، تاریخ کی جانچ، WHOIS/RDAP، صاف DNS، اور ایسا مواد منصوبہ جو سابقہ استعمال کے مقابلے میں گمراہ کن نہ ہو۔",
+        "منظرنامہ D — پورٹ فولیو کی صفائی: تمام نام برآمد کریں، مقصد کا ٹیگ لگائیں، بنا بنیاد والے نام چھوڑ دیں، اور دوبارہ طے کریں کہ تجدید کن ٹیم کے بجٹ سے ادا ہوگی۔",
+        "یہ سب منظرنامے DomainDiscovery پر دستیاب اسی تحقیقی چکر کو استعمال کرتے ہیں: ڈومین نام کی تلاش، اختیاری بلک یا جیو جنریشن، WHOIS، اور رجسٹرار کے چیک آؤٹ سے پہلے قیمتوں کا موازنہ۔"
+      ]
+    },
+    "extra": {
+      "heading": "اضافی غور طلب باتیں ({N})",
+      "body": [
+        "{T} کے بارے میں اضافی تفصیل: متعلقہ فریقوں کو شروع ہی میں ہم خیال کریں، تجدید کا بجٹ رکھیں، اور ملکیت کے تحریری ریکارڈ سنبھال کر رکھیں۔",
+        "متبادل کا موازنہ کرتے وقت ہر امیدوار کو بولنے میں وضاحت، املا، ٹریڈ مارک کے خطرے، TLD کی موزونیت اور پانچ سال کی ملکیت کی لاگت پر نمبر دیں، صرف پہلے دن کی دستیابی پر نہیں۔",
+        "تعلیمی مواد تنازعات یا پیچیدہ ٹریڈ مارک کے سوالات میں پیشہ ورانہ قانونی مشورے کا متبادل نہیں بن سکتا۔ خطرہ بڑا ہو تو ماہر سے مدد لیں۔",
+        "جب بھی کوئی نیا امیدوار سامنے آئے، مفت ڈومین نام کی تلاش پر واپس جائیں تاکہ آپ چیٹ کے پرانے اسکرین شاٹس پر انحصار نہ کریں۔"
+      ]
+    },
+    "boiler": "ڈومین نام کی تلاش اور رجسٹریشن کی تحقیق کے لیے عملی اقدامات، خطرات اور DomainDiscovery کے ورک فلو جانیں۔",
+    "extra5": {
+      "paste": "/bulk-search پر بلک تلاش میں 100 تک نام پیسٹ کریں تاکہ ایک ہی بار میں مختصر فہرست جانچی جا سکے۔",
+      "brainstorm": "جب .com لے لیا گیا ہو تو /generator پر AI ڈومین جنریٹر سے برانڈ کے قابل متبادل سوچیں۔",
+      "geo": "/tools/geo پر جیو ڈومین جنریٹر سے شہروں اور ممالک کے ناموں کی فہرستیں بنائیں، پھر بڑے پیمانے پر جانچ کے لیے CSV برآمد کریں۔",
+      "browse": "/domain-extensions پر ڈومین ایکسٹینشن کیٹلاگ اور /blog/tlds پر TLD انسائیکلوپیڈیا میں 1,600 سے زیادہ ایکسٹینشنز دیکھیں۔"
+    }
+  }
+}

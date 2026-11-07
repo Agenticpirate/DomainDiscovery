@@ -1,0 +1,17 @@
+godaddy-auctions-guide||GoDaddy Auctions: ein praktischer Leitfaden||Auktionen abgelaufener Domains, Abverkäufe, Bietstrategie und Due Diligence bei GoDaddy Auctions.
+drop-catching-basics||Grundlagen des Domain-Drop-Catchings||Wie Domains gelöscht werden, wie Backorders funktionieren und wie Dienste wie DropCatch und der Wettbewerb im Pool arbeiten.
+namejet-expired-domains||NameJet und Chancen mit abgelaufenen Domains||Wie private Registries und Listen abgelaufener Domains Inventar für Investoren sichtbar machen.
+afternic-fast-transfer||Afternic Fast Transfer erklärt||Wie Vertriebsnetzwerke Sofortkäufe über die Shopfronten von Registraren freischalten.
+sedo-domain-sales||Domains auf Sedo verkaufen||MLS-Distribution, Broker und internationale Käufer auf Sedo.
+domain-brokers||Wann sich ein Domain-Broker lohnt||Broker-Provisionen, Ansprache, Verhandlung und welche Namen eine Vertretung verdienen.
+bin-vs-make-offer||Festpreis oder Preisvorschlag: Preisstrategien||Liquidität durch Sofort-Kaufen gegenüber verhandlungsbasierten Preisstrategien.
+lto-domain-financing||Lease-to-Own-Geschäfte (LTO) bei Domains||Wie Raten- und LTO-Modelle den Käuferkreis erweitern und was schiefgehen kann.
+udrp-basics||UDRP-Grundlagen für Domaininhaber||Die einheitliche Streitbeilegungsrichtlinie für Domainnamen: Bösgläubigkeit, Rechte und wie Verfahren ablaufen.
+trademark-domain-risk||Markenrisiko beim Domain-Investieren||So prüfen Sie Marken vor der Registrierung oder vor Geboten bei Auktionen.
+cybersquatting-explained||Cybersquatting erklärt||Was Cybersquatting ist, welche rechtlichen Mittel es gibt und wo die ethischen Grenzen des Investierens liegen.
+udrp-case-lessons||Lehren aus aktuellen UDRP-Fällen||Muster bei Streitentscheidungen, die Domain-Investoren verinnerlichen sollten.
+domain-privacy-laws||DSGVO und Domain-Datenschutz||Wie das Datenschutzrecht das öffentliche WHOIS verändert hat und was in RDAP weiterhin erscheint.
+tmch-basics||Grundlagen des Trademark Clearinghouse (TMCH)||Warum Markeninhaber bei Starts neuer gTLDs benachrichtigt werden.
+expired-domains-guide||Wie abgelaufene Domains funktionieren||Kulanzfrist, Redemption, Pending Delete und worauf Investoren achten.
+domain-history-checks||Domain-Historie vor dem Kauf prüfen||Archive.org, Backlinks, Spam-Signale und Prüfungen auf Malware-Historie.
+aged-domains-seo||Alte Domains und die SEO-Realität||Was das Alter tatsächlich bringt und welche Mythen über „Alte-Domain-Magie“ kursieren.

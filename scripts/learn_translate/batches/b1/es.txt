@@ -1,0 +1,48 @@
+the-radio-test-brandable-domains||La prueba de la radio para dominios de marca||Cómo usar la prueba de la radio para filtrar nombres de dominio de marca como lo hacen los creadores de nombres profesionales y los inversores.
+smile-and-scratch-framework||El marco de nombres Smile & Scratch||El marco «smile and scratch» de Alexandra Watkins aplicado a nombres de dominio y marcas.
+domain-length-psychology||La psicología de la longitud del dominio||Por qué los dominios más cortos alcanzan precios superiores y cómo la longitud afecta a la confianza, a la escritura y a la memoria.
+brandable-vs-keyword-domains||Dominios de marca frente a dominios de palabra clave||Cuándo comprar un nombre inventado de marca y cuándo un dominio de coincidencia exacta rico en palabras clave.
+exact-match-domains-2026||¿Siguen valiendo la pena los dominios de coincidencia exacta?||Cómo la evolución de Google cambió el valor de los dominios de coincidencia exacta (EMD) y dónde siguen ganando.
+compound-word-domains||Estrategia de dominios de palabras compuestas||Cómo las combinaciones de dos palabras crean dominios de marca memorables sin inventar la ortografía.
+one-word-domain-guide||Dominios de una palabra: la clase de activo definitiva||Por qué los .com de una palabra del diccionario dominan las ventas premium y cómo evaluarlos.
+cctld-local-seo||ccTLD y SEO local: cuándo ayudan los dominios de país||Cuándo usar una TLD de código de país para el SEO local, en qué se diferencian las ccTLD de las gTLD y cómo combinarlas con dominios geográficos y las herramientas de investigación de DomainDiscovery.
+domain-portfolio-management||Fundamentos de la gestión de una cartera de dominios||Controla renovaciones, costes, rentabilidad y liquidez como en un libro de inversiones real.
+hand-registration-strategy||Estrategia de registro manual en 2026||Cuándo siguen funcionando los registros manuales y cómo evitar un inventario sin valor.
+domain-flipping-guide||Compraventa de dominios para principiantes||Comprar barato y vender más caro: plazos, márgenes y plataformas realistas para las reventas.
+geo-domain-investing||Inversión en dominios geográficos||Dominios de ciudad + servicio y nombres de ciudad puros: patrones de demanda y riesgos.
+ai-domain-investing||Tendencias de inversión en dominios de IA||Cómo el auge de la IA reconfiguró la demanda de .ai y de nombres de marca con palabras de IA.
+how-dns-works||Cómo funciona el sistema de nombres de dominio||Resolvedores, servidores raíz, servidores de TLD y servidores de nombres autoritativos en la cadena de consulta.
+nameservers-explained||Servidores de nombres explicados||Servidores de nombres propios frente al DNS del registrador y cuándo pasar a Cloudflare o similar.
+email-authentication-spf-dkim-dmarc||SPF, DKIM y DMARC para el correo del dominio||Protege la entregabilidad y evita la suplantación con autenticación de correo moderna.
+https-ssl-domains||Certificados SSL/TLS y dominios||Cómo se vinculan los certificados a los nombres de host y por qué HTTPS es lo mínimo exigible.
+dns-propagation-troubleshooting||Diagnóstico de la propagación del DNS||Por qué los cambios parecen «atascados» y cómo verificarlos con dig, DoH y el cálculo del TTL.
+domains-and-seo||Dominios y SEO: qué afecta de verdad al posicionamiento||Qué hacen (y qué no) los nombres de dominio por el SEO. Mitos de la coincidencia exacta, ccTLD, HTTPS y cómo combinar las herramientas de DomainDiscovery con contenido pensado para las personas.
+domain-tools-stack||El conjunto esencial de herramientas de dominios||NameBio, DNJournal, WHOIS/RDAP, archive.org, búsqueda de marcas y seguimiento de carteras.
+register-vs-buy-aftermarket||Registrar nuevo o comprar en el mercado secundario||Cuándo registrar a mano y cuándo comprar un dominio premium en el mercado secundario.
+domain-email-setup||Configurar el correo en tu dominio||Google Workspace, Microsoft 365, Fastmail y opciones gratuitas de reenvío.
+domain-name-generators||Cómo usar bien los generadores de dominios con IA||Cómo dar instrucciones a los generadores y filtrar los resultados débiles.
+bulk-domain-search-tips||Flujos de trabajo de búsqueda masiva de dominios||Comprueba cientos de nombres de forma eficiente con herramientas masivas.
+icann-basics||Fundamentos de ICANN para compradores de dominios||Qué controla ICANN y qué no controla en el sistema de dominios.
+registry-vs-registrar||Registro, registrador y revendedor||La estructura del sector que hay detrás de cada compra de dominio.
+premium-renewal-planning||Planificar las renovaciones premium||Planificación de flujo de caja cuando las renovaciones cuestan entre 50 y más de 5000 dólares por nombre.
+domain-hacks||Juegos con la extensión: ¿ingeniosos o confusos?||Usar las extensiones como parte de la palabra (históricamente del.icio.us): pros y contras.
+numbers-in-domains||Números en los nombres de dominio||Cuándo ayudan los dígitos (24, 365) y cuándo perjudican la marca.
+hyphenated-domains||Dominios con guiones: normalmente evítalos||Por qué los guiones reducen la escritura directa y la confianza en la mayoría de las marcas.
+personal-name-domains||Dominios con nombre propio||Lo raro que es nombre.com y alternativas prácticas para marcas personales.
+domain-development-vs-hold||Desarrollar o mantener dominios||Cuándo construir un sitio multiplica el valor y cuándo conviene mantener el dominio solo para vender.
+domain-metrics-to-track||Métricas de dominios que merece la pena seguir||Tasa de venta, tiempo medio de tenencia, rentabilidad y tasa de consultas.
+transfer-auth-codes||Códigos EPP/de autorización explicados||Qué son los códigos de autorización y cómo manejarlos con seguridad.
+cdn-and-domains||CDN y tu dominio||Dirigir el tráfico a través de Cloudflare o Fastly manteniendo un DNS limpio.
+investor-psychology||Psicología del inversor en dominios||Costes hundidos, fiebre de las subastas y culpa por las renovaciones.
+sales-year-planning||Planificar un año de ventas de dominios||Sprints trimestrales de prospección, experimentos de precios y renovación del inventario.
+domain-name-spelling||Estrategias de ortografía para marcas inventadas||Hasta dónde puedes llevar una ortografía creativa antes de que falle la prueba de la radio.
+two-letter-domains||Economía de los dominios de dos letras||Escasez, demanda corporativa y liquidez de los .com de dos letras (LL).
+three-letter-domains||Guía de los .com de tres letras (LLL)||LLL pronunciables frente a LLL cargados de consonantes y sus niveles de precio.
+number-domains||Inversión en dominios numéricos||Patrones de demanda de la numerología china y notas sobre liquidez.
+idns-explained||Nombres de dominio internacionalizados (IDN)||Punycode, alfabetos y riesgos de suplantación con caracteres parecidos.
+domain-forwarding||Buenas prácticas de reenvío de dominios||Redirección 301 frente a reenvío enmascarado y sus efectos sobre el SEO.
+www-vs-naked-domain||www o dominio sin www||Elige un host canónico y mantenlo.
+domain-monitoring-services||Servicios de vigilancia y monitorización de dominios||Disponibilidad, alertas de cambios en WHOIS y vigilancia de marca.
+domain-joint-ventures||Empresas conjuntas de dominios||Cuando los propietarios de dominios se asocian con operadores en lugar de vender directamente.
+corporate-domain-management||Gestión corporativa de dominios||Inventario central, protección de marca y menos dominios de TI en la sombra.
+safe-domain-purchase-checklist||Lista de comprobación para comprar un dominio con seguridad||Una lista mental imprimible antes de cualquier registro o puja en una subasta.

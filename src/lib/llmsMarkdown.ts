@@ -18,6 +18,8 @@ import {
   SITE_PILLAR_LEARN,
   SITE_PRODUCT_FACTS,
 } from '@/lib/seoSiteFacts';
+import { getLearnArticles, getLearnTranslatedLocales } from '@/lib/learnArticles';
+import { INDEXABLE_LOCALE_PATHS, LOCALES, localeHref } from '@/lib/i18n/locales';
 
 export const LLMS_HEADERS = {
   'Content-Type': 'text/plain; charset=utf-8',
@@ -93,6 +95,86 @@ function registrarMap(row?: TldPriceRow): Map<string, RegistrarRow> {
   return m;
 }
 
+
+/** Short label for the translated tool pages listed in the Languages section. */
+const LANGUAGE_PAGE_LABELS: Array<[string, string]> = [
+  ['/', 'Home'],
+  ['/search', 'Search'],
+  ['/generator', 'Generator'],
+  ['/bulk-search', 'Bulk search'],
+  ['/domain-extensions', 'Extensions'],
+  ['/tools/whois', 'WHOIS'],
+  ['/tools/compare', 'Price comparison'],
+  ['/tools/geo', 'Geo domains'],
+  ['/faq', 'FAQ'],
+];
+
+function languageUrl(base: string, localeId: (typeof LOCALES)[number]['id'], path: string): string {
+  const href = localeHref(localeId, path);
+  return href === '/' ? base : `${base}${href}`;
+}
+
+/**
+ * Translated pages. Only paths that are really translated and indexable are listed;
+ * Learn guides are English-only until a translation exists.
+ */
+function languagesSection(base: string, detailed: boolean): string[] {
+  const translatedGuides = getLearnArticles().filter((a) => getLearnTranslatedLocales(a.slug).length > 0).length;
+  const guideNote =
+    translatedGuides > 0
+      ? `${translatedGuides} Learn guides are translated too, at ${base}/<language>/learn/<slug> (for example ${base}/de/learn/whois-lookup-guide). The other guides are English only.`
+      : `Learn guides are currently English only.`;
+  const lines = [
+    `## Languages`,
+    ``,
+    `The core tool pages are available in ${LOCALES.length} languages. English URLs have no prefix; other languages use a path prefix (for example ${base}/de). ${guideNote}`,
+    ``,
+  ];
+  for (const locale of LOCALES) {
+    if (!detailed) {
+      lines.push(`- ${locale.name} (${locale.hreflang}): ${languageUrl(base, locale.id, '/')}`);
+      continue;
+    }
+    const pages = LANGUAGE_PAGE_LABELS.filter(([path]) =>
+      (INDEXABLE_LOCALE_PATHS as readonly string[]).includes(path)
+    )
+      .map(([path, label]) => `[${label}](${languageUrl(base, locale.id, path)})`)
+      .join(' · ');
+    lines.push(`- ${locale.name} (${locale.hreflang}): ${pages}`);
+  }
+  lines.push(``);
+  return lines;
+}
+
+/** Every published Learn guide: title, URL, one-line summary. */
+function learnCatalogSection(base: string): string[] {
+  const articles = getLearnArticles();
+  const lines = [
+    `## Learn catalog`,
+    ``,
+    `${articles.length} free guides, English. Each guide also has a Markdown version at ${base}/learn/md/<slug>.`,
+    ``,
+  ];
+  const byCategory = new Map<string, typeof articles>();
+  for (const article of articles) {
+    const list = byCategory.get(article.category) ?? [];
+    list.push(article);
+    byCategory.set(article.category, list);
+  }
+  for (const [category, list] of Array.from(byCategory.entries()).sort(([a], [b]) => a.localeCompare(b))) {
+    lines.push(`### ${category}`, ``);
+    for (const article of list) {
+      const summary = article.description.replace(/\s+/g, ' ').trim();
+      const short = summary.length > 150 ? `${summary.slice(0, 147).trimEnd()}...` : summary;
+      const translatedIn = getLearnTranslatedLocales(article.slug);
+      const alsoIn = translatedIn.length ? ` Also in: ${translatedIn.join(', ')}.` : '';
+      lines.push(`- [${article.title}](${base}/learn/${article.slug}): ${short}${alsoIn}`);
+    }
+    lines.push(``);
+  }
+  return lines;
+}
+
 /** Lean llms.txt — one H1, blockquote summary, H2 link groups (playbook format). */
 export function buildLlmsTxt(): string {
   const base = getSiteBaseUrl();
@@ -109,6 +191,10 @@ export function buildLlmsTxt(): string {
     `- Prices in comparison views are regular retail-style signals; promos, premium names, taxes, and multi-year rules vary. Final price is set by the registrar.`,
     `- Do **not** invent AggregateRating, review stars, traffic stats, or partnership claims.`,
     `- ${SITE_BRAND.name} does not process domain registration payments.`,
+    ``,
+    `## Product facts`,
+    ``,
+    SITE_PRODUCT_FACTS,
     ``,
     `## Core tools`,
     ``,
@@ -131,6 +217,7 @@ export function buildLlmsTxt(): string {
     ``,
     ...SITE_PILLAR_LEARN.map((p) => `- [${p.title}](${base}${p.path})`),
     ``,
+    ...languagesSection(base, false),
     `## Optional`,
     ``,
     `- [For AI systems (HTML hub)](${base}/for-ai): Human + crawler landing page for all LLM indexes.`,
@@ -367,6 +454,8 @@ export function buildLlmsFullTxt(): string {
   }
 
   lines.push(...faqSection(base));
+  lines.push(...languagesSection(base, true));
+  lines.push(...learnCatalogSection(base));
   lines.push(...pricingSection(data));
   lines.push(...tldProfilesSection());
   lines.push(...tldCatalogSection(data));
