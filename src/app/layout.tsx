@@ -208,6 +208,8 @@ export default async function RootLayout({
           // Impact's snippet uses `value`; include both so crawlers that expect either pass
           {...{ value: "94371be8-1bcb-4f36-b961-098e0c4eee46" }}
         />
+        {/* Naver Search Advisor ownership check; rendered in <head> for every user agent. */}
+        <meta name="naver-site-verification" content="8127a628cb41e826144dab50bcea70e957913d04" />
         {/* Machine-readable product indexes for assistants (not a Google ranking lever).
             Kept out of metadata.alternates.types: vinext only accepts string URLs there. */}
         <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
