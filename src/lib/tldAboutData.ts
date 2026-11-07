@@ -72,7 +72,9 @@ export async function getTldAboutDetail(slug: string): Promise<TldAboutDetail | 
   const normalized = slug.replace(/^\./, '').toLowerCase();
   if (!/^[a-z0-9-]+$/.test(normalized) || normalized === 'index') return null;
   try {
-    const mod = (await import(`@/data/tld-about/${normalized}.json`)) as { default: TldAboutDetail };
+    // Relative path + extension so both Vite (vinext/Workers) and webpack can bundle the
+    // JSON files; an aliased `@/` template import is skipped by Vite and 404s every page.
+    const mod = (await import(`../data/tld-about/${normalized}.json`)) as { default: TldAboutDetail };
     return mod.default;
   } catch {
     return null;
