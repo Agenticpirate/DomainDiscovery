@@ -31,12 +31,39 @@ const CATEGORY_ORDER = [
   'Pricing',
 ];
 
+export type LearnCatalogArticle = LearnArticle & {
+  /** English category name, stable across languages; `category` may be translated. */
+  categoryKey?: string;
+  /** Link target chosen by the server (localized URL only when the guide is translated). */
+  href?: string;
+};
+
+export type LearnCatalogLabels = {
+  all: string;
+  trending: string;
+  articles: string;
+  searchPlaceholder: string;
+  noMatch: string;
+  categories: Record<string, string>;
+};
+
+const DEFAULT_LABELS: LearnCatalogLabels = {
+  all: 'All',
+  trending: 'Trending',
+  articles: 'articles',
+  searchPlaceholder: 'Search articles — auctions, UDRP, .ai, parking…',
+  noMatch: 'No articles match that filter. Try another category or keyword.',
+  categories: {},
+};
+
 export function LearnCatalog({
   articles,
   categories,
+  labels = DEFAULT_LABELS,
 }: {
-  articles: LearnArticle[];
+  articles: LearnCatalogArticle[];
   categories: string[];
+  labels?: LearnCatalogLabels;
 }) {
   const { theme } = useTheme();
   const { href } = useLocale();
@@ -57,7 +84,7 @@ export function LearnCatalog({
     const q = query.trim().toLowerCase();
     return articles.filter((a) => {
       if (category === 'Trending' && !a.trending) return false;
-      if (category !== 'All' && category !== 'Trending' && a.category !== category) return false;
+      if (category !== 'All' && category !== 'Trending' && (a.categoryKey ?? a.category) !== category) return false;
       if (!q) return true;
       const hay = [a.title, a.description, a.category, ...a.topics, a.slug].join(' ').toLowerCase();
       return hay.includes(q);
@@ -79,7 +106,7 @@ export function LearnCatalog({
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search articles — auctions, UDRP, .ai, parking…"
+          placeholder={labels.searchPlaceholder}
           className={`flex-1 h-11 rounded-xl border px-3.5 text-sm outline-none focus:ring-2 ${
             isLight
               ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:ring-slate-300'
@@ -91,13 +118,13 @@ export function LearnCatalog({
             isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-[#0a0a0a] text-white/55'
           }`}
         >
-          {filtered.length} articles
+          {filtered.length} {labels.articles}
         </div>
       </div>
 
       <div className="flex flex-wrap gap-1.5 mb-5">
         <button type="button" onClick={() => setCategory('All')} className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold transition ${chip(category === 'All')}`}>
-          All
+          {labels.all}
         </button>
         {sortedCategories.map((c) => (
           <button
@@ -106,7 +133,7 @@ export function LearnCatalog({
             onClick={() => setCategory(c)}
             className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold transition ${chip(category === c)}`}
           >
-            {c}
+            {c === 'Trending' ? labels.trending : labels.categories[c] ?? c}
           </button>
         ))}
       </div>
@@ -115,7 +142,7 @@ export function LearnCatalog({
         {filtered.map((guide) => (
           <Link
             key={guide.slug}
-            href={href(`/learn/${guide.slug}`)}
+            href={guide.href ?? href(`/learn/${guide.slug}`)}
             className={`group relative block p-3 sm:p-4 rounded-xl sm:rounded-2xl border transition-all ${
               isLight
                 ? 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-md shadow-sm'
@@ -131,7 +158,7 @@ export function LearnCatalog({
                       isLight ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-amber-500/10 text-amber-200 border border-amber-500/20'
                     }`}
                   >
-                    Trending
+                    {labels.trending}
                   </span>
                 )}
                 <span className={`text-[10px] sm:text-xs font-medium ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
@@ -140,7 +167,7 @@ export function LearnCatalog({
               </div>
             </div>
             <div className={`text-[10px] font-bold uppercase tracking-wide mb-1 ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-              {guide.category}
+              {(guide.categoryKey && labels.categories[guide.categoryKey]) || guide.category}
             </div>
             <h3 className={`text-sm sm:text-lg font-bold mb-1.5 leading-snug ${isLight ? 'text-slate-900' : 'text-white'}`}>
               {guide.title}
@@ -166,7 +193,7 @@ export function LearnCatalog({
 
       {filtered.length === 0 && (
         <div className={`rounded-2xl border p-6 text-sm ${isLight ? 'border-slate-200 bg-white text-slate-500' : 'border-white/10 bg-[#0a0a0a] text-white/50'}`}>
-          No articles match that filter. Try another category or keyword.
+          {labels.noMatch}
         </div>
       )}
     </div>

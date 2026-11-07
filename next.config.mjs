@@ -7,6 +7,22 @@ const nextConfig = {
     process.env.REPLIT_DEV_DOMAIN,
     '127.0.0.1',
   ].filter(Boolean),
+  // Crawlers matching this list get <title>, canonical and hreflang inside <head> instead of
+  // streamed into <body>. Covers Google, the main regional engines (Baidu, 360, Shenma, Sogou,
+  // Yandex, Naver, Seznam, Petal) and AI crawlers that do not run JavaScript.
+  htmlLimitedBots: new RegExp(
+    [
+      '(?:^|[^\\w-])[\\w-]+-Google', 'Google-[\\w-]+', 'Googlebot', 'Chrome-Lighthouse', 'Mediapartners',
+      'Bingbot', 'BingPreview', 'msnbot', 'Slurp', 'DuckDuck', 'baidu', 'yandex', 'sogou', '360Spider',
+      'HaosouSpider', 'YisouSpider', 'Bytespider', 'PetalBot', 'Yeti', 'Daum', 'SeznamBot', 'coccoc', 'Qwant',
+      'Mojeek', 'applebot', 'GPTBot', 'ChatGPT-User', 'OAI-SearchBot', 'ClaudeBot', 'Claude-', 'anthropic',
+      'PerplexityBot', 'Perplexity-User', 'CCBot', 'Amazonbot', 'meta-external', 'facebookexternalhit',
+      'facebookcatalog', 'Twitterbot', 'LinkedInBot', 'Slackbot', 'Discordbot', 'WhatsApp', 'TelegramBot',
+      'SkypeUriPreview', 'vkShare', 'redditbot', 'quora link preview', 'ia_archiver', 'cohere', 'YouBot',
+      'Diffbot', 'DeepSeek', 'googleweblight', 'bitlybot', 'tumblr', 'spider', 'crawler',
+    ].join('|'),
+    'i'
+  ),
   // Production: enable type checking
   typescript: {
     ignoreBuildErrors: false,
