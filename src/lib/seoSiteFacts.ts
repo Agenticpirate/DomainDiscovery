@@ -442,7 +442,8 @@ export function getSiteToolsItemListJsonLd() {
  */
 export function getSearchEngineVerification(): import('next').Metadata['verification'] {
   const google = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
-  const yandex = process.env.NEXT_PUBLIC_YANDEX_VERIFICATION?.trim();
+  // Public verification code (also served as /yandex_e3868891a3dda9e6.html); env var overrides.
+  const yandex = process.env.NEXT_PUBLIC_YANDEX_VERIFICATION?.trim() || 'e3868891a3dda9e6';
   const yahoo = process.env.NEXT_PUBLIC_YAHOO_SITE_VERIFICATION?.trim();
   const bing = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION?.trim();
   const pinterest = process.env.NEXT_PUBLIC_PINTEREST_SITE_VERIFICATION?.trim();
