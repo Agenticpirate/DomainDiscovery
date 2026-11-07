@@ -15288,6 +15288,141 @@
           ]
         }
       ]
+    },
+    "how-to-buy-an-expired-domain-without-getting-scammed": {
+      "title": "Como comprar um domínio expirado sem cair em golpe",
+      "description": "Aprenda a comprar um domínio expirado com segurança: evite golpes em leilões de domínios, avalie cada compra do jeito certo e conclua a aquisição com confiança.",
+      "category": "Mercado secundário",
+      "topics": [
+        "comprar um domínio expirado",
+        "Mercado secundário"
+      ],
+      "readTime": "16 min de leitura",
+      "sections": [
+        {
+          "heading": "Visão geral",
+          "body": [
+            "Para comprar um domínio expirado com segurança, verifique você mesmo todas as métricas de SEO no Ahrefs, no Majestic e no Semrush — nunca confie nos dados do vendedor. Confira o histórico de tráfego em busca de quedas bruscas que indiquem penalidade do Google, analise manualmente o perfil de backlinks no Ahrefs, faça uma busca de marcas no USPTO e na WIPO e use o Escrow.com em qualquer compra particular acima de $200. Uma verificação sistemática elimina a grande maioria dos cenários de golpe."
+          ]
+        },
+        {
+          "heading": "Por que o mercado de domínios expirados atrai golpistas",
+          "body": [
+            "O grande atrativo dos domínios expirados é também o que torna esse mercado propício a fraudes: a promessa de herdar valor de SEO. Como os compradores costumam pagar ágios altos por domínios com bons backlinks, autoridade de domínio ou tráfego residual, os golpistas têm um incentivo financeiro real para manipular os sinais em que os compradores confiam.",
+            "Entender como essas manipulações funcionam é o primeiro passo para se proteger."
+          ]
+        },
+        {
+          "heading": "Golpes comuns com domínios expirados e como identificá-los",
+          "body": [
+            "1. Perfis de backlinks inflados artificialmente",
+            "Alguns vendedores inflam artificialmente a quantidade de backlinks de um domínio pouco antes de anunciá-lo. Para isso, cadastram o domínio em centenas de diretórios de baixa qualidade, fazem campanhas de spam em comentários de blogs ou usam fazendas de links. O resultado: um domínio com muitos domínios de referência — a maioria sem valor.",
+            "Como identificar: veja a lista de domínios de referência no Ahrefs, no Majestic ou no Semrush e ordene por qualidade. Se a grande maioria dos links vier de sites sem tráfego real, áreas de comentários genéricas ou diretórios óbvios, o perfil provavelmente é artificial. Procure também um pico repentino de novos backlinks — um domínio natural acumula links aos poucos. Um pico vertical é sinal de alerta.",
+            "2. Domínios com penalidades ocultas do Google",
+            "Um domínio pode ter métricas excelentes — Domain Rating alto, Trust Flow forte — e mesmo assim estar penalizado pelo Google. As ações manuais da equipe antispam do Google não aparecem em ferramentas de terceiros; só aparecem no Google Search Console.",
+            "Como identificar: antes de comprar, confira o histórico de tráfego orgânico no Ahrefs ou no Semrush. Se o domínio já teve tráfego que caiu de repente para zero — não um declínio gradual, mas um despencar —, isso costuma indicar penalidade do Google. Veja também a evolução das posições nas palavras-chave. Um domínio penalizado mostra uma queda drástica de posições.",
+            "3. Anúncios fraudulentos em leilões",
+            "Em mercados de leilão de domínios, alguns vendedores anunciam domínios com prints falsos de estatísticas de tráfego, relatórios do Google Analytics inventados ou métricas de terceiros manipuladas. Isso é mais comum em mercados menores e menos fiscalizados.",
+            "Como identificar: nunca confie só em prints ou dados informados pelo vendedor. Verifique sempre as métricas com suas próprias contas no Ahrefs, no Semrush ou no Majestic. Compare várias ferramentas — tráfego e perfis de links legítimos parecem coerentes entre fontes diferentes. Divergências entre as ferramentas são sinal para investigar mais.",
+            "4. Domínios que violam marcas",
+            "Comprar um domínio que contém uma marca registrada — mesmo que esteja expirado — pode expor você a uma reclamação UDRP (Uniform Domain Name Dispute Resolution Policy) do titular da marca. Se o titular vencer, você perde o domínio sem compensação, talvez depois de já ter investido nele.",
+            "Como identificar: antes de concluir qualquer compra de domínio expirado, pesquise na base de marcas do USPTO (marcas dos EUA), no EUIPO (marcas europeias) e na busca global de marcas da WIPO. Se o nome tiver marcas reconhecíveis — mesmo com erro de grafia ou com hífen —, siga com extrema cautela ou consulte um advogado de propriedade intelectual.",
+            "5. Lances falsos em leilões",
+            "Em leilões de domínios, lances falsos (shill bidding) acontecem quando o vendedor — ou alguém trabalhando com ele — dá lances fictícios para inflar o preço. Isso é especialmente comum em plataformas com pouca fiscalização.",
+            "Como identificar: defina um lance máximo baseado só na sua própria avaliação do domínio e não passe dele, aconteça o que acontecer no leilão. Se um domínio que não parece excepcional provocar uma disputa incomum, dê um passo atrás. Não deixe a psicologia do leilão levar você além de uma avaliação racional.",
+            "6. O truque do domínio “restaurado”",
+            "Alguns domínios penalizados e desindexados pelo Google são limpos — links ruins rejeitados, conteúdo de spam removido — e anunciados logo em seguida. A limpeza não desfaz a penalidade; só apaga as evidências visíveis. O novo dono herda o domínio penalizado achando que está comprando uma página em branco.",
+            "Como identificar: confira o histórico de conteúdo do domínio na Wayback Machine. Se as capturas recentes mostrarem limpeza ou mudanças bruscas de conteúdo, investigue o que havia antes. Compare com o histórico de tráfego para ver se as posições realmente se recuperaram ou se o domínio continua penalizado."
+          ]
+        },
+        {
+          "heading": "Como comprar um domínio expirado com segurança: passo a passo",
+          "body": [
+            "Com os riscos mapeados, este é o processo sistemático para fazer uma compra segura de domínio expirado.",
+            "Passo 1: encontre candidatos em fontes confiáveis",
+            "Use plataformas consolidadas para pesquisar domínios expirados: ExpiredDomains.net, DomCop, GoDaddy Auctions, NameJet ou Sedo. Elas não são perfeitas, mas têm reputação em jogo para manter a integridade do mercado, o que afasta os piores golpistas.",
+            "Evite mercados desconhecidos ou vendedores particulares sem histórico, a menos que você consiga verificar tudo por conta própria.",
+            "Passo 2: tire suas próprias métricas — nunca confie no anúncio",
+            "Para cada domínio que você esteja considerando de verdade, faça sua própria análise:",
+            "Ahrefs Site Explorer: Domain Rating, quantidade de domínios de referência, histórico de tráfego orgânico, distribuição dos textos-âncora",
+            "Majestic: Trust Flow, Citation Flow, proporção TF:CF, principais domínios que linkam",
+            "Semrush: análise do domínio, pontuação de toxicidade, histórico de posições",
+            "Wayback Machine: inspeção visual do conteúdo anterior",
+            "Compare os resultados entre as ferramentas. Um domínio com perfil de backlinks realmente forte mostra sinais coerentes em várias fontes de dados.",
+            "Passo 3: analise a lista de backlinks manualmente",
+            "Não pare nas métricas gerais. Baixe a lista completa de domínios de referência no Ahrefs ou no Majestic e analise manualmente os principais sites que linkam. Pergunte-se:",
+            "São sites reais, com conteúdo e tráfego de verdade?",
+            "O conteúdo da página que linka justifica um link para este domínio?",
+            "Os textos-âncora são variados e naturais, ou concentrados em palavras-chave comerciais exatas?",
+            "A análise manual dos 20–30 principais domínios de referência leva de 30 a 60 minutos, mas costuma ser onde surgem os maiores sinais de alerta.",
+            "Passo 4: confira a visão do Google",
+            "Verifique a situação do domínio no Google Search Console depois da compra — ou, antes de comprar, pesquise no Google site:odominio.com. Se o domínio estava ativo e não está penalizado, devem aparecer páginas indexadas. Nenhum resultado para um domínio que supostamente estava ativo sugere desindexação.",
+            "Pesquise também o nome do domínio entre aspas no Google para ver se aparece conteúdo em cache ou menções ao site.",
+            "Passo 5: faça uma busca de marcas",
+            "Antes de qualquer compra de domínio expirado com nome ou expressão reconhecível, faça uma busca de marcas. Leva menos de 15 minutos e pode evitar uma disputa jurídica cara.",
+            "Passo 6: use custódia (escrow) em compras de valor alto",
+            "Se você estiver comprando um domínio expirado de forma particular (fora de um mercado consolidado com proteção ao comprador), use sempre um serviço de custódia. O Escrow.com é a referência em transações de domínios. O comprador deposita o dinheiro, o vendedor transfere o domínio e o serviço só libera o pagamento depois que o comprador confirma o recebimento.",
+            "Nunca transfira dinheiro diretamente para um vendedor particular por um domínio. É uma das formas de pagamento mais arriscadas do setor.",
+            "Passo 7: confirme a transferência",
+            "Depois de concluir a compra, o domínio deve ser transferido para a sua conta na registradora. Confirme que:",
+            "O registro WHOIS do domínio mostra seus dados de titular (ou um serviço de privacidade)",
+            "A transferência foi concluída e o domínio está na sua conta, com controle total",
+            "A data de expiração reflete um novo período pago por você",
+            "Passo 8: documente tudo",
+            "Guarde registros da compra: recibos, conversas com o vendedor ou a plataforma e os relatórios de métricas reunidos durante a verificação. Se surgir uma disputa de marca ou com a plataforma, a documentação da compra e do estado do domínio na aquisição protege você."
+          ]
+        },
+        {
+          "heading": "Sinais de alerta para desistir da compra",
+          "body": [
+            "Considere desistir de qualquer compra de domínio expirado que apresente:",
+            "Histórico de tráfego que despenca para zero da noite para o dia, sem recuperação",
+            "Perfil de backlinks dominado por links de poucos domínios de baixa qualidade",
+            "Vendedor que não quer dar mais informações nem permitir um período de verificação",
+            "Métricas muito diferentes entre ferramentas (por exemplo, o Ahrefs mostra DR 40, mas o Semrush quase não mostra links)",
+            "Qualquer coincidência com uma marca ativa",
+            "Hospedagem recente de conteúdo adulto, apostas, spam farmacêutico ou outras categorias proibidas"
+          ]
+        },
+        {
+          "heading": "O que fazer depois de uma compra segura",
+          "body": [
+            "Depois de concluir a compra com segurança, os próximos passos definem se o investimento vai valer a pena:",
+            "1. Configure hospedagem e SSL imediatamente — garanta a presença técnica do domínio",
+            "2. Cadastre o domínio no Google Search Console para verificar ações manuais",
+            "3. Crie ou redirecione conteúdo ligado aos temas do perfil de backlinks",
+            "4. Acompanhe a indexação nas semanas seguintes para confirmar que o Google está rastreando e indexando o site normalmente",
+            "Se o domínio estava de fato livre de penalidades e com histórico limpo, você deve começar a ver tráfego orgânico entre algumas semanas e alguns meses depois de publicar conteúdo."
+          ]
+        },
+        {
+          "heading": "Considerações finais",
+          "body": [
+            "Comprar domínios expirados com segurança é uma habilidade que se aprende, não uma aposta. Os golpes e as armadilhas são reais, mas também são, em grande parte, previsíveis e evitáveis com uma verificação sistemática. Quem se dá mal repetidamente é quem pula etapas, confia no vendedor sem conferir e deixa a empolgação do leilão vencer a avaliação racional.",
+            "Dedique tempo para fazer do jeito certo, e domínios expirados podem ser um dos investimentos de maior retorno no seu marketing digital."
+          ]
+        },
+        {
+          "heading": "Veredito do especialista",
+          "body": [
+            "O risco de fraude no mercado de domínios expirados é totalmente controlável para quem age de forma sistemática — e sempre caro para quem age por impulso. Os mecanismos de golpe são bem documentados e detectáveis: perfis de links inflados têm assinaturas identificáveis (picos repentinos, fontes de baixa qualidade, concentração artificial de textos-âncora); penalidades do Google aparecem como quedas drásticas de tráfego nos dados históricos; domínios penalizados “restaurados” deixam padrões de mudança de conteúdo na Wayback Machine. Nada disso está escondido. Só não é verificado por compradores que pulam etapas na empolgação da compra.",
+            "A prática que mais protege é verificar as métricas por conta própria, com suas próprias contas nas ferramentas. Vendedores que inflam métricas contam com compradores que confiam em prints ou em dados agregados do anúncio sem checar no Ahrefs, no Majestic ou no Semrush. Sua própria análise leva de 30 a 60 minutos e é inegociável em qualquer compra acima de algumas centenas de dólares. O risco de lances falsos é mais bem controlado com outra prática igualmente inegociável: calcular antes o seu lance máximo com base só na sua avaliação independente e tratá-lo como teto absoluto, não como ponto de partida.",
+            "Em compras particulares fora dos mercados consolidados, o Escrow.com é a ferramenta antifraude mais importante que existe. A taxa — em geral de 3–4% do valor da transação — é pequena perto do risco de perder todo o valor para um vendedor fraudulento. Qualquer vendedor que resista ou desestimule o uso de custódia numa transação particular deve ser descartado imediatamente."
+          ]
+        },
+        {
+          "heading": "Perguntas frequentes",
+          "body": [
+            "P: Como verifico a qualidade dos backlinks de um domínio expirado antes de comprar?\nR: Use o Ahrefs Site Explorer ou o Majestic para obter você mesmo a lista completa de domínios de referência — nunca confie em prints do vendedor. Analise manualmente os 20–30 principais sites que linkam em busca de conteúdo real, tráfego genuíno e contexto editorial para o link. Confira se a distribuição dos textos-âncora é natural e variada. Veja a pontuação de toxicidade do domínio no Semrush. Compare os resultados em pelo menos duas ferramentas — sinais coerentes no Ahrefs e no Majestic indicam um perfil genuíno, e divergências grandes merecem investigação.",
+            "P: Qual é a forma mais segura de pagar a compra particular de um domínio expirado?\nR: O Escrow.com é a referência em transações particulares de domínios. O comprador deposita o dinheiro, o vendedor transfere o domínio e o serviço só libera o pagamento depois que o comprador confirma o recebimento e a transferência correta. Nunca transfira dinheiro direto para um vendedor particular, não pague com criptomoeda sem possibilidade de contestação e não pague adiantado antes da transferência. Em compras em mercados consolidados como GoDaddy Auctions, Sedo ou NameJet, a proteção ao comprador da própria plataforma oferece segurança equivalente.",
+            "P: Como sei se um domínio expirado tem uma penalidade oculta do Google?\nR: O indicador mais confiável é o histórico de tráfego orgânico do domínio no Ahrefs ou no Semrush. Uma penalidade real do Google costuma aparecer como uma queda repentina e acentuada do tráfego orgânico — muitas vezes de 90–100% — numa data específica que coincide com uma atualização do algoritmo ou uma revisão manual. Um declínio gradual combina mais com o envelhecimento natural do conteúdo. Depois da compra, cadastre o domínio no Google Search Console e veja o relatório de Ações manuais em busca de penalidades ativas que não aparecem nas ferramentas de terceiros.",
+            "P: Os leilões de domínios da GoDaddy e do NameJet são seguros?\nR: Plataformas de leilão consolidadas como GoDaddy Auctions, NameJet e Sedo são bem mais seguras que transações particulares ou plataformas desconhecidas. Elas exigem verificação de identidade, guardam registros de todas as transações e têm processos formais de resolução de disputas. O risco de lances falsos existe em todas as plataformas de leilão, mas diminui se você calcular seu lance máximo antes do leilão com base só na sua avaliação independente — e tratar esse número como teto absoluto, independentemente dos lances concorrentes.",
+            "P: O que devo fazer logo depois de comprar um domínio expirado?\nR: Logo após a compra, confirme que o domínio foi transferido com sucesso para a sua conta na registradora e que o registro WHOIS mostra você como titular. Configure a hospedagem e ative o SSL para garantir a presença técnica do domínio. Cadastre-o no Google Search Console para verificar se há ações manuais ativas. Depois, coloque sua estratégia em prática — criar conteúdo ligado ao nicho histórico do domínio ou configurar um redirecionamento 301 para o seu site principal. Acompanhe o progresso da indexação no Google Search Console e no Ahrefs nos 30–60 dias seguintes.",
+            "P: Como sei se um nome de domínio tem problema de marca?\nR: Pesquise o nome do domínio — e qualquer expressão ou palavra reconhecível dentro dele — na base de marcas do USPTO (tmsearch.uspto.gov) para marcas dos EUA e na Global Brand Database da WIPO (branddb.wipo.int) para marcas internacionais. Se for o caso, pesquise também no EUIPO (euipo.europa.eu) as marcas europeias. Conflitos de marca não são só correspondências exatas, mas também nomes que podem causar confusão. Se houver coincidência com uma marca ativa, consulte um advogado de propriedade intelectual antes de comprar — reclamações UDRP podem fazer você perder o domínio sem compensação.",
+            "P: O que é uma reclamação UDRP e como ela afeta quem compra domínios expirados?\nR: A UDRP (Uniform Domain Name Dispute Resolution Policy) é um processo administrado pela ICANN pelo qual titulares de marcas podem contestar registros de domínios que acreditam violar suas marcas. Se um titular vencer uma reclamação UDRP contra um domínio que você registrou, o domínio pode ser transferido para ele sem nenhuma compensação financeira para você — não importa quanto você pagou. Esse risco vale até para domínios expirados que você comprou legitimamente em leilão. Verificar marcas antes da compra é a única forma eficaz de reduzir esse risco."
+          ]
+        }
+      ]
     }
   }
 }
