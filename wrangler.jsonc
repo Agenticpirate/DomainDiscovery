@@ -5,7 +5,9 @@
   "compatibility_flags": ["nodejs_compat"],
   "main": "vinext/server/app-router-entry",
   "assets": {
-    "not_found_handling": "none"
+    "not_found_handling": "none",
+    // Serve .html files as-is (no /x.html -> /x redirect) so verification files work.
+    "html_handling": "none"
   },
   "observability": {
     "enabled": true
