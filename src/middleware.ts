@@ -10,6 +10,9 @@ import {
   stripLocalePrefix,
 } from '@/lib/i18n/locales';
 
+const APEX_HOST = 'domainsdiscovery.com';
+const CANONICAL_HOST = 'www.domainsdiscovery.com';
+
 function isAdaHost(host: string): boolean {
   const h = host.toLowerCase().split(':')[0];
   const configured = (process.env.NEXT_PUBLIC_ADA_HOST || '')
@@ -46,6 +49,13 @@ export function middleware(request: NextRequest) {
     host.includes('127.0.0.1') ||
     host.includes('0.0.0.0') ||
     host.endsWith('.local');
+
+  // One host for search engines: the bare domain 301s to the canonical www host,
+  // otherwise both serve the same pages and split ranking signals.
+  if (process.env.NODE_ENV === 'production' && host.toLowerCase().split(':')[0] === APEX_HOST) {
+    const dest = new URL(`${request.nextUrl.pathname}${request.nextUrl.search}`, `https://${CANONICAL_HOST}`);
+    return NextResponse.redirect(dest, 301);
+  }
 
   // Enforce HTTPS in production: redirect all plain HTTP requests to HTTPS immediately
   if (process.env.NODE_ENV === 'production' && !isLocal) {
@@ -197,7 +207,7 @@ function handleLocale(request: NextRequest) {
   url.pathname = bare;
   const response = NextResponse.rewrite(url, { request: { headers: requestHeaders } });
   if (!isCrawler(request)) localeCookie(response, locale);
-  // Learn guides decide for themselves: indexed once a guide exists in every language.
+  // Learn guides decide for themselves: each translated language is indexed on its own.
   if (!isIndexableLocalePath(bare) && !isLearnArticlePath(bare)) {
     response.headers.set('X-Robots-Tag', 'noindex, follow');
   }

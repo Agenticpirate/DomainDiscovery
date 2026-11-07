@@ -52,6 +52,7 @@ export const INDEXABLE_LOCALE_PATHS = [
   '/tools/compare',
   '/tools/geo',
   '/faq',
+  '/learn',
   '/contact',
   '/privacy',
   '/terms',
