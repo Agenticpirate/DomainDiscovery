@@ -1,0 +1,162 @@
+{
+ "title": "Como ocultar seus dados pessoais no WHOIS (guia de privacidade de domínio)",
+ "description": "Aprenda a ocultar seus dados pessoais no WHOIS com a proteção de privacidade de domínio. Veja como funciona, quanto custa e quais registradores oferecem de graça.",
+ "sections": [
+  [
+   "Visão geral",
+   [
+    "A proteção de privacidade de domínio (privacidade WHOIS) substitui seu nome, endereço, telefone e e-mail no banco de dados público do WHOIS por dados proxy do seu registrador. Ative-a nas configurações de domínio do seu registrador, em “WHOIS Privacy”, “Domain Privacy” ou “WhoisGuard”. É gratuita na Namecheap, na Cloudflare e na Porkbun, e vale a pena ativá-la em todos os domínios que você possui."
+   ]
+  ],
+  [
+   "Por que seus dados estão no WHOIS?",
+   [
+    "A ICANN, organização que supervisiona os nomes de domínio no mundo todo, sempre exigiu que os registrantes fornecessem dados de contato corretos ao registrar um domínio. Essa política de transparência foi pensada para:",
+    "Permitir a resolução de disputas por abuso (contatar spammers, violadores de direitos autorais etc.)",
+    "Ajudar empresas a verificar a titularidade de um domínio",
+    "Permitir contatar responsáveis técnicos em caso de problemas de rede",
+    "O problema: esses mesmos dados de acesso público logo viraram alvo de spammers, operadores de telemarketing, golpistas e, às vezes, perseguidores. Donos de domínios passaram a receber enxurradas de spam, ligações indesejadas e e-mails de phishing só por terem registrado um nome de domínio.",
+    "É aí que entra a proteção de privacidade de domínio."
+   ]
+  ],
+  [
+   "O que é a proteção de privacidade de domínio?",
+   [
+    "A proteção de privacidade de domínio (às vezes chamada de privacidade WHOIS, privacy guard ou domain privacy) é um serviço oferecido pela maioria dos registradores que substitui seus dados pessoais do WHOIS pelos dados de contato do registrador (ou de um serviço proxy).",
+    "Em vez de o seu registro WHOIS mostrar:",
+    "`` Registrant Name: Jane Smith Registrant Address: 123 Main Street, Austin, TX 78701 Registrant Phone: +1.5125551234 Registrant Email: jane@personalmail.com ``",
+    "Ele mostra algo como:",
+    "`` Registrant Name: WhoisGuard Protected Registrant Address: 11400 W. Olympic Blvd., Suite 200, Los Angeles, CA 90064 Registrant Phone: +1.6614842237 Registrant Email: abc123@proxy.whoisguard.com ``",
+    "O e-mail proxy encaminha as mensagens legítimas para você, então você continua recebendo avisos importantes do registrador sem expor seu endereço real."
+   ]
+  ],
+  [
+   "Como a proteção de privacidade funciona tecnicamente",
+   [
+    "Quando você ativa a proteção, seu registrador cria uma identidade proxy que ocupa o seu lugar no registro público do WHOIS. Veja o fluxo:",
+    "1. Alguém consulta seu domínio no WHOIS e vê os dados proxy",
+    "2. Se enviar um e-mail ao endereço proxy, ele é encaminhado para o seu e-mail real",
+    "3. Seu nome, endereço e telefone reais ficam guardados só nos registros privados do registrador",
+    "4. Autoridades policiais e processos legais legítimos ainda podem solicitar seus dados reais pelos canais adequados",
+    "O ponto essencial: isso não afeta em nada o funcionamento do seu domínio ou site. É só uma mudança no registro WHOIS: seu DNS, servidores de nomes e site funcionam exatamente igual."
+   ]
+  ],
+  [
+   "Do que a privacidade WHOIS protege você",
+   [
+    "Spam e abordagens comerciais indesejadas",
+    "É o maior benefício prático. Bots coletores de WHOIS rastreiam e-mails de registrantes e os vendem para listas de mala direta. Ocultar seus dados do WHOIS reduz muito o spam relacionado ao domínio.",
+    "Ligações indesejadas e telemarketing",
+    "Com seu telefone no WHOIS, corretores de domínios, vendedores de hospedagem e operadores de telemarketing conseguem encontrá-lo. A proteção de privacidade elimina esse caminho.",
+    "Exposição do endereço físico",
+    "Se você trabalha em casa e registra domínios com seu endereço pessoal, esse endereço fica visível ao público sem a proteção de privacidade. Para muitos autônomos e criadores, é uma preocupação legítima de segurança.",
+    "Ataques de engenharia social",
+    "Cibercriminosos usam dados do WHOIS em ataques direcionados. Saber seu nome real, e-mail e registrador ajuda a montar e-mails de phishing convincentes ou tentar tomar contas. Remover seus dados do WHOIS reduz essa superfície de risco."
+   ]
+  ],
+  [
+   "Do que a privacidade WHOIS NÃO protege você",
+   [
+    "É importante deixar claras as limitações:",
+    "Processos legais: tribunais, autoridades policiais e a ICANN ainda podem acessar seus dados reais por meio de solicitações formais ao seu registrador",
+    "Disputas de marca: se você estiver infringindo uma marca, a proteção de privacidade não impedirá um processo UDRP (Política Uniforme de Resolução de Disputas de Nomes de Domínio)",
+    "Histórico de pagamentos: seus registros financeiros com o registrador são privados, independentemente das configurações de privacidade WHOIS",
+    "Monitoramento de domínios: as pessoas ainda podem ver que um domínio está registrado, quando expira e quais servidores de nomes usa, apenas não seus dados pessoais",
+    "A privacidade WHOIS é uma ferramenta legítima para registrantes legítimos. Não é um escudo para atividades ilegais."
+   ]
+  ],
+  [
+   "O GDPR já me protege?",
+   [
+    "Se você está na União Europeia (ou registra de um país com leis de privacidade semelhantes), o GDPR já levou a maioria dos registradores a ocultar automaticamente dados pessoais no WHOIS público. Na prática, a maioria dos registrantes da UE tem proteção de fato sem precisar ativá-la explicitamente.",
+    "Porém, a proteção do GDPR não é garantida para todos os domínios e todos os registradores, e não vale para registrantes fora da UE. Ativar explicitamente a proteção de privacidade de domínio continua sendo a forma mais confiável de manter seus dados privados, onde quer que você esteja."
+   ]
+  ],
+  [
+   "Quanto custa a privacidade de domínio?",
+   [
+    "Aqui as políticas dos registradores variam bastante. Alguns cobram pela proteção de privacidade; outros a incluem de graça.",
+    "Registradores que oferecem privacidade WHOIS grátis",
+    "Namecheap: inclui a privacidade WhoisGuard grátis para sempre em todos os domínios elegíveis",
+    "Cloudflare Registrar: privacidade incluída sem custo extra",
+    "Porkbun: privacidade grátis em todos os domínios registrados",
+    "Google Domains (agora Squarespace): privacidade incluída grátis",
+    "Hover: privacidade incluída na maioria dos TLDs",
+    "Registradores que cobram pela privacidade",
+    "GoDaddy: cobra cerca de $9.99/ano pelo complemento “Full Domain Privacy + Protection”",
+    "Network Solutions: cobra a privacidade como complemento",
+    "Register.com: privacidade disponível por custo adicional",
+    "O custo da privacidade de domínio varia, mas raramente passa de $10–$15/ano. Dado o volume de spam e o risco que ela reduz, quase sempre vale pagar se o seu registrador cobrar.",
+    "Dica de especialista: se o seu registrador atual cobra pela privacidade de domínio e você está com orçamento apertado, migrar para a Namecheap, a Porkbun ou a Cloudflare, com privacidade embutida e gratuita, é uma forma legítima de economizar, principalmente em carteiras grandes de domínios."
+   ]
+  ],
+  [
+   "Como ativar a proteção de privacidade de domínio (passo a passo)",
+   [
+    "Passo 1: entre na conta do seu registrador",
+    "Acesse o site do seu registrador e faça login. Vá até a área de gerenciamento de domínios.",
+    "Passo 2: selecione o domínio",
+    "Clique no domínio para o qual quer ativar a privacidade. Você será levado à página de configurações individuais desse domínio.",
+    "Passo 3: encontre a opção de privacidade",
+    "Procure opções com estes nomes:",
+    "“WHOIS Privacy”",
+    "“Domain Privacy”",
+    "“WhoisGuard”",
+    "“Privacy Protection”",
+    "“Registrant Data Masking”",
+    "O local varia conforme o registrador. Geralmente fica nas configurações principais ou de segurança do domínio.",
+    "Passo 4: ative a privacidade",
+    "Ligue a opção ou adicione o serviço ao carrinho, caso exija compra separada. Conclua as etapas de pagamento necessárias.",
+    "Passo 5: verifique a mudança",
+    "Depois de ativar, faça uma consulta WHOIS do seu domínio (usando whois.domaintools.com ou whois.icann.org). Confirme que seus dados pessoais foram substituídos pelos dados proxy.",
+    "Observação: as atualizações do WHOIS nem sempre são instantâneas. Conte com até 24–48 horas para o mascaramento aparecer nos resultados públicos do WHOIS."
+   ]
+  ],
+  [
+   "Privacidade de domínio em registros empresariais e pessoais",
+   [
+    "Registros de pessoa física / pessoais",
+    "A proteção de privacidade é altamente recomendada. Seu endereço residencial, telefone pessoal e e-mail pessoal não têm por que estar em um banco de dados público. Ative-a em todos os domínios que você possui.",
+    "Registros empresariais",
+    "Para empresas, a conta é um pouco diferente. O endereço de uma empresa (principalmente de um escritório comercial) muitas vezes já é público de qualquer maneira. Algumas empresas escolhem exibir o endereço comercial real no WHOIS como sinal de confiança, em especial em setores em que a transparência importa.",
+    "Mesmo assim, até para empresas, usar um endereço genérico da companhia em vez dos dados de um funcionário específico é uma boa prática.",
+    "Domínios de alto perfil e marcas",
+    "Se você tem um domínio valioso ou muito reconhecível, a proteção de privacidade é essencial. Domínios de alto perfil atraem mais atenção de corretores de domínios, cybersquatters e, às vezes, de pessoas mal-intencionadas. Limitar o acesso deles aos seus dados pessoais é uma boa higiene de segurança."
+   ]
+  ],
+  [
+   "Trocar de registrador para ter melhores opções de privacidade",
+   [
+    "Se você paga hoje pela privacidade WHOIS em um registrador que cobra por ela, faça as contas: com 10 domínios a $10/ano de privacidade, são $100/ano só de privacidade. Transfira para um registrador que a inclua de graça e você economiza esse dinheiro na hora (mantendo uma proteção equivalente).",
+    "O processo de transferência é simples (veja nosso guia sobre como transferir um nome de domínio), e a proteção de privacidade em registradores de destino como a Namecheap ou a Porkbun é tão eficaz quanto a que você paga hoje."
+   ]
+  ],
+  [
+   "Veredito do especialista",
+   [
+    "A proteção de privacidade de domínio é a medida de proteção mais subutilizada ao alcance dos donos de domínios, e não há desculpa para ignorá-la quando ativá-la não custa nada. O risco prático de ter dados pessoais no banco de dados público do WHOIS não é teórico: é uma fonte ativa e contínua de e-mails de spam, ligações indesejadas e, nos piores casos, ataques de phishing direcionados que aproveitam as informações do registrador e do domínio visíveis no registro WHOIS.",
+    "O argumento comercial é igualmente direto. Donos individuais que registram de casa expõem publicamente a própria localização física. Funcionários que registram domínios da empresa em contas pessoais expõem seus contatos privados em nome da companhia. Nenhum dos dois é um risco aceitável quando a solução é grátis ou custa $10 por ano.",
+    "O cenário dos registradores em 2026 se dividiu claramente quanto à privacidade: os registradores feitos para donos de domínios atentos a custos (Namecheap, Cloudflare, Porkbun) a incluem grátis por padrão, enquanto os registradores tradicionais (GoDaddy, Network Solutions) continuam cobrando como complemento premium. Para quem gerencia mais de 2–3 domínios em um registrador que cobra pela privacidade, a conta de migrar para um com privacidade grátis é inequívoca. A qualidade da proteção é equivalente; a única diferença é se você paga por ela."
+   ]
+  ],
+  [
+   "Perguntas frequentes",
+   [
+    "P: A proteção de privacidade de domínio afeta meu site ou e-mail?\nR: Não. A proteção de privacidade só muda quais informações aparecem no banco de dados público do WHOIS. Ela não afeta seu site, registros DNS, servidores de nomes, entrega de e-mail nem a possibilidade de transferir o domínio. Seu site e seu e-mail funcionam igual com a privacidade ativada ou desativada.",
+    "P: A privacidade WHOIS é grátis ou custa dinheiro?\nR: Depende do seu registrador. Namecheap, Cloudflare Registrar e Porkbun incluem a privacidade WHOIS grátis em todos os domínios elegíveis. GoDaddy e Network Solutions cobram cerca de $9.99–$15 por ano pela privacidade como complemento. A qualidade da proteção é equivalente, seja qual for o custo: se você paga pela privacidade, considere migrar para um registrador que a inclua de graça.",
+    "P: Alguém ainda consegue achar meus dados pessoais se eu usar privacidade WHOIS?\nR: Com a privacidade ativada, seus dados pessoais não aparecem nas consultas públicas do WHOIS. No lugar, aparecem os dados proxy (o endereço do registrador e um e-mail de encaminhamento). Porém, seus dados reais continuam acessíveis às autoridades policiais por meio de solicitações legais formais ao seu registrador, e a quem reivindica propriedade intelectual pelo processo de disputa UDRP.",
+    "P: A privacidade WHOIS impede transferências de domínio?\nR: Não. A privacidade WHOIS não bloqueia nem restringe transferências de domínio. Ao iniciar uma transferência, o código de autorização EPP ainda é enviado ao seu e-mail real (pelo sistema de encaminhamento do proxy de privacidade), e o processo de aprovação funciona normalmente. A proteção de privacidade e as transferências de domínio funcionam de forma independente.",
+    "P: O que acontece com os e-mails enviados ao meu endereço proxy do WHOIS?\nR: As mensagens enviadas ao seu endereço proxy do WHOIS (o e-mail de encaminhamento exibido no registro público) são encaminhadas automaticamente ao seu e-mail real pelo serviço de privacidade do registrador. Você recebe as mensagens legítimas, como avisos do registrador e consultas sobre o domínio, sem expor seu e-mail verdadeiro. Filtros de spam podem capturar algumas mensagens encaminhadas; confira sua pasta de spam se estiver esperando e-mails encaminhados.",
+    "P: Devo ativar a privacidade WHOIS em todos os domínios que possuo?\nR: Sim, como regra geral. Para registrantes pessoa física, recomenda-se muito a proteção de privacidade em todos os domínios: seus dados pessoais não têm motivo para ser de acesso público. Em registros empresariais, usar um endereço da empresa e um e-mail genérico da companhia no WHOIS (em vez dos dados de um funcionário) oferece transparência adequada e protege as pessoas da organização.",
+    "P: Posso ativar a privacidade WHOIS depois que meu domínio já foi registrado?\nR: Sim. Você pode ativar a proteção de privacidade a qualquer momento, mesmo anos depois de registrar o domínio sem ela. Uma vez ativada, as atualizações do WHOIS se propagam em 24–48 horas, substituindo seus dados pessoais por dados proxy. Os dados pessoais que antes estavam visíveis no WHOIS não podem ser removidos retroativamente de registros em cache nem de serviços de terceiros de histórico do WHOIS que os capturaram antes."
+   ]
+  ],
+  [
+   "Proteja sua privacidade desde o começo",
+   [
+    "A hora mais fácil de ativar a privacidade de domínio é o momento do registro, antes mesmo de seus dados reais aparecerem no banco de dados público do WHOIS.",
+    "Use o DomainsDiscovery.com para verificar na hora a disponibilidade de domínios e comparar preços entre registradores. Compare quais registradores incluem privacidade WHOIS grátis, encontre os melhores preços de registro e comece cada registro de domínio com sua privacidade protegida desde o primeiro dia."
+   ]
+  ]
+ ]
+}

@@ -1,0 +1,121 @@
+{
+ "title": "Que se passe-t-il si vous ne renouvelez pas votre nom de domaine ?",
+ "description": "Que se passe-t-il si votre domaine expire ? Découvrez le calendrier complet des conséquences d’un domaine expiré, de la période de grâce à la suppression, et comment protéger votre activité.",
+ "sections": [
+  [
+   "Vue d’ensemble",
+   [
+    "Quand un domaine expire, votre site web et votre messagerie se coupent immédiatement. Vous disposez d’environ 30 jours pour renouveler au tarif standard (période de grâce), puis d’une période de rédemption de 30 jours avec des frais de $100–$400, puis de 5 jours de suppression en attente, après quoi le domaine est libéré au public. Activez le renouvellement automatique et gardez à jour vos coordonnées chez votre registrar pour éviter totalement ce désastre parfaitement évitable."
+   ]
+  ],
+  [
+   "Le calendrier d’expiration d’un domaine : jour par jour",
+   [
+    "L’expiration d’un domaine n’est pas instantanée. Il existe un processus structuré qui vous donne plusieurs occasions de récupérer votre domaine, mais la fenêtre se referme vite et les coûts augmentent.",
+    "Avant l’expiration : la période d’avertissement",
+    "La plupart des registrars commencent à envoyer des rappels de renouvellement 60 à 90 jours avant l’expiration de votre domaine. Ils arrivent par e-mail à l’adresse enregistrée chez votre registrar. C’est crucial : si vous avez changé d’adresse e-mail, fermé ce compte ou laissé les e-mails de votre registrar partir en spam, vous ne verrez peut-être jamais ces avertissements.",
+    "Assurez-vous que votre registrar dispose toujours de votre adresse e-mail actuelle et surveillée. Mieux encore, activez le renouvellement automatique avec un moyen de paiement valide enregistré.",
+    "Jour 0 : date d’expiration",
+    "Quand votre domaine atteint sa date d’expiration sans avoir été renouvelé, le registrar le suspend généralement immédiatement. Concrètement :",
+    "Votre site web se met hors ligne (les visiteurs voient une page d’erreur ou une page de parking hébergée par le registrar)",
+    "Votre messagerie cesse de fonctionner : les messages entrants peuvent être rejetés et vous ne pouvez plus en envoyer",
+    "Tous les services liés au domaine (sous-domaines, applications, API) cessent de fonctionner",
+    "La gravité dépend de votre configuration d’hébergement, mais dans la plupart des cas, l’interruption est immédiate et totale.",
+    "Jours 1–30 : la période de grâce",
+    "La plupart des registrars proposent une période de grâce d’environ 30 jours après l’expiration. Pendant ce temps, vous pouvez encore renouveler votre domaine au tarif de renouvellement standard, sans frais supplémentaires.",
+    "Pendant la période de grâce :",
+    "Le domaine est toujours dans votre compte",
+    "Vous pouvez le renouveler et rétablir rapidement toutes les fonctions",
+    "Votre site et votre messagerie restent suspendus dans la plupart des cas, mais le rétablissement est rapide une fois le renouvellement effectué",
+    "Agissez immédiatement si vous découvrez que votre domaine a expiré. N’attendez pas : la fenêtre devient plus coûteuse et plus incertaine avec le temps.",
+    "Jours 30–45 : la période de grâce de rédemption",
+    "Une fois la période de grâce standard terminée, la plupart des domaines entrent dans ce qu’on appelle la période de grâce de rédemption (RGP), qui dure généralement 30 jours. C’est là que les choses deviennent chères.",
+    "Pendant la RGP :",
+    "Vous pouvez encore récupérer votre domaine, mais les frais de rédemption vont généralement de $100 à $400 en plus du coût de renouvellement standard",
+    "Le domaine reste enregistré à votre nom mais ne se résout pas (votre site et votre messagerie restent hors service)",
+    "Le domaine n’est pas encore disponible à l’enregistrement pour d’autres",
+    "La RGP marque une escalade importante en coût comme en stress. Si vous êtes dans cette fenêtre, renouvelez immédiatement.",
+    "Jours 45–75 : suppression en attente",
+    "Après la période de grâce de rédemption, votre domaine passe au statut de suppression en attente (Pending Delete). Cette période dure généralement environ 5 jours.",
+    "Pendant cette période :",
+    "Vous NE POUVEZ PAS renouveler ni récupérer le domaine, il vous échappe",
+    "Le domaine est placé en file d’attente de suppression",
+    "Les registrars et les services de capture de domaines (drop-catching) surveillent les domaines qui expirent à ce stade",
+    "Jour 75 et au-delà : domaine libéré et disponible",
+    "Une fois la période de suppression en attente terminée, le domaine est remis dans le pool général et devient disponible pour quiconque veut l’enregistrer, y compris des investisseurs en domaines, des concurrents et des cybersquatteurs.",
+    "Si votre domaine avait de la valeur (trafic établi, backlinks, notoriété de marque), vous le perdrez presque certainement au profit d’un investisseur professionnel qui guettait sa libération."
+   ]
+  ],
+  [
+   "Les conséquences d’un domaine échu : ce qui casse vraiment",
+   [
+    "Votre site web se met hors ligne",
+    "C’est la conséquence la plus visible. Les visiteurs qui essaient d’atteindre votre site voient l’erreur « Impossible d’accéder à ce site » ou une page de parking générique du registrar, souvent remplie de publicités pour vos concurrents.",
+    "Chaque minute où votre site est hors ligne vous coûte des clients potentiels, du chiffre d’affaires et de la confiance.",
+    "Votre messagerie cesse de fonctionner",
+    "C’est souvent plus dommageable que la mise hors ligne du site. Chaque e-mail envoyé à l’adresse de votre domaine est rejeté avec un message d’erreur. Les clients qui tentent de vous joindre reçoivent des notifications de rejet et supposent que vous avez cessé votre activité. Les échanges importants sont perdus définitivement.",
+    "Pour une entreprise qui dépend de l’e-mail pour la communication client, la gestion des contrats ou le traitement des commandes, c’est catastrophique.",
+    "Votre classement SEO chute",
+    "Les moteurs de recherche désindexent votre site s’il reste hors ligne longtemps. Google explore régulièrement les sites : s’il trouve à répétition une erreur 404 ou une page de parking, il commence à retirer vos pages de l’index.",
+    "Retrouver son classement après une expiration prend généralement des mois. Des années de travail SEO peuvent être anéanties par quelques semaines d’indisponibilité.",
+    "Vous perdez vos backlinks et votre autorité",
+    "Les liens d’autres sites pointant vers votre domaine ne disparaissent pas immédiatement. Mais si le domaine est récupéré par quelqu’un d’autre qui y bâtit un site totalement différent, l’autorité SEO que vous avez accumulée ne se transfère pas vers votre nouveau domaine : elle reste attachée à l’ancien, qui profite désormais à quelqu’un d’autre.",
+    "Votre entreprise paraît peu professionnelle ou disparue",
+    "Les clients, partenaires et investisseurs qui découvrent que votre domaine a expiré peuvent supposer que vous avez fait faillite, que vous traversez de graves difficultés ou que vous n’êtes tout simplement pas fiable. La confiance est difficile à rebâtir une fois cette perception installée."
+   ]
+  ],
+  [
+   "Comment fonctionnent les squatteurs de domaines et les drop catchers",
+   [
+    "La capture de domaines (drop catching) est une industrie sophistiquée et automatisée. Des services spécialisés surveillent chaque domaine qui expire, analysent son trafic, ses backlinks et sa valeur en mots-clés, puis placent des offres d’enregistrement automatiques à l’instant où le domaine est libéré.",
+    "Si votre domaine a la moindre valeur, même modérée, il sera presque certainement enregistré par un drop catcher dans les secondes qui suivent sa disponibilité. Vous devrez alors le racheter à un investisseur en domaines, potentiellement à un prix plusieurs fois supérieur au coût de l’enregistrement initial.",
+    "De grandes marques ont connu exactement ce scénario. Le coût de la récupération, financier comme en temps de marque perdu, est presque toujours bien supérieur au coût d’un renouvellement automatique."
+   ]
+  ],
+  [
+   "Comment éviter l’expiration d’un domaine",
+   [
+    "Activer le renouvellement automatique",
+    "Cette seule étape évite la grande majorité des expirations de domaines. Connectez-vous à votre compte registrar, ouvrez les paramètres de votre domaine et activez le renouvellement automatique. Vérifiez qu’une carte bancaire valide est enregistrée.",
+    "Programmez un rappel tous les 6 mois pour vérifier que le renouvellement automatique est toujours actif et que vos informations de paiement n’ont pas expiré.",
+    "Enregistrer pour plusieurs années",
+    "Enregistrer pour 2–5 ans plutôt que 1 réduit le nombre de renouvellements à gérer et vous laisse plus de marge. Cela envoie aussi un léger signal SEO : Google a indiqué que des durées d’enregistrement plus longues peuvent traduire une activité légitime sur le long terme.",
+    "Garder vos coordonnées à jour",
+    "Votre registrar envoie les avis de renouvellement à votre adresse e-mail enregistrée. Si cette adresse change, mettez-la à jour immédiatement. Beaucoup d’entreprises perdent des domaines parce que les avis sont partis vers l’e-mail d’un ancien employé ou une adresse qui n’existe plus.",
+    "Définir plusieurs rappels",
+    "En plus des e-mails du registrar, programmez vos propres rappels 90, 60 et 30 jours avant l’expiration. Ne vous fiez pas uniquement aux communications de votre registrar.",
+    "Surveiller les dates d’expiration de vos domaines",
+    "Si vous gérez plusieurs domaines, utilisez un tableur ou un outil de gestion de domaines pour suivre toutes les dates d’expiration au même endroit. Plusieurs outils gratuits et payants (comme DomainAlert, Domainr, ou simplement un Google Sheet) peuvent vous aider."
+   ]
+  ],
+  [
+   "Que faire si votre domaine a déjà expiré",
+   [
+    "1. Vérifiez immédiatement auprès de votre registrar. Connectez-vous et regardez dans quelle phase se trouve votre domaine. S’il est en période de grâce, renouvelez maintenant : le coût est le tarif de renouvellement standard.",
+    "2. Si vous êtes en période de rédemption, payez les frais de rédemption et renouvelez. Oui, c’est cher, mais c’est bien moins que de perdre entièrement le domaine.",
+    "3. Si le domaine est en suppression en attente, contactez votre registrar. Certains ont des programmes d’accès anticipé ou peuvent placer des demandes de précommande (backorder) en votre nom.",
+    "4. Si le domaine a déjà été réenregistré, vous devrez peut-être contacter le nouveau propriétaire pour le racheter. Utilisez WHOIS pour trouver ses coordonnées. Agissez vite : plus vous attendez, plus il tirera parti de votre situation."
+   ]
+  ],
+  [
+   "Verdict de l’expert",
+   [
+    "L’expiration d’un domaine est la catastrophe la plus évitable dans la possession d’un site web. Contrairement aux pannes de serveur, aux piratages ou aux pénalités d’algorithme, elle est évitable à 100 % par une seule action faite une fois : activer le renouvellement automatique avec un moyen de paiement valide. Les conséquences en aval d’une expiration (indisponibilité du site, panne de messagerie, désindexation SEO, atteinte à la réputation de la marque et perte définitive possible du domaine) sont disproportionnellement graves par rapport au geste dérisoire de prévention.",
+    "Les entreprises touchées par une expiration partagent un même schéma d’échec : elles s’en remettent aux notifications e-mail du registrar comme seule sauvegarde, puis les manquent à cause d’un changement d’adresse, d’un filtre antispam ou d’une boîte de réception négligée. La solution est la défense en profondeur : le renouvellement automatique comme protection principale, les rappels personnels dans l’agenda comme protection secondaire, et la documentation de la propriété des domaines et des dates d’expiration au niveau de l’équipe comme protection tertiaire.",
+    "Pour les entreprises qui gèrent plus de trois domaines, un audit annuel de la gestion des domaines vaut la peine. Regroupez tous les domaines chez un seul registrar, vérifiez l’état du renouvellement automatique et la validité du moyen de paiement pour chacun, remplacez tous les e-mails de contact par une adresse de groupe activement surveillée plutôt que la boîte d’un employé, et consignez les dates d’expiration dans un système partagé accessible à plus d’un membre de l’équipe. Ces étapes prennent une heure par an et éliminent totalement le risque."
+   ]
+  ],
+  [
+   "Questions fréquentes",
+   [
+    "Q : Que devient mon site quand mon domaine expire ?\nR : Quand votre domaine expire, votre site se met immédiatement hors ligne à la date d’expiration ou autour de celle-ci. Les visiteurs voient soit l’erreur « site inaccessible », soit une page de parking hébergée par le registrar, souvent avec des publicités de concurrents. Votre site reste hors ligne pendant la période de grâce et la période de grâce de rédemption ; même si vous renouvelez durant ces phases, rétablir toutes les fonctions prend généralement de quelques minutes à quelques heures après le traitement du renouvellement.",
+    "Q : De combien de temps dispose-t-on pour renouveler un domaine expiré ?\nR : Vous avez environ 60–65 jours à compter de la date d’expiration pour récupérer votre domaine, mais à des coûts croissants. Les 30 premiers jours (période de grâce) permettent de renouveler au tarif standard sans frais supplémentaires. Les jours 30–60 (période de grâce de rédemption) ajoutent des frais de rédemption de $100–$400. Après environ le jour 65, le domaine passe au statut de suppression en attente et ne peut plus du tout être récupéré : il sera libéré au public environ 5 jours plus tard.",
+    "Q : Quelqu’un d’autre peut-il enregistrer mon domaine après son expiration ?\nR : Oui. Une fois qu’un domaine a terminé la phase de suppression en attente (environ 75 jours après l’expiration), il est libéré au public et peut être enregistré par n’importe qui, y compris des concurrents, des investisseurs en domaines et des cybersquatteurs. Des services professionnels de drop catching surveillent en continu les domaines qui expirent et peuvent enregistrer un domaine libéré en quelques millisecondes grâce à des systèmes automatisés. Si votre domaine avait du trafic, de la notoriété de marque ou de la valeur en backlinks, il est très probable qu’un drop catcher s’en empare dès sa disponibilité.",
+    "Q : Combien coûte la récupération d’un domaine expiré ?\nR : Le coût dépend de la phase de récupération. Pendant la période de grâce (30 premiers jours) : le tarif de renouvellement standard ($10–$15 pour un .com). Pendant la période de grâce de rédemption (jours 30–60) : $110–$415 au total (renouvellement standard plus $100–$400 de frais de rédemption). Une fois le domaine acquis par un tiers : le prix du marché fixé par le nouveau propriétaire, généralement de $200 à plusieurs milliers de dollars selon la valeur perçue du domaine. La récupération auprès de drop catchers se négocie et peut être coûteuse.",
+    "Q : Comment éviter que mon domaine expire par accident ?\nR : La prévention la plus fiable consiste à activer le renouvellement automatique dans votre compte registrar et à garder un moyen de paiement valide enregistré. Complétez avec des rappels personnels 90, 60 et 30 jours avant l’expiration, l’assurance que votre registrar a votre adresse e-mail actuelle et surveillée, l’enregistrement du domaine pour plusieurs années (2–5 plutôt que 1), et la consignation des dates d’expiration dans un endroit accessible à l’équipe plutôt que de dépendre de la mémoire d’une seule personne.",
+    "Q : L’expiration d’un domaine nuit-elle au SEO ?\nR : Oui, nettement. Quand un domaine expire et que le site se met hors ligne, les robots de Google rencontrent des erreurs au lieu de contenu lors de leurs cycles d’exploration réguliers. Après des échecs d’exploration répétés, Google commence à retirer les pages du site de l’index. Retrouver l’intégralité du classement après une expiration prend généralement 3 à 6 mois de fonctionnement régulier après la restauration du domaine. Si le domaine a été acquis par un tiers qui y a publié un autre contenu, l’historique de classement et le capital de backlinks du site d’origine profitent en pratique au nouveau propriétaire, pas au site d’origine.",
+    "Q : Quelle est la différence entre la période de grâce d’un domaine et la période de grâce de rédemption ?\nR : La période de grâce (environ jours 1–30 après l’expiration) permet de renouveler au tarif standard sans frais supplémentaires : c’est la fenêtre de récupération la plus simple et la moins chère. La période de grâce de rédemption (environ jours 30–60) est une phase plus coûteuse où le registrar facture des frais de rédemption importants ($100–$400) en plus du coût de renouvellement standard, en échange de la possibilité de récupérer avant la suppression définitive. La différence essentielle : pendant la période de grâce, le domaine est simplement suspendu ; pendant la RGP, il est entré dans le processus de suppression mais peut encore être récupéré moyennant des frais élevés."
+   ]
+  ]
+ ]
+}

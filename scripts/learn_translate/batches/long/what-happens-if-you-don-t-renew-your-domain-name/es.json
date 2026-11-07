@@ -1,0 +1,121 @@
+{
+ "title": "¿Qué pasa si no renuevas tu nombre de dominio?",
+ "description": "¿Qué pasa si tu dominio caduca? Conoce la cronología completa de las consecuencias de un dominio caducado, desde el periodo de gracia hasta la eliminación, y cómo proteger tu negocio.",
+ "sections": [
+  [
+   "Resumen",
+   [
+    "Cuando un dominio caduca, tu sitio web y tu correo se desconectan de inmediato. Tienes unos 30 días para renovar al coste estándar (periodo de gracia), seguidos de 30 días de periodo de redención con tarifas de $100–$400, y luego 5 días de eliminación pendiente, tras los cuales el dominio se libera al público. Activa la renovación automática y mantén al día los datos de contacto en tu registrador para evitar por completo este desastre totalmente evitable."
+   ]
+  ],
+  [
+   "La cronología de caducidad de un dominio: día a día",
+   [
+    "La caducidad de un dominio no es instantánea. Hay un proceso estructurado que te da varias oportunidades de recuperarlo, pero la ventana se estrecha rápido y los costes aumentan.",
+    "Antes de la caducidad: el periodo de avisos",
+    "La mayoría de los registradores empiezan a enviar recordatorios de renovación entre 60 y 90 días antes de que caduque tu dominio. Llegan por correo a la dirección registrada en tu registrador. Esto es crucial: si has cambiado de dirección de correo, cerrado esa cuenta o dejado que los correos de tu registrador vayan a spam, puede que nunca veas estos avisos.",
+    "Asegúrate de que tu registrador tenga siempre tu dirección de correo actual y que la revises. Mejor aún, activa la renovación automática con un método de pago válido registrado.",
+    "Día 0: fecha de caducidad",
+    "Cuando tu dominio llega a su fecha de caducidad sin haberse renovado, el registrador suele suspenderlo de inmediato. En la práctica esto significa:",
+    "Tu sitio web se desconecta (los visitantes ven una página de error o una página de aparcamiento del registrador)",
+    "Tu correo deja de funcionar: los mensajes entrantes pueden rebotar y no puedes enviar",
+    "Cualquier servicio conectado al dominio (subdominios, aplicaciones, API) deja de funcionar",
+    "La gravedad depende de tu configuración de hosting, pero en la mayoría de los casos la interrupción es inmediata y total.",
+    "Días 1–30: el periodo de gracia",
+    "La mayoría de los registradores ofrecen un periodo de gracia de unos 30 días tras la caducidad. Durante ese tiempo aún puedes renovar tu dominio al precio estándar de renovación, sin tarifas adicionales.",
+    "Durante el periodo de gracia:",
+    "El dominio sigue en tu cuenta",
+    "Puedes renovarlo y recuperar rápidamente toda la funcionalidad",
+    "En la mayoría de los casos tu sitio web y tu correo siguen suspendidos, pero la recuperación es rápida una vez renovado",
+    "Actúa de inmediato si descubres que tu dominio ha caducado. No esperes: la ventana se vuelve más cara e incierta con el paso del tiempo.",
+    "Días 30–45: el periodo de gracia de redención",
+    "Cuando termina el periodo de gracia estándar, la mayoría de los dominios entran en lo que se llama Periodo de Gracia de Redención (RGP), que suele durar 30 días. Aquí las cosas empiezan a encarecerse.",
+    "Durante el RGP:",
+    "Aún puedes recuperar tu dominio, pero las tarifas de redención suelen oscilar entre $100 y $400 además del coste estándar de renovación",
+    "El dominio sigue registrado a tu nombre pero no se resuelve (tu sitio y tu correo siguen caídos)",
+    "El dominio todavía no está disponible para que otros lo registren",
+    "El RGP supone una escalada importante tanto en coste como en estrés. Si estás en esta ventana, renueva de inmediato.",
+    "Días 45–75: eliminación pendiente",
+    "Tras el Periodo de Gracia de Redención, tu dominio pasa al estado de Eliminación Pendiente (Pending Delete). Este periodo suele durar unos 5 días.",
+    "Durante este periodo:",
+    "NO puedes renovar ni recuperar el dominio: está fuera de tus manos",
+    "El dominio está en cola para ser eliminado",
+    "Los registradores y los servicios de captura de dominios (drop-catching) vigilan los dominios que caducan en esta fase",
+    "Día 75 en adelante: dominio liberado y disponible",
+    "Cuando termina el periodo de Eliminación Pendiente, el dominio vuelve a liberarse al fondo común y queda disponible para que cualquiera lo registre, incluidos inversores de dominios, competidores y ciberocupas.",
+    "Si tu dominio tenía valor (tráfico consolidado, backlinks, reconocimiento de marca), casi con seguridad lo perderás a manos de un inversor profesional que estaba esperando a que se liberara."
+   ]
+  ],
+  [
+   "Consecuencias de un dominio caducado: qué se rompe realmente",
+   [
+    "Tu sitio web se desconecta",
+    "Es la consecuencia más visible. Los visitantes que intenten llegar a tu sitio verán el error “No se puede acceder a este sitio” o una página genérica de aparcamiento del registrador, a menudo llena de anuncios de tus competidores.",
+    "Cada minuto que tu sitio está caído te cuesta posibles clientes, ingresos y confianza.",
+    "Tu correo deja de funcionar",
+    "A menudo es más dañino que la caída del sitio. Todos los correos enviados a tu dirección del dominio rebotan con un mensaje de error. Los clientes que intentan contactarte reciben notificaciones de rebote y suponen que has cerrado. La correspondencia importante se pierde de forma permanente.",
+    "Para un negocio que depende del correo para comunicarse con clientes, gestionar contratos o procesar pedidos, esto es catastrófico.",
+    "Tu posicionamiento SEO cae",
+    "Los buscadores desindexarán tu sitio si está caído durante mucho tiempo. Google rastrea los sitios con regularidad: si encuentra repetidamente un 404 o una página aparcada, empieza a eliminar tus páginas del índice.",
+    "Recuperar el posicionamiento en buscadores tras una caducidad suele llevar meses. Años de trabajo de SEO pueden deshacerse con unas pocas semanas de inactividad.",
+    "Pierdes tus backlinks y tu autoridad",
+    "Los enlaces de otros sitios que apuntan a tu dominio no desaparecen de inmediato. Pero si el dominio lo recoge otra persona y construye en él un sitio completamente distinto, la autoridad SEO que acumulaste no se transfiere a tu nuevo dominio: se queda con el antiguo, que ahora beneficia a otro.",
+    "Tu negocio parece poco profesional o desaparecido",
+    "Los clientes, socios e inversores que descubran que tu dominio ha caducado pueden suponer que has cerrado, que tienes graves dificultades o que simplemente no eres fiable. Es difícil recuperar la confianza una vez que se instala esa percepción."
+   ]
+  ],
+  [
+   "Cómo funcionan los ocupantes de dominios y los drop catchers",
+   [
+    "La captura de dominios (drop catching) es una industria sofisticada y automatizada. Servicios especializados vigilan cada dominio que caduca, analizan su tráfico, sus backlinks y su valor de palabras clave, y luego hacen ofertas de registro automáticas en el instante en que el dominio se libera.",
+    "Si tu dominio tiene algún valor, aunque sea moderado, casi con seguridad lo registrará un drop catcher a los pocos segundos de quedar disponible. Entonces tendrás que comprárselo a un inversor de dominios, posiblemente a un precio muchas veces superior al coste del registro original.",
+    "Marcas famosas han vivido exactamente este escenario. El coste de la recuperación, tanto económico como en tiempo de marca perdido, es casi siempre mucho mayor que el coste de una renovación automática."
+   ]
+  ],
+  [
+   "Cómo evitar la caducidad del dominio",
+   [
+    "Activa la renovación automática",
+    "Este único paso evita la gran mayoría de las caducidades. Inicia sesión en tu cuenta del registrador, ve a la configuración de tu dominio y activa la renovación automática. Asegúrate de que haya una tarjeta de crédito válida registrada.",
+    "Pon un recordatorio en el calendario cada 6 meses para comprobar que la renovación automática sigue activa y que tus datos de pago no han caducado.",
+    "Registra por varios años",
+    "Registrar por 2–5 años en lugar de 1 reduce el número de renovaciones que tienes que gestionar y te da más margen. También envía una pequeña señal de SEO: Google ha señalado que los periodos de registro más largos pueden indicar una operación legítima a largo plazo.",
+    "Mantén al día tus datos de contacto",
+    "Tu registrador envía los avisos de renovación a tu dirección de correo registrada. Si esa dirección cambia, actualízala de inmediato. Muchas empresas pierden dominios porque los avisos de renovación fueron al correo de un antiguo empleado o a una dirección que ya no existe.",
+    "Pon varios recordatorios",
+    "Además de los correos del registrador, pon tus propios recordatorios en el calendario 90, 60 y 30 días antes de la caducidad. No dependas solo de las comunicaciones de tu registrador.",
+    "Vigila las fechas de caducidad de tus dominios",
+    "Si gestionas varios dominios, usa una hoja de cálculo o una herramienta de gestión de dominios para seguir todas las fechas de caducidad en un solo lugar. Varias herramientas gratuitas y de pago (como DomainAlert, Domainr o simplemente una hoja de Google Sheets) pueden ayudar."
+   ]
+  ],
+  [
+   "Qué hacer si tu dominio ya ha caducado",
+   [
+    "1. Revisa tu registrador de inmediato. Inicia sesión y comprueba en qué fase está tu dominio. Si está en el periodo de gracia, renueva ya: el coste es el precio estándar de renovación.",
+    "2. Si estás en el periodo de redención, paga la tarifa de redención y renueva. Sí, es caro, pero es mucho más barato que perder el dominio por completo.",
+    "3. Si el dominio está en Eliminación Pendiente, contacta con tu registrador. Algunos tienen programas de acceso anticipado o pueden hacer solicitudes de captura (backorder) en tu nombre.",
+    "4. Si el dominio ya se ha vuelto a registrar, puede que tengas que contactar con el nuevo titular para comprárselo. Usa WHOIS para encontrar sus datos de contacto. Actúa rápido: cuanto más esperes, más valor sacará de tu situación."
+   ]
+  ],
+  [
+   "Veredicto del experto",
+   [
+    "La caducidad de un dominio es la catástrofe más evitable de la propiedad de un sitio web. A diferencia de las caídas de servidor, los hackeos o las penalizaciones de algoritmo, la caducidad es 100 % evitable con una sola acción realizada una vez: activar la renovación automática con un método de pago válido. Las consecuencias posteriores de la caducidad (caída del sitio, fallo del correo, desindexación SEO, daño a la reputación de marca y posible pérdida permanente del dominio) son desproporcionadamente graves en comparación con el trivial acto de prevención.",
+    "Los negocios que sufren una caducidad comparten un patrón de fallo: confían en los avisos por correo del registrador como única protección y luego los pierden por cambios de dirección, filtros de spam o descuido de la bandeja de entrada. La solución es la defensa en profundidad: renovación automática como protección principal, recordatorios personales en el calendario como secundaria y documentación a nivel de equipo de la titularidad y las fechas de caducidad como tercera.",
+    "Para negocios que gestionan más de tres dominios, merece la pena una auditoría anual de la gestión de dominios. Consolida todos los dominios en un solo registrador, verifica el estado de la renovación automática y la validez del método de pago de cada uno, cambia todos los correos de contacto a una dirección de grupo vigilada activamente en lugar de la bandeja de un empleado concreto y documenta las fechas de caducidad en un sistema compartido al que acceda más de un miembro del equipo. Estos pasos llevan una hora al año y eliminan el riesgo por completo."
+   ]
+  ],
+  [
+   "Preguntas frecuentes",
+   [
+    "P: ¿Qué pasa con mi sitio web cuando caduca mi dominio?\nR: Cuando tu dominio caduca, tu sitio web se desconecta de inmediato en la fecha de caducidad o alrededor de ella. Los visitantes verán el error “no se puede acceder al sitio” o una página de aparcamiento alojada por el registrador, que a menudo muestra anuncios de la competencia. Tu sitio permanece desconectado durante el periodo de gracia y el periodo de gracia de redención; incluso si renuevas en estas fases, restaurar toda la funcionalidad suele llevar de unos minutos a unas horas después de procesarse la renovación.",
+    "P: ¿Cuánto tiempo tengo para renovar un dominio caducado?\nR: Tienes aproximadamente 60–65 días desde la fecha de caducidad para recuperar tu dominio, pero con costes crecientes. Los primeros 30 días (periodo de gracia) permiten renovar al coste estándar sin tarifas adicionales. Los días 30–60 (periodo de gracia de redención) añaden tarifas de redención de $100–$400. Pasado aproximadamente el día 65, el dominio entra en estado de Eliminación Pendiente y no se puede recuperar en absoluto: se liberará públicamente unos 5 días después.",
+    "P: ¿Puede otra persona registrar mi dominio después de que caduque?\nR: Sí. Cuando un dominio completa la fase de Eliminación Pendiente (unos 75 días después de caducar), se libera públicamente y cualquiera puede registrarlo, incluidos competidores, inversores de dominios y ciberocupas. Los servicios profesionales de drop catching vigilan continuamente los dominios que caducan y pueden registrar un dominio liberado en milisegundos con sistemas automatizados. Si tu dominio tenía algo de tráfico, reconocimiento de marca o valor de backlinks, es muy probable que un drop catcher lo capture en el momento en que quede disponible.",
+    "P: ¿Cuánto cuesta recuperar un dominio caducado?\nR: El coste depende de la fase de recuperación. Durante el periodo de gracia (primeros 30 días): el precio estándar de renovación ($10–$15 para .com). Durante el periodo de gracia de redención (días 30–60): $110–$415 en total (renovación estándar más tarifa de redención de $100–$400). Después de que un tercero adquiera el dominio: tarifa de mercado fijada por el nuevo titular, normalmente de $200 a miles de dólares según el valor percibido del dominio. La recuperación a manos de drop catchers se negocia y puede ser cara.",
+    "P: ¿Cómo evito que mi dominio caduque por accidente?\nR: La prevención más fiable es activar la renovación automática en tu cuenta del registrador y mantener registrado un método de pago válido. Complementa esto con: recordatorios personales en el calendario 90, 60 y 30 días antes de la caducidad; asegurarte de que tu registrador tenga tu correo actual y vigilado; registrar el dominio por varios años (2–5 en lugar de 1); y documentar las fechas de caducidad en un lugar accesible al equipo en vez de depender de los conocimientos de una sola persona.",
+    "P: ¿La caducidad de un dominio perjudica al SEO?\nR: Sí, y mucho. Cuando un dominio caduca y el sitio se desconecta, los rastreadores de Google encontrarán errores en lugar de contenido en sus ciclos regulares. Tras repetidos fallos de rastreo, Google empieza a eliminar las páginas del sitio del índice. Recuperar por completo el posicionamiento tras una caducidad suele llevar de 3 a 6 meses de funcionamiento constante tras restaurar el dominio. Si el dominio fue adquirido por un tercero que construyó otro contenido en él, el historial de posicionamiento y el valor de backlinks del sitio original benefician en la práctica al nuevo titular, no al sitio original.",
+    "P: ¿Cuál es la diferencia entre el periodo de gracia de un dominio y el periodo de gracia de redención?\nR: El periodo de gracia (aproximadamente los días 1–30 tras la caducidad) permite renovar al precio estándar sin tarifas adicionales: la ventana de recuperación más fácil y barata. El Periodo de Gracia de Redención (aproximadamente los días 30–60) es una fase más cara en la que el registrador cobra tarifas de redención considerables ($100–$400) además del coste estándar de renovación a cambio de permitir la recuperación antes de la eliminación definitiva. La diferencia clave: durante el periodo de gracia el dominio simplemente está suspendido; durante el RGP ya ha entrado en el proceso de eliminación, pero aún puede rescatarse por una tarifa elevada."
+   ]
+  ]
+ ]
+}

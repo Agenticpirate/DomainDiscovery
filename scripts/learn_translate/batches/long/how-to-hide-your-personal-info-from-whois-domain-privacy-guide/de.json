@@ -1,0 +1,162 @@
+{
+ "title": "So verbergen Sie Ihre persönlichen Daten im WHOIS (Domain-Datenschutz-Leitfaden)",
+ "description": "Erfahren Sie, wie Sie Ihre persönlichen Daten mit dem Domain-Datenschutz im WHOIS verbergen. Wie er funktioniert, was er kostet und welche Registrare ihn kostenlos anbieten.",
+ "sections": [
+  [
+   "Überblick",
+   [
+    "Der Domain-Datenschutz (WHOIS-Privacy) ersetzt Ihren Namen, Ihre Adresse, Telefonnummer und E-Mail-Adresse in der öffentlichen WHOIS-Datenbank durch Proxy-Daten Ihres Registrars. Aktivieren Sie ihn in den Domain-Einstellungen Ihres Registrars unter „WHOIS Privacy“, „Domain Privacy“ oder „WhoisGuard“. Bei Namecheap, Cloudflare und Porkbun ist er kostenlos und lohnt sich für jede Domain, die Sie besitzen."
+   ]
+  ],
+  [
+   "Warum stehen Ihre Daten überhaupt im WHOIS?",
+   [
+    "Die ICANN, die Organisation, die Domainnamen weltweit beaufsichtigt, verlangte von Domain-Registranten historisch korrekte Kontaktdaten bei der Registrierung. Diese Transparenzregel sollte:",
+    "Die Klärung von Missbrauchsfällen ermöglichen (Kontakt zu Spammern, Urheberrechtsverletzern usw.)",
+    "Unternehmen helfen, Domaininhaber zu überprüfen",
+    "Technische Ansprechpartner bei Netzwerkproblemen erreichbar machen",
+    "Das Problem: Dieselben öffentlich zugänglichen Daten wurden schnell zum Ziel von Spammern, Telefonwerbern, Betrügern und gelegentlich Stalkern. Domaininhaber bekamen allein dadurch, dass sie eine Domain registriert hatten, Unmengen an Spam, Werbeanrufen und Phishing-Mails.",
+    "Hier kommt der Domain-Datenschutz ins Spiel."
+   ]
+  ],
+  [
+   "Was ist Domain-Datenschutz?",
+   [
+    "Domain-Datenschutz (manchmal auch WHOIS-Privacy, Privacy Guard oder Domain Privacy genannt) ist ein Dienst der meisten Domain-Registrare, der Ihre persönlichen WHOIS-Daten durch die Kontaktdaten des Registrars (oder eines Proxy-Dienstes) ersetzt.",
+    "Statt dass Ihr WHOIS-Eintrag Folgendes zeigt:",
+    "`` Registrant Name: Jane Smith Registrant Address: 123 Main Street, Austin, TX 78701 Registrant Phone: +1.5125551234 Registrant Email: jane@personalmail.com ``",
+    "zeigt er etwa Folgendes:",
+    "`` Registrant Name: WhoisGuard Protected Registrant Address: 11400 W. Olympic Blvd., Suite 200, Los Angeles, CA 90064 Registrant Phone: +1.6614842237 Registrant Email: abc123@proxy.whoisguard.com ``",
+    "Die Proxy-E-Mail-Adresse leitet legitime Nachrichten an Sie weiter, sodass Sie wichtige Mitteilungen des Registrars weiterhin erhalten, ohne Ihre echte Adresse preiszugeben."
+   ]
+  ],
+  [
+   "Wie Domain-Datenschutz technisch funktioniert",
+   [
+    "Aktivieren Sie den Datenschutz, erstellt Ihr Registrar eine Proxy-Identität, die im öffentlichen WHOIS-Eintrag an Ihre Stelle tritt. So läuft es ab:",
+    "1. Jemand schlägt Ihre Domain im WHOIS nach und sieht die Proxy-Daten",
+    "2. Schickt er eine E-Mail an die Proxy-Adresse, wird sie an Ihre echte E-Mail-Adresse weitergeleitet",
+    "3. Ihr echter Name, Ihre Adresse und Telefonnummer sind nur in den privaten Unterlagen des Registrars gespeichert",
+    "4. Strafverfolgungsbehörden und legitime Rechtsverfahren können Ihre echten Daten weiterhin über die vorgesehenen Wege anfordern",
+    "Entscheidend: Das ändert nichts daran, wie Ihre Domain oder Website funktioniert. Es ist rein eine Änderung des WHOIS-Eintrags. DNS, Nameserver und Website funktionieren unverändert."
+   ]
+  ],
+  [
+   "Wovor WHOIS-Datenschutz Sie schützt",
+   [
+    "Spam und unerwünschte Werbung",
+    "Das ist der größte praktische Vorteil. WHOIS-Bots greifen die E-Mail-Adressen von Registranten ab und verkaufen sie an Mailinglisten. Wenn Sie Ihre WHOIS-Daten verbergen, sinkt der domainbezogene Spam erheblich.",
+    "Werbeanrufe und Telefonmarketing",
+    "Steht Ihre Telefonnummer im WHOIS, können Domainhändler, Hosting-Vertriebler und Telefonwerber sie finden. Der Datenschutz beseitigt diesen Angriffsweg.",
+    "Offenlegung der Postanschrift",
+    "Wenn Sie ein Unternehmen von zu Hause aus führen und Domains mit Ihrer privaten Adresse registrieren, ist diese Adresse ohne Datenschutz öffentlich sichtbar. Für viele Einzelunternehmer und Kreative ist das ein berechtigtes Sicherheitsproblem.",
+    "Social-Engineering-Angriffe",
+    "Cyberkriminelle nutzen WHOIS-Daten für gezielte Angriffe. Kennen sie Ihren echten Namen, Ihre E-Mail und Ihren Registrar, können sie überzeugende Phishing-Mails verfassen oder versuchen, Konten zu übernehmen. Wenn Ihre Daten aus dem WHOIS verschwinden, verkleinert sich diese Angriffsfläche."
+   ]
+  ],
+  [
+   "Wovor WHOIS-Datenschutz Sie NICHT schützt",
+   [
+    "Wichtig ist, die Grenzen klar zu benennen:",
+    "Rechtliche Verfahren: Gerichte, Strafverfolgungsbehörden und die ICANN können über formelle Anfragen an Ihren Registrar weiterhin auf Ihre echten Daten zugreifen",
+    "Markenstreitigkeiten: Verletzen Sie eine Marke, verhindert der Datenschutz kein UDRP-Verfahren (Uniform Domain Name Dispute Resolution Policy)",
+    "Zahlungshistorie: Ihre Finanzdaten beim Registrar sind unabhängig von den WHOIS-Datenschutzeinstellungen privat",
+    "Domain-Überwachung: Man kann weiterhin sehen, dass eine Domain registriert ist, wann sie abläuft und welche Nameserver sie nutzt, nur eben nicht Ihre persönlichen Daten",
+    "WHOIS-Datenschutz ist ein legitimes Werkzeug für legitime Registranten. Er ist kein Schutzschild für illegale Aktivitäten."
+   ]
+  ],
+  [
+   "Schützt mich nicht schon die DSGVO?",
+   [
+    "Wenn Sie in der Europäischen Union leben (oder in einem Land mit ähnlichen Datenschutzgesetzen registrieren), hat die DSGVO die meisten Registrare bereits dazu gebracht, persönliche Daten im öffentlichen WHOIS automatisch zu schwärzen. In der Praxis erhalten die meisten Registranten in der EU faktisch Datenschutz, ohne ihn ausdrücklich zu aktivieren.",
+    "Der DSGVO-Schutz ist jedoch nicht für alle Domains und alle Registrare garantiert und gilt nicht für Registranten außerhalb der EU. Den Domain-Datenschutz ausdrücklich zu aktivieren, bleibt daher der zuverlässigste Weg, Ihre Daten privat zu halten, egal wo Sie leben."
+   ]
+  ],
+  [
+   "Was kostet Domain-Datenschutz?",
+   [
+    "Hier unterscheiden sich die Registrar-Richtlinien erheblich. Manche Registrare berechnen den Datenschutz, andere schließen ihn kostenlos ein.",
+    "Registrare mit kostenlosem WHOIS-Datenschutz",
+    "Namecheap: Enthält WhoisGuard-Datenschutz lebenslang kostenlos für alle berechtigten Domains",
+    "Cloudflare Registrar: Datenschutz ohne Aufpreis enthalten",
+    "Porkbun: Kostenloser Datenschutz für alle registrierten Domains",
+    "Google Domains (jetzt Squarespace): Datenschutz kostenlos enthalten",
+    "Hover: Datenschutz bei den meisten TLDs enthalten",
+    "Registrare, die den Datenschutz berechnen",
+    "GoDaddy: Berechnet ca. $9.99/Jahr für das Add-on „Full Domain Privacy + Protection“",
+    "Network Solutions: Berechnet den Datenschutz als Zusatzoption",
+    "Register.com: Datenschutz gegen Aufpreis verfügbar",
+    "Die Kosten für den Domain-Datenschutz schwanken, liegen aber selten über $10–$15/Jahr. Angesichts der Menge an Spam und des Risikos, die er verringert, lohnt sich die Zahlung fast immer, wenn Ihr Registrar dafür Geld verlangt.",
+    "Profi-Tipp: Berechnet Ihr aktueller Registrar den Domain-Datenschutz und Sie haben ein knappes Budget, ist der Wechsel zu Namecheap, Porkbun oder Cloudflare mit kostenlos eingebautem Datenschutz eine vernünftige Sparmaßnahme, besonders bei großen Domain-Portfolios."
+   ]
+  ],
+  [
+   "So aktivieren Sie den Domain-Datenschutz (Schritt für Schritt)",
+   [
+    "Schritt 1: Beim Registrar-Konto anmelden",
+    "Rufen Sie die Website Ihres Registrars auf und melden Sie sich an. Gehen Sie in den Bereich der Domainverwaltung.",
+    "Schritt 2: Die Domain auswählen",
+    "Klicken Sie auf die Domain, für die Sie den Datenschutz aktivieren möchten. Sie gelangen zur Einstellungsseite dieser Domain.",
+    "Schritt 3: Die Datenschutzeinstellung finden",
+    "Suchen Sie nach Optionen mit diesen Bezeichnungen:",
+    "„WHOIS Privacy“",
+    "„Domain Privacy“",
+    "„WhoisGuard“",
+    "„Privacy Protection“",
+    "„Registrant Data Masking“",
+    "Die Stelle hängt vom Registrar ab. Meist finden Sie sie in den Haupteinstellungen oder den Sicherheitseinstellungen der Domain.",
+    "Schritt 4: Datenschutz aktivieren",
+    "Schalten Sie die Einstellung ein oder legen Sie den Dienst in den Warenkorb, falls er separat gekauft werden muss. Schließen Sie die nötigen Zahlungsschritte ab.",
+    "Schritt 5: Die Änderung überprüfen",
+    "Führen Sie nach der Aktivierung eine WHOIS-Abfrage für Ihre Domain durch (über whois.domaintools.com oder whois.icann.org). Prüfen Sie, ob Ihre persönlichen Daten durch die Proxy-Daten ersetzt wurden.",
+    "Hinweis: WHOIS-Updates erfolgen nicht immer sofort. Rechnen Sie mit bis zu 24–48 Stunden, bis die Schwärzung in den öffentlichen WHOIS-Ergebnissen erscheint."
+   ]
+  ],
+  [
+   "Domain-Datenschutz bei geschäftlichen und privaten Registrierungen",
+   [
+    "Private Registrierungen",
+    "Datenschutz ist dringend zu empfehlen. Ihre Privatadresse, Privattelefonnummer und private E-Mail-Adresse haben in einer öffentlichen Datenbank nichts verloren. Aktivieren Sie ihn für jede Domain, die Sie besitzen.",
+    "Geschäftliche Registrierungen",
+    "Bei Unternehmen sieht die Abwägung etwas anders aus. Eine Geschäftsadresse (insbesondere eines Büros) ist ohnehin oft öffentlich zugänglich. Manche Unternehmen zeigen ihre echte Geschäftsadresse im WHOIS bewusst als Vertrauenssignal, vor allem in Branchen, in denen Transparenz zählt.",
+    "Doch auch für Unternehmen empfiehlt es sich, eine allgemeine Firmenadresse statt der Daten einzelner Mitarbeiter zu verwenden.",
+    "Bekannte Domains und Marken",
+    "Besitzen Sie eine wertvolle oder bekannte Domain, ist Datenschutz unerlässlich. Bekannte Domains ziehen mehr Aufmerksamkeit von Domainhändlern, Cybersquattern und gelegentlich Kriminellen auf sich. Deren Zugriff auf Ihre persönlichen Daten einzuschränken, gehört zur soliden Sicherheitshygiene."
+   ]
+  ],
+  [
+   "Registrar-Wechsel für bessere Datenschutzoptionen",
+   [
+    "Zahlen Sie derzeit bei einem Registrar für WHOIS-Datenschutz, rechnen Sie nach: Bei 10 Domains zu je $10/Jahr für den Datenschutz sind das $100/Jahr allein für den Datenschutz. Wechseln Sie zu einem Registrar, der ihn kostenlos einschließt, sparen Sie das Geld sofort (bei gleichwertigem Schutz).",
+    "Der Transfer ist unkompliziert (siehe unseren Leitfaden zum Übertragen eines Domainnamens), und der Datenschutz bei Ziel-Registraren wie Namecheap oder Porkbun ist genauso wirksam wie das, wofür Sie jetzt zahlen."
+   ]
+  ],
+  [
+   "Fazit des Experten",
+   [
+    "Domain-Datenschutz ist die am meisten unterschätzte Schutzmaßnahme für Domaininhaber, und es ist unverzeihlich, ihn auszulassen, wenn die Aktivierung nichts kostet. Das praktische Risiko, persönliche Daten in der öffentlichen WHOIS-Datenbank zu haben, ist nicht theoretisch: Es ist eine aktive, dauerhafte Quelle für Spam-Mails, unerwünschte Anrufe und (im schlimmsten Fall) gezielte Phishing-Angriffe, die Registrar- und Domaininformationen aus dem WHOIS-Eintrag ausnutzen.",
+    "Auch aus geschäftlicher Sicht ist die Sache klar. Einzelne Domaininhaber, die von zu Hause aus registrieren, legen ihren Wohnort öffentlich offen. Mitarbeiter, die Firmendomains über private Konten registrieren, legen ihre privaten Kontaktdaten im Namen des Unternehmens offen. Beides ist kein vertretbares Risiko, wenn die Gegenmaßnahme kostenlos ist oder $10 pro Jahr kostet.",
+    "Die Registrar-Landschaft 2026 hat sich beim Datenschutz klar gespalten: Auf kostenbewusste Domaininhaber ausgerichtete Registrare (Namecheap, Cloudflare, Porkbun) schließen ihn standardmäßig kostenlos ein, während etablierte Registrare (GoDaddy, Network Solutions) ihn weiter als Premium-Add-on berechnen. Wer bei einem Registrar mit kostenpflichtigem Datenschutz mehr als 2–3 Domains verwaltet, für den ist der Wechsel zu einem Registrar mit kostenlosem Datenschutz wirtschaftlich eindeutig. Die Qualität des Schutzes ist gleich, der einzige Unterschied ist, ob Sie dafür zahlen."
+   ]
+  ],
+  [
+   "Häufig gestellte Fragen",
+   [
+    "F: Beeinflusst der Domain-Datenschutz meine Website oder E-Mail?\nA: Nein. Der Domain-Datenschutz ändert nur, welche Daten in der öffentlichen WHOIS-Datenbank erscheinen. Er hat keine Auswirkung auf Ihre Website, DNS-Records, Nameserver, E-Mail-Zustellung oder Domain-Transfers. Website und E-Mail funktionieren mit oder ohne Datenschutz gleich.",
+    "F: Ist WHOIS-Datenschutz kostenlos oder kostet er Geld?\nA: Das hängt von Ihrem Registrar ab. Namecheap, Cloudflare Registrar und Porkbun schließen WHOIS-Datenschutz für alle berechtigten Domains kostenlos ein. GoDaddy und Network Solutions berechnen für den Datenschutz als Add-on etwa $9.99–$15 pro Jahr. Die Schutzqualität ist unabhängig vom Preis gleich. Zahlen Sie für Datenschutz, sollten Sie einen Wechsel zu einem Registrar erwägen, der ihn kostenlos einschließt.",
+    "F: Kann jemand meine persönlichen Daten trotzdem finden, wenn ich WHOIS-Datenschutz nutze?\nA: Bei aktiviertem Datenschutz sind Ihre persönlichen Daten in öffentlichen WHOIS-Abfragen nicht sichtbar. Stattdessen erscheinen die Proxy-Daten (Adresse des Registrars und eine Weiterleitungs-E-Mail). Ihre echten Daten bleiben jedoch für Strafverfolgungsbehörden über formelle Rechtsanfragen an Ihren Registrar zugänglich und für Inhaber geistigen Eigentums über das UDRP-Streitverfahren.",
+    "F: Verhindert WHOIS-Datenschutz Domain-Transfers?\nA: Nein. WHOIS-Datenschutz blockiert oder beschränkt Domain-Transfers nicht. Beim Einleiten eines Transfers wird der EPP-Autorisierungscode weiterhin (über das Weiterleitungssystem des Datenschutz-Proxys) an Ihre echte E-Mail-Adresse gesendet, und die Transferfreigabe läuft normal ab. Datenschutz und Domain-Transfers funktionieren unabhängig voneinander.",
+    "F: Was passiert mit E-Mails an meine WHOIS-Proxy-Adresse?\nA: Nachrichten an Ihre WHOIS-Proxy-Adresse (die Weiterleitungs-E-Mail im öffentlichen WHOIS-Eintrag) werden vom Datenschutzdienst des Registrars automatisch an Ihre echte E-Mail-Adresse weitergeleitet. Sie erhalten legitime Nachrichten, etwa Registrar-Mitteilungen und Domain-Anfragen, ohne Ihre tatsächliche E-Mail-Adresse preiszugeben. Spamfilter können manche weitergeleiteten Nachrichten abfangen. Schauen Sie in Ihren Spam-Ordner, wenn Sie weitergeleitete Post erwarten.",
+    "F: Sollte ich WHOIS-Datenschutz für jede meiner Domains aktivieren?\nA: Ja, als Faustregel. Für private Registranten ist Datenschutz bei jeder Domain dringend zu empfehlen, denn Ihre persönlichen Daten haben keinen Grund, öffentlich zugänglich zu sein. Bei geschäftlichen Registrierungen sorgt eine Firmenadresse mit allgemeiner Firmen-E-Mail im WHOIS (statt der Daten einzelner Mitarbeiter) für angemessene Transparenz und schützt zugleich einzelne Personen im Unternehmen.",
+    "F: Kann ich WHOIS-Datenschutz aktivieren, nachdem die Domain bereits registriert ist?\nA: Ja. Sie können den Domain-Datenschutz jederzeit aktivieren, selbst Jahre nachdem die Domain ohne ihn registriert wurde. Nach der Aktivierung verbreiten sich WHOIS-Updates binnen 24–48 Stunden und ersetzen Ihre persönlichen Daten durch Proxy-Daten. Persönliche Daten, die zuvor im WHOIS sichtbar waren, lassen sich allerdings nicht rückwirkend aus Zwischenspeichern oder aus Drittanbieter-Diensten für WHOIS-Historie entfernen, die sie früher erfasst haben."
+   ]
+  ],
+  [
+   "Schützen Sie Ihre Privatsphäre von Anfang an",
+   [
+    "Der einfachste Zeitpunkt, den Domain-Datenschutz zu aktivieren, ist der Moment der Registrierung, bevor Ihre echten Daten überhaupt in der öffentlichen WHOIS-Datenbank erscheinen.",
+    "Prüfen Sie mit DomainsDiscovery.com sofort die Verfügbarkeit einer Domain und vergleichen Sie die Preise der Registrare. Vergleichen Sie, welche Registrare kostenlosen WHOIS-Datenschutz einschließen, finden Sie die besten Registrierungspreise und starten Sie jede Domain-Registrierung vom ersten Tag an mit geschützter Privatsphäre."
+   ]
+  ]
+ ]
+}

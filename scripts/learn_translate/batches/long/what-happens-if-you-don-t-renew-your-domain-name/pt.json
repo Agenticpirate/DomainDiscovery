@@ -1,0 +1,121 @@
+{
+ "title": "O que acontece se você não renovar seu nome de domínio?",
+ "description": "O que acontece se o seu domínio expirar? Conheça a linha do tempo completa das consequências de um domínio expirado, do período de carência à exclusão, e como proteger o seu negócio.",
+ "sections": [
+  [
+   "Visão geral",
+   [
+    "Quando um domínio expira, seu site e seu e-mail saem do ar imediatamente. Você tem cerca de 30 dias para renovar pelo custo padrão (período de carência), seguidos de 30 dias de período de redenção com taxas de $100–$400, e depois 5 dias de exclusão pendente, após os quais o domínio é liberado ao público. Ative a renovação automática e mantenha os dados de contato atualizados no registrador para evitar por completo esse desastre totalmente evitável."
+   ]
+  ],
+  [
+   "A linha do tempo da expiração de um domínio: dia a dia",
+   [
+    "A expiração de um domínio não é instantânea. Existe um processo estruturado que dá várias chances de recuperá-lo, mas a janela se estreita rápido e os custos aumentam.",
+    "Antes da expiração: o período de avisos",
+    "A maioria dos registradores começa a enviar lembretes de renovação de 60 a 90 dias antes de o domínio expirar. Eles chegam por e-mail ao endereço cadastrado no seu registrador. Isso é crucial: se você trocou de e-mail, encerrou aquela conta ou deixou os e-mails do registrador caírem no spam, talvez nunca veja esses avisos.",
+    "Garanta que o registrador sempre tenha seu e-mail atual e monitorado. Melhor ainda: ative a renovação automática com uma forma de pagamento válida cadastrada.",
+    "Dia 0: data de expiração",
+    "Quando o domínio chega à data de expiração sem ter sido renovado, o registrador geralmente o suspende de imediato. Na prática, isso significa:",
+    "Seu site sai do ar (os visitantes veem uma página de erro ou uma página de estacionamento hospedada pelo registrador)",
+    "Seu e-mail para de funcionar: as mensagens recebidas podem ser devolvidas e você não consegue enviar",
+    "Quaisquer serviços conectados ao domínio (subdomínios, aplicativos, APIs) deixam de funcionar",
+    "A gravidade depende da sua configuração de hospedagem, mas na maioria dos casos a interrupção é imediata e total.",
+    "Dias 1–30: o período de carência",
+    "A maioria dos registradores oferece um período de carência de cerca de 30 dias após a expiração. Nesse tempo, você ainda pode renovar o domínio pelo preço padrão de renovação, sem taxas extras.",
+    "Durante o período de carência:",
+    "O domínio ainda está na sua conta",
+    "Você pode renová-lo e restaurar rapidamente toda a funcionalidade",
+    "Seu site e seu e-mail continuam suspensos na maioria dos casos, mas a recuperação é rápida depois da renovação",
+    "Aja imediatamente se descobrir que seu domínio expirou. Não espere: a janela fica mais cara e incerta com o passar do tempo.",
+    "Dias 30–45: o período de carência de redenção",
+    "Quando termina o período de carência padrão, a maioria dos domínios entra no chamado Período de Carência de Redenção (RGP), que costuma durar 30 dias. É aqui que a coisa começa a ficar cara.",
+    "Durante o RGP:",
+    "Você ainda pode recuperar o domínio, mas as taxas de redenção costumam variar de $100 a $400, além do custo padrão de renovação",
+    "O domínio continua registrado no seu nome, mas não é resolvido (seu site e seu e-mail seguem fora do ar)",
+    "O domínio ainda não está disponível para que outros o registrem",
+    "O RGP é uma escalada importante, tanto em custo quanto em estresse. Se você está nessa janela, renove imediatamente.",
+    "Dias 45–75: exclusão pendente",
+    "Depois do Período de Carência de Redenção, o domínio entra no status de Exclusão Pendente (Pending Delete). Esse período costuma durar cerca de 5 dias.",
+    "Durante esse período:",
+    "Você NÃO pode renovar nem recuperar o domínio: ele está fora do seu alcance",
+    "O domínio está na fila para ser excluído",
+    "Registradores e serviços de captura de domínios (drop-catching) monitoram os domínios que expiram nessa fase",
+    "Dia 75 em diante: domínio liberado e disponível",
+    "Terminada a Exclusão Pendente, o domínio volta ao conjunto geral e fica disponível para qualquer pessoa registrar, inclusive investidores de domínios, concorrentes e cybersquatters.",
+    "Se o seu domínio tinha valor (tráfego consolidado, backlinks, reconhecimento de marca), você quase certamente o perderá para um investidor profissional que estava de olho na liberação."
+   ]
+  ],
+  [
+   "As consequências de um domínio vencido: o que realmente quebra",
+   [
+    "Seu site sai do ar",
+    "É a consequência mais visível. Os visitantes que tentarem acessar seu site verão o erro “Não é possível acessar este site” ou uma página genérica de estacionamento do registrador, muitas vezes cheia de anúncios dos seus concorrentes.",
+    "Cada minuto com o site fora do ar custa clientes em potencial, receita e confiança.",
+    "Seu e-mail para de funcionar",
+    "Muitas vezes isso é mais prejudicial do que o site cair. Todo e-mail enviado ao endereço do seu domínio é devolvido com uma mensagem de erro. Clientes que tentam falar com você recebem notificações de devolução e supõem que você encerrou as atividades. Correspondências importantes se perdem para sempre.",
+    "Para uma empresa que depende de e-mail para comunicação com clientes, gestão de contratos ou processamento de pedidos, isso é catastrófico.",
+    "Seu ranking de SEO despenca",
+    "Os buscadores desindexam seu site se ele ficar fora do ar por muito tempo. O Google rastreia os sites com regularidade: se encontra repetidamente um 404 ou uma página estacionada, começa a remover suas páginas do índice.",
+    "Recuperar o ranking nos buscadores depois de uma expiração costuma levar meses. Anos de trabalho de SEO podem ser desfeitos por algumas semanas de indisponibilidade.",
+    "Você perde seus backlinks e sua autoridade",
+    "Os links de outros sites para o seu domínio não desaparecem de imediato. Mas se o domínio for pego por outra pessoa que construa nele um site totalmente diferente, a autoridade de SEO que você acumulou não se transfere para o seu novo domínio: ela fica com o antigo, que agora beneficia outra pessoa.",
+    "Seu negócio parece pouco profissional ou encerrado",
+    "Clientes, parceiros e investidores que descobrirem que seu domínio expirou podem supor que você fechou as portas, está com sérias dificuldades ou simplesmente não é confiável. É difícil reconstruir a confiança depois que essa percepção se firma."
+   ]
+  ],
+  [
+   "Como funcionam os squatters de domínio e os drop catchers",
+   [
+    "A captura de domínios (drop catching) é uma indústria sofisticada e automatizada. Serviços especializados monitoram cada domínio que expira, analisam seu tráfego, backlinks e valor de palavras-chave, e então fazem lances automáticos de registro no instante em que o domínio é liberado.",
+    "Se o seu domínio tiver qualquer valor, mesmo moderado, quase certamente será registrado por um drop catcher em segundos depois de ficar disponível. Aí você terá de comprá-lo de volta de um investidor de domínios, possivelmente por um preço muitas vezes maior do que o custo do registro original.",
+    "Marcas famosas já enfrentaram exatamente esse cenário. O custo da recuperação, tanto financeiro quanto em tempo de marca perdido, é quase sempre muito maior do que o custo de uma renovação automática."
+   ]
+  ],
+  [
+   "Como evitar a expiração do domínio",
+   [
+    "Ative a renovação automática",
+    "Esse único passo evita a grande maioria das expirações. Entre na conta do registrador, vá às configurações do domínio e ative a renovação automática. Confirme que há um cartão de crédito válido cadastrado.",
+    "Crie um lembrete no calendário a cada 6 meses para verificar se a renovação automática continua ativa e se seus dados de pagamento não venceram.",
+    "Registre por vários anos",
+    "Registrar por 2–5 anos em vez de 1 reduz o número de renovações a gerenciar e dá mais margem de segurança. Também envia um pequeno sinal de SEO: o Google já observou que períodos de registro mais longos podem indicar uma operação legítima de longo prazo.",
+    "Mantenha os dados de contato atualizados",
+    "O registrador envia os avisos de renovação para o seu e-mail cadastrado. Se esse endereço mudar, atualize-o imediatamente. Muitas empresas perdem domínios porque os avisos foram para o e-mail de um ex-funcionário ou para um endereço que não existe mais.",
+    "Defina vários lembretes",
+    "Além dos e-mails do registrador, crie seus próprios lembretes no calendário 90, 60 e 30 dias antes da expiração. Não dependa só da comunicação do registrador.",
+    "Monitore as datas de expiração dos domínios",
+    "Se você gerencia vários domínios, use uma planilha ou uma ferramenta de gestão de domínios para acompanhar todas as datas de expiração em um só lugar. Várias ferramentas gratuitas e pagas (como DomainAlert, Domainr ou simplesmente uma planilha do Google) podem ajudar."
+   ]
+  ],
+  [
+   "O que fazer se o domínio já expirou",
+   [
+    "1. Verifique o registrador imediatamente. Entre e veja em que fase o domínio está. Se estiver no período de carência, renove agora: o custo é o preço padrão de renovação.",
+    "2. Se estiver no período de redenção, pague a taxa de redenção e renove. Sim, é caro, mas é bem mais barato do que perder o domínio de vez.",
+    "3. Se o domínio estiver em Exclusão Pendente, fale com o registrador. Alguns têm programas de acesso antecipado ou podem fazer pedidos de captura (backorder) em seu nome.",
+    "4. Se o domínio já foi registrado de novo, talvez você precise contatar o novo titular para comprá-lo de volta. Use o WHOIS para achar os dados de contato. Aja rápido: quanto mais você esperar, mais valor ele vai tirar da sua situação."
+   ]
+  ],
+  [
+   "Veredito do especialista",
+   [
+    "A expiração do domínio é a catástrofe mais evitável de quem tem um site. Ao contrário de quedas de servidor, ataques hackers ou penalidades de algoritmo, a expiração é 100% evitável com uma única ação, feita uma vez: ativar a renovação automática com uma forma de pagamento válida. As consequências da expiração (site fora do ar, falha no e-mail, desindexação no SEO, dano à reputação da marca e possível perda definitiva do domínio) são desproporcionalmente graves diante do ato trivial de prevenir.",
+    "As empresas que sofrem uma expiração de domínio têm um padrão de falha em comum: confiam nas notificações por e-mail do registrador como única salvaguarda e depois perdem esses e-mails por mudança de endereço, filtro de spam ou caixa de entrada abandonada. A solução é a defesa em camadas: renovação automática como proteção principal, lembretes pessoais no calendário como secundária e documentação da titularidade e das datas de expiração dos domínios em nível de equipe como terciária.",
+    "Para empresas que gerenciam mais de três domínios, vale fazer uma auditoria anual da gestão de domínios. Concentre todos os domínios em um único registrador, confira o status da renovação automática e a validade da forma de pagamento de cada um, troque todos os e-mails de contato por um endereço de grupo monitorado ativamente em vez da caixa de um funcionário e documente as datas de expiração em um sistema compartilhado acessível a mais de um membro da equipe. Esses passos levam uma hora por ano e eliminam o risco por completo."
+   ]
+  ],
+  [
+   "Perguntas frequentes",
+   [
+    "P: O que acontece com o meu site quando o domínio expira?\nR: Quando o domínio expira, seu site sai do ar imediatamente, na data de expiração ou por volta dela. Os visitantes verão o erro “site inacessível” ou uma página de estacionamento hospedada pelo registrador, que muitas vezes exibe anúncios de concorrentes. O site permanece fora do ar durante o período de carência e o período de carência de redenção; mesmo que você renove nessas fases, restaurar toda a funcionalidade costuma levar de minutos a algumas horas depois que a renovação é processada.",
+    "P: Quanto tempo tenho para renovar um domínio expirado?\nR: Você tem cerca de 60–65 dias a partir da data de expiração para recuperar o domínio, mas com custos crescentes. Os primeiros 30 dias (período de carência) permitem renovar pelo custo padrão, sem taxas extras. Os dias 30–60 (Período de Carência de Redenção) acrescentam taxas de redenção de $100–$400. Depois de aproximadamente o dia 65, o domínio entra no status de Exclusão Pendente e não pode mais ser recuperado: será liberado ao público cerca de 5 dias depois.",
+    "P: Outra pessoa pode registrar meu domínio depois que ele expirar?\nR: Sim. Quando um domínio conclui a fase de Exclusão Pendente (cerca de 75 dias após a expiração), ele é liberado ao público e qualquer pessoa pode registrá-lo, inclusive concorrentes, investidores de domínios e cybersquatters. Serviços profissionais de drop catching monitoram continuamente os domínios que expiram e conseguem registrar um domínio liberado em milissegundos, com sistemas automatizados. Se o seu domínio tinha algum tráfego, reconhecimento de marca ou valor de backlinks, é muito provável que um drop catcher o capture no instante em que ficar disponível.",
+    "P: Quanto custa recuperar um domínio expirado?\nR: O custo depende da fase da recuperação. Durante o período de carência (primeiros 30 dias): o preço padrão de renovação ($10–$15 para .com). Durante o Período de Carência de Redenção (dias 30–60): $110–$415 no total (renovação padrão mais taxa de redenção de $100–$400). Depois que um terceiro adquire o domínio: o valor de mercado definido pelo novo titular, normalmente de $200 a milhares de dólares, conforme o valor percebido do domínio. A recuperação junto a drop catchers é negociada e pode ser cara.",
+    "P: Como evito que meu domínio expire por acidente?\nR: A prevenção mais confiável é ativar a renovação automática na conta do registrador e manter uma forma de pagamento válida cadastrada. Complemente com: lembretes pessoais no calendário 90, 60 e 30 dias antes da expiração; garantir que o registrador tenha seu e-mail atual e monitorado; registrar o domínio por vários anos (2–5 em vez de 1); e documentar as datas de expiração em um local acessível à equipe, em vez de depender do conhecimento de uma só pessoa.",
+    "P: A expiração do domínio prejudica o SEO?\nR: Sim, e bastante. Quando um domínio expira e o site sai do ar, os rastreadores do Google encontram erros em vez de conteúdo nos ciclos regulares de rastreamento. Depois de falhas repetidas, o Google começa a remover as páginas do site do índice. Recuperar por completo o ranking depois de uma expiração costuma levar de 3 a 6 meses de funcionamento constante após a restauração do domínio. Se o domínio foi adquirido por um terceiro que construiu outro conteúdo nele, o histórico de ranking e o valor dos backlinks do site original beneficiam, na prática, o novo titular, e não o site original.",
+    "P: Qual é a diferença entre o período de carência de um domínio e o período de carência de redenção?\nR: O período de carência (aproximadamente os dias 1–30 após a expiração) permite renovar pelo preço padrão sem taxas extras: a janela de recuperação mais fácil e mais barata. O Período de Carência de Redenção (aproximadamente os dias 30–60) é uma fase mais cara, em que o registrador cobra taxas de redenção significativas ($100–$400) além do custo padrão de renovação, em troca de permitir a recuperação antes da exclusão definitiva. A diferença crucial: no período de carência o domínio está apenas suspenso; no RGP ele já entrou no processo de exclusão, mas ainda pode ser resgatado mediante uma taxa elevada."
+   ]
+  ]
+ ]
+}
