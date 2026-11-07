@@ -4,8 +4,9 @@ import { getSiteBaseUrl, SITE_CORE_PATHS } from '@/lib/seoSiteFacts';
  * IndexNow (Bing / Yandex / Seznam / Naver) — speeds discovery for engines
  * that feed ChatGPT browsing and other AI search surfaces.
  *
- * Host the key at /.well-known/indexnow.txt (custom keyLocation).
- * Override with INDEXNOW_KEY in production env.
+ * The key file must sit at the site root (/<key>.txt): IndexNow only accepts URLs under the
+ * key file's folder, so a key under /.well-known/ would only cover /.well-known/*.
+ * Override with INDEXNOW_KEY in production env (then also serve /<that key>.txt).
  *
  * Docs: https://www.indexnow.org/documentation
  */
@@ -19,7 +20,7 @@ export function getIndexNowKey(): string {
 }
 
 export function getIndexNowKeyLocation(): string {
-  return `${getSiteBaseUrl()}/.well-known/indexnow.txt`;
+  return `${getSiteBaseUrl()}/${getIndexNowKey()}.txt`;
 }
 
 /** Default URL set for bulk IndexNow pings (primary tools + GEO surfaces). */

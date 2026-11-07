@@ -52,6 +52,6 @@ export async function GET(req: NextRequest) {
     keyConfigured: Boolean(getIndexNowKey()),
     defaultUrlCount: getIndexNowDefaultUrls().length,
     usage: `POST ${base}/api/indexnow with optional { "urlList": ["${base}/..."] }`,
-    note: 'Key is served at /.well-known/indexnow.txt. Set INDEXNOW_KEY to override the default key. Set CRON_SECRET to protect POST in production.',
+    note: 'Key is served at /<key>.txt (root, required by IndexNow) and mirrored at /.well-known/indexnow.txt. Set INDEXNOW_KEY to override the default key. Set CRON_SECRET to protect POST in production.',
   });
 }
