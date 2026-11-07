@@ -84,14 +84,6 @@ const baseMetadata: Metadata = {
     title: "Domain Name Search — Free Instant Availability | DomainDiscovery",
     description:
       "Check domain availability across 1,600+ extensions. Free AI generator, bulk search, geo domains, WHOIS, and price compare.",
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "DomainDiscovery — free domain name search",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -99,7 +91,6 @@ const baseMetadata: Metadata = {
     description:
       "Check domain availability across 1,600+ extensions. Free AI generator, bulk search, geo domains, WHOIS, and price compare.",
     creator: "@domainsdiscovery",
-    images: ["/twitter-image"],
   },
   // Chrome / Android / Bing tile chrome
   other: {
