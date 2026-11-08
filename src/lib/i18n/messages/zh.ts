@@ -129,7 +129,7 @@ export const zh: Messages = {
     liveRest: '覆盖 1,600+ 个 TLD',
     h1Mobile: '找到你的域名',
     h1Desktop: '域名查询',
-    sub: '几秒内查看是否可注册',
+    sub: '发现你的下一个域名。',
     trust: ['私密', '不追踪', '即时', '免费'],
     placeholder: '查询域名',
     placeholderDots: '查询域名...',
