@@ -88,7 +88,7 @@ export const ar: Messages = {
     tagline: 'اكتشف نطاقك التالي.', builtBy: 'من إنشاء', onX: 'على X',
   },
   hero: {
-    live: 'مباشر', liveRest: 'عبر أكثر من 1600 TLD', h1Mobile: 'اعثر على نطاقك', h1Desktop: 'البحث عن اسم نطاق', sub: 'تحقق من التوفر خلال ثوانٍ',
+    live: 'مباشر', liveRest: 'عبر أكثر من 1600 TLD', h1Mobile: 'اعثر على نطاقك', h1Desktop: 'البحث عن اسم نطاق', sub: 'اكتشف نطاقك التالي.',
     trust: ['خاص', 'دون تتبّع', 'فوري', 'مجاني'],
     placeholder: 'ابحث عن اسم نطاق', placeholderDots: 'ابحث عن اسم نطاق...', placeholderAi: 'صف فكرة علامة…',
     searchDomains: 'بحث النطاقات', generateNames: 'توليد أسماء', aiOn: 'الذكاء الاصطناعي يعمل — صف العلامة', orAi: 'أو ولّد أسماء بالذكاء الاصطناعي',

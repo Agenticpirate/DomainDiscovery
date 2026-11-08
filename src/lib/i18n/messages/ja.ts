@@ -46,7 +46,7 @@ export const ja: Messages = {
     tagline: '次のドメインを見つけよう。', builtBy: '制作', onX: 'Xで',
   },
   hero: {
-    live: 'ライブ', liveRest: '1,600以上のTLD', h1Mobile: 'ドメインを見つける', h1Desktop: 'ドメイン名検索', sub: '数秒で空きを確認',
+    live: 'ライブ', liveRest: '1,600以上のTLD', h1Mobile: 'ドメインを見つける', h1Desktop: 'ドメイン名検索', sub: '次のドメインを見つけよう。',
     trust: ['非公開', '追跡なし', '即時', '無料'],
     placeholder: 'ドメイン名を検索', placeholderDots: 'ドメイン名を検索...', placeholderAi: 'ブランドのアイデアを書く…',
     searchDomains: 'ドメインを検索', generateNames: '名前を作る', aiOn: 'AIオン — ブランドを説明', orAi: 'またはAIで名前を作る',

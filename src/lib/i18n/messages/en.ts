@@ -143,7 +143,7 @@ export const en: Messages = {
     liveRest: 'across 1,600+ TLDs',
     h1Mobile: 'Find your domain',
     h1Desktop: 'Domain name search',
-    sub: 'Check availability in seconds',
+    sub: 'Discover Your Next Domain.',
     trust: ['Private', 'No tracking', 'Instant', 'Free'],
     placeholder: 'Search domain names',
     placeholderDots: 'Search domain names...',

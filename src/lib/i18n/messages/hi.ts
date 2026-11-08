@@ -46,7 +46,7 @@ export const hi: Messages = {
     tagline: 'अपना अगला डोमेन खोजें।', builtBy: 'बनाया', onX: 'X पर',
   },
   hero: {
-    live: 'लाइव', liveRest: '1,600+ TLD पर', h1Mobile: 'अपना डोमेन खोजें', h1Desktop: 'डोमेन नाम खोज', sub: 'सेकंडों में उपलब्धता देखें',
+    live: 'लाइव', liveRest: '1,600+ TLD पर', h1Mobile: 'अपना डोमेन खोजें', h1Desktop: 'डोमेन नाम खोज', sub: 'अपना अगला डोमेन खोजें।',
     trust: ['निजी', 'ट्रैकिंग नहीं', 'तुरंत', 'मुफ़्त'],
     placeholder: 'डोमेन नाम खोजें', placeholderDots: 'डोमेन नाम खोजें...', placeholderAi: 'ब्रांड का विचार लिखें…',
     searchDomains: 'डोमेन खोजें', generateNames: 'नाम बनाएँ', aiOn: 'AI चालू — ब्रांड बताएँ', orAi: 'या AI से नाम बनाएँ',

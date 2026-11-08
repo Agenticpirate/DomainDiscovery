@@ -88,7 +88,7 @@ export const ur: Messages = {
     tagline: 'اپنا اگلا ڈومین دریافت کریں۔', builtBy: 'بنایا', onX: 'X پر',
   },
   hero: {
-    live: 'لائیو', liveRest: '1,600 سے زیادہ TLD پر', h1Mobile: 'اپنا ڈومین تلاش کریں', h1Desktop: 'ڈومین نام کی تلاش', sub: 'سیکنڈوں میں دستیابی دیکھیں',
+    live: 'لائیو', liveRest: '1,600 سے زیادہ TLD پر', h1Mobile: 'اپنا ڈومین تلاش کریں', h1Desktop: 'ڈومین نام کی تلاش', sub: 'اپنا اگلا ڈومین دریافت کریں۔',
     trust: ['نجی', 'ٹریکنگ نہیں', 'فوری', 'مفت'],
     placeholder: 'ڈومین نام تلاش کریں', placeholderDots: 'ڈومین نام تلاش کریں...', placeholderAi: 'برانڈ کا خیال لکھیں…',
     searchDomains: 'ڈومین تلاش', generateNames: 'نام بنائیں', aiOn: 'AI چالو — برانڈ بیان کریں', orAi: 'یا AI سے نام بنائیں',

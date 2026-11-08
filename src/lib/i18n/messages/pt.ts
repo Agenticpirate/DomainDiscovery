@@ -46,7 +46,7 @@ export const pt: Messages = {
     tagline: 'Descubra o seu próximo domínio.', builtBy: 'Criado por', onX: 'no X',
   },
   hero: {
-    live: 'Ao vivo', liveRest: 'em mais de 1.600 TLD', h1Mobile: 'Encontre o seu domínio', h1Desktop: 'Pesquisa de nome de domínio', sub: 'Verifique a disponibilidade em segundos',
+    live: 'Ao vivo', liveRest: 'em mais de 1.600 TLD', h1Mobile: 'Encontre o seu domínio', h1Desktop: 'Pesquisa de nome de domínio', sub: 'Descubra o seu próximo domínio.',
     trust: ['Privado', 'Sem rastreio', 'Instantâneo', 'Grátis'],
     placeholder: 'Pesquisar um nome de domínio', placeholderDots: 'Pesquisar um nome de domínio...', placeholderAi: 'Descreva uma ideia de marca…',
     searchDomains: 'Pesquisar domínios', generateNames: 'Gerar nomes', aiOn: 'IA ligada — descreva uma marca', orAi: 'Ou gerar nomes com IA',
