@@ -244,8 +244,9 @@ const tree = h(
     ),
     h(
       'div',
-      { marginTop: 24, width: 470, fontSize: 22, lineHeight: 1.42, color: 'rgba(255,255,255,0.6)' },
-      'Free domain search, bulk availability checks and domain leads, all in one toolkit.'
+      { marginTop: 26, flexDirection: 'column', gap: 8 },
+      h('div', { fontSize: 30, fontWeight: 700, letterSpacing: '-0.02em', color: '#fff' }, 'Discover Your Next Domain.'),
+      h('div', { width: 470, fontSize: 19, lineHeight: 1.4, color: 'rgba(255,255,255,0.55)' }, 'Free search, bulk checks and domain leads.')
     )
   ),
 
@@ -278,7 +279,7 @@ await initWasm(readFileSync(require.resolve('@resvg/resvg-wasm/index_bg.wasm')))
 const svg = await satori(tree, { width: W, height: H, fonts });
 const png = new Resvg(svg, { fitTo: { mode: 'width', value: W } }).render().asPng();
 
-const alt = 'DomainDiscovery: find domains across 1,600+ TLDs, bulk domain search, and domain leads to find buyers';
+const alt = 'DomainDiscovery — Discover Your Next Domain. Find domains across 1,600+ TLDs, bulk domain search, and domain leads to find buyers';
 for (const name of ['opengraph-image', 'twitter-image']) {
   writeFileSync(path.join(root, 'src/app', `${name}.png`), png);
   writeFileSync(path.join(root, 'src/app', `${name}.alt.txt`), alt);

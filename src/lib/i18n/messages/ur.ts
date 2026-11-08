@@ -85,7 +85,7 @@ export const ur: Messages = {
     whois: 'WHOIS', geo: 'جیو ڈومین', compare: 'قیمت', keyword: 'کی ورڈ',
     guides: 'تمام گائیڈ', faq: 'سوالات', what: 'DD کیا ہے؟', forAi: 'AI کے لیے',
     blog: 'بلاگ', contact: 'رابطہ', privacy: 'رازداری', terms: 'شرائط', cookies: 'کوکیز', disclaimer: 'اعلان',
-    tagline: 'مفت ڈومین تلاش · براہِ راست دستیابی', builtBy: 'بنایا', onX: 'X پر',
+    tagline: 'اپنا اگلا ڈومین دریافت کریں۔', builtBy: 'بنایا', onX: 'X پر',
   },
   hero: {
     live: 'لائیو', liveRest: '1,600 سے زیادہ TLD پر', h1Mobile: 'اپنا ڈومین تلاش کریں', h1Desktop: 'ڈومین نام کی تلاش', sub: 'سیکنڈوں میں دستیابی دیکھیں',

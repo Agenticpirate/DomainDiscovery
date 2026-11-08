@@ -120,7 +120,7 @@ export const fr: Messages = {
     terms: 'Conditions',
     cookies: 'Cookies',
     disclaimer: 'Avertissement',
-    tagline: 'Recherche de domaines gratuite · Disponibilité en direct',
+    tagline: 'Découvrez votre prochain domaine.',
     builtBy: 'Créé par',
     onX: 'sur X',
   },

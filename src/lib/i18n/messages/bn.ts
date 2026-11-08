@@ -43,7 +43,7 @@ export const bn: Messages = {
     whois: 'WHOIS', geo: 'জিও ডোমেইন', compare: 'দাম তুলনা', keyword: 'কীওয়ার্ড',
     guides: 'সব গাইড', faq: 'প্রশ্ন', what: 'DD কী?', forAi: 'AI-এর জন্য',
     blog: 'ব্লগ', contact: 'যোগাযোগ', privacy: 'গোপনীয়তা', terms: 'শর্তাবলি', cookies: 'কুকি', disclaimer: 'দাবিত্যাগ',
-    tagline: 'বিনামূল্যে ডোমেইন সার্চ · লাইভ উপলব্ধতা', builtBy: 'তৈরি করেছেন', onX: 'X-এ',
+    tagline: 'আপনার পরবর্তী ডোমেইন খুঁজে নিন।', builtBy: 'তৈরি করেছেন', onX: 'X-এ',
   },
   hero: {
     live: 'লাইভ', liveRest: '১,৬০০-এর বেশি TLD-তে', h1Mobile: 'আপনার ডোমেইন খুঁজুন', h1Desktop: 'ডোমেইন নাম অনুসন্ধান', sub: 'কয়েক সেকেন্ডে উপলব্ধতা যাচাই করুন',

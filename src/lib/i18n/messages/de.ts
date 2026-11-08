@@ -43,7 +43,7 @@ export const de: Messages = {
     whois: 'WHOIS', geo: 'Geo-Domains', compare: 'Preise vergleichen', keyword: 'Keywords',
     guides: 'Alle Ratgeber', faq: 'FAQ', what: 'Was ist DD?', forAi: 'Für KI',
     blog: 'Blog', contact: 'Kontakt', privacy: 'Datenschutz', terms: 'Nutzungsbedingungen', cookies: 'Cookies', disclaimer: 'Hinweis',
-    tagline: 'Kostenlose Domain-Suche · Live-Verfügbarkeit', builtBy: 'Erstellt von', onX: 'auf X',
+    tagline: 'Entdecke deine nächste Domain.', builtBy: 'Erstellt von', onX: 'auf X',
   },
   hero: {
     live: 'Live', liveRest: 'über 1.600 TLDs', h1Mobile: 'Finden Sie Ihre Domain', h1Desktop: 'Domainnamen-Suche', sub: 'Verfügbarkeit in Sekunden prüfen',

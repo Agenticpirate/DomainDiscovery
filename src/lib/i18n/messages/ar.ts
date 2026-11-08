@@ -85,7 +85,7 @@ export const ar: Messages = {
     whois: 'WHOIS', geo: 'نطاقات جغرافية', compare: 'مقارنة الأسعار', keyword: 'كلمات مفتاحية',
     guides: 'كل الأدلة', faq: 'الأسئلة', what: 'ما هو DD؟', forAi: 'للذكاء الاصطناعي',
     blog: 'المدونة', contact: 'اتصل بنا', privacy: 'الخصوصية', terms: 'الشروط', cookies: 'ملفات الارتباط', disclaimer: 'إخلاء المسؤولية',
-    tagline: 'بحث مجاني عن النطاقات · توفر مباشر', builtBy: 'من إنشاء', onX: 'على X',
+    tagline: 'اكتشف نطاقك التالي.', builtBy: 'من إنشاء', onX: 'على X',
   },
   hero: {
     live: 'مباشر', liveRest: 'عبر أكثر من 1600 TLD', h1Mobile: 'اعثر على نطاقك', h1Desktop: 'البحث عن اسم نطاق', sub: 'تحقق من التوفر خلال ثوانٍ',

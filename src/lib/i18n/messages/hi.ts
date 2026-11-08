@@ -43,7 +43,7 @@ export const hi: Messages = {
     whois: 'WHOIS', geo: 'जियो डोमेन', compare: 'कीमत', keyword: 'कीवर्ड',
     guides: 'सभी गाइड', faq: 'प्रश्न', what: 'DD क्या है?', forAi: 'AI के लिए',
     blog: 'ब्लॉग', contact: 'संपर्क', privacy: 'गोपनीयता', terms: 'शर्तें', cookies: 'कुकीज़', disclaimer: 'अस्वीकरण',
-    tagline: 'मुफ़्त डोमेन खोज · लाइव उपलब्धता', builtBy: 'बनाया', onX: 'X पर',
+    tagline: 'अपना अगला डोमेन खोजें।', builtBy: 'बनाया', onX: 'X पर',
   },
   hero: {
     live: 'लाइव', liveRest: '1,600+ TLD पर', h1Mobile: 'अपना डोमेन खोजें', h1Desktop: 'डोमेन नाम खोज', sub: 'सेकंडों में उपलब्धता देखें',
