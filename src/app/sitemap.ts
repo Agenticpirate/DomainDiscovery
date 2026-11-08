@@ -47,7 +47,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/terms', priority: 0.4, changeFrequency: 'yearly' as const },
     { path: '/cookies', priority: 0.35, changeFrequency: 'yearly' as const },
     { path: '/disclaimer', priority: 0.35, changeFrequency: 'yearly' as const },
-    { path: '/premium', priority: 0.55, changeFrequency: 'weekly' as const },
     { path: '/expired', priority: 0.55, changeFrequency: 'weekly' as const },
   ].map(({ path, priority, changeFrequency }) => {
     const bare = path === '' ? '/' : path;

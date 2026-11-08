@@ -7,11 +7,10 @@ const description =
   'Premium domain marketplace for DomainDiscovery is coming soon. Meanwhile use free domain search, bulk check, and AI generator to find brandable names.';
 const path = '/premium';
 
-export const metadata: Metadata = buildToolMetadata({
-  title,
-  description,
-  path,
-});
+export const metadata: Metadata = {
+  ...buildToolMetadata({ title, description, path }),
+  robots: { index: false, follow: true },
+};
 
 export default function PremiumLayout({ children }: { children: React.ReactNode }) {
   return (
