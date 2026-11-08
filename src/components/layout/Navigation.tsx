@@ -91,6 +91,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     if (barePath.startsWith('/generator')) return 'generator';
     if (barePath === '/search' || barePath.startsWith('/search/')) return 'search';
     if (barePath.startsWith('/tools/whois')) return 'whois';
+    if (barePath.startsWith('/tools/value')) return 'value';
+    if (barePath.startsWith('/tools/domain-age')) return 'domain-age';
+    if (barePath.startsWith('/tools/dns')) return 'dns';
     if (barePath.startsWith('/tools/keyword') || barePath.startsWith('/tools/brandable')) return 'keyword';
     if (barePath.startsWith('/tools/compare')) return 'compare';
     if (barePath.startsWith('/tools/geo')) return 'geo';
@@ -134,13 +137,22 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     <Icons.Bulk key="bulk" className={iconSm} />,
     <Icons.Users key="leads" className={iconSm} />,
   ];
-  const toolIds = ['keyword', 'compare', 'whois', 'geo'] as const;
-  const toolHrefs = ['/tools/keyword', '/tools/compare', '/tools/whois', '/tools/geo'];
+  const toolIds = ['keyword', 'compare', 'whois', 'geo', 'value', 'domain-age', 'dns'] as const;
+  const toolHrefs = ['/tools/keyword', '/tools/compare', '/tools/whois', '/tools/geo', '/tools/value', '/tools/domain-age', '/tools/dns'];
+  // English-only tools without translated nav copy
+  const extraToolItems: Record<number, { label: string; mobile: string; description: string }> = {
+    4: { label: 'Domain Value', mobile: 'Value', description: 'Estimate what a domain is worth.' },
+    5: { label: 'Domain Age', mobile: 'Age', description: 'Check registration age and expiry date.' },
+    6: { label: 'DNS Lookup', mobile: 'DNS', description: 'Look up A, MX, NS and TXT records.' },
+  };
   const toolIcons = [
     <Icons.Keyword key="keyword" className={iconSm} />,
     <Icons.Dollar key="dollar" className={iconSm} />,
     <Icons.Info key="info" className={iconSm} />,
     <Icons.Globe key="globe" className={iconSm} />,
+    <Icons.Dollar key="value" className={iconSm} />,
+    <Icons.Info key="age" className={iconSm} />,
+    <Icons.Globe key="dns" className={iconSm} />,
   ];
 
   const searchMenu: DropdownMenu = {
@@ -165,7 +177,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   const toolsMenu: DropdownMenu = {
     label: navCopy.tools,
     items: toolIds.map((id, index) => {
-      const item = navCopy.toolItems[index] || {
+      const item = navCopy.toolItems[index] || extraToolItems[index] || {
         label: 'Domain Leads',
         mobile: 'Leads',
         description: 'Analyze SLD saturation across TLDs and discover buyer prospects.',
