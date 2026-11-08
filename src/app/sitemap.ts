@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getTldAboutSlugs } from '@/lib/tldAboutData';
+import { getAlternativeSlugs } from '@/lib/alternatives';
+import { getLeadPageSlugs } from '@/lib/leadPages';
 import { getLearnArticles, getLearnTranslatedLocales } from '@/lib/learnArticles';
 import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
 import {
@@ -104,5 +106,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  return [...coreRoutes, ...localizedRoutes, ...learnRoutes, ...tldAboutRoutes];
+  const seoLandingRoutes = [
+    { url: `${baseUrl}/alternatives`, changeFrequency: 'monthly' as const, priority: 0.6 },
+    ...getAlternativeSlugs().map((slug) => ({
+      url: `${baseUrl}/alternatives/${slug}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.55,
+    })),
+    { url: `${baseUrl}/domain-leads`, changeFrequency: 'monthly' as const, priority: 0.6 },
+    ...getLeadPageSlugs().map((slug) => ({
+      url: `${baseUrl}/domain-leads/${slug}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.55,
+    })),
+  ];
+  return [...coreRoutes, ...localizedRoutes, ...learnRoutes, ...tldAboutRoutes, ...seoLandingRoutes];
 }

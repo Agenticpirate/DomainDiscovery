@@ -149,6 +149,8 @@ function footerSections(f: Messages['footer'], href: (path: string) => string): 
       { label: f.bulk, href: href('/bulk-search'), Icon: Fi.layers },
       { label: f.extensions, href: href('/domain-extensions'), Icon: Fi.globe },
       { label: 'Domain Leads', href: href('/tools/leads'), Icon: Fi.spark },
+      { label: 'Domain Lead Guides', href: href('/domain-leads'), Icon: Fi.book },
+      { label: 'Alternatives', href: href('/alternatives'), Icon: Fi.layers },
       {
         label: f.ada,
         href: 'https://www.aidomainassistant.com',

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
@@ -67,6 +68,15 @@ export default function LeadsPage() {
         <div className="page-gutter pt-2 sm:pt-4 pb-3 sm:pb-5">
           <div className="max-w-6xl mx-auto space-y-12">
             <DomainLeadsView />
+            <nav aria-label="Domain lead guides" className="text-center text-[13px]">
+              <Link href="/domain-leads" className="underline underline-offset-4 opacity-80 hover:opacity-100">
+                Domain lead guides
+              </Link>
+              <span className="mx-2 opacity-40">·</span>
+              <Link href="/domain-leads/find-domain-buyers" className="underline underline-offset-4 opacity-80 hover:opacity-100">
+                How to find domain buyers
+              </Link>
+            </nav>
           </div>
         </div>
       </main>
