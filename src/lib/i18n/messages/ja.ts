@@ -43,7 +43,7 @@ export const ja: Messages = {
     whois: 'WHOIS', geo: '地域ドメイン', compare: '料金比較', keyword: 'キーワード',
     guides: 'すべてのガイド', faq: 'FAQ', what: 'DDとは', forAi: 'AI向け',
     blog: 'ブログ', contact: '連絡', privacy: 'プライバシー', terms: '利用規約', cookies: 'Cookie', disclaimer: '免責',
-    tagline: '無料ドメイン検索 · リアルタイム確認', builtBy: '制作', onX: 'Xで',
+    tagline: '次のドメインを見つけよう。', builtBy: '制作', onX: 'Xで',
   },
   hero: {
     live: 'ライブ', liveRest: '1,600以上のTLD', h1Mobile: 'ドメインを見つける', h1Desktop: 'ドメイン名検索', sub: '数秒で空きを確認',

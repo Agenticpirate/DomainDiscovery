@@ -43,7 +43,7 @@ export const pt: Messages = {
     whois: 'WHOIS', geo: 'Domínios geo', compare: 'Comparar preços', keyword: 'Palavras-chave',
     guides: 'Todos os guias', faq: 'Perguntas', what: 'O que é a DD?', forAi: 'Para IA',
     blog: 'Blogue', contact: 'Contacto', privacy: 'Privacidade', terms: 'Termos', cookies: 'Cookies', disclaimer: 'Aviso',
-    tagline: 'Pesquisa de domínios grátis · Disponibilidade ao vivo', builtBy: 'Criado por', onX: 'no X',
+    tagline: 'Descubra o seu próximo domínio.', builtBy: 'Criado por', onX: 'no X',
   },
   hero: {
     live: 'Ao vivo', liveRest: 'em mais de 1.600 TLD', h1Mobile: 'Encontre o seu domínio', h1Desktop: 'Pesquisa de nome de domínio', sub: 'Verifique a disponibilidade em segundos',

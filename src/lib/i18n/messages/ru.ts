@@ -43,7 +43,7 @@ export const ru: Messages = {
     whois: 'WHOIS', geo: 'Геодомены', compare: 'Сравнить цены', keyword: 'Ключевые слова',
     guides: 'Все гайды', faq: 'Вопросы', what: 'Что такое DD?', forAi: 'Для ИИ',
     blog: 'Блог', contact: 'Контакт', privacy: 'Приватность', terms: 'Условия', cookies: 'Cookie', disclaimer: 'Отказ',
-    tagline: 'Бесплатный поиск доменов · Проверка в реальном времени', builtBy: 'Сделано', onX: 'в X',
+    tagline: 'Найдите свой следующий домен.', builtBy: 'Сделано', onX: 'в X',
   },
   hero: {
     live: 'В эфире', liveRest: 'в более чем 1 600 TLD', h1Mobile: 'Найдите свой домен', h1Desktop: 'Поиск доменных имён', sub: 'Проверьте доступность за секунды',

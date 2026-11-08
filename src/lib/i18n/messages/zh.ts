@@ -120,7 +120,7 @@ export const zh: Messages = {
     terms: '条款',
     cookies: 'Cookie',
     disclaimer: '免责声明',
-    tagline: '免费域名查询 · 实时可用性',
+    tagline: '发现你的下一个域名。',
     builtBy: '制作者',
     onX: '的 X',
   },

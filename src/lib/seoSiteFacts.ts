@@ -35,7 +35,7 @@ export const SITE_BRAND = {
   alternateNames: ['Domain Discovery', 'Domains Discovery'] as const,
   domain: 'www.domainsdiscovery.com',
   apexDomain: 'domainsdiscovery.com',
-  tagline: 'Free domain name search and domain toolkit',
+  tagline: 'Discover Your Next Domain.',
   /** Short meta-style description (~40 words) */
   description:
     'DomainDiscovery (also searched as Domain Discovery or Domains Discovery) is a free domain name search and toolkit: live availability across 1,600+ TLDs, AI domain generator, bulk domain checker, geo domain generator for local SEO, WHOIS/RDAP lookup, domain extension browser, registrar price comparison. Shortlists stay on your device. Registration checkout happens at a third-party registrar.',
@@ -282,6 +282,7 @@ export function getOrganizationJsonLd() {
     '@id': `${base}/#organization`,
     name: SITE_BRAND.name,
     alternateName: [...SITE_BRAND.alternateNames],
+    slogan: SITE_BRAND.tagline,
     url: base,
     // Solid plate PNG (512) matches DomainDiscovery mark for Knowledge Panel / SERP
     logo: {

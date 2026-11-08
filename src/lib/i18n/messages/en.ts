@@ -134,7 +134,7 @@ export const en: Messages = {
     terms: 'Terms',
     cookies: 'Cookies',
     disclaimer: 'Disclaimer',
-    tagline: 'Free domain search · Live availability',
+    tagline: 'Discover Your Next Domain.',
     builtBy: 'Built by',
     onX: 'on X',
   },
