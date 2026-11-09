@@ -1112,8 +1112,10 @@ export function PriceComparison({
           )}
         </div>
 
-        <div className="grid xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)]">
-          <div className={`p-2 sm:p-4 xl:border-r ${isLight ? 'xl:border-slate-200' : 'xl:border-white/10'}`}>
+        <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)]">
+          {/* min-w-0: without it the grid item grows to the table's min width and the
+              table's own horizontal scroller never engages on phones. */}
+          <div className={`min-w-0 p-2 sm:p-4 xl:border-r ${isLight ? 'xl:border-slate-200' : 'xl:border-white/10'}`}>
             {canScrollTable && (
               <div
                 className={`mb-2 sm:mb-3 flex items-center justify-between gap-2 sm:gap-3 rounded-lg sm:rounded-xl border px-2 py-1.5 sm:px-3 sm:py-2 ${

@@ -56,7 +56,7 @@ export const fr: Messages = {
       keywords: ['contact DomainDiscovery', 'support recherche de domaine', 'partenariat domaine'],
     },
   },
-  crumbs: {
+  crumbs: { leads: 'Prospects domaines',
     search: 'Recherche de domaine',
     generator: 'Générateur IA',
     bulk: 'Recherche en masse',
@@ -131,7 +131,7 @@ export const fr: Messages = {
     h1Desktop: 'Recherche de nom de domaine',
     sub: 'Découvrez votre prochain domaine.',
     trust: ['Privé', 'Sans suivi', 'Instantané', 'Gratuit'],
-    placeholder: 'Rechercher un nom de domaine',
+    placeholder: 'Nom de domaine',
     placeholderDots: 'Rechercher un nom de domaine...',
     placeholderAi: 'Décrivez une idée de marque…',
     searchDomains: 'Rechercher',
@@ -141,7 +141,7 @@ export const fr: Messages = {
     search: 'Rechercher',
     generate: 'Générer',
     bulkHint: 'Vérifier plusieurs domaines',
-    geoHint: 'Noms selon le lieu',
+    geoHint: 'Noms selon le lieu', searched: 'domaines recherchés',
     aria: 'Rechercher un nom de domaine',
   },
   ui: {

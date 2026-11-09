@@ -212,10 +212,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
               {aiMode ? (
                 hero.generate
               ) : (
-                <>
-                  <span>Search</span>
-                  <span className="hidden min-[420px]:inline"> domains</span>
-                </>
+                hero.search
               )}
             </span>
             {searchArrow}

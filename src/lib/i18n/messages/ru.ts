@@ -16,7 +16,7 @@ export const ru: Messages = {
     faq: { title: 'Вопросы о поиске доменов', description: 'Вопросы о доступности, регистрации, WHOIS, геодоменах, ценах и приватности.', keywords: ['вопросы о доменном имени', 'как зарегистрировать домен'] },
     contact: { title: 'Связаться с DomainDiscovery — поддержка и партнёрство', description: 'Отзывы, сбои, запросы о приватности, юридические уведомления или партнёрство.', keywords: ['контакт DomainDiscovery', 'поддержка доменов'] },
   },
-  crumbs: { search: 'Поиск', generator: 'Генератор ИИ', bulk: 'Массовый поиск', extensions: 'Зоны', whois: 'WHOIS', compare: 'Цены', geo: 'Геодомены', faq: 'Вопросы', contact: 'Контакт' },
+  crumbs: { leads: 'Лиды доменов', search: 'Поиск', generator: 'Генератор ИИ', bulk: 'Массовый поиск', extensions: 'Зоны', whois: 'WHOIS', compare: 'Цены', geo: 'Геодомены', faq: 'Вопросы', contact: 'Контакт' },
   nav: {
     ...en.nav,
     home: 'Главная', search: 'Поиск', tools: 'Инструменты', learn: 'Гайды', saved: 'Сохранённые',
@@ -48,9 +48,9 @@ export const ru: Messages = {
   hero: {
     live: 'В эфире', liveRest: 'в более чем 1 600 TLD', h1Mobile: 'Найдите свой домен', h1Desktop: 'Поиск доменных имён', sub: 'Найдите свой следующий домен.',
     trust: ['Приватно', 'Без слежки', 'Мгновенно', 'Бесплатно'],
-    placeholder: 'Искать доменное имя', placeholderDots: 'Искать доменное имя...', placeholderAi: 'Опишите идею бренда…',
+    placeholder: 'Поиск домена', placeholderDots: 'Искать доменное имя...', placeholderAi: 'Опишите идею бренда…',
     searchDomains: 'Искать домены', generateNames: 'Сгенерировать имена', aiOn: 'ИИ включён — опишите бренд', orAi: 'Или сгенерировать имена с ИИ',
-    bulkHint: 'Проверить несколько доменов', geoHint: 'Имена по месту',
+    bulkHint: 'Проверить несколько доменов', geoHint: 'Имена по месту', searched: 'доменов проверено',
     search: 'Искать', generate: 'Создать', aria: 'Поиск доменного имени',
   },
   ui: { available: 'Свободен', premium: 'Премиум', taken: 'Занят', definition: 'Определение', example: 'Пример', namesCount: '1 000 имён' },

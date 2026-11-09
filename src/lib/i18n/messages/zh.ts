@@ -56,7 +56,7 @@ export const zh: Messages = {
       keywords: ['联系 DomainDiscovery', '域名查询支持', '合作'],
     },
   },
-  crumbs: {
+  crumbs: { leads: '域名线索',
     search: '域名查询',
     generator: 'AI 生成器',
     bulk: '批量查询',
@@ -141,7 +141,7 @@ export const zh: Messages = {
     search: '查询',
     generate: '生成',
     bulkHint: '一次检查多个域名',
-    geoHint: '按地点找域名',
+    geoHint: '按地点找域名', searched: '次域名查询',
     aria: '查询域名',
   },
   ui: {

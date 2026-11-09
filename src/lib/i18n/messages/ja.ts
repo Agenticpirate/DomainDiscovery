@@ -16,7 +16,7 @@ export const ja: Messages = {
     faq: { title: 'ドメイン検索FAQ — 空き確認とツール', description: '空き確認、登録、WHOIS、地域ドメイン、料金、プライバシーの質問。', keywords: ['ドメインFAQ', 'ドメイン登録方法'] },
     contact: { title: 'DomainDiscoveryへの連絡 — サポートと連携', description: 'フィードバック、不具合、プライバシー請求、法的通知、提携の連絡先。', keywords: ['DomainDiscovery 連絡', 'ドメインサポート'] },
   },
-  crumbs: { search: '検索', generator: 'AIジェネレーター', bulk: '一括検索', extensions: '拡張子', whois: 'WHOIS', compare: '料金', geo: '地域ドメイン', faq: 'FAQ', contact: '連絡' },
+  crumbs: { leads: 'ドメインリード', search: '検索', generator: 'AIジェネレーター', bulk: '一括検索', extensions: '拡張子', whois: 'WHOIS', compare: '料金', geo: '地域ドメイン', faq: 'FAQ', contact: '連絡' },
   nav: {
     ...en.nav,
     home: 'ホーム', search: '検索', tools: 'ツール', learn: 'ガイド', saved: '保存',
@@ -50,7 +50,7 @@ export const ja: Messages = {
     trust: ['非公開', '追跡なし', '即時', '無料'],
     placeholder: 'ドメイン名を検索', placeholderDots: 'ドメイン名を検索...', placeholderAi: 'ブランドのアイデアを書く…',
     searchDomains: 'ドメインを検索', generateNames: '名前を作る', aiOn: 'AIオン — ブランドを説明', orAi: 'またはAIで名前を作る',
-    bulkHint: '複数ドメインを確認', geoHint: '地域ごとの名前',
+    bulkHint: '複数ドメインを確認', geoHint: '地域ごとの名前', searched: '件のドメイン検索',
     search: '検索', generate: '生成', aria: 'ドメイン名を検索',
   },
   ui: { available: '取得可能', premium: 'プレミアム', taken: '登録済み', definition: '定義', example: '例', namesCount: '1,000件' },
