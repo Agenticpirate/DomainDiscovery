@@ -500,9 +500,9 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Product Hunt launch badge; badge theme follows the site theme */}
+      {/* Launch badges (Product Hunt, Peerlist); badge themes follow the site theme */}
       <div className={`relative z-[2] border-t ${hairline} ${solidBg}`}>
-        <div className="max-w-6xl mx-auto px-3 sm:px-5 py-3 flex justify-center">
+        <div className="max-w-6xl mx-auto px-3 sm:px-5 py-3 flex flex-wrap items-center justify-center gap-3">
           <a
             href="https://www.producthunt.com/products/domaindiscovery?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-domaindiscovery"
             target="_blank"
@@ -517,6 +517,22 @@ export const Footer: React.FC = () => {
               loading="lazy"
               decoding="async"
               src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1309683&theme=${isLight ? 'light' : 'dark'}&t=1794212082116`}
+            />
+          </a>
+          <a
+            href="https://peerlist.io/indiehacker/project/domain-discovery"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- third-party badge with unknown intrinsic width */}
+            <img
+              alt="Domain Discovery on Peerlist"
+              height={54}
+              loading="lazy"
+              decoding="async"
+              style={{ height: 54, width: 'auto' }}
+              src={`https://peerlist.io/api/v1/projects/embed/PRJHEOG7NJ8EAJODOHB76DMMJNM78K?showUpvote=false&theme=${isLight ? 'light' : 'dark'}`}
             />
           </a>
         </div>
