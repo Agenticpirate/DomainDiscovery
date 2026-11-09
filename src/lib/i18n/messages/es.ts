@@ -16,7 +16,7 @@ export const es: Messages = {
     faq: { title: 'Preguntas sobre búsqueda de dominios', description: 'Preguntas sobre disponibilidad, registro, WHOIS, dominios geo, precios y privacidad.', keywords: ['preguntas nombre de dominio', 'cómo registrar un dominio'] },
     contact: { title: 'Contactar con DomainDiscovery — soporte y alianzas', description: 'Comentarios, fallos, solicitudes de privacidad, avisos legales o alianzas.', keywords: ['contacto DomainDiscovery', 'soporte de dominios'] },
   },
-  crumbs: { search: 'Búsqueda', generator: 'Generador IA', bulk: 'Búsqueda masiva', extensions: 'Extensiones', whois: 'WHOIS', compare: 'Precios', geo: 'Dominios geo', faq: 'Preguntas', contact: 'Contacto' },
+  crumbs: { leads: 'Leads de dominios', search: 'Búsqueda', generator: 'Generador IA', bulk: 'Búsqueda masiva', extensions: 'Extensiones', whois: 'WHOIS', compare: 'Precios', geo: 'Dominios geo', faq: 'Preguntas', contact: 'Contacto' },
   nav: {
     ...en.nav,
     home: 'Inicio', search: 'Buscar', tools: 'Herramientas', learn: 'Guías', saved: 'Guardados',
@@ -48,9 +48,9 @@ export const es: Messages = {
   hero: {
     live: 'En vivo', liveRest: 'en más de 1.600 TLD', h1Mobile: 'Encuentre su dominio', h1Desktop: 'Búsqueda de nombres de dominio', sub: 'Descubre tu próximo dominio.',
     trust: ['Privado', 'Sin rastreo', 'Instantáneo', 'Gratis'],
-    placeholder: 'Buscar un nombre de dominio', placeholderDots: 'Buscar un nombre de dominio...', placeholderAi: 'Describa una idea de marca…',
+    placeholder: 'Buscar dominios', placeholderDots: 'Buscar un nombre de dominio...', placeholderAi: 'Describa una idea de marca…',
     searchDomains: 'Buscar dominios', generateNames: 'Generar nombres', aiOn: 'IA activa — describa una marca', orAi: 'O generar nombres con IA',
-    bulkHint: 'Revisa varios dominios', geoHint: 'Nombres por ubicación',
+    bulkHint: 'Revisa varios dominios', geoHint: 'Nombres por ubicación', searched: 'dominios buscados',
     search: 'Buscar', generate: 'Generar', aria: 'Buscar un nombre de dominio',
   },
   ui: { available: 'Libre', premium: 'Premium', taken: 'Registrado', definition: 'Definición', example: 'Ejemplo', namesCount: '1.000 nombres' },

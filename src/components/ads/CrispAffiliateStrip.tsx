@@ -42,8 +42,8 @@ function SpaceshipStrip() {
       {/* Center: Copy */}
       <div className="min-w-0 flex-1 px-1 sm:px-2 text-left sm:text-center text-white">
         <p className="text-[11px] min-[380px]:text-[11.5px] font-semibold leading-[1.3] tracking-[-0.015em] sm:text-[22px] sm:font-semibold sm:leading-tight [text-rendering:geometricPrecision]">
-          <span className="block sm:inline whitespace-nowrap">Want to manage your domain</span>{' '}
-          <span className="block sm:inline whitespace-nowrap">easier, cheaper?</span>
+          <span className="sm:whitespace-nowrap">Want to manage your domain</span>{' '}
+          <span className="sm:whitespace-nowrap">easier, cheaper?</span>
         </p>
         <p className="mt-0.5 hidden text-[14px] font-medium leading-snug text-white/90 sm:mt-1 sm:block sm:text-[16px]">
           You&apos;re closer than you think
@@ -87,8 +87,8 @@ function SpacemailStrip() {
       {/* Center: Copy */}
       <div className="min-w-0 flex-1 px-1 sm:px-2 text-left sm:text-center text-white [text-rendering:geometricPrecision]">
         <p className="text-[11px] min-[380px]:text-[11.5px] font-semibold leading-[1.3] tracking-[-0.015em] sm:hidden">
-          <span className="block whitespace-nowrap">Premium email for your</span>
-          <span className="block whitespace-nowrap">domains, made simple.</span>
+          <span>Premium email for your</span>{' '}
+          <span>domains, made simple.</span>
         </p>
         <p className="hidden text-[26px] font-semibold leading-tight tracking-[-0.03em] sm:block">
           Premium email for your domains,

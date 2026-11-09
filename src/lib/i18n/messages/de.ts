@@ -16,7 +16,7 @@ export const de: Messages = {
     faq: { title: 'FAQ zur Domainsuche — Verfügbarkeit und Tools', description: 'Fragen zu Verfügbarkeit, Registrierung, WHOIS, Geo-Domains, Preisen und Datenschutz.', keywords: ['Domain FAQ', 'Domain registrieren'] },
     contact: { title: 'DomainDiscovery kontaktieren — Support und Partnerschaften', description: 'Feedback, Fehler, Datenschutzanfragen, rechtliche Hinweise oder Partnerschaften.', keywords: ['DomainDiscovery Kontakt', 'Domain Support'] },
   },
-  crumbs: { search: 'Suche', generator: 'KI-Generator', bulk: 'Sammelsuche', extensions: 'Endungen', whois: 'WHOIS', compare: 'Preise', geo: 'Geo-Domains', faq: 'FAQ', contact: 'Kontakt' },
+  crumbs: { leads: 'Domain-Leads', search: 'Suche', generator: 'KI-Generator', bulk: 'Sammelsuche', extensions: 'Endungen', whois: 'WHOIS', compare: 'Preise', geo: 'Geo-Domains', faq: 'FAQ', contact: 'Kontakt' },
   nav: {
     ...en.nav,
     home: 'Start', search: 'Suche', tools: 'Tools', learn: 'Ratgeber', saved: 'Gespeichert',
@@ -51,7 +51,7 @@ export const de: Messages = {
     placeholder: 'Domainnamen suchen', placeholderDots: 'Domainnamen suchen...', placeholderAi: 'Beschreiben Sie eine Markenidee…',
     searchDomains: 'Domains suchen', generateNames: 'Namen erzeugen', aiOn: 'KI an — Marke beschreiben', orAi: 'Oder Namen mit KI erzeugen',
     search: 'Suchen', generate: 'Erzeugen', aria: 'Domainnamen suchen',
-    bulkHint: 'Mehrere Domains prüfen', geoHint: 'Namen nach Ort finden',
+    bulkHint: 'Mehrere Domains prüfen', geoHint: 'Namen nach Ort finden', searched: 'Domains gesucht',
   },
   ui: { available: 'Frei', premium: 'Premium', taken: 'Vergeben', definition: 'Definition', example: 'Beispiel', namesCount: '1.000 Namen' },
   home: {

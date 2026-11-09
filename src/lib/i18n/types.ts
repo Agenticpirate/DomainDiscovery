@@ -114,6 +114,8 @@ export type Messages = {
     aria: string;
     bulkHint: string;
     geoHint: string;
+    /** Label after the live search counter, e.g. "domains searched". */
+    searched: string;
   };
   ui: {
     available: string;

@@ -158,7 +158,7 @@ export default function Home() {
               </div>
 
               <div className="mt-3.5 sm:mt-5 flex justify-center">
-                <div className="hero-badge inline-flex max-w-full items-center rounded-full p-1 shadow-sm">
+                <div className="hero-badge inline-flex max-w-full flex-wrap items-center justify-center rounded-[1.4rem] p-1 shadow-sm sm:flex-nowrap sm:rounded-full">
                   <Link
                     href={href('/bulk-search')}
                     className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"
@@ -169,7 +169,7 @@ export default function Home() {
                     <span className="inline min-[360px]:hidden">Bulk</span>
                     <span className="hidden min-[360px]:inline">{messages.crumbs.bulk}</span>
                   </Link>
-                  <span className="mx-0.5 h-3.5 sm:h-4 w-px bg-ds-hairline shrink-0" aria-hidden />
+                  <span className="mx-0.5 hidden h-4 w-px bg-ds-hairline shrink-0 min-[420px]:block" aria-hidden />
                   <Link
                     href={href('/tools/geo')}
                     className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"
@@ -181,7 +181,7 @@ export default function Home() {
                     <span className="inline min-[360px]:hidden">Geo</span>
                     <span className="hidden min-[360px]:inline">{messages.crumbs.geo}</span>
                   </Link>
-                  <span className="mx-0.5 h-3.5 sm:h-4 w-px bg-ds-hairline shrink-0" aria-hidden />
+                  <span className="mx-0.5 hidden h-4 w-px bg-ds-hairline shrink-0 min-[420px]:block" aria-hidden />
                   <Link
                     href={href('/tools/leads')}
                     className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"

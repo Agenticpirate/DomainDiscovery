@@ -16,7 +16,7 @@ export const pt: Messages = {
     faq: { title: 'Perguntas sobre pesquisa de domínios', description: 'Perguntas sobre disponibilidade, registo, WHOIS, domínios geo, preços e privacidade.', keywords: ['perguntas nome de domínio', 'como registar um domínio'] },
     contact: { title: 'Contactar a DomainDiscovery — suporte e parcerias', description: 'Comentários, falhas, pedidos de privacidade, avisos legais ou parcerias.', keywords: ['contacto DomainDiscovery', 'suporte de domínios'] },
   },
-  crumbs: { search: 'Pesquisa', generator: 'Gerador IA', bulk: 'Pesquisa em massa', extensions: 'Extensões', whois: 'WHOIS', compare: 'Preços', geo: 'Domínios geo', faq: 'Perguntas', contact: 'Contacto' },
+  crumbs: { leads: 'Leads de domínios', search: 'Pesquisa', generator: 'Gerador IA', bulk: 'Pesquisa em massa', extensions: 'Extensões', whois: 'WHOIS', compare: 'Preços', geo: 'Domínios geo', faq: 'Perguntas', contact: 'Contacto' },
   nav: {
     ...en.nav,
     home: 'Início', search: 'Pesquisar', tools: 'Ferramentas', learn: 'Guias', saved: 'Guardados',
@@ -48,9 +48,9 @@ export const pt: Messages = {
   hero: {
     live: 'Ao vivo', liveRest: 'em mais de 1.600 TLD', h1Mobile: 'Encontre o seu domínio', h1Desktop: 'Pesquisa de nome de domínio', sub: 'Descubra o seu próximo domínio.',
     trust: ['Privado', 'Sem rastreio', 'Instantâneo', 'Grátis'],
-    placeholder: 'Pesquisar um nome de domínio', placeholderDots: 'Pesquisar um nome de domínio...', placeholderAi: 'Descreva uma ideia de marca…',
+    placeholder: 'Pesquisar domínios', placeholderDots: 'Pesquisar um nome de domínio...', placeholderAi: 'Descreva uma ideia de marca…',
     searchDomains: 'Pesquisar domínios', generateNames: 'Gerar nomes', aiOn: 'IA ligada — descreva uma marca', orAi: 'Ou gerar nomes com IA',
-    bulkHint: 'Verificar vários domínios', geoHint: 'Nomes por local',
+    bulkHint: 'Verificar vários domínios', geoHint: 'Nomes por local', searched: 'domínios pesquisados',
     search: 'Pesquisar', generate: 'Gerar', aria: 'Pesquisar um nome de domínio',
   },
   ui: { available: 'Livre', premium: 'Premium', taken: 'Registado', definition: 'Definição', example: 'Exemplo', namesCount: '1.000 nomes' },

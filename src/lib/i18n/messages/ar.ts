@@ -56,7 +56,7 @@ export const ar: Messages = {
       keywords: ['اتصل بـ DomainDiscovery', 'دعم البحث عن النطاق', 'شراكة'],
     },
   },
-  crumbs: { search: 'بحث النطاقات', generator: 'المولّد', bulk: 'البحث الجماعي', extensions: 'الامتدادات', whois: 'WHOIS', compare: 'الأسعار', geo: 'نطاقات جغرافية', faq: 'الأسئلة', contact: 'اتصل بنا' },
+  crumbs: { leads: 'عملاء النطاقات', search: 'بحث النطاقات', generator: 'المولّد', bulk: 'البحث الجماعي', extensions: 'الامتدادات', whois: 'WHOIS', compare: 'الأسعار', geo: 'نطاقات جغرافية', faq: 'الأسئلة', contact: 'اتصل بنا' },
   nav: {
     ...en.nav,
     home: 'الرئيسية', search: 'بحث', tools: 'أدوات', learn: 'أدلة', saved: 'المحفوظ',
@@ -92,7 +92,7 @@ export const ar: Messages = {
     trust: ['خاص', 'دون تتبّع', 'فوري', 'مجاني'],
     placeholder: 'ابحث عن اسم نطاق', placeholderDots: 'ابحث عن اسم نطاق...', placeholderAi: 'صف فكرة علامة…',
     searchDomains: 'بحث النطاقات', generateNames: 'توليد أسماء', aiOn: 'الذكاء الاصطناعي يعمل — صف العلامة', orAi: 'أو ولّد أسماء بالذكاء الاصطناعي',
-    bulkHint: 'افحص عدة نطاقات', geoHint: 'أسماء حسب الموقع',
+    bulkHint: 'افحص عدة نطاقات', geoHint: 'أسماء حسب الموقع', searched: 'نطاقًا تم البحث عنه',
     search: 'بحث', generate: 'توليد', aria: 'البحث عن اسم نطاق',
   },
   ui: { available: 'متاح', premium: 'مميز', taken: 'محجوز', definition: 'تعريف', example: 'مثال', namesCount: '1000 اسم' },

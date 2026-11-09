@@ -56,7 +56,7 @@ export const ur: Messages = {
       keywords: ['DomainDiscovery رابطہ', 'ڈومین سپورٹ', 'شراکت'],
     },
   },
-  crumbs: { search: 'ڈومین تلاش', generator: 'AI جنریٹر', bulk: 'بلک تلاش', extensions: 'ایکسٹینشن', whois: 'WHOIS', compare: 'قیمت', geo: 'جیو ڈومین', faq: 'سوالات', contact: 'رابطہ' },
+  crumbs: { leads: 'ڈومین لیڈز', search: 'ڈومین تلاش', generator: 'AI جنریٹر', bulk: 'بلک تلاش', extensions: 'ایکسٹینشن', whois: 'WHOIS', compare: 'قیمت', geo: 'جیو ڈومین', faq: 'سوالات', contact: 'رابطہ' },
   nav: {
     ...en.nav,
     home: 'ہوم', search: 'تلاش', tools: 'ٹولز', learn: 'گائیڈ', saved: 'محفوظ',
@@ -92,7 +92,7 @@ export const ur: Messages = {
     trust: ['نجی', 'ٹریکنگ نہیں', 'فوری', 'مفت'],
     placeholder: 'ڈومین نام تلاش کریں', placeholderDots: 'ڈومین نام تلاش کریں...', placeholderAi: 'برانڈ کا خیال لکھیں…',
     searchDomains: 'ڈومین تلاش', generateNames: 'نام بنائیں', aiOn: 'AI چالو — برانڈ بیان کریں', orAi: 'یا AI سے نام بنائیں',
-    bulkHint: 'کئی ڈومین چیک کریں', geoHint: 'مقام کے نام',
+    bulkHint: 'کئی ڈومین چیک کریں', geoHint: 'مقام کے نام', searched: 'ڈومین تلاش کیے گئے',
     search: 'تلاش', generate: 'بنائیں', aria: 'ڈومین نام تلاش کریں',
   },
   ui: { available: 'دستیاب', premium: 'پریمیم', taken: 'رجسٹرڈ', definition: 'تعریف', example: 'مثال', namesCount: '1,000 نام' },

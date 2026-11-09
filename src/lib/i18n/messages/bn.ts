@@ -16,7 +16,7 @@ export const bn: Messages = {
     faq: { title: 'ডোমেইন অনুসন্ধানের প্রশ্ন', description: 'উপলব্ধতা, নিবন্ধন, WHOIS, জিও ডোমেইন, দাম ও গোপনীয়তা নিয়ে প্রশ্ন।', keywords: ['ডোমেইন নাম প্রশ্ন', 'ডোমেইন কীভাবে নিবন্ধন করবেন'] },
     contact: { title: 'DomainDiscovery-এ যোগাযোগ — সহায়তা ও অংশীদারিত্ব', description: 'মতামত, ত্রুটি, গোপনীয়তার অনুরোধ, আইনি নোটিশ বা অংশীদারিত্ব।', keywords: ['DomainDiscovery যোগাযোগ', 'ডোমেইন সহায়তা'] },
   },
-  crumbs: { search: 'অনুসন্ধান', generator: 'AI জেনারেটর', bulk: 'বাল্ক অনুসন্ধান', extensions: 'এক্সটেনশন', whois: 'WHOIS', compare: 'দাম', geo: 'জিও ডোমেইন', faq: 'প্রশ্ন', contact: 'যোগাযোগ' },
+  crumbs: { leads: 'ডোমেইন লিড', search: 'অনুসন্ধান', generator: 'AI জেনারেটর', bulk: 'বাল্ক অনুসন্ধান', extensions: 'এক্সটেনশন', whois: 'WHOIS', compare: 'দাম', geo: 'জিও ডোমেইন', faq: 'প্রশ্ন', contact: 'যোগাযোগ' },
   nav: {
     ...en.nav,
     home: 'হোম', search: 'অনুসন্ধান', tools: 'টুল', learn: 'গাইড', saved: 'সংরক্ষিত',
@@ -48,9 +48,9 @@ export const bn: Messages = {
   hero: {
     live: 'লাইভ', liveRest: '১,৬০০-এর বেশি TLD-তে', h1Mobile: 'আপনার ডোমেইন খুঁজুন', h1Desktop: 'ডোমেইন নাম অনুসন্ধান', sub: 'আপনার পরবর্তী ডোমেইন খুঁজে নিন।',
     trust: ['ব্যক্তিগত', 'ট্র্যাকিং নেই', 'তাৎক্ষণিক', 'বিনামূল্যে'],
-    placeholder: 'একটি ডোমেইন নাম অনুসন্ধান করুন', placeholderDots: 'একটি ডোমেইন নাম অনুসন্ধান করুন...', placeholderAi: 'একটি ব্র্যান্ড আইডিয়া বর্ণনা করুন…',
+    placeholder: 'ডোমেইন খুঁজুন', placeholderDots: 'একটি ডোমেইন নাম অনুসন্ধান করুন...', placeholderAi: 'একটি ব্র্যান্ড আইডিয়া বর্ণনা করুন…',
     searchDomains: 'ডোমেইন অনুসন্ধান', generateNames: 'নাম তৈরি', aiOn: 'AI চালু — একটি ব্র্যান্ড বর্ণনা করুন', orAi: 'অথবা AI দিয়ে নাম তৈরি',
-    bulkHint: 'একাধিক ডোমেইন যাচাই', geoHint: 'স্থানভিত্তিক নাম',
+    bulkHint: 'একাধিক ডোমেইন যাচাই', geoHint: 'স্থানভিত্তিক নাম', searched: 'ডোমেইন খোঁজা হয়েছে',
     search: 'অনুসন্ধান', generate: 'তৈরি', aria: 'একটি ডোমেইন নাম অনুসন্ধান',
   },
   ui: { available: 'খালি', premium: 'প্রিমিয়াম', taken: 'নিবন্ধিত', definition: 'সংজ্ঞা', example: 'উদাহরণ', namesCount: '১,০০০ নাম' },

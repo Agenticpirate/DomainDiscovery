@@ -156,7 +156,7 @@ export const en: Messages = {
     generate: 'Generate',
     aria: 'Search domain names',
     bulkHint: 'Check multiple domains',
-    geoHint: 'Find location-based names',
+    geoHint: 'Find location-based names', searched: 'domains searched',
   },
   ui: {
     available: 'Available',

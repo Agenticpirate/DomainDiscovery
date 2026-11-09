@@ -16,7 +16,7 @@ export const hi: Messages = {
     faq: { title: 'डोमेन खोज प्रश्न — उपलब्धता और टूल', description: 'डोमेन खोज, पंजीकरण, WHOIS, जियो डोमेन, कीमत और गोपनीयता के प्रश्न।', keywords: ['डोमेन प्रश्न', 'डोमेन कैसे रजिस्टर करें', 'DomainDiscovery मदद'] },
     contact: { title: 'DomainDiscovery से संपर्क — सहायता और साझेदारी', description: 'राय, गड़बड़ी, गोपनीयता अनुरोध, कानूनी सूचना या साझेदारी के लिए संपर्क करें।', keywords: ['DomainDiscovery संपर्क', 'डोमेन सहायता', 'साझेदारी'] },
   },
-  crumbs: { search: 'डोमेन खोज', generator: 'AI जनरेटर', bulk: 'बल्क खोज', extensions: 'एक्सटेंशन', whois: 'WHOIS', compare: 'कीमत', geo: 'जियो डोमेन', faq: 'प्रश्न', contact: 'संपर्क' },
+  crumbs: { leads: 'डोमेन लीड्स', search: 'डोमेन खोज', generator: 'AI जनरेटर', bulk: 'बल्क खोज', extensions: 'एक्सटेंशन', whois: 'WHOIS', compare: 'कीमत', geo: 'जियो डोमेन', faq: 'प्रश्न', contact: 'संपर्क' },
   nav: {
     ...en.nav,
     home: 'होम', search: 'खोज', tools: 'टूल', learn: 'गाइड', saved: 'सहेजे',
@@ -50,7 +50,7 @@ export const hi: Messages = {
     trust: ['निजी', 'ट्रैकिंग नहीं', 'तुरंत', 'मुफ़्त'],
     placeholder: 'डोमेन नाम खोजें', placeholderDots: 'डोमेन नाम खोजें...', placeholderAi: 'ब्रांड का विचार लिखें…',
     searchDomains: 'डोमेन खोजें', generateNames: 'नाम बनाएँ', aiOn: 'AI चालू — ब्रांड बताएँ', orAi: 'या AI से नाम बनाएँ',
-    bulkHint: 'कई डोमेन जाँचें', geoHint: 'जगह के हिसाब से नाम',
+    bulkHint: 'कई डोमेन जाँचें', geoHint: 'जगह के हिसाब से नाम', searched: 'डोमेन खोजे गए',
     search: 'खोज', generate: 'बनाएँ', aria: 'डोमेन नाम खोजें',
   },
   ui: { available: 'उपलब्ध', premium: 'प्रीमियम', taken: 'पंजीकृत', definition: 'परिभाषा', example: 'उदाहरण', namesCount: '1,000 नाम' },
