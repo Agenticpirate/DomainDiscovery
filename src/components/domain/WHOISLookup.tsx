@@ -1,5 +1,6 @@
 'use client';
 
+import { useT } from '@/components/i18n/LocaleProvider';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -83,6 +84,7 @@ function writeClientCache(domain: string, data: WHOISData) {
 }
 
 export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
+  const t = useT();
   const [domain, setDomain] = useState(initialDomain || '');
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<WHOISData | null>(null);
@@ -206,10 +208,10 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
     >
       <div className="mb-3">
         <div className={`text-[11px] font-semibold uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-          Look up a domain
+          {t('Look up a domain')}
         </div>
         <p className={`mt-1 text-sm ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-          Free public RDAP. No account.
+          {t('Free public RDAP. No account.')}
         </p>
       </div>
 
@@ -230,7 +232,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
           }`}
         />
         <Button onClick={() => handleLookup()} isLoading={isLoading} className="w-full sm:w-auto">
-          Lookup
+          {t('Lookup')}
         </Button>
       </div>
 

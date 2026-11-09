@@ -11,7 +11,7 @@ import { DomainExtensionsView } from '@/components/domain/DomainExtensionsView';
 import { ExtensionsGuideContent } from '@/components/domain/ExtensionsGuideContent';
 import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
 import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 import { pageHeading } from '@/lib/i18n/locales';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -223,6 +223,7 @@ function ExtensionsViewFromUrl({ guideSlot }: { guideSlot: React.ReactNode }) {
 function DomainExtensionsPageContent() {
   const { theme } = useTheme();
   const { locale, messages, href } = useLocale();
+  const t = useT();
   const localized = locale !== 'en';
   const [mounted, setMounted] = React.useState(false);
 
@@ -272,9 +273,9 @@ function DomainExtensionsPageContent() {
                         isLight ? 'bg-slate-500' : 'bg-white/70'
                       }`}
                     />
-                    <span className="sm:hidden">1,000+ TLDs · Live</span>
+                    <span className="sm:hidden">{t('1,000+ TLDs · Live')}</span>
                     <span className="hidden sm:inline">
-                      Search all 1,000+ TLDs · Live availability
+                      {t('Search all 1,000+ TLDs · Live availability')}
                     </span>
                   </span>
                 </div>
@@ -336,12 +337,12 @@ function DomainExtensionsPageContent() {
                         : 'bg-white text-black border-white'
                     }`}
                   >
-                    Search all TLDs
+                    {t('Search all TLDs')}
                   </a>
                   {[
-                    { href: '#how-to-choose', label: 'How to choose' },
-                    { href: '#extension-faqs', label: 'FAQs' },
-                    { href: '#extensions-catalog', label: 'Catalog' },
+                    { href: '#how-to-choose', label: t('How to choose') },
+                    { href: '#extension-faqs', label: t('FAQs') },
+                    { href: '#extensions-catalog', label: t('Catalog') },
                   ].map((link) => (
                     <a
                       key={link.href}
@@ -362,9 +363,9 @@ function DomainExtensionsPageContent() {
               {/* Stats — solid plates; compact row on mobile */}
               <div className="relative z-[1] grid grid-cols-3 gap-1.5 sm:gap-2 shrink-0">
                 {[
-                  { value: '1,001', label: 'All TLDs' },
-                  { value: 'Live', label: 'Availability' },
-                  { value: 'Private', label: 'By default' },
+                  { value: '1,001', label: t('All TLDs') },
+                  { value: t('Live'), label: t('Availability') },
+                  { value: t('Private'), label: t('By default') },
                 ].map((s) => (
                   <div
                     key={s.label}

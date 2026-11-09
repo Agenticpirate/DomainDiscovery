@@ -1,5 +1,6 @@
 'use client';
 
+import { useT } from '@/components/i18n/LocaleProvider';
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import { Icons } from '@/components/ui/Icons';
@@ -79,6 +80,7 @@ function formatSldDisplay(sld: string, query: string, isLight: boolean) {
 }
 
 export function DomainLeadsView() {
+  const t = useT();
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -710,7 +712,7 @@ export function DomainLeadsView() {
                     : 'text-white/80 hover:bg-white/10'
                 }`}
               >
-                <span>{MATCH_TYPE_OPTIONS.find((m) => m.id === matchType)?.label}</span>
+                <span>{t(MATCH_TYPE_OPTIONS.find((m) => m.id === matchType)?.label ?? '')}</span>
                 <Icons.ChevronDown className="w-3.5 h-3.5 opacity-60" />
               </button>
 
@@ -741,7 +743,7 @@ export function DomainLeadsView() {
                           : 'hover:bg-white/5 text-white/70'
                       }`}
                     >
-                      <span className="font-semibold">{opt.label}</span>
+                      <span className="font-semibold">{t(opt.label)}</span>
                       <span className="text-[10px] opacity-60 font-normal">
                         {opt.desc}
                       </span>
@@ -765,7 +767,7 @@ export function DomainLeadsView() {
                 type="text"
                 value={inputKeyword}
                 onChange={(e) => setInputKeyword(e.target.value)}
-                placeholder="Enter brand name, keyword or SLD (e.g. novapay, agentflow)..."
+                placeholder={t('Enter brand name, keyword or SLD (e.g. novapay, agentflow)...')}
                 className={`w-full h-9 sm:h-10 bg-transparent border-0 outline-none text-xs sm:text-sm font-medium px-2.5 sm:px-3 ${
                   isLight
                     ? 'text-slate-900 placeholder:text-slate-400'
@@ -779,7 +781,7 @@ export function DomainLeadsView() {
                     setInputKeyword('');
                     searchInputRef.current?.focus();
                   }}
-                  title="Clear input"
+                  title={t('Clear input')}
                   className={`p-1 text-xs mr-2 transition-colors ${
                     isLight
                       ? 'text-slate-400 hover:text-slate-600'
@@ -808,7 +810,7 @@ export function DomainLeadsView() {
               {loading ? (
                 <>
                   <div className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                  <span>Scanning...</span>
+                  <span>{t('Scanning...')}</span>
                 </>
               ) : (
                 <>
@@ -852,13 +854,13 @@ export function DomainLeadsView() {
                   showAdvancedOptions ? 'text-ds-ink font-semibold' : 'text-ds-body'
                 }`}
               >
-                advanced options
+                {t('advanced options')}
               </span>
             </label>
 
             {/* Quick-Try Suggestions (High UX & Conversion) */}
             <div className="flex items-center gap-1.5 text-xs">
-              <span className="text-[10px] font-medium text-ds-subtle">Try:</span>
+              <span className="text-[10px] font-medium text-ds-subtle">{t('Try:')}</span>
               {['buddy', 'agent', 'pulse', 'pay', 'cloud', 'health'].map((kw) => (
                 <button
                   key={kw}
@@ -1208,13 +1210,13 @@ export function DomainLeadsView() {
         {/* Category Filter Pills (Matches Earlier Categories) */}
         <div className="flex flex-wrap items-center gap-1.5">
             {[
-              { id: 'all', label: `All Categories (${data?.sldResults?.length || 0})` },
-              { id: 'core', label: 'Core (.com, .net)' },
-              { id: 'tech', label: 'Tech & AI (.ai, .io)' },
-              { id: 'brand', label: 'Brandable (.xyz, .me)' },
-              { id: 'commercial', label: 'Commercial (.store, .pro)' },
-              { id: 'cctld', label: 'ccTLDs (Country)' },
-              { id: 'developed', label: 'Developed Websites' },
+              { id: 'all', label: t('All Categories ({n})', { n: data?.sldResults?.length || 0 }) },
+              { id: 'core', label: t('Core (.com, .net)') },
+              { id: 'tech', label: t('Tech & AI (.ai, .io)') },
+              { id: 'brand', label: t('Brandable (.xyz, .me)') },
+              { id: 'commercial', label: t('Commercial (.store, .pro)') },
+              { id: 'cctld', label: t('ccTLDs (Country)') },
+              { id: 'developed', label: t('Developed Websites') },
             ].map((cat) => (
               <button
                 key={cat.id}
@@ -1244,7 +1246,7 @@ export function DomainLeadsView() {
                   type="text"
                   value={sldSearchQuery}
                   onChange={(e) => setSldSearchQuery(e.target.value)}
-                  placeholder="Filter SLD names..."
+                  placeholder={t('Filter SLD names...')}
                   className={`h-8 pl-7 pr-2.5 rounded-lg text-xs font-medium border outline-none w-36 sm:w-44 ${
                     isLight
                       ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400'
@@ -1274,10 +1276,10 @@ export function DomainLeadsView() {
                     : 'bg-[#141414] border-white/10 text-white'
                 }`}
               >
-                <option value="all">All Saturation ({filteredSlds.length})</option>
-                <option value="high">High Saturation (50+ TLDs)</option>
-                <option value="moderate">Moderate Saturation (20-49 TLDs)</option>
-                <option value="developed">Developed Only (&gt;0 Live)</option>
+                <option value="all">{t('All Saturation ({n})', { n: filteredSlds.length })}</option>
+                <option value="high">{t('High Saturation (50+ TLDs)')}</option>
+                <option value="moderate">{t('Moderate Saturation (20-49 TLDs)')}</option>
+                <option value="developed">{t('Developed Only (>0 Live)')}</option>
               </select>
 
               {/* Per Page Selector */}
@@ -1293,7 +1295,7 @@ export function DomainLeadsView() {
                     ? 'bg-white border-slate-200 text-slate-900'
                     : 'bg-[#141414] border-white/10 text-white'
                 }`}
-                title="Number of SLD rows per page"
+                title={t('Number of SLD rows per page')}
               >
                 <option value="50">50 per page</option>
                 <option value="100">100 per page</option>
@@ -1346,7 +1348,7 @@ export function DomainLeadsView() {
                     : 'bg-[#141414] border-white/10 hover:bg-[#1a1a1a] text-white/70 hover:text-white'
                 }`}
               >
-                Expand All
+                {t('Expand All')}
               </button>
               <button
                 type="button"
@@ -1357,7 +1359,7 @@ export function DomainLeadsView() {
                     : 'bg-[#141414] border-white/10 hover:bg-[#1a1a1a] text-white/70 hover:text-white'
                 }`}
               >
-                Collapse All
+                {t('Collapse All')}
               </button>
               <button
                 type="button"
@@ -1369,7 +1371,7 @@ export function DomainLeadsView() {
                 }`}
               >
                 <Icons.Download className="w-3 h-3" />
-                <span>Export CSV</span>
+                <span>{t('Export CSV')}</span>
               </button>
             </div>
           </div>
@@ -1420,7 +1422,7 @@ export function DomainLeadsView() {
 
                     {/* Category Header */}
                     <th className="py-3 px-2 sm:px-3 font-semibold text-ds-subtle">
-                      <span>Category</span>
+                      <span>{t('Category')}</span>
                     </th>
 
                     {/* Lead Score Header */}
@@ -1436,7 +1438,7 @@ export function DomainLeadsView() {
                       }}
                     >
                       <div className="flex items-center gap-1">
-                        <span>Lead Score</span>
+                        <span>{t('Lead Score')}</span>
                         {sldSortCol === 'score' && (
                           <span className="text-[10px]">{sldSortDir === 'desc' ? '▼' : '▲'}</span>
                         )}
@@ -1456,7 +1458,7 @@ export function DomainLeadsView() {
                       }}
                     >
                       <div className="flex items-center gap-1">
-                        <span>Taken</span>
+                        <span>{t('Taken')}</span>
                         {sldSortCol === 'taken' && (
                           <span className="text-[10px]">{sldSortDir === 'desc' ? '▼' : '▲'}</span>
                         )}
@@ -1476,7 +1478,7 @@ export function DomainLeadsView() {
                       }}
                     >
                       <div className="flex items-center gap-1">
-                        <span>Developed</span>
+                        <span>{t('Developed')}</span>
                         {sldSortCol === 'dev' && (
                           <span className="text-[10px]">{sldSortDir === 'desc' ? '▼' : '▲'}</span>
                         )}
@@ -1486,18 +1488,18 @@ export function DomainLeadsView() {
                     {/* TLDs List Header with Right-Aligned Legend */}
                     <th className="py-3 px-3 sm:px-4">
                       <div className="flex items-center justify-between">
-                        <span>TLDs List</span>
+                        <span>{t('TLDs List')}</span>
                         <div className="flex items-center gap-3.5 normal-case font-normal text-[11px] tracking-normal">
                           <span className="inline-flex items-center gap-1.5">
                             <span className="w-2 h-2 rounded-full bg-[#f87171]" />
                             <span className={isLight ? 'text-slate-700 font-medium' : 'text-white/80 font-medium'}>
-                              Developed
+                              {t('Developed')}
                             </span>
                           </span>
                           <span className="inline-flex items-center gap-1.5">
                             <span className={`w-2 h-2 rounded-full ${isLight ? 'bg-slate-400' : 'bg-white'}`} />
                             <span className={isLight ? 'text-slate-500 font-medium' : 'text-white/80 font-medium'}>
-                              Registered
+                              {t('Registered')}
                             </span>
                           </span>
                         </div>
@@ -1747,7 +1749,7 @@ export function DomainLeadsView() {
                   ) : (
                     <tr>
                       <td colSpan={6} className="py-8 text-center text-xs text-ds-subtle font-sans">
-                        No SLDs matched your search query. Try clearing the filter or changing keyword.
+                        {t('No SLDs matched your search query. Try clearing the filter or changing keyword.')}
                       </td>
                     </tr>
                   )}

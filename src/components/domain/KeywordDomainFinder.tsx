@@ -1,5 +1,6 @@
 'use client';
 
+import { useT } from '@/components/i18n/LocaleProvider';
 import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Icons } from '@/components/ui/Icons';
@@ -69,6 +70,7 @@ function scorePopularity(type: GeneratedDomain['type'], words: string[]): number
 }
 
 export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
+  const t = useT();
   const [primaryKeyword, setPrimaryKeyword] = useState('');
   const [secondaryKeyword, setSecondaryKeyword] = useState('');
   const [includeHyphens, setIncludeHyphens] = useState(false);
@@ -477,7 +479,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         {/* 1) Search fields first */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-2 sm:mb-3">
           <Input
-            label="Keyword"
+            label={t('Keyword')}
             value={primaryKeyword}
             onChange={(e) => setPrimaryKeyword(e.target.value)}
             placeholder="ai, coffee, travel…"
@@ -492,7 +494,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             }}
           />
           <Input
-            label="Secondary (optional)"
+            label={t('Secondary (optional)')}
             value={secondaryKeyword}
             onChange={(e) => setSecondaryKeyword(e.target.value)}
             placeholder="hub, pro, buddy"
@@ -510,24 +512,24 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
         {/* Keyword position — filters result list after generate (not generation shape) */}
         <div className="mb-2 sm:mb-4">
-          <label className={`${ds.label} mb-1 hidden sm:block sm:mb-1.5`}>Filter by position</label>
+          <label className={`${ds.label} mb-1 hidden sm:block sm:mb-1.5`}>{t('Filter by position')}</label>
           <div className="grid grid-cols-3 gap-1 sm:flex sm:flex-wrap sm:gap-1.5">
             {(
               [
                 {
                   id: 'all' as const,
                   label: 'All',
-                  hint: 'Prefixes, suffixes & combos around your keyword',
+                  hint: t('Prefixes, suffixes & combos around your keyword'),
                 },
                 {
                   id: 'starts' as const,
-                  label: 'Starts',
-                  hint: 'Names that begin with your keyword (e.g. jobs…)',
+                  label: t('Starts'),
+                  hint: t('Names that begin with your keyword (e.g. jobs…)'),
                 },
                 {
                   id: 'ends' as const,
-                  label: 'Ends',
-                  hint: 'Names that end with your keyword (e.g. …jobs)',
+                  label: t('Ends'),
+                  hint: t('Names that end with your keyword (e.g. …jobs)'),
                 },
               ] as const
             ).map((opt) => (
@@ -552,7 +554,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         {/* 2) Extensions — type any TLD, pick presets, chips for selected */}
         <div className="mb-2 space-y-1.5 sm:mb-4 sm:space-y-2.5">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <label className={ds.label}>Extensions</label>
+            <label className={ds.label}>{t('Extensions')}</label>
             <span className={`hidden text-[10px] sm:inline ${ds.mute}`}>
               Type any TLD (e.g. shop, .io, co.uk) or pick a preset
             </span>
@@ -579,7 +581,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   onBlur={() => {
                     if (customTldInput.trim()) commitCustomTld();
                   }}
-                  placeholder="type tld…"
+                  placeholder={t('type tld…')}
                   autoComplete="off"
                   spellCheck={false}
                   className={`w-full rounded-ds-md border pl-6 pr-3 py-2 text-[12px] font-mono font-semibold outline-none transition-colors ${ds.input}`}
@@ -637,7 +639,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               ) : (
                 <>
                   <Icons.Search className="w-4 h-4" />
-                  Find domains
+                  {t('Find domains')}
                 </>
               )}
             </button>
@@ -652,7 +654,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   onClick={() => toggleTld(tld)}
                   title={
                     selectedTlds.length === 1
-                      ? 'At least one extension required'
+                      ? t('At least one extension required')
                       : `Remove ${tld}`
                   }
                   className="inline-flex items-center gap-1 rounded-full border border-[#f0f0f0] bg-[#f0f0f0] px-2.5 py-1 text-[11px] font-mono font-semibold text-[#0a0a0a] transition-colors hover:bg-white"
@@ -672,7 +674,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         {/* 3) Optional toggles */}
         <div className="flex flex-wrap items-center gap-2 mb-1">
           <button type="button" onClick={() => setShowOptions((v) => !v)} className={pill(showOptions)}>
-            {showOptions ? 'Hide options' : 'More options'}
+            {showOptions ? t('Hide options') : t('More options')}
             <svg
               className={`w-3 h-3 transition-transform ${showOptions ? 'rotate-180' : ''}`}
               fill="none"
@@ -684,7 +686,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             </svg>
           </button>
           <button type="button" onClick={() => setShowPopular((v) => !v)} className={pill(showPopular)}>
-            {showPopular ? 'Hide popular' : 'Popular seeds'}
+            {showPopular ? t('Hide popular') : t('Popular seeds')}
           </button>
           {(primaryKeyword || secondaryKeyword || generated.length > 0) && (
             <button
@@ -715,7 +717,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
         {showPopular && (
           <div className={`mt-3 mb-1 p-2.5 sm:p-3 ${ds.inset}`}>
-            <p className={`${ds.label} mb-2`}>Popular seeds</p>
+            <p className={`${ds.label} mb-2`}>{t('Popular seeds')}</p>
             <div className="flex flex-wrap gap-1.5">
               {POPULAR_CHIPS.map((item) => (
                 <button
@@ -769,7 +771,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
         {!canSearch && (
           <p className={`mt-2 hidden text-[11px] sm:block ${ds.mute}`}>
-            Type a primary or secondary keyword, then click Find domains
+            {t('Type a primary or secondary keyword, then click Find domains')}
           </p>
         )}
         </div>
@@ -842,8 +844,8 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               {(
                 [
                   { id: 'all' as const, label: 'All' },
-                  { id: 'starts' as const, label: 'Starts' },
-                  { id: 'ends' as const, label: 'Ends' },
+                  { id: 'starts' as const, label: t('Starts') },
+                  { id: 'ends' as const, label: t('Ends') },
                 ] as const
               ).map((m) => (
                 <button key={m.id} type="button" onClick={() => setFilterMode(m.id)} className={pill(filterMode === m.id)}>
@@ -1030,8 +1032,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
       {generated.length === 0 && !isGenerating && (
         <div className={`text-center rounded-2xl border px-4 py-6 sm:py-8 ${ds.card} ${ds.mute}`}>
           <p className={`text-[12px] sm:text-[13px] leading-relaxed max-w-md mx-auto ${ds.mute}`}>
-            Type any keyword (or use Popular), pick a registrar, then Find domains — prefixes,
-            suffixes &amp; live checks included.
+            {t('Type any keyword (or use Popular), pick a registrar, then Find domains — prefixes, suffixes & live checks included.')}
           </p>
         </div>
       )}

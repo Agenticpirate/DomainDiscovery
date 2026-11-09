@@ -10,7 +10,7 @@ import { DomainGenerator } from '@/components/generator/DomainGenerator';
 import { GeneratorContent } from '@/components/generator/GeneratorContent';
 import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
 import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 import { pageHeading } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -18,6 +18,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 export default function GeneratorPage() {
   const [selectedDomain, setSelectedDomain] = useState<string>('');
   const { locale, messages, href } = useLocale();
+  const t = useT();
   const localized = locale !== 'en';
   const { theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
@@ -67,9 +68,9 @@ export default function GeneratorPage() {
                         isLight ? 'bg-slate-500' : 'bg-white/70'
                       }`}
                     />
-                    <span className="sm:hidden">5,500+ words · Ideas appear instantly</span>
+                    <span className="sm:hidden">{t('5,500+ words · Ideas appear instantly')}</span>
                     <span className="hidden sm:inline">
-                      5,500+ ranked words · Ideas appear instantly · Live checks on the names in view
+                      {t('5,500+ ranked words · Ideas appear instantly · Live checks on the names in view')}
                     </span>
                   </span>
                 </div>

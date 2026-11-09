@@ -12,7 +12,7 @@ import {
   readCatalogSeed,
 } from '@/lib/catalogHandoff';
 import { resolveRegisterUrl } from '@/lib/registrars';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 
 interface Extension {
   tld: string;
@@ -128,6 +128,7 @@ const checkDomainsAvailability = async (
 
 export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExtensionsViewProps) {
   const { href } = useLocale();
+  const t = useT();
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const searchParams = useSearchParams();
@@ -427,30 +428,30 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
             <h2 className="text-[13px] sm:text-base font-black tracking-tight">
               {isNameSearch
                 ? statusFilter === 'available'
-                  ? `Available · “${cleanKeyword}”`
+                  ? t('Available · “{kw}”', { kw: cleanKeyword })
                   : statusFilter === 'taken'
-                    ? `Taken · “${cleanKeyword}”`
+                    ? t('Taken · “{kw}”', { kw: cleanKeyword })
                     : selectedCategory === 'All'
-                      ? `Results for “${cleanKeyword}”`
-                      : `“${cleanKeyword}” · ${selectedCategory}`
+                      ? t('Results for “{kw}”', { kw: cleanKeyword })
+                      : t('“{kw}” · {cat}', { kw: cleanKeyword, cat: t(selectedCategory) })
                 : selectedCategory === 'All'
-                  ? 'Browse extensions'
-                  : `Browse · ${selectedCategory}`}
+                  ? t('Browse extensions')
+                  : t('Browse · {cat}', { cat: t(selectedCategory) })}
             </h2>
             <p className="text-[10px] sm:text-[12px] mt-0.5" style={{ color: 'var(--text-tertiary)' }}>
               {filteredExtensions.length === 0
                 ? statusFilter === 'taken'
-                  ? 'No taken domains in this filter.'
+                  ? t('No taken domains in this filter.')
                   : statusFilter === 'available'
-                    ? 'No available domains in this filter yet.'
-                    : 'No extensions in this filter.'
+                    ? t('No available domains in this filter yet.')
+                    : t('No extensions in this filter.')
                 : isNameSearch
-                  ? `Showing ${visibleExtensions.length} of ${filteredExtensions.length}${
+                  ? `${t('Showing {a} of {b}', { a: visibleExtensions.length, b: filteredExtensions.length })}${
                       !isChecking && hasLiveResults && statusFilter === 'all'
-                        ? ` · ${availableCount} available · ${takenCount} taken`
+                        ? ` · ${t('{n} available', { n: availableCount })} · ${t('{n} taken', { n: takenCount })}`
                         : ''
                     }`
-                  : `Showing ${visibleExtensions.length} of ${filteredExtensions.length}`}
+                  : t('Showing {a} of {b}', { a: visibleExtensions.length, b: filteredExtensions.length })}
             </p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
@@ -462,7 +463,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                   isLight ? 'text-slate-600 hover:text-black' : 'text-white/55 hover:text-white/85'
                 }`}
               >
-                Clear filter
+                {t('Clear filter')}
               </button>
             )}
             {isNameSearch && cleanKeyword && (
@@ -548,7 +549,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                       : 'bg-white text-black border-white hover:bg-white/90'
                   }`}
                 >
-                  View more
+                  {t('View more')}
                   <span className="font-semibold opacity-70">(+{Math.min(PREVIEW_STEP, hiddenCount)})</span>
                 </button>
               )}
@@ -590,7 +591,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                 className="text-center text-[10px] sm:text-[11px] mt-2"
                 style={{ color: 'var(--text-muted)' }}
               >
-                {hiddenCount} more in this filter · guides & education below
+                {t('{n} more in this filter · guides & education below', { n: hiddenCount })}
               </p>
             )}
           </>
@@ -641,13 +642,13 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
               <p className="text-[13px] sm:text-[15px] font-black tracking-tight leading-tight">
-                Search all {totalTlds.toLocaleString()} extensions
+                {t('Search all {n} extensions', { n: totalTlds.toLocaleString() })}
               </p>
               <p
                 className="mt-0.5 text-[11px] sm:text-[12px] leading-snug truncate"
                 style={{ color: 'var(--text-tertiary)' }}
               >
-                Type a brand · filter by category anytime
+                {t('Type a brand · filter by category anytime')}
               </p>
             </div>
             <span
@@ -661,7 +662,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
               <span
                 className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-emerald-500' : 'bg-emerald-400'}`}
               />
-              {catalogCount.toLocaleString()} listings
+              {t('{n} listings', { n: catalogCount.toLocaleString() })}
             </span>
           </div>
 
@@ -690,7 +691,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                     window.location.href = href(`/search?q=${encodeURIComponent(cleanKeyword)}`);
                   }
                 }}
-                placeholder={`Brand name · checks ${totalTlds.toLocaleString()} TLDs`}
+                placeholder={t('Brand name · checks {n} TLDs', { n: totalTlds.toLocaleString() })}
                 className={`w-full rounded-xl border-0 bg-transparent pl-9 sm:pl-10 pr-9 py-2.5 sm:py-3 text-[13px] sm:text-[15px] font-medium outline-none focus:ring-0 ${
                   isLight
                     ? 'text-slate-900 placeholder:text-slate-400'
@@ -729,7 +730,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
               }`}
             >
               <Icons.Search className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span className="whitespace-nowrap">{cleanKeyword ? 'Full search' : 'Search all'}</span>
+              <span className="whitespace-nowrap">{cleanKeyword ? t('Full search') : t('Search all')}</span>
               <svg
                 className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5"
                 fill="none"
@@ -757,7 +758,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
               <div
                 className="flex-1 min-w-0 overflow-x-auto scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                 role="listbox"
-                aria-label="Extension categories"
+                aria-label={t('Extension categories')}
               >
                 <div className="inline-flex items-center gap-1 min-w-min pr-1">
                   {primaryCategories.map((cat) => {
@@ -765,10 +766,10 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                     const countLabel = countForCategory(cat);
                     const shortLabel =
                       cat === 'Business & Commerce'
-                        ? 'Business'
+                        ? t('Business')
                         : cat === 'Technology'
-                          ? 'Tech'
-                          : cat;
+                          ? t('Tech')
+                          : t(cat);
 
                     return (
                       <button
@@ -778,7 +779,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                         aria-selected={active}
                         onClick={() => pickCategory(cat)}
                         aria-pressed={active}
-                        title={cat === shortLabel ? undefined : cat}
+                        title={cat === shortLabel ? undefined : t(cat)}
                         className={`inline-flex items-center gap-1.5 rounded-full whitespace-nowrap transition-all border px-2.5 py-1.5 text-[11px] font-semibold ${
                           active
                             ? isLight
@@ -814,7 +815,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
               {moreCategories.length > 0 && (
                 <div className="relative shrink-0">
                   <label htmlFor="ext-more-category" className="sr-only">
-                    Industry and region categories
+                    {t('Industry and region categories')}
                   </label>
                   <select
                     id="ext-more-category"
@@ -835,25 +836,25 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                     style={
                       isMoreCategory || isLight ? undefined : { backgroundColor: plateInset }
                     }
-                    aria-label="More categories: industry and regions"
+                    aria-label={t('More categories: industry and regions')}
                   >
                     <option value="">
-                      {isMoreCategory ? 'Clear more…' : `More · ${moreCategories.length}`}
+                      {isMoreCategory ? t('Clear more…') : t('More · {n}', { n: moreCategories.length })}
                     </option>
                     {industryCategories.length > 0 && (
-                      <optgroup label="Industry">
+                      <optgroup label={t('Industry')}>
                         {industryCategories.map((cat) => (
                           <option key={cat} value={cat}>
-                            {cat} ({countForCategory(cat)})
+                            {t(cat)} ({countForCategory(cat)})
                           </option>
                         ))}
                       </optgroup>
                     )}
                     {regionCategories.length > 0 && (
-                      <optgroup label="Regions">
+                      <optgroup label={t('Regions')}>
                         {regionCategories.map((cat) => (
                           <option key={cat} value={cat}>
-                            {cat} ({countForCategory(cat)})
+                            {t(cat)} ({countForCategory(cat)})
                           </option>
                         ))}
                       </optgroup>
@@ -1014,6 +1015,7 @@ interface ExtensionCardProps {
 function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCardProps) {
   const { theme } = useTheme();
   const { href } = useLocale();
+  const t = useT();
   const isLight = theme === 'light';
 
   const cleanKeyword = searchQuery.toLowerCase().replace(/\s+/g, '').replace(/^\./, '');
@@ -1139,7 +1141,7 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
           isLight ? 'text-slate-500' : 'text-white/45'
         }`}
       >
-        {extension.name}
+        {t(extension.name)}
       </div>
 
       <div className="mt-auto flex items-center justify-between gap-1">

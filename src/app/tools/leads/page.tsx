@@ -8,12 +8,13 @@ import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { DomainLeadsView } from '@/components/leads/DomainLeadsView';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 import { useTheme } from '@/contexts/ThemeContext';
 import { ds } from '@/lib/ds';
 
 export default function LeadsPage() {
   const { messages, href } = useLocale();
+  const t = useT();
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -56,7 +57,7 @@ export default function LeadsPage() {
                     : 'linear-gradient(to right, #fff, #fff, rgba(255,255,255,0.65))',
                 }}
               >
-                Find Qualified Buyers for Your Domains
+                {t('Find Qualified Buyers for Your Domains')}
               </span>
             </h1>
             <p className={`hidden sm:block text-[13px] sm:text-[14px] leading-relaxed max-w-xl mx-auto ${ds.body}`}>
@@ -68,13 +69,13 @@ export default function LeadsPage() {
         <div className="page-gutter pt-2 sm:pt-4 pb-3 sm:pb-5">
           <div className="max-w-6xl mx-auto space-y-12">
             <DomainLeadsView />
-            <nav aria-label="Domain lead guides" className="text-center text-[13px]">
+            <nav aria-label={t('Domain lead guides')} className="text-center text-[13px]">
               <Link href="/domain-leads" className="underline underline-offset-4 opacity-80 hover:opacity-100">
-                Domain lead guides
+                {t('Domain lead guides')}
               </Link>
               <span className="mx-2 opacity-40">·</span>
               <Link href="/domain-leads/find-domain-buyers" className="underline underline-offset-4 opacity-80 hover:opacity-100">
-                How to find domain buyers
+                {t('How to find domain buyers')}
               </Link>
             </nav>
           </div>

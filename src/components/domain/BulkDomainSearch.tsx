@@ -6,6 +6,7 @@ import { Icons } from '../ui/Icons';
 import { BulkDomainSearchLanding, BULK_SAMPLE_TEXT, type BulkAddOptions } from './BulkDomainSearchLanding';
 import { RegistrarActionMenu } from './RegistrarControls';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useT } from '@/components/i18n/LocaleProvider';
 import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import {
@@ -353,6 +354,7 @@ const ResultsView: React.FC<{
   selectedRegistrar,
   setSelectedRegistrar,
 }) => {
+  const t = useT();
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const { showToast } = useToast();
@@ -537,7 +539,7 @@ const ResultsView: React.FC<{
                 ).map((x) => (
                   <button key={x.k} type="button" onClick={() => setFilter(x.k)} className={chip(filter === x.k)}>
                     {x.icon}
-                    {x.l}
+                    {t(x.l)}
                     <span className={`tabular-nums ${filter === x.k ? 'opacity-80' : 'opacity-50'}`}>{x.c}</span>
                   </button>
                 ))}

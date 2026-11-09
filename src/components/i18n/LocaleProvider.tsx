@@ -82,3 +82,17 @@ export function useLocale(): LocaleContextValue {
   }
   return value;
 }
+
+export type Translate = (text: string, vars?: Record<string, string | number>) => string;
+/** Looks up UI copy by its English text; falls back to the English text itself. */
+export function useT(): Translate {
+  const { messages } = useLocale();
+  return React.useCallback<Translate>(
+    (text, vars) => {
+      let out = messages.tx[text] ?? text;
+      if (vars) for (const key of Object.keys(vars)) out = out.split(`{${key}}`).join(String(vars[key]));
+      return out;
+    },
+    [messages]
+  );
+}

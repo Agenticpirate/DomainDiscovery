@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useT } from '@/components/i18n/LocaleProvider';
 
 const X_PROFILE = 'https://x.com/Agenticpirate';
 /** Stores the dismissal timestamp. The note comes back after DISMISS_MS. */
@@ -14,6 +15,7 @@ const AUDIENCES = ['Brands', 'Domain investors'];
  * A dismissal is remembered for 24 hours, then the note returns.
  */
 export function HeroStickyNote() {
+  const t = useT();
   const [visible, setVisible] = useState(false);
   const [leaving, setLeaving] = useState(false);
 
@@ -50,7 +52,7 @@ export function HeroStickyNote() {
           <button
             type="button"
             onClick={dismiss}
-            aria-label="Dismiss note"
+            aria-label={t('Dismiss note')}
             className="absolute right-1.5 top-2 grid h-7 w-7 place-items-center rounded-full text-[#6b5710] transition-colors hover:bg-black/[0.08] hover:text-[#2c2306] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#6b5710]"
           >
             <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden>

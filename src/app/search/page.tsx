@@ -21,7 +21,7 @@ import { searchDomains, checkDomainAvailability } from '@/services/instantDomain
 import { recordDomainsChecked } from '@/lib/searchCounter';
 import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
 import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
 import extensionsData from '@/data/extensions.json';
@@ -118,6 +118,7 @@ function generateBrandableDomains(query: string): string[] {
 
 function SearchPageContent() {
   const { locale, messages, href } = useLocale();
+  const t = useT();
   const searchParams = useSearchParams();
   const router = useRouter();
   const initialQuery = searchParams.get('q') || '';
@@ -507,7 +508,7 @@ function SearchPageContent() {
               <div className="min-w-0 flex-1 overflow-hidden">
                 <SearchInterface
                   initialQuery={query}
-                  placeholder="Search a domain…"
+                  placeholder={t('Search a domain…')}
                   onSearch={handleLiveSearch}
                   onClear={handleResetSearch}
                   autoFocus={true}
@@ -527,22 +528,22 @@ function SearchPageContent() {
               }`}
             >
               <nav
-                aria-label="Domain tools"
+                aria-label={t('Domain tools')}
                 className="flex min-w-0 flex-1 flex-wrap gap-1 sm:flex-nowrap sm:overflow-x-auto scrollbar-none"
               >
                 {(
                   [
-                    { href: '/search', label: 'Search', short: 'Search', active: true, catalog: false },
+                    { href: '/search', label: t('Search'), short: t('Search'), active: true, catalog: false },
                     {
                       href: extensionsCatalogHref,
-                      label: 'Extensions',
+                      label: t('Extensions'),
                       short: 'TLDs',
                       active: false,
                       catalog: true,
                     },
-                    { href: href('/generator'), label: 'Generator', short: 'Ideas', active: false, catalog: false },
-                    { href: href('/premium'), label: 'Aftermarket', short: 'Market', active: false, catalog: false },
-                    { href: href('/tools/keyword'), label: 'Research', short: 'Research', active: false, catalog: false },
+                    { href: href('/generator'), label: t('Generator'), short: t('Ideas'), active: false, catalog: false },
+                    { href: href('/premium'), label: t('Aftermarket'), short: t('Market'), active: false, catalog: false },
+                    { href: href('/tools/keyword'), label: t('Research'), short: t('Research'), active: false, catalog: false },
                   ] as const
                 ).map((tab) => {
                   const cls = `shrink-0 inline-flex min-h-9 sm:min-h-10 items-center justify-center rounded-xl px-2.5 sm:px-3 py-1.5 text-[12px] sm:text-[13px] font-semibold tracking-tight transition-colors duration-150 ${
@@ -740,9 +741,9 @@ function SearchPageContent() {
 
           {!isLoading && results.length === 0 && !query && (
             <div className="text-center py-16">
-              <p className="text-[15px] font-bold mb-1">Search any name</p>
+              <p className="text-[15px] font-bold mb-1">{t('Search any name')}</p>
               <p className="text-[12px]" style={{ color: 'var(--text-muted)' }}>
-                Live availability across {ALL_TLDS.length}+ extensions
+                {t('Live availability across {n}+ extensions', { n: ALL_TLDS.length })}
               </p>
             </div>
           )}

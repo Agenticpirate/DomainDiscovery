@@ -8,7 +8,7 @@ import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 
 interface SimpleContentPageProps {
   activeTool?: string;
@@ -36,6 +36,7 @@ export function SimpleContentPage({
 }: SimpleContentPageProps) {
   const { theme } = useTheme();
   const { href } = useLocale();
+  const t = useT();
   const isLight = theme === 'light';
   const solid = isLight ? '#ffffff' : '#0a0a0a';
 
@@ -47,7 +48,7 @@ export function SimpleContentPage({
       <main className={`${PAGE_MAIN_CLASS} pb-10 sm:pb-14`}>
         <PageBreadcrumb
           items={[
-            { label: 'Home', href: '/' },
+            { label: t('Home'), href: '/' },
             { label: breadcrumbLabel || title },
           ]}
         />
@@ -132,10 +133,10 @@ export function SimpleContentPage({
                         isLight ? 'text-slate-900' : 'text-white'
                       }`}
                     >
-                      Continue exploring
+                      {t('Continue exploring')}
                     </div>
                     <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
-                      Jump back into the core tools.
+                      {t('Jump back into the core tools.')}
                     </p>
                   </div>
                   <Link
