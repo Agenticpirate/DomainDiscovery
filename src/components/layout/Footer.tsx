@@ -500,6 +500,28 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
+      {/* Product Hunt launch badge; badge theme follows the site theme */}
+      <div className={`relative z-[2] border-t ${hairline} ${solidBg}`}>
+        <div className="max-w-6xl mx-auto px-3 sm:px-5 py-3 flex justify-center">
+          <a
+            href="https://www.producthunt.com/products/domaindiscovery?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-domaindiscovery"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- third-party SVG badge; next/image adds nothing here */}
+            <img
+              alt="DomainDiscovery - Discover Your Next Domain. | Product Hunt"
+              width={250}
+              height={54}
+              loading="lazy"
+              decoding="async"
+              src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1309683&theme=${isLight ? 'light' : 'dark'}&t=1794212082116`}
+            />
+          </a>
+        </div>
+      </div>
+
       {/* Legal bar — with safe-area padding for mobile home indicators */}
       <div
         className={`relative z-[2] border-t ${hairline} ${solidBg}`}
