@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 
 export interface BreadcrumbItem {
   label: string;
@@ -23,6 +23,7 @@ interface BreadcrumbProps {
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = '' }) => {
   const { theme } = useTheme();
   const { href: localize, messages } = useLocale();
+  const t = useT();
   const isLight = theme === 'light';
   const homeLabel = messages.nav.home;
 
@@ -54,7 +55,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = '' })
 
   return (
     <nav
-      aria-label="Breadcrumb"
+      aria-label={t('Breadcrumb')}
       className={`page-breadcrumb flex flex-wrap items-center justify-start gap-1.5 sm:gap-2 text-[12px] sm:text-[13px] leading-none ${className}`}
     >
       {trail.map((item, index) => {

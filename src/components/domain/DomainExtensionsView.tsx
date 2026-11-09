@@ -473,7 +473,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                   isLight ? 'text-slate-900' : 'text-white/85'
                 }`}
               >
-                Full search →
+                {t('Full search →')}
               </Link>
             )}
           </div>
@@ -483,15 +483,15 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
           <div className="text-center py-10">
             <p className="font-semibold text-sm mb-1">
               {statusFilter === 'taken'
-                ? 'No taken domains here'
+                ? t('No taken domains here')
                 : statusFilter === 'available'
-                  ? 'No available domains here'
-                  : 'No extensions found'}
+                  ? t('No available domains here')
+                  : t('No extensions found')}
             </p>
             <p className="text-[12px]" style={{ color: 'var(--text-tertiary)' }}>
               {statusFilter !== 'all'
-                ? 'Try All, or switch category.'
-                : 'Try another category or clear the filter.'}
+                ? t('Try All, or switch category.')
+                : t('Try another category or clear the filter.')}
             </p>
             <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
               {statusFilter !== 'all' && (
@@ -504,7 +504,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                       : 'bg-white text-black border-white'
                   }`}
                 >
-                  Show all statuses
+                  {t('Show all statuses')}
                 </button>
               )}
               {selectedCategory !== 'All' && (
@@ -515,7 +515,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                     isLight ? 'text-slate-800' : 'text-white/80'
                   }`}
                 >
-                  Show all categories
+                  {t('Show all categories')}
                 </button>
               )}
             </div>
@@ -564,7 +564,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                   }`}
                   style={isLight ? undefined : { backgroundColor: '#111111' }}
                 >
-                  Show all {filteredExtensions.length}
+                  {t('Show all {n}', { n: filteredExtensions.length })}
                 </button>
               )}
               {!canViewMore && visibleCount > PREVIEW_INITIAL && (
@@ -581,7 +581,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                   }`}
                   style={isLight ? undefined : { backgroundColor: '#111111' }}
                 >
-                  Show less
+                  {t('Show less')}
                 </button>
               )}
             </div>
@@ -697,7 +697,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                     ? 'text-slate-900 placeholder:text-slate-400'
                     : 'text-white placeholder:text-white/30'
                 }`}
-                aria-label="Search keyword across all domain extensions"
+                aria-label={t('Search keyword across all domain extensions')}
                 autoComplete="off"
                 spellCheck={false}
               />
@@ -708,7 +708,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                   className={`absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded-md ${
                     isLight ? 'text-slate-400 hover:text-slate-700' : 'text-white/40 hover:text-white/80'
                   }`}
-                  aria-label="Clear search"
+                  aria-label={t('Clear search')}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
@@ -893,7 +893,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                     isLight ? 'text-slate-500 hover:text-slate-900' : 'text-white/45 hover:text-white/80'
                   }`}
                 >
-                  Clear
+                  {t('Clear')}
                 </button>
               )}
             </div>
@@ -919,7 +919,9 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                         isLight ? 'bg-slate-500' : 'bg-white/70'
                       }`}
                     />
-                    Checking{selectedCategory !== 'All' ? ` ${selectedCategory}` : ' all TLDs'}…
+                    {selectedCategory !== 'All'
+                      ? t('Checking {cat}…', { cat: selectedCategory })
+                      : t('Checking all TLDs…')}
                   </span>
                 )}
                 {isNameSearch && hasLiveResults && (
@@ -929,7 +931,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                     }`}
                     style={isLight ? undefined : { backgroundColor: plateInset }}
                     role="group"
-                    aria-label="Filter by availability status"
+                    aria-label={t('Filter by availability status')}
                   >
                     {(
                       [
@@ -983,7 +985,7 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
                             aria-hidden
                           />
                           <span>
-                            {chip.label}
+                            {t(chip.label)}
                             <span className="ml-0.5 tabular-nums opacity-80">{chip.n}</span>
                           </span>
                         </button>
@@ -1083,9 +1085,9 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
       title={
         showFullDomain && cleanKeyword
           ? extension.available === false
-            ? `${fullDomain} · Taken — open search`
+            ? t('{d} · Taken — open search', { d: fullDomain })
             : extension.available
-              ? `${fullDomain} · Available — register`
+              ? t('{d} · Available — register', { d: fullDomain })
               : fullDomain
           : extension.tld
       }
@@ -1130,8 +1132,8 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
                     : 'ring-rose-400/20'
                   : 'ring-transparent'
             }`}
-            title={statusLabel}
-            aria-label={statusLabel}
+            title={t(statusLabel)}
+            aria-label={t(statusLabel)}
           />
         )}
       </div>
@@ -1157,7 +1159,7 @@ function ExtensionCard({ extension, searchQuery, showFullDomain }: ExtensionCard
             className={`inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold ${statusText}`}
           >
             <span className={`h-1.5 w-1.5 rounded-full ${statusDot}`} aria-hidden />
-            {statusLabel}
+            {t(statusLabel)}
           </span>
         )}
       </div>

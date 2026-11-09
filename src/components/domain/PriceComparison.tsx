@@ -272,7 +272,7 @@ function RegistrarCard({
               )}
               {isUnsupported && (
                 <span className={`text-[9px] sm:text-[10px] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                  Not listed
+                  {t('Not listed')}
                 </span>
               )}
             </div>
@@ -777,7 +777,7 @@ export function PriceComparison({
             isLight ? 'border-slate-200 bg-slate-50 text-slate-700' : 'border-white/10 bg-[#0a0a0a] text-white/70'
           }`}
         >
-          Loading registrar pricing…
+          {t('Loading registrar pricing…')}
         </div>
       </div>
     );
@@ -789,7 +789,7 @@ export function PriceComparison({
       <div className="space-y-3">
         <div className={`rounded-2xl border p-4 sm:p-5 ${panelTone(isLight)}`}>
           <div className={`text-[11px] uppercase tracking-[0.22em] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-            Registrar comparison
+            {t('Registrar comparison')}
           </div>
           <h3 className="mt-1 text-2xl font-black tracking-tight">{detail.tld}</h3>
           {loadError && (
@@ -812,7 +812,7 @@ export function PriceComparison({
           </div>
         </div>
         <div className={`rounded-2xl border p-4 sm:p-5 ${panelTone(isLight)}`}>
-          <h4 className="text-sm font-bold mb-2">Top registrars</h4>
+          <h4 className="text-sm font-bold mb-2">{t('Top registrars')}</h4>
           <div className="max-h-72 space-y-1.5 overflow-y-auto">
             {selectedRegistrarOffers.slice(0, 10).map((offer, index) => (
               <RegistrarCard
@@ -863,7 +863,7 @@ export function PriceComparison({
                   {totalExtensionCount && matrixRows.length < totalExtensionCount
                     ? ` / ${totalExtensionCount.toLocaleString()}`
                     : ''}{' '}
-                  TLDs
+                  {t('TLDs')}
                   {canShowMore ? ` · ${t('showing {n}', { n: visibleRows.length })}` : ''}
                   {matrixLoading ? ` · ${t('loading…')}` : ''}
                 </span>
@@ -943,7 +943,7 @@ export function PriceComparison({
                     }
                   }}
                   placeholder={t('e.g. .ai · .com · hamburg')}
-                  aria-label="Search or jump to a domain extension"
+                  aria-label={t('Search or jump to a domain extension')}
                   className="h-9 sm:h-10 w-full text-[13px]"
                 />
                 <button
@@ -972,17 +972,17 @@ export function PriceComparison({
                 id="compare-registrar-filter"
                 value={registrarFilter}
                 onChange={(event) => setRegistrarFilter(event.target.value)}
-                aria-label="Show only extensions sold by this registrar"
+                aria-label={t('Show only extensions sold by this registrar')}
                 className={`h-9 sm:h-10 w-full rounded-lg sm:rounded-xl border px-2.5 sm:px-3 text-[13px] sm:text-sm font-medium outline-none ${
                   isLight
                     ? 'border-slate-200 bg-slate-50 text-slate-900'
                     : 'border-white/10 bg-[#111111] text-white'
                 }`}
               >
-                <option value="all">All registrars</option>
+                <option value="all">{t('All registrars')}</option>
                 {tableRegistrars.map((name) => (
                   <option key={name} value={name}>
-                    Only {name === 'Unstoppable Domains' ? 'Unstoppable' : name}
+                    {t('Only {name}', { name: name === 'Unstoppable Domains' ? 'Unstoppable' : name })}
                   </option>
                 ))}
               </select>
@@ -1000,7 +1000,7 @@ export function PriceComparison({
                 id="compare-sort"
                 value={sortKey}
                 onChange={(event) => setSortKey(event.target.value as SortKey)}
-                aria-label="Sort extensions"
+                aria-label={t('Sort extensions')}
                 className={`h-9 sm:h-10 w-full rounded-lg sm:rounded-xl border px-2.5 text-[13px] sm:text-sm font-medium outline-none ${
                   isLight
                     ? 'border-slate-200 bg-slate-50 text-slate-900'
@@ -1039,7 +1039,7 @@ export function PriceComparison({
                     : 'border-white/10 bg-[#111111] text-white/60 hover:border-white/20'
               }`}
             >
-              All
+              {t('All')}
             </button>
             {tableRegistrars.map((name) => {
               const active = registrarFilter === name;
@@ -1110,8 +1110,9 @@ export function PriceComparison({
               }`}
             >
               <span className="font-semibold">
-                Showing {filteredRows.length.toLocaleString()} extension
-                {filteredRows.length === 1 ? '' : 's'}
+                {filteredRows.length === 1
+                  ? t('Showing 1 extension')
+                  : t('Showing {n} extensions', { n: filteredRows.length.toLocaleString() })}
               </span>
               <button
                 type="button"
@@ -1120,7 +1121,7 @@ export function PriceComparison({
                   isLight ? 'text-slate-700' : 'text-white/75'
                 }`}
               >
-                Clear filters
+                {t('Clear filters')}
               </button>
             </div>
           )}
@@ -1193,7 +1194,7 @@ export function PriceComparison({
                 ref={tableScrollRef}
                 onScroll={() => syncScrollPosition('table')}
                 role="region"
-                aria-label="Domain price comparison matrix"
+                aria-label={t('Domain price comparison matrix')}
                 tabIndex={0}
                 className={`max-h-[min(58vh,640px)] sm:max-h-[min(62vh,640px)] overflow-auto rounded-lg sm:rounded-xl border focus:outline-none focus-visible:ring-2 ${
                   isLight
@@ -1220,8 +1221,8 @@ export function PriceComparison({
                           isLight ? 'bg-slate-50 text-slate-500' : 'bg-[#111] text-white/45'
                         }`}
                       >
-                        <span className="sm:hidden">Ext</span>
-                        <span className="hidden sm:inline">TLD</span>
+                        <span className="sm:hidden">{t('Ext')}</span>
+                        <span className="hidden sm:inline">{t('TLD')}</span>
                       </th>
                       <th
                         scope="col"
@@ -1229,7 +1230,7 @@ export function PriceComparison({
                           isLight ? 'text-slate-500' : 'text-white/45'
                         }`}
                       >
-                        Cover
+                        {t('Cover')}
                       </th>
                       {tableRegistrars.map((registrar) => {
                         const focused = registrarFilter === registrar;
@@ -1276,7 +1277,7 @@ export function PriceComparison({
                           className={`px-4 py-10 text-center ${isLight ? 'text-slate-500' : 'text-white/50'}`}
                         >
                           <p className={`text-sm font-semibold ${isLight ? 'text-slate-800' : 'text-white/80'}`}>
-                            No extensions match your filters
+                            {t('No extensions match your filters')}
                           </p>
                           <button
                             type="button"
@@ -1287,7 +1288,7 @@ export function PriceComparison({
                                 : 'border-white bg-white text-black'
                             }`}
                           >
-                            Clear filters
+                            {t('Clear filters')}
                           </button>
                         </td>
                       </tr>
@@ -1433,7 +1434,7 @@ export function PriceComparison({
                   </p>
                 </div>
                 {loading && (
-                  <span className={`text-[10px] sm:text-[11px] ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Loading…</span>
+                  <span className={`text-[10px] sm:text-[11px] ${isLight ? 'text-slate-400' : 'text-white/40'}`}>{t('Loading…')}</span>
                 )}
               </div>
 

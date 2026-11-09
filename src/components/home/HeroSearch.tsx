@@ -187,7 +187,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
               className={`shrink-0 flex h-11 w-11 items-center justify-center rounded-xl ${
                 isLight ? 'text-[#52595b] active:bg-[#f4f5f5]' : 'text-[#a1a4a5] active:bg-white/10'
               }`}
-              aria-label="Clear search"
+              aria-label={t('Clear search')}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

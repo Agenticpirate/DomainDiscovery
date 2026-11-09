@@ -1,6 +1,7 @@
 'use client';
 
 import { useT } from '@/components/i18n/LocaleProvider';
+import { rich } from '@/components/i18n/rich';
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import { Icons } from '@/components/ui/Icons';
@@ -81,6 +82,7 @@ function formatSldDisplay(sld: string, query: string, isLight: boolean) {
 
 export function DomainLeadsView() {
   const t = useT();
+  const tt = t; // alias for places where `t` is shadowed by a TLD loop variable
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -226,7 +228,7 @@ export function DomainLeadsView() {
         setExpandedSlds(new Set());
       } catch (err) {
         console.error(err);
-        showToast('Error fetching lead data. Please try again.', 'error');
+        showToast(t('Error fetching lead data. Please try again.'), 'error');
       } finally {
         setLoading(false);
       }
@@ -378,7 +380,7 @@ export function DomainLeadsView() {
       text = enlargedTlds.map((t) => `${enlargeModalSld.sld}.${t.tld}`).join('\n');
     }
     navigator.clipboard.writeText(text);
-    showToast(`Copied ${enlargedTlds.length} extensions to clipboard!`, 'success');
+    showToast(t('Copied {n} extensions to clipboard!', { n: enlargedTlds.length }), 'success');
   };
 
   const getRowExpandedFilter = (sld: string): 'all' | 'developed' | 'registered' =>
@@ -427,7 +429,9 @@ export function DomainLeadsView() {
         : list.map((t) => `${item.sld}.${t.tld}`).join('\n');
     navigator.clipboard.writeText(text);
     showToast(
-      `Copied ${list.length} ${format === 'list' ? 'extensions' : 'domains'} for ${item.sld}!`,
+      format === 'list'
+        ? t('Copied {n} extensions for {sld}!', { n: list.length, sld: item.sld })
+        : t('Copied {n} domains for {sld}!', { n: list.length, sld: item.sld }),
       'success'
     );
   };
@@ -447,17 +451,17 @@ export function DomainLeadsView() {
   const handleExpandAll = () => {
     if (!filteredSlds.length) return;
     setExpandedSlds(new Set(filteredSlds.map((s) => s.sld)));
-    showToast(`Expanded all ${filteredSlds.length} SLD rows`, 'info');
+    showToast(t('Expanded all {n} SLD rows', { n: filteredSlds.length }), 'info');
   };
 
   const handleCollapseAll = () => {
     setExpandedSlds(new Set());
-    showToast('Collapsed all SLD rows', 'info');
+    showToast(t('Collapsed all SLD rows'), 'info');
   };
 
   const handleExportSldsCsv = () => {
     if (!filteredSlds.length) {
-      showToast('No SLD records to export', 'info');
+      showToast(t('No SLD records to export'), 'info');
       return;
     }
     const headers = [
@@ -493,7 +497,7 @@ export function DomainLeadsView() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    showToast(`Exported ${filteredSlds.length} SLDs as CSV`, 'success');
+    showToast(t('Exported {n} SLDs as CSV', { n: filteredSlds.length }), 'success');
   };
 
   const handleToggleSaved = (domain: string) => {
@@ -501,25 +505,25 @@ export function DomainLeadsView() {
     const updated = getSavedDomainNames();
     setSavedDomains(updated);
     showToast(
-      updated.includes(domain) ? `Saved ${domain}` : `Removed ${domain}`,
+      updated.includes(domain) ? t('Saved {d}', { d: domain }) : t('Removed {d}', { d: domain }),
       'info'
     );
   };
 
   const copyToClipboard = (text: string, label = 'Copied') => {
     navigator.clipboard.writeText(text);
-    showToast(`${label} to clipboard!`, 'success');
+    showToast(t(`${label} to clipboard!`), 'success');
   };
 
   // Export Namespace Intelligence Report as PDF
   const handleExportPDF = async () => {
     if (!filteredSlds.length) {
-      showToast('No records to export', 'info');
+      showToast(t('No records to export'), 'info');
       return;
     }
 
     try {
-      showToast('Generating PDF report...', 'info');
+      showToast(t('Generating PDF report...'), 'info');
       const { jsPDF } = await import('jspdf');
       const doc = new jsPDF({ unit: 'pt', format: 'a4' });
       const pageW = doc.internal.pageSize.getWidth();
@@ -658,10 +662,10 @@ export function DomainLeadsView() {
 
       const fileName = `domainleads-${activeKeyword.replace(/[^a-z0-9]/gi, '_')}-report.pdf`;
       doc.save(fileName);
-      showToast(`Exported ${exportRows.length} SLDs as PDF`, 'success');
+      showToast(t('Exported {n} SLDs as PDF', { n: exportRows.length }), 'success');
     } catch (err) {
       console.error('Failed to generate PDF:', err);
-      showToast('Failed to generate PDF report', 'error');
+      showToast(t('Failed to generate PDF report'), 'error');
     }
   };
 
@@ -745,7 +749,7 @@ export function DomainLeadsView() {
                     >
                       <span className="font-semibold">{t(opt.label)}</span>
                       <span className="text-[10px] opacity-60 font-normal">
-                        {opt.desc}
+                        {t(opt.desc)}
                       </span>
                     </button>
                   ))}
@@ -815,7 +819,7 @@ export function DomainLeadsView() {
               ) : (
                 <>
                   <Icons.Search className="w-3.5 h-3.5" />
-                  <span>Search</span>
+                  <span>{t('Search')}</span>
                 </>
               )}
             </button>
@@ -896,13 +900,13 @@ export function DomainLeadsView() {
                 {/* Exclude Keyword(s) */}
                 <div>
                   <label className="block text-[11px] font-semibold text-ds-ink mb-1">
-                    Exclude Keyword(s):
+                    {t('Exclude Keyword(s):')}
                   </label>
                   <input
                     type="text"
                     value={excludeKeywords}
                     onChange={(e) => setExcludeKeywords(e.target.value)}
-                    placeholder="ex: exclude word, test, free"
+                    placeholder={t('ex: exclude word, test, free')}
                     className={`w-full h-8 px-2.5 rounded-md text-xs font-medium border outline-none ${
                       isLight
                         ? 'bg-white border-slate-200 text-slate-900'
@@ -914,7 +918,7 @@ export function DomainLeadsView() {
                 {/* Exclude: Numbers, Dashes, Letters */}
                 <div>
                   <label className="block text-[11px] font-semibold text-ds-ink mb-1">
-                    Exclude:
+                    {t('Exclude:')}
                   </label>
                   <div className="flex items-center gap-3 pt-1">
                     <label className="inline-flex items-center gap-1.5 text-xs text-ds-body cursor-pointer">
@@ -924,7 +928,7 @@ export function DomainLeadsView() {
                         onChange={(e) => setExcludeNumbers(e.target.checked)}
                         className="rounded border-slate-300 text-slate-900 dark:text-white"
                       />
-                      <span>Numbers</span>
+                      <span>{t('Numbers')}</span>
                     </label>
                     <label className="inline-flex items-center gap-1.5 text-xs text-ds-body cursor-pointer">
                       <input
@@ -933,7 +937,7 @@ export function DomainLeadsView() {
                         onChange={(e) => setExcludeDashes(e.target.checked)}
                         className="rounded border-slate-300 text-slate-900 dark:text-white"
                       />
-                      <span>Dashes</span>
+                      <span>{t('Dashes')}</span>
                     </label>
                     <label className="inline-flex items-center gap-1.5 text-xs text-ds-body cursor-pointer">
                       <input
@@ -942,7 +946,7 @@ export function DomainLeadsView() {
                         onChange={(e) => setExcludeLetters(e.target.checked)}
                         className="rounded border-slate-300 text-slate-900 dark:text-white"
                       />
-                      <span>Letters</span>
+                      <span>{t('Letters')}</span>
                     </label>
                   </div>
                 </div>
@@ -950,7 +954,7 @@ export function DomainLeadsView() {
                 {/* Length: minimum & maximum */}
                 <div>
                   <label className="block text-[11px] font-semibold text-ds-ink mb-1">
-                    Length:
+                    {t('Length:')}
                   </label>
                   <div className="grid grid-cols-2 gap-2">
                     <input
@@ -959,7 +963,7 @@ export function DomainLeadsView() {
                       max="63"
                       value={minDomainLength}
                       onChange={(e) => setMinDomainLength(e.target.value)}
-                      placeholder="minimum"
+                      placeholder={t('minimum')}
                       className={`w-full h-8 px-2.5 rounded-md text-xs font-medium border outline-none ${
                         isLight
                           ? 'bg-white border-slate-200 text-slate-900'
@@ -972,7 +976,7 @@ export function DomainLeadsView() {
                       max="63"
                       value={maxDomainLength}
                       onChange={(e) => setMaxDomainLength(e.target.value)}
-                      placeholder="maximum"
+                      placeholder={t('maximum')}
                       className={`w-full h-8 px-2.5 rounded-md text-xs font-medium border outline-none ${
                         isLight
                           ? 'bg-white border-slate-200 text-slate-900'
@@ -992,7 +996,7 @@ export function DomainLeadsView() {
                     onChange={(e) => setDevelopedDomainsOnly(e.target.checked)}
                     className="rounded border-slate-300 text-slate-900 dark:text-white"
                   />
-                  <span>Developed Domains Only (Filter for active websites with live HTTP content)</span>
+                  <span>{t('Developed Domains Only (Filter for active websites with live HTTP content)')}</span>
                 </label>
               </div>
             </div>
@@ -1017,9 +1021,9 @@ export function DomainLeadsView() {
             <div className="pt-1 sm:pt-0 sm:px-2.5 first:pl-0 space-y-0.5">
               <div className="flex items-center gap-1 text-[11px] font-medium text-ds-subtle">
                 <Icons.Layers className="w-3 h-3 opacity-60" />
-                <span>Exact SLDs</span>
+                <span>{t('Exact SLDs')}</span>
                 <span
-                  title="Total exact matching Second-Level Domain registrations across root TLDs in the global namespace."
+                  title={t('Total exact matching Second-Level Domain registrations across root TLDs in the global namespace.')}
                   className="cursor-help opacity-60 hover:opacity-100 text-[10px]"
                 >
                   ⓘ
@@ -1034,9 +1038,9 @@ export function DomainLeadsView() {
             <div className="pt-1 sm:pt-0 sm:px-2.5 space-y-0.5">
               <div className="flex items-center gap-1 text-[11px] font-medium text-ds-subtle">
                 <Icons.Globe className="w-3 h-3 opacity-60" />
-                <span>Domains</span>
+                <span>{t('Domains')}</span>
                 <span
-                  title="Estimated total registered domain names containing or matching this keyword string."
+                  title={t('Estimated total registered domain names containing or matching this keyword string.')}
                   className="cursor-help opacity-60 hover:opacity-100 text-[10px]"
                 >
                   ⓘ
@@ -1051,9 +1055,9 @@ export function DomainLeadsView() {
             <div className="pt-1 sm:pt-0 sm:px-2.5 space-y-0.5">
               <div className="flex items-center gap-1 text-[11px] font-medium text-ds-subtle">
                 <Icons.Search className="w-3 h-3 opacity-60" />
-                <span>Search Volume</span>
+                <span>{t('Search Volume')}</span>
                 <span
-                  title="Monthly Google search demand estimating buyer and end-user interest in this keyword."
+                  title={t('Monthly Google search demand estimating buyer and end-user interest in this keyword.')}
                   className="cursor-help opacity-60 hover:opacity-100 text-[10px]"
                 >
                   ⓘ
@@ -1068,9 +1072,9 @@ export function DomainLeadsView() {
             <div className="pt-1 sm:pt-0 sm:px-2.5 space-y-0.5">
               <div className="flex items-center gap-1 text-[11px] font-medium text-ds-subtle">
                 <Icons.Dollar className="w-3 h-3 opacity-60" />
-                <span>Avg CPC</span>
+                <span>{t('Avg CPC')}</span>
                 <span
-                  title="Estimated Google Ads Cost-Per-Click commercial value. High CPC directly correlates with higher domain acquisition budgets."
+                  title={t('Estimated Google Ads Cost-Per-Click commercial value. High CPC directly correlates with higher domain acquisition budgets.')}
                   className="cursor-help opacity-60 hover:opacity-100 text-[10px]"
                 >
                   ⓘ
@@ -1085,9 +1089,9 @@ export function DomainLeadsView() {
             <div className="pt-1 sm:pt-0 sm:px-2.5 space-y-0.5">
               <div className="flex items-center gap-1 text-[11px] font-medium text-ds-subtle">
                 <Icons.Chart className="w-3 h-3 opacity-60" />
-                <span>Search History</span>
+                <span>{t('Search History')}</span>
                 <span
-                  title="Year-over-Year search interest trend velocity."
+                  title={t('Year-over-Year search interest trend velocity.')}
                   className="cursor-help opacity-60 hover:opacity-100 text-[10px]"
                 >
                   ⓘ
@@ -1104,16 +1108,16 @@ export function DomainLeadsView() {
               <div className="flex items-center justify-between text-[11px] font-medium text-ds-subtle">
                 <div className="flex items-center gap-1">
                   <Icons.Sparkles />
-                  <span>Ad Competition</span>
+                  <span>{t('Ad Competition')}</span>
                   <span
-                    title="PPC Advertiser density: High competition signals deep corporate marketing budgets."
+                    title={t('PPC Advertiser density: High competition signals deep corporate marketing budgets.')}
                     className="cursor-help opacity-60 hover:opacity-100 text-[10px]"
                   >
                     ⓘ
                   </span>
                 </div>
                 <span className="font-semibold text-ds-ink">
-                  {data.stats.adCompetitionLabel || 'High'}
+                  {t(data.stats.adCompetitionLabel || 'High')}
                 </span>
               </div>
               <div
@@ -1140,20 +1144,20 @@ export function DomainLeadsView() {
             {/* Status Pills */}
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-1 text-[11px]">
-                <span className="text-ds-subtle">Namespace Saturation:</span>
+                <span className="text-ds-subtle">{t('Namespace Saturation:')}</span>
                 <span className="font-semibold text-ds-ink">
-                  {data.stats.saturationPct}% ({data.stats.registeredCount}/{data.stats.totalAnalyzed} TLDs registered)
+                  {data.stats.saturationPct}% ({t('{a}/{b} TLDs registered', { a: data.stats.registeredCount, b: data.stats.totalAnalyzed })})
                 </span>
               </span>
               <span className="inline-flex items-center gap-1 text-[11px]">
-                <span className="text-ds-subtle">Active Sites:</span>
+                <span className="text-ds-subtle">{t('Active Sites:')}</span>
                 <span className="font-semibold text-emerald-400 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  {data.stats.developedCount} Live Sites
+                  {t('{n} Live Sites', { n: data.stats.developedCount })}
                 </span>
               </span>
               <span className="inline-flex items-center gap-1 text-[11px]">
-                <span className="text-ds-subtle">.com Status:</span>
+                <span className="text-ds-subtle">{t('.com Status:')}</span>
                 <span
                   className={`font-semibold px-2 py-0.5 rounded-full text-[10px] ${
                     data.stats.dotComStatus === 'Available'
@@ -1163,7 +1167,7 @@ export function DomainLeadsView() {
                       : 'bg-[#181818] text-white/90 border border-white/15'
                   }`}
                 >
-                  {data.stats.dotComStatus}
+                  {t(data.stats.dotComStatus)}
                 </span>
               </span>
             </div>
@@ -1172,7 +1176,7 @@ export function DomainLeadsView() {
             <div className="flex items-center gap-1.5">
               <span className="text-[11px] font-medium text-ds-subtle flex items-center gap-1">
                 <Icons.Download className="w-3 h-3" />
-                <span>Export:</span>
+                <span>{t('Export:')}</span>
               </span>
               <div className="inline-flex rounded-lg border border-slate-200 dark:border-white/15 overflow-hidden text-[11px] font-semibold shadow-sm">
                 <button
@@ -1183,7 +1187,7 @@ export function DomainLeadsView() {
                       ? 'bg-slate-100 hover:bg-slate-200 text-slate-800'
                       : 'bg-[#181818] hover:bg-[#252525] text-white/90 hover:text-white'
                   }`}
-                  title="Export results to CSV"
+                  title={t('Export results to CSV')}
                 >
                   CSV
                 </button>
@@ -1195,7 +1199,7 @@ export function DomainLeadsView() {
                       ? 'bg-slate-100 hover:bg-slate-200 text-slate-800'
                       : 'bg-[#181818] hover:bg-[#252525] text-white/90 hover:text-white'
                   }`}
-                  title="Export intelligence report as PDF"
+                  title={t('Export intelligence report as PDF')}
                 >
                   PDF
                 </button>
@@ -1297,19 +1301,22 @@ export function DomainLeadsView() {
                 }`}
                 title={t('Number of SLD rows per page')}
               >
-                <option value="50">50 per page</option>
-                <option value="100">100 per page</option>
-                <option value="250">250 per page</option>
-                <option value="all">All {filteredSlds.length} Results</option>
+                <option value="50">{t('{n} per page', { n: 50 })}</option>
+                <option value="100">{t('{n} per page', { n: 100 })}</option>
+                <option value="250">{t('{n} per page', { n: 250 })}</option>
+                <option value="all">{t('All {n} Results', { n: filteredSlds.length })}</option>
               </select>
 
               <span className="text-[11px] text-ds-subtle font-mono pl-0.5">
                 {sldPageSize === 'all'
-                  ? `All ${filteredSlds.length} SLDs`
-                  : `${(sldPage - 1) * (sldPageSize as number) + 1}–${Math.min(
-                      sldPage * (sldPageSize as number),
-                      filteredSlds.length
-                    )} of ${filteredSlds.length}`}
+                  ? t('All {n} SLDs', { n: filteredSlds.length })
+                  : t('{range} of {n}', {
+                      range: `${(sldPage - 1) * (sldPageSize as number) + 1}–${Math.min(
+                        sldPage * (sldPageSize as number),
+                        filteredSlds.length
+                      )}`,
+                      n: filteredSlds.length,
+                    })}
               </span>
             </div>
 
@@ -1413,7 +1420,7 @@ export function DomainLeadsView() {
                       }}
                     >
                       <div className="flex items-center gap-1">
-                        <span>SLD</span>
+                        <span>{t('SLD')}</span>
                         {sldSortCol === 'sld' && (
                           <span className="text-[10px]">{sldSortDir === 'desc' ? '▼' : '▲'}</span>
                         )}
@@ -1542,7 +1549,11 @@ export function DomainLeadsView() {
                           <td className="py-2.5 px-3 sm:px-4 align-top">
                             <div
                               onClick={() => toggleExpandSld(item.sld)}
-                              title={`Click to ${expandedSlds.has(item.sld) ? 'collapse' : 'expand'} all ${item.tldsTaken} TLD extensions`}
+                              title={
+                                expandedSlds.has(item.sld)
+                                  ? t('Click to collapse all {n} TLD extensions', { n: item.tldsTaken })
+                                  : t('Click to expand all {n} TLD extensions', { n: item.tldsTaken })
+                              }
                               className="inline-flex items-center gap-1.5 cursor-pointer group"
                             >
                               <span className="group-hover:underline font-medium">
@@ -1556,7 +1567,7 @@ export function DomainLeadsView() {
                                       : 'bg-white text-black'
                                   }`}
                                 >
-                                  Exact
+                                  {t('Exact')}
                                 </span>
                               )}
                             </div>
@@ -1571,7 +1582,7 @@ export function DomainLeadsView() {
                                   : 'bg-[#e2e8f0] text-[#1e293b] border border-white/40'
                               }`}
                             >
-                              {item.category || 'core'}
+                              {t(item.category || 'core')}
                             </span>
                           </td>
 
@@ -1593,7 +1604,7 @@ export function DomainLeadsView() {
                                   {item.leadScore ?? 80}/100
                                 </span>
                                 <span className="text-[9px] font-semibold text-ds-subtle uppercase">
-                                  {(item.leadScore ?? 80) >= 85 ? 'HIGH' : (item.leadScore ?? 80) >= 65 ? 'MED' : 'LOW'}
+                                  {(item.leadScore ?? 80) >= 85 ? t('HIGH') : (item.leadScore ?? 80) >= 65 ? t('MED') : t('LOW')}
                                 </span>
                               </div>
                               <div
@@ -1648,7 +1659,7 @@ export function DomainLeadsView() {
                                           })
                                         }
                                         title={`${item.sld}.${t.tld} (${
-                                          t.developed ? 'Developed / Active Website' : 'Registered'
+                                          t.developed ? tt('Developed / Active Website') : tt('Registered')
                                         })`}
                                         className={`cursor-pointer transition-colors ${
                                           t.developed
@@ -1684,7 +1695,7 @@ export function DomainLeadsView() {
                                   <button
                                     type="button"
                                     onClick={() => toggleExpandSld(item.sld)}
-                                    aria-label={`Expand all ${item.tlds.length} extensions for ${item.sld}`}
+                                    aria-label={t('Expand all {n} extensions for {sld}', { n: item.tlds.length, sld: item.sld })}
                                     className="pointer-events-auto w-6 h-6 rounded-full bg-[#1c1c1e] hover:bg-[#2c2c2e] border border-white/20 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm transition-transform active:scale-95 cursor-pointer"
                                   >
                                     +
@@ -1706,7 +1717,7 @@ export function DomainLeadsView() {
                                           })
                                         }
                                         title={`${item.sld}.${t.tld} (${
-                                          t.developed ? 'Developed / Active Website' : 'Registered'
+                                          t.developed ? tt('Developed / Active Website') : tt('Registered')
                                         })`}
                                         className={`cursor-pointer transition-colors ${
                                           t.developed
@@ -1735,7 +1746,7 @@ export function DomainLeadsView() {
                                 <button
                                   type="button"
                                   onClick={() => toggleExpandSld(item.sld)}
-                                  aria-label={`Collapse extensions list for ${item.sld}`}
+                                  aria-label={t('Collapse extensions list for {sld}', { sld: item.sld })}
                                   className="absolute right-0 top-0.5 w-6 h-6 rounded-full bg-[#1c1c1e] hover:bg-[#2c2c2e] border border-white/20 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm transition-transform active:scale-95 cursor-pointer"
                                 >
                                   −
@@ -1765,8 +1776,11 @@ export function DomainLeadsView() {
                 }`}
               >
                 <div className="text-ds-subtle text-[11px]">
-                  Showing page <span className="font-semibold text-ds-ink">{sldPage}</span> of{' '}
-                  <span className="font-semibold text-ds-ink">{totalSldPages}</span> ({filteredSlds.length} total SLD matches)
+                  {rich(t('Showing page {p} of {total} ({n} total SLD matches)'), {
+                    p: <span className="font-semibold text-ds-ink">{sldPage}</span>,
+                    total: <span className="font-semibold text-ds-ink">{totalSldPages}</span>,
+                    n: filteredSlds.length,
+                  })}
                 </div>
 
                 <div className="flex items-center gap-1.5">
@@ -1776,7 +1790,7 @@ export function DomainLeadsView() {
                     onClick={() => setSldPage(1)}
                     className="px-2 py-1 rounded text-[11px] font-semibold border disabled:opacity-30 hover:bg-white/10 transition-colors"
                   >
-                    First
+                    {t('First')}
                   </button>
                   <button
                     type="button"
@@ -1784,7 +1798,7 @@ export function DomainLeadsView() {
                     onClick={() => setSldPage((p) => Math.max(1, p - 1))}
                     className="px-2.5 py-1 rounded text-xs font-semibold border disabled:opacity-30 hover:bg-white/10 transition-colors"
                   >
-                    ◀ Prev
+                    {t('◀ Prev')}
                   </button>
 
                   <div className="flex items-center gap-1 px-1">
@@ -1817,7 +1831,7 @@ export function DomainLeadsView() {
                     onClick={() => setSldPage((p) => Math.min(totalSldPages, p + 1))}
                     className="px-2.5 py-1 rounded text-xs font-semibold border disabled:opacity-30 hover:bg-white/10 transition-colors"
                   >
-                    Next ▶
+                    {t('Next ▶')}
                   </button>
                   <button
                     type="button"
@@ -1825,7 +1839,7 @@ export function DomainLeadsView() {
                     onClick={() => setSldPage(totalSldPages)}
                     className="px-2 py-1 rounded text-[11px] font-semibold border disabled:opacity-30 hover:bg-white/10 transition-colors"
                   >
-                    Last
+                    {t('Last')}
                   </button>
                 </div>
               </div>
@@ -1849,10 +1863,10 @@ export function DomainLeadsView() {
                 </div>
                 <div>
                   <h3 className="font-bold text-sm text-ds-ink">
-                    Outbound Pitch Generator for {selectedLeadForPitch.domain}
+                    {t('Outbound Pitch Generator for {d}', { d: selectedLeadForPitch.domain })}
                   </h3>
                   <p className="text-[10px] text-ds-subtle">
-                    Target: {selectedLeadForPitch.sld} · Lead Score: {selectedLeadForPitch.leadScore}/100
+                    {t('Target: {sld} · Lead Score: {n}/100', { sld: selectedLeadForPitch.sld, n: selectedLeadForPitch.leadScore ?? '' })}
                   </p>
                 </div>
               </div>
@@ -1877,7 +1891,7 @@ export function DomainLeadsView() {
               >
                 <div>
                   <div className="text-[10px] uppercase font-bold tracking-wider text-emerald-600 dark:text-emerald-400">
-                    Estimated Buyer Budget Range
+                    {t('Estimated Buyer Budget Range')}
                   </div>
                   <div className="text-sm font-bold text-ds-ink tabular-nums">
                     {(selectedLeadForPitch.leadScore ?? 80) >= 90
@@ -1888,20 +1902,20 @@ export function DomainLeadsView() {
                   </div>
                 </div>
                 <div className="text-right text-[10px] text-ds-subtle">
-                  <div>Corporate MX: <span className="font-semibold text-ds-ink">{selectedLeadForPitch.mxProvider ? 'Active' : 'Standard'}</span></div>
-                  <div className="text-emerald-500 font-medium">Confidence: High (CZDS + RDAP)</div>
+                  <div>{rich(t('Corporate MX: {v}'), { v: <span className="font-semibold text-ds-ink">{selectedLeadForPitch.mxProvider ? t('Active') : t('Standard')}</span> })}</div>
+                  <div className="text-emerald-500 font-medium">{t('Confidence: High (CZDS + RDAP)')}</div>
                 </div>
               </div>
 
               {/* Buyer Persona Summary */}
               <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-[#141414] border border-slate-200 dark:border-white/10 text-xs text-ds-body space-y-0.5">
                 <div className="font-bold text-ds-ink text-[11px]">
-                  Target Buyer Insight:
+                  {t('Target Buyer Insight:')}
                 </div>
                 <div className="text-[11px]">{selectedLeadForPitch.buyerPersona}</div>
                 {selectedLeadForPitch.mxProvider && (
                   <div className="text-[10px] text-ds-subtle pt-0.5">
-                    Email System: <span className="font-semibold text-ds-ink">{selectedLeadForPitch.mxProvider}</span>
+                    {rich(t('Email System: {v}'), { v: <span className="font-semibold text-ds-ink">{selectedLeadForPitch.mxProvider}</span> })}
                   </div>
                 )}
               </div>
@@ -1909,7 +1923,7 @@ export function DomainLeadsView() {
               {/* Pitch Angle Selector */}
               <div>
                 <label className="block text-[11px] font-semibold text-ds-ink mb-1">
-                  Select Pitch Strategy:
+                  {t('Select Pitch Strategy:')}
                 </label>
                 <div className="grid grid-cols-3 gap-1.5">
                   {[
@@ -1931,8 +1945,8 @@ export function DomainLeadsView() {
                           : 'border-white/10 bg-[#141414] hover:bg-[#1a1a1a] text-white/70'
                       }`}
                     >
-                      <div className="text-[11px]">{tpl.label}</div>
-                      <div className="text-[9px] font-normal opacity-60 mt-0.5">{tpl.desc}</div>
+                      <div className="text-[11px]">{t(tpl.label)}</div>
+                      <div className="text-[9px] font-normal opacity-60 mt-0.5">{t(tpl.desc)}</div>
                     </button>
                   ))}
                 </div>
@@ -1943,14 +1957,14 @@ export function DomainLeadsView() {
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between text-xs">
                     <label className="font-semibold text-ds-ink text-[11px]">
-                      Subject Line:
+                      {t('Subject Line:')}
                     </label>
                     <button
                       type="button"
                       onClick={() => copyToClipboard(pitchTemplates[pitchTemplateType].subject, 'Subject copied')}
                       className="text-[10px] text-ds-ink underline opacity-70 hover:opacity-100"
                     >
-                      Copy Subject
+                      {t('Copy Subject')}
                     </button>
                   </div>
                   <div
@@ -1965,14 +1979,14 @@ export function DomainLeadsView() {
 
                   <div className="flex items-center justify-between pt-1 text-xs">
                     <label className="font-semibold text-ds-ink text-[11px]">
-                      Email Body:
+                      {t('Email Body:')}
                     </label>
                     <button
                       type="button"
                       onClick={() => copyToClipboard(pitchTemplates[pitchTemplateType].body, 'Body copied')}
                       className="text-[10px] text-ds-ink underline opacity-70 hover:opacity-100"
                     >
-                      Copy Body
+                      {t('Copy Body')}
                     </button>
                   </div>
                   <div
@@ -1995,7 +2009,7 @@ export function DomainLeadsView() {
                 onClick={() => setSelectedLeadForPitch(null)}
                 className="px-3 py-1 rounded-lg text-xs font-semibold hover:bg-slate-200 dark:hover:bg-white/10 transition-colors"
               >
-                Close
+                {t('Close')}
               </button>
 
               <div className="flex items-center gap-2">
@@ -2009,7 +2023,7 @@ export function DomainLeadsView() {
                   }}
                   className="px-3 py-1 rounded-lg text-xs font-semibold border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors"
                 >
-                  Copy Template
+                  {t('Copy Template')}
                 </button>
 
                 {pitchTemplates && (
@@ -2023,7 +2037,7 @@ export function DomainLeadsView() {
                         : 'bg-white hover:bg-slate-200 text-black'
                     }`}
                   >
-                    Open in Mail ↗
+                    {t('Open in Mail ↗')}
                   </a>
                 )}
               </div>
@@ -2046,7 +2060,7 @@ export function DomainLeadsView() {
                   {selectedTldModal.sld}.{selectedTldModal.tld}
                 </h3>
                 <p className="text-[11px] text-ds-subtle">
-                  TLD: .{selectedTldModal.tld} · Status:{' '}
+                  {t('TLD: .{tld} · Status:', { tld: selectedTldModal.tld })}{' '}
                   <span
                     className={
                       selectedTldModal.developed
@@ -2054,7 +2068,7 @@ export function DomainLeadsView() {
                         : 'text-ds-ink font-semibold'
                     }
                   >
-                    {selectedTldModal.developed ? 'Developed / Live Website' : 'Registered / Taken'}
+                    {selectedTldModal.developed ? t('Developed / Live Website') : t('Registered / Taken')}
                   </span>
                 </p>
               </div>
@@ -2074,7 +2088,7 @@ export function DomainLeadsView() {
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-ds-subtle">Development Status:</span>
+                  <span className="text-ds-subtle">{t('Development Status:')}</span>
                   <span
                     className={`inline-flex items-center gap-1 font-semibold ${
                       selectedTldModal.developed ? 'text-[#f87171]' : 'text-ds-ink'
@@ -2085,11 +2099,11 @@ export function DomainLeadsView() {
                         selectedTldModal.developed ? 'bg-[#f87171]' : 'bg-white/60'
                       }`}
                     />
-                    {selectedTldModal.developed ? 'Developed (HTTP 200)' : 'Registered (No Website)'}
+                    {selectedTldModal.developed ? t('Developed (HTTP 200)') : t('Registered (No Website)')}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-ds-subtle">Namespace Parent:</span>
+                  <span className="text-ds-subtle">{t('Namespace Parent:')}</span>
                   <span className="font-mono font-medium">{selectedTldModal.sld}</span>
                 </div>
               </div>
@@ -2123,7 +2137,7 @@ export function DomainLeadsView() {
                         : 'bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 border border-rose-500/30'
                     }`}
                   >
-                    <span>⚡ Generate Outbound Pitch</span>
+                    <span>{t('⚡ Generate Outbound Pitch')}</span>
                   </button>
                 )}
 
@@ -2137,7 +2151,7 @@ export function DomainLeadsView() {
                       : 'bg-white hover:bg-slate-100 text-black'
                   }`}
                 >
-                  <span>Visit Domain Website</span>
+                  <span>{t('Visit Domain Website')}</span>
                   <span>↗</span>
                 </a>
 
@@ -2152,7 +2166,7 @@ export function DomainLeadsView() {
                         : 'border-white/15 hover:bg-white/10 text-white'
                     }`}
                   >
-                    Check Registrar ↗
+                    {t('Check Registrar ↗')}
                   </a>
                   <button
                     type="button"
@@ -2168,7 +2182,7 @@ export function DomainLeadsView() {
                         : 'border-white/15 hover:bg-white/10 text-white'
                     }`}
                   >
-                    Copy Domain
+                    {t('Copy Domain')}
                   </button>
                 </div>
               </div>
@@ -2200,21 +2214,21 @@ export function DomainLeadsView() {
                         isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
                       }`}
                     >
-                      Exact Match
+                      {t('Exact Match')}
                     </span>
                   )}
                 </div>
                 <p className="text-xs text-ds-subtle mt-0.5 flex flex-wrap items-center gap-2">
                   <span>
-                    Total Taken: <strong className="text-ds-ink">{enlargeModalSld.tldsTaken} TLDs</strong>
+                    {rich(t('Total Taken: {v}'), { v: <strong className="text-ds-ink">{t('{n} TLDs', { n: enlargeModalSld.tldsTaken })}</strong> })}
                   </span>
                   <span>·</span>
                   <span className="text-[#f87171] font-semibold">
-                    • {enlargeModalSld.tldsDeveloped} Developed
+                    • {t('{n} Developed', { n: enlargeModalSld.tldsDeveloped })}
                   </span>
                   <span>·</span>
                   <span className={isLight ? 'text-slate-600' : 'text-white/60'}>
-                    • {enlargeModalSld.tldsTaken - enlargeModalSld.tldsDeveloped} Registered
+                    • {t('{n} Registered', { n: enlargeModalSld.tldsTaken - enlargeModalSld.tldsDeveloped })}
                   </span>
                 </p>
               </div>
@@ -2224,7 +2238,7 @@ export function DomainLeadsView() {
                   type="button"
                   onClick={() => setEnlargeModalSld(null)}
                   className="p-1.5 rounded-lg text-ds-subtle hover:text-ds-ink hover:bg-slate-100 dark:hover:bg-white/10 text-base"
-                  title="Close modal (Esc)"
+                  title={t('Close modal (Esc)')}
                 >
                   ✕
                 </button>
@@ -2252,7 +2266,7 @@ export function DomainLeadsView() {
                       : 'bg-white/10 text-white/70 hover:text-white border border-white/5'
                   }`}
                 >
-                  All ({enlargeModalSld.tldsTaken})
+                  {t('All ({n})', { n: enlargeModalSld.tldsTaken })}
                 </button>
                 <button
                   type="button"
@@ -2265,7 +2279,7 @@ export function DomainLeadsView() {
                       : 'bg-rose-950/40 text-rose-300 hover:bg-rose-950/60 border border-rose-500/30'
                   }`}
                 >
-                  Developed ({enlargeModalSld.tldsDeveloped})
+                  {t('Developed ({n})', { n: enlargeModalSld.tldsDeveloped })}
                 </button>
                 <button
                   type="button"
@@ -2280,7 +2294,7 @@ export function DomainLeadsView() {
                       : 'bg-white/10 text-white/70 hover:text-white border border-white/5'
                   }`}
                 >
-                  Registered ({enlargeModalSld.tldsTaken - enlargeModalSld.tldsDeveloped})
+                  {t('Registered ({n})', { n: enlargeModalSld.tldsTaken - enlargeModalSld.tldsDeveloped })}
                 </button>
               </div>
 
@@ -2291,7 +2305,7 @@ export function DomainLeadsView() {
                     type="text"
                     value={enlargeSearch}
                     onChange={(e) => setEnlargeSearch(e.target.value)}
-                    placeholder="Filter TLDs (.ai, .co)..."
+                    placeholder={t('Filter TLDs (.ai, .co)...')}
                     className={`h-7 px-2.5 text-xs rounded-lg border outline-none w-36 sm:w-44 ${
                       isLight
                         ? 'bg-white border-slate-200 text-slate-900'
@@ -2318,9 +2332,9 @@ export function DomainLeadsView() {
                         ? 'bg-white hover:bg-slate-100 text-slate-800'
                         : 'bg-white/10 hover:bg-white/20 text-white'
                     }`}
-                    title="Copy extensions as comma-separated list (.com, .net, .ai)"
+                    title={t('Copy extensions as comma-separated list (.com, .net, .ai)')}
                   >
-                    Copy List
+                    {t('Copy List')}
                   </button>
                   <button
                     type="button"
@@ -2330,9 +2344,9 @@ export function DomainLeadsView() {
                         ? 'bg-white hover:bg-slate-100 text-slate-800'
                         : 'bg-white/10 hover:bg-white/20 text-white'
                     }`}
-                    title="Copy full domains (buddy.com, buddy.net)"
+                    title={t('Copy full domains (buddy.com, buddy.net)')}
                   >
-                    Copy Domains
+                    {t('Copy Domains')}
                   </button>
                 </div>
               </div>
@@ -2362,7 +2376,7 @@ export function DomainLeadsView() {
                           : 'bg-white/5 border-white/10 text-white/70 hover:bg-white/10 hover:text-white'
                       }`}
                       title={`${enlargeModalSld.sld}.${t.tld} — ${
-                        t.developed ? 'Developed (Active Site)' : 'Registered'
+                        t.developed ? tt('Developed (Active Site)') : tt('Registered')
                       }. Click for registrar / WHOIS details.`}
                     >
                       <span className={t.developed ? 'text-[#f87171] font-bold' : 'opacity-40'}>
@@ -2373,14 +2387,14 @@ export function DomainLeadsView() {
                       {t.developed ? (
                         <span
                           className="w-1.5 h-1.5 rounded-full bg-[#f87171] animate-pulse"
-                          title="Developed / Live Website"
+                          title={tt('Developed / Live Website')}
                         />
                       ) : (
                         <span
                           className={`w-1.5 h-1.5 rounded-full ${
                             isLight ? 'bg-slate-300' : 'bg-white/20'
                           }`}
-                          title="Registered"
+                          title={tt('Registered')}
                         />
                       )}
                     </div>
@@ -2388,7 +2402,7 @@ export function DomainLeadsView() {
                 </div>
               ) : (
                 <div className="py-12 text-center text-xs text-ds-subtle">
-                  No extensions matched &quot;{enlargeSearch}&quot;. Try clearing the filter.
+                  {t('No extensions matched "{q}". Try clearing the filter.', { q: enlargeSearch })}
                 </div>
               )}
             </div>
@@ -2400,9 +2414,11 @@ export function DomainLeadsView() {
               }`}
             >
               <div className="text-[11px] text-ds-subtle">
-                Showing <strong className="text-ds-ink">{enlargedTlds.length}</strong> of{' '}
-                {enlargeModalSld.tldsTaken} extensions for{' '}
-                <span className="font-mono text-ds-ink font-semibold">{enlargeModalSld.sld}</span>
+                {rich(t('Showing {a} of {b} extensions for {sld}'), {
+                  a: <strong className="text-ds-ink">{enlargedTlds.length}</strong>,
+                  b: enlargeModalSld.tldsTaken,
+                  sld: <span className="font-mono text-ds-ink font-semibold">{enlargeModalSld.sld}</span>,
+                })}
               </div>
 
               <div className="flex items-center gap-2">
@@ -2415,7 +2431,7 @@ export function DomainLeadsView() {
                       : 'bg-white hover:bg-slate-200 text-black font-bold'
                   }`}
                 >
-                  Done
+                  {t('Done')}
                 </button>
               </div>
             </div>

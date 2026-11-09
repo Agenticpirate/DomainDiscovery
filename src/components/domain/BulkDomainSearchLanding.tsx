@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button } from '../ui/Button';
 import { Icons } from '../ui/Icons';
 import { useLocale, useT } from '@/components/i18n/LocaleProvider';
+import { rich } from '@/components/i18n/rich';
 import { pageHeading } from '@/lib/i18n/locales';
 import { pageShell } from '@/lib/i18n/pageShells';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -390,7 +391,7 @@ const SearchInputSection: React.FC<{
                     commitInput();
                   }
                 }}
-                placeholder={`Paste or type domains here…\n\n${BULK_PLACEHOLDER_EXAMPLES}`}
+                placeholder={`${t('Paste or type domains here…')}\n\n${BULK_PLACEHOLDER_EXAMPLES}`}
                 className={`w-full rounded-xl px-3.5 sm:px-4 py-3 sm:py-3.5 focus:outline-none focus:ring-2 min-h-[148px] sm:min-h-[176px] resize-y transition-all text-[13px] sm:text-[14px] font-mono leading-relaxed ${
                   isLight
                     ? 'bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:ring-slate-400/15'
@@ -404,7 +405,7 @@ const SearchInputSection: React.FC<{
                     isLight ? 'bg-white/80 text-slate-700' : 'bg-black/60 text-white'
                   }`}
                 >
-                  <span className="text-sm font-bold">Drop file or text to import</span>
+                  <span className="text-sm font-bold">{t('Drop file or text to import')}</span>
                 </div>
               )}
             </div>
@@ -490,7 +491,7 @@ const SearchInputSection: React.FC<{
                         type="button"
                         onClick={() => setDomains((p) => p.filter((x) => x.domain !== d.domain))}
                         className={`ml-0.5 rounded px-0.5 transition-colors ${removeTone}`}
-                        aria-label={`Remove ${d.domain}`}
+                        aria-label={t('Remove {d}', { d: d.domain })}
                       >
                         ×
                       </button>
@@ -513,7 +514,7 @@ const SearchInputSection: React.FC<{
                       commitInput();
                     }
                   }}
-                  placeholder="Add more domains…"
+                  placeholder={t('Add more domains…')}
                   rows={2}
                   className={`flex-1 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 resize-none text-[12px] sm:text-[13px] font-mono ${
                     isLight
@@ -531,7 +532,7 @@ const SearchInputSection: React.FC<{
                       : 'bg-white text-black hover:bg-white/90'
                   }`}
                 >
-                  Add
+                  {t('Add')}
                 </button>
               </div>
             </div>
@@ -548,7 +549,7 @@ const SearchInputSection: React.FC<{
                   <span
                     className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-slate-900' : 'bg-white'}`}
                   />
-                  Checking availability…
+                  {t('Checking availability…')}
                 </span>
                 <span className={`font-mono tabular-nums ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
                   {progress.done}/{progress.total}
@@ -614,7 +615,7 @@ const SearchInputSection: React.FC<{
               </button>
               {input.trim() && domains.length === 0 && (
                 <button type="button" onClick={commitInput} className={chipClass()}>
-                  Add list
+                  {t('Add list')}
                 </button>
               )}
               {domains.length > 0 && (
@@ -626,7 +627,7 @@ const SearchInputSection: React.FC<{
                       ? 'bg-slate-900 text-white border-slate-900 shadow-sm shadow-slate-900/20 hover:bg-slate-800'
                       : 'bg-white text-black border-white shadow-sm shadow-black/30 hover:bg-white/90'
                   }`}
-                  title="Remove every domain from this list"
+                  title={t('Remove every domain from this list')}
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path
@@ -636,7 +637,7 @@ const SearchInputSection: React.FC<{
                       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                     />
                   </svg>
-                  Clear all
+                  {t('Clear all')}
                 </button>
               )}
             </div>
@@ -657,27 +658,27 @@ const SearchInputSection: React.FC<{
               <div className="text-[11px] sm:text-[12px] text-ds-mute">
                 {domains.length > 0 ? (
                   <span className="font-medium">
-                    <span className="text-ds-ink">{domains.length}</span> domains
+                    {rich(t('{n} domains'), { n: <span className="text-ds-ink">{domains.length}</span> })}
                     {(counts.available > 0 || (counts.premium ?? 0) > 0 || counts.taken > 0) && (
                       <span className="ml-2">
                         ·{' '}
                         <span className={isLight ? 'text-emerald-700 font-semibold' : 'text-emerald-400'}>
-                          {counts.available} free
+                          {t('{n} free', { n: counts.available })}
                         </span>
                         {(counts.premium ?? 0) > 0 && (
                           <span className={isLight ? 'text-amber-700 font-semibold' : 'text-amber-400'}>
                             {' '}
-                            · {counts.premium} premium
+                            · {t('{n} premium', { n: counts.premium ?? 0 })}
                           </span>
                         )}
                         ·{' '}
                         <span className={isLight ? 'text-rose-600 font-semibold' : 'text-rose-400'}>
-                          {counts.taken} taken
+                          {t('{n} taken', { n: counts.taken })}
                         </span>
                       </span>
                     )}
                     {counts.checking > 0 && (
-                      <span className="ml-1 opacity-70">· {counts.checking} checking</span>
+                      <span className="ml-1 opacity-70">· {t('{n} checking', { n: counts.checking })}</span>
                     )}
                   </span>
                 ) : input.trim() ? (
@@ -688,7 +689,7 @@ const SearchInputSection: React.FC<{
                   <span className="sm:hidden">{t('Paste domains, then Search all')}</span>
                 )}
                 {!domains.length && !input.trim() && (
-                  <span className="hidden sm:inline">⌘/Ctrl + Enter to add · Shift + Enter for new line</span>
+                  <span className="hidden sm:inline">{t('⌘/Ctrl + Enter to add · Shift + Enter for new line')}</span>
                 )}
               </div>
               {(() => {
@@ -717,7 +718,7 @@ const SearchInputSection: React.FC<{
                     {checking && domains.length > 0 && counts.checking === domains.length ? (
                       <>
                         <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                        Checking…
+                        {t('Checking…')}
                       </>
                     ) : (
                       <>
@@ -745,24 +746,24 @@ const SearchInputSection: React.FC<{
                 isLight ? 'text-slate-400' : 'text-white/35'
               }`}
             >
-              How to add domains
+              {t('How to add domains')}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 text-left">
               {[
                 {
                   step: '01',
-                  title: 'Copy & paste',
-                  text: 'Paste a list from Excel, Notes, or email. New lines, commas, or spaces all work.',
+                  title: t('Copy & paste'),
+                  text: t('Paste a list from Excel, Notes, or email. New lines, commas, or spaces all work.'),
                 },
                 {
                   step: '02',
-                  title: 'Or type / import',
-                  text: 'Type names one by one, or import CSV, TXT, TSV, or JSON files. Drag & drop supported.',
+                  title: t('Or type / import'),
+                  text: t('Type names one by one, or import CSV, TXT, TSV, or JSON files. Drag & drop supported.'),
                 },
                 {
                   step: '03',
                   title: t('Search all'),
-                  text: 'We strip http:// and www, append .com when missing, then check availability live.',
+                  text: t('We strip http:// and www, append .com when missing, then check availability live.'),
                 },
               ].map((item) => (
                 <div key={item.step} className="flex gap-2.5">
@@ -789,7 +790,7 @@ const SearchInputSection: React.FC<{
                 isLight ? 'text-slate-500' : 'text-white/40'
               }`}
             >
-              Example:&nbsp;
+              {t('Example:')}&nbsp;
               <span className={isLight ? 'text-slate-700' : 'text-white/60'}>
                 example.com, example.org, ystartups.com
               </span>
@@ -809,12 +810,12 @@ const SearchInputSection: React.FC<{
                 isLight ? 'text-slate-400' : 'text-white/35'
               }`}
             >
-              Advanced options
+              {t('Advanced options')}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-left">
               <label className="block">
                 <span className={`text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                  Default TLD
+                  {t('Default TLD')}
                 </span>
                 <select
                   value={defaultTld}
@@ -834,7 +835,7 @@ const SearchInputSection: React.FC<{
               </label>
               <label className="block">
                 <span className={`text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                  Max domains
+                  {t('Max domains')}
                 </span>
                 <select
                   value={maxDomains}
@@ -864,7 +865,7 @@ const SearchInputSection: React.FC<{
                   className="rounded border-white/20"
                 />
                 <span className={`text-[12px] font-medium ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
-                  Auto-append .{defaultTld}
+                  {t('Auto-append .{tld}', { tld: defaultTld })}
                 </span>
               </label>
               <label
@@ -879,7 +880,7 @@ const SearchInputSection: React.FC<{
                   className="rounded border-white/20"
                 />
                 <span className={`text-[12px] font-medium ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
-                  Strip www / http
+                  {t('Strip www / http')}
                 </span>
               </label>
             </div>
@@ -954,9 +955,9 @@ export const BulkDomainSearchLanding: React.FC<{
     const diffMinutes = Math.floor(diffMs / 60000);
     const diffHours = Math.floor(diffMs / 3600000);
 
-    if (diffMinutes < 1) return 'just now';
-    if (diffMinutes < 60) return `${diffMinutes}m ago`;
-    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffMinutes < 1) return t('just now');
+    if (diffMinutes < 60) return t('{n}m ago', { n: diffMinutes });
+    if (diffHours < 24) return t('{n}h ago', { n: diffHours });
     return date.toLocaleDateString();
   };
 
@@ -1088,9 +1089,9 @@ export const BulkDomainSearchLanding: React.FC<{
                 <div className="relative z-[1]">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <h3 className={`text-sm sm:text-base font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>Recent bulk searches</h3>
+                    <h3 className={`text-sm sm:text-base font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>{t('Recent bulk searches')}</h3>
                     <p className={`text-xs sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
-                      Resume a previous domain set without pasting the same list again.
+                      {t('Resume a previous domain set without pasting the same list again.')}
                     </p>
                   </div>
                   <button
@@ -1098,7 +1099,7 @@ export const BulkDomainSearchLanding: React.FC<{
                     onClick={scrollToSearch}
                     className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700 hover:text-slate-900' : 'text-white/60 hover:text-white'}`}
                   >
-                    Add a new list
+                    {t('Add a new list')}
                   </button>
                 </div>
 
@@ -1113,25 +1114,25 @@ export const BulkDomainSearchLanding: React.FC<{
                       >
                         <button type="button" onClick={() => onLoadPreviousSearch(snapshot)} className="w-full text-left">
                           <div className={`text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white/90'}`}>
-                            {snapshot.domains.length} domains
+                            {t('{n} domains', { n: snapshot.domains.length })}
                           </div>
                           <div className={`mt-1 text-xs ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-                            {snapshotCounts.available} available • {snapshotCounts.premium} premium • {snapshotCounts.taken} taken
+                            {t('{a} available • {p} premium • {k} taken', { a: snapshotCounts.available, p: snapshotCounts.premium, k: snapshotCounts.taken })}
                           </div>
                           <div className={`mt-2 text-xs ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                            Saved {formatRecentTime(snapshot.createdAt)}
+                            {t('Saved {when}', { when: formatRecentTime(snapshot.createdAt) })}
                           </div>
                         </button>
                         <div className="mt-3 flex items-center justify-between gap-2">
                           <Button onClick={() => onLoadPreviousSearch(snapshot)} variant="secondary" size="sm" className="flex-1 text-xs">
-                            Load search
+                            {t('Load search')}
                           </Button>
                           <button
                             type="button"
                             onClick={() => onDeletePreviousSearch(snapshot.id)}
                             className={`text-xs ${isLight ? 'text-slate-400 hover:text-red-500' : 'text-white/35 hover:text-red-400'}`}
                           >
-                            Remove
+                            {t('Remove')}
                           </button>
                         </div>
                       </div>

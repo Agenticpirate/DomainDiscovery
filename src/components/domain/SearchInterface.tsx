@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Input } from '@/components/ui/Input';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useT } from '@/components/i18n/LocaleProvider';
 
 interface SearchInterfaceProps {
   initialQuery?: string;
@@ -40,6 +41,7 @@ export function SearchInterface({
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { theme } = useTheme();
+  const t = useT();
   const isLight = theme === 'light';
   const showRecentPanel = showRecent && showRecentSearches && recentSearches.length > 0;
 
@@ -173,7 +175,7 @@ export function SearchInterface({
             onClick={handleClear}
             className="absolute right-1 sm:right-10 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-xl transition-colors"
             style={{ color: 'var(--text-muted)' }}
-            aria-label="Clear search"
+            aria-label={t('Clear search')}
           >
             <svg
               className="w-4 h-4"
@@ -272,7 +274,7 @@ export function SearchInterface({
                     localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(updated));
                   }}
                   className={`p-1.5 rounded-md transition-colors ${isLight ? 'text-slate-300 hover:text-red-500 hover:bg-red-50' : 'text-white/20 hover:text-red-400 hover:bg-red-500/10'}`}
-                  aria-label={`Remove ${search.query}`}
+                  aria-label={t('Remove {d}', { d: search.query })}
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

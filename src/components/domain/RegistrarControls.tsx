@@ -3,6 +3,7 @@
 import React from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { cn } from '@/lib/utils';
+import { useT } from '@/components/i18n/LocaleProvider';
 import {
   REGISTRARS,
   getSpaceshipAffiliateUrl,
@@ -73,6 +74,7 @@ export function RegistrarActionMenu({
   premiumLabel?: string;
   isPremium?: boolean;
 }) {
+  const t = useT();
   const href = getSpaceshipAffiliateUrl(domain);
 
   return (
@@ -96,9 +98,9 @@ export function RegistrarActionMenu({
           canRegister ? primaryButtonClassName : fallbackButtonClassName,
           shellClassName
         )}
-        title={isPremium ? 'Premium name · open on Spaceship' : 'Register on Spaceship'}
+        title={isPremium ? t('Premium name · open on Spaceship') : t('Register on Spaceship')}
       >
-        {canRegister ? primaryLabel : 'Go'}
+        {canRegister ? (typeof primaryLabel === 'string' ? t(primaryLabel) : primaryLabel) : t('Go')}
       </a>
     </div>
   );
