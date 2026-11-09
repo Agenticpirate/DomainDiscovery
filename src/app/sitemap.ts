@@ -5,6 +5,8 @@ import { getLeadPageSlugs } from '@/lib/leadPages';
 import { getIndustrySlugs } from '@/lib/industries';
 import { getLearnArticles, getLearnTranslatedLocales } from '@/lib/learnArticles';
 import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
+import { getCheapExtensions, getReports } from '@/lib/research';
+import { CHEAP_MIN_LIST_SIZE } from '@/lib/research/domainPriceStudy';
 import {
   absoluteLocaleUrl,
   languageAlternates,
@@ -127,5 +129,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.55,
     })),
   ];
-  return [...coreRoutes, ...localizedRoutes, ...learnRoutes, ...tldAboutRoutes, ...seoLandingRoutes];
+  // lastmod is the date the underlying data was collected, never the build date.
+  const reports = getReports();
+  const hubUpdated = reports.map((r) => r.updated).sort().pop();
+  const priceUpdated = reports.find((r) => r.slug === 'domain-prices')?.updated;
+  const researchRoutes = [
+    {
+      url: `${baseUrl}/research`,
+      ...(hubUpdated ? { lastModified: new Date(hubUpdated) } : {}),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    ...reports.map((r) => ({
+      url: `${baseUrl}${r.path}`,
+      lastModified: new Date(r.updated),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+    // Same row set as the page, so the sitemap never lists a list that redirects.
+    ...(getCheapExtensions().length >= CHEAP_MIN_LIST_SIZE && priceUpdated
+      ? [
+          {
+            url: `${baseUrl}/cheapest-domain-extensions`,
+            lastModified: new Date(priceUpdated),
+            changeFrequency: 'monthly' as const,
+            priority: 0.7,
+          },
+        ]
+      : []),
+  ];
+  return [...coreRoutes, ...localizedRoutes, ...learnRoutes, ...tldAboutRoutes, ...seoLandingRoutes, ...researchRoutes];
 }

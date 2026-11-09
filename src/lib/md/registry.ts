@@ -7,13 +7,14 @@ import { isLongCachePattern, matchMarkdownRoute, mdPathFromHtmlPath } from './ro
 import { CORE_ROUTES } from './renderers/core';
 import { LEARN_ROUTES } from './renderers/learn';
 import { LEGAL_ROUTES } from './renderers/legal';
+import { RESEARCH_ROUTES } from './renderers/research';
 import { SEO_ROUTES } from './renderers/seoPages';
 import { TLD_ROUTES } from './renderers/tlds';
 import type { MdContext, MdDoc, MdGroup, MdRenderer, MdRouteDef, MdRouteInfo } from './types';
 
 export type { MdContext, MdDoc, MdGroup, MdRenderer, MdRouteDef, MdRouteInfo } from './types';
 
-const ROUTES: MdRouteDef[] = [...CORE_ROUTES, ...LEARN_ROUTES, ...TLD_ROUTES, ...SEO_ROUTES, ...LEGAL_ROUTES];
+const ROUTES: MdRouteDef[] = [...CORE_ROUTES, ...LEARN_ROUTES, ...TLD_ROUTES, ...SEO_ROUTES, ...RESEARCH_ROUTES, ...LEGAL_ROUTES];
 
 /** Register a renderer for a route pattern. The pattern must also be allowed in routes.ts. */
 export function registerMarkdown(

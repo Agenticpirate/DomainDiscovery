@@ -177,6 +177,7 @@ function footerSections(f: Messages['footer'], href: (path: string) => string, t
     links: [
       { label: f.guides, href: href('/learn'), Icon: Fi.book },
       { label: f.faq, href: href('/faq'), Icon: Fi.help },
+      { label: 'Research', href: '/research', Icon: Fi.info },
       { label: f.what, href: href('/learn/what-is-domaindiscovery'), Icon: Fi.badge },
       { label: f.forAi, href: href('/for-ai'), Icon: Fi.bolt },
     ],
