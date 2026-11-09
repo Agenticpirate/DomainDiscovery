@@ -106,11 +106,9 @@ export default function Home() {
               <SearchCountPill />
             </div>
 
-            <h1 className="relative z-[1] text-[2.75rem] leading-[1.04] sm:text-[3.65rem] sm:leading-[1.02] md:text-[4.5rem] font-bold tracking-[-0.04em] sm:tracking-[-0.05em] mb-3 sm:mb-4">
-              <span className="hero-ink hero-ink-live block pb-[0.06em]">
-                <span className="sm:hidden">{hero.h1Mobile}</span>
-                <span className="hidden sm:inline">{hero.h1Desktop}</span>
-              </span>
+            <h1 className="relative z-[1] text-[2.4rem] min-[390px]:text-[2.6rem] leading-[1.04] sm:text-[3.65rem] sm:leading-[1.02] md:text-[4.5rem] font-bold tracking-[-0.04em] sm:tracking-[-0.05em] mb-3 sm:mb-4">
+              {/* Same heading on every screen size; the tagline (hero.sub) sits underneath. */}
+              <span className="hero-ink hero-ink-live block pb-[0.06em] text-balance">{hero.h1Desktop}</span>
               <span className="block text-[1.18rem] min-[380px]:text-[1.25rem] sm:text-[1.5rem] md:text-[1.85rem] mt-1.5 sm:mt-2 font-medium tracking-[-0.02em] sm:tracking-[-0.025em] text-ds-body">
                 {hero.sub}
               </span>
