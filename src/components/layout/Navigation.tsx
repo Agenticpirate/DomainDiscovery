@@ -376,7 +376,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
       className="notch-nav fixed top-0 left-0 right-0 z-[100]"
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)', background: 'transparent' }}
       data-site-nav
-      aria-label="Primary"
+      aria-label={t('Primary')}
     >
       <style>{`nav[data-site-nav] .notch-content svg{width:16px;height:16px;max-width:16px;max-height:16px;flex-shrink:0}`}</style>
       {/* Safe-area strip keeps the notch shape flush on iOS */}
@@ -411,7 +411,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 </Link>
               </div>
 
-              <Link href={href('/')} className="shrink-0 hover:opacity-90 transition-opacity" aria-label="DomainDiscovery home">
+              <Link href={href('/')} className="shrink-0 hover:opacity-90 transition-opacity" aria-label={t('DomainDiscovery home')}>
                 <Logo size="sm" showText />
               </Link>
 
@@ -450,7 +450,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-nav-menu"
-                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-label={mobileMenuOpen ? t('Close menu') : t('Open menu')}
                 className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${
                   mobileMenuOpen
                     ? isLight
@@ -470,7 +470,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 </svg>
               </button>
 
-              <Link href={href('/')} className="min-w-0 px-1 hover:opacity-90 transition-opacity" aria-label="DomainDiscovery home">
+              <Link href={href('/')} className="min-w-0 px-1 hover:opacity-90 transition-opacity" aria-label={t('DomainDiscovery home')}>
                 <Logo size="sm" showText />
               </Link>
 

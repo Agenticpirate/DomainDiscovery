@@ -9,6 +9,7 @@ import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
 import { recordDomainsChecked } from '@/lib/searchCounter';
 import countriesData from '@/data/countries.json';
 import { useLocale, useT } from '@/components/i18n/LocaleProvider';
+import { rich } from '@/components/i18n/rich';
 import citiesData from '@/data/cities-expanded.json';
 import usStatesData from '@/data/us-states.json';
 import canadaProvincesData from '@/data/canada-provinces.json';
@@ -767,7 +768,7 @@ export const GeoDomainGenerator: React.FC = () => {
     const sanitizedKeyword = sanitizeDomainName(keyword);
     if (!sanitizedKeyword) {
       setIsGenerating(false);
-      flash('Enter a valid keyword (letters/numbers)');
+      flash(t('Enter a valid keyword (letters/numbers)'));
       return;
     }
 
@@ -845,7 +846,10 @@ export const GeoDomainGenerator: React.FC = () => {
     setGeneratedDomains(domains);
     setIsGenerating(false);
     flash(
-      `Generated ${domains.length.toLocaleString()} · live-checking top ${Math.min(limit, domains.length)}`
+      t('Generated {n} · live-checking top {m}', {
+        n: domains.length.toLocaleString(),
+        m: Math.min(limit, domains.length),
+      })
     );
     // Bring results into view on generate
     window.setTimeout(() => {
@@ -973,7 +977,9 @@ export const GeoDomainGenerator: React.FC = () => {
     if (!parts.length) return;
     setSelectedTlds((prev) => Array.from(new Set([...prev, ...parts])));
     setCustomTldInput('');
-    flash(`Added extension${parts.length > 1 ? 's' : ''}: ${parts.map((p) => `.${p}`).join(' ')}`);
+    flash(
+      `${parts.length > 1 ? t('Added extensions:') : t('Added extension:')} ${parts.map((p) => `.${p}`).join(' ')}`
+    );
   };
 
   const exportCsv = () => {
@@ -1000,7 +1006,7 @@ export const GeoDomainGenerator: React.FC = () => {
     a.download = `geo-domains-${sanitizeDomainName(keyword) || 'export'}.csv`;
     a.click();
     URL.revokeObjectURL(url);
-    flash('CSV downloaded');
+    flash(t('CSV downloaded'));
   };
 
   const copyAvailable = async () => {
@@ -1008,11 +1014,11 @@ export const GeoDomainGenerator: React.FC = () => {
       .filter((d) => d.status === 'available' && !d.premium)
       .map((d) => d.domain);
     if (!list.length) {
-      flash('No free available domains yet — try Premium filter or wait for checks');
+      flash(t('No free available domains yet — try Premium filter or wait for checks'));
       return;
     }
     await navigator.clipboard.writeText(list.join('\n'));
-    flash(`Copied ${list.length} free domains`);
+    flash(t('Copied {n} free domains', { n: list.length }));
   };
 
   const registerUrl = (domain: string) => getSpaceshipAffiliateUrl(domain);
@@ -1586,7 +1592,7 @@ export const GeoDomainGenerator: React.FC = () => {
             {stepLabel(
               3,
               'Pattern & extensions',
-              `${selectedTlds.length} TLD${selectedTlds.length === 1 ? '' : 's'} · ${t(position)} · ${t(separator)}`,
+              `${selectedTlds.length === 1 ? t('1 TLD') : t('{n} TLDs', { n: selectedTlds.length })} · ${t(position)} · ${t(separator)}`,
               selectedTlds.length > 0
             )}
             <div className="grid gap-4 sm:grid-cols-2">
@@ -1656,7 +1662,7 @@ export const GeoDomainGenerator: React.FC = () => {
                     {t('Popular')}
                   </button>
                   <button type="button" className={isLight ? 'text-slate-500' : 'text-white/40'} onClick={() => setSelectedTlds(TLD_OPTIONS.filter((t) => t.geo).map((t) => t.value))}>
-                    Geo
+                    {t('Geo')}
                   </button>
                   <button type="button" className={isLight ? 'text-slate-500' : 'text-white/40'} onClick={() => setSelectedTlds(['com'])}>
                     {t('Reset')}
@@ -1739,7 +1745,7 @@ export const GeoDomainGenerator: React.FC = () => {
               <div className="mb-1 flex justify-between text-[11px]">
                 <span className={isLight ? 'text-slate-500' : 'text-white/45'}>{t('Min population')}</span>
                 <span className={`font-bold tabular-nums ${isLight ? 'text-slate-700' : 'text-white/70'}`}>
-                  {minPopulation === 0 ? 'Any' : `${formatPopulation(minPopulation)}+`}
+                  {minPopulation === 0 ? t('Any') : `${formatPopulation(minPopulation)}+`}
                 </span>
               </div>
               <input
@@ -1802,11 +1808,11 @@ export const GeoDomainGenerator: React.FC = () => {
                 <div className="flex flex-wrap gap-4">
                   <label className={`inline-flex items-center gap-2 text-[11px] font-semibold ${isLight ? 'text-slate-700' : 'text-white/65'}`}>
                     <input type="checkbox" checked={includeCodes} onChange={(e) => setIncludeCodes(e.target.checked)} />
-                    State / country codes
+                    {t('State / country codes')}
                   </label>
                   <label className={`inline-flex items-center gap-2 text-[11px] font-semibold ${isLight ? 'text-slate-700' : 'text-white/65'}`}>
                     <input type="checkbox" checked={checkPremiumDeep} onChange={(e) => setCheckPremiumDeep(e.target.checked)} />
-                    Premium deep scan (slower)
+                    {t('Premium deep scan (slower)')}
                   </label>
                 </div>
                 <textarea
@@ -1855,14 +1861,14 @@ export const GeoDomainGenerator: React.FC = () => {
             >
               {isGenerating || isChecking ? (
                 isChecking ? (
-                  `Checking ${checkProgress.done}/${checkProgress.total || maxCheck}…`
+                  t('Checking {a}/{b}…', { a: checkProgress.done, b: checkProgress.total || maxCheck })
                 ) : (
-                  'Generating…'
+                  t('Generating…')
                 )
               ) : (
                 <>
                   <Icons.Magic />
-                  <span className="ml-2">Generate &amp; check ~{estimateCount.toLocaleString()}</span>
+                  <span className="ml-2">{t('Generate & check ~{n}', { n: estimateCount.toLocaleString() })}</span>
                 </>
               )}
             </Button>
@@ -1881,7 +1887,7 @@ export const GeoDomainGenerator: React.FC = () => {
         >
           <div className={`rounded-2xl border p-4 ${shell(isLight)}`}>
             <div className={`text-[10px] font-bold uppercase tracking-[0.16em] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-              Build summary
+              {t('Build summary')}
             </div>
 
             <ul className="mt-3 space-y-2">
@@ -1919,8 +1925,8 @@ export const GeoDomainGenerator: React.FC = () => {
               {[
                 [t('Scope'), activeLocationLabel],
                 [t('Places'), locations.length.toLocaleString()],
-                ['TLDs', selectedTlds.map((t) => `.${t}`).join(' ') || '—'],
-                ['Pattern', `${position} · ${separator}`],
+                [t('TLDs'), selectedTlds.map((t) => `.${t}`).join(' ') || '—'],
+                [t('Pattern'), `${position} · ${separator}`],
                 [t('Live check'), t('top {n}', { n: maxCheck })],
                 [t('Est. names'), `~${estimateCount.toLocaleString()}`],
               ].map(([k, v]) => (
@@ -1956,10 +1962,10 @@ export const GeoDomainGenerator: React.FC = () => {
               className="mt-4 w-full"
             >
               {isChecking
-                ? `Checking ${checkProgress.done}/${checkProgress.total || maxCheck}`
+                ? t('Checking {a}/{b}', { a: checkProgress.done, b: checkProgress.total || maxCheck })
                 : isGenerating
-                  ? 'Generating…'
-                  : 'Run generator'}
+                  ? t('Generating…')
+                  : t('Run generator')}
             </Button>
           </div>
           <div
@@ -1968,10 +1974,9 @@ export const GeoDomainGenerator: React.FC = () => {
             }`}
           >
             <p className={`font-semibold mb-1 ${isLight ? 'text-slate-700' : 'text-white/70'}`}>
-              After live check
+              {t('After live check')}
             </p>
-            Available (free to register), premium aftermarket, and already registered names.
-            Export CSV or copy free domains when ready.
+            {t('Available (free to register), premium aftermarket, and already registered names. Export CSV or copy free domains when ready.')}
           </div>
         </motion.aside>
       </div>
@@ -2056,7 +2061,7 @@ export const GeoDomainGenerator: React.FC = () => {
               <div>
                 <div className="flex flex-wrap items-center gap-2">
                   <h3 className={`text-lg font-black ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                    Inventory results
+                    {t('Inventory results')}
                   </h3>
                   {isChecking && (
                     <span
@@ -2064,18 +2069,18 @@ export const GeoDomainGenerator: React.FC = () => {
                         isLight ? 'bg-sky-50 text-sky-700' : 'bg-sky-500/15 text-sky-300'
                       }`}
                     >
-                      Live
+                      {t('Live')}
                     </span>
                   )}
                 </div>
                 <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-                  {stats.total.toLocaleString()} generated
+                  {t('{n} generated', { n: stats.total.toLocaleString() })}
                   {isChecking && checkProgress.total > 0
-                    ? ` · checking ${Math.min(checkProgress.done, checkProgress.total)}/${checkProgress.total}`
+                    ? ` · ${t('checking {a}/{b}', { a: Math.min(checkProgress.done, checkProgress.total), b: checkProgress.total })}`
                     : isChecking
-                      ? ' · checking…'
-                      : ` · ${stats.resolved.toLocaleString()} resolved`}
-                  {stats.skipped > 0 ? ` · ${stats.skipped} beyond check limit` : ''}
+                      ? ` · ${t('checking…')}`
+                      : ` · ${t('{n} resolved', { n: stats.resolved.toLocaleString() })}`}
+                  {stats.skipped > 0 ? ` · ${t('{n} beyond check limit', { n: stats.skipped })}` : ''}
                 </p>
                 {isChecking && checkProgress.total > 0 && (
                   <div
@@ -2096,21 +2101,21 @@ export const GeoDomainGenerator: React.FC = () => {
                 {stats.available > 0 && (
                   <span className="inline-flex items-center gap-1.5">
                     <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                    {stats.available} available
+                    {t('{n} available', { n: stats.available })}
                   </span>
                 )}
                 <span className="inline-flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-violet-500" />
-                  {stats.premium} premium
+                  {t('{n} premium', { n: stats.premium })}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-rose-500" />
-                  {stats.taken} registered
+                  {t('{n} registered', { n: stats.taken })}
                 </span>
                 {isChecking && stats.checking > 0 && (
                   <span className="inline-flex items-center gap-1.5">
                     <span className="h-2 w-2 rounded-full bg-sky-500 animate-pulse" />
-                    {stats.checking} in progress
+                    {t('{n} in progress', { n: stats.checking })}
                   </span>
                 )}
               </div>
@@ -2120,11 +2125,11 @@ export const GeoDomainGenerator: React.FC = () => {
               <div className="flex flex-wrap gap-1">
                 {(
                   [
-                    ['all', 'All', true],
-                    ['available', `Available${stats.available ? ` · ${stats.available}` : ''}`, stats.available > 0 || isChecking],
-                    ['premium', `Premium · ${stats.premium}`, true],
-                    ['taken', `Registered · ${stats.taken}`, true],
-                    ['checking', `In progress · ${stats.checking}`, isChecking && stats.checking > 0],
+                    ['all', t('All'), true],
+                    ['available', stats.available ? t('Available · {n}', { n: stats.available }) : t('Available'), stats.available > 0 || isChecking],
+                    ['premium', t('Premium · {n}', { n: stats.premium }), true],
+                    ['taken', t('Registered · {n}', { n: stats.taken }), true],
+                    ['checking', t('In progress · {n}', { n: stats.checking }), isChecking && stats.checking > 0],
                   ] as const
                 )
                   .filter(([, , show]) => show)
@@ -2158,7 +2163,7 @@ export const GeoDomainGenerator: React.FC = () => {
                     isLight ? 'border-slate-200 text-slate-700' : 'border-white/10 text-white/70'
                   }`}
                 >
-                  Copy free
+                  {t('Copy free')}
                 </button>
                 <button
                   type="button"
@@ -2184,7 +2189,7 @@ export const GeoDomainGenerator: React.FC = () => {
                 className={`flex-1 rounded-xl border px-3 py-2 text-sm outline-none ${inputCls}`}
               />
               <div className="flex flex-wrap items-center gap-1">
-                <span className={`px-1 text-[10px] ${isLight ? 'text-slate-400' : 'text-white/30'}`}>Sort</span>
+                <span className={`px-1 text-[10px] ${isLight ? 'text-slate-400' : 'text-white/30'}`}>{t('Sort')}</span>
                 {(['population', 'domain', 'length', 'status'] as const).map((sort) => (
                   <button
                     key={sort}
@@ -2293,7 +2298,7 @@ export const GeoDomainGenerator: React.FC = () => {
                         className={`py-2.5 px-3 text-right tabular-nums ${isLight ? 'text-slate-600' : 'text-white/55'}`}
                         title={
                           domain.population >= 1_000_000
-                            ? `${formatPopulationMillions(domain.population)} (${formatPopulationExact(domain.population)} people)`
+                            ? `${formatPopulationMillions(domain.population)} (${t('{pop} people', { pop: formatPopulationExact(domain.population) })})`
                             : formatPopulationExact(domain.population)
                         }
                       >
@@ -2344,7 +2349,7 @@ export const GeoDomainGenerator: React.FC = () => {
                             className={`rounded-lg p-1.5 ${
                               isLight ? 'text-slate-400 hover:bg-slate-100' : 'text-white/30 hover:bg-white/10'
                             }`}
-                            title="WHOIS"
+                            title={t('WHOIS')}
                           >
                             <Icons.Info />
                           </a>
@@ -2362,17 +2367,22 @@ export const GeoDomainGenerator: React.FC = () => {
               className={`flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-4 py-3 ${shell(isLight)}`}
             >
               <span className={`text-[12px] tabular-nums ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-                Showing{' '}
-                <strong className={isLight ? 'text-slate-800' : 'text-white/80'}>
-                  {sortedDomains.length === 0
-                    ? 0
-                    : `${safeResultsPage * PAGE_SIZE + 1}–${Math.min(
-                        (safeResultsPage + 1) * PAGE_SIZE,
-                        sortedDomains.length
-                      )}`}
-                </strong>{' '}
-                of {sortedDomains.length.toLocaleString()} results
-                {sortedDomains.length !== stats.total ? ` (filtered from ${stats.total.toLocaleString()})` : ''}
+                {rich(t('Showing {range} of {n} results'), {
+                  range: (
+                    <strong className={isLight ? 'text-slate-800' : 'text-white/80'}>
+                      {sortedDomains.length === 0
+                        ? 0
+                        : `${safeResultsPage * PAGE_SIZE + 1}–${Math.min(
+                            (safeResultsPage + 1) * PAGE_SIZE,
+                            sortedDomains.length
+                          )}`}
+                    </strong>
+                  ),
+                  n: sortedDomains.length.toLocaleString(),
+                })}
+                {sortedDomains.length !== stats.total
+                  ? ` ${t('(filtered from {n})', { n: stats.total.toLocaleString() })}`
+                  : ''}
               </span>
               <div className="flex flex-wrap items-center gap-1">
                 <button
@@ -2449,6 +2459,7 @@ function StatusPill({
   price?: string;
   isLight: boolean;
 }) {
+  const t = useT();
   if (status === 'checking' || status === 'pending') {
     return (
       <span
@@ -2457,7 +2468,7 @@ function StatusPill({
         }`}
       >
         <span className="h-2.5 w-2.5 animate-spin rounded-full border border-current border-t-transparent" />
-        Checking
+        {t('Checking')}
       </span>
     );
   }
@@ -2467,9 +2478,9 @@ function StatusPill({
         className={`inline-flex rounded-full px-2 py-0.5 text-[10px] font-bold ${
           isLight ? 'bg-violet-50 text-violet-800' : 'bg-violet-500/20 text-violet-200'
         }`}
-        title={price ? `Premium ${price}` : 'Premium'}
+        title={price ? t('Premium {price}', { price }) : t('Premium')}
       >
-        Premium{price ? ` · ${price}` : ''}
+        {t('Premium')}{price ? ` · ${price}` : ''}
       </span>
     );
   }
@@ -2480,7 +2491,7 @@ function StatusPill({
           isLight ? 'bg-emerald-50 text-emerald-700' : 'bg-emerald-500/15 text-emerald-300'
         }`}
       >
-        Available
+        {t('Available')}
       </span>
     );
   }
@@ -2491,7 +2502,7 @@ function StatusPill({
           isLight ? 'bg-rose-50 text-rose-700' : 'bg-rose-500/15 text-rose-300'
         }`}
       >
-        Registered
+        {t('Registered')}
       </span>
     );
   }
@@ -2501,9 +2512,9 @@ function StatusPill({
         className={`inline-flex rounded-full px-2 py-0.5 text-[10px] font-bold ${
           isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/5 text-white/40'
         }`}
-        title="Outside live-check budget — raise check limit to include"
+        title={t('Outside live-check budget — raise check limit to include')}
       >
-        Not checked
+        {t('Not checked')}
       </span>
     );
   }
@@ -2513,7 +2524,7 @@ function StatusPill({
         isLight ? 'bg-amber-50 text-amber-800' : 'bg-amber-500/15 text-amber-200'
       }`}
     >
-      Error
+      {t('Error')}
     </span>
   );
 }

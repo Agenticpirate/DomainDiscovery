@@ -44,7 +44,7 @@ export default function LeadsPage() {
             <div className={`${ds.badgeInk} relative isolate mb-2 hidden sm:inline-flex`}>
               <span className="relative z-[1] inline-flex items-center gap-1.5">
                 <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
-                <span>330M+ Registered Domains · Real-Time Outbound Lead Discovery</span>
+                <span>{t('330M+ Registered Domains · Real-Time Outbound Lead Discovery')}</span>
               </span>
             </div>
 
@@ -61,7 +61,7 @@ export default function LeadsPage() {
               </span>
             </h1>
             <p className={`hidden sm:block text-[13px] sm:text-[14px] leading-relaxed max-w-xl mx-auto ${ds.body}`}>
-              Discover commercial companies operating on alternative extensions (.co, .io, .ai, ccTLDs) who need to upgrade to the definitive .com. Filter active developed websites from parked pages and pitch qualified buyers.
+              {t('Discover commercial companies operating on alternative extensions (.co, .io, .ai, ccTLDs) who need to upgrade to the definitive .com. Filter active developed websites from parked pages and pitch qualified buyers.')}
             </p>
           </div>
         </SectionAmbient>

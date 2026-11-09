@@ -11,7 +11,7 @@ import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { WHOISLookup } from '@/components/domain/WHOISLookup';
 import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
 import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 import { pageHeading } from '@/lib/i18n/locales';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -25,6 +25,7 @@ export default function WhoisPage() {
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const { locale, messages, href } = useLocale();
+  const t = useT();
   const localized = locale !== 'en';
 
   return (
@@ -80,7 +81,7 @@ export default function WhoisPage() {
                     isLight ? 'border-slate-200 bg-white text-slate-500' : 'border-white/10 bg-[#0a0a0a] text-white/50'
                   }`}
                 >
-                  Loading WHOIS…
+                  {t('Loading WHOIS…')}
                 </div>
               }
             >

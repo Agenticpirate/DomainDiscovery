@@ -323,7 +323,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     }
 
     if (!primary) {
-      showToast('Enter a keyword with letters or numbers to search', 'info', 2200);
+      showToast(t('Enter a keyword with letters or numbers to search'), 'info', 2200);
       return;
     }
 
@@ -358,7 +358,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
       if (!list.length) {
         setGenerated([]);
-        showToast('No domains generated — try another keyword or extension', 'info', 2500);
+        showToast(t('No domains generated — try another keyword or extension'), 'info', 2500);
         return;
       }
 
@@ -367,7 +367,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
     } catch (err) {
       console.error('Keyword search failed:', err);
       if (gen === searchGenRef.current) {
-        showToast('Search failed — please try again', 'error', 2500);
+        showToast(t('Search failed — please try again'), 'error', 2500);
       }
     } finally {
       if (gen === searchGenRef.current) {
@@ -460,15 +460,18 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   isLight ? 'text-white' : 'text-ds-ink'
                 }`}
               >
-                Keyword domain finder
+                {t('Keyword domain finder')}
               </h3>
               <p
                 className={`text-[11px] sm:text-xs mt-0.5 ${
                   isLight ? 'text-white/45' : 'text-ds-mute'
                 }`}
               >
-                {PREFIXES.length.toLocaleString()}+ prefixes · {SUFFIXES.length.toLocaleString()}+ suffixes ·{' '}
-                {POPULAR.length.toLocaleString()}+ seeds
+                {t('{a}+ prefixes · {b}+ suffixes · {c}+ seeds', {
+                  a: PREFIXES.length.toLocaleString(),
+                  b: SUFFIXES.length.toLocaleString(),
+                  c: POPULAR.length.toLocaleString(),
+                })}
               </p>
             </div>
           </div>
@@ -518,7 +521,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               [
                 {
                   id: 'all' as const,
-                  label: 'All',
+                  label: t('All'),
                   hint: t('Prefixes, suffixes & combos around your keyword'),
                 },
                 {
@@ -545,9 +548,9 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             ))}
           </div>
           <p className={`mt-1.5 hidden text-[10px] sm:block sm:text-[11px] ${ds.mute}`}>
-            {filterMode === 'starts' && 'Only domains that start with your keyword.'}
-            {filterMode === 'ends' && 'Only domains that end with your keyword.'}
-            {filterMode === 'all' && 'All prefix, suffix, and combo patterns.'}
+            {filterMode === 'starts' && t('Only domains that start with your keyword.')}
+            {filterMode === 'ends' && t('Only domains that end with your keyword.')}
+            {filterMode === 'all' && t('All prefix, suffix, and combo patterns.')}
           </p>
         </div>
 
@@ -556,7 +559,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
           <div className="flex flex-wrap items-center justify-between gap-2">
             <label className={ds.label}>{t('Extensions')}</label>
             <span className={`hidden text-[10px] sm:inline ${ds.mute}`}>
-              Type any TLD (e.g. shop, .io, co.uk) or pick a preset
+              {t('Type any TLD (e.g. shop, .io, co.uk) or pick a preset')}
             </span>
           </div>
 
@@ -585,7 +588,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   autoComplete="off"
                   spellCheck={false}
                   className={`w-full rounded-ds-md border pl-6 pr-3 py-2 text-[12px] font-mono font-semibold outline-none transition-colors ${ds.input}`}
-                  aria-label="Type a preferred extension"
+                  aria-label={t('Type a preferred extension')}
                 />
               </div>
               <button
@@ -598,7 +601,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                     : 'border-white/15 bg-[#111111] text-[#f0f0f0] hover:border-white/30'
                 }`}
               >
-                Add
+                {t('Add')}
               </button>
               <select
                 value=""
@@ -607,9 +610,9 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   e.target.value = '';
                 }}
                 className={`rounded-ds-md border px-2.5 py-2 text-[12px] font-semibold outline-none min-w-[7.5rem] ${ds.input}`}
-                aria-label="Choose preset extension"
+                aria-label={t('Choose preset extension')}
               >
-                <option value="">Presets…</option>
+                <option value="">{t('Presets…')}</option>
                 {availableTlds.map((tld) => (
                   <option key={tld} value={tld} disabled={selectedTlds.includes(tld)}>
                     {tld}
@@ -634,7 +637,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               {isGenerating ? (
                 <>
                   <span className="h-3.5 w-3.5 rounded-full border-2 border-current border-t-transparent animate-spin" />
-                  Building…
+                  {t('Building…')}
                 </>
               ) : (
                 <>
@@ -655,7 +658,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   title={
                     selectedTlds.length === 1
                       ? t('At least one extension required')
-                      : `Remove ${tld}`
+                      : t('Remove {tld}', { tld })
                   }
                   className="inline-flex items-center gap-1 rounded-full border border-[#f0f0f0] bg-[#f0f0f0] px-2.5 py-1 text-[11px] font-mono font-semibold text-[#0a0a0a] transition-colors hover:bg-white"
                 >
@@ -710,7 +713,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
               }}
               className={`text-[12px] font-semibold px-1 ${ds.mute} hover:text-ds-ink transition-colors`}
             >
-              Clear
+              {t('Clear')}
             </button>
           )}
         </div>
@@ -736,13 +739,13 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
         {showOptions && (
           <div className={`mt-3 pt-3 border-t space-y-3 border-ds-hairline`}>
             <div>
-              <label className={`${ds.label} block mb-2`}>Sort by</label>
+              <label className={`${ds.label} block mb-2`}>{t('Sort by')}</label>
               <div className="flex flex-wrap gap-1.5">
                 {(
                   [
-                    { id: 'popularity' as const, label: 'Popularity' },
-                    { id: 'alpha' as const, label: 'Alphabetical' },
-                    { id: 'length' as const, label: 'Length' },
+                    { id: 'popularity' as const, label: t('Popularity') },
+                    { id: 'alpha' as const, label: t('Alphabetical') },
+                    { id: 'length' as const, label: t('Length') },
                   ] as const
                 ).map((opt) => (
                   <button
@@ -764,7 +767,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 onChange={(e) => setIncludeHyphens(e.target.checked)}
                 className="w-3.5 h-3.5 rounded"
               />
-              <span className={`text-[12px] ${ds.body}`}>Include hyphens</span>
+              <span className={`text-[12px] ${ds.body}`}>{t('Include hyphens')}</span>
             </label>
           </div>
         )}
@@ -797,29 +800,29 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                     / {positionTotal.toLocaleString()}
                     <span className="hidden sm:inline">
                       {' '}
-                      ({generated.length.toLocaleString()} total)
+                      ({t('{n} total', { n: generated.length.toLocaleString() })})
                     </span>
                   </span>
                 </span>
                 {availableCount > 0 && (
-                  <span className="text-emerald-400 font-semibold">{availableCount} free</span>
+                  <span className="text-emerald-400 font-semibold">{t('{n} free', { n: availableCount })}</span>
                 )}
                 {premiumCount > 0 && (
-                  <span className="text-amber-400 font-semibold">{premiumCount} premium</span>
+                  <span className="text-amber-400 font-semibold">{t('{n} premium', { n: premiumCount })}</span>
                 )}
                 {takenCount > 0 && (
-                  <span className="text-rose-300/90">{takenCount} taken</span>
+                  <span className="text-rose-300/90">{t('{n} taken', { n: takenCount })}</span>
                 )}
                 {uncheckedCount > 0 && isChecking && (
                   <span className="text-white/50">
-                    checking {checkedCount.toLocaleString()}…
+                    {t('checking {n}…', { n: checkedCount.toLocaleString() })}
                   </span>
                 )}
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 {isChecking && (
                   <button type="button" onClick={handleStop} className={pill(false)}>
-                    Stop
+                    {t('Stop')}
                   </button>
                 )}
               </div>
@@ -839,11 +842,11 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             {/* Position + sort also editable after results (same state as form) */}
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="text-[9px] font-bold uppercase tracking-wide mr-0.5" style={{ color: 'var(--text-muted)' }}>
-                Position
+                {t('Position')}
               </span>
               {(
                 [
-                  { id: 'all' as const, label: 'All' },
+                  { id: 'all' as const, label: t('All') },
                   { id: 'starts' as const, label: t('Starts') },
                   { id: 'ends' as const, label: t('Ends') },
                 ] as const
@@ -853,13 +856,13 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 </button>
               ))}
               <span className="text-[9px] font-bold uppercase tracking-wide ml-1 mr-0.5" style={{ color: 'var(--text-muted)' }}>
-                Sort
+                {t('Sort')}
               </span>
               {(
                 [
-                  { id: 'popularity' as const, label: 'Popularity' },
-                  { id: 'alpha' as const, label: 'Alphabetical' },
-                  { id: 'length' as const, label: 'Length' },
+                  { id: 'popularity' as const, label: t('Popularity') },
+                  { id: 'alpha' as const, label: t('Alphabetical') },
+                  { id: 'length' as const, label: t('Length') },
                 ] as const
               ).map((m) => (
                 <button key={m.id} type="button" onClick={() => setSortMode(m.id)} className={pill(sortMode === m.id)}>
@@ -870,7 +873,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
 
             <div
               role="tablist"
-              aria-label="Filter by availability"
+              aria-label={t('Filter by availability')}
               className={`grid grid-cols-4 gap-0.5 w-full min-w-0 rounded-2xl border p-1 ${
                 isLight ? 'bg-slate-100/70 border-slate-200/90' : 'bg-[#0a0a0a] border-white/[0.08]'
               }`}
@@ -879,25 +882,25 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 [
                   {
                     id: 'available' as const,
-                    label: 'Available',
+                    label: t('Available'),
                     n: availableCount,
                     dot: isLight ? 'bg-emerald-500' : 'bg-emerald-400',
                   },
                   {
                     id: 'premium' as const,
-                    label: 'Premium',
+                    label: t('Premium'),
                     n: premiumCount,
                     dot: 'bg-amber-400',
                   },
                   {
                     id: 'taken' as const,
-                    label: 'Taken',
+                    label: t('Taken'),
                     n: takenCount,
                     dot: isLight ? 'bg-rose-500' : 'bg-rose-400',
                   },
                   {
                     id: 'all' as const,
-                    label: 'All',
+                    label: t('All'),
                     n: positionTotal,
                     dot: isLight ? 'bg-slate-400' : 'bg-white/45',
                   },
@@ -939,15 +942,15 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   onChange={(e) => setTypeFilter(e.target.value as TypeFilter)}
                   className={`rounded-lg border px-2 py-1 text-[11px] font-semibold outline-none ${ds.input}`}
                 >
-                  <option value="all">Type: All</option>
-                  <option value="exact">Exact</option>
-                  <option value="prefix">Prefix</option>
-                  <option value="suffix">Suffix</option>
-                  <option value="combo">Combo</option>
-                  <option value="hyphen">Hyphen</option>
+                  <option value="all">{t('Type: All')}</option>
+                  <option value="exact">{t('Exact')}</option>
+                  <option value="prefix">{t('Prefix')}</option>
+                  <option value="suffix">{t('Suffix')}</option>
+                  <option value="combo">{t('Combo')}</option>
+                  <option value="hyphen">{t('Hyphen')}</option>
                 </select>
                 <label className={`inline-flex items-center gap-1 text-[10px] ${ds.mute}`}>
-                  Len
+                  {t('Len')}
                   <input
                     type="number"
                     min={2}
@@ -986,8 +989,8 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
             {visible.length === 0 && (
               <div className="text-center py-12 space-y-3">
                 <p className={`text-[12px] ${ds.mute}`}>
-                  No domains match these filters
-                  {searchPrimary ? ` for “${searchPrimary}”` : ''}
+                  {t('No domains match these filters')}
+                  {searchPrimary ? ` ${t('for “{q}”', { q: searchPrimary })}` : ''}
                 </p>
                 <button
                   type="button"
@@ -1000,7 +1003,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                   }}
                   className={pill(false)}
                 >
-                  Reset filters
+                  {t('Reset filters')}
                 </button>
               </div>
             )}
@@ -1013,8 +1016,10 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 onClick={() => setVisibleCount((n) => n + 200)}
                 className={pill(false)}
               >
-                Show more ({Math.min(200, filtered.length - visibleCount)} of{' '}
-                {(filtered.length - visibleCount).toLocaleString()})
+                {t('Show more ({a} of {b})', {
+                  a: Math.min(200, filtered.length - visibleCount),
+                  b: (filtered.length - visibleCount).toLocaleString(),
+                })}
               </button>
               <button
                 type="button"
@@ -1022,7 +1027,7 @@ export function KeywordDomainFinder({ onSelect }: KeywordDomainFinderProps) {
                 className="text-[11px] font-semibold"
                 style={{ color: 'var(--text-muted)' }}
               >
-                Show all {filtered.length.toLocaleString()}
+                {t('Show all {n}', { n: filtered.length.toLocaleString() })}
               </button>
             </div>
           )}
@@ -1053,6 +1058,7 @@ function DomainRow({
   onSelectRegistrar: (r: import('@/lib/registrars').RegistrarName) => void;
   onSelect?: (domain: string) => void;
 }) {
+  const t = useT();
   const { showToast } = useToast();
   const [isSaved, setIsSaved] = useState(false);
 
@@ -1106,7 +1112,7 @@ function DomainRow({
             className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
               isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/[0.06] text-white/35'
             }`}
-            title="Not checked yet"
+            title={t('Not checked yet')}
           >
             <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-300' : 'bg-white/30'}`} />
           </span>
@@ -1115,7 +1121,7 @@ function DomainRow({
             className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
               isLight ? 'bg-amber-100 text-amber-600' : 'bg-amber-500/15 text-amber-400'
             }`}
-            title="Premium"
+            title={t('Premium')}
           >
             <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
               <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 2h14v2H5v-2z" />
@@ -1128,7 +1134,7 @@ function DomainRow({
                 ? 'bg-emerald-50 text-emerald-600 border border-emerald-200/80'
                 : 'bg-emerald-500/12 text-emerald-400 border border-emerald-500/25'
             }`}
-            title="Available"
+            title={t('Available')}
           >
             <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
@@ -1139,7 +1145,7 @@ function DomainRow({
             className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
               isLight ? 'bg-rose-50 text-rose-500' : 'bg-rose-500/10 text-rose-400/90'
             }`}
-            title="Taken"
+            title={t('Taken')}
           >
             <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -1156,11 +1162,15 @@ function DomainRow({
         onClick={() => {
           const { saved } = toggleSavedDomain(item.domain);
           setIsSaved(saved);
-          showToast(saved ? `Saved ${item.domain}` : `Removed ${item.domain}`, 'success', 1500);
+          showToast(
+            saved ? t('Saved {d}', { d: item.domain }) : t('Removed {d}', { d: item.domain }),
+            'success',
+            1500
+          );
         }}
         className={`h-7 w-7 shrink-0 inline-flex items-center justify-center rounded-full border transition-colors ${saveClass}`}
-        aria-label={isSaved ? `Remove ${item.domain}` : `Save ${item.domain}`}
-        title={isSaved ? 'Saved' : 'Save domain'}
+        aria-label={isSaved ? t('Remove {d}', { d: item.domain }) : t('Save {d}', { d: item.domain })}
+        title={isSaved ? t('Saved') : t('Save domain')}
       >
         <svg
           className="w-3.5 h-3.5"
@@ -1186,8 +1196,8 @@ function DomainRow({
             canRegister
             isPremium={isPremium}
             premiumUrl={isPremium ? item.buyUrl : undefined}
-            primaryLabel={isPremium ? 'Go' : 'Go'}
-            premiumLabel={isPremium ? 'Premium listing' : undefined}
+            primaryLabel={t('Go')}
+            premiumLabel={isPremium ? t('Premium listing') : undefined}
             primaryButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${goPrimary}`}
             chevronButtonClassName={`rounded-full p-1 transition-colors ${goPrimary}`}
             fallbackButtonClassName={`text-[10px] sm:text-[11px] px-2 py-1 rounded-full font-semibold transition-colors ${
