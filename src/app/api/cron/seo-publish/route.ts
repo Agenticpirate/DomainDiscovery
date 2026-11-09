@@ -61,7 +61,6 @@ export async function GET(req: NextRequest) {
     revalidatePath('/feed.xml');
     for (const a of dueToday) {
       revalidatePath(`/learn/${a.slug}`);
-      revalidatePath(`/learn/md/${a.slug}`);
     }
     // Also revalidate recently live (last 7 days of batch) in case of lag
     for (const a of live.slice(-21)) {
@@ -80,7 +79,7 @@ export async function GET(req: NextRequest) {
       `${base}/learn`,
       `${base}/sitemap.xml`,
       `${base}/feed.xml`,
-      ...dueToday.flatMap((a) => [`${base}/learn/${a.slug}`, `${base}/learn/md/${a.slug}`]),
+      ...dueToday.flatMap((a) => [`${base}/learn/${a.slug}`, `${base}/learn/${a.slug}.md`]),
       ...live.slice(-10).map((a) => `${base}/learn/${a.slug}`),
     ];
     indexNow = await submitIndexNow(Array.from(new Set(pingUrls)));

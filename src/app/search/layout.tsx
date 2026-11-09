@@ -11,6 +11,8 @@ export function generateMetadata() {
   title,
   description,
   path,
+  aiSummary:
+    'Free instant domain availability checker across popular TLDs. Results show free, registered or premium status as a snapshot, so re-check at the registrar before you pay.',
   keywords: [
     'domain availability checker',
     'instant domain search',

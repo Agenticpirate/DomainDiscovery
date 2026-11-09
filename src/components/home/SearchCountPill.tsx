@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { useLocale } from '@/components/i18n/LocaleProvider';
 import {
   markSearchCountSeen,
   readSearchCount,
@@ -14,6 +15,7 @@ function formatCount(value: number) {
 }
 
 export function SearchCountPill() {
+  const { messages } = useLocale();
   const [display, setDisplay] = useState<number | null>(null);
   const displayRef = useRef<number | null>(null);
   const frameRef = useRef(0);
@@ -92,7 +94,7 @@ export function SearchCountPill() {
       <span className="tabular-nums font-semibold text-ds-ink" suppressHydrationWarning>
         {display == null ? '20,000,000+' : formatCount(display)}
       </span>
-      <span>domains searched</span>
+      <span>{messages.hero.searched}</span>
     </div>
   );
 }

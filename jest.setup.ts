@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom';
+// Tests that opt into the node environment (`@jest-environment node`) have no window.
+const hasDom = typeof window !== 'undefined';
 
 // Mock window.matchMedia for components that use media queries
-Object.defineProperty(window, 'matchMedia', {
+if (hasDom) Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query: string) => ({
     matches: false,
@@ -31,7 +33,7 @@ class MockIntersectionObserver {
   }
 }
 
-Object.defineProperty(window, 'IntersectionObserver', {
+if (hasDom) Object.defineProperty(window, 'IntersectionObserver', {
   writable: true,
   value: MockIntersectionObserver,
 });
@@ -44,7 +46,7 @@ class MockResizeObserver {
   unobserve(): void {}
 }
 
-Object.defineProperty(window, 'ResizeObserver', {
+if (hasDom) Object.defineProperty(window, 'ResizeObserver', {
   writable: true,
   value: MockResizeObserver,
 });

@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Icons } from '../ui/Icons';
 import { Logo } from '../ui/Logo';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher';
 import { LOCALES, persistLocaleChoice, stripLocalePrefix } from '@/lib/i18n/locales';
 
@@ -42,6 +42,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   const pathname = usePathname();
   const barePath = stripLocalePrefix(pathname || '/');
   const { messages, href, locale, switchHref } = useLocale();
+  const t = useT();
   const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const isLight = mounted ? theme === 'light' : false;
@@ -141,9 +142,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
   const toolHrefs = ['/tools/keyword', '/tools/compare', '/tools/whois', '/tools/geo', '/tools/value', '/tools/domain-age', '/tools/dns'];
   // English-only tools without translated nav copy
   const extraToolItems: Record<number, { label: string; mobile: string; description: string }> = {
-    4: { label: 'Domain Value', mobile: 'Value', description: 'Estimate what a domain is worth.' },
-    5: { label: 'Domain Age', mobile: 'Age', description: 'Check registration age and expiry date.' },
-    6: { label: 'DNS Lookup', mobile: 'DNS', description: 'Look up A, MX, NS and TXT records.' },
+    4: { label: t('Domain Value'), mobile: t('Value'), description: t('Estimate what a domain is worth.') },
+    5: { label: t('Domain Age'), mobile: t('Age'), description: t('Check registration age and expiry date.') },
+    6: { label: t('DNS Lookup'), mobile: 'DNS', description: t('Look up A, MX, NS and TXT records.') },
   };
   const toolIcons = [
     <Icons.Keyword key="keyword" className={iconSm} />,
@@ -159,9 +160,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     label: navCopy.search,
     items: searchIds.map((id, index) => {
       const item = navCopy.searchItems[index] || {
-        label: 'Domain Leads',
-        mobile: 'Leads',
-        description: 'Track namespace saturation, newly registered domains, and end-user buyers.',
+        label: t('Domain Leads'),
+        mobile: t('Leads'),
+        description: t('Track namespace saturation, newly registered domains, and end-user buyers.'),
       };
       return {
         id,
@@ -178,9 +179,9 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     label: navCopy.tools,
     items: toolIds.map((id, index) => {
       const item = navCopy.toolItems[index] || extraToolItems[index] || {
-        label: 'Domain Leads',
-        mobile: 'Leads',
-        description: 'Analyze SLD saturation across TLDs and discover buyer prospects.',
+        label: t('Domain Leads'),
+        mobile: t('Leads'),
+        description: t('Analyze SLD saturation across TLDs and discover buyer prospects.'),
       };
       return {
         id,
@@ -375,7 +376,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
       className="notch-nav fixed top-0 left-0 right-0 z-[100]"
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)', background: 'transparent' }}
       data-site-nav
-      aria-label="Primary"
+      aria-label={t('Primary')}
     >
       <style>{`nav[data-site-nav] .notch-content svg{width:16px;height:16px;max-width:16px;max-height:16px;flex-shrink:0}`}</style>
       {/* Safe-area strip keeps the notch shape flush on iOS */}
@@ -410,7 +411,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 </Link>
               </div>
 
-              <Link href={href('/')} className="shrink-0 hover:opacity-90 transition-opacity" aria-label="DomainDiscovery home">
+              <Link href={href('/')} className="shrink-0 hover:opacity-90 transition-opacity" aria-label={t('DomainDiscovery home')}>
                 <Logo size="sm" showText />
               </Link>
 
@@ -449,7 +450,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-nav-menu"
-                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-label={mobileMenuOpen ? t('Close menu') : t('Open menu')}
                 className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${
                   mobileMenuOpen
                     ? isLight
@@ -469,7 +470,7 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
                 </svg>
               </button>
 
-              <Link href={href('/')} className="min-w-0 px-1 hover:opacity-90 transition-opacity" aria-label="DomainDiscovery home">
+              <Link href={href('/')} className="min-w-0 px-1 hover:opacity-90 transition-opacity" aria-label={t('DomainDiscovery home')}>
                 <Logo size="sm" showText />
               </Link>
 

@@ -22,8 +22,8 @@ for-ai: ${base}/for-ai
 ai.txt: ${base}/ai.txt
 well-known-llms: ${base}/.well-known/llms.txt
 indexnow-key: ${base}/.well-known/indexnow.txt
-markdown-mirrors: ${base}/search.md ${base}/generator.md ${base}/geo.md ${base}/whois.md ${base}/pricing.md
-learn-md: ${base}/learn/md/{slug}
+markdown-mirrors: ${base}/search.md ${base}/generator.md ${base}/tools/geo.md ${base}/tools/whois.md ${base}/tools/compare.md
+learn-md: ${base}/learn/{slug}.md
 
 /* BRAND */
 Official: ${SITE_BRAND.name}

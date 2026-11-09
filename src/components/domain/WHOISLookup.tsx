@@ -1,5 +1,6 @@
 'use client';
 
+import { useT } from '@/components/i18n/LocaleProvider';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -83,6 +84,7 @@ function writeClientCache(domain: string, data: WHOISData) {
 }
 
 export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
+  const t = useT();
   const [domain, setDomain] = useState(initialDomain || '');
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<WHOISData | null>(null);
@@ -95,7 +97,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
   const handleLookup = useCallback(async (override?: string) => {
     const query = normalizeInput(override ?? domain);
     if (!query) {
-      setError('Enter a domain name to look up.');
+      setError(t('Enter a domain name to look up.'));
       setData(null);
       return;
     }
@@ -133,12 +135,12 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
         if (response.status === 404) {
           setError(
             payload?.error ||
-              `"${query}" was not found. It may be available to register, or this TLD has no public RDAP data.`
+              t('"{q}" was not found. It may be available to register, or this TLD has no public RDAP data.', { q: query })
           );
           setData({
             domain: query,
             registrar: '—',
-            status: 'Not registered / not in RDAP',
+            status: t('Not registered / not in RDAP'),
             registrationDate: null,
             expirationDate: null,
             nameServers: [],
@@ -147,7 +149,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
             latencyMs: payload?.latencyMs ?? clientMs,
           });
         } else {
-          setError(payload?.error || 'WHOIS lookup failed. Try again in a moment.');
+          setError(payload?.error || t('WHOIS lookup failed. Try again in a moment.'));
         }
         setLookedUp(true);
         return;
@@ -180,7 +182,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
     } finally {
       if (!controller.signal.aborted) setIsLoading(false);
     }
-  }, [domain]);
+  }, [domain, t]);
 
   // Auto-lookup when opened with a domain prop
   useEffect(() => {
@@ -206,10 +208,10 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
     >
       <div className="mb-3">
         <div className={`text-[11px] font-semibold uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-          Look up a domain
+          {t('Look up a domain')}
         </div>
         <p className={`mt-1 text-sm ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-          Free public RDAP. No account.
+          {t('Free public RDAP. No account.')}
         </p>
       </div>
 
@@ -230,7 +232,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
           }`}
         />
         <Button onClick={() => handleLookup()} isLoading={isLoading} className="w-full sm:w-auto">
-          Lookup
+          {t('Lookup')}
         </Button>
       </div>
 
@@ -261,7 +263,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
           }`}
         >
           <span className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent" />
-          Querying registry RDAP…
+          {t('Querying registry RDAP…')}
         </div>
       )}
 
@@ -291,7 +293,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
                     : 'border-white/10 bg-[#111111] text-white/55'
                 }`}
               >
-                {data.latencyMs === 0 ? 'cached' : `${data.latencyMs} ms`}
+                {data.latencyMs === 0 ? t('cached') : `${data.latencyMs} ms`}
               </span>
             )}
             {data.source && (
@@ -313,7 +315,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
                     : 'border-white/10 bg-[#111111] text-white/55'
                 }`}
               >
-                DNSSEC {data.dnssec ? 'signed' : 'unsigned'}
+                DNSSEC {data.dnssec ? t('signed') : t('unsigned')}
               </span>
             )}
           </div>
@@ -321,7 +323,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
           <div className={`p-3.5 sm:p-4 rounded-xl border ${fieldShell}`}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <div className={labelClass}>Registrar</div>
+                <div className={labelClass}>{t('Registrar')}</div>
                 <div className="text-sm font-semibold break-words">
                   {data.registrar}
                   {data.registrarIanaId ? (
@@ -332,26 +334,26 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
                 </div>
               </div>
               <div>
-                <div className={labelClass}>Status</div>
+                <div className={labelClass}>{t('Status')}</div>
                 <div className="text-sm font-semibold break-words capitalize">{data.status}</div>
               </div>
               <div>
-                <div className={labelClass}>Registered</div>
+                <div className={labelClass}>{t('Registered')}</div>
                 <div className="text-sm font-semibold">{data.registrationDate || '—'}</div>
               </div>
               <div>
-                <div className={labelClass}>Expires</div>
+                <div className={labelClass}>{t('Expires')}</div>
                 <div className="text-sm font-semibold">{data.expirationDate || '—'}</div>
               </div>
               {data.updatedDate && (
                 <div>
-                  <div className={labelClass}>Last updated</div>
+                  <div className={labelClass}>{t('Last updated')}</div>
                   <div className="text-sm font-semibold">{data.updatedDate}</div>
                 </div>
               )}
               {data.registrant?.organization && (
                 <div>
-                  <div className={labelClass}>Registrant</div>
+                  <div className={labelClass}>{t('Registrant')}</div>
                   <div className="text-sm font-semibold break-words">
                     {data.registrant.organization}
                     {data.registrant.country ? ` · ${data.registrant.country}` : ''}
@@ -363,7 +365,7 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
 
           {data.statuses && data.statuses.length > 1 && (
             <div className={`p-3.5 sm:p-4 rounded-xl border ${fieldShell}`}>
-              <div className={labelClass}>All statuses</div>
+              <div className={labelClass}>{t('All statuses')}</div>
               <div className="flex flex-wrap gap-1.5 mt-1">
                 {data.statuses.map((status) => (
                   <span
@@ -380,9 +382,9 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
           )}
 
           <div className={`p-3.5 sm:p-4 rounded-xl border ${fieldShell}`}>
-            <div className={labelClass}>Name servers</div>
+            <div className={labelClass}>{t('Name servers')}</div>
             {data.nameServers.length === 0 ? (
-              <div className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/45'}`}>None listed</div>
+              <div className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/45'}`}>{t('None listed')}</div>
             ) : (
               <div className="space-y-1 mt-1">
                 {data.nameServers.map((ns) => (
@@ -417,9 +419,10 @@ export function WHOISLookup({ domain: initialDomain }: WHOISLookupProps) {
           />
 
           <p className={`text-[11px] leading-relaxed ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
-            Free public RDAP via IANA bootstrap → registry operators (Verisign, PIR, Identity Digital, Nominet, …).
-            No paid WHOIS API. Contact fields are often redacted for privacy.
-            {data.server ? ` Server: ${data.server.replace(/^https?:\/\//, '').split('/')[0]}` : ''}
+            {t('Free public RDAP via IANA bootstrap → registry operators (Verisign, PIR, Identity Digital, Nominet, …). No paid WHOIS API. Contact fields are often redacted for privacy.')}
+            {data.server
+              ? ` ${t('Server: {s}', { s: data.server.replace(/^https?:\/\//, '').split('/')[0] })}`
+              : ''}
           </p>
         </div>
       )}

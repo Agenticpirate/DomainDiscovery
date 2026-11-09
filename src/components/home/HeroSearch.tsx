@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 
 interface HeroSearchProps {
   initialQuery?: string;
@@ -32,6 +32,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
   const lastRoutedRef = useRef('');
   const router = useRouter();
   const { messages, href } = useLocale();
+  const t = useT();
   const hero = messages.hero;
   const { theme } = useTheme();
   const isLight = theme === 'light';
@@ -186,7 +187,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
               className={`shrink-0 flex h-11 w-11 items-center justify-center rounded-xl ${
                 isLight ? 'text-[#52595b] active:bg-[#f4f5f5]' : 'text-[#a1a4a5] active:bg-white/10'
               }`}
-              aria-label="Clear search"
+              aria-label={t('Clear search')}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -197,7 +198,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
             type="button"
             onClick={() => setAiMode((v) => !v)}
             className={`${aiBtnClass} shrink-0 px-2.5 py-2 min-h-[44px]`}
-            title="Toggle AI generator mode"
+            title={t('Toggle AI generator mode')}
             aria-pressed={aiMode}
           >
             {aiIcon}
@@ -212,10 +213,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
               {aiMode ? (
                 hero.generate
               ) : (
-                <>
-                  <span>Search</span>
-                  <span className="hidden min-[420px]:inline"> domains</span>
-                </>
+                hero.search
               )}
             </span>
             {searchArrow}
@@ -257,7 +255,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
           type="button"
           onClick={() => setAiMode((v) => !v)}
           className={`${aiBtnClass} shrink-0 px-2.5 py-2`}
-          title="Toggle AI generator mode"
+          title={t('Toggle AI generator mode')}
           aria-pressed={aiMode}
         >
           {aiIcon}

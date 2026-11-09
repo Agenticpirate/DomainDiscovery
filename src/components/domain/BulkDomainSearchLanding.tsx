@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Button } from '../ui/Button';
 import { Icons } from '../ui/Icons';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
+import { rich } from '@/components/i18n/rich';
 import { pageHeading } from '@/lib/i18n/locales';
 import { pageShell } from '@/lib/i18n/pageShells';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -268,6 +269,7 @@ const SearchInputSection: React.FC<{
   progress: { done: number; total: number };
   counts: { available: number; taken: number; checking: number; premium?: number; all?: number };
 }> = ({ input, setInput, domains, setDomains, onAdd, onLoadSample, onCheck, onReset, onFileUpload, checking, progress, counts }) => {
+  const t = useT();
   const fileRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { theme } = useTheme();
@@ -343,10 +345,10 @@ const SearchInputSection: React.FC<{
         <div className="relative z-[1] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-4 sm:px-5 pt-4 sm:pt-5 pb-3 border-b border-ds-hairline">
           <div className="text-left">
             <div className="text-[13px] sm:text-[15px] font-semibold tracking-tight text-ds-ink">
-              Bulk domain list
+              {t('Bulk domain list')}
             </div>
             <p className="text-[11px] sm:text-[12px] mt-0.5 text-ds-mute">
-              Paste up to {maxDomains.toLocaleString()} domains · live availability
+              {t('Paste up to {n} domains · live availability', { n: maxDomains.toLocaleString() })}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
@@ -354,13 +356,13 @@ const SearchInputSection: React.FC<{
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              How to add
+              {t('How to add')}
             </button>
             <button type="button" onClick={() => setShowAdvanced((v) => !v)} className={chipClass(showAdvanced)}>
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
               </svg>
-              Advanced
+              {t('Advanced')}
             </button>
           </div>
         </div>
@@ -389,7 +391,7 @@ const SearchInputSection: React.FC<{
                     commitInput();
                   }
                 }}
-                placeholder={`Paste or type domains here…\n\n${BULK_PLACEHOLDER_EXAMPLES}`}
+                placeholder={`${t('Paste or type domains here…')}\n\n${BULK_PLACEHOLDER_EXAMPLES}`}
                 className={`w-full rounded-xl px-3.5 sm:px-4 py-3 sm:py-3.5 focus:outline-none focus:ring-2 min-h-[148px] sm:min-h-[176px] resize-y transition-all text-[13px] sm:text-[14px] font-mono leading-relaxed ${
                   isLight
                     ? 'bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:ring-slate-400/15'
@@ -403,7 +405,7 @@ const SearchInputSection: React.FC<{
                     isLight ? 'bg-white/80 text-slate-700' : 'bg-black/60 text-white'
                   }`}
                 >
-                  <span className="text-sm font-bold">Drop file or text to import</span>
+                  <span className="text-sm font-bold">{t('Drop file or text to import')}</span>
                 </div>
               )}
             </div>
@@ -473,13 +475,13 @@ const SearchInputSection: React.FC<{
                       style={{ userSelect: 'none' }}
                       title={
                         d.status === 'available'
-                          ? 'Available'
+                          ? t('Available')
                           : d.status === 'premium'
-                            ? 'Premium'
+                            ? t('Premium')
                             : d.status === 'taken'
-                              ? 'Taken / registered'
+                              ? t('Taken / registered')
                               : d.status === 'checking'
-                                ? 'Checking…'
+                                ? t('Checking…')
                                 : d.status
                       }
                     >
@@ -489,7 +491,7 @@ const SearchInputSection: React.FC<{
                         type="button"
                         onClick={() => setDomains((p) => p.filter((x) => x.domain !== d.domain))}
                         className={`ml-0.5 rounded px-0.5 transition-colors ${removeTone}`}
-                        aria-label={`Remove ${d.domain}`}
+                        aria-label={t('Remove {d}', { d: d.domain })}
                       >
                         ×
                       </button>
@@ -512,7 +514,7 @@ const SearchInputSection: React.FC<{
                       commitInput();
                     }
                   }}
-                  placeholder="Add more domains…"
+                  placeholder={t('Add more domains…')}
                   rows={2}
                   className={`flex-1 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 resize-none text-[12px] sm:text-[13px] font-mono ${
                     isLight
@@ -530,7 +532,7 @@ const SearchInputSection: React.FC<{
                       : 'bg-white text-black hover:bg-white/90'
                   }`}
                 >
-                  Add
+                  {t('Add')}
                 </button>
               </div>
             </div>
@@ -547,7 +549,7 @@ const SearchInputSection: React.FC<{
                   <span
                     className={`w-1.5 h-1.5 rounded-full ${isLight ? 'bg-slate-900' : 'bg-white'}`}
                   />
-                  Checking availability…
+                  {t('Checking availability…')}
                 </span>
                 <span className={`font-mono tabular-nums ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
                   {progress.done}/{progress.total}
@@ -585,13 +587,13 @@ const SearchInputSection: React.FC<{
               />
               <button type="button" onClick={() => fileRef.current?.click()} className={chipClass()}>
                 <Icons.Upload />
-                Import file
+                {t('Import file')}
               </button>
               <button type="button" onClick={handlePasteFromClipboard} className={chipClass()}>
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
-                Paste clipboard
+                {t('Paste clipboard')}
               </button>
               <button
                 type="button"
@@ -609,11 +611,11 @@ const SearchInputSection: React.FC<{
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
-                Load sample
+                {t('Load sample')}
               </button>
               {input.trim() && domains.length === 0 && (
                 <button type="button" onClick={commitInput} className={chipClass()}>
-                  Add list
+                  {t('Add list')}
                 </button>
               )}
               {domains.length > 0 && (
@@ -625,7 +627,7 @@ const SearchInputSection: React.FC<{
                       ? 'bg-slate-900 text-white border-slate-900 shadow-sm shadow-slate-900/20 hover:bg-slate-800'
                       : 'bg-white text-black border-white shadow-sm shadow-black/30 hover:bg-white/90'
                   }`}
-                  title="Remove every domain from this list"
+                  title={t('Remove every domain from this list')}
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path
@@ -635,14 +637,14 @@ const SearchInputSection: React.FC<{
                       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                     />
                   </svg>
-                  Clear all
+                  {t('Clear all')}
                 </button>
               )}
             </div>
             <div
               className="flex flex-wrap gap-1.5 text-[10px] font-medium text-ds-mute"
             >
-              {['CSV', 'TXT', 'TSV', 'JSON', 'Drag & drop', 'Copy-paste'].map((f) => (
+              {['CSV', 'TXT', 'TSV', 'JSON', t('Drag & drop'), t('Copy-paste')].map((f) => (
                 <span
                   key={f}
                   className="rounded-md border px-1.5 py-0.5 border-ds-hairline bg-ds-soft text-ds-mute"
@@ -656,38 +658,38 @@ const SearchInputSection: React.FC<{
               <div className="text-[11px] sm:text-[12px] text-ds-mute">
                 {domains.length > 0 ? (
                   <span className="font-medium">
-                    <span className="text-ds-ink">{domains.length}</span> domains
+                    {rich(t('{n} domains'), { n: <span className="text-ds-ink">{domains.length}</span> })}
                     {(counts.available > 0 || (counts.premium ?? 0) > 0 || counts.taken > 0) && (
                       <span className="ml-2">
                         ·{' '}
                         <span className={isLight ? 'text-emerald-700 font-semibold' : 'text-emerald-400'}>
-                          {counts.available} free
+                          {t('{n} free', { n: counts.available })}
                         </span>
                         {(counts.premium ?? 0) > 0 && (
                           <span className={isLight ? 'text-amber-700 font-semibold' : 'text-amber-400'}>
                             {' '}
-                            · {counts.premium} premium
+                            · {t('{n} premium', { n: counts.premium ?? 0 })}
                           </span>
                         )}
                         ·{' '}
                         <span className={isLight ? 'text-rose-600 font-semibold' : 'text-rose-400'}>
-                          {counts.taken} taken
+                          {t('{n} taken', { n: counts.taken })}
                         </span>
                       </span>
                     )}
                     {counts.checking > 0 && (
-                      <span className="ml-1 opacity-70">· {counts.checking} checking</span>
+                      <span className="ml-1 opacity-70">· {t('{n} checking', { n: counts.checking })}</span>
                     )}
                   </span>
                 ) : input.trim() ? (
                   <span className="font-medium">
-                    Draft ready · tap <span className={isLight ? 'text-slate-800' : 'text-white/80'}>Search all</span>
+                    {t('Draft ready · tap')} <span className={isLight ? 'text-slate-800' : 'text-white/80'}>{t('Search all')}</span>
                   </span>
                 ) : (
-                  <span className="sm:hidden">Paste domains, then Search all</span>
+                  <span className="sm:hidden">{t('Paste domains, then Search all')}</span>
                 )}
                 {!domains.length && !input.trim() && (
-                  <span className="hidden sm:inline">⌘/Ctrl + Enter to add · Shift + Enter for new line</span>
+                  <span className="hidden sm:inline">{t('⌘/Ctrl + Enter to add · Shift + Enter for new line')}</span>
                 )}
               </div>
               {(() => {
@@ -706,7 +708,7 @@ const SearchInputSection: React.FC<{
                     }}
                     disabled={!canSearch || (checking && counts.checking === domains.length && domains.length > 0)}
                     aria-disabled={!canSearch}
-                    title={!canSearch ? 'Add domains first' : undefined}
+                    title={!canSearch ? t('Add domains first') : undefined}
                     className={`inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl px-5 py-2.5 sm:py-3 text-[12px] sm:text-[13px] font-bold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-ds-link/40 focus-visible:ring-offset-2 focus-visible:ring-offset-ds-canvas ${
                       canSearch
                         ? 'bg-ds-ink text-ds-soft hover:brightness-110 shadow-ds-card'
@@ -716,12 +718,12 @@ const SearchInputSection: React.FC<{
                     {checking && domains.length > 0 && counts.checking === domains.length ? (
                       <>
                         <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                        Checking…
+                        {t('Checking…')}
                       </>
                     ) : (
                       <>
                         <Icons.Search className="w-3.5 h-3.5" />
-                        Search all{countHint != null ? ` (${countHint})` : draft ? '' : ''}
+                        {t('Search all')}{countHint != null ? ` (${countHint})` : draft ? '' : ''}
                       </>
                     )}
                   </button>
@@ -744,24 +746,24 @@ const SearchInputSection: React.FC<{
                 isLight ? 'text-slate-400' : 'text-white/35'
               }`}
             >
-              How to add domains
+              {t('How to add domains')}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 text-left">
               {[
                 {
                   step: '01',
-                  title: 'Copy & paste',
-                  text: 'Paste a list from Excel, Notes, or email. New lines, commas, or spaces all work.',
+                  title: t('Copy & paste'),
+                  text: t('Paste a list from Excel, Notes, or email. New lines, commas, or spaces all work.'),
                 },
                 {
                   step: '02',
-                  title: 'Or type / import',
-                  text: 'Type names one by one, or import CSV, TXT, TSV, or JSON files. Drag & drop supported.',
+                  title: t('Or type / import'),
+                  text: t('Type names one by one, or import CSV, TXT, TSV, or JSON files. Drag & drop supported.'),
                 },
                 {
                   step: '03',
-                  title: 'Search all',
-                  text: 'We strip http:// and www, append .com when missing, then check availability live.',
+                  title: t('Search all'),
+                  text: t('We strip http:// and www, append .com when missing, then check availability live.'),
                 },
               ].map((item) => (
                 <div key={item.step} className="flex gap-2.5">
@@ -788,7 +790,7 @@ const SearchInputSection: React.FC<{
                 isLight ? 'text-slate-500' : 'text-white/40'
               }`}
             >
-              Example:&nbsp;
+              {t('Example:')}&nbsp;
               <span className={isLight ? 'text-slate-700' : 'text-white/60'}>
                 example.com, example.org, ystartups.com
               </span>
@@ -808,12 +810,12 @@ const SearchInputSection: React.FC<{
                 isLight ? 'text-slate-400' : 'text-white/35'
               }`}
             >
-              Advanced options
+              {t('Advanced options')}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-left">
               <label className="block">
                 <span className={`text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                  Default TLD
+                  {t('Default TLD')}
                 </span>
                 <select
                   value={defaultTld}
@@ -833,7 +835,7 @@ const SearchInputSection: React.FC<{
               </label>
               <label className="block">
                 <span className={`text-[10px] font-bold uppercase tracking-wider ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                  Max domains
+                  {t('Max domains')}
                 </span>
                 <select
                   value={maxDomains}
@@ -863,7 +865,7 @@ const SearchInputSection: React.FC<{
                   className="rounded border-white/20"
                 />
                 <span className={`text-[12px] font-medium ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
-                  Auto-append .{defaultTld}
+                  {t('Auto-append .{tld}', { tld: defaultTld })}
                 </span>
               </label>
               <label
@@ -878,7 +880,7 @@ const SearchInputSection: React.FC<{
                   className="rounded border-white/20"
                 />
                 <span className={`text-[12px] font-medium ${isLight ? 'text-slate-700' : 'text-white/80'}`}>
-                  Strip www / http
+                  {t('Strip www / http')}
                 </span>
               </label>
             </div>
@@ -931,6 +933,7 @@ export const BulkDomainSearchLanding: React.FC<{
   const searchRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
   const { locale, messages } = useLocale();
+  const t = useT();
   const localized = locale !== 'en';
   const shell = pageShell(locale);
   const isLight = theme === 'light';
@@ -952,9 +955,9 @@ export const BulkDomainSearchLanding: React.FC<{
     const diffMinutes = Math.floor(diffMs / 60000);
     const diffHours = Math.floor(diffMs / 3600000);
 
-    if (diffMinutes < 1) return 'just now';
-    if (diffMinutes < 60) return `${diffMinutes}m ago`;
-    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffMinutes < 1) return t('just now');
+    if (diffMinutes < 60) return t('{n}m ago', { n: diffMinutes });
+    if (diffHours < 24) return t('{n}h ago', { n: diffHours });
     return date.toLocaleDateString();
   };
 
@@ -1014,7 +1017,7 @@ export const BulkDomainSearchLanding: React.FC<{
                   ),
                 },
                 {
-                  label: shell?.bulkChips[1] ?? 'CSV · TXT · JSON',
+                  label: shell?.bulkChips[1] ?? t('CSV · TXT · JSON'),
                   icon: (
                     <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 16V4m0 12-3.5-3.5M12 16l3.5-3.5M5 18.5h14" />
@@ -1086,9 +1089,9 @@ export const BulkDomainSearchLanding: React.FC<{
                 <div className="relative z-[1]">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <h3 className={`text-sm sm:text-base font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>Recent bulk searches</h3>
+                    <h3 className={`text-sm sm:text-base font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>{t('Recent bulk searches')}</h3>
                     <p className={`text-xs sm:text-sm ${isLight ? 'text-slate-500' : 'text-white/50'}`}>
-                      Resume a previous domain set without pasting the same list again.
+                      {t('Resume a previous domain set without pasting the same list again.')}
                     </p>
                   </div>
                   <button
@@ -1096,7 +1099,7 @@ export const BulkDomainSearchLanding: React.FC<{
                     onClick={scrollToSearch}
                     className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700 hover:text-slate-900' : 'text-white/60 hover:text-white'}`}
                   >
-                    Add a new list
+                    {t('Add a new list')}
                   </button>
                 </div>
 
@@ -1111,25 +1114,25 @@ export const BulkDomainSearchLanding: React.FC<{
                       >
                         <button type="button" onClick={() => onLoadPreviousSearch(snapshot)} className="w-full text-left">
                           <div className={`text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white/90'}`}>
-                            {snapshot.domains.length} domains
+                            {t('{n} domains', { n: snapshot.domains.length })}
                           </div>
                           <div className={`mt-1 text-xs ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-                            {snapshotCounts.available} available • {snapshotCounts.premium} premium • {snapshotCounts.taken} taken
+                            {t('{a} available • {p} premium • {k} taken', { a: snapshotCounts.available, p: snapshotCounts.premium, k: snapshotCounts.taken })}
                           </div>
                           <div className={`mt-2 text-xs ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                            Saved {formatRecentTime(snapshot.createdAt)}
+                            {t('Saved {when}', { when: formatRecentTime(snapshot.createdAt) })}
                           </div>
                         </button>
                         <div className="mt-3 flex items-center justify-between gap-2">
                           <Button onClick={() => onLoadPreviousSearch(snapshot)} variant="secondary" size="sm" className="flex-1 text-xs">
-                            Load search
+                            {t('Load search')}
                           </Button>
                           <button
                             type="button"
                             onClick={() => onDeletePreviousSearch(snapshot.id)}
                             className={`text-xs ${isLight ? 'text-slate-400 hover:text-red-500' : 'text-white/35 hover:text-red-400'}`}
                           >
-                            Remove
+                            {t('Remove')}
                           </button>
                         </div>
                       </div>
@@ -1152,16 +1155,16 @@ export const BulkDomainSearchLanding: React.FC<{
               className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
               style={{ color: 'var(--text-muted)' }}
             >
-              Built for scale
+              {t('Built for scale')}
             </p>
             <h2 className={`text-xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-3 leading-tight tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-              The most advanced bulk<br className="hidden sm:block" /> domain search tool
+              {t('The most advanced bulk')}<br className="hidden sm:block" /> {t('domain search tool')}
             </h2>
             <p
               className="max-w-xl mx-auto text-[13px] sm:text-[15px] leading-relaxed"
               style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
             >
-              Paste thousands of names, stream live availability, and register winners — without the spreadsheet grind.
+              {t('Paste thousands of names, stream live availability, and register winners — without the spreadsheet grind.')}
             </p>
           </div>
 
@@ -1170,10 +1173,10 @@ export const BulkDomainSearchLanding: React.FC<{
             className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 mb-3 sm:mb-4"
           >
             {[
-              { value: '1,000', label: 'Domains / run' },
-              { value: 'Live', label: 'Availability' },
-              { value: '8', label: 'Registrars' },
-              { value: 'CSV', label: 'Import & export' },
+              { value: '1,000', label: t('Domains / run') },
+              { value: t('Live'), label: t('Availability') },
+              { value: '8', label: t('Registrars') },
+              { value: 'CSV', label: t('Import & export') },
             ].map((s) => (
               <div
                 key={s.label}
@@ -1194,8 +1197,8 @@ export const BulkDomainSearchLanding: React.FC<{
             {[
               {
                 step: '01',
-                title: 'Lightning fast',
-                description: 'Progressive live checks for up to 1,000 domains with clear status as results land.',
+                title: t('Lightning fast'),
+                description: t('Progressive live checks for up to 1,000 domains with clear status as results land.'),
                 icon: (
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -1204,8 +1207,8 @@ export const BulkDomainSearchLanding: React.FC<{
               },
               {
                 step: '02',
-                title: 'Smart filtering',
-                description: 'Slice by available, premium, taken, TLD, and sort A–Z or by length in one view.',
+                title: t('Smart filtering'),
+                description: t('Slice by available, premium, taken, TLD, and sort A–Z or by length in one view.'),
                 icon: (
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -1214,8 +1217,8 @@ export const BulkDomainSearchLanding: React.FC<{
               },
               {
                 step: '03',
-                title: 'Flexible import',
-                description: 'Paste lists or drop CSV, TXT, TSV, JSON — then export winners as CSV or PDF.',
+                title: t('Flexible import'),
+                description: t('Paste lists or drop CSV, TXT, TSV, JSON — then export winners as CSV or PDF.'),
                 icon: (
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -1224,8 +1227,8 @@ export const BulkDomainSearchLanding: React.FC<{
               },
               {
                 step: '04',
-                title: 'Registrar ready',
-                description: 'Go on an available or premium name opens Spaceship so you can register it.',
+                title: t('Registrar ready'),
+                description: t('Go on an available or premium name opens Spaceship so you can register it.'),
                 icon: (
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
@@ -1275,10 +1278,10 @@ export const BulkDomainSearchLanding: React.FC<{
               <div className="flex items-center justify-between gap-3 mb-3 sm:mb-4">
                 <div>
                   <div className={`text-[12px] sm:text-[13px] font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                    Live result preview
+                    {t('Live result preview')}
                   </div>
                   <p className="text-[11px] mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                    How bulk results look — free forever, no account
+                    {t('How bulk results look — free forever, no account')}
                   </p>
                 </div>
                 <div className="flex items-center gap-1.5">
@@ -1289,14 +1292,14 @@ export const BulkDomainSearchLanding: React.FC<{
                         : 'border-emerald-500/25 text-emerald-400 bg-emerald-500/10'
                     }`}
                   >
-                    Free
+                    {t('Free')}
                   </span>
                   <span
                     className={`rounded-md border px-2 py-0.5 text-[10px] font-semibold ${
                       isLight ? 'border-slate-200 text-slate-500 bg-slate-50' : 'border-white/10 text-white/40 bg-[#111111]'
                     }`}
                   >
-                    Demo
+                    {t('Demo')}
                   </span>
                 </div>
               </div>
@@ -1304,7 +1307,7 @@ export const BulkDomainSearchLanding: React.FC<{
                 {[
                   { domain: 'example.com', status: 'taken' as const },
                   { domain: 'example.org', status: 'available' as const, price: '$12.99' },
-                  { domain: 'ystartups.com', status: 'premium' as const, price: 'Premium' },
+                  { domain: 'ystartups.com', status: 'premium' as const, price: t('Premium') },
                   { domain: 'foundersprime.com', status: 'available' as const, price: '$12.99' },
                   { domain: 'cultbuddy.com', status: 'available' as const, price: '$12.99' },
                 ].map((d, i) => (
@@ -1348,7 +1351,7 @@ export const BulkDomainSearchLanding: React.FC<{
                                 : 'text-white/35'
                         }`}
                       >
-                        {d.status === 'available' ? 'Available' : d.status === 'premium' ? 'Premium' : 'Taken'}
+                        {d.status === 'available' ? t('Available') : d.status === 'premium' ? t('Premium') : t('Taken')}
                       </span>
                     </div>
                   </div>
@@ -1360,9 +1363,9 @@ export const BulkDomainSearchLanding: React.FC<{
                 }`}
               >
                 {[
-                  { label: 'Available', color: 'bg-emerald-400' },
-                  { label: 'Premium', color: 'bg-amber-400' },
-                  { label: 'Taken', color: 'bg-red-400/80' },
+                  { label: t('Available'), color: 'bg-emerald-400' },
+                  { label: t('Premium'), color: 'bg-amber-400' },
+                  { label: t('Taken'), color: 'bg-red-400/80' },
                 ].map((l) => (
                   <span
                     key={l.label}
@@ -1382,23 +1385,23 @@ export const BulkDomainSearchLanding: React.FC<{
                 className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
                 style={{ color: 'var(--text-muted)' }}
               >
-                Premium results · free tool
+                {t('Premium results · free tool')}
               </p>
               <h3 className={`text-lg sm:text-2xl font-black tracking-tight mb-2 sm:mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                Real-time availability checking
+                {t('Real-time availability checking')}
               </h3>
               <p
                 className="text-[13px] sm:text-[14px] leading-relaxed mb-4 sm:mb-5"
                 style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
               >
-                Every name is checked live — free registrations, premium listings, and taken domains are labeled so you only chase what you can buy. No account, no paywall.
+                {t('Every name is checked live — free registrations, premium listings, and taken domains are labeled so you only chase what you can buy. No account, no paywall.')}
               </p>
               <ul className="space-y-2.5 sm:space-y-3">
                 {[
-                  'Instant status with color indicators',
-                  'Premium detection with listing context',
-                  'Multi-TLD support across major extensions',
-                  'Go opens Spaceship for available and premium names',
+                  t('Instant status with color indicators'),
+                  t('Premium detection with listing context'),
+                  t('Multi-TLD support across major extensions'),
+                  t('Go opens Spaceship for available and premium names'),
                 ].map((item) => (
                   <li
                     key={item}
@@ -1431,7 +1434,7 @@ export const BulkDomainSearchLanding: React.FC<{
                       : 'bg-white text-black hover:bg-white/90'
                   }`}
                 >
-                  Try bulk search free
+                  {t('Try bulk search free')}
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
                   </svg>
@@ -1448,7 +1451,7 @@ export const BulkDomainSearchLanding: React.FC<{
                       : 'border-white/12 text-white/75 hover:bg-white/[0.05]'
                   }`}
                 >
-                  Load sample list
+                  {t('Load sample list')}
                 </button>
               </div>
             </div>
@@ -1464,16 +1467,16 @@ export const BulkDomainSearchLanding: React.FC<{
               className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2"
               style={{ color: 'var(--text-muted)' }}
             >
-              Free · full power
+              {t('Free · full power')}
             </p>
             <h2 className={`text-xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-3 leading-tight tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-              Powerful bulk domain<br className="hidden sm:block" /> search features
+              {t('Powerful bulk domain')}<br className="hidden sm:block" /> {t('search features')}
             </h2>
             <p
               className="max-w-xl mx-auto text-[13px] sm:text-[15px] leading-relaxed"
               style={{ color: isLight ? '#6e7679' : 'rgba(255,255,255,0.5)' }}
             >
-              Everything you need to find and register multiple domains — premium workflow, zero cost to use.
+              {t('Everything you need to find and register multiple domains — premium workflow, zero cost to use.')}
             </p>
           </div>
 
@@ -1483,8 +1486,8 @@ export const BulkDomainSearchLanding: React.FC<{
             {[
               {
                 step: '01',
-                title: 'Smart parsing',
-                desc: 'Paste CSV, text, URLs, or mixed lists — we normalize names, strip www/http, and append TLDs.',
+                title: t('Smart parsing'),
+                desc: t('Paste CSV, text, URLs, or mixed lists — we normalize names, strip www/http, and append TLDs.'),
                 icon: (
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -1493,8 +1496,8 @@ export const BulkDomainSearchLanding: React.FC<{
               },
               {
                 step: '02',
-                title: 'TLD filtering',
-                desc: 'Focus on .com, .io, .ai, and more after the check — only the extensions you care about.',
+                title: t('TLD filtering'),
+                desc: t('Focus on .com, .io, .ai, and more after the check — only the extensions you care about.'),
                 icon: (
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
@@ -1503,8 +1506,8 @@ export const BulkDomainSearchLanding: React.FC<{
               },
               {
                 step: '03',
-                title: 'Availability stats',
-                desc: 'Live counts for available, premium, and taken so you know your hit rate at a glance.',
+                title: t('Availability stats'),
+                desc: t('Live counts for available, premium, and taken so you know your hit rate at a glance.'),
                 icon: (
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -1513,8 +1516,8 @@ export const BulkDomainSearchLanding: React.FC<{
               },
               {
                 step: '04',
-                title: 'Export results',
-                desc: 'Download CSV or PDF of your full list for sharing, portfolios, or offline review.',
+                title: t('Export results'),
+                desc: t('Download CSV or PDF of your full list for sharing, portfolios, or offline review.'),
                 icon: (
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -1523,8 +1526,8 @@ export const BulkDomainSearchLanding: React.FC<{
               },
               {
                 step: '05',
-                title: 'Batch processing',
-                desc: 'Up to 1,000 domains per run with progressive checks — keep working while results stream in.',
+                title: t('Batch processing'),
+                desc: t('Up to 1,000 domains per run with progressive checks — keep working while results stream in.'),
                 icon: (
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -1533,8 +1536,8 @@ export const BulkDomainSearchLanding: React.FC<{
               },
               {
                 step: '06',
-                title: 'One-click register',
-                desc: 'Go on an available or premium name opens Spaceship in one click.',
+                title: t('One-click register'),
+                desc: t('Go on an available or premium name opens Spaceship in one click.'),
                 icon: (
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
@@ -1583,10 +1586,10 @@ export const BulkDomainSearchLanding: React.FC<{
           >
             <div className="text-center sm:text-left">
               <div className={`text-[13px] font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                Premium bulk tooling — free for everyone
+                {t('Premium bulk tooling — free for everyone')}
               </div>
               <p className="text-[11px] sm:text-[12px] mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                No account · No credit card · Up to 1,000 domains per search
+                {t('No account · No credit card · Up to 1,000 domains per search')}
               </p>
             </div>
             <button
@@ -1598,7 +1601,7 @@ export const BulkDomainSearchLanding: React.FC<{
                   : 'bg-white text-black hover:bg-white/90'
               }`}
             >
-              Start free bulk search
+              {t('Start free bulk search')}
             </button>
           </div>
         </div>
@@ -1869,7 +1872,7 @@ brandforge`}</code>
                     title: 'Act fast on good finds',
                     description:
                       'Available names can disappear in minutes. When status turns green, use Go to register it on Spaceship.',
-                    tags: ['Register', 'Live'],
+                    tags: ['Register', t('Live')],
                   },
                   {
                     step: '05',

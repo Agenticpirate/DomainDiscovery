@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useT } from '@/components/i18n/LocaleProvider';
 import { useToast } from '@/components/ui/Toast';
 import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
 import { recordDomainsChecked } from '@/lib/searchCounter';
@@ -95,6 +96,7 @@ const CHECK_CAP = 480;
 const MAX_GENERATED = 14000;
 
 export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
+  const t = useT();
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const [keyword, setKeyword] = useState('');
@@ -134,7 +136,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
       const full = domain.includes('.') ? domain : `${domain}.com`;
       const { saved } = toggleSavedDomain(full);
       setSavedDomains(getSavedDomainNames());
-      showToast(saved ? `Saved ${full}` : `Removed ${full}`, 'success', 1500);
+      showToast(saved ? t('Saved {d}', { d: full }) : t('Removed {d}', { d: full }), 'success', 1500);
     },
     [showToast]
   );
@@ -435,7 +437,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
           className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
             isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/[0.06] text-white/35'
           }`}
-          title="Not checked yet"
+          title={t('Not checked yet')}
         >
           <span className={`h-1.5 w-1.5 rounded-full ${isLight ? 'bg-slate-300' : 'bg-white/30'}`} />
         </span>
@@ -447,7 +449,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
           className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
             isLight ? 'bg-amber-100 text-amber-600' : 'bg-amber-500/15 text-amber-400'
           }`}
-          title="Premium"
+          title={t('Premium')}
         >
           <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
             <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm0 2h14v2H5v-2z" />
@@ -463,8 +465,8 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               ? 'bg-emerald-50 text-emerald-600 border border-emerald-200/80 shadow-[0_0_6px_rgba(16,185,129,0.28)]'
               : 'bg-emerald-500/12 text-emerald-400 border border-emerald-500/25 shadow-[0_0_8px_rgba(52,211,153,0.32)]'
           }`}
-          title="Available"
-          aria-label="Available"
+          title={t('Available')}
+          aria-label={t('Available')}
         >
           <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
@@ -477,7 +479,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
         className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
           isLight ? 'bg-rose-50 text-rose-500' : 'bg-rose-500/10 text-rose-400/90'
         }`}
-        title="Taken"
+        title={t('Taken')}
       >
         <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -653,7 +655,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch(keyword)}
-              placeholder="Enter a keyword (cloud, mint, spark, shop…)"
+              placeholder={t('Enter a keyword (cloud, mint, spark, shop…)')}
               autoFocus
               autoComplete="off"
               spellCheck={false}
@@ -662,7 +664,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   ? 'text-slate-900 placeholder:text-slate-400'
                   : 'text-white placeholder:text-white/35'
               }`}
-              aria-label="Domain keyword"
+              aria-label={t('Domain keyword')}
               style={{ boxShadow: 'none', WebkitAppearance: 'none' }}
             />
 
@@ -677,7 +679,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                 className={`shrink-0 p-1.5 rounded-lg transition-colors ${
                   isLight ? 'text-slate-400 hover:text-slate-700' : 'text-white/35 hover:text-white/70'
                 }`}
-                aria-label="Clear"
+                aria-label={t('Clear')}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -701,7 +703,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               disabled={!keyword.trim() || isSearching}
               className={`btn-brand shrink-0 inline-flex items-center gap-1 rounded-lg sm:rounded-xl px-3 sm:px-5 py-2 sm:py-2.5 text-[12px] sm:text-[13px] font-bold disabled:opacity-40 disabled:cursor-not-allowed`}
             >
-              <span>Generate</span>
+              <span>{t('Generate')}</span>
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -742,7 +744,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                           : 'bg-transparent text-white/40 border-transparent hover:text-white/70'
                     }`}
                   >
-                    {SEED_CATEGORY_LABELS[cat] || cat}
+                    {SEED_CATEGORY_LABELS[cat] ? t(SEED_CATEGORY_LABELS[cat]) : cat}
                   </button>
                 );
               })}
@@ -766,9 +768,12 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               ))}
             </div>
             <p className="text-center text-[9px] sm:text-[10px]" style={{ color: 'var(--text-muted)' }}>
-              {lexiconStats.prefixes.toLocaleString()} prefixes · {lexiconStats.suffixes.toLocaleString()}{' '}
-              suffixes · {lexiconStats.seedWords.toLocaleString()} seeds · up to{' '}
-              {MAX_GENERATED.toLocaleString()} ideas per keyword
+              {t('{prefixes} prefixes · {suffixes} suffixes · {seeds} seeds · up to {max} ideas per keyword', {
+                prefixes: lexiconStats.prefixes.toLocaleString(),
+                suffixes: lexiconStats.suffixes.toLocaleString(),
+                seeds: lexiconStats.seedWords.toLocaleString(),
+                max: MAX_GENERATED.toLocaleString(),
+              })}
             </p>
           </div>
 
@@ -792,8 +797,10 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                     />
                   </div>
                   <p className="text-center text-[9px] mt-1" style={{ color: 'var(--text-muted)' }}>
-                    Checking availability {checkProgress.done.toLocaleString()} /{' '}
-                    {checkProgress.total.toLocaleString()}
+                    {t('Checking availability {a} / {b}', {
+                      a: checkProgress.done.toLocaleString(),
+                      b: checkProgress.total.toLocaleString(),
+                    })}
                   </p>
                 </div>
               )}
@@ -802,14 +809,14 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               <div
                 className="grid grid-cols-2 gap-1.5 sm:grid-cols-[repeat(4,minmax(0,1fr))] sm:gap-2"
                 role="tablist"
-                aria-label="Filter by availability"
+                aria-label={t('Filter by availability')}
               >
                 {(
                   [
                     {
                       id: 'available' as const,
-                      label: 'Available',
-                      hint: 'Free to register',
+                      label: t('Available'),
+                      hint: t('Free to register'),
                       count: availableCount,
                       icon: isLight
                         ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
@@ -817,8 +824,8 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                     },
                     {
                       id: 'premium' as const,
-                      label: 'Premium',
-                      hint: 'Listed for sale',
+                      label: t('Premium'),
+                      hint: t('Listed for sale'),
                       count: premiumCount,
                       icon: isLight
                         ? 'border-amber-200 bg-amber-50 text-amber-700'
@@ -826,8 +833,8 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                     },
                     {
                       id: 'taken' as const,
-                      label: 'Taken',
-                      hint: 'Already registered',
+                      label: t('Taken'),
+                      hint: t('Already registered'),
                       count: takenCount,
                       icon: isLight
                         ? 'border-rose-200 bg-rose-50 text-rose-700'
@@ -835,8 +842,8 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                     },
                     {
                       id: 'all' as const,
-                      label: 'All ideas',
-                      hint: 'Every generated name',
+                      label: t('All ideas'),
+                      hint: t('Every generated name'),
                       count: listedCount,
                       icon: isLight
                         ? 'border-[#d7dbdc] bg-[#f4f5f5] text-slate-700'
@@ -918,7 +925,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em]"
                   style={{ color: 'var(--text-muted)' }}
                 >
-                  Sort
+                  {t('Sort')}
                 </span>
                 <select
                   value={sortBy}
@@ -928,10 +935,10 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                       ? 'bg-slate-50 border-slate-200 text-slate-900'
                       : 'bg-[#111111] border-white/12 text-white'
                   }`}
-                  aria-label="Sort domain ideas"
+                  aria-label={t('Sort domain ideas')}
                 >
-                  <option value="popularity">Most popular</option>
-                  <option value="length">Shortest</option>
+                  <option value="popularity">{t('Most popular')}</option>
+                  <option value="length">{t('Shortest')}</option>
                   <option value="alphabetical">A → Z</option>
                 </select>
               </label>
@@ -941,7 +948,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em]"
                   style={{ color: 'var(--text-muted)' }}
                 >
-                  Keyword
+                  {t('Keyword')}
                 </span>
                 <select
                   value={positionFilter}
@@ -951,11 +958,11 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                       ? 'bg-slate-50 border-slate-200 text-slate-900'
                       : 'bg-[#111111] border-white/12 text-white'
                   }`}
-                  aria-label="Where the keyword appears in the name"
+                  aria-label={t('Where the keyword appears in the name')}
                 >
-                  <option value="all">Anywhere</option>
-                  <option value="starts">Starts with</option>
-                  <option value="ends">Ends with</option>
+                  <option value="all">{t('Anywhere')}</option>
+                  <option value="starts">{t('Starts with')}</option>
+                  <option value="ends">{t('Ends with')}</option>
                 </select>
               </label>
             </div>
@@ -978,12 +985,12 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         ? 'text-slate-500'
                         : 'text-white/45'
                   }`}
-                  title="Grid view"
+                  title={t('Grid view')}
                 >
                   <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                   </svg>
-                  <span className="hidden xs:inline sm:inline">Grid</span>
+                  <span className="hidden xs:inline sm:inline">{t('Grid')}</span>
                 </button>
                 <button
                   type="button"
@@ -997,12 +1004,12 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         ? 'text-slate-500'
                         : 'text-white/45'
                   }`}
-                  title="List view"
+                  title={t('List view')}
                 >
                   <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
-                  <span className="hidden sm:inline">List</span>
+                  <span className="hidden sm:inline">{t('List')}</span>
                 </button>
               </div>
 
@@ -1010,7 +1017,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                 className="inline-flex items-center gap-1 font-medium text-[10px] sm:text-[11px]"
                 style={{ color: 'var(--text-muted)' }}
               >
-                <span className="hidden sm:inline">Length</span>
+                <span className="hidden sm:inline">{t('Length')}</span>
                 <input
                   type="number"
                   min={2}
@@ -1022,7 +1029,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                       ? 'bg-slate-50 border-slate-200 text-slate-800'
                       : 'bg-[#111111] border-white/10 text-white/80'
                   }`}
-                  aria-label="Minimum name length"
+                  aria-label={t('Minimum name length')}
                 />
                 <span>–</span>
                 <input
@@ -1036,7 +1043,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                       ? 'bg-slate-50 border-slate-200 text-slate-800'
                       : 'bg-[#111111] border-white/10 text-white/80'
                   }`}
-                  aria-label="Maximum name length"
+                  aria-label={t('Maximum name length')}
                 />
               </label>
 
@@ -1051,8 +1058,8 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   onChange={(e) => setIncludeCompounds(e.target.checked)}
                   className="rounded border-slate-400 scale-90 sm:scale-100"
                 />
-                <span className="sm:hidden">Compounds</span>
-                <span className="hidden sm:inline">Include compounds</span>
+                <span className="sm:hidden">{t('Compounds')}</span>
+                <span className="hidden sm:inline">{t('Include compounds')}</span>
               </label>
 
               <span
@@ -1085,7 +1092,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         rel="sponsored noopener noreferrer"
                         data-affiliate="spaceship"
                         data-placement="generator-domain"
-                        title={`Register ${fullDomain} on Spaceship`}
+                        title={t('Register {d} on Spaceship', { d: fullDomain })}
                         className="flex items-center gap-2 min-w-0 flex-1 text-left"
                       >
                         <StatusMark suggestion={suggestion} />
@@ -1106,8 +1113,10 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                               ? 'text-slate-400 border-slate-200 hover:text-slate-700'
                               : 'text-white/40 border-white/10 hover:text-white/80'
                         }`}
-                        aria-label={isSaved ? `Remove ${fullDomain}` : `Save ${fullDomain}`}
-                        title={isSaved ? 'Saved' : 'Save domain'}
+                        aria-label={
+                          isSaved ? t('Remove {d}', { d: fullDomain }) : t('Save {d}', { d: fullDomain })
+                        }
+                        title={isSaved ? t('Saved') : t('Save domain')}
                       >
                         <svg
                           className="w-3.5 h-3.5"
@@ -1173,7 +1182,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                         rel="sponsored noopener noreferrer"
                         data-affiliate="spaceship"
                         data-placement="generator-domain"
-                        title={`Register ${fullDomain} on Spaceship`}
+                        title={t('Register {d} on Spaceship', { d: fullDomain })}
                         className="flex items-center gap-2 min-w-0 flex-1 text-left"
                       >
                         <StatusMark suggestion={suggestion} />
@@ -1193,8 +1202,10 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                               ? 'text-slate-400 border-slate-200 hover:text-slate-700'
                               : 'text-white/40 border-white/10 hover:text-white/80'
                         }`}
-                        aria-label={isSaved ? `Remove ${fullDomain}` : `Save ${fullDomain}`}
-                        title={isSaved ? 'Saved' : 'Save domain'}
+                        aria-label={
+                          isSaved ? t('Remove {d}', { d: fullDomain }) : t('Save {d}', { d: fullDomain })
+                        }
+                        title={isSaved ? t('Saved') : t('Save domain')}
                       >
                         <svg
                           className="w-3.5 h-3.5"
@@ -1245,26 +1256,26 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
             <div className="text-center py-10 px-4">
               <p className="text-sm font-semibold mb-1">
                 {statusFilter === 'available'
-                  ? 'No free .com domains in this set yet'
+                  ? t('No free .com domains in this set yet')
                   : statusFilter === 'premium'
-                    ? 'No premium listings in this set'
+                    ? t('No premium listings in this set')
                     : statusFilter === 'taken'
-                      ? 'No taken domains match'
-                      : 'No matches for this filter'}
+                      ? t('No taken domains match')
+                      : t('No matches for this filter')}
               </p>
               <p className="text-[12px] mb-3" style={{ color: 'var(--text-muted)' }}>
-                “{keyword}” has {suggestions.length.toLocaleString()} total ideas
+                {t('“{kw}” has {n} total ideas', { kw: keyword, n: suggestions.length.toLocaleString() })}
                 {checkProgress.done < checkProgress.total
-                  ? ' — still checking availability…'
-                  : ' — try another status'}
+                  ? ` — ${t('still checking availability…')}`
+                  : ` — ${t('try another status')}`}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-1.5">
                 {(
                   [
-                    { id: 'available' as const, label: 'Available' },
-                    { id: 'premium' as const, label: 'Premium' },
-                    { id: 'taken' as const, label: 'Taken' },
-                    { id: 'all' as const, label: 'All ideas' },
+                    { id: 'available' as const, label: t('Available') },
+                    { id: 'premium' as const, label: t('Premium') },
+                    { id: 'taken' as const, label: t('Taken') },
+                    { id: 'all' as const, label: t('All ideas') },
                   ] as const
                 ).map((tab) => (
                   <button
@@ -1303,7 +1314,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                   isLight ? 'text-slate-800 hover:text-black' : 'text-white/85 hover:text-white'
                 }`}
               >
-                View more ({(filteredSuggestions.length - visibleCount).toLocaleString()} left)
+                {t('View more ({n} left)', { n: (filteredSuggestions.length - visibleCount).toLocaleString() })}
               </button>
               <button
                 type="button"
@@ -1311,7 +1322,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                 className="text-[11px] font-semibold"
                 style={{ color: 'var(--text-muted)' }}
               >
-                Show all
+                {t('Show all')}
               </button>
             </div>
           )}
@@ -1324,7 +1335,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
           className="text-center text-[11px] sm:text-[12px] py-1"
           style={{ color: 'var(--text-muted)' }}
         >
-          Pick a keyword chip or type above — names from the word list show up here immediately.
+          {t('Pick a keyword chip or type above — names from the word list show up here immediately.')}
         </p>
       )}
     </div>

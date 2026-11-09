@@ -8,6 +8,8 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
 import { recordDomainsChecked } from '@/lib/searchCounter';
 import countriesData from '@/data/countries.json';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
+import { rich } from '@/components/i18n/rich';
 import citiesData from '@/data/cities-expanded.json';
 import usStatesData from '@/data/us-states.json';
 import canadaProvincesData from '@/data/canada-provinces.json';
@@ -278,7 +280,18 @@ function locationIsoCode(loc: Location): string | undefined {
   return loc.country || loc.code;
 }
 
+/** Country name in the page language (English keeps the catalog name). */
+function countryLabel(code: string, fallback: string, locale: string): string {
+  if (locale === 'en') return fallback;
+  try {
+    return new Intl.DisplayNames([locale], { type: 'region' }).of(code) || fallback;
+  } catch {
+    return fallback;
+  }
+}
 export const GeoDomainGenerator: React.FC = () => {
+  const t = useT();
+  const { locale } = useLocale();
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const reduceMotion = useReducedMotion();
@@ -324,6 +337,7 @@ export const GeoDomainGenerator: React.FC = () => {
       {
         code: string;
         name: string;
+        label: string;
         cityCount: number;
         megaCount: number;
         topPop: number;
@@ -334,6 +348,7 @@ export const GeoDomainGenerator: React.FC = () => {
       const cur = byCode.get(city.country) || {
         code: city.country,
         name: city.countryName,
+        label: '',
         cityCount: 0,
         megaCount: 0,
         topPop: 0,
@@ -353,16 +368,17 @@ export const GeoDomainGenerator: React.FC = () => {
         row.population = c.population;
       }
     }
+    for (const row of byCode.values()) row.label = countryLabel(row.code, row.name, locale);
     return Array.from(byCode.values()).sort(
       (a, b) => (b.population || b.topPop) - (a.population || a.topPop) || b.cityCount - a.cityCount
     );
-  }, []);
+  }, [locale]);
 
   const filteredCountryPicker = useMemo(() => {
     const q = countrySearch.trim().toLowerCase();
     if (!q) return countriesWithCities;
     return countriesWithCities.filter(
-      (c) => c.name.toLowerCase().includes(q) || c.code.toLowerCase().includes(q)
+      (c) => c.name.toLowerCase().includes(q) || c.label.toLowerCase().includes(q) || c.code.toLowerCase().includes(q)
     );
   }, [countriesWithCities, countrySearch]);
 
@@ -752,7 +768,7 @@ export const GeoDomainGenerator: React.FC = () => {
     const sanitizedKeyword = sanitizeDomainName(keyword);
     if (!sanitizedKeyword) {
       setIsGenerating(false);
-      flash('Enter a valid keyword (letters/numbers)');
+      flash(t('Enter a valid keyword (letters/numbers)'));
       return;
     }
 
@@ -830,7 +846,10 @@ export const GeoDomainGenerator: React.FC = () => {
     setGeneratedDomains(domains);
     setIsGenerating(false);
     flash(
-      `Generated ${domains.length.toLocaleString()} · live-checking top ${Math.min(limit, domains.length)}`
+      t('Generated {n} · live-checking top {m}', {
+        n: domains.length.toLocaleString(),
+        m: Math.min(limit, domains.length),
+      })
     );
     // Bring results into view on generate
     window.setTimeout(() => {
@@ -958,7 +977,9 @@ export const GeoDomainGenerator: React.FC = () => {
     if (!parts.length) return;
     setSelectedTlds((prev) => Array.from(new Set([...prev, ...parts])));
     setCustomTldInput('');
-    flash(`Added extension${parts.length > 1 ? 's' : ''}: ${parts.map((p) => `.${p}`).join(' ')}`);
+    flash(
+      `${parts.length > 1 ? t('Added extensions:') : t('Added extension:')} ${parts.map((p) => `.${p}`).join(' ')}`
+    );
   };
 
   const exportCsv = () => {
@@ -985,7 +1006,7 @@ export const GeoDomainGenerator: React.FC = () => {
     a.download = `geo-domains-${sanitizeDomainName(keyword) || 'export'}.csv`;
     a.click();
     URL.revokeObjectURL(url);
-    flash('CSV downloaded');
+    flash(t('CSV downloaded'));
   };
 
   const copyAvailable = async () => {
@@ -993,11 +1014,11 @@ export const GeoDomainGenerator: React.FC = () => {
       .filter((d) => d.status === 'available' && !d.premium)
       .map((d) => d.domain);
     if (!list.length) {
-      flash('No free available domains yet — try Premium filter or wait for checks');
+      flash(t('No free available domains yet — try Premium filter or wait for checks'));
       return;
     }
     await navigator.clipboard.writeText(list.join('\n'));
-    flash(`Copied ${list.length} free domains`);
+    flash(t('Copied {n} free domains', { n: list.length }));
   };
 
   const registerUrl = (domain: string) => getSpaceshipAffiliateUrl(domain);
@@ -1015,10 +1036,10 @@ export const GeoDomainGenerator: React.FC = () => {
 
   const activeLocationLabel = useMemo(() => {
     if (locationType === 'country_cities' && selectedCountryMeta) {
-      return `Country: ${selectedCountryMeta.name} (${selectedCountryMeta.code})`;
+      return `${t('Country')}: ${selectedCountryMeta.label} (${selectedCountryMeta.code})`;
     }
-    return LOCATION_OPTIONS.find((o) => o.value === locationType)?.label || 'Locations';
-  }, [locationType, selectedCountryMeta]);
+    return t(LOCATION_OPTIONS.find((o) => o.value === locationType)?.label || 'Locations');
+  }, [locationType, selectedCountryMeta, t]);
 
   const locationTabs = useMemo(() => locationGroups.map(([g]) => g), [locationGroups]);
   const locationsInTab = useMemo(() => {
@@ -1076,7 +1097,7 @@ export const GeoDomainGenerator: React.FC = () => {
         </span>
         <div className="min-w-0">
           <div className={`text-sm font-bold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-            {title}
+            {t(title)}
           </div>
           {hint && (
             <div className={`text-[11px] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>{hint}</div>
@@ -1112,10 +1133,10 @@ export const GeoDomainGenerator: React.FC = () => {
         <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <dl className="grid flex-1 grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-4">
             {[
-              ['Catalog', `${catalogMega.toLocaleString()} cities 1M+ · ${catalogTotal.toLocaleString()}`],
-              ['Scope', `${locations.length.toLocaleString()} places`],
-              ['Output', `~${estimateCount.toLocaleString()} names`],
-              ['Check', `top ${maxCheck}`],
+              [t('Catalog'), t('{mega} cities 1M+ · {total}', { mega: catalogMega.toLocaleString(), total: catalogTotal.toLocaleString() })],
+              [t('Scope'), t('{n} places', { n: locations.length.toLocaleString() })],
+              [t('Output'), t('~{n} names', { n: estimateCount.toLocaleString() })],
+              [t('Check'), t('top {n}', { n: maxCheck })],
             ].map(([k, v]) => (
               <div key={k} className="min-w-0">
                 <dt
@@ -1145,13 +1166,13 @@ export const GeoDomainGenerator: React.FC = () => {
                     : 'border-white/10 bg-white/[0.05] text-white/75'
                 }`}
               >
-                <CountryFlag code={selectedCountryMeta.code} size={14} title={selectedCountryMeta.name} />
-                {selectedCountryMeta.name}
+                <CountryFlag code={selectedCountryMeta.code} size={14} title={selectedCountryMeta.label} />
+                {selectedCountryMeta.label}
               </span>
             )}
             {isChecking ? (
               <span className={`text-xs font-bold tabular-nums ${isLight ? 'text-sky-700' : 'text-sky-300'}`}>
-                Checking {checkProgress.done}/{checkProgress.total || maxCheck}…
+                {t('Checking {a}/{b}…', { a: checkProgress.done, b: checkProgress.total || maxCheck })}
               </span>
             ) : feedback ? (
               <span className={`text-xs font-bold ${isLight ? 'text-emerald-700' : 'text-emerald-300'}`}>
@@ -1159,17 +1180,17 @@ export const GeoDomainGenerator: React.FC = () => {
               </span>
             ) : canGenerate ? (
               <span className={`text-xs font-bold ${isLight ? 'text-emerald-700' : 'text-emerald-300'}`}>
-                Ready to generate
+                {t('Ready to generate')}
               </span>
             ) : (
               <span className={`text-xs font-medium ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
                 {!keyword.trim()
-                  ? 'Enter a keyword'
+                  ? t('Enter a keyword')
                   : locations.length === 0
-                    ? 'Pick locations'
+                    ? t('Pick locations')
                     : selectedTlds.length === 0
-                      ? 'Select a TLD'
-                      : 'Configure build'}
+                      ? t('Select a TLD')
+                      : t('Configure build')}
               </span>
             )}
           </div>
@@ -1184,14 +1205,14 @@ export const GeoDomainGenerator: React.FC = () => {
         >
           {/* Step 1 */}
           <section className={`border-b p-4 sm:p-5 ${isLight ? 'border-slate-100' : 'border-white/[0.06]'}`}>
-            {stepLabel(1, 'Keyword', 'Local niche or brand term', Boolean(keyword.trim()))}
+            {stepLabel(1, 'Keyword', t('Local niche or brand term'), Boolean(keyword.trim()))}
             <div className="relative">
               <input
                 type="text"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && canGenerate && void generateDomains()}
-                placeholder="plumber, lawyer, pizza, homes…"
+                placeholder={t('plumber, lawyer, pizza, homes…')}
                 className={`w-full rounded-xl border px-4 py-3.5 pr-11 text-base outline-none transition ${inputCls}`}
                 autoComplete="off"
                 spellCheck={false}
@@ -1222,7 +1243,7 @@ export const GeoDomainGenerator: React.FC = () => {
             {stepLabel(
               2,
               'Locations',
-              `${locations.length.toLocaleString()} places in scope`,
+              t('{n} places in scope', { n: locations.length.toLocaleString() }),
               locations.length > 0
             )}
 
@@ -1247,7 +1268,7 @@ export const GeoDomainGenerator: React.FC = () => {
                         : 'text-white/45 hover:bg-white/5 hover:text-white'
                   }`}
                 >
-                  {tab}
+                  {t(tab)}
                 </button>
               ))}
             </div>
@@ -1283,7 +1304,7 @@ export const GeoDomainGenerator: React.FC = () => {
                     ) : (
                       <span className="text-sm leading-none opacity-90">{option.icon}</span>
                     )}
-                    <span className="min-w-0 truncate">{option.label}</span>
+                    <span className="min-w-0 truncate">{t(option.label)}</span>
                   </button>
                 );
               })}
@@ -1309,16 +1330,16 @@ export const GeoDomainGenerator: React.FC = () => {
                         isLight ? 'text-slate-500' : 'text-white/40'
                       }`}
                     >
-                      Select a country
+                      {t('Select a country')}
                     </div>
                     <p className={`mt-0.5 text-[11px] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
                       {locationType === 'country_cities' && selectedCountryMeta
-                        ? `${selectedCountryMeta.name} · ${selectedCountryCityStats.matching.toLocaleString()} cities in scope${
+                        ? `${selectedCountryMeta.label} · ${t('{n} cities in scope', { n: selectedCountryCityStats.matching.toLocaleString() })}${
                             selectedCountryMeta.population > 0
-                              ? ` · ${formatPopulation(selectedCountryMeta.population)} people`
+                              ? ` · ${t('{pop} people', { pop: formatPopulation(selectedCountryMeta.population) })}`
                               : ''
                           }`
-                        : 'Tap a country below · populations in millions · official flags'}
+                        : t('Tap a country below · populations in millions · official flags')}
                     </p>
                   </div>
                 </div>
@@ -1331,7 +1352,7 @@ export const GeoDomainGenerator: React.FC = () => {
                       setCountrySearch(e.target.value);
                       setCountryPage(0);
                     }}
-                    placeholder="Search countries… India, China, Germany, Brazil"
+                    placeholder={t('Search countries… India, China, Germany, Brazil')}
                     className={`mb-3 w-full rounded-xl border px-3 py-2.5 text-sm outline-none ${inputCls}`}
                   />
 
@@ -1362,10 +1383,10 @@ export const GeoDomainGenerator: React.FC = () => {
                                   : 'bg-transparent text-white/75 hover:bg-white/[0.04]'
                             }`}
                           >
-                            <CountryFlag code={c.code} size={22} title={c.name} />
+                            <CountryFlag code={c.code} size={22} title={c.label} />
                             <span className="min-w-0 flex-1">
                               <span className="flex items-center gap-1.5 truncate font-semibold tracking-tight">
-                                {c.name}
+                                {c.label}
                                 {active && (
                                   <span
                                     className={`shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${
@@ -1374,7 +1395,7 @@ export const GeoDomainGenerator: React.FC = () => {
                                         : 'bg-emerald-400/20 text-emerald-200'
                                     }`}
                                   >
-                                    Selected
+                                    {t('Selected')}
                                   </span>
                                 )}
                               </span>
@@ -1384,11 +1405,11 @@ export const GeoDomainGenerator: React.FC = () => {
                                 }`}
                               >
                                 {c.population > 0
-                                  ? `${formatPopulation(c.population)} people`
+                                  ? t('{pop} people', { pop: formatPopulation(c.population) })
                                   : c.megaCount > 0
                                     ? `${c.megaCount}×1M+`
-                                    : `${c.cityCount} cities`}
-                                {c.cityCount > 0 ? ` · ${c.cityCount} cities` : ''}
+                                    : t('{n} cities', { n: c.cityCount })}
+                                {c.cityCount > 0 ? ` · ${t('{n} cities', { n: c.cityCount })}` : ''}
                               </span>
                             </span>
                             <span
@@ -1417,8 +1438,7 @@ export const GeoDomainGenerator: React.FC = () => {
                         }`}
                       >
                         <span className={`text-[11px] tabular-nums ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-                          {filteredCountryPicker.length} countries · page{' '}
-                          {Math.min(countryPage, countryPageCount - 1) + 1}/{countryPageCount}
+                          {t('{n} countries · page {p}/{total}', { n: filteredCountryPicker.length, p: Math.min(countryPage, countryPageCount - 1) + 1, total: countryPageCount })}
                         </span>
                         <div className="flex items-center gap-1">
                           <button
@@ -1431,7 +1451,7 @@ export const GeoDomainGenerator: React.FC = () => {
                                 : 'bg-white/10 text-white/80'
                             }`}
                           >
-                            Prev
+                            {t('Prev')}
                           </button>
                           {Array.from({ length: countryPageCount }, (_, i) => i)
                             .filter((i) => {
@@ -1475,7 +1495,7 @@ export const GeoDomainGenerator: React.FC = () => {
                                 : 'bg-white/10 text-white/80'
                             }`}
                           >
-                            Next
+                            {t('Next')}
                           </button>
                         </div>
                       </div>
@@ -1493,12 +1513,12 @@ export const GeoDomainGenerator: React.FC = () => {
               <div className="mb-3">
                 <div className="mb-1 flex flex-wrap items-end justify-between gap-2 text-[11px]">
                   <span className={isLight ? 'text-slate-500' : 'text-white/45'}>
-                    Min city population (city proper · WPR 2026)
+                    {t('Min city population (city proper · WPR 2026)')}
                   </span>
                   <span className={`font-bold tabular-nums ${isLight ? 'text-slate-700' : 'text-white/70'}`}>
-                    {minCityPop === 0 ? 'Any size' : `${formatPopulation(minCityPop)}+`}
+                    {minCityPop === 0 ? t('Any size') : `${formatPopulation(minCityPop)}+`}
                     <span className={`ml-2 font-semibold ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
-                      · {locations.length.toLocaleString()} match
+                      · {t('{n} match', { n: locations.length.toLocaleString() })}
                     </span>
                   </span>
                 </div>
@@ -1515,7 +1535,7 @@ export const GeoDomainGenerator: React.FC = () => {
                 />
                 <div className={`mt-1.5 flex flex-wrap gap-1.5 ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
                   {[
-                    [0, 'Any'],
+                    [0, t('Any')],
                     [250_000, '250K'],
                     [500_000, '500K'],
                     [1_000_000, '1M'],
@@ -1542,12 +1562,11 @@ export const GeoDomainGenerator: React.FC = () => {
                 </div>
                 {locations.length === 0 && (
                   <p className={`mt-2 text-[11px] font-medium ${isLight ? 'text-amber-700' : 'text-amber-300'}`}>
-                    No cities match this filter — lower the minimum (e.g. Any or 500K). City-proper counts are
-                    smaller than metro areas; US only has ~1 city above 5M.
+                    {t('No cities match this filter — lower the minimum (e.g. Any or 500K). City-proper counts are smaller than metro areas; US only has ~1 city above 5M.')}
                   </p>
                 )}
                 <p className={`mt-1.5 text-[10px] leading-relaxed ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
-                  City-proper figures (not metro). Tokyo ≈ 10.3M · Shanghai ≈ 24.7M · New York ≈ 8.5M.
+                  {t('City-proper figures (not metro). Tokyo ≈ 10.3M · Shanghai ≈ 24.7M · New York ≈ 8.5M.')}
                 </p>
               </div>
             )}
@@ -1556,15 +1575,15 @@ export const GeoDomainGenerator: React.FC = () => {
               type="search"
               value={locationQuery}
               onChange={(e) => setLocationQuery(e.target.value)}
-              placeholder="Filter place names in current scope…"
+              placeholder={t('Filter place names in current scope…')}
               className={`w-full rounded-xl border px-3 py-2 text-sm outline-none ${inputCls}`}
             />
             <p className={`mt-2 text-[11px] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
               <span className="font-semibold">{activeLocationLabel}</span>
               {' · '}
-              {locations.length.toLocaleString()} places
-              {locationQuery ? ' (name filter on)' : ''}
-              {customLocationList.length ? ` · +${customLocationList.length} custom` : ''}
+              {t('{n} places', { n: locations.length.toLocaleString() })}
+              {locationQuery ? ` ${t('(name filter on)')}` : ''}
+              {customLocationList.length ? ` · ${t('+{n} custom', { n: customLocationList.length })}` : ''}
             </p>
           </section>
 
@@ -1573,20 +1592,20 @@ export const GeoDomainGenerator: React.FC = () => {
             {stepLabel(
               3,
               'Pattern & extensions',
-              `${selectedTlds.length} TLD${selectedTlds.length === 1 ? '' : 's'} · ${position} · ${separator}`,
+              `${selectedTlds.length === 1 ? t('1 TLD') : t('{n} TLDs', { n: selectedTlds.length })} · ${t(position)} · ${t(separator)}`,
               selectedTlds.length > 0
             )}
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <div className={`mb-1.5 text-[10px] font-bold uppercase tracking-[0.12em] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                  Order
+                  {t('Order')}
                 </div>
                 <div className="flex flex-col gap-1">
                   {(
                     [
-                      ['end', 'Location first', 'londonplumber.com'],
-                      ['start', 'Keyword first', 'plumberlondon.com'],
-                      ['both', 'Both orders', '2× patterns'],
+                      ['end', t('Location first'), 'londonplumber.com'],
+                      ['start', t('Keyword first'), 'plumberlondon.com'],
+                      ['both', t('Both orders'), t('2× patterns')],
                     ] as const
                   ).map(([val, label, ex]) => (
                     <button
@@ -1606,14 +1625,14 @@ export const GeoDomainGenerator: React.FC = () => {
               </div>
               <div>
                 <div className={`mb-1.5 text-[10px] font-bold uppercase tracking-[0.12em] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                  Separator
+                  {t('Separator')}
                 </div>
                 <div className="flex flex-col gap-1">
                   {(
                     [
-                      ['none', 'Solid', 'londonplumber'],
-                      ['hyphen', 'Hyphen', 'london-plumber'],
-                      ['both', 'Both styles', '2× variants'],
+                      ['none', t('Solid'), 'londonplumber'],
+                      ['hyphen', t('Hyphen'), 'london-plumber'],
+                      ['both', t('Both styles'), t('2× variants')],
                     ] as const
                   ).map(([val, label, ex]) => (
                     <button
@@ -1636,17 +1655,17 @@ export const GeoDomainGenerator: React.FC = () => {
             <div className="mt-4">
               <div className="mb-1.5 flex items-center justify-between">
                 <div className={`text-[10px] font-bold uppercase tracking-[0.12em] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                  Extensions (TLDs) · {selectedTlds.length} selected
+                  {t('Extensions (TLDs) · {n} selected', { n: selectedTlds.length })}
                 </div>
                 <div className="flex gap-2 text-[10px] font-bold">
                   <button type="button" className={isLight ? 'text-slate-500' : 'text-white/40'} onClick={() => setSelectedTlds(TLD_OPTIONS.filter((t) => t.popular).map((t) => t.value))}>
-                    Popular
+                    {t('Popular')}
                   </button>
                   <button type="button" className={isLight ? 'text-slate-500' : 'text-white/40'} onClick={() => setSelectedTlds(TLD_OPTIONS.filter((t) => t.geo).map((t) => t.value))}>
-                    Geo
+                    {t('Geo')}
                   </button>
                   <button type="button" className={isLight ? 'text-slate-500' : 'text-white/40'} onClick={() => setSelectedTlds(['com'])}>
-                    Reset
+                    {t('Reset')}
                   </button>
                 </div>
               </div>
@@ -1669,20 +1688,20 @@ export const GeoDomainGenerator: React.FC = () => {
                 })}
                 {/* Custom selected TLDs not in preset list */}
                 {selectedTlds
-                  .filter((t) => !TLD_OPTIONS.some((o) => o.value === t))
-                  .map((t) => (
+                  .filter((x) => !TLD_OPTIONS.some((o) => o.value === x))
+                  .map((x) => (
                     <button
-                      key={t}
+                      key={x}
                       type="button"
-                      onClick={() => toggleTld(t)}
-                      title="Click to remove"
+                      onClick={() => toggleTld(x)}
+                      title={t('Click to remove')}
                       className={`rounded-lg border px-2 py-1 text-[11px] font-bold ${
                         isLight
                           ? 'border-slate-900 bg-slate-900 text-white'
                           : 'border-white bg-white text-black'
                       }`}
                     >
-                      .{t} ×
+                      .{x} ×
                     </button>
                   ))}
               </div>
@@ -1697,9 +1716,9 @@ export const GeoDomainGenerator: React.FC = () => {
                       addCustomTlds();
                     }
                   }}
-                  placeholder="Add your own extensions… e.g. shop, store, co.uk, health"
+                  placeholder={t('Add your own extensions… e.g. shop, store, co.uk, health')}
                   className={`min-w-0 flex-1 rounded-xl border px-3 py-2 text-sm outline-none ${inputCls}`}
-                  aria-label="Enter custom domain extensions"
+                  aria-label={t('Enter custom domain extensions')}
                 />
                 <button
                   type="button"
@@ -1710,23 +1729,23 @@ export const GeoDomainGenerator: React.FC = () => {
                       : 'border-white bg-white text-black'
                   }`}
                 >
-                  Add extensions
+                  {t('Add extensions')}
                 </button>
               </div>
               <p className={`mt-1.5 text-[10px] ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
-                Enter one or more extensions (with or without the dot). Multi-level allowed (e.g. co.uk).
+                {t('Enter one or more extensions (with or without the dot). Multi-level allowed (e.g. co.uk).')}
               </p>
             </div>
           </section>
 
           {/* Step 4 — compact advanced */}
           <section className="p-4 sm:p-5">
-            {stepLabel(4, 'Refine & generate', 'Preview · limits · custom places')}
+            {stepLabel(4, 'Refine & generate', t('Preview · limits · custom places'))}
             <div className="mb-3">
               <div className="mb-1 flex justify-between text-[11px]">
-                <span className={isLight ? 'text-slate-500' : 'text-white/45'}>Min population</span>
+                <span className={isLight ? 'text-slate-500' : 'text-white/45'}>{t('Min population')}</span>
                 <span className={`font-bold tabular-nums ${isLight ? 'text-slate-700' : 'text-white/70'}`}>
-                  {minPopulation === 0 ? 'Any' : `${formatPopulation(minPopulation)}+`}
+                  {minPopulation === 0 ? t('Any') : `${formatPopulation(minPopulation)}+`}
                 </span>
               </div>
               <input
@@ -1749,7 +1768,7 @@ export const GeoDomainGenerator: React.FC = () => {
                 isLight ? 'text-slate-600' : 'text-white/50'
               }`}
             >
-              {showAdvanced ? 'Hide' : 'Show'} advanced options
+              {showAdvanced ? t('Hide advanced options') : t('Show advanced options')}
             </button>
 
             {showAdvanced && (
@@ -1761,10 +1780,10 @@ export const GeoDomainGenerator: React.FC = () => {
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                   {(
                     [
-                      ['Max places', maxLocations, setMaxLocations, 0, 500],
-                      ['Check limit', maxCheck, setMaxCheck, 20, HARD_MAX_CHECK],
-                      ['Min length', minLength, setMinLength, 1, 63],
-                      ['Max length', maxLength, setMaxLength, 1, 63],
+                      [t('Max places'), maxLocations, setMaxLocations, 0, 500],
+                      [t('Check limit'), maxCheck, setMaxCheck, 20, HARD_MAX_CHECK],
+                      [t('Min length'), minLength, setMinLength, 1, 63],
+                      [t('Max length'), maxLength, setMaxLength, 1, 63],
                     ] as const
                   ).map(([label, val, set, lo, hi]) => (
                     <label key={label} className="text-[10px]">
@@ -1789,18 +1808,18 @@ export const GeoDomainGenerator: React.FC = () => {
                 <div className="flex flex-wrap gap-4">
                   <label className={`inline-flex items-center gap-2 text-[11px] font-semibold ${isLight ? 'text-slate-700' : 'text-white/65'}`}>
                     <input type="checkbox" checked={includeCodes} onChange={(e) => setIncludeCodes(e.target.checked)} />
-                    State / country codes
+                    {t('State / country codes')}
                   </label>
                   <label className={`inline-flex items-center gap-2 text-[11px] font-semibold ${isLight ? 'text-slate-700' : 'text-white/65'}`}>
                     <input type="checkbox" checked={checkPremiumDeep} onChange={(e) => setCheckPremiumDeep(e.target.checked)} />
-                    Premium deep scan (slower)
+                    {t('Premium deep scan (slower)')}
                   </label>
                 </div>
                 <textarea
                   value={customPlaces}
                   onChange={(e) => setCustomPlaces(e.target.value)}
                   rows={2}
-                  placeholder="Custom places (optional) — Austin, Brooklyn, …"
+                  placeholder={t('Custom places (optional) — Austin, Brooklyn, …')}
                   className={`w-full rounded-lg border px-2.5 py-2 text-sm outline-none ${inputCls}`}
                 />
               </div>
@@ -1816,7 +1835,7 @@ export const GeoDomainGenerator: React.FC = () => {
                   isLight ? 'text-slate-400' : 'text-white/35'
                 }`}
               >
-                Live preview
+                {t('Live preview')}
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {livePreview.map((s) => (
@@ -1842,20 +1861,20 @@ export const GeoDomainGenerator: React.FC = () => {
             >
               {isGenerating || isChecking ? (
                 isChecking ? (
-                  `Checking ${checkProgress.done}/${checkProgress.total || maxCheck}…`
+                  t('Checking {a}/{b}…', { a: checkProgress.done, b: checkProgress.total || maxCheck })
                 ) : (
-                  'Generating…'
+                  t('Generating…')
                 )
               ) : (
                 <>
                   <Icons.Magic />
-                  <span className="ml-2">Generate &amp; check ~{estimateCount.toLocaleString()}</span>
+                  <span className="ml-2">{t('Generate & check ~{n}', { n: estimateCount.toLocaleString() })}</span>
                 </>
               )}
             </Button>
             {locations.length === 0 && (
               <p className={`mt-2 text-xs ${isLight ? 'text-amber-700' : 'text-amber-200'}`}>
-                No places in scope — adjust population or filters.
+                {t('No places in scope — adjust population or filters.')}
               </p>
             )}
           </section>
@@ -1868,15 +1887,15 @@ export const GeoDomainGenerator: React.FC = () => {
         >
           <div className={`rounded-2xl border p-4 ${shell(isLight)}`}>
             <div className={`text-[10px] font-bold uppercase tracking-[0.16em] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-              Build summary
+              {t('Build summary')}
             </div>
 
             <ul className="mt-3 space-y-2">
               {(
                 [
-                  ['Keyword', Boolean(keyword.trim())],
-                  ['Locations', locations.length > 0],
-                  ['Extensions', selectedTlds.length > 0],
+                  [t('Keyword'), Boolean(keyword.trim())],
+                  [t('Locations'), locations.length > 0],
+                  [t('Extensions'), selectedTlds.length > 0],
                 ] as const
               ).map(([label, ok]) => (
                 <li key={label} className="flex items-center gap-2 text-[12px] font-semibold">
@@ -1904,12 +1923,12 @@ export const GeoDomainGenerator: React.FC = () => {
               }`}
             >
               {[
-                ['Scope', activeLocationLabel],
-                ['Places', locations.length.toLocaleString()],
-                ['TLDs', selectedTlds.map((t) => `.${t}`).join(' ') || '—'],
-                ['Pattern', `${position} · ${separator}`],
-                ['Live check', `top ${maxCheck}`],
-                ['Est. names', `~${estimateCount.toLocaleString()}`],
+                [t('Scope'), activeLocationLabel],
+                [t('Places'), locations.length.toLocaleString()],
+                [t('TLDs'), selectedTlds.map((t) => `.${t}`).join(' ') || '—'],
+                [t('Pattern'), `${position} · ${separator}`],
+                [t('Live check'), t('top {n}', { n: maxCheck })],
+                [t('Est. names'), `~${estimateCount.toLocaleString()}`],
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-3">
                   <dt className={isLight ? 'text-slate-400' : 'text-white/35'}>{k}</dt>
@@ -1943,10 +1962,10 @@ export const GeoDomainGenerator: React.FC = () => {
               className="mt-4 w-full"
             >
               {isChecking
-                ? `Checking ${checkProgress.done}/${checkProgress.total || maxCheck}`
+                ? t('Checking {a}/{b}', { a: checkProgress.done, b: checkProgress.total || maxCheck })
                 : isGenerating
-                  ? 'Generating…'
-                  : 'Run generator'}
+                  ? t('Generating…')
+                  : t('Run generator')}
             </Button>
           </div>
           <div
@@ -1955,10 +1974,9 @@ export const GeoDomainGenerator: React.FC = () => {
             }`}
           >
             <p className={`font-semibold mb-1 ${isLight ? 'text-slate-700' : 'text-white/70'}`}>
-              After live check
+              {t('After live check')}
             </p>
-            Available (free to register), premium aftermarket, and already registered names.
-            Export CSV or copy free domains when ready.
+            {t('Available (free to register), premium aftermarket, and already registered names. Export CSV or copy free domains when ready.')}
           </div>
         </motion.aside>
       </div>
@@ -1978,10 +1996,10 @@ export const GeoDomainGenerator: React.FC = () => {
           className="w-full min-h-[48px]"
         >
           {isChecking
-            ? `Checking ${checkProgress.done}/${checkProgress.total || maxCheck}…`
+            ? t('Checking {a}/{b}…', { a: checkProgress.done, b: checkProgress.total || maxCheck })
             : isGenerating
-              ? 'Generating…'
-              : `Generate ~${estimateCount.toLocaleString()}`}
+              ? t('Generating…')
+              : t('Generate ~{n}', { n: estimateCount.toLocaleString() })}
         </Button>
       </div>
 
@@ -2004,10 +2022,10 @@ export const GeoDomainGenerator: React.FC = () => {
               </span>
               <div className="min-w-0">
                 <h3 className={`text-[13px] font-semibold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                  Your inventory appears here
+                  {t('Your inventory appears here')}
                 </h3>
                 <p className={`mt-0.5 text-[12px] leading-snug ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-                  Add a keyword, then generate. We live-check the top {maxCheck} for free, premium, and registered.
+                  {t('Add a keyword, then generate. We live-check the top {n} for free, premium, and registered.', { n: maxCheck })}
                 </p>
               </div>
             </div>
@@ -2043,7 +2061,7 @@ export const GeoDomainGenerator: React.FC = () => {
               <div>
                 <div className="flex flex-wrap items-center gap-2">
                   <h3 className={`text-lg font-black ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                    Inventory results
+                    {t('Inventory results')}
                   </h3>
                   {isChecking && (
                     <span
@@ -2051,18 +2069,18 @@ export const GeoDomainGenerator: React.FC = () => {
                         isLight ? 'bg-sky-50 text-sky-700' : 'bg-sky-500/15 text-sky-300'
                       }`}
                     >
-                      Live
+                      {t('Live')}
                     </span>
                   )}
                 </div>
                 <p className={`text-sm ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-                  {stats.total.toLocaleString()} generated
+                  {t('{n} generated', { n: stats.total.toLocaleString() })}
                   {isChecking && checkProgress.total > 0
-                    ? ` · checking ${Math.min(checkProgress.done, checkProgress.total)}/${checkProgress.total}`
+                    ? ` · ${t('checking {a}/{b}', { a: Math.min(checkProgress.done, checkProgress.total), b: checkProgress.total })}`
                     : isChecking
-                      ? ' · checking…'
-                      : ` · ${stats.resolved.toLocaleString()} resolved`}
-                  {stats.skipped > 0 ? ` · ${stats.skipped} beyond check limit` : ''}
+                      ? ` · ${t('checking…')}`
+                      : ` · ${t('{n} resolved', { n: stats.resolved.toLocaleString() })}`}
+                  {stats.skipped > 0 ? ` · ${t('{n} beyond check limit', { n: stats.skipped })}` : ''}
                 </p>
                 {isChecking && checkProgress.total > 0 && (
                   <div
@@ -2083,21 +2101,21 @@ export const GeoDomainGenerator: React.FC = () => {
                 {stats.available > 0 && (
                   <span className="inline-flex items-center gap-1.5">
                     <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                    {stats.available} available
+                    {t('{n} available', { n: stats.available })}
                   </span>
                 )}
                 <span className="inline-flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-violet-500" />
-                  {stats.premium} premium
+                  {t('{n} premium', { n: stats.premium })}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-rose-500" />
-                  {stats.taken} registered
+                  {t('{n} registered', { n: stats.taken })}
                 </span>
                 {isChecking && stats.checking > 0 && (
                   <span className="inline-flex items-center gap-1.5">
                     <span className="h-2 w-2 rounded-full bg-sky-500 animate-pulse" />
-                    {stats.checking} in progress
+                    {t('{n} in progress', { n: stats.checking })}
                   </span>
                 )}
               </div>
@@ -2107,11 +2125,11 @@ export const GeoDomainGenerator: React.FC = () => {
               <div className="flex flex-wrap gap-1">
                 {(
                   [
-                    ['all', 'All', true],
-                    ['available', `Available${stats.available ? ` · ${stats.available}` : ''}`, stats.available > 0 || isChecking],
-                    ['premium', `Premium · ${stats.premium}`, true],
-                    ['taken', `Registered · ${stats.taken}`, true],
-                    ['checking', `In progress · ${stats.checking}`, isChecking && stats.checking > 0],
+                    ['all', t('All'), true],
+                    ['available', stats.available ? t('Available · {n}', { n: stats.available }) : t('Available'), stats.available > 0 || isChecking],
+                    ['premium', t('Premium · {n}', { n: stats.premium }), true],
+                    ['taken', t('Registered · {n}', { n: stats.taken }), true],
+                    ['checking', t('In progress · {n}', { n: stats.checking }), isChecking && stats.checking > 0],
                   ] as const
                 )
                   .filter(([, , show]) => show)
@@ -2145,7 +2163,7 @@ export const GeoDomainGenerator: React.FC = () => {
                     isLight ? 'border-slate-200 text-slate-700' : 'border-white/10 text-white/70'
                   }`}
                 >
-                  Copy free
+                  {t('Copy free')}
                 </button>
                 <button
                   type="button"
@@ -2154,7 +2172,7 @@ export const GeoDomainGenerator: React.FC = () => {
                     isLight ? 'border-slate-200 text-slate-700' : 'border-white/10 text-white/70'
                   }`}
                 >
-                  Export CSV
+                  {t('Export CSV')}
                 </button>
               </div>
             </div>
@@ -2167,11 +2185,11 @@ export const GeoDomainGenerator: React.FC = () => {
                   setResultQuery(e.target.value);
                   setResultsPage(0);
                 }}
-                placeholder="Filter results…"
+                placeholder={t('Filter results…')}
                 className={`flex-1 rounded-xl border px-3 py-2 text-sm outline-none ${inputCls}`}
               />
               <div className="flex flex-wrap items-center gap-1">
-                <span className={`px-1 text-[10px] ${isLight ? 'text-slate-400' : 'text-white/30'}`}>Sort</span>
+                <span className={`px-1 text-[10px] ${isLight ? 'text-slate-400' : 'text-white/30'}`}>{t('Sort')}</span>
                 {(['population', 'domain', 'length', 'status'] as const).map((sort) => (
                   <button
                     key={sort}
@@ -2222,7 +2240,7 @@ export const GeoDomainGenerator: React.FC = () => {
                 {visibleDomains.length === 0 ? (
                   <tr>
                     <td colSpan={5} className={`py-12 text-center text-sm ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-                      No domains match this filter.
+                      {t('No domains match this filter.')}
                     </td>
                   </tr>
                 ) : (
@@ -2280,7 +2298,7 @@ export const GeoDomainGenerator: React.FC = () => {
                         className={`py-2.5 px-3 text-right tabular-nums ${isLight ? 'text-slate-600' : 'text-white/55'}`}
                         title={
                           domain.population >= 1_000_000
-                            ? `${formatPopulationMillions(domain.population)} (${formatPopulationExact(domain.population)} people)`
+                            ? `${formatPopulationMillions(domain.population)} (${t('{pop} people', { pop: formatPopulationExact(domain.population) })})`
                             : formatPopulationExact(domain.population)
                         }
                       >
@@ -2319,19 +2337,19 @@ export const GeoDomainGenerator: React.FC = () => {
                             {domain.premium
                               ? domain.price
                                 ? domain.price
-                                : 'Premium'
+                                : t('Premium')
                               : domain.status === 'available'
-                                ? 'Register'
+                                ? t('Register')
                                 : domain.status === 'taken'
-                                  ? 'Registered'
-                                  : 'Check'}
+                                  ? t('Registered')
+                                  : t('Check')}
                           </a>
                           <a
                             href={whoisUrl(domain.domain)}
                             className={`rounded-lg p-1.5 ${
                               isLight ? 'text-slate-400 hover:bg-slate-100' : 'text-white/30 hover:bg-white/10'
                             }`}
-                            title="WHOIS"
+                            title={t('WHOIS')}
                           >
                             <Icons.Info />
                           </a>
@@ -2349,17 +2367,22 @@ export const GeoDomainGenerator: React.FC = () => {
               className={`flex flex-wrap items-center justify-between gap-3 rounded-2xl border px-4 py-3 ${shell(isLight)}`}
             >
               <span className={`text-[12px] tabular-nums ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-                Showing{' '}
-                <strong className={isLight ? 'text-slate-800' : 'text-white/80'}>
-                  {sortedDomains.length === 0
-                    ? 0
-                    : `${safeResultsPage * PAGE_SIZE + 1}–${Math.min(
-                        (safeResultsPage + 1) * PAGE_SIZE,
-                        sortedDomains.length
-                      )}`}
-                </strong>{' '}
-                of {sortedDomains.length.toLocaleString()} results
-                {sortedDomains.length !== stats.total ? ` (filtered from ${stats.total.toLocaleString()})` : ''}
+                {rich(t('Showing {range} of {n} results'), {
+                  range: (
+                    <strong className={isLight ? 'text-slate-800' : 'text-white/80'}>
+                      {sortedDomains.length === 0
+                        ? 0
+                        : `${safeResultsPage * PAGE_SIZE + 1}–${Math.min(
+                            (safeResultsPage + 1) * PAGE_SIZE,
+                            sortedDomains.length
+                          )}`}
+                    </strong>
+                  ),
+                  n: sortedDomains.length.toLocaleString(),
+                })}
+                {sortedDomains.length !== stats.total
+                  ? ` ${t('(filtered from {n})', { n: stats.total.toLocaleString() })}`
+                  : ''}
               </span>
               <div className="flex flex-wrap items-center gap-1">
                 <button
@@ -2372,7 +2395,7 @@ export const GeoDomainGenerator: React.FC = () => {
                       : 'bg-white/10 text-white/80 hover:bg-white/15'
                   }`}
                 >
-                  Previous
+                  {t('Previous')}
                 </button>
                 {Array.from({ length: resultsPageCount }, (_, i) => i)
                   .filter((i) => {
@@ -2414,7 +2437,7 @@ export const GeoDomainGenerator: React.FC = () => {
                       : 'bg-white/10 text-white/80 hover:bg-white/15'
                   }`}
                 >
-                  Next
+                  {t('Next')}
                 </button>
               </div>
             </div>
@@ -2436,6 +2459,7 @@ function StatusPill({
   price?: string;
   isLight: boolean;
 }) {
+  const t = useT();
   if (status === 'checking' || status === 'pending') {
     return (
       <span
@@ -2444,7 +2468,7 @@ function StatusPill({
         }`}
       >
         <span className="h-2.5 w-2.5 animate-spin rounded-full border border-current border-t-transparent" />
-        Checking
+        {t('Checking')}
       </span>
     );
   }
@@ -2454,9 +2478,9 @@ function StatusPill({
         className={`inline-flex rounded-full px-2 py-0.5 text-[10px] font-bold ${
           isLight ? 'bg-violet-50 text-violet-800' : 'bg-violet-500/20 text-violet-200'
         }`}
-        title={price ? `Premium ${price}` : 'Premium'}
+        title={price ? t('Premium {price}', { price }) : t('Premium')}
       >
-        Premium{price ? ` · ${price}` : ''}
+        {t('Premium')}{price ? ` · ${price}` : ''}
       </span>
     );
   }
@@ -2467,7 +2491,7 @@ function StatusPill({
           isLight ? 'bg-emerald-50 text-emerald-700' : 'bg-emerald-500/15 text-emerald-300'
         }`}
       >
-        Available
+        {t('Available')}
       </span>
     );
   }
@@ -2478,7 +2502,7 @@ function StatusPill({
           isLight ? 'bg-rose-50 text-rose-700' : 'bg-rose-500/15 text-rose-300'
         }`}
       >
-        Registered
+        {t('Registered')}
       </span>
     );
   }
@@ -2488,9 +2512,9 @@ function StatusPill({
         className={`inline-flex rounded-full px-2 py-0.5 text-[10px] font-bold ${
           isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/5 text-white/40'
         }`}
-        title="Outside live-check budget — raise check limit to include"
+        title={t('Outside live-check budget — raise check limit to include')}
       >
-        Not checked
+        {t('Not checked')}
       </span>
     );
   }
@@ -2500,7 +2524,7 @@ function StatusPill({
         isLight ? 'bg-amber-50 text-amber-800' : 'bg-amber-500/15 text-amber-200'
       }`}
     >
-      Error
+      {t('Error')}
     </span>
   );
 }

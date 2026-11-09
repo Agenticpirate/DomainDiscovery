@@ -10,6 +10,7 @@ export function buildSeoPageMetadata(opts: {
   description: string;
   path: string;
   keywords?: string[];
+  aiSummary?: string;
 }): Metadata {
   const description = clampMetaDescription(opts.description);
   const base = buildToolMetadata({ ...opts, description });

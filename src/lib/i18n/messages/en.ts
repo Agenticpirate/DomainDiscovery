@@ -156,7 +156,7 @@ export const en: Messages = {
     generate: 'Generate',
     aria: 'Search domain names',
     bulkHint: 'Check multiple domains',
-    geoHint: 'Find location-based names',
+    geoHint: 'Find location-based names', searched: 'domains searched',
   },
   ui: {
     available: 'Available',
@@ -449,4 +449,5 @@ export const en: Messages = {
     partners: 'If you are a registrar, aftermarket platform, or data provider and want to discuss integrations, email {email} and include the integration scope and technical contact details.',
     cta: 'Back to Search',
   },
+  tx: {},
 };

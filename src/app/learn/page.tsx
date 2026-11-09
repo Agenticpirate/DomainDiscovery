@@ -32,6 +32,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title: copy.metaTitle,
     description: copy.metaDescription,
     path: '/learn',
+    aiSummary:
+      'Free domain name guides: choosing a domain, brandable versus keyword domains, geo domains, valuation, DNS, auctions and registration strategy.',
     keywords: copy.keywords,
   });
 }

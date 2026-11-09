@@ -8,7 +8,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { SITE_BRAND } from '@/lib/seoSiteFacts';
 import { AffiliateSupportNote } from '@/components/ads/AffiliateSupportNote';
 import { isLabAutomation, prefersReducedMotion } from '@/lib/perfRuntime';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT, type Translate } from '@/components/i18n/LocaleProvider';
 import type { Messages } from '@/lib/i18n/types';
 
 const HalftoneWordmark = dynamic(
@@ -138,7 +138,7 @@ type FooterSection = {
   links: FooterLink[];
 };
 
-function footerSections(f: Messages['footer'], href: (path: string) => string): FooterSection[] {
+function footerSections(f: Messages['footer'], href: (path: string) => string, t: Translate): FooterSection[] {
   return [
   {
     category: f.product,
@@ -148,10 +148,10 @@ function footerSections(f: Messages['footer'], href: (path: string) => string): 
       { label: f.generator, href: href('/generator'), Icon: Fi.spark },
       { label: f.bulk, href: href('/bulk-search'), Icon: Fi.layers },
       { label: f.extensions, href: href('/domain-extensions'), Icon: Fi.globe },
-      { label: 'Domain Leads', href: href('/tools/leads'), Icon: Fi.spark },
-      { label: 'Domain Lead Guides', href: href('/domain-leads'), Icon: Fi.book },
-      { label: 'Domain Name Ideas', href: href('/domain-name-ideas'), Icon: Fi.spark },
-      { label: 'Alternatives', href: href('/alternatives'), Icon: Fi.layers },
+      { label: t('Domain Leads'), href: href('/tools/leads'), Icon: Fi.spark },
+      { label: t('Domain Lead Guides'), href: href('/domain-leads'), Icon: Fi.book },
+      { label: t('Domain Name Ideas'), href: href('/domain-name-ideas'), Icon: Fi.spark },
+      { label: t('Alternatives'), href: href('/alternatives'), Icon: Fi.layers },
       {
         label: f.ada,
         href: 'https://www.aidomainassistant.com',
@@ -167,9 +167,9 @@ function footerSections(f: Messages['footer'], href: (path: string) => string): 
       { label: f.geo, href: href('/tools/geo'), Icon: Fi.globe },
       { label: f.compare, href: href('/tools/compare'), Icon: Fi.dollar },
       { label: f.keyword, href: href('/tools/keyword'), Icon: Fi.keyword },
-      { label: 'Domain Value', href: href('/tools/value'), Icon: Fi.dollar },
-      { label: 'Domain Age', href: href('/tools/domain-age'), Icon: Fi.info },
-      { label: 'DNS Lookup', href: href('/tools/dns'), Icon: Fi.globe },
+      { label: t('Domain Value'), href: href('/tools/value'), Icon: Fi.dollar },
+      { label: t('Domain Age'), href: href('/tools/domain-age'), Icon: Fi.info },
+      { label: t('DNS Lookup'), href: href('/tools/dns'), Icon: Fi.globe },
     ],
   },
   {
@@ -198,8 +198,9 @@ function footerSections(f: Messages['footer'], href: (path: string) => string): 
 
 export const Footer: React.FC = () => {
   const { messages, href } = useLocale();
+  const t = useT();
   const foot = messages.footer;
-  const sections = footerSections(foot, href);
+  const sections = footerSections(foot, href, t);
   const currentYear = new Date().getFullYear();
   const [mounted, setMounted] = React.useState(false);
   const [showParticles, setShowParticles] = React.useState(false);
@@ -381,7 +382,7 @@ export const Footer: React.FC = () => {
                   >
                     <Fi.shield className="h-2.5 w-2.5" />
                   </span>
-                  Free · No account
+                  {t('Free · No account')}
                 </span>
                 <Link
                   href={href('/search')}
@@ -501,6 +502,44 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
+      {/* Launch badges (Product Hunt, Peerlist); badge themes follow the site theme */}
+      <div className={`relative z-[2] border-t ${hairline} ${solidBg}`}>
+        <div className="max-w-6xl mx-auto px-3 sm:px-5 py-3 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="https://www.producthunt.com/products/domaindiscovery?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-domaindiscovery"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- third-party SVG badge; next/image adds nothing here */}
+            <img
+              alt="DomainDiscovery - Discover Your Next Domain. | Product Hunt"
+              width={250}
+              height={54}
+              loading="lazy"
+              decoding="async"
+              src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1309683&theme=${isLight ? 'light' : 'dark'}&t=1794212082116`}
+            />
+          </a>
+          <a
+            href="https://peerlist.io/indiehacker/project/domain-discovery"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- third-party badge with unknown intrinsic width */}
+            <img
+              alt="Domain Discovery on Peerlist"
+              height={54}
+              loading="lazy"
+              decoding="async"
+              style={{ height: 54, width: 'auto' }}
+              src={`https://peerlist.io/api/v1/projects/embed/PRJHEOG7NJ8EAJODOHB76DMMJNM78K?showUpvote=false&theme=${isLight ? 'light' : 'dark'}`}
+            />
+          </a>
+        </div>
+      </div>
+
       {/* Legal bar — with safe-area padding for mobile home indicators */}
       <div
         className={`relative z-[2] border-t ${hairline} ${solidBg}`}
@@ -536,7 +575,7 @@ export const Footer: React.FC = () => {
               { label: foot.disclaimer, href: href('/disclaimer') },
               { label: foot.contact, href: href('/contact') },
               { label: 'Sitemap', href: '/sitemap.xml' },
-              { label: 'For AI', href: href('/for-ai') },
+              { label: t('For AI'), href: href('/for-ai') },
               { label: 'llms.txt', href: '/llms.txt' },
               { label: 'llms-full', href: '/llms-full.txt' },
               { label: 'RSS', href: '/feed.xml' },

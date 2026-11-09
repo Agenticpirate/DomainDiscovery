@@ -6,6 +6,8 @@ import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { getTldAboutIndex, getTldAboutMeta } from '@/lib/tldAboutData';
+import { aiSummaryOther, markdownAlternateTypes } from '@/lib/md/head';
+import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
 import { BlogIntro, BlogStatLabel } from '@/components/i18n/LocalizedSectionIntros';
 
 export const dynamic = 'force-dynamic';
@@ -14,7 +16,10 @@ export const metadata: Metadata = {
   title: 'Domain Blog & TLD Encyclopedia — Extension Guides',
   description:
     'Domain strategy plus a TLD encyclopedia with registry-level about pages: sponsors, WHOIS/RDAP, and nameserver context from public IANA root zone data.',
-  alternates: { canonical: '/blog' },
+  alternates: { canonical: '/blog', ...markdownAlternateTypes(getSiteBaseUrl(), '/blog') },
+  other: aiSummaryOther(
+    'Domain strategy plus a TLD encyclopedia with registry-level about pages: sponsors, WHOIS/RDAP, and nameserver context from public IANA root zone data.'
+  ),
   openGraph: {
     title: 'Domain Blog & TLD Encyclopedia — Extension Guides',
     description:

@@ -3,6 +3,8 @@
  * Single source of truth for brand, features, definitions, and indexes.
  */
 
+import { aiSummaryOther, markdownAlternateTypes } from '@/lib/md/head';
+
 /**
  * Cache-bust for favicons / logos referenced in HTML + JSON-LD.
  * Bump when brand marks change so Google SERP, Bing, and browser caches refetch.
@@ -78,13 +80,14 @@ export const SITE_CORE_PATHS = [
   { path: '/saved-domains', title: 'Saved domains (local shortlist)', priority: 'secondary' },
   { path: '/llms.txt', title: 'LLM product index (machine-readable Markdown)', priority: 'secondary' },
   { path: '/llms-full.txt', title: 'Full LLM dataset + pricing tables', priority: 'secondary' },
+  { path: '/ai.txt', title: 'AI usage permissions and attribution (ai.txt)', priority: 'secondary' },
   { path: '/search.md', title: 'Domain search (Markdown mirror)', priority: 'secondary' },
   { path: '/generator.md', title: 'AI generator (Markdown mirror)', priority: 'secondary' },
-  { path: '/geo.md', title: 'Geo generator (Markdown mirror)', priority: 'secondary' },
-  { path: '/whois.md', title: 'WHOIS (Markdown mirror)', priority: 'secondary' },
-  { path: '/pricing.md', title: 'Price comparison (Markdown mirror)', priority: 'secondary' },
-  { path: '/extensions.md', title: 'TLD extensions (Markdown mirror)', priority: 'secondary' },
-  { path: '/about.md', title: 'About DomainDiscovery (Markdown)', priority: 'secondary' },
+  { path: '/tools/geo.md', title: 'Geo generator (Markdown mirror)', priority: 'secondary' },
+  { path: '/tools/whois.md', title: 'WHOIS (Markdown mirror)', priority: 'secondary' },
+  { path: '/tools/compare.md', title: 'Price comparison (Markdown mirror)', priority: 'secondary' },
+  { path: '/domain-extensions.md', title: 'TLD extensions (Markdown mirror)', priority: 'secondary' },
+  { path: '/learn/what-is-domaindiscovery.md', title: 'About DomainDiscovery (Markdown)', priority: 'secondary' },
 ] as const;
 
 /** Pillar learn articles for organic + LLM discovery */
@@ -534,13 +537,16 @@ export function buildToolMetadata(opts: {
   description: string;
   path: string;
   keywords?: string[];
+  /** Text for the ai-summary meta tag. Defaults to the description. */
+  aiSummary?: string;
 }): import('next').Metadata {
   const path = opts.path.startsWith('/') ? opts.path : `/${opts.path}`;
   return {
     title: opts.title,
     description: opts.description,
     ...(opts.keywords?.length ? { keywords: opts.keywords } : {}),
-    alternates: { canonical: path },
+    alternates: { canonical: path, ...markdownAlternateTypes(getSiteBaseUrl(), path) },
+    other: aiSummaryOther(opts.aiSummary ?? opts.description),
     openGraph: {
       type: 'website',
       locale: 'en_US',

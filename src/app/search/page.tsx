@@ -21,7 +21,8 @@ import { searchDomains, checkDomainAvailability } from '@/services/instantDomain
 import { recordDomainsChecked } from '@/lib/searchCounter';
 import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
 import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
+import { rich } from '@/components/i18n/rich';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
 import extensionsData from '@/data/extensions.json';
@@ -118,6 +119,7 @@ function generateBrandableDomains(query: string): string[] {
 
 function SearchPageContent() {
   const { locale, messages, href } = useLocale();
+  const t = useT();
   const searchParams = useSearchParams();
   const router = useRouter();
   const initialQuery = searchParams.get('q') || '';
@@ -256,7 +258,7 @@ function SearchPageContent() {
   const handleSave = (domain: string) => {
     const { saved } = toggleSavedDomain(domain);
     setSavedDomains(getSavedDomainNames());
-    showToast(saved ? `Saved ${domain}` : `Removed ${domain}`, 'success', 1500);
+    showToast(saved ? t('Saved {d}', { d: domain }) : t('Removed {d}', { d: domain }), 'success', 1500);
   };
 
   /** Block clipboard copy of domain names — save only */
@@ -507,7 +509,7 @@ function SearchPageContent() {
               <div className="min-w-0 flex-1 overflow-hidden">
                 <SearchInterface
                   initialQuery={query}
-                  placeholder="Search a domain…"
+                  placeholder={t('Search a domain…')}
                   onSearch={handleLiveSearch}
                   onClear={handleResetSearch}
                   autoFocus={true}
@@ -527,22 +529,22 @@ function SearchPageContent() {
               }`}
             >
               <nav
-                aria-label="Domain tools"
+                aria-label={t('Domain tools')}
                 className="flex min-w-0 flex-1 flex-wrap gap-1 sm:flex-nowrap sm:overflow-x-auto scrollbar-none"
               >
                 {(
                   [
-                    { href: '/search', label: 'Search', short: 'Search', active: true, catalog: false },
+                    { href: '/search', label: t('Search'), short: t('Search'), active: true, catalog: false },
                     {
                       href: extensionsCatalogHref,
-                      label: 'Extensions',
+                      label: t('Extensions'),
                       short: 'TLDs',
                       active: false,
                       catalog: true,
                     },
-                    { href: href('/generator'), label: 'Generator', short: 'Ideas', active: false, catalog: false },
-                    { href: href('/premium'), label: 'Aftermarket', short: 'Market', active: false, catalog: false },
-                    { href: href('/tools/keyword'), label: 'Research', short: 'Research', active: false, catalog: false },
+                    { href: href('/generator'), label: t('Generator'), short: t('Ideas'), active: false, catalog: false },
+                    { href: href('/premium'), label: t('Aftermarket'), short: t('Market'), active: false, catalog: false },
+                    { href: href('/tools/keyword'), label: t('Research'), short: t('Research'), active: false, catalog: false },
                   ] as const
                 ).map((tab) => {
                   const cls = `shrink-0 inline-flex min-h-9 sm:min-h-10 items-center justify-center rounded-xl px-2.5 sm:px-3 py-1.5 text-[12px] sm:text-[13px] font-semibold tracking-tight transition-colors duration-150 ${
@@ -581,8 +583,8 @@ function SearchPageContent() {
                       ? 'text-slate-400 hover:text-slate-800 hover:bg-white'
                       : 'text-white/35 hover:text-white hover:bg-white/[0.06]'
                   }`}
-                  title="Clear search"
-                  aria-label="Clear search"
+                  title={t('Clear search')}
+                  aria-label={t('Clear search')}
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
@@ -612,14 +614,14 @@ function SearchPageContent() {
                       className="text-[10px] font-medium tabular-nums shrink-0"
                       style={{ color: 'var(--text-muted)' }}
                     >
-                      Checking {checkedCount}…
+                      {t('Checking {n}…', { n: checkedCount })}
                     </span>
                   </div>
                 )}
 
                 <div
                   role="tablist"
-                  aria-label="Filter by availability status"
+                  aria-label={t('Filter by availability status')}
                   className={`grid grid-cols-4 gap-0.5 w-full rounded-2xl border p-1 ${
                     isLight
                       ? 'bg-slate-100/70 border-slate-200/90'
@@ -690,7 +692,7 @@ function SearchPageContent() {
                           <span
                             className="text-[12px] font-semibold leading-none tracking-tight truncate"
                           >
-                            {f.label}
+                            {t(f.label)}
                           </span>
                         </span>
                         <span
@@ -732,7 +734,7 @@ function SearchPageContent() {
                   }}
                 />
                 <span className="text-[13px] font-medium" style={{ color: 'var(--text-muted)' }}>
-                  Checking…
+                  {t('Checking…')}
                 </span>
               </div>
             </div>
@@ -740,19 +742,18 @@ function SearchPageContent() {
 
           {!isLoading && results.length === 0 && !query && (
             <div className="text-center py-16">
-              <p className="text-[15px] font-bold mb-1">Search any name</p>
+              <p className="text-[15px] font-bold mb-1">{t('Search any name')}</p>
               <p className="text-[12px]" style={{ color: 'var(--text-muted)' }}>
-                Live availability across {ALL_TLDS.length}+ extensions
+                {t('Live availability across {n}+ extensions', { n: ALL_TLDS.length })}
               </p>
             </div>
           )}
 
           {!isLoading && results.length === 0 && !!query && (
             <div className="text-center py-16 px-4 max-w-md mx-auto space-y-3">
-              <p className="text-[15px] font-bold">No results for “{query}”</p>
+              <p className="text-[15px] font-bold">{t('No results for “{q}”', { q: query })}</p>
               <p className="text-[12px] leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                Try another spelling, fewer special characters, or explore ideas in Generator or
-                Keyword tools.
+                {t('Try another spelling, fewer special characters, or explore ideas in Generator or Keyword tools.')}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
                 <Link
@@ -763,7 +764,7 @@ function SearchPageContent() {
                       : 'bg-[#111111] border-white/10 text-white/80 hover:bg-white/10'
                   }`}
                 >
-                  Domain generator
+                  {t('Domain generator')}
                 </Link>
                 <Link
                   href={href('/tools/keyword')}
@@ -773,7 +774,7 @@ function SearchPageContent() {
                       : 'bg-[#111111] border-white/10 text-white/80 hover:bg-white/10'
                   }`}
                 >
-                  Keyword finder
+                  {t('Keyword finder')}
                 </Link>
               </div>
             </div>
@@ -788,7 +789,7 @@ function SearchPageContent() {
             >
               {visibleExtensions.length === 0 ? (
                 <p className="text-center text-[12px] py-12" style={{ color: 'var(--text-muted)' }}>
-                  Nothing in this filter
+                  {t('Nothing in this filter')}
                 </p>
               ) : (
                 <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 sm:gap-1.5 w-full max-w-full min-w-0">
@@ -827,15 +828,17 @@ function SearchPageContent() {
                         }`}
                       >
                         <span className="tracking-tight">
-                          View{' '}
-                          <span
-                            className={`tabular-nums ${
-                              isLight ? 'text-slate-500' : 'text-white/50'
-                            }`}
-                          >
-                            {hiddenExtCount.toLocaleString()}
-                          </span>{' '}
-                          more
+                          {rich(t('View {n} more'), {
+                            n: (
+                              <span
+                                className={`tabular-nums ${
+                                  isLight ? 'text-slate-500' : 'text-white/50'
+                                }`}
+                              >
+                                {hiddenExtCount.toLocaleString()}
+                              </span>
+                            ),
+                          })}
                         </span>
                         <svg
                           className={`h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-px ${
@@ -866,7 +869,7 @@ function SearchPageContent() {
                             : 'border-white/[0.08] bg-transparent text-white/45 hover:border-white/15 hover:text-white/80'
                         }`}
                       >
-                        Show less
+                        {t('Show less')}
                       </button>
                     )}
 
@@ -879,7 +882,7 @@ function SearchPageContent() {
                           : 'text-white/35 hover:text-white/75'
                       }`}
                     >
-                      Full catalog
+                      {t('Full catalog')}
                       <span
                         aria-hidden
                         className="inline-block transition-transform duration-300 group-hover:translate-x-0.5"
@@ -903,7 +906,7 @@ function SearchPageContent() {
                 }}
               />
               <span className="text-[13px] font-medium" style={{ color: 'var(--text-muted)' }}>
-                Checking more extensions…
+                {t('Checking more extensions…')}
               </span>
             </div>
           )}
@@ -952,18 +955,19 @@ function DomainRow({
   onSelectRegistrar: (registrar: RegistrarName) => void;
   onBlockCopy: (e: React.ClipboardEvent | React.MouseEvent) => void;
 }) {
+  const t = useT();
   const isUnknown = result.checked === false;
   const isPremium = !isUnknown && !!result.premium && !result.available;
   const isAvailable = result.available && !result.premium && !isUnknown;
 
   const domainHref = getSpaceshipAffiliateUrl(result.domain);
   const domainTitle = isAvailable
-    ? `Register ${result.domain} via Spaceship affiliate`
+    ? t('Register {d} via Spaceship affiliate', { d: result.domain })
     : isPremium
-      ? `Premium name · open ${result.domain} on Spaceship`
+      ? t('Premium name · open {d} on Spaceship', { d: result.domain })
       : isUnknown
-        ? `Availability unconfirmed · open ${result.domain} on Spaceship`
-        : `Open ${result.domain} on Spaceship`;
+        ? t('Availability unconfirmed · open {d} on Spaceship', { d: result.domain })
+        : t('Open {d} on Spaceship', { d: result.domain });
 
   // Status: soft color on dot + label only (not on the CTA)
   const statusDot = isAvailable
@@ -983,12 +987,12 @@ function DomainRow({
           : 'bg-rose-400';
 
   const actionTitle = isAvailable
-    ? `Available · register ${result.domain}`
+    ? t('Available · register {d}', { d: result.domain })
     : isPremium
-      ? `Premium · open ${result.domain}`
+      ? t('Premium · open {d}', { d: result.domain })
       : isUnknown
-        ? `Unconfirmed · check ${result.domain}`
-        : `Taken · look up ${result.domain}`;
+        ? t('Unconfirmed · check {d}', { d: result.domain })
+        : t('Taken · look up {d}', { d: result.domain });
 
   // Status stays on the dot. The arrow is the brand control on every row.
   const actionTone = isLight
@@ -1044,8 +1048,8 @@ function DomainRow({
               ? 'text-slate-400 border-slate-200 hover:text-slate-700'
               : 'text-white/35 border-white/10 hover:text-white/75'
         }`}
-        aria-label={isSaved ? 'Remove save' : 'Save domain'}
-        title={isSaved ? 'Saved' : 'Save'}
+        aria-label={isSaved ? t('Remove save') : t('Save domain')}
+        title={isSaved ? t('Saved') : t('Save')}
       >
         <svg
           className="w-3.5 h-3.5"
@@ -1074,7 +1078,7 @@ function DomainRow({
           </>
         }
         premiumUrl={isPremium ? result.buyUrl : undefined}
-        premiumLabel={result.purchaseInfo || (isPremium ? 'Premium listing' : undefined)}
+        premiumLabel={result.purchaseInfo || (isPremium ? t('Premium listing') : undefined)}
         shellClassName="shadow-none ring-0"
         primaryButtonClassName={`${actionTone} !h-6 !w-6 sm:!h-7 sm:!w-7 !p-0`}
         chevronButtonClassName={`${actionTone} !px-1.5 !py-0 border-l ${

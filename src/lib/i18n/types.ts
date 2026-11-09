@@ -114,6 +114,8 @@ export type Messages = {
     aria: string;
     bulkHint: string;
     geoHint: string;
+    /** Label after the live search counter, e.g. "domains searched". */
+    searched: string;
   };
   ui: {
     available: string;
@@ -225,4 +227,10 @@ export type Messages = {
     partners: string;
     cta: string;
   };
+  /**
+   * Phrase table for tool-page UI copy, keyed by the exact English text.
+   * English leaves it empty (the key itself is shown); other languages fill it in.
+   * Placeholders look like {n} and are filled in by the translate helper.
+   */
+  tx: Record<string, string>;
 };

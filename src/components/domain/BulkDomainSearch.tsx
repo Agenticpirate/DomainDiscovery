@@ -6,6 +6,8 @@ import { Icons } from '../ui/Icons';
 import { BulkDomainSearchLanding, BULK_SAMPLE_TEXT, type BulkAddOptions } from './BulkDomainSearchLanding';
 import { RegistrarActionMenu } from './RegistrarControls';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useT } from '@/components/i18n/LocaleProvider';
+import { rich } from '@/components/i18n/rich';
 import { useToast } from '@/components/ui/Toast';
 import { usePreferredRegistrar } from '@/hooks/usePreferredRegistrar';
 import {
@@ -99,13 +101,14 @@ function StatusIcon({
   status: DomainTag['status'];
   isLight: boolean;
 }) {
+  const t = useT();
   if (status === 'premium') {
     return (
       <span
         className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
           isLight ? 'bg-amber-100 text-amber-600' : 'bg-amber-500/15 text-amber-400'
         }`}
-        title="Premium"
+        title={t('Premium')}
       >
         <CrownIcon className="w-3 h-3" />
       </span>
@@ -119,8 +122,8 @@ function StatusIcon({
             ? 'bg-emerald-50 text-emerald-600 border border-emerald-200/80 shadow-[0_0_6px_rgba(16,185,129,0.28)]'
             : 'bg-emerald-500/12 text-emerald-400 border border-emerald-500/25 shadow-[0_0_8px_rgba(52,211,153,0.32)]'
         }`}
-        title="Available"
-        aria-label="Available"
+        title={t('Available')}
+        aria-label={t('Available')}
       >
         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
@@ -134,7 +137,7 @@ function StatusIcon({
         className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
           isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/[0.06] text-white/40'
         }`}
-        title="Checking"
+        title={t('Checking')}
       >
         <span className="h-2 w-2 rounded-full border-2 border-current border-t-transparent animate-spin" />
       </span>
@@ -146,7 +149,7 @@ function StatusIcon({
       className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md ${
         isLight ? 'bg-rose-50 text-rose-500' : 'bg-rose-500/10 text-rose-400/90'
       }`}
-      title="Taken"
+      title={t('Taken')}
     >
       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -353,6 +356,7 @@ const ResultsView: React.FC<{
   selectedRegistrar,
   setSelectedRegistrar,
 }) => {
+  const t = useT();
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const { showToast } = useToast();
@@ -369,7 +373,7 @@ const ResultsView: React.FC<{
     (domain: string) => {
       const { saved } = toggleSavedDomain(domain);
       setSavedDomains(getSavedDomainNames());
-      showToast(saved ? `Saved ${domain}` : `Removed ${domain}`, 'success', 1500);
+      showToast(saved ? t('Saved {d}', { d: domain }) : t('Removed {d}', { d: domain }), 'success', 1500);
     },
     [showToast]
   );
@@ -438,10 +442,10 @@ const ResultsView: React.FC<{
     sortMode === 'az'
       ? 'A–Z'
       : sortMode === 'score'
-        ? 'Score'
+        ? t('Score')
         : sortMode === 'length-asc'
-          ? 'Shortest'
-          : 'Longest';
+          ? t('Shortest')
+          : t('Longest');
 
   const cycleSort = () => {
     setSortMode(
@@ -478,7 +482,7 @@ const ResultsView: React.FC<{
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
-                New search
+                {t('New search')}
               </button>
               <div className={`h-4 w-px hidden sm:block ${isLight ? 'bg-slate-200' : 'bg-white/10'}`} />
               <div className="flex flex-wrap items-center gap-1.5">
@@ -537,7 +541,7 @@ const ResultsView: React.FC<{
                 ).map((x) => (
                   <button key={x.k} type="button" onClick={() => setFilter(x.k)} className={chip(filter === x.k)}>
                     {x.icon}
-                    {x.l}
+                    {t(x.l)}
                     <span className={`tabular-nums ${filter === x.k ? 'opacity-80' : 'opacity-50'}`}>{x.c}</span>
                   </button>
                 ))}
@@ -549,23 +553,23 @@ const ResultsView: React.FC<{
                 type="button"
                 onClick={cycleSort}
                 className={chip(sortMode !== 'score')}
-                title="Cycle sort: Score → Shortest → Longest → A–Z"
+                title={t('Cycle sort: Score → Shortest → Longest → A–Z')}
               >
-                Sort: {sortLabel}
+                {t('Sort: {label}', { label: sortLabel })}
               </button>
               <button
                 type="button"
                 onClick={() => setShowTlds(!showTlds)}
                 className={chip(showTlds || tldFilter.length > 0)}
               >
-                TLD{tldFilter.length > 0 ? ` (${tldFilter.length})` : ''}
+                {t('TLD')}{tldFilter.length > 0 ? ` (${tldFilter.length})` : ''}
               </button>
               <button
                 type="button"
                 onClick={() => setShowMoreFilters(!showMoreFilters)}
                 className={chip(showMoreFilters || priceFilterActive || sortMode.startsWith('length'))}
               >
-                More filters
+                {t('More filters')}
               </button>
               <button type="button" onClick={exportCSV} className={chip(false)}>
                 <Icons.Download />
@@ -599,7 +603,7 @@ const ResultsView: React.FC<{
               })}
               {tldFilter.length > 0 && (
                 <button type="button" onClick={() => setTldFilter([])} className={chip(false)}>
-                  Clear TLDs
+                  {t('Clear TLDs')}
                 </button>
               )}
             </div>
@@ -616,17 +620,17 @@ const ResultsView: React.FC<{
                   className="text-[10px] font-bold uppercase tracking-[0.12em] mb-1.5"
                   style={{ color: 'var(--text-muted)' }}
                 >
-                  Sort by length
+                  {t('Sort by length')}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   <button type="button" onClick={() => setSortMode('length-asc')} className={chip(sortMode === 'length-asc')}>
-                    Shortest first
+                    {t('Shortest first')}
                   </button>
                   <button type="button" onClick={() => setSortMode('length-desc')} className={chip(sortMode === 'length-desc')}>
-                    Longest first
+                    {t('Longest first')}
                   </button>
                   <button type="button" onClick={() => setSortMode('score')} className={chip(sortMode === 'score')}>
-                    Score
+                    {t('Score')}
                   </button>
                   <button type="button" onClick={() => setSortMode('az')} className={chip(sortMode === 'az')}>
                     A–Z
@@ -639,7 +643,7 @@ const ResultsView: React.FC<{
                     className="text-[10px] font-bold uppercase tracking-[0.12em] mb-1.5"
                     style={{ color: 'var(--text-muted)' }}
                   >
-                    Price range · {formatPriceCompact(priceMin)} – {formatPriceCompact(priceMax)}
+                    {t('Price range · {min} – {max}', { min: formatPriceCompact(priceMin), max: formatPriceCompact(priceMax) })}
                   </p>
                   <div className="space-y-1">
                     <input
@@ -650,7 +654,7 @@ const ResultsView: React.FC<{
                       value={priceMin}
                       onChange={(e) => setPriceMin(Math.min(Number(e.target.value), priceMax))}
                       className="w-full accent-white"
-                      aria-label="Minimum price"
+                      aria-label={t('Minimum price')}
                     />
                     <input
                       type="range"
@@ -660,7 +664,7 @@ const ResultsView: React.FC<{
                       value={priceMax}
                       onChange={(e) => setPriceMax(Math.max(Number(e.target.value), priceMin))}
                       className="w-full accent-white"
-                      aria-label="Maximum price"
+                      aria-label={t('Maximum price')}
                     />
                   </div>
                   {priceFilterActive && (
@@ -674,7 +678,7 @@ const ResultsView: React.FC<{
                         isLight ? 'text-slate-500 hover:text-slate-900' : 'text-white/45 hover:text-white/80'
                       }`}
                     >
-                      Clear price
+                      {t('Clear price')}
                     </button>
                   )}
                 </div>
@@ -688,22 +692,28 @@ const ResultsView: React.FC<{
             }`}
           >
             <p className={`text-[11px] sm:text-[12px] font-medium ${isLight ? 'text-slate-600' : 'text-white/55'}`}>
-              Showing{' '}
-              <span className={`tabular-nums font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                {results.length.toLocaleString()}
-              </span>{' '}
-              of <span className="tabular-nums">{counts.all.toLocaleString()}</span> domains
+              {rich(t('Showing {a} of {b} domains'), {
+                a: (
+                  <span className={`tabular-nums font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
+                    {results.length.toLocaleString()}
+                  </span>
+                ),
+                b: <span className="tabular-nums">{counts.all.toLocaleString()}</span>,
+              })}
               {results.length > 0 && (
                 <span className={`ml-1.5 ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
-                  · avg score{' '}
-                  <span className={`tabular-nums font-bold ${isLight ? 'text-slate-700' : 'text-white/70'}`}>
-                    {avgScore}
-                  </span>
+                  {rich(t('· avg score {n}'), {
+                    n: (
+                      <span className={`tabular-nums font-bold ${isLight ? 'text-slate-700' : 'text-white/70'}`}>
+                        {avgScore}
+                      </span>
+                    ),
+                  })}
                 </span>
               )}
               <span className={`hidden sm:inline ${isLight ? 'text-slate-400' : 'text-white/30'}`}>
                 {' '}
-                · scroll for full list (max 1k)
+                {t('· scroll for full list (max 1k)')}
               </span>
             </p>
             {counts.checking > 0 ? (
@@ -725,7 +735,7 @@ const ResultsView: React.FC<{
               </div>
             ) : (
               <span className={`text-[10px] sm:text-[11px] font-semibold ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                Check complete
+                {t('Check complete')}
               </span>
             )}
           </div>
@@ -745,8 +755,8 @@ const ResultsView: React.FC<{
         >
           {results.length === 0 ? (
             <div className={`text-center py-16 px-4 ${isLight ? 'text-slate-400' : 'text-white/40'}`}>
-              <p className="text-sm font-semibold mb-1">No domains match this filter</p>
-              <p className="text-[12px]">Switch to All or clear filters</p>
+              <p className="text-sm font-semibold mb-1">{t('No domains match this filter')}</p>
+              <p className="text-[12px]">{t('Switch to All or clear filters')}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-2.5 w-full auto-rows-auto">
@@ -754,10 +764,10 @@ const ResultsView: React.FC<{
                 const domainHref = getSpaceshipAffiliateUrl(d.domain);
                 const domainTitle =
                   d.status === 'available'
-                    ? `Register ${d.domain} via Spaceship affiliate`
+                    ? t('Register {d} via Spaceship affiliate', { d: d.domain })
                     : d.status === 'premium'
-                      ? `Premium name · open ${d.domain} on Spaceship`
-                      : `Open ${d.domain} on Spaceship`;
+                      ? t('Premium name · open {d} on Spaceship', { d: d.domain })
+                      : t('Open {d} on Spaceship', { d: d.domain });
                 const canAct = d.status === 'available' || d.status === 'premium' || d.status === 'taken';
                 const isSaved = savedDomains.includes(d.domain.toLowerCase());
 
@@ -807,8 +817,12 @@ const ResultsView: React.FC<{
                             ? 'text-slate-400 border-slate-200 hover:text-slate-700 hover:border-slate-300'
                             : 'text-white/40 border-white/10 hover:text-white/80 hover:border-white/20'
                       }`}
-                      aria-label={isSaved ? `Remove ${d.domain} from saved` : `Save ${d.domain}`}
-                      title={isSaved ? 'Saved — click to remove' : 'Save domain'}
+                      aria-label={
+                        isSaved
+                          ? t('Remove {d} from saved', { d: d.domain })
+                          : t('Save {d}', { d: d.domain })
+                      }
+                      title={isSaved ? t('Saved — click to remove') : t('Save domain')}
                     >
                       <svg
                         className="w-3.5 h-3.5"
@@ -841,7 +855,7 @@ const ResultsView: React.FC<{
                         premiumUrl={d.status === 'premium' ? d.buyUrl : undefined}
                         premiumLabel={
                           d.purchaseInfo ||
-                          (d.status === 'premium' ? 'Premium listing' : undefined)
+                          (d.status === 'premium' ? t('Premium listing') : undefined)
                         }
                         primaryButtonClassName={
                           isLight
@@ -874,10 +888,12 @@ const ResultsView: React.FC<{
             }`}
           >
             <span>
-              {results.length.toLocaleString()} domain{results.length === 1 ? '' : 's'} in view
-              {filter !== 'all' ? ` · filter: ${filter}` : ''}
+              {results.length === 1
+                ? t('1 domain in view')
+                : t('{n} domains in view', { n: results.length.toLocaleString() })}
+              {filter !== 'all' ? ` · ${t(`filter: ${filter}`)}` : ''}
             </span>
-            <span className="font-medium">Scroll for full list · max 1,000 domains</span>
+            <span className="font-medium">{t('Scroll for full list · max 1,000 domains')}</span>
           </div>
         )}
       </div>
@@ -889,7 +905,7 @@ const ResultsView: React.FC<{
               className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider"
               style={{ color: 'var(--text-muted)' }}
             >
-              Recent bulk searches
+              {t('Recent bulk searches')}
             </p>
           </div>
           <div className="flex gap-2 overflow-x-auto pb-1">
@@ -904,10 +920,10 @@ const ResultsView: React.FC<{
                 >
                   <button type="button" onClick={() => onLoadSearch(snapshot)} className="w-full text-left">
                     <div className={`text-[12px] font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                      {snapshot.domains.length} domains
+                      {t('{n} domains', { n: snapshot.domains.length })}
                     </div>
                     <div className="text-[10px] mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                      {sc.available} free · {sc.premium} prem · {sc.taken} taken
+                      {t('{a} free · {p} prem · {k} taken', { a: sc.available, p: sc.premium, k: sc.taken })}
                     </div>
                   </button>
                   <button
@@ -917,7 +933,7 @@ const ResultsView: React.FC<{
                       isLight ? 'text-slate-400 hover:text-red-500' : 'text-white/30 hover:text-red-400'
                     }`}
                   >
-                    Remove
+                    {t('Remove')}
                   </button>
                 </div>
               );
@@ -930,6 +946,7 @@ const ResultsView: React.FC<{
 };
 
 export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = () => {
+  const t = useT();
   const [input, setInput] = useState('');
   const [domains, setDomains] = useState<DomainTag[]>([]);
   const [recentSearches, setRecentSearches] = useState<BulkSearchSnapshot[]>([]);
@@ -1134,11 +1151,11 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
   }, []);
 
   const add = useCallback(
-    (t: string, options?: BulkAddOptions) => {
+    (text: string, options?: BulkAddOptions) => {
       const max = Math.min(Math.max(options?.maxDomains || 1000, 1), 1000);
-      const names = parse(t, options);
+      const names = parse(text, options);
       if (!names.length) {
-        showToast('No valid domains found in that input', 'error');
+        showToast(t('No valid domains found in that input'), 'error');
         return 0;
       }
 
@@ -1155,7 +1172,7 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
         }));
 
       if (!newOnes.length) {
-        showToast('Those domains are already in your list', 'info');
+        showToast(t('Those domains are already in your list'), 'info');
         return 0;
       }
 
@@ -1163,7 +1180,10 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
       domainsRef.current = next;
       setDomains(next);
       void checkBg(newOnes.map((d) => d.domain));
-      showToast(`Added ${newOnes.length} domain${newOnes.length === 1 ? '' : 's'}`, 'success');
+      showToast(
+        newOnes.length === 1 ? t('Added 1 domain') : t('Added {n} domains', { n: newOnes.length }),
+        'success'
+      );
       return newOnes.length;
     },
     [checkBg, showToast]
@@ -1209,7 +1229,7 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
     a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
     a.download = `bulk-domains-${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
-    showToast('Bulk search exported as CSV', 'success');
+    showToast(t('Bulk search exported as CSV'), 'success');
   };
 
   const exportPDF = async () => {
@@ -1279,7 +1299,7 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
     });
 
     doc.save(`bulk-domains-${new Date().toISOString().split('T')[0]}.pdf`);
-    showToast('Bulk search exported as PDF', 'success');
+    showToast(t('Bulk search exported as PDF'), 'success');
   };
 
   const counts = getDomainCounts(domains);
@@ -1314,14 +1334,14 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
     setShowTlds(false);
     setShowMoreFilters(false);
     setProgress({ done: withScores.length, total: withScores.length });
-    showToast(`Loaded ${withScores.length} domains from a recent bulk search`, 'success');
+    showToast(t('Loaded {n} domains from a recent bulk search', { n: withScores.length }), 'success');
   }, [showToast]);
 
   const deletePreviousSearch = useCallback((snapshotId: string) => {
     const nextHistory = recentSearches.filter((snapshot) => snapshot.id !== snapshotId);
     setRecentSearches(nextHistory);
     saveBulkSearchHistory(nextHistory);
-    showToast('Removed that recent bulk search', 'success');
+    showToast(t('Removed that recent bulk search'), 'success');
   }, [recentSearches, showToast]);
 
   // Show results view
@@ -1397,7 +1417,7 @@ export const BulkDomainSearch: React.FC<{ onSelect?: (d: string) => void }> = ()
 
       add(text, options);
     };
-    reader.onerror = () => showToast('Could not read that file', 'error');
+    reader.onerror = () => showToast(t('Could not read that file'), 'error');
     reader.readAsText(file);
   };
 

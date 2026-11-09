@@ -2,6 +2,8 @@
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useT } from '@/components/i18n/LocaleProvider';
+import { rich } from '@/components/i18n/rich';
 import { pngFileName, renderWhoisSharePng } from '@/lib/whoisShareImage';
 import {
   buildSocialCaption,
@@ -185,6 +187,7 @@ interface WhoisShareCardProps {
 }
 
 export function WhoisShareCard({ data }: WhoisShareCardProps) {
+  const t = useT();
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -299,7 +302,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
   const openSocialComposer = useCallback(
     (id: SocialId) => {
       if (localShare && id !== 'email') {
-        flash('Card image won’t show on social until the site is public HTTPS (not localhost)');
+        flash(t('Card image won’t show on social until the site is public HTTPS (not localhost)'));
       }
       const conf = SOCIAL[id];
       const href = conf.intent(caption, pageUrl, shareTitle);
@@ -309,10 +312,10 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
         openShareWindow(href);
       }
       if (!localShare) {
-        flash(`Opened ${conf.label} · image card loads from the public link`);
+        flash(t('Opened {s} · image card loads from the public link', { s: conf.label }));
       }
     },
-    [caption, flash, localShare, pageUrl, shareTitle]
+    [caption, flash, localShare, pageUrl, shareTitle, t]
   );
 
   const share = useCallback(
@@ -325,7 +328,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
           try {
             const ok = await sharePngFile(blob);
             if (ok) {
-              flash('Shared via device sheet');
+              flash(t('Shared via device sheet'));
               return;
             }
           } catch (err) {
@@ -333,13 +336,13 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
           }
           // Fallback: copy the public share link (best for social previews)
           await navigator.clipboard.writeText(pageUrl);
-          flash('Share link copied — paste in any app for the card preview');
+          flash(t('Share link copied — paste in any app for the card preview'));
           return;
         }
 
         if (channel === 'download') {
           await downloadPng();
-          flash('Card image downloaded');
+          flash(t('Card image downloaded'));
           return;
         }
 
@@ -347,23 +350,23 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
           const blob = await ensureBlob();
           try {
             await copyImage(blob);
-            flash('Card image copied');
+            flash(t('Card image copied'));
           } catch {
             await downloadPng(blob);
-            flash('Downloaded (clipboard blocked)');
+            flash(t('Downloaded (clipboard blocked)'));
           }
           return;
         }
 
         if (channel === 'copy') {
           await navigator.clipboard.writeText(postText);
-          flash('Post text + link copied');
+          flash(t('Post text + link copied'));
           return;
         }
 
         if (channel === 'copyLink') {
           await navigator.clipboard.writeText(pageUrl);
-          flash('Share link copied');
+          flash(t('Share link copied'));
           return;
         }
 
@@ -371,12 +374,12 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
           openSocialComposer(channel as SocialId);
         }
       } catch {
-        flash('Share failed — try Copy link');
+        flash(t('Share failed — try Copy link'));
       } finally {
         setBusy(false);
       }
     },
-    [copyImage, downloadPng, ensureBlob, flash, openSocialComposer, pageUrl, postText, sharePngFile]
+    [copyImage, downloadPng, ensureBlob, flash, openSocialComposer, pageUrl, postText, sharePngFile, t]
   );
 
   const statusTone = data.available
@@ -402,13 +405,13 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
               isLight ? 'text-slate-500' : 'text-white/40'
             }`}
           >
-            Share
+            {t('Share')}
           </div>
           <p className={`mt-0.5 text-sm font-semibold ${isLight ? 'text-slate-800' : 'text-white/90'}`}>
-            Send this record
+            {t('Send this record')}
           </p>
           <p className={`mt-1 text-[12px] leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-            Download the card, or open it in the app you already use. The image appears under the post once the link is public.
+            {t('Download the card, or open it in the app you already use. The image appears under the post once the link is public.')}
           </p>
         </div>
         {feedback && (
@@ -433,7 +436,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
               : 'border-white/10 bg-[#111111] text-white/70'
           }`}
         >
-          Image previews need a public link. On localhost, share still opens with the caption and URL. The card image appears after you deploy.
+          {t('Image previews need a public link. On localhost, share still opens with the caption and URL. The card image appears after you deploy.')}
         </div>
       )}
       {!localShare && crawlable && (
@@ -442,7 +445,9 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
             isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-[#0a0a0a] text-white/50'
           }`}
         >
-          Share links use <span className="font-mono text-[10px]">{shareOrigin}</span> so networks can fetch the card image.
+          {rich(t('Share links use {origin} so networks can fetch the card image.'), {
+            origin: <span className="font-mono text-[10px]">{shareOrigin}</span>,
+          })}
         </div>
       )}
 
@@ -517,8 +522,8 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                       isLight ? 'text-slate-400' : 'text-white/30'
                     }`}
                   >
-                    <span>Share card</span>
-                    <span>export → PNG</span>
+                    <span>{t('Share card')}</span>
+                    <span>{t('export → PNG')}</span>
                   </div>
                 </div>
               </div>
@@ -532,7 +537,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                 isLight ? 'text-slate-500' : 'text-white/40'
               }`}
             >
-              Post preview
+              {t('Post preview')}
             </div>
             <div
               className={`overflow-hidden rounded-2xl border ${
@@ -607,7 +612,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                 isLight ? 'text-slate-500' : 'text-white/40'
               }`}
             >
-              Card
+              {t('Card')}
             </div>
             <button
               type="button"
@@ -620,7 +625,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
               }`}
             >
               <SocialIcon id="image" className="h-4 w-4" />
-              Share card image
+              {t('Share card image')}
             </button>
             <div className="mt-1.5 grid grid-cols-2 gap-1.5">
               <button
@@ -634,7 +639,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                 }`}
               >
                 <SocialIcon id="download" className="h-3.5 w-3.5" />
-                Download PNG
+                {t('Download PNG')}
               </button>
               <button
                 type="button"
@@ -647,7 +652,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                 }`}
               >
                 <SocialIcon id="copy" className="h-3.5 w-3.5" />
-                Copy image
+                {t('Copy image')}
               </button>
             </div>
           </div>
@@ -658,7 +663,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                 isLight ? 'text-slate-500' : 'text-white/40'
               }`}
             >
-              Post it
+              {t('Post it')}
             </div>
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
               {socialIds.map((id) => {
@@ -669,11 +674,11 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                     type="button"
                     disabled={busy}
                     onClick={() => void share(id)}
-                    aria-label={`Share on ${conf.label}`}
+                    aria-label={t('Share on {s}', { s: conf.label })}
                     title={
                       localShare
-                        ? `Opens ${conf.label} with caption + localhost link (no image card until public HTTPS)`
-                        : `Opens ${conf.label} with caption + share link (card image via Open Graph)`
+                        ? t('Opens {s} with caption + localhost link (no image card until public HTTPS)', { s: conf.label })
+                        : t('Opens {s} with caption + share link (card image via Open Graph)', { s: conf.label })
                     }
                     className={`inline-flex min-h-[52px] flex-col items-center justify-center gap-1 rounded-xl border px-2 py-2.5 text-[10px] font-bold transition disabled:opacity-50 ${
                       isLight
@@ -682,13 +687,13 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                     }`}
                   >
                     <SocialIcon id={id} className="h-4 w-4" />
-                    <span className="leading-none">{conf.chip}</span>
+                    <span className="leading-none">{conf.chip ? t(conf.chip) : conf.chip}</span>
                   </button>
                 );
               })}
             </div>
             <p className={`mt-2 text-[12px] leading-relaxed ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-              Opens the compose window you already use. We never ask for a social password.
+              {t('Opens the compose window you already use. We never ask for a social password.')}
             </p>
           </div>
 
@@ -703,7 +708,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                   : 'border-white/10 bg-[#0a0a0a] text-white/65'
               }`}
             >
-              Copy text
+              {t('Copy text')}
             </button>
             <button
               type="button"
@@ -715,7 +720,7 @@ export function WhoisShareCard({ data }: WhoisShareCardProps) {
                   : 'border-white/10 bg-[#0a0a0a] text-white/65'
               }`}
             >
-              Copy link
+              {t('Copy link')}
             </button>
           </div>
 

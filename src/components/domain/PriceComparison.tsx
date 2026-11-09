@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Input } from '@/components/ui/Input';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useT } from '@/components/i18n/LocaleProvider';
 import {
   MATRIX_PAGE_DESKTOP,
   MATRIX_PAGE_MOBILE,
@@ -127,6 +128,7 @@ function MetricCard({
   meta: string;
   emphasize?: boolean;
 }) {
+  const t = useT();
   return (
     <div
       className={`rounded-md sm:rounded-xl border px-1.5 py-1 sm:p-3 min-w-0 ${
@@ -150,8 +152,8 @@ function MetricCard({
               : 'text-white/45'
         }`}
       >
-        <span className="sm:hidden">{labelShort || label}</span>
-        <span className="hidden sm:inline">{label}</span>
+        <span className="sm:hidden">{t(labelShort || label)}</span>
+        <span className="hidden sm:inline">{t(label)}</span>
       </div>
       <div className="mt-0.5 text-[13px] sm:text-lg font-black tabular-nums leading-none sm:leading-tight">
         {value}
@@ -189,6 +191,7 @@ function RegistrarCard({
   isCheapestRenew?: boolean;
   isBestValue?: boolean;
 }) {
+  const t = useT();
   const isUnsupported =
     offer.registration.value == null &&
     offer.renewal.value == null &&
@@ -246,7 +249,7 @@ function RegistrarCard({
                     isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
                   }`}
                 >
-                  Best reg
+                  {t('Best reg')}
                 </span>
               )}
               {isCheapestRenew && !isCheapestReg && (
@@ -255,7 +258,7 @@ function RegistrarCard({
                     isLight ? 'bg-slate-200 text-slate-700' : 'bg-white/10 text-white/70'
                   }`}
                 >
-                  Best renew
+                  {t('Best renew')}
                 </span>
               )}
               {isBestValue && (
@@ -264,12 +267,12 @@ function RegistrarCard({
                     isLight ? 'bg-slate-200 text-slate-700' : 'bg-white/10 text-white/70'
                   }`}
                 >
-                  Best value
+                  {t('Best value')}
                 </span>
               )}
               {isUnsupported && (
                 <span className={`text-[9px] sm:text-[10px] ${isLight ? 'text-slate-400' : 'text-white/35'}`}>
-                  Not listed
+                  {t('Not listed')}
                 </span>
               )}
             </div>
@@ -344,6 +347,7 @@ function PricePill({
   value: string;
   highlight?: boolean;
 }) {
+  const t = useT();
   return (
     <div
       className={`min-w-0 rounded sm:rounded-lg border px-0.5 py-0.5 sm:px-1.5 sm:py-1.5 text-center ${
@@ -367,7 +371,7 @@ function PricePill({
               : 'text-white/35'
         }`}
       >
-        {label}
+        {t(label)}
       </div>
       <div className="mt-px sm:mt-0.5 text-[10px] sm:text-[12px] font-bold tabular-nums leading-tight truncate">
         {value}
@@ -387,6 +391,7 @@ export function PriceComparison({
   sourceUrl,
   domain,
 }: PriceComparisonProps) {
+  const t = useT();
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const tableRegistrars = TOP_COMPARISON_REGISTRARS;
@@ -772,7 +777,7 @@ export function PriceComparison({
             isLight ? 'border-slate-200 bg-slate-50 text-slate-700' : 'border-white/10 bg-[#0a0a0a] text-white/70'
           }`}
         >
-          Loading registrar pricing…
+          {t('Loading registrar pricing…')}
         </div>
       </div>
     );
@@ -784,7 +789,7 @@ export function PriceComparison({
       <div className="space-y-3">
         <div className={`rounded-2xl border p-4 sm:p-5 ${panelTone(isLight)}`}>
           <div className={`text-[11px] uppercase tracking-[0.22em] ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-            Registrar comparison
+            {t('Registrar comparison')}
           </div>
           <h3 className="mt-1 text-2xl font-black tracking-tight">{detail.tld}</h3>
           {loadError && (
@@ -807,7 +812,7 @@ export function PriceComparison({
           </div>
         </div>
         <div className={`rounded-2xl border p-4 sm:p-5 ${panelTone(isLight)}`}>
-          <h4 className="text-sm font-bold mb-2">Top registrars</h4>
+          <h4 className="text-sm font-bold mb-2">{t('Top registrars')}</h4>
           <div className="max-h-72 space-y-1.5 overflow-y-auto">
             {selectedRegistrarOffers.slice(0, 10).map((offer, index) => (
               <RegistrarCard
@@ -827,7 +832,7 @@ export function PriceComparison({
   }
 
   const matrixLabel =
-    matrixPriceKey === 'registration' ? 'Registration' : matrixPriceKey === 'renewal' ? 'Renewal' : 'Transfer';
+    matrixPriceKey === 'registration' ? t('Registration') : matrixPriceKey === 'renewal' ? t('Renewal') : t('Transfer');
 
   const availableQuickTlds = QUICK_TLDS.filter((tld) =>
     matrixRows.some((r) => r.tld.toLowerCase() === tld)
@@ -847,7 +852,7 @@ export function PriceComparison({
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                 <h3 className={`text-[14px] sm:text-lg font-black tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                  Price matrix
+                  {t('Price matrix')}
                 </h3>
                 <span
                   className={`rounded-full border px-1.5 py-0.5 sm:px-2 text-[9px] sm:text-[10px] font-semibold ${
@@ -858,13 +863,22 @@ export function PriceComparison({
                   {totalExtensionCount && matrixRows.length < totalExtensionCount
                     ? ` / ${totalExtensionCount.toLocaleString()}`
                     : ''}{' '}
-                  TLDs
-                  {canShowMore ? ` · showing ${visibleRows.length}` : ''}
-                  {matrixLoading ? ' · loading…' : ''}
+                  {t('TLDs')}
+                  {canShowMore ? ` · ${t('showing {n}', { n: visibleRows.length })}` : ''}
+                  {matrixLoading ? ` · ${t('loading…')}` : ''}
                 </span>
               </div>
               <p className={`mt-0.5 text-[11px] sm:text-[12px] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-                Viewing <span className="font-semibold">{matrixLabel.toLowerCase()}</span> list prices
+                {(() => {
+                  const [before, after] = t('Viewing {type} list prices', { type: '\u0000' }).split('\u0000');
+                  return (
+                    <>
+                      {before}
+                      <span className="font-semibold">{matrixLabel.toLowerCase()}</span>
+                      {after}
+                    </>
+                  );
+                })()}
               </p>
             </div>
 
@@ -873,7 +887,7 @@ export function PriceComparison({
                 isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-[#111111]'
               }`}
               role="group"
-              aria-label="Price type"
+              aria-label={t('Price type')}
             >
               {(
                 [
@@ -898,7 +912,7 @@ export function PriceComparison({
                           : 'text-white/55 hover:text-white'
                     }`}
                   >
-                    {label}
+                    {t(label)}
                   </button>
                 );
               })}
@@ -916,7 +930,7 @@ export function PriceComparison({
                   isLight ? 'text-slate-500' : 'text-white/45'
                 }`}
               >
-                Find extension
+                {t('Find extension')}
               </span>
               <div className="flex gap-1.5">
                 <Input
@@ -928,8 +942,8 @@ export function PriceComparison({
                       jumpToExtensionQuery();
                     }
                   }}
-                  placeholder="e.g. .ai · .com · hamburg"
-                  aria-label="Search or jump to a domain extension"
+                  placeholder={t('e.g. .ai · .com · hamburg')}
+                  aria-label={t('Search or jump to a domain extension')}
                   className="h-9 sm:h-10 w-full text-[13px]"
                 />
                 <button
@@ -941,7 +955,7 @@ export function PriceComparison({
                       : 'border-white bg-white text-black hover:bg-white/90'
                   }`}
                 >
-                  Go
+                  {t('Go')}
                 </button>
               </div>
             </label>
@@ -952,23 +966,23 @@ export function PriceComparison({
                   isLight ? 'text-slate-500' : 'text-white/45'
                 }`}
               >
-                Filter by registrar
+                {t('Filter by registrar')}
               </span>
               <select
                 id="compare-registrar-filter"
                 value={registrarFilter}
                 onChange={(event) => setRegistrarFilter(event.target.value)}
-                aria-label="Show only extensions sold by this registrar"
+                aria-label={t('Show only extensions sold by this registrar')}
                 className={`h-9 sm:h-10 w-full rounded-lg sm:rounded-xl border px-2.5 sm:px-3 text-[13px] sm:text-sm font-medium outline-none ${
                   isLight
                     ? 'border-slate-200 bg-slate-50 text-slate-900'
                     : 'border-white/10 bg-[#111111] text-white'
                 }`}
               >
-                <option value="all">All registrars</option>
+                <option value="all">{t('All registrars')}</option>
                 {tableRegistrars.map((name) => (
                   <option key={name} value={name}>
-                    Only {name === 'Unstoppable Domains' ? 'Unstoppable' : name}
+                    {t('Only {name}', { name: name === 'Unstoppable Domains' ? 'Unstoppable' : name })}
                   </option>
                 ))}
               </select>
@@ -980,25 +994,25 @@ export function PriceComparison({
                   isLight ? 'text-slate-500' : 'text-white/45'
                 }`}
               >
-                Sort list
+                {t('Sort list')}
               </span>
               <select
                 id="compare-sort"
                 value={sortKey}
                 onChange={(event) => setSortKey(event.target.value as SortKey)}
-                aria-label="Sort extensions"
+                aria-label={t('Sort extensions')}
                 className={`h-9 sm:h-10 w-full rounded-lg sm:rounded-xl border px-2.5 text-[13px] sm:text-sm font-medium outline-none ${
                   isLight
                     ? 'border-slate-200 bg-slate-50 text-slate-900'
                     : 'border-white/10 bg-[#111111] text-white'
                 }`}
               >
-                <option value="recommended">Most popular</option>
-                <option value="coverage">Most coverage</option>
-                <option value="registration">Cheapest reg</option>
-                <option value="renewal">Cheapest renew</option>
-                <option value="transfer">Cheapest transfer</option>
-                <option value="value">Best value</option>
+                <option value="recommended">{t('Most popular')}</option>
+                <option value="coverage">{t('Most coverage')}</option>
+                <option value="registration">{t('Cheapest reg')}</option>
+                <option value="renewal">{t('Cheapest renew')}</option>
+                <option value="transfer">{t('Cheapest transfer')}</option>
+                <option value="value">{t('Best value')}</option>
                 <option value="alphabetical">A–Z</option>
               </select>
             </label>
@@ -1010,7 +1024,7 @@ export function PriceComparison({
                 isLight ? 'text-slate-400' : 'text-white/35'
               }`}
             >
-              Registrars
+              {t('Registrars')}
             </span>
             <button
               type="button"
@@ -1025,7 +1039,7 @@ export function PriceComparison({
                     : 'border-white/10 bg-[#111111] text-white/60 hover:border-white/20'
               }`}
             >
-              All
+              {t('All')}
             </button>
             {tableRegistrars.map((name) => {
               const active = registrarFilter === name;
@@ -1035,7 +1049,7 @@ export function PriceComparison({
                   key={name}
                   type="button"
                   onClick={() => setRegistrarFilter(active ? 'all' : name)}
-                  title={`Show only extensions listed by ${name}`}
+                  title={t('Show only extensions listed by {name}', { name })}
                   className={`shrink-0 inline-flex items-center gap-1 rounded-md sm:rounded-lg border px-1.5 py-0.5 sm:px-2 sm:py-1 text-[10px] sm:text-[11px] font-semibold transition ${
                     active
                       ? isLight
@@ -1060,7 +1074,7 @@ export function PriceComparison({
                   isLight ? 'text-slate-400' : 'text-white/35'
                 }`}
               >
-                Extensions
+                {t('Extensions')}
               </span>
               {availableQuickTlds.map((tld) => {
                 const active = selectedTld === tld;
@@ -1096,8 +1110,9 @@ export function PriceComparison({
               }`}
             >
               <span className="font-semibold">
-                Showing {filteredRows.length.toLocaleString()} extension
-                {filteredRows.length === 1 ? '' : 's'}
+                {filteredRows.length === 1
+                  ? t('Showing 1 extension')
+                  : t('Showing {n} extensions', { n: filteredRows.length.toLocaleString() })}
               </span>
               <button
                 type="button"
@@ -1106,14 +1121,16 @@ export function PriceComparison({
                   isLight ? 'text-slate-700' : 'text-white/75'
                 }`}
               >
-                Clear filters
+                {t('Clear filters')}
               </button>
             </div>
           )}
         </div>
 
-        <div className="grid xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)]">
-          <div className={`p-2 sm:p-4 xl:border-r ${isLight ? 'xl:border-slate-200' : 'xl:border-white/10'}`}>
+        <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)]">
+          {/* min-w-0: without it the grid item grows to the table's min width and the
+              table's own horizontal scroller never engages on phones. */}
+          <div className={`min-w-0 p-2 sm:p-4 xl:border-r ${isLight ? 'xl:border-slate-200' : 'xl:border-white/10'}`}>
             {canScrollTable && (
               <div
                 className={`mb-2 sm:mb-3 flex items-center justify-between gap-2 sm:gap-3 rounded-lg sm:rounded-xl border px-2 py-1.5 sm:px-3 sm:py-2 ${
@@ -1121,8 +1138,8 @@ export function PriceComparison({
                 }`}
               >
                 <div className={`text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] ${isLight ? 'text-slate-600' : 'text-white/60'}`}>
-                  <span className="sm:hidden">Swipe for more registrars</span>
-                  <span className="hidden sm:inline">Scroll horizontally for all 10 registrars</span>
+                  <span className="sm:hidden">{t('Swipe for more registrars')}</span>
+                  <span className="hidden sm:inline">{t('Scroll horizontally for all 10 registrars')}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <button
@@ -1177,7 +1194,7 @@ export function PriceComparison({
                 ref={tableScrollRef}
                 onScroll={() => syncScrollPosition('table')}
                 role="region"
-                aria-label="Domain price comparison matrix"
+                aria-label={t('Domain price comparison matrix')}
                 tabIndex={0}
                 className={`max-h-[min(58vh,640px)] sm:max-h-[min(62vh,640px)] overflow-auto rounded-lg sm:rounded-xl border focus:outline-none focus-visible:ring-2 ${
                   isLight
@@ -1194,7 +1211,7 @@ export function PriceComparison({
 
                 <table className="w-full text-sm min-w-[720px] sm:min-w-[1080px]">
                   <caption className="sr-only">
-                    Registration prices by extension and registrar. Cheapest price in each row is highlighted.
+                    {t('Registration prices by extension and registrar. Cheapest price in each row is highlighted.')}
                   </caption>
                   <thead className={`sticky top-0 z-30 ${isLight ? 'bg-slate-50' : 'bg-[#111]'}`}>
                     <tr>
@@ -1204,8 +1221,8 @@ export function PriceComparison({
                           isLight ? 'bg-slate-50 text-slate-500' : 'bg-[#111] text-white/45'
                         }`}
                       >
-                        <span className="sm:hidden">Ext</span>
-                        <span className="hidden sm:inline">TLD</span>
+                        <span className="sm:hidden">{t('Ext')}</span>
+                        <span className="hidden sm:inline">{t('TLD')}</span>
                       </th>
                       <th
                         scope="col"
@@ -1213,7 +1230,7 @@ export function PriceComparison({
                           isLight ? 'text-slate-500' : 'text-white/45'
                         }`}
                       >
-                        Cover
+                        {t('Cover')}
                       </th>
                       {tableRegistrars.map((registrar) => {
                         const focused = registrarFilter === registrar;
@@ -1260,7 +1277,7 @@ export function PriceComparison({
                           className={`px-4 py-10 text-center ${isLight ? 'text-slate-500' : 'text-white/50'}`}
                         >
                           <p className={`text-sm font-semibold ${isLight ? 'text-slate-800' : 'text-white/80'}`}>
-                            No extensions match your filters
+                            {t('No extensions match your filters')}
                           </p>
                           <button
                             type="button"
@@ -1271,7 +1288,7 @@ export function PriceComparison({
                                 : 'border-white bg-white text-black'
                             }`}
                           >
-                            Clear filters
+                            {t('Clear filters')}
                           </button>
                         </td>
                       </tr>
@@ -1378,18 +1395,17 @@ export function PriceComparison({
                       : 'border-white bg-white text-black hover:bg-white/90'
                   }`}
                 >
-                  Show more extensions ({(filteredRows.length - visibleCount).toLocaleString()} left)
+                  {t('Show more extensions ({n} left)', { n: (filteredRows.length - visibleCount).toLocaleString() })}
                 </button>
               </div>
             )}
 
             <p className={`mt-2 text-[10px] sm:text-[11px] leading-snug ${isLight ? 'text-slate-500' : 'text-white/35'}`}>
               <span className="sm:hidden">
-                — not listed · white pill = best in row · source {formatDate(meta.generatedAt)}
+                {t('— not listed · white pill = best in row · source {date}', { date: formatDate(meta.generatedAt) })}
               </span>
               <span className="hidden sm:inline">
-                — = not listed. Regular list prices when promo + regular both exist. Source updated{' '}
-                {formatDate(meta.generatedAt)}.
+                {t('— = not listed. Regular list prices when promo + regular both exist. Source updated {date}.', { date: formatDate(meta.generatedAt) })}
               </span>
             </p>
           </div>
@@ -1404,21 +1420,21 @@ export function PriceComparison({
                 <div className="min-w-0 flex sm:block items-baseline gap-2">
                   <div className="min-w-0">
                     <div className={`text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-                      Selected extension
+                      {t('Selected extension')}
                     </div>
                     <h3 className={`mt-0 text-lg sm:text-3xl font-black tracking-tight tabular-nums leading-none sm:mt-0.5 ${isLight ? 'text-slate-900' : 'text-white'}`}>
                       {detail.tld}
                     </h3>
                   </div>
                   <p className={`text-[9px] sm:text-[12px] sm:mt-0.5 shrink-0 ${isLight ? 'text-slate-500' : 'text-white/45'}`}>
-                    <span className="sm:hidden">{selectedSupportCount}/{tableRegistrars.length} list it</span>
+                    <span className="sm:hidden">{t('{a}/{b} list it', { a: selectedSupportCount, b: tableRegistrars.length })}</span>
                     <span className="hidden sm:inline">
-                      {selectedSupportCount}/{tableRegistrars.length} registrars list this TLD
+                      {t('{a}/{b} registrars list this TLD', { a: selectedSupportCount, b: tableRegistrars.length })}
                     </span>
                   </p>
                 </div>
                 {loading && (
-                  <span className={`text-[10px] sm:text-[11px] ${isLight ? 'text-slate-400' : 'text-white/40'}`}>Loading…</span>
+                  <span className={`text-[10px] sm:text-[11px] ${isLight ? 'text-slate-400' : 'text-white/40'}`}>{t('Loading…')}</span>
                 )}
               </div>
 
@@ -1434,26 +1450,26 @@ export function PriceComparison({
               <div className="mb-1.5 sm:mb-2 flex items-center justify-between gap-2">
                 <div className="min-w-0">
                   <h4 className={`text-[12px] sm:text-sm font-bold leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                    Registrar breakdown
+                    {t('Registrar breakdown')}
                   </h4>
                   <p className={`text-[9px] sm:text-[11px] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
-                    Sorted by {detailSortKey === 'score' ? 'value score' : detailSortKey}
+                    {t('Sorted by {key}', { key: t(detailSortKey === 'score' ? 'value score' : detailSortKey) })}
                   </p>
                 </div>
                 <select
                   value={detailSortKey}
                   onChange={(event) => setDetailSortKey(event.target.value as DetailSortKey)}
-                  aria-label="Sort registrars"
+                  aria-label={t('Sort registrars')}
                   className={`h-6 sm:h-8 rounded-md sm:rounded-lg border px-1.5 sm:px-2 text-[9px] sm:text-[11px] font-medium outline-none ${
                     isLight
                       ? 'border-slate-200 bg-white text-slate-800'
                       : 'border-white/10 bg-[#111111] text-white'
                   }`}
                 >
-                  <option value="registration">Reg price</option>
-                  <option value="renewal">Renew price</option>
-                  <option value="transfer">Transfer price</option>
-                  <option value="score">Value score</option>
+                  <option value="registration">{t('Reg price')}</option>
+                  <option value="renewal">{t('Renew price')}</option>
+                  <option value="transfer">{t('Transfer price')}</option>
+                  <option value="score">{t('Value score')}</option>
                   <option value="name">A–Z</option>
                 </select>
               </div>
