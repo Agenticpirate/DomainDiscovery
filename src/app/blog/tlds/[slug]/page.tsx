@@ -8,6 +8,13 @@ import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { getTldAboutDetail, getTldAboutSlugs } from '@/lib/tldAboutData';
 import { getRequestLocale } from '@/lib/i18n/request';
+import { getTldPriceDetail } from '@/lib/tldPriceData';
+import { buildTldBuyingContent } from '@/lib/tldBuyingContent';
+import { buildSeoPageMetadata } from '@/lib/seo/pageMeta';
+import { ToolPageJsonLd } from '@/components/seo/JsonLd';
+import { FaqSection } from '@/components/seo/FaqSection';
+import { TldAvailabilityBox } from '@/components/tld/TldAvailabilityBox';
+import { TldPriceTable } from '@/components/tld/TldPriceTable';
 import { fillTld, libraryChrome } from '@/lib/i18n/libraryChrome';
 
 export const dynamic = 'force-dynamic';
@@ -26,27 +33,13 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   if (!detail) {
     return { title: 'TLD not found' };
   }
-  const tldLabel = detail.tld.startsWith('.') ? detail.tld : `.${detail.tld}`;
-  const title =
-    detail.title?.trim() ||
-    `${tldLabel} Domain Extension — Registry Guide`;
-  const description = (
-    detail.about?.replace(/\s+/g, ' ').trim().slice(0, 155) ||
-    `About the ${tldLabel} domain extension: registry, registration rules, and how to check availability on DomainDiscovery.`
-  ).slice(0, 160);
-  const url = `/blog/tlds/${detail.slug}`;
-
-  return {
-    title,
-    description,
-    alternates: { canonical: url },
-    openGraph: {
-      title,
-      description,
-      url,
-      type: 'article',
-    },
-  };
+  const content = buildTldBuyingContent(detail, getTldPriceDetail(detail.tld));
+  return buildSeoPageMetadata({
+    title: content.title,
+    description: content.description,
+    path: `/blog/tlds/${detail.slug}`,
+    keywords: [`${content.tld} domain`, `buy ${content.tld} domain`, `${content.tld} domain price`],
+  });
 }
 
 export default async function TldAboutPage(props: PageProps) {
@@ -57,6 +50,9 @@ export default async function TldAboutPage(props: PageProps) {
   const lib = libraryChrome(locale);
   const tld = detail.tld.startsWith('.') ? detail.tld : `.${detail.tld}`;
 
+  const price = getTldPriceDetail(detail.tld);
+  const content = buildTldBuyingContent(detail, price);
+  const pagePath = `/blog/tlds/${detail.slug}`;
   const features = Object.entries(detail.features || {}).filter(([k]) => k !== 'note');
   const restrictions = detail.registrationRestrictions || {};
 
@@ -88,13 +84,15 @@ export default async function TldAboutPage(props: PageProps) {
                 </span>
               )}
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight">{detail.title}</h1>
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight">{content.h1}</h1>
             {detail.sponsor && (
               <p className="mt-3 text-sm sm:text-base" style={{ color: 'var(--text-secondary)' }}>
                 {lib?.sponsor ?? 'Registry / sponsor'}: <strong className="text-white/90">{detail.sponsor}</strong>
               </p>
             )}
           </header>
+          <TldAvailabilityBox tld={tld} />
+          {price && content.hasPrice && <TldPriceTable tld={tld} price={price} />}
 
           {/* About */}
           <section className="mt-8 rounded-2xl border border-white/10 bg-[#0a0a0a] p-5 sm:p-6">
@@ -231,6 +229,7 @@ export default async function TldAboutPage(props: PageProps) {
             )}
           </section>
 
+          <FaqSection items={content.faqs} />
           <div className="mt-6 flex flex-wrap gap-2">
             <Link
               href={`/tools/whois?domain=example${detail.tld}`}

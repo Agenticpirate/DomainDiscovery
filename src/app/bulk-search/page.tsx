@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
@@ -32,6 +33,12 @@ export default function BulkSearchPage() {
         </div>
         <LocalizedDefinition id="bulk" compact />
         <LocalizedGuidePack pack="bulk" />
+        <p className="page-gutter pt-4 text-center text-[13px]" style={{ color: 'var(--text-muted)' }}>
+          Comparing tools?{' '}
+          <Link href="/alternatives" className="underline underline-offset-4">
+            See domain search alternatives
+          </Link>
+        </p>
         {/* Big ad banner sits below FAQ / guide content */}
         <div className="pt-6 sm:pt-8 pb-4 sm:pb-6">
           <AffiliateAdRail placement="bulk" variant="billboard" />
