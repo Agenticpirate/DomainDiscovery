@@ -78,6 +78,7 @@ export const SITE_CORE_PATHS = [
   { path: '/saved-domains', title: 'Saved domains (local shortlist)', priority: 'secondary' },
   { path: '/llms.txt', title: 'LLM product index (machine-readable Markdown)', priority: 'secondary' },
   { path: '/llms-full.txt', title: 'Full LLM dataset + pricing tables', priority: 'secondary' },
+  { path: '/ai.txt', title: 'AI usage permissions and attribution (ai.txt)', priority: 'secondary' },
   { path: '/search.md', title: 'Domain search (Markdown mirror)', priority: 'secondary' },
   { path: '/generator.md', title: 'AI generator (Markdown mirror)', priority: 'secondary' },
   { path: '/tools/geo.md', title: 'Geo generator (Markdown mirror)', priority: 'secondary' },

@@ -93,8 +93,8 @@ const nextConfig = {
         ],
       },
       {
-        // Crawlable LLM indexes + AI discovery
-        source: '/:file(llms.txt|llms-full.txt|robots.txt|sitemap.xml|ai.txt|humans.txt)',
+        // Crawlable discovery files (llms.txt and llms-full.txt set their own daily cache)
+        source: '/:file(robots.txt|sitemap.xml|ai.txt|humans.txt)',
         headers: [
           {
             key: 'Cache-Control',
