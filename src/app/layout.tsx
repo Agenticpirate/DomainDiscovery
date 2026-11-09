@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { aiSummaryOther, markdownAlternateTypes } from "@/lib/md/head";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
@@ -155,6 +156,13 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: localeHref(locale, "/"),
       languages: languageAlternates("/"),
+      ...(locale === "en" ? markdownAlternateTypes(getSiteBaseUrl(), "/") : {}),
+    },
+    other: {
+      ...baseMetadata.other,
+      ...aiSummaryOther(
+        "Free domain name search across 1,600+ TLDs with live availability, plus an AI name generator, bulk checker, WHOIS lookup and registrar price comparison. Registration happens at a third-party registrar."
+      ),
     },
     openGraph: {
       ...baseMetadata.openGraph,

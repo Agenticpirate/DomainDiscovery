@@ -12,7 +12,7 @@ describe('markdownResponse', () => {
     expect(res.headers.get('X-Markdown-Tokens')).toBe('11');
     expect(res.headers.get('X-Robots-Tag')).toBe('noindex, follow');
     expect(res.headers.get('Content-Location')).toBe(opts.canonicalUrl);
-    expect(res.headers.get('Link')).toBe(`<${opts.canonicalUrl}>; rel="canonical"`);
+    expect(res.headers.get('Link')).toContain(`<${opts.canonicalUrl}>; rel="canonical"`);
     expect(res.headers.get('Vary')).toBe('Accept');
     expect(res.headers.get('Cache-Control')).toBe('public, s-maxage=3600, stale-while-revalidate=86400');
     expect(res.headers.get('Last-Modified')).toBe('Wed, 22 Jul 2026 00:00:00 GMT');

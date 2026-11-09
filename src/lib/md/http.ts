@@ -1,4 +1,5 @@
 /** Response builders for the Markdown endpoint: one place for every header. */
+import { DESCRIBEDBY_LINK } from './head';
 import { MD_CACHE_CONTROL } from './routes';
 
 const CACHE_DEFAULT = MD_CACHE_CONTROL.default;
@@ -37,7 +38,8 @@ function baseHeaders(body: string): Headers {
 export function markdownResponse(body: string, opts: MarkdownResponseOptions): Response {
   const h = baseHeaders(body);
   h.set('Content-Location', opts.canonicalUrl);
-  h.append('Link', `<${opts.canonicalUrl}>; rel="canonical"`);
+  // One Link value: the canonical plus the global describedby links (a config header would replace it).
+  h.append('Link', `<${opts.canonicalUrl}>; rel="canonical", ${DESCRIBEDBY_LINK}`);
   h.set('Cache-Control', opts.longCache ? CACHE_LONG : CACHE_DEFAULT);
   if (opts.negotiated) h.set('Vary', 'Accept');
   if (opts.lastModified) {

@@ -3,6 +3,8 @@
  * Single source of truth for brand, features, definitions, and indexes.
  */
 
+import { aiSummaryOther, markdownAlternateTypes } from '@/lib/md/head';
+
 /**
  * Cache-bust for favicons / logos referenced in HTML + JSON-LD.
  * Bump when brand marks change so Google SERP, Bing, and browser caches refetch.
@@ -535,13 +537,16 @@ export function buildToolMetadata(opts: {
   description: string;
   path: string;
   keywords?: string[];
+  /** Text for the ai-summary meta tag. Defaults to the description. */
+  aiSummary?: string;
 }): import('next').Metadata {
   const path = opts.path.startsWith('/') ? opts.path : `/${opts.path}`;
   return {
     title: opts.title,
     description: opts.description,
     ...(opts.keywords?.length ? { keywords: opts.keywords } : {}),
-    alternates: { canonical: path },
+    alternates: { canonical: path, ...markdownAlternateTypes(getSiteBaseUrl(), path) },
+    other: aiSummaryOther(opts.aiSummary ?? opts.description),
     openGraph: {
       type: 'website',
       locale: 'en_US',

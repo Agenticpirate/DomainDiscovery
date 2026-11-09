@@ -10,6 +10,7 @@ import {
   stripLocalePrefix,
 } from '@/lib/i18n/locales';
 import { prefersMarkdown } from '@/lib/md/accept';
+import { DESCRIBEDBY_LINK } from '@/lib/md/head';
 import {
   htmlPathFromMdPath,
   isExcludedPath,
@@ -50,6 +51,22 @@ function adaPublicBase(): string {
  * - Local monorepo keeps /ada/* for development
  */
 export function middleware(request: NextRequest) {
+  const response = routeRequest(request);
+  // Global hint for agents. Markdown responses carry it from their own handler (a rewritten
+  // response keeps the handler's Link), and redirects and internals do not need it.
+  const { pathname } = request.nextUrl;
+  const rewrite = response.headers.get('x-middleware-rewrite');
+  const toMarkdown = rewrite !== null && new URL(rewrite, request.url).pathname.startsWith('/api/md');
+  const skip =
+    response.status >= 300 ||
+    toMarkdown ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/_next');
+  if (!skip) response.headers.append('Link', DESCRIBEDBY_LINK);
+  return response;
+}
+
+function routeRequest(request: NextRequest): NextResponse {
   const host = request.headers.get('host') || request.nextUrl.host || '';
   const isLocal =
     host.includes('localhost') ||

@@ -6,6 +6,8 @@ import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { getTldAboutIndex, getTldAboutMeta } from '@/lib/tldAboutData';
+import { aiSummaryOther, markdownAlternateTypes } from '@/lib/md/head';
+import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,7 +15,10 @@ export const metadata: Metadata = {
   title: 'TLD Encyclopedia — Domain Extensions & Registry Guides',
   description:
     'Browse domain extensions (TLDs) with registry-oriented about pages: gTLDs, ccTLDs, sponsors, and public DNS root context. Then check availability on DomainDiscovery.',
-  alternates: { canonical: '/blog/tlds' },
+  alternates: { canonical: '/blog/tlds', ...markdownAlternateTypes(getSiteBaseUrl(), '/blog/tlds') },
+  other: aiSummaryOther(
+    'Browse domain extensions (TLDs) with registry-oriented about pages: gTLDs, ccTLDs, sponsors, and public DNS root context.'
+  ),
   openGraph: {
     title: 'TLD Encyclopedia — Domain Extensions & Registry Guides',
     description:
