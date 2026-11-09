@@ -12,6 +12,7 @@ import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
 import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
 import { useLocale } from '@/components/i18n/LocaleProvider';
 import { pageHeading } from '@/lib/i18n/locales';
+import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function GeneratorPage() {
@@ -122,6 +123,15 @@ export default function GeneratorPage() {
             </section>
           )}
 
+          {locale === 'en' && (
+            <p className="px-3.5 sm:px-6 pb-8 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
+              Looking for ideas for your type of business?{' '}
+              <Link href="/domain-name-ideas" className="underline underline-offset-2">
+                Browse domain name ideas by industry
+              </Link>
+              .
+            </p>
+          )}
           <LocalizedDefinition id="generator" compact />
           <LocalizedGuidePack pack="generator" />
           {/* Footer affiliate banner only — no stacked inline ad */}

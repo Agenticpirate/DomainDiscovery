@@ -208,6 +208,7 @@ export function buildLlmsTxt(): string {
     `- [Domain Age Checker](${base}/tools/domain-age): Registration age and expiry date from public RDAP data.`,
     `- [DNS Lookup](${base}/tools/dns): A, AAAA, MX, NS, TXT, CNAME, SOA and CAA records via DNS over HTTPS.`,
     `- [Domain Lead Guides](${base}/domain-leads): How to find buyers for a domain with the leads tool.`,
+    `- [Domain Name Ideas by Industry](${base}/domain-name-ideas): Sample names, live suggestions and tips for 30 business types.`,
     `- [Domain Search Alternatives](${base}/alternatives): Neutral comparisons with other domain search tools.`,
     ``,
     `## Documentation and data`,

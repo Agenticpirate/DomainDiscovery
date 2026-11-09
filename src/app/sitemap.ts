@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { getTldAboutSlugs } from '@/lib/tldAboutData';
 import { getAlternativeSlugs } from '@/lib/alternatives';
 import { getLeadPageSlugs } from '@/lib/leadPages';
+import { getIndustrySlugs } from '@/lib/industries';
 import { getLearnArticles, getLearnTranslatedLocales } from '@/lib/learnArticles';
 import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
 import {
@@ -116,6 +117,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/domain-leads`, changeFrequency: 'monthly' as const, priority: 0.6 },
     ...getLeadPageSlugs().map((slug) => ({
       url: `${baseUrl}/domain-leads/${slug}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.55,
+    })),
+    { url: `${baseUrl}/domain-name-ideas`, changeFrequency: 'monthly' as const, priority: 0.6 },
+    ...getIndustrySlugs().map((slug) => ({
+      url: `${baseUrl}/domain-name-ideas/${slug}`,
       changeFrequency: 'monthly' as const,
       priority: 0.55,
     })),

@@ -150,6 +150,7 @@ function footerSections(f: Messages['footer'], href: (path: string) => string): 
       { label: f.extensions, href: href('/domain-extensions'), Icon: Fi.globe },
       { label: 'Domain Leads', href: href('/tools/leads'), Icon: Fi.spark },
       { label: 'Domain Lead Guides', href: href('/domain-leads'), Icon: Fi.book },
+      { label: 'Domain Name Ideas', href: href('/domain-name-ideas'), Icon: Fi.spark },
       { label: 'Alternatives', href: href('/alternatives'), Icon: Fi.layers },
       {
         label: f.ada,
