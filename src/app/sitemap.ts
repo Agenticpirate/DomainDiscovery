@@ -19,7 +19,7 @@ import { INDEXABLE_LOCALE_PATHS, LOCALES } from '@/lib/i18n/locales';
  * Left out on purpose:
  * - /ada/*: production redirects these to the dedicated ADA domain (308), so listing
  *   them here only produces "Page with redirect" reports. They belong in that site's sitemap.
- * - .txt / .md / .xml files and /learn/md/*: machine-readable mirrors for AI crawlers.
+ * - .txt / .md / .xml files and (.md versions of every page): machine-readable mirrors for AI crawlers.
  *   They are linked from llms.txt, not submitted as pages to Google.
  * - /saved-domains: per-visitor page with no public content.
  *

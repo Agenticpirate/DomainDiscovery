@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { aiSummaryOther, markdownAlternateTypes } from '@/lib/md/head';
 import { clampMetaDescription } from '@/lib/seo/metaDescription';
 import { notFound } from 'next/navigation';
 import { Navigation } from '@/components/layout/Navigation';
@@ -80,6 +81,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     title,
     description,
     keywords,
+    other: aiSummaryOther(description),
     authors: [{ name: SITE_BRAND.name, url: BASE }],
     creator: SITE_BRAND.name,
     publisher: SITE_BRAND.name,
@@ -102,6 +104,8 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     },
     alternates: {
       canonical: url,
+      // Points at the Markdown twin of the canonical URL (English, or the translated guide).
+      ...markdownAlternateTypes(BASE, new URL(url).pathname),
       ...(translatedLocales.length
         ? { languages: learnLanguageAlternates(article.slug, translatedLocales) }
         : {}),

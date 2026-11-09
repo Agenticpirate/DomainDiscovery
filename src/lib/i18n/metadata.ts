@@ -3,6 +3,7 @@ import { getSiteBaseUrl, SITE_BRAND } from '@/lib/seoSiteFacts';
 import { getMessages, getPageCopy } from './index';
 import { getRequestLocale } from './request';
 import { clampMetaDescription } from '@/lib/seo/metaDescription';
+import { aiSummaryOther, markdownAlternateTypes } from '@/lib/md/head';
 import {
   getLocaleMeta,
   INDEXABLE_LOCALE_PATHS,
@@ -33,6 +34,7 @@ export async function buildLocalizedToolMetadata(opts: {
   description: string;
   path: string;
   keywords?: string[];
+  aiSummary?: string;
 }): Promise<Metadata> {
   const locale = await getRequestLocale();
   const meta = getLocaleMeta(locale);
@@ -46,8 +48,11 @@ export async function buildLocalizedToolMetadata(opts: {
     title,
     description,
     keywords: copy?.keywords ?? opts.keywords,
+    other: aiSummaryOther(locale === 'en' ? (opts.aiSummary ?? description) : description),
     alternates: {
       canonical: publicPath,
+      // Markdown exists for English pages only; localized learn guides set their own.
+      ...(locale === 'en' ? markdownAlternateTypes(getSiteBaseUrl(), opts.path) : {}),
       ...(indexable ? { languages: languageAlternates(opts.path) } : {}),
     },
     openGraph: {

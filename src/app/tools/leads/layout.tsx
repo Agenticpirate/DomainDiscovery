@@ -11,6 +11,8 @@ export function generateMetadata() {
     title,
     description,
     path,
+    aiSummary:
+      'Domain lead discovery and namespace saturation scanner. Finds businesses using a brand name on other TLDs and newly registered domains so you can pitch the right buyers.',
     keywords: [
       'domain leads',
       'domain sales leads',

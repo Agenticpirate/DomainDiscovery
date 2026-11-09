@@ -11,6 +11,8 @@ export function generateMetadata() {
   title,
   description,
   path,
+  aiSummary:
+    'Bulk domain availability checker for portfolios and agencies. Paste up to 1,000 names and screen free versus registered domains in batches.',
   keywords: [
     'bulk domain search',
     'bulk domain checker',

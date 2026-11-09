@@ -2,9 +2,9 @@ import { buildLlmsFullTxt, markdownResponse } from '@/lib/llmsMarkdown';
 
 /**
  * llms-full.txt — expanded Markdown dataset for AI ingestion (GEO).
- * Includes definitions, FAQ, real highlight-TLD pricing tables, TLD notes.
+ * Main pages rendered through the Markdown registry (src/lib/md), under 500k characters.
  * Not a Google Search ranking lever.
  */
-export function GET() {
-  return markdownResponse(buildLlmsFullTxt());
+export async function GET() {
+  return markdownResponse(await buildLlmsFullTxt());
 }
