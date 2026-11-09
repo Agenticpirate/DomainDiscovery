@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Icons } from '@/components/ui/Icons';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useT } from '@/components/i18n/LocaleProvider';
 import { useToast } from '@/components/ui/Toast';
 import { getSpaceshipAffiliateUrl } from '@/lib/registrars';
 import { recordDomainsChecked } from '@/lib/searchCounter';
@@ -95,6 +96,7 @@ const CHECK_CAP = 480;
 const MAX_GENERATED = 14000;
 
 export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
+  const t = useT();
   const { theme } = useTheme();
   const isLight = theme === 'light';
   const [keyword, setKeyword] = useState('');
@@ -653,7 +655,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch(keyword)}
-              placeholder="Enter a keyword (cloud, mint, spark, shop…)"
+              placeholder={t('Enter a keyword (cloud, mint, spark, shop…)')}
               autoFocus
               autoComplete="off"
               spellCheck={false}
@@ -701,7 +703,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               disabled={!keyword.trim() || isSearching}
               className={`btn-brand shrink-0 inline-flex items-center gap-1 rounded-lg sm:rounded-xl px-3 sm:px-5 py-2 sm:py-2.5 text-[12px] sm:text-[13px] font-bold disabled:opacity-40 disabled:cursor-not-allowed`}
             >
-              <span>Generate</span>
+              <span>{t('Generate')}</span>
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -742,7 +744,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
                           : 'bg-transparent text-white/40 border-transparent hover:text-white/70'
                     }`}
                   >
-                    {SEED_CATEGORY_LABELS[cat] || cat}
+                    {SEED_CATEGORY_LABELS[cat] ? t(SEED_CATEGORY_LABELS[cat]) : cat}
                   </button>
                 );
               })}
@@ -766,9 +768,12 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
               ))}
             </div>
             <p className="text-center text-[9px] sm:text-[10px]" style={{ color: 'var(--text-muted)' }}>
-              {lexiconStats.prefixes.toLocaleString()} prefixes · {lexiconStats.suffixes.toLocaleString()}{' '}
-              suffixes · {lexiconStats.seedWords.toLocaleString()} seeds · up to{' '}
-              {MAX_GENERATED.toLocaleString()} ideas per keyword
+              {t('{prefixes} prefixes · {suffixes} suffixes · {seeds} seeds · up to {max} ideas per keyword', {
+                prefixes: lexiconStats.prefixes.toLocaleString(),
+                suffixes: lexiconStats.suffixes.toLocaleString(),
+                seeds: lexiconStats.seedWords.toLocaleString(),
+                max: MAX_GENERATED.toLocaleString(),
+              })}
             </p>
           </div>
 
@@ -1324,7 +1329,7 @@ export function DomainGenerator({ onSelect }: DomainGeneratorProps) {
           className="text-center text-[11px] sm:text-[12px] py-1"
           style={{ color: 'var(--text-muted)' }}
         >
-          Pick a keyword chip or type above — names from the word list show up here immediately.
+          {t('Pick a keyword chip or type above — names from the word list show up here immediately.')}
         </p>
       )}
     </div>

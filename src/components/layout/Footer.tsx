@@ -8,7 +8,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { SITE_BRAND } from '@/lib/seoSiteFacts';
 import { AffiliateSupportNote } from '@/components/ads/AffiliateSupportNote';
 import { isLabAutomation, prefersReducedMotion } from '@/lib/perfRuntime';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT, type Translate } from '@/components/i18n/LocaleProvider';
 import type { Messages } from '@/lib/i18n/types';
 
 const HalftoneWordmark = dynamic(
@@ -138,7 +138,7 @@ type FooterSection = {
   links: FooterLink[];
 };
 
-function footerSections(f: Messages['footer'], href: (path: string) => string): FooterSection[] {
+function footerSections(f: Messages['footer'], href: (path: string) => string, t: Translate): FooterSection[] {
   return [
   {
     category: f.product,
@@ -148,10 +148,10 @@ function footerSections(f: Messages['footer'], href: (path: string) => string): 
       { label: f.generator, href: href('/generator'), Icon: Fi.spark },
       { label: f.bulk, href: href('/bulk-search'), Icon: Fi.layers },
       { label: f.extensions, href: href('/domain-extensions'), Icon: Fi.globe },
-      { label: 'Domain Leads', href: href('/tools/leads'), Icon: Fi.spark },
-      { label: 'Domain Lead Guides', href: href('/domain-leads'), Icon: Fi.book },
-      { label: 'Domain Name Ideas', href: href('/domain-name-ideas'), Icon: Fi.spark },
-      { label: 'Alternatives', href: href('/alternatives'), Icon: Fi.layers },
+      { label: t('Domain Leads'), href: href('/tools/leads'), Icon: Fi.spark },
+      { label: t('Domain Lead Guides'), href: href('/domain-leads'), Icon: Fi.book },
+      { label: t('Domain Name Ideas'), href: href('/domain-name-ideas'), Icon: Fi.spark },
+      { label: t('Alternatives'), href: href('/alternatives'), Icon: Fi.layers },
       {
         label: f.ada,
         href: 'https://www.aidomainassistant.com',
@@ -167,9 +167,9 @@ function footerSections(f: Messages['footer'], href: (path: string) => string): 
       { label: f.geo, href: href('/tools/geo'), Icon: Fi.globe },
       { label: f.compare, href: href('/tools/compare'), Icon: Fi.dollar },
       { label: f.keyword, href: href('/tools/keyword'), Icon: Fi.keyword },
-      { label: 'Domain Value', href: href('/tools/value'), Icon: Fi.dollar },
-      { label: 'Domain Age', href: href('/tools/domain-age'), Icon: Fi.info },
-      { label: 'DNS Lookup', href: href('/tools/dns'), Icon: Fi.globe },
+      { label: t('Domain Value'), href: href('/tools/value'), Icon: Fi.dollar },
+      { label: t('Domain Age'), href: href('/tools/domain-age'), Icon: Fi.info },
+      { label: t('DNS Lookup'), href: href('/tools/dns'), Icon: Fi.globe },
     ],
   },
   {
@@ -197,8 +197,9 @@ function footerSections(f: Messages['footer'], href: (path: string) => string): 
 
 export const Footer: React.FC = () => {
   const { messages, href } = useLocale();
+  const t = useT();
   const foot = messages.footer;
-  const sections = footerSections(foot, href);
+  const sections = footerSections(foot, href, t);
   const currentYear = new Date().getFullYear();
   const [mounted, setMounted] = React.useState(false);
   const [showParticles, setShowParticles] = React.useState(false);
@@ -380,7 +381,7 @@ export const Footer: React.FC = () => {
                   >
                     <Fi.shield className="h-2.5 w-2.5" />
                   </span>
-                  Free · No account
+                  {t('Free · No account')}
                 </span>
                 <Link
                   href={href('/search')}
@@ -573,7 +574,7 @@ export const Footer: React.FC = () => {
               { label: foot.disclaimer, href: href('/disclaimer') },
               { label: foot.contact, href: href('/contact') },
               { label: 'Sitemap', href: '/sitemap.xml' },
-              { label: 'For AI', href: href('/for-ai') },
+              { label: t('For AI'), href: href('/for-ai') },
               { label: 'llms.txt', href: '/llms.txt' },
               { label: 'llms-full', href: '/llms-full.txt' },
               { label: 'RSS', href: '/feed.xml' },

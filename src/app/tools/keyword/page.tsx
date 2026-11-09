@@ -11,13 +11,14 @@ import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
 import { SITE_PAGE_DEFINITIONS } from '@/lib/seoSiteFacts';
 import { useTheme } from '@/contexts/ThemeContext';
 import { ds } from '@/lib/ds';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 import { pageShell } from '@/lib/i18n/pageShells';
 
 export default function KeywordPage() {
   const [selectedDomain, setSelectedDomain] = useState<string>('');
   const { theme } = useTheme();
-  const { locale } = useLocale();
+  const { locale, messages } = useLocale();
+  const t = useT();
   const shell = pageShell(locale);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -78,7 +79,16 @@ export default function KeywordPage() {
           </section>
         </SectionAmbient>
 
-        <CiteableDefinition definition={SITE_PAGE_DEFINITIONS.keyword} compact />
+        <CiteableDefinition
+          eyebrow={messages.ui.definition}
+          definition={{
+            ...SITE_PAGE_DEFINITIONS.keyword,
+            question: t(SITE_PAGE_DEFINITIONS.keyword.question),
+            answer: t(SITE_PAGE_DEFINITIONS.keyword.answer),
+            learnLabel: SITE_PAGE_DEFINITIONS.keyword.learnLabel && t(SITE_PAGE_DEFINITIONS.keyword.learnLabel),
+          }}
+          compact
+        />
       </main>
 
       <Footer />

@@ -10,9 +10,10 @@ import { BulkDomainSearch } from '@/components/domain/BulkDomainSearch';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
 import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
-import { useLocale } from '@/components/i18n/LocaleProvider';
+import { useLocale, useT } from '@/components/i18n/LocaleProvider';
 export default function BulkSearchPage() {
   const { messages, href } = useLocale();
+  const t = useT();
   return (
     <div className="page-x-lock min-h-screen overflow-x-hidden" style={{ backgroundColor: 'var(--bg-main)' }}>
       <PageBackground variant="hero" />
@@ -34,9 +35,9 @@ export default function BulkSearchPage() {
         <LocalizedDefinition id="bulk" compact />
         <LocalizedGuidePack pack="bulk" />
         <p className="page-gutter pt-4 text-center text-[13px]" style={{ color: 'var(--text-muted)' }}>
-          Comparing tools?{' '}
+          {t('Comparing tools?')}{' '}
           <Link href="/alternatives" className="underline underline-offset-4">
-            See domain search alternatives
+            {t('See domain search alternatives')}
           </Link>
         </p>
         {/* Big ad banner sits below FAQ / guide content */}
