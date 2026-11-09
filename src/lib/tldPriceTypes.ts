@@ -11,6 +11,13 @@ export interface PriceCell {
   regularDisplay?: string | null;
   promoCode?: string;
   limitPerCustomer?: string;
+  /** Last day the promo price is valid (YYYY-MM-DD), when the source gives one. */
+  promoEnds?: string;
+  newCustomerOnly?: boolean;
+  /** Promo applies to the first year only (Porkbun coupons say so explicitly). */
+  firstYearOnly?: boolean;
+  /** Minimum registration term in years the promo requires. */
+  minYears?: number;
 }
 
 export interface RegistrarOffer {

@@ -19,6 +19,8 @@ import {
   SITE_PRODUCT_FACTS,
 } from '@/lib/seoSiteFacts';
 import { getLearnArticles, getLearnTranslatedLocales } from '@/lib/learnArticles';
+import { getCheapExtensions, getReports } from '@/lib/research';
+import { CHEAP_MAX_PRICE, CHEAP_MIN_LIST_SIZE, CHEAP_MIN_REGISTRARS } from '@/lib/research/domainPriceStudy';
 import { INDEXABLE_LOCALE_PATHS, LOCALES, localeHref } from '@/lib/i18n/locales';
 
 export const LLMS_HEADERS = {
@@ -175,6 +177,23 @@ function learnCatalogSection(base: string): string[] {
   return lines;
 }
 
+/** Research pages with their headline numbers inline, taken from the same reports the pages render. */
+function citeSection(base: string): string[] {
+  const lines = [`## Cite this site for`, ``];
+  for (const report of getReports()) {
+    lines.push(`- [${report.h1}](${base}${report.path}) (data as of ${report.updated}): ${report.summary}`);
+    for (const f of report.findings) lines.push(`  - ${f.text} [link](${base}${report.path}#${f.id})`);
+  }
+  const cheap = getCheapExtensions();
+  if (cheap.length >= CHEAP_MIN_LIST_SIZE) {
+    lines.push(
+      `- [${cheap.length} cheapest domain extensions under $${CHEAP_MAX_PRICE}](${base}/cheapest-domain-extensions): ranked by lowest listed registration price, at least ${CHEAP_MIN_REGISTRARS} registrars each.`
+    );
+  }
+  lines.push(`- [All research](${base}/research)`, ``);
+  return lines;
+}
+
 /** Lean llms.txt — one H1, blockquote summary, H2 link groups (playbook format). */
 export function buildLlmsTxt(): string {
   const base = getSiteBaseUrl();
@@ -196,6 +215,7 @@ export function buildLlmsTxt(): string {
     ``,
     SITE_PRODUCT_FACTS,
     ``,
+    ...citeSection(base),
     `## Core tools`,
     ``,
     `- [Live Domain Search](${base}/search.md): Instant availability checks across 1,600+ TLDs.`,

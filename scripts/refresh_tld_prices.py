@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
 """Refresh registrar pricing from tld-list.com into src/data/tld-price-comparison.json.
 
-Pulls regular (non-promo) registration / renewal / transfer prices for the tracked
-top registrars via the Next.js server action `getTldRegistrars`.
+Pulls the CURRENT listed registration / renewal / transfer prices (promos included) for the
+tracked registrars via the Next.js server action `getTldRegistrars`. When a promo applies,
+`value` is the promo price and `regularValue` is the regular price, with the promo code,
+end date and terms (new customers only, per-customer limit, minimum years) alongside.
+
+Politeness: tld-list.com asks for `Crawl-delay: 5` in robots.txt, so requests are spaced at
+least --delay seconds apart across all workers (default 5). Use --output to write to a
+staging file so a half-finished run never replaces the live dataset.
 
 By default discovers 1,100 popular+alphabetical TLD slugs from
 https://tld-list.com/tlds-from-a-z and refreshes all of them.
@@ -13,6 +19,7 @@ import argparse
 import json
 import re
 import statistics
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
@@ -146,6 +153,21 @@ PRIORITY_SLUGS = [
     "jobs", "careers", "team", "management", "partners",
 ]
 
+_throttle_lock = threading.Lock()
+_last_request_at = 0.0
+MIN_INTERVAL = 5.0
+
+
+def throttle() -> None:
+    """Block until MIN_INTERVAL seconds have passed since the previous request (all threads)."""
+    global _last_request_at
+    with _throttle_lock:
+        wait = _last_request_at + MIN_INTERVAL - time.monotonic()
+        if wait > 0:
+            time.sleep(wait)
+        _last_request_at = time.monotonic()
+
+
 ACTION_ID_FALLBACK = "40debe317f2d55915bb9bf58c0c8d4e6186381d245"
 ACTION_ID_RE = re.compile(
     r'createServerReference\)\("([0-9a-f]{40,})"[^)]*?,"getTldRegistrars"\)'
@@ -163,10 +185,12 @@ def make_scraper() -> cloudscraper.CloudScraper:
 
 def discover_action_id(scraper: cloudscraper.CloudScraper) -> str:
     try:
+        throttle()
         html = scraper.get("https://tld-list.com/tld/com", timeout=45).text
         chunk_paths = list(dict.fromkeys(re.findall(r"/_next/static/chunks/[^\"'\\]+\.js", html)))
         for path in chunk_paths:
             try:
+                throttle()
                 js = scraper.get(f"https://tld-list.com{path}", timeout=30).text
             except Exception:  # noqa: BLE001
                 continue
@@ -189,7 +213,14 @@ def discover_tld_slugs(scraper: cloudscraper.CloudScraper, limit: int | None = N
     When limit is None or <= 0, returns the full catalog (~3,000+).
     Priority popular TLDs are ordered first, then apex, then multi-level.
     """
-    html = scraper.get("https://tld-list.com/tlds-from-a-z", timeout=90).text
+    throttle()
+    resp = scraper.get("https://tld-list.com/tlds-from-a-z", timeout=90)
+    if resp.status_code != 200:
+        raise RuntimeError(
+            f"A-Z index returned HTTP {resp.status_code} (bot challenge?). "
+            "Not working around it; retry later or use --slugs-from-dataset."
+        )
+    html = resp.text
     found = re.findall(r'href="/tld/([a-z0-9.-]+)"', html)
     available = list(dict.fromkeys(found))
     available_set = set(available)
@@ -240,6 +271,46 @@ def regular_price_cell(
         return cents_to_price(current)
 
     return {"value": None, "display": None, "hasPromo": False}
+
+
+PRICE_TYPE_BY_KEY = {"_register": "register", "_renewal": "renewal", "_transfer": "transfer"}
+
+
+def current_price_cell(raw: dict[str, Any], key: str) -> dict[str, Any]:
+    """Current listed price. If a promo applies, value is the promo price and the regular price,
+    promo code, end date and terms are kept next to it."""
+    price = raw.get("price") or {}
+    priceorig = raw.get("priceorig") or {}
+    current = price.get(key)
+    orig = priceorig.get(key)
+    if current is None and orig is None:
+        return {"value": None, "display": None, "hasPromo": False}
+    cell = cents_to_price(current if current is not None else orig)
+    if current is None or orig is None or current == orig:
+        return cell
+    cell["hasPromo"] = True
+    cell["regularValue"] = round(float(orig) / 100.0, 2)
+    cell["regularDisplay"] = f"${cell['regularValue']:.2f}"
+    ptype = PRICE_TYPE_BY_KEY.get(key)
+    applied_ids = set((raw.get("promoApplied") or {}).get(ptype) or []) if ptype else set()
+    for promo in raw.get("promo") or []:
+        if promo.get("_id") in applied_ids:
+            if promo.get("code"):
+                cell["promoCode"] = str(promo["code"])
+            if promo.get("end"):
+                cell["promoEnds"] = str(promo["end"])[:10]
+            break
+    terms = raw.get("terms") or {}
+    limit = terms.get("limit-per-customer") or {}
+    if ptype in (limit.get("pricetype") or []) and limit.get("amount") is not None:
+        cell["limitPerCustomer"] = str(limit["amount"])
+    new_only = terms.get("new-customer-only") or {}
+    if ptype in (new_only.get("pricetype") or []):
+        cell["newCustomerOnly"] = True
+    multi = terms.get("multi-year-purchase-required") or {}
+    if ptype in (multi.get("pricetype") or []) and multi.get("amount") is not None:
+        cell["minYears"] = multi["amount"]
+    return cell
 
 
 def map_payments(methods: list[str] | None) -> list[str]:
@@ -314,14 +385,16 @@ def fetch_registrars(
 
     for attempt in range(max_retries):
         try:
-            page = scraper.get(page_url, timeout=45)
-            if page.status_code == 429:
-                wait = 2.5 * (attempt + 1)
-                time.sleep(wait)
-                continue
-            if page.status_code >= 400:
-                raise RuntimeError(f"TLD page HTTP {page.status_code}")
-
+            # The server action works without loading the page first, which halves the request
+            # count. Only retries load the page (to refresh cookies).
+            if attempt > 0:
+                throttle()
+                page = scraper.get(page_url, timeout=45)
+                if page.status_code == 429:
+                    time.sleep(10.0 * attempt)
+                    continue
+                if page.status_code >= 400:
+                    raise RuntimeError(f"TLD page HTTP {page.status_code}")
             payload = [
                 {
                     "tldName": tld_slug,
@@ -338,6 +411,7 @@ def fetch_registrars(
                 "Origin": "https://tld-list.com",
                 "Referer": page_url,
             }
+            throttle()
             response = scraper.post(
                 page_url,
                 data=json.dumps(payload, separators=(",", ":")),
@@ -345,8 +419,7 @@ def fetch_registrars(
                 timeout=60,
             )
             if response.status_code == 429:
-                wait = 2.5 * (attempt + 1)
-                time.sleep(wait)
+                time.sleep(10.0 * (attempt + 1))
                 continue
             if response.status_code >= 400:
                 raise RuntimeError(f"Server action HTTP {response.status_code}")
@@ -375,10 +448,10 @@ def build_offer(raw: dict[str, Any], display_name: str) -> dict[str, Any]:
     return {
         "registrar": display_name,
         "url": None,
-        "registration": regular_price_cell(price, priceorig, "_register"),
-        "renewal": regular_price_cell(price, priceorig, "_renewal"),
-        "transfer": regular_price_cell(price, priceorig, "_transfer"),
-        "whoisPrivacy": regular_price_cell(price, priceorig, "_whoisprivacy"),
+        "registration": current_price_cell(raw, "_register"),
+        "renewal": current_price_cell(raw, "_renewal"),
+        "transfer": current_price_cell(raw, "_transfer"),
+        "whoisPrivacy": current_price_cell(raw, "_whoisprivacy"),
         "taxAndFees": "None",
         "features": normalize_features(raw),
         "rating": None,
@@ -520,6 +593,7 @@ def write_dataset(
     failed: list[str],
     existing_by_tld: dict[str, dict[str, Any]],
     keep_extra: bool,
+    output_path: Path = DATASET_PATH,
 ) -> int:
     extensions: list[dict[str, Any]] = []
     seen_tlds: set[str] = set()
@@ -554,7 +628,9 @@ def write_dataset(
                     output[key] = prev_meta[key]
         except Exception:  # noqa: BLE001
             pass
-    DATASET_PATH.write_text(json.dumps(output, ensure_ascii=True, separators=(",", ":")))
+    output["pricesIncludePromos"] = True
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(output, ensure_ascii=True, separators=(",", ":")))
     return len(extensions)
 
 
@@ -575,7 +651,24 @@ def main() -> None:
         action="store_true",
         help="Keep existing successful entries; only scrape missing / empty ones",
     )
-    parser.add_argument("--delay", type=float, default=0.7, help="Delay between requests per worker (seconds)")
+    parser.add_argument(
+        "--delay",
+        type=float,
+        default=5.0,
+        help="Minimum seconds between any two requests (tld-list.com robots.txt: Crawl-delay 5)",
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=DATASET_PATH,
+        help="Where to write the dataset. Use a staging file, then copy it over after checking it.",
+    )
+    parser.add_argument(
+        "--abort-after-blocks",
+        type=int,
+        default=5,
+        help="Stop the run after this many 403/429 failures in a row instead of retrying harder",
+    )
     parser.add_argument(
         "--checkpoint-every",
         type=int,
@@ -587,17 +680,33 @@ def main() -> None:
         action="store_true",
         help="Skip common brand/closed TLD patterns that never list public registrars",
     )
+    parser.add_argument("--action-id", default=None, help="Skip action-id discovery and use this server action id")
+    parser.add_argument(
+        "--slugs-from-dataset",
+        action="store_true",
+        help="Use the extensions already in the live dataset instead of fetching the A-Z index",
+    )
     args = parser.parse_args()
+    global MIN_INTERVAL
+    MIN_INTERVAL = max(0.0, args.delay)
 
     limit: int | None = None if (args.all or args.limit <= 0) else args.limit
 
     scraper = make_scraper()
     print("Discovering getTldRegistrars action id…")
-    action_id = discover_action_id(scraper)
+    action_id = args.action_id or discover_action_id(scraper)
     print(f"  action id: {action_id}")
 
     print(f"Discovering TLD slugs from tld-list.com A–Z ({'ALL' if limit is None else f'limit={limit}'})…")
-    slugs = discover_tld_slugs(scraper, limit)
+    if args.slugs_from_dataset:
+        prev_file = json.loads(DATASET_PATH.read_text())
+        dataset_slugs = [e["tld"].lstrip(".").lower() for e in prev_file.get("extensions") or []]
+        ordered_known = [x for x in PRIORITY_SLUGS if x in set(dataset_slugs)]
+        slugs = list(dict.fromkeys(ordered_known + dataset_slugs))
+        if limit:
+            slugs = slugs[:limit]
+    else:
+        slugs = discover_tld_slugs(scraper, limit)
     print(f"  {len(slugs)} extensions in source catalog")
 
     existing_by_tld: dict[str, dict[str, Any]] = {}
@@ -612,10 +721,20 @@ def main() -> None:
     results: dict[str, dict[str, Any]] = {}
     failed: list[str] = []
 
-    # Seed with existing good data when resuming
+    # Resume source: the staging file when --output is not the live dataset, else the live dataset.
+    resume_by_tld = existing_by_tld
+    if args.output != DATASET_PATH:
+        resume_by_tld = {}
+        if args.output.exists():
+            try:
+                for entry in json.loads(args.output.read_text()).get("extensions") or []:
+                    resume_by_tld[entry["tld"].lower()] = entry
+            except Exception:  # noqa: BLE001
+                pass
+    # Seed with already-scraped data when resuming
     for slug in slugs:
         tld = f".{slug}"
-        prev = existing_by_tld.get(tld)
+        prev = resume_by_tld.get(tld)
         if (
             args.resume
             and prev
@@ -652,7 +771,7 @@ def main() -> None:
     )
 
     if not pending:
-        n = write_dataset(slugs, results, failed, existing_by_tld, keep_extra=args.resume)
+        n = write_dataset(slugs, results, failed, existing_by_tld, keep_extra=args.resume, output_path=args.output)
         print(f"Nothing to scrape. Dataset has {n} extensions.")
         return
 
@@ -670,11 +789,12 @@ def main() -> None:
 
     def scrape_with_delay(slug: str) -> tuple[str, dict[str, Any] | None, str | None]:
         result = scrape_one(action_id, slug, get_client())
-        time.sleep(args.delay)
         return result
 
     workers = max(1, args.workers)
     done = 0
+    blocked_in_a_row = 0
+    aborted = False
     with ThreadPoolExecutor(max_workers=workers) as pool:
         futures = {pool.submit(scrape_with_delay, slug): slug for slug in pending}
         for future in as_completed(futures):
@@ -685,6 +805,10 @@ def main() -> None:
             except Exception as exc:  # noqa: BLE001
                 s, entry, err = slug, None, str(exc)
 
+            if err and ("HTTP 403" in err or "HTTP 429" in err or "Retries exhausted" in err):
+                blocked_in_a_row += 1
+            else:
+                blocked_in_a_row = 0
             if entry is None:
                 failed.append(s)
                 prev = existing_by_tld.get(f".{s}")
@@ -702,15 +826,25 @@ def main() -> None:
                     flush=True,
                 )
 
+            if args.abort_after_blocks > 0 and blocked_in_a_row >= args.abort_after_blocks:
+                print(
+                    f"Stopping: {blocked_in_a_row} blocked/rate-limited requests in a row. "
+                    "Not retrying harder; wait and re-run with --resume.",
+                    flush=True,
+                )
+                aborted = True
+                for pending_future in futures:
+                    pending_future.cancel()
+                break
             if args.checkpoint_every > 0 and done % args.checkpoint_every == 0:
-                saved = write_dataset(slugs, results, failed, existing_by_tld, keep_extra=args.resume)
+                saved = write_dataset(slugs, results, failed, existing_by_tld, keep_extra=args.resume, output_path=args.output)
                 print(
                     f"  ↳ checkpoint: {saved} extensions saved ({done}/{len(pending)} this run)",
                     flush=True,
                 )
 
-    saved = write_dataset(slugs, results, failed, existing_by_tld, keep_extra=args.resume)
-    print(f"Updated {DATASET_PATH}")
+    saved = write_dataset(slugs, results, failed, existing_by_tld, keep_extra=args.resume, output_path=args.output)
+    print(f"Updated {args.output}" + (" (run stopped early)" if aborted else ""))
     print(f"Saved {saved} extensions · failed this run {len(failed)} · catalog {len(slugs)}")
     if failed[:30]:
         print(f"Failed sample: {failed[:30]}")
