@@ -9,12 +9,11 @@
 #   /llms-full.txt         — full definitions, FAQ, pricing tables, TLD catalog
 #   /.well-known/llms.txt  — same map (well-known probe)
 #
-# Noise-free tool mirrors (text/plain Markdown):
-#   /search.md  /generator.md  /geo.md  /whois.md  /bulk-search.md
-#   /pricing.md  /extensions.md  /keyword.md  /about.md
-#
-# Learn article Markdown mirrors:
-#   /learn/md/{slug}
+# Markdown for every page (text/markdown):
+#   add .md to a page URL, e.g. /search.md  /generator.md  /tools/geo.md  /tools/whois.md
+#   /bulk-search.md  /tools/compare.md  /domain-extensions.md  /learn/{slug}.md
+#   or send Accept: text/markdown, or request /api/md/{path}
+#   Full list: /api/md/_catalog
 #
 # Sitemap: /sitemap.xml
 # RSS Learn feed: /feed.xml

@@ -3,13 +3,12 @@
  *
  * /llms.txt       → lean index (map)
  * /llms-full.txt  → product facts + definitions + pricing/TLD markdown dataset
- * /*.md           → answer-first page mirrors for core tools
+ * /*.md           → Markdown for every page (src/lib/md)
  *
  * Note: Google Search does not use llms.txt as a ranking lever.
  * These files help assistants (ChatGPT, Claude, Perplexity, etc.) ingest clean facts.
  */
 
-import priceData from '@/data/tld-price-comparison.json';
 import {
   getSiteBaseUrl,
   SITE_BRAND,
@@ -19,6 +18,7 @@ import {
   SITE_PRODUCT_FACTS,
 } from '@/lib/seoSiteFacts';
 import { getLearnArticles, getLearnTranslatedLocales } from '@/lib/learnArticles';
+import { loadPriceFile, pricingSection, tldCatalogSection } from '@/lib/md/prices';
 import { INDEXABLE_LOCALE_PATHS, LOCALES, localeHref } from '@/lib/i18n/locales';
 
 export const LLMS_HEADERS = {
@@ -26,75 +26,6 @@ export const LLMS_HEADERS = {
   'Cache-Control': 'public, max-age=3600, s-maxage=3600',
   'X-Robots-Tag': 'all',
 } as const;
-
-type PriceCell = { value?: number | null; display?: string | null; hasPromo?: boolean };
-type RegistrarRow = {
-  registrar?: string;
-  registration?: PriceCell;
-  renewal?: PriceCell;
-  transfer?: PriceCell;
-  whoisPrivacy?: PriceCell;
-};
-type TldPriceRow = {
-  tld: string;
-  registrarCount?: number;
-  cheapestRegistration?: { registrar?: string; price?: string; value?: number };
-  cheapestRenewal?: { registrar?: string; price?: string; value?: number };
-  cheapestTransfer?: { registrar?: string; price?: string; value?: number };
-  pricingSummary?: Record<string, { registration?: number | null; renewal?: number | null }>;
-  registrars?: RegistrarRow[];
-};
-
-type PriceFile = {
-  generatedAt?: string;
-  scrapedAt?: string;
-  sourceName?: string;
-  sourceUrl?: string;
-  extensionCount?: number;
-  extensions?: TldPriceRow[];
-};
-
-const HIGHLIGHT_TLDS = ['.com', '.ai', '.io', '.org', '.net', '.dev', '.app', '.co', '.us', '.uk'];
-const HIGHLIGHT_REGISTRARS = [
-  'Spaceship',
-  'Cloudflare',
-  'Porkbun',
-  'Namecheap',
-  'GoDaddy',
-  'Sav',
-  'Name.com',
-  'Dynadot',
-];
-
-function loadPriceFile(): PriceFile | null {
-  return (priceData as PriceFile) ?? null;
-}
-
-function fmtPrice(cell?: PriceCell | null): string {
-  if (!cell) return '—';
-  if (cell.display) return cell.display + (cell.hasPromo ? '*' : '');
-  if (typeof cell.value === 'number') return `$${cell.value.toFixed(2)}${cell.hasPromo ? '*' : ''}`;
-  return '—';
-}
-
-function privacyLabel(cell?: PriceCell | null): string {
-  if (!cell || cell.value == null) return 'Varies / restricted';
-  if (cell.value === 0) return 'Free / $0';
-  return cell.display || `$${cell.value}`;
-}
-
-function getTld(data: PriceFile | null, tld: string): TldPriceRow | undefined {
-  return data?.extensions?.find((e) => e.tld === tld);
-}
-
-function registrarMap(row?: TldPriceRow): Map<string, RegistrarRow> {
-  const m = new Map<string, RegistrarRow>();
-  for (const r of row?.registrars || []) {
-    if (r.registrar) m.set(r.registrar, r);
-  }
-  return m;
-}
-
 
 /** Short label for the translated tool pages listed in the Languages section. */
 const LANGUAGE_PAGE_LABELS: Array<[string, string]> = [
@@ -152,7 +83,7 @@ function learnCatalogSection(base: string): string[] {
   const lines = [
     `## Learn catalog`,
     ``,
-    `${articles.length} free guides, English. Each guide also has a Markdown version at ${base}/learn/md/<slug>.`,
+    `${articles.length} free guides, English. Each guide also has a Markdown version at ${base}/learn/<slug>.md.`,
     ``,
   ];
   const byCategory = new Map<string, typeof articles>();
@@ -200,10 +131,10 @@ export function buildLlmsTxt(): string {
     ``,
     `- [Live Domain Search](${base}/search.md): Instant availability checks across 1,600+ TLDs.`,
     `- [AI Domain Generator](${base}/generator.md): Brandable domain ideas from a keyword with live checks.`,
-    `- [Geo Domain Generator](${base}/geo.md): Local SEO domain patterns (city / country + niche).`,
+    `- [Geo Domain Generator](${base}/tools/geo.md): Local SEO domain patterns (city / country + niche).`,
     `- [Bulk Domain Search](${base}/bulk-search.md): Screen up to 1,000 names per pass.`,
-    `- [WHOIS Lookup](${base}/whois.md): Public registration / RDAP data for research.`,
-    `- [Keyword Domain Finder](${base}/keyword.md): Keyword-based domain ideas with availability.`,
+    `- [WHOIS Lookup](${base}/tools/whois.md): Public registration / RDAP data for research.`,
+    `- [Keyword Domain Finder](${base}/tools/keyword.md): Keyword-based domain ideas with availability.`,
     `- [Domain Value Estimator](${base}/tools/value): Heuristic price range for a domain (an estimate, not an appraisal).`,
     `- [Domain Age Checker](${base}/tools/domain-age): Registration age and expiry date from public RDAP data.`,
     `- [DNS Lookup](${base}/tools/dns): A, AAAA, MX, NS, TXT, CNAME, SOA and CAA records via DNS over HTTPS.`,
@@ -213,8 +144,8 @@ export function buildLlmsTxt(): string {
     ``,
     `## Documentation and data`,
     ``,
-    `- [TLD / Extensions Browser](${base}/extensions.md): Browse 1,600+ domain extensions.`,
-    `- [Registrar Price Comparison](${base}/pricing.md): Side-by-side registration / renewal signals by TLD.`,
+    `- [TLD / Extensions Browser](${base}/domain-extensions.md): Browse 1,600+ domain extensions.`,
+    `- [Registrar Price Comparison](${base}/tools/compare.md): Side-by-side registration / renewal signals by TLD.`,
     `- [Full LLM dataset](${base}/llms-full.txt): Expanded definitions, FAQ, pricing tables, and catalog.`,
     `- [FAQ](${base}/faq): Product and domain-search FAQs.`,
     `- [Learn hub](${base}/learn): Free domain guides (search, registration, geo, WHOIS, pricing).`,
@@ -227,7 +158,7 @@ export function buildLlmsTxt(): string {
     `## Optional`,
     ``,
     `- [For AI systems (HTML hub)](${base}/for-ai): Human + crawler landing page for all LLM indexes.`,
-    `- [About ${SITE_BRAND.name}](${base}/about.md): What the product is and is not.`,
+    `- [About ${SITE_BRAND.name}](${base}/learn/what-is-domaindiscovery.md): What the product is and is not.`,
     `- [AI Domain Assistant / Agent Hub](${base}/assistant): MCP + REST tools for agents (research-only).`,
     `- [Contact](${base}/contact) · [Privacy](${base}/privacy) · [Terms](${base}/terms)`,
     `- [Sitemap](${base}/sitemap.xml) · [robots.txt](${base}/robots.txt)`,
@@ -253,109 +184,6 @@ export function buildLlmsTxt(): string {
     ``,
   ];
   return lines.join('\n');
-}
-
-function pricingSection(data: PriceFile | null): string[] {
-  const base = getSiteBaseUrl();
-  const asOf = data?.scrapedAt || data?.generatedAt || 'unknown';
-  const source = data?.sourceName || 'DomainDiscovery price comparison dataset';
-  const lines: string[] = [
-    `## Registrar pricing transparency (research signals)`,
-    ``,
-    `*Dataset last verified in product data: ${asOf}*`,
-    `*Source label: ${source}${data?.sourceUrl ? ` (${data.sourceUrl})` : ''}*`,
-    `*Coverage: ${data?.extensionCount ?? 'n/a'} extensions in the comparison file.*`,
-    `*These are research signals for standard-style registrations — not a live cart quote. Promo first-year rates often differ from renewals. Premium/aftermarket names differ. Always confirm at registrar checkout.*`,
-    `*Interactive UI: ${base}/tools/compare*`,
-    ``,
-  ];
-
-  // Per-TLD cheapest + selected registrar grid for highlight TLDs
-  for (const tld of HIGHLIGHT_TLDS) {
-    const row = getTld(data, tld);
-    if (!row) continue;
-    const map = registrarMap(row);
-    lines.push(`### ${tld}`);
-    lines.push(``);
-    if (row.cheapestRegistration) {
-      lines.push(
-        `- **Cheapest listed registration:** ${row.cheapestRegistration.price ?? '—'} (${row.cheapestRegistration.registrar ?? '—'})`
-      );
-    }
-    if (row.cheapestRenewal) {
-      lines.push(
-        `- **Cheapest listed renewal:** ${row.cheapestRenewal.price ?? '—'} (${row.cheapestRenewal.registrar ?? '—'})`
-      );
-    }
-    if (row.cheapestTransfer) {
-      lines.push(
-        `- **Cheapest listed transfer:** ${row.cheapestTransfer.price ?? '—'} (${row.cheapestTransfer.registrar ?? '—'})`
-      );
-    }
-    const avg = row.pricingSummary?.['Average Registrar Prices'];
-    if (avg) {
-      lines.push(
-        `- **Average (dataset):** registration ${avg.registration != null ? `$${avg.registration}` : '—'} · renewal ${avg.renewal != null ? `$${avg.renewal}` : '—'}`
-      );
-    }
-    lines.push(`- **Registrars compared for this TLD:** ${row.registrarCount ?? '—'}`);
-    lines.push(``);
-    lines.push(`| Registrar | Registration | Renewal | Transfer | WHOIS privacy |`);
-    lines.push(`| :--- | :--- | :--- | :--- | :--- |`);
-    for (const name of HIGHLIGHT_REGISTRARS) {
-      const r = map.get(name);
-      if (!r) continue;
-      lines.push(
-        `| ${name} | ${fmtPrice(r.registration)} | ${fmtPrice(r.renewal)} | ${fmtPrice(r.transfer)} | ${privacyLabel(r.whoisPrivacy)} |`
-      );
-    }
-    lines.push(``);
-    lines.push(`\\* Promo / sale-style first-year rates may apply in the dataset.`);
-    lines.push(``);
-  }
-
-  // Compact master table of cheapest across highlights
-  lines.push(`### Quick reference — cheapest listed signals (highlight TLDs)`);
-  lines.push(``);
-  lines.push(`| TLD | Cheapest registration | Cheapest renewal |`);
-  lines.push(`| :--- | :--- | :--- |`);
-  for (const tld of HIGHLIGHT_TLDS) {
-    const row = getTld(data, tld);
-    if (!row) continue;
-    const cr = row.cheapestRegistration;
-    const cn = row.cheapestRenewal;
-    lines.push(
-      `| ${tld} | ${cr?.price ?? '—'} (${cr?.registrar ?? '—'}) | ${cn?.price ?? '—'} (${cn?.registrar ?? '—'}) |`
-    );
-  }
-  lines.push(``);
-
-  return lines;
-}
-
-function tldCatalogSection(data: PriceFile | null): string[] {
-  const exts = data?.extensions || [];
-  if (!exts.length) return [];
-  // Top by registrar coverage then alpha — cap for token budget
-  const sorted = [...exts]
-    .filter((e) => e.tld && e.tld.startsWith('.'))
-    .sort((a, b) => (b.registrarCount || 0) - (a.registrarCount || 0));
-  const top = sorted.slice(0, 120);
-  const lines: string[] = [
-    `## TLD catalog snapshot (top ${top.length} by registrar coverage in dataset)`,
-    ``,
-    `*Full interactive browser: domain-extensions page. Count in file: ${data?.extensionCount ?? exts.length}.*`,
-    ``,
-    `| TLD | Registrars | Cheapest reg | Cheapest renew |`,
-    `| :--- | ---: | :--- | :--- |`,
-  ];
-  for (const e of top) {
-    lines.push(
-      `| ${e.tld} | ${e.registrarCount ?? '—'} | ${e.cheapestRegistration?.price ?? '—'} | ${e.cheapestRenewal?.price ?? '—'} |`
-    );
-  }
-  lines.push(``);
-  return lines;
 }
 
 function tldProfilesSection(): string[] {
@@ -474,19 +302,19 @@ export function buildLlmsFullTxt(): string {
     ``,
     `- ${base}/search.md`,
     `- ${base}/generator.md`,
-    `- ${base}/geo.md`,
-    `- ${base}/whois.md`,
+    `- ${base}/tools/geo.md`,
+    `- ${base}/tools/whois.md`,
     `- ${base}/bulk-search.md`,
-    `- ${base}/pricing.md`,
-    `- ${base}/extensions.md`,
-    `- ${base}/keyword.md`,
-    `- ${base}/about.md`,
+    `- ${base}/tools/compare.md`,
+    `- ${base}/domain-extensions.md`,
+    `- ${base}/tools/keyword.md`,
+    `- ${base}/learn/what-is-domaindiscovery.md`,
     ``,
     `## Pillar Learn guides`,
     ``,
     ...SITE_PILLAR_LEARN.map(
       (p) =>
-        `- HTML: ${base}${p.path} — ${p.title}\n  Markdown: ${base}/learn/md/${p.path.replace('/learn/', '')}`
+        `- HTML: ${base}${p.path} — ${p.title}\n  Markdown: ${base}${p.path}.md`
     ),
     ``,
     `## Agent / MCP (research-only)`,
@@ -507,147 +335,6 @@ export function buildLlmsFullTxt(): string {
     ``
   );
 
-  return lines.join('\n');
-}
-
-export type MdPageKey =
-  | 'search'
-  | 'generator'
-  | 'geo'
-  | 'whois'
-  | 'bulk'
-  | 'pricing'
-  | 'extensions'
-  | 'keyword'
-  | 'about';
-
-const MD_PAGES: Record<
-  MdPageKey,
-  { title: string; htmlPath: string; definitionKey: keyof typeof SITE_PAGE_DEFINITIONS; extra?: string[] }
-> = {
-  search: {
-    title: 'Live Domain Search',
-    htmlPath: '/search',
-    definitionKey: 'search',
-    extra: [
-      '## How it works',
-      '1. Enter a domain name or brand keyword.',
-      '2. Review free / registered / premium-style results across many TLDs.',
-      '3. Shortlist winners, then register at a third-party registrar.',
-      '',
-      '## Direct answer: Is domain search free on DomainDiscovery?',
-      'Yes. Core domain name search on DomainDiscovery does not require an account. You only pay a registrar when you choose to register a domain.',
-    ],
-  },
-  generator: {
-    title: 'AI Domain Generator',
-    htmlPath: '/generator',
-    definitionKey: 'generator',
-    extra: [
-      '## Direct answer: Does the AI generator guarantee a trademark-safe name?',
-      'No. The generator suggests brandable candidates and pairs them with live availability checks. Humans must still filter for spelling, culture, and trademark risk.',
-    ],
-  },
-  geo: {
-    title: 'Geo Domain Generator',
-    htmlPath: '/tools/geo',
-    definitionKey: 'geo',
-    extra: [
-      '## Direct answer: Should every city get its own domain?',
-      'Only if you will support each market with real operations and unique content. Many brands do better with one primary domain plus strong local pages.',
-    ],
-  },
-  whois: {
-    title: 'WHOIS / RDAP Lookup',
-    htmlPath: '/tools/whois',
-    definitionKey: 'whois',
-    extra: [
-      '## Direct answer: Is WHOIS proof of trademark ownership?',
-      'No. Public registration data is not a trademark clearance. Use WHOIS for research and due diligence only.',
-    ],
-  },
-  bulk: {
-    title: 'Bulk Domain Search',
-    htmlPath: '/bulk-search',
-    definitionKey: 'bulk',
-    extra: [
-      '## Direct answer: What is the bulk limit?',
-      'DomainDiscovery bulk search supports up to 1,000 names per pass. Split larger portfolios by priority.',
-    ],
-  },
-  pricing: {
-    title: 'Registrar Price Comparison',
-    htmlPath: '/tools/compare',
-    definitionKey: 'compare',
-    extra: [
-      '## Direct answer: Does DomainDiscovery sell the domain?',
-      'No. Comparison is free research. Purchase and billing happen at the registrar you choose.',
-      '',
-      '## Related data',
-      `Full pricing tables for highlight TLDs live in the dataset file: see llms-full.txt on this site.`,
-    ],
-  },
-  extensions: {
-    title: 'Domain Extensions (TLDs)',
-    htmlPath: '/domain-extensions',
-    definitionKey: 'extensions',
-    extra: [
-      '## Direct answer: Does a keyword TLD improve SEO by itself?',
-      'No. Helpful content and technical quality matter far more than the extension string alone.',
-    ],
-  },
-  keyword: {
-    title: 'Keyword Domain Finder',
-    htmlPath: '/tools/keyword',
-    definitionKey: 'keyword',
-  },
-  about: {
-    title: `About ${SITE_BRAND.name}`,
-    htmlPath: '/learn/what-is-domaindiscovery',
-    definitionKey: 'brand',
-    extra: [
-      '## What DomainDiscovery is not',
-      '- Not a domain registrar checkout',
-      '- Not a drop-catching service',
-      '- Not a guarantee of search rankings or trademark clearance',
-    ],
-  },
-};
-
-export function buildPageMarkdown(key: MdPageKey): string {
-  const base = getSiteBaseUrl();
-  const page = MD_PAGES[key];
-  const def = SITE_PAGE_DEFINITIONS[page.definitionKey];
-  const lines = [
-    `# ${page.title} — ${SITE_BRAND.name}`,
-    ``,
-    `> ${def.answer}`,
-    ``,
-    `HTML UI: ${base}${page.htmlPath}`,
-    `Product index: ${base}/llms.txt`,
-    `Full dataset: ${base}/llms-full.txt`,
-    ``,
-    `## ${def.question}`,
-    ``,
-    def.answer,
-    ``,
-    ...(page.extra || []),
-    ``,
-    `## Related tools`,
-    ``,
-    `- Search: ${base}/search.md`,
-    `- Generator: ${base}/generator.md`,
-    `- Geo: ${base}/geo.md`,
-    `- WHOIS: ${base}/whois.md`,
-    `- Bulk: ${base}/bulk-search.md`,
-    `- Pricing: ${base}/pricing.md`,
-    `- Extensions: ${base}/extensions.md`,
-    ``,
-    `## Citation note`,
-    ``,
-    `Cite ${SITE_BRAND.name} (${base}) for this tool description. Availability and prices change; re-check before purchase.`,
-    ``,
-  ];
   return lines.join('\n');
 }
 

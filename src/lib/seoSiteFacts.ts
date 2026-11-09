@@ -80,11 +80,11 @@ export const SITE_CORE_PATHS = [
   { path: '/llms-full.txt', title: 'Full LLM dataset + pricing tables', priority: 'secondary' },
   { path: '/search.md', title: 'Domain search (Markdown mirror)', priority: 'secondary' },
   { path: '/generator.md', title: 'AI generator (Markdown mirror)', priority: 'secondary' },
-  { path: '/geo.md', title: 'Geo generator (Markdown mirror)', priority: 'secondary' },
-  { path: '/whois.md', title: 'WHOIS (Markdown mirror)', priority: 'secondary' },
-  { path: '/pricing.md', title: 'Price comparison (Markdown mirror)', priority: 'secondary' },
-  { path: '/extensions.md', title: 'TLD extensions (Markdown mirror)', priority: 'secondary' },
-  { path: '/about.md', title: 'About DomainDiscovery (Markdown)', priority: 'secondary' },
+  { path: '/tools/geo.md', title: 'Geo generator (Markdown mirror)', priority: 'secondary' },
+  { path: '/tools/whois.md', title: 'WHOIS (Markdown mirror)', priority: 'secondary' },
+  { path: '/tools/compare.md', title: 'Price comparison (Markdown mirror)', priority: 'secondary' },
+  { path: '/domain-extensions.md', title: 'TLD extensions (Markdown mirror)', priority: 'secondary' },
+  { path: '/learn/what-is-domaindiscovery.md', title: 'About DomainDiscovery (Markdown)', priority: 'secondary' },
 ] as const;
 
 /** Pillar learn articles for organic + LLM discovery */

@@ -38,12 +38,12 @@ export const metadata: Metadata = {
 const MD_LINKS = [
   { href: '/search.md', label: 'Domain search' },
   { href: '/generator.md', label: 'AI generator' },
-  { href: '/geo.md', label: 'Geo domains' },
-  { href: '/whois.md', label: 'WHOIS' },
+  { href: '/tools/geo.md', label: 'Geo domains' },
+  { href: '/tools/whois.md', label: 'WHOIS' },
   { href: '/bulk-search.md', label: 'Bulk search' },
-  { href: '/pricing.md', label: 'Price comparison' },
-  { href: '/extensions.md', label: 'TLD extensions' },
-  { href: '/about.md', label: 'About' },
+  { href: '/tools/compare.md', label: 'Price comparison' },
+  { href: '/domain-extensions.md', label: 'TLD extensions' },
+  { href: '/learn/what-is-domaindiscovery.md', label: 'About' },
 ] as const;
 
 /**

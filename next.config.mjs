@@ -52,7 +52,8 @@ const nextConfig = {
         ],
       },
       {
-        source: '/api/(.*)',
+        // The Markdown handler (/api/md) sets its own Cache-Control
+        source: '/api/:path((?!md/).*)',
         headers: [
           { key: 'Cache-Control', value: 'no-store, max-age=0' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
@@ -95,17 +96,6 @@ const nextConfig = {
         // Crawlable LLM indexes + AI discovery
         source: '/:file(llms.txt|llms-full.txt|robots.txt|sitemap.xml|ai.txt|humans.txt)',
         headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, s-maxage=3600',
-          },
-        ],
-      },
-      {
-        // Markdown tool mirrors for AI crawlers
-        source: '/:file(search.md|generator.md|ai-generator.md|geo.md|whois.md|bulk-search.md|pricing.md|extensions.md|keyword.md|about.md)',
-        headers: [
-          { key: 'Content-Type', value: 'text/plain; charset=utf-8' },
           {
             key: 'Cache-Control',
             value: 'public, max-age=3600, s-maxage=3600',

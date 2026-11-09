@@ -9,6 +9,13 @@ import {
   LOCALE_COOKIE_MAX_AGE,
   stripLocalePrefix,
 } from '@/lib/i18n/locales';
+import { prefersMarkdown } from '@/lib/md/accept';
+import {
+  htmlPathFromMdPath,
+  isExcludedPath,
+  isNegotiablePath,
+  LEGACY_MD_REDIRECTS,
+} from '@/lib/md/routes';
 
 const APEX_HOST = 'domainsdiscovery.com';
 const CANONICAL_HOST = 'www.domainsdiscovery.com';
@@ -93,19 +100,77 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Markdown versions of pages. Never on the ADA host, and before the /api early return so
+  // `/page.md` can be rewritten to the Markdown handler under /api/md.
+  if (!isAdaHost(host)) {
+    const markdown = handleMarkdown(request);
+    if (markdown) return markdown;
+  }
+
   // API & Next internals always pass through
   if (pathname.startsWith('/api') || pathname.startsWith('/_next')) {
     return NextResponse.next();
   }
 
   if (!isAdaHost(host)) {
-    return handleLocale(request);
+    const response = handleLocale(request);
+    // Allowlisted pages can answer with HTML or Markdown depending on Accept.
+    if ((request.method === 'GET' || request.method === 'HEAD') && isNegotiablePath(pathname)) {
+      response.headers.append('Vary', 'Accept');
+    }
+    return response;
   }
 
   // ADA host: rewrite clean URLs under /ada app tree
   const url = request.nextUrl.clone();
   url.pathname = pathname === '/' ? '/ada' : `/ada${pathname}`;
   return NextResponse.rewrite(url);
+}
+
+function redirectTo(request: NextRequest, pathname: string): NextResponse {
+  const dest = request.nextUrl.clone();
+  dest.pathname = pathname;
+  return NextResponse.redirect(dest, 301);
+}
+
+/**
+ * Markdown routing, all of it rewriting to the single handler at /api/md:
+ * - old mirrors (/learn/md/<slug>, /geo.md, ...) 301 to their new .md path
+ * - `/<page>.md` rewrites to the handler, which answers 404 in Markdown for unknown pages
+ * - an allowlisted page requested with Accept: text/markdown (strictly preferred over HTML)
+ *   rewrites the same way and is marked as negotiated
+ */
+function handleMarkdown(request: NextRequest): NextResponse | null {
+  const { pathname } = request.nextUrl;
+
+  const legacyLearn = /^\/learn\/md\/([a-z0-9-]+)\/?$/i.exec(pathname);
+  if (legacyLearn) return redirectTo(request, `/learn/${legacyLearn[1]}.md`);
+  const legacy = LEGACY_MD_REDIRECTS[pathname];
+  if (legacy) return redirectTo(request, legacy);
+
+  const method = request.method;
+  if (method !== 'GET' && method !== 'HEAD' && method !== 'OPTIONS') return null;
+  if (isExcludedPath(pathname)) return null;
+
+  const url = request.nextUrl.clone();
+  const mdHtmlPath = htmlPathFromMdPath(pathname);
+  if (mdHtmlPath) {
+    url.pathname = `/api/md${mdHtmlPath === '/' ? '/index' : mdHtmlPath}`;
+    return NextResponse.rewrite(url);
+  }
+
+  if (
+    method !== 'OPTIONS' &&
+    !request.nextUrl.search &&
+    isNegotiablePath(pathname) &&
+    prefersMarkdown(request.headers.get('accept'))
+  ) {
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set('x-md-negotiated', '1');
+    url.pathname = `/api/md${pathname === '/' ? '/index' : pathname.replace(/\/$/, '')}`;
+    return NextResponse.rewrite(url, { request: { headers: requestHeaders } });
+  }
+  return null;
 }
 
 function isCrawler(request: NextRequest): boolean {
