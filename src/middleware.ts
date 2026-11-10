@@ -11,6 +11,7 @@ import {
 } from '@/lib/i18n/locales';
 import { prefersMarkdown } from '@/lib/md/accept';
 import { DESCRIBEDBY_LINK } from '@/lib/md/head';
+import { legacySocialImageTarget } from '@/lib/legacySocialImages';
 import {
   htmlPathFromMdPath,
   isExcludedPath,
@@ -74,6 +75,12 @@ function routeRequest(request: NextRequest): NextResponse {
     host.includes('0.0.0.0') ||
     host.endsWith('.local');
 
+  // Old social-card image addresses go straight to the current PNG (one hop, canonical host).
+  const legacyImage = legacySocialImageTarget(request.nextUrl.pathname);
+  if (legacyImage) {
+    const origin = process.env.NODE_ENV === 'production' ? `https://${CANONICAL_HOST}` : request.nextUrl.origin;
+    return NextResponse.redirect(new URL(legacyImage, origin), 301);
+  }
   // One host for search engines: the bare domain 301s to the canonical www host,
   // otherwise both serve the same pages and split ranking signals.
   if (process.env.NODE_ENV === 'production' && host.toLowerCase().split(':')[0] === APEX_HOST) {
