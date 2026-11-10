@@ -16,7 +16,6 @@ export const MD_STATIC_PATHS = [
   '/tools/geo',
   '/tools/whois',
   '/tools/value',
-  '/tools/domain-age',
   '/tools/dns',
   '/tools/leads',
   '/learn',

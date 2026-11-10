@@ -1,7 +1,6 @@
 'use client';
 
 import React, { Suspense } from 'react';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
@@ -90,11 +89,6 @@ export default function WhoisPage() {
           </div>
         </SectionAmbient>
 
-        {!localized && (
-          <p className="mx-auto max-w-3xl px-4 pb-6 text-center text-sm text-ds-body">
-            Want just the dates? Try the <Link href="/tools/domain-age" className="underline underline-offset-2">domain age and expiry checker</Link>.
-          </p>
-        )}
         <LocalizedDefinition id="whois" compact />
         <LocalizedGuidePack pack="whois" />
         {/* Footer affiliate banner only — no stacked inline ad above it */}
