@@ -12,6 +12,7 @@ import {
 import { prefersMarkdown } from '@/lib/md/accept';
 import { DESCRIBEDBY_LINK } from '@/lib/md/head';
 import { legacySocialImageTarget } from '@/lib/legacySocialImages';
+import { retiredPageTarget } from '@/lib/retiredPages';
 import {
   htmlPathFromMdPath,
   isExcludedPath,
@@ -80,6 +81,14 @@ function routeRequest(request: NextRequest): NextResponse {
   if (legacyImage) {
     const origin = process.env.NODE_ENV === 'production' ? `https://${CANONICAL_HOST}` : request.nextUrl.origin;
     return NextResponse.redirect(new URL(legacyImage, origin), 301);
+  }
+  // Removed pages go to their replacement (same host, same language), not a 404.
+  const retired = retiredPageTarget(request.nextUrl.pathname);
+  if (retired) {
+    const origin = process.env.NODE_ENV === 'production' ? `https://${CANONICAL_HOST}` : request.nextUrl.origin;
+    const dest = new URL(retired, origin);
+    dest.search = request.nextUrl.search;
+    return NextResponse.redirect(dest, 301);
   }
   // One host for search engines: the bare domain 301s to the canonical www host,
   // otherwise both serve the same pages and split ranking signals.

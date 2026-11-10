@@ -6,7 +6,7 @@ import { TOOL_GUIDE_PACKS, type ToolGuideKey } from '@/components/seo/toolGuideP
 import { getMessages, getPageCopy } from '@/lib/i18n';
 import { DD_CONTACT } from '@/lib/legal/legalMeta';
 import { EXPIRED_INFO_CARDS, EXPIRED_LIFECYCLE_STAGES } from '@/lib/seo/expiredCopy';
-import { DNS_PAGE_COPY, VALUE_PAGE_COPY, DOMAIN_AGE_PAGE_COPY, type ToolPageCopy } from '@/lib/seo/toolPageCopy';
+import { DNS_PAGE_COPY, VALUE_PAGE_COPY, type ToolPageCopy } from '@/lib/seo/toolPageCopy';
 import {
   SITE_BRAND,
   SITE_FEATURES,
@@ -295,7 +295,6 @@ function renderExpired(): MdDoc {
       path: '/expired',
       body,
       related: [
-        { text: 'Domain age checker', href: '/tools/domain-age' },
         { text: 'WHOIS lookup', href: '/tools/whois' },
       ],
     }),
@@ -384,7 +383,7 @@ export const CORE_ROUTES: MdRouteDef[] = [
     };
   }),
   ...TOOLS.map((spec) => def(spec.path, spec.group, () => renderTool(spec))),
-  ...[VALUE_PAGE_COPY, DNS_PAGE_COPY, DOMAIN_AGE_PAGE_COPY].map((copy) => ({
+  ...[VALUE_PAGE_COPY, DNS_PAGE_COPY].map((copy) => ({
     pattern: copy.path,
     group: 'tool' as const,
     render: () => renderToolCopy(copy),

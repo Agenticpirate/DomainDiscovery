@@ -93,7 +93,6 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     if (barePath === '/search' || barePath.startsWith('/search/')) return 'search';
     if (barePath.startsWith('/tools/whois')) return 'whois';
     if (barePath.startsWith('/tools/value')) return 'value';
-    if (barePath.startsWith('/tools/domain-age')) return 'domain-age';
     if (barePath.startsWith('/tools/dns')) return 'dns';
     if (barePath.startsWith('/tools/keyword') || barePath.startsWith('/tools/brandable')) return 'keyword';
     if (barePath.startsWith('/tools/compare')) return 'compare';
@@ -138,13 +137,12 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     <Icons.Bulk key="bulk" className={iconSm} />,
     <Icons.Users key="leads" className={iconSm} />,
   ];
-  const toolIds = ['keyword', 'compare', 'whois', 'geo', 'value', 'domain-age', 'dns'] as const;
-  const toolHrefs = ['/tools/keyword', '/tools/compare', '/tools/whois', '/tools/geo', '/tools/value', '/tools/domain-age', '/tools/dns'];
+  const toolIds = ['keyword', 'compare', 'whois', 'geo', 'value', 'dns'] as const;
+  const toolHrefs = ['/tools/keyword', '/tools/compare', '/tools/whois', '/tools/geo', '/tools/value', '/tools/dns'];
   // English-only tools without translated nav copy
   const extraToolItems: Record<number, { label: string; mobile: string; description: string }> = {
     4: { label: t('Domain Value'), mobile: t('Value'), description: t('Estimate what a domain is worth.') },
-    5: { label: t('Domain Age'), mobile: t('Age'), description: t('Check registration age and expiry date.') },
-    6: { label: t('DNS Lookup'), mobile: 'DNS', description: t('Look up A, MX, NS and TXT records.') },
+    5: { label: t('DNS Lookup'), mobile: 'DNS', description: t('Look up A, MX, NS and TXT records.') },
   };
   const toolIcons = [
     <Icons.Keyword key="keyword" className={iconSm} />,
@@ -152,7 +150,6 @@ export const Navigation: React.FC<NavProps> = ({ onToolSelect, activeTool }) => 
     <Icons.Info key="info" className={iconSm} />,
     <Icons.Globe key="globe" className={iconSm} />,
     <Icons.Dollar key="value" className={iconSm} />,
-    <Icons.Info key="age" className={iconSm} />,
     <Icons.Globe key="dns" className={iconSm} />,
   ];
 

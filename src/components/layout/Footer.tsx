@@ -168,7 +168,6 @@ function footerSections(f: Messages['footer'], href: (path: string) => string, t
       { label: f.compare, href: href('/tools/compare'), Icon: Fi.dollar },
       { label: f.keyword, href: href('/tools/keyword'), Icon: Fi.keyword },
       { label: t('Domain Value'), href: href('/tools/value'), Icon: Fi.dollar },
-      { label: t('Domain Age'), href: href('/tools/domain-age'), Icon: Fi.info },
       { label: t('DNS Lookup'), href: href('/tools/dns'), Icon: Fi.globe },
     ],
   },

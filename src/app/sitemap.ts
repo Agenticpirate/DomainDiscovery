@@ -55,7 +55,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/tools/geo', priority: 0.85, changeFrequency: 'daily' as const },
     { path: '/tools/whois', priority: 0.85, changeFrequency: 'daily' as const },
     { path: '/tools/value', priority: 0.8, changeFrequency: 'weekly' as const },
-    { path: '/tools/domain-age', priority: 0.8, changeFrequency: 'weekly' as const },
     { path: '/tools/dns', priority: 0.8, changeFrequency: 'weekly' as const },
     { path: '/learn', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/blog', priority: 0.75, changeFrequency: 'weekly' as const },

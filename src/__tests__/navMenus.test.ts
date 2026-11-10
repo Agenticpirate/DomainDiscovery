@@ -5,7 +5,7 @@ import { LOCALES } from '@/lib/i18n/locales';
  * Navigation.tsx reads nav.searchItems and nav.toolItems by position. Language files are
  * merged over English by position too, so a language that lists fewer items than English
  * silently gets the missing ones in English, and an extra English item shifts the labels of
- * the slots Navigation fills itself (Tools: Domain Value, Domain Age, DNS Lookup).
+ * the slots Navigation fills itself (Tools: Domain Value, DNS Lookup).
  */
 const en = getMessages('en').nav;
 
