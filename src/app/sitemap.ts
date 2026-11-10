@@ -1,12 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getTldAboutSlugs } from '@/lib/tldAboutData';
-import { getAlternativeSlugs } from '@/lib/alternatives';
-import { getLeadPageSlugs } from '@/lib/leadPages';
-import { getIndustrySlugs } from '@/lib/industries';
-import { getLearnArticles, getLearnTranslatedLocales } from '@/lib/learnArticles';
 import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
-import { getCheapExtensions, getReports } from '@/lib/research';
-import { CHEAP_MIN_LIST_SIZE } from '@/lib/research/domainPriceStudy';
 import {
   absoluteLocaleUrl,
   languageAlternates,
@@ -28,7 +21,26 @@ import { INDEXABLE_LOCALE_PATHS, LOCALES } from '@/lib/i18n/locales';
  * lastmod is only set where we know a real date (Learn publish date). A sitemap where every
  * URL claims "modified now" teaches Google to ignore the field.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Loaded on demand: the framework bundles this file into the Worker entry, so static imports
+  // here made every request (even /robots.txt) load ~30 MB of guide and price data first.
+  const [
+    { getTldAboutSlugs },
+    { getAlternativeSlugs },
+    { getLeadPageSlugs },
+    { getIndustrySlugs },
+    { getLearnArticles, getLearnTranslatedLocales },
+    { getCheapExtensions, getReports },
+    { CHEAP_MIN_LIST_SIZE },
+  ] = await Promise.all([
+    import('@/lib/tldAboutData'),
+    import('@/lib/alternatives'),
+    import('@/lib/leadPages'),
+    import('@/lib/industries'),
+    import('@/lib/learnArticles'),
+    import('@/lib/research'),
+    import('@/lib/research/domainPriceStudy'),
+  ]);
   const baseUrl = getSiteBaseUrl();
 
   const coreRoutes = [

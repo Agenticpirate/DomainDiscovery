@@ -54,8 +54,11 @@ export default async function LearnPage() {
     locale === 'en'
       ? all
       : [...all.filter((a) => isLearnTranslated(a.slug, locale)), ...all.filter((a) => !isLearnTranslated(a.slug, locale))];
+  // The catalog is a client component: send listing fields only. Spreading the whole article
+  // shipped every guide's full text to the browser (~2.9 MB of HTML on /learn).
   const articles = ordered.map((article) => ({
     ...localizeLearnArticle(article, locale)!,
+    sections: [],
     categoryKey: article.category,
     href: guideHref(article.slug),
   }));
