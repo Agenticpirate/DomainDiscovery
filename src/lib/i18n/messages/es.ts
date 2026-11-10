@@ -27,6 +27,7 @@ export const es: Messages = {
       { label: 'Asistente de dominios con IA', mobile: 'Asistente', description: 'Describa el negocio: ideas, comprobación y orden.' },
       { label: 'Generador de dominios', mobile: 'Generador', description: 'Ideas de nombres a partir de una palabra o un tema.' },
       { label: 'Búsqueda masiva', mobile: 'Masiva', description: 'Compruebe muchos nombres a la vez.' },
+      { label: 'Leads de dominios', mobile: 'Leads', description: 'Sigue la saturación del espacio de nombres, los dominios recién registrados y los compradores finales.' },
     ],
     toolItems: [
       { label: 'Dominios por palabra clave', mobile: 'Palabras', description: 'Convierta una palabra en nombres con comprobación en vivo.' },

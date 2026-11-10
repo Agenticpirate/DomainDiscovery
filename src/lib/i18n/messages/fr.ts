@@ -84,6 +84,7 @@ export const fr: Messages = {
       { label: 'Assistant de domaine IA', mobile: 'Assistant', description: 'Décrivez l’activité — idées, vérification et classement.' },
       { label: 'Générateur de domaines', mobile: 'Générateur', description: 'Des idées de noms à partir d’un mot-clé ou d’un sujet.' },
       { label: 'Recherche en masse', mobile: 'En masse', description: 'Vérifiez la disponibilité de nombreux noms en une fois.' },
+      { label: 'Prospects domaines', mobile: 'Prospects', description: 'Suivez la saturation de l’espace de noms, les domaines récemment enregistrés et les acheteurs finaux.' },
     ],
     toolItems: [
       { label: 'Domaines par mot-clé', mobile: 'Mots-clés', description: 'Déclinez un mot-clé en noms brandables, vérifiés en direct.' },

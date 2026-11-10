@@ -84,6 +84,7 @@ export const zh: Messages = {
       { label: 'AI 域名助手', mobile: '助手', description: '描述业务，自动生成、检查并排序品牌域名。' },
       { label: '域名生成器', mobile: '生成', description: '用关键词和主题生成域名创意。' },
       { label: '批量查询', mobile: '批量', description: '一次检查大量域名是否可注册。' },
+      { label: '域名线索', mobile: '线索', description: '追踪命名空间饱和度、新注册域名和终端买家。' },
     ],
     toolItems: [
       { label: '关键词域名', mobile: '关键词', description: '把关键词扩展成可注册的品牌名。' },

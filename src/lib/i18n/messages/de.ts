@@ -27,6 +27,7 @@ export const de: Messages = {
       { label: 'KI-Domain-Assistent', mobile: 'Assistent', description: 'Geschäft beschreiben: Ideen, Prüfung und Rangfolge.' },
       { label: 'Domain-Generator', mobile: 'Generator', description: 'Namensideen aus einem Stichwort oder Thema.' },
       { label: 'Sammel-Domainsuche', mobile: 'Sammel', description: 'Viele Namen auf einmal prüfen.' },
+      { label: 'Domain-Leads', mobile: 'Leads', description: 'Verfolgen Sie Namensraum-Sättigung, neu registrierte Domains und Endkunden.' },
     ],
     toolItems: [
       { label: 'Keyword-Domains', mobile: 'Keywords', description: 'Ein Stichwort wird zu Namen mit Live-Prüfung.' },
