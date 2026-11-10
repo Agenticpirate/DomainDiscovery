@@ -1,4 +1,5 @@
 import indexData from '@/data/tld-about/index.json';
+import { readDataJson } from '@/lib/dataFiles';
 
 export type TldAboutSummary = {
   tld: string;
@@ -72,10 +73,9 @@ export async function getTldAboutDetail(slug: string): Promise<TldAboutDetail | 
   const normalized = slug.replace(/^\./, '').toLowerCase();
   if (!/^[a-z0-9-]+$/.test(normalized) || normalized === 'index') return null;
   try {
-    // Relative path + extension so both Vite (vinext/Workers) and webpack can bundle the
-    // JSON files; an aliased `@/` template import is skipped by Vite and 404s every page.
-    const mod = (await import(`../data/tld-about/${normalized}.json`)) as { default: TldAboutDetail };
-    return mod.default;
+    // Read at request time (src/data in Node, /_data static assets on Cloudflare), so the
+    // 1,596 detail files are not part of the Worker bundle. See dataFiles.ts.
+    return await readDataJson<TldAboutDetail>(`tld-about/${normalized}.json`);
   } catch {
     return null;
   }
