@@ -1,5 +1,6 @@
 import learnData from '@/data/learn-articles.json';
 import learnLocaleIndex from '@/data/learn-locale-index.json';
+import { readDataJson } from '@/lib/dataFiles';
 import type { LocaleId } from '@/lib/i18n/locales';
 
 export type LearnSection = {
@@ -65,23 +66,10 @@ const LEARN_INDEX = learnLocaleIndex as Record<TranslatedLocale, Record<string, 
 const TRANSLATED_LOCALES = Object.keys(LEARN_INDEX) as TranslatedLocale[];
 
 /**
- * Full translation files, one per language, loaded on demand. Together they are ~24 MB, so
- * bundling them eagerly made every Worker instance load all of them before answering.
- * Relative paths with the extension: Vite does not bundle aliased dynamic imports.
+ * Full translation files, one per language (~24 MB together), loaded on demand. They are read
+ * from src/data in Node and from the /_data static assets on Cloudflare (see dataFiles.ts),
+ * so they are not part of the Worker bundle.
  */
-const LOCALE_LOADERS: Record<TranslatedLocale, () => Promise<{ default: unknown }>> = {
-  zh: () => import('../data/learn-locales/zh.json'),
-  de: () => import('../data/learn-locales/de.json'),
-  es: () => import('../data/learn-locales/es.json'),
-  ja: () => import('../data/learn-locales/ja.json'),
-  fr: () => import('../data/learn-locales/fr.json'),
-  pt: () => import('../data/learn-locales/pt.json'),
-  hi: () => import('../data/learn-locales/hi.json'),
-  ar: () => import('../data/learn-locales/ar.json'),
-  ru: () => import('../data/learn-locales/ru.json'),
-  bn: () => import('../data/learn-locales/bn.json'),
-  ur: () => import('../data/learn-locales/ur.json'),
-};
 const loadedLocales: Partial<Record<TranslatedLocale, LearnLocaleFile>> = {};
 
 /**
@@ -89,9 +77,9 @@ const loadedLocales: Partial<Record<TranslatedLocale, LearnLocaleFile>> = {};
  * translated guide body; listings and titles work without it from the small index.
  */
 export async function ensureLearnLocale(locale: LocaleId): Promise<void> {
-  if (locale === 'en' || loadedLocales[locale] || !LOCALE_LOADERS[locale]) return;
-  const mod = await LOCALE_LOADERS[locale]();
-  loadedLocales[locale] = mod.default as LearnLocaleFile;
+  if (locale === 'en' || loadedLocales[locale] || !(locale in LEARN_INDEX)) return;
+  const file = await readDataJson<LearnLocaleFile>(`learn-locales/${locale}.json`);
+  if (file) loadedLocales[locale] = file;
 }
 
 /**

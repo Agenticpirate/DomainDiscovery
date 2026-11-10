@@ -1,7 +1,8 @@
 import { getSiteBaseUrl } from '@/lib/seoSiteFacts';
 
 /** Paths no crawler should fetch. ai.txt lists the same paths as excluded. */
-export const ROBOTS_DISALLOW = ['/api/', '/share/'];
+/** /_data/ holds raw JSON the server reads at request time (src/lib/dataFiles.ts); not pages. */
+export const ROBOTS_DISALLOW = ['/api/', '/share/', '/_data/'];
 
 /** Named user agents. Search and AI bots all get the same allow rules; none is ever blocked outright. */
 export const ROBOTS_AGENTS = {
