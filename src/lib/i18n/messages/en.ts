@@ -104,7 +104,6 @@ export const en: Messages = {
       { label: 'Price Comparison', mobile: 'Prices', description: 'Compare registrar pricing in real time to find the lowest prices.' },
       { label: 'WHOIS Lookup', mobile: 'WHOIS', description: 'Look up domain ownership and registration details instantly.' },
       { label: 'Geo Domain Finder', mobile: 'Geo domains', description: 'Find location-based domains for local businesses and regional marketing.' },
-      { label: 'Domain Leads', mobile: 'Leads', description: 'Analyze SLD saturation across TLDs and discover buyer prospects.' },
     ],
   },
   footer: {

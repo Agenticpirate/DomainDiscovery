@@ -27,6 +27,7 @@ export const pt: Messages = {
       { label: 'Assistente de domínios com IA', mobile: 'Assistente', description: 'Descreva o negócio: ideias, verificação e ordenação.' },
       { label: 'Gerador de domínios', mobile: 'Gerador', description: 'Ideias de nomes a partir de uma palavra ou tema.' },
       { label: 'Pesquisa em massa', mobile: 'Em massa', description: 'Verifique muitos nomes de uma vez.' },
+      { label: 'Leads de domínios', mobile: 'Leads', description: 'Acompanhe a saturação do espaço de nomes, os domínios recém-registados e os compradores finais.' },
     ],
     toolItems: [
       { label: 'Domínios por palavra-chave', mobile: 'Palavras', description: 'Transforme uma palavra em nomes com verificação ao vivo.' },

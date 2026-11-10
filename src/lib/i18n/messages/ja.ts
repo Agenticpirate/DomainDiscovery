@@ -27,6 +27,7 @@ export const ja: Messages = {
       { label: 'AIドメインアシスタント', mobile: 'アシスタント', description: '事業を書くと、候補の生成、確認、順位付けをします。' },
       { label: 'ドメインジェネレーター', mobile: '生成', description: 'キーワードやテーマから名前の案を出します。' },
       { label: '一括ドメイン検索', mobile: '一括', description: '多数の名前を一度に確認します。' },
+      { label: 'ドメインリード', mobile: 'リード', description: 'ネームスペースの飽和度、新規登録ドメイン、エンドユーザーの買い手を追跡します。' },
     ],
     toolItems: [
       { label: 'キーワードドメイン', mobile: 'キーワード', description: '一つの言葉を、空き確認付きの名前に広げます。' },
