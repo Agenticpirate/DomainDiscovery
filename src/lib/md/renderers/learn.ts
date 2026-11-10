@@ -13,6 +13,7 @@ import {
   isFaqSection,
   isLearnTranslated,
   localizeLearnArticle,
+  ensureLearnLocale,
 } from '@/lib/learnArticles';
 import type { LocaleId } from '@/lib/i18n/locales';
 import { bullets, faqBlock, heading, listItem, oneLine, page } from '../format';
@@ -46,11 +47,12 @@ function renderHub(): MdDoc {
   };
 }
 
-function renderGuide(ctx: MdContext): MdDoc | null {
+async function renderGuide(ctx: MdContext): Promise<MdDoc | null> {
   const { slug } = ctx.params;
   const locale: LocaleId = ctx.locale;
   const english = getLearnArticle(slug);
   if (!english || !isLearnTranslated(slug, locale)) return null;
+  await ensureLearnLocale(locale);
   const article = localizeLearnArticle(english, locale);
   if (!article) return null;
 

@@ -1,15 +1,5 @@
 import learnData from '@/data/learn-articles.json';
-import zhLearn from '@/data/learn-locales/zh.json';
-import deLearn from '@/data/learn-locales/de.json';
-import esLearn from '@/data/learn-locales/es.json';
-import jaLearn from '@/data/learn-locales/ja.json';
-import frLearn from '@/data/learn-locales/fr.json';
-import ptLearn from '@/data/learn-locales/pt.json';
-import hiLearn from '@/data/learn-locales/hi.json';
-import arLearn from '@/data/learn-locales/ar.json';
-import ruLearn from '@/data/learn-locales/ru.json';
-import bnLearn from '@/data/learn-locales/bn.json';
-import urLearn from '@/data/learn-locales/ur.json';
+import learnLocaleIndex from '@/data/learn-locale-index.json';
 import type { LocaleId } from '@/lib/i18n/locales';
 
 export type LearnSection = {
@@ -67,62 +57,84 @@ export type LearnTranslation = {
 };
 
 type LearnLocaleFile = { articles: Record<string, LearnTranslation> };
+type TranslatedLocale = Exclude<LocaleId, 'en'>;
+/** Listing fields of a translated guide (no section bodies). Built by scripts/build-learn-locale-index.mjs. */
+type LearnIndexEntry = Pick<LearnTranslation, 'title' | 'description' | 'category' | 'topics' | 'readTime'>;
 
-const LEARN_LOCALES: Record<Exclude<LocaleId, 'en'>, LearnLocaleFile> = {
-  zh: zhLearn as LearnLocaleFile,
-  de: deLearn as LearnLocaleFile,
-  es: esLearn as LearnLocaleFile,
-  ja: jaLearn as LearnLocaleFile,
-  fr: frLearn as LearnLocaleFile,
-  pt: ptLearn as LearnLocaleFile,
-  hi: hiLearn as LearnLocaleFile,
-  ar: arLearn as LearnLocaleFile,
-  ru: ruLearn as LearnLocaleFile,
-  bn: bnLearn as LearnLocaleFile,
-  ur: urLearn as LearnLocaleFile,
+const LEARN_INDEX = learnLocaleIndex as Record<TranslatedLocale, Record<string, LearnIndexEntry>>;
+const TRANSLATED_LOCALES = Object.keys(LEARN_INDEX) as TranslatedLocale[];
+
+/**
+ * Full translation files, one per language, loaded on demand. Together they are ~24 MB, so
+ * bundling them eagerly made every Worker instance load all of them before answering.
+ * Relative paths with the extension: Vite does not bundle aliased dynamic imports.
+ */
+const LOCALE_LOADERS: Record<TranslatedLocale, () => Promise<{ default: unknown }>> = {
+  zh: () => import('../data/learn-locales/zh.json'),
+  de: () => import('../data/learn-locales/de.json'),
+  es: () => import('../data/learn-locales/es.json'),
+  ja: () => import('../data/learn-locales/ja.json'),
+  fr: () => import('../data/learn-locales/fr.json'),
+  pt: () => import('../data/learn-locales/pt.json'),
+  hi: () => import('../data/learn-locales/hi.json'),
+  ar: () => import('../data/learn-locales/ar.json'),
+  ru: () => import('../data/learn-locales/ru.json'),
+  bn: () => import('../data/learn-locales/bn.json'),
+  ur: () => import('../data/learn-locales/ur.json'),
 };
+const loadedLocales: Partial<Record<TranslatedLocale, LearnLocaleFile>> = {};
 
-/** English article plus the matching language file, when that slug has been published there. */
+/**
+ * Load one language's full guide translations. Call (and await) this before rendering a
+ * translated guide body; listings and titles work without it from the small index.
+ */
+export async function ensureLearnLocale(locale: LocaleId): Promise<void> {
+  if (locale === 'en' || loadedLocales[locale] || !LOCALE_LOADERS[locale]) return;
+  const mod = await LOCALE_LOADERS[locale]();
+  loadedLocales[locale] = mod.default as LearnLocaleFile;
+}
+
+/**
+ * English article localized for the language. With the language loaded (ensureLearnLocale),
+ * the translated sections are used; without it, only the listing fields (title, description,
+ * category, topics, read time) are translated, which is all listings and metadata need.
+ */
 export function localizeLearnArticle(
   article: LearnArticle | null,
   locale: LocaleId
 ): LearnArticle | null {
   if (!article || locale === 'en') return article;
-  const translated = LEARN_LOCALES[locale]?.articles?.[article.slug];
-  if (!translated?.title || !translated.sections?.length) return article;
+  const meta = LEARN_INDEX[locale]?.[article.slug];
+  if (!meta?.title) return article;
+  const full = loadedLocales[locale]?.articles?.[article.slug];
   return {
     ...article,
-    title: translated.title,
-    description: translated.description || article.description,
-    category: translated.category || article.category,
-    topics: translated.topics?.length ? translated.topics : article.topics,
-    readTime: translated.readTime || article.readTime,
-    sections: translated.sections,
+    title: meta.title,
+    description: meta.description || article.description,
+    category: meta.category || article.category,
+    topics: meta.topics?.length ? meta.topics : article.topics,
+    readTime: meta.readTime || article.readTime,
+    sections: full?.sections?.length ? full.sections : article.sections,
   };
 }
 
 /** True when this language has a full translation of the slug. English always counts. */
 export function isLearnTranslated(slug: string, locale: LocaleId): boolean {
   if (locale === 'en') return true;
-  const copy = LEARN_LOCALES[locale]?.articles?.[slug];
-  return Boolean(copy?.title && copy.sections?.length);
+  return Boolean(LEARN_INDEX[locale]?.[slug]?.title);
 }
 
 /**
  * Non-English languages that have a full translation of the slug. Each one is indexed on its
  * own, and the hreflang set lists English plus exactly these languages (all reciprocal).
  */
-export function getLearnTranslatedLocales(slug: string): Array<Exclude<LocaleId, 'en'>> {
-  return (Object.keys(LEARN_LOCALES) as Array<Exclude<LocaleId, 'en'>>).filter((locale) =>
-    isLearnTranslated(slug, locale)
-  );
+export function getLearnTranslatedLocales(slug: string): TranslatedLocale[] {
+  return TRANSLATED_LOCALES.filter((locale) => isLearnTranslated(slug, locale));
 }
 
 /** True when every language has the slug. */
 export function isLearnFullyTranslated(slug: string): boolean {
-  return (Object.keys(LEARN_LOCALES) as Array<Exclude<LocaleId, 'en'>>).every((locale) =>
-    isLearnTranslated(slug, locale)
-  );
+  return TRANSLATED_LOCALES.every((locale) => isLearnTranslated(slug, locale));
 }
 
 /** Published slugs that exist in all languages. Used by the sitemap, hreflang, and llms files. */

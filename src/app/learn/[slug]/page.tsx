@@ -23,6 +23,7 @@ import {
   isFaqSection,
   getLearnTranslatedLocales,
   isLearnTranslated,
+  ensureLearnLocale,
 } from '@/lib/learnArticles';
 import { getSiteBaseUrl, SITE_BRAND } from '@/lib/seoSiteFacts';
 import { getRequestLocale } from '@/lib/i18n/request';
@@ -124,6 +125,8 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 export default async function LearnArticlePage(props: PageProps) {
   const params = await props.params;
   const locale = await getRequestLocale();
+  // Load this language's guide bodies before localizing (titles alone come from the index).
+  await ensureLearnLocale(locale);
   const article = localizeLearnArticle(getLearnArticle(params.slug), locale);
   if (!article) notFound();
 
