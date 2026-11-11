@@ -149,9 +149,6 @@ function footerSections(f: Messages['footer'], href: (path: string) => string, t
       { label: f.bulk, href: href('/bulk-search'), Icon: Fi.layers },
       { label: f.extensions, href: href('/domain-extensions'), Icon: Fi.globe },
       { label: t('Domain Leads'), href: href('/tools/leads'), Icon: Fi.spark },
-      { label: t('Domain Lead Guides'), href: href('/domain-leads'), Icon: Fi.book },
-      { label: t('Domain Name Ideas'), href: href('/domain-name-ideas'), Icon: Fi.spark },
-      { label: t('Alternatives'), href: href('/alternatives'), Icon: Fi.layers },
       {
         label: f.ada,
         href: 'https://www.aidomainassistant.com',
@@ -167,8 +164,6 @@ function footerSections(f: Messages['footer'], href: (path: string) => string, t
       { label: f.geo, href: href('/tools/geo'), Icon: Fi.globe },
       { label: f.compare, href: href('/tools/compare'), Icon: Fi.dollar },
       { label: f.keyword, href: href('/tools/keyword'), Icon: Fi.keyword },
-      { label: t('Domain Value'), href: href('/tools/value'), Icon: Fi.dollar },
-      { label: t('DNS Lookup'), href: href('/tools/dns'), Icon: Fi.globe },
     ],
   },
   {

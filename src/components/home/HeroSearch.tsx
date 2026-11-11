@@ -31,7 +31,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastRoutedRef = useRef('');
   const router = useRouter();
-  const { messages, href } = useLocale();
+  const { messages, href, locale } = useLocale();
   const t = useT();
   const hero = messages.hero;
   const { theme } = useTheme();
@@ -213,7 +213,14 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
               {aiMode ? (
                 hero.generate
               ) : (
-                hero.search
+                locale === 'en' ? (
+                  <>
+                    <span>Search</span>
+                    <span className="hidden min-[420px]:inline"> domains</span>
+                  </>
+                ) : (
+                  hero.search
+                )
               )}
             </span>
             {searchArrow}

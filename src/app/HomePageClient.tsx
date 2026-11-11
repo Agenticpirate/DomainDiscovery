@@ -35,7 +35,8 @@ const HERO_TRUST_ICONS: React.ReactNode[] = [
 ];
 
 export default function Home() {
-  const { messages, href } = useLocale();
+  const { messages, href, locale } = useLocale();
+  const isEn = locale === 'en';
   const hero = messages.hero;
   const [searchQuery, setSearchQuery] = useState('');
   const [showHeroAd, setShowHeroAd] = useState(false);
@@ -106,7 +107,7 @@ export default function Home() {
               <SearchCountPill />
             </div>
 
-            <h1 className="relative z-[1] text-[2.4rem] min-[390px]:text-[2.6rem] leading-[1.04] sm:text-[3.65rem] sm:leading-[1.02] md:text-[4.5rem] font-bold tracking-[-0.04em] sm:tracking-[-0.05em] mb-3 sm:mb-4">
+            <h1 className="relative z-[1] text-[clamp(1.9rem,9.2vw,2.75rem)] leading-[1.04] sm:text-[3.65rem] sm:leading-[1.02] md:text-[4.5rem] font-bold tracking-[-0.04em] sm:tracking-[-0.05em] mb-3 sm:mb-4">
               {/* Same heading on every screen size; the tagline (hero.sub) sits underneath. */}
               <span className="hero-ink hero-ink-live block pb-[0.06em] text-balance">{hero.h1Desktop}</span>
               <span className="block text-[1.18rem] min-[380px]:text-[1.25rem] sm:text-[1.5rem] md:text-[1.85rem] mt-1.5 sm:mt-2 font-medium tracking-[-0.02em] sm:tracking-[-0.025em] text-ds-body">
@@ -158,39 +159,39 @@ export default function Home() {
               </div>
 
               <div className="mt-3.5 sm:mt-5 flex justify-center">
-                <div className="hero-badge inline-flex max-w-full flex-wrap items-center justify-center rounded-[1.4rem] p-1 shadow-sm sm:flex-nowrap sm:rounded-full">
+                <div className={`hero-badge inline-flex max-w-full items-center rounded-full p-1 shadow-sm ${isEn ? '' : 'flex-wrap justify-center rounded-[1.4rem] sm:flex-nowrap sm:rounded-full'}`}>
                   <Link
                     href={href('/bulk-search')}
-                    className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"
+                    className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-2 min-[400px]:px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-3.5 w-3.5 sm:h-[15px] sm:w-[15px] text-ds-body transition-colors group-hover/link:text-ds-ink shrink-0" aria-hidden>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l9 4.5-9 4.5-9-4.5L12 3zM3 12l9 4.5 9-4.5M3 16.5L12 21l9-4.5" />
                     </svg>
-                    <span className="inline min-[360px]:hidden">Bulk</span>
-                    <span className="hidden min-[360px]:inline">{messages.crumbs.bulk}</span>
+                    <span className="inline min-[380px]:hidden">Bulk</span>
+                    <span className="hidden min-[380px]:inline">{messages.crumbs.bulk}</span>
                   </Link>
-                  <span className="mx-0.5 hidden h-4 w-px bg-ds-hairline shrink-0 min-[420px]:block" aria-hidden />
+                  <span className={`mx-0.5 h-3.5 sm:h-4 w-px bg-ds-hairline shrink-0 ${isEn ? '' : 'hidden min-[420px]:block'}`} aria-hidden />
                   <Link
                     href={href('/tools/geo')}
-                    className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"
+                    className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-2 min-[400px]:px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-3.5 w-3.5 sm:h-[15px] sm:w-[15px] text-ds-body transition-colors group-hover/link:text-ds-ink shrink-0" aria-hidden>
                       <circle cx="12" cy="12" r="9" />
                       <path strokeLinecap="round" d="M3 12h18M12 3c2.5 2.6 3.75 5.6 3.75 9S14.5 18.4 12 21c-2.5-2.6-3.75-5.6-3.75-9S9.5 5.6 12 3z" />
                     </svg>
-                    <span className="inline min-[360px]:hidden">Geo</span>
-                    <span className="hidden min-[360px]:inline">{messages.crumbs.geo}</span>
+                    <span className="inline min-[380px]:hidden">Geo</span>
+                    <span className="hidden min-[380px]:inline">{messages.crumbs.geo}</span>
                   </Link>
-                  <span className="mx-0.5 hidden h-4 w-px bg-ds-hairline shrink-0 min-[420px]:block" aria-hidden />
+                  <span className={`mx-0.5 h-3.5 sm:h-4 w-px bg-ds-hairline shrink-0 ${isEn ? '' : 'hidden min-[420px]:block'}`} aria-hidden />
                   <Link
                     href={href('/tools/leads')}
-                    className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"
+                    className="group/link inline-flex min-h-9 sm:min-h-10 items-center gap-1.5 sm:gap-2 rounded-full px-2 min-[400px]:px-3 sm:px-4 text-[12px] min-[360px]:text-[12.5px] sm:text-[13px] font-semibold text-ds-ink transition-colors duration-200 hover:bg-white/[0.06] [.light_&]:hover:bg-[#f4f5f5] whitespace-nowrap"
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="h-3.5 w-3.5 sm:h-[15px] sm:w-[15px] text-ds-body transition-colors group-hover/link:text-ds-ink shrink-0" aria-hidden>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                     </svg>
-                    <span className="inline min-[360px]:hidden">Leads</span>
-                    <span className="hidden min-[360px]:inline">{messages.crumbs.leads || 'Domain leads'}</span>
+                    <span className="inline min-[380px]:hidden">Leads</span>
+                    <span className="hidden min-[380px]:inline">{messages.crumbs.leads || 'Domain leads'}</span>
                   </Link>
                 </div>
               </div>
