@@ -23,7 +23,7 @@ const FAQ_ITEMS = [
     icon: <Icons.Check />,
     question: 'How do I check if a domain name is available?',
     answer:
-      'Use domain name search on the homepage or Search page. Type the name and review free, registered, or premium-style results across 1,600+ extensions. Availability is a snapshot — re-check at registrar checkout and register promptly if the name matters.',
+      'Use domain name search on the homepage or Search page. Type the name and review free, registered, or premium-style results across 700+ extensions. Availability is a snapshot — re-check at registrar checkout and register promptly if the name matters.',
   },
   {
     icon: <Icons.Dollar />,

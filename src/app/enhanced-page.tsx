@@ -100,7 +100,7 @@ export default function EnhancedHome() {
                 mounted ? 'animate-fade-in' : 'opacity-0'
               } [animation-delay:200ms]`}
             >
-              Search millions of domains in real-time. Check 1,600+ extensions, compare prices, and register instantly.
+              Search millions of domains in real-time. Check 700+ extensions, compare prices, and register instantly.
             </p>
           </div>
         </div>
@@ -148,7 +148,7 @@ export default function EnhancedHome() {
                   </div>
                   <h3 className="text-xl font-bold text-white/80 mb-2">Start Your Search</h3>
                   <p className="text-sm text-white/40 max-w-md mx-auto">
-                    Enter a domain name above to check availability across 1,600+ extensions in real-time.
+                    Enter a domain name above to check availability across 700+ extensions in real-time.
                   </p>
                 </div>
               )}
@@ -184,7 +184,7 @@ export default function EnhancedHome() {
               <p className="text-white/50 text-sm mb-4">
                 Real-time results in under 25ms. See availability as you type across all major extensions.
               </p>
-              <div className="text-xs text-white/30">1,600+ TLDs supported</div>
+              <div className="text-xs text-white/30">700+ TLDs supported</div>
             </div>
 
             <div className="glass-card p-8 border-white/10 hover:border-white/20 transition-all duration-500">

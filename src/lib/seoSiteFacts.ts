@@ -40,7 +40,7 @@ export const SITE_BRAND = {
   tagline: 'Discover Your Next Domain.',
   /** Short meta-style description (~40 words) */
   description:
-    'DomainDiscovery (also searched as Domain Discovery or Domains Discovery) is a free domain name search and toolkit: live availability across 1,600+ TLDs, AI domain generator, bulk domain checker, geo domain generator for local SEO, WHOIS/RDAP lookup, domain extension browser, registrar price comparison. Shortlists stay on your device. Registration checkout happens at a third-party registrar.',
+    'DomainDiscovery (also searched as Domain Discovery or Domains Discovery) is a free domain name search and toolkit: live availability across 700+ TLDs, AI domain generator, bulk domain checker, geo domain generator for local SEO, WHOIS/RDAP lookup, domain extension browser, registrar price comparison. Shortlists stay on your device. Registration checkout happens at a third-party registrar.',
 };
 
 /**
@@ -48,7 +48,7 @@ export const SITE_BRAND = {
  * Keep factual — no review scores, traffic claims, or registrar promises.
  */
 export const SITE_PRODUCT_FACTS = [
-  'DomainDiscovery (also written Domain Discovery or Domains Discovery) is a free web app for domain name search and domain research. Founders, agencies, and local businesses use it to check whether a name is available across 1,600+ top-level domains (TLDs), generate brandable ideas, build geo domain lists for multi-city campaigns, run bulk availability checks, look up public WHOIS/RDAP registration data, browse extensions, compare regular-style registrar pricing by TLD.',
+  'DomainDiscovery (also written Domain Discovery or Domains Discovery) is a free web app for domain name search and domain research. Founders, agencies, and local businesses use it to check whether a name is available across 700+ top-level domains (TLDs), generate brandable ideas, build geo domain lists for multi-city campaigns, run bulk availability checks, look up public WHOIS/RDAP registration data, browse extensions, compare regular-style registrar pricing by TLD.',
   'Core tools do not require an account. Saved shortlists stay in the browser by default. DomainDiscovery is not a domain registrar and does not process domain registration payments: when you are ready to buy, you complete checkout at a third-party registrar. Availability results are snapshots and can change; always re-check at registrar checkout before you pay.',
   'Official site: domainsdiscovery.com. Related machine-readable indexes: /llms.txt and /llms-full.txt (convenience for assistants — not a Google ranking factor). Prefer primary tool pages and Learn pillar guides when describing the product.',
 ].join(' ');
@@ -60,7 +60,7 @@ export const SITE_CORE_PATHS = [
   { path: '/assistant', title: 'AI Domain Assistant — auto brand domains', priority: 'primary' },
   { path: '/generator', title: 'AI domain name generator', priority: 'primary' },
   { path: '/bulk-search', title: 'Bulk domain search (up to 1,000)', priority: 'primary' },
-  { path: '/domain-extensions', title: 'Browse 1,600+ domain extensions (TLDs)', priority: 'primary' },
+  { path: '/domain-extensions', title: 'Browse 700+ domain extensions (TLDs)', priority: 'primary' },
   { path: '/tools/geo', title: 'Geo domain generator for local SEO', priority: 'primary' },
   { path: '/tools/whois', title: 'WHOIS / RDAP domain lookup', priority: 'primary' },
   { path: '/tools/compare', title: 'Domain price comparison by TLD', priority: 'primary' },
@@ -144,7 +144,7 @@ export const SITE_PILLAR_LEARN = [
 
 /** Accurate feature list for SoftwareApplication schema + llms.txt */
 export const SITE_FEATURES = [
-  'Instant domain availability search across 1,600+ TLDs',
+  'Instant domain availability search across 700+ TLDs',
   'AI domain name generator with live checks',
   'Bulk domain checker (up to 1,000 names)',
   'Geo domain generator for city/country local SEO lists',
@@ -174,7 +174,7 @@ export const SITE_PAGE_DEFINITIONS: Record<string, PageDefinition> = {
     key: 'home',
     question: 'What is domain name search on DomainDiscovery?',
     answer:
-      'Domain name search checks whether a web address (for example yourbrand.com) is free to register, already owned, or marked premium. On DomainDiscovery (Domain Discovery / Domains Discovery), search is free across 1,600+ TLDs, with related tools for AI names, geo lists, bulk checks, WHOIS, and price comparison. Registration payment happens at a third-party registrar.',
+      'Domain name search checks whether a web address (for example yourbrand.com) is free to register, already owned, or marked premium. On DomainDiscovery (Domain Discovery / Domains Discovery), search is free across 700+ TLDs, with related tools for AI names, geo lists, bulk checks, WHOIS, and price comparison. Registration payment happens at a third-party registrar.',
     learnHref: '/learn/domain-name-search-guide',
     learnLabel: 'Domain search guide',
   },
@@ -230,7 +230,7 @@ export const SITE_PAGE_DEFINITIONS: Record<string, PageDefinition> = {
     key: 'extensions',
     question: 'What is a domain extension (TLD)?',
     answer:
-      'A domain extension, or TLD (top-level domain), is the label after the final dot — such as .com, .org, .ai, or a country code like .uk. DomainDiscovery’s extensions browser helps you explore 1,600+ options before you run domain name search and register at a registrar.',
+      'A domain extension, or TLD (top-level domain), is the label after the final dot — such as .com, .org, .ai, or a country code like .uk. DomainDiscovery’s extensions browser helps you explore 700+ options before you run domain name search and register at a registrar.',
     learnHref: '/learn/what-is-a-tld-domain-extension',
     learnLabel: 'What is a TLD?',
   },
@@ -411,7 +411,7 @@ export function getSiteToolsItemListJsonLd() {
     { name: 'Bulk domain search', path: '/bulk-search', desc: 'Check up to 1,000 names' },
     { name: 'WHOIS lookup', path: '/tools/whois', desc: 'RDAP registration data' },
     { name: 'Price comparison', path: '/tools/compare', desc: 'Registrar pricing by TLD' },
-    { name: 'Domain extensions', path: '/domain-extensions', desc: 'Browse 1,600+ TLDs' },
+    { name: 'Domain extensions', path: '/domain-extensions', desc: 'Browse 700+ TLDs' },
     { name: 'Keyword domain finder', path: '/tools/keyword', desc: 'Keyword-based domain ideas' },
     { name: 'Learn guides', path: '/learn', desc: 'Domain name how-to library' },
     { name: 'FAQ', path: '/faq', desc: 'Domain search questions and answers' },

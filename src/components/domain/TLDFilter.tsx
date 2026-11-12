@@ -54,7 +54,7 @@ export function TLDFilter({ onSelect }: TLDFilterProps) {
           onClick={() => setShowAll(!showAll)}
           className={`text-xs ${isLight ? 'text-slate-500 hover:text-slate-900' : 'text-white/40 hover:text-white'} transition-colors`}
         >
-          {showAll ? 'Show Less' : 'Show All 1,600+'}
+          {showAll ? 'Show Less' : 'Show All 700+'}
         </button>
       </div>
       <div className="flex flex-wrap gap-2">

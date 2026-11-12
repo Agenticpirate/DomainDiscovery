@@ -50,7 +50,7 @@ export default function AlternativesHubPage() {
       <RelatedLinks
         title="Start with DomainDiscovery"
         links={[
-          { href: '/search', label: 'Domain name search', description: 'Check availability across 1,600+ extensions.' },
+          { href: '/search', label: 'Domain name search', description: 'Check availability across 700+ extensions.' },
           { href: '/bulk-search', label: 'Bulk domain search', description: 'Check up to 1,000 names in one pass.' },
         ]}
       />

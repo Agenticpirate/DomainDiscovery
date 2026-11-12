@@ -53,7 +53,7 @@ export const VALUE_PAGE_COPY: ToolPageCopy = {
   ],
   related: [
         { href: '/tools/whois', label: 'WHOIS lookup', description: 'Registrar, dates and name servers.' },
-        { href: '/search', label: 'Domain name search', description: 'Check availability across 1,600+ extensions.' },
+        { href: '/search', label: 'Domain name search', description: 'Check availability across 700+ extensions.' },
         { href: '/tools/compare', label: 'Compare registrar prices', description: 'Registration and renewal prices by extension.' },
   ],
 };
@@ -90,7 +90,7 @@ export const DNS_PAGE_COPY: ToolPageCopy = {
   ],
   related: [
         { href: '/tools/whois', label: 'WHOIS lookup', description: 'Registrar, dates and name servers.' },
-        { href: '/search', label: 'Domain name search', description: 'Check availability across 1,600+ extensions.' },
+        { href: '/search', label: 'Domain name search', description: 'Check availability across 700+ extensions.' },
         { href: '/tools/value', label: 'Domain value estimator', description: 'Estimated price range for a name.' },
   ],
 };

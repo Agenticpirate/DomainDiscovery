@@ -33,7 +33,7 @@ const faqItems = [
     icon: <Icons.Globe />,
     question: 'What TLD extensions do you support?',
     answer:
-      'We support 1,000+ TLD extensions including .com, .net, .org, .ai, .io, and hundreds of country-code and specialty TLDs. Browse them on Domain Extensions with live availability.',
+      'We support 700+ TLD extensions including .com, .net, .org, .ai, .io, and hundreds of country-code and specialty TLDs. Browse them on Domain Extensions with live availability.',
   },
   {
     icon: <Icons.Dollar />,

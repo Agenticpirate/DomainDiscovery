@@ -55,7 +55,7 @@ export const ALTERNATIVES: Alternative[] = [
       {
         question: 'What can I use instead of Lean Domain Search?',
         answer:
-          'DomainDiscovery lets you search one name across 1,600+ extensions, generate ideas from a keyword and check many names at once.',
+          'DomainDiscovery lets you search one name across 700+ extensions, generate ideas from a keyword and check many names at once.',
       },
       {
         question: 'Does DomainDiscovery suggest names from a keyword?',
@@ -69,7 +69,7 @@ export const ALTERNATIVES: Alternative[] = [
     searchTerm: 'Instant Domain Search alternative',
     title: 'Instant Domain Search Alternative | DomainDiscovery',
     description:
-      'Looking for an Instant Domain Search alternative? DomainDiscovery checks availability across 1,600+ extensions and adds bulk search, WHOIS and price comparison.',
+      'Looking for an Instant Domain Search alternative? DomainDiscovery checks availability across 700+ extensions and adds bulk search, WHOIS and price comparison.',
     whatItIs:
       'Instant Domain Search is a domain availability tool known for showing results as you type. Check its site for its current features and pricing.',
     focus: 'Fast, as-you-type domain availability checks.',
@@ -81,7 +81,7 @@ export const ALTERNATIVES: Alternative[] = [
       },
       {
         question: 'How many extensions does DomainDiscovery check?',
-        answer: 'Search covers more than 1,600 top-level domains.',
+        answer: 'Search covers more than 700 top-level domains.',
       },
       {
         question: 'Can I check many names at once?',
@@ -197,7 +197,7 @@ export const ALTERNATIVES: Alternative[] = [
     searchTerm: 'Porkbun domain search alternative',
     title: 'Porkbun Domain Search Alternative',
     description:
-      'A Porkbun domain search alternative. Check names across 1,600+ extensions on DomainDiscovery, search in bulk and compare registrar prices side by side.',
+      'A Porkbun domain search alternative. Check names across 700+ extensions on DomainDiscovery, search in bulk and compare registrar prices side by side.',
     whatItIs:
       'Porkbun is a domain registrar, and its site includes a domain search box. Check its site for current features and pricing.',
     focus: 'Domain search and registration at a registrar.',
@@ -213,7 +213,7 @@ export const ALTERNATIVES: Alternative[] = [
       },
       {
         question: 'How many extensions can I search?',
-        answer: 'More than 1,600 top-level domains.',
+        answer: 'More than 700 top-level domains.',
       },
     ],
   },
@@ -223,7 +223,7 @@ export const ALTERNATIVES: Alternative[] = [
     searchTerm: 'Domainr alternative',
     title: 'Domainr Alternative | DomainDiscovery',
     description:
-      'Looking for a Domainr alternative? DomainDiscovery searches 1,600+ extensions and adds bulk search, an AI generator, WHOIS and price comparison.',
+      'Looking for a Domainr alternative? DomainDiscovery searches 700+ extensions and adds bulk search, an AI generator, WHOIS and price comparison.',
     whatItIs:
       'Domainr is a domain search service that also offers an API for developers. Check its site for current features and pricing.',
     focus: 'Domain search and a developer API.',
@@ -235,7 +235,7 @@ export const ALTERNATIVES: Alternative[] = [
       },
       {
         question: 'Does DomainDiscovery show creative extensions?',
-        answer: 'Search covers more than 1,600 extensions, and the extension browser explains each one.',
+        answer: 'Search covers more than 700 extensions, and the extension browser explains each one.',
       },
       {
         question: 'Where can I read about each extension?',

@@ -45,7 +45,7 @@ const baseMetadata: Metadata = {
     template: "%s | DomainDiscovery",
   },
   description:
-    "Free domain name search across 1,600+ TLDs with live availability. AI name generator, bulk checker, WHOIS lookup, and registrar price comparison. No signup.",
+    "Free domain name search across 700+ TLDs with live availability. AI name generator, bulk checker, WHOIS lookup, and registrar price comparison. No signup.",
   applicationName: SITE_BRAND.name,
   category: "technology",
   keywords: [
@@ -84,13 +84,13 @@ const baseMetadata: Metadata = {
     siteName: SITE_BRAND.name,
     title: "Domain Name Search — Free Instant Availability | DomainDiscovery",
     description:
-      "Check domain availability across 1,600+ extensions. Free AI generator, bulk search, geo domains, WHOIS, and price compare.",
+      "Check domain availability across 700+ extensions. Free AI generator, bulk search, geo domains, WHOIS, and price compare.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Domain Name Search — Free Instant Availability | DomainDiscovery",
     description:
-      "Check domain availability across 1,600+ extensions. Free AI generator, bulk search, geo domains, WHOIS, and price compare.",
+      "Check domain availability across 700+ extensions. Free AI generator, bulk search, geo domains, WHOIS, and price compare.",
     creator: "@domainsdiscovery",
   },
   // Chrome / Android / Bing tile chrome
@@ -161,7 +161,7 @@ export async function generateMetadata(): Promise<Metadata> {
     other: {
       ...baseMetadata.other,
       ...aiSummaryOther(
-        "Free domain name search across 1,600+ TLDs with live availability, plus an AI name generator, bulk checker, WHOIS lookup and registrar price comparison. Registration happens at a third-party registrar."
+        "Free domain name search across 700+ TLDs with live availability, plus an AI name generator, bulk checker, WHOIS lookup and registrar price comparison. Registration happens at a third-party registrar."
       ),
     },
     openGraph: {

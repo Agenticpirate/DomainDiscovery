@@ -1,9 +1,9 @@
 import { ToolPageJsonLd } from '@/components/seo/JsonLd';
 import { buildLocalizedToolMetadata } from '@/lib/i18n/metadata';
 
-const title = 'Domain Extensions (TLDs) — Browse 1,600+ Options';
+const title = 'Domain Extensions (TLDs) — Browse 700+ Options';
 const description =
-  'Browse 1,600+ domain extensions and TLDs — from .com and .ai to country codes. Find the right extension, then check availability.';
+  'Browse 700+ domain extensions and TLDs — from .com and .ai to country codes. Find the right extension, then check availability.';
 const path = '/domain-extensions';
 
 export function generateMetadata() {

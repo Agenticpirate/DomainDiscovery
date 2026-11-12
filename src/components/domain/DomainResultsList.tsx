@@ -39,7 +39,7 @@ export function DomainResultsList({
       <div className="text-center py-8">
         <div className={`inline-flex items-center gap-2 ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
           <div className={`w-2 h-2 rounded-full ${isLight ? 'bg-slate-400' : 'bg-white/40'} animate-pulse`} />
-          <span className="text-sm">Searching across 1,600+ extensions...</span>
+          <span className="text-sm">Searching across 700+ extensions...</span>
         </div>
       </div>
     );
