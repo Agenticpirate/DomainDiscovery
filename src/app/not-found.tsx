@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
 import { PAGE_MAIN_CLASS } from '@/components/ui/pageLayout';
+import { Owl } from '@/components/ui/Owl';
 
 export const metadata: Metadata = {
   title: { absolute: 'Page not found | DomainDiscovery' },
@@ -26,6 +27,7 @@ export default function NotFound() {
       <Navigation />
       <main className={`${PAGE_MAIN_CLASS} flex flex-1 items-center justify-center px-4 pb-16 sm:pb-24`}>
         <div className="w-full max-w-xl pt-10 text-center sm:pt-16">
+          <Owl mood="lost" interactive className="mx-auto mb-5 block h-16 w-16 sm:h-20 sm:w-20" />
           <p className="inline-flex items-center gap-2 rounded-full border border-ds-hairline px-3 py-1 text-[12px] font-semibold tracking-wide text-ds-body">
             <span className="h-1.5 w-1.5 rounded-full bg-rose-400" aria-hidden />
             404 · Not found

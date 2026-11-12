@@ -40,6 +40,9 @@ export default function Home() {
   const hero = messages.hero;
   const [searchQuery, setSearchQuery] = useState('');
   const [showHeroAd, setShowHeroAd] = useState(false);
+  const [owlWatching, setOwlWatching] = useState(false);
+  const [owlNudge, setOwlNudge] = useState(0);
+  const [owlCheer, setOwlCheer] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -72,6 +75,7 @@ export default function Home() {
     const normalized = query.trim();
     if (!normalized) return;
     setSearchQuery(normalized);
+    setOwlCheer(true);
     router.push(href(`/search?q=${encodeURIComponent(normalized)}`));
   };
 
@@ -115,7 +119,7 @@ export default function Home() {
               </span>
             </h1>
 
-            <ul className="relative z-[1] mx-auto mb-4 sm:mb-8 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 text-[11px] min-[380px]:text-[12px] sm:text-[13px] font-medium text-ds-body">
+            <ul className="relative z-[1] mx-auto mb-8 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 text-[11px] min-[380px]:text-[12px] sm:text-[13px] font-medium text-ds-body">
               {hero.trust.map((label, index) => (
                 <li
                   key={label}
@@ -147,14 +151,19 @@ export default function Home() {
             <div className="relative z-[2] mx-auto w-full max-w-[40rem] sm:max-w-[44rem]">
               {/* Mascot perched on the search panel (hover to make it hop) */}
               <Owl
-                mood="idle"
-                className="pointer-events-auto absolute -top-[3.1rem] right-5 z-[3] hidden h-14 w-14 sm:block"
+                mood={owlCheer ? 'happy' : owlWatching ? 'typing' : 'idle'}
+                nudge={owlNudge}
+                interactive
+                sleepAfterMs={25000}
+                className="pointer-events-auto absolute -top-[2rem] right-5 z-[3] h-9 w-9 sm:-top-[3.1rem] sm:right-5 sm:h-14 sm:w-14"
               />
               <div className="hero-halo">
                 <HeroSearch
                   initialQuery={searchQuery}
                   onSearch={handleHeroSearch}
                   embedded
+                  onFocusChange={setOwlWatching}
+                  onType={() => setOwlNudge((n) => n + 1)}
                 />
               </div>
 
