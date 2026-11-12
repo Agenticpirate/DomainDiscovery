@@ -26,6 +26,7 @@ import { rich } from '@/components/i18n/rich';
 import { AffiliateAdRail } from '@/components/ads/AffiliateAdRail';
 import { getSavedDomainNames, toggleSavedDomain } from '@/lib/savedDomainsStore';
 import extensionsData from '@/data/extensions.json';
+import { Owl } from '@/components/ui/Owl';
 import {
   extensionsCatalogHref as buildExtensionsCatalogHref,
   normalizeCatalogKeyword,
@@ -725,6 +726,7 @@ function SearchPageContent() {
         <div className="mx-auto w-full max-w-full min-w-0 sm:max-w-[100rem] box-border px-3 sm:px-4 lg:px-5 py-2.5 sm:py-3">
           {isLoading && results.length === 0 && (
             <div className="py-16 text-center">
+              <Owl mood="searching" interactive className="mx-auto mb-3 block h-14 w-14" />
               <div className="inline-flex items-center gap-2">
                 <div
                   className="w-3.5 h-3.5 border-2 rounded-full animate-spin"
@@ -742,6 +744,7 @@ function SearchPageContent() {
 
           {!isLoading && results.length === 0 && !query && (
             <div className="text-center py-16">
+              <Owl mood="idle" interactive sleepAfterMs={20000} className="mx-auto mb-3 block h-14 w-14" />
               <p className="text-[15px] font-bold mb-1">{t('Search any name')}</p>
               <p className="text-[12px]" style={{ color: 'var(--text-muted)' }}>
                 {t('Live availability across {n}+ extensions', { n: ALL_TLDS.length })}
@@ -751,6 +754,7 @@ function SearchPageContent() {
 
           {!isLoading && results.length === 0 && !!query && (
             <div className="text-center py-16 px-4 max-w-md mx-auto space-y-3">
+              <Owl mood="shrug" interactive className="mx-auto block h-14 w-14" />
               <p className="text-[15px] font-bold">{t('No results for “{q}”', { q: query })}</p>
               <p className="text-[12px] leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                 {t('Try another spelling, fewer special characters, or explore ideas in Generator or Keyword tools.')}

@@ -17,6 +17,10 @@ interface HeroSearchProps {
    * Enter / Search still navigates immediately.
    */
   debounceMs?: number;
+  /** Search box gained / lost focus (mascot watches the box). */
+  onFocusChange?: (focused: boolean) => void;
+  /** Fires on every edit (mascot nods along). */
+  onType?: () => void;
 }
 
 export const HeroSearch: React.FC<HeroSearchProps> = ({
@@ -24,6 +28,8 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
   onSearch,
   embedded = false,
   debounceMs = 3500,
+  onFocusChange,
+  onType,
 }) => {
   const [query, setQuery] = useState(initialQuery);
   const [aiMode, setAiMode] = useState(false);
@@ -87,6 +93,7 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
 
   const handleChange = (value: string) => {
     setQuery(value);
+    onType?.();
     if (!aiMode) {
       scheduleLiveRoute(value);
     }
@@ -156,6 +163,8 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
             ref={inputRef}
             value={query}
             onChange={(e) => handleChange(e.target.value)}
+            onFocus={() => onFocusChange?.(true)}
+            onBlur={() => onFocusChange?.(false)}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault();
@@ -243,6 +252,8 @@ export const HeroSearch: React.FC<HeroSearchProps> = ({
         <input
           value={query}
           onChange={(e) => handleChange(e.target.value)}
+          onFocus={() => onFocusChange?.(true)}
+          onBlur={() => onFocusChange?.(false)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
