@@ -1561,7 +1561,7 @@ export function DomainLeadsView() {
                               </span>
                               {item.exact && (
                                 <span
-                                  className={`px-1 py-0.5 rounded text-[8px] font-sans font-bold uppercase tracking-wider ${
+                                  className={`px-1 py-0.5 rounded text-[9px] font-sans font-bold uppercase tracking-wider ${
                                     isLight
                                       ? 'bg-slate-900 text-white'
                                       : 'bg-white text-black'

@@ -182,9 +182,10 @@ export function HomeProductRows() {
             </p>
             <Link
               href={href('/domain-extensions')}
-              className="mt-4 hidden min-h-11 items-center text-[13px] font-semibold text-ds-ink underline decoration-ds-hairline underline-offset-4 sm:inline-flex"
+              className="group mt-4 hidden min-h-11 items-center gap-1 text-[13px] font-semibold text-ds-ink underline decoration-ds-mute underline-offset-4 transition-colors hover:decoration-ds-ink sm:inline-flex"
             >
               {copy.extCta}
+              <span aria-hidden className="no-underline transition-transform group-hover:translate-x-0.5">→</span>
             </Link>
           </div>
           <MockShell label={copy.tileLabel}>
@@ -257,9 +258,10 @@ export function HomeProductRows() {
             </p>
             <Link
               href={href('/bulk-search')}
-              className="mt-4 inline-flex min-h-11 items-center text-[13px] font-semibold text-ds-ink underline decoration-ds-hairline underline-offset-4"
+              className="group mt-4 inline-flex min-h-11 items-center gap-1 text-[13px] font-semibold text-ds-ink underline decoration-ds-mute underline-offset-4 transition-colors hover:decoration-ds-ink"
             >
               {copy.bulkCta}
+              <span aria-hidden className="no-underline transition-transform group-hover:translate-x-0.5">→</span>
             </Link>
           </div>
           <MockShell label={copy.bulkFile}>

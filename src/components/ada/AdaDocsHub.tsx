@@ -750,7 +750,7 @@ export function AdaDocsHub() {
                       <div className="relative z-[3] flex items-start justify-between gap-1.5 mb-1 sm:mb-1.5">
                         <p className={`text-[11px] sm:text-[13px] font-black tracking-tight leading-tight ${ink}`}>{c.t}</p>
                         <span
-                          className={`shrink-0 rounded-md border px-1 sm:px-1.5 py-0.5 text-[7px] sm:text-[8px] font-bold uppercase tracking-wide ${chipSolid}`}
+                          className={`shrink-0 rounded-md border px-1 sm:px-1.5 py-0.5 text-[9px] sm:text-[9px] font-bold uppercase tracking-wide ${chipSolid}`}
                         >
                           {c.meta}
                         </span>
@@ -826,7 +826,7 @@ export function AdaDocsHub() {
                       </code>
                       {t.badge && (
                         <span
-                          className={`rounded-full px-1.5 sm:px-2 py-0.5 text-[8px] sm:text-[9px] font-bold uppercase tracking-wide ${
+                          className={`rounded-full px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[9px] font-bold uppercase tracking-wide ${
                             isLight
                               ? 'bg-slate-900 text-white'
                               : 'bg-white text-black'

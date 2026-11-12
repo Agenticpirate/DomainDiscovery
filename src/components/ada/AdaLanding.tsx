@@ -188,7 +188,7 @@ export function AdaLanding() {
             <Reveal className="flex justify-center mb-2.5 sm:mb-5" y={8}>
               {/* Badge — opaque plate; bubbles never show through */}
               <span
-                className={`relative isolate inline-flex items-center gap-1.5 overflow-hidden rounded-full border px-2.5 sm:px-3 py-0.5 sm:py-1 text-[8.5px] sm:text-[10px] font-bold uppercase tracking-[0.11em] sm:tracking-[0.14em] ${pill}`}
+                className={`relative isolate inline-flex items-center gap-1.5 overflow-hidden rounded-full border px-2.5 sm:px-3 py-0.5 sm:py-1 text-[9.5px] sm:text-[10px] font-bold uppercase tracking-[0.11em] sm:tracking-[0.14em] ${pill}`}
               >
                 <span
                   aria-hidden

@@ -1133,7 +1133,7 @@ export const GeoDomainGenerator: React.FC = () => {
         <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <dl className="grid flex-1 grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-4">
             {[
-              [t('Catalog'), t('{mega} cities 1M+ · {total}', { mega: catalogMega.toLocaleString(), total: catalogTotal.toLocaleString() })],
+              [t('Catalog'), t('{mega} cities 1M+ · {total} total', { mega: catalogMega.toLocaleString(), total: catalogTotal.toLocaleString() })],
               [t('Scope'), t('{n} places', { n: locations.length.toLocaleString() })],
               [t('Output'), t('~{n} names', { n: estimateCount.toLocaleString() })],
               [t('Check'), t('top {n}', { n: maxCheck })],

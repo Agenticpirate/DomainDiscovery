@@ -342,7 +342,7 @@ export const Footer: React.FC = () => {
                       } ${isBottom ? '' : `border-b ${mobileCellBorder}`}`}
                     >
                       <p
-                        className={`mb-0.5 px-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] ${mobileMutedLabel}`}
+                        className={`mb-0.5 px-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${mobileMutedLabel}`}
                       >
                         {section.category}
                       </p>
@@ -351,7 +351,7 @@ export const Footer: React.FC = () => {
                           <li key={`${section.category}-${item.href}-${item.label}`}>
                             {renderLink(
                               item,
-                              'group flex min-h-6 items-center gap-1.5 rounded-md px-0.5 py-0.5 active:opacity-80',
+                              'group flex min-h-8 items-center gap-1.5 rounded-md px-0.5 py-0.5 active:opacity-80',
                               true
                             )}
                           </li>

@@ -408,7 +408,7 @@ export const de: Messages = {
     '{prefixes} prefixes · {suffixes} suffixes · {seeds} seeds · up to {max} ideas per keyword': '{prefixes} Präfixe · {suffixes} Suffixe · {seeds} Basiswörter · bis zu {max} Ideen pro Stichwort',
     'Pick a keyword chip or type above — names from the word list show up here immediately.': 'Stichwort-Chip antippen oder oben eingeben – Namen aus der Wortliste erscheinen hier sofort.',
     'Country': 'Land',
-    '{mega} cities 1M+ · {total}': '{mega} Städte ab 1 Mio. · {total}',
+    '{mega} cities 1M+ · {total} total': '{mega} Städte ab 1 Mio. · {total}',
     'Scope': 'Umfang',
     '{n} places': '{n} Orte',
     'Output': 'Ergebnis',

@@ -207,7 +207,7 @@ export function AffiliateSkyscraper() {
           }}
         >
           <span
-            className="pointer-events-none absolute left-1 top-1 z-[2] inline-flex items-center rounded-full border border-white/25 bg-white/15 px-1.5 py-px text-[6px] font-semibold uppercase tracking-[0.1em] text-white/85 backdrop-blur-[3px]"
+            className="pointer-events-none absolute left-1 top-1 z-[2] inline-flex items-center rounded-full border border-white/25 bg-white/15 px-1.5 py-px text-[9px] font-semibold uppercase tracking-[0.1em] text-white/85 backdrop-blur-[3px]"
             style={{ backgroundColor: 'rgba(255,255,255,0.14)' }}
           >
             Ad

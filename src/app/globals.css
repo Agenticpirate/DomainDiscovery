@@ -1544,8 +1544,19 @@ nav a:has(.logo-icon-wrapper) {
     }
   }
 
+  /* Hero copy + search must be visible on the very first frame (LCP, and tabs where
+     animations are paused). Motion only — no fade from opacity 0. */
+  @keyframes home-hero-settle {
+    from {
+      transform: translateY(10px);
+    }
+    to {
+      transform: none;
+    }
+  }
+
   .home-hero-stage > * {
-    animation: home-rise 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: home-hero-settle 0.72s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .home-hero-stage > *:nth-child(2) {

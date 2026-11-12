@@ -4,7 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
-import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
+import { PageBreadcrumb } from '@/components/ui/Breadcrumb';
+import { PAGE_MAIN_CLASS } from '@/components/ui/pageLayout';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
 import { CiteableDefinition } from '@/components/seo/CiteableDefinition';
@@ -196,7 +197,7 @@ export function AssistantShell() {
         </section>
 
         <section className="px-4 sm:px-6">
-          <div className="max-w-4xl mx-auto grid lg:grid-cols-[1fr_0.95fr] gap-5 sm:gap-6 items-start">
+          <div className="max-w-4xl mx-auto grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] gap-5 sm:gap-6 items-start">
             <div className="space-y-4">
               <BriefForm
                 isLight={isLight}

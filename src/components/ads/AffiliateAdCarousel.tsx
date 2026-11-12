@@ -152,7 +152,7 @@ export function AffiliateAdCarousel({
       >
         {/* Ghost watermark SPONSORED indicator — completely borderless, seamless & non-intrusive */}
         <span
-          className="pointer-events-none absolute z-[4] left-2.5 top-1.5 select-none text-[5.5px] min-[390px]:text-[6px] font-medium uppercase tracking-[0.14em] text-white/30 sm:left-3.5 sm:top-2 sm:text-[6.5px]"
+          className="pointer-events-none absolute z-[4] right-2.5 bottom-1.5 select-none rounded-full bg-black/25 px-1.5 py-px text-[9px] font-semibold uppercase leading-[1.4] tracking-[0.12em] text-white/70 backdrop-blur-sm sm:right-3 sm:bottom-2"
         >
           SPONSORED
         </span>

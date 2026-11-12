@@ -483,7 +483,7 @@ export const ar: Messages = {
     '{prefixes} prefixes · {suffixes} suffixes · {seeds} seeds · up to {max} ideas per keyword': '{prefixes} بادئة · {suffixes} لاحقة · {seeds} كلمة أساس · حتى {max} فكرة لكل كلمة مفتاحية',
     'Pick a keyword chip or type above — names from the word list show up here immediately.': 'اختر كلمة مفتاحية أو اكتب أعلاه، وستظهر الأسماء من قائمة الكلمات هنا فورًا.',
     'Country': 'الدولة',
-    '{mega} cities 1M+ · {total}': '{mega} مدينة بمليون نسمة فأكثر · {total}',
+    '{mega} cities 1M+ · {total} total': '{mega} مدينة بمليون نسمة فأكثر · {total}',
     'Scope': 'النطاق',
     '{n} places': '{n} موقع',
     'Output': 'الناتج',

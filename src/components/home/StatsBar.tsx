@@ -78,7 +78,10 @@ export const StatsBar: React.FC = () => {
     const tick = (now: number) => {
       const t = Math.min(1, (now - start) / duration);
       const e = 1 - Math.pow(1 - t, 3);
-      setCounts(STATS.map((s) => s.target * (origin + (1 - origin) * e)));
+      // Uptime stays fixed: a count-up through 94% reads as an outage, not a flourish.
+      setCounts(
+        STATS.map((s) => (s.suffix === '%' ? s.target : s.target * (origin + (1 - origin) * e)))
+      );
       if (t < 1) raf = requestAnimationFrame(tick);
       else setCounts(STATS.map((s) => s.target));
     };

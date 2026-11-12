@@ -91,7 +91,7 @@ export default function Home() {
         <div className="min-h-[calc(100svh-4rem-env(safe-area-inset-top,0px))] flex flex-col justify-between sm:justify-start sm:min-h-0 sm:block pt-1 pb-3 min-[390px]:pb-4 sm:py-0">
           <SectionAmbient
             intensity="hero"
-            className="home-hero-ambient w-full"
+            className="home-hero-ambient w-full flex flex-1 flex-col justify-center sm:block"
             contentClassName="px-3.5 sm:px-6 pt-3 min-[390px]:pt-4 pb-1 sm:pt-12 md:pt-14 sm:pb-8"
           >
           <div className="home-hero-stage relative z-[1] w-full max-w-[42rem] sm:max-w-[58rem] mx-auto text-center">

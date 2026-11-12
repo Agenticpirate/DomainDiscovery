@@ -597,7 +597,7 @@ export const fr: Messages = {
     '{prefixes} prefixes · {suffixes} suffixes · {seeds} seeds · up to {max} ideas per keyword': '{prefixes} préfixes · {suffixes} suffixes · {seeds} mots de base · jusqu’à {max} idées par mot-clé',
     'Pick a keyword chip or type above — names from the word list show up here immediately.': 'Choisissez un mot-clé ou saisissez-le ci-dessus : les noms de la liste de mots s’affichent ici immédiatement.',
     'Country': 'Pays',
-    '{mega} cities 1M+ · {total}': '{mega} villes de 1 M+ · {total}',
+    '{mega} cities 1M+ · {total} total': '{mega} villes de 1 M+ · {total}',
     'Scope': 'Périmètre',
     '{n} places': '{n} lieux',
     'Output': 'Résultat',

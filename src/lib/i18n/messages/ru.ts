@@ -408,7 +408,7 @@ export const ru: Messages = {
     '{prefixes} prefixes · {suffixes} suffixes · {seeds} seeds · up to {max} ideas per keyword': 'Префиксов: {prefixes} · суффиксов: {suffixes} · базовых слов: {seeds} · до {max} идей на слово',
     'Pick a keyword chip or type above — names from the word list show up here immediately.': 'Выберите слово или введите выше: имена из списка слов сразу появятся здесь.',
     'Country': 'Страна',
-    '{mega} cities 1M+ · {total}': 'Городов 1 млн+: {mega} · всего {total}',
+    '{mega} cities 1M+ · {total} total': 'Городов 1 млн+: {mega} · всего {total}',
     'Scope': 'Охват',
     '{n} places': 'мест: {n}',
     'Output': 'Результат',
