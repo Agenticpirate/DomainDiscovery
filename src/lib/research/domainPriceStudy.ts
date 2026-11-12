@@ -262,7 +262,7 @@ export function buildDomainPriceReport(rows: StudyRow[], generatedAt: string): R
     path: PRICE_STUDY_PATH,
     title: `Domain Extension Price Statistics ${year}: ${formatInt(study.pricedTldCount)} TLDs`,
     h1: `Domain extension price statistics ${year}`,
-    description: `Registration price data for ${formatInt(study.pricedTldCount)} domain extensions across ${formatInt(study.offerCount)} registrar offers. ${study.findings[0]?.text ?? ''}`,
+    description: `Registration price data for ${formatInt(study.pricedTldCount)} domain extensions across ${formatInt(study.offerCount)} registrar offers. ${study.findings[0]?.text ?? 'Compare cheapest registration, renewal and transfer prices by TLD and registrar.'}`,
     summary: `${formatInt(study.pricedTldCount)} extensions, ${formatInt(study.offerCount)} registrar offers. ${study.findings[0]?.text ?? ''}`,
     intro: `Prices for ${formatInt(study.pricedTldCount)} domain extensions from ${formatInt(study.offerCount)} registrar offers, as collected in our price comparison dataset.`,
     updated: generatedAt,

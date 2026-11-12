@@ -123,7 +123,7 @@ export function buildTldTypeReport(rows: TldTypeRow[], generatedAt: string): Rep
     path: TLD_TYPE_PATH,
     title: `Domain Extension Types ${year}: ${formatInt(study.total)} TLDs by Type`,
     h1: `Domain extension types ${year}: gTLD vs ccTLD`,
-    description: `${formatInt(study.total)} domain extensions grouped by type from the IANA Root Zone Database. ${lead}`,
+    description: `${formatInt(study.total)} domain extensions grouped by type from the IANA Root Zone Database. ${lead || 'Counts of generic, country-code, sponsored and brand TLDs, with examples of each.'}`,
     summary: `${formatInt(study.total)} extensions by type. ${lead}`,
     intro: `Every extension in the IANA Root Zone Database that we hold an about page for, counted by type.`,
     updated: generatedAt,

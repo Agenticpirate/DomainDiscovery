@@ -11,11 +11,11 @@ export const ADA_BRAND = {
   description:
     'AI Domain Assistant finds and ranks brandable domains from a business brief, with a hard research budget (for example $20). Powered by DomainDiscovery research APIs. Research only — registration is confirmed by you at a registrar.',
   /** Transparent brand mark (public path) — bump query when replacing assets */
-  logoMark: '/ada/logo-mark.png?v=3',
-  logoFull: '/ada/logo.png?v=3',
+  logoMark: '/ada/logo-192.png?v=4',
+  logoFull: '/ada/logo-192.png?v=4',
   logo512: '/ada/logo-512.png?v=3',
   /** Tight head-only icon for chat FAB (minimal padding) */
-  fabIcon: '/ada/fab-icon.png?v=1',
+  fabIcon: '/ada/fab-icon-128.png?v=2',
 } as const;
 
 /** Hosts that should render the ADA product skin */

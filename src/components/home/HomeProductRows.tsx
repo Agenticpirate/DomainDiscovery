@@ -97,7 +97,7 @@ const GENERATOR_NAMES: Array<[string, Status]> = [
 
 const BULK_NAMES: Array<[string, Status]> = [
   ['imagetoweb.com', 'free'],
-  ['NaNolaunches.com', 'taken'],
+  ['nanolaunches.com', 'taken'],
   ['superrintelligence.com', 'premium'],
   ['seowhales.com', 'free'],
 ];

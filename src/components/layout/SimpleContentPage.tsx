@@ -27,6 +27,31 @@ interface SimpleContentPageProps {
   breadcrumbLabel?: string;
 }
 
+const EMAIL_RE = /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g;
+
+/** Turn plain email addresses in copy into tappable mailto links. */
+function linkifyEmails(text: string, isLight: boolean): React.ReactNode {
+  const parts = text.split(EMAIL_RE);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <a
+        key={`${part}-${i}`}
+        href={`mailto:${part}`}
+        className={`font-medium underline underline-offset-4 break-all transition-colors ${
+          isLight
+            ? 'text-slate-900 decoration-slate-300 hover:decoration-slate-900'
+            : 'text-white decoration-white/30 hover:decoration-white'
+        }`}
+      >
+        {part}
+      </a>
+    ) : (
+      part
+    )
+  );
+}
+
 export function SimpleContentPage({
   activeTool,
   title,
@@ -109,7 +134,7 @@ export function SimpleContentPage({
                             isLight ? 'text-slate-600' : 'text-white/60'
                           }`}
                         >
-                          {paragraph}
+                          {linkifyEmails(paragraph, isLight)}
                         </p>
                       ))}
                     </div>
