@@ -304,7 +304,7 @@ export const HomePageContent: React.FC = () => {
                     </h3>
                     {tool.badge && (
                       <span
-                        className={`hidden sm:inline text-[8px] font-bold px-1.5 py-0.5 rounded-full shrink-0 border ${
+                        className={`hidden sm:inline text-[9px] font-bold px-1.5 py-0.5 rounded-full shrink-0 border ${
                           isLight
                             ? 'bg-slate-100 text-slate-600 border-slate-200'
                             : 'bg-white/[0.06] text-white/60 border-white/10'
@@ -339,7 +339,7 @@ export const HomePageContent: React.FC = () => {
 
       {/* Popular Extensions — last on mobile (after Why); mid-page on desktop */}
       <section className="defer-section section-shell order-3 sm:order-2 !mt-2 sm:!mt-0 !mb-5 sm:!mb-8">
-        <div className="flex items-end justify-between gap-2 mb-2 sm:mb-3">
+        <div className="flex items-center sm:items-end justify-between gap-2 mb-2 sm:mb-3">
           <div>
             <h2 className="section-title">
               <span className="sm:hidden">{home.popularMobile}</span>
@@ -516,7 +516,7 @@ export const HomePageContent: React.FC = () => {
                     <h3 className="text-[13px] font-bold leading-snug">{benefit.title}</h3>
                     {benefit.highlight && (
                       <span
-                        className={`text-[8px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full border ${
+                        className={`text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full border ${
                           isLight
                             ? 'bg-slate-200 text-slate-700 border-slate-300'
                             : 'bg-white/[0.08] text-white/70 border-white/15'

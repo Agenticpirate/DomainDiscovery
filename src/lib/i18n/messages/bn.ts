@@ -408,7 +408,7 @@ export const bn: Messages = {
     '{prefixes} prefixes · {suffixes} suffixes · {seeds} seeds · up to {max} ideas per keyword': '{prefixes}টি প্রিফিক্স · {suffixes}টি সাফিক্স · {seeds}টি মূল শব্দ · প্রতি কীওয়ার্ডে {max}টি পর্যন্ত আইডিয়া',
     'Pick a keyword chip or type above — names from the word list show up here immediately.': 'ওপরে কীওয়ার্ড চিপ বাছুন বা লিখুন। শব্দতালিকার নামগুলো এখানে সঙ্গে সঙ্গে দেখা যাবে।',
     'Country': 'দেশ',
-    '{mega} cities 1M+ · {total}': '১০ লক্ষ+ জনসংখ্যার {mega}টি শহর · মোট {total}',
+    '{mega} cities 1M+ · {total} total': '১০ লক্ষ+ জনসংখ্যার {mega}টি শহর · মোট {total}',
     'Scope': 'পরিসর',
     '{n} places': '{n}টি স্থান',
     'Output': 'আউটপুট',

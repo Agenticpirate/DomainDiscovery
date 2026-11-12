@@ -705,7 +705,7 @@ export function AdaChat() {
                   return (
                     <li key={s.id} className="flex flex-col items-center gap-0.5 min-w-0 flex-1">
                       <span
-                        className={`flex h-5 w-5 items-center justify-center rounded-full text-[8px] font-black ${
+                        className={`flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-black ${
                           current
                             ? isLight
                               ? 'bg-slate-900 text-white ring-2 ring-slate-900/20'
@@ -721,7 +721,7 @@ export function AdaChat() {
                       >
                         {done ? '✓' : i + 1}
                       </span>
-                      <span className={`text-[8px] font-semibold truncate max-w-full ${current ? ink : faint}`}>
+                      <span className={`text-[9px] font-semibold truncate max-w-full ${current ? ink : faint}`}>
                         {s.label}
                       </span>
                     </li>
@@ -945,7 +945,7 @@ export function AdaChat() {
                     {m.role === 'assistant' && (
                       <div className="mb-1 sm:mb-1.5 flex items-center gap-1.5 sm:gap-2 px-0.5 sm:px-1">
                         <span
-                          className={`flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-md sm:rounded-lg text-[8px] sm:text-[9px] font-black ${
+                          className={`flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-md sm:rounded-lg text-[9px] sm:text-[9px] font-black ${
                             isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
                           }`}
                         >

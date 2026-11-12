@@ -483,7 +483,7 @@ export const ur: Messages = {
     '{prefixes} prefixes · {suffixes} suffixes · {seeds} seeds · up to {max} ideas per keyword': '{prefixes} پری فکس · {suffixes} سفکس · {seeds} بنیادی الفاظ · ہر کی ورڈ پر {max} تک آئیڈیاز',
     'Pick a keyword chip or type above — names from the word list show up here immediately.': 'اوپر کی ورڈ چپ چنیں یا لکھیں۔ الفاظ کی فہرست کے نام یہاں فوراً نظر آئیں گے۔',
     'Country': 'ملک',
-    '{mega} cities 1M+ · {total}': '10 لاکھ+ آبادی والے {mega} شہر · کل {total}',
+    '{mega} cities 1M+ · {total} total': '10 لاکھ+ آبادی والے {mega} شہر · کل {total}',
     'Scope': 'دائرہ',
     '{n} places': '{n} مقامات',
     'Output': 'آؤٹ پٹ',

@@ -126,6 +126,9 @@ const checkDomainsAvailability = async (
   return new Map();
 };
 
+/** Unique TLDs in the catalog (a TLD can sit in several categories). */
+export const UNIQUE_TLD_COUNT = UNIQUE_TLD_BASE.length;
+
 export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExtensionsViewProps) {
   const { href } = useLocale();
   const t = useT();
@@ -756,11 +759,11 @@ export function DomainExtensionsView({ searchQuery = '', guideSlot }: DomainExte
             <div className="flex items-center gap-2 min-w-0">
               {/* Primary categories — single horizontal track, no wrap scatter */}
               <div
-                className="flex-1 min-w-0 overflow-x-auto scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                className="flex-1 min-w-0 overflow-x-auto scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,black_calc(100%-1.75rem),transparent)] [-webkit-mask-image:linear-gradient(to_right,black_calc(100%-1.75rem),transparent)]"
                 role="listbox"
                 aria-label={t('Extension categories')}
               >
-                <div className="inline-flex items-center gap-1 min-w-min pr-1">
+                <div className="inline-flex items-center gap-1 min-w-min pr-6">
                   {primaryCategories.map((cat) => {
                     const active = selectedCategory === cat;
                     const countLabel = countForCategory(cat);

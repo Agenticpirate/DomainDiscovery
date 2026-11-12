@@ -144,7 +144,7 @@ export const en: Messages = {
     h1Desktop: 'Domain name search',
     sub: 'Discover Your Next Domain.',
     trust: ['Private', 'No tracking', 'Instant', 'Free'],
-    placeholder: 'Search domain names',
+    placeholder: 'Search domains',
     placeholderDots: 'Search domain names...',
     placeholderAi: 'Describe a brand idea…',
     searchDomains: 'Search domains',

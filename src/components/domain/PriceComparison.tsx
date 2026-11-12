@@ -142,7 +142,7 @@ function MetricCard({
       }`}
     >
       <div
-        className={`text-[7px] sm:text-[10px] font-semibold uppercase leading-none tracking-[0.08em] sm:tracking-[0.1em] ${
+        className={`text-[9px] sm:text-[10px] font-semibold uppercase leading-none tracking-[0.08em] sm:tracking-[0.1em] ${
           emphasize
             ? isLight
               ? 'text-white/55'
@@ -216,7 +216,7 @@ function RegistrarCard({
       <div className="flex items-center justify-between gap-1.5 sm:gap-2 mb-1 sm:mb-2.5 min-w-0">
         <div className="flex items-center gap-1 sm:gap-2 min-w-0">
           <span
-            className={`flex h-4 w-4 sm:h-6 sm:w-6 shrink-0 items-center justify-center rounded sm:rounded-md text-[8px] sm:text-[10px] font-black tabular-nums ${
+            className={`flex h-4 w-4 sm:h-6 sm:w-6 shrink-0 items-center justify-center rounded sm:rounded-md text-[9px] sm:text-[10px] font-black tabular-nums ${
               rank === 1
                 ? isLight
                   ? 'bg-slate-900 text-white'
@@ -245,7 +245,7 @@ function RegistrarCard({
             <div className="flex flex-wrap gap-0.5 sm:gap-1 sm:mt-0.5 shrink-0">
               {isCheapestReg && (
                 <span
-                  className={`rounded px-1 py-px text-[7px] sm:text-[9px] font-bold uppercase tracking-wide leading-none ${
+                  className={`rounded px-1 py-px text-[9px] sm:text-[9px] font-bold uppercase tracking-wide leading-none ${
                     isLight ? 'bg-slate-900 text-white' : 'bg-white text-black'
                   }`}
                 >
@@ -254,7 +254,7 @@ function RegistrarCard({
               )}
               {isCheapestRenew && !isCheapestReg && (
                 <span
-                  className={`rounded px-1 py-px text-[7px] sm:text-[9px] font-bold uppercase tracking-wide leading-none ${
+                  className={`rounded px-1 py-px text-[9px] sm:text-[9px] font-bold uppercase tracking-wide leading-none ${
                     isLight ? 'bg-slate-200 text-slate-700' : 'bg-white/10 text-white/70'
                   }`}
                 >
@@ -263,7 +263,7 @@ function RegistrarCard({
               )}
               {isBestValue && (
                 <span
-                  className={`rounded px-1 py-px text-[7px] sm:text-[9px] font-bold uppercase tracking-wide leading-none ${
+                  className={`rounded px-1 py-px text-[9px] sm:text-[9px] font-bold uppercase tracking-wide leading-none ${
                     isLight ? 'bg-slate-200 text-slate-700' : 'bg-white/10 text-white/70'
                   }`}
                 >
@@ -280,7 +280,7 @@ function RegistrarCard({
         </div>
         {offer.score != null && (
           <span
-            className={`shrink-0 rounded-full border px-1 sm:px-2 py-px sm:py-0.5 text-[8px] sm:text-[10px] font-bold tabular-nums ${
+            className={`shrink-0 rounded-full border px-1 sm:px-2 py-px sm:py-0.5 text-[9px] sm:text-[10px] font-bold tabular-nums ${
               isLight ? 'border-slate-200 text-slate-600' : 'border-white/10 text-white/55'
             }`}
           >
@@ -314,7 +314,7 @@ function RegistrarCard({
           {offer.features.slice(0, 2).map((feature) => (
             <span
               key={feature}
-              className={`rounded px-1 py-px sm:rounded-md sm:px-1.5 sm:py-0.5 text-[8px] sm:text-[10px] leading-tight ${
+              className={`rounded px-1 py-px sm:rounded-md sm:px-1.5 sm:py-0.5 text-[9px] sm:text-[10px] leading-tight ${
                 isLight ? 'bg-slate-100 text-slate-600' : 'bg-[#111111] text-white/50 border border-white/8'
               }`}
             >
@@ -361,7 +361,7 @@ function PricePill({
       }`}
     >
       <div
-        className={`text-[7px] sm:text-[9px] font-semibold uppercase tracking-wide leading-none ${
+        className={`text-[9px] sm:text-[9px] font-semibold uppercase tracking-wide leading-none ${
           highlight
             ? isLight
               ? 'text-white/55'
@@ -1215,7 +1215,7 @@ export function PriceComparison({
                     <tr>
                       <th
                         scope="col"
-                        className={`sticky left-0 z-40 w-[3.35rem] min-w-[3.35rem] max-w-[3.35rem] sm:w-auto sm:min-w-[100px] sm:max-w-none px-1.5 sm:px-3 py-1.5 sm:py-2.5 text-left text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.12em] ${
+                        className={`sticky left-0 z-40 w-[3.35rem] min-w-[3.35rem] max-w-[3.35rem] sm:w-auto sm:min-w-[100px] sm:max-w-none px-1.5 sm:px-3 py-1.5 sm:py-2.5 text-left text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.12em] ${
                           isLight ? 'bg-slate-50 text-slate-500' : 'bg-[#111] text-white/45'
                         }`}
                       >
@@ -1258,7 +1258,7 @@ export function PriceComparison({
                               <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-[0.08em] leading-tight">
                                 {registrar === 'Unstoppable Domains' ? 'Unstoppable' : registrar}
                               </span>
-                              <span className="sm:hidden text-[8px] font-bold uppercase tracking-tight leading-none truncate max-w-[2.8rem]">
+                              <span className="sm:hidden text-[9px] font-bold uppercase tracking-tight leading-none truncate max-w-[2.8rem]">
                                 {shortName}
                               </span>
                             </div>
@@ -1417,7 +1417,7 @@ export function PriceComparison({
               <div className="flex items-center sm:items-start justify-between gap-2 sm:gap-3">
                 <div className="min-w-0 flex sm:block items-baseline gap-2">
                   <div className="min-w-0">
-                    <div className={`text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
+                    <div className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] ${isLight ? 'text-slate-500' : 'text-white/40'}`}>
                       {t('Selected extension')}
                     </div>
                     <h3 className={`mt-0 text-lg sm:text-3xl font-black tracking-tight tabular-nums leading-none sm:mt-0.5 ${isLight ? 'text-slate-900' : 'text-white'}`}>

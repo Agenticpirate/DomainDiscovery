@@ -151,8 +151,14 @@ export function AffiliateAdCarousel({
         aria-label={`${active.alt} (sponsored)`}
       >
         {/* Ghost watermark SPONSORED indicator — completely borderless, seamless & non-intrusive */}
+        {/* Text strips: top-left (logo is vertically centred, CTA sits right).
+            Image creatives: bottom-right pill, clear of the advertiser logo. */}
         <span
-          className="pointer-events-none absolute z-[4] left-2.5 top-1.5 select-none text-[5.5px] min-[390px]:text-[6px] font-medium uppercase tracking-[0.14em] text-white/30 sm:left-3.5 sm:top-2 sm:text-[6.5px]"
+          className={`pointer-events-none absolute z-[4] select-none text-[9px] font-semibold uppercase leading-[1.4] tracking-[0.14em] ${
+            isCrispStrip(active)
+              ? 'left-3 top-1 text-white/60 min-[390px]:left-4 sm:left-8 sm:top-2'
+              : 'right-2.5 bottom-1.5 rounded-full bg-black/25 px-1.5 py-px text-white/70 backdrop-blur-sm sm:right-3 sm:bottom-2'
+          }`}
         >
           SPONSORED
         </span>

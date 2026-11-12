@@ -408,7 +408,7 @@ export const ja: Messages = {
     '{prefixes} prefixes · {suffixes} suffixes · {seeds} seeds · up to {max} ideas per keyword': '接頭辞{prefixes}個 · 接尾辞{suffixes}個 · 種語{seeds}個 · キーワードごとに最大{max}件のアイデア',
     'Pick a keyword chip or type above — names from the word list show up here immediately.': '上のキーワードチップを選ぶか入力すると、単語リストの名前がここにすぐ表示されます。',
     'Country': '国',
-    '{mega} cities 1M+ · {total}': '人口100万以上の都市{mega}件 · 合計{total}',
+    '{mega} cities 1M+ · {total} total': '人口100万以上の都市{mega}件 · 合計{total}',
     'Scope': '対象範囲',
     '{n} places': '{n}か所',
     'Output': '出力',

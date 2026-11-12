@@ -12,6 +12,8 @@ type Dot = {
   vx: number;
   vy: number;
   r: number;
+  /** 1 at the top of the letters, fading toward the baseline */
+  fade: number;
 };
 
 type Shock = { x: number; y: number; born: number };
@@ -80,6 +82,8 @@ export function HalftoneWordmark({
       const font = (n: number) =>
         `800 ${Math.max(12, n)}px "Inter", "SF Pro Display", "Segoe UI", system-ui, sans-serif`;
       let size: number;
+      let textTop = 0;
+      let textBottom = cssH;
       if (isMobile) {
         const side = 14;
         const topPad = 22;
@@ -97,19 +101,29 @@ export function HalftoneWordmark({
         const descent = size * 0.16;
         const top = Math.max(topPad, (cssH - ascent - descent) / 2);
         octx.fillText(text, cssW / 2, top + ascent);
+        textTop = top;
+        textBottom = top + ascent + descent;
       } else {
-        const side = 10;
+        // Fit the whole word (descenders included) using measured glyph bounds,
+        // leaving room for the tagline above and a little air above the hairline.
+        const side = Math.max(24, cssW * 0.03);
+        const topPad = 58;
+        const bottomPad = 20;
         octx.font = font(100);
-        const sample = Math.max(1, octx.measureText(text).width);
-        size = ((cssW - side * 2) / sample) * 100 * 1.18;
+        const m100 = octx.measureText(text);
+        const w100 = Math.max(1, m100.width);
+        const h100 = Math.max(1, m100.actualBoundingBoxAscent + m100.actualBoundingBoxDescent);
+        size = Math.min(
+          ((cssW - side * 2) / w100) * 100,
+          ((cssH - topPad - bottomPad) / h100) * 100
+        );
         octx.font = font(size);
-        const fitted = octx.measureText(text).width;
-        const maxW = cssW - side * 2;
-        if (fitted > maxW) size *= maxW / fitted;
-        octx.font = font(size);
-        const ascent = size * 0.74;
-        // Crop the bottom 15% so 85% of each letter stays visible.
-        octx.fillText(text, cssW / 2, cssH + ascent * 0.15);
+        const m = octx.measureText(text);
+        const glyphH = m.actualBoundingBoxAscent + m.actualBoundingBoxDescent;
+        const top = topPad + Math.max(0, (cssH - topPad - bottomPad - glyphH) / 2);
+        octx.fillText(text, cssW / 2, top + m.actualBoundingBoxAscent);
+        textTop = top;
+        textBottom = top + glyphH;
       }
 
       const gap = isMobile ? 3.6 : 4;
@@ -122,7 +136,8 @@ export function HalftoneWordmark({
           const a = data[(iy * cssW + ix) * 4 + 3];
           if (a < 140) continue;
           const r = gap * (0.28 + (a / 255) * 0.22);
-          next.push({ ox: x, oy: y, x, y, vx: 0, vy: 0, r });
+          const t = Math.min(1, Math.max(0, (y - textTop) / Math.max(1, textBottom - textTop)));
+          next.push({ ox: x, oy: y, x, y, vx: 0, vy: 0, r, fade: 1 - t * 0.55 });
         }
       }
       dots = next;
@@ -160,6 +175,9 @@ export function HalftoneWordmark({
       // Sleek, minimalist motion parameters (critically damped, no heavy bounce)
       const reach = 60;
       const wavePhase = now * 0.0016;
+      // Sheen crosses the band every ~7s, with a pause off-canvas between passes
+      const sweepSpan = w + h + 900;
+      const sweepX = ((now * 0.16) % sweepSpan) - 300;
 
       for (let i = 0; i < dots.length; i++) {
         const d = dots[i];
@@ -211,7 +229,20 @@ export function HalftoneWordmark({
 
         const shift = Math.min(1, Math.hypot(d.x - d.ox, d.y - d.oy) / 5);
         const rgb = shift > 0.45 ? hot : idle;
-        const alpha = isLight ? 0.52 + shift * 0.35 : 0.40 + shift * 0.45;
+        const base = isLight ? 0.6 : 0.5;
+        // Slow diagonal sheen sweeping across the letters
+        let sheen = 0;
+        if (!reduced) {
+          const dx = d.ox + d.oy * 0.45 - sweepX;
+          sheen = Math.max(0, 1 - Math.abs(dx) / 90) * 0.38;
+        }
+        // Soft glow around the cursor (brightens, separate from the push)
+        let glow = 0;
+        if (pointer.on) {
+          const gd = Math.hypot(d.ox - pointer.x, d.oy - pointer.y);
+          if (gd < 140) glow = (1 - gd / 140) * 0.32;
+        }
+        const alpha = Math.min(1, base * d.fade + sheen + glow + shift * 0.45);
         ctx.beginPath();
         ctx.fillStyle = `rgba(${rgb}, ${alpha})`;
         ctx.arc(d.x, d.y, d.r * (1 + shift * 0.08), 0, Math.PI * 2);
@@ -287,6 +318,10 @@ export function HalftoneWordmark({
 
     const ro = new ResizeObserver(() => resize());
     resize();
+    // Re-measure once web fonts load so glyph bounds match the real typeface.
+    document.fonts?.ready.then(() => {
+      if (running) resize();
+    });
     ro.observe(wrap);
     kick();
 

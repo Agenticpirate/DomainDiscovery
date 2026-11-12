@@ -94,7 +94,7 @@ export function ComparePageClientChrome({ extensionCount, generatedAt }: Props) 
             <div key={s.label} className={`px-2 py-2.5 sm:px-3 sm:py-4 text-center ${panelCell}`}>
               <div className="text-[13px] sm:text-xl font-black tracking-tight tabular-nums">{s.value}</div>
               <div
-                className="text-[8px] sm:text-[10px] font-medium mt-0.5"
+                className="text-[9px] sm:text-[10px] font-medium mt-0.5"
                 style={{ color: 'var(--text-muted)' }}
               >
                 {s.label}

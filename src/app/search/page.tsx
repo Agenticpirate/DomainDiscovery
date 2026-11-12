@@ -530,7 +530,7 @@ function SearchPageContent() {
             >
               <nav
                 aria-label={t('Domain tools')}
-                className="flex min-w-0 flex-1 flex-wrap gap-1 sm:flex-nowrap sm:overflow-x-auto scrollbar-none"
+                className="flex min-w-0 flex-1 flex-nowrap gap-0.5 sm:gap-1 overflow-x-auto overscroll-x-contain scrollbar-none"
               >
                 {(
                   [
@@ -547,7 +547,7 @@ function SearchPageContent() {
                     { href: href('/tools/keyword'), label: t('Research'), short: t('Research'), active: false, catalog: false },
                   ] as const
                 ).map((tab) => {
-                  const cls = `shrink-0 inline-flex min-h-9 sm:min-h-10 items-center justify-center rounded-xl px-2.5 sm:px-3 py-1.5 text-[12px] sm:text-[13px] font-semibold tracking-tight transition-colors duration-150 ${
+                  const cls = `shrink-0 inline-flex min-h-9 sm:min-h-10 items-center justify-center rounded-xl px-2 min-[400px]:px-2.5 sm:px-3 py-1.5 text-[12px] sm:text-[13px] font-semibold tracking-tight transition-colors duration-150 ${
                     tab.active
                       ? isLight
                         ? 'bg-white text-[#0a0a0a] shadow-sm ring-1 ring-black/[0.04]'

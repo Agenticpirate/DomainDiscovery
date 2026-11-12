@@ -342,7 +342,7 @@ export const Footer: React.FC = () => {
                       } ${isBottom ? '' : `border-b ${mobileCellBorder}`}`}
                     >
                       <p
-                        className={`mb-0.5 px-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] ${mobileMutedLabel}`}
+                        className={`mb-0.5 px-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${mobileMutedLabel}`}
                       >
                         {section.category}
                       </p>
@@ -351,7 +351,7 @@ export const Footer: React.FC = () => {
                           <li key={`${section.category}-${item.href}-${item.label}`}>
                             {renderLink(
                               item,
-                              'group flex min-h-6 items-center gap-1.5 rounded-md px-0.5 py-0.5 active:opacity-80',
+                              'group flex min-h-8 items-center gap-1.5 rounded-md px-0.5 py-0.5 active:opacity-80',
                               true
                             )}
                           </li>
@@ -437,7 +437,7 @@ export const Footer: React.FC = () => {
       <div
         ref={brandBandRef}
         data-footer-brand
-        className={`relative z-[1] h-[5.75rem] w-full overflow-hidden sm:h-[20rem] md:h-[22rem] ${hairline} border-t`}
+        className={`relative z-[1] h-[5.75rem] w-full overflow-hidden sm:h-[clamp(11rem,17vw,17.5rem)] ${hairline} border-t`}
       >
         {/* Desktop: Interactive Halftone Wordmark (unchanged) */}
         <div className="hidden sm:block h-full w-full relative">

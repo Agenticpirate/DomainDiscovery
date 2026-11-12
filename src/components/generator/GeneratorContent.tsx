@@ -404,7 +404,7 @@ export const GeneratorContent: React.FC = () => {
                         {benefit.stat}
                       </div>
                       <div
-                        className="text-[8px] sm:text-[9px] font-medium mt-0.5 uppercase tracking-wide"
+                        className="text-[9px] sm:text-[9px] font-medium mt-0.5 uppercase tracking-wide"
                         style={{ color: 'var(--text-muted)' }}
                       >
                         {benefit.statLabel}

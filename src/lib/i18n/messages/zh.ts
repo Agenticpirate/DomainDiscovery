@@ -597,7 +597,7 @@ export const zh: Messages = {
     '{prefixes} prefixes · {suffixes} suffixes · {seeds} seeds · up to {max} ideas per keyword': '{prefixes} 个前缀 · {suffixes} 个后缀 · {seeds} 个种子词 · 每个关键词最多 {max} 个创意',
     'Pick a keyword chip or type above — names from the word list show up here immediately.': '点击上方关键词标签或直接输入 — 词库中的名称会立即显示在这里。',
     'Country': '国家/地区',
-    '{mega} cities 1M+ · {total}': '{mega} 个百万人口以上城市 · 共 {total}',
+    '{mega} cities 1M+ · {total} total': '{mega} 个百万人口以上城市 · 共 {total}',
     'Scope': '范围',
     '{n} places': '{n} 个地点',
     'Output': '输出',

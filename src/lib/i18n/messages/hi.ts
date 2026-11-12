@@ -436,7 +436,7 @@ export const hi: Messages = {
     '{prefixes} prefixes · {suffixes} suffixes · {seeds} seeds · up to {max} ideas per keyword': '{prefixes} प्रीफ़िक्स · {suffixes} सफ़िक्स · {seeds} बीज शब्द · हर कीवर्ड पर {max} तक आइडिया',
     'Pick a keyword chip or type above — names from the word list show up here immediately.': 'ऊपर कीवर्ड चिप चुनें या लिखें। शब्द सूची के नाम यहाँ तुरंत दिखेंगे।',
     'Country': 'देश',
-    '{mega} cities 1M+ · {total}': '10 लाख+ आबादी वाले {mega} शहर · कुल {total}',
+    '{mega} cities 1M+ · {total} total': '10 लाख+ आबादी वाले {mega} शहर · कुल {total}',
     'Scope': 'दायरा',
     '{n} places': '{n} स्थान',
     'Output': 'आउटपुट',

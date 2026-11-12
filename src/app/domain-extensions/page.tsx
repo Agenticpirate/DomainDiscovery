@@ -4,10 +4,11 @@ import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Navigation } from '@/components/layout/Navigation';
 import { Footer } from '@/components/layout/Footer';
-import { PageBreadcrumb, PAGE_MAIN_CLASS } from '@/components/ui/Breadcrumb';
+import { PageBreadcrumb } from '@/components/ui/Breadcrumb';
+import { PAGE_MAIN_CLASS } from '@/components/ui/pageLayout';
 import { PageBackground } from '@/components/ui/PageBackground';
 import { SectionAmbient } from '@/components/ui/SectionAmbient';
-import { DomainExtensionsView } from '@/components/domain/DomainExtensionsView';
+import { DomainExtensionsView, UNIQUE_TLD_COUNT } from '@/components/domain/DomainExtensionsView';
 import { ExtensionsGuideContent } from '@/components/domain/ExtensionsGuideContent';
 import { LocalizedGuidePack } from '@/components/i18n/LocalizedGuidePack';
 import { LocalizedDefinition } from '@/components/i18n/LocalizedDefinition';
@@ -324,7 +325,7 @@ function DomainExtensionsPageContent() {
                   className="hidden sm:block text-[13px] leading-relaxed max-w-xl"
                   style={{ color: 'var(--text-tertiary)' }}
                 >
-                  Type a name below to check all 1,001 extensions at once. Free · Private · No account required.
+                  Type a name below to check all {UNIQUE_TLD_COUNT.toLocaleString('en-US')} extensions at once. Free · Private · No account required.
                 </p>
                 )}
 
@@ -363,7 +364,7 @@ function DomainExtensionsPageContent() {
               {/* Stats — solid plates; compact row on mobile */}
               <div className="relative z-[1] grid grid-cols-3 gap-1.5 sm:gap-2 shrink-0">
                 {[
-                  { value: '1,001', label: t('All TLDs') },
+                  { value: UNIQUE_TLD_COUNT.toLocaleString('en-US'), label: t('All TLDs') },
                   { value: t('Live'), label: t('Availability') },
                   { value: t('Private'), label: t('By default') },
                 ].map((s) => (
@@ -383,7 +384,7 @@ function DomainExtensionsPageContent() {
                       {s.value}
                     </div>
                     <div
-                      className="relative z-[1] text-[8px] sm:text-[10px] font-medium mt-0.5 uppercase tracking-wide"
+                      className="relative z-[1] text-[9px] sm:text-[10px] font-medium mt-0.5 uppercase tracking-wide"
                       style={{ color: 'var(--text-tertiary)' }}
                     >
                       {s.label}

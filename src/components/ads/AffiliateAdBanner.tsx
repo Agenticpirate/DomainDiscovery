@@ -127,7 +127,7 @@ export function AffiliateAdBanner({
   /** Clear frosted pill — small, transparent, never heavy black/grey */
   const sponsoredBadge = (
     <span
-      className="pointer-events-none absolute z-[2] left-1 top-1 sm:left-2 sm:top-2 inline-flex items-center gap-0.5 rounded-full border border-white/25 bg-white/15 px-1.5 py-px text-[6px] sm:text-[6.5px] font-semibold uppercase tracking-[0.1em] text-white/85 backdrop-blur-[3px] shadow-none"
+      className="pointer-events-none absolute z-[2] left-1 top-1 sm:left-2 sm:top-2 inline-flex items-center gap-0.5 rounded-full border border-white/25 bg-white/15 px-1.5 py-px text-[9px] sm:text-[9px] font-semibold uppercase tracking-[0.1em] text-white/85 backdrop-blur-[3px] shadow-none"
       style={{ backgroundColor: 'rgba(255,255,255,0.14)' }}
     >
       <span className="hidden sm:inline normal-case tracking-wide font-medium opacity-90">Ad</span>
