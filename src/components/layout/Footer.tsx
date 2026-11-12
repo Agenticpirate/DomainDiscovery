@@ -437,7 +437,7 @@ export const Footer: React.FC = () => {
       <div
         ref={brandBandRef}
         data-footer-brand
-        className={`relative z-[1] h-[5.75rem] w-full overflow-hidden sm:h-[20rem] md:h-[22rem] ${hairline} border-t`}
+        className={`relative z-[1] h-[5.75rem] w-full overflow-hidden sm:h-[clamp(11rem,17vw,17.5rem)] ${hairline} border-t`}
       >
         {/* Desktop: Interactive Halftone Wordmark (unchanged) */}
         <div className="hidden sm:block h-full w-full relative">
