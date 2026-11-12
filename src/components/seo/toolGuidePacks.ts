@@ -242,7 +242,7 @@ export const TOOL_GUIDE_PACKS = {
     eyebrow: 'TLD FAQ',
     title: 'Domain extensions (TLDs) — quick answers',
     intro:
-      'Choose an extension for brand fit and market, then verify availability. Browse 1,600+ options here.',
+      'Choose an extension for brand fit and market, then verify availability. Browse 700+ options here.',
     items: [
       {
         question: 'What is a TLD?',

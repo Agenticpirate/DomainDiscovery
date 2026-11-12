@@ -5,7 +5,7 @@ export const en: Messages = {
     home: {
       title: 'Domain Name Search — Free Instant Availability | DomainDiscovery',
       description:
-        'Free domain name search across 1,600+ TLDs with live availability. AI name generator, bulk checker, WHOIS lookup, and registrar price comparison. No signup.',
+        'Free domain name search across 700+ TLDs with live availability. AI name generator, bulk checker, WHOIS lookup, and registrar price comparison. No signup.',
       keywords: ['domain name search', 'domain availability checker', 'check domain availability', 'AI domain generator'],
     },
     search: {
@@ -27,9 +27,9 @@ export const en: Messages = {
       keywords: ['bulk domain search', 'bulk domain checker', 'check multiple domains', 'domain list availability'],
     },
     extensions: {
-      title: 'Domain Extensions — 1,600+ TLDs',
+      title: 'Domain Extensions — 700+ TLDs',
       description:
-        'Browse 1,600+ domain extensions. Compare .com, .ai, .io, and country codes, then check which names are free.',
+        'Browse 700+ domain extensions. Compare .com, .ai, .io, and country codes, then check which names are free.',
       keywords: ['domain extensions', 'TLD list', 'domain endings', 'buy a domain extension'],
     },
     whois: {
@@ -65,7 +65,7 @@ export const en: Messages = {
     leads: {
       title: 'Domain Leads & Namespace Intelligence — Discover End-User Prospects',
       description:
-        'Analyze domain namespace saturation, track newly registered domains (NRDs), and discover high-value buyer leads across 1,600+ TLD extensions.',
+        'Analyze domain namespace saturation, track newly registered domains (NRDs), and discover high-value buyer leads across 700+ TLD extensions.',
       keywords: ['domain leads', 'newly registered domains', 'domain prospecting', 'namespace saturation', 'end-user buyers', 'zone files'],
     },
   },
@@ -139,7 +139,7 @@ export const en: Messages = {
   },
   hero: {
     live: 'Live',
-    liveRest: 'across 1,600+ TLDs',
+    liveRest: 'across 700+ TLDs',
     h1Mobile: 'Find your domain',
     h1Desktop: 'Domain name search',
     sub: 'Discover Your Next Domain.',
@@ -170,11 +170,11 @@ export const en: Messages = {
     salesTitle: 'Names that sold for millions',
     searchKicker: 'Search',
     searchTitle: 'Check a name in seconds',
-    searchBody: 'Type once. See free, taken, and premium across 1,600+ extensions.',
+    searchBody: 'Type once. See free, taken, and premium across 700+ extensions.',
     searchCta: 'Search domains',
     extKicker: 'Extensions',
     extTitle: 'The right ending, not just .com',
-    extBody: 'Start with the names people trust. Then open the full catalog — 1,600+ TLDs, checked live.',
+    extBody: 'Start with the names people trust. Then open the full catalog — 700+ TLDs, checked live.',
     extCta: 'Browse extensions',
     tileLabel: 'Names, not just endings',
     genKicker: 'Generator',
@@ -202,7 +202,7 @@ export const en: Messages = {
       { title: 'AI Domain Generator', description: 'Instant brandable ideas from a keyword, checked live as they appear.', badge: 'AI', cta: 'Generate Now' },
       { title: 'Instant Domain Search', description: 'Type once — see availability stream across core and long-tail TLDs.', badge: 'Real-time' },
       { title: 'Bulk Domain Search', description: 'Paste up to 1,000 names and clear free vs taken in one batch.', badge: '1,000 at once' },
-      { title: 'Domain Extensions', description: 'Explore 1,600+ endings and match the right TLD to your brand.', badge: '1,600+ TLDs' },
+      { title: 'Domain Extensions', description: 'Explore 700+ endings and match the right TLD to your brand.', badge: '700+ TLDs' },
       { title: 'Price Comparison', description: 'Side-by-side registrar prices before you click buy.' },
       { title: 'WHOIS Lookup', description: 'Owner, dates, and registration history via RDAP/WHOIS.' },
       { title: 'Geo Domain Generator', description: 'City + niche lists built for local SEO and multi-location brands.' },
@@ -213,19 +213,19 @@ export const en: Messages = {
       { title: 'AI + geo tools', description: 'Brandable names and city-level lists in one free toolkit.' },
       { title: 'Price clarity', description: 'Compare registrar prices so you buy with confidence, not guesswork.' },
       { title: 'Private shortlists', description: 'Saved domains stay on your device — we don’t harvest your searches.' },
-      { title: '1,600+ TLDs', description: 'From .com to niche and country-code extensions in a single search.' },
+      { title: '700+ TLDs', description: 'From .com to niche and country-code extensions in a single search.' },
       { title: 'Mobile-ready', description: 'The same fast search and tools on phone, tablet, and desktop.' },
     ],
     local: 'Local',
     popularMobile: 'Popular TLDs',
     popularDesktop: 'Popular extensions',
-    popularSub: 'Start with the endings brands trust — then explore 1,600+ more.',
+    popularSub: 'Start with the endings brands trust — then explore 700+ more.',
     viewAll: 'View all',
     extLabels: ['Popular', 'AI & Tech', 'Startups', 'Companies', 'Networks', 'Orgs', 'Apps', 'Creative'],
     privacyTitle: 'Private by default',
     privacySub: 'Live checks. AI names. Shortlists that stay on this device.',
     howTitle: 'How domain name search works on DomainDiscovery',
-    howLead: 'Domain name search answers one question first: is this name free to register? Type a brand, keyword, or city-niche combo and get live availability across 1,600+ TLDs. Then refine with AI name ideas,',
+    howLead: 'Domain name search answers one question first: is this name free to register? Type a brand, keyword, or city-niche combo and get live availability across 700+ TLDs. Then refine with AI name ideas,',
     howGeo: 'geo domain lists',
     howMid: ', bulk checks,',
     howWhois: 'WHOIS',
@@ -233,7 +233,7 @@ export const en: Messages = {
     howPrices: 'registrar prices',
     howTail: '— before you leave the site.',
     chips: [
-      { label: '1,600+ TLDs', sub: 'Live availability' },
+      { label: '700+ TLDs', sub: 'Live availability' },
       { label: 'AI + geo tools', sub: 'Brand & local SEO' },
       { label: 'Private shortlists', sub: 'Saved on device' },
     ],
@@ -262,7 +262,7 @@ export const en: Messages = {
     faqSub: 'Search, price, and privacy — in short.',
     faqs: [
       { question: 'What is a domain name?', answer: 'A domain name is the human-readable address of a website (for example, domainsdiscovery.com). It maps to infrastructure on the internet so people can find and remember your brand. Use domain name search to check whether a name is still available to register.' },
-      { question: 'How do I check if a domain name is available?', answer: 'Enter the name in the search box above. DomainDiscovery runs a live availability check across 1,600+ extensions and shows free, registered, or premium-style outcomes so you can decide quickly.' },
+      { question: 'How do I check if a domain name is available?', answer: 'Enter the name in the search box above. DomainDiscovery runs a live availability check across 700+ extensions and shows free, registered, or premium-style outcomes so you can decide quickly.' },
       { question: 'What free domain tools does DomainDiscovery include?', answer: 'Instant domain search, AI domain generator, bulk domain checker (up to 1,000 names), geo domain generator for city and country lists, keyword domain finder, WHOIS/RDAP lookup, TLD browser, and registrar price comparison. No account is required.' },
       { question: 'What if the domain I want is already taken?', answer: 'Try another TLD (.net, .ai, .io, .co), generate brandable alternatives with the AI domain generator, expand keywords, or use geo patterns for local markets. Premium or aftermarket names may still be purchasable through a registrar.' },
       { question: 'What is a TLD or domain extension?', answer: 'A TLD (top-level domain) is the part after the final dot — .com, .org, .ai, .io, or a country code like .uk. .com remains the default for most brands; industry TLDs can signal niche. Browse the full catalog under Domain Extensions.' },
@@ -285,7 +285,7 @@ export const en: Messages = {
   definitions: {
     home: {
       question: 'What is domain name search on DomainDiscovery?',
-      answer: 'Domain name search checks whether a web address (for example yourbrand.com) is free to register, already owned, or marked premium. On DomainDiscovery, search is free across 1,600+ TLDs, with tools for AI names, geo lists, bulk checks, WHOIS, and price comparison. Registration payment happens at a third-party registrar.',
+      answer: 'Domain name search checks whether a web address (for example yourbrand.com) is free to register, already owned, or marked premium. On DomainDiscovery, search is free across 700+ TLDs, with tools for AI names, geo lists, bulk checks, WHOIS, and price comparison. Registration payment happens at a third-party registrar.',
       learnLabel: 'Domain search guide',
     },
     search: {
@@ -305,7 +305,7 @@ export const en: Messages = {
     },
     extensions: {
       question: 'What is a domain extension (TLD)?',
-      answer: 'A domain extension, or TLD (top-level domain), is the label after the final dot — such as .com, .org, .ai, or a country code like .uk. DomainDiscovery’s extensions browser helps you explore 1,600+ options before you run domain name search and register at a registrar.',
+      answer: 'A domain extension, or TLD (top-level domain), is the label after the final dot — such as .com, .org, .ai, or a country code like .uk. DomainDiscovery’s extensions browser helps you explore 700+ options before you run domain name search and register at a registrar.',
       learnLabel: 'What is a TLD?',
     },
     whois: {
@@ -406,7 +406,7 @@ export const en: Messages = {
     extensions: {
       eyebrow: 'TLD FAQ',
       title: 'Domain extensions (TLDs) — quick answers',
-      intro: 'Choose an extension for brand fit and market, then verify availability. Browse 1,600+ options here.',
+      intro: 'Choose an extension for brand fit and market, then verify availability. Browse 700+ options here.',
       items: [
         { question: 'What is a TLD?', answer: 'A TLD (top-level domain) is the part after the final dot — .com, .org, .ai, or a country code like .uk. It sits at the top of the DNS hierarchy for that namespace.' },
         { question: 'Which extension should I choose?', answer: 'Prefer .com for global consumer brands when available. Consider .ai, .io, .app, or .dev for category fit. Use a ccTLD when you truly operate in that country and customers expect it.' },
@@ -422,8 +422,8 @@ export const en: Messages = {
     subtitle: 'Availability, registration, bulk checks, geo domains, WHOIS, pricing, and privacy.',
     cta: 'Start domain name search',
     items: [
-      { question: 'What is domain name search on DomainDiscovery?', answer: 'Domain name search checks whether a web address is free to register, already owned, or marked premium. Search on DomainDiscovery is free across 1,600+ TLDs. You pay a registrar only when you register.' },
-      { question: 'How do I check if a domain name is available?', answer: 'Use domain name search on the homepage or Search page. Type the name and review free, registered, or premium-style results across 1,600+ extensions. Availability is a snapshot — re-check at registrar checkout and register promptly if the name matters.' },
+      { question: 'What is domain name search on DomainDiscovery?', answer: 'Domain name search checks whether a web address is free to register, already owned, or marked premium. Search on DomainDiscovery is free across 700+ TLDs. You pay a registrar only when you register.' },
+      { question: 'How do I check if a domain name is available?', answer: 'Use domain name search on the homepage or Search page. Type the name and review free, registered, or premium-style results across 700+ extensions. Availability is a snapshot — re-check at registrar checkout and register promptly if the name matters.' },
       { question: 'How do I register a domain name?', answer: 'Confirm availability, choose a registrar (price comparison helps), complete registrant details and payment, then set DNS for your website and email. Enable two-factor authentication and auto-renew on the registrar account.' },
       { question: 'What is bulk domain search?', answer: 'Bulk domain search checks many names in one job — up to 1,000 on DomainDiscovery — so portfolios and agencies can screen lists without retyping. Generate candidates first, then bulk-check them.' },
       { question: 'How does an AI domain name generator help?', answer: 'It turns a seed keyword into brandable candidates and pairs ideas with live availability. You still apply human filters: spelling, trademark, and the radio test.' },

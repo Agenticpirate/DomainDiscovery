@@ -16,7 +16,7 @@ type Stat = {
 const STATS: Stat[] = [
   { value: '20M+', label: 'Searches', target: 20, suffix: 'M+', decimals: 0 },
   { value: '50K+', label: 'Users', target: 50, suffix: 'K+', decimals: 0 },
-  { value: '1,600+', label: 'TLDs', target: 1600, suffix: '+', decimals: 0 },
+  { value: '700+', label: 'TLDs', target: 700, suffix: '+', decimals: 0 },
   { value: '99.9%', label: 'Uptime', target: 99.9, suffix: '%', decimals: 1 },
 ];
 

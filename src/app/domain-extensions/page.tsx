@@ -274,9 +274,9 @@ function DomainExtensionsPageContent() {
                         isLight ? 'bg-slate-500' : 'bg-white/70'
                       }`}
                     />
-                    <span className="sm:hidden">{t('1,000+ TLDs · Live')}</span>
+                    <span className="sm:hidden">{t('700+ TLDs · Live')}</span>
                     <span className="hidden sm:inline">
-                      {t('Search all 1,000+ TLDs · Live availability')}
+                      {t('Search all 700+ TLDs · Live availability')}
                     </span>
                   </span>
                 </div>

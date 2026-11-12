@@ -235,7 +235,7 @@ const FAQS: { q: string; a: string; icon: FaqIcon }[] = [
   {
     icon: 'layers',
     q: 'How many domain extensions are there?',
-    a: 'Over 1,500 TLDs are delegated by ICANN. The catalog expanded after 2012 new gTLDs. DomainDiscovery organizes 1,000+ of the most relevant so you can search without noise.',
+    a: 'Over 1,500 TLDs are delegated by ICANN. The catalog expanded after 2012 new gTLDs. DomainDiscovery organizes 700+ of the most relevant so you can search without noise.',
   },
   {
     icon: 'dollar',
@@ -948,9 +948,9 @@ export const ExtensionsGuideContent: React.FC = () => {
       >
         <h2 className="text-[0.95rem] sm:text-xl font-black mb-1 sm:mb-1.5">Ready to find your perfect domain ending?</h2>
         <p className="text-[11px] sm:text-[13px] mb-3 sm:mb-4 max-w-lg mx-auto" style={{ color: 'var(--text-tertiary)' }}>
-          <span className="sm:hidden">Search 1,000+ extensions free — live availability, private by default.</span>
+          <span className="sm:hidden">Search 700+ extensions free — live availability, private by default.</span>
           <span className="hidden sm:inline">
-            Search 1,000+ extensions with live availability — free, private, and built for speed. Compare prices and
+            Search 700+ extensions with live availability — free, private, and built for speed. Compare prices and
             register when you are ready.
           </span>
         </p>

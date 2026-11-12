@@ -278,7 +278,7 @@ function calculateDomainLeadsMetrics(keyword: string, registeredCount: number) {
   const lower = keyword.toLowerCase();
   const hasHighValueToken = HIGH_VALUE_TOKENS.some((tok) => lower.includes(tok));
 
-  // 1. Exact SLDs across all ~1,600 TLDs
+  // 1. Exact SLDs across all ~700 TLDs
   const exactSlds = Math.min(
     1480,
     Math.max(12, Math.round(registeredCount * 8.5 + (hash % 45)))

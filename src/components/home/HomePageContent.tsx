@@ -62,9 +62,9 @@ export const HomePageContent: React.FC = () => {
     {
       icon: <Icons.Globe />,
       title: 'Domain Extensions',
-      description: 'Explore 1,600+ endings and match the right TLD to your brand.',
+      description: 'Explore 700+ endings and match the right TLD to your brand.',
       href: '/domain-extensions',
-      badge: '1,600+ TLDs',
+      badge: '700+ TLDs',
       hideOnMobile: false,
     },
     {
@@ -126,7 +126,7 @@ export const HomePageContent: React.FC = () => {
     },
     {
       icon: <Icons.Globe />,
-      title: '1,600+ TLDs',
+      title: '700+ TLDs',
       description: 'From .com to niche and country-code extensions in a single search.',
       highlight: false,
     },
@@ -160,7 +160,7 @@ export const HomePageContent: React.FC = () => {
       icon: <Icons.Check />,
       question: 'How do I check if a domain name is available?',
       answer:
-        'Enter the name in the search box above. DomainDiscovery runs a live availability check across 1,600+ extensions and shows free, registered, or premium-style outcomes so you can decide quickly.',
+        'Enter the name in the search box above. DomainDiscovery runs a live availability check across 700+ extensions and shows free, registered, or premium-style outcomes so you can decide quickly.',
     },
     {
       icon: <Icons.Sparkles />,
