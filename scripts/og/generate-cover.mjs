@@ -224,7 +224,7 @@ const tree = h(
         h('div', { fontFamily: 'Geist Mono', fontSize: 13, letterSpacing: '0.22em', color: 'rgba(255,255,255,0.45)', marginTop: 2 }, 'AI-POWERED')
       )
     ),
-    pill('Live across 1,600+ TLDs', GREEN)
+    pill('Live across 700+ TLDs', GREEN)
   ),
 
   // Left: headline built from the three core features
@@ -269,7 +269,7 @@ const tree = h(
     'div',
     { position: 'absolute', top: 160, right: 64, width: 560, flexDirection: 'column', gap: 14 },
     img(owl, 70, 70, { position: 'absolute', top: -56, right: 250 }),
-    card('01', ICONS.search, 'Find domains', 'Live availability on 1,600+ TLDs, plus AI name ideas.', findVisual),
+    card('01', ICONS.search, 'Find domains', 'Live availability on 700+ TLDs, plus AI name ideas.', findVisual),
     card('02', ICONS.layers, 'Bulk search', 'Check hundreds of names at once and export the results.', bulkVisual),
     card('03', ICONS.leads, 'Domain leads', 'See who uses your name on other TLDs and pitch them.', leadsVisual)
   )
@@ -279,7 +279,7 @@ await initWasm(readFileSync(require.resolve('@resvg/resvg-wasm/index_bg.wasm')))
 const svg = await satori(tree, { width: W, height: H, fonts });
 const png = new Resvg(svg, { fitTo: { mode: 'width', value: W } }).render().asPng();
 
-const alt = 'DomainDiscovery — Discover Your Next Domain. Find domains across 1,600+ TLDs, bulk domain search, and domain leads to find buyers';
+const alt = 'DomainDiscovery — Discover Your Next Domain. Find domains across 700+ TLDs, bulk domain search, and domain leads to find buyers';
 for (const name of ['opengraph-image', 'twitter-image']) {
   writeFileSync(path.join(root, 'src/app', `${name}.png`), png);
   writeFileSync(path.join(root, 'src/app', `${name}.alt.txt`), alt);
