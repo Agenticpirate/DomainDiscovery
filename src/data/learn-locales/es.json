@@ -36,7 +36,7 @@
         {
           "heading": "¿Qué TLD conviene buscar primero?",
           "body": [
-            "La mayoría de las marcas globales siguen priorizando .com por confianza y recordación. Los equipos de producto y las startups suelen comprobar también .ai, .io, .app y .dev. Los negocios locales pueden añadir TLD de código de país (ccTLD) que encajen con su mercado. DomainDiscovery indexa más de 1600 extensiones para que compares categorías en una sola sesión en lugar de saltar entre registradores.",
+            "La mayoría de las marcas globales siguen priorizando .com por confianza y recordación. Los equipos de producto y las startups suelen comprobar también .ai, .io, .app y .dev. Los negocios locales pueden añadir TLD de código de país (ccTLD) que encajen con su mercado. DomainDiscovery indexa más de 700 extensiones para que compares categorías en una sola sesión en lugar de saltar entre registradores.",
             "Una buena regla: elige la TLD que realmente vas a usar en el correo, los anuncios y los envases. Buscar todas las extensiones sin un caso de uso genera fatiga de decisión y una marca poco coherente."
           ]
         },
@@ -1685,7 +1685,7 @@
           "heading": "Cómo ayuda DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) es una capa gratuita de investigación para la búsqueda de nombres de dominio, la planificación del registro y la diligencia debida; no es un pago de registrador. Cuándo usar una TLD de código de país para el SEO local, en qué se diferencian las ccTLD de las gTLD y cómo combinarlas con dominios geográficos y las herramientas de investigación de DomainDiscovery.",
-            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
+            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
           ]
         },
         {
@@ -5790,7 +5790,7 @@
     },
     "what-is-a-tld-domain-extension": {
       "title": "¿Qué es una TLD? Las extensiones de dominio explicadas",
-      "description": "Qué es un dominio de nivel superior (TLD), en qué se diferencian las gTLD y las ccTLD, cómo elegir una extensión y cómo te ayuda DomainDiscovery a explorar más de 1600 TLD antes de registrar.",
+      "description": "Qué es un dominio de nivel superior (TLD), en qué se diferencian las gTLD y las ccTLD, cómo elegir una extensión y cómo te ayuda DomainDiscovery a explorar más de 700 TLD antes de registrar.",
       "category": "TLD",
       "topics": [
         "TLD",
@@ -5803,7 +5803,7 @@
         {
           "heading": "Entender las extensiones: ¿Qué es una TLD? Las extensiones de dominio explicadas",
           "body": [
-            "Qué es un dominio de nivel superior (TLD), en qué se diferencian las gTLD y las ccTLD, cómo elegir una extensión y cómo te ayuda DomainDiscovery a explorar más de 1600 TLD antes de registrar.",
+            "Qué es un dominio de nivel superior (TLD), en qué se diferencian las gTLD y las ccTLD, cómo elegir una extensión y cómo te ayuda DomainDiscovery a explorar más de 700 TLD antes de registrar.",
             "Una TLD (dominio de nivel superior) es la etiqueta que va tras el último punto: .com, .org, .ai o un código de país como .de. Los registros fijan las políticas y los precios mayoristas; los registradores venden los nombres al público.",
             "Elige las extensiones por encaje con el público, elegibilidad, estabilidad del precio y pronunciación de la marca, no porque una cadena parezca de moda esta semana."
           ]
@@ -5825,14 +5825,14 @@
         {
           "heading": "Explora antes de comprar en bloque",
           "body": [
-            "Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
+            "Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
             "Preselecciona de 1 a 3 extensiones que de verdad vayas a imprimir en anuncios y correos. La coherencia vale más que coleccionar cada cadena que estaba libre un martes."
           ]
         },
         {
           "heading": "Análisis a fondo de «¿Qué es una TLD? Las extensiones de dominio explicadas»",
           "body": [
-            "Cuando la gente busca orientación sobre «¿Qué es una TLD? Las extensiones de dominio explicadas», suele necesitar tanto una definición como una regla de decisión. Definición: Qué es un dominio de nivel superior (TLD), en qué se diferencian las gTLD y las ccTLD, cómo elegir una extensión y cómo te ayuda DomainDiscovery a explorar más de 1600 TLD antes de registrar.",
+            "Cuando la gente busca orientación sobre «¿Qué es una TLD? Las extensiones de dominio explicadas», suele necesitar tanto una definición como una regla de decisión. Definición: Qué es un dominio de nivel superior (TLD), en qué se diferencian las gTLD y las ccTLD, cómo elegir una extensión y cómo te ayuda DomainDiscovery a explorar más de 700 TLD antes de registrar.",
             "Regla de decisión: si el nombre o el proceso no respalda una función clara de cara al usuario en los próximos 90 días, deja la idea en una lista de preseleccionados en lugar de gastar en registros impulsivos.",
             "Los temas relacionados en el apartado de aprendizaje de DomainDiscovery incluyen TLD, Extensiones, ccTLD y gTLD. Enlaza esas guías cuando termines esta página para construir un modelo mental coherente en lugar de acumular datos sueltos.",
             "Los ejemplos ayudan: un fontanero local puede dar prioridad a un patrón claro de servicio + ciudad y a una vía fiable para la llamada; una startup SaaS puede priorizar un .com/.ai de marca y una pronunciación global; un inversor puede priorizar la liquidez y las cuentas de renovación. Mismos artículos del sector, distintas métricas de éxito."
@@ -5841,8 +5841,8 @@
         {
           "heading": "Cómo ayuda DomainDiscovery",
           "body": [
-            "DomainDiscovery (Domain Discovery / Domains Discovery) es una capa gratuita de investigación para la búsqueda de nombres de dominio, la planificación del registro y la diligencia debida; no es un pago de registrador. Qué es un dominio de nivel superior (TLD), en qué se diferencian las gTLD y las ccTLD, cómo elegir una extensión y cómo te ayuda DomainDiscovery a explorar más de 1600 TLD antes de registrar.",
-            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
+            "DomainDiscovery (Domain Discovery / Domains Discovery) es una capa gratuita de investigación para la búsqueda de nombres de dominio, la planificación del registro y la diligencia debida; no es un pago de registrador. Qué es un dominio de nivel superior (TLD), en qué se diferencian las gTLD y las ccTLD, cómo elegir una extensión y cómo te ayuda DomainDiscovery a explorar más de 700 TLD antes de registrar.",
+            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
           ]
         },
         {
@@ -5914,7 +5914,7 @@
         {
           "heading": "Explora antes de comprar en bloque",
           "body": [
-            "Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
+            "Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
             "Preselecciona de 1 a 3 extensiones que de verdad vayas a imprimir en anuncios y correos. La coherencia vale más que coleccionar cada cadena que estaba libre un martes."
           ]
         },
@@ -5931,7 +5931,7 @@
           "heading": "Cómo ayuda DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) es una capa gratuita de investigación para la búsqueda de nombres de dominio, la planificación del registro y la diligencia debida; no es un pago de registrador. Compara .com, .io, .ai, las ccTLD y las nuevas gTLD según confianza, SEO y encaje con la marca.",
-            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
+            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
           ]
         },
         {
@@ -6002,7 +6002,7 @@
         {
           "heading": "Explora antes de comprar en bloque",
           "body": [
-            "Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
+            "Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
             "Preselecciona de 1 a 3 extensiones que de verdad vayas a imprimir en anuncios y correos. La coherencia vale más que coleccionar cada cadena que estaba libre un martes."
           ]
         },
@@ -6019,7 +6019,7 @@
           "heading": "Cómo ayuda DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) es una capa gratuita de investigación para la búsqueda de nombres de dominio, la planificación del registro y la diligencia debida; no es un pago de registrador. Una comparación práctica de las tres extensiones más debatidas entre las startups tecnológicas.",
-            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
+            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
           ]
         },
         {
@@ -6090,7 +6090,7 @@
         {
           "heading": "Explora antes de comprar en bloque",
           "body": [
-            "Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
+            "Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
             "Preselecciona de 1 a 3 extensiones que de verdad vayas a imprimir en anuncios y correos. La coherencia vale más que coleccionar cada cadena que estaba libre un martes."
           ]
         },
@@ -6107,7 +6107,7 @@
           "heading": "Cómo ayuda DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) es una capa gratuita de investigación para la búsqueda de nombres de dominio, la planificación del registro y la diligencia debida; no es un pago de registrador. Cómo evaluar .shop, .app, .dev, .xyz y otras nuevas genéricas sin arrepentirte de los costes de renovación.",
-            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
+            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
           ]
         },
         {
@@ -6178,7 +6178,7 @@
         {
           "heading": "Explora antes de comprar en bloque",
           "body": [
-            "Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
+            "Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
             "Preselecciona de 1 a 3 extensiones que de verdad vayas a imprimir en anuncios y correos. La coherencia vale más que coleccionar cada cadena que estaba libre un martes."
           ]
         },
@@ -6195,7 +6195,7 @@
           "heading": "Cómo ayuda DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) es una capa gratuita de investigación para la búsqueda de nombres de dominio, la planificación del registro y la diligencia debida; no es un pago de registrador. Cómo los precios premium del registro y las renovaciones promocionales pueden sorprender a los titulares de dominios.",
-            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
+            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
           ]
         },
         {
@@ -6287,7 +6287,7 @@
         {
           "heading": "Explora antes de comprar en bloque",
           "body": [
-            "Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
+            "Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
             "Preselecciona de 1 a 3 extensiones que de verdad vayas a imprimir en anuncios y correos. La coherencia vale más que coleccionar cada cadena que estaba libre un martes."
           ]
         },
@@ -6304,7 +6304,7 @@
           "heading": "Cómo ayuda DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) es una capa gratuita de investigación para la búsqueda de nombres de dominio, la planificación del registro y la diligencia debida; no es un pago de registrador. Señales de confianza de .org y cuándo tienen sentido las alternativas.",
-            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
+            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
           ]
         },
         {
@@ -6396,7 +6396,7 @@
         {
           "heading": "Explora antes de comprar en bloque",
           "body": [
-            "Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
+            "Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
             "Preselecciona de 1 a 3 extensiones que de verdad vayas a imprimir en anuncios y correos. La coherencia vale más que coleccionar cada cadena que estaba libre un martes."
           ]
         },
@@ -6413,7 +6413,7 @@
           "heading": "Cómo ayuda DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) es una capa gratuita de investigación para la búsqueda de nombres de dominio, la planificación del registro y la diligencia debida; no es un pago de registrador. Cómo funcionan las fases de lanzamiento de las nuevas TLD para los titulares de marcas y el público.",
-            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
+            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
           ]
         },
         {
@@ -6505,7 +6505,7 @@
         {
           "heading": "Explora antes de comprar en bloque",
           "body": [
-            "Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
+            "Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds.",
             "Preselecciona de 1 a 3 extensiones que de verdad vayas a imprimir en anuncios y correos. La coherencia vale más que coleccionar cada cadena que estaba libre un martes."
           ]
         },
@@ -6522,7 +6522,7 @@
           "heading": "Cómo ayuda DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) es una capa gratuita de investigación para la búsqueda de nombres de dominio, la planificación del registro y la diligencia debida; no es un pago de registrador. Cómo ayudan los representantes a registrar ccTLD restringidas a extranjeros, y cuáles son los riesgos.",
-            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 1600 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
+            "Usa la búsqueda gratuita de nombres de dominio de DomainDiscovery (/) para comprobar la disponibilidad en vivo antes de pagar a un registrador. Compara los precios regulares de los registradores en /tools/compare: los precios promocionales del primer año suelen diferir de las renovaciones. Consulta titularidad y fechas con WHOIS/RDAP en /tools/whois cuando necesites diligencia debida. Explora más de 700 extensiones en el catálogo de extensiones de dominio en /domain-extensions y en la enciclopedia de TLD en /blog/tlds."
           ]
         },
         {
@@ -13348,14 +13348,14 @@
         {
           "heading": "¿Qué es DomainDiscovery?",
           "body": [
-            "DomainDiscovery (también escrito Domain Discovery o Domains Discovery) es una aplicación web gratuita para buscar e investigar nombres de dominio. Fundadores, agencias y negocios locales la usan para comprobar si un nombre está disponible en más de 1.600 dominios de nivel superior (TLD), generar ideas de marca, crear listas de dominios geográficos para campañas en varias ciudades, hacer comprobaciones masivas de disponibilidad, consultar los datos públicos de registro WHOIS/RDAP, explorar extensiones, estimar el valor relativo de un dominio y comparar precios habituales de registradores por TLD. Las herramientas principales no requieren cuenta. Las listas guardadas se quedan en el navegador por defecto. DomainDiscovery no es un registrador de dominios ni procesa pagos de registro: cuando quieras comprar, completas el pago en un registrador externo. Los resultados de disponibilidad son instantáneas y pueden cambiar; vuelve a comprobarlo siempre en el carrito del registrador antes de pagar. Sitio oficial: domainsdiscovery.com.",
+            "DomainDiscovery (también escrito Domain Discovery o Domains Discovery) es una aplicación web gratuita para buscar e investigar nombres de dominio. Fundadores, agencias y negocios locales la usan para comprobar si un nombre está disponible en más de 700 dominios de nivel superior (TLD), generar ideas de marca, crear listas de dominios geográficos para campañas en varias ciudades, hacer comprobaciones masivas de disponibilidad, consultar los datos públicos de registro WHOIS/RDAP, explorar extensiones, estimar el valor relativo de un dominio y comparar precios habituales de registradores por TLD. Las herramientas principales no requieren cuenta. Las listas guardadas se quedan en el navegador por defecto. DomainDiscovery no es un registrador de dominios ni procesa pagos de registro: cuando quieras comprar, completas el pago en un registrador externo. Los resultados de disponibilidad son instantáneas y pueden cambiar; vuelve a comprobarlo siempre en el carrito del registrador antes de pagar. Sitio oficial: domainsdiscovery.com.",
             "Mucha gente también busca Domain Discovery o Domains Discovery para referirse al mismo producto. La marca es DomainDiscovery; el sitio público es domainsdiscovery.com."
           ]
         },
         {
           "heading": "Lo que puedes hacer gratis",
           "body": [
-            "Búsqueda instantánea de dominios en más de 1.600 TLD; generador de nombres de dominio con IA y comprobación en vivo; comprobador masivo (hasta 1.000 nombres); generador de dominios geográficos con patrones de ciudad y país; consulta WHOIS/RDAP; explorador de extensiones y enciclopedia de TLD; comparación de precios de registradores por TLD; y un estimador del valor del dominio para orientarte.",
+            "Búsqueda instantánea de dominios en más de 700 TLD; generador de nombres de dominio con IA y comprobación en vivo; comprobador masivo (hasta 1.000 nombres); generador de dominios geográficos con patrones de ciudad y país; consulta WHOIS/RDAP; explorador de extensiones y enciclopedia de TLD; comparación de precios de registradores por TLD; y un estimador del valor del dominio para orientarte.",
             "Las listas guardadas se quedan en tu dispositivo por defecto. No necesitas cuenta para las herramientas principales de investigación."
           ]
         },
@@ -17493,7 +17493,7 @@
         {
           "heading": "Resumen",
           "body": [
-            "Los mejores generadores de nombres de dominio con IA de 2026 combinan la creatividad de los grandes modelos de lenguaje con la comprobación de disponibilidad en tiempo real. ChatGPT y Claude destacan en la generación creativa; Namelix añade maquetas visuales; y DomainsDiscovery.com cubre el paso de disponibilidad en 1,600+ TLD. Ninguna herramienta lo hace todo: el flujo ganador usa al menos dos en secuencia."
+            "Los mejores generadores de nombres de dominio con IA de 2026 combinan la creatividad de los grandes modelos de lenguaje con la comprobación de disponibilidad en tiempo real. ChatGPT y Claude destacan en la generación creativa; Namelix añade maquetas visuales; y DomainsDiscovery.com cubre el paso de disponibilidad en 700+ TLD. Ninguna herramienta lo hace todo: el flujo ganador usa al menos dos en secuencia."
           ]
         },
         {
@@ -17596,7 +17596,7 @@
             "Ninguna herramienta ofrece por sí sola resultados óptimos. Este es el flujo de trabajo que da los mejores resultados:",
             "Fase 1: Generar (usa ChatGPT o Claude): redacta un briefing de naming detallado y genera de 30 a 50 candidatos con un modelo de IA avanzado. Así obtienes materia prima creativa que refleja tu posicionamiento de marca real.",
             "Fase 2: Filtrar (usa Namelix o Brandmark): pasa tus 20 mejores nombres por una herramienta visual para ver cómo lucen como marca. Así descartas nombres que suenan bien pero se ven débiles como logotipo o marca denominativa.",
-            "Fase 3: Comprobar la disponibilidad (usa DomainsDiscovery.com): busca en lote todos los nombres que sobrevivan en 1,600+ TLD a la vez. Filtra por disponibilidad en tus extensiones preferidas.",
+            "Fase 3: Comprobar la disponibilidad (usa DomainsDiscovery.com): busca en lote todos los nombres que sobrevivan en 700+ TLD a la vez. Filtra por disponibilidad en tus extensiones preferidas.",
             "Fase 4: Filtrado de marcas registradas (usa USPTO TESS): pasa tus tres a cinco mejores nombres por las bases de datos de marcas antes de comprometerte.",
             "Fase 5: Registrar (desde DomainsDiscovery.com): registra tu dominio principal más una o dos extensiones alternativas."
           ]
@@ -17630,13 +17630,13 @@
         {
           "heading": "Preguntas frecuentes",
           "body": [
-            "P: ¿Cuál es el generador de nombres de dominio con IA más preciso en 2026?\nR: Ningún generador de dominios con IA es a la vez el más acertado en creatividad y el más preciso en disponibilidad. ChatGPT y Claude producen los nombres creativos más adecuados al contexto. DomainsDiscovery.com ofrece los datos de disponibilidad en vivo más completos en 1,600+ TLD. Usar ambos en secuencia (IA para generar, DomainsDiscovery.com para la disponibilidad) da los resultados más precisos y accionables.",
+            "P: ¿Cuál es el generador de nombres de dominio con IA más preciso en 2026?\nR: Ningún generador de dominios con IA es a la vez el más acertado en creatividad y el más preciso en disponibilidad. ChatGPT y Claude producen los nombres creativos más adecuados al contexto. DomainsDiscovery.com ofrece los datos de disponibilidad en vivo más completos en 700+ TLD. Usar ambos en secuencia (IA para generar, DomainsDiscovery.com para la disponibilidad) da los resultados más precisos y accionables.",
             "P: ¿Son suficientemente buenos los generadores de dominios con IA gratuitos?\nR: Las herramientas gratuitas como Namelix y el generador de Shopify bastan para la exploración inicial y la inspiración de primera pasada. Son menos eficaces en decisiones de nombre de alto riesgo donde importan el posicionamiento de marca, la diferenciación frente a la competencia y la seguridad cultural. En esos casos, una sesión estructurada de ChatGPT o Claude con un briefing de naming detallado supera de forma constante a las herramientas gratuitas específicas.",
             "P: ¿Por qué la mayoría de los generadores de dominios con IA muestran sobre todo dominios no disponibles?\nR: Porque hay registrados más de 165 millones de dominios .com, y la mayoría de las herramientas de IA generan sobre todo combinaciones de palabras clave con palabras comunes del inglés, que en su inmensa mayoría ya están tomadas. Las herramientas que usan creatividad real de LLM para generar palabras inventadas y combinaciones fonéticamente agradables producen una proporción mucho mayor de resultados .com disponibles que las herramientas de combinación de palabras clave.",
             "P: ¿Pueden los generadores de dominios con IA encontrar dominios .com de una sola palabra?\nR: Prácticamente todos los dominios .com de una sola palabra común en inglés están registrados. La IA puede ayudarte a encontrar dominios inventados de una palabra que estén disponibles, generando términos acuñados cortos que siguen patrones fonéticos naturales. Una IA bien instruida puede producir decenas de candidatos inventados de una palabra en minutos; comprobar su disponibilidad en .com en DomainsDiscovery.com muestra rápidamente cuáles aún se pueden registrar a precio estándar.",
             "P: ¿Cuánto cuesta registrar nombres de dominio generados con IA?\nR: Las palabras inventadas por IA que se registran por primera vez (nunca antes en manos de nadie) cuestan $10–$12 en .com, $8–$15 en .co, $30–$50 en .io y $8–$15 en la mayoría de los demás TLD. El paso de generación con IA es gratuito o de bajo coste (una suscripción a ChatGPT Plus). El coste total de encontrar y registrar un gran dominio generado con IA suele ser de $10–$25, frente a $500–$150,000+ por adquirir un dominio premium de segunda mano.",
             "P: ¿Comprueban los generadores de dominios con IA la disponibilidad de marcas registradas?\nR: No. Los modelos de lenguaje de IA no pueden consultar las bases de datos de marcas en tiempo real. Herramientas específicas como Squadhelp incluyen el prefiltrado de marcas como función de pago. Con todas las demás, debes comprobar manualmente tus mejores candidatos en USPTO TESS (para EE. UU.) y EUIPO (para Europa) antes de registrar. Este paso no es opcional: un dominio registrado que entre en conflicto con una marca existente puede perderse mediante un procedimiento legal con un coste considerable.",
-            "P: ¿Cuál es el mejor flujo de trabajo para usar varias herramientas de naming con IA?\nR: Usa ChatGPT o Claude con un briefing de naming detallado para generar de 30 a 50 candidatos. Pasa tus 20 mejores por Namelix o Brandmark para ver representaciones visuales de la marca. Comprueba en lote la disponibilidad de todos los que queden en DomainsDiscovery.com en 1,600+ TLD. Pasa tus tres a cinco mejores opciones por USPTO TESS para detectar conflictos de marca. Registra a tu ganador más uno o dos TLD alternativos el mismo día en que lo decidas."
+            "P: ¿Cuál es el mejor flujo de trabajo para usar varias herramientas de naming con IA?\nR: Usa ChatGPT o Claude con un briefing de naming detallado para generar de 30 a 50 candidatos. Pasa tus 20 mejores por Namelix o Brandmark para ver representaciones visuales de la marca. Comprueba en lote la disponibilidad de todos los que queden en DomainsDiscovery.com en 700+ TLD. Pasa tus tres a cinco mejores opciones por USPTO TESS para detectar conflictos de marca. Registra a tu ganador más uno o dos TLD alternativos el mismo día en que lo decidas."
           ]
         }
       ]
@@ -17654,7 +17654,7 @@
         {
           "heading": "Resumen",
           "body": [
-            "Los generadores de nombres de dominio con IA funcionan mejor cuando, antes de darle instrucciones, aportas un briefing de naming estructurado: personalidad de marca, público objetivo, contexto del sector y preferencias de formato. Usa ChatGPT o Claude para generar de 30 a 50 candidatos y luego comprueba la disponibilidad en lote en 1,600+ TLD en DomainsDiscovery.com. El proceso lleva menos de una hora, desde la página en blanco hasta el dominio registrado."
+            "Los generadores de nombres de dominio con IA funcionan mejor cuando, antes de darle instrucciones, aportas un briefing de naming estructurado: personalidad de marca, público objetivo, contexto del sector y preferencias de formato. Usa ChatGPT o Claude para generar de 30 a 50 candidatos y luego comprueba la disponibilidad en lote en 700+ TLD en DomainsDiscovery.com. El proceso lleva menos de una hora, desde la página en blanco hasta el dominio registrado."
           ]
         },
         {
@@ -17712,7 +17712,7 @@
             "Aquí es donde la mayoría pierde el impulso. Tienes una lista de 20 nombres prometedores generados por IA. Ahora toca comprobar la disponibilidad, y hacerlo uno por uno en varios registradores es dolorosamente lento.",
             "Cómo comprobar en lote las sugerencias de nombres de dominio de la IA",
             "En lugar de introducir los nombres de uno en uno, usa una herramienta de búsqueda de dominios que acepte entradas masivas y busque en varios TLD a la vez. Introduce los 20 nombres de una vez y filtra por disponibilidad.",
-            "DomainsDiscovery.com admite búsquedas masivas de dominios en 1,600+ TLD, lo que significa que puedes pegar toda tu lista generada por IA y ver en segundos qué nombres están disponibles en .com, .io, .co, .ai, .app y cientos de extensiones más."
+            "DomainsDiscovery.com admite búsquedas masivas de dominios en 700+ TLD, lo que significa que puedes pegar toda tu lista generada por IA y ver en segundos qué nombres están disponibles en .com, .io, .co, .ai, .app y cientos de extensiones más."
           ]
         },
         {
@@ -17757,10 +17757,10 @@
         {
           "heading": "Preguntas frecuentes",
           "body": [
-            "P: ¿Cuál es la mejor herramienta de IA para generar nombres de dominio?\nR: ChatGPT y Claude son los generadores de nombres de dominio con IA más potentes en 2026 porque entienden el posicionamiento de marca, la estética fonética y las convenciones del sector, y pueden hacer un filtrado de seguridad cultural. Herramientas específicas como Namelix añaden maquetas visuales de marca. El flujo óptimo combina un gran modelo de lenguaje para la generación creativa con una herramienta de búsqueda masiva de dominios como DomainsDiscovery.com para comprobar la disponibilidad en 1,600+ TLD a la vez.",
+            "P: ¿Cuál es la mejor herramienta de IA para generar nombres de dominio?\nR: ChatGPT y Claude son los generadores de nombres de dominio con IA más potentes en 2026 porque entienden el posicionamiento de marca, la estética fonética y las convenciones del sector, y pueden hacer un filtrado de seguridad cultural. Herramientas específicas como Namelix añaden maquetas visuales de marca. El flujo óptimo combina un gran modelo de lenguaje para la generación creativa con una herramienta de búsqueda masiva de dominios como DomainsDiscovery.com para comprobar la disponibilidad en 700+ TLD a la vez.",
             "P: ¿Por qué es tan difícil encontrar un dominio .com en 2026?\nR: Actualmente hay registrados más de 165 millones de dominios .com, aproximadamente uno por cada 52 personas del planeta. Todas las palabras comunes del inglés, la mayoría de los compuestos de dos palabras y prácticamente todos los nombres de negocio evidentes están tomados. La IA ayuda generando palabras inventadas y combinaciones creativas que ninguna sesión de lluvia de ideas humana produciría, lo que aumenta drásticamente tus probabilidades de encontrar un .com disponible al precio estándar de registro de $10–$12.",
             "P: ¿Cómo escribo un buen prompt para un generador de nombres de dominio con IA?\nR: Incluye cuatro elementos en tu prompt: qué hace tu negocio (una frase), cómo quieres que se sienta la marca (de tres a cinco adjetivos), quién es tu cliente principal (una frase) y tus preferencias de formato (una palabra o dos, palabra real o inventada, límite de caracteres). Los prompts específicos producen resultados específicos y utilizables. Los prompts vagos como «nombres para mi startup» producen combinaciones genéricas de palabras clave.",
-            "P: ¿Puedo fiarme de que la IA compruebe si un nombre de dominio está disponible?\nR: No. Los modelos de lenguaje de IA no tienen acceso en tiempo real a las bases de datos de registro de dominios. ChatGPT o Claude pueden generar nombres candidatos, pero no pueden decirte cuáles están realmente disponibles para registrar hoy. Contrasta siempre las sugerencias de la IA con una herramienta de disponibilidad de dominios en vivo. DomainsDiscovery.com comprueba la disponibilidad en 1,600+ TLD en tiempo real y admite búsquedas masivas para listas enteras de nombres generados por IA.",
+            "P: ¿Puedo fiarme de que la IA compruebe si un nombre de dominio está disponible?\nR: No. Los modelos de lenguaje de IA no tienen acceso en tiempo real a las bases de datos de registro de dominios. ChatGPT o Claude pueden generar nombres candidatos, pero no pueden decirte cuáles están realmente disponibles para registrar hoy. Contrasta siempre las sugerencias de la IA con una herramienta de disponibilidad de dominios en vivo. DomainsDiscovery.com comprueba la disponibilidad en 700+ TLD en tiempo real y admite búsquedas masivas para listas enteras de nombres generados por IA.",
             "P: ¿Cuántos nombres debería generar la IA antes de comprobar la disponibilidad?\nR: Genera al menos 20–30 nombres antes de comprobar la disponibilidad. El objetivo es construir un grupo lo bastante grande como para que queden opciones sólidas después de que la disponibilidad y el filtrado de marcas eliminen a los inevitables descartados. Si compruebas la disponibilidad tras cinco nombres y los cinco están tomados, tendrás que empezar de nuevo. Con 30 nombres, casi siempre encontrarás al menos de tres a cinco opciones sólidas aún disponibles en tu TLD preferido.",
             "P: ¿Los nombres generados por IA deberían ser palabras reales o inventadas?\nR: Ambos funcionan, pero las palabras inventadas tienen una ventaja considerable de disponibilidad en 2026. Las palabras reales, sobre todo las comunes del inglés y los compuestos evidentes, están registradas en su inmensa mayoría como dominios .com. Las palabras inventadas por IA que siguen patrones fonéticos naturales (terminadas en vocal, pronunciables en todo el mundo, de menos de 8 caracteres) tienen muchas más probabilidades de estar disponibles al precio estándar de registro y, además, se pueden registrar como marca sin problemas desde el primer día.",
             "P: ¿Cómo compruebo si un nombre generado por IA es seguro en otros idiomas?\nR: Pídele a una IA que haga una comprobación de seguridad cultural: «¿Tiene ‘[nombre]’ algún significado negativo, ofensivo o no deseado en español, francés, alemán, japonés, mandarín, árabe o portugués?». Lleva menos de dos minutos y ha evitado numerosos lanzamientos de marca embarazosos. Hazlo antes de la comprobación de marcas y del registro del dominio, ya que puede descartar candidatos que habrían provocado un costoso cambio de marca más adelante."
@@ -17770,7 +17770,7 @@
           "heading": "Tu siguiente paso",
           "body": [
             "Ahora tienes un proceso que te lleva de la página en blanco al dominio registrado en menos de una hora. Ponlo en práctica.",
-            "Comprueba ahora mismo si tu dominio ideal está disponible en DomainsDiscovery.com: busca al instante en 1,600+ TLD."
+            "Comprueba ahora mismo si tu dominio ideal está disponible en DomainsDiscovery.com: busca al instante en 700+ TLD."
           ]
         }
       ]

@@ -1,7 +1,7 @@
 {
   "name": "DomainDiscovery — Free Domain Name Search",
   "short_name": "DomainDiscovery",
-  "description": "DomainDiscovery (Domain Discovery) — free domain name search, AI generator, geo domains, bulk check, WHOIS, and price comparison across 1,600+ TLDs.",
+  "description": "DomainDiscovery (Domain Discovery) — free domain name search, AI generator, geo domains, bulk check, WHOIS, and price comparison across 700+ TLDs.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",

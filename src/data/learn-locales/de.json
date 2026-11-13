@@ -36,7 +36,7 @@
         {
           "heading": "Welche TLDs sollten Sie zuerst prüfen?",
           "body": [
-            "Die meisten globalen Marken setzen für Vertrauen und Wiedererkennung weiterhin auf .com. Produkt- und Startup-Teams prüfen oft zusätzlich .ai, .io, .app und .dev. Lokale Unternehmen ergänzen gern länderspezifische TLDs (ccTLDs), die zum Markt passen. DomainDiscovery erfasst mehr als 1.600 Endungen, sodass Sie Kategorien in einer Sitzung vergleichen können, statt zwischen Registraren hin- und herzuspringen.",
+            "Die meisten globalen Marken setzen für Vertrauen und Wiedererkennung weiterhin auf .com. Produkt- und Startup-Teams prüfen oft zusätzlich .ai, .io, .app und .dev. Lokale Unternehmen ergänzen gern länderspezifische TLDs (ccTLDs), die zum Markt passen. DomainDiscovery erfasst mehr als 700 Endungen, sodass Sie Kategorien in einer Sitzung vergleichen können, statt zwischen Registraren hin- und herzuspringen.",
             "Eine gute Faustregel: Wählen Sie die TLD, die Sie tatsächlich in E-Mails, Anzeigen und auf Verpackungen verwenden werden. Wer jede Endung ohne konkreten Zweck durchsucht, erzeugt Entscheidungsmüdigkeit und einen uneinheitlichen Markenauftritt."
           ]
         },
@@ -1685,7 +1685,7 @@
           "heading": "So hilft DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) ist eine kostenlose Recherche-Ebene für Domainnamen-Suche, Registrierungsplanung und Sorgfaltsprüfung – keine Registrar-Kasse. Wann Sie eine länderspezifische TLD für lokales SEO einsetzen, wie sich ccTLDs von gTLDs unterscheiden und wie Sie sie mit Geo-Domains und den Recherche-Werkzeugen von DomainDiscovery kombinieren.",
-            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen."
+            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen."
           ]
         },
         {
@@ -5790,7 +5790,7 @@
     },
     "what-is-a-tld-domain-extension": {
       "title": "Was ist eine TLD? Domain-Endungen erklärt",
-      "description": "Was eine Top-Level-Domain (TLD) ist, wie sich gTLDs und ccTLDs unterscheiden, wie Sie eine Endung wählen und wie DomainDiscovery Ihnen hilft, vor der Registrierung mehr als 1.600 TLDs zu durchstöbern.",
+      "description": "Was eine Top-Level-Domain (TLD) ist, wie sich gTLDs und ccTLDs unterscheiden, wie Sie eine Endung wählen und wie DomainDiscovery Ihnen hilft, vor der Registrierung mehr als 700 TLDs zu durchstöbern.",
       "category": "TLDs",
       "topics": [
         "TLD",
@@ -5803,7 +5803,7 @@
         {
           "heading": "Endungen verstehen: Was ist eine TLD? Domain-Endungen erklärt",
           "body": [
-            "Was eine Top-Level-Domain (TLD) ist, wie sich gTLDs und ccTLDs unterscheiden, wie Sie eine Endung wählen und wie DomainDiscovery Ihnen hilft, vor der Registrierung mehr als 1.600 TLDs zu durchstöbern.",
+            "Was eine Top-Level-Domain (TLD) ist, wie sich gTLDs und ccTLDs unterscheiden, wie Sie eine Endung wählen und wie DomainDiscovery Ihnen hilft, vor der Registrierung mehr als 700 TLDs zu durchstöbern.",
             "Eine TLD (Top-Level-Domain) ist die Bezeichnung nach dem letzten Punkt – .com, .org, .ai oder ein Ländercode wie .de. Registries legen Regeln und Großhandelspreise fest, Registrare verkaufen die Namen an die Öffentlichkeit.",
             "Wählen Sie Endungen nach Passung zur Zielgruppe, Berechtigung, Preisstabilität und Aussprache der Marke – nicht, weil eine Zeichenfolge diese Woche gerade im Trend liegt."
           ]
@@ -5825,14 +5825,14 @@
         {
           "heading": "Erst stöbern, dann im Block kaufen",
           "body": [
-            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen.",
+            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen.",
             "Wählen Sie 1 bis 3 Endungen in die engere Auswahl, die Sie wirklich auf Anzeigen und in E-Mails drucken. Konsequenz schlägt das Sammeln jeder Zeichenfolge, die an einem Dienstag frei war."
           ]
         },
         {
           "heading": "Vertiefung zu „Was ist eine TLD? Domain-Endungen erklärt“",
           "body": [
-            "Wer nach Hinweisen zu „Was ist eine TLD? Domain-Endungen erklärt“ sucht, braucht meist sowohl eine Definition als auch eine Entscheidungsregel. Definition: Was eine Top-Level-Domain (TLD) ist, wie sich gTLDs und ccTLDs unterscheiden, wie Sie eine Endung wählen und wie DomainDiscovery Ihnen hilft, vor der Registrierung mehr als 1.600 TLDs zu durchstöbern.",
+            "Wer nach Hinweisen zu „Was ist eine TLD? Domain-Endungen erklärt“ sucht, braucht meist sowohl eine Definition als auch eine Entscheidungsregel. Definition: Was eine Top-Level-Domain (TLD) ist, wie sich gTLDs und ccTLDs unterscheiden, wie Sie eine Endung wählen und wie DomainDiscovery Ihnen hilft, vor der Registrierung mehr als 700 TLDs zu durchstöbern.",
             "Entscheidungsregel: Wenn der Name oder der Vorgang in den nächsten 90 Tagen keine klare Aufgabe für Nutzer erfüllt, legen Sie die Idee auf eine Merkliste, statt Geld in spontane Registrierungen zu stecken.",
             "Verwandte Themen im Lernbereich von DomainDiscovery sind TLD, Endungen, ccTLD und gTLD. Verlinken Sie diese Leitfäden, nachdem Sie diese Seite gelesen haben, damit ein stimmiges Gesamtbild entsteht, statt Detailwissen zu sammeln.",
             "Beispiele helfen: Ein lokaler Klempner legt Wert auf ein klares Muster aus Leistung und Stadt sowie einen verlässlichen Weg zum Anruf. Ein SaaS-Startup legt Wert auf eine einprägsame .com/.ai und weltweit gleiche Aussprache. Ein Investor legt Wert auf Handelbarkeit und Verlängerungskosten. Gleiche Fachartikel, andere Erfolgsmaßstäbe."
@@ -5841,8 +5841,8 @@
         {
           "heading": "So hilft DomainDiscovery",
           "body": [
-            "DomainDiscovery (Domain Discovery / Domains Discovery) ist eine kostenlose Recherche-Ebene für Domainnamen-Suche, Registrierungsplanung und Sorgfaltsprüfung – keine Registrar-Kasse. Was eine Top-Level-Domain (TLD) ist, wie sich gTLDs und ccTLDs unterscheiden, wie Sie eine Endung wählen und wie DomainDiscovery Ihnen hilft, vor der Registrierung mehr als 1.600 TLDs zu durchstöbern.",
-            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen."
+            "DomainDiscovery (Domain Discovery / Domains Discovery) ist eine kostenlose Recherche-Ebene für Domainnamen-Suche, Registrierungsplanung und Sorgfaltsprüfung – keine Registrar-Kasse. Was eine Top-Level-Domain (TLD) ist, wie sich gTLDs und ccTLDs unterscheiden, wie Sie eine Endung wählen und wie DomainDiscovery Ihnen hilft, vor der Registrierung mehr als 700 TLDs zu durchstöbern.",
+            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen."
           ]
         },
         {
@@ -5914,7 +5914,7 @@
         {
           "heading": "Erst stöbern, dann im Block kaufen",
           "body": [
-            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen.",
+            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen.",
             "Wählen Sie 1 bis 3 Endungen in die engere Auswahl, die Sie wirklich auf Anzeigen und in E-Mails drucken. Konsequenz schlägt das Sammeln jeder Zeichenfolge, die an einem Dienstag frei war."
           ]
         },
@@ -5931,7 +5931,7 @@
           "heading": "So hilft DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) ist eine kostenlose Recherche-Ebene für Domainnamen-Suche, Registrierungsplanung und Sorgfaltsprüfung – keine Registrar-Kasse. Vergleichen Sie .com, .io, .ai, ccTLDs und neue gTLDs nach Vertrauen, SEO und Markenpassung.",
-            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen."
+            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen."
           ]
         },
         {
@@ -6002,7 +6002,7 @@
         {
           "heading": "Erst stöbern, dann im Block kaufen",
           "body": [
-            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen.",
+            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen.",
             "Wählen Sie 1 bis 3 Endungen in die engere Auswahl, die Sie wirklich auf Anzeigen und in E-Mails drucken. Konsequenz schlägt das Sammeln jeder Zeichenfolge, die an einem Dienstag frei war."
           ]
         },
@@ -6019,7 +6019,7 @@
           "heading": "So hilft DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) ist eine kostenlose Recherche-Ebene für Domainnamen-Suche, Registrierungsplanung und Sorgfaltsprüfung – keine Registrar-Kasse. Ein praktischer Vergleich der drei meistdiskutierten Endungen für Tech-Startups.",
-            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen."
+            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen."
           ]
         },
         {
@@ -6090,7 +6090,7 @@
         {
           "heading": "Erst stöbern, dann im Block kaufen",
           "body": [
-            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen.",
+            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen.",
             "Wählen Sie 1 bis 3 Endungen in die engere Auswahl, die Sie wirklich auf Anzeigen und in E-Mails drucken. Konsequenz schlägt das Sammeln jeder Zeichenfolge, die an einem Dienstag frei war."
           ]
         },
@@ -6107,7 +6107,7 @@
           "heading": "So hilft DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) ist eine kostenlose Recherche-Ebene für Domainnamen-Suche, Registrierungsplanung und Sorgfaltsprüfung – keine Registrar-Kasse. So bewerten Sie .shop, .app, .dev, .xyz und andere neue generische Endungen, ohne die Verlängerungskosten zu bereuen.",
-            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen."
+            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen."
           ]
         },
         {
@@ -6178,7 +6178,7 @@
         {
           "heading": "Erst stöbern, dann im Block kaufen",
           "body": [
-            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen.",
+            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen.",
             "Wählen Sie 1 bis 3 Endungen in die engere Auswahl, die Sie wirklich auf Anzeigen und in E-Mails drucken. Konsequenz schlägt das Sammeln jeder Zeichenfolge, die an einem Dienstag frei war."
           ]
         },
@@ -6195,7 +6195,7 @@
           "heading": "So hilft DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) ist eine kostenlose Recherche-Ebene für Domainnamen-Suche, Registrierungsplanung und Sorgfaltsprüfung – keine Registrar-Kasse. Wie Premiumpreise der Registry und Aktions-Verlängerungen Domaininhaber überraschen können.",
-            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen."
+            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen."
           ]
         },
         {
@@ -6287,7 +6287,7 @@
         {
           "heading": "Erst stöbern, dann im Block kaufen",
           "body": [
-            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen.",
+            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen.",
             "Wählen Sie 1 bis 3 Endungen in die engere Auswahl, die Sie wirklich auf Anzeigen und in E-Mails drucken. Konsequenz schlägt das Sammeln jeder Zeichenfolge, die an einem Dienstag frei war."
           ]
         },
@@ -6304,7 +6304,7 @@
           "heading": "So hilft DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) ist eine kostenlose Recherche-Ebene für Domainnamen-Suche, Registrierungsplanung und Sorgfaltsprüfung – keine Registrar-Kasse. Vertrauenssignale von .org und wann Alternativen sinnvoll sind.",
-            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen."
+            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen."
           ]
         },
         {
@@ -6396,7 +6396,7 @@
         {
           "heading": "Erst stöbern, dann im Block kaufen",
           "body": [
-            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen.",
+            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen.",
             "Wählen Sie 1 bis 3 Endungen in die engere Auswahl, die Sie wirklich auf Anzeigen und in E-Mails drucken. Konsequenz schlägt das Sammeln jeder Zeichenfolge, die an einem Dienstag frei war."
           ]
         },
@@ -6413,7 +6413,7 @@
           "heading": "So hilft DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) ist eine kostenlose Recherche-Ebene für Domainnamen-Suche, Registrierungsplanung und Sorgfaltsprüfung – keine Registrar-Kasse. Wie die Startphasen neuer TLDs für Markeninhaber und die Öffentlichkeit ablaufen.",
-            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen."
+            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen."
           ]
         },
         {
@@ -6505,7 +6505,7 @@
         {
           "heading": "Erst stöbern, dann im Block kaufen",
           "body": [
-            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen.",
+            "Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen.",
             "Wählen Sie 1 bis 3 Endungen in die engere Auswahl, die Sie wirklich auf Anzeigen und in E-Mails drucken. Konsequenz schlägt das Sammeln jeder Zeichenfolge, die an einem Dienstag frei war."
           ]
         },
@@ -6522,7 +6522,7 @@
           "heading": "So hilft DomainDiscovery",
           "body": [
             "DomainDiscovery (Domain Discovery / Domains Discovery) ist eine kostenlose Recherche-Ebene für Domainnamen-Suche, Registrierungsplanung und Sorgfaltsprüfung – keine Registrar-Kasse. Wie Treuhänder Ausländern bei der Registrierung beschränkter ccTLDs helfen – und welche Risiken es gibt.",
-            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 1.600 Endungen."
+            "Nutzen Sie die kostenlose Domainnamen-Suche bei DomainDiscovery (/), um die Live-Verfügbarkeit zu prüfen, bevor Sie einem Registrar etwas zahlen. Vergleichen Sie die regulären Registrar-Preise unter /tools/compare. Preise im ersten Aktionsjahr unterscheiden sich oft von den Verlängerungen. Schlagen Sie Inhaber und Daten per WHOIS/RDAP unter /tools/whois nach, wenn Sie eine Sorgfaltsprüfung brauchen. Stöbern Sie unter /domain-extensions im Katalog der Domain-Endungen und unter /blog/tlds in der TLD-Enzyklopädie unter mehr als 700 Endungen."
           ]
         },
         {
@@ -13348,14 +13348,14 @@
         {
           "heading": "Was ist DomainDiscovery?",
           "body": [
-            "DomainDiscovery (auch Domain Discovery oder Domains Discovery geschrieben) ist eine kostenlose Web-App für Domainsuche und Domainrecherche. Gründer, Agenturen und lokale Unternehmen prüfen damit, ob ein Name unter mehr als 1.600 Top-Level-Domains (TLDs) frei ist, entwickeln markenfähige Ideen, erstellen Geo-Domainlisten für Kampagnen in mehreren Städten, führen Massenprüfungen durch, schlagen öffentliche WHOIS/RDAP-Registrierungsdaten nach, stöbern in Endungen, schätzen den relativen Domainwert und vergleichen reguläre Registrar-Preise je TLD. Die Kernwerkzeuge brauchen kein Konto. Gespeicherte Auswahllisten bleiben standardmäßig im Browser. DomainDiscovery ist kein Domain-Registrar und wickelt keine Zahlungen für Registrierungen ab: Wenn Sie kaufen möchten, schließen Sie den Kauf bei einem externen Registrar ab. Verfügbarkeitsergebnisse sind Momentaufnahmen und können sich ändern; prüfen Sie vor dem Bezahlen immer erneut im Warenkorb des Registrars. Offizielle Website: domainsdiscovery.com.",
+            "DomainDiscovery (auch Domain Discovery oder Domains Discovery geschrieben) ist eine kostenlose Web-App für Domainsuche und Domainrecherche. Gründer, Agenturen und lokale Unternehmen prüfen damit, ob ein Name unter mehr als 700 Top-Level-Domains (TLDs) frei ist, entwickeln markenfähige Ideen, erstellen Geo-Domainlisten für Kampagnen in mehreren Städten, führen Massenprüfungen durch, schlagen öffentliche WHOIS/RDAP-Registrierungsdaten nach, stöbern in Endungen, schätzen den relativen Domainwert und vergleichen reguläre Registrar-Preise je TLD. Die Kernwerkzeuge brauchen kein Konto. Gespeicherte Auswahllisten bleiben standardmäßig im Browser. DomainDiscovery ist kein Domain-Registrar und wickelt keine Zahlungen für Registrierungen ab: Wenn Sie kaufen möchten, schließen Sie den Kauf bei einem externen Registrar ab. Verfügbarkeitsergebnisse sind Momentaufnahmen und können sich ändern; prüfen Sie vor dem Bezahlen immer erneut im Warenkorb des Registrars. Offizielle Website: domainsdiscovery.com.",
             "Viele suchen auch nach Domain Discovery oder Domains Discovery und meinen dasselbe Produkt. Der Markenname lautet DomainDiscovery; die öffentliche Website ist domainsdiscovery.com."
           ]
         },
         {
           "heading": "Was Sie kostenlos tun können",
           "body": [
-            "Sofortige Domainsuche über mehr als 1.600 TLDs; KI-Domainnamen-Generator mit Live-Prüfung; Massenprüfung (bis zu 1.000 Namen); Geo-Domain-Generator für Stadt- und Länder-Muster; WHOIS/RDAP-Abfrage; Browser für Domain-Endungen und TLD-Lexikon; Registrar-Preisvergleich je TLD; sowie ein Domainwert-Schätzer für die Orientierung.",
+            "Sofortige Domainsuche über mehr als 700 TLDs; KI-Domainnamen-Generator mit Live-Prüfung; Massenprüfung (bis zu 1.000 Namen); Geo-Domain-Generator für Stadt- und Länder-Muster; WHOIS/RDAP-Abfrage; Browser für Domain-Endungen und TLD-Lexikon; Registrar-Preisvergleich je TLD; sowie ein Domainwert-Schätzer für die Orientierung.",
             "Gespeicherte Auswahllisten bleiben standardmäßig auf Ihrem Gerät. Für die Kernwerkzeuge der Recherche brauchen Sie kein Konto."
           ]
         },
@@ -17493,7 +17493,7 @@
         {
           "heading": "Überblick",
           "body": [
-            "Die besten KI-Domain-Generatoren des Jahres 2026 verbinden die Kreativität großer Sprachmodelle mit einer Verfügbarkeitsprüfung in Echtzeit. ChatGPT und Claude glänzen bei der kreativen Ideenfindung, Namelix liefert visuelle Mockups, und DomainsDiscovery.com übernimmt den Verfügbarkeitsschritt 1,600+ TLDs. Kein einzelnes Tool kann alles – der erfolgreiche Workflow nutzt mindestens zwei nacheinander."
+            "Die besten KI-Domain-Generatoren des Jahres 2026 verbinden die Kreativität großer Sprachmodelle mit einer Verfügbarkeitsprüfung in Echtzeit. ChatGPT und Claude glänzen bei der kreativen Ideenfindung, Namelix liefert visuelle Mockups, und DomainsDiscovery.com übernimmt den Verfügbarkeitsschritt 700+ TLDs. Kein einzelnes Tool kann alles – der erfolgreiche Workflow nutzt mindestens zwei nacheinander."
           ]
         },
         {
@@ -17596,7 +17596,7 @@
             "Kein einzelnes Tool liefert allein optimale Ergebnisse. So sieht der Workflow aus, der die besten Resultate bringt:",
             "Phase 1: Generieren (mit ChatGPT oder Claude): Verfassen Sie ein detailliertes Naming-Briefing und lassen Sie mit einem fortgeschrittenen KI-Modell 30–50 Namenskandidaten erzeugen. Das liefert kreatives Rohmaterial, das Ihre tatsächliche Markenpositionierung widerspiegelt.",
             "Phase 2: Filtern (mit Namelix oder Brandmark): Lassen Sie Ihre 20 besten Namen durch ein visuelles Tool laufen, um zu sehen, wie sie als Marke aussehen. So fallen Namen weg, die gut klingen, aber als Logo oder Wortmarke schwach wirken.",
-            "Phase 3: Verfügbarkeit prüfen (mit DomainsDiscovery.com): Prüfen Sie alle verbliebenen Namen gleichzeitig 1,600+ TLDs. Filtern Sie nach Verfügbarkeit bei Ihren bevorzugten Endungen.",
+            "Phase 3: Verfügbarkeit prüfen (mit DomainsDiscovery.com): Prüfen Sie alle verbliebenen Namen gleichzeitig 700+ TLDs. Filtern Sie nach Verfügbarkeit bei Ihren bevorzugten Endungen.",
             "Phase 4: Markenprüfung (mit USPTO TESS): Prüfen Sie Ihre besten drei bis fünf Namen in Markendatenbanken, bevor Sie sich festlegen.",
             "Phase 5: Registrieren (bei DomainsDiscovery.com): Registrieren Sie Ihre Hauptdomain plus ein oder zwei alternative Endungen."
           ]
@@ -17630,13 +17630,13 @@
         {
           "heading": "Häufig gestellte Fragen",
           "body": [
-            "F: Welcher KI-Domain-Generator ist 2026 der genaueste?\nA: Kein einzelner KI-Domain-Generator ist zugleich bei der Kreativität und bei der Verfügbarkeit am genauesten. ChatGPT und Claude liefern die kontextuell passendsten kreativen Namen. DomainsDiscovery.com bietet die umfassendsten Live-Verfügbarkeitsdaten 1,600+ TLDs. Beide nacheinander zu nutzen – KI für die Generierung, DomainsDiscovery.com für die Verfügbarkeit – liefert die genauesten und umsetzbarsten Ergebnisse.",
+            "F: Welcher KI-Domain-Generator ist 2026 der genaueste?\nA: Kein einzelner KI-Domain-Generator ist zugleich bei der Kreativität und bei der Verfügbarkeit am genauesten. ChatGPT und Claude liefern die kontextuell passendsten kreativen Namen. DomainsDiscovery.com bietet die umfassendsten Live-Verfügbarkeitsdaten 700+ TLDs. Beide nacheinander zu nutzen – KI für die Generierung, DomainsDiscovery.com für die Verfügbarkeit – liefert die genauesten und umsetzbarsten Ergebnisse.",
             "F: Reichen kostenlose KI-Domain-Generatoren aus?\nA: Kostenlose Tools wie Namelix und der Generator von Shopify genügen für die frühe Erkundung und erste Inspiration. Weniger wirksam sind sie bei wichtigen Namensentscheidungen, bei denen Markenpositionierung, Wettbewerbsabgrenzung und kulturelle Sicherheit zählen. In solchen Fällen schneidet eine strukturierte ChatGPT- oder Claude-Sitzung mit einem detaillierten Naming-Briefing durchweg besser ab als kostenlose Spezialtools.",
             "F: Warum zeigen die meisten KI-Domain-Generatoren überwiegend vergebene Domains an?\nA: Weil über 165 Millionen .com-Domains registriert sind und die meisten KI-Tools vor allem Keyword-Kombinationen aus gängigen englischen Wörtern erzeugen, die zum allergrößten Teil vergeben sind. Tools, die mit echter LLM-Kreativität erfundene Wörter und wohlklingende Wortverschmelzungen erzeugen, liefern eine deutlich höhere Quote verfügbarer .com-Ergebnisse als Keyword-Kombinations-Tools.",
             "F: Können KI-Domain-Generatoren Einwort-.com-Domains finden?\nA: Praktisch alle gängigen englischen Einwort-.com-Domains sind registriert. KI kann Ihnen helfen, verfügbare erfundene Einwort-Domains zu finden, indem sie kurze Kunstwörter nach natürlichen Lautmustern erzeugt. Eine gut geführte KI liefert in Minuten Dutzende erfundener Einwort-Kandidaten; die Prüfung ihrer .com-Verfügbarkeit bei DomainsDiscovery.com zeigt dann schnell, welche noch zum Standardpreis registrierbar sind.",
             "F: Was kostet die Registrierung KI-generierter Domainnamen?\nA: KI-generierte erfundene Wörter, die neu registriert werden (nie zuvor vergeben), kosten $10–$12 für .com, $8–$15 für .co, $30–$50 für .io und $8–$15 für die meisten anderen TLDs. Der KI-Generierungsschritt ist kostenlos oder günstig (ein ChatGPT-Plus-Abo). Die Gesamtkosten, eine großartige KI-generierte Domain zu finden und zu registrieren, liegen typischerweise bei $10–$25 – gegenüber $500–$150,000+ für den Erwerb einer Premium-Domain aus zweiter Hand.",
             "F: Prüfen KI-Domain-Generatoren die Verfügbarkeit von Marken?\nA: Nein. KI-Sprachmodelle können Markendatenbanken nicht in Echtzeit abfragen. Spezialisierte Tools wie Squadhelp bieten eine markenrechtliche Vorprüfung als kostenpflichtige Funktion. Bei allen anderen Tools müssen Sie Ihre Favoriten vor der Registrierung manuell über USPTO TESS (für die USA) und EUIPO (für Europa) prüfen. Dieser Schritt ist nicht optional – eine registrierte Domain, die mit einer bestehenden Marke kollidiert, kann in einem Rechtsverfahren mit erheblichen Kosten verloren gehen.",
-            "F: Was ist der beste Workflow für mehrere KI-Naming-Tools?\nA: Nutzen Sie ChatGPT oder Claude mit einem detaillierten Naming-Briefing, um 30–50 Kandidaten zu erzeugen. Lassen Sie Ihre besten 20 durch Namelix oder Brandmark laufen, um visuelle Markendarstellungen zu sehen. Prüfen Sie alle Übriggebliebenen bei DomainsDiscovery.com gesammelt 1,600+ TLDs auf Verfügbarkeit. Lassen Sie Ihre besten drei bis fünf Favoriten über USPTO TESS auf Markenkonflikte prüfen. Registrieren Sie Ihren Gewinner plus ein oder zwei alternative TLDs am selben Tag, an dem Sie sich entscheiden."
+            "F: Was ist der beste Workflow für mehrere KI-Naming-Tools?\nA: Nutzen Sie ChatGPT oder Claude mit einem detaillierten Naming-Briefing, um 30–50 Kandidaten zu erzeugen. Lassen Sie Ihre besten 20 durch Namelix oder Brandmark laufen, um visuelle Markendarstellungen zu sehen. Prüfen Sie alle Übriggebliebenen bei DomainsDiscovery.com gesammelt 700+ TLDs auf Verfügbarkeit. Lassen Sie Ihre besten drei bis fünf Favoriten über USPTO TESS auf Markenkonflikte prüfen. Registrieren Sie Ihren Gewinner plus ein oder zwei alternative TLDs am selben Tag, an dem Sie sich entscheiden."
           ]
         }
       ]
@@ -17654,7 +17654,7 @@
         {
           "heading": "Überblick",
           "body": [
-            "KI-Domain-Generatoren funktionieren am besten, wenn Sie vor dem Prompten ein strukturiertes Naming-Briefing liefern – Markenpersönlichkeit, Zielgruppe, Branchenkontext und Formatvorlieben. Lassen Sie mit ChatGPT oder Claude 30–50 Kandidaten erzeugen und prüfen Sie dann die Verfügbarkeit gesammelt über 1,600+ TLDs bei DomainsDiscovery.com. Vom leeren Blatt bis zur registrierten Domain vergeht weniger als eine Stunde."
+            "KI-Domain-Generatoren funktionieren am besten, wenn Sie vor dem Prompten ein strukturiertes Naming-Briefing liefern – Markenpersönlichkeit, Zielgruppe, Branchenkontext und Formatvorlieben. Lassen Sie mit ChatGPT oder Claude 30–50 Kandidaten erzeugen und prüfen Sie dann die Verfügbarkeit gesammelt über 700+ TLDs bei DomainsDiscovery.com. Vom leeren Blatt bis zur registrierten Domain vergeht weniger als eine Stunde."
           ]
         },
         {
@@ -17712,7 +17712,7 @@
             "An diesem Punkt verlieren die meisten den Schwung. Sie haben eine Liste mit 20 vielversprechenden KI-Namen. Jetzt müssen Sie die Verfügbarkeit prüfen – und das einzeln bei mehreren Registraren zu tun, ist qualvoll langsam.",
             "So prüfen Sie KI-Domainnamen-Vorschläge gesammelt",
             "Statt Namen einzeln einzugeben, nutzen Sie ein Domain-Suchtool, das Mehrfacheingaben akzeptiert und mehrere TLDs gleichzeitig durchsucht. Geben Sie alle 20 Namen auf einmal ein und filtern Sie nach Verfügbarkeit.",
-            "DomainsDiscovery.com unterstützt Massen-Domainsuchen über 1,600+ TLDs. Sie können also Ihre gesamte KI-generierte Liste einfügen und in Sekunden sehen, welche Namen auf .com, .io, .co, .ai, .app und Hunderten weiteren Endungen verfügbar sind."
+            "DomainsDiscovery.com unterstützt Massen-Domainsuchen über 700+ TLDs. Sie können also Ihre gesamte KI-generierte Liste einfügen und in Sekunden sehen, welche Namen auf .com, .io, .co, .ai, .app und Hunderten weiteren Endungen verfügbar sind."
           ]
         },
         {
@@ -17757,10 +17757,10 @@
         {
           "heading": "Häufig gestellte Fragen",
           "body": [
-            "F: Was ist das beste KI-Tool zum Generieren von Domainnamen?\nA: ChatGPT und Claude sind 2026 die leistungsfähigsten KI-Domain-Generatoren, weil sie Markenpositionierung, Klangästhetik und Branchenkonventionen verstehen und kulturelle Unbedenklichkeitsprüfungen durchführen können. Spezialisierte Tools wie Namelix ergänzen visuelle Marken-Mockups. Der optimale Workflow kombiniert ein großes Sprachmodell für die kreative Generierung mit einem Massen-Domainsuchtool wie DomainsDiscovery.com, um die Verfügbarkeit über 1,600+ TLDs gleichzeitig zu prüfen.",
+            "F: Was ist das beste KI-Tool zum Generieren von Domainnamen?\nA: ChatGPT und Claude sind 2026 die leistungsfähigsten KI-Domain-Generatoren, weil sie Markenpositionierung, Klangästhetik und Branchenkonventionen verstehen und kulturelle Unbedenklichkeitsprüfungen durchführen können. Spezialisierte Tools wie Namelix ergänzen visuelle Marken-Mockups. Der optimale Workflow kombiniert ein großes Sprachmodell für die kreative Generierung mit einem Massen-Domainsuchtool wie DomainsDiscovery.com, um die Verfügbarkeit über 700+ TLDs gleichzeitig zu prüfen.",
             "F: Warum ist es 2026 so schwer, eine .com-Domain zu finden?\nA: Derzeit sind über 165 Millionen .com-Domains registriert – etwa eine auf je 52 Menschen der Erde. Jedes gängige englische Wort, die meisten Zwei-Wort-Zusammensetzungen und praktisch alle naheliegenden Firmennamen sind vergeben. KI hilft, indem sie erfundene Wörter und kreative Kombinationen erzeugt, auf die keine menschliche Brainstorming-Runde käme, und erhöht so Ihre Chancen erheblich, eine verfügbare .com zum üblichen Registrierungspreis von $10–$12 zu finden.",
             "F: Wie schreibe ich einen guten Prompt für einen KI-Domain-Generator?\nA: Nehmen Sie vier Elemente in Ihren Prompt auf: was Ihr Unternehmen tut (ein Satz), wie die Marke wirken soll (drei bis fünf Adjektive), wer Ihr wichtigster Kunde ist (ein Satz) und Ihre Formatvorlieben (ein Wort oder zwei, echtes Wort oder erfunden, Zeichenlimit). Konkrete Prompts liefern konkrete, nutzbare Ergebnisse. Vage Prompts wie „Namen für mein Startup“ liefern generische Keyword-Kombinationen.",
-            "F: Kann ich der KI vertrauen, wenn sie prüft, ob ein Domainname verfügbar ist?\nA: Nein. KI-Sprachmodelle haben keinen Echtzeitzugriff auf Domainregistrierungsdatenbanken. ChatGPT oder Claude können Kandidatennamen generieren, aber nicht sagen, welche heute tatsächlich registrierbar sind. Gleichen Sie KI-Vorschläge immer mit einem Live-Tool zur Domainverfügbarkeit ab. DomainsDiscovery.com prüft die Verfügbarkeit über 1,600+ TLDs in Echtzeit und unterstützt Massensuchen für ganze KI-generierte Namenslisten.",
+            "F: Kann ich der KI vertrauen, wenn sie prüft, ob ein Domainname verfügbar ist?\nA: Nein. KI-Sprachmodelle haben keinen Echtzeitzugriff auf Domainregistrierungsdatenbanken. ChatGPT oder Claude können Kandidatennamen generieren, aber nicht sagen, welche heute tatsächlich registrierbar sind. Gleichen Sie KI-Vorschläge immer mit einem Live-Tool zur Domainverfügbarkeit ab. DomainsDiscovery.com prüft die Verfügbarkeit über 700+ TLDs in Echtzeit und unterstützt Massensuchen für ganze KI-generierte Namenslisten.",
             "F: Wie viele Namen sollte die KI erzeugen, bevor ich die Verfügbarkeit prüfe?\nA: Erzeugen Sie mindestens 20–30 Namen, bevor Sie die Verfügbarkeit prüfen. Ziel ist ein Pool, der groß genug ist, dass nach der Filterung nach Verfügbarkeit und Markenrecht, die unvermeidliche Verlierer aussortiert, noch starke Optionen übrig bleiben. Wenn Sie nach fünf Namen prüfen und alle fünf vergeben sind, müssen Sie von vorn anfangen. Bei 30 Namen finden Sie fast immer mindestens drei bis fünf starke Optionen, die auf Ihrer bevorzugten TLD noch verfügbar sind.",
             "F: Sollten KI-generierte Namen echte oder erfundene Wörter sein?\nA: Beides funktioniert, doch erfundene Wörter haben 2026 einen deutlichen Verfügbarkeitsvorteil. Echte Wörter – vor allem gängige englische Wörter und naheliegende Zusammensetzungen – sind überwiegend als .com-Domains registriert. KI-generierte erfundene Wörter, die natürlichen Lautmustern folgen (auf Vokal endend, weltweit aussprechbar, unter 8 Zeichen), sind weit eher zum Standardpreis verfügbar und haben zusätzlich den Vorteil, vom ersten Tag an uneingeschränkt als Marke schützbar zu sein.",
             "F: Wie prüfe ich, ob ein KI-generierter Name in anderen Sprachen unbedenklich ist?\nA: Bitten Sie eine KI um eine kulturelle Unbedenklichkeitsprüfung: „Hat ‚[Name]‘ im Spanischen, Französischen, Deutschen, Japanischen, Mandarin, Arabischen oder Portugiesischen negative, anstößige oder unbeabsichtigte Bedeutungen?“ Das dauert unter zwei Minuten und hat zahlreiche peinliche Markenstarts verhindert. Tun Sie dies vor der Markenprüfung und der Domainregistrierung, denn so lassen sich Kandidaten aussortieren, die später ein teures Rebranding verursacht hätten."
@@ -17770,7 +17770,7 @@
           "heading": "Ihr nächster Schritt",
           "body": [
             "Sie haben jetzt einen Prozess, der Sie in unter einer Stunde vom leeren Blatt zur registrierten Domain bringt. Setzen Sie ihn ein.",
-            "Prüfen Sie jetzt bei DomainsDiscovery.com, ob Ihre Wunschdomain verfügbar ist – mit sofortiger Suche über 1,600+ TLDs."
+            "Prüfen Sie jetzt bei DomainsDiscovery.com, ob Ihre Wunschdomain verfügbar ist – mit sofortiger Suche über 700+ TLDs."
           ]
         }
       ]
